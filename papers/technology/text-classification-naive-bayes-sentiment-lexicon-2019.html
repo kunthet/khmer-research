@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការចាត់ថ្នាក់អត្ថបទ៖ ក្បួនដោះស្រាយ Naïve Bayes ជាមួយវចនានុក្រមមនោសញ្ចេតនា | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាខ្វះខាតវចនានុក្រមមនោសញ្ចេតនាសម្រាប់ភាសាវៀតណាម និងការចំណាយខ្ពស់ក្នុងការបង្កើតទិន្នន័យបណ្តុះបណ្តាលសម្រាប់ការចាត់ថ្នាក់អត្ថបទ។">
+    
+    <meta name="keywords" content="Naïve Bayes, Sentiment Lexicon, Text Classification, Vietnamese Language, TF-IDF, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/text-classification-naive-bayes-sentiment-lexicon-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/text-classification-naive-bayes-sentiment-lexicon-2019.html">
+    <meta property="og:title" content="ការចាត់ថ្នាក់អត្ថបទ៖ ក្បួនដោះស្រាយ Naïve Bayes ជាមួយវចនានុក្រមមនោសញ្ចេតនា | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាខ្វះខាតវចនានុក្រមមនោសញ្ចេតនាសម្រាប់ភាសាវៀតណាម និងការចំណាយខ្ពស់ក្នុងការបង្កើតទិន្នន័យបណ្តុះបណ្តាលសម្រាប់ការចាត់ថ្នាក់អត្ថបទ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2019 IAENG International Journal of Computer Science">
+    
+    <meta property="article:tag" content="Naïve Bayes">
+    
+    <meta property="article:tag" content="Sentiment Lexicon">
+    
+    <meta property="article:tag" content="Text Classification">
+    
+    <meta property="article:tag" content="Vietnamese Language">
+    
+    <meta property="article:tag" content="TF-IDF">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការចាត់ថ្នាក់អត្ថបទ៖ ក្បួនដោះស្រាយ Naïve Bayes ជាមួយវចនានុក្រមមនោសញ្ចេតនា">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាខ្វះខាតវចនានុក្រមមនោសញ្ចេតនាសម្រាប់ភាសាវៀតណាម និងការចំណាយខ្ពស់ក្នុងការបង្កើតទិន្នន័យបណ្តុះបណ្តាលសម្រាប់ការចាត់ថ្នាក់អត្ថបទ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u17d6 \u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Na\u00efve Bayes \u1787\u17b6\u1798\u17bd\u1799\u179c\u1785\u1793\u17b6\u1793\u17bb\u1780\u17d2\u179a\u1798\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6",
+      "name": "Text Classification: Na\u00efve Bayes Classifier with Sentiment Lexicon",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u179c\u1785\u1793\u17b6\u1793\u17bb\u1780\u17d2\u179a\u1798\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6\u179c\u17c0\u178f\u178e\u17b6\u1798 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1785\u17c6\u178e\u17b6\u1799\u1781\u17d2\u1796\u179f\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/text-classification-naive-bayes-sentiment-lexicon-2019.html",
+      "author": [{"@type": "Person", "name": "Cong-Cuong Le (Charles Sturt University)"},{"@type": "Person", "name": "P.W.C. Prasad (Charles Sturt University)"}],
+      "datePublished": "2019 IAENG International Journal of Computer Science",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Text Classification: Na\u00efve Bayes Classifier with Sentiment Lexicon",
+        "url": "N/A"
+      },
+      "keywords": ["Na\u00efve Bayes", "Sentiment Lexicon", "Text Classification", "Vietnamese Language", "TF-IDF"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u17d6 \u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Na\u00efve Bayes \u1787\u17b6\u1798\u17bd\u1799\u179c\u1785\u1793\u17b6\u1793\u17bb\u1780\u17d2\u179a\u1798\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/text-classification-naive-bayes-sentiment-lexicon-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការចាត់ថ្នាក់អត្ថបទ៖ ក្បួនដោះស្រាយ Naïve Bayes ជាមួយវចនាន...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Text Classification: Naïve Bayes Classifier with Sentiment Lexicon<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការចាត់ថ្នាក់អត្ថបទ៖ ក្បួនដោះស្រាយ Naïve Bayes ជាមួយវចនានុក្រមមនោសញ្ចេតនា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Text Classification: Naïve Bayes Classifier with Sentiment Lexicon</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Cong-Cuong Le (Charles Sturt University), P.W.C. Prasad (Charles Sturt University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2019 IAENG International Journal of Computer Science</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាខ្វះខាតវចនានុក្រមមនោសញ្ចេតនាសម្រាប់ភាសាវៀតណាម និងការចំណាយខ្ពស់ក្នុងការបង្កើតទិន្នន័យបណ្តុះបណ្តាលសម្រាប់ការចាត់ថ្នាក់អត្ថបទ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានស្នើវិធីសាស្ត្រមួយដែលរួមបញ្ចូលគ្នារវាងការបង្កើតវចនានុក្រមមនោសញ្ចេតនាដោយស្វ័យប្រវត្តិ និងការប្រើប្រាស់ក្បួនដោះស្រាយម៉ាស៊ីនរៀន ដើម្បីចាត់ថ្នាក់ឯកសារ។
+        
+        <ul>
+            
+            <li>ការបង្កើតវចនានុក្រមមនោសញ្ចេតនាភាសាវៀតណាម (VSL Construction) ដោយប្រើក្បួនដោះស្រាយ TF-IDF</li>
+            
+            <li>ការចាត់ថ្នាក់ឯកសារដោយប្រើក្បួនដោះស្រាយ (Naïve Bayes Classifier) ដោយប្រើវចនានុក្រមជាទិន្នន័យបណ្តុះបណ្តាល</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រដែលបានស្នើឡើងទទួលបានភាពត្រឹមត្រូវ (Accuracy) ៩៨.២% ដែលខ្ពស់ជាងវិធីសាស្ត្រ Naïve Bayes ធម្មតា (៩៦.១%) និងវិធីសាស្ត្រ Lexical (៨៧.៣%)។</li>
+            
+            <li>ការប្រើប្រាស់វចនានុក្រមមនោសញ្ចេតនាជាវ៉ិចទ័របណ្តុះបណ្តាល បានជួយកាត់បន្ថយទំហំទិន្នន័យដែលត្រូវការ និងពេលវេលាសម្រាប់បណ្តុះបណ្តាលយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li>វិធីសាស្ត្រនេះអាចដំណើរការបានល្អសូម្បីតែជាមួយទិន្នន័យបណ្តុះបណ្តាលតិចតួច (ឧទាហរណ៍ ប្រើតែឯកសារ ២ ជាគំរូក៏ទទួលបានលទ្ធផលល្អ)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Proposed Method (Naïve Bayes + Sentiment Lexicon)</span></strong><br>វិធីសាស្ត្រដែលបានស្នើឡើង (រួមបញ្ចូល Naïve Bayes ជាមួយវចនានុក្រមមនោសញ្ចេតនា)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់បំផុត និងកាត់បន្ថយពេលវេលាបណ្តុះបណ្តាលយ៉ាងខ្លាំង ដោយគ្រាន់តែប្រើប្រាស់ឯកសារគំរូតិចតួច (Training data)។</td>
+                <td>នៅតែមានបញ្ចូលពាក្យដែលមិនចាំបាច់ (Redundant words) មួយចំនួននៅក្នុងវចនានុក្រម ដែលទាមទារការត្រួតពិនិត្យបន្ថែមពីអ្នកជំនាញ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ (Accuracy) ៩៨.២% ដែលជាលទ្ធផលខ្ពស់បំផុតក្នុងការពិសោធន៍។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Naïve Bayes</span></strong><br>វិធីសាស្ត្រ Naïve Bayes តាមបែបប្រពៃណី</td>
+                <td>ជាក្បួនដោះស្រាយដែលមានល្បឿនលឿន និងពេញនិយមសម្រាប់ការចាត់ថ្នាក់អត្ថបទ។</td>
+                <td>ទាមទារទិន្នន័យបណ្តុះបណ្តាលឯករាជ្យច្រើន ហើយមិនមានការសម្អាតទិន្នន័យល្អដូចវិធីសាស្ត្រដែលបានស្នើឡើង។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៦.១%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Lexical Method</span></strong><br>វិធីសាស្ត្រផ្អែកលើវចនានុក្រមសុទ្ធសាធ</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្តដោយផ្អែកលើច្បាប់នៃការរាប់ពាក្យវិជ្ជមាន ឬអវិជ្ជមាន។</td>
+                <td>មានកម្រិតភាពត្រឹមត្រូវទាបជាងគេ ដោយសារមិនអាចវិភាគបរិបទនៃប្រយោគបានល្អ និងពឹងផ្អែកខ្លាំងលើការវិនិច្ឆ័យរបស់មនុស្ស។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវត្រឹមតែ ៨៧.៣%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះបង្ហាញថា ការចំណាយលើធនធានមានកម្រិតទាប ជាពិសេសគឺការកាត់បន្ថយតម្រូវការទិន្នន័យបណ្តុះបណ្តាលដ៏ច្រើនសន្ធឹកសន្ធាប់ ដែលជាធម្មតាមានតម្លៃថ្លៃ និងកម្រ។
+    
+    <ul>
+        
+        <li><strong>Computing Software:</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់កម្មវិធី MATLAB ដើម្បីដំណើរការក្បួនដោះស្រាយ Naïve Bayes classifier ។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការឯកសារអត្ថបទចំនួន ១០០០ ពីគេហទំព័រព័ត៌មាន (សម្រាប់ភាសាវៀតណាម) ប៉ុន្តែត្រូវការឯកសារបណ្តុះបណ្តាល (Training Docs) តិចតួចបំផុតដើម្បីបង្កើតវចនានុក្រម។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យភាសាវៀតណាមពីគេហទំព័រព័ត៌មាននយោបាយ និងសង្គមចំនួន ៥ (ដូចជា nguyenphutrong.org និង viettan.org)។ សម្រាប់កម្ពុជា នេះគឺជាចំណុចសំខាន់ព្រោះភាសាខ្មែរ និងវៀតណាមមានលក្ខណៈស្រដៀងគ្នាត្រង់ថាជាភាសាដែលមានធនធានតិច (Low-resource language) និងខ្វះខាតវចនានុក្រមមនោសញ្ចេតនា (Sentiment Lexicon) ស្តង់ដារ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ជាពិសេសក្នុងការអភិវឌ្ឍប្រព័ន្ធវិភាគអត្ថបទភាសាខ្មែរដោយមិនចាំបាច់ចំណាយពេលបង្កើតទិន្នន័យបណ្តុះបណ្តាលរាប់ម៉ឺនឯកសារ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ និងធនាគារ (Private Sector):</strong> អាចប្រើដើម្បីវិភាគមតិយោបល់អតិថិជន (Customer Feedback) នៅលើបណ្តាញសង្គម Facebook ឬ Telegram ដោយស្វ័យប្រវត្តិ ដើម្បីដឹងថាអតិថិជនពេញចិត្ត ឬមិនពេញចិត្ត។</li>
+            
+            <li><strong>ការស្រាវជ្រាវភាសាខ្មែរ (Khmer NLP Research):</strong> សាកលវិទ្យាល័យនៅកម្ពុជាអាចយកគំរូនេះដើម្បីបង្កើត 'Khmer Sentiment Lexicon' ដំបូង ដោយប្រើឯកសារព័ត៌មានក្នុងស្រុកជាមូលដ្ឋាន។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក នេះគឺជាគំរូដ៏ល្អសម្រាប់ដោះស្រាយបញ្ហាកង្វះទិន្នន័យក្នុងវិស័យ NLP នៅកម្ពុជា ដោយផ្លាស់ប្តូរពីការប្រើប្រាស់ទិន្នន័យច្រើន មកប្រើការបង្កើតវចនានុក្រមស្វ័យប្រវត្តិដែលមានប្រសិទ្ធភាពជាង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីមូលដ្ឋានគ្រឹះនៃក្បួនដោះស្រាយ:</strong> និស្សិតគួរចាប់ផ្តើមដោយការយល់ដឹងស៊ីជម្រៅអំពីទ្រឹស្តីប្រូបាប៊ីលីតេ (Probability Theory) និងរបៀបដែលក្បួនដោះស្រាយ (Naïve Bayes) ដំណើរការក្នុងការចាត់ថ្នាក់អត្ថបទ។</li>
+            
+            <li><strong>ការប្រមូល និងរៀបចំទិន្នន័យភាសាខ្មែរ:</strong> ប្រមូលអត្ថបទព័ត៌មាន ឬមតិយោបល់ជាភាសាខ្មែរ ហើយអនុវត្តការបំបែកពាក្យ (Tokenization) ដោយប្រើឧបករណ៍ដូចជា (KhmerCut) ឬបណ្ណាល័យដែលមានស្រាប់ ដើម្បីសម្អាត Stop-words ។</li>
+            
+            <li><strong>ការបង្កើតវចនានុក្រមមនោសញ្ចេតនា (Lexicon Construction):</strong> អនុវត្តវិធីសាស្ត្រ TF-IDF ដូចក្នុងឯកសារយោង ដើម្បីគណនាទម្ងន់ពាក្យ (Word Weight) និងបង្កើតវចនានុក្រមមនោសញ្ចេតនាពីឯកសារគំរូ។</li>
+            
+            <li><strong>ការពិសោធន៍ និងវាយតម្លៃ:</strong> ប្រើប្រាស់ភាសា (Python) ជាមួយបណ្ណាល័យ (Scikit-learn) ដើម្បីសរសេរកូដ Naïve Bayes ដោយបញ្ចូលវចនានុក្រមដែលបានបង្កើត និងធ្វើការប្រៀបធៀបលទ្ធផលភាពត្រឹមត្រូវ (Accuracy/Precision/Recall)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Sentiment Lexicon</span></td>
+                <td>គឺជាវចនានុក្រមពិសេសដែលមិនត្រឹមតែផ្ទុកពាក្យប៉ុណ្ណោះទេ ប៉ុន្តែថែមទាំងភ្ជាប់ពាក្យនីមួយៗទៅនឹងពិន្ទុមនោសញ្ចេតនា (វិជ្ជមាន ឬអវិជ្ជមាន)។ វាត្រូវបានប្រើដើម្បីបង្រៀនកុំព្យូទ័រឱ្យចេះវាយតម្លៃអារម្មណ៍នៃអត្ថបទដោយផ្អែកលើពាក្យដែលមាននៅក្នុងនោះ។</td>
+                <td>ដូចជាបញ្ជីតម្លៃទំនិញ តែជំនួសឱ្យតម្លៃលុយ គឺគេដាក់ពិន្ទុថាពាក្យហ្នឹង 'ល្អ' ឬ 'អាក្រក់'។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Naïve Bayes Classifier</span></td>
+                <td>ជាក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine Learning) ផ្អែកលើទ្រឹស្តីប្រូបាប៊ីលីតេ ដែលប្រើសម្រាប់ចាត់ថ្នាក់ទិន្នន័យ។ វាត្រូវបានហៅថា 'Naïve' (ឆោតល្ងង់) ព្រោះវាសន្មតថាពាក្យនីមួយៗក្នុងប្រយោគមិនមានទំនាក់ទំនងគ្នា ដែលជួយឱ្យការគណនាលឿនខ្លាំង។</td>
+                <td>ដូចជាការទាយថាផ្លែឈើមួយជាផ្លែអ្វី ដោយគ្រាន់តែមើលពណ៌ និងរូបរាងដាច់ដោយឡែកពីគ្នា ដោយមិនខ្វល់ថាវាដុះនៅណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TF-IDF (Term Frequency-Inverse Document Frequency)</span></td>
+                <td>ជាវិធីសាស្ត្រគណិតវិទ្យាសម្រាប់វាស់វែងថាតើពាក្យមួយមានសារៈសំខាន់ប៉ុណ្ណាក្នុងឯកសារមួយ។ វាផ្តល់ពិន្ទុខ្ពស់ដល់ពាក្យដែលប្លែក (Unique) និងផ្តល់ពិន្ទុទាបដល់ពាក្យដែលប្រើញឹកញាប់ពេកក្នុងគ្រប់ឯកសារ (ដូចជាពាក្យ 'គឺ', 'នៃ')។</td>
+                <td>ដូចជាការស្វែងរកគ្រឿងផ្សំពិសេសក្នុងម្ហូប ដោយមិនរាប់បញ្ចូល អំបិល ឬស្ករ ដែលមានក្នុងគ្រប់ម្ហូប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bag-of-Words</span></td>
+                <td>ជាបច្ចេកទេសបម្លែងអត្ថបទទៅជាទិន្នន័យលេខ ដោយគ្រាន់តែរាប់ចំនួនពាក្យដែលលេចឡើងក្នុងអត្ថបទនោះ ដោយមិនគិតពីលំដាប់លំដោយ ឬវេយ្យាករណ៍នៃពាក្យឡើយ។</td>
+                <td>ដូចជាការយកផ្ទះមួយមកវាយកម្ទេច ដើម្បីរាប់ចំនួនឥដ្ឋ ដោយមិនខ្វល់ថារូបរាងផ្ទះដើមយ៉ាងណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tokenization</span></td>
+                <td>គឺជាដំណើរការនៃការកាត់ ឬបំបែកអត្ថបទវែងៗឱ្យទៅជាពាក្យតូចៗ ឬឃ្លាដែលមានអត្ថន័យ (Tokens)។ សម្រាប់ភាសាដែលមិនមានដកឃ្លាដូចជា ខ្មែរ ឬវៀតណាម ដំណើរការនេះសំខាន់ណាស់ដើម្បីឱ្យកុំព្យូទ័រស្គាល់ពាក្យ។</td>
+                <td>ដូចជាការកាត់នំខេកមួយដុំធំ ឱ្យទៅជាចំណិតតូចៗដើម្បីងាយស្រួលញ៉ាំ (ឬវិភាគ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stop-word</span></td>
+                <td>សំដៅលើពាក្យដែលត្រូវបានប្រើប្រាស់ញឹកញាប់បំផុតនៅក្នុងភាសា (ដូចជា 'is', 'the' ក្នុងភាសាអង់គ្លេស ឬ 'គឺ', 'ដែល' ក្នុងភាសាខ្មែរ) ប៉ុន្តែមិនសូវផ្តល់អត្ថន័យសំខាន់ក្នុងការវិភាគ ទើបគេតែងតែលុបវាចោល។</td>
+                <td>ដូចជាការបកសំបកចេកចោល ដើម្បីយកតែសាច់ចេកមកប្រើប្រាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Precision and Recall</span></td>
+                <td>ជាខ្នាតរង្វាស់ពីរដែលប្រើដើម្បីវាយតម្លៃគុណភាពនៃម៉ាស៊ីនរៀន។ Precision វាស់ថាតើការព្យាករណ៍ត្រឹមត្រូវប៉ុន្មានភាគរយ ចំណែក Recall វាស់ថាតើម៉ាស៊ីនរកឃើញទិន្នន័យត្រឹមត្រូវចំនួនប៉ុន្មាននៃទិន្នន័យសរុប។</td>
+                <td>Precision គឺដូចជាការបាញ់ព្រួញឱ្យចំគោលដៅ ចំណែក Recall គឺដូចជាការរកឱ្យឃើញគោលដៅទាំងអស់ដែលមាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul>
+            
+            <li><a href="https://scholar.google.com/scholar?q=automatic+construction+of+sentiment+lexicons+using+TF-IDF" target="_blank" rel="noopener"><span class="en">automatic construction of sentiment lexicons using TF-IDF</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Na%C3%AFve+Bayes+classifier+optimization+for+text+analysis" target="_blank" rel="noopener"><span class="en">Naïve Bayes classifier optimization for text analysis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=sentiment+analysis+for+low-resource+languages" target="_blank" rel="noopener"><span class="en">sentiment analysis for low-resource languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+lexicon-machine+learning+approaches+for+sentiment+analysis" target="_blank" rel="noopener"><span class="en">hybrid lexicon-machine learning approaches for sentiment analysis</span></a></li>
+            
+        </ul>
+    </div>
+    
+
+</div>
+
+</body>
+</html>

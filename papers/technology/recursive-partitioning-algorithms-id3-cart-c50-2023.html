@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Recursive Partitioning (ID3, CART, C5.0) សម្រាប់ការធ្វើចំណាត់ថ្នាក់ | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការជ្រើសរើសក្បួនដោះស្រាយ (Algorithm) ដើមឈើសម្រេចចិត្ត (Decision Tree) ដែលមានប្រសិទ្ធភាពបំផុតសម្រាប់ការធ្វើចំណាត់ថ្នាក់ទិន្នន័យ ដោយ...">
+    
+    <meta name="keywords" content="Classification, Decision Tree, Recursive Partitioning, ID3, CART, C5.0, RStudio, Supervised Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/recursive-partitioning-algorithms-id3-cart-c50-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/recursive-partitioning-algorithms-id3-cart-c50-2023.html">
+    <meta property="og:title" content="ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Recursive Partitioning (ID3, CART, C5.0) សម្រាប់ការធ្វើចំណាត់ថ្នាក់ | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការជ្រើសរើសក្បួនដោះស្រាយ (Algorithm) ដើមឈើសម្រេចចិត្ត (Decision Tree) ដែលមានប្រសិទ្ធភាពបំផុតសម្រាប់ការធ្វើចំណាត់ថ្នាក់ទិន្នន័យ ដោយប្រៀបធៀបលើល្បឿន ភាពត្រឹមត្រូវ និងរចនាសម្...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023 (International Research Journal of Humanities and Interdisciplinary Studies)">
+    
+    <meta property="article:tag" content="Classification">
+    
+    <meta property="article:tag" content="Decision Tree">
+    
+    <meta property="article:tag" content="Recursive Partitioning">
+    
+    <meta property="article:tag" content="ID3">
+    
+    <meta property="article:tag" content="CART">
+    
+    <meta property="article:tag" content="C5.0">
+    
+    <meta property="article:tag" content="RStudio">
+    
+    <meta property="article:tag" content="Supervised Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Recursive Partitioning (ID3, CART, C5.0) សម្រាប់ការធ្វើចំណាត់ថ្នាក់">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការជ្រើសរើសក្បួនដោះស្រាយ (Algorithm) ដើមឈើសម្រេចចិត្ត (Decision Tree) ដែលមានប្រសិទ្ធភាពបំផុតសម្រាប់ការធ្វើចំណាត់ថ្នាក់ទិន្នន័យ ដោយប្រៀបធៀបលើល្បឿន ភាពត្រឹមត្រូវ និងរចនាសម្...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Recursive Partitioning (ID3, CART, C5.0) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb",
+      "name": "A Comparative Study of Recursive Partitioning Algorithms (ID3, CART, C5.0) for Classification",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 (Algorithm) \u178a\u17be\u1798\u1788\u17be\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f (Decision Tree) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1794\u17c6\u1795\u17bb\u178f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179b\u17be\u179b\u17d2\u1794\u17bf\u1793 \u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c \u1793\u17b7\u1784\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/recursive-partitioning-algorithms-id3-cart-c50-2023.html",
+      "author": [{"@type": "Person", "name": "Abhijeet D. Mankar (Tuljaram Chaturchand College)"},{"@type": "Person", "name": "Dr. Sudhakar D. Bhoite (Chhatrapati Shahu Institute)"}],
+      "datePublished": "2023 (International Research Journal of Humanities and Interdisciplinary Studies)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A Comparative Study of Recursive Partitioning Algorithms (ID3, CART, C5.0) for Classification",
+        "url": "https://doi-ds.org/doilink/03.2023-16164445/IRJHISIC2302052"
+      },
+      "keywords": ["Classification", "Decision Tree", "Recursive Partitioning", "ID3", "CART", "C5.0", "RStudio", "Supervised Learning"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Recursive Partitioning (ID3, CART, C5.0) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb",
+          "item": "https://khmerresearch.com/papers/technology/recursive-partitioning-algorithms-id3-cart-c50-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Recursive Partitioning (...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A Comparative Study of Recursive Partitioning Algorithms (ID3, CART, C5.0) for Classification<br>
+        
+        <strong>Source:</strong> <a href="https://doi-ds.org/doilink/03.2023-16164445/IRJHISIC2302052" target="_blank">https://doi-ds.org/doilink/03.2023-16164445/IRJHISIC2302052</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Recursive Partitioning (ID3, CART, C5.0) សម្រាប់ការធ្វើចំណាត់ថ្នាក់</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A Comparative Study of Recursive Partitioning Algorithms (ID3, CART, C5.0) for Classification</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Abhijeet D. Mankar (Tuljaram Chaturchand College), Dr. Sudhakar D. Bhoite (Chhatrapati Shahu Institute)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 (International Research Journal of Humanities and Interdisciplinary Studies)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហានៃការជ្រើសរើសក្បួនដោះស្រាយ (Algorithm) ដើមឈើសម្រេចចិត្ត (Decision Tree) ដែលមានប្រសិទ្ធភាពបំផុតសម្រាប់ការធ្វើចំណាត់ថ្នាក់ទិន្នន័យ ដោយប្រៀបធៀបលើល្បឿន ភាពត្រឹមត្រូវ និងរចនាសម្ព័ន្ធស្មុគស្មាញនៃម៉ូដែល។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានធ្វើការពិសោធន៍ប្រៀបធៀបដោយអនុវត្តក្បួនដោះស្រាយចំនួនបីផ្សេងគ្នាទៅលើសំណុំទិន្នន័យដែលមានទំហំតូច មធ្យម និងធំ ដើម្បីវាយតម្លៃប្រសិទ្ធភាព។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយចំនួនបី (Algorithms: ID3, CART, C5.0)</li>
+            
+            <li>ការពិសោធន៍លើសំណុំទិន្នន័យចំនួន ៧ ពី UCI (UCI Machine Learning Repository Datasets)</li>
+            
+            <li>ការវិភាគទិន្នន័យដោយប្រើកម្មវិធី (RStudio with rpart and C50 packages)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ C5.0 ផ្តល់នូវភាពត្រឹមត្រូវ (Accuracy) ខ្ពស់ជាងគេបើធៀបនឹង ID3 និង CART ក្នុងការធ្វើចំណាត់ថ្នាក់។</li>
+            
+            <li>ទោះបីជាមានភាពត្រឹមត្រូវខ្ពស់ ប៉ុន្តែ C5.0 ចំណាយពេលយូរជាងក្នុងការបង្កើតម៉ូដែល (Model Building Time) និងបង្កើតរចនាសម្ព័ន្ធដើមឈើដែលមានជម្រៅនិងទំហំធំជាង។</li>
+            
+            <li>CART និង ID3 មានដំណើរការលឿនជាង ប៉ុន្តែផ្តល់នូវរចនាសម្ព័ន្ធដើមឈើដែលតូចជាង និងមានភាពត្រឹមត្រូវទាបជាង C5.0 បន្តិចបន្តួច។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">C5.0 Algorithm</span></strong><br>ក្បួនដោះស្រាយ C5.0 (ប្រើ Entropy)</td>
+                <td>ផ្តល់នូវកម្រិតភាពត្រឹមត្រូវ (Accuracy) ខ្ពស់បំផុតក្នុងការពិសោធន៍ និងអាចដោះស្រាយទិន្នន័យដែលមានភាពស្មុគស្មាញបានល្អ។</td>
+                <td>ចំណាយពេលយូរជាងគេក្នុងការបង្កើតម៉ូដែល និងបង្កើតដើមឈើដែលមានទំហំធំ (ជម្រៅជ្រៅ និងទទឹងធំ) ដែលអាចពិបាកក្នុងការបកស្រាយដោយភ្នែកទទេ។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវខ្ពស់បំផុត (ឧទាហរណ៍ ១០០% លើ Mushroom dataset) ប៉ុន្តែបង្កើតចំនួនថ្នាំង (Nodes) ច្រើនជាងគេ (រហូតដល់ ៥៥៩ ថ្នាំងសម្រាប់ Bank Marketing)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CART (Classification and Regression Trees)</span></strong><br>ក្បួនដោះស្រាយ CART (ប្រើ Gini Index)</td>
+                <td>មានល្បឿនលឿនក្នុងការបង្កើតម៉ូដែល និងបង្កើតដើមឈើដែលមានទំហំតូចជាង (Compact Tree) ដែលងាយស្រួលមើលនិងបកស្រាយ។</td>
+                <td>មានកម្រិតភាពត្រឹមត្រូវទាបជាង C5.0 បន្តិចបន្តួចនៅក្នុងសំណុំទិន្នន័យភាគច្រើន។</td>
+                <td>ប្រើពេលតិចបំផុតក្នុងការសាងសង់ម៉ូដែល (ឧទាហរណ៍ ០.០៤ វិនាទីសម្រាប់ Obesity dataset) និងមានប្រសិទ្ធភាពល្អលើទិន្នន័យទូទៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ID3 (Iterative Dichotomiser 3)</span></strong><br>ក្បួនដោះស្រាយ ID3 (ប្រើ Information Gain)</td>
+                <td>ជាក្បួនដោះស្រាយមូលដ្ឋានដែលងាយស្រួលយល់ និងមានល្បឿនលឿនសមរម្យ។</td>
+                <td>មិនអាចដោះស្រាយទិន្នន័យជាលេខ (Continuous data) បានល្អដូច CART ទេ ហើយងាយរងគ្រោះដោយសារការលំអៀងទៅរកអថេរដែលមានតម្លៃច្រើន។</td>
+                <td>ផ្តល់លទ្ធផលប្រហាក់ប្រហែលនឹង CART ដែរប៉ុន្តែបង្កើតរចនាសម្ព័ន្ធដើមឈើខុសគ្នាបន្តិចបន្តួច។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះបង្ហាញថាការពិសោធន៍អាចធ្វើទៅបានដោយប្រើធនធានកុំព្យូទ័រធម្មតា ដោយមិនតម្រូវឱ្យមានកុំព្យូទ័រដែលមានកម្លាំងខ្លាំង (High-Performance Computing) នោះទេ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កម្មវិធី RStudio (កំណែ 2022.12.0) ជាមួយកញ្ចប់កម្មវិធី rpart និង C50 ដែលអាចទាញយកដោយឥតគិតថ្លៃ។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យបើកចំហពី UCI Machine Learning Repository ដែលមិនមានការចំណាយ។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រយួរដៃ ឬកុំព្យូទ័រលើតុស្តង់ដារគឺគ្រប់គ្រាន់សម្រាប់ការដំណើរការទិន្នន័យដែលមានទំហំមធ្យម (រហូតដល់រាប់ម៉ឺនជួរ)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពី UCI Repository ដែលភាគច្រើនជាទិន្នន័យពីបស្ចិមប្រទេស (ដូចជាទិន្នន័យឥណទានរបស់អាល្លឺម៉ង់ German Credit ឬទិន្នន័យជំរឿនអាមេរិក Adult dataset)។ ការណ៍នេះអាចធ្វើឱ្យម៉ូដែលដែលបានបង្កើតមិនអាចយកមកអនុវត្តផ្ទាល់នៅក្នុងបរិបទសង្គម និងសេដ្ឋកិច្ចរបស់កម្ពុជាបានទេ ប្រសិនបើគ្មានការបង្ហាត់ម៉ូដែលឡើងវិញជាមួយទិន្នន័យក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេស Decision Tree នេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ដោយសារវាជាម៉ូដែលដែលអាចបកស្រាយបាន (Explainable AI) ដែលសាកសមសម្រាប់វិស័យដែលត្រូវការតម្លាភាព។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យមីក្រូហិរញ្ញវត្ថុ និងធនាគារ (Microfinance):</strong> គ្រឹះស្ថានដូចជា ACLEDA ឬ ABA អាចប្រើ CART ឬ C5.0 ដើម្បីវាយតម្លៃហានិភ័យឥណទាន (Credit Scoring) ដោយអាចពន្យល់អតិថិជនបានថាហេតុអ្វីបានជាកម្ចីត្រូវបានអនុម័ត ឬបដិសេធ។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល (Public Health):</strong> អាចប្រើសម្រាប់ធ្វើចំណាត់ថ្នាក់ហានិភ័យនៃជំងឺឆ្លង (ដូចជា គ្រុនឈាម ឬ គ្រុនចាញ់) ផ្អែកលើរោគសញ្ញា និងកត្តាបរិស្ថាននៅក្នុងខេត្តនានា។</li>
+            
+            <li><strong>វិស័យកសិកម្ម (Agriculture):</strong> ប្រើដើម្បីធ្វើចំណាត់ថ្នាក់ប្រភេទដី ឬការណែនាំដំណាំដោយផ្អែកលើលក្ខខណ្ឌអាកាសធាតុ និងប្រភេទដីនៅក្នុងតំបន់កសិកម្មសំខាន់ៗដូចជា បាត់ដំបង ឬ កំពង់ចាម។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់ C5.0 ហាក់មានសក្តានុពលខ្ពស់បំផុតសម្រាប់ស្ថាប័ននៅកម្ពុជាដែលផ្តល់អាទិភាពលើភាពត្រឹមត្រូវ (Accuracy) ប៉ុន្តែប្រសិនបើត្រូវការការពន្យល់សាមញ្ញ CART គឺជាជម្រើសល្អជាង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>រៀបចំឧបករណ៍សិក្សា:</strong> ដំឡើងកម្មវិធី RStudio និងដំឡើង libraries ចាំបាច់ដូចជា rpart, rpart.plot, និង C50។</li>
+            
+            <li><strong>ការជ្រើសរើសទិន្នន័យ:</strong> ចាប់ផ្តើមអនុវត្តជាមួយទិន្នន័យដែលមានស្រាប់នៅក្នុង R (ដូចជា iris dataset) មុននឹងឈានទៅប្រើប្រាស់ទិន្នន័យជាក់ស្តែងរបស់កម្ពុជា (ឧទាហរណ៍ ទិន្នន័យជំរឿនសេដ្ឋកិច្ចពី NIS)។</li>
+            
+            <li><strong>ការពិសោធន៍ប្រៀបធៀប:</strong> សរសេរកូដដើម្បីបំបែកទិន្នន័យជា Training និង Testing sets (ឧទាហរណ៍ 70/30) រួចដំណើរការ algorithms ទាំងបី ដើម្បីមើលលទ្ធផលជាក់ស្តែង។</li>
+            
+            <li><strong>ការវិភាគលទ្ធផល និងរចនាសម្ព័ន្ធដើមឈើ:</strong> កុំគ្រាន់តែមើលលើ Accuracy។ ត្រូវប្រើ plot() ដើម្បីមើលរូបរាងដើមឈើសម្រេចចិត្ត។ សម្រាប់កម្ពុជា ម៉ូដែលដែលសាមញ្ញ (ដើមឈើតូច) អាចនឹងមានប្រយោជន៍ជាងម៉ូដែលដែលស្មុគស្មាញពេក។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+of+Gini+Index+and+Entropy+in+Decision+Trees" target="_blank" rel="noopener"><span class="en">Comparison of Gini Index and Entropy in Decision Trees</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Decision+tree+pruning+techniques+to+avoid+overfitting" target="_blank" rel="noopener"><span class="en">Decision tree pruning techniques to avoid overfitting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Random+Forest+vs+Decision+Trees+for+classification" target="_blank" rel="noopener"><span class="en">Random Forest vs Decision Trees for classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+missing+values+in+CART+and+C4.5+algorithms" target="_blank" rel="noopener"><span class="en">Handling missing values in CART and C4.5 algorithms</span></a></li>
+            
+        </ul>
+    </div>
+    
+
+</div>
+
+</body>
+</html>

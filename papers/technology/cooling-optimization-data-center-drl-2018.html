@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់មជ្ឈមណ្ឌលទិន្នន័យបៃតង តាមរយៈការរៀនសូត្របែបពង្រឹងកម្លាំងយ៉ាងស៊ីជម្រៅ (Deep Reinforcement Learning) | KhmerResearch.com</title>
+    <meta name="description" content="មជ្ឈមណ្ឌលទិន្នន័យប្រើប្រាស់ថាមពលអគ្គិសនីយ៉ាងច្រើនសម្បើមសម្រាប់ប្រព័ន្ធត្រជាក់ (Cooling System) ហើយវិធីសាស្ត្រគ្រប់គ្រងបច្ចុប្បន្នដែលផ្អែកលើគំរូរូបវន្ត មានភាព...">
+    
+    <meta name="keywords" content="Deep Reinforcement Learning, Data Center Cooling, Energy Optimization, DDPG Algorithm, HVAC Control, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/cooling-optimization-data-center-drl-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/cooling-optimization-data-center-drl-2018.html">
+    <meta property="og:title" content="ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់មជ្ឈមណ្ឌលទិន្នន័យបៃតង តាមរយៈការរៀនសូត្របែបពង្រឹងកម្លាំងយ៉ាងស៊ីជម្រៅ (Deep Reinforcement Learning) | KhmerResearch.com">
+    <meta property="og:description" content="មជ្ឈមណ្ឌលទិន្នន័យប្រើប្រាស់ថាមពលអគ្គិសនីយ៉ាងច្រើនសម្បើមសម្រាប់ប្រព័ន្ធត្រជាក់ (Cooling System) ហើយវិធីសាស្ត្រគ្រប់គ្រងបច្ចុប្បន្នដែលផ្អែកលើគំរូរូបវន្ត មានភាពស្មុគស្មាញក្នុងការរចនា និងជារឿយៗមិនមានប្...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2018 (arXiv)">
+    
+    <meta property="article:tag" content="Deep Reinforcement Learning">
+    
+    <meta property="article:tag" content="Data Center Cooling">
+    
+    <meta property="article:tag" content="Energy Optimization">
+    
+    <meta property="article:tag" content="DDPG Algorithm">
+    
+    <meta property="article:tag" content="HVAC Control">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់មជ្ឈមណ្ឌលទិន្នន័យបៃតង តាមរយៈការរៀនសូត្របែបពង្រឹងកម្លាំងយ៉ាងស៊ីជម្រៅ (Deep Reinforcement Learning)">
+    <meta name="twitter:description" content="មជ្ឈមណ្ឌលទិន្នន័យប្រើប្រាស់ថាមពលអគ្គិសនីយ៉ាងច្រើនសម្បើមសម្រាប់ប្រព័ន្ធត្រជាក់ (Cooling System) ហើយវិធីសាស្ត្រគ្រប់គ្រងបច្ចុប្បន្នដែលផ្អែកលើគំរូរូបវន្ត មានភាពស្មុគស្មាញក្នុងការរចនា និងជារឿយៗមិនមានប្...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u178f\u17d2\u179a\u1787\u17b6\u1780\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1798\u1787\u17d2\u1788\u1798\u178e\u17d2\u178c\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17c3\u178f\u1784 \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a\u1794\u17c2\u1794\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u1798\u17d2\u179b\u17b6\u17c6\u1784\u1799\u17c9\u17b6\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep Reinforcement Learning)",
+      "name": "Transforming Cooling Optimization for Green Data Center via Deep Reinforcement Learning",
+      "description": "\u1798\u1787\u17d2\u1788\u1798\u178e\u17d2\u178c\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1790\u17b6\u1798\u1796\u179b\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8\u1799\u17c9\u17b6\u1784\u1785\u17d2\u179a\u17be\u1793\u179f\u1798\u17d2\u1794\u17be\u1798\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u178f\u17d2\u179a\u1787\u17b6\u1780\u17cb (Cooling System) \u17a0\u17be\u1799\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793\u178a\u17c2\u179b\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1782\u17c6\u179a\u17bc\u179a\u17bc\u1794\u179c\u1793\u17d2\u178f \u1798\u17b6\u1793\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u1785\u1793\u17b6 \u1793\u17b7\u1784\u1787\u17b6\u179a\u17bf\u1799\u17d7\u1798\u17b7\u1793\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1781\u17d2\u1796\u179f\u17cb\u1793\u17c4\u17c7\u1791\u17c1\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/cooling-optimization-data-center-drl-2018.html",
+      "author": [{"@type": "Person", "name": "Yuanlong Li (Nanyang Technological University)"},{"@type": "Person", "name": "Yonggang Wen (Nanyang Technological University)"},{"@type": "Person", "name": "Kyle Guan (Bell Labs, Nokia)"},{"@type": "Person", "name": "Dacheng Tao (University of Technology, Sydney)"}],
+      "datePublished": "2018 (arXiv)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Transforming Cooling Optimization for Green Data Center via Deep Reinforcement Learning",
+        "url": "https://arxiv.org/abs/1709.05077"
+      },
+      "keywords": ["Deep Reinforcement Learning", "Data Center Cooling", "Energy Optimization", "DDPG Algorithm", "HVAC Control"],
+      "about": "Computer Science / Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u178f\u17d2\u179a\u1787\u17b6\u1780\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1798\u1787\u17d2\u1788\u1798\u178e\u17d2\u178c\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17c3\u178f\u1784 \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a\u1794\u17c2\u1794\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u1798\u17d2\u179b\u17b6\u17c6\u1784\u1799\u17c9\u17b6\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep Reinforcement Learning)",
+          "item": "https://khmerresearch.com/papers/technology/cooling-optimization-data-center-drl-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់ម...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Transforming Cooling Optimization for Green Data Center via Deep Reinforcement Learning<br>
+        
+        <strong>Source:</strong> <a href="https://arxiv.org/abs/1709.05077" target="_blank">https://arxiv.org/abs/1709.05077</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់មជ្ឈមណ្ឌលទិន្នន័យបៃតង តាមរយៈការរៀនសូត្របែបពង្រឹងកម្លាំងយ៉ាងស៊ីជម្រៅ (Deep Reinforcement Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Transforming Cooling Optimization for Green Data Center via Deep Reinforcement Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Yuanlong Li (Nanyang Technological University), Yonggang Wen (Nanyang Technological University), Kyle Guan (Bell Labs, Nokia), Dacheng Tao (University of Technology, Sydney)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018 (arXiv)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> មជ្ឈមណ្ឌលទិន្នន័យប្រើប្រាស់ថាមពលអគ្គិសនីយ៉ាងច្រើនសម្បើមសម្រាប់ប្រព័ន្ធត្រជាក់ (Cooling System) ហើយវិធីសាស្ត្រគ្រប់គ្រងបច្ចុប្បន្នដែលផ្អែកលើគំរូរូបវន្ត មានភាពស្មុគស្មាញក្នុងការរចនា និងជារឿយៗមិនមានប្រសិទ្ធភាពខ្ពស់នោះទេ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធស្នើឡើងនូវក្បួនដោះស្រាយការគ្រប់គ្រងភាពត្រជាក់ (CCA) ដោយប្រើប្រាស់បច្ចេកវិទ្យា Deep Reinforcement Learning ដើម្បីរៀនពីទិន្នន័យតាមដាន និងបង្កើនប្រសិទ្ធភាពនៃការគ្រប់គ្រងដោយស្វ័យប្រវត្តិ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយ Deep Deterministic Policy Gradient (DDPG) សម្រាប់បណ្តុះបណ្តាល AI Agent</li>
+            
+            <li>ការធ្វើតេស្តសាកល្បងលើថ្នាល EnergyPlus (EnergyPlus Simulation Platform)</li>
+            
+            <li>ការប្រើប្រាស់ទិន្នន័យជាក់ស្តែងពីមជ្ឈមណ្ឌលកំពូលកុំព្យូទ័រជាតិសិង្ហបុរី (NSCC Data Trace)</li>
+            
+            <li>យន្តការសុពលភាព De-Underestimation (DUE) ដើម្បីកាត់បន្ថយហានិភ័យនៃការប៉ាន់ស្មានសីតុណ្ហភាពខុស</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការពិសោធន៍បង្ហាញថា ក្បួនដោះស្រាយនេះអាចសន្សំសំចៃថ្លៃដើមថាមពលត្រជាក់បានប្រហែល ១១% នៅក្នុងការធ្វើត្រាប់តាម (Simulation) បើធៀបនឹងវិធីសាស្ត្រមូលដ្ឋាន។</li>
+            
+            <li>ចំពោះទិន្នន័យជាក់ស្តែងពី NSCC ក្បួនដោះស្រាយនេះអាចសន្សំសំចៃថាមពលបានប្រហែល ១៥% ដោយរក្សាសីតុណ្ហភាពក្នុងកម្រិតសុវត្ថិភាព។</li>
+            
+            <li>ការសិក្សានេះបង្ហាញពីសក្តានុពលនៃការប្រើប្រាស់វិធីសាស្ត្រ End-to-End DRL ក្នុងការគ្រប់គ្រងប្រព័ន្ធត្រជាក់ដែលមានភាពស្មុគស្មាញនៅក្នុងមជ្ឈមណ្ឌលទិន្នន័យ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">DefaultE+ (Baseline Control)</span></strong><br>ការគ្រប់គ្រងតាមលំនាំដើមដែលមានស្រាប់នៅក្នុងកម្មវិធី EnergyPlus</td>
+                <td>មានស្ថេរភាព និងត្រូវបានប្រើប្រាស់ជាស្តង់ដារសម្រាប់ការប្រៀបធៀបនៅក្នុងការធ្វើត្រាប់តាម (Simulation)។</td>
+                <td>ពឹងផ្អែកលើការកំណត់ចំណុចគោលដៅ (Set-points) ដែលមានភាពរឹង និងមិនអាចបត់បែនតាមបម្រែបម្រួលបរិយាកាសបានល្អឥតខ្ចោះ។</td>
+                <td>PUE ជាមធ្យមគឺ ១.៣៧៦ (ចំណាយថាមពលខ្ពស់ជាងគេក្នុងការពិសោធន៍)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Two-Stage (TS) Approach</span></strong><br>វិធីសាស្ត្រពីរដំណាក់កាល (ការបង្កើតគំរូ និងការដោះស្រាយបញ្ហា)</td>
+                <td>ប្រើប្រាស់ក្បួនដោះស្រាយបរមាភិបាល (Optimization) ដូចជា Differential Evolution ដើម្បីស្វែងរកដំណោះស្រាយ។</td>
+                <td>ទាមទារការគណនាច្រើននៅពេលប្រតិបត្តិការជាក់ស្តែង និងបង្ហាញលទ្ធផលមិនមានស្ថេរភាពនៅក្នុងការធ្វើតេស្ត។</td>
+                <td>មិនមានប្រសិទ្ធភាពជាងវិធីសាស្ត្រមូលដ្ឋានប៉ុន្មានទេ ហើយមានអស្ថេរភាពក្នុងការគ្រប់គ្រងសីតុណ្ហភាព។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CCA (Proposed - DDPG Based)</span></strong><br>ក្បួនដោះស្រាយការគ្រប់គ្រងភាពត្រជាក់ដោយប្រើ Deep Reinforcement Learning</td>
+                <td>អាចរៀនពីទិន្នន័យដែលមានស្រាប់ (Offline training) និងធ្វើការសម្រេចចិត្តដោយស្វ័យប្រវត្តិសម្រាប់ប្រព័ន្ធដែលមានភាពស្មុគស្មាញខ្ពស់។</td>
+                <td>ទាមទារទិន្នន័យប្រវត្តិសាស្ត្រច្រើនសម្រាប់បណ្តុះបណ្តាល និងត្រូវការការកំណត់ Hyper-parameter យ៉ាងប្រុងប្រយ័ត្ន។</td>
+                <td>សន្សំសំចៃថាមពលត្រជាក់បាន ១១% ក្នុងការធ្វើត្រាប់តាម និងរហូតដល់ ១៥% លើទិន្នន័យជាក់ស្តែង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តវិធីសាស្ត្រនេះទាមទារធនធានកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់សម្រាប់ការបណ្តុះបណ្តាល និងប្រព័ន្ធប្រមូលទិន្នន័យដែលមានគុណភាព។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការ GPU (ក្រាហ្វិកកាត) ដើម្បីបណ្តុះបណ្តាលបណ្តាញសរសៃប្រសាទ (Neural Networks) នៃក្បួនដោះស្រាយ DDPG ។</li>
+        
+        <li><strong>Data:</strong> ទាមទារទិន្នន័យប្រវត្តិសាស្ត្រ (Historical Trace) យ៉ាងតិចមួយឆ្នាំ ដែលរួមមាន សីតុណ្ហភាព ការប្រើប្រាស់ថាមពល និងលំហូរខ្យល់។</li>
+        
+        <li><strong>Software Simulation:</strong> ត្រូវការកម្មវិធី EnergyPlus សម្រាប់ការធ្វើត្រាប់តាម និងភាសា Python (TensorFlow) សម្រាប់ការសរសេរកូដ AI។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យអាកាសធាតុនៃប្រទេសសិង្ហបុរី និងទិន្នន័យប្រតិបត្តិការពីមជ្ឈមណ្ឌលកំពូលកុំព្យូទ័រជាតិសិង្ហបុរី (NSCC)។ នេះគឺជាចំណុចវិជ្ជមានយ៉ាងខ្លាំងសម្រាប់កម្ពុជា ដោយសារយើងមានអាកាសធាតុតំបន់ត្រូពិក (ក្តៅ និងសើម) ដូចគ្នា ដែលធ្វើឱ្យលទ្ធផលនៃការសិក្សានេះអាចយកមកអនុវត្តបានដោយផ្ទាល់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសារៈប្រយោជន៍ខ្លាំងសម្រាប់កម្ពុជា ដែលជាប្រទេសមានថ្លៃដើមអគ្គិសនីខ្ពស់ និងត្រូវការប្រព័ន្ធត្រជាក់ខ្លាំងសម្រាប់មជ្ឈមណ្ឌលទិន្នន័យ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ:</strong> ធនាគារធំៗនៅកម្ពុជា (ដូចជា ACLEDA ឬ ABA) ដែលមាន Data Center ផ្ទាល់ខ្លួន អាចប្រើបច្ចេកវិទ្យានេះដើម្បីកាត់បន្ថយចំណាយប្រតិបត្តិការ។</li>
+            
+            <li><strong>ក្រុមហ៊ុនផ្តល់សេវាអ៊ីនធឺណិត (ISP):</strong> ក្រុមហ៊ុនដូចជា EZECOM ឬ ISP ដទៃទៀតដែលមានបន្ទប់ Server ធំៗ អាចសន្សំសំចៃថាមពលបាន ១០-១៥% ដែលជាចំនួនទឹកប្រាក់ដ៏ច្រើនក្នុងមួយឆ្នាំ។</li>
+            
+            <li><strong>រដ្ឋាភិបាលអេឡិចត្រូនិក:</strong> មជ្ឈមណ្ឌលទិន្នន័យរបស់ក្រសួងប្រៃសណីយ៍ ឬស្ថាប័នរដ្ឋ អាចបង្កើនប្រសិទ្ធភាពថាមពល (Green Data Center) ស្របតាមគោលនយោបាយបរិស្ថាន។</li>
+            
+        </ul>
+        
+        
+        <p>ដោយសារអាកាសធាតុកម្ពុជាក្តៅពេញមួយឆ្នាំ ការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់គឺជាអាទិភាពខ្ពស់ ហើយបច្ចេកវិទ្យានេះផ្តល់នូវដំណោះស្រាយដែលមានប្រសិទ្ធភាពដោយមិនចាំបាច់ផ្លាស់ប្តូរគ្រឿងម៉ាស៊ីន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១៖ ការសិក្សាមូលដ្ឋានគ្រឹះ:</strong> និស្សិតត្រូវសិក្សាអំពី Python programming និងមូលដ្ឋានគ្រឹះនៃ Reinforcement Learning ជាពិសេសស្វែងយល់ពីក្បួនដោះស្រាយ Actor-Critic និង DDPG។</li>
+            
+            <li><strong>ជំហានទី ២៖ ការរៀបចំប្រព័ន្ធពិសោធន៍:</strong> ដំឡើងកម្មវិធី EnergyPlus និងរៀនពីរបៀបបង្កើតគំរូអគារ (Building Model) នៅក្នុងបរិបទអាកាសធាតុកម្ពុជា (អាចទាញយកឯកសារអាកាសធាតុភ្នំពេញ)។</li>
+            
+            <li><strong>ជំហានទី ៣៖ ការប្រមូលទិន្នន័យ:</strong> សហការជាមួយផ្នែក IT របស់សាកលវិទ្យាល័យ ឬក្រុមហ៊ុនដៃគូ ដើម្បីបំពាក់ឧបករណ៍ចាប់សញ្ញា (IoT Sensors) ក្នុងបន្ទប់ Server ដើម្បីប្រមូលទិន្នន័យសីតុណ្ហភាព និងថាមពល។</li>
+            
+            <li><strong>ជំហានទី ៤៖ ការអនុវត្តក្បួនដោះស្រាយ:</strong> សរសេរកូដ DDPG ដោយប្រើ TensorFlow ឬ PyTorch ហើយធ្វើការបណ្តុះបណ្តាល (Train) ជាមួយទិន្នន័យដែលប្រមូលបាន ឬទិន្នន័យបើកចំហ (Open Data sets)។</li>
+            
+            <li><strong>ជំហានទី ៥៖ ការវាយតម្លៃសុវត្ថិភាព:</strong> អនុវត្តយន្តការ De-Underestimation (DUE) ដូចក្នុងឯកសារ ដើម្បីធានាថា AI មិនព្យាករណ៍សីតុណ្ហភាពទាបជាងការពិត ដែលអាចបណ្តាលឱ្យម៉ាស៊ីនឡើងកម្តៅ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+Reinforcement+Learning+for+building+energy+management" target="_blank" rel="noopener"><span class="en">Deep Reinforcement Learning for building energy management</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Data+center+cooling+efficiency+optimization+techniques" target="_blank" rel="noopener"><span class="en">Data center cooling efficiency optimization techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Actor-Critic+methods+in+continuous+control+problems" target="_blank" rel="noopener"><span class="en">Actor-Critic methods in continuous control problems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Google+DeepMind+data+center+cooling+AI" target="_blank" rel="noopener"><span class="en">Google DeepMind data center cooling AI</span></a></li>
+            
+        </ul>
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការចាត់ថ្នាក់អត្ថបទសម្រាប់ការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធដោយប្រើម៉ាស៊ីនចំណាត់ថ្នាក់ Naive Bayes ជាមួយទិន្នន័យបណ្តុះបណ្តាលមានកំណត់ | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធ (Authorship Attribution) សម្រាប់អត្ថបទដែលមានទំហំខ្លីខ្លាំង និងមានទិន្នន័យបណ្តុះបណ្តាលមានកំណត់ ជាព...">
+    
+    <meta name="keywords" content="Authorship attribution, Text classification, Naive Bayes classifier, Support Vector Machines, N-grams features, Arabic text analysis, Stylometry, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/text-classification-authorship-attribution-naive-bayes-2014.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/text-classification-authorship-attribution-naive-bayes-2014.html">
+    <meta property="og:title" content="ការចាត់ថ្នាក់អត្ថបទសម្រាប់ការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធដោយប្រើម៉ាស៊ីនចំណាត់ថ្នាក់ Naive Bayes ជាមួយទិន្នន័យបណ្តុះបណ្តាលមានកំណត់ | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធ (Authorship Attribution) សម្រាប់អត្ថបទដែលមានទំហំខ្លីខ្លាំង និងមានទិន្នន័យបណ្តុះបណ្តាលមានកំណត់ ជាពិសេសផ្តោតលើអត្ថបទប្រវត្តិសាស្ត្រជាភាសាអារ៉ាប់។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2014">
+    
+    <meta property="article:tag" content="Authorship attribution">
+    
+    <meta property="article:tag" content="Text classification">
+    
+    <meta property="article:tag" content="Naive Bayes classifier">
+    
+    <meta property="article:tag" content="Support Vector Machines">
+    
+    <meta property="article:tag" content="N-grams features">
+    
+    <meta property="article:tag" content="Arabic text analysis">
+    
+    <meta property="article:tag" content="Stylometry">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការចាត់ថ្នាក់អត្ថបទសម្រាប់ការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធដោយប្រើម៉ាស៊ីនចំណាត់ថ្នាក់ Naive Bayes ជាមួយទិន្នន័យបណ្តុះបណ្តាលមានកំណត់">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធ (Authorship Attribution) សម្រាប់អត្ថបទដែលមានទំហំខ្លីខ្លាំង និងមានទិន្នន័យបណ្តុះបណ្តាលមានកំណត់ ជាពិសេសផ្តោតលើអត្ថបទប្រវត្តិសាស្ត្រជាភាសាអារ៉ាប់។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u17a2\u17d2\u1793\u1780\u1793\u17b7\u1796\u1793\u17d2\u1792\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb Naive Bayes \u1787\u17b6\u1798\u17bd\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17b6\u1793\u1780\u17c6\u178e\u178f\u17cb",
+      "name": "Text Classification for Authorship Attribution Using Naive Bayes Classifier with Limited Training Data",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u17a2\u17d2\u1793\u1780\u1793\u17b7\u1796\u1793\u17d2\u1792 (Authorship Attribution) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u178a\u17c2\u179b\u1798\u17b6\u1793\u1791\u17c6\u17a0\u17c6\u1781\u17d2\u179b\u17b8\u1781\u17d2\u179b\u17b6\u17c6\u1784 \u1793\u17b7\u1784\u1798\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17b6\u1793\u1780\u17c6\u178e\u178f\u17cb \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u17a2\u178f\u17d2\u1790\u1794\u1791\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1787\u17b6\u1797\u17b6\u179f\u17b6\u17a2\u17b6\u179a\u17c9\u17b6\u1794\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/text-classification-authorship-attribution-naive-bayes-2014.html",
+      "author": [{"@type": "Person", "name": "Fatma Howedi (Universiti Kebangsaan Malaysia)"},{"@type": "Person", "name": "Masnizah Mohd (Universiti Kebangsaan Malaysia)"}],
+      "datePublished": "2014",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Text Classification for Authorship Attribution Using Naive Bayes Classifier with Limited Training Data",
+        "url": "www.iiste.org"
+      },
+      "keywords": ["Authorship attribution", "Text classification", "Naive Bayes classifier", "Support Vector Machines", "N-grams features", "Arabic text analysis", "Stylometry"],
+      "about": "Computer Science (Natural Language Processing)"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u17a2\u17d2\u1793\u1780\u1793\u17b7\u1796\u1793\u17d2\u1792\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb Naive Bayes \u1787\u17b6\u1798\u17bd\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17b6\u1793\u1780\u17c6\u178e\u178f\u17cb",
+          "item": "https://khmerresearch.com/papers/technology/text-classification-authorship-attribution-naive-bayes-2014.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការចាត់ថ្នាក់អត្ថបទសម្រាប់ការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធដោយ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Text Classification for Authorship Attribution Using Naive Bayes Classifier with Limited Training Data<br>
+        
+        <strong>Source:</strong> <a href="www.iiste.org" target="_blank">www.iiste.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការចាត់ថ្នាក់អត្ថបទសម្រាប់ការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធដោយប្រើម៉ាស៊ីនចំណាត់ថ្នាក់ Naive Bayes ជាមួយទិន្នន័យបណ្តុះបណ្តាលមានកំណត់</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Text Classification for Authorship Attribution Using Naive Bayes Classifier with Limited Training Data</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Fatma Howedi (Universiti Kebangsaan Malaysia), Masnizah Mohd (Universiti Kebangsaan Malaysia)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2014</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science (Natural Language Processing)</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធ (Authorship Attribution) សម្រាប់អត្ថបទដែលមានទំហំខ្លីខ្លាំង និងមានទិន្នន័យបណ្តុះបណ្តាលមានកំណត់ ជាពិសេសផ្តោតលើអត្ថបទប្រវត្តិសាស្ត្រជាភាសាអារ៉ាប់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់ម៉ាស៊ីនចំណាត់ថ្នាក់ Naive Bayes ដើម្បីវិភាគលើលក្ខណៈពិសេសនៃរចនាប័ទ្មសរសេរ (Stylometry) ដែលបានទាញចេញពីអត្ថបទ ដោយប្រៀបធៀបជាមួយវិធីសាស្ត្រ SVM ។
+        
+        <ul>
+            
+            <li>AAAT Dataset (សំណុំទិន្នន័យអត្ថបទអារ៉ាប់បុរាណចំនួន ៣០ ពីអ្នកនិពន្ធ ១០ នាក់)</li>
+            
+            <li>Naive Bayes Classifier (ម៉ាស៊ីនចំណាត់ថ្នាក់ Naive Bayes)</li>
+            
+            <li>N-grams Features (ការទាញយកលក្ខណៈពិសេសបែប N-gram កម្រិតពាក្យ និងតួអក្សរ)</li>
+            
+            <li>3-fold Cross Validation (ការផ្ទៀងផ្ទាត់ឆ្លងចំនួន ៣ ដំណាក់កាល)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ាស៊ីនចំណាត់ថ្នាក់ Naive Bayes ទទួលបានប្រសិទ្ធភាពខ្ពស់បំផុតរហូតដល់ ៩៦.៦៧% ដោយប្រើប្រាស់លក្ខណៈពិសេស Word Uni-gram ។</li>
+            
+            <li>ជាមធ្យម ម៉ាស៊ីន Naive Bayes ផ្តល់លទ្ធផលល្អជាង SVM (៧១.៨៥% ធៀបនឹង ៦២.៩៦%) សម្រាប់ការវិភាគលើអត្ថបទខ្លីៗប្រភេទនេះ។</li>
+            
+            <li>ការដាក់បញ្ចូលសញ្ញាវណ្ណយុត្តិ (Punctuation marks) ទៅក្នុងការវិភាគលក្ខណៈពិសេសនៃតួអក្សរ បានជួយបង្កើនភាពត្រឹមត្រូវនៃការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធឱ្យកាន់តែប្រសើរឡើង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Naive Bayes (NB)</span></strong><br>វិធីសាស្ត្រចំណាត់ថ្នាក់តាមបែបប្រូបាប៊ីលីតេ (Naive Bayes)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ចំពោះទិន្នន័យដែលមានចំនួនតិច (Limited Training Data) និងដំណើរការលឿនដោយមិនទាមទារធនធានកុំព្យូទ័រខ្លាំង។</td>
+                <td>សន្មតថាលក្ខណៈពិសេសនីមួយៗមិនអាស្រ័យលើគ្នា (Independence assumption) ដែលអាចមិនឆ្លុះបញ្ចាំងពីការពិតនៃរចនាសម្ព័ន្ធភាសា។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុត ៩៦.៦៧% (លើមុខងារ Word Uni-gram) និងមធ្យមភាគ ៧១.៨៥% លើគ្រប់មុខងារ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machines (SVM)</span></strong><br>វិធីសាស្ត្រវ៉ិចទ័រគាំទ្រ (Support Vector Machines)</td>
+                <td>ជាទូទៅមានប្រសិទ្ធភាពចំពោះការចាត់ថ្នាក់អត្ថបទដែលមានទិន្នន័យច្រើន និងមានវិមាត្រខ្ពស់។</td>
+                <td>ជួបការលំបាក និងទទួលបានលទ្ធផលទាបនៅពេលធ្វើការជាមួយទិន្នន័យខ្លីៗ ឬទិន្នន័យដែលមានចំនួនតិច (Sparse data)។</td>
+                <td>ទទួលបានលទ្ធផលទាបជាង NB ដោយមធ្យមភាគត្រឹមតែ ៦២.៩៦% ហើយក្នុងករណីខ្លះធ្លាក់ចុះដល់ ២០% (Word Tri-gram)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រក្នុងកម្រិតទាប ដែលសមស្របសម្រាប់បរិបទនៃសាកលវិទ្យាល័យ ឬស្ថាប័នដែលមានថវិកាកម្រិតមធ្យម។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់កម្មវិធី RapidMiner tool kit សម្រាប់ការវិភាគទិន្នន័យ និងការចាត់ថ្នាក់។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យ AAAT (អត្ថបទអារ៉ាប់បុរាណ) ដែលមានទំហំតូច (ប្រហែល ៣០ អត្ថបទ) ជាប្រភេទឯកសារ .txt ។</li>
+        
+        <li><strong>Hardware:</strong> មិនទាមទារ GPU ខ្លាំងដូចការបណ្តុះបណ្តាល Deep Learning ទេ កុំព្យូទ័រធម្មតាអាចដំណើរការបាន។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះធ្វើឡើងលើអត្ថបទប្រវត្តិសាស្ត្រជាភាសាអារ៉ាប់ (Arabic travelers' texts) ដែលមានរចនាសម្ព័ន្ធភាសាខុសពីភាសាខ្មែរ។ ទោះជាយ៉ាងណាក៏ដោយ បញ្ហានៃការមានទិន្នន័យតិច (Limited Data) គឺស្រដៀងគ្នាទៅនឹងបញ្ហាប្រឈមក្នុងការធ្វើ NLP សម្រាប់ភាសាខ្មែរនាពេលបច្ចុប្បន្ន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានអត្ថប្រយោជន៍ខ្ពស់សម្រាប់កម្ពុជា ជាពិសេសក្នុងការវិភាគអត្ថបទដែលមានធនធានតិចតួច។</p>
+        
+        <ul>
+            
+            <li><strong>Khmer Literature & Digital Humanities:</strong> អាចប្រើដើម្បីកំណត់អត្តសញ្ញាណអ្នកនិពន្ធនៃអត្ថបទបុរាណ ឬកំណាព្យខ្មែរដែលបាត់បង់ឈ្មោះអ្នកនិពន្ធ ដោយផ្អែកលើរចនាប័ទ្មសរសេរ (Stylometry)។</li>
+            
+            <li><strong>Forensic Linguistics (នីតិវិទ្យាភាសា):</strong> អាចអនុវត្តក្នុងវិស័យច្បាប់ដើម្បីវិភាគសារគំរាមកំហែង ឬលិខិតអនាមិកខ្លីៗ (Short texts) ដើម្បីរកអត្តសញ្ញាណជនសង្ស័យ។</li>
+            
+            <li><strong>Social Media Monitoring:</strong> ការចាត់ថ្នាក់គណនីក្លែងក្លាយ (Fake accounts) នៅលើ Facebook ឬ Telegram ដោយវិភាគលើមតិយោបល់ខ្លីៗរបស់អ្នកប្រើប្រាស់។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់ Naive Bayes លើទិន្នន័យតូច គឺជាដំណោះស្រាយដ៏ល្អសម្រាប់អ្នកស្រាវជ្រាវខ្មែរដែលមិនទាន់មានសំណុំទិន្នន័យធំ (Big Data) ក្នុងដៃ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃម៉ាស៊ីនរៀន:</strong> និស្សិតគួរចាប់ផ្តើមសិក្សាពីទ្រឹស្តីនៃ Naive Bayes និងរបៀបគណនាប្រូបាប៊ីលីតេ ដោយប្រើប្រាស់ភាសា Python និងបណ្ណាល័យ Scikit-learn ។</li>
+            
+            <li><strong>ការរៀបចំទិន្នន័យភាសាខ្មែរ (Preprocessing):</strong> ដោយសារភាសាខ្មែរមិនដកឃ្លា និស្សិតត្រូវសិក្សាពីវិធីសាស្ត្រកាត់ពាក្យ (Word Segmentation) ដោយប្រើឧបករណ៍ដូចជា Khmer NLTK ឬ Polyglot មុននឹងបង្កើត N-grams។</li>
+            
+            <li><strong>ការអនុវត្តលើសំណុំទិន្នន័យតូច:</strong> សាកល្បងប្រមូលអត្ថបទខ្លីៗ (ប្រហែល ៥០០ ពាក្យក្នុងមួយអត្ថបទ) ពីអ្នកនិពន្ធខ្មែរល្បីៗ ៣-៥ នាក់ ហើយប្រើប្រាស់កម្មវិធី RapidMiner ឬសរសេរកូដ Python ដើម្បីធ្វើចំណាត់ថ្នាក់។</li>
+            
+            <li><strong>ការពិសោធន៍ជាមួយលក្ខណៈពិសេស (Feature Engineering):</strong> ប្រៀបធៀបប្រសិទ្ធភាពរវាងការប្រើ Word N-grams និង Character N-grams សម្រាប់ភាសាខ្មែរ ដើម្បីមើលថាតើមួយណាផ្តល់លទ្ធផលល្អជាងសម្រាប់អត្ថបទខ្លី។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul>
+            
+            <li><a href="https://scholar.google.com/scholar?q=stylometric+analysis+of+short+texts" target="_blank" rel="noopener"><span class="en">stylometric analysis of short texts</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=feature+selection+methods+for+authorship+attribution" target="_blank" rel="noopener"><span class="en">feature selection methods for authorship attribution</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparison+of+Naive+Bayes+and+SVM+for+text+classification" target="_blank" rel="noopener"><span class="en">comparison of Naive Bayes and SVM for text classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=impact+of+data+size+on+authorship+attribution+accuracy" target="_blank" rel="noopener"><span class="en">impact of data size on authorship attribution accuracy</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Arabic+text+classification+techniques" target="_blank" rel="noopener"><span class="en">Arabic text classification techniques</span></a></li>
+            
+        </ul>
+    </div>
+    
+
+</div>
+
+</body>
+</html>

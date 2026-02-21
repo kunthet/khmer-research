@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រព័ន្ធសិក្សាបន្ថែមសម្រាប់ការធ្វើចំណាត់ថ្នាក់ KNN តាមអនឡាញ៖ ការអនុវត្តចំពោះការរកឃើញការលុកលុយបណ្តាញ | KhmerResearch.com</title>
+    <meta name="description" content="ប្រព័ន្ធរកឃើញការលុកលុយបណ្តាញ (NIDS) ប្រឈមមុខនឹងបញ្ហានៃការផ្លាស់ប្តូរបរិយាកាសឥតឈប់ឈរដែលបណ្តាលឱ្យមានការវាយប្រហារប្រភេទថ្មីៗ (Concept Drift) ហើយការប្រើប្រាស់វិធ...">
+    
+    <meta name="keywords" content="Incremental Learning, KNN Classification, Network Intrusion Detection, Concept Drift, Instance Selection, Condensed Nearest Neighbor (CNN), Genetic Algorithm, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/incremental-learning-system-knn-nids-2013.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/incremental-learning-system-knn-nids-2013.html">
+    <meta property="og:title" content="ប្រព័ន្ធសិក្សាបន្ថែមសម្រាប់ការធ្វើចំណាត់ថ្នាក់ KNN តាមអនឡាញ៖ ការអនុវត្តចំពោះការរកឃើញការលុកលុយបណ្តាញ | KhmerResearch.com">
+    <meta property="og:description" content="ប្រព័ន្ធរកឃើញការលុកលុយបណ្តាញ (NIDS) ប្រឈមមុខនឹងបញ្ហានៃការផ្លាស់ប្តូរបរិយាកាសឥតឈប់ឈរដែលបណ្តាលឱ្យមានការវាយប្រហារប្រភេទថ្មីៗ (Concept Drift) ហើយការប្រើប្រាស់វិធីសាស្ត្រ KNN បែបបុរាណមានដំណើរការយឺត និងម...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2013">
+    
+    <meta property="article:tag" content="Incremental Learning">
+    
+    <meta property="article:tag" content="KNN Classification">
+    
+    <meta property="article:tag" content="Network Intrusion Detection">
+    
+    <meta property="article:tag" content="Concept Drift">
+    
+    <meta property="article:tag" content="Instance Selection">
+    
+    <meta property="article:tag" content="Condensed Nearest Neighbor (CNN)">
+    
+    <meta property="article:tag" content="Genetic Algorithm">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រព័ន្ធសិក្សាបន្ថែមសម្រាប់ការធ្វើចំណាត់ថ្នាក់ KNN តាមអនឡាញ៖ ការអនុវត្តចំពោះការរកឃើញការលុកលុយបណ្តាញ">
+    <meta name="twitter:description" content="ប្រព័ន្ធរកឃើញការលុកលុយបណ្តាញ (NIDS) ប្រឈមមុខនឹងបញ្ហានៃការផ្លាស់ប្តូរបរិយាកាសឥតឈប់ឈរដែលបណ្តាលឱ្យមានការវាយប្រហារប្រភេទថ្មីៗ (Concept Drift) ហើយការប្រើប្រាស់វិធីសាស្ត្រ KNN បែបបុរាណមានដំណើរការយឺត និងម...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1794\u1793\u17d2\u1790\u17c2\u1798\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb KNN \u178f\u17b6\u1798\u17a2\u1793\u17a1\u17b6\u1789\u17d6 \u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1785\u17c6\u1796\u17c4\u17c7\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u179b\u17bb\u1780\u179b\u17bb\u1799\u1794\u178e\u17d2\u178f\u17b6\u1789",
+      "name": "AN INCREMENTAL LEARNING SYSTEM FOR ON LINE KNN CLASSIFICATION: Application To Network Intrusion Detection",
+      "description": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u179b\u17bb\u1780\u179b\u17bb\u1799\u1794\u178e\u17d2\u178f\u17b6\u1789 (NIDS) \u1794\u17d2\u179a\u1788\u1798\u1798\u17bb\u1781\u1793\u17b9\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1794\u179a\u17b7\u1799\u17b6\u1780\u17b6\u179f\u17a5\u178f\u1788\u1794\u17cb\u1788\u179a\u178a\u17c2\u179b\u1794\u178e\u17d2\u178f\u17b6\u179b\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u179c\u17b6\u1799\u1794\u17d2\u179a\u17a0\u17b6\u179a\u1794\u17d2\u179a\u1797\u17c1\u1791\u1790\u17d2\u1798\u17b8\u17d7 (Concept Drift) \u17a0\u17be\u1799\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a KNN \u1794\u17c2\u1794\u1794\u17bb\u179a\u17b6\u178e\u1798\u17b6\u1793\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1799\u17ba\u178f \u1793\u17b7\u1784\u1798\u17b7\u1793\u17a2\u17b6\u1785\u179f\u1798\u17d2\u179a\u1794\u1781\u17d2\u179b\u17bd\u1793\u1794\u17b6\u1793\u1791\u17b6\u1793\u17cb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/incremental-learning-system-knn-nids-2013.html",
+      "author": [{"@type": "Person", "name": "Ahmed Riadh Baba-ali (University of Science and Technology of Algiers, Algeria)"}],
+      "datePublished": "2013",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "AN INCREMENTAL LEARNING SYSTEM FOR ON LINE KNN CLASSIFICATION: Application To Network Intrusion Detection",
+        "url": "N/A"
+      },
+      "keywords": ["Incremental Learning", "KNN Classification", "Network Intrusion Detection", "Concept Drift", "Instance Selection", "Condensed Nearest Neighbor (CNN)", "Genetic Algorithm"],
+      "about": "Computer Science / Cybersecurity"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1794\u1793\u17d2\u1790\u17c2\u1798\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb KNN \u178f\u17b6\u1798\u17a2\u1793\u17a1\u17b6\u1789\u17d6 \u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1785\u17c6\u1796\u17c4\u17c7\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u179b\u17bb\u1780\u179b\u17bb\u1799\u1794\u178e\u17d2\u178f\u17b6\u1789",
+          "item": "https://khmerresearch.com/papers/technology/incremental-learning-system-knn-nids-2013.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រព័ន្ធសិក្សាបន្ថែមសម្រាប់ការធ្វើចំណាត់ថ្នាក់ KNN តាមអនឡ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> AN INCREMENTAL LEARNING SYSTEM FOR ON LINE KNN CLASSIFICATION: Application To Network Intrusion Detection<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រព័ន្ធសិក្សាបន្ថែមសម្រាប់ការធ្វើចំណាត់ថ្នាក់ KNN តាមអនឡាញ៖ ការអនុវត្តចំពោះការរកឃើញការលុកលុយបណ្តាញ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> AN INCREMENTAL LEARNING SYSTEM FOR ON LINE KNN CLASSIFICATION: Application To Network Intrusion Detection</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ahmed Riadh Baba-ali (University of Science and Technology of Algiers, Algeria)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2013</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Cybersecurity</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ប្រព័ន្ធរកឃើញការលុកលុយបណ្តាញ (NIDS) ប្រឈមមុខនឹងបញ្ហានៃការផ្លាស់ប្តូរបរិយាកាសឥតឈប់ឈរដែលបណ្តាលឱ្យមានការវាយប្រហារប្រភេទថ្មីៗ (Concept Drift) ហើយការប្រើប្រាស់វិធីសាស្ត្រ KNN បែបបុរាណមានដំណើរការយឺត និងមិនអាចសម្របខ្លួនបានទាន់ពេលវេលា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវប្រព័ន្ធសិក្សាបន្ថែម (Incremental Learning) ដែលរួមបញ្ចូលការធ្វើចំណាត់ថ្នាក់ KNN ជាមួយការជ្រើសរើសទិន្នន័យគំរូ ដើម្បីកាត់បន្ថយទំហំទិន្នន័យ និងធ្វើបច្ចុប្បន្នភាពចំណេះដឹងជាបន្តបន្ទាប់។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ម៉ូឌុលធ្វើចំណាត់ថ្នាក់ (KNN Classification Module) ដើម្បីវិភាគចរាចរណ៍បណ្តាញ។</li>
+            
+            <li>ការជ្រើសរើសទិន្នន័យគំរូ (Instance Selection) ដោយប្រើក្បួនដោះស្រាយសេនេទិច (Genetic Algorithm) ដើម្បីកាត់បន្ថយទំហំទិន្នន័យបណ្តុះបណ្តាល។</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយ CNN (Condensed Nearest Neighbor) សម្រាប់ការធ្វើបច្ចុប្បន្នភាពចំណេះដឹងតាមពេលវេលាជាក់ស្តែង។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការជ្រើសរើសទិន្នន័យគំរូអាចកាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យបណ្តុះបណ្តាលបានរហូតដល់ ៩៩% ដែលជួយបង្កើនល្បឿននៃការធ្វើចំណាត់ថ្នាក់បានយ៉ាងលឿន។</li>
+            
+            <li>អត្រានៃការខុស (Error rate) ត្រូវបានកាត់បន្ថយយ៉ាងខ្លាំងពីប្រហែល ១០% មកនៅត្រឹម ២.៣៣% ដោយសារដំណើរការសិក្សាបន្ថែម (Incremental Learning)។</li>
+            
+            <li>ប្រព័ន្ធនេះកាត់បន្ថយអត្រានៃការមិនបានរកឃើញការវាយប្រហារ (False Negative) ដែលធ្វើឱ្យប្រសិទ្ធភាពនៃការការពារបណ្តាញមានភាពល្អប្រសើរជាងមុន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Classical KNN (Offline Learning)</span></strong><br>ការធ្វើចំណាត់ថ្នាក់ KNN បែបបុរាណ (រៀនតែម្តងនៅពេលចាប់ផ្តើម)</td>
+                <td>មានភាពសាមញ្ញក្នុងការអនុវត្ត និងមិនពឹងផ្អែកលើម៉ូដែលស្មុគស្មាញ (Non-parametric)។</td>
+                <td>មានល្បឿនយឺតខ្លាំងនៅពេលទិន្នន័យមានទំហំធំ និងមិនអាចចាប់យកការវាយប្រហារប្រភេទថ្មីៗបានទេ (Static knowledge)។</td>
+                <td>អត្រាមានកំហុសមធ្យម (Mean Error Rate) ខ្ពស់ប្រហែល ១៣.៧៥% (នៅពេល K=1)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Incremental KNN with Instance Selection</span></strong><br>ប្រព័ន្ធ KNN បែបសិក្សាបន្ថែម ជាមួយការជ្រើសរើសទិន្នន័យគំរូ (វិធីសាស្ត្រដែលស្នើឡើង)</td>
+                <td>មានល្បឿនលឿនដោយសារការកាត់បន្ថយទំហំទិន្នន័យ និងអាចធ្វើបច្ចុប្បន្នភាពចំណេះដឹងដើម្បីស្គាល់ការវាយប្រហារថ្មីៗ (Concept Drift Adaptation)។</td>
+                <td>ប្រសិទ្ធភាពអាចអាស្រ័យលើលំដាប់នៃព្រឹត្តិការណ៍ដែលចូលមក (Sensitive to order of events) ប៉ុន្តែអ្នកនិពន្ធចាត់ទុកថានេះជាគុណសម្បត្តិសម្រាប់ការសិក្សាតាមពេលវេលា។</td>
+                <td>កាត់បន្ថយអត្រាមានកំហុសមកត្រឹម ២.៥៦% (នៅពេល K=1) និងកាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យបណ្តុះបណ្តាលបាន ៩៩%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> វិធីសាស្ត្រនេះត្រូវបានរចនាឡើងដើម្បីដំណើរការលើប្រព័ន្ធដែលមានធនធានកំណត់ ដោយសារវាមានសមត្ថភាពកាត់បន្ថយទិន្នន័យបានយ៉ាងច្រើន ធ្វើឱ្យមិនត្រូវការកុំព្យូទ័រដែលមានកម្លាំងខ្លាំងពេកនោះទេ។
+    
+    <ul>
+        
+        <li><strong>Computational Power:</strong> កុំព្យូទ័រធម្មតាអាចដំណើរការបាន ដោយសារក្បួនដោះស្រាយ Genetic Algorithm និង CNN ជួយកាត់បន្ថយការគណនាបានច្រើន។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យចរាចរណ៍បណ្តាញជាក់ស្តែង (Real Network Traffic) ដែលមានលក្ខណៈសម្បត្តិ TCP connection (ដូចជា KDD Cup 99 ឬទិន្នន័យផ្ទាល់ពី Wireshark)។</li>
+        
+        <li><strong>Algorithm Implementation:</strong> តម្រូវឱ្យមានការសរសេរកូដសម្រាប់ Genetic Algorithm (សម្រាប់ការជ្រើសរើសទិន្នន័យ) និង Condensed Nearest Neighbor (CNN) Rule។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យដែលប្រមូលបានពីបណ្តាញជាក់ស្តែងក្នុងរយៈពេលខ្លី (ប្រហែលមួយសប្តាហ៍)។ នេះជាចំណុចខ្វះខាតមួយព្រោះទម្រង់នៃការវាយប្រហារក្នុងប្រទេសកម្ពុជាអាចខុសគ្នាពីបរិបទនៃការសិក្សានេះ ហើយរយៈពេលខ្លីអាចមិនឆ្លុះបញ្ចាំងពីការប្រែប្រួលតាមរដូវកាល។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់វិស័យសន្តិសុខតាមអ៊ីនធឺណិតនៅកម្ពុជា ជាពិសេសសម្រាប់ការការពារប្រព័ន្ធបណ្តាញដែលមានការផ្លាស់ប្តូរលឿន។</p>
+        
+        <ul>
+            
+            <li><strong>សេវាផ្តល់អ៊ីនធឺណិត (ISPs):</strong> ក្រុមហ៊ុនដូចជា Ezecom ឬ SINET អាចប្រើប្រព័ន្ធនេះដើម្បីការពារបណ្តាញស្នូលរបស់ពួកគេពីការវាយប្រហារថ្មីៗដោយមិនចាំបាច់បិទប្រព័ន្ធដើម្បីបណ្តុះបណ្តាលសារជាថ្មី។</li>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ:</strong> ធនាគារនៅកម្ពុជាអាចប្រើវាដើម្បីចាប់យកសកម្មភាពមិនប្រក្រតី (Anomalies) ក្នុងប្រតិបត្តិការ ដោយប្រព័ន្ធអាចរៀនពីការប៉ុនប៉ងឆបោកថ្មីៗភ្លាមៗ។</li>
+            
+        </ul>
+        
+        
+        <p>វាផ្តល់នូវដំណោះស្រាយដែលមានប្រសិទ្ធភាពខ្ពស់ និងចំណាយតិចសម្រាប់ការការពារបណ្តាញកុំព្យូទ័រ ដែលសាកសមនឹងស្ថាប័ននៅកម្ពុជាដែលចង់ពង្រឹងសុវត្ថិភាពទិន្នន័យ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការសិក្សាមូលដ្ឋានគ្រឹះ:</strong> និស្សិតគួរចាប់ផ្តើមដោយការយល់ដឹងអំពីដំណើរការនៃម៉ូដែល KNN និងបញ្ហា Concept Drift នៅក្នុងប្រព័ន្ធ Network Intrusion Detection (NIDS)។</li>
+            
+            <li><strong>ការរៀបចំទិន្នន័យពិសោធន៍:</strong> ប្រើប្រាស់ឧបករណ៍ដូចជា Wireshark ដើម្បីចាប់យកកញ្ចប់ទិន្នន័យ (Packets) ឬប្រើប្រាស់ទិន្នន័យស្តង់ដារដូចជា NSL-KDD ដើម្បីធ្វើការសាកល្បង។</li>
+            
+            <li><strong>ការអនុវត្តក្បួនដោះស្រាយ Genetic Algorithm:</strong> សរសេរកម្មវិធី (អាចប្រើ Python) ដើម្បីអនុវត្ត Genetic Algorithm ក្នុងគោលបំណងជ្រើសរើសទិន្នន័យដែលសំខាន់បំផុត (Feature Selection / Instance Selection) ដើម្បីកាត់បន្ថយទំហំទិន្នន័យ។</li>
+            
+            <li><strong>ការបង្កើតប្រព័ន្ធសិក្សាបន្ថែម (Incremental Module):</strong> បញ្ចូលក្បួនដោះស្រាយ Condensed Nearest Neighbor (CNN) ដើម្បីឱ្យប្រព័ន្ធអាចរៀនពីកំហុស (Misclassification) និងធ្វើបច្ចុប្បន្នភាពមូលដ្ឋានទិន្នន័យដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ការវាយតម្លៃលទ្ធផល:</strong> ធ្វើការប្រៀបធៀបអត្រា False Negative និងល្បឿននៃការវិភាគ រវាងប្រព័ន្ធដែលបានបង្កើត និងប្រព័ន្ធ KNN ធម្មតា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Incremental Learning</span></td>
+                <td>ជាវិធីសាស្ត្រនៃការបណ្តុះបណ្តាលម៉ូដែលដែលអនុញ្ញាតឱ្យប្រព័ន្ធរៀនចំណេះដឹងថ្មីៗជាបន្តបន្ទាប់នៅពេលមានទិន្នន័យថ្មីចូលមក ដោយមិនចាំបាច់លុបចោលចំណេះដឹងចាស់ ឬចាប់ផ្តើមរៀនពីដំបូងឡើយ។</td>
+                <td>ដូចសិស្សដែលរៀនមេរៀនថ្មីបន្ថែមជារៀងរាល់ថ្ងៃ ដោយមិនចាំបាច់រៀនមេរៀនទាំងអស់ឡើងវិញតាំងពីថ្នាក់ទីមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept Drift</span></td>
+                <td>ជាបាតុភូតដែលលក្ខណៈនៃទិន្នន័យ ឬទម្រង់នៃការវាយប្រហារមានការផ្លាស់ប្តូរតាមពេលវេលា ដែលធ្វើឱ្យម៉ូដែលដែលបានបណ្តុះបណ្តាលពីមុនលែងមានប្រសិទ្ធភាព ឬមានភាពសុក្រឹតតិចជាងមុន។</td>
+                <td>ដូចជាការផ្លាស់ប្តូរម៉ូដសម្លៀកបំពាក់តាមសម័យកាល អ្វីដែលពេញនិយមពីមុនអាចនឹងលែងត្រូវនឹងចំណង់ចំណូលចិត្តបច្ចុប្បន្ន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Instance Selection (IS)</span></td>
+                <td>ជាដំណើរការនៃការជ្រើសរើសយកតែសំណុំទិន្នន័យតំណាងសំខាន់ៗបំផុតចេញពីទិន្នន័យដើមដ៏ច្រើន ដើម្បីកាត់បន្ថយទំហំផ្ទុក និងបង្កើនល្បឿននៃការគណនា ដោយរក្សានូវភាពត្រឹមត្រូវដដែល។</td>
+                <td>ប្រៀបដូចជាការសង្ខេបសៀវភៅមួយក្បាល ដោយដកស្រង់យកតែប្រយោគសំខាន់ៗមកសិក្សា ដើម្បីចំណេញពេលវេលា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Condensed Nearest Neighbor (CNN)</span></td>
+                <td>ជាក្បួនដោះស្រាយមួយសម្រាប់កាត់បន្ថយទំហំទិន្នន័យបណ្តុះបណ្តាល ដោយរក្សាទុកតែទិន្នន័យណាដែលចាំបាច់ដើម្បីកំណត់ព្រំដែននៃការធ្វើចំណាត់ថ្នាក់ឱ្យបានត្រឹមត្រូវ និងលុបចោលទិន្នន័យដែលលែងត្រូវការ។</td>
+                <td>ដូចជាការរក្សាទុកតែលំហាត់គំរូដែលពិបាកៗដើម្បីរៀន និងបោះចោលលំហាត់ងាយៗដែលស្រដៀងគ្នាខ្លាំងពេក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">False Negative (FN)</span></td>
+                <td>ជាកំហុសនៃការវិភាគដែលប្រព័ន្ធសុវត្ថិភាពសន្និដ្ឋានថា 'គ្មានការវាយប្រហារ' (Normal) ទាំងដែលការពិតកំពុងមានការវាយប្រហារកើតឡើង។ នេះជាកំហុសដ៏គ្រោះថ្នាក់បំផុតសម្រាប់ប្រព័ន្ធសុវត្ថិភាព។</td>
+                <td>ដូចជាឧបករណ៍រាវរកផ្សែងដែលមិនបន្លឺសំឡេងព្រមាន នៅពេលមានអគ្គិភ័យកើតឡើងជាក់ស្តែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (KNN)</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ធ្វើចំណាត់ថ្នាក់ទិន្នន័យថ្មី ដោយផ្អែកលើភាពស្រដៀងគ្នារបស់វាទៅនឹងទិន្នន័យចាស់ចំនួន K ដែលនៅជិតបំផុតនៅក្នុងមូលដ្ឋានទិន្នន័យ។</td>
+                <td>ដូចពាក្យស្លោកថា 'មើលមិត្តភក្តិជិតស្និទ្ធបំផុតរបស់គេ ដើម្បីដឹងថាគេជាមនុស្សបែបណា'។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul>
+            
+            <li><a href="https://scholar.google.com/scholar?q=concept+drift+adaptation+in+network+intrusion+detection+systems" target="_blank" rel="noopener"><span class="en">concept drift adaptation in network intrusion detection systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=condensed+nearest+neighbor+rule+for+instance+selection" target="_blank" rel="noopener"><span class="en">condensed nearest neighbor rule for instance selection</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=genetic+algorithms+for+reducing+training+set+size+in+KNN" target="_blank" rel="noopener"><span class="en">genetic algorithms for reducing training set size in KNN</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=incremental+learning+algorithms+for+data+streams" target="_blank" rel="noopener"><span class="en">incremental learning algorithms for data streams</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparison+of+offline+vs+online+learning+in+cybersecurity" target="_blank" rel="noopener"><span class="en">comparison of offline vs online learning in cybersecurity</span></a></li>
+            
+        </ul>
+    </div>
+    
+
+</div>
+
+</body>
+</html>
