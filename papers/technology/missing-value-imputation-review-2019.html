@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបំពេញតម្លៃដែលបាត់បង់៖ ការពិនិត្យឡើងវិញ | KhmerResearch.com</title>
+    <meta name="description" content="បញ្ហានៃតម្លៃដែលបាត់បង់ (Missing Values) នៅក្នុងសំណុំទិន្នន័យ (Data Sets) បណ្តាលឱ្យមានការថយចុះនូវភាពត្រឹមត្រូវ និងប្រសិទ្ធភាពក្នុងការវិភាគទិន្នន័យ ដែលតម្រូវឱ្...">
+    
+    <meta name="keywords" content="Missing Value Imputation, Data Mining, K-Nearest Neighbor, Algorithms, Data Preprocessing, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/missing-value-imputation-review-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/missing-value-imputation-review-2019.html">
+    <meta property="og:title" content="ការបំពេញតម្លៃដែលបាត់បង់៖ ការពិនិត្យឡើងវិញ | KhmerResearch.com">
+    <meta property="og:description" content="បញ្ហានៃតម្លៃដែលបាត់បង់ (Missing Values) នៅក្នុងសំណុំទិន្នន័យ (Data Sets) បណ្តាលឱ្យមានការថយចុះនូវភាពត្រឹមត្រូវ និងប្រសិទ្ធភាពក្នុងការវិភាគទិន្នន័យ ដែលតម្រូវឱ្យមានបច្ចេកទេសសមស្របដើម្បីដោះស្រាយ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2019, International Journal of Computer Sciences and Engineering">
+    
+    <meta property="article:tag" content="Missing Value Imputation">
+    
+    <meta property="article:tag" content="Data Mining">
+    
+    <meta property="article:tag" content="K-Nearest Neighbor">
+    
+    <meta property="article:tag" content="Algorithms">
+    
+    <meta property="article:tag" content="Data Preprocessing">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបំពេញតម្លៃដែលបាត់បង់៖ ការពិនិត្យឡើងវិញ">
+    <meta name="twitter:description" content="បញ្ហានៃតម្លៃដែលបាត់បង់ (Missing Values) នៅក្នុងសំណុំទិន្នន័យ (Data Sets) បណ្តាលឱ្យមានការថយចុះនូវភាពត្រឹមត្រូវ និងប្រសិទ្ធភាពក្នុងការវិភាគទិន្នន័យ ដែលតម្រូវឱ្យមានបច្ចេកទេសសមស្របដើម្បីដោះស្រាយ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u17d6 \u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789",
+      "name": "Missing Value Imputation-A Review",
+      "description": "\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb (Missing Values) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Sets) \u1794\u178e\u17d2\u178f\u17b6\u179b\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1790\u1799\u1785\u17bb\u17c7\u1793\u17bc\u179c\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c \u1793\u17b7\u1784\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u178a\u17c2\u179b\u178f\u1798\u17d2\u179a\u17bc\u179c\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179f\u1798\u179f\u17d2\u179a\u1794\u178a\u17be\u1798\u17d2\u1794\u17b8\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/missing-value-imputation-review-2019.html",
+      "author": [{"@type": "Person", "name": "Dipalika Das (Department of MCA, TACT, BBSR, Odisha India)"},{"@type": "Person", "name": "Maya Nayak (Dept. of Computer Science and Engineering, OEC, BBSR, Odisha, India)"},{"@type": "Person", "name": "Subhendu Kumar Pani (Dept. of Computer Science and Engineering, OEC, BBSR, Odisha, India)"}],
+      "datePublished": "2019, International Journal of Computer Sciences and Engineering",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Missing Value Imputation-A Review",
+        "url": "https://doi.org/10.26438/ijcse/v7i4.548558"
+      },
+      "keywords": ["Missing Value Imputation", "Data Mining", "K-Nearest Neighbor", "Algorithms", "Data Preprocessing"],
+      "about": "Computer Science / Data Mining"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u17d6 \u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789",
+          "item": "https://khmerresearch.com/papers/technology/missing-value-imputation-review-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបំពេញតម្លៃដែលបាត់បង់៖ ការពិនិត្យឡើងវិញ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Missing Value Imputation-A Review<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.26438/ijcse/v7i4.548558" target="_blank">https://doi.org/10.26438/ijcse/v7i4.548558</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបំពេញតម្លៃដែលបាត់បង់៖ ការពិនិត្យឡើងវិញ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Missing Value Imputation-A Review</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Dipalika Das (Department of MCA, TACT, BBSR, Odisha India), Maya Nayak (Dept. of Computer Science and Engineering, OEC, BBSR, Odisha, India), Subhendu Kumar Pani (Dept. of Computer Science and Engineering, OEC, BBSR, Odisha, India)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2019, International Journal of Computer Sciences and Engineering</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Data Mining</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> បញ្ហានៃតម្លៃដែលបាត់បង់ (Missing Values) នៅក្នុងសំណុំទិន្នន័យ (Data Sets) បណ្តាលឱ្យមានការថយចុះនូវភាពត្រឹមត្រូវ និងប្រសិទ្ធភាពក្នុងការវិភាគទិន្នន័យ ដែលតម្រូវឱ្យមានបច្ចេកទេសសមស្របដើម្បីដោះស្រាយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះគឺជាការពិនិត្យឡើងវិញនូវអក្សរសិល្ប៍ដែលមានស្រាប់តាមលំដាប់ឆ្នាំ (Year-wise study) ដើម្បីស្វែងយល់ពីបច្ចេកទេសបំពេញទិន្នន័យផ្សេងៗ និងប្រៀបធៀបប្រសិទ្ធភាពរបស់វា។
+        
+        <ul>
+            
+            <li>ការពិនិត្យលើវិធីសាស្ត្រស្ថិតិ និងម៉ាស៊ីនរៀនដូចជា Mean/Mode Imputation និង K-Nearest Neighbor (KNN)</li>
+            
+            <li>ការវិភាគលើវិធីសាស្ត្រកូនកាត់ (Hybrid methods) ដែលប្រើប្រាស់ Fuzzy Logic និង Neural Networks</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រ KNN ត្រូវបានរកឃើញថាមានប្រសិទ្ធភាពល្អជាងវិធីសាស្ត្រជំនួសដោយតម្លៃមធ្យម (Mean Imputation) នៅក្នុងករណីជាច្រើន ប៉ុន្តែវាអាស្រ័យលើប្រភេទនៃទិន្នន័យ។</li>
+            
+            <li>ការប្រើប្រាស់វិធីសាស្ត្រកូនកាត់ដូចជា Fuzzy-KNN និង Deep Learning ផ្តល់នូវលទ្ធផលសុក្រឹតភាពខ្ពស់ជាងវិធីសាស្ត្រប្រពៃណីក្នុងការប៉ាន់ប្រមាណតម្លៃដែលបាត់។</li>
+            
+            <li>មិនមានវិធីសាស្ត្របំពេញតម្លៃណាមួយដែលល្អបំផុតសម្រាប់គ្រប់ស្ថានភាពនោះទេ ការជ្រើសរើសគឺអាស្រ័យលើរចនាសម្ព័ន្ធទិន្នន័យ និងយន្តការនៃការបាត់បង់ទិន្នន័យ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Mean/Mode Imputation</span></strong><br>ការជំនួសដោយតម្លៃមធ្យម ឬតម្លៃដែលញឹកញាប់បំផុត</td>
+                <td>ងាយស្រួលអនុវត្ត និងមានល្បឿនលឿនក្នុងការគណនា។</td>
+                <td>អាចបង្កើតភាពលំអៀង (Bias) ខ្ពស់ និងកាត់បន្ថយបម្រែបម្រួលនៃទិន្នន័យ ដែលធ្វើឱ្យលទ្ធផលវិភាគមិនសូវសុក្រឹត។</td>
+                <td>ជាវិធីសាស្ត្រមូលដ្ឋាន ប៉ុន្តែផ្តល់លទ្ធផលមិនល្អស្មើនឹងវិធីសាស្ត្រទំនើប ជាពិសេសនៅពេលទិន្នន័យបាត់បង់មានចំនួនច្រើន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbors (KNN) Imputation</span></strong><br>ការជំនួសដោយប្រើវិធីសាស្ត្រអ្នកជិតខាងដែលនៅជិតបំផុតចំនួន K</td>
+                <td>មានភាពធន់ (Robust) និងផ្តល់សុក្រឹតភាពខ្ពស់ជាងវិធីសាស្ត្រ Mean/Mode ដោយផ្អែកលើភាពស្រដៀងគ្នានៃទិន្នន័យ។</td>
+                <td>ចំណាយពេលគណនាយូរ (Computationally expensive) សម្រាប់សំណុំទិន្នន័យធំៗ។</td>
+                <td>ត្រូវបានរកឃើញថាមានប្រសិទ្ធភាពជាង Mean/Mode និង Case Deletion នៅក្នុងការពិសោធន៍ភាគច្រើន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Deep Learning / Neural Networks</span></strong><br>ការប្រើប្រាស់បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (ដូចជា Autoencoders)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការចាប់យកទំនាក់ទំនងស្មុគស្មាញនៅក្នុងទិន្នន័យ ជាពិសេសសម្រាប់ការទស្សន៍ទាយចរាចរណ៍ ឬទិន្នន័យដែលមានលក្ខណៈមិនលីនេអ៊ែរ។</td>
+                <td>តម្រូវឱ្យមានទិន្នន័យច្រើនសម្រាប់បង្ហាត់ និងធនធានកុំព្យូទ័រខ្លាំង។</td>
+                <td>ផ្តល់លទ្ធផលល្អប្រសើរក្នុងការកាត់បន្ថយការបាត់បង់ទិន្នន័យចរាចរណ៍ (Traffic data) និងរក្សាសុក្រឹតភាពនៃការទស្សន៍ទាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Fuzzy Clustering Approaches</span></strong><br>វិធីសាស្ត្រចង្កោមស្រពិចស្រពិល (Fuzzy C-Means)</td>
+                <td>ល្អសម្រាប់ការដោះស្រាយភាពមិនច្បាស់លាស់នៅក្នុងទិន្នន័យវេជ្ជសាស្ត្រ ឬទិន្នន័យដែលមានព្រំដែនមិនច្បាស់លាស់។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការកំណត់ប៉ារ៉ាម៉ែត្រ (Parameters) ឱ្យបានត្រឹមត្រូវ។</td>
+                <td>ធ្វើឱ្យប្រសើរឡើងនូវភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់ (Classification accuracy) លើសពីវិធីសាស្ត្រស្តង់ដារ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារមិនបានបញ្ជាក់ពីតម្លៃជាទឹកប្រាក់ទេ ប៉ុន្តែបានបង្ហាញពីតម្រូវការធនធានបច្ចេកទេស និងកម្លាំងគណនា។
+    
+    <ul>
+        
+        <li><strong>Computational Power:</strong> វិធីសាស្ត្រ Deep Learning និង Genetic Algorithms តម្រូវឱ្យមានកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់ (CPU/GPU) ខណៈពេលដែល Mean Imputation ប្រើប្រាស់ធនធានតិចតួច។</li>
+        
+        <li><strong>Software Tools:</strong> ការពិសោធន៍ក្នុងឯកសារប្រើប្រាស់ឧបករណ៍ដូចជា WEKA Data Mining Tool និងភាសាសរសេរកូដសម្រាប់ម៉ូដែលស្ថិតិ។</li>
+        
+        <li><strong>Data Quality:</strong> តម្រូវឱ្យមានសំណុំទិន្នន័យដែលមានរចនាសម្ព័ន្ធច្បាស់លាស់ (Structured Data) ដូចជាទិន្នន័យពី UCI Repository ដើម្បីធ្វើការប្រៀបធៀប។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្អែកលើការពិនិត្យឡើងវិញនូវឯកសារស្រាវជ្រាវដែលភាគច្រើនប្រើប្រាស់សំណុំទិន្នន័យស្តង់ដារអន្តរជាតិ (UCI Machine Learning Repository) និងទិន្នន័យវេជ្ជសាស្ត្រលោកខាងលិច។ នេះអាចជាចំណុចខ្វះខាតសម្រាប់កម្ពុជា ដែលទិន្នន័យជាក់ស្តែងអាចមានភាពរញ៉េរញ៉ៃជាង (Noisy) ឬមានទម្រង់នៃការបាត់បង់ទិន្នន័យខុសគ្នាដោយសារបញ្ហាបច្ចេកទេស ឬកត្តាមនុស្ស។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសដែលបានរៀបរាប់នៅក្នុងឯកសារនេះមានសារៈសំខាន់យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ដែលកំពុងស្ថិតក្នុងដំណាក់កាលបរិវត្តកម្មឌីជីថល និងប្រមូលទិន្នន័យ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសុខាភិបាល (Public Health):</strong> ការប្រើប្រាស់ Fuzzy Clustering ឬ KNN មានប្រយោជន៍សម្រាប់បំពេញទិន្នន័យអ្នកជំងឺនៅតាមមន្ទីរពេទ្យបង្អែក ដែលជារឿយៗមានការកត់ត្រាមិនពេញលេញ (Incomplete medical records)។</li>
+            
+            <li><strong>ការគ្រប់គ្រងចរាចរណ៍ (Urban Planning):</strong> វិធីសាស្ត្រ Deep Learning អាចអនុវត្តលើទិន្នន័យកាមេរ៉ាសុវត្ថិភាពនៅរាជធានីភ្នំពេញ ដើម្បីបំពេញទិន្នន័យលំហូរចរាចរណ៍ដែលបាត់បង់នៅពេលដាច់ភ្លើង ឬកាមេរ៉ាខូច។</li>
+            
+            <li><strong>វិស័យកសិកម្ម (Smart Agriculture):</strong> ការប្រើប្រាស់ឧបករណ៍ចាប់សញ្ញា (IoT Sensors) នៅកម្ពុជាអាចជួបបញ្ហាបាត់សេវា ឬដាច់ធនធាន ដូច្នេះការប្រើវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យអាកាសធាតុដែលបាត់បង់គឺចាំបាច់សម្រាប់ការដាំដុះ។</li>
+            
+        </ul>
+        
+        
+        <p>ការជ្រើសរើសវិធីសាស្ត្របំពេញទិន្នន័យឱ្យបានត្រឹមត្រូវនឹងជួយឱ្យស្ថាប័នរដ្ឋ និងឯកជននៅកម្ពុជាទទួលបានការវិភាគដែលមានគុណភាពខ្ពស់ ទោះបីជាប្រព័ន្ធប្រមូលទិន្នន័យបច្ចុប្បន្ននៅមានកម្រិតក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទិន្នន័យដែលបាត់បង់:</strong> និស្សិតត្រូវស្វែងយល់ពីប្រភេទនៃការបាត់បង់ទិន្នន័យ (MCAR, MAR, MNAR) ដើម្បីដឹងថាគួរប្រើវិធីសាស្ត្រណា។ សូមប្រើប្រាស់បណ្ណាល័យ Pandas នៅក្នុង Python ដើម្បីវិភាគមើលគំរូនៃទិន្នន័យដែលបាត់។</li>
+            
+            <li><strong>ការអនុវត្តវិធីសាស្ត្រមូលដ្ឋាន:</strong> សាកល្បងប្រើវិធីសាស្ត្រ SimpleImputer (Mean/Median) ពីបណ្ណាល័យ Scikit-learn លើសំណុំទិន្នន័យតូចៗ ដើម្បីមើលពីផលប៉ះពាល់នៃការបំពេញទិន្នន័យបែបនេះ។</li>
+            
+            <li><strong>ការពិសោធន៍ជាមួយវិធីសាស្ត្រកម្រិតខ្ពស់:</strong> អនុវត្តវិធីសាស្ត្រ KNNImputer ឬ IterativeImputer (MICE) លើទិន្នន័យដែលមានភាពស្មុគស្មាញ ហើយប្រៀបធៀបប្រសិទ្ធភាពជាមួយវិធីសាស្ត្រមូលដ្ឋាន។</li>
+            
+            <li><strong>ការវាយតម្លៃម៉ូដែល:</strong> ប្រើប្រាស់រង្វាស់ដូចជា RMSE (Root Mean Square Error) ដើម្បីវាស់វែងថាតើវិធីសាស្ត្រមួយណាផ្តល់តម្លៃបំពេញដែលជិតនឹងការពិតបំផុត ដោយបង្កើតការបាត់បង់ទិន្នន័យសិប្បនិម្មិតលើទិន្នន័យពេញលេញ។</li>
+            
+            <li><strong>ការអនុវត្តលើទិន្នន័យជាក់ស្តែងនៅកម្ពុជា:</strong> ស្វែងរកសំណុំទិន្នន័យពី Open Development Cambodia ឬទិន្នន័យជំរឿន ហើយអនុវត្តបច្ចេកទេសទាំងនេះដើម្បីសម្អាតទិន្នន័យមុននឹងធ្វើការវិភាគ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imputation</span></td>
+                <td>ដំណើរការបច្ចេកទេសនៃការជំនួសទិន្នន័យដែលបាត់បង់ (Missing Data) ដោយតម្លៃដែលបានប៉ាន់ស្មានថ្មីមួយ ដោយផ្អែកលើការវិភាគនៃទិន្នន័យផ្សេងទៀតដែលមានស្រាប់ ដើម្បីឱ្យសំណុំទិន្នន័យមានភាពពេញលេញសម្រាប់ការវិភាគបន្ត។</td>
+                <td>ដូចជាការទាយពាក្យដែលបាត់នៅក្នុងប្រយោគមួយ ដោយមើលទៅលើពាក្យផ្សេងទៀតដែលនៅជុំវិញវា ដើម្បីឱ្យប្រយោគនោះមានន័យពេញលេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (KNN)</span></td>
+                <td>ជាអាល់កូរីតដែលប៉ាន់ស្មានតម្លៃដែលបាត់ ដោយស្វែងរកចំណុចទិន្នន័យចំនួន K ដែលមានលក្ខណៈស្រដៀងបំផុត (នៅជិតបំផុត) នឹងទិន្នន័យដែលបាត់នោះ ហើយយកមធ្យមភាគ ឬលក្ខណៈរបស់ពួកវាវាមកជំនួស។</td>
+                <td>ប្រៀបបាននឹងការសួរមនុស្ស ៥ នាក់ដែលនៅជិតផ្ទះអ្នក ដើម្បីប៉ាន់ស្មានតម្លៃផ្ទះរបស់អ្នក ដោយសន្មតថាផ្ទះនៅជិតគ្នាមានតម្លៃប្រហាក់ប្រហែលគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Root Mean Square Error (RMSE)</span></td>
+                <td>រង្វាស់ស្ថិតិសម្រាប់វាយតម្លៃភាពត្រឹមត្រូវនៃម៉ូដែល ដោយគណនាគម្លាតស្តង់ដារនៃកំហុសរវាងតម្លៃដែលបានទស្សន៍ទាយ (Predicted values) និងតម្លៃជាក់ស្តែង (Actual values)។ តម្លៃ RMSE កាន់តែទាប បញ្ជាក់ថាម៉ូដែលកាន់តែមានសុក្រឹតភាព។</td>
+                <td>ដូចជាការវាស់ថាតើការទស្សន៍ទាយរបស់អ្នកខុសពីការពិតប៉ុន្មានជាមធ្យម; បើលេខនេះកាន់តែតូច មានន័យថាការទាយរបស់អ្នកកាន់តែត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fuzzy Clustering</span></td>
+                <td>វិធីសាស្ត្របែងចែកទិន្នន័យជាក្រុម ដែលអនុញ្ញាតឱ្យទិន្នន័យមួយអាចជាសមាជិកនៃក្រុមច្រើនក្នុងពេលតែមួយ (Partial membership) ផ្ទុយពីការបែងចែកដាច់ស្រេច (Hard clustering)។ វាមានប្រយោជន៍សម្រាប់ទិន្នន័យដែលមានភាពមិនច្បាស់លាស់។</td>
+                <td>ដូចជាការចាត់ថ្នាក់ពណ៌មួយថាជា 'ពណ៌ទឹកក្រូច' ដែលមានជាតិក្រហម ៦០% និងលឿង ៤០% ជាជាងការកំណត់ថាវាជាពណ៌ក្រហម ឬលឿងដាច់ខាត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Maximum Likelihood Estimation (MLE)</span></td>
+                <td>វិធីសាស្ត្រស្ថិតិដើម្បីប៉ាន់ស្មានប៉ារ៉ាម៉ែត្រនៃគំរូទិន្នន័យ ដោយជ្រើសរើសតម្លៃណាដែលធ្វើឱ្យទិន្នន័យដែលបានសង្កេតឃើញមានឱកាសកើតឡើងខ្ពស់បំផុត (Highest Probability)។</td>
+                <td>ដូចជាការសន្និដ្ឋានថា មេឃទំនងជាភ្លៀង នៅពេលអ្នកឃើញផ្លូវសើម ព្រោះវាជាហេតុផលដែលសមហេតុផលបំផុតចំពោះអ្វីដែលអ្នកកំពុងឃើញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multilayer Perceptrons (MLP)</span></td>
+                <td>ប្រភេទនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Artificial Neural Network) ដែលមានស្រទាប់ច្រើន (Input, Hidden, Output) សម្រាប់រៀនពីទំនាក់ទំនងដ៏ស្មុគស្មាញនៅក្នុងទិន្នន័យ ដើម្បីធ្វើការទស្សន៍ទាយ ឬបំពេញតម្លៃ។</td>
+                <td>ប្រៀបដូចជាប្រព័ន្ធខួរក្បាលសិប្បនិម្មិតដែលមានស្រទាប់សម្រេចចិត្តជាច្រើនដំណាក់កាល ដើម្បីដោះស្រាយបញ្ហាដែលស្មុគស្មាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Genetic Algorithm</span></td>
+                <td>វិធីសាស្ត្រដោះស្រាយបញ្ហាដែលយកគំរូតាមដំណើរការនៃការវិវត្តន៍ធម្មជាតិ (Natural Selection) ដោយបង្កើត ចម្រាញ់ និងផ្លាស់ប្តូរដំណោះស្រាយជាច្រើនជំនាន់ ដើម្បីស្វែងរកដំណោះស្រាយដែលល្អបំផុត (Optimization)។</td>
+                <td>ដូចជាការបង្កាត់ពូជដំណាំ ដើម្បីទទួលបានគ្រាប់ពូជដែលល្អបំផុតតាមរយៈការជ្រើសរើសពូជដែលខ្លាំងជាងគេពីមួយជំនាន់ទៅមួយជំនាន់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparison+of+missing+value+imputation+techniques+in+data+mining" target="_blank" rel="noopener"><span class="en">comparison of missing value imputation techniques in data mining</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=handling+missing+data+with+machine+learning+algorithms" target="_blank" rel="noopener"><span class="en">handling missing data with machine learning algorithms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=fuzzy+c-means+clustering+for+missing+data+imputation" target="_blank" rel="noopener"><span class="en">fuzzy c-means clustering for missing data imputation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=impact+of+missing+data+on+classification+accuracy" target="_blank" rel="noopener"><span class="en">impact of missing data on classification accuracy</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+methods+for+data+imputation" target="_blank" rel="noopener"><span class="en">deep learning methods for data imputation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

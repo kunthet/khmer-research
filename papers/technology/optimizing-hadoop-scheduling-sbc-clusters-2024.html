@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបង្កើនប្រសិទ្ធភាពនៃការកំណត់កាលវិភាគ Hadoop នៅក្នុងចង្កោមដែលផ្អែកលើកុំព្យូទ័រប្រភេទ Single-Board Computer (SBC) និងមានលក្ខណៈចម្រុះ | KhmerResearch.com</title>
+    <meta name="description" content="ការកំណត់រចនាសម្ព័ន្ធកាលវិភាគតាមបែបប្រពៃណីរបស់ Hadoop ជួបប្រទះការលំបាកក្នុងការបង្កើនប្រសិទ្ធភាពនៅក្នុងចង្កោម (Cluster) ដែលប្រើប្រាស់កុំព្យូទ័រប្រភេទ Single-Bo...">
+    
+    <meta name="keywords" content="Single-Board Computers, Hadoop YARN, Task Scheduling, Heterogeneous Clusters, Frugal Edge Computing, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/optimizing-hadoop-scheduling-sbc-clusters-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/optimizing-hadoop-scheduling-sbc-clusters-2024.html">
+    <meta property="og:title" content="ការបង្កើនប្រសិទ្ធភាពនៃការកំណត់កាលវិភាគ Hadoop នៅក្នុងចង្កោមដែលផ្អែកលើកុំព្យូទ័រប្រភេទ Single-Board Computer (SBC) និងមានលក្ខណៈចម្រុះ | KhmerResearch.com">
+    <meta property="og:description" content="ការកំណត់រចនាសម្ព័ន្ធកាលវិភាគតាមបែបប្រពៃណីរបស់ Hadoop ជួបប្រទះការលំបាកក្នុងការបង្កើនប្រសិទ្ធភាពនៅក្នុងចង្កោម (Cluster) ដែលប្រើប្រាស់កុំព្យូទ័រប្រភេទ Single-Board Computer (SBC) ចម្រុះ ដោយសារតែភាពខុស...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024 (Computation Journal)">
+    
+    <meta property="article:tag" content="Single-Board Computers">
+    
+    <meta property="article:tag" content="Hadoop YARN">
+    
+    <meta property="article:tag" content="Task Scheduling">
+    
+    <meta property="article:tag" content="Heterogeneous Clusters">
+    
+    <meta property="article:tag" content="Frugal Edge Computing">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបង្កើនប្រសិទ្ធភាពនៃការកំណត់កាលវិភាគ Hadoop នៅក្នុងចង្កោមដែលផ្អែកលើកុំព្យូទ័រប្រភេទ Single-Board Computer (SBC) និងមានលក្ខណៈចម្រុះ">
+    <meta name="twitter:description" content="ការកំណត់រចនាសម្ព័ន្ធកាលវិភាគតាមបែបប្រពៃណីរបស់ Hadoop ជួបប្រទះការលំបាកក្នុងការបង្កើនប្រសិទ្ធភាពនៅក្នុងចង្កោម (Cluster) ដែលប្រើប្រាស់កុំព្យូទ័រប្រភេទ Single-Board Computer (SBC) ចម្រុះ ដោយសារតែភាពខុស...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u1780\u17b6\u179b\u179c\u17b7\u1797\u17b6\u1782 Hadoop \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1785\u1784\u17d2\u1780\u17c4\u1798\u178a\u17c2\u179b\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1794\u17d2\u179a\u1797\u17c1\u1791 Single-Board Computer (SBC) \u1793\u17b7\u1784\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u1785\u1798\u17d2\u179a\u17bb\u17c7",
+      "name": "Optimizing Hadoop Scheduling in Single-Board-Computer-Based Heterogeneous Clusters",
+      "description": "\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1780\u17b6\u179b\u179c\u17b7\u1797\u17b6\u1782\u178f\u17b6\u1798\u1794\u17c2\u1794\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8\u179a\u1794\u179f\u17cb Hadoop \u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1785\u1784\u17d2\u1780\u17c4\u1798 (Cluster) \u178a\u17c2\u179b\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1794\u17d2\u179a\u1797\u17c1\u1791 Single-Board Computer (SBC) \u1785\u1798\u17d2\u179a\u17bb\u17c7 \u178a\u17c4\u1799\u179f\u17b6\u179a\u178f\u17c2\u1797\u17b6\u1796\u1781\u17bb\u179f\u1782\u17d2\u1793\u17b6\u1793\u17c3\u1792\u1793\u1792\u17b6\u1793\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a (CPU \u1793\u17b7\u1784 Memory)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/optimizing-hadoop-scheduling-sbc-clusters-2024.html",
+      "author": [{"@type": "Person", "name": "Basit Qureshi (Prince Sultan University)"}],
+      "datePublished": "2024 (Computation Journal)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Optimizing Hadoop Scheduling in Single-Board-Computer-Based Heterogeneous Clusters",
+        "url": "https://doi.org/10.3390/computation12050096"
+      },
+      "keywords": ["Single-Board Computers", "Hadoop YARN", "Task Scheduling", "Heterogeneous Clusters", "Frugal Edge Computing"],
+      "about": "Computer Science / Edge Computing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u1780\u17b6\u179b\u179c\u17b7\u1797\u17b6\u1782 Hadoop \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1785\u1784\u17d2\u1780\u17c4\u1798\u178a\u17c2\u179b\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1794\u17d2\u179a\u1797\u17c1\u1791 Single-Board Computer (SBC) \u1793\u17b7\u1784\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u1785\u1798\u17d2\u179a\u17bb\u17c7",
+          "item": "https://khmerresearch.com/papers/technology/optimizing-hadoop-scheduling-sbc-clusters-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបង្កើនប្រសិទ្ធភាពនៃការកំណត់កាលវិភាគ Hadoop នៅក្នុងចង្ក...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Optimizing Hadoop Scheduling in Single-Board-Computer-Based Heterogeneous Clusters<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/computation12050096" target="_blank">https://doi.org/10.3390/computation12050096</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបង្កើនប្រសិទ្ធភាពនៃការកំណត់កាលវិភាគ Hadoop នៅក្នុងចង្កោមដែលផ្អែកលើកុំព្យូទ័រប្រភេទ Single-Board Computer (SBC) និងមានលក្ខណៈចម្រុះ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Optimizing Hadoop Scheduling in Single-Board-Computer-Based Heterogeneous Clusters</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Basit Qureshi (Prince Sultan University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 (Computation Journal)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Edge Computing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការកំណត់រចនាសម្ព័ន្ធកាលវិភាគតាមបែបប្រពៃណីរបស់ Hadoop ជួបប្រទះការលំបាកក្នុងការបង្កើនប្រសិទ្ធភាពនៅក្នុងចង្កោម (Cluster) ដែលប្រើប្រាស់កុំព្យូទ័រប្រភេទ Single-Board Computer (SBC) ចម្រុះ ដោយសារតែភាពខុសគ្នានៃធនធានកុំព្យូទ័រ (CPU និង Memory)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវយន្តការកំណត់កាលវិភាគថ្មីមួយ ដោយប្រើប្រាស់ស្លាកសម្គាល់ថ្នាំង (Node Labels) និងសន្ទស្សន៍សន្សំសំចៃ (Frugality Index) ដើម្បីចាត់ថ្នាក់ថ្នាំង SBC តាមសមត្ថភាព និងកែសម្រួលការបែងចែកធនធានដោយស្វ័យប្រវត្តិ។
+        
+        <ul>
+            
+            <li>ការបង្កើតចង្កោម SBC ចម្រុះចំនួន ១៣ ថ្នាំង (រួមមាន Raspberry Pi 5, 4, 3B+, Odroid XU4 និង Rockpro64)</li>
+            
+            <li>ការអនុវត្តគោលនយោបាយកំណត់រចនាសម្ព័ន្ធតាមតម្រូវការ (adaptiveConfig policy) និងសន្ទស្សន៍សន្សំសំចៃ (Frugality Index) នៅក្នុង YARN</li>
+            
+            <li>ការធ្វើតេស្តប្រៀបធៀបដោយប្រើកម្មវិធី Hadoop Benchmarks (WordCount និង Terasort)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>លទ្ធផលបង្ហាញថា រយៈពេលប្រតិបត្តិការលឿនជាង ៥៦% បើធៀបនឹងការកំណត់ Capacity ល្អបំផុត និងលឿនជាង ២២% ធៀបនឹង FIFO ល្អបំផុត។</li>
+            
+            <li>វិធីសាស្ត្រនេះជួយគ្រប់គ្រងលក្ខណៈចម្រុះនៃឧបករណ៍បានយ៉ាងមានប្រសិទ្ធភាព ដោយការពារការផ្ទុកលើសចំណុះលើថ្នាំងដែលមានសមត្ថភាពទាប។</li>
+            
+            <li>ការប្រើប្រាស់ SBC ជំនាន់ថ្មីដូចជា Raspberry Pi 5 ក្នុងចង្កោមនេះ បង្កើនប្រសិទ្ធភាពទាំងល្បឿន និងការសន្សំសំចៃថាមពល។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Adaptive Frugal Configuration (Proposed)</span></strong><br>ការកំណត់រចនាសម្ព័ន្ធសន្សំសំចៃតាមតម្រូវការ (Adaptive Frugal Configuration) ដោយប្រើ Frugality Index</td>
+                <td>ការពារការប្រើប្រាស់ធនធានហួសកម្រិតលើថ្នាំងដែលមានសមត្ថភាពទាប (Low-end nodes) និងបង្កើនល្បឿនប្រតិបត្តិការសរុប។</td>
+                <td>ទាមទារការកំណត់រចនាសម្ព័ន្ធស្មុគស្មាញជាងការកំណត់ដើម និងត្រូវការ script បន្ថែមដើម្បីគណនា Findex។</td>
+                <td>លឿនជាងការកំណត់ល្អបំផុតរបស់ Capacity Scheduler ចំនួន ៥៦% និងលឿនជាង FIFO ២២%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Native Capacity Scheduler</span></strong><br>កាលវិភាគសមត្ថភាពដើមរបស់ Hadoop (Native Capacity Scheduler)</td>
+                <td>ជាស្តង់ដាររបស់ Hadoop ដែលអនុញ្ញាតឱ្យមានការចែករំលែកធនធានក្នុងចំណោមអ្នកប្រើប្រាស់ច្រើន។</td>
+                <td>មិនចេះបែងចែករវាងថ្នាំងខ្លាំង និងខ្សោយ ដែលបណ្តាលឱ្យមានការផ្ទុកលើសលើឧបករណ៍ដូចជា Raspberry Pi 3B។</td>
+                <td>ដំណើរការយឺតជាង និងងាយជួបបញ្ហាគាំង (Crash) នៅពេលដំណើរការលើឧបករណ៍ដែលមាន RAM តិច (១ GB)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Native FIFO Scheduler</span></strong><br>កាលវិភាគបម្រើតាមលំដាប់មុនក្រោយ (Native FIFO Scheduler)</td>
+                <td>ងាយស្រួលក្នុងការកំណត់ និងដំណើរការតាមលំដាប់ដែលបានដាក់ចូល។</td>
+                <td>អាចបណ្តាលឱ្យការងារធំៗរាំងស្ទះការងារតូចៗ និងមិនមានប្រសិទ្ធភាពក្នុងការប្រើប្រាស់ធនធានចម្រុះ។</td>
+                <td>មានប្រសិទ្ធភាពទាបជាងវិធីសាស្ត្រដែលបានស្នើឡើង ជាពិសេសក្នុងការគ្រប់គ្រងការងារដែលត្រូវការ CPU ខ្លាំង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ថវិកាតិច និងថាមពលទាប ដែលសមស្របសម្រាប់ការស្រាវជ្រាវក្នុងប្រទេសកំពុងអភិវឌ្ឍន៍។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ចំណាយសរុបប្រហែល ៩៦៦ ដុល្លារសម្រាប់ SBC ១៣ គ្រឿង (Raspberry Pi 5, 4, 3B+, Odroid XU4, Rockpro64) និងគ្រឿងបន្លាស់បណ្តាញ។</li>
+        
+        <li><strong>Energy:</strong> ប្រើប្រាស់ថាមពលប្រហែល ៧៦ វ៉ាត់ (Watts) ក្នុងពេលដំណើរការពេញលេញ ដែលសន្សំសំចៃជាង Server ធម្មតា។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ Linux (Armbian/Debian), Java ARM64, និង Apache Hadoop 3.3.6 (Open Source)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះធ្វើឡើងនៅក្នុងមន្ទីរពិសោធន៍ដោយប្រើទិន្នន័យ Benchmark សិប្បនិម្មិត (Terasort និង WordCount) ជំនួសឱ្យទិន្នន័យជាក់ស្តែងពីឧស្សាហកម្ម។ ទោះជាយ៉ាងណាក៏ដោយ នេះគឺជាស្តង់ដារសម្រាប់ការវាស់វែងប្រសិទ្ធភាពប្រព័ន្ធ ហើយលទ្ធផលគឺមានសារៈសំខាន់សម្រាប់បរិបទនៃ Edge Computing នៅកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍ខ្ពស់សម្រាប់កម្ពុជា ជាពិសេសសម្រាប់ការកាត់បន្ថយថ្លៃដើមក្នុងការបង្កើតហេដ្ឋារចនាសម្ព័ន្ធ Big Data។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យអប់រំ (Education Sector):</strong> សាកលវិទ្យាល័យដូចជា RUPP ឬ ITC អាចបង្កើតបន្ទប់ពិសោធន៍ Big Data ដោយចំណាយតិច ដោយប្រើ Raspberry Pi ជំនួសឱ្យ Server ថ្លៃៗសម្រាប់និស្សិតអនុវត្ត។</li>
+            
+            <li><strong>កសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> ការប្រើប្រាស់ SBC នៅតាមកសិដ្ឋានដាច់ស្រយាលដើម្បីវិភាគទិន្នន័យពីសេនស័រ (Sensor Data) នៅនឹងកន្លែង (Edge) ដោយមិនពឹងផ្អែកលើ Cloud ទាំងស្រុង។</li>
+            
+            <li><strong>សហគ្រាសខ្នាតតូច និងមធ្យម (SMEs):</strong> អាជីវកម្មអាចបង្កើតប្រព័ន្ធវិភាគទិន្នន័យផ្ទាល់ខ្លួនដែលមានតម្លៃសមរម្យ និងសន្សំសំចៃអគ្គិសនី។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់ SBC ក្នុងការគណនាបែប Distributed Systems គឺជាដំណោះស្រាយដ៏ល្អសម្រាប់ប្រទេសកម្ពុជា ដើម្បីចាប់ផ្តើមពង្រឹងសមត្ថភាពផ្នែក Data Science ដោយមិនត្រូវការការវិនិយោគធំដុំ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការរៀបចំឧបករណ៍ (Hardware Setup):</strong> និស្សិតគួរចាប់ផ្តើមដោយការទិញ Raspberry Pi (ម៉ូដែល 4 ឬ 5) ចំនួន ៣ ទៅ ៤ គ្រឿង និងភ្ជាប់វាទៅក្នុងបណ្តាញតែមួយ (LAN) ដោយប្រើ Gigabit Switch។</li>
+            
+            <li><strong>ការដំឡើងប្រព័ន្ធមូលដ្ឋាន (Base System Installation):</strong> ដំឡើងប្រព័ន្ធប្រតិបត្តិការ Linux (ដូចជា Ubuntu Server ឬ Raspberry Pi OS Lite) និងកំណត់រចនាសម្ព័ន្ធ SSH ដើម្បីគ្រប់គ្រងពីចម្ងាយ។</li>
+            
+            <li><strong>ការដំឡើង និងកំណត់រចនាសម្ព័ន្ធ Hadoop:</strong> ដំឡើង Apache Hadoop និងកំណត់វាជា Cluster (Master/Slave)។ សិក្សាពីឯកសារ yarn-site.xml និង mapred-site.xml។</li>
+            
+            <li><strong>ការអនុវត្ត Frugality Index:</strong> សរសេរ Script ដើម្បីកំណត់ចំណាត់ថ្នាក់ថ្នាំង (Node Labeling) ដោយផ្អែកលើ RAM (ឧ. RAM < 2GB ជា Low) និងកំណត់ចំនួន Container នៅក្នុង capacity-scheduler.xml ឬ fair-scheduler.xml ឱ្យសមស្រប។</li>
+            
+            <li><strong>ការវាស់វែងប្រសិទ្ធភាព (Benchmarking):</strong> ដំណើរការកម្មវិធីតេស្តដូចជា Terasort ដើម្បីប្រៀបធៀបល្បឿនរវាងការកំណត់តាមលំនាំដើម និងការកំណត់ដែលបានកែសម្រួល។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Single-board computers (SBCs)</span></td>
+                <td>ជាកុំព្យូទ័រពេញលេញដែលត្រូវបានបង្កើតឡើងនៅលើបន្ទះសៀគ្វីតែមួយ មានទំហំតូច និងប្រើប្រាស់ថាមពលតិច។ នៅក្នុងការសិក្សានេះ វាត្រូវបានគេប្រើដើម្បីបង្កើតជាក្រុមបណ្តាញកុំព្យូទ័រ (Cluster) សម្រាប់ការគណនាទិន្នន័យដែលមានតម្លៃសមរម្យ និងសន្សំសំចៃអគ្គិសនី។</td>
+                <td>ដូចជាកុំព្យូទ័រខ្នាតតូចប៉ុនបាតដៃ ដែលមានតម្លៃថោក និងអាចធ្វើការងារបានដូចកុំព្យូទ័រធំៗដែរ ប៉ុន្តែស៊ីភ្លើងតិចជាង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Heterogeneous Clusters</span></td>
+                <td>សំដៅលើប្រព័ន្ធបណ្តាញកុំព្យូទ័រដែលភ្ជាប់គ្នា ប៉ុន្តែកុំព្យូទ័រនីមួយៗ (Node) មានសមត្ថភាពមិនស្មើគ្នា (ខ្លះលឿន ខ្លះយឺត ខ្លះមាន RAM ធំ ខ្លះតូច) ដែលធ្វើឱ្យការបែងចែកការងារឱ្យស្មើគ្នាមានការលំបាក។</td>
+                <td>ដូចជាក្រុមការងារមួយដែលមានមនុស្សចម្រុះគ្នា ខ្លះជាមនុស្សចាស់ដែលមានកម្លាំងខ្លាំង និងខ្លះជាក្មេងដែលមានកម្លាំងតិច ធ្វើការរួមគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hadoop YARN</span></td>
+                <td>ជាប្រព័ន្ធគ្រប់គ្រងធនធានស្នូលនៅក្នុង Hadoop ដែលមានតួនាទីចាត់ចែង CPU និង Memory ទៅឱ្យកម្មវិធីផ្សេងៗ។ នៅក្នុងការសិក្សានេះ វាត្រូវបានកែសម្រួលដើម្បីឱ្យវាស្គាល់ពីកម្រិតសមត្ថភាពរបស់កុំព្យូទ័រតូចៗ (SBCs)។</td>
+                <td>ប្រៀបបានទៅនឹងអ្នកចាត់ការទូទៅនៅក្នុងរោងចក្រ ដែលមានតួនាទីបែងចែកភារកិច្ចឱ្យបុគ្គលិកម្នាក់ៗធ្វើ ដើម្បីកុំឱ្យនរណាម្នាក់ទំនេរ ឬធ្វើការហួសកម្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Frugality Index (Findex)</span></td>
+                <td>ជាកម្រិតរង្វាស់ថ្មីមួយដែលអ្នកស្រាវជ្រាវបង្កើតឡើង ដើម្បីកំណត់ចំណាត់ថ្នាក់កុំព្យូទ័រនៅក្នុងបណ្តាញ ដោយផ្អែកលើសមត្ថភាពរបស់វា (ដូចជា CPU និង Memory)។ វាជួយឱ្យប្រព័ន្ធដឹងថា កុំព្យូទ័រណាគួរទទួលការងារច្រើន និងមួយណាគួរទទួលតិច។</td>
+                <td>ដូចជាការបិទស្លាកលើឡានដឹកទំនិញ ដើម្បីកំណត់ថាឡានណាអាចដឹកបានធ្ងន់ និងឡានណាដឹកបានតែស្រាលៗ ដើម្បីកុំឱ្យខូចឡាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">MapReduce</span></td>
+                <td>ជាគំរូនៃការសរសេរកម្មវិធីសម្រាប់ដំណើរការទិន្នន័យខ្នាតធំ ដោយបំបែកការងារជាចំណែកតូចៗ (Map) ឱ្យកុំព្យូទ័រច្រើនធ្វើព្រមគ្នា ហើយបន្ទាប់មកប្រមូលលទ្ធផលមករួមបញ្ចូលគ្នាវិញ (Reduce)។</td>
+                <td>ដូចជាការចែកសន្លឹកឆ្នោតទៅឱ្យមនុស្សច្រើននាក់ជួយរាប់រៀងៗខ្លួន (Map) រួចយកលទ្ធផលពីមនុស្សម្នាក់ៗមកបូកបញ្ចូលគ្នាដើម្បីរកលទ្ធផលចុងក្រោយ (Reduce)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=energy+efficient+edge+computing+with+raspberry+pi+clusters" target="_blank" rel="noopener"><span class="en">energy efficient edge computing with raspberry pi clusters</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hadoop+yarn+scheduler+optimization+for+heterogeneous+environments" target="_blank" rel="noopener"><span class="en">hadoop yarn scheduler optimization for heterogeneous environments</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=performance+benchmarking+of+single+board+computers+for+big+data" target="_blank" rel="noopener"><span class="en">performance benchmarking of single board computers for big data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=resource+management+in+fog+and+edge+computing" target="_blank" rel="noopener"><span class="en">resource management in fog and edge computing</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

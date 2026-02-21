@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វឌ្ឍនភាពថ្មីៗនៃវិធីសាស្ត្រសម្របខ្លួនតាមការប្រែប្រួលគំនិត (Concept Drift) សម្រាប់ការរៀនស៊ីជម្រៅ (Deep Learning) | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហាដែលគំរូនៃការរៀនស៊ីជម្រៅ (Deep Learning Models) តែងតែហួសសម័យឬធ្លាក់ចុះសមត្ថភាពនៅពេលដែលមានការផ្លាស់ប្តូរការបែងចែកទិន្នន័យតាមពេលវេលា ដែ...">
+    
+    <meta name="keywords" content="concept drift adaptation, deep learning, model parameter updating, model structure updating, catastrophic forgetting, online learning, non-stationary environments, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/recent-advances-concept-drift-deep-learning-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/recent-advances-concept-drift-deep-learning-2022.html">
+    <meta property="og:title" content="វឌ្ឍនភាពថ្មីៗនៃវិធីសាស្ត្រសម្របខ្លួនតាមការប្រែប្រួលគំនិត (Concept Drift) សម្រាប់ការរៀនស៊ីជម្រៅ (Deep Learning) | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាដែលគំរូនៃការរៀនស៊ីជម្រៅ (Deep Learning Models) តែងតែហួសសម័យឬធ្លាក់ចុះសមត្ថភាពនៅពេលដែលមានការផ្លាស់ប្តូរការបែងចែកទិន្នន័យតាមពេលវេលា ដែលហៅថាការប្រែប្រួលគំនិត (Concept Drift)។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022 (IJCAI-22)">
+    
+    <meta property="article:tag" content="concept drift adaptation">
+    
+    <meta property="article:tag" content="deep learning">
+    
+    <meta property="article:tag" content="model parameter updating">
+    
+    <meta property="article:tag" content="model structure updating">
+    
+    <meta property="article:tag" content="catastrophic forgetting">
+    
+    <meta property="article:tag" content="online learning">
+    
+    <meta property="article:tag" content="non-stationary environments">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វឌ្ឍនភាពថ្មីៗនៃវិធីសាស្ត្រសម្របខ្លួនតាមការប្រែប្រួលគំនិត (Concept Drift) សម្រាប់ការរៀនស៊ីជម្រៅ (Deep Learning)">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាដែលគំរូនៃការរៀនស៊ីជម្រៅ (Deep Learning Models) តែងតែហួសសម័យឬធ្លាក់ចុះសមត្ថភាពនៅពេលដែលមានការផ្លាស់ប្តូរការបែងចែកទិន្នន័យតាមពេលវេលា ដែលហៅថាការប្រែប្រួលគំនិត (Concept Drift)។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u178c\u17d2\u178d\u1793\u1797\u17b6\u1796\u1790\u17d2\u1798\u17b8\u17d7\u1793\u17c3\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u1798\u17d2\u179a\u1794\u1781\u17d2\u179b\u17bd\u1793\u178f\u17b6\u1798\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u1782\u17c6\u1793\u17b7\u178f (Concept Drift) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep Learning)",
+      "name": "Recent Advances in Concept Drift Adaptation Methods for Deep Learning",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u178a\u17c2\u179b\u1782\u17c6\u179a\u17bc\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep Learning Models) \u178f\u17c2\u1784\u178f\u17c2\u17a0\u17bd\u179f\u179f\u1798\u17d0\u1799\u17ac\u1792\u17d2\u179b\u17b6\u1780\u17cb\u1785\u17bb\u17c7\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796\u1793\u17c5\u1796\u17c1\u179b\u178a\u17c2\u179b\u1798\u17b6\u1793\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1780\u17b6\u179a\u1794\u17c2\u1784\u1785\u17c2\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178f\u17b6\u1798\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u178a\u17c2\u179b\u17a0\u17c5\u1790\u17b6\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u1782\u17c6\u1793\u17b7\u178f (Concept Drift)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/recent-advances-concept-drift-deep-learning-2022.html",
+      "author": [{"@type": "Person", "name": "Liheng Yuan (Huazhong University of Science and Technology)"},{"@type": "Person", "name": "Heng Li (Huazhong University of Science and Technology)"},{"@type": "Person", "name": "Beihao Xia (Huazhong University of Science and Technology)"},{"@type": "Person", "name": "Cuiying Gao (Huazhong University of Science and Technology)"},{"@type": "Person", "name": "Mingyue Liu (Huazhong University of Science and Technology)"},{"@type": "Person", "name": "Wei Yuan (Huazhong University of Science and Technology)"},{"@type": "Person", "name": "Xinge You (Huazhong University of Science and Technology)"}],
+      "datePublished": "2022 (IJCAI-22)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Recent Advances in Concept Drift Adaptation Methods for Deep Learning",
+        "url": "https://github.com/vlosing/driftDatasets/tree/master"
+      },
+      "keywords": ["concept drift adaptation", "deep learning", "model parameter updating", "model structure updating", "catastrophic forgetting", "online learning", "non-stationary environments"],
+      "about": "Artificial Intelligence / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u178c\u17d2\u178d\u1793\u1797\u17b6\u1796\u1790\u17d2\u1798\u17b8\u17d7\u1793\u17c3\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u1798\u17d2\u179a\u1794\u1781\u17d2\u179b\u17bd\u1793\u178f\u17b6\u1798\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u1782\u17c6\u1793\u17b7\u178f (Concept Drift) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep Learning)",
+          "item": "https://khmerresearch.com/papers/technology/recent-advances-concept-drift-deep-learning-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>វឌ្ឍនភាពថ្មីៗនៃវិធីសាស្ត្រសម្របខ្លួនតាមការប្រែប្រួលគំនិត ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Recent Advances in Concept Drift Adaptation Methods for Deep Learning<br>
+        
+        <strong>Source:</strong> <a href="https://github.com/vlosing/driftDatasets/tree/master" target="_blank">https://github.com/vlosing/driftDatasets/tree/master</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វឌ្ឍនភាពថ្មីៗនៃវិធីសាស្ត្រសម្របខ្លួនតាមការប្រែប្រួលគំនិត (Concept Drift) សម្រាប់ការរៀនស៊ីជម្រៅ (Deep Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Recent Advances in Concept Drift Adaptation Methods for Deep Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Liheng Yuan (Huazhong University of Science and Technology), Heng Li (Huazhong University of Science and Technology), Beihao Xia (Huazhong University of Science and Technology), Cuiying Gao (Huazhong University of Science and Technology), Mingyue Liu (Huazhong University of Science and Technology), Wei Yuan (Huazhong University of Science and Technology), Xinge You (Huazhong University of Science and Technology)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022 (IJCAI-22)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហាដែលគំរូនៃការរៀនស៊ីជម្រៅ (Deep Learning Models) តែងតែហួសសម័យឬធ្លាក់ចុះសមត្ថភាពនៅពេលដែលមានការផ្លាស់ប្តូរការបែងចែកទិន្នន័យតាមពេលវេលា ដែលហៅថាការប្រែប្រួលគំនិត (Concept Drift)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> នេះគឺជាអត្ថបទស្រាវជ្រាវត្រួតពិនិត្យ (Survey Paper) ដែលធ្វើការវិភាគតាមគណិតវិទ្យាទៅលើប្រភេទនៃការប្រែប្រួល និងបែងចែកវិធីសាស្ត្រសម្របខ្លួនដែលមានស្រាប់ជាពីរប្រភេទធំៗ ដើម្បីវាយតម្លៃប្រសិទ្ធភាព។
+        
+        <ul>
+            
+            <li>ការវិភាគគណិតវិទ្យាទៅលើប្រភេទ Concept Drift (Abrupt, Gradual, Recurrent, Incremental)</li>
+            
+            <li>ការបែងចែកវិធីសាស្ត្រជាពីរក្រុម៖ ការធ្វើបច្ចុប្បន្នភាពប៉ារ៉ាម៉ែត្រគំរូ (Model Parameter Updating) និងការធ្វើបច្ចុប្បន្នភាពរចនាសម្ព័ន្ធគំរូ (Model Structure Updating)</li>
+            
+            <li>ការវាយតម្លៃសមត្ថភាពលើសំណុំទិន្នន័យ (Datasets) ដូចជា SEA, Rotated MNIST, Weather និង KDDCUP</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រធ្វើបច្ចុប្បន្នភាពប៉ារ៉ាម៉ែត្រ (Parameter Updating) មានប្រសិទ្ធភាពចំពោះការប្រែប្រួលភ្លាមៗ (Abrupt Drift) ប៉ុន្តែអាចប្រឈមនឹងបញ្ហាការបាត់បង់ការចងចាំធ្ងន់ធ្ងរ (Catastrophic Forgetting)។</li>
+            
+            <li>វិធីសាស្ត្រធ្វើបច្ចុប្បន្នភាពរចនាសម្ព័ន្ធ (Structure Updating) មានភាពបត់បែនអាចដោះស្រាយការប្រែប្រួលសន្សឹមៗ (Gradual Drift) បានល្អ ប៉ុន្តែមានភាពស្មុគស្មាញនិងចំណាយពេលយូរក្នុងការបណ្តុះបណ្តាល។</li>
+            
+            <li>ទិសដៅអនាគតសម្រាប់ការស្រាវជ្រាវរួមមានការប្រើប្រាស់ Few-shot Learning និងវិធីសាស្ត្រ Ensemble ដើម្បីដោះស្រាយបញ្ហាកង្វះទិន្នន័យនិងបង្កើនល្បឿននៃការសម្របខ្លួន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Model Parameter Updating (e.g., HBP, SEOA)</span></strong><br>ការធ្វើបច្ចុប្បន្នភាពប៉ារ៉ាម៉ែត្រគំរូ (ការកែប្រែទម្ងន់នៃបណ្តាញ)</td>
+                <td>មានល្បឿននៃការបង្រួបបង្រួមលឿន (Fast convergence) និងមានប្រសិទ្ធភាពខ្ពស់ក្នុងការដោះស្រាយការប្រែប្រួលភ្លាមៗ (Abrupt drift)។</td>
+                <td>ប្រឈមនឹងបញ្ហាការបាត់បង់ការចងចាំធ្ងន់ធ្ងរ (Catastrophic forgetting) និងមិនសូវមានប្រសិទ្ធភាពចំពោះទិន្នន័យដែលមានការចែកចាយថ្មីខុសគ្នាខ្លាំងពីមុន។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់លើទិន្នន័យ KDDCUP (HBP: 98.23%, SEOA: 96.54%) ប៉ុន្តែមិនអាចដោះស្រាយស្ថានភាពចម្រុះបានល្អដូចវិធីសាស្ត្រកែរចនាសម្ព័ន្ធ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Model Structure Updating - Adding Branches (e.g., PNN)</span></strong><br>ការធ្វើបច្ចុប្បន្នភាពរចនាសម្ព័ន្ធគំរូដោយបន្ថែមសាខាថ្មី</td>
+                <td>ជៀសវាងបញ្ហាការបាត់បង់ការចងចាំ (Forgetting) ដោយរក្សាទុកផ្នែកនៃបណ្តាញចាស់ និងអាចដោះស្រាយការប្រែប្រួលចម្រុះបាន។</td>
+                <td>រចនាសម្ព័ន្ធបណ្តាញកាន់តែស្មុគស្មាញដែលនាំឱ្យការបង្រួបបង្រួមយឺត (Slow convergence) និងចំណាយពេលប្រតិបត្តិយូរ។</td>
+                <td>លទ្ធផលលើទិន្នន័យ Weather (68.46%) ទាបជាងវិធីសាស្ត្រដទៃ ហើយចំនួនប៉ារ៉ាម៉ែត្រកើនឡើងយ៉ាងឆាប់រហ័ស។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Model Structure Updating - Depth Adjusting (e.g., ADL, NADINE)</span></strong><br>ការធ្វើបច្ចុប្បន្នភាពរចនាសម្ព័ន្ធគំរូដោយកែតម្រូវជម្រៅបណ្តាញ</td>
+                <td>មានភាពបត់បែនខ្ពស់ (Flexibility) អាចដោះស្រាយបានទាំងការប្រែប្រួលសន្សឹមៗ (Gradual) និងភ្លាមៗ (Abrupt) តាមរយៈការបន្ថែមឬដកស្រទាប់បណ្តាញ។</td>
+                <td>តម្រូវឱ្យមានការកំណត់រចនាសម្ព័ន្ធស្មុគស្មាញ ហើយវិធីសាស្ត្រខ្លះ (ដូចជា NADINE) អាចមានបញ្ហាយឺតក្នុងការរៀន។</td>
+                <td>ADL ទទួលបានលទ្ធផលល្អប្រសើរលើគ្រប់ប្រភេទនៃការប្រែប្រួល (SEA: 92.13%, KDDCUP: 99.84%) ជាមួយនឹងពេលវេលាប្រតិបត្តិសមរម្យ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះបង្ហាញថាវិធីសាស្ត្រកែប្រែរចនាសម្ព័ន្ធ (Structure Updating) ទាមទារធនធានកុំព្យូទ័រខ្ពស់ជាងវិធីសាស្ត្រកែប្រែប៉ារ៉ាម៉ែត្រ ដោយសារភាពស្មុគស្មាញនៃបណ្តាញកើនឡើងជាលំដាប់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> តម្រូវឱ្យមាន GPUs ដែលមានសមត្ថភាពខ្ពស់សម្រាប់ការបណ្តុះបណ្តាលគំរូ Deep Learning ពិសេសសម្រាប់វិធីសាស្ត្រ PNN ដែលបណ្តាញកើនឡើងឥតឈប់ឈរ។</li>
+        
+        <li><strong>Time Latency:</strong> វិធីសាស្ត្រមួយចំនួនដូចជា PNN និង NADINE មានពេលវេលាប្រតិបត្តិ (Execution Time) ខ្ពស់ ដែលអាចជាឧបសគ្គសម្រាប់ការវិភាគទិន្នន័យផ្ទាល់ (Real-time application)។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យដែលមានការផ្លាស់ប្តូរតាមពេលវេលា (Streaming Data) ដូចជា Weather ឬ Network Traffic ដើម្បីធ្វើតេស្ត។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកខ្លាំងលើទិន្នន័យសំយោគ (Synthetic Datasets) ដូចជា SEA និង Hyperplane និងទិន្នន័យបរទេសដូចជា Weather (ទិន្នន័យអាកាសធាតុមិនមែននៅកម្ពុជា) និង KDDCUP (ការវាយប្រហារបណ្តាញ)។ នេះអាចជាកង្វះខាតមួយ ដោយសារលក្ខណៈនៃ Concept Drift នៅក្នុងបរិបទជាក់ស្តែងនៃប្រទេសកម្ពុជា (ដូចជារដូវភ្លៀង/ប្រាំង ឬឥរិយាបថអ្នកប្រើប្រាស់ឌីជីថល) អាចមានភាពខុសគ្នាពីទិន្នន័យពិសោធន៍។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រដែលបានលើកឡើងមានសារៈសំខាន់ខ្លាំងសម្រាប់កម្ពុជា ដែលកំពុងឆ្ពោះទៅរកសេដ្ឋកិច្ចឌីជីថល និងប្រឈមនឹងការប្រែប្រួលបរិស្ថាន។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្ម និងធនធានទឹក (MOWRAM):</strong> ការប្រើប្រាស់ម៉ូដែល Deep Learning ដើម្បីទស្សន៍ទាយទឹកជំនន់ឬគ្រោះរាំងស្ងួត ដែលលំនាំអាកាសធាតុអាចផ្លាស់ប្តូរខុសប្រក្រតី (Recurrent/Abrupt Drift) ដោយសារការប្រែប្រួលអាកាសធាតុ។</li>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (NBC/Commercial Banks):</strong> ការការពារការលាងលុយ និងការក្លែងបន្លំ (Fraud Detection) ដែលទម្រង់នៃការវាយប្រហារតែងតែផ្លាស់ប្តូរថ្មីៗជានិច្ច ទាមទារឱ្យប្រព័ន្ធ AI សម្របខ្លួនបានរហ័ស។</li>
+            
+            <li><strong>សន្តិសុខសាយប័រ (Cybersecurity):</strong> សម្រាប់ស្ថាប័នផ្តល់សេវាអ៊ីនធឺណិត (ISPs) នៅកម្ពុជា ការរកឃើញការវាយប្រហារបណ្តាញ (Network Intrusion) ត្រូវការគំរូដែលអាចបែងចែករវាងចរាចរណ៍ធម្មតា និងការវាយប្រហារថ្មីៗ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តវិធីសាស្ត្រទាំងនេះនឹងជួយឱ្យប្រព័ន្ធបច្ចេកវិទ្យានៅកម្ពុជាមានភាពធន់ និងឆ្លាតវៃជាងមុន ប៉ុន្តែត្រូវការការកែសម្រួលបន្ថែមដើម្បីឱ្យសមស្របនឹងទិន្នន័យក្នុងស្រុក។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការពង្រឹងមូលដ្ឋានគ្រឹះ Deep Learning និង Streaming Data:</strong> និស្សិតគួរចាប់ផ្តើមសិក្សាពីបណ្ណាល័យ Python ដូចជា PyTorch ឬ TensorFlow និងស្វែងយល់ពីបណ្ណាល័យជំនាញសម្រាប់ Data Stream ដូចជា River ឬ Scikit-multiflow ដើម្បីយល់ពីរបៀបដែលទិន្នន័យហូរចូលជាបន្តបន្ទាប់។</li>
+            
+            <li><strong>ការពិសោធន៍ជាមួយទិន្នន័យមូលដ្ឋាន (Benchmark Datasets):</strong> សាកល្បងអនុវត្តវិធីសាស្ត្រសាមញ្ញដូចជា ADL ឬ PNN លើទិន្នន័យ SEA ឬ Rotated MNIST ដើម្បីមើលពីរបៀបដែលម៉ូដែលបរាជ័យពេលមាន Concept Drift កើតឡើង។</li>
+            
+            <li><strong>ការប្រមូលនិងបង្កើតទិន្នន័យក្នុងស្រុក:</strong> ធ្វើការប្រមូលទិន្នន័យជាក់ស្តែងនៅកម្ពុជា ឧទាហរណ៍៖ ទិន្នន័យតម្លៃទីផ្សារកសិផល ឬទិន្នន័យចរាចរណ៍ក្នុងក្រុងភ្នំពេញ ហើយវិភាគរកចំណុចដែលទិន្នន័យមានការប្រែប្រួល (Drift Detection)។</li>
+            
+            <li><strong>ការបង្កើតគម្រោងសាកល្បង (Pilot Project):</strong> ជ្រើសរើសវិធីសាស្ត្រមួយ (ឧ. Parameter Updating) ដើម្បីបង្កើតប្រព័ន្ធជូនដំណឹងដែលរៀនពីទិន្នន័យថ្មីដោយស្វ័យប្រវត្តិ និងប្រៀបធៀបប្រសិទ្ធភាពជាមួយម៉ូដែលដែលមិនមានការសម្របខ្លួន (Static Model)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept Drift</span></td>
+                <td>គឺជាបាតុភូតដែលលក្ខណៈស្ថិតិនៃទិន្នន័យគោលដៅមានការផ្លាស់ប្តូរតាមពេលវេលា (ឧទាហរណ៍៖ ឥរិយាបថអតិថិជនផ្លាស់ប្តូរ) ដែលធ្វើឱ្យម៉ូដែលដែលធ្លាប់តែមានភាពត្រឹមត្រូវពីមុន ក្លាយជាលែងមានប្រសិទ្ធភាព ឬហួសសម័យ។</td>
+                <td>ដូចជាការលេងបាល់ទាត់ ប៉ុន្តែច្បាប់នៃការលេងត្រូវបានផ្លាស់ប្តូរនៅពាក់កណ្តាលការប្រកួតដោយមិនបានប្រាប់មុន ធ្វើឱ្យកីឡាករ (ម៉ូដែល) លែងចេះលេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Catastrophic Forgetting</span></td>
+                <td>គឺជាបញ្ហាធ្ងន់ធ្ងរនៅក្នុងបណ្តាញសរសៃប្រសាទ (Neural Networks) ដែលម៉ូដែលភ្លេចចំណេះដឹងដែលធ្លាប់រៀនពីមុនស្ទើរតែទាំងអស់ នៅពេលដែលវាត្រូវបានបណ្តុះបណ្តាលជាមួយទិន្នន័យថ្មីៗ។</td>
+                <td>ប្រៀបដូចជាសិស្សម្នាក់ដែលខំរៀនភាសាបារាំងថ្មី ហើយស្រាប់តែភ្លេចភាសាអង់គ្លេសដែលធ្លាប់ចេះទាំងអស់ភ្លាមៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stability-Plasticity Dilemma</span></td>
+                <td>គឺជាបញ្ហាប្រឈមក្នុងការធ្វើឱ្យប្រព័ន្ធរៀនសូត្រមានតុល្យភាព រវាងសមត្ថភាពក្នុងការរក្សាចំណេះដឹងចាស់ឱ្យនៅដដែល (Stability) និងសមត្ថភាពក្នុងការទទួលយកចំណេះដឹងថ្មីដើម្បីសម្របខ្លួន (Plasticity)។</td>
+                <td>ដូចជាការសម្រេចចិត្តថាតើគួររក្សារូបមន្តធ្វើម្ហូបដើមដែលឆ្ងាញ់ស្រាប់ (រក្សាលំនឹង) ឬសាកល្បងកែប្រែវាទាំងស្រុងដើម្បីឱ្យកាន់តែទាន់សម័យ (ភាពបត់បែន)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fisher Information Matrix</span></td>
+                <td>ជារង្វាស់គណិតវិទ្យាដែលប្រើដើម្បីកំណត់ថាតើប៉ារ៉ាម៉ែត្រ (Weights) មួយណាមានសារៈសំខាន់ខ្លាំងសម្រាប់ចំណេះដឹងចាស់ ដើម្បីកុំឱ្យប្រព័ន្ធកែប្រែប៉ារ៉ាម៉ែត្រនោះខ្លាំងពេកពេលរៀនទិន្នន័យថ្មី (ប្រើដើម្បីការពារ Catastrophic Forgetting)។</td>
+                <td>ប្រៀបដូចជាការបិទស្លាក "ហាមប៉ះ" នៅលើសសរទ្រទ្រង់ផ្ទះពេលកំពុងជួសជុល ដើម្បីកុំឱ្យផ្ទះបាក់រលំដោយសារការកែប្រែ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Incremental Learning</span></td>
+                <td>គឺជាវិធីសាស្ត្រនៃការរៀនដែលម៉ូដែលធ្វើបច្ចុប្បន្នភាពចំណេះដឹងរបស់ខ្លួនជាបន្តបន្ទាប់នៅពេលមានទិន្នន័យថ្មីចូលមក ដោយមិនចាំបាច់ចាប់ផ្តើមរៀនពីដើម (Retraining) ឡើងវិញជាមួយទិន្នន័យទាំងអស់នោះទេ។</td>
+                <td>ដូចជាការរៀនពាក្យថ្មីមួយថ្ងៃមួយពាក្យបន្ថែមលើអ្វីដែលចេះស្រាប់ ដោយមិនចាំបាច់ទៅរៀនថ្នាក់មត្តេយ្យឡើងវិញរាល់ពេលចង់ចេះពាក្យថ្មី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Back-Propagation Through Time (BPTT)</span></td>
+                <td>គឺជាបច្ចេកទេសបណ្តុះបណ្តាលសម្រាប់បណ្តាញសរសៃប្រសាទ (RNNs) ដែលអនុញ្ញាតឱ្យម៉ូដែលរៀនពីទិន្នន័យដែលមានលំដាប់លំដោយតាមពេលវេលា ដោយគណនាកំហុសត្រឡប់ក្រោយឆ្លងកាត់ពេលវេលាដើម្បីកែតម្រូវប៉ារ៉ាម៉ែត្រ។</td>
+                <td>ដូចជាការមើលវីដេអូថយក្រោយនៃព្រឹត្តិការណ៍មួយ ដើម្បីស្វែងរកចំណុចដែលអ្នកបានធ្វើខុសតាំងពីដើមទី ហើយកែតម្រូវវា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=learning+under+concept+drift+a+review+ieee+transactions" target="_blank" rel="noopener"><span class="en">learning under concept drift a review ieee transactions</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=stability-plasticity+dilemma+in+deep+learning" target="_blank" rel="noopener"><span class="en">stability-plasticity dilemma in deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=few-shot+learning+for+concept+drift+adaptation" target="_blank" rel="noopener"><span class="en">few-shot learning for concept drift adaptation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ensemble+methods+for+non-stationary+data+streams" target="_blank" rel="noopener"><span class="en">ensemble methods for non-stationary data streams</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=catastrophic+forgetting+in+continuous+learning+neural+networks" target="_blank" rel="noopener"><span class="en">catastrophic forgetting in continuous learning neural networks</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

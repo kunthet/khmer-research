@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ | KhmerResearch.com</title>
+    <meta name="description" content="ទិន្នន័យទឹកភ្លៀងពីផ្កាយរណបមានកម្រិតភាពច្បាស់ទាប (Coarse Resolution) ដែលធ្វើឱ្យពិបាកក្នុងការប្រើប្រាស់សម្រាប់ការសិក្សាកម្រិតតំបន់ និងការគ្រប់គ្រងគ្រោះមហន្តរាយ...">
+    
+    <meta name="keywords" content="Satellite Precipitation, Downscaling, Machine Learning, XGBoost, Transfer Learning, Spatial Variability, Calibration, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html">
+    <meta property="og:title" content="ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ | KhmerResearch.com">
+    <meta property="og:description" content="ទិន្នន័យទឹកភ្លៀងពីផ្កាយរណបមានកម្រិតភាពច្បាស់ទាប (Coarse Resolution) ដែលធ្វើឱ្យពិបាកក្នុងការប្រើប្រាស់សម្រាប់ការសិក្សាកម្រិតតំបន់ និងការគ្រប់គ្រងគ្រោះមហន្តរាយ ជាពិសេសនៅតំបន់ដែលខ្វះខាតស្ថានីយវាស់វែង។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024">
+    
+    <meta property="article:tag" content="Satellite Precipitation">
+    
+    <meta property="article:tag" content="Downscaling">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="XGBoost">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Spatial Variability">
+    
+    <meta property="article:tag" content="Calibration">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ">
+    <meta name="twitter:description" content="ទិន្នន័យទឹកភ្លៀងពីផ្កាយរណបមានកម្រិតភាពច្បាស់ទាប (Coarse Resolution) ដែលធ្វើឱ្យពិបាកក្នុងការប្រើប្រាស់សម្រាប់ការសិក្សាកម្រិតតំបន់ និងការគ្រប់គ្រងគ្រោះមហន្តរាយ ជាពិសេសនៅតំបន់ដែលខ្វះខាតស្ថានីយវាស់វែង។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179c\u17c2\u1784\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1798\u17b6\u178f\u17d2\u179a\u178a\u17d2\u178b\u17b6\u1793\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u1796\u17b8\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794\u17d6 \u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u17a2\u17c6\u1796\u17b8\u17a7\u178f\u17d2\u178f\u1798\u1797\u17b6\u1796 \u1782\u17bb\u178e\u179f\u1798\u17d2\u1794\u178f\u17d2\u178f\u17b7 \u1793\u17b7\u1784\u179b\u1791\u17d2\u1792\u1797\u17b6\u1796\u1795\u17d2\u1791\u17c1\u179a",
+      "name": "Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability",
+      "description": "\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u1796\u17b8\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f\u1797\u17b6\u1796\u1785\u17d2\u1794\u17b6\u179f\u17cb\u1791\u17b6\u1794 (Coarse Resolution) \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1796\u17b7\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1780\u1798\u17d2\u179a\u17b7\u178f\u178f\u17c6\u1794\u1793\u17cb \u1793\u17b7\u1784\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1782\u17d2\u179a\u17c4\u17c7\u1798\u17a0\u1793\u17d2\u178f\u179a\u17b6\u1799 \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1793\u17c5\u178f\u17c6\u1794\u1793\u17cb\u178a\u17c2\u179b\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u179f\u17d2\u1790\u17b6\u1793\u17b8\u1799\u179c\u17b6\u179f\u17cb\u179c\u17c2\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html",
+      "author": [{"@type": "Person", "name": "ZHU, Honglin (Hong Kong Baptist University)"},{"@type": "Person", "name": "Prof. GAO Meng (Supervisor)"}],
+      "datePublished": "2024",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability",
+        "url": "https://doi.org/10.3390/rs15102640"
+      },
+      "keywords": ["Satellite Precipitation", "Downscaling", "Machine Learning", "XGBoost", "Transfer Learning", "Spatial Variability", "Calibration"],
+      "about": "Remote Sensing and Hydrology"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179c\u17c2\u1784\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1798\u17b6\u178f\u17d2\u179a\u178a\u17d2\u178b\u17b6\u1793\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u1796\u17b8\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794\u17d6 \u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u17a2\u17c6\u1796\u17b8\u17a7\u178f\u17d2\u178f\u1798\u1797\u17b6\u1796 \u1782\u17bb\u178e\u179f\u1798\u17d2\u1794\u178f\u17d2\u178f\u17b7 \u1793\u17b7\u1784\u179b\u1791\u17d2\u1792\u1797\u17b6\u1796\u1795\u17d2\u1791\u17c1\u179a",
+          "item": "https://khmerresearch.com/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/rs15102640" target="_blank">https://doi.org/10.3390/rs15102640</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> ZHU, Honglin (Hong Kong Baptist University), Prof. GAO Meng (Supervisor)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Remote Sensing and Hydrology</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ទិន្នន័យទឹកភ្លៀងពីផ្កាយរណបមានកម្រិតភាពច្បាស់ទាប (Coarse Resolution) ដែលធ្វើឱ្យពិបាកក្នុងការប្រើប្រាស់សម្រាប់ការសិក្សាកម្រិតតំបន់ និងការគ្រប់គ្រងគ្រោះមហន្តរាយ ជាពិសេសនៅតំបន់ដែលខ្វះខាតស្ថានីយវាស់វែង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការវាស់វែងប្រៀបធៀបប្រសិទ្ធភាពនៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ចំនួនបួន និងស្នើឡើងនូវក្របខ័ណ្ឌថ្មីសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋាន និងការផ្ទេរចំណេះដឹងទៅកាន់តំបន់ខ្វះទិន្នន័យ។
+        
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន (Machine Learning Algorithms: XGBoost, RF, SVR, SRF)</li>
+            
+            <li>ទិន្នន័យទឹកភ្លៀងពីផ្កាយរណប PERSIANN-CDR និងទិន្នន័យពីស្ថានីយវាស់វែង (Remote Sensing Data & Gauge Observations)</li>
+            
+            <li>ការវិភាគភាពខុសគ្នាតាមភូមិសាស្ត្រ (Geographical Difference Analysis - GDA) សម្រាប់ការកែតម្រូវ</li>
+            
+            <li>បច្ចេកទេសរៀនបន្ត (Transfer Learning) ដោយប្រើបណ្តាញសរសៃប្រសាទ CNN</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>XGBoost បានបង្ហាញលទ្ធផលល្អបំផុតក្នុងការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀង ដោយមានប្រសិទ្ធភាពខ្ពស់ជាង SVR, RF និង SRF ក្នុងការចាប់យកទំនាក់ទំនងមិនលីនេអ៊ែរដ៏ស្មុគស្មាញ។</li>
+            
+            <li>វិធីសាស្ត្រ XGBoost_DC ដែលត្រូវបានអភិវឌ្ឍឡើង អាចបង្កើតទិន្នន័យទឹកភ្លៀងដែលមានគុណភាពបង្ហាញខ្ពស់ និងចាប់យកបម្រែបម្រួលក្នុងលំហ (Spatial Variability) បានយ៉ាងល្អ ជាពិសេសក្នុងអំឡុងពេលមានព្យុះទីហ្វុង។</li>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេស Transfer Learning បានធ្វើឱ្យប្រសើរឡើងនូវភាពត្រឹមត្រូវនៃការប៉ាន់ប្រមាណទឹកភ្លៀងនៅក្នុងតំបន់ដែលខ្វះខាតទិន្នន័យ ដោយម៉ូដែលដែលបានផ្ទេរចំណេះដឹងមានប្រសិទ្ធភាពជាងម៉ូដែលដែលបណ្តុះបណ្តាលដោយទិន្នន័យក្នុងស្រុកតែមួយមុខ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">XGBoost (eXtreme Gradient Boosting)</span></strong><br>ការជំរុញជម្រាលខ្លាំង (XGBoost)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការចាប់យកទំនាក់ទំនងមិនលីនេអ៊ែរ និងគ្រប់គ្រងទិន្នន័យដែលមានភាពស្មុគស្មាញបានល្អជាងម៉ូដែលផ្សេងទៀត។</td>
+                <td>ទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រ (Hyperparameter tuning) យ៉ាងប្រុងប្រយ័ត្នដើម្បីទទួលបានលទ្ធផលល្អបំផុត។</td>
+                <td>ទទួលបានពិន្ទុប្រសិទ្ធភាព KGE ខ្ពស់បំផុត (ចន្លោះពី ០.៤៦ ដល់ ០.៧៩) ក្នុងការពិសោធន៍កាត់បន្ថយមាត្រដ្ឋាន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SRF (Spatial Random Forest)</span></strong><br>ព្រៃចៃដន្យតាមលំហ (Spatial Random Forest)</td>
+                <td>រួមបញ្ចូលព័ត៌មានលំហ (Spatial autocorrelation) ទៅក្នុងម៉ូដែល ដែលជួយកាត់បន្ថយការពឹងផ្អែកលើការសន្មតនៃឯករាជ្យភាពទិន្នន័យ។</td>
+                <td>នៅតែមានកម្រិតទាបជាង XGBoost បន្តិចក្នុងការចាប់យកភាពខុសគ្នានៃទឹកភ្លៀងក្នុងតំបន់ជាក់លាក់។</td>
+                <td>មានប្រសិទ្ធភាពល្អជាងវិធីសាស្ត្របុរាណ ប៉ុន្តែនៅតែទាបជាង XGBoost បន្តិចបន្តួច។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Spline Interpolation</span></strong><br>ការប៉ាន់ស្មាន Spline (វិធីសាស្ត្របុរាណ)</td>
+                <td>ងាយស្រួលអនុវត្ត និងមិនទាមទារធនធានកុំព្យូទ័រខ្ពស់។</td>
+                <td>បង្កើតលទ្ធផលដែលមានភាពរលូនពេក (Too smooth) និងបរាជ័យក្នុងការចាប់យកកម្រិតទឹកភ្លៀងខ្ពស់បំផុត (Extreme events)។</td>
+                <td>មានកម្រិតភាពត្រឹមត្រូវទាបបំផុតបើធៀបនឹងវិធីសាស្ត្ររៀនរបស់ម៉ាស៊ីន (Machine Learning)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Transfer Learning (CNN-based Fine-tuning)</span></strong><br>ការរៀនបន្តដោយប្រើបណ្តាញសរសៃប្រសាទ (CNN)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់សម្រាប់តំបន់ដែលខ្វះខាតទិន្នន័យ (Data-scarce areas) ដោយប្រើប្រាស់ចំណេះដឹងពីតំបន់ដែលមានទិន្នន័យសម្បូរបែប។</td>
+                <td>ទាមទារចំណេះដឹងខ្ពស់ក្នុងការរចនាម៉ូដែល Deep Learning និងធនធានកុំព្យូទ័រ។</td>
+                <td>ម៉ូដែលដែលបានផ្ទេរចំណេះដឹង (Fine-tuned models) ផ្តល់លទ្ធផលល្អជាងការបណ្តុះបណ្តាលដោយទិន្នន័យក្នុងស្រុកតែមួយមុខ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រកម្រិតមធ្យមទៅខ្ពស់ និងជំនាញផ្នែកវិទ្យាសាស្ត្រទិន្នន័យដើម្បីអនុវត្តក្បួនដោះស្រាយ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កម្មវិធី R (កញ្ចប់ xgboost, randomForest, spatialRF) ឬ Python សម្រាប់ការបង្កើតម៉ូដែល។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យទឹកភ្លៀងផ្កាយរណប (PERSIANN-CDR), ទិន្នន័យវាស់វែងផ្ទាល់ (Rain gauges), និងទិន្នន័យបរិស្ថាន (DEM, NDVI, LST)។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមាន CPU ខ្លាំងសម្រាប់ការបណ្តុះបណ្តាល XGBoost និង GPU សម្រាប់ការបណ្តុះបណ្តាល CNN (Transfer Learning)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងខេត្តក្វាងទុង និងអាងទន្លេយ៉ង់សេ ប្រទេសចិន ដែលមានលក្ខណៈអាកាសធាតុ (Monsoon) និងភូមិសាស្ត្រស្រដៀងនឹងកម្ពុជា។ ទោះបីជាយ៉ាងណាក៏ដោយ ការប្រើប្រាស់បណ្តាញស្ថានីយវាស់វែងទឹកភ្លៀងដែលមានដង់ស៊ីតេខ្ពស់នៅក្នុងការសិក្សានេះ អាចជាចំណុចខុសគ្នាពីស្ថានភាពនៅកម្ពុជាដែលមានស្ថានីយតិចតួច។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រដែលបានរកឃើញនៅក្នុងការស្រាវជ្រាវនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់ប្រទេសកម្ពុជា ជាពិសេសក្នុងការគ្រប់គ្រងធនធានទឹក និងព្យាករណ៍គ្រោះមហន្តរាយ។</p>
+        
+        <ul>
+            
+            <li><strong>ក្រសួងធនធានទឹក និងឧតុនិយម (MOWRAM):</strong> អាចប្រើប្រាស់វិធីសាស្ត្រ XGBoost និង Transfer Learning ដើម្បីបង្កើតផែនទីទឹកភ្លៀងដែលមានកម្រិតភាពច្បាស់ខ្ពស់នៅតំបន់ដាច់ស្រយាលដែលគ្មានស្ថានីយវាស់។</li>
+            
+            <li><strong>គណៈកម្មការទន្លេមេគង្គ (MRC):</strong> អាចអនុវត្តវិធីសាស្ត្រកាត់បន្ថយមាត្រដ្ឋាន (Downscaling) ដើម្បីតាមដានលំហូរទឹក និងព្យាករណ៍ទឹកជំនន់នៅក្នុងអាងទន្លេមេគង្គ។</li>
+            
+            <li><strong>វិស័យកសិកម្ម (ខេត្តបាត់ដំបង និងព្រៃវែង):</strong> ការទទួលបានទិន្នន័យទឹកភ្លៀងច្បាស់លាស់ជួយដល់ការគ្រប់គ្រងប្រព័ន្ធធារាសាស្ត្រ និងការដាំដុះស្រូវ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តបច្ចេកទេស Transfer Learning គឺជាដំណោះស្រាយដ៏មានសក្តានុពលបំផុតសម្រាប់កម្ពុជា ដើម្បីជម្នះបញ្ហាខ្វះខាតទិន្នន័យពីស្ថានីយវាស់វែងផ្ទាល់ដី។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការសិក្សាមូលដ្ឋានគ្រឹះ និងការប្រមូលទិន្នន័យ:</strong> និស្សិតត្រូវសិក្សាពីរបៀបប្រើប្រាស់ភាសា R ឬ Python និងប្រមូលទិន្នន័យ PERSIANN-CDR ព្រមទាំងទិន្នន័យបរិស្ថាន (NDVI, DEM) សម្រាប់តំបន់សិក្សានៅកម្ពុជា។</li>
+            
+            <li><strong>ការអនុវត្តម៉ូដែល XGBoost:</strong> សាកល្បងបង្កើតម៉ូដែល Downscaling ដោយប្រើ XGBoost ដើម្បីភ្ជាប់ទំនាក់ទំនងរវាងទិន្នន័យផ្កាយរណប និងទិន្នន័យពីស្ថានីយដែលមានស្រាប់។</li>
+            
+            <li><strong>ការអនុវត្តបច្ចេកទេស Transfer Learning:</strong> ប្រើប្រាស់ម៉ូដែលដែលបានបណ្តុះបណ្តាលរួច (Pre-trained model) ពីតំបន់ដែលមានទិន្នន័យច្រើន (ដូចជាប្រទេសវៀតណាម ឬថៃ) ហើយធ្វើការ Fine-tuning សម្រាប់តំបន់នៅកម្ពុជា។</li>
+            
+            <li><strong>ការកែតម្រូវ និងការផ្ទៀងផ្ទាត់ (Calibration & Validation):</strong> ប្រើប្រាស់វិធីសាស្ត្រ GDA ដើម្បីកែតម្រូវលទ្ធផល និងធ្វើការផ្ទៀងផ្ទាត់ជាមួយទិន្នន័យជាក់ស្តែង ដើម្បីវាយតម្លៃប្រសិទ្ធភាព។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Spatial Downscaling</span></td>
+                <td>ជាដំណើរការបច្ចេកទេសក្នុងការបំប្លែងទិន្នន័យដែលមានកម្រិតភាពច្បាស់ទាប (ដូចជាទិន្នន័យពីផ្កាយរណបដែលគ្របដណ្តប់ផ្ទៃដីធំៗ ១០០ គីឡូម៉ែត្រការ៉េ) ឱ្យទៅជាទិន្នន័យដែលមានកម្រិតភាពច្បាស់ខ្ពស់ (១ គីឡូម៉ែត្រការ៉េ) ដោយប្រើប្រាស់ទំនាក់ទំនងជាមួយកត្តាបរិស្ថានដូចជា កម្ពស់ដី និងរុក្ខជាតិ។</td>
+                <td>ដូចជាការយក្សរូបថតដែលស្រពិចស្រពិល (Blurry) មកកែឱ្យច្បាស់ (Sharp) ដើម្បីមើលឃើញព័ត៌មានលម្អិតដូចជា ដើមឈើ ឬផ្ទះជាដើម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">eXtreme Gradient Boosting (XGBoost)</span></td>
+                <td>ជាក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ដ៏មានឥទ្ធិពលដែលបង្កើតគំរូព្យាករណ៍ជាច្រើនបន្តបន្ទាប់គ្នា ដោយគំរូថ្មីនីមួយៗព្យាយាមកែតម្រូវកំហុសដែលគំរូមុនបានបង្កើត ដើម្បីទទួលបានលទ្ធផលចុងក្រោយដែលត្រឹមត្រូវបំផុត។</td>
+                <td>ដូចជាក្រុមសិស្សធ្វើលំហាត់រួមគ្នា ដោយសិស្សទីពីរជួយកែកំហុសសិស្សទីមួយ ហើយសិស្សទីបីកែកំហុសសិស្សទីពីរ បន្តរហូតដល់បានចម្លើយត្រឹមត្រូវបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>ជាបច្ចេកទេសក្នុងវិទ្យាសាស្ត្រកុំព្យូទ័រ ដែលអនុញ្ញាតឱ្យយកចំណេះដឹង ឬគំរូដែលកុំព្យូទ័របានរៀនពីតំបន់ដែលមានទិន្នន័យច្រើន (Source Domain) ទៅអនុវត្តលើតំបន់ថ្មីដែលខ្វះខាតទិន្នន័យ (Target Domain) ដោយមិនចាំបាច់បណ្តុះបណ្តាលពីចំណុចចាប់ផ្តើម។</td>
+                <td>ដូចជាអ្នកចេះជិះកង់រួចហើយ អាចរៀនជិះម៉ូតូបានលឿនជាងអ្នកមិនចេះសោះ ព្រោះពួកគេមានបំណិនតុល្យភាពស្រាប់ពីការជិះកង់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fine-tuning</span></td>
+                <td>ជាដំណាក់កាលមួយនៃ Transfer Learning ដែលអ្នកស្រាវជ្រាវធ្វើការកែតម្រូវប៉ារ៉ាម៉ែត្រមួយចំនួនតូចនៃគំរូដែលមានស្រាប់ ដើម្បីឱ្យវាដំណើរការល្អ និងស៊ីគ្នាជាមួយទិន្នន័យថ្មីនៅក្នុងតំបន់សិក្សាជាក់លាក់។</td>
+                <td>ដូចជាការរឹតខ្សែហ្គីតាដែលបានរឹតរួច ឱ្យត្រូវនឹងសំឡេងនៃបទចម្រៀងជាក់លាក់ណាមួយបន្ថែមទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Geographical Difference Analysis (GDA)</span></td>
+                <td>ជាវិធីសាស្ត្រកែតម្រូវទិន្នន័យដោយគណនាភាពខុសគ្នារវាងទិន្នន័យផ្កាយរណប និងទិន្នន័យវាស់វែងជាក់ស្តែងនៅស្ថានីយ រួចយកតម្លៃភាពខុសគ្នានោះទៅបូក ឬដកបន្ថែមលើផ្ទៃដីទាំងមូល ដើម្បីកាត់បន្ថយលំអៀង។</td>
+                <td>ដូចជាការដឹងថានាឡិការបស់អ្នកដើរយឺត ៥ នាទី ដូច្នេះរាល់ពេលមើលម៉ោង អ្នកត្រូវបូកបន្ថែម ៥ នាទីជានិច្ច ដើម្បីឱ្យត្រូវនឹងម៉ោងពិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spatial Autocorrelation</span></td>
+                <td>ជាគោលគំនិតស្ថិតិដែលបញ្ជាក់ថា ទីតាំងដែលនៅជិតគ្នាទំនងជាមានលក្ខណៈ និងតម្លៃ (ដូចជាបរិមាណទឹកភ្លៀង) ស្រដៀងគ្នាខ្លាំងជាងទីតាំងដែលនៅឆ្ងាយពីគ្នា ដែលត្រូវបានប្រើដើម្បីកែលម្អការព្យាករណ៍នៅក្នុងម៉ូដែល SRF។</td>
+                <td>ដូចជាតម្លៃដីធ្លីដែរ ដីដែលនៅជាប់របងគ្នាជាធម្មតាមានតម្លៃប្រហាក់ប្រហែលគ្នាជាងដីដែលនៅឆ្ងាយពីគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Network (CNN)</span></td>
+                <td>ជាប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Artificial Neural Network) ដែលមានជំនាញពិសេសក្នុងការវិភាគទិន្នន័យជារូបភាព ឬជាក្រឡា (Grid data) ដោយវាអាចចាប់យកលំនាំនៃទឹកភ្លៀងក្នុងលំហបានយ៉ាងល្អ។</td>
+                <td>ដូចជាភ្នែក និងខួរក្បាលរបស់មនុស្សដែលមើលរូបភាពមួយ ហើយអាចសម្គាល់ថាផ្នែកណាជាពពក និងផ្នែកណាជាភ្លៀង ដោយផ្អែកលើរូបរាង និងពណ៌។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/irregular-stock-data-prediction-sli-2025.html">
+                    <span class="km">ការបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយទិន្នន័យភាគហ៊ុនមិនទៀងទាត់ដោយផ្អែកលើការប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation)</span><br>
+                    <span class="en article-original-title">Irregular Stock Data Prediction Performance Optimisation Based on the Simple Linear Interpolation</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/ml-precipitation-uncertainty-vietnam-2025.html">
+                    <span class="km">វិធីសាស្ត្ររៀនម៉ាស៊ីនសម្រាប់ការកែលម្អភាពត្រឹមត្រូវនៃទឹកភ្លៀងតាមក្រឡាជាមួយនឹងការកំណត់បរិមាណនៃភាពមិនច្បាស់លាស់</span><br>
+                    <span class="en article-original-title">A Machine Learning Approach for Improving the Accuracy of Gridded Precipitation With Uncertainty Quantification</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

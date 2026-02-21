@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវិភាគលើសមត្ថភាពនៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការបំពេញតម្លៃដែលបាត់បង់ | KhmerResearch.com</title>
+    <meta name="description" content="តម្លៃដែលបាត់បង់ (Missing values) គឺជាបញ្ហាទូទៅនៅក្នុងការជីកយកទិន្នន័យ (Data Mining) ដែលអាចនាំឱ្យមានការវិភាគលំអៀង និងការសន្និដ្ឋានមិនត្រឹមត្រូវ ជាពិសេសនៅក្នុង...">
+    
+    <meta name="keywords" content="Missing Value Imputation, Data Cleaning, Bayesian Networks, K-Nearest Neighbors, Decision Tree, RMSE, Mean Absolute Error, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/performance-analysis-ml-missing-value-imputation-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/performance-analysis-ml-missing-value-imputation-2018.html">
+    <meta property="og:title" content="ការវិភាគលើសមត្ថភាពនៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការបំពេញតម្លៃដែលបាត់បង់ | KhmerResearch.com">
+    <meta property="og:description" content="តម្លៃដែលបាត់បង់ (Missing values) គឺជាបញ្ហាទូទៅនៅក្នុងការជីកយកទិន្នន័យ (Data Mining) ដែលអាចនាំឱ្យមានការវិភាគលំអៀង និងការសន្និដ្ឋានមិនត្រឹមត្រូវ ជាពិសេសនៅក្នុងវិស័យស្រាវជ្រាវវេជ្ជសាស្ត្រ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2018, (IJACSA) International Journal of Advanced Computer Science and Applications">
+    
+    <meta property="article:tag" content="Missing Value Imputation">
+    
+    <meta property="article:tag" content="Data Cleaning">
+    
+    <meta property="article:tag" content="Bayesian Networks">
+    
+    <meta property="article:tag" content="K-Nearest Neighbors">
+    
+    <meta property="article:tag" content="Decision Tree">
+    
+    <meta property="article:tag" content="RMSE">
+    
+    <meta property="article:tag" content="Mean Absolute Error">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវិភាគលើសមត្ថភាពនៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការបំពេញតម្លៃដែលបាត់បង់">
+    <meta name="twitter:description" content="តម្លៃដែលបាត់បង់ (Missing values) គឺជាបញ្ហាទូទៅនៅក្នុងការជីកយកទិន្នន័យ (Data Mining) ដែលអាចនាំឱ្យមានការវិភាគលំអៀង និងការសន្និដ្ឋានមិនត្រឹមត្រូវ ជាពិសេសនៅក្នុងវិស័យស្រាវជ្រាវវេជ្ជសាស្ត្រ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179b\u17be\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb",
+      "name": "Performance Analysis of Machine Learning Algorithms for Missing Value Imputation",
+      "description": "\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb (Missing values) \u1782\u17ba\u1787\u17b6\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17bc\u1791\u17c5\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1787\u17b8\u1780\u1799\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Mining) \u178a\u17c2\u179b\u17a2\u17b6\u1785\u1793\u17b6\u17c6\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179b\u17c6\u17a2\u17c0\u1784 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179f\u1793\u17d2\u1793\u17b7\u178a\u17d2\u178b\u17b6\u1793\u1798\u17b7\u1793\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u179f\u17d0\u1799\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/performance-analysis-ml-missing-value-imputation-2018.html",
+      "author": [{"@type": "Person", "name": "Nadzurah Zainal Abidin (International Islamic University Malaysia)"},{"@type": "Person", "name": "Amelia Ritahani Ismail (International Islamic University Malaysia)"},{"@type": "Person", "name": "Nurul A. Emran (Universiti Teknikal Malaysia Melaka)"}],
+      "datePublished": "2018, (IJACSA) International Journal of Advanced Computer Science and Applications",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Performance Analysis of Machine Learning Algorithms for Missing Value Imputation",
+        "url": "http://www.ijacsa.thesai.org"
+      },
+      "keywords": ["Missing Value Imputation", "Data Cleaning", "Bayesian Networks", "K-Nearest Neighbors", "Decision Tree", "RMSE", "Mean Absolute Error"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179b\u17be\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb",
+          "item": "https://khmerresearch.com/papers/technology/performance-analysis-ml-missing-value-imputation-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការវិភាគលើសមត្ថភាពនៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនសម្រាប់...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Performance Analysis of Machine Learning Algorithms for Missing Value Imputation<br>
+        
+        <strong>Source:</strong> <a href="http://www.ijacsa.thesai.org" target="_blank">http://www.ijacsa.thesai.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវិភាគលើសមត្ថភាពនៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការបំពេញតម្លៃដែលបាត់បង់</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Performance Analysis of Machine Learning Algorithms for Missing Value Imputation</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Nadzurah Zainal Abidin (International Islamic University Malaysia), Amelia Ritahani Ismail (International Islamic University Malaysia), Nurul A. Emran (Universiti Teknikal Malaysia Melaka)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018, (IJACSA) International Journal of Advanced Computer Science and Applications</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> តម្លៃដែលបាត់បង់ (Missing values) គឺជាបញ្ហាទូទៅនៅក្នុងការជីកយកទិន្នន័យ (Data Mining) ដែលអាចនាំឱ្យមានការវិភាគលំអៀង និងការសន្និដ្ឋានមិនត្រឹមត្រូវ ជាពិសេសនៅក្នុងវិស័យស្រាវជ្រាវវេជ្ជសាស្ត្រ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការប្រៀបធៀបប្រសិទ្ធភាពនៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ចំនួនបី ដើម្បីបំពេញទិន្នន័យដែលបាត់បង់ ដោយធ្វើការពិសោធន៍លើសំណុំទិន្នន័យជាក់ស្តែងចំនួនដប់។
+        
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនចំនួន ៣ (Machine Learning Classifiers: KNN, Decision Tree, Bayesian Networks)</li>
+            
+            <li>សំណុំទិន្នន័យវេជ្ជសាស្ត្រចំនួន ១០ (Medical Datasets) ដែលប្រមូលពីប្រភពដូចជា WHO និង UCI Machine Learning Repository</li>
+            
+            <li>រង្វាស់វាយតម្លៃកំហុស (Evaluation Metrics) រួមមាន MAE, MSE, និង RMSE ដើម្បីផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>បណ្តាញ Bayesian (Bayesian Networks) ផ្តល់លទ្ធផលល្អបំផុតដែលមានកំហុសទាបជាងគេ ជាពិសេសសម្រាប់សំណុំទិន្នន័យតូចដែលមានការបាត់បង់ទិន្នន័យតិចជាង ២០ភាគរយ។</li>
+            
+            <li>Decision Tree គឺជាជម្រើសល្អទីពីរ និងមានភាពសមស្របសម្រាប់សំណុំទិន្នន័យធំៗដែលមានភាគរយនៃតម្លៃបាត់បង់ខ្ពស់។</li>
+            
+            <li>ទោះបីជា K-Nearest Neighbors (KNN) មានភាពសាមញ្ញក៏ដោយ វាចំណាយពេលគណនាច្រើន និងមានប្រសិទ្ធភាពទាបលើទិន្នន័យធំ បើប្រៀបធៀបទៅនឹងវិធីសាស្ត្រផ្សេងទៀត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Bayesian Networks</span></strong><br>បណ្តាញបេ (Bayesian Networks)</td>
+                <td>ផ្តល់នូវភាពត្រឹមត្រូវខ្ពស់បំផុត (Highest Accuracy) ដោយរក្សាទំនាក់ទំនងរវាងអថេរ និងការចែកចាយប្រូបាប៊ីលីតេរួម (Joint Probability Distribution)។</td>
+                <td>ទាមទារការគណនាស្មុគស្មាញ និងចំណាយធនធានច្រើនសម្រាប់សំណុំទិន្នន័យធំ ហើយតម្រូវឱ្យមានការបំបែកទិន្នន័យ (Discretization)។</td>
+                <td>មានកំហុសទាបបំផុត (Lowest MAE, MSE, RMSE) ក្នុងចំណោមវិធីសាស្ត្រទាំងបី ជាពិសេសលើទិន្នន័យតូចដែលមានការបាត់បង់តិចជាង ២០%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Decision Tree</span></strong><br>ដើមឈើសម្រេចចិត្ត (Decision Tree)</td>
+                <td>មានតម្លាភាពក្នុងការធ្វើសេចក្តីសម្រេចចិត្ត និងដំណើរការបានល្អសម្រាប់សំណុំទិន្នន័យធំដែលមានភាគរយនៃតម្លៃបាត់បង់ខ្ពស់។</td>
+                <td>ចំណាយពេលយូរក្នុងការសាងសង់រចនាសម្ព័ន្ធដើមឈើ (Training time) និងអាចមានភាពលំអៀងប្រសិនបើមិនមានការគ្រប់គ្រងល្អ។</td>
+                <td>ជាជម្រើសល្អទីពីរ (Second best) និងមានស្ថេរភាពក្នុងការបំពេញទិន្នន័យសម្រាប់សំណុំទិន្នន័យធំៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbors (KNN)</span></strong><br>K-អ្នកជិតខាងដែលនៅជិតបំផុត (K-Nearest Neighbors)</td>
+                <td>ជាវិធីសាស្ត្រសាមញ្ញ និងងាយស្រួលយល់ ដោយផ្អែកលើចម្ងាយរវាងទិន្នន័យ (Euclidean distance)។</td>
+                <td>ដំណើរការយឺតខ្លាំងលើទិន្នន័យធំ ដោយសារត្រូវស្កេនទិន្នន័យទាំងមូល និងងាយរងផលប៉ះពាល់ដោយទិន្នន័យមិនប្រក្រតី (Noise/Outliers)។</td>
+                <td>មានកំហុសខ្ពស់ជាងគេ និងមិនអាចទស្សន៍ទាយតម្លៃដែលនៅក្រៅដែនកំណត់នៃទិន្នន័យដែលមានស្រាប់បានទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះបង្ហាញថាការចំណាយលើការគណនា (Computational Cost) គឺជាកត្តាសំខាន់ ដោយវិធីសាស្ត្រខ្លះត្រូវការធនធានច្រើនជាងវិធីសាស្ត្រផ្សេងទៀត។
+    
+    <ul>
+        
+        <li><strong>Computational Power:</strong> KNN ទាមទារថាមពលគណនាខ្ពស់នៅពេលស្វែងរកទិន្នន័យក្នុង Dataset ធំ ខណៈដែល Bayesian Networks ទាមទារធនធានក្នុងការរៀនរចនាសម្ព័ន្ធបណ្តាញ។</li>
+        
+        <li><strong>Software:</strong> ត្រូវការកម្មវិធីសម្រាប់បង្កើតម៉ូដែលដូចជា Python (Scikit-learn) ឬ Weka ដើម្បីដំណើរការក្បួនដោះស្រាយទាំងនេះ។</li>
+        
+        <li><strong>Data Pre-processing:</strong> ត្រូវការពេលវេលាក្នុងការសម្អាតទិន្នន័យ (Data Cleaning) និងបង្កើតតម្លៃបាត់បង់សិប្បនិម្មិតដើម្បីធ្វើការពិសោធន៍។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យវេជ្ជសាស្ត្រមកពីចក្រភពអង់គ្លេស (data.gov.uk), កាណាដា, និង WHO ដែលមិនឆ្លុះបញ្ចាំងពីបរិបទសុខភាពនៅកម្ពុជា។ លក្ខណៈនៃទិន្នន័យអ្នកជំងឺ និងប្រភេទជំងឺអាចខុសគ្នាពីប្រព័ន្ធសុខាភិបាលក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ជាពិសេសក្នុងបរិបទដែលប្រព័ន្ធទិន្នន័យឌីជីថលកំពុងចាប់ផ្តើមរីកចម្រើន ប៉ុន្តែនៅមានចន្លោះខ្វះខាតច្រើន។</p>
+        
+        <ul>
+            
+            <li><strong>Public Health (សុខភាពសាធារណៈ):</strong> ក្រសួងសុខាភិបាលអាចប្រើវិធីសាស្ត្រ Bayesian ឬ Decision Tree ដើម្បីបំពេញទិន្នន័យអ្នកជំងឺដែលបាត់បង់នៅតាមមណ្ឌលសុខភាពដាច់ស្រយាល។</li>
+            
+            <li><strong>National Statistics (ស្ថិតិជាតិ):</strong> វិទ្យាស្ថានជាតិស្ថិតិ (NIS) អាចអនុវត្តបច្ចេកទេសនេះដើម្បីកែលម្អគុណភាពទិន្នន័យជំរឿន ឬការអង្កេតសេដ្ឋកិច្ចសង្គមដែលមិនពេញលេញ។</li>
+            
+            <li><strong>Agriculture (កសិកម្ម):</strong> ការបំពេញទិន្នន័យអាកាសធាតុ ឬទិន្នន័យទិន្នផលដំណាំដែលបាត់បង់ដោយសារកង្វះឧបករណ៍វាស់វែងនៅតាមខេត្តមួយចំនួន។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន (Machine Learning) នឹងជួយកាត់បន្ថយភាពមិនច្បាស់លាស់ក្នុងការវិភាគទិន្នន័យ និងជួយឱ្យអ្នកធ្វើគោលនយោបាយនៅកម្ពុជាទទួលបានព័ត៌មានដែលគួរឱ្យទុកចិត្តជាងមុន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទិន្នន័យដែលបាត់បង់:</strong> ស្វែងយល់ពីប្រភេទនៃការបាត់បង់ទិន្នន័យ៖ MCAR (Missing Completely at Random), MAR (Missing at Random), និង MNAR (Missing Not at Random) ដើម្បីជ្រើសរើសវិធីសាស្ត្រត្រឹមត្រូវ។</li>
+            
+            <li><strong>រៀនប្រើប្រាស់ឧបករណ៍ Python libraries:</strong> អនុវត្តការសរសេរកូដដោយប្រើបណ្ណាល័យ Python ដូចជា Pandas សម្រាប់ការគ្រប់គ្រងទិន្នន័យ និង Scikit-learn សម្រាប់បង្កើតម៉ូដែល KNN និង Decision Tree។</li>
+            
+            <li><strong>ពិសោធន៍ជាមួយសំណុំទិន្នន័យបើកចំហ:</strong> ទាញយកទិន្នន័យពី Open Development Cambodia (ODC) ដែលមានតម្លៃបាត់បង់ ហើយសាកល្បងប្រើវិធីសាស្ត្រ Imputation ផ្សេងៗដើម្បីប្រៀបធៀបលទ្ធផល។</li>
+            
+            <li><strong>ការវាយតម្លៃម៉ូដែល (Model Evaluation):</strong> រៀនគណនា និងវិភាគរង្វាស់កំហុសដូចជា RMSE និង MAE ដើម្បីដឹងថាវិធីសាស្ត្រមួយណាមានប្រសិទ្ធភាពបំផុតសម្រាប់ទិន្នន័យជាក់ស្តែងរបស់អ្នក។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Imputation</span></td>
+                <td>ដំណើរការនៃការជំនួសទិន្នន័យដែលបាត់បង់ (Missing Data) ដោយតម្លៃប៉ាន់ស្មានដែលសមស្រប ដើម្បីធ្វើឱ្យសំណុំទិន្នន័យពេញលេញ និងអាចយកទៅវិភាគបានដោយមិនមានកំហុស ឬភាពលំអៀង។</td>
+                <td>ដូចជាការទាយពាក្យដែលបាត់នៅក្នុងប្រយោគមួយ ដោយមើលទៅលើពាក្យផ្សេងទៀតដែលនៅជុំវិញវា ដើម្បីឱ្យប្រយោគនោះមានន័យពេញលេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bayesian Networks</span></td>
+                <td>ជាគំរូស្ថិតិដែលប្រើប្រូបាប៊ីលីតេ (Probability) ដើម្បីបង្ហាញពីទំនាក់ទំនងរវាងអថេរផ្សេងៗ។ វាគណនាឱកាសនៃតម្លៃដែលបាត់ ដោយផ្អែកលើចំណេះដឹងដែលមានស្រាប់ និងទំនាក់ទំនងហេតុផលរវាងទិន្នន័យ។</td>
+                <td>ដូចជាគ្រូពេទ្យដែលទាយថាអ្នកមានជំងឺអ្វី ដោយផ្អែកលើរោគសញ្ញាដែលអ្នកកំពុងមាន និងប្រវត្តិជំងឺពីមុន (ប្រើហេតុផលភ្ជាប់គ្នាជាបណ្តាញ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbors (KNN)</span></td>
+                <td>ក្បួនដោះស្រាយដែលស្វែងរកចំណុចទិន្នន័យដែលមានលក្ខណៈស្រដៀងគ្នាបំផុត (ហៅថាអ្នកជិតខាង) ចំនួន 'k' ដើម្បីយកមកគណនារកតម្លៃមធ្យម ឬតម្លៃដែលដូចគ្នាសម្រាប់បំពេញចន្លោះដែលបាត់។</td>
+                <td>ដូចជាប្រសិនបើអ្នកមិនដឹងតម្លៃផ្ទះមួយ អ្នកអាចសាកសួរតម្លៃផ្ទះ ៣ ដែលនៅក្បែរនោះ ហើយយកតម្លៃមធ្យមរបស់ផ្ទះទាំងនោះមកកំណត់ជាតម្លៃផ្ទះរបស់អ្នក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Root Mean Square Error (RMSE)</span></td>
+                <td>រង្វាស់ស្តង់ដារសម្រាប់វាស់កម្រិតនៃកំហុសរវាងតម្លៃដែលម៉ាស៊ីនទស្សន៍ទាយ និងតម្លៃជាក់ស្តែង។ តម្លៃ RMSE កាន់តែតូច បង្ហាញថាម៉ាស៊ីនធ្វើការកាន់តែត្រឹមត្រូវ និងមានកំហុសតិច។</td>
+                <td>ដូចជាការវាស់ចម្ងាយថាការទស្សន៍ទាយរបស់អ្នកខុសពីការពិតប៉ុន្មានម៉ែត្រ (លេខកាន់តែតូច គឺកាន់តែល្អ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Missing Completely at Random (MCAR)</span></td>
+                <td>ស្ថានភាពដែលទិន្នន័យបាត់បង់ដោយចៃដន្យសុទ្ធសាធ ដោយមិនមានការពាក់ព័ន្ធនឹងតម្លៃនៃទិន្នន័យនោះ ឬទិន្នន័យផ្សេងទៀតឡើយ ដែលធ្វើឱ្យការវិភាគមិនសូវមានភាពលំអៀង។</td>
+                <td>ដូចជាការធ្វើឱ្យកំពប់ទឹកលើឯកសារដោយអចេតនា ដែលធ្វើឱ្យអក្សរខ្លះរលុបបាត់ដោយគ្មានហេតុផលជាក់លាក់ ឬចេតនាលាក់បាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Maximum Likelihood</span></td>
+                <td>វិធីសាស្ត្រស្ថិតិសម្រាប់ប៉ាន់ស្មានតម្លៃប៉ារ៉ាម៉ែត្រនៃគំរូមួយ ដោយស្វែងរកតម្លៃណាដែលទំនងបំផុតនឹងបង្កើតទិន្នន័យដែលយើងបានសង្កេតឃើញ។</td>
+                <td>ដូចជាការសន្និដ្ឋានថា មេឃនឹងភ្លៀង ដោយសារឃើញពពកខ្មៅ និងខ្យល់បក់ខ្លាំង (ព្រោះវាជាហេតុផលដែលទំនងបំផុតឱ្យកើតមានហេតុការណ៍នេះ)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Multiple+Imputation+by+Chained+Equations+%28MICE%29+methodology" target="_blank" rel="noopener"><span class="en">Multiple Imputation by Chained Equations (MICE) methodology</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+of+statistical+vs+machine+learning+imputation+methods" target="_blank" rel="noopener"><span class="en">Comparison of statistical vs machine learning imputation methods</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Bayesian+Network+structure+learning+for+incomplete+data" target="_blank" rel="noopener"><span class="en">Bayesian Network structure learning for incomplete data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Impact+of+missing+data+mechanisms+%28MCAR%2C+MAR%2C+MNAR%29+on+classifier+performance" target="_blank" rel="noopener"><span class="en">Impact of missing data mechanisms (MCAR, MAR, MNAR) on classifier performance</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

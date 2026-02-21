@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយទិន្នន័យភាគហ៊ុនមិនទៀងទាត់ដោយផ្អែកលើការប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation) | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យមិនទៀងទាត់ (Irregular Data) នៅក្នុងទីផ្សារភាគហ៊ុន ដែលបណ្តាលមកពីការប្រែប្រួលទីផ្សារ និងចន្លោះខ្វះខាតនៃទិន្នន័យ ធ្វើឱ្យប៉ះ...">
+    
+    <meta name="keywords" content="Simple Linear Interpolation, Stock Prediction, Irregular Data, Machine Learning, Stacked Model, XGBoost, Tesla Stock, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/irregular-stock-data-prediction-sli-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/irregular-stock-data-prediction-sli-2025.html">
+    <meta property="og:title" content="ការបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយទិន្នន័យភាគហ៊ុនមិនទៀងទាត់ដោយផ្អែកលើការប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យមិនទៀងទាត់ (Irregular Data) នៅក្នុងទីផ្សារភាគហ៊ុន ដែលបណ្តាលមកពីការប្រែប្រួលទីផ្សារ និងចន្លោះខ្វះខាតនៃទិន្នន័យ ធ្វើឱ្យប៉ះពាល់ដល់ភាពត្រឹមត្រូវនៃម៉ូដែលទស្សន៍ទាយបែបប្រពៃណី។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2025 (ECAI 2024)">
+    
+    <meta property="article:tag" content="Simple Linear Interpolation">
+    
+    <meta property="article:tag" content="Stock Prediction">
+    
+    <meta property="article:tag" content="Irregular Data">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Stacked Model">
+    
+    <meta property="article:tag" content="XGBoost">
+    
+    <meta property="article:tag" content="Tesla Stock">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយទិន្នន័យភាគហ៊ុនមិនទៀងទាត់ដោយផ្អែកលើការប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យមិនទៀងទាត់ (Irregular Data) នៅក្នុងទីផ្សារភាគហ៊ុន ដែលបណ្តាលមកពីការប្រែប្រួលទីផ្សារ និងចន្លោះខ្វះខាតនៃទិន្នន័យ ធ្វើឱ្យប៉ះពាល់ដល់ភាពត្រឹមត្រូវនៃម៉ូដែលទស្សន៍ទាយបែបប្រពៃណី។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1797\u17b6\u1782\u17a0\u17ca\u17bb\u1793\u1798\u17b7\u1793\u1791\u17c0\u1784\u1791\u17b6\u178f\u17cb\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u179b\u17b8\u1793\u17c1\u17a2\u17ca\u17c2\u179a\u179f\u17b6\u1798\u1789\u17d2\u1789 (Simple Linear Interpolation)",
+      "name": "Irregular Stock Data Prediction Performance Optimisation Based on the Simple Linear Interpolation",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1791\u17c0\u1784\u1791\u17b6\u178f\u17cb (Irregular Data) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1791\u17b8\u1795\u17d2\u179f\u17b6\u179a\u1797\u17b6\u1782\u17a0\u17ca\u17bb\u1793 \u178a\u17c2\u179b\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u1780\u1796\u17b8\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u1791\u17b8\u1795\u17d2\u179f\u17b6\u179a \u1793\u17b7\u1784\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1793\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u178a\u179b\u17cb\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1794\u17c2\u1794\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/irregular-stock-data-prediction-sli-2025.html",
+      "author": [{"@type": "Person", "name": "Zhenyu Xu (Warwick Manufacturing Group, University of Warwick, Coventry, U.K.)"}],
+      "datePublished": "2025 (ECAI 2024)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Irregular Stock Data Prediction Performance Optimisation Based on the Simple Linear Interpolation",
+        "url": "https://doi.org/10.5220/0013264100004568"
+      },
+      "keywords": ["Simple Linear Interpolation", "Stock Prediction", "Irregular Data", "Machine Learning", "Stacked Model", "XGBoost", "Tesla Stock"],
+      "about": "Machine Learning / Financial Technology"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1797\u17b6\u1782\u17a0\u17ca\u17bb\u1793\u1798\u17b7\u1793\u1791\u17c0\u1784\u1791\u17b6\u178f\u17cb\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u179b\u17b8\u1793\u17c1\u17a2\u17ca\u17c2\u179a\u179f\u17b6\u1798\u1789\u17d2\u1789 (Simple Linear Interpolation)",
+          "item": "https://khmerresearch.com/papers/technology/irregular-stock-data-prediction-sli-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយទិន្នន័យភាគហ៊ុនមិនទៀងទា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Irregular Stock Data Prediction Performance Optimisation Based on the Simple Linear Interpolation<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.5220/0013264100004568" target="_blank">https://doi.org/10.5220/0013264100004568</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយទិន្នន័យភាគហ៊ុនមិនទៀងទាត់ដោយផ្អែកលើការប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Irregular Stock Data Prediction Performance Optimisation Based on the Simple Linear Interpolation</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Zhenyu Xu (Warwick Manufacturing Group, University of Warwick, Coventry, U.K.)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025 (ECAI 2024)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Financial Technology</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យមិនទៀងទាត់ (Irregular Data) នៅក្នុងទីផ្សារភាគហ៊ុន ដែលបណ្តាលមកពីការប្រែប្រួលទីផ្សារ និងចន្លោះខ្វះខាតនៃទិន្នន័យ ធ្វើឱ្យប៉ះពាល់ដល់ភាពត្រឹមត្រូវនៃម៉ូដែលទស្សន៍ទាយបែបប្រពៃណី។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់ទិន្នន័យភាគហ៊ុនក្រុមហ៊ុន Tesla រយៈពេល ១០ឆ្នាំ ដោយអនុវត្តវិធីសាស្ត្រ ប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation) ដើម្បីកែលម្អគុណភាពទិន្នន័យ មុននឹងធ្វើការសាកល្បងជាមួយម៉ូដែល Machine Learning ផ្សេងៗ។
+        
+        <ul>
+            
+            <li>ការប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation - SLI) ដើម្បីបំពេញទិន្នន័យដែលបាត់</li>
+            
+            <li>ការជ្រើសរើសលក្ខណៈពិសេសតាមជំហាន (Stepwise Feature Selection) និងការប្រើប្រាស់ម៉ូដែលដូចជា XGBoost, Random Forest, KNN និង Stacked Model</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់ SLI ធ្វើឱ្យប្រសិទ្ធភាពម៉ូដែល Stacked Model កើនឡើងយ៉ាងខ្លាំង ដោយភាពត្រឹមត្រូវ (Accuracy) កើនឡើង ៧.០៣% និង AUC កើនឡើង ៧.៥២%។</li>
+            
+            <li>សម្រាប់ម៉ូដែលដូចជា Random Forest និង XGBoost ការកែលម្អមានកម្រិតតិចតួច ប៉ុន្តែវាជួយកាត់បន្ថយភាពមិនច្បាស់លាស់ (Noise) និងបង្កើនសង្គតិភាពទិន្នន័យ។</li>
+            
+            <li>លទ្ធផលពីការធ្វើតេស្តលើទិន្នន័យដាច់ដោយឡែក (Hold-Out Set) បង្ហាញថា SLI ជួយការពារបញ្ហា Overfitting និងបង្កើនសមត្ថភាពទស្សន៍ទាយលើទិន្នន័យថ្មី។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Stacked Model with Simple Linear Interpolation (SLI)</span></strong><br>ការប្រើប្រាស់គំរូត្រួតគ្នា (Stacked Model) រួមជាមួយការបំពេញចន្លោះទិន្នន័យ (SLI)</td>
+                <td>ផ្តល់នូវការកើនឡើងនៃប្រសិទ្ធភាពខ្ពស់បំផុត ដោយសារវាអាចរៀនពីលក្ខណៈទិន្នន័យដែលបានបំពេញបន្ថែមបានល្អជាងគំរូទោល។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការបង្កើត និងទាមទារធនធានគណនាច្រើនជាងគំរូធម្មតា។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy) កើនឡើង ៧.០៣% និង AUC កើនឡើង ៧.៥២% បើធៀបនឹងទិន្នន័យដើម។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest & XGBoost with SLI</span></strong><br>ការប្រើប្រាស់ Random Forest និង XGBoost រួមជាមួយ SLI</td>
+                <td>មានភាពធន់នឹងការរំខាន (Noise) និងហានិភ័យនៃ Overfitting ទាបជាងម៉ូដែលដទៃ។</td>
+                <td>ការកែលម្អមានកម្រិតតិចតួចណាស់ (ប្រហែល ១%) ដែលបង្ហាញថាវាមិនសូវទទួលបានផលពី SLI ដូច Stacked Model ទេ។</td>
+                <td>ការកើនឡើងនៃភាពត្រឹមត្រូវមានត្រឹមតែ ០.០៥% ទៅ ១.០៦% ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbors (KNN) with SLI</span></strong><br>ការប្រើប្រាស់ KNN រួមជាមួយ SLI</td>
+                <td>មានភាពសាមញ្ញក្នុងការអនុវត្ត និងបង្ហាញការកើនឡើងនៃភាពត្រឹមត្រូវខ្លះ។</td>
+                <td>ងាយរងគ្រោះដោយសារទិន្នន័យមិនពិត (Artifacts) ដែលកើតចេញពីការប៉ាន់ស្មាន បណ្តាលឱ្យមានបញ្ហា Overfitting ។</td>
+                <td>តម្លៃ KS (Kolmogorov-Smirnov) ធ្លាក់ចុះ ដែលបង្ហាញពីការថយចុះសមត្ថភាពក្នុងការបែងចែកប្រភេទ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រក្នុងកម្រិតមធ្យម ដែលនិស្សិត ឬអ្នកស្រាវជ្រាវអាចអនុវត្តបានលើកុំព្យូទ័រផ្ទាល់ខ្លួន។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ភាសា Python ដោយប្រើបណ្ណាល័យដូចជា Pandas (សម្រាប់គ្រប់គ្រងទិន្នន័យ), Scikit-learn (សម្រាប់ ML), និង XGBoost library។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យប្រវត្តិភាគហ៊ុន (Historical Stock Data) ដែលមានចន្លោះខ្វះខាត (Missing Values) ឬមិនទៀងទាត់។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមាន CPU ល្បឿនមធ្យមគឺគ្រប់គ្រាន់ ប៉ុន្តែប្រសិនបើប្រើ Stacked Model ធំ អាចត្រូវការ RAM ខ្ពស់បន្តិច (៨GB+)</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្តោតតែលើភាគហ៊ុនក្រុមហ៊ុន Tesla (US Market) រយៈពេល ១០ឆ្នាំ ដែលជាភាគហ៊ុនដែលមានការប្រែប្រួលខ្ពស់ (High Volatility) និងទំហំជួញដូរធំ។ នេះជាចំណុចខ្វះខាតមួយសម្រាប់កម្ពុជា ព្រោះទីផ្សារភាគហ៊ុនកម្ពុជា (CSX) មានទំហំតូចជាង និងមានលក្ខណៈនៃការជួញដូរខុសគ្នា (Low Liquidity) ដែលលទ្ធផលអាចនឹងមិនឆ្លុះបញ្ចាំងទាំងស្រុង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍ខ្លាំងសម្រាប់កម្ពុជា ជាពិសេសក្នុងការដោះស្រាយបញ្ហាទិន្នន័យមិនពេញលេញនៅក្នុងវិស័យហិរញ្ញវត្ថុ។</p>
+        
+        <ul>
+            
+            <li><strong>Cambodia Securities Exchange (CSX):</strong> ដោយសារភាគហ៊ុននៅកម្ពុជាខ្លះមិនមានការជួញដូររាល់ថ្ងៃ ឬមានចន្លោះម៉ោងយូរ ការប្រើ SLI អាចជួយបំពេញទិន្នន័យដើម្បីធ្វើការវិភាគបច្ចេកទេសបាន។</li>
+            
+            <li><strong>Microfinance & Banking Sector:</strong> ការវិភាគហានិភ័យឥណទាន (Credit Risk) ដែលទិន្នន័យនៃការសងប្រាក់អាចមានភាពមិនទៀងទាត់ អាចប្រើវិធីសាស្ត្រនេះដើម្បីធ្វើឱ្យទិន្នន័យមានសង្គតិភាព។</li>
+            
+            <li><strong>Agricultural Price Prediction:</strong> តម្លៃកសិផល (ស្រូវ, កៅស៊ូ) នៅកម្ពុជាច្រើនតែមិនត្រូវបានកត់ត្រាជាប្រចាំ ការប្រើ Interpolation អាចជួយបង្កើតទិន្នន័យពេញលេញសម្រាប់ការទស្សន៍ទាយនិន្នាការ។</li>
+            
+        </ul>
+        
+        
+        <p>បច្ចេកទេសនេះសាមញ្ញតែមានប្រសិទ្ធភាពខ្ពស់សម្រាប់ការចាប់ផ្តើមវិភាគទិន្នន័យហិរញ្ញវត្ថុនៅកម្ពុជា ដែលទិន្នន័យជាញឹកញាប់មិនមានភាពពេញលេញ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការរៀបចំទិន្នន័យមូលដ្ឋាន:</strong> និស្សិតគួរចាប់ផ្តើមរៀនប្រើប្រាស់ Python library ឈ្មោះ Pandas ដើម្បីទាញយកទិន្នន័យភាគហ៊ុនពី Yahoo Finance ឬ CSX website និងកំណត់អត្តសញ្ញាណទិន្នន័យដែលបាត់ (Missing Values)។</li>
+            
+            <li><strong>ការអនុវត្តបច្ចេកទេសបំពេញទិន្នន័យ:</strong> សរសេរកូដដើម្បីអនុវត្ត Simple Linear Interpolation (SLI) លើទិន្នន័យដែលបាត់ ដោយប្រៀបធៀបជាមួយវិធីសាស្ត្រផ្សេងដូចជា Mean Imputation ដើម្បីឃើញភាពខុសគ្នា។</li>
+            
+            <li><strong>ការបង្កើតម៉ូដែលប្រៀបធៀប:</strong> ប្រើប្រាស់ Scikit-learn ដើម្បីបង្កើតម៉ូដែលសាមញ្ញ (ដូចជា Random Forest) ហើយបង្វឹកវាជាមួយទិន្នន័យពីរឈុត៖ មួយដែលមិនទាន់កែសម្រួល និងមួយទៀតដែលបានប្រើ SLI។</li>
+            
+            <li><strong>ការវាស់វែងលទ្ធផល:</strong> វាយតម្លៃប្រសិទ្ធភាពដោយប្រើរង្វាស់ AUC និង KS Statistic ដូចក្នុងឯកសារ ដើម្បីធានាថាការបំពេញទិន្នន័យមិនបង្កឱ្យមានបញ្ហា Overfitting។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Irregular Data</span></td>
+                <td>សំដៅលើទិន្នន័យដែលត្រូវបានប្រមូលក្នុងចន្លោះពេលវេលាដែលមិនស្មើគ្នា ឬមានការបាត់បង់ទិន្នន័យនៅចំណុចខ្លះ ដែលធ្វើឱ្យពិបាកក្នុងការប្រើប្រាស់ជាមួយគំរូស្ថិតិបែបប្រពៃណីដែលទាមទារភាពទៀងទាត់។</td>
+                <td>ដូចជាការកត់ត្រាកំណត់ហេតុប្រចាំថ្ងៃ ដែលថ្ងៃខ្លះអ្នកសរសេរ ហើយថ្ងៃខ្លះទៀតអ្នកភ្លេចសរសេរ ដែលធ្វើឱ្យព័ត៌មានមិនបន្តជាប់គ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Simple Linear Interpolation</span></td>
+                <td>ជាបច្ចេកទេសគណិតវិទ្យាសម្រាប់ប៉ាន់ស្មានតម្លៃដែលបាត់ ដោយគូសបន្ទាត់ត្រង់ភ្ជាប់រវាងចំណុចទិន្នន័យពីរដែលគេស្គាល់ ដើម្បីរកតម្លៃកណ្តាល។</td>
+                <td>ប្រៀបដូចជាការគូសបន្ទាត់ត្រង់ភ្ជាប់ពីចំណុចមួយទៅចំណុចមួយទៀត ដើម្បីបិទចន្លោះដែលដាច់នៅលើក្រដាស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stacked Model</span></td>
+                <td>ជាវិធីសាស្ត្រមួយក្នុង Machine Learning ដែលយកលទ្ធផលទស្សន៍ទាយពីម៉ូដែលជាច្រើន (Base Models) មកបញ្ចូលគ្នា ហើយប្រើម៉ូដែលមេមួយ (Meta-learner) ដើម្បីធ្វើការសម្រេចចិត្តចុងក្រោយដែលមានភាពសុក្រឹតជាងមុន។</td>
+                <td>ដូចជាការមានគណៈកម្មការមួយក្រុមដែលផ្តល់យោបល់ ហើយមានប្រធានម្នាក់ជាអ្នកសម្រេចចិត្តចុងក្រោយដោយផ្អែកលើយោបល់ល្អៗទាំងនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stepwise Feature Selection</span></td>
+                <td>ដំណើរការនៃការជ្រើសរើសអថេរ (Variables) សម្រាប់ដាក់ចូលក្នុងម៉ូដែល ដោយធ្វើការបន្ថែមឬដកចេញម្តងមួយៗ ដើម្បីស្វែងរកបន្សំនៃអថេរណាដែលផ្តល់លទ្ធផលល្អបំផុត និងកាត់បន្ថយភាពស្មុគស្មាញ។</td>
+                <td>ដូចជាការសាកល្បងគ្រឿងផ្សំម្ហូបម្តងមួយមុខ ដើម្បីដឹងថាគ្រឿងផ្សំណាធ្វើឱ្យម្ហូបឆ្ងាញ់ ហើយដកគ្រឿងផ្សំដែលមិនចាំបាច់ចេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Kolmogorov-Smirnov (KS) Statistic</span></td>
+                <td>រង្វាស់ស្ថិតិដែលប្រើដើម្បីវាយតម្លៃថា តើម៉ូដែលមួយអាចបែងចែករវាងក្រុមពីរផ្សេងគ្នា (ឧទាហរណ៍៖ ភាគហ៊ុនឡើង និងភាគហ៊ុនចុះ) បានដាច់ស្រឡះពីគ្នាកម្រិតណា។</td>
+                <td>ប្រៀបដូចជាការវាស់គម្លាតរវាងសិស្សពូកែ និងសិស្សខ្សោយ ដើម្បីមើលថាតើការប្រឡងមួយអាចបែងចែកសមត្ថភាពពួកគេបានច្បាស់ឬអត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hold-Out Set</span></td>
+                <td>ផ្នែកមួយនៃទិន្នន័យដែលត្រូវបានដកចេញតាំងពីដំបូង និងមិនត្រូវបានប្រើសម្រាប់ការបង្វឹកម៉ូដែលឡើយ ដើម្បីទុកប្រើប្រាស់សម្រាប់ធ្វើតេស្តសមត្ថភាពម៉ូដែលជាលើកចុងក្រោយ។</td>
+                <td>ដូចជាវិញ្ញាសាប្រឡងដែលគ្រូទុកដោយឡែក មិនយកមកបង្រៀនក្នុងថ្នាក់ ដើម្បីយកមកធ្វើតេស្តសិស្សនៅថ្ងៃប្រឡងបញ្ចប់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html">
+                    <span class="km">ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ</span><br>
+                    <span class="en article-original-title">Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

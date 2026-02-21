@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការណែនាំអំពី Gradient Boosting ជាឧបករណ៍បំពេញទិន្នន័យចន្លោះប្រហោងសម្រាប់ស៊េរីពេលវេលាម៉េតេអូសាស្ត្រ | KhmerResearch.com</title>
+    <meta name="description" content="ស៊េរីពេលវេលាម៉េតេអូសាស្ត្រ (Meteorological time series) ជាញឹកញាប់ជួបប្រទះបញ្ហាចន្លោះប្រហោងនៃទិន្នន័យ ដែលបណ្តាលមកពីការបាត់បង់ ឬកំហុសនៃទិន្នន័យ ដែលរាំងស្ទះដល់ក...">
+    
+    <meta name="keywords" content="Gradient Boosting, gap filling, meteorological time series, XGBoost, missing data imputation, air temperature, wind speed, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/gradient-boosting-gap-filling-meteorology-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/gradient-boosting-gap-filling-meteorology-2018.html">
+    <meta property="og:title" content="ការណែនាំអំពី Gradient Boosting ជាឧបករណ៍បំពេញទិន្នន័យចន្លោះប្រហោងសម្រាប់ស៊េរីពេលវេលាម៉េតេអូសាស្ត្រ | KhmerResearch.com">
+    <meta property="og:description" content="ស៊េរីពេលវេលាម៉េតេអូសាស្ត្រ (Meteorological time series) ជាញឹកញាប់ជួបប្រទះបញ្ហាចន្លោះប្រហោងនៃទិន្នន័យ ដែលបណ្តាលមកពីការបាត់បង់ ឬកំហុសនៃទិន្នន័យ ដែលរាំងស្ទះដល់ការវិភាគ និងការធ្វើគំរូអាកាសធាតុ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2018 Meteorologische Zeitschrift">
+    
+    <meta property="article:tag" content="Gradient Boosting">
+    
+    <meta property="article:tag" content="gap filling">
+    
+    <meta property="article:tag" content="meteorological time series">
+    
+    <meta property="article:tag" content="XGBoost">
+    
+    <meta property="article:tag" content="missing data imputation">
+    
+    <meta property="article:tag" content="air temperature">
+    
+    <meta property="article:tag" content="wind speed">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការណែនាំអំពី Gradient Boosting ជាឧបករណ៍បំពេញទិន្នន័យចន្លោះប្រហោងសម្រាប់ស៊េរីពេលវេលាម៉េតេអូសាស្ត្រ">
+    <meta name="twitter:description" content="ស៊េរីពេលវេលាម៉េតេអូសាស្ត្រ (Meteorological time series) ជាញឹកញាប់ជួបប្រទះបញ្ហាចន្លោះប្រហោងនៃទិន្នន័យ ដែលបណ្តាលមកពីការបាត់បង់ ឬកំហុសនៃទិន្នន័យ ដែលរាំងស្ទះដល់ការវិភាគ និងការធ្វើគំរូអាកាសធាតុ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u178e\u17c2\u1793\u17b6\u17c6\u17a2\u17c6\u1796\u17b8 Gradient Boosting \u1787\u17b6\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1794\u17d2\u179a\u17a0\u17c4\u1784\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1798\u17c9\u17c1\u178f\u17c1\u17a2\u17bc\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a",
+      "name": "Introducing Gradient Boosting as a universal gap filling tool for meteorological time series",
+      "description": "\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1798\u17c9\u17c1\u178f\u17c1\u17a2\u17bc\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a (Meteorological time series) \u1787\u17b6\u1789\u17b9\u1780\u1789\u17b6\u1794\u17cb\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1794\u1789\u17d2\u17a0\u17b6\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1794\u17d2\u179a\u17a0\u17c4\u1784\u1793\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u178a\u17c2\u179b\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u1780\u1796\u17b8\u1780\u17b6\u179a\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb \u17ac\u1780\u17c6\u17a0\u17bb\u179f\u1793\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u178a\u17c2\u179b\u179a\u17b6\u17c6\u1784\u179f\u17d2\u1791\u17c7\u178a\u179b\u17cb\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/gradient-boosting-gap-filling-meteorology-2018.html",
+      "author": [{"@type": "Person", "name": "Philipp K\u00f6rner (Technische Universit\u00e4t Dresden)"},{"@type": "Person", "name": "Rico Kronenberg"},{"@type": "Person", "name": "Sandra Genzel"},{"@type": "Person", "name": "Christian Bernhofer"}],
+      "datePublished": "2018 Meteorologische Zeitschrift",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Introducing Gradient Boosting as a universal gap filling tool for meteorological time series",
+        "url": "https://doi.org/10.1127/metz/2018/0908"
+      },
+      "keywords": ["Gradient Boosting", "gap filling", "meteorological time series", "XGBoost", "missing data imputation", "air temperature", "wind speed"],
+      "about": "Meteorology / Data Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u178e\u17c2\u1793\u17b6\u17c6\u17a2\u17c6\u1796\u17b8 Gradient Boosting \u1787\u17b6\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1794\u17d2\u179a\u17a0\u17c4\u1784\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1798\u17c9\u17c1\u178f\u17c1\u17a2\u17bc\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a",
+          "item": "https://khmerresearch.com/papers/science/gradient-boosting-gap-filling-meteorology-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ការណែនាំអំពី Gradient Boosting ជាឧបករណ៍បំពេញទិន្នន័យចន្លោ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Introducing Gradient Boosting as a universal gap filling tool for meteorological time series<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.1127/metz/2018/0908" target="_blank">https://doi.org/10.1127/metz/2018/0908</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការណែនាំអំពី Gradient Boosting ជាឧបករណ៍បំពេញទិន្នន័យចន្លោះប្រហោងសម្រាប់ស៊េរីពេលវេលាម៉េតេអូសាស្ត្រ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Introducing Gradient Boosting as a universal gap filling tool for meteorological time series</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Philipp Körner (Technische Universität Dresden), Rico Kronenberg, Sandra Genzel, Christian Bernhofer</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018 Meteorologische Zeitschrift</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Meteorology / Data Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ស៊េរីពេលវេលាម៉េតេអូសាស្ត្រ (Meteorological time series) ជាញឹកញាប់ជួបប្រទះបញ្ហាចន្លោះប្រហោងនៃទិន្នន័យ ដែលបណ្តាលមកពីការបាត់បង់ ឬកំហុសនៃទិន្នន័យ ដែលរាំងស្ទះដល់ការវិភាគ និងការធ្វើគំរូអាកាសធាតុ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះណែនាំពីការប្រើប្រាស់វិធីសាស្ត្រម៉ាស៊ីនរៀនឈ្មោះ Gradient Boosting (gb) ដើម្បីបំពេញចន្លោះប្រហោងទិន្នន័យ ដោយធ្វើការប្រៀបធៀបប្រសិទ្ធភាពរបស់វាជាមួយនឹងវិធីសាស្ត្របណ្តាញសរសៃប្រសាទ (Neural Networks) និងតម្រែតម្រង់លីនេអ៊ែរ (Linear Regression)។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យសីតុណ្ហភាព ខ្យល់ និងសំណើមប្រចាំម៉ោងពីស្ថានីយ៍ចំនួន ៥៨៨ នៅប្រទេសអាល្លឺម៉ង់ (ឆ្នាំ ១៩៥១-២០១៥)។</li>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្រ Gradient Boosting ដោយប្រើប្រាស់កញ្ចប់កម្មវិធី XGBoost ដើម្បីបង្កើតគំរូព្យាករណ៍។</li>
+            
+            <li>ការវាយតម្លៃលទ្ធផលដោយប្រើរង្វាស់ស្ថិតិដូចជា RMSE, MAE និង R² ដើម្បីប្រៀបធៀបជាមួយវិធីសាស្ត្រដទៃ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>Gradient Boosting ផ្តល់នូវកម្រិតកំហុសទាបបំផុត ដោយមានមធ្យមភាគ RMSE សម្រាប់សីតុណ្ហភាពគឺ ០.៧៣°C ល្បឿនខ្យល់ ០.៨២ m/s និងសំណើម ៤.៣%។</li>
+            
+            <li>វិធីសាស្ត្រនេះមានល្បឿនគណនាលឿនជាងវិធីសាស្ត្រតម្រែតម្រង់លីនេអ៊ែរ (Multiple Linear Regression) រហូតដល់ ២៥៥ ដង និងលឿនជាង Neural Networks ផងដែរ។</li>
+            
+            <li>Gradient Boosting មានសមត្ថភាពពិសេសក្នុងការដោះស្រាយទិន្នន័យដែលបាត់នៅក្នុងអថេរព្យាករណ៍ (Predictors) ដោយស្វ័យប្រវត្តិ ដែលមិនតម្រូវឱ្យមានការកែសម្រួលទិន្នន័យជាមុនដូចវិធីសាស្ត្រផ្សេងទៀត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Gradient Boosting (xgb)</span></strong><br>ការប្រើប្រាស់បច្ចេកទេស Gradient Boosting</td>
+                <td>មានល្បឿនគណនាលឿនបំផុត អាចដោះស្រាយទិន្នន័យដែលបាត់នៅក្នុងអថេរព្យាករណ៍ (Predictors) ដោយមិនចាំបាច់កែសម្រួលជាមុន និងមានភាពត្រឹមត្រូវខ្ពស់។</td>
+                <td>ទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រ (Hyperparameters) ឱ្យបានត្រឹមត្រូវដើម្បីទទួលបានលទ្ធផលល្អបំផុត។</td>
+                <td>មានកំហុសទាបបំផុត (RMSE 1.42°C) និងប្រើពេលត្រឹមតែ 1.4 នាទីប៉ុណ្ណោះសម្រាប់ការគណនា (លឿនជាងវិធីសាស្ត្រផ្សេងទៀតរាប់រយដង)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Neural Networks (nn)</span></strong><br>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត</td>
+                <td>មានសមត្ថភាពចាប់យកទំនាក់ទំនងមិនលីនេអ៊ែរ (Non-linear relationships) បានល្អ។</td>
+                <td>ប្រើប្រាស់ពេលវេលាគណនាយូរខ្លាំង (900 នាទី) និងទាមទារឱ្យមានទិន្នន័យពេញលេញសម្រាប់អថេរព្យាករណ៍។</td>
+                <td>កំហុសមធ្យម (RMSE 1.57°C) ប៉ុន្តែមានប្រសិទ្ធភាពទាបជាង xgb ទាំងផ្នែកល្បឿន និងភាពត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Multiple Linear Regression (mlr)</span></strong><br>តម្រែតម្រង់លីនេអ៊ែរពហុគុណ</td>
+                <td>ជាវិធីសាស្ត្រស្តង់ដារដែលងាយស្រួលយល់ និងអនុវត្ត។</td>
+                <td>ប្រសិទ្ធភាពធ្លាក់ចុះនៅពេលទិន្នន័យមានភាពស្មុគស្មាញ ហើយការគណនាអាចយឺតខ្លាំង (Exponential scale) នៅពេលមានអថេរច្រើន។</td>
+                <td>កំហុសខ្ពស់បំផុត (RMSE 2.09°C) និងប្រើពេលគណនា 470 នាទី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> វិធីសាស្ត្រនេះមានប្រសិទ្ធភាពខ្ពស់ផ្នែកធនធាន ដោយអាចដំណើរការបានលើកុំព្យូទ័រការិយាល័យធម្មតា ដោយមិនចាំបាច់មាន Supercomputer ឡើយ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រលើតុធម្មតា (Standard Desktop PC) គឺគ្រប់គ្រាន់សម្រាប់ដំណើរការម៉ូដែលនេះ។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា R និងកញ្ចប់កម្មវិធី xgboost ដែលជាកម្មវិធីកូដចំហ (Open Source) មិនអស់ប្រាក់។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យស៊េរីពេលវេលា (Time series data) ដូចជាសីតុណ្ហភាព ឬទឹកភ្លៀងដែលមានចន្លោះប្រហោង។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីប្រទេសអាល្លឺម៉ង់ (អាកាសធាតុក្តៅល្មម/Temperate Climate) ដែលមានលក្ខណៈខុសគ្នាពីអាកាសធាតុមូសុងនៅកម្ពុជា។ ទោះយ៉ាងណា បច្ចេកទេសគណិតវិទ្យានៃការបំពេញចន្លោះប្រហោងនេះ គឺអាចអនុវត្តជាសកលបាន ឱ្យតែមានទិន្នន័យប្រវត្តិសាស្ត្រគ្រប់គ្រាន់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ដោយសារយើងមានទិន្នន័យអាកាសធាតុប្រវត្តិសាស្ត្រដែលដាច់ដោយដុំៗ ឬបាត់បង់ដោយសារសង្គ្រាម និងកង្វះការថែទាំ។</p>
+        
+        <ul>
+            
+            <li><strong>ក្រសួងធនធានទឹក និងឧតុនិយម (MOWRAM):</strong> អាចប្រើដើម្បីស្តារ និងបំពេញទិន្នន័យទឹកភ្លៀង និងកម្ពស់ទឹកទន្លេដែលបាត់ក្នុងអំឡុងទសវត្សរ៍ឆ្នាំ ១៩៧០-១៩៩០ ដើម្បីធ្វើឱ្យការសិក្សាធារាសាស្ត្រកាន់តែសុក្រឹត។</li>
+            
+            <li><strong>វិស័យកសិកម្ម (ស្រូវ និងដំណាំ):</strong> ការបំពេញទិន្នន័យសីតុណ្ហភាព និងសំណើម ជួយក្នុងការបង្កើតម៉ូដែលព្យាករណ៍ទិន្នផលដំណាំ (Crop Modelling) សម្រាប់តំបន់ដែលខ្វះស្ថានីយ៍វាស់វែង។</li>
+            
+        </ul>
+        
+        
+        <p>ដោយសារវាត្រូវការធនធានកុំព្យូទ័រតិច និងមានល្បឿនលឿន វាសាកសមបំផុតសម្រាប់ការប្រើប្រាស់នៅក្នុងស្ថាប័នរដ្ឋ ឬសាកលវិទ្យាល័យនៅកម្ពុជាដែលមានធនធានកំណត់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>រៀនមូលដ្ឋានគ្រឹះនៃ XGBoost:</strong> និស្សិតគួរចាប់ផ្តើមសិក្សាពីរបៀបប្រើប្រាស់កញ្ចប់ xgboost នៅក្នុងភាសា R ឬ Python ដោយផ្តោតលើការបង្កើតម៉ូដែល Regression ។</li>
+            
+            <li><strong>ប្រមូល និងសម្អាតទិន្នន័យ:</strong> ស្វែងរកទិន្នន័យអាកាសធាតុនៅកម្ពុជា (ឧទាហរណ៍ពី MOWRAM ឬទិន្នន័យផ្កាយរណប) ហើយរៀបចំជាទម្រង់ Time Series ដែលមានចន្លោះប្រហោង (Missing values) ដើម្បីធ្វើការពិសោធន៍។</li>
+            
+            <li><strong>អនុវត្តការបែងចែកទិន្នន័យ (Data Splitting):</strong> បែងចែកទិន្នន័យជាផ្នែកបណ្តុះបណ្តាល (Training) និងផ្នែកផ្ទៀងផ្ទាត់ (Validation) ដោយដកទិន្នន័យមួយចំនួនចេញដោយចេតនា ដើម្បីសាកល្បងសមត្ថភាពបំពេញរបស់ម៉ូដែល។</li>
+            
+            <li><strong>ការវាយតម្លៃ និងប្រៀបធៀប:</strong> ប្រើប្រាស់រង្វាស់ RMSE និង MAE ដើម្បីវាយតម្លៃថា តើវិធីសាស្ត្រ Gradient Boosting មានភាពសុក្រឹតជាងវិធីសាស្ត្រមធ្យមភាគធម្មតា (Linear Interpolation) ដែរឬទេ សម្រាប់ទិន្នន័យនៅកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Gradient Boosting</span></td>
+                <td>ជាបច្ចេកទេសនៃវិធីសាស្ត្រម៉ាស៊ីនរៀន (Machine Learning) ដែលបង្កើតម៉ូដែលព្យាករណ៍តូចៗជាច្រើនបន្តបន្ទាប់គ្នា ដើម្បីកែតម្រូវកំហុសរបស់ម៉ូដែលមុនៗ រហូតដល់ទទួលបានលទ្ធផលដែលមានភាពសុក្រឹតខ្ពស់បំផុត។</td>
+                <td>ដូចជាការសហការគ្នារបស់ក្រុមសិស្សដោះស្រាយលំហាត់ ដោយសិស្សម្នាក់ៗជួយកែចំណុចខ្វះខាតរបស់សិស្សមុន ដើម្បីឱ្យចម្លើយចុងក្រោយត្រឹមត្រូវបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gap filling</span></td>
+                <td>ដំណើរការបច្ចេកទេសក្នុងការប៉ាន់ប្រមាណ និងជំនួសទិន្នន័យដែលបាត់បង់នៅក្នុងស៊េរីទិន្នន័យ ដោយប្រើប្រាស់ទំនាក់ទំនងគណិតវិទ្យាជាមួយទិន្នន័យដែលមានស្រាប់ ឬទិន្នន័យពីស្ថានីយ៍ជិតខាង។</td>
+                <td>ដូចជាការទស្សន៍ទាយពាក្យដែលបាត់នៅក្នុងប្រយោគមួយ ដោយមើលទៅលើពាក្យ និងអត្ថន័យដែលនៅជុំវិញវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Regression trees</span></td>
+                <td>រចនាសម្ព័ន្ធនៃការសម្រេចចិត្តបែបមែកធាង ដែលបំបែកទិន្នន័យជាផ្នែកតូចៗតាមលក្ខខណ្ឌជាក់លាក់ ដើម្បីស្វែងរកតម្លៃលេខ (ដូចជាសីតុណ្ហភាព) សម្រាប់ក្រុមទិន្នន័យនីមួយៗ។</td>
+                <td>ដូចជាតារាងលំហូរ (Flowchart) ដែលសួរសំណួរ "បាទ/ទេ" ជាច្រើនដំណាក់កាល ដើម្បីឈានទៅរកចម្លើយចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Root Mean Square Error (RMSE)</span></td>
+                <td>រង្វាស់ស្ថិតិសម្រាប់វាស់វែងកម្រិតនៃកំហុសរវាងតម្លៃដែលម៉ូដែលបានទស្សន៍ទាយ និងតម្លៃជាក់ស្តែង។ តម្លៃ RMSE កាន់តែតូច បង្ហាញថាម៉ូដែលកាន់តែមានភាពសុក្រឹត។</td>
+                <td>ដូចជាការវាស់ចម្ងាយថា តើគ្រាប់ព្រួញដែលបាញ់ទៅនោះ ឃ្លាតឆ្ងាយពីគោលដៅកណ្ដាលប៉ុន្មានជាមធ្យម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Time series</span></td>
+                <td>បណ្ុំទិន្នន័យដែលត្រូវបានកត់ត្រាទុកតាមលំដាប់លំដោយនៃពេលវេលាជាក់លាក់ (ឧទាហរណ៍៖ ទិន្នន័យសីតុណ្ហភាពដែលវាស់ជារៀងរាល់ម៉ោង ឬរៀងរាល់ថ្ងៃ)។</td>
+                <td>ដូចជាកំណត់ហេតុប្រចាំថ្ងៃ ដែលកត់ត្រាតម្លៃអ្វីមួយជារៀងរាល់ថ្ងៃតាមលំដាប់ថ្ងៃខែ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cross validation</span></td>
+                <td>វិធីសាស្ត្រវាយតម្លៃម៉ូដែល ដោយបែងចែកទិន្នន័យជាផ្នែកៗ ដើម្បីយកទៅបង្រៀនម៉ូដែលខ្លះ និងយកទៅសាកល្បងខ្លះ ក្នុងគោលបំណងធានាថាម៉ូដែលនោះអាចដំណើរការបានល្អជាមួយទិន្នន័យថ្មីដែលមិនធ្លាប់ជួប។</td>
+                <td>ដូចជាការហ្វឹកហាត់ប្រឡងដោយប្រើវិញ្ញាសាចាស់ៗ ប៉ុន្តែទុកវិញ្ញាសាមួយឆ្នាំចុងក្រោយដោយសម្ងាត់ ដើម្បីសាកល្បងសមត្ថភាពពិតប្រាកដនៅពេលក្រោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+methods+for+meteorological+data+imputation" target="_blank" rel="noopener"><span class="en">machine learning methods for meteorological data imputation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparison+of+gap+filling+techniques+for+time+series" target="_blank" rel="noopener"><span class="en">comparison of gap filling techniques for time series</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=XGBoost+algorithm+applications+in+environmental+science" target="_blank" rel="noopener"><span class="en">XGBoost algorithm applications in environmental science</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=handling+missing+values+in+climate+data" target="_blank" rel="noopener"><span class="en">handling missing values in climate data</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

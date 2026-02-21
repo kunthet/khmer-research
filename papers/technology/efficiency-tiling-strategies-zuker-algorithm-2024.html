@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រសិទ្ធភាពនៃយុទ្ធសាស្ត្រ Tiling ផ្សេងៗសម្រាប់ការបង្កើនប្រសិទ្ធភាពអាល់កូរីត Zuker | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើនល្បឿននៃការទស្សន៍ទាយរចនាសម្ព័ន្ធ RNA (RNA secondary structure prediction) ដោយប្រើអាល់កូរីត Zuker ដែលមានភាពស្មុ...">
+    
+    <meta name="keywords" content="Zuker's algorithm, RNA folding, loop tiling, polyhedral compilers, dynamic programming, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/efficiency-tiling-strategies-zuker-algorithm-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/efficiency-tiling-strategies-zuker-algorithm-2024.html">
+    <meta property="og:title" content="ប្រសិទ្ធភាពនៃយុទ្ធសាស្ត្រ Tiling ផ្សេងៗសម្រាប់ការបង្កើនប្រសិទ្ធភាពអាល់កូរីត Zuker | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើនល្បឿននៃការទស្សន៍ទាយរចនាសម្ព័ន្ធ RNA (RNA secondary structure prediction) ដោយប្រើអាល់កូរីត Zuker ដែលមានភាពស្មុគស្មាញខ្ពស់ និងមានការពឹងផ្អែកទិន្នន័យមិន...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024 Mathematics">
+    
+    <meta property="article:tag" content="Zuker's algorithm">
+    
+    <meta property="article:tag" content="RNA folding">
+    
+    <meta property="article:tag" content="loop tiling">
+    
+    <meta property="article:tag" content="polyhedral compilers">
+    
+    <meta property="article:tag" content="dynamic programming">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រសិទ្ធភាពនៃយុទ្ធសាស្ត្រ Tiling ផ្សេងៗសម្រាប់ការបង្កើនប្រសិទ្ធភាពអាល់កូរីត Zuker">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើនល្បឿននៃការទស្សន៍ទាយរចនាសម្ព័ន្ធ RNA (RNA secondary structure prediction) ដោយប្រើអាល់កូរីត Zuker ដែលមានភាពស្មុគស្មាញខ្ពស់ និងមានការពឹងផ្អែកទិន្នន័យមិន...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Tiling \u1795\u17d2\u179f\u17c1\u1784\u17d7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u17a2\u17b6\u179b\u17cb\u1780\u17bc\u179a\u17b8\u178f Zuker",
+      "name": "Efficiency of Various Tiling Strategies for the Zuker Algorithm Optimization",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u179b\u17d2\u1794\u17bf\u1793\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792 RNA (RNA secondary structure prediction) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u17a2\u17b6\u179b\u17cb\u1780\u17bc\u179a\u17b8\u178f Zuker \u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1781\u17d2\u1796\u179f\u17cb \u1793\u17b7\u1784\u1798\u17b6\u1793\u1780\u17b6\u179a\u1796\u17b9\u1784\u1795\u17d2\u17a2\u17c2\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u179f\u17d2\u1798\u17be\u1782\u17d2\u1793\u17b6 (Non-uniform dependencies) \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f Tiling \u1792\u1798\u17d2\u1798\u178f\u17b6\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/efficiency-tiling-strategies-zuker-algorithm-2024.html",
+      "author": [{"@type": "Person", "name": "Piotr Blaszynski (West Pomeranian University of Technology)"},{"@type": "Person", "name": "Marek Palkowski (West Pomeranian University of Technology)"},{"@type": "Person", "name": "Wlodzimierz Bielecki (West Pomeranian University of Technology)"},{"@type": "Person", "name": "Maciej Poliwoda (West Pomeranian University of Technology)"}],
+      "datePublished": "2024 Mathematics",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Efficiency of Various Tiling Strategies for the Zuker Algorithm Optimization",
+        "url": "https://doi.org/10.3390/math12050728"
+      },
+      "keywords": ["Zuker\u0027s algorithm", "RNA folding", "loop tiling", "polyhedral compilers", "dynamic programming"],
+      "about": "Computer Science (Computational Biology)"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Tiling \u1795\u17d2\u179f\u17c1\u1784\u17d7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u17a2\u17b6\u179b\u17cb\u1780\u17bc\u179a\u17b8\u178f Zuker",
+          "item": "https://khmerresearch.com/papers/technology/efficiency-tiling-strategies-zuker-algorithm-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រសិទ្ធភាពនៃយុទ្ធសាស្ត្រ Tiling ផ្សេងៗសម្រាប់ការបង្កើនប្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Efficiency of Various Tiling Strategies for the Zuker Algorithm Optimization<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/math12050728" target="_blank">https://doi.org/10.3390/math12050728</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រសិទ្ធភាពនៃយុទ្ធសាស្ត្រ Tiling ផ្សេងៗសម្រាប់ការបង្កើនប្រសិទ្ធភាពអាល់កូរីត Zuker</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Efficiency of Various Tiling Strategies for the Zuker Algorithm Optimization</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Piotr Blaszynski (West Pomeranian University of Technology), Marek Palkowski (West Pomeranian University of Technology), Wlodzimierz Bielecki (West Pomeranian University of Technology), Maciej Poliwoda (West Pomeranian University of Technology)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 Mathematics</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science (Computational Biology)</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើនល្បឿននៃការទស្សន៍ទាយរចនាសម្ព័ន្ធ RNA (RNA secondary structure prediction) ដោយប្រើអាល់កូរីត Zuker ដែលមានភាពស្មុគស្មាញខ្ពស់ និងមានការពឹងផ្អែកទិន្នន័យមិនស្មើគ្នា (Non-uniform dependencies) ដែលធ្វើឱ្យការប្រើប្រាស់បច្ចេកទេស Tiling ធម្មតាមានការលំបាក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់គំរូ Polyhedral ដើម្បីអនុវត្តយុទ្ធសាស្ត្រ Tiling ដោយស្វ័យប្រវត្តិ និងប្រៀបធៀបប្រសិទ្ធភាពនៃកូដដែលបង្កើតដោយកម្មវិធីបំប្លែងកូដ (Source-to-source compilers) ចំនួនបី នៅលើម៉ាស៊ីន Multi-core ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់កម្មវិធីបំប្លែងកូដ Polyhedral ចំនួនបីគឺ PLUTO, TRACO, និង DAPT ដើម្បីបង្កើតកូដដែលមានប្រសិទ្ធភាព (Cache-efficient codes) ។</li>
+            
+            <li>ការអនុវត្តបច្ចេកទេស Space-time tiling និងការប្រៀបធៀបជាមួយបច្ចេកទេស Transpose code ដោយដៃ។</li>
+            
+            <li>ការវាស់វែងប្រសិទ្ធភាពថាមពល (Energy efficiency) ដោយប្រើប្រាស់ចំណុចប្រទាក់ RAPL នៅលើកុំព្យូទ័រ AMD Epyc និង Intel Xeon ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>កូដដែលបង្កើតដោយបច្ចេកទេស Space-time tiling (តាមរយៈកម្មវិធី DAPT) ផ្តល់នូវល្បឿនលឿនបំផុត និងសន្សំសំចៃថាមពលបានល្អបំផុត ដោយយកឈ្នះលើបច្ចេកទេស PLUTO និង Transpose ។</li>
+            
+            <li>ការប្រើប្រាស់ម៉ាស៊ីន AMD Epyc បង្ហាញពីប្រសិទ្ធភាពថាមពលល្អជាង Intel Xeon ទោះបីជា Intel គណនាលឿនជាងបន្តិចក្នុងករណីខ្លះក៏ដោយ។</li>
+            
+            <li>លទ្ធផលបង្ហាញថា វិធីសាស្ត្រដែលបានស្នើឡើងមានលទ្ធភាពពង្រីក (Scalability) បានល្អទាំងលើទំហំទិន្នន័យ RNA និងចំនួន Threads ដែលបានប្រើប្រាស់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Classic Loop Implementation</span></strong><br>ការអនុវត្តកូដដើមដោយមិនមានការកែប្រែ (Classic)</td>
+                <td>ងាយស្រួលយល់ និងអនុវត្តដោយផ្ទាល់តាមរូបមន្តគណិតវិទ្យា។</td>
+                <td>ប្រើប្រាស់ពេលវេលាយូរខ្លាំង និងស៊ីថាមពលខ្ពស់ដោយសារបញ្ហា Data Locality មិនល្អ។</td>
+                <td>ចំណាយពេលយូរបំផុត (១៥,៤៨៤ វិនាទី សម្រាប់ RNA ប្រវែង ៥០០០ នៅលើ AMD)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Transpose Technique</span></strong><br>បច្ចេកទេស Transpose (កែសម្រួលដោយដៃ)</td>
+                <td>កាត់បន្ថយការអានទិន្នន័យពី Memory ដោយគ្មានប្រសិទ្ធភាព (Inefficient column reading)។</td>
+                <td>តម្រូវឱ្យមានការសរសេរកូដឡើងវិញដោយដៃ ដែលស្មុគស្មាញជាងការប្រើឧបករណ៍ស្វ័យប្រវត្តិ។</td>
+                <td>លឿនជាងវិធីសាស្ត្រដើមប្រហែល ១០ ដង ប៉ុន្តែនៅយឺតជាង Space-Time Tiling។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">PLUTO (Affine Transformation)</span></strong><br>ការប្រើប្រាស់កម្មវិធី PLUTO ដើម្បីធ្វើ Tiling</td>
+                <td>ជាឧបករណ៍ស្វ័យប្រវត្តិដែលមានប្រជាប្រិយភាព និងងាយស្រួលប្រើសម្រាប់កូដ C/C++ ទូទៅ។</td>
+                <td>មិនអាចធ្វើ Tiling លើរង្វិលជុំ (Loop) ទីបីនៃអាល់កូរីត Zuker បានទេ ដែលកាត់បន្ថយប្រសិទ្ធភាព។</td>
+                <td>មានប្រសិទ្ធភាពល្អជាង Transpose លើម៉ាស៊ីន AMD ប៉ុន្តែនៅមានកម្រិត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Space-Time Tiling (DAPT Compiler)</span></strong><br>ការប្រើប្រាស់កម្មវិធី DAPT (បច្ចេកទេស Space-Time)</td>
+                <td>បង្កើតកូដដែលមាន Data Locality ល្អបំផុត និងអាចដោះស្រាយបញ្ហាការពឹងផ្អែកមិនស្មើគ្នា (Non-uniform dependencies)។</td>
+                <td>ជាបច្ចេកទេសកម្រិតខ្ពស់ដែលតម្រូវឱ្យប្រើប្រាស់កម្មវិធីបំប្លែងកូដជាក់លាក់ (DAPT)។</td>
+                <td>លឿនបំផុត (៨៥០ វិនាទី សម្រាប់ RNA ប្រវែង ៥០០០) និងសន្សំសំចៃថាមពលបានច្រើនជាងគេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះតម្រូវឱ្យមានធនធានផ្នែករឹងកម្រិតខ្ពស់ និងចំណេះដឹងផ្នែក Programming ជ្រៅជ្រះ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមាន CPU ច្រើនគ្រាប់ (Multi-core processors) ដូចជា AMD Epyc (32 cores) ឬ Intel Xeon Gold។</li>
+        
+        <li><strong>Software:</strong> ប្រព័ន្ធប្រតិបត្តិការ Linux, កម្មវិធី GNU C++ Compiler, និងបណ្ណាល័យ OpenMP សម្រាប់ការដំណើរការស្របគ្នា (Parallel processing)។</li>
+        
+        <li><strong>Algorithm Tools:</strong> កម្មវិធី Polyhedral Compilers ជាក់លាក់ដូចជា PLUTO, TRACO, និង DAPT។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការពិសោធន៍ត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យ RNA ដែលបង្កើតដោយចៃដន្យ (Randomly generated RNA sequences) ដែលមានប្រវែងពី ១០០០ ទៅ ៥០០០។ ថ្វីត្បិតតែនេះជាស្តង់ដារសម្រាប់ការវាស់វែងល្បឿនកុំព្យូទ័រ ប៉ុន្តែវាមិនបានឆ្លុះបញ្ចាំងពីលក្ខណៈជីវសាស្ត្រជាក់ស្តែងនៃ RNA របស់មនុស្ស ឬវីរុសឡើយ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសនេះមានសារៈសំខាន់ខ្លាំងសម្រាប់វិស័យវិទ្យាសាស្ត្រកុំព្យូទ័រ និង Bioinformatics នៅកម្ពុជាក្នុងការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យអប់រំ និងស្រាវជ្រាវ (RUPP/ITC):</strong> អាចប្រើជាករណីសិក្សាសម្រាប់និស្សិតថ្នាក់អនុបណ្ឌិតផ្នែកវិទ្យាសាស្ត្រកុំព្យូទ័រ អំពីការបង្កើនប្រសិទ្ធភាពកូដ (Code Optimization) និងការប្រើប្រាស់ Cache Memory។</li>
+            
+            <li><strong>ការស្រាវជ្រាវផ្នែកជីវសាស្ត្រ (Bioinformatics):</strong> ជួយអ្នកស្រាវជ្រាវនៅកម្ពុជាឱ្យដំណើរការការវិភាគហ្សែន (Genomic analysis) បានលឿនជាងមុន ប្រសិនបើពួកគេមានធនធានកុំព្យូទ័រកម្រិតមធ្យម។</li>
+            
+        </ul>
+        
+        
+        <p>ទោះបីជាការអនុវត្តផ្ទាល់លើអ្នកជំងឺមិនទាន់មានក៏ដោយ ប៉ុន្តែវាជាមូលដ្ឋានគ្រឹះដ៏សំខាន់សម្រាប់ការកសាងសមត្ថភាព High-Performance Computing (HPC) នៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃអាល់កូរីត:</strong> និស្សិតគួរចាប់ផ្តើមដោយការយល់ដឹងអំពី Dynamic Programming និង Zuker algorithm ដោយប្រើភាសា C++ និងស្វែងយល់ពីរបៀបដែល Memory ដំណើរការ។</li>
+            
+            <li><strong>រៀបចំមជ្ឈដ្ឋានពិសោធន៍ (Environment Setup):</strong> ដំឡើងប្រព័ន្ធប្រតិបត្តិការ Linux និងឧបករណ៍ចាំបាច់ដូចជា GCC compiler និងបណ្ណាល័យ OpenMP ដើម្បីត្រៀមលក្ខណៈសម្រាប់ការដំណើរការកូដ។</li>
+            
+            <li><strong>ការប្រើប្រាស់ឧបករណ៍ Polyhedral:</strong> សាកល្បងប្រើប្រាស់ឧបករណ៍ PLUTO (មានជាសាធារណៈ) ដើម្បីធ្វើការបំប្លែងកូដដោយស្វ័យប្រវត្តិ និងប្រៀបធៀបលទ្ធផលជាមួយកូដដើម។</li>
+            
+            <li><strong>ការវាស់វែង និងប្រៀបធៀបប្រសិទ្ធភាព:</strong> ទាញយក Source Code របស់អ្នកនិពន្ធពី GitHub (https://github.com/markpal/zuker) ហើយធ្វើការពិសោធន៍វាស់វែងល្បឿន និងថាមពលនៅលើកុំព្យូទ័រដែលមាននៅសាកលវិទ្យាល័យ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">RNA secondary structure prediction</span></td>
+                <td>ជាដំណើរការគណនាដើម្បីទស្សន៍ទាយរូបរាងដែលម៉ូលេគុល RNA នឹងបត់ខ្លួនវាបង្កើតជាគូ (Base pairs) ដោយផ្អែកលើគោលការណ៍ថាមពលអប្បបរមា (Minimum Free Energy)។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាតើខ្សែសង្វាក់មួយនឹងរមួលទៅជារាងអ្វីនៅពេលយើងទម្លាក់វាឱ្យនៅស្ងៀម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">dynamic programming</span></td>
+                <td>ជាវិធីសាស្ត្រដោះស្រាយបញ្ហាស្មុគស្មាញដោយបំបែកវាជាផ្នែកតូចៗ ហើយរក្សាទុកចម្លើយនៃផ្នែកតូចៗទាំងនោះក្នុងតារាង ដើម្បីកុំឱ្យកុំព្យូទ័រត្រូវគណនាដដែលៗនៅពេលក្រោយ។</td>
+                <td>ដូចជាការសរសេរចម្លើយលំហាត់ទុកក្នុងសៀវភៅ ដើម្បីកុំឱ្យចាំបាច់គិតលេខដដែលៗនៅពេលជួបលំហាត់ស្រដៀងគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">polyhedral model</span></td>
+                <td>ជាគំរូគណិតវិទ្យាដែលតំណាងឱ្យរង្វិលជុំ (Loops) ក្នុងកូដកុំព្យូទ័រជារូបរាងធរណីមាត្រ (Polyhedra) ដើម្បីអនុញ្ញាតឱ្យកុំព្យូទ័រវិភាគ និងកែប្រែលំដាប់នៃការគណនាឱ្យមានប្រសិទ្ធភាពខ្ពស់។</td>
+                <td>ដូចជាការរៀបចំដុំឥដ្ឋជារាងធរណីមាត្រ ដើម្បីងាយស្រួលរាប់ឬផ្លាស់ទីវា ជាជាងទុកវារាយប៉ាយគ្មានសណ្តាប់ធ្នាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Loop tiling</span></td>
+                <td>ជាបច្ចេកទេសបែងចែកការគណនាធំៗ (Iteration space) ទៅជាប្លុកតូចៗ (Tiles) ដើម្បីឱ្យទិន្នន័យដែលកំពុងប្រើប្រាស់អាចផ្ទុកនៅក្នុងអង្គចងចាំល្បឿនលឿន (CPU Cache) បាន។</td>
+                <td>ដូចជាការញ៉ាំអាហារដោយកាត់ជាចំណិតតូចៗដាក់ក្នុងចានតូច ដើម្បីងាយស្រួលញ៉ាំនិងមិនកំពប់ ជាជាងព្យាយាមញ៉ាំទាំងមូលក្នុងពេលតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data locality</span></td>
+                <td>សំដៅលើការរៀបចំទិន្នន័យឱ្យនៅជិតនឹងអង្គគណនា (CPU) បំផុត ដើម្បីកុំឱ្យចំណាយពេលយូរក្នុងការទៅយកទិន្នន័យពីអង្គចងចាំធំ (RAM) ដែលនៅឆ្ងាយ។</td>
+                <td>ដូចជាការដាក់ឧបករណ៍ជាងនៅក្បែរដៃនៅលើតុពេលកំពុងជួសជុល ដើម្បីកុំឱ្យដើរទៅយកនៅឃ្លាំងញឹកញាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Affine transformations</span></td>
+                <td>ជាការបំប្លែងគណិតវិទ្យាដែលប្រើដើម្បីផ្លាស់ប្តូររបៀបដែលកុំព្យូទ័រអានទិន្នន័យ ឬផ្លាស់ប្តូរលំដាប់នៃរង្វិលជុំ ដោយរក្សាទំនាក់ទំនងដើមនៃទិន្នន័យ។</td>
+                <td>ដូចជាការបង្វិលរូបភាព ឬពង្រីករូបភាពនៅលើកុំព្យូទ័រដោយរក្សាសមាមាត្រដើមនៃរូបភាពនោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Polyhedral+model+for+loop+optimization" target="_blank" rel="noopener"><span class="en">Polyhedral model for loop optimization</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Space-time+tiling+in+dynamic+programming+algorithms" target="_blank" rel="noopener"><span class="en">Space-time tiling in dynamic programming algorithms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Energy+efficiency+of+parallel+bioinformatics+algorithms" target="_blank" rel="noopener"><span class="en">Energy efficiency of parallel bioinformatics algorithms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Optimizing+Nussinov+and+Zuker+RNA+folding" target="_blank" rel="noopener"><span class="en">Optimizing Nussinov and Zuker RNA folding</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

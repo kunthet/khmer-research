@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការលើកកម្ពស់ការទស្សន៍ទាយតម្លៃដាច់ជ្រុល (Extreme Values) | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការទស្សន៍ទាយតម្លៃកម្រ ឬតម្លៃដាច់ជ្រុល (Extreme Values) នៅក្នុងសំណុំទិន្នន័យតម្រតម្រង់ដែលមិនមានតុល្យភាព (Imbalanced Regression)...">
+    
+    <meta name="keywords" content="Imbalanced Regression, Extreme Values, SERA (Squared Error Relevance Area), Gradient Boosting Machines, Loss Function Optimization, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/boosting-prediction-extreme-values-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/boosting-prediction-extreme-values-2022.html">
+    <meta property="og:title" content="ការលើកកម្ពស់ការទស្សន៍ទាយតម្លៃដាច់ជ្រុល (Extreme Values) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការទស្សន៍ទាយតម្លៃកម្រ ឬតម្លៃដាច់ជ្រុល (Extreme Values) នៅក្នុងសំណុំទិន្នន័យតម្រតម្រង់ដែលមិនមានតុល្យភាព (Imbalanced Regression) ដែលម៉ូដែលស្តង់ដារតែងតែមើលរំលងដោយសារផ្តោ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022">
+    
+    <meta property="article:tag" content="Imbalanced Regression">
+    
+    <meta property="article:tag" content="Extreme Values">
+    
+    <meta property="article:tag" content="SERA (Squared Error Relevance Area)">
+    
+    <meta property="article:tag" content="Gradient Boosting Machines">
+    
+    <meta property="article:tag" content="Loss Function Optimization">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការលើកកម្ពស់ការទស្សន៍ទាយតម្លៃដាច់ជ្រុល (Extreme Values)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការទស្សន៍ទាយតម្លៃកម្រ ឬតម្លៃដាច់ជ្រុល (Extreme Values) នៅក្នុងសំណុំទិន្នន័យតម្រតម្រង់ដែលមិនមានតុល្យភាព (Imbalanced Regression) ដែលម៉ូដែលស្តង់ដារតែងតែមើលរំលងដោយសារផ្តោ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179b\u17be\u1780\u1780\u1798\u17d2\u1796\u179f\u17cb\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u178a\u17b6\u1785\u17cb\u1787\u17d2\u179a\u17bb\u179b (Extreme Values)",
+      "name": "Boosting the Prediction of Extreme Values",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1780\u1798\u17d2\u179a \u17ac\u178f\u1798\u17d2\u179b\u17c3\u178a\u17b6\u1785\u17cb\u1787\u17d2\u179a\u17bb\u179b (Extreme Values) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178f\u1798\u17d2\u179a\u178f\u1798\u17d2\u179a\u1784\u17cb\u178a\u17c2\u179b\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796 (Imbalanced Regression) \u178a\u17c2\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179f\u17d2\u178f\u1784\u17cb\u178a\u17b6\u179a\u178f\u17c2\u1784\u178f\u17c2\u1798\u17be\u179b\u179a\u17c6\u179b\u1784\u178a\u17c4\u1799\u179f\u17b6\u179a\u1795\u17d2\u178f\u17c4\u178f\u178f\u17c2\u179b\u17be\u178f\u1798\u17d2\u179b\u17c3\u1798\u1792\u17d2\u1799\u1798\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/boosting-prediction-extreme-values-2022.html",
+      "author": [{"@type": "Person", "name": "An\u00edbal Silva (University of Porto)"},{"@type": "Person", "name": "Rita Ribeiro (Supervisor)"},{"@type": "Person", "name": "Nuno Moniz (Co-supervisor)"}],
+      "datePublished": "2022",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Boosting the Prediction of Extreme Values",
+        "url": "https://github.com/anibalsilva1/ModelOptimizationIR"
+      },
+      "keywords": ["Imbalanced Regression", "Extreme Values", "SERA (Squared Error Relevance Area)", "Gradient Boosting Machines", "Loss Function Optimization"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179b\u17be\u1780\u1780\u1798\u17d2\u1796\u179f\u17cb\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u178a\u17b6\u1785\u17cb\u1787\u17d2\u179a\u17bb\u179b (Extreme Values)",
+          "item": "https://khmerresearch.com/papers/technology/boosting-prediction-extreme-values-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការលើកកម្ពស់ការទស្សន៍ទាយតម្លៃដាច់ជ្រុល (Extreme Values)</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Boosting the Prediction of Extreme Values<br>
+        
+        <strong>Source:</strong> <a href="https://github.com/anibalsilva1/ModelOptimizationIR" target="_blank">https://github.com/anibalsilva1/ModelOptimizationIR</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការលើកកម្ពស់ការទស្សន៍ទាយតម្លៃដាច់ជ្រុល (Extreme Values)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Boosting the Prediction of Extreme Values</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Aníbal Silva (University of Porto), Rita Ribeiro (Supervisor), Nuno Moniz (Co-supervisor)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការទស្សន៍ទាយតម្លៃកម្រ ឬតម្លៃដាច់ជ្រុល (Extreme Values) នៅក្នុងសំណុំទិន្នន័យតម្រតម្រង់ដែលមិនមានតុល្យភាព (Imbalanced Regression) ដែលម៉ូដែលស្តង់ដារតែងតែមើលរំលងដោយសារផ្តោតតែលើតម្លៃមធ្យម។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឱ្យប្រើប្រាស់រង្វាស់ SERA ជាអនុគមន៍បាត់បង់ (Loss Function) នៅក្នុងក្បួនដោះស្រាយ Gradient Boosting ដើម្បីបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយតម្លៃដាច់ជ្រុល។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ Squared Error Relevance Area (SERA) ជាអនុគមន៍បាត់បង់សម្រាប់ការបង្កើនប្រសិទ្ធភាព</li>
+            
+            <li>ការអនុវត្តលើក្បួនដោះស្រាយ Gradient Boosting Machines (XGBoost និង LightGBM)</li>
+            
+            <li>ការពិសោធន៍លើសំណុំទិន្នន័យចំនួន ៣៦ (36 Data Sets) ពីវិស័យផ្សេងៗគ្នា</li>
+            
+            <li>ការវាយតម្លៃស្ថិតិដោយប្រើ Bayes Sign Test</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់ SERA ជាអនុគមន៍បាត់បង់ បានជួយឱ្យម៉ូដែលទស្សន៍ទាយតម្លៃដាច់ជ្រុលបានល្អប្រសើរជាងការប្រើប្រាស់ Mean Squared Error (MSE) តាមបែបស្តង់ដារ។</li>
+            
+            <li>ម៉ូដែល LGBM ដែលប្រើ SERA ទទួលបានលទ្ធផលល្អបំផុតនៅក្នុងសំណុំទិន្នន័យចំនួន ១៦ ក្នុងចំណោម ៣៦ សម្រាប់ការវាយតម្លៃ SERA ។</li>
+            
+            <li>លទ្ធផលបញ្ជាក់ថា SERA អាចត្រូវបានប្រើប្រាស់យ៉ាងមានប្រសិទ្ធភាពក្នុងការបង្រួមអប្បបរមានៃកំហុសចំពោះទិន្នន័យដែលមានតម្លៃកម្រ ឬមិនមានតុល្យភាពខ្លាំង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Standard Gradient Boosting (optimized with MSE)</span></strong><br>ការប្រើប្រាស់ម៉ាស៊ីន Gradient Boosting ធម្មតា (XGBoost/LGBM) ដែលប្រើអនុគមន៍ Mean Squared Error (MSE)</td>
+                <td>ងាយស្រួលអនុវត្តដោយប្រើកញ្ចប់កម្មវិធីស្តង់ដារ និងផ្តល់លទ្ធផលល្អសម្រាប់ទិន្នន័យដែលមានតម្លៃនៅកណ្តាល (Normal distribution)។</td>
+                <td>មានទំនោរមើលរំលងតម្លៃកម្រ (Extreme Values) និងផ្តល់ការព្យាករណ៍មិនសូវត្រឹមត្រូវចំពោះព្រឹត្តិការណ៍ដែលមានហានិភ័យខ្ពស់។</td>
+                <td>មានប្រសិទ្ធភាពល្អក្នុងការវាស់វែងដោយប្រើរង្វាស់ MSE ប៉ុន្តែមិនសូវល្អក្នុងការចាប់យកតម្លៃធ្ងន់ធ្ងរ ឬកម្រ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Gradient Boosting optimized with SERA (Proposed Method)</span></strong><br>ការប្រើប្រាស់ XGBoost/LGBM ដែលប្រើ SERA ជាអនុគមន៍សម្រាប់ធ្វើ Optimization (Loss Function)</td>
+                <td>ផ្តោតសំខាន់លើការកាត់បន្ថយកំហុសចំពោះតម្លៃកម្រ (Rare cases) ដោយមិនបាត់បង់សមត្ថភាពព្យាករណ៍លើទិន្នន័យទូទៅ។</td>
+                <td>ត្រូវការការគណនាដេរីវេ (Derivatives) ផ្ទាល់ខ្លួន និងការកំណត់ប៉ារ៉ាម៉ែត្របន្ថែម (ដូចជាចំនួនចន្លោះ T សម្រាប់ធ្វើសមាហរណកម្ម)។</td>
+                <td>LGBM ដែលប្រើ SERA (LGBMS) ទទួលបានចំណាត់ថ្នាក់ល្អបំផុតក្នុងការទស្សន៍ទាយតម្លៃកម្រលើសំណុំទិន្នន័យចំនួន ៣៦។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនតម្រូវឱ្យមានធនធានកុំព្យូទ័រធំដុំទេ អាចដំណើរការបានលើកុំព្យូទ័រស្រាវជ្រាវទូទៅ ប៉ុន្តែត្រូវការចំណេះដឹងផ្នែកគណិតវិទ្យាដើម្បីអនុវត្ត។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ភាសា R និងកញ្ចប់កម្មវិធី xgboost ឬ lightgbm (អ្នកនិពន្ធបានបង្កើត R package ឈ្មោះ ModelOptimizationIR)។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការអ្នកជំនាញដែលមានចំណេះដឹងអំពី Cost-sensitive learning និងការបង្កើត Custom Loss Function។</li>
+        
+        <li><strong>Hardware:</strong> CPU ទូទៅគឺគ្រប់គ្រាន់ ប៉ុន្តែ GPU អាចជួយពន្លឿនការបង្វឹកម៉ូដែល (Training) លើទិន្នន័យធំ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះបានប្រើប្រាស់សំណុំទិន្នន័យចំនួន ៣៦ ពីវិស័យផ្សេងៗគ្នា (ដូចជា ជីវវិទ្យា ឧតុនិយម និងហិរញ្ញវត្ថុ) ដែលភាគច្រើនជាទិន្នន័យស្តង់ដារអន្តរជាតិ (Benchmark datasets)។ មិនមានទិន្នន័យជាក់លាក់ពីកម្ពុជាទេ ប៉ុន្តែលក្ខណៈនៃបញ្ហា (Imbalanced Regression) គឺស្រដៀងគ្នាទៅនឹងបញ្ហានានាក្នុងពិភពពិត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ជាពិសេសក្នុងវិស័យដែលត្រូវការការទស្សន៍ទាយគ្រោះមហន្តរាយ ឬព្រឹត្តិការណ៍កម្រ។</p>
+        
+        <ul>
+            
+            <li><strong>ការព្យាករណ៍ទឹកជំនន់ (Flood Forecasting):</strong> អាចប្រើដើម្បីព្យាករណ៍កម្រិតទឹកទន្លេមេគង្គ ឬស្ទឹងព្រែកត្នោត នៅពេលមានភ្លៀងធ្លាក់ខ្លាំងខុសប្រក្រតី (Extreme Values) ដែលម៉ូដែលធម្មតាម៉្យាងមិនអាចចាប់យកបាន។</li>
+            
+            <li><strong>វិស័យហិរញ្ញវត្ថុ និងមីក្រូហិរញ្ញវត្ថុ:</strong> ប្រើសម្រាប់ចាប់យកការក្លែងបន្លំ (Fraud Detection) ឬហានិភ័យឥណទានធ្ងន់ធ្ងរ ដែលជាករណីកម្រប៉ុន្តែមានផលប៉ះពាល់ខ្ពស់។</li>
+            
+            <li><strong>ការគ្រប់គ្រងគុណភាពខ្យល់ (Air Quality):</strong> ដូចឧទាហរណ៍ NO2 ក្នុងសារណា វិធីសាស្ត្រនេះអាចប្រើដើម្បីព្យាករណ៍កម្រិត PM2.5 នៅរាជធានីភ្នំពេញនៅពេលវាឡើងខ្ពស់ខុសធម្មតា។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់ SERA ជា Loss Function គឺជាបច្ចេកទេសដ៏មានសក្តានុពលសម្រាប់អ្នកវិទ្យាសាស្ត្រទិន្នន័យនៅកម្ពុជា ដើម្បីបង្កើនភាពត្រឹមត្រូវនៃប្រព័ន្ធប្រកាសអាសន្ន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១៖ សិក្សាទ្រឹស្តីមូលដ្ឋាន:</strong> ស្វែងយល់អំពី Imbalanced Regression និងរបៀបដែល Gradient Boosting Machines (ដូចជា XGBoost) ដំណើរការ។ អានជំពូកទី ៣ នៃសារណាដើម្បីយល់ពី Relevance Function និង SERA។</li>
+            
+            <li><strong>ជំហានទី ២៖ រៀបចំឧបករណ៍ (Tools):</strong> ដំឡើងកម្មវិធី R និង RStudio។ ទាញយកកញ្ចប់ xgboost និង lightgbm។ សាកល្បងស្វែងរកកញ្ចប់ ModelOptimizationIR របស់អ្នកនិពន្ធពី GitHub។</li>
+            
+            <li><strong>ជំហានទី ៣៖ ការអនុវត្តសាកល្បង (Implementation):</strong> សរសេរកូដដើម្បីបង្កើត Custom Loss Function (First និង Second derivatives នៃ SERA) នៅក្នុង R ដោយផ្អែកលើសមីការក្នុងជំពូកទី ៤ និងបញ្ចូលវាទៅក្នុង lightgbm ។</li>
+            
+            <li><strong>ជំហានទី ៤៖ អនុវត្តលើទិន្នន័យកម្ពុជា:</strong> ប្រមូលទិន្នន័យដែលមានលក្ខណៈមិនស្មើគ្នា (Skewed) ដូចជាទិន្នន័យទឹកភ្លៀងពីក្រសួងធនធានទឹក ឬទិន្នន័យឥណទាន។ កំណត់តម្លៃណាដែលចាត់ទុកថាជា 'Extreme'។</li>
+            
+            <li><strong>ជំហានទី ៥៖ ការវាយតម្លៃ:</strong> ប្រៀបធៀបលទ្ធផលរវាងម៉ូដែលដែលប្រើ MSE និង SERA ដោយប្រើរង្វាស់ SERA Curve ដើម្បីមើលថាបរាជ័យត្រង់ណាខ្លះ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imbalanced Regression</span></td>
+                <td>ជាប្រភេទនៃការវិភាគទិន្នន័យដែលតម្លៃគោលដៅភាគច្រើនមានភាពប្រហាក់ប្រហែលគ្នា (តម្លៃធម្មតា) ប៉ុន្តែមានតម្លៃមួយចំនួនតូចដែលខុសប្លែកខ្លាំង (តម្លៃដាច់ជ្រុល) ហើយតម្លៃកម្រទាំងនោះជាចំណុចសំខាន់បំផុតដែលត្រូវទស្សន៍ទាយ។</td>
+                <td>ដូចជាការរុករកគ្រាប់ពេជ្រនៅក្នុងគំនរខ្សាច់ដ៏ធំ ដែលគ្រាប់ពេជ្រមានចំនួនតិចតួចណាស់តែមានតម្លៃខ្ពស់បំផុតដែលយើងចង់បាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Relevance Function</span></td>
+                <td>ជាអនុគមន៍គណិតវិទ្យាដែលប្រើដើម្បីកំណត់កម្រិត 'សារៈសំខាន់' នៃទិន្នន័យនីមួយៗ។ វាផ្តល់តម្លៃខ្ពស់ដល់ទិន្នន័យកម្រ (Extreme Values) និងតម្លៃទាបដល់ទិន្នន័យធម្មតា ដើម្បីឱ្យម៉ូដែលកុំព្យូទ័រដឹងថាត្រូវផ្តោតលើចំណុចណាខ្លាំងជាងគេ។</td>
+                <td>ប្រៀបដូចជាគ្រូបង្រៀនដែលផ្តល់ពិន្ទុខ្ពស់ចំពោះលំហាត់ណាដែលពិបាកខ្លាំង ហើយផ្តល់ពិន្ទុតិចចំពោះលំហាត់ងាយៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Squared Error Relevance Area (SERA)</span></td>
+                <td>ជារង្វាស់វាយតម្លៃគុណភាពម៉ូដែលថ្មីមួយ ដែលគណនាកំហុសសរុបដោយថ្លឹងថ្លែងទៅតាមកម្រិតសារៈសំខាន់នៃទិន្នន័យ។ វាធានាថាម៉ូដែលមិនត្រឹមតែត្រឹមត្រូវលើទិន្នន័យទូទៅប៉ុណ្ណោះទេ ថែមទាំងត្រឹមត្រូវលើទិន្នន័យកម្រទៀតផង។</td>
+                <td>ដូចជាការដាក់ពិន័យចំពោះកំហុស ដោយកំហុសលើរឿងធំដុំ (តម្លៃកម្រ) ត្រូវទទួលពិន័យធ្ងន់ជាងកំហុសលើរឿងតូចតាច (តម្លៃធម្មតា)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gradient Boosting Machines</span></td>
+                <td>ជាបច្ចេកទេសបង្រៀនម៉ាស៊ីន (Machine Learning) ដែលបង្កើតម៉ូដែលតូចៗជាច្រើនបន្តបន្ទាប់គ្នា ដោយម៉ូដែលថ្មីនីមួយៗព្យាយាមកែតម្រូវកំហុសដែលម៉ូដែលមុនបានធ្វើ ដើម្បីបង្កើតជាម៉ូដែលចុងក្រោយដ៏ខ្លាំងក្លាមួយ។</td>
+                <td>ប្រៀបដូចជាការសាងសង់ជញ្ជាំងមួយ ដោយជាងម្នាក់ៗមកបិទចន្លោះប្រហោងដែលជាងមុនបានបន្សល់ទុក ដើម្បីឱ្យជញ្ជាំងកាន់តែរឹងមាំនិងគ្មានចន្លោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Loss Function</span></td>
+                <td>ជាក្បួនគណិតវិទ្យាសម្រាប់វាស់វែងថាតើការព្យាករណ៍របស់ម៉ូដែលខុសពីការពិតកម្រិតណា។ កុំព្យូទ័រប្រើវាដើម្បីរៀនកែតម្រូវខ្លួនឯងក្នុងអំឡុងពេលហ្វឹកហាត់ (Training) ដើម្បីកាត់បន្ថយកំហុសឱ្យនៅតិចបំផុត។</td>
+                <td>ដូចជាឧបករណ៍វាស់កម្ពស់ទឹក ដែលប្រាប់យើងថាទឹកនៅខ្វះប៉ុន្មានទៀតទើបពេញពាង ដើម្បីយើងដឹងថាត្រូវចាក់ទឹកបន្ថែមប៉ុន្មាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bayes Sign Test</span></td>
+                <td>ជាវិធីសាស្ត្រស្ថិតិដែលប្រើសម្រាប់ប្រៀបធៀបប្រសិទ្ធភាពរវាងម៉ូដែលពីរ ដើម្បីកំណត់ថាអ្នកណាឈ្នះ អ្នកណាចាញ់ ឬស្មើគ្នា ដោយផ្អែកលើលទ្ធផលនៃការពិសោធន៍លើទិន្នន័យជាច្រើនផ្សេងៗគ្នា។</td>
+                <td>ដូចជាការកាត់សេចក្តីរបស់អាជ្ញាកណ្តាលក្នុងការប្រកួតកីឡា ដើម្បីប្រកាសថាអ្នកណាជាអ្នកឈ្នះពិតប្រាកដដោយផ្អែកលើពិន្ទុនៃការប្រកួត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Squared+Error+Relevance+Area+%28SERA%29+evaluation+metric" target="_blank" rel="noopener"><span class="en">Squared Error Relevance Area (SERA) evaluation metric</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Asymmetric+loss+functions+for+imbalanced+regression" target="_blank" rel="noopener"><span class="en">Asymmetric loss functions for imbalanced regression</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gradient+Boosting+Machines+optimization+techniques" target="_blank" rel="noopener"><span class="en">Gradient Boosting Machines optimization techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Synthetic+Minority+Over-sampling+Technique+for+Regression+%28SMOTER%29" target="_blank" rel="noopener"><span class="en">Synthetic Minority Over-sampling Technique for Regression (SMOTER)</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

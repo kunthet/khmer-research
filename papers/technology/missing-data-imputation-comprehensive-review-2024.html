@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបំពេញទិន្នន័យដែលបាត់៖ ការពិនិត្យឡើងវិញដ៏ទូលំទូលាយ | KhmerResearch.com</title>
+    <meta name="description" content="ទិន្នន័យដែលបាត់ (Missing Data) គឺជាបញ្ហាប្រឈមដ៏ធំមួយក្នុងការវិភាគស្ថិតិ និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ដែលអាចនាំឱ្យលទ្ធផលមានភាពលម្អៀង និងកាត់បន្ថយប្...">
+    
+    <meta name="keywords" content="Missing Data, Imputation Techniques, Machine Learning, Deep Learning, MCAR, MAR, Generative Adversarial Networks, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/missing-data-imputation-comprehensive-review-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/missing-data-imputation-comprehensive-review-2024.html">
+    <meta property="og:title" content="ការបំពេញទិន្នន័យដែលបាត់៖ ការពិនិត្យឡើងវិញដ៏ទូលំទូលាយ | KhmerResearch.com">
+    <meta property="og:description" content="ទិន្នន័យដែលបាត់ (Missing Data) គឺជាបញ្ហាប្រឈមដ៏ធំមួយក្នុងការវិភាគស្ថិតិ និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ដែលអាចនាំឱ្យលទ្ធផលមានភាពលម្អៀង និងកាត់បន្ថយប្រសិទ្ធភាពនៃការទស្សន៍ទាយ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024, Journal of Computer and Communications">
+    
+    <meta property="article:tag" content="Missing Data">
+    
+    <meta property="article:tag" content="Imputation Techniques">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="MCAR">
+    
+    <meta property="article:tag" content="MAR">
+    
+    <meta property="article:tag" content="Generative Adversarial Networks">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបំពេញទិន្នន័យដែលបាត់៖ ការពិនិត្យឡើងវិញដ៏ទូលំទូលាយ">
+    <meta name="twitter:description" content="ទិន្នន័យដែលបាត់ (Missing Data) គឺជាបញ្ហាប្រឈមដ៏ធំមួយក្នុងការវិភាគស្ថិតិ និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ដែលអាចនាំឱ្យលទ្ធផលមានភាពលម្អៀង និងកាត់បន្ថយប្រសិទ្ធភាពនៃការទស្សន៍ទាយ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u17d6 \u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789\u178a\u17cf\u1791\u17bc\u179b\u17c6\u1791\u17bc\u179b\u17b6\u1799",
+      "name": "Missing Data Imputation: A Comprehensive Review",
+      "description": "\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb (Missing Data) \u1782\u17ba\u1787\u17b6\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u178a\u17cf\u1792\u17c6\u1798\u17bd\u1799\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179f\u17d2\u1790\u17b7\u178f\u17b7 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u178a\u17c2\u179b\u17a2\u17b6\u1785\u1793\u17b6\u17c6\u17b1\u17d2\u1799\u179b\u1791\u17d2\u1792\u1795\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u179b\u1798\u17d2\u17a2\u17c0\u1784 \u1793\u17b7\u1784\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/missing-data-imputation-comprehensive-review-2024.html",
+      "author": [{"@type": "Person", "name": "Majed Alwateer (Taibah University, Saudi Arabia)"},{"@type": "Person", "name": "El-Sayed Atlam (Taibah University, Saudi Arabia / Tanta University, Egypt)"},{"@type": "Person", "name": "Mahmoud Mohammed Abd El-Raouf (Arab Academy for Science and Technology, Egypt)"},{"@type": "Person", "name": "Osama A. Ghoneim (Tanta University, Egypt)"},{"@type": "Person", "name": "Ibrahim Gad (Tanta University, Egypt)"}],
+      "datePublished": "2024, Journal of Computer and Communications",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Missing Data Imputation: A Comprehensive Review",
+        "url": "https://doi.org/10.4236/jcc.2024.1211004"
+      },
+      "keywords": ["Missing Data", "Imputation Techniques", "Machine Learning", "Deep Learning", "MCAR", "MAR", "Generative Adversarial Networks"],
+      "about": "Computer Science / Data Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u17d6 \u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789\u178a\u17cf\u1791\u17bc\u179b\u17c6\u1791\u17bc\u179b\u17b6\u1799",
+          "item": "https://khmerresearch.com/papers/technology/missing-data-imputation-comprehensive-review-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបំពេញទិន្នន័យដែលបាត់៖ ការពិនិត្យឡើងវិញដ៏ទូលំទូលាយ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Missing Data Imputation: A Comprehensive Review<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.4236/jcc.2024.1211004" target="_blank">https://doi.org/10.4236/jcc.2024.1211004</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបំពេញទិន្នន័យដែលបាត់៖ ការពិនិត្យឡើងវិញដ៏ទូលំទូលាយ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Missing Data Imputation: A Comprehensive Review</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Majed Alwateer (Taibah University, Saudi Arabia), El-Sayed Atlam (Taibah University, Saudi Arabia / Tanta University, Egypt), Mahmoud Mohammed Abd El-Raouf (Arab Academy for Science and Technology, Egypt), Osama A. Ghoneim (Tanta University, Egypt), Ibrahim Gad (Tanta University, Egypt)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Journal of Computer and Communications</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Data Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ទិន្នន័យដែលបាត់ (Missing Data) គឺជាបញ្ហាប្រឈមដ៏ធំមួយក្នុងការវិភាគស្ថិតិ និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ដែលអាចនាំឱ្យលទ្ធផលមានភាពលម្អៀង និងកាត់បន្ថយប្រសិទ្ធភាពនៃការទស្សន៍ទាយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការពិនិត្យឡើងវិញ និងវាយតម្លៃលើបច្ចេកទេសបំពេញទិន្នន័យផ្សេងៗ ដោយបែងចែកជាវិធីសាស្ត្រកំណត់ (Deterministic), គំរូប្រូបាប៊ីលីតេ និងក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន។
+        
+        <ul>
+            
+            <li>វិធីសាស្ត្រប្រពៃណី (Traditional Methods) ដូចជាការជំនួសដោយមធ្យមភាគ (Mean Imputation) និងការយកតម្លៃសង្កេតចុងក្រោយមកប្រើ (LOCF)។</li>
+            
+            <li>បច្ចេកទេសកម្រិតខ្ពស់ (Advanced Techniques) រួមមាន K-Nearest Neighbors (KNN) និង Multiple Imputation (MI)។</li>
+            
+            <li>វិធីសាស្ត្ររៀនស៊ីជម្រៅ (Deep Learning Approaches) ដូចជា Generative Adversarial Networks (GANs) និង Autoencoders។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការយល់ដឹងអំពីយន្តការនៃការបាត់ទិន្នន័យ (ដូចជា MCAR, MAR, MNAR) គឺមានសារៈសំខាន់ណាស់សម្រាប់ការជ្រើសរើសវិធីសាស្ត្របំពេញទិន្នន័យឱ្យបានត្រឹមត្រូវ។</li>
+            
+            <li>វិធីសាស្ត្រទំនើបដូចជា ការរៀនរបស់ម៉ាស៊ីន (Machine Learning) និង Deep Learning ផ្តល់នូវភាពត្រឹមត្រូវខ្ពស់ជាងវិធីសាស្ត្រសាមញ្ញ ប៉ុន្តែទាមទារសមត្ថភាពកុំព្យូទ័រខ្លាំង និងទិន្នន័យច្រើន។</li>
+            
+            <li>ការជ្រើសរើសគំរូគួរផ្អែកលើលក្ខណៈនៃទិន្នន័យ និងគោលបំណងនៃការវិភាគ ដើម្បីជៀសវាងការលម្អៀង (Bias) និងរក្សាភាពសុក្រឹតនៃលទ្ធផលស្រាវជ្រាវ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Mean/Median Imputation</span></strong><br>ការជំនួសដោយមធ្យមភាគ ឬមេដ្យាន</td>
+                <td>ងាយស្រួលអនុវត្ត និងចំណាយពេលគណនតិចបំផុត ល្អសម្រាប់ទិន្នន័យដែលមានការបែងចែកធម្មតា (Normal Distribution)។</td>
+                <td>អាចបង្កឱ្យមានភាពលម្អៀង (Bias) ខ្ពស់ និងមិនបានគិតគូរពីទំនាក់ទំនងរវាងអថេរផ្សេងៗ ដែលធ្វើឱ្យកាត់បន្ថយភាពប្រែប្រួល (Variance) នៃទិន្នន័យ។</td>
+                <td>មានប្រសិទ្ធភាពចំពោះទិន្នន័យបាត់តិចតួច ប៉ុន្តែផ្តល់លទ្ធផលមិនល្អចំពោះទិន្នន័យស្មុគស្មាញ បើធៀបនឹងវិធីសាស្ត្រ Machine Learning។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbors (KNN)</span></strong><br>ការជំនួសដោយផ្អែកលើទិន្នន័យជិតខាងបំផុត (KNN)</td>
+                <td>អាចប្រើបានទាំងទិន្នន័យលេខ និងប្រភេទ (Categorical) ដោយគិតគូរពីទំនាក់ទំនងរវាងអថេរជិតខាង។</td>
+                <td>ចំណាយពេលគណនាយូរ (Computationally expensive) ចំពោះសំណុំទិន្នន័យធំ និងងាយរងផលប៉ះពាល់ដោយទិន្នន័យមិនប្រក្រតី (Outliers)។</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវខ្ពស់ជាងការជំនួសដោយមធ្យមភាគ ជាពិសេសនៅពេលមានទំនាក់ទំនងខ្លាំងរវាងអថេរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Multiple Imputation by Chained Equations (MICE)</span></strong><br>ការជំនួសទិន្នន័យច្រើនដងតាមសមីការច្រវាក់ (MICE)</td>
+                <td>គិតគូរពីភាពមិនច្បាស់លាស់ (Uncertainty) នៃទិន្នន័យដែលបាត់ និងផ្តល់នូវការប៉ាន់ប្រមាណដែលមានស្ថេរភាពជាងមុន។</td>
+                <td>ទាមទារការសន្មតថាទិន្នន័យបាត់ដោយចៃដន្យ (MAR) និងត្រូវការធនធានគណនាច្រើនជាងវិធីសាស្ត្រសាមញ្ញ។</td>
+                <td>ជាវិធីសាស្ត្រស្តង់ដារមាស (Gold Standard) សម្រាប់ការវិភាគស្ថិតិដែលផ្តល់លទ្ធផលគួរឱ្យទុកចិត្តជាងវិធីសាស្ត្រជំនួសតែមួយដង (Single Imputation)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Generative Adversarial Networks (GANs)</span></strong><br>បណ្តាញសរសៃប្រសាទបង្កើតទិន្នន័យ (GANs)</td>
+                <td>មានសមត្ថភាពបង្កើតទិន្នន័យជំនួសដែលមានភាពប្រាកដនិយមខ្ពស់ និងចាប់យកទំនាក់ទំនងមិនលីនេអ៊ែរ (Non-linear) ដ៏ស្មុគស្មាញ។</td>
+                <td>ពិបាកក្នុងការបង្វឹក (Training) ទាមទារទិន្នន័យច្រើន និងត្រូវការថាមពលកុំព្យូទ័រខ្លាំង (High computational power)។</td>
+                <td>វិធីសាស្ត្រ GAIN (ដែលផ្អែកលើ GAN) បង្ហាញប្រសិទ្ធភាពខ្ពស់បំផុតចំពោះទិន្នន័យដែលមានភាគរយនៃការបាត់ខ្ពស់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះបង្ហាញថា វិធីសាស្ត្រប្រពៃណីត្រូវការធនធានតិចតួច ប៉ុន្តែវិធីសាស្ត្រ Deep Learning ទាមទារធនធានខ្ពស់ទាំងផ្នែករឹង និងទិន្នន័យ។
+    
+    <ul>
+        
+        <li><strong>Computational Power:</strong> វិធីសាស្ត្រដូចជា GANs និង KNN ទាមទារសមត្ថភាព CPU/GPU ខ្ពស់ ជាពិសេសជាមួយទិន្នន័យធំ (Big Data) ខណៈដែល Mean Imputation ប្រើប្រាស់ធនធានតិចតួច។</li>
+        
+        <li><strong>Software Libraries:</strong> ត្រូវការចេះប្រើប្រាស់បណ្ណាល័យ Python ដូចជា Scikit-learn (សម្រាប់ SimpleImputer, KNN), Statsmodels (សម្រាប់ MICE), និង TensorFlow/PyTorch (សម្រាប់ GANs/Autoencoders)។</li>
+        
+        <li><strong>Data Volume:</strong> វិធីសាស្ត្រ Deep Learning ទាមទារទិន្នន័យសំណាកធំទូលាយដើម្បីបង្វឹកម៉ូដែលឱ្យមានប្រសិទ្ធភាព ខុសពីវិធីសាស្ត្រស្ថិតិដែលអាចធ្វើបានជាមួយទិន្នន័យតូច។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះគឺជាការពិនិត្យឡើងវិញ (Review Paper) ដែលប្រមូលផ្តុំលទ្ធផលពីការសិក្សាជាច្រើន (ដូចជាទិន្នន័យអាកាសធាតុ NCDC ទិន្នន័យសុខភាព និងការអប់រំ)។ សម្រាប់កម្ពុជា ការប្រុងប្រយ័ត្នគឺចាំបាច់ព្រោះយន្តការនៃការបាត់ទិន្នន័យ (Missing Mechanism) នៅកម្ពុជាអាចខុសគ្នាដោយសារកត្តាបច្ចេកវិទ្យា និងការបញ្ចូលទិន្នន័យដោយដៃដែលងាយមានកំហុស។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រដែលបានលើកឡើងគឺមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ដែលជារឿយៗជួបប្រទះបញ្ហាទិន្នន័យមិនពេញលេញនៅក្នុងវិស័យសាធារណៈ និងឯកជន។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសុខាភិបាល (Health Informatics):</strong> អាចប្រើវិធីសាស្ត្រ MICE ឬ KNN ដើម្បីបំពេញទិន្នន័យអ្នកជំងឺដែលបាត់នៅក្នុងប្រព័ន្ធព័ត៌មានសុខាភិបាលកម្ពុជា (HIs) ដើម្បីកែលម្អការធ្វើរោគវិនិច្ឆ័យ។</li>
+            
+            <li><strong>វិស័យកសិកម្ម និងឧតុនិយម:</strong> ការប្រើប្រាស់វិធីសាស្ត្រ Time Series (ដូចជា ARIMA ឬ LOCF) មានសារៈសំខាន់សម្រាប់បំពេញទិន្នន័យទឹកភ្លៀង ឬទិន្នផលកសិកម្មដែលបាត់ដោយសារកំហុសឧបករណ៍វាស់វែងនៅតាមខេត្ត។</li>
+            
+            <li><strong>ការស្ទង់មតិសេដ្ឋកិច្ចសង្គម (Socio-economic Surveys):</strong> សម្រាប់វិទ្យាស្ថានជាតិស្ថិតិ (NIS) ការប្រើប្រាស់វិធីសាស្ត្រ Machine Learning អាចជួយដោះស្រាយបញ្ហាអ្នកឆ្លើយសំណួរមិនគ្រប់គ្រាន់ (Non-response) ក្នុងការធ្វើជំរឿន។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តវិធីសាស្ត្របំពេញទិន្នន័យត្រឹមត្រូវនឹងជួយឱ្យអ្នកស្រាវជ្រាវ និងអ្នកបង្កើតគោលនយោបាយនៅកម្ពុជា អាចធ្វើការសម្រេចចិត្តដោយផ្អែកលើទិន្នន័យ (Data-driven decision) ដែលមានគុណភាព និងភាពជឿជាក់ខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១៖ ការវិភាគយន្តការនៃការបាត់ទិន្នន័យ (Identify Missing Mechanism):</strong> និស្សិតត្រូវប្រើប្រាស់ Python library ដូចជា missingno ដើម្បីមើលឃើញគំរូនៃការបាត់ទិន្នន័យ និងកំណត់ថាវាជាប្រភេទ MCAR, MAR, ឬ MNAR មុននឹងជ្រើសរើសវិធីសាស្ត្រ។</li>
+            
+            <li><strong>ជំហានទី ២៖ ការអនុវត្តវិធីសាស្ត្រមូលដ្ឋាន (Baseline Imputation):</strong> ចាប់ផ្តើមពិសោធន៍ជាមួយ SimpleImputer នៃ scikit-learn ដោយប្រើ Mean ឬ Median ដើម្បីបង្កើតជាចំណុចគោល (Baseline) សម្រាប់ប្រៀបធៀប។</li>
+            
+            <li><strong>ជំហានទី ៣៖ ការប្រើប្រាស់វិធីសាស្ត្រកម្រិតខ្ពស់ (Advanced Techniques):</strong> អនុវត្តវិធីសាស្ត្រ IterativeImputer (MICE) ឬ KNNImputer សម្រាប់ទិន្នន័យដែលមានទំនាក់ទំនងគ្នាខ្លាំង។ សម្រាប់ទិន្នន័យជាស៊េរីពេលវេលា (Time Series) គួរប្រើ pandas (fillna with ffill/bfill) ឬ ARIMA។</li>
+            
+            <li><strong>ជំហានទី ៤៖ ការវាយតម្លៃម៉ូដែល (Performance Evaluation):</strong> ធ្វើការវាយតម្លៃប្រសិទ្ធភាពដោយដកទិន្នន័យមួយចំនួនចេញដោយចេតនា រួចធ្វើការបំពេញ និងវាស់វែងកំហុសដោយប្រើរង្វាស់ RMSE ឬ MAE ដើម្បីជ្រើសរើសវិធីសាស្ត្រដែលល្អបំផុតសម្រាប់ទិន្នន័យជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imputation</span></td>
+                <td>ដំណើរការនៃការជំនួសទិន្នន័យដែលបាត់នៅក្នុងសំណុំទិន្នន័យ (Dataset) ដោយតម្លៃប៉ាន់ស្មានដែលមានភាពសមហេតុផល ដើម្បីឱ្យទិន្នន័យពេញលេញ និងអាចយកទៅវិភាគបន្តបានដោយមិនមានកំហុស។</td>
+                <td>ដូចជាការប៉ះអាវដែលរហែកដោយប្រើបំណែកក្រណាត់ដែលមានពណ៌ និងសាច់ក្រណាត់ស្រដៀងគ្នា ដើម្បីឱ្យអាវនោះអាចប្រើប្រាស់បានវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Missing Completely at Random (MCAR)</span></td>
+                <td>ជាប្រភេទនៃការបាត់ទិន្នន័យដែលកើតឡើងដោយចៃដន្យសុទ្ធសាធ ដោយមិនមានទំនាក់ទំនងជាមួយតម្លៃនៃទិន្នន័យខ្លួនឯង ឬទិន្នន័យផ្សេងទៀតឡើយ គឺដូចជាការចាប់ឆ្នោត។</td>
+                <td>ដូចជាសន្លឹកឯកសារមួយដែលរបូតធ្លាក់ពីសៀវភៅដោយចៃដន្យ មិនមែនដោយសារមានគេលាក់ ឬហែកចេញនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Missing Not at Random (MNAR)</span></td>
+                <td>ជាការបាត់ទិន្នន័យដែលមូលហេតុនៃការបាត់គឺទាក់ទងផ្ទាល់ទៅនឹងតម្លៃពិតនៃទិន្នន័យនោះ។ ឧទាហរណ៍៖ អ្នកដែលមានប្រាក់ខែខ្ពស់ មិនព្រមផ្តល់ព័ត៌មានអំពីប្រាក់ខែរបស់ពួកគេ។</td>
+                <td>ដូចជាសិស្សដែលមិនមកប្រឡង ព្រោះពួកគេដឹងថាខ្លួនឯងមិនចេះមេរៀន (ការបាត់ខ្លួនទាក់ទងនឹងហេតុផលផ្ទាល់ខ្លួន)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbors (KNN)</span></td>
+                <td>ជាក្បួនដោះស្រាយដែលស្វែងរកចំណុចទិន្នន័យផ្សេងទៀតដែលមានលក្ខណៈស្រដៀងបំផុត (ជិតខាង) នឹងទិន្នន័យដែលបាត់ រួចយកតម្លៃមធ្យម ឬតម្លៃដែលជួបញឹកញាប់របស់ពួកគេមកបំពេញកន្លែងដែលបាត់។</td>
+                <td>ដូចជាការទស្សន៍ទាយតម្លៃផ្ទះមួយ ដោយមើលទៅលើតម្លៃផ្ទះរបស់អ្នកជិតខាងដែលនៅក្បែរៗនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multiple Imputation</span></td>
+                <td>ជាបច្ចេកទេសស្ថិតិដែលបង្កើតសំណុំទិន្នន័យពេញលេញជាច្រើនច្បាប់ (ដោយប្រើតម្លៃប៉ាន់ស្មានផ្សេងៗគ្នាសម្រាប់កន្លែងដែលបាត់) រួចធ្វើការវិភាគរួមគ្នា ដើម្បីកាត់បន្ថយភាពលម្អៀង និងគិតគូរពីភាពមិនច្បាស់លាស់។</td>
+                <td>ដូចជាការសួរយោបល់ពីអ្នកជំនាញ ៥ នាក់ផ្សេងគ្នាអំពីចម្លើយដែលបាត់ រួចយកមធ្យមភាគនៃចម្លើយទាំងនោះមកប្រើ ដើម្បីឱ្យកាន់តែសុក្រឹត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Generative Adversarial Networks (GANs)</span></td>
+                <td>ជាប្រព័ន្ធបញេ្ញាសិប្បនិម្មិត (AI) ដែលមានម៉ូដែលពីរប្រកួតប្រជែងគ្នា៖ មួយព្យាយាមបង្កើតទិន្នន័យក្លែងក្លាយឱ្យដូចពិត (Generator) និងមួយទៀតព្យាយាមចាប់កំហុស (Discriminator) រហូតទាល់តែទិន្នន័យដែលបង្កើតថ្មីនោះល្អឥតខ្ចោះ។</td>
+                <td>ដូចជាអ្នកក្លែងបន្លំគំនូរម្នាក់ព្យាយាមគូរឱ្យដូចដើមបំផុត ខណៈដែលអ្នកជំនាញព្យាយាមចាប់កំហុស រហូតទាល់តែគំនូរនោះមើលទៅដូចរបស់ពិត ១០០%។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Autoencoder</span></td>
+                <td>ជាប្រភេទនៃបណ្តាញសរសៃប្រសាទ (Neural Network) ដែលរៀនបង្រួមទិន្នន័យ (Encode) ហើយពន្លាវាវិញ (Decode)។ ដំណើរការនេះជួយឱ្យវាចេះពីទម្រង់នៃទិន្នន័យ និងអាចបង្កើតផ្នែកដែលបាត់ឡើងវិញបាន។</td>
+                <td>ដូចជាការរៀនសង្ខេបសាច់រឿងសៀវភៅមួយក្បាល ហើយអាចសរសេរទំព័រដែលបាត់ឡើងវិញបាន ដោយផ្អែកលើការយល់ដឹងពីសាច់រឿងរួម។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ai-predictive-analytics-edge-cloud-2021.html">
+                    <span class="km">ការវិភាគព្យាករណ៍ដែលជំរុញដោយ AI សម្រាប់បង្កើនប្រសិទ្ធភាពការប្រើប្រាស់ធនធាននៅក្នុងមជ្ឈមណ្ឌលទិន្នន័យ Edge-Cloud</span><br>
+                    <span class="en article-original-title">AI-Driven Predictive Analytics for Optimizing Resource Utilization in Edge-Cloud Data Centers</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cyber-attack-detection-smart-grid-ml-2024.html">
+                    <span class="km">ការរកឃើញនិងការកាត់បន្ថយការវាយប្រហារតាមអ៊ីនធឺណិតដោយប្រើម៉ាស៊ីនរៀននៅក្នុងប្រព័ន្ធបណ្តាញអគ្គិសនីឆ្លាតវៃ</span><br>
+                    <span class="en article-original-title">CYBER ATTACK DETECTION AND MITIGATION USING MACHINE LEARNING IN SMART GRID SYSTEMS</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/explainable-ai-disease-diagnosis-review-2024.html">
+                    <span class="km">ការពិនិត្យឡើងវិញលើបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) សម្រាប់ការធ្វើរោគវិនិច្ឆ័យជំងឺ</span><br>
+                    <span class="en article-original-title">A comprehensive review of explainable AI for disease diagnosis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/automated-parkinsons-disease-detection-review-2024.html">
+                    <span class="km">ការរកឃើញជំងឺផាកឃីនសុនដោយស្វ័យប្រវត្តិ៖ ការពិនិត្យឡើងវិញលើបច្ចេកទេស សំណុំទិន្នន័យ ទម្រង់រោគវិនិច្ឆ័យ និងបញ្ហាប្រឈម</span><br>
+                    <span class="en article-original-title">Automated Parkinson’s Disease Detection: A Review of Techniques, Datasets, Modalities, and Open Challenges</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/ai-parkinsons-disease-machine-learning-diagnosis-2026.html">
+                    <span class="km">AI នៅក្នុងជំងឺផាកឃីនសាន់៖ ការពិនិត្យឡើងវិញសង្ខេបអំពីវិធីសាស្ត្រ Machine Learning សម្រាប់ការធ្វើរោគវិនិច្ឆ័យ</span><br>
+                    <span class="en article-original-title">AI in Parkinson’s Disease: A Short Review of Machine Learning Approaches for Diagnosis</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបែងចែកអត្ថបទ និង Naive Bayes | KhmerResearch.com</title>
+    <meta name="description" content="ជំពូកនេះដោះស្រាយបញ្ហានៃការចាត់ថ្នាក់ឯកសារ (Text Classification) ទៅក្នុងក្រុមដែលបានកំណត់ទុកជាមុនដោយស្វ័យប្រវត្តិ ដើម្បីជំនួសឱ្យការចាត់ថ្នាក់ដោយដៃដែលចំណាយពេលយូ...">
+    
+    <meta name="keywords" content="Text Classification, Naive Bayes, Multinomial Model, Bernoulli Model, Feature Selection, Mutual Information, Supervised Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/text-classification-and-naive-bayes-2009.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/text-classification-and-naive-bayes-2009.html">
+    <meta property="og:title" content="ការបែងចែកអត្ថបទ និង Naive Bayes | KhmerResearch.com">
+    <meta property="og:description" content="ជំពូកនេះដោះស្រាយបញ្ហានៃការចាត់ថ្នាក់ឯកសារ (Text Classification) ទៅក្នុងក្រុមដែលបានកំណត់ទុកជាមុនដោយស្វ័យប្រវត្តិ ដើម្បីជំនួសឱ្យការចាត់ថ្នាក់ដោយដៃដែលចំណាយពេលយូរ និងមានតម្លៃថ្លៃ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2009">
+    
+    <meta property="article:tag" content="Text Classification">
+    
+    <meta property="article:tag" content="Naive Bayes">
+    
+    <meta property="article:tag" content="Multinomial Model">
+    
+    <meta property="article:tag" content="Bernoulli Model">
+    
+    <meta property="article:tag" content="Feature Selection">
+    
+    <meta property="article:tag" content="Mutual Information">
+    
+    <meta property="article:tag" content="Supervised Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបែងចែកអត្ថបទ និង Naive Bayes">
+    <meta name="twitter:description" content="ជំពូកនេះដោះស្រាយបញ្ហានៃការចាត់ថ្នាក់ឯកសារ (Text Classification) ទៅក្នុងក្រុមដែលបានកំណត់ទុកជាមុនដោយស្វ័យប្រវត្តិ ដើម្បីជំនួសឱ្យការចាត់ថ្នាក់ដោយដៃដែលចំណាយពេលយូរ និងមានតម្លៃថ្លៃ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17c2\u1784\u1785\u17c2\u1780\u17a2\u178f\u17d2\u1790\u1794\u1791 \u1793\u17b7\u1784 Naive Bayes",
+      "name": "Text classification and Naive Bayes",
+      "description": "\u1787\u17c6\u1796\u17bc\u1780\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17af\u1780\u179f\u17b6\u179a (Text Classification) \u1791\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17d2\u179a\u17bb\u1798\u178a\u17c2\u179b\u1794\u17b6\u1793\u1780\u17c6\u178e\u178f\u17cb\u1791\u17bb\u1780\u1787\u17b6\u1798\u17bb\u1793\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1787\u17c6\u1793\u17bd\u179f\u17b1\u17d2\u1799\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178a\u17c4\u1799\u178a\u17c3\u178a\u17c2\u179b\u1785\u17c6\u178e\u17b6\u1799\u1796\u17c1\u179b\u1799\u17bc\u179a \u1793\u17b7\u1784\u1798\u17b6\u1793\u178f\u1798\u17d2\u179b\u17c3\u1790\u17d2\u179b\u17c3\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/text-classification-and-naive-bayes-2009.html",
+      "author": [{"@type": "Person", "name": "Christopher D. Manning (Cambridge University Press)"},{"@type": "Person", "name": "Prabhakar Raghavan"},{"@type": "Person", "name": "Hinrich Sch\u00fctze"}],
+      "datePublished": "2009",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Text classification and Naive Bayes",
+        "url": "N/A"
+      },
+      "keywords": ["Text Classification", "Naive Bayes", "Multinomial Model", "Bernoulli Model", "Feature Selection", "Mutual Information", "Supervised Learning"],
+      "about": "Information Retrieval / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17c2\u1784\u1785\u17c2\u1780\u17a2\u178f\u17d2\u1790\u1794\u1791 \u1793\u17b7\u1784 Naive Bayes",
+          "item": "https://khmerresearch.com/papers/technology/text-classification-and-naive-bayes-2009.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបែងចែកអត្ថបទ និង Naive Bayes</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Text classification and Naive Bayes<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបែងចែកអត្ថបទ និង Naive Bayes</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Text classification and Naive Bayes</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Christopher D. Manning (Cambridge University Press), Prabhakar Raghavan, Hinrich Schütze</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2009</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Information Retrieval / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ជំពូកនេះដោះស្រាយបញ្ហានៃការចាត់ថ្នាក់ឯកសារ (Text Classification) ទៅក្នុងក្រុមដែលបានកំណត់ទុកជាមុនដោយស្វ័យប្រវត្តិ ដើម្បីជំនួសឱ្យការចាត់ថ្នាក់ដោយដៃដែលចំណាយពេលយូរ និងមានតម្លៃថ្លៃ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្ត្រសិក្សាដោយមានការត្រួតពិនិត្យ (Supervised Learning) ដោយផ្តោតលើគំរូប្រូបាប៊ីលីតេ Naive Bayes និងបច្ចេកទេសជ្រើសរើសលក្ខណៈពិសេសនៃទិន្នន័យ។
+        
+        <ul>
+            
+            <li>គំរូ Multinomial Naive Bayes (ផ្អែកលើភាពញឹកញាប់នៃពាក្យ)</li>
+            
+            <li>គំរូ Bernoulli Naive Bayes (ផ្អែកលើវត្តមាន ឬអវត្តមាននៃពាក្យ)</li>
+            
+            <li>ការជ្រើសរើសលក្ខណៈពិសេស (Feature Selection) ដោយប្រើ Mutual Information និង Chi-square</li>
+            
+            <li>ការវាយតម្លៃប្រសិទ្ធភាពដោយប្រើ Precision, Recall និង F1 measure</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>Naive Bayes មានប្រសិទ្ធភាពខ្ពស់ និងល្បឿនលឿនក្នុងការបែងចែកអត្ថបទ ទោះបីជាវាសន្មតថាពាក្យនីមួយៗមានឯករាជ្យភាព (Independence Assumption) ពីគ្នាក៏ដោយ។</li>
+            
+            <li>ការជ្រើសរើសលក្ខណៈពិសេស (Feature Selection) ជួយបង្កើនភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់ ជាពិសេសសម្រាប់គំរូ Bernoulli ដោយកាត់បន្ថយពាក្យដែលរំខាន (Noise features)។</li>
+            
+            <li>ទោះបីជា Naive Bayes ដំណើរការបានល្អក៏ដោយ វិធីសាស្ត្រផ្សេងទៀតដូចជា Support Vector Machines (SVM) ជារឿយៗផ្តល់នូវភាពត្រឹមត្រូវខ្ពស់ជាងនៅលើសំណុំទិន្នន័យស្តង់ដារ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Multinomial Naive Bayes</span></strong><br>គំរូដែលគិតគូរពីចំនួនដងនៃការកើតឡើងនៃពាក្យ (Term Frequency)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់សម្រាប់ឯកសារវែង និងអាចចាប់យកព័ត៌មានពីចំនួនពាក្យដែលបានប្រើប្រាស់។</td>
+                <td>ទាមទារការធ្វើឱ្យរលូន (Smoothing) ដើម្បីចៀសវាងបញ្ហាប្រូបាប៊ីលីតេសូន្យ ហើយសន្មតថាទីតាំងពាក្យមិនសំខាន់។</td>
+                <td>ដំណើរការបានល្អជាង Bernoulli លើទិន្នន័យដែលមានវាក្យសព្ទធំ ប៉ុន្តែនៅតែទាបជាង SVM ប្រហែល ១០% លើ F1 Score។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Bernoulli Naive Bayes</span></strong><br>គំរូដែលគិតតែពីវត្តមាន ឬអវត្តមាននៃពាក្យ (Binary)</td>
+                <td>មានប្រសិទ្ធភាពល្អសម្រាប់ឯកសារខ្លីៗ និងអាចទប់ទល់នឹងការប្រែប្រួលនៃបរិបទ (Concept Drift) បានខ្លះ។</td>
+                <td>បាត់បង់ព័ត៌មានលម្អិតដោយសារមិនគិតពីចំនួនដងនៃពាក្យ ហើយភាពត្រឹមត្រូវធ្លាក់ចុះលើឯកសារវែង។</td>
+                <td>ទាមទារការជ្រើសរើសលក្ខណៈពិសេស (Feature Selection) យ៉ាងចាំបាច់ បើមិនដូច្នោះទេភាពត្រឹមត្រូវនឹងទាប។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machines (SVM)</span></strong><br>គំរូដែលស្វែងរកបន្ទាត់ព្រំដែនល្អបំផុតដើម្បីបែងចែកថ្នាក់ (ត្រូវបានប្រើប្រាស់ក្នុងឯកសារសម្រាប់ប្រៀបធៀប)</td>
+                <td>ផ្តល់នូវភាពត្រឹមត្រូវ (Accuracy/F1) ខ្ពស់បំផុតក្នុងចំណោមវិធីសាស្ត្រដែលបានសាកល្បង។</td>
+                <td>ចំណាយពេលយូរក្នុងការបង្វឹក (Training) និងទាមទារធនធានកុំព្យូទ័រខ្ពស់ជាង Naive Bayes។</td>
+                <td>ទទួលបានពិន្ទុ Micro-averaged F1 ខ្ពស់ជាង Naive Bayes (៨៩% ធៀបនឹង ៨០%)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> វិធីសាស្ត្រ Naive Bayes ត្រូវបានគេស្គាល់ថាមានប្រសិទ្ធភាពខ្ពស់ និងចំណាយធនធានតិចបំផុត ដែលសាកសមសម្រាប់ការអនុវត្តលើកុំព្យូទ័រធម្មតា។
+    
+    <ul>
+        
+        <li><strong>Computation Time:</strong> មានល្បឿនលឿនណាស់ (Linear Time Complexity) ក្នុងការបង្វឹក និងការធ្វើចំណាត់ថ្នាក់ ដែលសាកសមសម្រាប់ប្រព័ន្ធ Real-time។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារទិន្នន័យដែលមានស្លាក (Labeled Data) សម្រាប់ធ្វើការបង្វឹក (Supervised Learning)។</li>
+        
+        <li><strong>Storage:</strong> មិនត្រូវការអង្គចងចាំ (RAM) ធំពេកទេ បើធៀបនឹងគំរូ Deep Learning ទំនើបៗ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពី Reuters-RCV1 និង Reuters-21578 ដែលជាអត្ថបទព័ត៌មានភាសាអង់គ្លេស។ សម្រាប់កម្ពុជា នេះគឺជាបញ្ហាប្រឈមធំមួយព្រោះភាសាខ្មែរមិនមានដកឃ្លាដើម្បីសម្គាល់ពាក្យ (No explicit word boundaries) ដូចភាសាអង់គ្លេស ដែលធ្វើឱ្យគំរូ Bag of Words របស់ Naive Bayes ពិបាកអនុវត្តផ្ទាល់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានបញ្ហាភាសា ប៉ុន្តែវិធីសាស្ត្រនេះមានប្រយោជន៍ខ្លាំងសម្រាប់កម្ពុជា ដោយសារវាមានតម្លៃថោក និងងាយស្រួលបង្កើត។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសារព័ត៌មាន និងបណ្ណាល័យ:</strong> ការប្រើប្រាស់ដើម្បីបែងចែកប្រភេទព័ត៌មានក្នុងស្រុក ឬឯកសារក្នុងបណ្ណាល័យឌីជីថល (Digital Library) ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ (ISP/Telco):</strong> ការច្រោះសារឥតបានការ (Spam Filtering) លើ SMS ឬ Email ដែលជាបញ្ហាកំពុងកើនឡើងនៅកម្ពុជា។</li>
+            
+            <li><strong>ការស្រាវជ្រាវទីផ្សារ:</strong> ការវិភាគមតិយោបល់ (Sentiment Analysis) របស់អតិថិជនលើបណ្តាញសង្គមចំពោះផលិតផលខ្មែរ។</li>
+            
+        </ul>
+        
+        
+        <p>ដើម្បីឱ្យជោគជ័យនៅកម្ពុជា អ្នកស្រាវជ្រាវត្រូវតែបញ្ចូលបច្ចេកទេសកាត់ពាក្យខ្មែរ (Khmer Word Segmentation) មុននឹងអនុវត្តវិធីសាស្ត្រនេះ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១៖ ការសិក្សាទ្រឹស្តី និងឧបករណ៍:</strong> សិក្សាស្វែងយល់ពីទ្រឹស្តី Bayes Theorem និងរៀនប្រើប្រាស់បណ្ណាល័យ Python ដូចជា (scikit-learn) សម្រាប់ការអនុវត្ត Naive Bayes។</li>
+            
+            <li><strong>ជំហានទី ២៖ ការរៀបចំទិន្នន័យភាសាខ្មែរ:</strong> ដោយសារភាសាខ្មែរមិនមានដកឃ្លា អ្នកត្រូវប្រើឧបករណ៍កាត់ពាក្យដូចជា (KhmerCut) ឬ (PyKhmerNLP) ដើម្បីបំបែកអត្ថបទទៅជាពាក្យ (Tokens) មុននឹងដាក់ចូលក្នុងគំរូ។</li>
+            
+            <li><strong>ជំហានទី ៣៖ ការជ្រើសរើសលក្ខណៈពិសេស (Feature Selection):</strong> អនុវត្តបច្ចេកទេស (Chi-square) ឬ (Mutual Information) ដើម្បីចម្រាញ់យកតែពាក្យសំខាន់ៗ និងកាត់បន្ថយទិន្នន័យរំខាន (Noise)។</li>
+            
+            <li><strong>ជំហានទី ៤៖ ការសាកល្បង និងវាយតម្លៃ:</strong> បែងចែកទិន្នន័យជា Training/Test set និងវាស់វែងប្រសិទ្ធភាពដោយប្រើរង្វាស់ (Precision, Recall, F1-Score) ជាជាងមើលតែលើ Accuracy តែមួយមុខ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Bag of words</span></td>
+                <td>គឺជាវិធីសាស្រ្តតំណាងឯកសារអត្ថបទដោយគ្រាន់តែរាប់ចំនួនពាក្យនីមួយៗដែលមានក្នុងឯកសារនោះ ដោយមិនខ្វល់ពីលំដាប់លំដោយ ឬរចនាសម្ព័ន្ធវេយ្យាករណ៍ឡើយ។</td>
+                <td>ដូចជាការយកគ្រឿងផ្សំធ្វើម្ហូបទាំងអស់ដាក់ចូលក្នុងថង់មួយ ដោយមិនខ្វល់ថាដាក់មួយណាមុនឬក្រោយ សំខាន់គឺមានអ្វីខ្លះនិងចំនួនប៉ុន្មាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature selection</span></td>
+                <td>គឺជាដំណើរការនៃការជ្រើសរើសយកតែពាក្យ ឬលក្ខណៈពិសេសដែលសំខាន់បំផុតពីក្នុងអត្ថបទ ដើម្បីយកមកបង្វឹកកុំព្យូទ័រ ដោយកាត់បន្ថយទិន្នន័យដែលមិនចាំបាច់ ឬរំខាន (Noise)។</td>
+                <td>ដូចជាការរៀបចំវ៉ាលីសម្រាប់ទៅដើរលេង អ្នកជ្រើសរើសយកតែរបស់ណាដែលចាំបាច់បំផុត ដោយទុករបស់ដែលមិនសំខាន់ចោលនៅផ្ទះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Add-one smoothing</span></td>
+                <td>គឺជាបច្ចេកទេសគណិតវិទ្យាដែលបន្ថែមចំនួន ១ ទៅលើគ្រប់ពាក្យទាំងអស់ ដើម្បីការពារកុំឱ្យមានប្រូបាប៊ីលីតេសូន្យ (Zero Probability) នៅពេលកុំព្យូទ័រជួបពាក្យដែលមិនធ្លាប់ឃើញពីមុនក្នុងទិន្នន័យបង្វឹក។</td>
+                <td>ដូចជាការផ្តល់ពិន្ទុបន្ថែម ១ ដល់សិស្សទាំងអស់ក្នុងការប្រឡង ដើម្បីធានាថាមិនមាននរណាម្នាក់បានពិន្ទុសូន្យដាច់ខាត ដែលអាចធ្វើឱ្យខូចមធ្យមភាគ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Maximum a posteriori (MAP)</span></td>
+                <td>គឺជាវិធាននៃការសម្រេចចិត្តក្នុងស្ថិតិ ដើម្បីជ្រើសរើសយកចម្លើយ (ថ្នាក់) ណាដែលមានភាគរយអាចទៅរួចខ្ពស់បំផុត ដោយផ្អែកលើទិន្នន័យដែលមានស្រាប់ បូកផ្សំជាមួយចំណេះដឹងពីមុន (Prior knowledge)។</td>
+                <td>ដូចជាការទាយថាក្រុមបាល់ទាត់មួយណានឹងឈ្នះ ដោយផ្អែកលើប្រវត្តិប្រកួតកន្លងមក និងស្ថានភាពកីឡាករបច្ចុប្បន្ន ដើម្បីជ្រើសរើសអ្នកឈ្នះដែលទំនងបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept drift</span></td>
+                <td>គឺជាបាតុភូតដែលអត្ថន័យ ឬបរិបទនៃទិន្នន័យផ្លាស់ប្តូរទៅតាមពេលវេលា ធ្វើឱ្យគំរូកុំព្យូទ័រចាស់លែងមានភាពត្រឹមត្រូវ (ឧទាហរណ៍៖ ប្រធានាធិបតីអាមេរិកផ្លាស់ប្តូរពី Clinton ទៅ Bush)។</td>
+                <td>ដូចជាពាក្យស្លោករបស់យុវវ័យដែលផ្លាស់ប្តូរពីមួយជំនាន់ទៅមួយជំនាន់ ពាក្យដែលពេញនិយមពីមុន អាចលែងមានន័យដូចដើមនៅពេលបច្ចុប្បន្ន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Macroaveraging</span></td>
+                <td>គឺជាវិធីសាស្ត្រគណនាមធ្យមភាគនៃប្រសិទ្ធភាព ដោយផ្តល់ទម្ងន់ស្មើគ្នាដល់គ្រប់ថ្នាក់ (Class) មិនថាថ្នាក់នោះមានទិន្នន័យច្រើន ឬតិចនោះទេ ដែលជួយឱ្យយើងដឹងពីប្រសិទ្ធភាពលើថ្នាក់តូចៗ។</td>
+                <td>ដូចជាការរកមធ្យមភាគពិន្ទុនៃមុខវិជ្ជាផ្សេងៗគ្នា ដោយចាត់ទុកថាគ្រប់មុខវិជ្ជាសំខាន់ស្មើគ្នា ទោះបីជាមុខវិជ្ជាខ្លះរៀនពិបាកជាង ឬមានម៉ោងរៀនតិចជាងក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/overview-supervised-machine-learning-methods-2017.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃវិធីសាស្ត្ររៀនម៉ាស៊ីនដែលមានការត្រួតពិនិត្យ (Supervised Machine Learning)</span><br>
+                    <span class="en article-original-title">An overview of the supervised machine learning methods</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

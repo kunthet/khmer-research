@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបំប្លែងស៊េរីទិន្នន័យពេលវេលាជាទម្រង់រូបភាពសម្រាប់ការត្រួតពិនិត្យ និងចំណាត់ថ្នាក់ដោយប្រើបណ្ដាញសរសៃប្រសាទ Tiled Convolutional Neural Networks | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់ស៊េរីទិន្នន័យពេលវេលា (Time Series Classification) ដោយព្យាយាមប្រើប្រាស់បច្ចេកវិទ្យា Computer Vision ដ៏មានប្រសិទ្...">
+    
+    <meta name="keywords" content="Time Series Classification, Gramian Angular Fields, Markov Transition Fields, Tiled Convolutional Neural Networks, Deep Learning, Feature Representation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/encoding-time-series-images-cnn-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/encoding-time-series-images-cnn-2015.html">
+    <meta property="og:title" content="ការបំប្លែងស៊េរីទិន្នន័យពេលវេលាជាទម្រង់រូបភាពសម្រាប់ការត្រួតពិនិត្យ និងចំណាត់ថ្នាក់ដោយប្រើបណ្ដាញសរសៃប្រសាទ Tiled Convolutional Neural Networks | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់ស៊េរីទិន្នន័យពេលវេលា (Time Series Classification) ដោយព្យាយាមប្រើប្រាស់បច្ចេកវិទ្យា Computer Vision ដ៏មានប្រសិទ្ធភាព ដើម្បីវិភាគទិន្នន័យដែលមិនមែនជារូបភា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015 AAAI Workshop">
+    
+    <meta property="article:tag" content="Time Series Classification">
+    
+    <meta property="article:tag" content="Gramian Angular Fields">
+    
+    <meta property="article:tag" content="Markov Transition Fields">
+    
+    <meta property="article:tag" content="Tiled Convolutional Neural Networks">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Feature Representation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបំប្លែងស៊េរីទិន្នន័យពេលវេលាជាទម្រង់រូបភាពសម្រាប់ការត្រួតពិនិត្យ និងចំណាត់ថ្នាក់ដោយប្រើបណ្ដាញសរសៃប្រសាទ Tiled Convolutional Neural Networks">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់ស៊េរីទិន្នន័យពេលវេលា (Time Series Classification) ដោយព្យាយាមប្រើប្រាស់បច្ចេកវិទ្យា Computer Vision ដ៏មានប្រសិទ្ធភាព ដើម្បីវិភាគទិន្នន័យដែលមិនមែនជារូបភា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17c6\u1794\u17d2\u179b\u17c2\u1784\u179f\u17ca\u17c1\u179a\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1787\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178f\u17d2\u179a\u17bd\u178f\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799 \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791 Tiled Convolutional Neural Networks",
+      "name": "Encoding Time Series as Images for Visual Inspection and Classification Using Tiled Convolutional Neural Networks",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17ca\u17c1\u179a\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 (Time Series Classification) \u178a\u17c4\u1799\u1796\u17d2\u1799\u17b6\u1799\u17b6\u1798\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6 Computer Vision \u178a\u17cf\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796 \u178a\u17be\u1798\u17d2\u1794\u17b8\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1798\u17b7\u1793\u1798\u17c2\u1793\u1787\u17b6\u179a\u17bc\u1794\u1797\u17b6\u1796\u1796\u17b8\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/encoding-time-series-images-cnn-2015.html",
+      "author": [{"@type": "Person", "name": "Zhiguang Wang (University of Maryland Baltimore County)"},{"@type": "Person", "name": "Tim Oates (University of Maryland Baltimore County)"}],
+      "datePublished": "2015 AAAI Workshop",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Encoding Time Series as Images for Visual Inspection and Classification Using Tiled Convolutional Neural Networks",
+        "url": "www.aaai.org"
+      },
+      "keywords": ["Time Series Classification", "Gramian Angular Fields", "Markov Transition Fields", "Tiled Convolutional Neural Networks", "Deep Learning", "Feature Representation"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17c6\u1794\u17d2\u179b\u17c2\u1784\u179f\u17ca\u17c1\u179a\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1787\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178f\u17d2\u179a\u17bd\u178f\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799 \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791 Tiled Convolutional Neural Networks",
+          "item": "https://khmerresearch.com/papers/technology/encoding-time-series-images-cnn-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបំប្លែងស៊េរីទិន្នន័យពេលវេលាជាទម្រង់រូបភាពសម្រាប់ការត្រ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Encoding Time Series as Images for Visual Inspection and Classification Using Tiled Convolutional Neural Networks<br>
+        
+        <strong>Source:</strong> <a href="www.aaai.org" target="_blank">www.aaai.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបំប្លែងស៊េរីទិន្នន័យពេលវេលាជាទម្រង់រូបភាពសម្រាប់ការត្រួតពិនិត្យ និងចំណាត់ថ្នាក់ដោយប្រើបណ្ដាញសរសៃប្រសាទ Tiled Convolutional Neural Networks</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Encoding Time Series as Images for Visual Inspection and Classification Using Tiled Convolutional Neural Networks</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Zhiguang Wang (University of Maryland Baltimore County), Tim Oates (University of Maryland Baltimore County)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015 AAAI Workshop</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់ស៊េរីទិន្នន័យពេលវេលា (Time Series Classification) ដោយព្យាយាមប្រើប្រាស់បច្ចេកវិទ្យា Computer Vision ដ៏មានប្រសិទ្ធភាព ដើម្បីវិភាគទិន្នន័យដែលមិនមែនជារូបភាពពីធម្មជាតិ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើក្របខ័ណ្ឌថ្មីមួយដើម្បីបំប្លែងទិន្នន័យពេលវេលាទៅជាប្រភេទរូបភាពផ្សេងៗគ្នា រួចប្រើប្រាស់បច្ចេកទេស Deep Learning ដើម្បីធ្វើចំណាត់ថ្នាក់។
+        
+        <ul>
+            
+            <li>ការបង្កើត Gramian Angular Fields (GAF) ដោយបំប្លែងស៊េរីពេលវេលាទៅជាប្រព័ន្ធកូអរដោនេប៉ូលែរ (Polar Coordinate System)</li>
+            
+            <li>ការបង្កើត Markov Transition Fields (MTF) ដើម្បីតំណាងឱ្យប្រូបាប៊ីលីតេនៃការផ្លាស់ប្ដូរ (Transition Probability) តាមលំដាប់លំដោយ</li>
+            
+            <li>ការប្រើប្រាស់ Tiled Convolutional Neural Networks (Tiled CNNs) ដើម្បីរៀនលក្ខណៈពិសេសកម្រិតខ្ពស់ពីរូបភាព GAF និង MTF</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>លទ្ធផលនៃការធ្វើចំណាត់ថ្នាក់បង្ហាញថា វិធីសាស្ត្រនេះមានសមត្ថភាពប្រកួតប្រជែងជាមួយបច្ចេកទេសឈានមុខគេបច្ចុប្បន្នដូចជា 1NN-DTW និង Fast-Shapelets។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នារវាងរូបភាព GAF និង MTF (GAF-MTF) ជួយកាត់បន្ថយហានិភ័យនៃការរៀនសូត្រលើសកម្រិត (Overfitting) និងបង្កើនភាពត្រឹមត្រូវនៃការធ្វើចំណាត់ថ្នាក់លើសំណុំទិន្នន័យចំនួន ១០ ក្នុងចំណោម ១២ ដែលបានសាកល្បង។</li>
+            
+            <li>បណ្ដាញ Tiled CNNs ដំណើរការបានល្អជាមួយទិន្នន័យដែលមានចំនួនកំណត់ (Limited Labeled Data) ដោយសារការចែករំលែកទម្ងន់ (Weight Sharing) និងរចនាសម្ព័ន្ធ Tiling។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">GAF-MTF + Tiled CNN (Proposed Method)</span></strong><br>វិធីសាស្ត្រស្នើឡើងដែលរួមបញ្ចូល GAF និង MTF ជាមួយ Tiled CNN</td>
+                <td>អាចចាប់យកទំនាក់ទំនងរវាងទិន្នន័យថេរ (Static) និងទិន្នន័យផ្លាស់ប្តូរ (Dynamic) បានល្អ ហើយដំណើរការមានប្រសិទ្ធភាពលើសំណុំទិន្នន័យតូចៗ។</td>
+                <td>ទាមទារការបំប្លែងទិន្នន័យជាមុន (Preprocessing) ទៅជារូបភាព ដែលអាចស្មុគស្មាញជាងការប្រើប្រាស់ទិន្នន័យ Raw Time Series ផ្ទាល់។</td>
+                <td>ទទួលបានអត្រាមានកំហុស (Error Rate) ទាបបំផុតលើសំណុំទិន្នន័យចំនួន ១០ ក្នុងចំណោម ១២ ដែលបានសាកល្បង ប្រៀបធៀបនឹងការប្រើ GAF ឬ MTF តែឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">1NN-DTW (Dynamic Time Warping)</span></strong><br>វិធីសាស្ត្រ 1-Nearest Neighbor ជាមួយ Dynamic Time Warping</td>
+                <td>ជាវិធីសាស្ត្រស្តង់ដារដែលមានប្រសិទ្ធភាពខ្ពស់ក្នុងការដោះស្រាយបញ្ហាការផ្លាស់ប្តូរពេលវេលា (Temporal Shifts) នៃទិន្នន័យ។</td>
+                <td>ចំណាយពេលគណនាយូរ (Computationally Expensive) ពិសេសលើទិន្នន័យដែលមានទំហំធំ។</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ ប៉ុន្តែត្រូវបានវ៉ាដាច់ដោយវិធីសាស្ត្រ Tiled CNN លើសំណុំទិន្នន័យមួយចំនួនដូចជា ECG200 និង FaceAll។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SAX-VSM</span></strong><br>វិធីសាស្ត្រ Symbolic Aggregate approXimation - Vector Space Model</td>
+                <td>មានល្បឿនលឿន និងមានប្រសិទ្ធភាពក្នុងការតំណាងទិន្នន័យជាទម្រង់និមិត្តសញ្ញា (Symbolic)។</td>
+                <td>អាចបាត់បង់ព័ត៌មានលម្អិតមួយចំនួននៅពេលធ្វើការបង្រួមទិន្នន័យ (Discretization)។</td>
+                <td>ជាគូប្រជែងដ៏ខ្លាំងក្លា ប៉ុន្តែវិធីសាស្ត្រ GAF-MTF នៅតែមានប្រៀបជាងលើទិន្នន័យស្មុគស្មាញមួយចំនួន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះអាចអនុវត្តបានដោយប្រើប្រាស់ធនធានកុំព្យូទ័រកម្រិតមធ្យម មិនចាំបាច់មានបច្ចេកវិទ្យាទំនើបពេកនោះទេ ដែលសមស្របសម្រាប់បរិបទនៅកម្ពុជា។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រយួរដៃដែលមាន CPU Intel i7 និង RAM 8GB គឺគ្រប់គ្រាន់សម្រាប់ការពិសោធន៍លើ Dataset ចំនួន ១២ ដោយចំណាយពេលត្រឹមមួយថ្ងៃ។</li>
+        
+        <li><strong>Software:</strong> ភាសា Python និងបណ្ណាល័យសម្រាប់ Deep Learning (ដូចជា TensorFlow ឬ PyTorch) និងបណ្ណាល័យ pyts សម្រាប់ការបំប្លែង Time Series។</li>
+        
+        <li><strong>Data Requirements:</strong> វិធីសាស្ត្រ Tiled CNN នេះត្រូវបានរចនាឡើងដើម្បីដំណើរការល្អជាមួយសំណុំទិន្នន័យដែលមានការដាក់ស្លាក (Labeled Data) មានកំណត់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ UCR Time Series Repository ដែលជាសំណុំទិន្នន័យស្តង់ដារអន្តរជាតិ (លោកខាងលិច) រួមមានទិន្នន័យវេជ្ជសាស្ត្រ រូបភាព និងចលនា។ វាមិនមានទិន្នន័យជាក់លាក់ពីតំបន់អាស៊ីអាគ្នេយ៍ ឬកម្ពុជាទេ ដែលអាចធ្វើឱ្យម៉ូដែលត្រូវការការបង្វឹកបន្ថែម (Fine-tuning) ពេលយកមកប្រើលើទិន្នន័យជាក់ស្តែងក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ជាពិសេសក្នុងវិស័យដែលទើបចាប់ផ្តើមប្រមូលទិន្នន័យ និងមិនទាន់មានទិន្នន័យច្រើនសន្ធឹកសន្ធាប់។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្ម (Smart Agriculture):</strong> ការប្រើប្រាស់ដើម្បីវិភាគទិន្នន័យពីសេនស័រ (Sensors) តាមដានសំណើមដី ឬសីតុណ្ហភាពក្នុងចំការដំណាំ ដើម្បីព្យាករណ៍ពីជំងឺ ឬតម្រូវការទឹក ដោយបំប្លែងទិន្នន័យសេនស័រទៅជារូបភាពសម្រាប់វិភាគ។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល (Healthcare):</strong> ការវិភាគទិន្នន័យ ECG (ចង្វាក់បេះដូង) នៅតាមមន្ទីរពេទ្យនានា ដោយវិធីសាស្ត្រនេះបានបង្ហាញប្រសិទ្ធភាពខ្ពស់លើទិន្នន័យ ECG200 ក្នុងការពិសោធន៍។</li>
+            
+            <li><strong>វិស័យថាមពល (Energy Sector - EDC):</strong> ការត្រួតពិនិត្យភាពមិនប្រក្រតី (Anomaly Detection) នៅក្នុងបណ្តាញចែកចាយអគ្គិសនី ដោយវិភាគលើស៊េរីទិន្នន័យនៃការប្រើប្រាស់ថាមពល។</li>
+            
+        </ul>
+        
+        
+        <p>បច្ចេកទេសនេះផ្តល់លទ្ធភាពឱ្យអ្នកស្រាវជ្រាវខ្មែរប្រើប្រាស់ម៉ូដែល Deep Learning ដ៏មានអានុភាព (CNN) លើទិន្នន័យស៊េរីពេលវេលា ដោយមិនចាំបាច់មានទិន្នន័យរាប់លានដូចការសម្គាល់រូបភាពធម្មតា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃការបំប្លែងទិន្នន័យ:</strong> និស្សិតគួរចាប់ផ្តើមសិក្សាពីទ្រឹស្តីនៃ Gramian Angular Fields (GAF) និង Markov Transition Fields (MTF) ដោយប្រើប្រាស់បណ្ណាល័យ Python ឈ្មោះ pyts ដើម្បីសាកល្បងបំប្លែងទិន្នន័យសាមញ្ញទៅជារូបភាព។</li>
+            
+            <li><strong>អនុវត្ត Tiled CNN លើទិន្នន័យបើកចំហ:</strong> ទាញយកសំណុំទិន្នន័យពី UCR Archive (ដូចជា ECG200) ហើយអនុវត្តការបង្កើតម៉ូដែល CNN សាមញ្ញដោយប្រើ TensorFlow ឬ Keras ដើម្បីធ្វើចំណាត់ថ្នាក់រូបភាពដែលបានបំប្លែងរួច។</li>
+            
+            <li><strong>ប្រមូលទិន្នន័យជាក់ស្តែងក្នុងស្រុក:</strong> សហការជាមួយដេប៉ាតឺម៉ង់កសិកម្ម ឬវិស្វកម្ម ដើម្បីប្រមូលទិន្នន័យ Time Series (ឧទាហរណ៍៖ ទិន្នន័យអាកាសធាតុប្រចាំម៉ោង ឬទិន្នន័យចរាចរណ៍) ដើម្បីបង្កើតជា Dataset ផ្ទាល់ខ្លួន។</li>
+            
+            <li><strong>ការប្រៀបធៀបប្រសិទ្ធភាព:</strong> ធ្វើការប្រៀបធៀបលទ្ធផលរវាងការប្រើប្រាស់ 1NN-DTW និងវិធីសាស្ត្រ GAF-CNN លើទិន្នន័យក្នុងស្រុក ដើម្បីវាយតម្លៃថាវិធីសាស្ត្រមួយណាផ្តល់ភាពត្រឹមត្រូវជាងសម្រាប់បរិបទកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Gramian Angular Field (GAF)</span></td>
+                <td>បច្ចេកទេសបំប្លែងស៊េរីទិន្នន័យពេលវេលា (Time Series) ទៅជារូបភាពដោយប្រើប្រព័ន្ធកូអរដោនេប៉ូលែរ (Polar Coordinates)។ វាគណនាកម្រិតនៃទំនាក់ទំនងរវាងចំណុចពេលវេលានីមួយៗ ដើម្បីបង្កើតជាតារាងមួយដែលអាចឱ្យកុំព្យូទ័រវិភាគបានដូចរូបភាព។</td>
+                <td>ដូចជាការបំប្លែងសំឡេងតន្ត្រីទៅជាក្រាហ្វិកដែលមានពណ៌ចម្រុះ ដើម្បីឱ្យយើងអាចមើលឃើញលំនាំនៃបទចម្រៀងនោះតាមរយៈភ្នែក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov Transition Field (MTF)</span></td>
+                <td>វិធីសាស្ត្របង្កើតរូបភាពដោយផ្អែកលើប្រូបាប៊ីលីតេនៃការផ្លាស់ប្តូរតម្លៃពីកម្រិតមួយទៅកម្រិតមួយទៀតតាមពេលវេលា។ វាចាប់យកព័ត៌មានអំពីសក្ដានុពល (Dynamics) ឬរបៀបដែលទិន្នន័យផ្លាស់ទីពីស្ថានភាពមួយទៅស្ថានភាពមួយទៀត។</td>
+                <td>ប្រៀបដូចជាការគូរផែនទីបង្ហាញផ្លូវរបស់សត្វមួយ ដោយកត់ត្រាថាវាទំនងជានឹងលោតពីទីតាំង A ទៅទីតាំង B ញឹកញាប់ប៉ុណ្ណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tiled Convolutional Neural Networks (Tiled CNNs)</span></td>
+                <td>ប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដែលរៀនលក្ខណៈសម្បត្តិរបស់រូបភាពដោយបែងចែកជារូបភាពតូចៗ (Tiles) និងមិនចែករំលែកទម្ងន់ (Weights) គ្រប់កន្លែងដូច CNN ធម្មតា។ វាជួយឱ្យម៉ូដែលរៀនពីទិន្នន័យដែលមានលក្ខណៈប្រែប្រួលបន្តិចបន្តួច (Invariance) បានល្អ។</td>
+                <td>ដូចជាការពិនិត្យមើលរូបភាពធំមួយដោយប្រើកែវយុត្ដតូចៗជាច្រើនដាច់ដោយឡែកពីគ្នា ដើម្បីចាប់យកចំណុចលម្អិតពិសេសៗនៅកន្លែងផ្សេងៗគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dynamic Time Warping (DTW)</span></td>
+                <td>ក្បួនដោះស្រាយសម្រាប់វាស់វែងភាពស្រដៀងគ្នារវាងស៊េរីពេលវេលាពីរ ដែលអាចមានល្បឿនមិនស្មើគ្នា។ វា 'ពត់' (Warp) អ័ក្សពេលវេលាដើម្បីឱ្យចំណុចខ្ពស់និងទាបនៃក្រាហ្វទាំងពីរត្រូវគ្នាសម្រាប់ការប្រៀបធៀប។</td>
+                <td>ដូចជាការប្រៀបធៀបសំឡេងមនុស្សពីរនាក់និយាយពាក្យ 'សួស្តី' ទោះបីជាម្នាក់និយាយលឿន ហើយម្នាក់ទៀតនិយាយយឺតក៏ដោយ ក៏កុំព្យូទ័រនៅតែដឹងថាជាពាក្យតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Topographic ICA (TICA)</span></td>
+                <td>បច្ចេកទេសរៀនដោយគ្មានការត្រួតពិនិត្យ (Unsupervised Learning) ដែលប្រើដើម្បីបង្វឹកបណ្ដាញសរសៃប្រសាទជាមុន។ វាជួយបង្កើតលក្ខណៈពិសេស (Features) ដែលមានលក្ខណៈស្មុគស្មាញ និងមានទំនាក់ទំនងគ្នាតាមលំដាប់លំដោយ។</td>
+                <td>ដូចជាការរៀនសម្គាល់ប្រភេទស្លឹកឈើផ្សេងៗគ្នាដោយខ្លួនឯង ដោយគ្រាន់តែដើរមើលក្នុងព្រៃ មុនពេលមានគ្រូប្រាប់ឈ្មោះស្លឹកឈើទាំងនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Piecewise Aggregation Approximation (PAA)</span></td>
+                <td>វិធីសាស្ត្រកាត់បន្ថយទំហំទិន្នន័យដោយបែងចែកស៊េរីពេលវេលាជាផ្នែកស្មើៗគ្នា រួចយកតម្លៃមធ្យមនៃផ្នែកនីមួយៗមកតំណាង។ វាកាត់បន្ថយភាពស្មុគស្មាញនៃទិន្នន័យមុននឹងបំប្លែងទៅជា GAF។</td>
+                <td>ដូចជាការសង្ខេបសាច់រឿងភាពយន្តរយៈពេល ២ម៉ោង មកនៅត្រឹម ១០នាទី ដោយរក្សានូវចំណុចសំខាន់ៗ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gramian+Angular+Fields+for+time+series+encoding" target="_blank" rel="noopener"><span class="en">Gramian Angular Fields for time series encoding</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Markov+Transition+Fields+python+implementation" target="_blank" rel="noopener"><span class="en">Markov Transition Fields python implementation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Tiled+Convolutional+Neural+Networks+architecture" target="_blank" rel="noopener"><span class="en">Tiled Convolutional Neural Networks architecture</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+learning+approaches+for+time+series+classification" target="_blank" rel="noopener"><span class="en">Deep learning approaches for time series classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Imagine+time+series%3A+recent+advances+in+image-based+time+series+classification" target="_blank" rel="noopener"><span class="en">Imagine time series: recent advances in image-based time series classification</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

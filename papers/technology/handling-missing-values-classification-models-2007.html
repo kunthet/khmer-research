@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលអនុវត្តគំរូចំណាត់ថ្នាក់ (Classification Models) | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហាជាក់លាក់ទាក់ទងនឹងការបាត់បង់តម្លៃទិន្នន័យ (Missing Values) នៅដំណាក់កាលធ្វើការទស្សន៍ទាយ (Prediction Time) ដែលខុសពីការសិក្សាភាគច្រើនដែល...">
+    
+    <meta name="keywords" content="missing data, classification trees, imputation, reduced-feature models, decision trees, predictive modeling, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/handling-missing-values-classification-models-2007.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/handling-missing-values-classification-models-2007.html">
+    <meta property="og:title" content="ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលអនុវត្តគំរូចំណាត់ថ្នាក់ (Classification Models) | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាជាក់លាក់ទាក់ទងនឹងការបាត់បង់តម្លៃទិន្នន័យ (Missing Values) នៅដំណាក់កាលធ្វើការទស្សន៍ទាយ (Prediction Time) ដែលខុសពីការសិក្សាភាគច្រើនដែលផ្តោតតែលើការបាត់បង់ទិន្នន័យនៅពេលបណ្តុះបណ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2007, Journal of Machine Learning Research">
+    
+    <meta property="article:tag" content="missing data">
+    
+    <meta property="article:tag" content="classification trees">
+    
+    <meta property="article:tag" content="imputation">
+    
+    <meta property="article:tag" content="reduced-feature models">
+    
+    <meta property="article:tag" content="decision trees">
+    
+    <meta property="article:tag" content="predictive modeling">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលអនុវត្តគំរូចំណាត់ថ្នាក់ (Classification Models)">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាជាក់លាក់ទាក់ទងនឹងការបាត់បង់តម្លៃទិន្នន័យ (Missing Values) នៅដំណាក់កាលធ្វើការទស្សន៍ទាយ (Prediction Time) ដែលខុសពីការសិក្សាភាគច្រើនដែលផ្តោតតែលើការបាត់បង់ទិន្នន័យនៅពេលបណ្តុះបណ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1793\u17c5\u1796\u17c1\u179b\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1782\u17c6\u179a\u17bc\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb (Classification Models)",
+      "name": "Handling Missing Values when Applying Classification Models",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1787\u17b6\u1780\u17cb\u179b\u17b6\u1780\u17cb\u1791\u17b6\u1780\u17cb\u1791\u1784\u1793\u17b9\u1784\u1780\u17b6\u179a\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u178f\u1798\u17d2\u179b\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Missing Values) \u1793\u17c5\u178a\u17c6\u178e\u17b6\u1780\u17cb\u1780\u17b6\u179b\u1792\u17d2\u179c\u17be\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799 (Prediction Time) \u178a\u17c2\u179b\u1781\u17bb\u179f\u1796\u17b8\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793\u178a\u17c2\u179b\u1795\u17d2\u178f\u17c4\u178f\u178f\u17c2\u179b\u17be\u1780\u17b6\u179a\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1793\u17c5\u1796\u17c1\u179b\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1782\u17c6\u179a\u17bc (Induction Time)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/handling-missing-values-classification-models-2007.html",
+      "author": [{"@type": "Person", "name": "Maytal Saar-Tsechansky (The University of Texas at Austin)"},{"@type": "Person", "name": "Foster Provost (New York University)"}],
+      "datePublished": "2007, Journal of Machine Learning Research",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Handling Missing Values when Applying Classification Models",
+        "url": "Journal of Machine Learning Research 8 (2007) 1625-1657"
+      },
+      "keywords": ["missing data", "classification trees", "imputation", "reduced-feature models", "decision trees", "predictive modeling"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1793\u17c5\u1796\u17c1\u179b\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1782\u17c6\u179a\u17bc\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb (Classification Models)",
+          "item": "https://khmerresearch.com/papers/technology/handling-missing-values-classification-models-2007.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលអនុវត្តគំរូចំណាត់ថ្នាក់ (C...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Handling Missing Values when Applying Classification Models<br>
+        
+        <strong>Source:</strong> <a href="Journal of Machine Learning Research 8 (2007) 1625-1657" target="_blank">Journal of Machine Learning Research 8 (2007) 1625-1657</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលអនុវត្តគំរូចំណាត់ថ្នាក់ (Classification Models)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Handling Missing Values when Applying Classification Models</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Maytal Saar-Tsechansky (The University of Texas at Austin), Foster Provost (New York University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2007, Journal of Machine Learning Research</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហាជាក់លាក់ទាក់ទងនឹងការបាត់បង់តម្លៃទិន្នន័យ (Missing Values) នៅដំណាក់កាលធ្វើការទស្សន៍ទាយ (Prediction Time) ដែលខុសពីការសិក្សាភាគច្រើនដែលផ្តោតតែលើការបាត់បង់ទិន្នន័យនៅពេលបណ្តុះបណ្តាលគំរូ (Induction Time)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានធ្វើការប្រៀបធៀបពិសោធន៍យ៉ាងទូលំទូលាយទៅលើវិធីសាស្ត្រចំនួន ៣ និងបានណែនាំវិធីសាស្ត្រកូនកាត់ (Hybrid approaches) ដើម្បីថ្លឹងថ្លែងរវាងភាពត្រឹមត្រូវ និងតម្លៃនៃការគណនា។
+        
+        <ul>
+            
+            <li>ការបំពេញតម្លៃដោយការទស្សន៍ទាយ (Predictive Value Imputation - PVI)</li>
+            
+            <li>ការបំពេញតម្លៃដោយផ្អែកលើការបែងចែកដូចក្នុង C4.5 (Distribution-based Imputation - DBI)</li>
+            
+            <li>គំរូដែលកាត់បន្ថយលក្ខណៈសម្បត្តិ (Reduced-Feature Models)</li>
+            
+            <li>ការពិសោធន៍លើសំណុំទិន្នន័យស្តង់ដារចំនួន ១៥ (15 Benchmark Datasets)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្របង្កើតគំរូដែលកាត់បន្ថយលក្ខណៈ (Reduced-Feature Models) ផ្តល់លទ្ធផលល្អប្រសើរជាងវិធីសាស្ត្រ Imputation ទាំងពីរយ៉ាងដាច់ ដោយកាត់បន្ថយការធ្លាក់ចុះនៃភាពត្រឹមត្រូវបានយ៉ាងច្រើន។</li>
+            
+            <li>ការបំពេញតម្លៃដោយការទស្សន៍ទាយ (PVI) មានប្រសិទ្ធភាពជាងនៅពេលដែលលក្ខណៈទិន្នន័យអាចទស្សន៍ទាយបានខ្ពស់ (High Imputability) ខណៈដែលវិធីសាស្ត្រ DBI ល្អជាងនៅពេលដែលលក្ខណៈទិន្នន័យមិនអាចទស្សន៍ទាយបាន។</li>
+            
+            <li>វិធីសាស្ត្រកូនកាត់ (Hybrid Models) ដែលអ្នកនិពន្ធបានណែនាំ អាចផ្តល់នូវតុល្យភាពល្អរវាងការចំណាយលើការគណនា/ការផ្ទុកទិន្នន័យ និងភាពត្រឹមត្រូវ ដោយវាមានសមត្ថភាពល្អជាងការធ្វើ Imputation សុទ្ធសាធ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Reduced-Feature Models</span></strong><br>គំរូកាត់បន្ថយលក្ខណៈ (Reduced-Feature Models)</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់បំផុត និងមានស្ថេរភាព (Robust) លើគ្រប់កម្រិតនៃការទស្សន៍ទាយលក្ខណៈ (Feature Imputability)។</td>
+                <td>ទាមទារធនធានផ្ទុកទិន្នន័យ និងការគណនាខ្ពស់ ដោយសារត្រូវបង្កើតគំរូជាច្រើនសម្រាប់ករណីបាត់បង់ទិន្នន័យនីមួយៗ។</td>
+                <td>ដំណើរការល្អជាងគេលើសំណុំទិន្នន័យចំនួន ១៥ ដោយកាត់បន្ថយអត្រាខុសឆ្គងបានយ៉ាងច្រើនបើធៀបនឹងវិធីសាស្ត្រផ្សេងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Predictive Value Imputation (PVI)</span></strong><br>ការបំពេញតម្លៃដោយការទស្សន៍ទាយ (PVI)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់នៅពេលដែលលក្ខណៈទិន្នន័យ (Features) មានទំនាក់ទំនងខ្លាំងនឹងគ្នា។</td>
+                <td>ដំណើរការមិនល្អនៅពេលដែលលក្ខណៈទិន្នន័យមានទំនាក់ទំនងខ្សោយ ហើយអាចបង្កើតភាពលំអៀង (Bias) ដល់គំរូ។</td>
+                <td>ល្អជាង DBI នៅពេលដែលលក្ខណៈទិន្នន័យអាចទស្សន៍ទាយបានខ្ពស់ (High Imputability) ប៉ុន្តែនៅតែចាញ់ Reduced-Feature Models។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Distribution-based Imputation (DBI - C4.5)</span></strong><br>ការបំពេញតម្លៃដោយផ្អែកលើការបែងចែក (DBI - វិធីសាស្ត្រ C4.5)</td>
+                <td>ជាស្តង់ដារនៅក្នុងកម្មវិធី C4.5 និងមានប្រសិទ្ធភាពសម្រាប់ទិន្នន័យដែលមានទំនាក់ទំនងខ្សោយ។</td>
+                <td>បរាជ័យធ្ងន់ធ្ងរនៅពេលដែលលក្ខណៈទិន្នន័យមានទំនាក់ទំនងខ្លាំង (Redundant features) ដោយសារវាព្យាយាមបែងចែកទម្ងន់។</td>
+                <td>ដំណើរការល្អជាង PVI ក្នុងករណីដែលលក្ខណៈទិន្នន័យមិនសូវមានទំនាក់ទំនងគ្នា (Low Feature Imputability)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hybrid Models</span></strong><br>គំរូកូនកាត់ (Hybrid Models)</td>
+                <td>ផ្តល់នូវតុល្យភាពល្អរវាងភាពត្រឹមត្រូវ និងប្រសិទ្ធភាពនៃការប្រើប្រាស់ធនធាន។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការអនុវត្តជាងវិធីសាស្ត្រ Imputation ធម្មតា ដោយត្រូវកំណត់យុទ្ធសាស្ត្រជ្រើសរើសគំរូ។</td>
+                <td>ផ្តល់លទ្ធផលល្អប្រសើរជាង Imputation សុទ្ធសាធ ទោះបីជាប្រើប្រាស់ធនធានផ្ទុកទិន្នន័យបន្ថែមបន្តិចបន្តួចក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> វិធីសាស្ត្រដែលមានប្រសិទ្ធភាពបំផុត (Reduced-Feature Models) ទាមទារការចំណាយខ្ពស់លើការផ្ទុកទិន្នន័យ (Storage) និងពេលវេលាគណនា (Computation Time) ខណៈដែលវិធីសាស្ត្រ Imputation មានតម្លៃទាបជាង។
+    
+    <ul>
+        
+        <li><strong>Computational Cost:</strong> ខ្ពស់សម្រាប់ Reduced-Feature Models (ត្រូវបណ្តុះបណ្តាលគំរូជាច្រើន ឬប្រើ Lazy Learning) ទាបសម្រាប់ PVI និង DBI។</li>
+        
+        <li><strong>Storage Space:</strong> កើនឡើងយ៉ាងខ្លាំង (Exponentially) សម្រាប់ Reduced-Feature Models ប្រសិនបើមិនប្រើវិធីសាស្ត្រ Lazy Learning ឬ Hybrid។</li>
+        
+        <li><strong>Software:</strong> អាចអនុវត្តបានដោយប្រើ Weka (ដូចក្នុងក្រដាសស្រាវជ្រាវ) ឬបណ្ណាល័យ Python ដូចជា Scikit-learn សម្រាប់ការអនុវត្តទំនើប។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យស្តង់ដារពី UCI Machine Learning Repository និងទិន្នន័យអាជីវកម្មមួយចំនួន ដែលភាគច្រើនតំណាងឱ្យបរិបទលោកខាងលិច។ សម្រាប់កម្ពុជា លក្ខណៈនៃការបាត់បង់ទិន្នន័យ (Missingness Pattern) អាចមានភាពខុសគ្នា ដោយសារកត្តាវប្បធម៌ក្នុងការឆ្លើយសំណួរ ឬប្រព័ន្ធកត់ត្រាទិន្នន័យដែលមិនទាន់មានស្តង់ដារ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសារៈសំខាន់ខ្លាំងណាស់សម្រាប់កម្ពុជា ដោយសារបញ្ហាទិន្នន័យមិនពេញលេញគឺជាឧបសគ្គចម្បងក្នុងការវិភាគទិន្នន័យនៅតាមស្ថាប័ននានា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យមីក្រូហិរញ្ញវត្ថុ និងធនាគារ:</strong> ការវាយតម្លៃឥណទាន (Credit Scoring) សម្រាប់អតិថិជននៅតំបន់ជនបទដែលមានប្រវត្តិហិរញ្ញវត្ថុមិនពេញលេញ ទាមទារឱ្យមានគំរូដែលមិនបោះបង់ចោលអតិថិជនគ្រាន់តែដោយសារខ្វះទិន្នន័យមួយចំនួន។</li>
+            
+            <li><strong>វិស័យសុខាភិបាលសាធារណៈ:</strong> ទិន្នន័យអ្នកជំងឺនៅតាមមណ្ឌលសុខភាពដាច់ស្រយាលតែងតែមានចន្លោះខ្វះខាត។ ការប្រើប្រាស់ Reduced-Feature Models អាចជួយឱ្យគ្រូពេទ្យធ្វើរោគវិនិច្ឆ័យបានត្រឹមត្រូវជាងមុន ទោះបីជាគ្មានលទ្ធផលតេស្តគ្រប់មុខក៏ដោយ។</li>
+            
+            <li><strong>ការស្ទង់មតិសេដ្ឋកិច្ចសង្គម:</strong> ទិន្នន័យជំរឿន ឬការស្ទង់មតិថ្នាក់ជាតិ (National Surveys) តែងតែជួបប្រទះការមិនឆ្លើយតប (Non-response) លើសំណួររសើបដូចជាប្រាក់ចំណូល ដែលវិធីសាស្ត្រ Hybrid អាចដោះស្រាយបានល្អ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តវិធីសាស្ត្រ Reduced-Feature Models ឬ Hybrid នឹងជួយបង្កើនភាពជឿជាក់នៃប្រព័ន្ធសម្រេចចិត្តស្វ័យប្រវត្តិ (Decision Support Systems) នៅកម្ពុជា ដែលបច្ចុប្បន្នច្រើនតែជួបបញ្ហាដោយសារគុណភាពទិន្នន័យទាប។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការសិក្សាមូលដ្ឋានគ្រឹះនៃការបាត់បង់ទិន្នន័យ:</strong> និស្សិតគួរស្វែងយល់ពីប្រភេទនៃការបាត់បង់ទិន្នន័យ (MCAR, MAR, MNAR) ដើម្បីដឹងថាពេលណាគួរប្រើវិធីសាស្ត្រណាមួយ។ ប្រើប្រាស់ឯកសារយោងពី Little & Rubin (1987)។</li>
+            
+            <li><strong>ការពិសោធន៍ជាមួយវិធីសាស្ត្រ Imputation:</strong> អនុវត្តវិធីសាស្ត្រ Simple Imputation (Mean/Mode) និង Predictive Imputation ដោយប្រើ Python library (Scikit-learn SimpleImputer និង IterativeImputer) លើទិន្នន័យដែលមានស្រាប់។</li>
+            
+            <li><strong>ការបង្កើតគំរូ Reduced-Feature:</strong> សាកល្បងសរសេរកូដដើម្បីបង្កើតគំរូដាច់ដោយឡែកសម្រាប់ករណីបាត់បង់ទិន្នន័យសំខាន់ៗ (ឧទាហរណ៍៖ ករណីបាត់ទិន្នន័យប្រាក់ចំណូល vs ករណីមានទិន្នន័យពេញលេញ) និងប្រៀបធៀបលទ្ធផល។</li>
+            
+            <li><strong>ការអភិវឌ្ឍន៍យុទ្ធសាស្ត្រកូនកាត់ (Hybrid Strategy):</strong> សម្រាប់ប្រព័ន្ធធំៗ រចនាយន្តការដែលប្រើ Reduced Models សម្រាប់តែករណីបាត់បង់ទិន្នន័យដែលកើតឡើងញឹកញាប់ (Common Missing Patterns) និងប្រើ Imputation សម្រាប់ករណីកម្រ ដើម្បីសន្សំសំចៃធនធាន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Reduced-feature Models</span></td>
+                <td>ជាវិធីសាស្ត្រមួយដែលមិនព្យាយាមបំពេញតម្លៃដែលបាត់បង់នោះទេ ប៉ុន្តែផ្ទុយទៅវិញវាប្រើប្រាស់គំរូ (Model) ថ្មីមួយដែលត្រូវបានបណ្តុះបណ្តាលដោយប្រើតែលក្ខណៈ (Features) ដែលមានស្រាប់ប៉ុណ្ណោះ។ សម្រាប់រាល់ទម្រង់នៃការបាត់បង់ទិន្នន័យ វាប្រើគំរូដាច់ដោយឡែកមួយដែលសមស្របនឹងទិន្នន័យដែលនៅសល់។</td>
+                <td>ដូចជាការចម្អិនម្ហូបដោយប្រើរូបមន្តថ្មីដែលមិនត្រូវការគ្រឿងផ្សំដែលអ្នកកំពុងខ្វះ ជាជាងព្យាយាមដាក់របស់ផ្សេងជំនួស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Predictive Value Imputation (PVI)</span></td>
+                <td>ជាបច្ចេកទេសដែលប្រើប្រាស់គំរូស្ថិតិដាច់ដោយឡែកមួយ ដើម្បីទស្សន៍ទាយតម្លៃដែលបាត់បង់ដោយផ្អែកលើទិន្នន័យផ្សេងទៀតដែលមានក្នុងប្រព័ន្ធ។ បន្ទាប់ពីទស្សន៍ទាយបានតម្លៃហើយ វានឹងយកតម្លៃនោះទៅបំពេញកន្លែងដែលខ្វះ ហើយដំណើរការគំរូដើមដូចធម្មតា។</td>
+                <td>ដូចជាការទាយពាក្យដែលរលុបបាត់នៅក្នុងប្រយោគមួយ ដោយផ្អែកលើអត្ថន័យនៃពាក្យផ្សេងទៀតដែលនៅជុំវិញវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Distribution-based Imputation (DBI)</span></td>
+                <td>ជាវិធីសាស្ត្រដែលប្រើក្នុងក្បួនដោះស្រាយ C4.5 (Decision Trees)។ ជំនួសឱ្យការជ្រើសរើសតម្លៃតែមួយដើម្បីបំពេញកន្លែងដែលបាត់ វាបំបែកទិន្នន័យនោះជាផ្នែកតូចៗ (Fractional Instances) ទៅតាមប្រូបាប៊ីលីតេនៃតម្លៃដែលអាចកើតមាន រួចគណនាលទ្ធផលចុងក្រោយដោយបូកសរុបទម្ងន់នៃផ្នែកទាំងនោះ។</td>
+                <td>ដូចជាការភ្នាល់លើសេះគ្រប់ក្បាលទាំងអស់ដោយដាក់លុយតាមសមាមាត្រនៃឱកាសឈ្នះ ព្រោះអ្នកមិនដឹងថាសេះមួយណាពិតជានឹងឈ្នះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Imputability</span></td>
+                <td>ជាគោលគំនិតដែលវាស់វែងថាតើលក្ខណៈ (Feature) មួយងាយស្រួលទស្សន៍ទាយបានកម្រិតណា ដោយពឹងផ្អែកលើលក្ខណៈផ្សេងទៀត។ ប្រសិនបើ Feature Imputability ខ្ពស់ មានន័យថាទិន្នន័យនោះមានទំនាក់ទំនងខ្លាំងជាមួយទិន្នន័យផ្សេងទៀត ហើយងាយស្រួលបំពេញ។</td>
+                <td>ដូចជាប្រសិនបើអ្នកដឹងថាថ្ងៃនេះជាថ្ងៃអាទិត្យ អ្នកអាចទាយបាន ១០០% ថាថ្ងៃស្អែកគឺជាថ្ងៃច័ន្ទ (នេះហៅថា Imputability ខ្ពស់)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Missing Completely At Random (MCAR)</span></td>
+                <td>ជាសម្មតិកម្មដែលចាត់ទុកថា ការបាត់បង់ទិន្នន័យគឺកើតឡើងដោយចៃដន្យសុទ្ធសាធ និងមិនមានទំនាក់ទំនងអ្វីទាំងអស់ទៅនឹងតម្លៃនៃទិន្នន័យខ្លួនឯង ឬទិន្នន័យផ្សេងទៀត។</td>
+                <td>ដូចជាសន្លឹកសៀវភៅមួយទំព័រដែលរហែកបាត់ដោយចៃដន្យ មិនមែនបាត់ដោយសារតែនរណាម្នាក់ហែកវាចោលព្រោះមិនចង់ឱ្យគេឃើញខ្លឹមសារនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bagging (Bootstrap Aggregating)</span></td>
+                <td>ជាបច្ចេកទេសបង្កើតគំរូច្រើន (Ensemble) ដោយប្រើសំណុំទិន្នន័យដែលជ្រើសរើសដោយចៃដន្យ (Random Sampling) រួចយកលទ្ធផលពីគំរូទាំងអស់មកបូកបញ្ចូលគ្នា (Average/Vote) ដើម្បីកាត់បន្ថយភាពលំអៀង និងបង្កើនភាពត្រឹមត្រូវ។</td>
+                <td>ដូចជាការសួរយោបល់ពីគណៈកម្មការដែលមានសមាជិកច្រើននាក់ ជាជាងជឿជាក់លើការសម្រេចចិត្តរបស់មនុស្សតែម្នាក់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=missing+data+mechanisms+MCAR+MAR+MNAR" target="_blank" rel="noopener"><span class="en">missing data mechanisms MCAR MAR MNAR</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=reduced-feature+models+for+classification" target="_blank" rel="noopener"><span class="en">reduced-feature models for classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=imputation+methods+for+decision+trees" target="_blank" rel="noopener"><span class="en">imputation methods for decision trees</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ensemble+methods+for+missing+data" target="_blank" rel="noopener"><span class="en">ensemble methods for missing data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=cost-sensitive+learning+with+missing+values" target="_blank" rel="noopener"><span class="en">cost-sensitive learning with missing values</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

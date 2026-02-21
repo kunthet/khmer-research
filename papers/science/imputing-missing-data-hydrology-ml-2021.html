@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបំពេញទិន្នន័យដែលបាត់បង់ក្នុងវិស័យជលសាស្ត្រ ដោយប្រើប្រាស់គំរូនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning Models) | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់ (Missing Data) នៅក្នុងកំណត់ត្រាទឹកភ្លៀង និងសីតុណ្ហភាព ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់ការធ្វើគំរូជលសាស្ត្រ និងការគ្រប់គ្រ...">
+    
+    <meta name="keywords" content="Missing values, Hydrology, kNN Imputation, Artificial Neural Network, Random Forest, River flow prediction, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/imputing-missing-data-hydrology-ml-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/imputing-missing-data-hydrology-ml-2021.html">
+    <meta property="og:title" content="ការបំពេញទិន្នន័យដែលបាត់បង់ក្នុងវិស័យជលសាស្ត្រ ដោយប្រើប្រាស់គំរូនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning Models) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់ (Missing Data) នៅក្នុងកំណត់ត្រាទឹកភ្លៀង និងសីតុណ្ហភាព ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់ការធ្វើគំរូជលសាស្ត្រ និងការគ្រប់គ្រងធនធានទឹក។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2021, International Journal of Engineering Research & Technology (IJERT)">
+    
+    <meta property="article:tag" content="Missing values">
+    
+    <meta property="article:tag" content="Hydrology">
+    
+    <meta property="article:tag" content="kNN Imputation">
+    
+    <meta property="article:tag" content="Artificial Neural Network">
+    
+    <meta property="article:tag" content="Random Forest">
+    
+    <meta property="article:tag" content="River flow prediction">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបំពេញទិន្នន័យដែលបាត់បង់ក្នុងវិស័យជលសាស្ត្រ ដោយប្រើប្រាស់គំរូនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning Models)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់ (Missing Data) នៅក្នុងកំណត់ត្រាទឹកភ្លៀង និងសីតុណ្ហភាព ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់ការធ្វើគំរូជលសាស្ត្រ និងការគ្រប់គ្រងធនធានទឹក។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u179f\u17d0\u1799\u1787\u179b\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1782\u17c6\u179a\u17bc\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning Models)",
+      "name": "Imputing Missing Data in Hydrology using Machine Learning Models",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb (Missing Data) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17c6\u178e\u178f\u17cb\u178f\u17d2\u179a\u17b6\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784 \u1793\u17b7\u1784\u179f\u17b8\u178f\u17bb\u178e\u17d2\u17a0\u1797\u17b6\u1796 \u178a\u17c2\u179b\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u1799\u17c9\u17b6\u1784\u1781\u17d2\u179b\u17b6\u17c6\u1784\u178a\u179b\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc\u1787\u179b\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a \u1793\u17b7\u1784\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1792\u1793\u1792\u17b6\u1793\u1791\u17b9\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/imputing-missing-data-hydrology-ml-2021.html",
+      "author": [{"@type": "Person", "name": "Vasker Sharma (Jigme Namgyel Engineering College, Royal University of Bhutan)"},{"@type": "Person", "name": "Kezang Yuden (Jigme Namgyel Engineering College, Royal University of Bhutan)"}],
+      "datePublished": "2021, International Journal of Engineering Research \u0026 Technology (IJERT)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Imputing Missing Data in Hydrology using Machine Learning Models",
+        "url": "http://www.ijert.org"
+      },
+      "keywords": ["Missing values", "Hydrology", "kNN Imputation", "Artificial Neural Network", "Random Forest", "River flow prediction"],
+      "about": "Hydrology / Civil Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u179f\u17d0\u1799\u1787\u179b\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1782\u17c6\u179a\u17bc\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning Models)",
+          "item": "https://khmerresearch.com/papers/science/imputing-missing-data-hydrology-ml-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ការបំពេញទិន្នន័យដែលបាត់បង់ក្នុងវិស័យជលសាស្ត្រ ដោយប្រើប្រា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Imputing Missing Data in Hydrology using Machine Learning Models<br>
+        
+        <strong>Source:</strong> <a href="http://www.ijert.org" target="_blank">http://www.ijert.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបំពេញទិន្នន័យដែលបាត់បង់ក្នុងវិស័យជលសាស្ត្រ ដោយប្រើប្រាស់គំរូនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning Models)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Imputing Missing Data in Hydrology using Machine Learning Models</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Vasker Sharma (Jigme Namgyel Engineering College, Royal University of Bhutan), Kezang Yuden (Jigme Namgyel Engineering College, Royal University of Bhutan)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021, International Journal of Engineering Research & Technology (IJERT)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Hydrology / Civil Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់ (Missing Data) នៅក្នុងកំណត់ត្រាទឹកភ្លៀង និងសីតុណ្ហភាព ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់ការធ្វើគំរូជលសាស្ត្រ និងការគ្រប់គ្រងធនធានទឹក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រៀបធៀបវិធីសាស្ត្របំពេញទិន្នន័យផ្សេងៗគ្នា រួមទាំងវិធីសាស្ត្រស្ថិតិ និងម៉ាស៊ីនរៀន ដើម្បីស្វែងរកវិធីដែលមានប្រសិទ្ធភាពបំផុតសម្រាប់យកទៅប្រើប្រាស់ក្នុងការទស្សន៍ទាយលំហូរទឹក។
+        
+        <ul>
+            
+            <li>ការបំពេញទិន្នន័យដោយប្រើគំរូ k-Nearest Neighbours (kNN) និងគំរូផ្អែកលើដើមឈើសម្រេចចិត្ត (Tree-based models/Random Forest)។</li>
+            
+            <li>ការប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (ANN) ដើម្បីទស្សន៍ទាយលំហូរទឹក ដោយផ្អែកលើទិន្នន័យដែលបានបំពេញរួច។</li>
+            
+            <li>ការវាយតម្លៃភាពមិនប្រាកដប្រជាដោយប្រើបច្ចេកទេស Bootstrapping និងការវាស់វែងកំហុសដោយ RMSE និង MAE ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>គំរូ kNN ផ្តល់លទ្ធផលល្អប្រសើរជាងគំរូ Tree-based បន្តិចក្នុងការបំពេញទិន្នន័យដែលបាត់បង់។</li>
+            
+            <li>ការប្រើប្រាស់ទិន្នន័យដែលបានបំពេញដោយ kNN ជាមួយគំរូ ANN ផ្តល់នូវភាពត្រឹមត្រូវខ្ពស់រហូតដល់ ៩៤.៥៣% និង ៩១.១១% សម្រាប់ស្ថានីយ៍វាស់វែងទាំងពីរ។</li>
+            
+            <li>លទ្ធផលបង្ហាញថា ការប្រើប្រាស់ម៉ាស៊ីនរៀន (Machine Learning) គឺជាជម្រើសដ៏ល្អមួយសម្រាប់ដោះស្រាយបញ្ហាទិន្នន័យមិនពេញលេញនៅក្នុងការសិក្សាវិទ្យាសាស្ត្របរិស្ថាន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Multiple Linear Regression (MLRM)</span></strong><br>គំរូតម្រែតម្រង់លីនេអ៊ែរពហុគុណ</td>
+                <td>ជាវិធីសាស្ត្រស្ថិតិមូលដ្ឋានដែលងាយស្រួលអនុវត្ត និងយល់។</td>
+                <td>ទាមទារឱ្យមានទំនាក់ទំនងលីនេអ៊ែររវាងអថេរ និងតែងតែបោះចោលទិន្នន័យដែលមានតម្លៃបាត់បង់ (Missing values) ដែលធ្វើឱ្យបាត់បង់ទំហំសំណាក។</td>
+                <td>ត្រូវបានប្រើប្រាស់ជាមូលដ្ឋានប្រៀបធៀប ប៉ុន្តែមិនមានប្រសិទ្ធភាពដូចវិធីសាស្ត្រ Machine Learning ក្នុងការដោះស្រាយទិន្នន័យស្មុគស្មាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">k-Nearest Neighbours (kNN) Imputation</span></strong><br>ការបំពេញទិន្នន័យដោយប្រើគំរូជិតខាងដែលនៅជិតបំផុត</td>
+                <td>ប្រើប្រាស់ការគណនាចម្ងាយដើម្បីរកតម្លៃដែលសមស្របពីទិន្នន័យជិតខាង និងផ្តល់ភាពលំអៀង (Bias) ទាប។</td>
+                <td>អាចចំណាយពេលយូរក្នុងការគណនាប្រសិនបើទិន្នន័យមានទំហំធំខ្លាំង។</td>
+                <td>មានប្រសិទ្ធភាពល្អបំផុតក្នុងការបំពេញទិន្នន័យ ដោយមានកំហុសស្តង់ដារ (Standard Error) ទាប និងលំអៀងតិចតួចបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Decision Tree-based / Random Forest</span></strong><br>ការបំពេញទិន្នន័យផ្អែកលើដើមឈើសម្រេចចិត្ត</td>
+                <td>មិនទាមទារឱ្យមានការសន្មតលើទំនាក់ទំនងរវាងអថេរ និងអាចចាប់យកលំនាំមិនលីនេអ៊ែរបានល្អ។</td>
+                <td>ត្រូវការពេលវេលាគណនាយូរជាង និងមានកំហុស RMSE ខ្ពស់ជាង kNN បន្តិចនៅក្នុងការសិក្សានេះ។</td>
+                <td>មានកំហុស RMSE ខ្ពស់ជាង kNN បន្តិច ប៉ុន្តែនៅតែអាចទទួលយកបានសម្រាប់ការប្រើប្រាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Artificial Neural Network (ANN)</span></strong><br>បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (សម្រាប់ទស្សន៍ទាយលំហូរ)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការរៀនពីទំនាក់ទំនងដ៏ស្មុគស្មាញរវាងទឹកភ្លៀង សីតុណ្ហភាព និងលំហូរទឹក។</td>
+                <td>ដំណើរការដូចប្រអប់ខ្មៅ (Black box) ដែលពិបាកពន្យល់ពីដំណើរការខាងក្នុង និងទាមទារទិន្នន័យច្រើនដើម្បីបង្រៀន (Train)។</td>
+                <td>សម្រេចបាននូវភាពត្រឹមត្រូវខ្ពស់ក្នុងការទស្សន៍ទាយ (៩១-៩៤%) នៅពេលប្រើប្រាស់ទិន្នន័យដែលបំពេញដោយ kNN ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រទូទៅ ប៉ុន្តែទាមទារចំណេះដឹងផ្នែកសរសេរកូដស្ថិតិ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា R និងកញ្ចប់ (Packages) ដូចជា VIM, missForest, និង neuralnet។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យពីស្ថានីយ៍ឧតុនិយមចំនួន ៦ និងស្ថានីយ៍វាស់កម្ពស់ទឹកចំនួន ២ (ទាមទារទិន្នន័យរយៈពេលវែង)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែក Hydrological Modelling និងមូលដ្ឋានគ្រឹះនៃ Machine Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះធ្វើឡើងនៅតំបន់ភ្នំនៃប្រទេសប៊ូតាន (Bhutan) ដែលមានលក្ខណៈភូមិសាស្ត្រ និងអាកាសធាតុស្រដៀងនឹងតំបន់ខ្ពង់រាប ឬតំបន់ជួរភ្នំក្រវាញក្នុងប្រទេសកម្ពុជា។ ទិន្នន័យដែលបាត់បង់ជាបញ្ហាសកល ប៉ុន្តែលក្ខណៈនៃភ្លៀងមូសុងអាចមានភាពខុសគ្នាខ្លះពីកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសនេះមានសារៈសំខាន់ខ្លាំងណាស់សម្រាប់កម្ពុជា ដែលជារឿយៗជួបប្រទះបញ្ហាទិន្នន័យមិនពេញលេញនៅតាមស្ថានីយ៍វាស់វែងនានា។</p>
+        
+        <ul>
+            
+            <li><strong>ក្រសួងធនធានទឹក និងឧតុនិយម (MOWRAM):</strong> អាចប្រើប្រាស់វិធីសាស្ត្រ kNN ដើម្បីបំពេញចន្លោះទិន្នន័យទឹកភ្លៀងដែលបាត់បង់ក្នុងអំឡុងពេលសង្គ្រាម ឬការខូចខាតឧបករណ៍។</li>
+            
+            <li><strong>ការព្យាករណ៍ទឹកជំនន់ (Flood Forecasting):</strong> ការប្រើប្រាស់ ANN អាចជួយបង្កើនភាពត្រឹមត្រូវក្នុងការទស្សន៍ទាយកម្ពស់ទឹកនៅបឹងទន្លេសាប ឬទន្លេមេគង្គ ដោយផ្អែកលើទិន្នន័យដែលមានស្រាប់។</li>
+            
+            <li><strong>ការគ្រប់គ្រងទំនប់វារីអគ្គិសនី:</strong> ទំនប់ដូចជា កំចាយ ឬ តាតៃ ត្រូវការទិន្នន័យលំហូរទឹកដែលត្រឹមត្រូវសម្រាប់ការផលិតថាមពល និងសុវត្ថិភាពទំនប់។</li>
+            
+        </ul>
+        
+        
+        <p>ការយកគំរូ Machine Learning មកប្រើប្រាស់ នឹងជួយអ្នកស្រាវជ្រាវកម្ពុជាកាត់បន្ថយភាពមិនប្រាកដប្រជា និងធ្វើឱ្យការគ្រប់គ្រងធនធានទឹកមានប្រសិទ្ធភាពជាងមុន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១: ការរៀបចំឧបករណ៍:</strong> ដំឡើងកម្មវិធី R និង RStudio ព្រមទាំងរៀនប្រើប្រាស់កញ្ចប់ចាំបាច់ដូចជា 'VIM' សម្រាប់ការបំពេញទិន្នន័យ និង 'neuralnet' សម្រាប់បង្កើតគំរូ។</li>
+            
+            <li><strong>ជំហានទី ២: ការប្រមូល និងសម្អាតទិន្នន័យ:</strong> ស្នើសុំទិន្នន័យទឹកភ្លៀង និងកម្ពស់ទឹកពី MOWRAM ឬប្រើប្រាស់ទិន្នន័យបើកចំហរ (Open Data) រួចបង្កើតជា Missing Values សិប្បនិម្មិត (MCAR) ដើម្បីសាកល្បង។</li>
+            
+            <li><strong>ជំហានទី ៣: ការអនុវត្តការបំពេញទិន្នន័យ (Imputation):</strong> ប្រើប្រាស់កូដដើម្បីដំណើរការ kNN Imputation (k=5) លើទិន្នន័យដែលបាត់បង់ រួចប្រៀបធៀបលទ្ធផលជាមួយទិន្នន័យដើមដើម្បីវាយតម្លៃកំហុស (RMSE)។</li>
+            
+            <li><strong>ជំហានទី ៤: ការបង្កើតគំរូព្យាករណ៍ (Prediction Model):</strong> យកទិន្នន័យដែលបានបំពេញរួច មកបង្រៀន (Train) គំរូ ANN ដោយប្រើបច្ចេកទេស Backpropagation ដើម្បីទស្សន៍ទាយលំហូរទឹក។</li>
+            
+            <li><strong>ជំហានទី ៥: ការវាយតម្លៃ និងការអនុវត្ត:</strong> វាយតម្លៃប្រសិទ្ធភាពគំរូដោយប្រើ MAE និង RMSE។ បើលទ្ធផលល្អ អាចសាកល្បងអនុវត្តលើទិន្នន័យជាក់ស្តែងនៃអាងទន្លេណាមួយក្នុងប្រទេសកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imputation</span></td>
+                <td>ដំណើរការនៃការជំនួសទិន្នន័យដែលបាត់បង់ (Missing Data) ដោយតម្លៃដែលត្រូវបានប៉ាន់ប្រមាណតាមរយៈការគណនាស្ថិតិ ឬម៉ាស៊ីនរៀន ដើម្បីឱ្យសំណុំទិន្នន័យមានភាពពេញលេញសម្រាប់ការវិភាគបន្ត។</td>
+                <td>ដូចជាការបំពេញពាក្យដែលបាត់នៅក្នុងប្រយោគ ដោយមើលទៅលើអត្ថន័យនៃពាក្យដែលនៅជុំវិញវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">k-Nearest Neighbours (kNN)</span></td>
+                <td>ជាក្បួនដោះស្រាយ (Algorithm) ដែលស្វែងរកចំណុចទិន្នន័យដែលមានលក្ខណៈស្រដៀងគ្នាបំផុតចំនួន 'k' (ឧទាហរណ៍ ៥ ចំណុច) ទៅនឹងទិន្នន័យដែលបាត់បង់ រួចយកមធ្យមភាគនៃចំណុចទាំងនោះមកបំពេញកន្លែងដែលបាត់។</td>
+                <td>ដូចជាការសួរអ្នកជិតខាង ៥ នាក់ថាម៉ោងប៉ុន្មាន ដើម្បីប៉ាន់ស្មានម៉ោងនៅពេលដែលនាឡិការបស់អ្នកខូច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Artificial Neural Network (ANN)</span></td>
+                <td>គំរូកុំព្យូទ័រដែលត្រូវបានរចនាឡើងដោយយកលំនាំតាមដំណើរការនៃខួរក្បាលមនុស្ស (Bimimicry) ដែលមានបណ្ដាញនៃណឺរ៉ូនសិប្បនិម្មិតតភ្ជាប់គ្នា ដើម្បីរៀនពីទំនាក់ទំនងស្មុគស្មាញ និងមិនលីនេអ៊ែរនៅក្នុងទិន្នន័យ។</td>
+                <td>ជាប្រព័ន្ធកុំព្យូទ័រដែលរៀនតាមរយៈការសាកល្បងនិងកែតម្រូវកំហុស ដូចក្មេងរៀនស្គាល់រូបរាងសត្វ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bootstrapping</span></td>
+                <td>បច្ចេកទេសស្ថិតិដែលបង្កើតសំណាកទិន្នន័យថ្មីៗជាច្រើនដងដោយការយកចេញពីទិន្នន័យដើម (Resampling with replacement) ដើម្បីវាស់វែងភាពមិនប្រាកដប្រជា (Uncertainty) និងប្រសិទ្ធភាពនៃគំរូ។</td>
+                <td>ដូចជាការដួសសម្លភ្លក់ច្រើនដងពីកន្លែងផ្សេងៗគ្នាក្នុងឆ្នាំង ដើម្បីដឹងថាតើរសជាតិសម្លទាំងមូលប្រៃឬសាបកម្រិតណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Backpropagation</span></td>
+                <td>វិធីសាស្ត្រស្នូលក្នុងការបង្រៀន Neural Network ដោយគណនាកំហុសពីលទ្ធផលចុងក្រោយ (Output) ហើយបញ្ជូនកំហុសនោះត្រឡប់ក្រោយវិញដើម្បីកែតម្រូវទម្ងន់ (Weights) នៃការតភ្ជាប់ ដើម្បីកាត់បន្ថយកំហុសនៅពេលក្រោយ។</td>
+                <td>ដូចជាគ្រូកែវិញ្ញាសាហើយប្រាប់សិស្សថាខុសត្រង់ណា ដើម្បីឱ្យសិស្សកែតម្រូវវិធីគិតរបស់ពួកគេនៅពេលប្រឡងលើកក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Root Mean Square Error (RMSE)</span></td>
+                <td>រង្វាស់ស្តង់ដារសម្រាប់វាយតម្លៃភាពត្រឹមត្រូវនៃគំរូ។ វាគណនាគម្លាតរវាងតម្លៃដែលម៉ាស៊ីនទស្សន៍ទាយ និងតម្លៃជាក់ស្តែង។ តម្លៃ RMSE កាន់តែតូច បង្ហាញថាគំរូកាន់តែមានភាពត្រឹមត្រូវ។</td>
+                <td>ជាពិន្ទុដែលប្រាប់ថា តើការទស្សន៍ទាយរបស់យើងខុសពីការពិតខ្លាំងប៉ុណ្ណា (លេខកាន់តែតូច កាន់តែល្អ)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=k-nearest+neighbors+imputation+for+missing+hydrological+data" target="_blank" rel="noopener"><span class="en">k-nearest neighbors imputation for missing hydrological data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Artificial+Neural+Networks+in+rainfall-runoff+modelling" target="_blank" rel="noopener"><span class="en">Artificial Neural Networks in rainfall-runoff modelling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+of+MissForest+and+kNN+imputation+methods" target="_blank" rel="noopener"><span class="en">Comparison of MissForest and kNN imputation methods</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Machine+learning+applications+in+water+resource+management" target="_blank" rel="noopener"><span class="en">Machine learning applications in water resource management</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

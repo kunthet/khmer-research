@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបំពេញទិន្នន័យដែលបាត់ដោយប្រើបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Machine Learning) | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យមិនពេញលេញ ឬបាត់បង់នៅក្នុងមូលដ្ឋានទិន្នន័យឧស្សាហកម្ម ដែលរាំងស្ទះដល់ការវិភាគ និងការធ្វើសេចក្តីសម្រេចចិត្តច្បាស់លាស់។">
+    
+    <meta name="keywords" content="missing data imputation, machine learning, AutoClass, C4.5 algorithm, Bayesian clustering, decision trees, industrial databases, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/imputation-missing-data-ml-techniques-1996.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/imputation-missing-data-ml-techniques-1996.html">
+    <meta property="og:title" content="ការបំពេញទិន្នន័យដែលបាត់ដោយប្រើបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Machine Learning) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យមិនពេញលេញ ឬបាត់បង់នៅក្នុងមូលដ្ឋានទិន្នន័យឧស្សាហកម្ម ដែលរាំងស្ទះដល់ការវិភាគ និងការធ្វើសេចក្តីសម្រេចចិត្តច្បាស់លាស់។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="1996 (KDD-96 Proceedings)">
+    
+    <meta property="article:tag" content="missing data imputation">
+    
+    <meta property="article:tag" content="machine learning">
+    
+    <meta property="article:tag" content="AutoClass">
+    
+    <meta property="article:tag" content="C4.5 algorithm">
+    
+    <meta property="article:tag" content="Bayesian clustering">
+    
+    <meta property="article:tag" content="decision trees">
+    
+    <meta property="article:tag" content="industrial databases">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបំពេញទិន្នន័យដែលបាត់ដោយប្រើបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Machine Learning)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យមិនពេញលេញ ឬបាត់បង់នៅក្នុងមូលដ្ឋានទិន្នន័យឧស្សាហកម្ម ដែលរាំងស្ទះដល់ការវិភាគ និងការធ្វើសេចក្តីសម្រេចចិត្តច្បាស់លាស់។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning)",
+      "name": "Imputation of missing data using machine learning techniques",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1796\u17c1\u1789\u179b\u17c1\u1789 \u17ac\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a7\u179f\u17d2\u179f\u17b6\u17a0\u1780\u1798\u17d2\u1798 \u178a\u17c2\u179b\u179a\u17b6\u17c6\u1784\u179f\u17d2\u1791\u17c7\u178a\u179b\u17cb\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179f\u17c1\u1785\u1780\u17d2\u178f\u17b8\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/imputation-missing-data-ml-techniques-1996.html",
+      "author": [{"@type": "Person", "name": "Kamakshi Lakshminarayan (Honeywell Technology Center)"},{"@type": "Person", "name": "Steven A. Harp (Honeywell Technology Center)"},{"@type": "Person", "name": "Robert Goldman (Honeywell Technology Center)"},{"@type": "Person", "name": "Tariq Samad (Honeywell Technology Center)"}],
+      "datePublished": "1996 (KDD-96 Proceedings)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Imputation of missing data using machine learning techniques",
+        "url": "N/A"
+      },
+      "keywords": ["missing data imputation", "machine learning", "AutoClass", "C4.5 algorithm", "Bayesian clustering", "decision trees", "industrial databases"],
+      "about": "Computer Science / Data Mining"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning)",
+          "item": "https://khmerresearch.com/papers/technology/imputation-missing-data-ml-techniques-1996.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបំពេញទិន្នន័យដែលបាត់ដោយប្រើបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Ma...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Imputation of missing data using machine learning techniques<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបំពេញទិន្នន័យដែលបាត់ដោយប្រើបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Machine Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Imputation of missing data using machine learning techniques</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Kamakshi Lakshminarayan (Honeywell Technology Center), Steven A. Harp (Honeywell Technology Center), Robert Goldman (Honeywell Technology Center), Tariq Samad (Honeywell Technology Center)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 1996 (KDD-96 Proceedings)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Data Mining</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទិន្នន័យមិនពេញលេញ ឬបាត់បង់នៅក្នុងមូលដ្ឋានទិន្នន័យឧស្សាហកម្ម ដែលរាំងស្ទះដល់ការវិភាគ និងការធ្វើសេចក្តីសម្រេចចិត្តច្បាស់លាស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានធ្វើការពិសោធន៍ប្រៀបធៀប និងរួមបញ្ចូលគ្នានូវបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Machine Learning) ចំនួនពីរ ដើម្បីបំពេញទិន្នន័យដែលបាត់ដោយស្វ័យប្រវត្តិ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ AutoClass ដែលជាវិធីសាស្រ្តចង្កោមបែបបេយ៉េស (Unsupervised Bayesian Clustering) ដើម្បីព្យាករណ៍ទិន្នន័យ។</li>
+            
+            <li>ការប្រើប្រាស់ C4.5 ដែលជាវិធីសាស្រ្តដើមឈើសម្រេចចិត្ត (Supervised Decision Tree) ដើម្បីស្វែងរកតម្លៃដែលបាត់ជាក់លាក់។</li>
+            
+            <li>ការធ្វើតេស្តលើទិន្នន័យថែទាំឧស្សាហកម្មពីក្រុមហ៊ុន Honeywell ដែលមានកំណត់ត្រាចំនួន ៤៣៨៣ និងអថេរចំនួន ៨២។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>សម្រាប់ការព្យាករណ៍តម្លៃតែមួយ វិធីសាស្រ្ត C4.5 មានអត្រាខុស (Error Rate) ទាបជាងគឺ ២២.៦% ខណៈដែល AutoClass មានអត្រាខុសដល់ទៅ ៤៨.៧%។</li>
+            
+            <li>AutoClass មានប្រសិទ្ធភាពខ្ពស់ក្នុងការផ្តល់ជម្រើសជាច្រើន (Multiple Choices) ដោយមានភាពត្រឹមត្រូវ ៨២% សម្រាប់ជម្រើសកំពូលទាំង ៣ (Top 3 choices)។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នាដោយប្រើលទ្ធផលពី AutoClass ជាទិន្នន័យបញ្ចូលឱ្យ C4.5 ផ្តល់លទ្ធផលល្អបំផុត ដោយកាត់បន្ថយអត្រាខុសមកត្រឹម ២០.១%។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">C4.5 (Supervised Decision Tree)</span></strong><br>ការរៀនដោយប្រើដើមឈើសម្រេចចិត្ត (Decision Tree) ដែលមានការត្រួតពិនិត្យ</td>
+                <td>មានភាពជាក់លាក់ខ្ពស់ក្នុងការទស្សន៍ទាយតម្លៃតែមួយ (Single value) និងងាយស្រួលបកស្រាយលទ្ធផល។</td>
+                <td>ត្រូវការការបង្វឹក (Training) ដាច់ដោយឡែកសម្រាប់អថេរនីមួយៗដែលចង់បំពេញ និងមិនអាចដោះស្រាយទិន្នន័យបាត់បង់ក្នុងពេលបង្វឹកបានល្អដូចវិធីសាស្រ្ត Bayesian។</td>
+                <td>អត្រាមានកំហុស (Error Rate) ២២.៦% ក្នុងការទស្សន៍ទាយក្រុមហ៊ុនផលិតឧបករណ៍។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">AutoClass (Unsupervised Bayesian Clustering)</span></strong><br>ការធ្វើចង្កោមទិន្នន័យបែបបេយ៉េស (Bayesian Clustering) ដោយគ្មានការត្រួតពិនិត្យ</td>
+                <td>អាចបង្កើតម៉ូដែលតែមួយសម្រាប់ទស្សន៍ទាយគ្រប់អថេរ និងមានប្រសិទ្ធភាពខ្ពស់ក្នុងការផ្តល់ជម្រើសជាច្រើន (Multiple choices) ដល់អ្នកប្រើប្រាស់។</td>
+                <td>មានអត្រាខុសខ្ពស់នៅពេលបង្ខំឱ្យទស្សន៍ទាយតម្លៃតែមួយ ហើយការបែងចែកថ្នាក់ (Class) អាចមានភាពស្មុគស្មាញ។</td>
+                <td>អត្រាមានកំហុស ៤៨.៧% សម្រាប់ការទស្សន៍ទាយតម្លៃតែមួយ ប៉ុន្តែមានភាពត្រឹមត្រូវ ៨២% បើគិតលើជម្រើសកំពូលទាំង ៣។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hybrid (AutoClass + C4.5)</span></strong><br>វិធីសាស្រ្តចម្រុះ (ការប្រើលទ្ធផល AutoClass ជាធាតុចូលឱ្យ C4.5)</td>
+                <td>ទាញយកអត្ថប្រយោជន៍ពីការធ្វើចង្កោមដើម្បីកាត់បន្ថយភាពស្មុគស្មាញនៃទិន្នន័យ មុននឹងប្រើដើមឈើសម្រេចចិត្ត។</td>
+                <td>តម្រូវឱ្យមានជំហានដំណើរការពីរដំណាក់កាល ដែលធ្វើឱ្យប្រព័ន្ធកាន់តែស្មុគស្មាញ។</td>
+                <td>អត្រាមានកំហុសទាបបំផុតគឺ ២០.១% (ធ្វើឱ្យប្រសើរឡើងបានប្រហែល ២.៥% ធៀបនឹងការប្រើ C4.5 តែឯង)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រក្នុងកម្រិតមធ្យម ប៉ុន្តែត្រូវការការរៀបចំទិន្នន័យច្រើន។
+    
+    <ul>
+        
+        <li><strong>Computational Power:</strong> មិនតម្រូវឱ្យមានកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់ខ្លាំងទេ (អាចដំណើរការលើកុំព្យូទ័រការិយាល័យបាន) ប៉ុន្តែល្បឿននៃការបង្វឹកម៉ូដែល C4.5 អាស្រ័យលើចំនួនអថេរដែលបាត់។</li>
+        
+        <li><strong>Dataset Quality:</strong> ត្រូវការទិន្នន័យដែលបានកំណត់អត្តសញ្ញាណត្រឹមត្រូវ (Labeled Data) មួយចំនួនសម្រាប់ការបង្វឹក C4.5 ជាពិសេសទិន្នន័យដែលគ្មានកំហុស (Clean records) សម្រាប់បង្កើតជាសំណាកគំរូ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីមូលដ្ឋានទិន្នន័យថែទាំឧបករណ៍របស់ក្រុមហ៊ុន Honeywell នៅសហរដ្ឋអាមេរិក ដែលមានលក្ខណៈបច្ចេកទេសខ្ពស់និងស្តង់ដារជាក់លាក់។ សម្រាប់កម្ពុជា ការអនុវត្តអាចជួបបញ្ហាដោយសារទិន្នន័យក្នុងស្រុកភាគច្រើន (ដូចជាទិន្នន័យសេវាសាធារណៈ ឬកសិកម្ម) អាចមិនមានរចនាសម្ព័ន្ធច្បាស់លាស់ (Unstructured) ឬមានកម្រិតបាត់បង់ទិន្នន័យខ្ពស់ជាងនេះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសនេះមានសារៈសំខាន់ខ្លាំងសម្រាប់កម្ពុជាក្នុងការធ្វើឌីជីថលូបនីយកម្ម (Digitalization) លើឯកសារចាស់ៗដែលមិនពេញលេញ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងមីក្រូហិរញ្ញវត្ថុ (Banking & MFI):</strong> ប្រើសម្រាប់បំពេញព័ត៌មានអតិថិជនដែលបាត់នៅក្នុងពាក្យស្នើសុំប្រាក់កម្ចី ដើម្បីវាយតម្លៃហានិភ័យឥណទាន (Credit Scoring) បានកាន់តែសុក្រឹត។</li>
+            
+            <li><strong>វិទ្យាស្ថានជាតិស្ថិតិ (NIS) - ជំរឿន:</strong> អាចប្រើវិធីសាស្រ្ត Hybrid ដើម្បីបំពេញទិន្នន័យដែលបាត់នៅក្នុងការស្ទង់មតិប្រជាសាស្ត្រ ឬសេដ្ឋកិច្ចសង្គម ដោយផ្អែកលើចង្កោមនៃគ្រួសារដែលមានលក្ខណៈស្រដៀងគ្នា។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល (Public Health):</strong> ជួយក្នុងការបំពេញប្រវត្តិអ្នកជំងឺនៅតាមមន្ទីរពេទ្យបង្អែក ដែលជារឿយៗការកត់ត្រាទិន្នន័យមិនមានភាពពេញលេញ។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់វិធីសាស្រ្តនេះនឹងជួយកាត់បន្ថយពេលវេលាត្រួតពិនិត្យទិន្នន័យដោយដៃ និងបង្កើនគុណភាពនៃការវិភាគទិន្នន័យថ្នាក់ជាតិ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការសិក្សាមូលដ្ឋានគ្រឹះ:</strong> និស្សិតគួរចាប់ផ្តើមពីការយល់ដឹងអំពីគោលការណ៍នៃ Bayesian Statistics និងរបៀបដំណើរការរបស់ Decision Trees (ដូចជា C4.5 ឬ CART)។</li>
+            
+            <li><strong>ការជ្រើសរើសឧបករណ៍:</strong> រៀនប្រើប្រាស់បណ្ណាល័យ Python ដូចជា (Scikit-learn) សម្រាប់ Decision Tree និង (Gaussian Mixture Models) ដើម្បីជំនួស AutoClass សម្រាប់ការធ្វើចង្កោម។</li>
+            
+            <li><strong>ការពិសោធន៍ជាមួយទិន្នន័យជាក់ស្តែង:</strong> ទាញយកទិន្នន័យពី (Open Development Cambodia) ដែលមានចន្លោះខ្វះខាត ហើយសាកល្បងបង្កើតម៉ូដែលដើម្បីបំពេញទិន្នន័យនោះ រួចផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ។</li>
+            
+            <li><strong>ការអនុវត្តវិធីសាស្រ្តចម្រុះ:</strong> សាកល្បងបច្ចេកទេស Hybrid ដោយប្រើលទ្ធផលពីការធ្វើចង្កោម (Clustering) ជាមុខងារបន្ថែម (Feature) នៅក្នុងការបង្វឹកម៉ូដែល Supervised Learning ដើម្បីមើលពីការកើនឡើងនៃប្រសិទ្ធភាព។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imputation</span></td>
+                <td>ដំណើរការនៃការបំពេញទិន្នន័យដែលបាត់បង់ (Missing Data) ដោយប្រើតម្លៃដែលបានប៉ាន់ស្មានតាមរយៈរូបមន្តស្ថិតិ ឬបញ្ញាសិប្បនិម្មិត ដើម្បីឱ្យសំណុំទិន្នន័យមានលក្ខណៈពេញលេញសម្រាប់យកទៅវិភាគ។</td>
+                <td>ដូចជាការទាយពាក្យដែលបាត់នៅក្នុងប្រយោគមួយ ដោយផ្អែកលើអត្ថន័យនៃពាក្យផ្សេងទៀតដែលនៅជុំវិញវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Unsupervised clustering</span></td>
+                <td>បច្ចេកទេសរៀនរបស់ម៉ាស៊ីនដែលកុំព្យូទ័រព្យាយាមរកលំនាំ ឬក្រុម (Clusters) ដែលមានលក្ខណៈស្រដៀងគ្នានៅក្នុងទិន្នន័យ ដោយមិនមានការបង្រៀន ឬប្រាប់ចម្លើយជាមុនថាទិន្នន័យនោះជាអ្វីឡើយ។</td>
+                <td>ដូចជាការបែងចែកផ្លែឈើមួយកន្ត្រកជាគំនរផ្សេងៗគ្នាទៅតាមពណ៌ និងរូបរាង ដោយមិនចាំបាច់ស្គាល់ឈ្មោះផ្លែឈើទាំងនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Supervised induction</span></td>
+                <td>ដំណើរការបង្កើតច្បាប់ ឬម៉ូដែលពីទិន្នន័យដែលមានចម្លើយស្រាប់ (Labeled Data) ដើម្បីយកទៅទស្សន៍ទាយចម្លើយសម្រាប់ទិន្នន័យថ្មី។ ក្នុងឯកសារនេះសំដៅលើការប្រើ C4.5។</td>
+                <td>ដូចជាសិស្សរៀនដោះស្រាយលំហាត់គណិតវិទ្យាដោយមើលឧទាហរណ៍ដែលមានចម្លើយស្រាប់ជាមុនសិន មុននឹងទៅធ្វើលំហាត់ប្រឡង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bayesian classification</span></td>
+                <td>វិធីសាស្រ្តចាត់ថ្នាក់ទិន្នន័យដោយប្រើទ្រឹស្តីប្រូបាប (Probability Theory) ដើម្បីគណនាថាទិន្នន័យមួយគួរស្ថិតនៅក្នុងក្រុមណា ដោយផ្អែកលើភស្តុតាងដែលមាន និងចំណេះដឹងពីមុន (Prior Knowledge)។</td>
+                <td>ដូចជាការព្យាករណ៍អាកាសធាតុថា "ភ្លៀង" ឬ "មិនភ្លៀង" ដោយផ្អែកលើភាគរយនៃពពកខ្មៅ និងកម្លាំងខ្យល់ដែលបានវាស់វែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gain ratio</span></td>
+                <td>រង្វាស់ដែលប្រើនៅក្នុងក្បួនដោះស្រាយ C4.5 ដើម្បីជ្រើសរើសថា តើគួរប្រើអថេរមួយណាដើម្បីបំបែកទិន្នន័យជាក្រុមតូចៗ ដើម្បីទទួលបានព័ត៌មានច្បាស់លាស់បំផុត (Information Gain)។</td>
+                <td>ដូចជាការលេងល្បែងទាយឈ្មោះសត្វ ហើយអ្នកសួរថា "តើវាមានជើង ៤ មែនទេ?" ដើម្បីកាត់បន្ថយជម្រើសចម្លើយឱ្យនៅសល់តិចបំផុតជាជាងសួរថា "តើវាឈ្មោះអាខ្មៅមែនទេ?"។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hot-deck imputation</span></td>
+                <td>វិធីសាស្រ្តបំពេញទិន្នន័យបាត់ ដោយការចម្លងតម្លៃពីកំណត់ត្រាផ្សេងទៀត (Donor) ដែលមានលក្ខណៈស្រដៀងគ្នាបំផុតនៅក្នុងសំណុំទិន្នន័យតែមួយ។</td>
+                <td>ដូចជាការខ្ចីចម្លើយកិច្ចការផ្ទះពីមិត្តភក្តិម្នាក់ដែលអង្គុយជិត ហើយមានប្រវត្តិរៀនពូកែដូចគ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/solar-energy-grid-integration-machine-learning-2024.html">
+                    <span class="km">ការធ្វើសមាហរណកម្មថាមពលពន្លឺព្រះអាទិត្យទៅក្នុងបណ្តាញអគ្គិសនីប្រកបដោយប្រសិទ្ធភាពតាមរយៈបច្ចេកទេសម៉ាស៊ីនរៀន (Machine Learning)</span><br>
+                    <span class="en article-original-title">Solar Energy Optimal Grid Integration Through Machine Learning Techniques</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/examining-evaluating-classification-algorithms-2024.html">
+                    <span class="km">ការពិនិត្យ និងវាយតម្លៃក្បួនដោះស្រាយចំណាត់ថ្នាក់ដោយផ្អែកលើដើមឈើសម្រេចចិត្ត</span><br>
+                    <span class="en article-original-title">Examining and Evaluating Classification Algorithms Based on Decision Trees</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
