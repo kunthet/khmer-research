@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរកឃើញការជ្រៀតចូលមិនប្រក្រតីដោយផ្អែកលើបម្រែបម្រួលគំនិត (Concept Drift) | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហាសុវត្ថិភាពបណ្តាញកុំព្យូទ័រ ដែលអ្នកវាយប្រហារតែងតែផ្លាស់ប្តូរបច្ចេកទេស និងឧបករណ៍របស់ពួកគេ (ហៅថា Concept Drift) ធ្វើឱ្យប្រព័ន្ធការពារបែ...">
+    
+    <meta name="keywords" content="Intrusion Detection System, Concept Drift, Transfer Learning, Incremental Learning, NSL-KDD Dataset, Ensemble Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/anomaly-intrusion-detection-concept-drift-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/anomaly-intrusion-detection-concept-drift-2020.html">
+    <meta property="og:title" content="ការរកឃើញការជ្រៀតចូលមិនប្រក្រតីដោយផ្អែកលើបម្រែបម្រួលគំនិត (Concept Drift) | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាសុវត្ថិភាពបណ្តាញកុំព្យូទ័រ ដែលអ្នកវាយប្រហារតែងតែផ្លាស់ប្តូរបច្ចេកទេស និងឧបករណ៍របស់ពួកគេ (ហៅថា Concept Drift) ធ្វើឱ្យប្រព័ន្ធការពារបែបបុរាណមានការលំបាកក្នុងការចាប់យកការវាយប្រ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020, World Wide Journal of Multidisciplinary Research and Development">
+    
+    <meta property="article:tag" content="Intrusion Detection System">
+    
+    <meta property="article:tag" content="Concept Drift">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Incremental Learning">
+    
+    <meta property="article:tag" content="NSL-KDD Dataset">
+    
+    <meta property="article:tag" content="Ensemble Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរកឃើញការជ្រៀតចូលមិនប្រក្រតីដោយផ្អែកលើបម្រែបម្រួលគំនិត (Concept Drift)">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាសុវត្ថិភាពបណ្តាញកុំព្យូទ័រ ដែលអ្នកវាយប្រហារតែងតែផ្លាស់ប្តូរបច្ចេកទេស និងឧបករណ៍របស់ពួកគេ (ហៅថា Concept Drift) ធ្វើឱ្យប្រព័ន្ធការពារបែបបុរាណមានការលំបាកក្នុងការចាប់យកការវាយប្រ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u1787\u17d2\u179a\u17c0\u178f\u1785\u17bc\u179b\u1798\u17b7\u1793\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u1782\u17c6\u1793\u17b7\u178f (Concept Drift)",
+      "name": "Anomaly Intrusion Detection Based on Concept Drift",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796\u1794\u178e\u17d2\u178f\u17b6\u1789\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a \u178a\u17c2\u179b\u17a2\u17d2\u1793\u1780\u179c\u17b6\u1799\u1794\u17d2\u179a\u17a0\u17b6\u179a\u178f\u17c2\u1784\u178f\u17c2\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f \u1793\u17b7\u1784\u17a7\u1794\u1780\u179a\u178e\u17cd\u179a\u1794\u179f\u17cb\u1796\u17bd\u1780\u1782\u17c1 (\u17a0\u17c5\u1790\u17b6 Concept Drift) \u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u17b6\u179a\u1796\u17b6\u179a\u1794\u17c2\u1794\u1794\u17bb\u179a\u17b6\u178e\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1785\u17b6\u1794\u17cb\u1799\u1780\u1780\u17b6\u179a\u179c\u17b6\u1799\u1794\u17d2\u179a\u17a0\u17b6\u179a\u1790\u17d2\u1798\u17b8\u17d7\u1791\u17b6\u17c6\u1784\u1793\u17c4\u17c7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/anomaly-intrusion-detection-concept-drift-2020.html",
+      "author": [{"@type": "Person", "name": "Gokul R (Anna University, Chennai, India)"},{"@type": "Person", "name": "Pradheep D (Anna University, Chennai, India)"},{"@type": "Person", "name": "Naveen V (Anna University, Chennai, India)"},{"@type": "Person", "name": "Vijayarani J (Anna University, Chennai, India)"}],
+      "datePublished": "2020, World Wide Journal of Multidisciplinary Research and Development",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Anomaly Intrusion Detection Based on Concept Drift",
+        "url": "www.wwjmrd.com"
+      },
+      "keywords": ["Intrusion Detection System", "Concept Drift", "Transfer Learning", "Incremental Learning", "NSL-KDD Dataset", "Ensemble Learning"],
+      "about": "Computer Science / Network Security"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u1787\u17d2\u179a\u17c0\u178f\u1785\u17bc\u179b\u1798\u17b7\u1793\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u1782\u17c6\u1793\u17b7\u178f (Concept Drift)",
+          "item": "https://khmerresearch.com/papers/technology/anomaly-intrusion-detection-concept-drift-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរកឃើញការជ្រៀតចូលមិនប្រក្រតីដោយផ្អែកលើបម្រែបម្រួលគំនិត ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Anomaly Intrusion Detection Based on Concept Drift<br>
+        
+        <strong>Source:</strong> <a href="www.wwjmrd.com" target="_blank">www.wwjmrd.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរកឃើញការជ្រៀតចូលមិនប្រក្រតីដោយផ្អែកលើបម្រែបម្រួលគំនិត (Concept Drift)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Anomaly Intrusion Detection Based on Concept Drift</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Gokul R (Anna University, Chennai, India), Pradheep D (Anna University, Chennai, India), Naveen V (Anna University, Chennai, India), Vijayarani J (Anna University, Chennai, India)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020, World Wide Journal of Multidisciplinary Research and Development</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Network Security</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហាសុវត្ថិភាពបណ្តាញកុំព្យូទ័រ ដែលអ្នកវាយប្រហារតែងតែផ្លាស់ប្តូរបច្ចេកទេស និងឧបករណ៍របស់ពួកគេ (ហៅថា Concept Drift) ធ្វើឱ្យប្រព័ន្ធការពារបែបបុរាណមានការលំបាកក្នុងការចាប់យកការវាយប្រហារថ្មីៗទាំងនោះ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់វិធីសាស្ត្រ Machine Learning ចំនួនពីរគឺ Incremental Learning និង Transfer Learning ដើម្បីបណ្តុះបណ្តាលម៉ូដែលលើសំណុំទិន្នន័យ NSL-KDD ក្នុងការស្វែងរកសកម្មភាពជ្រៀតចូលមិនប្រក្រតី។
+        
+        <ul>
+            
+            <li>ការរៀបចំទិន្នន័យ (Data Preprocessing) រួមមានការសម្អាត ការបំប្លែងកូដ (Label Encoding) និងការជ្រើសរើសលក្ខណៈពិសេស (Feature Selection) ដោយប្រើ Random Forest Classifier</li>
+            
+            <li>ការរកឃើញបម្រែបម្រួលទិន្នន័យ (Drift Detection) ដោយប្រើវិធីសាស្ត្រ HDDM និង Hoeffding Tree</li>
+            
+            <li>ការប្រៀបធៀបរវាង Ensemble Incremental Learning (ប្រើ MLP, MultinomialNB, SGD) និង Transfer Learning</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រ Transfer Learning ទទួលបានប្រសិទ្ធភាពខ្ពស់ជាងវិធីសាស្ត្រ Incremental Learning ក្នុងការស្វែងរកការវាយប្រហារ។</li>
+            
+            <li>ពិន្ទុ Cross-validation សម្រាប់ Transfer Learning គឺទទួលបានប្រមាណ ០.៨៨ (ឬ ៨៨%) ដែលបង្ហាញថាវាមានសុក្រឹតភាពល្អ។</li>
+            
+            <li>ប្រព័ន្ធដែលបានស្នើឡើងអាចបត់បែនតាមការផ្លាស់ប្តូរនៃទម្រង់ទិន្នន័យ (Concept Drift) ដើម្បីការពារបណ្តាញពីការវាយប្រហារដែលមិនធ្លាប់ស្គាល់ ឬការវាយប្រហារដែលមានលក្ខណៈប្រែប្រួល។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Incremental Learning (Ensemble)</span></strong><br>ការរៀនបែបបន្ថែមដោយប្រើបច្ចេកទេស Ensemble (MLP, MultinomialNB, SGD)</td>
+                <td>អាចធ្វើបច្ចុប្បន្នភាពម៉ូដែលបានជាបន្តបន្ទាប់ដោយមិនចាំបាច់បង្វឹកពីដើមឡើងវិញ និងមានសមត្ថភាពចាប់យកបម្រែបម្រួលទិន្នន័យ (Concept Drift) តាមរយៈ HDDM និង Hoeffding Tree ។</td>
+                <td>ទទួលបានកម្រិតសុក្រឹតភាពទាបជាងបច្ចេកទេស Transfer Learning បន្តិចនៅក្នុងការពិសោធន៍នេះ។</td>
+                <td>សុក្រឹតភាព (Accuracy) ប្រមាណ ០.៧៩ (ឬ ៧៩%)</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Transfer Learning</span></strong><br>ការរៀនបែបផ្ទេរចំណេះដឹង (ប្រើប្រាស់ម៉ូដែលដែលបានបង្វឹកស្រាប់)</td>
+                <td>ប្រើប្រាស់ចំណេះដឹងពីម៉ូដែលដែលមានស្រាប់ដើម្បីដោះស្រាយបញ្ហាថ្មី មានប្រសិទ្ធភាពខ្ពស់ក្នុងការសម្របខ្លួនទៅនឹងការវាយប្រហារប្រភេទថ្មីៗ និងផ្តល់នូវសុក្រឹតភាពខ្ពស់ជាង។</td>
+                <td>ទាមទារឱ្យមានការជ្រើសរើស Source Model ដែលសាកសម ហើយដំណើរការអាចមានភាពស្មុគស្មាញក្នុងការរៀបចំដំបូង។</td>
+                <td>សុក្រឹតភាព (Accuracy) ប្រមាណ ០.៨៨ (ឬ ៨៨%)</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រក្នុងកម្រិតមធ្យម ដែលអាចអនុវត្តបានដោយប្រើកុំព្យូទ័រផ្ទាល់ខ្លួនដែលមានសមត្ថភាពសមរម្យសម្រាប់ការបង្វឹកម៉ូដែល Machine Learning ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់ទិន្នន័យ NSL-KDD (មានកំណត់ត្រាសម្រាប់ Training ជាង ១៣០,០០០ និង Testing ១២,០០០) ដែលជាទិន្នន័យសាធារណៈ។</li>
+        
+        <li><strong>Software Framework:</strong> តម្រូវឱ្យប្រើប្រាស់ Python រួមជាមួយបណ្ណាល័យដូចជា Keras (សម្រាប់ Deep Learning/Transfer Learning) និង Scikit-learn (សម្រាប់ Classifier ផ្សេងៗ)។</li>
+        
+        <li><strong>Hardware:</strong> មិនតម្រូវឱ្យមាន GPU កម្រិតខ្ពស់ពេកទេ ប៉ុន្តែការមាន GPU នឹងជួយពន្លឿនការបង្វឹកម៉ូដែល Transfer Learning ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ NSL-KDD ដែលជាទិន្នន័យស្តង់ដារក្នុងការសិក្សាស្រាវជ្រាវ ប៉ុន្តែវាជាទិន្នន័យចាស់ និងមិនឆ្លុះបញ្ចាំងទាំងស្រុងពីទម្រង់ចរាចរណ៍បណ្តាញ (Network Traffic) និងការវាយប្រហារតាមអ៊ីនធឺណិតជាក់ស្តែងនៅក្នុងប្រទេសកម្ពុជានាពេលបច្ចុប្បន្ន។ នេះមានន័យថា ប្រសិទ្ធភាពនៃការការពារអាចមានការប្រែប្រួលនៅពេលអនុវត្តលើបណ្តាញពិត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសារៈសំខាន់យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ដែលកំពុងជំរុញសេដ្ឋកិច្ចឌីជីថល និងរដ្ឋាភិបាលអេឡិចត្រូនិក។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងមីក្រូហិរញ្ញវត្ថុ (Banking & MFI):</strong> អាចប្រើប្រាស់ដើម្បីការពារប្រព័ន្ធទិន្នន័យហិរញ្ញវត្ថុពីការវាយប្រហារដែលផ្លាស់ប្តូរទម្រង់ជាប្រចាំ (Concept Drift) ដើម្បីលួចទិន្នន័យ ឬបង្កការរំខាន។</li>
+            
+            <li><strong>អ្នកផ្តល់សេវាអ៊ីនធឺណិត (ISPs & Telecoms):</strong> ជួយក្នុងការត្រួតពិនិត្យចរាចរណ៍បណ្តាញ (Network Monitoring) ដើម្បីរកមើលភាពមិនប្រក្រតីដែលបណ្តាលមកពីមេរោគ ឬការវាយប្រហារ DDoS ថ្មីៗ។</li>
+            
+            <li><strong>ហេដ្ឋារចនាសម្ព័ន្ធរដ្ឋាភិបាល (Government Infrastructure):</strong> ពង្រឹងសុវត្ថិភាពមជ្ឈមណ្ឌលទិន្នន័យជាតិ (National Data Center) ទល់នឹងការវាយប្រហារកម្រិតខ្ពស់។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់បច្ចេកទេស Transfer Learning និង Incremental Learning គឺជាជំហានចាំបាច់មួយសម្រាប់អ្នកជំនាញសន្តិសុខបណ្តាញនៅកម្ពុជា ដើម្បីបង្កើតប្រព័ន្ធការពារដែលមានភាពឆ្លាតវៃ និងអាចបត់បែនបាន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការសិក្សាមូលដ្ឋានគ្រឹះ និងរៀបចំទិន្នន័យ:</strong> ចាប់ផ្តើមដោយការស្វែងយល់ពីរបៀបដំណើរការរបស់ Intrusion Detection System (IDS) និងទាញយកទិន្នន័យ NSL-KDD។ ប្រើប្រាស់ Python (Pandas) ដើម្បីធ្វើ Data Cleaning, Scaling និង Label Encoding ដូចបានរៀបរាប់ក្នុងផ្នែក 'Data Processing' នៃឯកសារ។</li>
+            
+            <li><strong>ការជ្រើសរើសលក្ខណៈពិសេស (Feature Selection):</strong> អនុវត្តការជ្រើសរើសលក្ខណៈពិសេសដោយប្រើ Random Forest Classifier ដើម្បីកាត់បន្ថយចំនួន Features ពី ៤០ មកនៅត្រឹម ៩ Features សំខាន់ៗ ដែលជួយឱ្យម៉ូដែលដំណើរការលឿន។</li>
+            
+            <li><strong>ការបង្កើតប្រព័ន្ធចាប់យកបម្រែបម្រួល (Drift Detection):</strong> សរសេរកូដដើម្បីអនុវត្តក្បួនដោះស្រាយ HDDM និង Hoeffding Tree ដោយប្រើបណ្ណាល័យដូចជា (scikit-multiflow) ដើម្បីស្វែងរកចំណុចដែលទិន្នន័យមានការប្រែប្រួល។</li>
+            
+            <li><strong>ការអនុវត្ត និងប្រៀបធៀបម៉ូដែល:</strong> បង្កើតម៉ូដែលចំនួនពីរ៖ ទីមួយប្រើ Incremental Learning (MLP, SGD) និងទីពីរប្រើ Transfer Learning (Keras Sequential model)។ ធ្វើការប្រៀបធៀបលទ្ធផលសុក្រឹតភាពដូចក្នុងតារាងទី ១ នៃឯកសារ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept drift</span></td>
+                <td>ជាបាតុភូតដែលទិន្នន័យឬគំរូនៃការវាយប្រហារមានការផ្លាស់ប្តូរលក្ខណៈរបស់វាតាមពេលវេលា ដែលធ្វើឱ្យប្រព័ន្ធការពារចាស់ៗលែងមានប្រសិទ្ធភាពក្នុងការចាប់យកការវាយប្រហារថ្មីៗទាំងនោះ។</td>
+                <td>ដូចជាមេរោគដែលផ្លាស់ប្តូររូបរាងថ្មី ធ្វើឱ្យថ្នាំចាស់ព្យាបាលលែងត្រូវ ដូច្នេះគ្រូពេទ្យត្រូវប្តូររូបមន្តថ្នាំតាម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Incremental learning</span></td>
+                <td>ជាវិធីសាស្ត្រដែលកុំព្យូទ័ររៀនពីទិន្នន័យថ្មីៗបន្តិចម្តងៗដើម្បីធ្វើបច្ចុប្បន្នភាពចំណេះដឹងរបស់វា ដោយមិនចាំបាច់លុបចោលការចងចាំចាស់ ឬរៀនពីដើមឡើងវិញទាំងអស់ឡើយ។</td>
+                <td>ដូចជាសិស្សរៀនមេរៀនថ្មីបន្ថែមជារៀងរាល់ថ្ងៃ ដោយមិនចាំបាច់ត្រឡប់ទៅរៀនថ្នាក់ទី ១ ឡើងវិញរាល់ពេលនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer learning</span></td>
+                <td>ការយកចំណេះដឹង ឬគំរូ (Model) ដែលម៉ាស៊ីនបានរៀនពីបញ្ហាមួយរួចហើយ ទៅប្រើប្រាស់ជាមូលដ្ឋានដើម្បីដោះស្រាយបញ្ហាមួយផ្សេងទៀតដែលស្រដៀងគ្នា ដើម្បីកុំឱ្យចំណាយពេលរៀនពីចំណុចសូន្យ។</td>
+                <td>ដូចជាអ្នកចេះជិះកង់រួចហើយ នឹងងាយស្រួលរៀនជិះម៉ូតូជាងអ្នកមិនចេះសោះ ព្រោះវាមានមូលដ្ឋានស្រដៀងគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Anomaly Detection</span></td>
+                <td>ដំណើរការនៃការស្វែងរកសកម្មភាព ឬទិន្នន័យណាដែលខុសប្លែកពីទម្លាប់ធម្មតា (Normal behavior) ដើម្បីសម្គាល់ថាវាអាចជាការវាយប្រហារ ឬជាបញ្ហាក្នុងប្រព័ន្ធ។</td>
+                <td>ដូចជាសន្តិសុខដែលចាប់អារម្មណ៍ឃើញមនុស្សពាក់អាវរងារក្រាស់នៅរដូវក្តៅ ដែលជាសញ្ញាខុសពីធម្មតា និងគួរឱ្យសង្ស័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ensemble learning</span></td>
+                <td>បច្ចេកទេសនៃការប្រើប្រាស់វិធីសាស្ត្រវិភាគ ឬម៉ូដែលច្រើនបញ្ចូលគ្នា ដើម្បីធ្វើការសម្រេចចិត្តឱ្យកាន់តែត្រឹមត្រូវ និងមានប្រសិទ្ធភាពខ្ពស់ជាងការពឹងផ្អែកលើម៉ូដែលតែមួយ។</td>
+                <td>ដូចជាការប្រឹក្សាយោបល់ជាមួយអ្នកជំនាញច្រើននាក់ដើម្បីរកដំណោះស្រាយរួមមួយ ជាជាងជឿលើមនុស្សតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Intrusion Detection System (IDS)</span></td>
+                <td>ជាកម្មវិធី ឬឧបករណ៍ដែលឃ្លាំមើលចរាចរណ៍បណ្តាញកុំព្យូទ័រ ដើម្បីស្វែងរកសកម្មភាពព្យាបាទ ឬការលួចចូលដោយគ្មានការអនុញ្ញាត។</td>
+                <td>ដូចជាប្រព័ន្ធកាមេរ៉ាសុវត្ថិភាព និងសញ្ញាអាសន្ននៅតាមផ្ទះ ដែលរោទ៍ឡើងនៅពេលមានចោរគាស់ផ្ទះចូល។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/incremental-learning-system-knn-nids-2013.html">
+                    <span class="km">ប្រព័ន្ធសិក្សាបន្ថែមសម្រាប់ការធ្វើចំណាត់ថ្នាក់ KNN តាមអនឡាញ៖ ការអនុវត្តចំពោះការរកឃើញការលុកលុយបណ្តាញ</span><br>
+                    <span class="en article-original-title">AN INCREMENTAL LEARNING SYSTEM FOR ON LINE KNN CLASSIFICATION: Application To Network Intrusion Detection</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

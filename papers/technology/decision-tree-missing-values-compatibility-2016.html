@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ដើមឈើសម្រេចចិត្ត៖ ភាពឆបគ្នានៃបច្ចេកទេសសម្រាប់ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលបណ្តុះបណ្តាល និងពេលសាកល្បង | KhmerResearch.com</title>
+    <meta name="description" content="បញ្ហាចម្បងនៅក្នុងគុណភាពទិន្នន័យសម្រាប់ការរៀនរបស់ម៉ាស៊ីន (Machine Learning) គឺវត្តមាននៃតម្លៃដែលបាត់បង់ (Missing Values) ទាំងនៅក្នុងដំណាក់កាលបណ្តុះបណ្តាល និងដំ...">
+    
+    <meta name="keywords" content="Decision Tree, Missing Values, C4.5 Algorithm, Imputation, Data Compatibility, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/decision-tree-missing-values-compatibility-2016.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/decision-tree-missing-values-compatibility-2016.html">
+    <meta property="og:title" content="ដើមឈើសម្រេចចិត្ត៖ ភាពឆបគ្នានៃបច្ចេកទេសសម្រាប់ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលបណ្តុះបណ្តាល និងពេលសាកល្បង | KhmerResearch.com">
+    <meta property="og:description" content="បញ្ហាចម្បងនៅក្នុងគុណភាពទិន្នន័យសម្រាប់ការរៀនរបស់ម៉ាស៊ីន (Machine Learning) គឺវត្តមាននៃតម្លៃដែលបាត់បង់ (Missing Values) ទាំងនៅក្នុងដំណាក់កាលបណ្តុះបណ្តាល និងដំណាក់កាលសាកល្បង ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់ភា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2016">
+    
+    <meta property="article:tag" content="Decision Tree">
+    
+    <meta property="article:tag" content="Missing Values">
+    
+    <meta property="article:tag" content="C4.5 Algorithm">
+    
+    <meta property="article:tag" content="Imputation">
+    
+    <meta property="article:tag" content="Data Compatibility">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ដើមឈើសម្រេចចិត្ត៖ ភាពឆបគ្នានៃបច្ចេកទេសសម្រាប់ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលបណ្តុះបណ្តាល និងពេលសាកល្បង">
+    <meta name="twitter:description" content="បញ្ហាចម្បងនៅក្នុងគុណភាពទិន្នន័យសម្រាប់ការរៀនរបស់ម៉ាស៊ីន (Machine Learning) គឺវត្តមាននៃតម្លៃដែលបាត់បង់ (Missing Values) ទាំងនៅក្នុងដំណាក់កាលបណ្តុះបណ្តាល និងដំណាក់កាលសាកល្បង ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់ភា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u178a\u17be\u1798\u1788\u17be\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u17d6 \u1797\u17b6\u1796\u1786\u1794\u1782\u17d2\u1793\u17b6\u1793\u17c3\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1793\u17c5\u1796\u17c1\u179b\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b \u1793\u17b7\u1784\u1796\u17c1\u179b\u179f\u17b6\u1780\u179b\u17d2\u1794\u1784",
+      "name": "Decision Tree: Compatibility of Techniques for Handling Missing Values at Training and Testing",
+      "description": "\u1794\u1789\u17d2\u17a0\u17b6\u1785\u1798\u17d2\u1794\u1784\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1782\u17bb\u178e\u1797\u17b6\u1796\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u1782\u17ba\u179c\u178f\u17d2\u178f\u1798\u17b6\u1793\u1793\u17c3\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb (Missing Values) \u1791\u17b6\u17c6\u1784\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u178a\u17c6\u178e\u17b6\u1780\u17cb\u1780\u17b6\u179b\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b \u1793\u17b7\u1784\u178a\u17c6\u178e\u17b6\u1780\u17cb\u1780\u17b6\u179b\u179f\u17b6\u1780\u179b\u17d2\u1794\u1784 \u178a\u17c2\u179b\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u1799\u17c9\u17b6\u1784\u1781\u17d2\u179b\u17b6\u17c6\u1784\u178a\u179b\u17cb\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/decision-tree-missing-values-compatibility-2016.html",
+      "author": [{"@type": "Person", "name": "Sachin Gavankar (Datta Meghe College of Engineering, Mumbai University)"},{"@type": "Person", "name": "Sudhirkumar Sawarkar (Datta Meghe College of Engineering, Mumbai University)"}],
+      "datePublished": "2016",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Decision Tree: Compatibility of Techniques for Handling Missing Values at Training and Testing",
+        "url": "https://doi.org/10.5013/IJSSST.a.17.34.10"
+      },
+      "keywords": ["Decision Tree", "Missing Values", "C4.5 Algorithm", "Imputation", "Data Compatibility"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u178a\u17be\u1798\u1788\u17be\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u17d6 \u1797\u17b6\u1796\u1786\u1794\u1782\u17d2\u1793\u17b6\u1793\u17c3\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1793\u17c5\u1796\u17c1\u179b\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b \u1793\u17b7\u1784\u1796\u17c1\u179b\u179f\u17b6\u1780\u179b\u17d2\u1794\u1784",
+          "item": "https://khmerresearch.com/papers/technology/decision-tree-missing-values-compatibility-2016.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ដើមឈើសម្រេចចិត្ត៖ ភាពឆបគ្នានៃបច្ចេកទេសសម្រាប់ការដោះស្រាយត...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Decision Tree: Compatibility of Techniques for Handling Missing Values at Training and Testing<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.5013/IJSSST.a.17.34.10" target="_blank">https://doi.org/10.5013/IJSSST.a.17.34.10</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ដើមឈើសម្រេចចិត្ត៖ ភាពឆបគ្នានៃបច្ចេកទេសសម្រាប់ការដោះស្រាយតម្លៃដែលបាត់បង់នៅពេលបណ្តុះបណ្តាល និងពេលសាកល្បង</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Decision Tree: Compatibility of Techniques for Handling Missing Values at Training and Testing</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Sachin Gavankar (Datta Meghe College of Engineering, Mumbai University), Sudhirkumar Sawarkar (Datta Meghe College of Engineering, Mumbai University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2016</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> បញ្ហាចម្បងនៅក្នុងគុណភាពទិន្នន័យសម្រាប់ការរៀនរបស់ម៉ាស៊ីន (Machine Learning) គឺវត្តមាននៃតម្លៃដែលបាត់បង់ (Missing Values) ទាំងនៅក្នុងដំណាក់កាលបណ្តុះបណ្តាល និងដំណាក់កាលសាកល្បង ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់ភាពត្រឹមត្រូវនៃការទស្សន៍ទាយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានធ្វើការពិសោធន៍ដោយប្រើសំណុំទិន្នន័យពី UCI Repository ដើម្បីវិភាគភាពឆបគ្នារវាងវិធីសាស្ត្រផ្សេងៗក្នុងការដោះស្រាយតម្លៃដែលបាត់បង់។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយ C4.5 (C4.5 Algorithm) និងវិធីសាស្ត្របំពេញតម្លៃ (Imputation) លើសំណុំទិន្នន័យចំនួន ៤ (Breast, Credit, Diabetes, Iris)។</li>
+            
+            <li>ការបង្កើតទិន្នន័យបាត់បង់សិប្បនិម្មិតចំនួន ១០% ដើម្បីប្រៀបធៀបប្រសិទ្ធភាពនៃយុទ្ធសាស្ត្រ Null Value និង Lazy Decision Tree។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>យុទ្ធសាស្ត្រតម្លៃដែលស្គាល់ (Known Value Strategy) នៅពេលសាកល្បង ទទួលបានលទ្ធផលល្អបំផុតនៅពេលប្រើជាមួយបច្ចេកទេសបណ្តុះបណ្តាលផ្សេងៗ។</li>
+            
+            <li>ក្បួនដោះស្រាយ C4.5 នៅពេលសាកល្បង មានភាពឆបគ្នាខ្ពស់ជាមួយនឹងការប្រើប្រាស់ C4.5 និង Imputation នៅពេលបណ្តុះបណ្តាល។</li>
+            
+            <li>ការលុបចោលកំណត់ត្រាដែលមានតម្លៃបាត់បង់ (Delete Records) ត្រូវបានរកឃើញថាជាយុទ្ធសាស្ត្រដែលមិនមានប្រសិទ្ធភាពសម្រាប់ការដោះស្រាយបញ្ហានេះ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Delete Records (Complete Case Analysis)</span></strong><br>ការលុបចោលកំណត់ត្រាដែលមានទិន្នន័យបាត់បង់</td>
+                <td>ងាយស្រួលអនុវត្តបំផុត និងមិនត្រូវការការគណនាស្មុគស្មាញ។</td>
+                <td>បាត់បង់ទិន្នន័យសំខាន់ៗជាច្រើន និងអាចធ្វើឱ្យលទ្ធផលលំអៀង (Bias) ប្រសិនបើទិន្នន័យមិនបាត់បង់ដោយចៃដន្យ (Not MCAR)។</td>
+                <td>ទទួលបានលទ្ធផលទាបជាងគេក្នុងការពិសោធន៍ ជាពិសេសលើសំណុំទិន្នន័យ Credit (ធ្លាក់ចុះដល់ ៦៤%)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Imputation (Mean/Mode)</span></strong><br>ការបំពេញតម្លៃដែលបាត់ដោយប្រើមធ្យមភាគ ឬតម្លៃដែលញឹកញាប់បំផុត</td>
+                <td>រក្សាចំនួនទិន្នន័យបានពេញលេញ និងងាយស្រួលក្នុងការអនុវត្តមុនពេលបង្កើតម៉ូដែល។</td>
+                <td>អាចបង្កើតទំនាក់ទំនងមិនពិតរវាងអថេរ និងកាត់បន្ថយភាពប្រែប្រួលនៃទិន្នន័យ។</td>
+                <td>មានប្រសិទ្ធភាពល្អបង្គួរ និងមានភាពឆបគ្នា (Compatible) ជាមួយ C4.5 ក្នុងការបង្កើនភាពត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">C4.5 Strategy (Probabilistic Split)</span></strong><br>យុទ្ធសាស្ត្ររបស់ C4.5 (បំបែកទិន្នន័យតាមប្រូបាប៊ីលីតេ)</td>
+                <td>ប្រើប្រាស់ព័ត៌មានដែលមានស្រាប់ទាំងអស់ដោយមិនបាច់បំពេញតម្លៃក្លែងក្លាយ។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការគណនាជាងការបំពេញតម្លៃធម្មតា។</td>
+                <td>ផ្តល់លទ្ធផលខ្ពស់ និងមានស្ថេរភាពលើសំណុំទិន្នន័យភាគច្រើន (ឧទាហរណ៍ ៧៨% លើ Breast Cancer)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Known Value Strategy (Lazy Decision Tree)</span></strong><br>យុទ្ធសាស្ត្រតម្លៃដែលស្គាល់ (ប្រើតែអថេរដែលមានតម្លៃនៅពេលសាកល្បង)</td>
+                <td>ដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់នៅពេលសាកល្បង (Testing phase) បានយ៉ាងល្អតាមធម្មជាតិ។</td>
+                <td>ចំណាយធនធានគណនាខ្ពស់ (High Computational Cost) ព្រោះត្រូវបង្កើតដើមឈើថ្មីសម្រាប់ករណីសាកល្បងនីមួយៗ។</td>
+                <td>ជាយុទ្ធសាស្ត្រដែលមានប្រសិទ្ធភាពបំផុតនៅពេលធ្វើតេស្តសាកល្បង (Testing)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រទូទៅសម្រាប់ការបណ្តុះបណ្តាលម៉ូដែល C4.5 ប៉ុន្តែវិធីសាស្ត្រ Lazy Decision Tree ទាមទារថាមពលគណនាខ្ពស់ជាងគេ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់កម្មវិធី WEKA (J48 Classifier) ដែលជាកូដចំហ (Open Source) ងាយស្រួលសម្រាប់អ្នកស្រាវជ្រាវ។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យដែលមានរចនាសម្ព័ន្ធច្បាស់លាស់ (Structured Data) ពី UCI Repository។</li>
+        
+        <li><strong>Computing Power:</strong> កុំព្យូទ័រធម្មតាអាចដំណើរការបាន លើកលែងតែវិធីសាស្ត្រ Lazy Approach ដែលអាចត្រូវការពេលវេលាវែងជាងប្រសិនបើសំណុំទិន្នន័យធំ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យស្តង់ដារពី UCI (ដូចជា Breast Cancer, Credit, Diabetes) ដែលជាទិន្នន័យរបស់បរទេស។ នេះអាចជាចំណុចខ្វះខាតសម្រាប់កម្ពុជា ប្រសិនបើយើងអនុវត្តលើទិន្នន័យដែលមានលក្ខណៈពិសេសក្នុងស្រុក ដូចជាទិន្នន័យកសិកម្ម ឬសេដ្ឋកិច្ចក្រៅប្រព័ន្ធ ដែលអាចមានទម្រង់នៃការបាត់បង់ទិន្នន័យ (Missingness pattern) ខុសគ្នា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសារៈសំខាន់ខ្លាំងសម្រាប់កម្ពុជា ដោយសារបញ្ហាទិន្នន័យមិនពេញលេញគឺជាបញ្ហាប្រឈមទូទៅនៅក្នុងស្ថាប័នជាច្រើន។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យមីក្រូហិរញ្ញវត្ថុ (Microfinance):</strong> ការវាយតម្លៃឥណទាន (Credit Scoring) សម្រាប់ប្រជាជននៅជនបទដែលជារឿយៗខ្វះឯកសារហិរញ្ញវត្ថុ ឬប្រវត្តិការបង់ប្រាក់មិនពេញលេញ។</li>
+            
+            <li><strong>សុខាភិបាលសាធារណៈ (Public Health):</strong> ការវិភាគទិន្នន័យអ្នកជំងឺនៅតាមមន្ទីរពេទ្យរដ្ឋ ដែលជារឿយៗមានការកត់ត្រាមិនគ្រប់គ្រាន់ ឬបាត់បង់ចន្លោះពេលបញ្ជូនទិន្នន័យ។</li>
+            
+            <li><strong>ការស្ទង់មតិសង្គម (Social Survey):</strong> ការវិភាគទិន្នន័យជំរឿន ឬការស្ទង់មតិរបស់អង្គការក្រៅរដ្ឋាភិបាល ដែលអ្នកផ្តល់សម្ភាសន៍អាចបដិសេធមិនឆ្លើយសំណួរមួយចំនួន។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់វិធីសាស្ត្រ Imputation ជាមួយនឹង C4.5 គឺជាដំណោះស្រាយដែលមានប្រសិទ្ធភាព និងចំណាយតិចសម្រាប់ស្ថាប័ននៅកម្ពុជាដែលមិនទាន់មានប្រព័ន្ធប្រមូលទិន្នន័យទំនើប។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ C4.5:</strong> និស្សិតគួរស្វែងយល់ពីរបៀបដែលក្បួនដោះស្រាយ C4.5 (J48) គណនា Information Gain និងរបៀបដែលវាបំបែកទិន្នន័យនៅពេលជួបតម្លៃដែលបាត់ (Missing Values)។</li>
+            
+            <li><strong>ការប្រើប្រាស់ឧបករណ៍ WEKA:</strong> ដំឡើងកម្មវិធី WEKA និងអនុវត្តការប្រើប្រាស់ J48 classifier។ សាកល្បងប្រើមុខងារ 'ReplaceMissingValues' filter នៅក្នុង WEKA ដើម្បីប្រៀបធៀបលទ្ធផល។</li>
+            
+            <li><strong>ការពិសោធន៍ជាមួយទិន្នន័យជាក់ស្តែង:</strong> ប្រមូលទិន្នន័យក្នុងស្រុកដែលមានចន្លោះខ្វះខាត (ឧទាហរណ៍ ទិន្នន័យអាកាសធាតុពីក្រសួងធនធានទឹក ឬទិន្នន័យអង្កេតសេដ្ឋកិច្ច) ហើយអនុវត្តវិធីសាស្ត្រ Imputation ប្រៀបធៀបនឹងការលុបទិន្នន័យចោល។</li>
+            
+            <li><strong>ការអភិវឌ្ឍន៍ប្រព័ន្ធវាយតម្លៃ:</strong> សរសេរកូដ Python ដោយប្រើបណ្ណាល័យ Scikit-learn (IterativeImputer ឬ SimpleImputer) ដើម្បីបង្កើតបំពង់ទិន្នន័យ (Data Pipeline) ស្វ័យប្រវត្តិសម្រាប់ដោះស្រាយទិន្នន័យដែលបាត់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imputation</span></td>
+                <td>ដំណើរការនៃការជំនួសទិន្នន័យដែលបាត់បង់ (Missing Values) ដោយតម្លៃប៉ាន់ស្មាន ដូចជាមធ្យមភាគ (Mean) ឬតម្លៃដែលកើតឡើងញឹកញាប់បំផុត (Mode) ដើម្បីឱ្យសំណុំទិន្នន័យមានភាពពេញលេញសម្រាប់យកទៅវិភាគ ឬបណ្តុះបណ្តាលម៉ូដែល។</td>
+                <td>ដូចជាការយកឥដ្ឋថ្មីទៅដាក់ជំនួសកន្លែងដែលបាក់បែកនៅជញ្ជាំង ដើម្បីឱ្យជញ្ជាំងនោះពេញលេញឡើងវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Lazy Decision Tree</span></td>
+                <td>វិធីសាស្ត្រដែលមិនបង្កើតម៉ូដែលទុកជាមុន (No pre-built model) ប៉ុន្តែវាបង្កើតដើមឈើសម្រេចចិត្តនៅពេលមានទិន្នន័យថ្មីចូលមកភ្លាមៗ ដើម្បីធ្វើការទស្សន៍ទាយ ដោយប្រើតែព័ត៌មានដែលមានជាក់ស្តែងនៅពេលនោះប៉ុណ្ណោះ។</td>
+                <td>ដូចជាចុងភៅដែលមិនចំអិនម្ហូបទុកចោល តែចាប់ផ្តើមចំអិនភ្លាមៗនៅពេលមានភ្ញៀវកម្មង់ ដោយមើលតាមគ្រឿងផ្សំដែលមានជាក់ស្តែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Missing Completely At Random (MCAR)</span></td>
+                <td>ស្ថានភាពដែលទិន្នន័យបាត់បង់ដោយចៃដន្យសុទ្ធសាធ ដោយមិនមានទំនាក់ទំនងជាមួយតម្លៃនៃទិន្នន័យនោះ ឬទិន្នន័យផ្សេងទៀតឡើយ ដែលអនុញ្ញាតឱ្យអ្នកវិភាគលុបវាចោលបានដោយមិនធ្វើឱ្យលទ្ធផលលំអៀង (Bias)។</td>
+                <td>ដូចជាសំបុត្រដែលបាត់ដោយសារឡានប្រៃសណីយ៍ខូចតាមផ្លូវដោយចៃដន្យ មិនមែនដោយសារគេលាក់បាំង ឬខ្លឹមសារសំបុត្រនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">C4.5 Strategy</span></td>
+                <td>ក្បួនដោះស្រាយសម្រាប់បង្កើតដើមឈើសម្រេចចិត្ត ដែលដោះស្រាយទិន្នន័យបាត់បង់ដោយបំបែកទិន្នន័យនោះទៅគ្រប់សាខាដែលអាចទៅរួច ដោយផ្តល់ទម្ងន់តាមភាគរយ (Probabilistic Split) ជំនួសឱ្យការជ្រើសរើសផ្លូវតែមួយ។</td>
+                <td>ដូចជាការបែងចែកក្រុមរុករកទៅគ្រប់ផ្លូវបំបែកទាំងអស់ ដើម្បីស្វែងរកចម្លើយ នៅពេលដែលយើងមិនដឹងច្បាស់ថាត្រូវទៅផ្លូវណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Expectation-Maximization (EM)</span></td>
+                <td>វិធីសាស្ត្រស្ថិតិដ៏ស្មុគស្មាញមួយដែលធ្វើការប៉ាន់ស្មានតម្លៃដែលបាត់ និងកែតម្រូវម៉ូដែលឆ្លាស់គ្នាម្ដងហើយម្ដងទៀត (Iterative process) រហូតដល់ទទួលបានតម្លៃដែលទំនងបំផុតសម្រាប់ទិន្នន័យដែលបាត់នោះ។</td>
+                <td>ដូចជាការទាយចម្លើយនៃល្បែងផ្គុំរូប ដោយដាក់បំណែកសាកល្បង រួចកែតម្រូវបន្តិចម្តងៗរហូតដល់រូបភាពនោះត្រឹមត្រូវ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/decision-tree-algorithms-survey-2016.html">
+                    <span class="km">ការសិក្សាកម្រងអំពីអាល់កូរីត Decision Tree សម្រាប់ការធ្វើចំណាត់ថ្នាក់ក្នុងការជីកយកទិន្នន័យ (Data Mining)</span><br>
+                    <span class="en article-original-title">A Survey on Decision Tree Algorithms of Classification in Data Mining</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

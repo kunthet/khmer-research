@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Decision Tree៖ ID3, CART និង C4.5 | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះផ្តោតលើតម្រូវការក្នុងការស្វែងយល់និងប្រៀបធៀបប្រសិទ្ធភាព លទ្ធភាពនៃការពង្រីក និងលក្ខណៈពិសេសនៃក្បួនដោះស្រាយ Decision Tree ចំនួនបីគឺ ID3, CART, និង C4...">
+    
+    <meta name="keywords" content="Decision Tree, ID3, C4.5, CART, Information Gain, Gini Index, Pruning, Data Mining, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/comparative-study-id3-cart-c45-decision-tree-2014.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/comparative-study-id3-cart-c45-decision-tree-2014.html">
+    <meta property="og:title" content="ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Decision Tree៖ ID3, CART និង C4.5 | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះផ្តោតលើតម្រូវការក្នុងការស្វែងយល់និងប្រៀបធៀបប្រសិទ្ធភាព លទ្ធភាពនៃការពង្រីក និងលក្ខណៈពិសេសនៃក្បួនដោះស្រាយ Decision Tree ចំនួនបីគឺ ID3, CART, និង C4.5 ដើម្បីកំណត់ថាមួយណាដែលសមស្របបំផុតសម្រា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2014 (International Journal of Advanced Information Science and Technology)">
+    
+    <meta property="article:tag" content="Decision Tree">
+    
+    <meta property="article:tag" content="ID3">
+    
+    <meta property="article:tag" content="C4.5">
+    
+    <meta property="article:tag" content="CART">
+    
+    <meta property="article:tag" content="Information Gain">
+    
+    <meta property="article:tag" content="Gini Index">
+    
+    <meta property="article:tag" content="Pruning">
+    
+    <meta property="article:tag" content="Data Mining">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Decision Tree៖ ID3, CART និង C4.5">
+    <meta name="twitter:description" content="ការសិក្សានេះផ្តោតលើតម្រូវការក្នុងការស្វែងយល់និងប្រៀបធៀបប្រសិទ្ធភាព លទ្ធភាពនៃការពង្រីក និងលក្ខណៈពិសេសនៃក្បួនដោះស្រាយ Decision Tree ចំនួនបីគឺ ID3, CART, និង C4.5 ដើម្បីកំណត់ថាមួយណាដែលសមស្របបំផុតសម្រា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Decision Tree\u17d6 ID3, CART \u1793\u17b7\u1784 C4.5",
+      "name": "Comparative Study Id3, Cart And C4.5 Decision Tree Algorithm: A Survey",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u1799\u179b\u17cb\u1793\u17b7\u1784\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796 \u179b\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780 \u1793\u17b7\u1784\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Decision Tree \u1785\u17c6\u1793\u17bd\u1793\u1794\u17b8\u1782\u17ba ID3, CART, \u1793\u17b7\u1784 C4.5 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17c6\u178e\u178f\u17cb\u1790\u17b6\u1798\u17bd\u1799\u178e\u17b6\u178a\u17c2\u179b\u179f\u1798\u179f\u17d2\u179a\u1794\u1794\u17c6\u1795\u17bb\u178f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u1797\u17c1\u1791\u1793\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/comparative-study-id3-cart-c45-decision-tree-2014.html",
+      "author": [{"@type": "Person", "name": "Sonia Singh (Department of computer science, University of Delhi)"},{"@type": "Person", "name": "Manoj Giri (Department of computer science, University of Delhi)"}],
+      "datePublished": "2014 (International Journal of Advanced Information Science and Technology)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Comparative Study Id3, Cart And C4.5 Decision Tree Algorithm: A Survey",
+        "url": "http://dx.doi.org/10.15693/ijaist/2014.v3i7.47-52"
+      },
+      "keywords": ["Decision Tree", "ID3", "C4.5", "CART", "Information Gain", "Gini Index", "Pruning", "Data Mining"],
+      "about": "Computer Science / Data Mining"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Decision Tree\u17d6 ID3, CART \u1793\u17b7\u1784 C4.5",
+          "item": "https://khmerresearch.com/papers/technology/comparative-study-id3-cart-c45-decision-tree-2014.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Decision Tree៖ ID3, CART...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Comparative Study Id3, Cart And C4.5 Decision Tree Algorithm: A Survey<br>
+        
+        <strong>Source:</strong> <a href="http://dx.doi.org/10.15693/ijaist/2014.v3i7.47-52" target="_blank">http://dx.doi.org/10.15693/ijaist/2014.v3i7.47-52</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Decision Tree៖ ID3, CART និង C4.5</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Comparative Study Id3, Cart And C4.5 Decision Tree Algorithm: A Survey</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Sonia Singh (Department of computer science, University of Delhi), Manoj Giri (Department of computer science, University of Delhi)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2014 (International Journal of Advanced Information Science and Technology)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Data Mining</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះផ្តោតលើតម្រូវការក្នុងការស្វែងយល់និងប្រៀបធៀបប្រសិទ្ធភាព លទ្ធភាពនៃការពង្រីក និងលក្ខណៈពិសេសនៃក្បួនដោះស្រាយ Decision Tree ចំនួនបីគឺ ID3, CART, និង C4.5 ដើម្បីកំណត់ថាមួយណាដែលសមស្របបំផុតសម្រាប់ប្រភេទនៃទិន្នន័យផ្សេងៗគ្នា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានធ្វើការសិក្សាស្រាវជ្រាវតាមបែបទ្រឹស្តី និងការវិភាគប្រៀបធៀបនៃក្បួនដោះស្រាយ ដោយពិនិត្យមើលលក្ខខណ្ឌនៃការបំបែក (Splitting criteria) ការគ្រប់គ្រងប្រភេទទិន្នន័យ និងយុទ្ធសាស្ត្រនៃការកាត់តម្រឹម (Pruning strategy)។
+        
+        <ul>
+            
+            <li>ការវិភាគលើលក្ខខណ្ឌបំបែក (Splitting Criteria) ដូចជា Information Gain, Gain Ratio និង Gini Index</li>
+            
+            <li>ការប្រៀបធៀបលក្ខណៈសម្បត្តិសំខាន់ៗរវាងក្បួនដោះស្រាយតាមរយៈតារាងប្រៀបធៀប (Comparative Table Analysis)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ID3 គឺជាក្បួនដោះស្រាយដ៏សាមញ្ញ ប៉ុន្តែមិនអាចគ្រប់គ្រងទិន្នន័យជាលេខ (Numeric attributes) ឬទិន្នន័យដែលបាត់បង់ (Missing values) បានទេ ហើយងាយនឹងមានបញ្ហា Overfitting។</li>
+            
+            <li>C4.5 (ដែលវិវត្តចេញពី ID3) អាចគ្រប់គ្រងទាំងទិន្នន័យជាប់ (Continuous) និងដាច់ដោយឡែក (Discrete) ព្រមទាំងទិន្នន័យដែលបាត់បង់ ដោយប្រើវិធីសាស្ត្រកាត់តម្រឹមផ្អែកលើកំហុស (Error Based pruning)។</li>
+            
+            <li>CART បង្កើតជា Binary trees និងអាចគ្រប់គ្រងទាំងប្រភេទនៃទិន្នន័យ និងទិន្នន័យមិនប្រក្រតី (Outliers) បានយ៉ាងល្អ ដោយប្រើប្រាស់វិធីសាស្ត្រ Cost-Complexity pruning។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">ID3 (Iterative Dichotomizer 3)</span></strong><br>ក្បួនដោះស្រាយ ID3 ដែលប្រើប្រាស់ Information Gain ដើម្បីបំបែកទិន្នន័យ</td>
+                <td>បង្កើត Decision Tree បានលឿនបំផុត និងផ្តល់នូវវិធាន (Rules) ដែលងាយស្រួលយល់សម្រាប់មនុស្ស។</td>
+                <td>មិនអាចដំណើរការជាមួយទិន្នន័យជាលេខ (Numeric) ឬទិន្នន័យដែលបាត់បង់ (Missing values) បានទេ ហើយងាយនឹងមានបញ្ហា Overfitting។</td>
+                <td>សមស្របសម្រាប់តែទិន្នន័យប្រភេទ Categorical ដែលគ្មានភាពមិនប្រក្រតី (Noise-free)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">C4.5</span></strong><br>ក្បួនដោះស្រាយដែលវិវត្តពី ID3 ដោយប្រើប្រាស់ Gain Ratio</td>
+                <td>អាចគ្រប់គ្រងទាំងទិន្នន័យជាប់ (Continuous) និងដាច់ដោយឡែក (Discrete) ព្រមទាំងប្រើប្រាស់បច្ចេកទេស Pruning ដើម្បីកាត់បន្ថយអត្រាខុស។</td>
+                <td>អាចបង្កើតមែកទទេ (Empty branches) ដែលមិនមានតម្លៃសម្រាប់ការបង្កើតវិធាន ហើយដំណើរការយឺតជាង ID3 បន្តិច។</td>
+                <td>ដោះស្រាយបញ្ហារបស់ ID3 ដោយអាចគ្រប់គ្រងទិន្នន័យដែលបាត់បង់ និងកាត់បន្ថយការ Overfitting។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CART (Classification and Regression Trees)</span></strong><br>ក្បួនដោះស្រាយសម្រាប់បង្កើត Binary Trees ដោយប្រើប្រាស់ Gini Index ឬ Twoing Criteria</td>
+                <td>អាចធ្វើការជាមួយទាំងបញ្ហា Classification និង Regression ហើយមានសមត្ថភាពខ្ពស់ក្នុងការគ្រប់គ្រង Outliers។</td>
+                <td>ការបំបែកគឺធ្វើឡើងតែពីរផ្នែក (Binary split) ហើយរចនាសម្ព័ន្ធ Tree អាចមិនមានស្ថេរភាពប្រសិនបើទិន្នន័យមានការផ្លាស់ប្តូរបន្តិចបន្តួច។</td>
+                <td>ល្អបំផុតសម្រាប់ការវិភាគដែលត្រូវការភាពបត់បែនរវាងប្រភេទអថេរ និងការទស្សន៍ទាយតម្លៃលេខ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារមិនបានបញ្ជាក់ពីតម្រូវការផ្នែករឹងជាក់លាក់ទេ ប៉ុន្តែក្បួនដោះស្រាយ Decision Tree ជាទូទៅមិនទាមទារធនធានកុំព្យូទ័រខ្ពស់នោះទេ។
+    
+    <ul>
+        
+        <li><strong>Computational Power:</strong> អាចដំណើរការបាននៅលើកុំព្យូទ័រទូទៅ (Standard CPU) មិនចាំបាច់មាន GPU ខ្លាំងក្លាដូច Deep Learning ទេ។</li>
+        
+        <li><strong>Software Tools:</strong> អាចអនុវត្តបានដោយប្រើកម្មវិធីដូចជា Weka, ឬភាសា Python (scikit-learn) និង R។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះគឺជាការស្ទង់មតិបែបទ្រឹស្តី (Theoretical Survey) ដែលធ្វើឡើងដោយអ្នកស្រាវជ្រាវនៅប្រទេសឥណ្ឌា ដោយមិនបានប្រើប្រាស់ទិន្នន័យជាក់ស្តែង (Real-world dataset) ដើម្បីធ្វើការវាស់វែងប្រសិទ្ធភាពទេ។ ឧទាហរណ៍ដែលលើកឡើងគឺគ្រាន់តែជាទិន្នន័យអាកាសធាតុសាមញ្ញ (Weather dataset) ដើម្បីពន្យល់ពីដំណើរការប៉ុណ្ណោះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រទាំងនេះមានសារៈសំខាន់ខ្លាំង និងអាចអនុវត្តបានភ្លាមៗនៅក្នុងប្រទេសកម្ពុជាសម្រាប់ការវិភាគទិន្នន័យបែបបុរាណ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យមីក្រូហិរញ្ញវត្ថុ និងធនាគារ:</strong> ប្រើប្រាស់ C4.5 ឬ CART ដើម្បីវាយតម្លៃហានិភ័យឥណទាន (Credit Scoring) ដោយផ្អែកលើប្រវត្តិអតិថិជន។</li>
+            
+            <li><strong>វិស័យកសិកម្ម:</strong> បង្កើតប្រព័ន្ធគាំទ្រការសម្រេចចិត្ត (Decision Support System) សម្រាប់កសិករ ដើម្បីទស្សន៍ទាយជំងឺដំណាំ ឬតម្រូវការទឹកដោយផ្អែកលើលក្ខខណ្ឌអាកាសធាតុ។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល:</strong> ប្រើប្រាស់សម្រាប់ការធ្វើរោគវិនិច្ឆ័យបឋម (Diagnosis) ដោយផ្អែកលើរោគសញ្ញាអ្នកជំងឺ ដែលផ្តល់លទ្ធផលជាវិធានងាយស្រួលពន្យល់ដល់គ្រូពេទ្យ។</li>
+            
+        </ul>
+        
+        
+        <p>ដោយសារក្បួនដោះស្រាយទាំងនេះងាយស្រួលពន្យល់ (Explainable AI) វាសាកសមបំផុតសម្រាប់ការចាប់ផ្តើមអនុវត្ត Data Mining នៅក្នុងស្ថាប័នកម្ពុជាដែលត្រូវការតម្លាភាពក្នុងការសម្រេចចិត្ត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទ្រឹស្តី:</strong> ស្វែងយល់ឱ្យច្បាស់អំពីគណិតវិទ្យានៃ Entropy, Information Gain និង Gini Index ដើម្បីដឹងពីរបៀបដែល Tree ធ្វើការបំបែក Node។</li>
+            
+            <li><strong>ការជ្រើសរើសឧបករណ៍អនុវត្ត:</strong> ដំឡើងកម្មវិធី Weka (សម្រាប់អ្នកមិនចេះកូដ) ឬប្រើប្រាស់បណ្ណាល័យ scikit-learn ក្នុង Python ដើម្បីសាកល្បងបង្កើត Model។</li>
+            
+            <li><strong>ការរៀបចំទិន្នន័យ (Data Preprocessing):</strong> រៀបចំទិន្នន័យដោយសម្អាត Missing Values (ប្រសិនបើប្រើ ID3 ត្រូវលុបចោល, បើប្រើ C4.5 អាចទុកបាន) និងបំប្លែងទិន្នន័យទៅជាទម្រង់ដែលសមស្រប។</li>
+            
+            <li><strong>ការប្រៀបធៀបប្រសិទ្ធភាព:</strong> អនុវត្តក្បួនដោះស្រាយទាំង ៣ លើទិន្នន័យតែមួយ ហើយប្រៀបធៀបលទ្ធផល Accuracy និងភាពស្មុគស្មាញនៃ Tree (Tree Depth)។</li>
+            
+            <li><strong>ការបកស្រាយលទ្ធផល (Interpretation):</strong> ប្រើប្រាស់មុខងារ Visualization (ដូចជា plot_tree ក្នុង Python) ដើម្បីមើលរូបរាងនៃ Decision Tree និងបកស្រាយវិធាន (Rules) ដែលទទួលបាន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Entropy</span></td>
+                <td>រង្វាស់នៃភាពមិនសុទ្ធ (Impurity) ឬភាពច្របូកច្របល់នៅក្នុងសំណុំទិន្នន័យ។ នៅក្នុង Decision Tree វាត្រូវបានប្រើដើម្បីគណនាថាតើការបំបែកទិន្នន័យមួយណាដែលនឹងផ្តល់នូវក្រុមទិន្នន័យដែលមានលក្ខណៈដូចគ្នា (Homogeneous) ជាងគេ។</td>
+                <td>ដូចជាការវាស់ថាតើបន្ទប់មួយរញ៉េរញ៉ៃកម្រិតណា។ បន្ទប់រញ៉េរញ៉ៃខ្លាំងមាន Entropy ខ្ពស់ បន្ទប់ដែលមានរបៀបរៀបរយមាន Entropy ទាប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Information Gain</span></td>
+                <td>បច្ចេកទេសដែលប្រើក្នុងក្បួនដោះស្រាយ ID3 ដើម្បីវាស់វែងថាតើយើងទទួលបានព័ត៌មានច្បាស់លាស់ប៉ុន្មានបន្ទាប់ពីបំបែកទិន្នន័យតាមលក្ខខណ្ឌណាមួយ។ វាជួយជ្រើសរើសលក្ខខណ្ឌដែលល្អបំផុតសម្រាប់ដាក់នៅកំពូលនៃ Tree។</td>
+                <td>ដូចជាការលេងល្បែងទាយសំនួរ ២០ សំនួរ; សំនួរដែលកាត់ចោលចម្លើយខុសបានច្រើនបំផុត គឺជាសំនួរដែលមាន Information Gain ខ្ពស់បំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pruning</span></td>
+                <td>ដំណើរការនៃការកាត់បន្ថយទំហំនៃ Decision Tree ដោយដកចេញនូវផ្នែក (Nodes) ដែលមិនសូវសំខាន់ ឬដែលផ្តល់ព័ត៌មានលម្អិតពេក ដើម្បីការពារកុំឱ្យម៉ូដែលស្មុគស្មាញពេក។</td>
+                <td>ដូចជាការកាត់មែកឈើដែលងាប់ ឬមែកតូចៗចេញ ដើម្បីឱ្យដើមឈើទាំងមូលលូតលាស់បានល្អ និងមានរូបរាងស្អាត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Over-fitting</span></td>
+                <td>ស្ថានភាពដែលម៉ូដែលរៀនពីទិន្នន័យបង្វឹក (Training Data) លម្អិតពេក រហូតដល់ចងចាំទាំងទិន្នន័យដែលខុសប្រក្រតី (Noise) ធ្វើឱ្យវាមានប្រសិទ្ធភាពទាបនៅពេលយកទៅប្រើជាមួយទិន្នន័យថ្មី។</td>
+                <td>ដូចជាសិស្សដែលទន្ទេញចម្លើយវិញ្ញាសាចាស់ៗចាំទាំងអស់ ប៉ុន្តែបែរជាធ្លាក់ពេលប្រឡងពិតប្រាកដព្រោះសំនួរត្រូវបានកែប្រែបន្តិចបន្តួច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gini Index</span></td>
+                <td>រង្វាស់មួយប្រភេទទៀតសម្រាប់វាស់ភាពមិនសុទ្ធ (Impurity) ដែលត្រូវបានប្រើប្រាស់ដោយក្បួនដោះស្រាយ CART។ វាគណនាប្រូបាប៊ីលីតេដែលធាតុមួយត្រូវបានចាត់ថ្នាក់ខុស ប្រសិនបើវាត្រូវបានជ្រើសរើសដោយចៃដន្យ។</td>
+                <td>ស្រដៀងនឹង Entropy ដែរ វាដូចជាការវាស់ថាតើក្នុងកន្ត្រកមួយមានផ្លែឈើចម្រុះគ្នាខ្លាំងប៉ុណ្ណា។ បើមានតែផ្លែប៉ោមសុទ្ធ Gini Index គឺសូន្យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gain Ratio</span></td>
+                <td>ការកែតម្រូវលើ Information Gain ដែលប្រើក្នុង C4.5 ដើម្បីដោះស្រាយបញ្ហាលំអៀងទៅរកអថេរដែលមានតម្លៃច្រើន (ដូចជាលេខអត្តសញ្ញាណជាដើម) ដោយធ្វើការ Normalize ទៅលើលទ្ធផល។</td>
+                <td>ដូចជាការផ្តល់ពិន្ទុក្នុងការប្រកួតមួយដោយគិតគូរពីភាពលំបាកផងដែរ មិនមែនគ្រាន់តែរាប់ចំនួនពិន្ទុដាច់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Recursive Partitioning</span></td>
+                <td>វិធីសាស្ត្រនៃការបំបែកទិន្នន័យជាផ្នែកតូចៗម្តងហើយម្តងទៀត។ ដំណើរការនេះចាប់ផ្តើមពីចំណុចកំពូល (Root) ហើយបន្តបំបែកចុះក្រោមរហូតដល់លក្ខខណ្ឌត្រូវបានបំពេញ ឬទិន្នន័យមានលក្ខណៈដូចគ្នា។</td>
+                <td>ដូចជាការបកខ្ទឹមបារាំងមួយស្រទាប់ម្តងៗ ឬការកាត់នំជាចំណែកតូចៗបន្តបន្ទាប់គ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-mining-c50-cart-car-credit-2020.html">
+                    <span class="km">ការប្រៀបធៀបក្បួនដោះស្រាយចំណាត់ថ្នាក់ទិន្នន័យ (Data Mining)៖ C5.0 និង CART សម្រាប់សំណុំទិន្នន័យវាយតម្លៃរថយន្ត និងព័ត៌មានកាតឥណទាន</span><br>
+                    <span class="en article-original-title">COMPARISON OF DATA MINING CLASSIFICATION ALGORITHMS: C5.0 AND CART FOR CAR EVALUATION AND CREDIT CARD INFORMATION DATASETS</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/recursive-partitioning-algorithms-id3-cart-c50-2023.html">
+                    <span class="km">ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Recursive Partitioning (ID3, CART, C5.0) សម្រាប់ការធ្វើចំណាត់ថ្នាក់</span><br>
+                    <span class="en article-original-title">A Comparative Study of Recursive Partitioning Algorithms (ID3, CART, C5.0) for Classification</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/decision-tree-algorithms-survey-2016.html">
+                    <span class="km">ការសិក្សាកម្រងអំពីអាល់កូរីត Decision Tree សម្រាប់ការធ្វើចំណាត់ថ្នាក់ក្នុងការជីកយកទិន្នន័យ (Data Mining)</span><br>
+                    <span class="en article-original-title">A Survey on Decision Tree Algorithms of Classification in Data Mining</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

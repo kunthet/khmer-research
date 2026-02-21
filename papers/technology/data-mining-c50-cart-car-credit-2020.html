@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការប្រៀបធៀបក្បួនដោះស្រាយចំណាត់ថ្នាក់ទិន្នន័យ (Data Mining)៖ C5.0 និង CART សម្រាប់សំណុំទិន្នន័យវាយតម្លៃរថយន្ត និងព័ត៌មានកាតឥណទាន | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកវិធីសាស្ត្រដ៏មានប្រសិទ្ធភាពដើម្បីធ្វើចំណាត់ថ្នាក់ទិន្នន័យ (Data Classification) ក្នុងសំណុំទិន្នន័យធំៗ ដោយធ្វើការប្រៀ...">
+    
+    <meta name="keywords" content="Data Mining, Classification Algorithms, C5.0, CART, Decision Tree, UCI Datasets, Car Evaluation, Credit Card Fraud, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/data-mining-c50-cart-car-credit-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/data-mining-c50-cart-car-credit-2020.html">
+    <meta property="og:title" content="ការប្រៀបធៀបក្បួនដោះស្រាយចំណាត់ថ្នាក់ទិន្នន័យ (Data Mining)៖ C5.0 និង CART សម្រាប់សំណុំទិន្នន័យវាយតម្លៃរថយន្ត និងព័ត៌មានកាតឥណទាន | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកវិធីសាស្ត្រដ៏មានប្រសិទ្ធភាពដើម្បីធ្វើចំណាត់ថ្នាក់ទិន្នន័យ (Data Classification) ក្នុងសំណុំទិន្នន័យធំៗ ដោយធ្វើការប្រៀបធៀបក្បួនដោះស្រាយពីរគឺ C5.0 និង CART លើទ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020">
+    
+    <meta property="article:tag" content="Data Mining">
+    
+    <meta property="article:tag" content="Classification Algorithms">
+    
+    <meta property="article:tag" content="C5.0">
+    
+    <meta property="article:tag" content="CART">
+    
+    <meta property="article:tag" content="Decision Tree">
+    
+    <meta property="article:tag" content="UCI Datasets">
+    
+    <meta property="article:tag" content="Car Evaluation">
+    
+    <meta property="article:tag" content="Credit Card Fraud">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការប្រៀបធៀបក្បួនដោះស្រាយចំណាត់ថ្នាក់ទិន្នន័យ (Data Mining)៖ C5.0 និង CART សម្រាប់សំណុំទិន្នន័យវាយតម្លៃរថយន្ត និងព័ត៌មានកាតឥណទាន">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកវិធីសាស្ត្រដ៏មានប្រសិទ្ធភាពដើម្បីធ្វើចំណាត់ថ្នាក់ទិន្នន័យ (Data Classification) ក្នុងសំណុំទិន្នន័យធំៗ ដោយធ្វើការប្រៀបធៀបក្បួនដោះស្រាយពីរគឺ C5.0 និង CART លើទ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Mining)\u17d6 C5.0 \u1793\u17b7\u1784 CART \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179a\u1790\u1799\u1793\u17d2\u178f \u1793\u17b7\u1784\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1780\u17b6\u178f\u17a5\u178e\u1791\u17b6\u1793",
+      "name": "COMPARISON OF DATA MINING CLASSIFICATION ALGORITHMS: C5.0 AND CART FOR CAR EVALUATION AND CREDIT CARD INFORMATION DATASETS",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u178a\u17cf\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u178a\u17be\u1798\u17d2\u1794\u17b8\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Classification) \u1780\u17d2\u1793\u17bb\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1792\u17c6\u17d7 \u178a\u17c4\u1799\u1792\u17d2\u179c\u17be\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1796\u17b8\u179a\u1782\u17ba C5.0 \u1793\u17b7\u1784 CART \u179b\u17be\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/data-mining-c50-cart-car-credit-2020.html",
+      "author": [{"@type": "Person", "name": "Ei Thinzar Win Maung (University of Computer Studies, Yangon)"}],
+      "datePublished": "2020",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "COMPARISON OF DATA MINING CLASSIFICATION ALGORITHMS: C5.0 AND CART FOR CAR EVALUATION AND CREDIT CARD INFORMATION DATASETS",
+        "url": "N/A"
+      },
+      "keywords": ["Data Mining", "Classification Algorithms", "C5.0", "CART", "Decision Tree", "UCI Datasets", "Car Evaluation", "Credit Card Fraud"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Mining)\u17d6 C5.0 \u1793\u17b7\u1784 CART \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179a\u1790\u1799\u1793\u17d2\u178f \u1793\u17b7\u1784\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1780\u17b6\u178f\u17a5\u178e\u1791\u17b6\u1793",
+          "item": "https://khmerresearch.com/papers/technology/data-mining-c50-cart-car-credit-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការប្រៀបធៀបក្បួនដោះស្រាយចំណាត់ថ្នាក់ទិន្នន័យ (Data Mining...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> COMPARISON OF DATA MINING CLASSIFICATION ALGORITHMS: C5.0 AND CART FOR CAR EVALUATION AND CREDIT CARD INFORMATION DATASETS<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការប្រៀបធៀបក្បួនដោះស្រាយចំណាត់ថ្នាក់ទិន្នន័យ (Data Mining)៖ C5.0 និង CART សម្រាប់សំណុំទិន្នន័យវាយតម្លៃរថយន្ត និងព័ត៌មានកាតឥណទាន</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> COMPARISON OF DATA MINING CLASSIFICATION ALGORITHMS: C5.0 AND CART FOR CAR EVALUATION AND CREDIT CARD INFORMATION DATASETS</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ei Thinzar Win Maung (University of Computer Studies, Yangon)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកវិធីសាស្ត្រដ៏មានប្រសិទ្ធភាពដើម្បីធ្វើចំណាត់ថ្នាក់ទិន្នន័យ (Data Classification) ក្នុងសំណុំទិន្នន័យធំៗ ដោយធ្វើការប្រៀបធៀបក្បួនដោះស្រាយពីរគឺ C5.0 និង CART លើទិន្នន័យជាក់ស្តែង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានបង្កើតប្រព័ន្ធមួយដោយប្រើភាសា C# និង SQL Server ដើម្បីអនុវត្តក្បួនដោះស្រាយ Decision Tree ទាំងពីរ និងវាយតម្លៃលទ្ធផលតាមរយៈវិធីសាស្ត្រ Holdout Method។
+        
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយដើមឈើសម្រេចចិត្ត (Decision Tree Algorithms: C5.0 & CART)</li>
+            
+            <li>សំណុំទិន្នន័យ UCI (UCI Datasets: Car Evaluation & German Credit Card)</li>
+            
+            <li>វិធីសាស្ត្របែងចែកទិន្នន័យ (Holdout Method)</li>
+            
+            <li>រង្វាស់នៃការវាយតម្លៃ (Evaluation Metrics: Accuracy, Processing Time, Rule Counts)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ C5.0 មានល្បឿនលឿនជាង CART យ៉ាងខ្លាំងក្នុងការបង្កើតម៉ូដែល Decision Tree សម្រាប់សំណុំទិន្នន័យទាំងពីរ។</li>
+            
+            <li>ចំពោះសំណុំទិន្នន័យវាយតម្លៃរថយន្ត (Car Dataset) ក្បួនដោះស្រាយ C5.0 ផ្តល់នូវភាពត្រឹមត្រូវ (Accuracy) ខ្ពស់ជាង និងបង្កើតវិធាន (Rules) ច្រើនជាង CART។</li>
+            
+            <li>ផ្ទុយទៅវិញ សម្រាប់សំណុំទិន្នន័យកាតឥណទាន (Credit Card Dataset) ក្បួនដោះស្រាយ CART ផ្តល់នូវភាពត្រឹមត្រូវខ្ពស់ជាង ខណៈដែល C5.0 មានកំហុសក្នុងការចាត់ថ្នាក់ច្រើនជាង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">C5.0 Algorithm</span></strong><br>ក្បួនដោះស្រាយ C5.0 (ប្រើប្រាស់ Information Gain)</td>
+                <td>មានល្បឿនលឿនខ្លាំងក្នុងការបង្កើតម៉ូដែល និងគាំទ្រការបំបែកជាច្រើនសាខា (Multi-way splitting)។ វាមានប្រសិទ្ធភាពខ្ពស់ក្នុងការចាត់ថ្នាក់ទិន្នន័យដែលមានលក្ខណៈជាប្រភេទ (Categorical data) ដូចជាទិន្នន័យរថយន្ត។</td>
+                <td>អាចជួបបញ្ហា Overfitting (ការបង្រៀនលើសកម្រិត) លើទិន្នន័យដែលមានសំឡេងរំខាន (Noisy data) និងបង្កើតវិធាន (Rules) ច្រើនពេកដែលធ្វើឱ្យស្មុគស្មាញ។</td>
+                <td>ប្រើពេលខ្លីត្រឹមតែ ១០-១៣ វិនាទីក្នុងការបង្កើតម៉ូដែល និងផ្តល់ភាពត្រឹមត្រូវខ្ពស់ជាងសម្រាប់ទិន្នន័យរថយន្ត (Car Evaluation)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CART Algorithm</span></strong><br>ក្បួនដោះស្រាយ CART (ប្រើប្រាស់ Gini Index)</td>
+                <td>មានភាពរឹងមាំ (Robust) ជាងក្នុងការដោះស្រាយជាមួយទិន្នន័យដែលមានចន្លោះខ្វះខាត (Missing values) និងទិន្នន័យមិនប្រក្រតី (Outliers)។ វាកាត់បន្ថយហានិភ័យនៃកំហុសក្នុងការចាត់ថ្នាក់សម្រាប់ទិន្នន័យហិរញ្ញវត្ថុ។</td>
+                <td>ដំណើរការយឺតជាង C5.0 យ៉ាងខ្លាំងដោយសារវាត្រូវគណនាការបំបែកជាពីរ (Binary split) សម្រាប់គ្រប់លក្ខណៈវិនិច្ឆ័យ។</td>
+                <td>ចំណាយពេលយូររហូតដល់ ៧១ វិនាទីសម្រាប់ទិន្នន័យឥណទាន ប៉ុន្តែផ្តល់ភាពត្រឹមត្រូវខ្ពស់ជាង C5.0 លើទិន្នន័យឥណទាន (Credit Card Dataset)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រទូទៅ ដោយមិនតម្រូវឱ្យមានផ្នែករឹង (Hardware) កម្រិតខ្ពស់នោះទេ ប៉ុន្តែតម្រូវឱ្យមានការរៀបចំប្រព័ន្ធទិន្នន័យដែលត្រឹមត្រូវ។
+    
+    <ul>
+        
+        <li><strong>Software Platform:</strong> ប្រើប្រាស់ Microsoft Visual Studio 2013 (C# Language) និង Microsoft SQL Server 2012 សម្រាប់គ្រប់គ្រងទិន្នន័យ។</li>
+        
+        <li><strong>Data Processing:</strong> តម្រូវឱ្យមានការសម្អាតទិន្នន័យ (Data Cleaning) និងការបំប្លែងទិន្នន័យជាទម្រង់ Excel មុននឹងនាំចូលទៅក្នុងប្រព័ន្ធ។</li>
+        
+        <li><strong>Computational Time:</strong> ក្បួនដោះស្រាយ CART ទាមទារពេលវេលាដំណើរការយូរជាង C5.0 ជាពិសេសលើសំណុំទិន្នន័យដែលមានលក្ខណៈវិនិច្ឆ័យ (Attributes) ច្រើន។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ UCI Machine Learning Repository (German Credit Data និង Car Evaluation) ដែលឆ្លុះបញ្ចាំងពីបរិបទអឺរ៉ុប និងអាមេរិក។ សម្រាប់កម្ពុជា ការប្រើប្រាស់ទិន្នន័យឥណទានរបស់អាល្លឺម៉ង់អាចមិនឆ្លុះបញ្ចាំងពេញលេញពីឥរិយាបថរបស់អ្នកខ្ចីប្រាក់ ឬលក្ខខណ្ឌសេដ្ឋកិច្ចក្នុងស្រុកនោះទេ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសារៈសំខាន់ខ្លាំងសម្រាប់វិស័យធនាគារ និងពាណិជ្ជកម្មនៅកម្ពុជា ដែលកំពុងត្រូវការប្រព័ន្ធស្វ័យប្រវត្តិកម្មក្នុងការវាយតម្លៃហានិភ័យ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យមីក្រូហិរញ្ញវត្ថុ និងធនាគារ (Banking & MFIs):</strong> អាចយកទៅអនុវត្តដើម្បីបង្កើតប្រព័ន្ធវាយតម្លៃពិន្ទុឥណទាន (Credit Scoring) ដោយប្រើប្រាស់ទិន្នន័យពីការិយាល័យឥណទានកម្ពុជា (CBC) ដើម្បីកាត់បន្ថយបំណុលខូច (NPLs)។</li>
+            
+            <li><strong>ទីផ្សាររថយន្ត និងការធានារ៉ាប់រង (Automotive & Insurance):</strong> ក្រុមហ៊ុនធានារ៉ាប់រងនៅកម្ពុជាអាចប្រើ C5.0 ដើម្បីវាយតម្លៃហានិភ័យនៃយានយន្ត និងកំណត់តម្លៃបុព្វលាភ (Premium) ដោយផ្អែកលើលក្ខណៈសម្បត្តិនៃរថយន្ត។</li>
+            
+        </ul>
+        
+        
+        <p>ទោះបីជាលទ្ធផលបង្ហាញថា CART ល្អសម្រាប់ហិរញ្ញវត្ថុ និង C5.0 ល្អសម្រាប់ទំនិញក៏ដោយ ការអនុវត្តជាក់ស្តែងនៅកម្ពុជាទាមទារឱ្យមានការបង្រៀនម៉ូដែល (Retraining) ជាមួយទិន្នន័យក្នុងស្រុកជាមុនសិន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការសិក្សាទ្រឹស្តីគ្រឹះ:</strong> ស្វែងយល់ឱ្យច្បាស់ពីភាពខុសគ្នារវាង Entropy (សម្រាប់ C5.0) និង Gini Index (សម្រាប់ CART) ដើម្បីដឹងថាពេលណាគួរប្រើក្បួនមួយណា។</li>
+            
+            <li><strong>ការរៀបចំទិន្នន័យ (Data Preparation):</strong> សាកល្បងប្រមូលទិន្នន័យជាក់ស្តែងពីស្ថាប័នក្នុងស្រុក ឬប្រើប្រាស់ទិន្នន័យបើកចំហ (Open Data) និងសម្អាតទិន្នន័យដោយប្រើ Python (Pandas) ជំនួសឱ្យការប្រើ Excel ដើម្បីប្រសិទ្ធភាព។</li>
+            
+            <li><strong>ការជ្រើសរើសឧបករណ៍បច្ចេកវិទ្យា:</strong> ទោះបីឯកសារប្រើ C# ក៏ដោយ និស្សិតគួរងាកមកប្រើ Python ជាមួយបណ្ណាល័យ Scikit-learn ដែលជាស្តង់ដារបច្ចុប្បន្នសម្រាប់ការងារ Data Mining និង Machine Learning។</li>
+            
+            <li><strong>ការវាយតម្លៃម៉ូដែល (Evaluation):</strong> កុំពឹងផ្អែកតែលើ Accuracy តែមួយមុខ។ ត្រូវសិក្សាលើ Confusion Matrix និង ROC Curve ដើម្បីមើលកម្រិតនៃការទស្សន៍ទាយខុស (Misclassification rate) ជាពិសេសសម្រាប់ទិន្នន័យឥណទាន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Mining</span></td>
+                <td>ជាដំណើរការនៃការរុករកនិងវិភាគទិន្នន័យក្នុងបរិមាណដ៏ច្រើនសន្ធឹកសន្ធាប់ ដើម្បីស្វែងរកលំនាំ (Patterns) ឬចំណេះដឹងដែលលាក់កំបាំង ដែលមានប្រយោជន៍សម្រាប់ការសម្រេចចិត្តអាជីវកម្ម ឬការព្យាករណ៍។</td>
+                <td>ដូចជាការជីកកកាយដីរ៉ែរាប់តោន ដើម្បីស្វែងរកគ្រាប់ពេជ្រ ឬមាសដែលមានតម្លៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Classification</span></td>
+                <td>ជាបច្ចេកទេសមួយក្នុង Data Mining ដែលរៀបចំទិន្នន័យទៅជាក្រុម ឬថ្នាក់ (Classes) ដែលបានកំណត់ទុកជាមុន ដោយផ្អែកលើលក្ខណៈសម្បត្តិនៃទិន្នន័យនោះ ដើម្បីទស្សន៍ទាយលទ្ធផលនៃទិន្នន័យថ្មី។</td>
+                <td>ដូចជាការបែងចែកសំបុត្រដែលចូលមកក្នុងប្រអប់អ៊ីមែល ថាជាសំបុត្រសំខាន់ ឬជាសំបុត្រឥតប្រយោជន៍ (Spam)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision Tree</span></td>
+                <td>ជាគំរូនៃក្បួនដោះស្រាយដែលមានរចនាសម្ព័ន្ធដូចដើមឈើ ដែលប្រើសម្រាប់ធ្វើការសម្រេចចិត្ត។ វាបំបែកទិន្នន័យតាមលក្ខខណ្ឌជាបន្តបន្ទាប់ពីគល់ (Root) ទៅដល់ស្លឹក (Leaf) ដែលជាលទ្ធផលចុងក្រោយ។</td>
+                <td>ដូចជាគំនូសបំព្រួញ (Flowchart) ដែលសួរសំណួរ 'បាទ/ទេ' ជាបន្តបន្ទាប់ ដើម្បីឈានទៅរកចម្លើយចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Information Gain</span></td>
+                <td>ជារង្វាស់ដែលប្រើក្នុងក្បួនដោះស្រាយ C5.0 ដើម្បីវាស់វែងថាតើការបំបែកទិន្នន័យត្រង់ចំណុចណាមួយ ផ្តល់ព័ត៌មានច្បាស់លាស់បំផុត និងកាត់បន្ថយភាពមិនប្រាកដប្រជា (Entropy) បានច្រើនបំផុត។</td>
+                <td>ដូចជាការជ្រើសរើសសួរសំណួរដែលឆ្លាតបំផុតនៅក្នុងល្បែងទាយឈ្មោះ ដើម្បីឆាប់រកឃើញចម្លើយត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gini Index</span></td>
+                <td>ជារង្វាស់ដែលប្រើក្នុងក្បួនដោះស្រាយ CART ដើម្បីគណនា 'ភាពមិនសុទ្ធ' (Impurity) នៃទិន្នន័យ។ ក្បួននេះជ្រើសរើសការបំបែកណាដែលធ្វើឱ្យ Gini Index មានតម្លៃទាបបំផុត (មានន័យថាទិន្នន័យកាន់តែសុទ្ធ ឬដូចគ្នា)។</td>
+                <td>ដូចជាការពិនិត្យមើលថង់គ្រាប់ឃ្លីចម្រុះពណ៌ បើសិនជាក្នុងថង់មានតែពណ៌មួយមុខគត់ នោះវាមានភាពសុទ្ធល្អ (Gini ទាប)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Holdout Method</span></td>
+                <td>ជាវិធីសាស្ត្រវាយតម្លៃម៉ូដែល ដោយបែងចែកសំណុំទិន្នន័យជាពីរផ្នែកដាច់ដោយឡែកពីគ្នា គឺមួយផ្នែកសម្រាប់បង្រៀន (Training set) និងមួយផ្នែកទៀតសម្រាប់ធ្វើតេស្ត (Testing set) ដើម្បីវាស់ស្ទង់ភាពត្រឹមត្រូវ។</td>
+                <td>ដូចជាគ្រូឱ្យសិស្សធ្វើលំហាត់ក្នុងសៀវភៅពុម្ពដើម្បីរៀន (Training) ប៉ុន្តែពេលប្រឡង គ្រូដាក់លំហាត់ថ្មីដែលមិនធ្លាប់ធ្វើ (Testing) ដើម្បីដឹងថាសិស្សចេះពិតឬអត់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/comparative-study-id3-cart-c45-decision-tree-2014.html">
+                    <span class="km">ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Decision Tree៖ ID3, CART និង C4.5</span><br>
+                    <span class="en article-original-title">Comparative Study Id3, Cart And C4.5 Decision Tree Algorithm: A Survey</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/recursive-partitioning-algorithms-id3-cart-c50-2023.html">
+                    <span class="km">ការសិក្សាប្រៀបធៀបនៃក្បួនដោះស្រាយ Recursive Partitioning (ID3, CART, C5.0) សម្រាប់ការធ្វើចំណាត់ថ្នាក់</span><br>
+                    <span class="en article-original-title">A Comparative Study of Recursive Partitioning Algorithms (ID3, CART, C5.0) for Classification</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/decision-tree-algorithms-survey-2016.html">
+                    <span class="km">ការសិក្សាកម្រងអំពីអាល់កូរីត Decision Tree សម្រាប់ការធ្វើចំណាត់ថ្នាក់ក្នុងការជីកយកទិន្នន័យ (Data Mining)</span><br>
+                    <span class="en article-original-title">A Survey on Decision Tree Algorithms of Classification in Data Mining</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
