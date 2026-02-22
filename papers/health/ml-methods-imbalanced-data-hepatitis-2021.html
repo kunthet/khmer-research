@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វិធីសាស្ត្រផ្អែកលើការរៀនដោយម៉ាស៊ីនសម្រាប់ការដោះស្រាយទិន្នន័យមិនមានតុល្យភាពក្នុងការធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើម | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហាទិន្នន័យមិនមានតុល្យភាព (Imbalanced Data) ក្នុងការទស្សន៍ទាយ និងធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើមប្រភេទសេ (HCV) និងកម្រិតធ្ងន់ធ្...">
+    
+    <meta name="keywords" content="Hepatitis C Virus (HCV), Machine Learning, Imbalanced Data, Data Mining, Disease Prediction, Over-sampling, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/health/ml-methods-imbalanced-data-hepatitis-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/health/ml-methods-imbalanced-data-hepatitis-2021.html">
+    <meta property="og:title" content="វិធីសាស្ត្រផ្អែកលើការរៀនដោយម៉ាស៊ីនសម្រាប់ការដោះស្រាយទិន្នន័យមិនមានតុល្យភាពក្នុងការធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើម | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហាទិន្នន័យមិនមានតុល្យភាព (Imbalanced Data) ក្នុងការទស្សន៍ទាយ និងធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើមប្រភេទសេ (HCV) និងកម្រិតធ្ងន់ធ្ងររបស់វា។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2021 Frontiers in Health Informatics">
+    
+    <meta property="article:tag" content="Hepatitis C Virus (HCV)">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Imbalanced Data">
+    
+    <meta property="article:tag" content="Data Mining">
+    
+    <meta property="article:tag" content="Disease Prediction">
+    
+    <meta property="article:tag" content="Over-sampling">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វិធីសាស្ត្រផ្អែកលើការរៀនដោយម៉ាស៊ីនសម្រាប់ការដោះស្រាយទិន្នន័យមិនមានតុល្យភាពក្នុងការធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើម">
+    <meta name="twitter:description" content="ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហាទិន្នន័យមិនមានតុល្យភាព (Imbalanced Data) ក្នុងការទស្សន៍ទាយ និងធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើមប្រភេទសេ (HCV) និងកម្រិតធ្ងន់ធ្ងររបស់វា។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179a\u17c4\u1782\u179c\u17b7\u1793\u17b7\u1785\u17d2\u1786\u17d0\u1799\u1787\u17c6\u1784\u17ba\u179a\u179b\u17b6\u1780\u1790\u17d2\u179b\u17be\u1798",
+      "name": "Machine learning based methods for handling imbalanced data in hepatitis diagnosis",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796 (Imbalanced Data) \u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799 \u1793\u17b7\u1784\u1792\u17d2\u179c\u17be\u179a\u17c4\u1782\u179c\u17b7\u1793\u17b7\u1785\u17d2\u1786\u17d0\u1799\u1787\u17c6\u1784\u17ba\u179a\u179b\u17b6\u1780\u1790\u17d2\u179b\u17be\u1798\u1794\u17d2\u179a\u1797\u17c1\u1791\u179f\u17c1 (HCV) \u1793\u17b7\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1792\u17d2\u1784\u1793\u17cb\u1792\u17d2\u1784\u179a\u179a\u1794\u179f\u17cb\u179c\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/health/ml-methods-imbalanced-data-hepatitis-2021.html",
+      "author": [{"@type": "Person", "name": "Azam Orooji (North Khorasan University of Medical Sciences)"},{"@type": "Person", "name": "Farzaneh Kermani (Semnan University of Medical Sciences)"}],
+      "datePublished": "2021 Frontiers in Health Informatics",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Machine learning based methods for handling imbalanced data in hepatitis diagnosis",
+        "url": "https://doi.org/10.30699/fhi.v10i1.259"
+      },
+      "keywords": ["Hepatitis C Virus (HCV)", "Machine Learning", "Imbalanced Data", "Data Mining", "Disease Prediction", "Over-sampling"],
+      "about": "Health Informatics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health",
+          "item": "https://khmerresearch.com/papers/health/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179a\u17c4\u1782\u179c\u17b7\u1793\u17b7\u1785\u17d2\u1786\u17d0\u1799\u1787\u17c6\u1784\u17ba\u179a\u179b\u17b6\u1780\u1790\u17d2\u179b\u17be\u1798",
+          "item": "https://khmerresearch.com/papers/health/ml-methods-imbalanced-data-hepatitis-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/health/">Health</a> &rsaquo;
+        <span>វិធីសាស្ត្រផ្អែកលើការរៀនដោយម៉ាស៊ីនសម្រាប់ការដោះស្រាយទិន្ន...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Machine learning based methods for handling imbalanced data in hepatitis diagnosis<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.30699/fhi.v10i1.259" target="_blank">doi.org/10.30699/fhi.v10i1.259</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វិធីសាស្ត្រផ្អែកលើការរៀនដោយម៉ាស៊ីនសម្រាប់ការដោះស្រាយទិន្នន័យមិនមានតុល្យភាពក្នុងការធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើម</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Machine learning based methods for handling imbalanced data in hepatitis diagnosis</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Azam Orooji (North Khorasan University of Medical Sciences), Farzaneh Kermani (Semnan University of Medical Sciences)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021 Frontiers in Health Informatics</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Health Informatics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហាទិន្នន័យមិនមានតុល្យភាព (Imbalanced Data) ក្នុងការទស្សន៍ទាយ និងធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើមប្រភេទសេ (HCV) និងកម្រិតធ្ងន់ធ្ងររបស់វា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះត្រូវបានអនុវត្តជាបួនជំហាន ដោយប្រើប្រាស់សំណុំទិន្នន័យ (Dataset) ជំងឺរលាកថ្លើមពីបណ្ណាល័យ UCI ជាមួយនឹងបច្ចេកទេសរៀនដោយម៉ាស៊ីន (Machine Learning)។
+        
+        <ul>
+            
+            <li>ការរៀបចំទិន្នន័យជាមុន និងការធ្វើឲ្យទិន្នន័យមានតុល្យភាព (Data pre-processing and balancing) តាមរយៈការយកគំរូលើលុប (Over-sampling) និងការយកគំរូក្រោម (Under-sampling)</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយការរុករកទិន្នន័យ (Data mining algorithms) ដូចជា Multi-layer Perceptron (MLP), Bayesian network, និង Decision tree</li>
+            
+            <li>ការវាយតម្លៃក្បួនដោះស្រាយដោយប្រើវិធីសាស្ត្រ 10-fold cross-validation</li>
+            
+            <li>ការរចនាប្រព័ន្ធចំណុចប្រទាក់អ្នកប្រើប្រាស់ (User interface design) នៅក្នុងកម្មវិធី MATLAB ផ្អែកលើក្បួនដោះស្រាយដែលល្អបំផុត</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រយកគំរូលើលុប (Over-sampling) បានធ្វើឲ្យប្រសើរឡើងយ៉ាងខ្លាំងនូវរង្វាស់ប្រសិទ្ធភាពនៃក្បួនដោះស្រាយក្នុងការទស្សន៍ទាយជំងឺ។</li>
+            
+            <li>នៅក្នុងសំណុំទិន្នន័យដែលបានប្រើការយកគំរូលើលុប (O-dataset) ក្បួនដោះស្រាយ Random Forest ទទួលបានភាពត្រឹមត្រូវ (Accuracy), ភាពរសើប (Sensitivity) និង F-measure រហូតដល់ ៩៩,៩% ព្រមទាំងភាពជាក់លាក់ (Specificity) ១០០%។</li>
+            
+            <li>ប្រព័ន្ធដែលត្រូវបានស្នើឡើងនេះមានដំណើរការល្អជាងវិធីសាស្ត្រមុនៗ ហើយអាចប្រើប្រាស់បានយ៉ាងមានប្រសិទ្ធភាពក្នុងការទស្សន៍ទាយរោគវិនិច្ឆ័យ និងកម្រិតធ្ងន់ធ្ងរនៃជំងឺរលាកថ្លើមប្រភេទសេ (HCV)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest with Over-sampling</span></strong><br>ក្បួនដោះស្រាយ Random Forest រួមផ្សំជាមួយបច្ចេកទេស Over-sampling</td>
+                <td>ទទួលបានលទ្ធផលខ្ពស់បំផុតក្នុងការទស្សន៍ទាយ និងមានសមត្ថភាពល្អក្នុងការបែងចែកកម្រិតធ្ងន់ធ្ងរនៃជំងឺដោយមានស្ថេរភាព។ វាដោះស្រាយបញ្ហាទិន្នន័យមិនមានតុល្យភាពបានយ៉ាងមានប្រសិទ្ធភាព។</td>
+                <td>ទោះបីជាលទ្ធផលល្អឥតខ្ចោះ (៩៩.៩%) ប៉ុន្តែអាចមានហានិភ័យនៃ Overfitting ដោយសារបច្ចេកទេស Random Over-sampling ចម្លងទិន្នន័យដដែលៗច្រើនដង។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ (Accuracy) ភាពរសើប (Sensitivity) និង F-measure រហូតដល់ ៩៩.៩% និងភាពជាក់លាក់ (Specificity) ១០០% លើសំណុំទិន្នន័យ O-dataset។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Multi-layer Perceptron (MLP)</span></strong><br>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត Multi-layer Perceptron</td>
+                <td>មានដំណើរការល្អជាងគេ និងមានស្ថេរភាពនៅលើសំណុំទិន្នន័យដើមដែលមិនមានតុល្យភាព (Original dataset) បើប្រៀបធៀបទៅនឹងក្បួនដោះស្រាយផ្សេងទៀត។</td>
+                <td>ត្រូវការពេលវេលាបង្វឹក (Training time) យូរជាងគេ និងមានលក្ខណៈជាប្រអប់ខ្មៅ (Black box) ដែលពិបាកក្នុងការពន្យល់ពីមូលហេតុនៃការសម្រេចចិត្តរបស់ម៉ូដែល។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវលើយកគំរូលើលុប (O-dataset) ៩៦.៤% និងមាន F-measure ៩២.៩% លើទិន្នន័យដើម (Original dataset)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">J48 (Decision Tree)</span></strong><br>មែកធាងសម្រេចចិត្ត J48</td>
+                <td>ងាយស្រួលក្នុងការយល់ដឹង និងអាចបកស្រាយពីវិធាននៃការសម្រេចចិត្ត (Decision rules) បានយ៉ាងច្បាស់លាស់ដល់គ្រូពេទ្យនិងអ្នកប្រើប្រាស់។</td>
+                <td>ដំណើរការទាបជាង Random Forest បន្តិច និងងាយរងឥទ្ធិពលពីបម្រែបម្រួលនៃទិន្នន័យ (Variance) ដែលធ្វើឲ្យលទ្ធផលអាចមិនសូវមានស្ថេរភាព។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៨% ភាពរសើប ៩៨% និងភាពជាក់លាក់ ៩៩.៦% នៅលើសំណុំទិន្នន័យ O-dataset។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារស្រាវជ្រាវនេះមិនបានបញ្ជាក់លម្អិតពីតម្លៃធនធានដែលបានចំណាយនោះទេ ប៉ុន្តែផ្អែកលើបច្ចេកទេសដែលបានប្រើប្រាស់ យើងអាចប៉ាន់ស្មានតម្រូវការធនធានចាំបាច់មួយចំនួន។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ត្រូវការកម្មវិធី MATLAB (ជំនាន់ ២០១៦ ឬថ្មីជាងនេះ) សម្រាប់ការសរសេរកូដ អនុវត្តម៉ូដែល Machine Learning និងការរចនាចំណុចប្រទាក់អ្នកប្រើប្រាស់ (User Interface)។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានកម្រិតមធ្យម (Standard CPU) គឺអាចទទួលយកបាន ដោយសារទិន្នន័យមានទំហំតូច (ត្រឹមតែ ៦១៥ កំណត់ត្រា) ហើយមិនទាមទារការគណនាដោយប្រើ GPU កម្រិតខ្ពស់នោះទេ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យ Hepatitis C (HCV dataset) ពីបណ្ណាល័យ UCI Machine Learning Repository ដែលអាចទាញយកមកប្រើប្រាស់ដោយឥតគិតថ្លៃសម្រាប់ការស្រាវជ្រាវ។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញផ្នែកវិទ្យាសាស្ត្រទិន្នន័យ (Data Scientists) សម្រាប់ការសម្អាតទិន្នន័យ និងគ្រូពេទ្យឯកទេសថ្លើមដើម្បីផ្ទៀងផ្ទាត់លទ្ធផលនៃសូចនាករវេជ្ជសាស្ត្រ (ដូចជា ALT, AST, Bilirubin)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យពីបណ្ណាល័យ UCI ដែលទំនងជាប្រមូលផ្តុំពីប្រជាជននៅតំបន់អឺរ៉ុបឬលោកខាងលិច ហើយមានចំនួនអ្នកជំងឺរលាកថ្លើមប្រភេទសេ (HCV) តិចតួចណាស់ (៧៥ នាក់) ធៀបនឹងអ្នកមានសុខភាពល្អ។ នេះជាបញ្ហាសម្រាប់ប្រទេសកម្ពុជា ព្រោះប្រជាសាស្ត្រ របបអាហារ កត្តាហ្សែន និងប្រភេទមេរោគរលាកថ្លើមរបស់ប្រជាជនខ្មែរអាចមានភាពខុសគ្នា ដែលតម្រូវឲ្យមានទិន្នន័យក្នុងស្រុកដើម្បីជៀសវាងភាពលំអៀងរបស់ម៉ូដែល។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ និងអាចយកមកអនុវត្តជាក់ស្តែងនៅប្រទេសកម្ពុជា ដើម្បីជួយសម្រួលដល់ការធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើមដែលជាបញ្ហាសុខភាពសាធារណៈដ៏ចម្បងមួយ។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យថ្នាក់ជាតិ (ឧ. មន្ទីរពេទ្យកាល់ម៉ែត និងមន្ទីរពេទ្យមិត្តភាពខ្មែរ-សូវៀត):</strong> អាចប្រើប្រាស់ប្រព័ន្ធ Machine Learning នេះរួមបញ្ចូលក្នុងប្រព័ន្ធព័ត៌មានមន្ទីរពេទ្យ (HIS) ដើម្បីជួយគ្រូពេទ្យវាយតម្លៃកម្រិតធ្ងន់ធ្ងរនៃជំងឺរលាកថ្លើម (ដូចជា Fibrosis ឬ Cirrhosis) បានយ៉ាងរហ័សមុននឹងឈានដល់ការថតអេកូកម្រិតខ្ពស់។</li>
+            
+            <li><strong>មន្ទីរពេទ្យបង្អែកខេត្ត និងស្រុកប្រតិបត្តិ:</strong> ជួយដោះស្រាយបញ្ហាខ្វះខាតគ្រូពេទ្យឯកទេសក្រពះពោះវៀននិងថ្លើមនៅតាមបណ្តាខេត្តឆ្ងាយៗ ដោយប្រើកម្មវិធីនេះជាជំនួយការទស្សន៍ទាយបឋមផ្អែកលើលទ្ធផលតេស្តឈាមទូទៅ (Routine blood tests)។</li>
+            
+            <li><strong>កម្មវិធីជាតិប្រយុទ្ធប្រឆាំងជំងឺអេដស៍ សើស្បែក និងកាមរោគ (NCHADS) ឬ ក្រសួងសុខាភិបាល:</strong> អាចសហការអភិវឌ្ឍន៍ប្រព័ន្ធទស្សន៍ទាយនេះ ដើម្បីតាមដាន និងគ្រប់គ្រងអ្នកជំងឺ HCV នៅក្នុងសហគមន៍ដែលងាយរងគ្រោះ ស្របតាមយុទ្ធសាស្ត្រលុបបំបាត់ជំងឺរលាកថ្លើមនៅកម្ពុជា។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់បច្ចេកទេស Machine Learning រួមជាមួយវិធីសាស្ត្រធ្វើឲ្យទិន្នន័យមានតុល្យភាព អាចក្លាយជាឧបករណ៍ដ៏មានប្រសិទ្ធភាពក្នុងការធ្វើរោគវិនិច្ឆ័យជំងឺរលាកថ្លើមបានទាន់ពេលវេលា និងកាត់បន្ថយអត្រាស្លាប់ពីជំងឺក្រិនថ្លើមនៅកម្ពុជា ប្រសិនបើត្រូវបានបង្វឹកជាមួយទិន្នន័យក្នុងស្រុក។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីក្បួនដោះស្រាយ និងការរៀបចំទិន្នន័យ (Data Pre-processing):</strong> និស្សិតគួរចាប់ផ្តើមសិក្សាពីបច្ចេកទេសកម្រិតខ្ពស់ដូចជា <span class="en">SMOTE (Synthetic Minority Over-sampling Technique)</span> ជំនួសឲ្យត្រឹមតែ <span class="en">Random Over-sampling</span> ដើម្បីជៀសវាងបញ្ហា <span class="en">Overfitting</span> នៃការចម្លងទិន្នន័យផ្ទាល់ ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">imbalanced-learn</span> នៅក្នុងភាសា <span class="en">Python</span>។</li>
+            
+            <li><strong>សាកល្បងជាមួយទិន្នន័យសាធារណៈ (Public Dataset):</strong> ធ្វើការទាញយកសំណុំទិន្នន័យ <span class="en">HCV dataset</span> ពី <span class="en">UCI Machine Learning Repository</span> រួចប្រើប្រាស់បណ្ណាល័យ <span class="en">Scikit-learn</span> និង <span class="en">Pandas</span> ក្នុង <span class="en">Python</span> ដើម្បីបង្កើតនិងប្រៀបធៀបម៉ូដែល <span class="en">Random Forest</span> និង <span class="en">MLP</span> ឡើងវិញ។</li>
+            
+            <li><strong>ប្រមូលទិន្នន័យក្នុងស្រុក (Local Data Collection):</strong> សហការជាមួយមន្ទីរពេទ្យក្នុងស្រុកតាមរយៈសាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល ដើម្បីប្រមូលទិន្នន័យអ្នកជំងឺរលាកថ្លើមដោយអនាមិក។ ទិន្នន័យគួរមានអាយុ ភេទ និងលទ្ធផលតេស្តឈាមជាមូលដ្ឋាន (<span class="en">ALT, AST, Bilirubin, Albumin</span>) ដើម្បីយកមកហ្វឹកហាត់ម៉ូដែលឲ្យត្រូវនឹងកត្តាជីវសាស្ត្ររបស់ប្រជាជនកម្ពុជា។</li>
+            
+            <li><strong>រចនាប្រព័ន្ធចំណុចប្រទាក់អ្នកប្រើប្រាស់ (UI/UX) និងដាក់ឲ្យប្រើប្រាស់ (Deployment):</strong> ផ្លាស់ប្តូរពីការប្រើប្រាស់ <span class="en">MATLAB</span> ទៅប្រើប្រាស់បច្ចេកវិទ្យាទំនើបនិងឥតគិតថ្លៃដូចជា <span class="en">Streamlit</span> ឬ <span class="en">Flask</span> នៅក្នុង <span class="en">Python</span> ដើម្បីបង្កើតជាកម្មវិធី <span class="en">Web Application</span> ដែលងាយស្រួលឲ្យគ្រូពេទ្យបញ្ចូលតម្លៃតេស្តឈាម និងទទួលបានលទ្ធផលទស្សន៍ទាយជំងឺរលាកថ្លើមភ្លាមៗ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imbalanced Data</span></td>
+                <td>គឺជាស្ថានភាពដែលទិន្នន័យក្នុងការសិក្សាមានចំនួនលំអៀងខ្លាំងទៅរកក្រុមណាមួយ (ឧទាហរណ៍ អ្នកមានសុខភាពល្អមានចំនួនច្រើនលើសលប់ ខណៈអ្នកមានជំងឺមានចំនួនតិចតួច) ដែលធ្វើឲ្យម៉ាស៊ីន (Machine Learning) រៀនចេះតែទាយរកក្រុមដែលមានគ្នាច្រើន។</td>
+                <td>ដូចជាការបង្រៀនក្មេងឲ្យស្គាល់សត្វ ដោយបង្ហាញរូបឆ្កែ១០០សន្លឹក និងរូបឆ្មាត្រឹមតែ១សន្លឹក ដែលធ្វើឲ្យក្មេងនោះស្គាល់តែឆ្កែ តែមិនសូវស្គាល់ឆ្មា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Over-sampling</span></td>
+                <td>ជាបច្ចេកទេសកែច្នៃទិន្នន័យដែលមិនមានតុល្យភាព ដោយធ្វើការចម្លង (Duplicate) ឬបង្កើតទិន្នន័យថ្មីបន្ថែមក្នុងក្រុមដែលមានចំនួនតិច ឲ្យកើនឡើងរហូតដល់មានចំនួនស្មើគ្នានឹងក្រុមដែលមានចំនួនច្រើន។</td>
+                <td>ដូចជាការថតចម្លង (Copy) សៀវភៅមេរៀនដែលខ្វះខាតចែកឲ្យសិស្ស ដើម្បីឲ្យសិស្សគ្រប់រូបមានសៀវភៅអានគ្រប់ៗគ្នាសម្រាប់ត្រៀមប្រឡង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Under-sampling</span></td>
+                <td>ជាបច្ចេកទេសធ្វើឲ្យទិន្នន័យមានតុល្យភាព ដោយធ្វើការលុបចោលដោយចៃដន្យនូវកំណត់ត្រាមួយចំនួនពីក្រុមដែលមានទិន្នន័យច្រើនលើសលប់ ដើម្បីឲ្យចំនួនធ្លាក់ចុះមកស្មើនឹងក្រុមដែលមានទិន្នន័យតិច។</td>
+                <td>ដូចជាការកាត់បន្ថយចំនួនសិស្សក្នុងថ្នាក់ធំមួយចំនួនចេញ ដើម្បីឲ្យចំនួនសិស្សនៅសល់ស្មើគ្នានឹងថ្នាក់តូចមួយទៀត ងាយស្រួលក្នុងការប្រកួតកីឡា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">10-fold cross-validation</span></td>
+                <td>គឺជាវិធីសាស្ត្រវាយតម្លៃសមត្ថភាពម៉ូដែល ដោយបែងចែកទិន្នន័យសរុបជា ១០ ចំណែកស្មើៗគ្នា រួចយក ៩ ចំណែកទៅបង្រៀនម៉ូដែល និង ១ ចំណែកទៀតទៅតេស្តសមត្ថភាព ដោយធ្វើការឆ្លាស់គ្នាបែបនេះចំនួន ១0 ជុំ។</td>
+                <td>ដូចជាការបែងចែកមេរៀនជា ១០ ជំពូក ហើយសិស្សត្រូវប្រឡង ១០ ដង ដោយម្តងៗគ្រូចេញវិញ្ញាសាតាមជំពូកផ្សេងៗគ្នា ដើម្បីឲ្យប្រាកដថាសិស្សពិតជាចេះមេរៀនទាំងអស់មែន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-layer perceptron (MLP)</span></td>
+                <td>ជាប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដែលមានស្រទាប់ជាច្រើនតភ្ជាប់គ្នា វាអាចរៀនពីទំនាក់ទំនងដ៏ស្មុគស្មាញនៃទិន្នន័យបញ្ចូល ដើម្បីធ្វើចំណាត់ថ្នាក់ឬទស្សន៍ទាយលទ្ធផល ស្រដៀងទៅនឹងរបៀបធ្វើការនៃខួរក្បាលមនុស្ស។</td>
+                <td>ដូចជាខ្សែសង្វាក់ផលិតកម្មក្នុងរោងចក្រដែលមានច្រើនដំណាក់កាល តាំងពីអ្នកទទួលវត្ថុធាតុដើម អ្នកកែច្នៃ និងអ្នកវេចខ្ចប់ ដែលធ្វើការបន្តបន្ទាប់គ្នាដើម្បីបញ្ចេញផលិតផលសម្រេច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random forest</span></td>
+                <td>គឺជាក្បួនដោះស្រាយដែលបង្កើតនូវមែកធាងសម្រេចចិត្ត (Decision Trees) ជាច្រើនបញ្ចូលគ្នា ហើយយកការបោះឆ្នោតជាសម្លេងភាគច្រើនពីមែកធាងទាំងអស់នោះ ដើម្បីសម្រេចលទ្ធផលចុងក្រោយ ដែលជួយកាត់បន្ថយភាពខុសឆ្គងបានយ៉ាងល្អ។</td>
+                <td>ដូចជាការសួរយោបល់ពីវេជ្ជបណ្ឌិតឯកទេសចំនួន ១០០ នាក់ផ្សេងៗគ្នា ហើយយកចម្លើយដែលគ្រូពេទ្យភាគច្រើនយល់ស្របជាងគេ មកធ្វើជាសេចក្តីសម្រេចចិត្តចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">F-measure</span></td>
+                <td>ជារង្វាស់ភាគរយសម្រាប់វាយតម្លៃគុណភាពម៉ូដែលម៉ាស៊ីន ដោយគណនាបញ្ចូលគ្នារវាងភាពជាក់លាក់ (Precision) និងភាពរសើប (Sensitivity) ដែលវាជាសូចនាករស័ក្តិសមបំផុតសម្រាប់វាស់ស្ទង់សមត្ថភាពម៉ូដែលលើទិន្នន័យដែលមិនមានតុល្យភាព។</td>
+                <td>ដូចជាការវាយតម្លៃសិស្សពូកែដោយមិនមើលតែពិន្ទុសរុបទេ តែត្រូវធានាថាសិស្សនោះពូកែទាំងមុខវិជ្ជាគណិតវិទ្យា និងអក្សរសាស្ត្រក្នុងពេលតែមួយ ទើបទទួលស្គាល់ថាពូកែមែន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+models+for+chronic+disease+prediction" target="_blank" rel="noopener"><span class="en">machine learning models for chronic disease prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=handling+imbalanced+datasets+in+medical+informatics" target="_blank" rel="noopener"><span class="en">handling imbalanced datasets in medical informatics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SMOTE+and+advanced+over-sampling+techniques" target="_blank" rel="noopener"><span class="en">SMOTE and advanced over-sampling techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hepatitis+C+Virus+%28HCV%29+severity+classification+using+AI" target="_blank" rel="noopener"><span class="en">Hepatitis C Virus (HCV) severity classification using AI</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
