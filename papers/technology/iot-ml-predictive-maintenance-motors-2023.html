@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រព័ន្ធថែទាំព្យាករណ៍ផ្អែកលើ IoT និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) សម្រាប់ម៉ូទ័រអគ្គិសនី | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការខូចខាតម៉ាស៊ីនឧស្សាហកម្ម (ម៉ូទ័រអគ្គិសនី) ដោយមិនបានរំពឹងទុក ដែលបណ្តាលឱ្យខាតបង់ពេលវេលានិងថវិកា ដោយស្នើឡើងនូវប្រព័ន្ធថែទាំព្យា...">
+    
+    <meta name="keywords" content="predictive maintenance, machine learning, Industrial IoT (IIoT), MQTT protocol, random forest, electrical motors, fault diagnosis, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/iot-ml-predictive-maintenance-motors-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/iot-ml-predictive-maintenance-motors-2023.html">
+    <meta property="og:title" content="ប្រព័ន្ធថែទាំព្យាករណ៍ផ្អែកលើ IoT និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) សម្រាប់ម៉ូទ័រអគ្គិសនី | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការខូចខាតម៉ាស៊ីនឧស្សាហកម្ម (ម៉ូទ័រអគ្គិសនី) ដោយមិនបានរំពឹងទុក ដែលបណ្តាលឱ្យខាតបង់ពេលវេលានិងថវិកា ដោយស្នើឡើងនូវប្រព័ន្ធថែទាំព្យាករណ៍ (Predictive Maintenance) ដើម្បីកំណត...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023, Journal Européen des Systèmes Automatisés">
+    
+    <meta property="article:tag" content="predictive maintenance">
+    
+    <meta property="article:tag" content="machine learning">
+    
+    <meta property="article:tag" content="Industrial IoT (IIoT)">
+    
+    <meta property="article:tag" content="MQTT protocol">
+    
+    <meta property="article:tag" content="random forest">
+    
+    <meta property="article:tag" content="electrical motors">
+    
+    <meta property="article:tag" content="fault diagnosis">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រព័ន្ធថែទាំព្យាករណ៍ផ្អែកលើ IoT និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) សម្រាប់ម៉ូទ័រអគ្គិសនី">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការខូចខាតម៉ាស៊ីនឧស្សាហកម្ម (ម៉ូទ័រអគ្គិសនី) ដោយមិនបានរំពឹងទុក ដែលបណ្តាលឱ្យខាតបង់ពេលវេលានិងថវិកា ដោយស្នើឡើងនូវប្រព័ន្ធថែទាំព្យាករណ៍ (Predictive Maintenance) ដើម្បីកំណត...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1790\u17c2\u1791\u17b6\u17c6\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be IoT \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1798\u17c9\u17bc\u1791\u17d0\u179a\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8",
+      "name": "An IoT and Machine Learning-Based Predictive Maintenance System for Electrical Motors",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1781\u17bc\u1785\u1781\u17b6\u178f\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u17a7\u179f\u17d2\u179f\u17b6\u17a0\u1780\u1798\u17d2\u1798 (\u1798\u17c9\u17bc\u1791\u17d0\u179a\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8) \u178a\u17c4\u1799\u1798\u17b7\u1793\u1794\u17b6\u1793\u179a\u17c6\u1796\u17b9\u1784\u1791\u17bb\u1780 \u178a\u17c2\u179b\u1794\u178e\u17d2\u178f\u17b6\u179b\u17b1\u17d2\u1799\u1781\u17b6\u178f\u1794\u1784\u17cb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1793\u17b7\u1784\u1790\u179c\u17b7\u1780\u17b6 \u178a\u17c4\u1799\u179f\u17d2\u1793\u17be\u17a1\u17be\u1784\u1793\u17bc\u179c\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1790\u17c2\u1791\u17b6\u17c6\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd (Predictive Maintenance) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17c6\u178e\u178f\u17cb\u1794\u1789\u17d2\u17a0\u17b6\u1798\u17bb\u1793\u1796\u17c1\u179b\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1788\u17b6\u1793\u178a\u179b\u17cb\u178a\u17c6\u178e\u17b6\u1780\u17cb\u1780\u17b6\u179b\u1792\u17d2\u1784\u1793\u17cb\u1792\u17d2\u1784\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/iot-ml-predictive-maintenance-motors-2023.html",
+      "author": [{"@type": "Person", "name": "Noor A. Mohammed (Automated Manufacturing Eng. Dept., AlKhwarizmi College of Engineering, University of Baghdad)"},{"@type": "Person", "name": "Osamah F. Abdulateef (Information and Communication Eng. Dept., AlKhwarizmi College of Engineering, University of Baghdad)"},{"@type": "Person", "name": "Ali H. Hamad (Information and Communication Eng. Dept., AlKhwarizmi College of Engineering, University of Baghdad)"}],
+      "datePublished": "2023, Journal Europ\u00e9en des Syst\u00e8mes Automatis\u00e9s",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "An IoT and Machine Learning-Based Predictive Maintenance System for Electrical Motors",
+        "url": "https://doi.org/10.18280/jesa.560414"
+      },
+      "keywords": ["predictive maintenance", "machine learning", "Industrial IoT (IIoT)", "MQTT protocol", "random forest", "electrical motors", "fault diagnosis"],
+      "about": "Industrial Internet of Things (IIoT) and Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1790\u17c2\u1791\u17b6\u17c6\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be IoT \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1798\u17c9\u17bc\u1791\u17d0\u179a\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8",
+          "item": "https://khmerresearch.com/papers/technology/iot-ml-predictive-maintenance-motors-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រព័ន្ធថែទាំព្យាករណ៍ផ្អែកលើ IoT និងការរៀនរបស់ម៉ាស៊ីន (Ma...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> An IoT and Machine Learning-Based Predictive Maintenance System for Electrical Motors<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.18280/jesa.560414" target="_blank">doi.org/10.18280/jesa.560414</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រព័ន្ធថែទាំព្យាករណ៍ផ្អែកលើ IoT និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) សម្រាប់ម៉ូទ័រអគ្គិសនី</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> An IoT and Machine Learning-Based Predictive Maintenance System for Electrical Motors</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Noor A. Mohammed (Automated Manufacturing Eng. Dept., AlKhwarizmi College of Engineering, University of Baghdad), Osamah F. Abdulateef (Information and Communication Eng. Dept., AlKhwarizmi College of Engineering, University of Baghdad), Ali H. Hamad (Information and Communication Eng. Dept., AlKhwarizmi College of Engineering, University of Baghdad)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, Journal Européen des Systèmes Automatisés</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Industrial Internet of Things (IIoT) and Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការខូចខាតម៉ាស៊ីនឧស្សាហកម្ម (ម៉ូទ័រអគ្គិសនី) ដោយមិនបានរំពឹងទុក ដែលបណ្តាលឱ្យខាតបង់ពេលវេលានិងថវិកា ដោយស្នើឡើងនូវប្រព័ន្ធថែទាំព្យាករណ៍ (Predictive Maintenance) ដើម្បីកំណត់បញ្ហាមុនពេលម៉ាស៊ីនឈានដល់ដំណាក់កាលធ្ងន់ធ្ងរ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្ត្ររួមបញ្ចូលគ្នារវាងឧបករណ៍សេនស័រ (Sensors) ពិធីការទំនាក់ទំនង (MQTT) និងក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ដើម្បីប្រមូលនិងវិភាគទិន្នន័យក្នុងពេលជាក់ស្តែងពីម៉ូទ័រអគ្គិសនី។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យពីសេនស័ររំញ័រ ចរន្តអគ្គិសនី និងសីតុណ្ហភាព (Vibration, Current, and Temperature Sensors)</li>
+            
+            <li>ការប្រើប្រាស់ពិធីការទំនាក់ទំនង (MQTT Protocol) សម្រាប់បញ្ជូនទិន្នន័យពី Raspberry Pi ទៅកាន់ប្រព័ន្ធក្លោដ (Cloud Server) ប្រកបដោយប្រសិទ្ធភាពខ្ពស់</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនចំនួន ៥ ម៉ូដែលដូចជា KNN, SVM, RF, LR, និង NB (Machine Learning Algorithms) ដើម្បីវិភាគ និងព្យាករណ៍ពីកំហុស</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល Random Forest (RF) ទទួលបានភាពត្រឹមត្រូវខ្ពស់ជាងគេបំផុត (០.៩៩ ឬ ៩៩%) ក្នុងការវាយតម្លៃ និងព្យាករណ៍ពីការខូចខាតរបស់ម៉ូទ័រ។</li>
+            
+            <li>ប្រព័ន្ធទំនាក់ទំនងតាមរយៈពិធីការ MQTT បានផ្តល់នូវប្រសិទ្ធភាពខ្ពស់និងភាពជឿជាក់ក្នុងការបញ្ជូនទិន្នន័យនៅក្នុងប្រព័ន្ធ IoT ។</li>
+            
+            <li>ម៉ូដែល Naive Bayes (NB) ផ្តល់ល្បឿនឆ្លើយតបលឿនបំផុត ចំណែកឯ SVM ត្រូវការពេលវេលាបង្វឹក (Training time) យូរជាងម៉ូដែលដទៃប្រមាណ ២០ ដង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest (RF)</span></strong><br>ម៉ូដែលរ៉េនដុមហ្វ័ររ៉េស (Random Forest)</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវខ្ពស់បំផុត និងមានសមត្ថភាពអាចគ្រប់គ្រងទិន្នន័យដែលមានវិមាត្រខ្ពស់ (High dimensionality data) បានយ៉ាងល្អ។</td>
+                <td>ត្រូវការពេលវេលាបង្វឹក (Training time) និងធនធានគណនាច្រើនជាងម៉ូដែលសាមញ្ញមួយចំនួន។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុតរហូតដល់ ០.៩៩ (៩៩%) ក្នុងការទស្សន៍ទាយកំហុសរបស់ម៉ូទ័រ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM)</span></strong><br>ម៉ូដែលសាប់ផតវេទ័រម៉ាស៊ីន (Support Vector Machine)</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវខ្ពស់ក្នុងការចំណាត់ថ្នាក់ទិន្នន័យ ស្មើនឹងម៉ូដែល Random Forest ដែរ។</td>
+                <td>ចំណាយពេលក្នុងការបង្វឹក (Training time) យូរជាងម៉ូដែលដទៃប្រមាណ ២០ ដង ដែលធ្វើឱ្យយឺតក្នុងការអនុវត្តផ្ទាល់។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវស្មើនឹង ០.៩៩ ប៉ុន្តែស៊ីពេលបង្វឹកយូរជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Naive Bayes (NB)</span></strong><br>ម៉ូដែលណាយបេយេស (Naive Bayes)</td>
+                <td>មានល្បឿនឆ្លើយតបលឿនភ្លាមៗ (Instant) ស័ក្តិសមបំផុតសម្រាប់កម្មវិធីដែលត្រូវការល្បឿននៃការឆ្លើយតបរហ័ស។</td>
+                <td>មានភាពត្រឹមត្រូវទាបជាងម៉ូដែល RF និង SVM ហើយសន្មតថាទិន្នន័យឯករាជ្យពីគ្នាទាំងស្រុង។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវត្រឹមតែ ០.៨៤ ប៉ុន្តែមានល្បឿនលឿនជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Linear Regression (LR)</span></strong><br>តំរែតំរង់លីនេអ៊ែរ (Linear Regression)</td>
+                <td>ងាយស្រួលក្នុងការស្វែងរកទំនាក់ទំនងរវាងអថេរផ្សេងៗនៅក្នុងទិន្នន័យ។</td>
+                <td>មិនសូវមានប្រសិទ្ធភាពក្នុងការទស្សន៍ទាយទិន្នន័យដែលមានភាពស្មុគស្មាញ និងមានភាពមិនលីនេអ៊ែរ (Non-linear)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទាបជាងគេបំផុតគឺ ០.៨២។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធនេះទាមទារនូវការរួមបញ្ចូលគ្នារវាងឧបករណ៍ផ្នែករឹងសេនស័រ (Hardware Devices) ប្រព័ន្ធក្លោដ និងចំណេះដឹងផ្នែកក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ូទ័រអគ្គិសនី (AC motor), ក្តារ Raspberry Pi សម្រាប់ធ្វើជាម៉ាស៊ីនមេ (Local Server), និងសេនស័រ (ADXL345 សម្រាប់រំញ័រ, ACS712 សម្រាប់ចរន្តអគ្គិសនី, MLX90614 សម្រាប់សីតុណ្ហភាព)។</li>
+        
+        <li><strong>Software & Protocols:</strong> ពិធីការ MQTT សម្រាប់បញ្ជូនទិន្នន័យ ប្រព័ន្ធក្លោដ (Cloud Server) និងភាសាកម្មវិធី (ជាទូទៅ Python) សម្រាប់បង្កើតម៉ូដែល Machine Learning។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យដែលប្រមូលបានរៀងរាល់ ១ វិនាទី (ប្រមាណ ៣៥,៥០០ គំរូទិន្នន័យ) ដោយត្រូវបែងចែកជា ៨០% សម្រាប់បង្វឹក (Training), ១០% សម្រាប់វាយតម្លៃ (Validation), និង ១០% សម្រាប់ធ្វើតេស្ត (Testing)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងមន្ទីរពិសោធន៍នៃសាកលវិទ្យាល័យបាកដាដ (ប្រទេសអ៊ីរ៉ាក់) ដោយប្រើប្រាស់ទិន្នន័យក្លែងធ្វើពីការខូចខាតម៉ូទ័រអគ្គិសនីតែមួយម៉ាស៊ីនប៉ុណ្ណោះ។ ទិន្នន័យមានទំហំតូច និងមិនមែនជាទិន្នន័យដែលប្រមូលបានពីបរិយាកាសរោងចក្រពិតប្រាកដនោះទេ។ សម្រាប់ប្រទេសកម្ពុជា ចំណុចនេះមានសារៈសំខាន់ណាស់ ព្រោះបរិយាកាសរោងចក្រពិត (ដូចជាកម្តៅ សំណើមខ្ពស់ និងធូលី) អាចធ្វើឱ្យលទ្ធផលជាក់ស្តែងនៃការទស្សន៍ទាយមានការប្រែប្រួលពីការពិសោធន៍នេះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ប្រព័ន្ធថែទាំព្យាករណ៍នេះពិតជាមានអត្ថប្រយោជន៍ខ្ពស់សម្រាប់ការធ្វើទំនើបកម្ម និងដោះស្រាយបញ្ហាការខូចខាតម៉ាស៊ីនភ្លាមៗនៅក្នុងវិស័យឧស្សាហកម្មនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>រោងចក្រកាត់ដេរ និងវាយនភ័ណ្ឌ (Garment & Textile Factories):</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យានេះដើម្បីត្រួតពិនិត្យម៉ូទ័រដេរ និងម៉ាស៊ីនតម្បាញ រារាំងការផ្អាកខ្សែសង្វាក់ផលិតកម្មភ្លាមៗ ដែលជាកត្តាជួយសន្សំសំចៃពេលវេលានិងថវិកាយ៉ាងច្រើន។</li>
+            
+            <li><strong>វិស័យកសិកម្ម និងរោងម៉ាស៊ីនកិនស្រូវ (Agriculture & Rice Mills):</strong> ជួយតាមដានសុខភាពម៉ូទ័រម៉ាស៊ីនបូមទឹកខ្នាតធំ ឬម៉ាស៊ីនកិនស្រូវទំនើបៗនៅតាមខេត្តសក្តានុពល (ដូចជា បាត់ដំបង និងកំពង់ធំ) ដើម្បីកាត់បន្ថយថ្លៃដើមថែទាំ។</li>
+            
+            <li><strong>តំបន់សេដ្ឋកិច្ចពិសេស (Special Economic Zones - SEZ):</strong> អាចអនុវត្តនៅក្នុងតំបន់សេដ្ឋកិច្ចពិសេសភ្នំពេញ (PPSEZ) ឬក្រុងព្រះសីហនុ ក្នុងរោងចក្រផលិតគ្រឿងបន្លាស់រថយន្ត ឬអេឡិចត្រូនិក ដើម្បីបង្កើនស្ថិរភាពផលិតកម្ម។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់បច្ចេកវិទ្យា IoT រួមជាមួយក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន គឺជាដំណោះស្រាយដែលមានសក្តានុពលក្នុងការជួយឱ្យរោងចក្រនៅកម្ពុជាផ្លាស់ប្តូរពីការជួសជុលពេលខូច (Reactive Maintenance) ទៅជាការការពារជាមុន (Predictive Maintenance)។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១៖ សិក្សាមូលដ្ឋានគ្រឹះឧបករណ៍ IoT និងសេនស័រ:</strong> ចាប់ផ្តើមដោយការស្វែងយល់អំពីការភ្ជាប់សេនស័រដូចជា <span class="en">ADXL345</span> (វាស់រំញ័រ) ឬ <span class="en">ACS712</span> (វាស់ចរន្ត) ទៅកាន់មីក្រូកុងត្រូល័រ <span class="en">Raspberry Pi</span> ឬ <span class="en">Arduino</span> ដើម្បីអនុវត្តការប្រមូលទិន្នន័យបឋម។</li>
+            
+            <li><strong>ជំហានទី ២៖ រៀបចំប្រព័ន្ធបញ្ជូនទិន្នន័យ (Data Transmission Setup):</strong> សិក្សាពីរបៀបដំឡើង និងប្រើប្រាស់ពិធីការ <span class="en">MQTT Protocol</span> ដោយប្រើប្រាស់ <span class="en">Mosquitto Broker</span> ដើម្បីអាចបញ្ជូនទិន្នន័យពីសេនស័រទៅកាន់ប្រព័ន្ធ <span class="en">Cloud Server</span> បានលឿននិងមិនសូវស៊ីអ៊ីនធឺណិត។</li>
+            
+            <li><strong>ជំហានទី ៣៖ ការប្រមូល និងសម្អាតទិន្នន័យ (Data Collection & Preprocessing):</strong> បង្កើតឈុតទិន្នន័យផ្ទាល់ខ្លួនដោយប្រមូលទិន្នន័យពីម៉ូទ័រក្នុងស្ថានភាពធម្មតានិងពេលមានបញ្ហា ហើយប្រើប្រាស់បណ្ណាល័យ <span class="en">Pandas</span> និង <span class="en">NumPy</span> នៅក្នុង <span class="en">Python</span> ដើម្បីសម្អាតទិន្នន័យ (Data Cleaning)។</li>
+            
+            <li><strong>ជំហានទី ៤៖ ការបង្វឹកម៉ូដែល Machine Learning (Model Training):</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">Scikit-Learn</span> ក្នុង <span class="en">Python</span> ដើម្បីសាកល្បងបង្វឹកម៉ូដែលដូចជា <span class="en">Random Forest (RF)</span> និង <span class="en">Support Vector Machine (SVM)</span> រួចប្រៀបធៀបភាពត្រឹមត្រូវនៃម៉ូដែលទាំងនោះដោយប្រើឈុតទិន្នន័យរបស់អ្នក។</li>
+            
+            <li><strong>ជំហានទី ៥៖ ការដាក់ឱ្យដំណើរការប្រព័ន្ធជាក់ស្តែងនិងតាមដាន (System Deployment):</strong> អភិវឌ្ឍផ្ទាំងគ្រប់គ្រង (Dashboard) ដោយប្រើប្រាស់កម្មវិធី <span class="en">Grafana</span> ឬ <span class="en">Streamlit</span> ដើម្បីបង្ហាញទិន្នន័យជាក់ស្តែង និងប្រកាសអាសន្ន (Alerts) ពេលមានការទស្សន៍ទាយថាម៉ូទ័រមានហានិភ័យខូចខាត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">predictive maintenance</span></td>
+                <td>គឺជាវិធីសាស្ត្រថែទាំដែលប្រើប្រាស់ទិន្នន័យជាក់ស្តែង និងការវិភាគកម្រិតខ្ពស់ ដើម្បីទស្សន៍ទាយទុកជាមុនថាពេលណាម៉ាស៊ីនមួយនឹងខូចខាត ដែលអនុញ្ញាតឱ្យគេអាចជួសជុលវាបានទាន់ពេលវេលាមុនពេលការខូចខាតធ្ងន់ធ្ងរកើតឡើង។</td>
+                <td>ដូចជាការស្តាប់សំឡេងម៉ាស៊ីនឡានដែលរាងខុសប្រក្រតី ហើយយើងដឹងមុនថាត្រូវយកវាទៅជាង មុនពេលវាគាំងងាប់តាមផ្លូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Industrial IoT (IIoT)</span></td>
+                <td>គឺជាការតភ្ជាប់បណ្តាញសេនស័រ ឧបករណ៍ និងម៉ាស៊ីននៅក្នុងរោងចក្រឧស្សាហកម្មទៅកាន់ប្រព័ន្ធអ៊ីនធឺណិត ដើម្បីប្រមូលទិន្នន័យរួមគ្នា និងបញ្ជាម៉ាស៊ីនទាំងនោះដោយស្វ័យប្រវត្តិប្រកបដោយភាពឆ្លាតវៃ។</td>
+                <td>ដូចជាការបំពាក់នាឡិកាសុខភាព (Smartwatch) ទៅឱ្យម៉ាស៊ីននីមួយៗក្នុងរោងចក្រ ដើម្បីឱ្យវាចេះរាយការណ៍ប្រាប់មេកានិកពីអាការៈរបស់វា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">MQTT protocol</span></td>
+                <td>គឺជាវិន័យ ឬភាសាទំនាក់ទំនងតាមបណ្តាញអ៊ីនធឺណិតដែលមានទំហំស្រាលបំផុត ដែលត្រូវបានប្រើប្រាស់សម្រាប់បញ្ជូនទិន្នន័យពីសេនស័រតូចៗទៅកាន់ម៉ាស៊ីនមេ (Cloud Server) ដោយមិនស៊ីទិន្នន័យអ៊ីនធឺណិតច្រើន និងដំណើរការបានលឿន។</td>
+                <td>ដូចជាប្រព័ន្ធផ្ញើសារតេឡេក្រាម (Telegram) ប៉ុន្តែវាប្រើសម្រាប់តែម៉ាស៊ីននិងម៉ាស៊ីនផ្ញើសារខ្សឹបប្រាប់គ្នាដោយសន្សំសំចៃអ៉ីនធឺណិតបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">random forest</span></td>
+                <td>គឺជាក្បួនដោះស្រាយផ្នែក Machine Learning ដែលបង្កើតឡើងដោយការប្រមូលផ្តុំ "ដើមឈើសម្រេចចិត្ត" (Decision Trees) ជាច្រើនបញ្ចូលគ្នា ដើម្បីធ្វើការបោះឆ្នោតរួមគ្នាថាតើទិន្នន័យមួយគួរតែត្រូវបានចាត់ថ្នាក់ជាអ្វី ដែលធ្វើឱ្យលទ្ធផលមានភាពសុក្រឹតខ្ពស់។</td>
+                <td>ដូចជាការសួរសំណួរទៅកាន់ក្រុមអ្នកជំនាញ ១០០ នាក់ ហើយយកចម្លើយដែលអ្នកជំនាញភាគច្រើនឆ្លើយដូចគ្នា ដើម្បីធ្វើជាសេចក្តីសម្រេចចិត្តចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">supported vector machine (SVM)</span></td>
+                <td>គឺជាក្បួនដោះស្រាយចំណាត់ថ្នាក់ទិន្នន័យ ដែលព្យាយាមគូសបន្ទាត់ ឬបង្កើតប្លង់កាត់ខណ្ឌចែកក្រុមទិន្នន័យឱ្យនៅដាច់ពីគ្នាតាមដែលអាចធ្វើទៅបាន ដើម្បីងាយស្រួលក្នុងការទស្សន៍ទាយទិន្នន័យថ្មីដែលនឹងចូលមក។</td>
+                <td>ដូចជាការគូសបន្ទាត់ព្រំដែនដ៏ធំមួយនៅកណ្តាលទីលាន ដើម្បីបំបែកក្រុមសិស្សពាក់អាវក្រហម និងសិស្សពាក់អាវខៀវឱ្យនៅដាច់ពីគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">outliers</span></td>
+                <td>គឺជាទិន្នន័យដែលមានតម្លៃខុសប្លែកដាច់ពីគេឆ្ងាយបើប្រៀបធៀបទៅនឹងក្រុមទិន្នន័យភាគច្រើន ដែលវាអាចជាសញ្ញាបញ្ជាក់ពីកំហុសរបស់ម៉ាស៊ីន ឬគ្រាន់តែជាការចាប់ទិន្នន័យខុសរបស់សេនស័រ។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលប្រលងបានពិន្ទុ ១០០ ពេញ ខណៈដែលសិស្សមួយថ្នាក់ទៀតប្រលងបានពិន្ទុត្រឹមតែ ៤០ ទៅ ៥០ ដែលជារឿងគួរឱ្យសង្ស័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">oversampling</span></td>
+                <td>គឺជាបច្ចេកទេសក្នុងការបង្កើតទិន្នន័យបន្ថែមសម្រាប់ក្រុមទិន្នន័យដែលមានចំនួនតិចតួច (ឧទាហរណ៍៖ ទិន្នន័យពេលម៉ាស៊ីនខូច) ដើម្បីធ្វើឱ្យវាមានចំនួនប្រហាក់ប្រហែលនឹងក្រុមទិន្នន័យធម្មតា ដែលជួយឱ្យម៉ូដែល AI រៀនបានស្មើភាពគ្នា។</td>
+                <td>ដូចជាការថតចម្លង (Copy) សន្លឹកកិច្ចការរបស់សិស្សខ្សោយឱ្យបានច្រើនសន្លឹក ដើម្បីឱ្យគ្រូមានឱកាសសិក្សាពីចំណុចខ្សោយរបស់ពួកគេបានស្មើនឹងសិស្សពូកែដែលមានគ្នាច្រើន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27AI+Enhanced+Predictive+Maintenance+for+Manufacturing+System%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%90%E1%9F%82%E1%9E%91%E1%9E%B6%E1%9F%86%E1%9E%94%E1%9F%82%E1%9E%94%E1%9E%96%E1%9F%92%E1%9E%99%E1%9E%B6%E1%9E%80%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BE%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%9F%E1%9F%8B%E1%9E%94%E1%9E%89%E1%9F%92%E1%9E%89%E1%9E%B6%E1%9E%9F%E1%9E%B7%E1%9E%94%E1%9F%92%E1%9E%94%E1%9E%93%E1%9E%B7%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%B7%E1%9E%8F%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%95%E1%9E%9B%E1%9E%B7%E1%9E%8F%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fai-enhanced-predictive-maintenance-2024.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'AI Enhanced Predictive Maintenance for Manufacturing System', 'khmer_title': 'ការថែទាំបែបព្យាករណ៍ដោយប្រើប្រាស់បញ្ញាសិប្បនិម្មិតសម្រាប់ប្រព័ន្ធផលិតកម្ម', 'url': '/papers/technology/ai-enhanced-predictive-maintenance-2024.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Machine+Learning+based+Predictive+Maintenance+in+Manufacturing+Industry%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%90%E1%9F%82%E1%9E%91%E1%9E%B6%E1%9F%86%E1%9E%94%E1%9F%82%E1%9E%94%E1%9E%96%E1%9F%92%E1%9E%99%E1%9E%B6%E1%9E%80%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%95%E1%9F%92%E1%9E%A2%E1%9F%82%E1%9E%80%E1%9E%9B%E1%9E%BE%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%93%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%93%E1%9F%85%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%A7%E1%9E%9F%E1%9F%92%E1%9E%9F%E1%9E%B6%E1%9E%A0%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%95%E1%9E%9B%E1%9E%B7%E1%9E%8F%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fml-predictive-maintenance-manufacturing-2022.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Machine Learning based Predictive Maintenance in Manufacturing Industry', 'khmer_title': 'ការថែទាំបែបព្យាករណ៍ផ្អែកលើម៉ាស៊ីនរៀននៅក្នុងឧស្សាហកម្មផលិតកម្ម', 'url': '/papers/technology/ml-predictive-maintenance-manufacturing-2022.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Machine+Learning+Applications+in+Renewable+Energy+Integration+and+Grid+Stability%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%93%E1%9E%BB%E1%9E%9C%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%93%E1%9E%9A%E1%9F%80%E1%9E%93+%28Machine+Learning%29+%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%92%E1%9F%92%E1%9E%9C%E1%9E%BE%E1%9E%9F%E1%9E%98%E1%9E%B6%E1%9E%A0%E1%9E%9A%E1%9E%8E%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%90%E1%9E%B6%E1%9E%98%E1%9E%96%E1%9E%9B%E1%9E%80%E1%9E%80%E1%9E%BE%E1%9E%8F%E1%9E%A1%E1%9E%BE%E1%9E%84%E1%9E%9C%E1%9E%B7%E1%9E%89+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%9F%E1%9F%92%E1%9E%90%E1%9E%B7%E1%9E%9A%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%94%E1%9E%8E%E1%9F%92%E1%9E%8F%E1%9E%B6%E1%9E%89%E1%9E%A2%E1%9E%82%E1%9F%92%E1%9E%82%E1%9E%B7%E1%9E%9F%E1%9E%93%E1%9E%B8%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fml-renewable-energy-integration-grid-stability-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Machine Learning Applications in Renewable Energy Integration and Grid Stability', 'khmer_title': 'ការអនុវត្តម៉ាស៊ីនរៀន (Machine Learning) ក្នុងការធ្វើសមាហរណកម្មថាមពលកកើតឡើងវិញ និងស្ថិរភាពបណ្តាញអគ្គិសនី', 'url': '/papers/technology/ml-renewable-energy-integration-grid-stability-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Efficiency+of+Flash+Flood+Prediction+by+XGBoost+and+Random+Forest+using+15+minutes+%26+1+hour+time+period+sensor+data.%27%2C+%27khmer_title%27%3A+%27%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%9F%E1%9E%B7%E1%9E%91%E1%9F%92%E1%9E%92%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%91%E1%9E%9F%E1%9F%92%E1%9E%9F%E1%9E%93%E1%9F%8D%E1%9E%91%E1%9E%B6%E1%9E%99%E1%9E%91%E1%9E%B9%E1%9E%80%E1%9E%87%E1%9F%86%E1%9E%93%E1%9E%93%E1%9F%8B%E1%9E%9A%E1%9E%A0%E1%9F%90%E1%9E%9F%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BE%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%9F%E1%9F%8B+XGBoost+%E1%9E%93%E1%9E%B7%E1%9E%84+Random+Forest+%E1%9E%87%E1%9E%B6%E1%9E%98%E1%9E%BD%E1%9E%99%E1%9E%93%E1%9E%B9%E1%9E%84%E1%9E%91%E1%9E%B7%E1%9E%93%E1%9F%92%E1%9E%93%E1%9E%93%E1%9F%90%E1%9E%99%E1%9E%9F%E1%9F%81%E1%9E%93%E1%9E%9F%E1%9F%90%E1%9E%9A%E1%9E%9A%E1%9E%99%E1%9F%88%E1%9E%96%E1%9F%81%E1%9E%9B+%E1%9F%A1%E1%9F%A5+%E1%9E%93%E1%9E%B6%E1%9E%91%E1%9E%B8+%E1%9E%93%E1%9E%B7%E1%9E%84+%E1%9F%A1+%E1%9E%98%E1%9F%89%E1%9F%84%E1%9E%84%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fflash-flood-prediction-xgboost-random-forest-2020.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Efficiency of Flash Flood Prediction by XGBoost and Random Forest using 15 minutes & 1 hour time period sensor data.', 'khmer_title': 'ប្រសិទ្ធភាពនៃការទស្សន៍ទាយទឹកជំនន់រហ័សដោយប្រើប្រាស់ XGBoost និង Random Forest ជាមួយនឹងទិន្នន័យសេនស័ររយៈពេល ១៥ នាទី និង ១ ម៉ោង', 'url': '/papers/technology/flash-flood-prediction-xgboost-random-forest-2020.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27How+can+gender+be+identified+from+heart+rate+data%3F+Evaluation+using+ALLSTAR+heart+rate+variability+big+data+analysis%27%2C+%27khmer_title%27%3A+%27%E1%9E%8F%E1%9E%BE%E1%9E%97%E1%9F%81%E1%9E%91%E1%9E%A2%E1%9E%B6%E1%9E%85%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%BC%E1%9E%9C%E1%9E%94%E1%9E%B6%E1%9E%93%E1%9E%80%E1%9F%86%E1%9E%8E%E1%9E%8F%E1%9F%8B%E1%9E%A2%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%9F%E1%9E%89%E1%9F%92%E1%9E%89%E1%9E%B6%E1%9E%8E%E1%9E%96%E1%9E%B8%E1%9E%91%E1%9E%B7%E1%9E%93%E1%9F%92%E1%9E%93%E1%9E%93%E1%9F%90%E1%9E%99%E1%9E%A2%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%81%E1%9F%87%E1%9E%8A%E1%9E%BC%E1%9E%84%E1%9E%94%E1%9E%B6%E1%9E%93%E1%9E%8A%E1%9F%82%E1%9E%9A%E1%9E%AC%E1%9E%91%E1%9F%81%3F+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9C%E1%9E%B6%E1%9E%99%E1%9E%8F%E1%9E%98%E1%9F%92%E1%9E%9B%E1%9F%83%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BE%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9C%E1%9E%B7%E1%9E%97%E1%9E%B6%E1%9E%82%E1%9E%91%E1%9E%B7%E1%9E%93%E1%9F%92%E1%9E%93%E1%9E%93%E1%9F%90%E1%9E%99%E1%9E%92%E1%9F%86%E1%9E%93%E1%9F%83%E1%9E%94%E1%9F%86%E1%9E%9A%E1%9F%82%E1%9E%94%E1%9F%86%E1%9E%9A%E1%9E%BD%E1%9E%9B%E1%9E%A2%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%81%E1%9F%87%E1%9E%8A%E1%9E%BC%E1%9E%84+ALLSTAR%27%2C+%27url%27%3A+%27%2Fpapers%2Fhealth%2Fgender-id-heart-rate-data-2023.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'How can gender be identified from heart rate data? Evaluation using ALLSTAR heart rate variability big data analysis', 'khmer_title': 'តើភេទអាចត្រូវបានកំណត់អត្តសញ្ញាណពីទិន្នន័យអត្រាបេះដូងបានដែរឬទេ? ការវាយតម្លៃដោយប្រើការវិភាគទិន្នន័យធំនៃបំរែបំរួលអត្រាបេះដូង ALLSTAR', 'url': '/papers/health/gender-id-heart-rate-data-2023.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+for+industrial+predictive+maintenance" target="_blank" rel="noopener"><span class="en">deep learning for industrial predictive maintenance</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=edge+computing+in+IIoT+condition+monitoring" target="_blank" rel="noopener"><span class="en">edge computing in IIoT condition monitoring</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=sensor+data+fusion+for+machinery+health+prognosis" target="_blank" rel="noopener"><span class="en">sensor data fusion for machinery health prognosis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=MQTT+vs+CoAP+in+low-latency+industrial+automation" target="_blank" rel="noopener"><span class="en">MQTT vs CoAP in low-latency industrial automation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

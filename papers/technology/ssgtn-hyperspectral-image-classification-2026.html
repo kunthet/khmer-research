@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>SSGTN: បណ្តាញបម្លែងក្រាហ្វតាមលំហ-វិសាលគម សម្រាប់ការធ្វើចំណាត់ថ្នាក់រូបភាពដែលមានវិសាលគមច្រើន | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់រូបភាពដែលមានវិសាលគមច្រើន (Hyperspectral Image Classification) ដែលជួបការលំបាកក្នុងការបង្កើតគំរូនៃទំនាក់ទំនងរវាងទ...">
+    
+    <meta name="keywords" content="Hyperspectral Image Classification, Graph Convolutional Networks, Transformers, Spectral-Spatial Learning, Superpixel Segmentation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/ssgtn-hyperspectral-image-classification-2026.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/ssgtn-hyperspectral-image-classification-2026.html">
+    <meta property="og:title" content="SSGTN: បណ្តាញបម្លែងក្រាហ្វតាមលំហ-វិសាលគម សម្រាប់ការធ្វើចំណាត់ថ្នាក់រូបភាពដែលមានវិសាលគមច្រើន | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់រូបភាពដែលមានវិសាលគមច្រើន (Hyperspectral Image Classification) ដែលជួបការលំបាកក្នុងការបង្កើតគំរូនៃទំនាក់ទំនងរវាងទិន្នន័យឆ្ងាយៗ និងរចនាសម្ព័ន្ធលម្អិត ជាពិ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2026, Remote Sensing">
+    
+    <meta property="article:tag" content="Hyperspectral Image Classification">
+    
+    <meta property="article:tag" content="Graph Convolutional Networks">
+    
+    <meta property="article:tag" content="Transformers">
+    
+    <meta property="article:tag" content="Spectral-Spatial Learning">
+    
+    <meta property="article:tag" content="Superpixel Segmentation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="SSGTN: បណ្តាញបម្លែងក្រាហ្វតាមលំហ-វិសាលគម សម្រាប់ការធ្វើចំណាត់ថ្នាក់រូបភាពដែលមានវិសាលគមច្រើន">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់រូបភាពដែលមានវិសាលគមច្រើន (Hyperspectral Image Classification) ដែលជួបការលំបាកក្នុងការបង្កើតគំរូនៃទំនាក់ទំនងរវាងទិន្នន័យឆ្ងាយៗ និងរចនាសម្ព័ន្ធលម្អិត ជាពិ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "SSGTN: \u1794\u178e\u17d2\u178f\u17b6\u1789\u1794\u1798\u17d2\u179b\u17c2\u1784\u1780\u17d2\u179a\u17b6\u17a0\u17d2\u179c\u178f\u17b6\u1798\u179b\u17c6\u17a0-\u179c\u17b7\u179f\u17b6\u179b\u1782\u1798 \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u179f\u17b6\u179b\u1782\u1798\u1785\u17d2\u179a\u17be\u1793",
+      "name": "SSGTN: Spectral\u2013Spatial Graph Transformer Network for Hyperspectral Image Classification",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u179f\u17b6\u179b\u1782\u1798\u1785\u17d2\u179a\u17be\u1793 (Hyperspectral Image Classification) \u178a\u17c2\u179b\u1787\u17bd\u1794\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1782\u17c6\u179a\u17bc\u1793\u17c3\u1791\u17c6\u1793\u17b6\u1780\u17cb\u1791\u17c6\u1793\u1784\u179a\u179c\u17b6\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1786\u17d2\u1784\u17b6\u1799\u17d7 \u1793\u17b7\u1784\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u179b\u1798\u17d2\u17a2\u17b7\u178f \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1793\u17c5\u1796\u17c1\u179b\u178a\u17c2\u179b\u1798\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u1784\u17d2\u179a\u17c0\u1793 (Labeled training data) \u178f\u17b7\u1785\u178f\u17bd\u1785\u178f\u17d2\u179a\u17b9\u1798 \u17e1%\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/ssgtn-hyperspectral-image-classification-2026.html",
+      "author": [{"@type": "Person", "name": "Haotian Shi (Guangzhou University)"},{"@type": "Person", "name": "Zihang Luo (Guangzhou University)"},{"@type": "Person", "name": "Yiyang Ma (Guangzhou University)"},{"@type": "Person", "name": "Guanquan Zhu (Guangzhou University)"},{"@type": "Person", "name": "Xin Dai (Guangzhou University)"}],
+      "datePublished": "2026, Remote Sensing",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "SSGTN: Spectral\u2013Spatial Graph Transformer Network for Hyperspectral Image Classification",
+        "url": "https://doi.org/10.3390/rs18020199"
+      },
+      "keywords": ["Hyperspectral Image Classification", "Graph Convolutional Networks", "Transformers", "Spectral-Spatial Learning", "Superpixel Segmentation"],
+      "about": "Remote Sensing / Deep Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SSGTN: \u1794\u178e\u17d2\u178f\u17b6\u1789\u1794\u1798\u17d2\u179b\u17c2\u1784\u1780\u17d2\u179a\u17b6\u17a0\u17d2\u179c\u178f\u17b6\u1798\u179b\u17c6\u17a0-\u179c\u17b7\u179f\u17b6\u179b\u1782\u1798 \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u179f\u17b6\u179b\u1782\u1798\u1785\u17d2\u179a\u17be\u1793",
+          "item": "https://khmerresearch.com/papers/technology/ssgtn-hyperspectral-image-classification-2026.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>SSGTN: បណ្តាញបម្លែងក្រាហ្វតាមលំហ-វិសាលគម សម្រាប់ការធ្វើចំ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> SSGTN: Spectral–Spatial Graph Transformer Network for Hyperspectral Image Classification<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/rs18020199" target="_blank">doi.org/10.3390/rs18020199</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>SSGTN: បណ្តាញបម្លែងក្រាហ្វតាមលំហ-វិសាលគម សម្រាប់ការធ្វើចំណាត់ថ្នាក់រូបភាពដែលមានវិសាលគមច្រើន</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> SSGTN: Spectral–Spatial Graph Transformer Network for Hyperspectral Image Classification</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Haotian Shi (Guangzhou University), Zihang Luo (Guangzhou University), Yiyang Ma (Guangzhou University), Guanquan Zhu (Guangzhou University), Xin Dai (Guangzhou University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2026, Remote Sensing</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Remote Sensing / Deep Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់រូបភាពដែលមានវិសាលគមច្រើន (Hyperspectral Image Classification) ដែលជួបការលំបាកក្នុងការបង្កើតគំរូនៃទំនាក់ទំនងរវាងទិន្នន័យឆ្ងាយៗ និងរចនាសម្ព័ន្ធលម្អិត ជាពិសេសនៅពេលដែលមានទិន្នន័យសម្រាប់បង្រៀន (Labeled training data) តិចតួចត្រឹម ១%។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានស្នើឡើងនូវបណ្តាញ SSGTN ដែលជាស្ថាបត្យកម្មមានពីរផ្នែក (Dual-branch architecture) រួមបញ្ចូលគ្នារវាងការបង្កើតគំរូក្រាហ្វផ្អែកលើ Superpixel និងការប្រើប្រាស់ Transformer សម្រាប់ការវែកញែកបរិបទសកល។
+        
+        <ul>
+            
+            <li>ការសាងសង់ក្រាហ្វ Superpixel ដោយប្រើ LDA-SLIC (LDA-SLIC Superpixel Graph Construction) ដើម្បីបង្កើតតំបន់ដែលមានលក្ខណៈដូចគ្នា។</li>
+            
+            <li>ម៉ូឌុលកាត់បន្ថយសំឡេងរំខាននៃវិសាលគម (Spectral Denoising Module) ដើម្បីកម្ចាត់ទិន្នន័យដែលមិនចាំបាច់។</li>
+            
+            <li>ម៉ូឌុលផ្លាស់ប្តូរលំហ-វិសាលគម (Spectral-Spatial Shift Module - SSSM) សម្រាប់ការលាយបញ្ចូលគ្នានៃលក្ខណៈពិសេសពហុកម្រិត។</li>
+            
+            <li>ប្លុក GCN-Transformer ពីរផ្នែក (Dual-branch GCN-Transformer) ដែលធ្វើការគំរូទាំងរចនាសម្ព័ន្ធមូលដ្ឋាន និងទំនាក់ទំនងសកល។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ជាមួយនឹងការប្រើប្រាស់គំរូទិន្នន័យបង្រៀនត្រឹមតែ ១% វិធីសាស្ត្រនេះទទួលបានលទ្ធផលល្អបំផុត (State-of-the-art) លើសំណុំទិន្នន័យស្តង់ដារចំនួនបីគឺ Indian Pines, WHU-Hi-LongKou និង Houston2018។</li>
+            
+            <li>លទ្ធផលបង្ហាញថាការរួមបញ្ចូលគ្នានៃការបង្កើតគំរូរចនាសម្ព័ន្ធកម្រិតតំបន់ជាមួយនឹងការវែកញែកសកល មានប្រសិទ្ធភាពខ្ពស់ក្នុងការដោះស្រាយបញ្ហាខ្វះខាតទិន្នន័យ។</li>
+            
+            <li>បណ្តាញ SSGTN មានសមត្ថភាពខ្ពស់ក្នុងការកាត់បន្ថយផលប៉ះពាល់ពីសំឡេងរំខាន (Noise) និងភាពស្មុគស្មាញនៃវិមាត្រទិន្នន័យ ដោយរក្សាបាននូវភាពត្រឹមត្រូវខ្ពស់នៃការធ្វើចំណាត់ថ្នាក់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">SSGTN (Proposed Method)</span></strong><br>បណ្តាញបម្លែងក្រាហ្វតាមលំហ-វិសាលគម (SSGTN)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការធ្វើចំណាត់ថ្នាក់ទោះបីមានទិន្នន័យបង្រៀនតិចតួច (១%) និងអាចចាប់យកទំនាក់ទំនងទាំងតំបន់ (Local) និងសកល (Global) បានល្អ។</td>
+                <td>មានចំនួនប៉ារ៉ាម៉ែត្រ (Parameters) ច្រើនជាងវិធីសាស្ត្រ GCN ធម្មតាបន្តិច ទោះបីជាចំនួនប្រតិបត្តិការ (FLOPs) ទាបក៏ដោយ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវសរុប (OA) ៩៧.១២% លើទិន្នន័យ Indian Pines ដោយប្រើសំណាកបង្រៀនត្រឹម ១%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">HybridSN</span></strong><br>បណ្តាញ CNN កូនកាត់ (Hybrid Spectral-Spatial 3D-CNN)</td>
+                <td>មានប្រសិទ្ធភាពក្នុងការទាញយកលក្ខណៈពិសេសតាមលំហ និងវិសាលគមដោយប្រើ Convolution 3D និង 2D។</td>
+                <td>ត្រូវការកម្លាំងគណនាខ្ពស់ (High FLOPs) និងមានកម្រិតក្នុងការចាប់យកទំនាក់ទំនងចម្ងាយឆ្ងាយ (Long-range dependencies)។</td>
+                <td>ទទួលបាន OA ៩០.១៧% លើទិន្នន័យ Indian Pines។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">MorphFormer</span></strong><br>បណ្តាញ Transformer ផ្អែកលើ Morphological</td>
+                <td>ល្អក្នុងការចាប់យកបរិបទសកល និងប្រើប្រាស់ប្រតិបត្តិការ Morphological ដើម្បីកែលម្អរចនាសម្ព័ន្ធ។</td>
+                <td>អាចជួបបញ្ហាក្នុងការរក្សាលម្អិតនៃរចនាសម្ព័ន្ធតូចៗ និងត្រូវការទិន្នន័យច្រើនដើម្បីបង្រៀនឱ្យមានប្រសិទ្ធភាព។</td>
+                <td>ទទួលបាន OA ៩០.៦៤% លើទិន្នន័យ Indian Pines។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CEGCN</span></strong><br>បណ្តាញ CNN គួបផ្សំជាមួយ GCN</td>
+                <td>មានប្រសិទ្ធភាពជាង GCN ធម្មតាដោយសារការបន្ថែមលក្ខណៈពិសេសពី CNN ទៅក្នុងក្រាហ្វ Superpixel។</td>
+                <td>នៅតែមានកម្រិតក្នុងការធ្វើសមាហរណកម្មទំនាក់ទំនងសកលបើធៀបនឹង Transformer។</td>
+                <td>ទទួលបាន OA ៩៥.៨១% លើទិន្នន័យ Indian Pines។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">MambaHSI</span></strong><br>គំរូ State Space Models (Mamba)</td>
+                <td>មានល្បឿនគណនាលឿន (Linear complexity) និងប្រើប្រាស់ធនធានតិចជាង Transformer។</td>
+                <td>ងាយរងផលប៉ះពាល់ដោយសំឡេងរំខាន (Spectral noise) និងមិនសូវល្អក្នុងការចាប់យកទំនាក់ទំនងលំហដែលមិនទៀងទាត់។</td>
+                <td>ទទួលបាន OA ៩០.៥៩% លើទិន្នន័យ Indian Pines។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់សម្រាប់ការបង្រៀនគំរូ ប៉ុន្តែគំរូនេះត្រូវបានរចនាឡើងដើម្បីកាត់បន្ថយការចំណាយលើការគណនា (Low FLOPs) នៅពេលអនុវត្តជាក់ស្តែង។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ការពិសោធន៍ត្រូវបានធ្វើឡើងដោយប្រើ NVIDIA GeForce RTX 4090 GPU និង Intel Xeon Silver 4310 CPU។</li>
+        
+        <li><strong>Software:</strong> ត្រូវការចេះប្រើប្រាស់ភាសា Python និងបណ្ណាល័យ PyTorch សម្រាប់ការសរសេរកូដ។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យរូបភាព Hyperspectral (ដូចជា Indian Pines, Houston2018) ដែលជាទូទៅមានទំហំធំ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យស្តង់ដារចំនួនបីមកពីសហរដ្ឋអាមេរិក (Indian Pines, Houston) និងប្រទេសចិន (LongKou)។ នេះអាចជាចំណុចលំអៀងមួយព្រោះលក្ខណៈនៃដំណាំ និងដីនៅប្រទេសកម្ពុជាអាចមានភាពខុសគ្នាផ្នែកវិសាលគម (Spectral signatures) ដោយសារអាកាសធាតុត្រូពិច និងប្រភេទដី។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានអត្ថប្រយោជន៍ខ្ពស់សម្រាប់ប្រទេសកម្ពុជា ជាពិសេសដោយសារសមត្ថភាពរបស់វាក្នុងការផ្តល់លទ្ធផលល្អទោះបីជាមានទិន្នន័យដែលបានកំណត់ស្លាក (Labeled data) តិចតួចក៏ដោយ។</p>
+        
+        <ul>
+            
+            <li><strong>Precision Agriculture (ខេត្តបាត់ដំបង និងព្រៃវែង):</strong> អាចប្រើប្រាស់ដើម្បីបែងចែកប្រភេទដំណាំ (ស្រូវ ពោត ដំឡូង) និងតាមដានសុខភាពដំណាំដោយប្រើរូបភាពពី Drone ឬផ្កាយរណប ដោយមិនចាំបាច់ចុះវាស់វែងផ្ទាល់ច្រើនពេក។</li>
+            
+            <li><strong>Environmental Monitoring (បឹងទន្លេសាប):</strong> ការធ្វើចំណាត់ថ្នាក់ប្រភេទព្រៃលិចទឹក និងការតាមដានគុណភាពទឹក ដែលជាធម្មតាពិបាកទទួលបានទិន្នន័យវាស់វែងផ្ទាល់គ្រប់គ្រាន់សម្រាប់ការបង្រៀន AI។</li>
+            
+            <li><strong>Urban Planning (រាជធានីភ្នំពេញ):</strong> ការធ្វើផែនទីប្រើប្រាស់ដី (Land Use/Land Cover) ក្នុងទីក្រុងដែលមានការរីកចម្រើនលឿន ដោយប្រើរូបភាពដែលមានកម្រិតភាពច្បាស់ខ្ពស់។</li>
+            
+        </ul>
+        
+        
+        <p>បច្ចេកវិទ្យានេះសក្តិសមសម្រាប់ការស្រាវជ្រាវ និងការអនុវត្តនៅកម្ពុជា ដែលជាញឹកញាប់ជួបបញ្ហាខ្វះខាតទិន្នន័យ Ground Truth សម្រាប់បង្រៀនប្រព័ន្ធ AI ក្នុងវិស័យ Remote Sensing។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១: សិក្សាមូលដ្ឋានគ្រឹះនៃ HSI និង Graph Theory:</strong> និស្សិតគួរចាប់ផ្តើមពីការយល់ដឹងអំពី Hyperspectral Imaging (HSI) និងមូលដ្ឋានគ្រឹះនៃ Graph Convolutional Networks (GCNs)។ ប្រើប្រាស់ធនធានដូចជា Coursera ឬឯកសារពី IEEE GRSS។</li>
+            
+            <li><strong>ជំហានទី ២: ការអនុវត្ត Superpixel Segmentation:</strong> រៀនអនុវត្តកូដ Python សម្រាប់បច្ចេកទេស SLIC (Simple Linear Iterative Clustering) ដើម្បីបែងចែករូបភាពជាតំបន់តូចៗ។ អាចប្រើបណ្ណាល័យ Scikit-image សម្រាប់ SLIC។</li>
+            
+            <li><strong>ជំហានទី ៣: ការកសាងនិងបង្រៀនគំរូ SSGTN:</strong> ទាញយកកូដ ឬព្យាយាមសរសេរឡើងវិញនូវរចនាសម្ព័ន្ធ SSGTN ដោយប្រើ PyTorch។ ផ្តោតលើការយល់ដឹងអំពី Dual-branch architecture និង Spectral-Spatial Shift Module (SSSM)។</li>
+            
+            <li><strong>ជំហានទី ៤: ការពិសោធន៍ជាមួយទិន្នន័យកម្ពុជា:</strong> សាកល្បងអនុវត្តគំរូនេះជាមួយទិន្នន័យផ្កាយរណប Sentinel-2 (ដែលមាន bands ច្រើន) លើតំបន់កសិកម្មនៅកម្ពុជា ដោយកំណត់ចំនួន samples សម្រាប់បង្រៀនឱ្យតិចបំផុតដើម្បីតេស្តប្រសិទ្ធភាព។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperspectral Image (HSI)</span></td>
+                <td>ជារូបភាពដែលមានផ្ទុកព័ត៌មានពណ៌ (Spectral bands) រាប់រយជាន់គ្នា ដែលភ្នែកមនុស្សមើលមិនឃើញ។ វាអនុញ្ញាតឱ្យកុំព្យូទ័រអាចបែងចែកប្រភេទវត្ថុដែលមានពណ៌ស្រដៀងគ្នាខ្លាំង (ដូចជាស្លឹកឈើពិត និងស្លឹកឈើជ័រ) ដោយផ្អែកលើហត្ថលេខានៃពន្លឺ។</td>
+                <td>ដូចជាកាមេរ៉ាវិសេសដែលអាចមើលឃើញពណ៌រាប់រយប្រភេទ មិនមែនត្រឹមតែ ក្រហម បៃតង និងខៀវ នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Superpixel</span></td>
+                <td>គឺជាការប្រមូលផ្តុំចំណុចរូបភាព (Pixels) ដែលនៅជិតគ្នា និងមានលក្ខណៈស្រដៀងគ្នាឱ្យទៅជាតំបន់តែមួយ (Region)។ ការធ្វើបែបនេះជួយកាត់បន្ថយចំនួនទិន្នន័យដែលត្រូវគណនា និងរក្សារចនាសម្ព័ន្ធរូបរាងរបស់វត្ថុបានល្អជាងការគណនាម្តងមួយចំណុច។</td>
+                <td>ដូចជាការបែងចែករូបភាពជាបំណែកតូចៗ (Mosaic tiles) ជំនួសឱ្យការពិនិត្យមើលចំណុចតូចៗរាប់លាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Graph Convolutional Network (GCN)</span></td>
+                <td>ជាប្រភេទនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដែលត្រូវបានរចនាឡើងដើម្បីធ្វើការលើទិន្នន័យដែលមានរចនាសម្ព័ន្ធជាបណ្តាញ (Graph)។ នៅក្នុងអត្ថបទនេះ វាត្រូវបានប្រើដើម្បីវិភាគទំនាក់ទំនងរវាង Superpixels ដែលនៅជិតគ្នា។</td>
+                <td>ដូចជាការវិភាគពីចំណង់ចំណូលចិត្តរបស់មនុស្សម្នាក់ ដោយផ្អែកលើទំនាក់ទំនងជាមួយមិត្តភក្តិរបស់ពួកគេក្នុងបណ្តាញសង្គម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transformer</span></td>
+                <td>ជាគំរូ Deep Learning ដែលប្រើប្រាស់យន្តការ 'Attention' ដើម្បីចាប់យកទំនាក់ទំនងរវាងផ្នែកផ្សេងៗនៃទិន្នន័យ ទោះបីជាវាស្ថិតនៅឆ្ងាយពីគ្នាក៏ដោយ។ ក្នុង HSI វាជួយផ្សារភ្ជាប់ព័ត៌មានពីតំបន់ឆ្ងាយៗក្នុងរូបភាព។</td>
+                <td>ដូចជាការអានសៀវភៅហើយចេះផ្សារភ្ជាប់ព្រឹត្តិការណ៍នៅទំព័រដើម ទៅនឹងព្រឹត្តិការណ៍នៅទំព័រចុងក្រោយ ដើម្បីយល់ន័យរួម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spectral–Spatial Shift Module (SSSM)</span></td>
+                <td>ជាបច្ចេកទេសថ្មីដែលអ្នកស្រាវជ្រាវបង្កើតឡើង ដើម្បីលាយបញ្ចូលព័ត៌មានរវាងលំហ (Spatial) និងវិសាលគម (Spectral) ដោយគ្រាន់តែរុញទីតាំងទិន្នន័យបន្តិចបន្តួច។ វាជួយឱ្យម៉ូដែលរៀនបានល្អដោយមិនចំណាយធនធានគណនាច្រើន។</td>
+                <td>ដូចជាការសាប់សន្លឹកបៀដើម្បីឱ្យវាលាយគ្នា ដោយមិនចាំបាច់ប្រើឧបករណ៍ស្មុគស្មាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Linear Discriminant Analysis (LDA)</span></td>
+                <td>ជាវិធីសាស្ត្រស្ថិតិសម្រាប់កាត់បន្ថយចំនួនវិមាត្រនៃទិន្នន័យ ដោយព្យាយាមស្វែងរកប្លង់ (Projection) ណាដែលធ្វើឱ្យក្រុមទិន្នន័យផ្សេងគ្នា (Classes) នៅដាច់ពីគ្នាឆ្ងាយបំផុតតាមដែលអាចធ្វើបាន។</td>
+                <td>ដូចជាការថតរូបក្រុមមនុស្សពីរក្រុមពីមុំមួយ ដែលធ្វើឱ្យយើងឃើញពួកគេដាច់ពីគ្នាយ៉ាងច្បាស់ មិនឈរជាន់គ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=hyperspectral+image+classification+with+graph+transformers" target="_blank" rel="noopener"><span class="en">hyperspectral image classification with graph transformers</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=LDA-SLIC+superpixel+segmentation+for+remote+sensing" target="_blank" rel="noopener"><span class="en">LDA-SLIC superpixel segmentation for remote sensing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+for+hyperspectral+image+classification+with+limited+samples" target="_blank" rel="noopener"><span class="en">deep learning for hyperspectral image classification with limited samples</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=spectral-spatial+feature+extraction+methods" target="_blank" rel="noopener"><span class="en">spectral-spatial feature extraction methods</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=state+space+models+vs+transformers+in+remote+sensing" target="_blank" rel="noopener"><span class="en">state space models vs transformers in remote sensing</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

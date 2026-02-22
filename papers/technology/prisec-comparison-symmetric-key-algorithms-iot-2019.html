@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>PRISEC៖ ការប្រៀបធៀបក្បួនដោះស្រាយកូនសោស៊ីមេទ្រីសម្រាប់ឧបករណ៍ IoT | KhmerResearch.com</title>
+    <meta name="description" content="ការកើនឡើងនៃឧបករណ៍ IoT ដែលមានធនធានកម្រិត (Resource-constrained devices) បង្កឱ្យមានបញ្ហាប្រឈមក្នុងការការពារទិន្នន័យ ដោយសារក្បួនដោះស្រាយកូដសម្ងាត់ស្តង់ដារត្រូវក...">
+    
+    <meta name="keywords" content="IoT security, Symmetric key algorithms, ChaCha20-Poly1305, Lightweight cryptography, Power consumption analysis, UbiPri middleware, AES benchmarking, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/prisec-comparison-symmetric-key-algorithms-iot-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/prisec-comparison-symmetric-key-algorithms-iot-2019.html">
+    <meta property="og:title" content="PRISEC៖ ការប្រៀបធៀបក្បួនដោះស្រាយកូនសោស៊ីមេទ្រីសម្រាប់ឧបករណ៍ IoT | KhmerResearch.com">
+    <meta property="og:description" content="ការកើនឡើងនៃឧបករណ៍ IoT ដែលមានធនធានកម្រិត (Resource-constrained devices) បង្កឱ្យមានបញ្ហាប្រឈមក្នុងការការពារទិន្នន័យ ដោយសារក្បួនដោះស្រាយកូដសម្ងាត់ស្តង់ដារត្រូវការថាមពល និងសមត្ថភាពកុំព្យូទ័រខ្ពស់ពេក។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2019, Sensors">
+    
+    <meta property="article:tag" content="IoT security">
+    
+    <meta property="article:tag" content="Symmetric key algorithms">
+    
+    <meta property="article:tag" content="ChaCha20-Poly1305">
+    
+    <meta property="article:tag" content="Lightweight cryptography">
+    
+    <meta property="article:tag" content="Power consumption analysis">
+    
+    <meta property="article:tag" content="UbiPri middleware">
+    
+    <meta property="article:tag" content="AES benchmarking">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="PRISEC៖ ការប្រៀបធៀបក្បួនដោះស្រាយកូនសោស៊ីមេទ្រីសម្រាប់ឧបករណ៍ IoT">
+    <meta name="twitter:description" content="ការកើនឡើងនៃឧបករណ៍ IoT ដែលមានធនធានកម្រិត (Resource-constrained devices) បង្កឱ្យមានបញ្ហាប្រឈមក្នុងការការពារទិន្នន័យ ដោយសារក្បួនដោះស្រាយកូដសម្ងាត់ស្តង់ដារត្រូវការថាមពល និងសមត្ថភាពកុំព្យូទ័រខ្ពស់ពេក។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "PRISEC\u17d6 \u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1780\u17bc\u1793\u179f\u17c4\u179f\u17ca\u17b8\u1798\u17c1\u1791\u17d2\u179a\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a7\u1794\u1780\u179a\u178e\u17cd IoT",
+      "name": "PRISEC: Comparison of Symmetric Key Algorithms for IoT Devices",
+      "description": "\u1780\u17b6\u179a\u1780\u17be\u1793\u17a1\u17be\u1784\u1793\u17c3\u17a7\u1794\u1780\u179a\u178e\u17cd IoT \u178a\u17c2\u179b\u1798\u17b6\u1793\u1792\u1793\u1792\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f (Resource-constrained devices) \u1794\u1784\u17d2\u1780\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17b6\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1780\u17bc\u178a\u179f\u1798\u17d2\u1784\u17b6\u178f\u17cb\u179f\u17d2\u178f\u1784\u17cb\u178a\u17b6\u179a\u178f\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1790\u17b6\u1798\u1796\u179b \u1793\u17b7\u1784\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1781\u17d2\u1796\u179f\u17cb\u1796\u17c1\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/prisec-comparison-symmetric-key-algorithms-iot-2019.html",
+      "author": [{"@type": "Person", "name": "Daniel A. F. Saraiva (Universidade da Beira Interior)"},{"@type": "Person", "name": "Valderi Reis Quietinho Leithardt (Universidade do Vale do Itaja\u00ed)"},{"@type": "Person", "name": "Diandre de Paula"},{"@type": "Person", "name": "Andr\u00e9 Sales Mendes"},{"@type": "Person", "name": "Gabriel Villarrubia Gonz\u00e1lez"},{"@type": "Person", "name": "Paul Crocker"}],
+      "datePublished": "2019, Sensors",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "PRISEC: Comparison of Symmetric Key Algorithms for IoT Devices",
+        "url": "https://doi.org/10.3390/s19194312"
+      },
+      "keywords": ["IoT security", "Symmetric key algorithms", "ChaCha20-Poly1305", "Lightweight cryptography", "Power consumption analysis", "UbiPri middleware", "AES benchmarking"],
+      "about": "Computer Science / Cybersecurity"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "PRISEC\u17d6 \u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1780\u17bc\u1793\u179f\u17c4\u179f\u17ca\u17b8\u1798\u17c1\u1791\u17d2\u179a\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a7\u1794\u1780\u179a\u178e\u17cd IoT",
+          "item": "https://khmerresearch.com/papers/technology/prisec-comparison-symmetric-key-algorithms-iot-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>PRISEC៖ ការប្រៀបធៀបក្បួនដោះស្រាយកូនសោស៊ីមេទ្រីសម្រាប់ឧបករណ៍ IoT</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> PRISEC: Comparison of Symmetric Key Algorithms for IoT Devices<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/s19194312" target="_blank">doi.org/10.3390/s19194312</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>PRISEC៖ ការប្រៀបធៀបក្បួនដោះស្រាយកូនសោស៊ីមេទ្រីសម្រាប់ឧបករណ៍ IoT</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> PRISEC: Comparison of Symmetric Key Algorithms for IoT Devices</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Daniel A. F. Saraiva (Universidade da Beira Interior), Valderi Reis Quietinho Leithardt (Universidade do Vale do Itajaí), Diandre de Paula, André Sales Mendes, Gabriel Villarrubia González, Paul Crocker</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2019, Sensors</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Cybersecurity</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការកើនឡើងនៃឧបករណ៍ IoT ដែលមានធនធានកម្រិត (Resource-constrained devices) បង្កឱ្យមានបញ្ហាប្រឈមក្នុងការការពារទិន្នន័យ ដោយសារក្បួនដោះស្រាយកូដសម្ងាត់ស្តង់ដារត្រូវការថាមពល និងសមត្ថភាពកុំព្យូទ័រខ្ពស់ពេក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតកម្មវិធី Android ដើម្បីធ្វើតេស្ត និងប្រៀបធៀបប្រសិទ្ធភាពនៃក្បួនដោះស្រាយកូនសោស៊ីមេទ្រីផ្សេងៗគ្នានៅលើស្មាតហ្វូនដែលមានស្ថាបត្យកម្ម CPU ខុសគ្នា (ARMv7 និង ARMv8)។
+        
+        <ul>
+            
+            <li>ការប្រៀបធៀបក្បួនដោះស្រាយ (Algorithm Comparison): AES, RC6, Twofish, SPECK128, LEA, និង ChaCha20-Poly1305</li>
+            
+            <li>ការវាស់វែងម៉ែត្រវាស់ស្ទង់ (Performance Metrics): រយៈពេលប្រតិបត្តិការ (Execution Time), ល្បឿនបញ្ជូនទិន្នន័យ (Throughput), និងការប្រើប្រាស់ថាមពលថ្ម (Battery Consumption)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ChaCha20-Poly1305 គឺជាជម្រើសដ៏ល្អបំផុតសម្រាប់ឧបករណ៍ដែលមានធនធានកម្រិត ដោយសារវាមានល្បឿនលឿន និងប្រើប្រាស់ថាមពលតិច។</li>
+            
+            <li>ក្បួនដោះស្រាយធុនស្រាល (Lightweight Block Ciphers) ដូចជា SPECK128 និង LEA ដំណើរការបានល្អជាង AES និង RC6 ក្នុងការអនុវត្តលើ Software ដោយគ្មានជំនួយពី Hardware។</li>
+            
+            <li>AES មានប្រសិទ្ធភាពខ្ពស់ដាច់គេលុះត្រាតែឧបករណ៍នោះមានការគាំទ្រការពន្លឿនដោយផ្នែករឹង (Hardware Acceleration) បើមិនដូច្នេះទេវានឹងប្រើប្រាស់ថាមពលច្រើនជាងគេ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">ChaCha20-Poly1305</span></strong><br>ក្បួនដោះស្រាយ ChaCha20-Poly1305 (Authenticated Stream Cipher)</td>
+                <td>មានល្បឿនលឿនខ្លាំង និងប្រើប្រាស់ថាមពលតិចបំផុតលើឧបករណ៍ដែលគ្មាន Hardware Acceleration។ វាមានសុវត្ថិភាពខ្ពស់ និងត្រូវបានប្រើក្នុង TLS 1.3។</td>
+                <td>គាំទ្រតែទំហំកូនសោ (Key size) 256-bit ប៉ុណ្ណោះ ដែលអាចខ្វះភាពបត់បែនខ្លះសម្រាប់ប្រព័ន្ធចាស់ៗ។</td>
+                <td>ជាជម្រើសល្អបំផុតសម្រាប់ឧបករណ៍ IoT ដែលមានធនធានកម្រិត ដោយមានតុល្យភាពរវាងល្បឿន និងការសន្សំសំចៃថ្ម។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SPECK128</span></strong><br>ក្បួនដោះស្រាយ SPECK128 (Lightweight Block Cipher)</td>
+                <td>មានល្បឿនលឿនជាងគេសម្រាប់កញ្ចប់ទិន្នន័យតូចៗ និងប្រើប្រាស់ Memory តិចបំផុត។ សមស្របសម្រាប់ឧបករណ៍ដែលមានកម្លាំង CPU ខ្សោយ។</td>
+                <td>កម្រិតសុវត្ថិភាពមិនទាន់ត្រូវបានសិក្សាលម្អិតស្មើនឹង AES ឡើយ ហើយអាចមិនសូវមានការគាំទ្រក្នុងស្តង់ដារអន្តរជាតិធំៗ។</td>
+                <td>ដំណើរការលឿនជាង LEA លើកូនសោទំហំ 192 និង 256 bits ហើយប្រើប្រាស់ថាមពលតិច។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">AES (Hardware Accelerated)</span></strong><br>AES ដែលមានជំនួយពីផ្នែករឹង (AES-NI / ARMv8 CE)</td>
+                <td>មានល្បឿនលឿនដាច់គេ និងសុវត្ថិភាពខ្ពស់បំផុត។ ជាស្តង់ដារពិភពលោកដែលគួរឱ្យទុកចិត្ត។</td>
+                <td>ទាមទារឱ្យឧបករណ៍មាន Hardware ពិសេស (ដូចជា ARMv8)។ បើគ្មាន Hardware នេះទេ វាដំណើរការយឺត និងស៊ីថ្មខ្លាំង។</td>
+                <td>ទទួលបាន Throughput ខ្ពស់បំផុត (ជាង 400 MiB/s) លើឧបករណ៍ Xiaomi Redmi Note 3 (ARMv8)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">RC6 & Twofish</span></strong><br>ក្បួនដោះស្រាយ RC6 និង Twofish</td>
+                <td>មានសមត្ថភាពល្អជាង AES ក្នុងករណីដែលគ្មាន Hardware Acceleration (Software-only implementation)។</td>
+                <td>នៅតែយឺតជាង និងស៊ីថ្មច្រើនជាង ChaCha20 ឬ SPECK សម្រាប់ឧបករណ៍ IoT។</td>
+                <td>RC6 លឿនជាង Twofish បន្តិចលើស្ថាបត្យកម្ម ARMv8 ប៉ុន្តែ Twofish លឿនជាងលើ ARMv7។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះបង្ហាញថាធនធានសំខាន់គឺថាមពលថ្ម និងសមត្ថភាព CPU របស់ឧបករណ៍ IoT ។
+    
+    <ul>
+        
+        <li><strong>Hardware Requirements:</strong> ស្មាតហ្វូន ឬឧបករណ៍ IoT ដែលប្រើប្រាស់ឈីប ARM (ARMv7 ឬ ARMv8)។ សម្រាប់ AES ត្រូវការឈីបដែលគាំទ្រ Hardware Acceleration ដើម្បីប្រសិទ្ធភាព។</li>
+        
+        <li><strong>Software Tools:</strong> ការអភិវឌ្ឍន៍ប្រើប្រាស់ Android NDK (C++) និងបណ្ណាល័យ Crypto++ library សម្រាប់អនុវត្តក្បួនដោះស្រាយ។</li>
+        
+        <li><strong>Energy Measurement:</strong> ត្រូវការឧបករណ៍ ឬ Software ដើម្បីវាស់ស្ទង់ការប្រើប្រាស់ថាមពល (ក្នុងការសិក្សានេះប្រើប្រាស់ battery-stats របស់ Android)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះធ្វើឡើងដោយប្រើប្រាស់ស្មាតហ្វូន Android (Samsung និង Xiaomi) ជាតំណាងឱ្យឧបករណ៍ IoT។ នេះអាចជាចំណុចលម្អៀងមួយ ព្រោះឧបករណ៍ IoT ជាក់ស្តែងនៅក្នុងវិស័យកសិកម្ម ឬឧស្សាហកម្មនៅកម្ពុជា ភាគច្រើនជា Microcontrollers (ដូចជា ESP32 ឬ STM32) ដែលមានកម្លាំងខ្សោយជាងស្មាតហ្វូនឆ្ងាយណាស់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>លទ្ធផលនៃការសិក្សានេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់អ្នកអភិវឌ្ឍន៍ប្រព័ន្ធ IoT នៅកម្ពុជា ដើម្បីជ្រើសរើសក្បួនដោះស្រាយសុវត្ថិភាពដែលសមស្រប។</p>
+        
+        <ul>
+            
+            <li><strong>Smart Farming (កសិកម្មឆ្លាតវៃ):</strong> ឧបករណ៍សេនស័រ (Sensors) ដែលដាក់តាមចម្ការនៅខេត្តឆ្ងាយៗដូចជា មណ្ឌលគិរី ឬ បាត់ដំបង ត្រូវការថ្មកាន់បានយូរ។ ការប្រើ ChaCha20 ឬ SPECK នឹងជួយសន្សំសំចៃថាមពលជាង AES។</li>
+            
+            <li><strong>IoT Startups (ក្រុមហ៊ុនបច្ចេកវិទ្យា):</strong> សម្រាប់ក្រុមហ៊ុនក្នុងស្រុក (ដូចជា ArrowDot ឬ ក្រុមហ៊ុនគ្រប់គ្រងទឹកស្អាត) ដែលផលិតឧបករណ៍ Gateway ដោយប្រើ Raspberry Pi ឬ Android board ការជ្រើសរើស ChaCha20 នឹងផ្តល់ល្បឿនលឿន។</li>
+            
+        </ul>
+        
+        
+        <p>ការជ្រើសរើសក្បួនដោះស្រាយឱ្យត្រូវនឹងប្រភេទ Hardware (ARMv7 vs ARMv8) គឺជាកត្តាស្លាប់រស់សម្រាប់ប្រសិទ្ធភាពនៃឧបករណ៍ IoT ដែលដំណើរការដោយថ្ម។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Cryptography:</strong> និស្សិតត្រូវស្វែងយល់ពីភាពខុសគ្នារវាង Block Ciphers (AES, SPECK) និង Stream Ciphers (ChaCha20) ព្រមទាំងគន្លឹះនៃ Authenticated Encryption (GCM, Poly1305)។</li>
+            
+            <li><strong>ការដំឡើងបរិស្ថានអភិវឌ្ឍន៍ (Environment Setup):</strong> ដំឡើង Android Studio និងរៀនប្រើប្រាស់ Android NDK ដើម្បីអាចសរសេរកូដ C++ សម្រាប់ហៅប្រើបណ្ណាល័យដូចជា Crypto++ ឬ Monocypher លើឧបករណ៍ចល័ត។</li>
+            
+            <li><strong>ការធ្វើតេស្តប្រៀបធៀប (Benchmarking):</strong> សរសេរកម្មវិធីតូចមួយដើម្បីវាស់ល្បឿន (Encryption speed) និងការប្រើប្រាស់ថ្ម នៃក្បួនដោះស្រាយ ChaCha20 ធៀបនឹង AES លើឧបករណ៍ Raspberry Pi ឬ ESP32 ដែលមាន។</li>
+            
+            <li><strong>ការអនុវត្តជាក់ស្តែងក្នុងគម្រោង IoT:</strong> ជ្រើសរើស ChaCha20-Poly1305 សម្រាប់ការពារទិន្នន័យដែលផ្ញើចេញពីឧបករណ៍សេនស័រ (Sensor Node) ទៅកាន់ Cloud ដោយធានាថាវាមិនធ្វើឱ្យឧបករណ៍ឆាប់អស់ថ្ម។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Symmetric Key Algorithms</span></td>
+                <td>ជាវិធីសាស្ត្រកូដសម្ងាត់ដែលប្រើប្រាស់កូនសោ (Key) តែមួយគត់ សម្រាប់ការចាក់សោទិន្នន័យឱ្យទៅជាសម្ងាត់ (Encryption) និងការដោះសោទិន្នន័យនោះមកវិញ (Decryption)។</td>
+                <td>ដូចជាការប្រើកូនសោតែមួយគ្រាប់ ដើម្បីចាក់សោទ្វារផ្ទះពេលចេញក្រៅ និងប្រើកូនសោដដែលនោះដើម្បីបើកទ្វារពេលត្រឡប់មកវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Authenticated Encryption</span></td>
+                <td>ជាបច្ចេកទេសដែលធ្វើការងារពីរក្នុងពេលតែមួយ គឺការបំប្លែងទិន្នន័យជាសម្ងាត់ (Confidentiality) និងការធានាថាទិន្នន័យនោះមិនត្រូវបានកែប្រែដោយជនទីបីឡើយ (Integrity) ក្នុងអំឡុងពេលបញ្ជូន។</td>
+                <td>ប្រៀបដូចជាការផ្ញើសំបុត្រដាក់ក្នុងប្រអប់ដែក (សម្ងាត់) ហើយបិទត្រាជ័រពីលើ (ការផ្ទៀងផ្ទាត់) ដើម្បីឱ្យអ្នកទទួលដឹងថាគ្មាននរណាលួចបើក ឬដូរខ្លឹមសារសំបុត្រតាមផ្លូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hardware Acceleration</span></td>
+                <td>ការប្រើប្រាស់ផ្នែកពិសេសនៃគ្រឿងកុំព្យូទ័រ (ដូចជា CPU ថ្មីៗដែលមានឈុតណែនាំ AES-NI) ដើម្បីធ្វើការគណនាកូដសម្ងាត់ឱ្យលឿនជាងការប្រើប្រាស់កម្មវិធី (Software) ធម្មតា។</td>
+                <td>ដូចជាការប្រើម៉ាស៊ីនគិតលេខដើម្បីគុណលេខ លឿនជាងនិងចំណាយកម្លាំងតិចជាងការគិតលេខដោយប្រើក្រដាសនិងប៊ិច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Middleware</span></td>
+                <td>កម្មវិធីកុំព្យូទ័រដែលដើរតួជាអ្នកសម្របសម្រួលនៅកណ្តាល រវាងប្រព័ន្ធប្រតិបត្តិការ (OS) និងកម្មវិធីអ្នកប្រើប្រាស់ (Application) ដើម្បីជួយឱ្យឧបករណ៍ផ្សេងៗគ្នាអាចផ្លាស់ប្តូរទិន្នន័យគ្នាបាន។</td>
+                <td>ប្រៀបបាននឹងអ្នកបកប្រែភាសា ដែលជួយឱ្យមនុស្សពីរនាក់និយាយភាសាផ្សេងគ្នាអាចយល់គ្នា និងធ្វើការជាមួយគ្នាបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Side-Channel Attacks</span></td>
+                <td>ការវាយប្រហារលួចយកទិន្នន័យសម្ងាត់ ដោយមិនមែនបំបែកកូដគណិតវិទ្យាផ្ទាល់ ប៉ុន្តែតាមរយៈការវាស់វែងរូបហ្សែព (Physical implementation) ដូចជាការប្រើប្រាស់ថាមពល ឬរយៈពេលដែល CPU ប្រើដើម្បីគណនា។</td>
+                <td>ដូចជាចោរដែលទាយលេខសម្ងាត់ទូដែក ដោយស្តាប់សំឡេង 'តុកៗ' ពេលបង្វិលសោ ជាជាងការទាយលេខម្តងមួយៗដោយចៃដន្យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Block Cipher</span></td>
+                <td>ក្បួនដោះស្រាយដែលបំប្លែងទិន្នន័យជាដុំៗដែលមានទំហំកំណត់ (ឧទាហរណ៍ 128 bits ក្នុងមួយដុំ) មុននឹងធ្វើការអ៊ិនគ្រីប។ AES និង RC6 គឺជាឧទាហរណ៍នៃ Block Cipher ។</td>
+                <td>ដូចជាការកាត់នំប៉័ងវែងមួយដើម ឱ្យទៅជាចំណិតស្មើៗគ្នា មុននឹងយកទៅវេចខ្ចប់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27The+Untapped+Potential+of+Ascon+Hash+Functions%3A+Benchmarking%2C+Hardware+Profiling%2C+and+Application+Insights+for+Secure+IoT+and+Blockchain+Systems%27%2C+%27khmer_title%27%3A+%27%E1%9E%9F%E1%9E%80%E1%9F%92%E1%9E%8F%E1%9E%B6%E1%9E%93%E1%9E%BB%E1%9E%96%E1%9E%9B%E1%9E%93%E1%9F%83%E1%9E%A2%E1%9E%93%E1%9E%BB%E1%9E%82%E1%9E%98%E1%9E%93%E1%9F%8D+Hash+Ascon%E1%9F%96+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9C%E1%9E%B6%E1%9E%9F%E1%9F%8B%E1%9E%9C%E1%9F%82%E1%9E%84%E1%9E%9F%E1%9E%98%E1%9E%8F%E1%9F%92%E1%9E%90%E1%9E%97%E1%9E%B6%E1%9E%96+%E1%9E%91%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%84%E1%9F%8B%E1%9E%95%E1%9F%92%E1%9E%93%E1%9F%82%E1%9E%80%E1%9E%9A%E1%9E%B9%E1%9E%84+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%99%E1%9E%9B%E1%9F%8B%E1%9E%8A%E1%9E%B9%E1%9E%84%E1%9E%A2%E1%9F%86%E1%9E%96%E1%9E%B8%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%9C%E1%9E%B7%E1%9E%92%E1%9E%B8%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92+IoT+%E1%9E%93%E1%9E%B7%E1%9E%84+Blockchain+%E1%9E%8A%E1%9F%82%E1%9E%9B%E1%9E%98%E1%9E%B6%E1%9E%93%E1%9E%9F%E1%9E%BB%E1%9E%9C%E1%9E%8F%E1%9F%92%E1%9E%90%E1%9E%B7%E1%9E%97%E1%9E%B6%E1%9E%96%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fascon-hash-functions-iot-blockchain-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'The Untapped Potential of Ascon Hash Functions: Benchmarking, Hardware Profiling, and Application Insights for Secure IoT and Blockchain Systems', 'khmer_title': 'សក្តានុពលនៃអនុគមន៍ Hash Ascon៖ ការវាស់វែងសមត្ថភាព ទម្រង់ផ្នែករឹង និងការយល់ដឹងអំពីកម្មវិធីសម្រាប់ប្រព័ន្ធ IoT និង Blockchain ដែលមានសុវត្ថិភាព', 'url': '/papers/technology/ascon-hash-functions-iot-blockchain-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Proposal+Framework+to+Light+Weight+Cryptography+Primitives%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9F%92%E1%9E%9A%E1%9E%94%E1%9E%81%E1%9F%90%E1%9E%8E%E1%9F%92%E1%9E%8C%E1%9E%9F%E1%9F%86%E1%9E%8E%E1%9E%BE%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%98%E1%9E%BC%E1%9E%9B%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%B6%E1%9E%93%E1%9E%82%E1%9F%92%E1%9E%9A%E1%9E%B9%E1%9F%87%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%BC%E1%9E%8A%E1%9E%93%E1%9E%B8%E1%9E%99%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%91%E1%9E%98%E1%9F%92%E1%9E%84%E1%9E%93%E1%9F%8B%E1%9E%9F%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%9B%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fproposal-framework-lightweight-cryptography-primitives-2022.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Proposal Framework to Light Weight Cryptography Primitives', 'khmer_title': 'ក្របខ័ណ្ឌសំណើសម្រាប់មូលដ្ឋានគ្រឹះនៃកូដនីយកម្មទម្ងន់ស្រាល', 'url': '/papers/technology/proposal-framework-lightweight-cryptography-primitives-2022.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Performance+analysis+of+ChaCha20-Poly1305+vs+AES-GCM+on+ARM+processors" target="_blank" rel="noopener"><span class="en">Performance analysis of ChaCha20-Poly1305 vs AES-GCM on ARM processors</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Lightweight+block+ciphers+for+resource-constrained+IoT+devices" target="_blank" rel="noopener"><span class="en">Lightweight block ciphers for resource-constrained IoT devices</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hardware+acceleration+of+cryptographic+algorithms+on+mobile+devices" target="_blank" rel="noopener"><span class="en">Hardware acceleration of cryptographic algorithms on mobile devices</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=UbiPri+middleware+architecture+for+ubiquitous+privacy" target="_blank" rel="noopener"><span class="en">UbiPri middleware architecture for ubiquitous privacy</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Energy+consumption+of+symmetric+encryption+algorithms+in+WSN" target="_blank" rel="noopener"><span class="en">Energy consumption of symmetric encryption algorithms in WSN</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

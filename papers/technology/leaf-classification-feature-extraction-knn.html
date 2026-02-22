@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើចំណាត់ថ្នាក់ដោយប្រើការទាញយកលក្ខណៈពិសេសនៃស្លឹកឈើផ្អែកលើក្បួនដោះស្រាយបណ្តាញសរសៃប្រសាទជាមួយ K-Nearest Neighbor និង Supervised Learning | KhmerResearch.com</title>
+    <meta name="description" content="ការកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិដោយផ្អែកលើស្លឹកមានសារៈសំខាន់ ប៉ុន្តែមនុស្សភាគច្រើនជួបការលំបាកក្នុងការបែងចែកប្រភេទរុក្ខជាតិដោយមើលផ្ទាល់ភ្នែក។ ការស្រាវជ្រាវនេ...">
+    
+    <meta name="keywords" content="Leaf classification, Feature extraction, K-Nearest Neighbor, Image processing, Morphological features, Pattern recognition, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/leaf-classification-feature-extraction-knn.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/leaf-classification-feature-extraction-knn.html">
+    <meta property="og:title" content="ការធ្វើចំណាត់ថ្នាក់ដោយប្រើការទាញយកលក្ខណៈពិសេសនៃស្លឹកឈើផ្អែកលើក្បួនដោះស្រាយបណ្តាញសរសៃប្រសាទជាមួយ K-Nearest Neighbor និង Supervised Learning | KhmerResearch.com">
+    <meta property="og:description" content="ការកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិដោយផ្អែកលើស្លឹកមានសារៈសំខាន់ ប៉ុន្តែមនុស្សភាគច្រើនជួបការលំបាកក្នុងការបែងចែកប្រភេទរុក្ខជាតិដោយមើលផ្ទាល់ភ្នែក។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានេះដោយបង្កើតប្រព័ន្ធស្វ័យប...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="IJSSST">
+    
+    <meta property="article:tag" content="Leaf classification">
+    
+    <meta property="article:tag" content="Feature extraction">
+    
+    <meta property="article:tag" content="K-Nearest Neighbor">
+    
+    <meta property="article:tag" content="Image processing">
+    
+    <meta property="article:tag" content="Morphological features">
+    
+    <meta property="article:tag" content="Pattern recognition">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើចំណាត់ថ្នាក់ដោយប្រើការទាញយកលក្ខណៈពិសេសនៃស្លឹកឈើផ្អែកលើក្បួនដោះស្រាយបណ្តាញសរសៃប្រសាទជាមួយ K-Nearest Neighbor និង Supervised Learning">
+    <meta name="twitter:description" content="ការកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិដោយផ្អែកលើស្លឹកមានសារៈសំខាន់ ប៉ុន្តែមនុស្សភាគច្រើនជួបការលំបាកក្នុងការបែងចែកប្រភេទរុក្ខជាតិដោយមើលផ្ទាល់ភ្នែក។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានេះដោយបង្កើតប្រព័ន្ធស្វ័យប...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u1793\u17c3\u179f\u17d2\u179b\u17b9\u1780\u1788\u17be\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u1787\u17b6\u1798\u17bd\u1799 K-Nearest Neighbor \u1793\u17b7\u1784 Supervised Learning",
+      "name": "Classification using Feature Extraction of Leaf Based on Neural Network Algorithm with K-Nearest Neighbor and Supervised Learning",
+      "description": "\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u1794\u17d2\u179a\u1797\u17c1\u1791\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179f\u17d2\u179b\u17b9\u1780\u1798\u17b6\u1793\u179f\u17b6\u179a\u17c8\u179f\u17c6\u1781\u17b6\u1793\u17cb \u1794\u17c9\u17bb\u1793\u17d2\u178f\u17c2\u1798\u1793\u17bb\u179f\u17d2\u179f\u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793\u1787\u17bd\u1794\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u17c2\u1784\u1785\u17c2\u1780\u1794\u17d2\u179a\u1797\u17c1\u1791\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u178a\u17c4\u1799\u1798\u17be\u179b\u1795\u17d2\u1791\u17b6\u179b\u17cb\u1797\u17d2\u1793\u17c2\u1780\u17d4 \u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u1799\u1794\u1784\u17d2\u1780\u17be\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u178a\u17be\u1798\u17d2\u1794\u17b8\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17d2\u179b\u17b9\u1780\u1788\u17be\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/leaf-classification-feature-extraction-knn.html",
+      "author": [{"@type": "Person", "name": "Fauziah Nasir Fauziah (Faculty of Information and Communication Technology, Universitas Nasional, Indonesia)"},{"@type": "Person", "name": "Faris Helmi"}],
+      "datePublished": "IJSSST",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Classification using Feature Extraction of Leaf Based on Neural Network Algorithm with K-Nearest Neighbor and Supervised Learning",
+        "url": "https://doi.org/10.5013/IJSSST.a.20.06.14"
+      },
+      "keywords": ["Leaf classification", "Feature extraction", "K-Nearest Neighbor", "Image processing", "Morphological features", "Pattern recognition"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u1793\u17c3\u179f\u17d2\u179b\u17b9\u1780\u1788\u17be\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u1787\u17b6\u1798\u17bd\u1799 K-Nearest Neighbor \u1793\u17b7\u1784 Supervised Learning",
+          "item": "https://khmerresearch.com/papers/technology/leaf-classification-feature-extraction-knn.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើចំណាត់ថ្នាក់ដោយប្រើការទាញយកលក្ខណៈពិសេសនៃស្លឹកឈើផ្អ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Classification using Feature Extraction of Leaf Based on Neural Network Algorithm with K-Nearest Neighbor and Supervised Learning<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.5013/IJSSST.a.20.06.14" target="_blank">doi.org/10.5013/IJSSST.a.20.06.14</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើចំណាត់ថ្នាក់ដោយប្រើការទាញយកលក្ខណៈពិសេសនៃស្លឹកឈើផ្អែកលើក្បួនដោះស្រាយបណ្តាញសរសៃប្រសាទជាមួយ K-Nearest Neighbor និង Supervised Learning</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Classification using Feature Extraction of Leaf Based on Neural Network Algorithm with K-Nearest Neighbor and Supervised Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Fauziah Nasir Fauziah (Faculty of Information and Communication Technology, Universitas Nasional, Indonesia), Faris Helmi</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> IJSSST</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិដោយផ្អែកលើស្លឹកមានសារៈសំខាន់ ប៉ុន្តែមនុស្សភាគច្រើនជួបការលំបាកក្នុងការបែងចែកប្រភេទរុក្ខជាតិដោយមើលផ្ទាល់ភ្នែក។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានេះដោយបង្កើតប្រព័ន្ធស្វ័យប្រវត្តិដើម្បីធ្វើចំណាត់ថ្នាក់ស្លឹកឈើដោយប្រើបច្ចេកវិទ្យាកុំព្យូទ័រ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់ដំណើរការរូបភាព (Image Processing) និងក្បួនដោះស្រាយចំណាត់ថ្នាក់ K-Nearest Neighbor (K-NN) ដើម្បីកំណត់អត្តសញ្ញាណរុក្ខជាតិ។
+        
+        <ul>
+            
+            <li>ការកែច្នៃរូបភាពបឋម (Image Preprocessing) ដោយបំប្លែងរូបភាពពីពណ៌ RGB ទៅជាពណ៌ប្រផេះ (Grayscale) រួចបំប្លែងទៅជាទម្រង់គោលពីរ (Binary) សម្រាប់ការផ្ដាច់ផ្នែក (Segmentation)។</li>
+            
+            <li>ការទាញយកលក្ខណៈពិសេស (Feature Extraction) ពីរូបភាពស្លឹកឈើ ដោយផ្តោតលើទំហំ (Area) បរិមាត្រ (Perimeter) ភាពវៀច (Eccentricity) និងម៉ែត្រ (Metric)។</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយ K-Nearest Neighbor (K-NN Algorithm) ដែលជាប្រភេទនៃការរៀនមានការត្រួតពិនិត្យ (Supervised Learning) ដើម្បីប្រៀបធៀប និងធ្វើចំណាត់ថ្នាក់ទិន្នន័យ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>លទ្ធផលនៃការធ្វើតេស្តបានបង្ហាញពីភាពត្រឹមត្រូវខ្ពស់រហូតដល់ ៩៧.៧២% (97.72% Accuracy) ក្នុងការបែងចែកប្រភេទស្លឹកឈើ។</li>
+            
+            <li>ការប្រើប្រាស់លក្ខណៈរូបសាស្ត្រនៃស្លឹកឈើ (Morphological features) ដូចជា ទំហំ បរិមាត្រ និងភាពវៀច គឺមានប្រសិទ្ធភាពក្នុងការធ្វើជាប៉ារ៉ាម៉ែត្រសម្គាល់។</li>
+            
+            <li>ប្រព័ន្ធចំណុចប្រទាក់អ្នកប្រើប្រាស់ (User Interface) ត្រូវបានបង្កើតឡើងដោយជោគជ័យ ដើម្បីសម្រួលដល់ការបញ្ចូលរូបភាព ទាញយកលក្ខណៈពិសេស និងបង្ហាញលទ្ធផលចំណាត់ថ្នាក់យ៉ាងច្បាស់លាស់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbor (K-NN) with Morphological Features</span></strong><br>ក្បួនដោះស្រាយ K-NN ដោយប្រើប្រាស់លក្ខណៈរូបសាស្ត្រ</td>
+                <td>មានភាពងាយស្រួលក្នុងការអនុវត្ត និងផ្តល់ភាពត្រឹមត្រូវខ្ពស់នៅពេលប្រើប្រាស់ជាមួយទិន្នន័យលក្ខណៈពិសេស (Features) ដែលបានទាញយកយ៉ាងច្បាស់លាស់។</td>
+                <td>ទាមទារការប្រើប្រាស់អង្គចងចាំ (Memory) ច្រើននៅពេលទិន្នន័យមានទំហំធំ និងដំណើរការយឺតក្នុងដំណាក់កាលធ្វើតេស្ត ប្រសិនបើទិន្នន័យយោងមានច្រើនពេក។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវរហូតដល់ ៩៧.៧២% (97.72% Accuracy) ក្នុងការធ្វើចំណាត់ថ្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SURF / FAST-SURF Feature Extraction</span></strong><br>ការទាញយកលក្ខណៈពិសេសដោយប្រើ SURF/FAST-SURF (យោងតាមឯកសារស្រាវជ្រាវមុនៗ)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការចាប់យកចំណុចសំខាន់ៗនៃរូបភាព ទោះបីជារូបភាពមានការផ្លាស់ប្តូរទំហំ ឬបង្វិលក៏ដោយ។</td>
+                <td>ដំណើរការគណនាមានភាពស្មុគស្មាញ និងទាមទារធនធានកុំព្យូទ័រខ្ពស់ជាងការវាស់ទំហំស្លឹកធម្មតា។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៥% សម្រាប់ម៉ូដែល SURF និង ៩១.២៥% សម្រាប់ FAST-SURF។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Probabilistic Neural Network (PNN) / Artificial Neural Network (ANN)</span></strong><br>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (យោងតាមឯកសារស្រាវជ្រាវមុនៗ)</td>
+                <td>មានសមត្ថភាពក្នុងការរៀនពីលំនាំស្មុគស្មាញ (Complex patterns) ដូចជាសរសៃស្លឹក និងវាយនភាព (Texture) បានយ៉ាងល្អឥតខ្ចោះ។</td>
+                <td>ត្រូវការទិន្នន័យហ្វឹកហាត់ (Training data) ច្រើនសន្ធឹកសន្ធាប់ និងចំណាយពេលយូរក្នុងការបង្វឹកម៉ូដែល (Training time)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវចន្លោះពី ៩០% ទៅ ៩៦.៥៣% អាស្រ័យលើប្រភេទនៃបណ្តាញនិងទិន្នន័យ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធនេះមិនតម្រូវឱ្យមានធនធានផ្នែករឹងកុំព្យូទ័រធំដុំនោះទេ ប៉ុន្តែទាមទារឱ្យមានសំណុំទិន្នន័យរូបភាពច្បាស់លាស់ និងកម្មវិធីសម្រាប់កែច្នៃរូបភាព។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រផ្ទាល់ខ្លួន (PC) ធម្មតាដែលមានសមត្ថភាពដំណើរការកម្មវិធីមូលដ្ឋាន និងម៉ាស៊ីនថតកាមេរ៉ា ឬទូរស័ព្ទដៃសម្រាប់ថតរូបភាពស្លឹកឈើ។</li>
+        
+        <li><strong>Software:</strong> បរិស្ថានសម្រាប់សរសេរកម្មវិធីកែច្នៃរូបភាព និងចំណុចប្រទាក់អ្នកប្រើប្រាស់ (User Interface) ដូចជា MATLAB ឬ Python។</li>
+        
+        <li><strong>Dataset:</strong> បណ្តុំរូបភាពស្លឹកឈើ (Leaf Image Dataset) ដែលបានរក្សាទុកក្នុងទម្រង់ JPEG រួមបញ្ចូលទាំងទិន្នន័យសម្រាប់ហ្វឹកហាត់ (Training) និងទិន្នន័យសម្រាប់ធ្វើតេស្ត (Testing)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកកែច្នៃរូបភាពឌីជីថល (Digital Image Processing) ការទាញយកលក្ខណៈពិសេស (Feature Extraction) និងក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន (Machine Learning)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយអ្នកស្រាវជ្រាវនៅប្រទេសឥណ្ឌូនេស៊ី ដោយប្រើប្រាស់សំណុំទិន្នន័យស្លឹកឈើប្រភេទជាក់លាក់មួយចំនួន (ដូចជា Aesculus californica ជាដើម)។ សម្រាប់ប្រទេសកម្ពុជា ទិន្នន័យទាំងនេះមិនអាចយកមកអនុវត្តផ្ទាល់បានទេ ព្រោះរុក្ខជាតិក្នុងស្រុកមានលក្ខណៈរូបសាស្ត្រ និងពូជខុសៗគ្នា ដែលទាមទារឱ្យមានការប្រមូលទិន្នន័យស្លឹកឈើនៅកម្ពុជាផ្ទាល់ដើម្បីបង្វឹកម៉ូដែលឡើងវិញ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកសាស្ត្រនេះមានសក្តានុពលខ្ពស់ និងអាចយកមកកែច្នៃអនុវត្តនៅប្រទេសកម្ពុជាបាន ជាពិសេសក្នុងការគ្រប់គ្រងធនធានធម្មជាតិ និងកសិកម្ម។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្ម (ខេត្តបាត់ដំបង និងកំពង់ចាម):</strong> អាចប្រើដើម្បីជួយកសិករ ឬមន្ត្រីកសិកម្មក្នុងការកំណត់អត្តសញ្ញាណប្រភេទស្មៅចង្រៃ ឬសញ្ញានៃជំងឺលើស្លឹកដំណាំបានយ៉ាងឆាប់រហ័ស។</li>
+            
+            <li><strong>ការអភិរក្សព្រៃឈើ (ជួរភ្នំក្រវាញ និងតំបន់កែវសីមា):</strong> ជួយដល់មន្ត្រីបរិស្ថាន (Ministry of Environment) ក្នុងការកត់ត្រា សម្គាល់ និងតាមដានប្រភេទរុក្ខជាតិកម្រនៅក្នុងតំបន់ការពារនានា។</li>
+            
+            <li><strong>ការសិក្សាពីឱសថបុរាណ (Traditional Medicine):</strong> គាំទ្រដល់និស្សិតពេទ្យ និងអ្នកស្រាវជ្រាវក្នុងការបង្កើតប្រព័ន្ធទិន្នន័យឌីជីថល ដើម្បីសម្គាល់ប្រភេទរុក្ខជាតិដែលអាចប្រើជាឱសថបុរាណក្នុងស្រុកឱ្យបានត្រឹមត្រូវ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអភិវឌ្ឍប្រព័ន្ធនេះជាទម្រង់កម្មវិធីទូរស័ព្ទដៃ (Mobile App) ដោយបង្វឹកវាជាមួយរុក្ខជាតិក្នុងស្រុក នឹងជួយសម្រួលដល់ប្រជាជនកម្ពុជា និងអ្នកស្រាវជ្រាវក្នុងការស្វែងយល់ពីរុក្ខជាតិជុំវិញខ្លួនបានយ៉ាងងាយស្រួល។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាមូលដ្ឋានគ្រឹះនៃការកែច្នៃរូបភាព:</strong> ចាប់ផ្តើមរៀនពីរបៀបនាំចូលរូបភាព និងបំប្លែងរូបភាពទៅជាពណ៌ប្រផេះ (Grayscale) និងទម្រង់គោលពីរ (Binary) សម្រាប់ការផ្ដាច់ផ្នែករូបភាព (Segmentation) ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">OpenCV</span> នៅក្នុង <span class="en">Python</span>។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តការទាញយកលក្ខណៈពិសេស (Feature Extraction):</strong> សរសេរកូដដើម្បីគណនានិងទាញយកទំហំ (Area) បរិមាត្រ (Perimeter) និងភាពវៀច (Eccentricity) ពីរូបភាពស្លឹកដែលបានកាត់ផ្ទៃខាងក្រោយរួច ដោយប្រើប្រាស់កញ្ចប់កម្មវិធី <span class="en">scikit-image</span>។</li>
+            
+            <li><strong>ជំហានទី៣៖ អនុវត្តក្បួនដោះស្រាយ K-NN:</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">scikit-learn</span> ដើម្បីបង្កើតម៉ូដែល K-Nearest Neighbor (K-NN Classifier) រួចធ្វើការបង្វឹក (Train) និងសាកល្បង (Test) ម៉ូដែលជាមួយទិន្នន័យតារាងលក្ខណៈពិសេសដែលបានទាញយក។</li>
+            
+            <li><strong>ជំហានទី៤៖ ប្រមូលទិន្នន័យរុក្ខជាតិក្នុងស្រុកកម្ពុជា:</strong> រៀបចំយុទ្ធនាការប្រមូលទិន្នន័យដោយចុះថតរូបស្លឹកឈើពិតៗ (ឧទាហរណ៍៖ រុក្ខជាតិនៅឧទ្យានជាតិគិរីរម្យ ឬសួនរុក្ខជាតិ) ហើយធ្វើចំណាត់ថ្នាក់ និងរក្សាទុកក្នុងថតឯកសារ (Folder) ដាច់ដោយឡែកពីគ្នាដើម្បីធ្វើជា <span class="en">Dataset</span>។</li>
+            
+            <li><strong>ជំហានទី៥៖ បង្កើតចំណុចប្រទាក់អ្នកប្រើប្រាស់ (User Interface):</strong> អភិវឌ្ឍកម្មវិធីដែលមានភាពងាយស្រួលប្រើប្រាស់ដោយប្រើ <span class="en">Streamlit</span> ឬ <span class="en">PyQt</span> ដែលអនុញ្ញាតឱ្យអ្នកប្រើប្រាស់បញ្ចូលរូបភាពស្លឹកឈើ និងបង្ហាញលទ្ធផលនៃឈ្មោះរុក្ខជាតិដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Extraction</span></td>
+                <td>គឺជាដំណើរការទាញយកលក្ខណៈសម្គាល់ពិសេសៗ (ដូចជាពណ៌ រាង ទំហំ ឬវាយនភាព) ពីរូបភាពដើម ដើម្បីកាត់បន្ថយទំហំទិន្នន័យ តែនៅរក្សាទុកព័ត៌មានសំខាន់ៗសម្រាប់ឱ្យកុំព្យូទ័រងាយស្រួលវិភាគ និងចំណាត់ថ្នាក់ដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាពេលយើងប្រាប់ប៉ូលីសពីភិនភាគចោរ ដោយរៀបរាប់តែចំណុចសំខាន់ៗ (កម្ពស់ សម្បុរ ស្លាកស្នាម) ជំនួសឱ្យការពណ៌នាគ្រប់រោមសរសៃទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (K-NN)</span></td>
+                <td>គឺជាក្បួនដោះស្រាយសម្រាប់ធ្វើចំណាត់ថ្នាក់ទិន្នន័យថ្មី ដោយផ្អែកលើការស្វែងរកទិន្នន័យចាស់ចំនួន K (ឧទាហរណ៍ ៥ ឬ ១០) ដែលមានលក្ខណៈស្រដៀងវាជាងគេ (នៅជិតបំផុត) ហើយចាត់ទុកថាវាស្ថិតក្នុងក្រុមដែលមានសមាជិកភាគច្រើនក្នុងចំណោមអ្នកជិតខាងទាំងនោះ។</td>
+                <td>ដូចជាសុភាសិត "សេពគប់ពាល គឺពាល សេពគប់បណ្ឌិត គឺបណ្ឌិត" បើយើងចង់ដឹងថាមនុស្សម្នាក់ជាអ្នកណា យើងគ្រាន់តែមើលមិត្តភក្តិជិតស្និទ្ធបំផុតរបស់គាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Supervised Learning</span></td>
+                <td>ជាវិធីសាស្ត្របង្រៀនកុំព្យូទ័រ (Machine Learning) ដែលតម្រូវឱ្យមនុស្សផ្តល់ទិន្នន័យគំរូដែលមានចម្លើយ ឬឈ្មោះត្រឹមត្រូវរួចជាស្រេច (Labeled data) ដើម្បីឱ្យកុំព្យូទ័ររៀនស្គាល់លំនាំ ហើយអាចទាយចម្លើយសម្រាប់ទិន្នន័យថ្មីៗនៅពេលក្រោយ។</td>
+                <td>ដូចជាគ្រូបង្រៀនសិស្សដោយបង្ហាញរូបភាពសត្វឆ្កែ ហើយប្រាប់ផ្ទាល់មាត់ថា "នេះគឺជាសត្វឆ្កែ" រហូតដល់សិស្សចាំ និងអាចស្គាល់ឆ្កែផ្សេងទៀតដោយខ្លួនឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Eccentricity</span></td>
+                <td>គឺជារង្វាស់គណិតវិទ្យាដែលប្រើក្នុងដំណើរការកែច្នៃរូបភាព ដើម្បីវាស់ថាតើរូបរាងមួយមានសណ្ឋានទ្រវែងប៉ុណ្ណា។ តម្លៃរបស់វាស្ថិតនៅចន្លោះពី ០ (រាងមូលកង់) ដល់ ១ (រាងជាបន្ទាត់ត្រង់) ដែលជាប៉ារ៉ាម៉ែត្រជួយកុំព្យូទ័របែងចែករាងស្លឹកឈើ។</td>
+                <td>ដូចជាការវាស់ភាពវៀចរបស់កង់ឡាន បើកង់មូលល្អគឺលេខ ០ តែបើកង់នោះវៀចទ្រវែងដូចស៊ុតគឺលេខកៀកនឹង ១។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Segmentation</span></td>
+                <td>គឺជាការកាត់ផ្តាច់រូបភាពជាផ្នែកៗ ដើម្បីបំបែកវត្ថុគោលដៅ (ឧទាហរណ៍៖ ស្លឹកឈើ) ចេញពីផ្ទៃខាងក្រោយ (Background) ដែលធ្វើឱ្យកុំព្យូទ័រអាចផ្តោតការទាញយកទិន្នន័យតែលើវត្ថុដែលយើងចង់បានប៉ុណ្ណោះ ដោយមិនមានការរំខានពីរូបភាពជុំវិញ។</td>
+                <td>ដូចជាការប្រើកន្ត្រៃកាត់រូបភាពមនុស្សចេញពីទស្សនាវដ្តី ដើម្បីយកទៅបិទលើក្រដាសស ទើបងាយស្រួលមើល និងមិនរញ៉េរញ៉ៃជាមួយរូបភាពផ្សេងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Artificial Neural Network (NN)</span></td>
+                <td>គឺជាប្រព័ន្ធកុំព្យូទ័រដែលត្រូវបានសរសេរកូដឡើងដោយយកគំរូតាមបណ្តាញកោសិកាសរសៃប្រសាទក្នុងខួរក្បាលមនុស្ស វាមានសមត្ថភាពខ្ពស់ក្នុងការរៀនសូត្រពីកំហុស កត់សម្គាល់លំនាំ និងធ្វើការសម្រេចចិត្តលើទិន្នន័យរូបភាពស្មុគស្មាញ។</td>
+                <td>ដូចជាការសាងសង់ខួរក្បាលសិប្បនិម្មិតតូចមួយឱ្យកុំព្យូទ័រ ដើម្បីឱ្យវាអាចគិត សង្កេត និងរៀនសូត្រចំណាំអ្វីៗបានដូចជាកូនក្មេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Morphology</span></td>
+                <td>នៅក្នុងបរិបទនៃការសិក្សានេះ វាសំដៅទៅលើការសិក្សាអំពីរូបរាង និងរចនាសម្ព័ន្ធខាងក្រៅរបស់ស្លឹកឈើ (ដូចជា ទ្រង់ទ្រាយ គែមសន្លឹក ទំហំ និងទម្រង់សរសៃស្លឹក) ដើម្បីយកមកធ្វើជាទិន្នន័យគោលសម្រាប់កំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិ។</td>
+                <td>ដូចជាការរៀនសម្គាល់មុខមាត់ កម្ពស់ និងទម្រង់មុខរបស់មនុស្សម្នាក់ៗ ដើម្បីងាយស្រួលចំណាំថានរណាជានរណា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Plant+species+recognition+using+deep+learning" target="_blank" rel="noopener"><span class="en">Plant species recognition using deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Shape-based+feature+extraction+techniques+in+computer+vision" target="_blank" rel="noopener"><span class="en">Shape-based feature extraction techniques in computer vision</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Artificial+Neural+Networks+for+botanical+image+classification" target="_blank" rel="noopener"><span class="en">Artificial Neural Networks for botanical image classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Automated+plant+identification+systems+in+agriculture" target="_blank" rel="noopener"><span class="en">Automated plant identification systems in agriculture</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

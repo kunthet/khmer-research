@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើម៉ូដែលថាមវន្តនៃការយល់ដឹងនិងអារម្មណ៍ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយពីតម្រូវការក្នុងការស្វែងយល់ពីថាមវន្តនៃស្ថានភាពនៃការយល់ដឹងនិងអារម្មណ៍ (Cognitive-Affective States ដូចជាការភាន់ច្រឡំ ការខកចិត្ត និងភាពធុញទ្រាន់...">
+    
+    <meta name="keywords" content="Cognitive-affective dynamics, Hidden Markov Models, Cognitive disequilibrium, Intelligent Tutoring Systems, Affect dynamics, AutoTutor, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/modeling-cognitive-affective-dynamics-hmm-2010.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/modeling-cognitive-affective-dynamics-hmm-2010.html">
+    <meta property="og:title" content="ការធ្វើម៉ូដែលថាមវន្តនៃការយល់ដឹងនិងអារម្មណ៍ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយពីតម្រូវការក្នុងការស្វែងយល់ពីថាមវន្តនៃស្ថានភាពនៃការយល់ដឹងនិងអារម្មណ៍ (Cognitive-Affective States ដូចជាការភាន់ច្រឡំ ការខកចិត្ត និងភាពធុញទ្រាន់) ក្នុងអំឡុងពេលនៃការសិក្សាស៊ីជម្រៅ ដោយផ្...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2010, Proceedings of the Annual Meeting of the Cognitive Science Society">
+    
+    <meta property="article:tag" content="Cognitive-affective dynamics">
+    
+    <meta property="article:tag" content="Hidden Markov Models">
+    
+    <meta property="article:tag" content="Cognitive disequilibrium">
+    
+    <meta property="article:tag" content="Intelligent Tutoring Systems">
+    
+    <meta property="article:tag" content="Affect dynamics">
+    
+    <meta property="article:tag" content="AutoTutor">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើម៉ូដែលថាមវន្តនៃការយល់ដឹងនិងអារម្មណ៍ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយពីតម្រូវការក្នុងការស្វែងយល់ពីថាមវន្តនៃស្ថានភាពនៃការយល់ដឹងនិងអារម្មណ៍ (Cognitive-Affective States ដូចជាការភាន់ច្រឡំ ការខកចិត្ត និងភាពធុញទ្រាន់) ក្នុងអំឡុងពេលនៃការសិក្សាស៊ីជម្រៅ ដោយផ្...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1790\u17b6\u1798\u179c\u1793\u17d2\u178f\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u1793\u17b7\u1784\u17a2\u17b6\u179a\u1798\u17d2\u1798\u178e\u17cd \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+      "name": "Modeling Cognitive-Affective Dynamics with Hidden Markov Models",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1796\u17b8\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u1799\u179b\u17cb\u1796\u17b8\u1790\u17b6\u1798\u179c\u1793\u17d2\u178f\u1793\u17c3\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u1793\u17b7\u1784\u17a2\u17b6\u179a\u1798\u17d2\u1798\u178e\u17cd (Cognitive-Affective States \u178a\u17bc\u1785\u1787\u17b6\u1780\u17b6\u179a\u1797\u17b6\u1793\u17cb\u1785\u17d2\u179a\u17a1\u17c6 \u1780\u17b6\u179a\u1781\u1780\u1785\u17b7\u178f\u17d2\u178f \u1793\u17b7\u1784\u1797\u17b6\u1796\u1792\u17bb\u1789\u1791\u17d2\u179a\u17b6\u1793\u17cb) \u1780\u17d2\u1793\u17bb\u1784\u17a2\u17c6\u17a1\u17bb\u1784\u1796\u17c1\u179b\u1793\u17c3\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u179a\u1794\u17c0\u1794\u178a\u17c2\u179b\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796\u1791\u17b6\u17c6\u1784\u1793\u17c1\u17c7\u179c\u17b7\u179c\u178f\u17d2\u178f \u1793\u17b7\u1784\u17a2\u1793\u17d2\u178f\u179a\u1780\u1798\u17d2\u1798\u1787\u17b6\u1798\u17bd\u1799\u1782\u17d2\u1793\u17b6\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1791\u17d2\u179a\u17b9\u179f\u17d2\u178f\u17b8\u179c\u17b7\u179f\u1798\u178f\u17b6\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784 (Cognitive Disequilibrium Theory)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/modeling-cognitive-affective-dynamics-hmm-2010.html",
+      "author": [{"@type": "Person", "name": "Sidney K. D\u2019Mello (Institute for Intelligent Systems, University of Memphis)"},{"@type": "Person", "name": "Art Graesser (Department of Psychology, University of Memphis)"}],
+      "datePublished": "2010, Proceedings of the Annual Meeting of the Cognitive Science Society",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Modeling Cognitive-Affective Dynamics with Hidden Markov Models",
+        "url": "https://escholarship.org/uc/item/06b952g5"
+      },
+      "keywords": ["Cognitive-affective dynamics", "Hidden Markov Models", "Cognitive disequilibrium", "Intelligent Tutoring Systems", "Affect dynamics", "AutoTutor"],
+      "about": "Cognitive Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1790\u17b6\u1798\u179c\u1793\u17d2\u178f\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u1793\u17b7\u1784\u17a2\u17b6\u179a\u1798\u17d2\u1798\u178e\u17cd \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+          "item": "https://khmerresearch.com/papers/science/modeling-cognitive-affective-dynamics-hmm-2010.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ការធ្វើម៉ូដែលថាមវន្តនៃការយល់ដឹងនិងអារម្មណ៍ ដោយប្រើប្រាស់ម...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Modeling Cognitive-Affective Dynamics with Hidden Markov Models<br>
+        
+        <strong>Source:</strong> <a href="https://escholarship.org/uc/item/06b952g5" target="_blank">escholarship.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើម៉ូដែលថាមវន្តនៃការយល់ដឹងនិងអារម្មណ៍ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Modeling Cognitive-Affective Dynamics with Hidden Markov Models</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Sidney K. D’Mello (Institute for Intelligent Systems, University of Memphis), Art Graesser (Department of Psychology, University of Memphis)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2010, Proceedings of the Annual Meeting of the Cognitive Science Society</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Cognitive Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយពីតម្រូវការក្នុងការស្វែងយល់ពីថាមវន្តនៃស្ថានភាពនៃការយល់ដឹងនិងអារម្មណ៍ (Cognitive-Affective States ដូចជាការភាន់ច្រឡំ ការខកចិត្ត និងភាពធុញទ្រាន់) ក្នុងអំឡុងពេលនៃការសិក្សាស៊ីជម្រៅ ដោយផ្តោតលើរបៀបដែលស្ថានភាពទាំងនេះវិវត្ត និងអន្តរកម្មជាមួយគ្នាដោយផ្អែកលើទ្រឹស្តីវិសមតាការយល់ដឹង (Cognitive Disequilibrium Theory)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានធ្វើការសិក្សាចំនួនពីរដោយអនុញ្ញាតឱ្យសិស្សានុសិស្សប្រើប្រាស់ប្រព័ន្ធបង្រៀនឆ្លាតវៃ (Intelligent Tutoring System) និងប្រមូលទិន្នន័យអារម្មណ៍សិស្ស ដើម្បីបង្កើតម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Models - HMMs) សម្រាប់វិភាគទិន្នន័យតាមស៊េរីពេលវេលា។
+        
+        <ul>
+            
+            <li>ការធ្វើអន្តរកម្មជាមួយប្រព័ន្ធបង្រៀនឆ្លាតវៃ (AutoTutor Intelligent Tutoring System) ដើម្បីជំរុញការសិក្សាស៊ីជម្រៅ។</li>
+            
+            <li>ការវាយតម្លៃអារម្មណ៍ថយក្រោយ (Retrospective Affect Judgment Protocol) ដោយផ្អែកលើវីដេអូថតសកម្មភាពផ្ទៃមុខ និងអេក្រង់កុំព្យូទ័រតាមពេលវេលាជាក់លាក់។</li>
+            
+            <li>ការកសាងម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Models) សម្រាប់ទាញរកទំនាក់ទំនងរវាងស្ថានភាពសង្កេតឃើញ (Observed States) និងមូលហេតុលាក់កំបាំង (Hidden Causes)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>លទ្ធផលស្រាវជ្រាវបានគាំទ្រយ៉ាងរឹងមាំទៅលើការព្យាករណ៍នៃទ្រឹស្តីវិសមតាការយល់ដឹង ដោយបង្ហាញថាស្ថានភាពលំនឹង (Equilibrium) បង្កើតឱ្យមានការយកចិត្តទុកដាក់ខ្ពស់ (Flow) ហើយស្ថានភាពគ្មានលំនឹង (Disequilibrium) បង្កើតឱ្យមានការភាន់ច្រឡំ។</li>
+            
+            <li>ម៉ូដែលបានបញ្ជាក់ពីការផ្លាស់ប្តូរស្ថានភាព qua ត្រឡប់ចុះឡើងរវាងលំនឹង និងការគ្មានលំនឹង ដែលបង្ហាញថាសិស្សជួបប្រទះនូវវគ្គបន្តបន្ទាប់គ្នារវាងការភាន់ច្រឡំ និងការរកឃើញដំណោះស្រាយថ្មី (Insight) ក្នុងអំឡុងពេលសិក្សាប្រកបដោយប្រសិទ្ធភាព។</li>
+            
+            <li>សម្មតិកម្មស្តីពីការផ្លាស់ប្តូរពីស្ថានភាព 'ជាប់គាំង' (Stuck) ទៅជា 'លែងចូលរួម' (Disengaged) ត្រូវបានគាំទ្រតែមួយផ្នែកប៉ុណ្ណោះ ដោយសារទិន្នន័យបង្ហាញថាសិស្សអាចត្រឡប់ពីការជាប់គាំងទៅកាន់ស្ថានភាពគ្មានលំនឹង ឬលំនឹងវិញ ដែលបញ្ជាក់ពីអត្ថិភាពនៃភាពខកចិត្តប្រភេទផ្សេងៗគ្នា (Productive vs. Hopeless Frustration)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Theoretically-Seeded Hidden Markov Model (HMM)</span></strong><br>ម៉ូដែល Hidden Markov ដែលកំណត់ប៉ារ៉ាម៉ែត្រដំបូងផ្អែកលើទ្រឹស្តីវិសមតាការយល់ដឹង (Cognitive Disequilibrium Theory)</td>
+                <td>ងាយស្រួលបកស្រាយ និងផ្តល់អត្ថន័យស្របតាមទ្រឹស្តីផ្លូវចិត្ត។ ជួយឱ្យយល់ច្បាស់ពីទំនាក់ទំនងរវាងស្ថានភាពអារម្មណ៍លាក់កំបាំង និងអារម្មណ៍ដែលស្តែងចេញមកក្រៅ។</td>
+                <td>ទាមទារឱ្យមានចំណេះដឹងស៊ីជម្រៅលើទ្រឹស្តីដើម្បីកំណត់តម្លៃប្រូបាប៊ីលីតេដំបូង (Initial probabilities) បានត្រឹមត្រូវ។</td>
+                <td>ម៉ូដែលអាចចាប់យកថាមវន្តនៃការផ្លាស់ប្តូរស្ថានភាពអារម្មណ៍បានយ៉ាងល្អ ដោយឆ្លងកាត់ការធ្វើតេស្តសុពលភាពអានុភាព (LOOCV) ទទួលបានរង្វាស់ទំនាក់ទំនងសឹងតែឥតខ្ចោះ (r = .99)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Surrogate HMM (Baseline)</span></strong><br>ម៉ូដែលម៉ាកូវលាក់កំបាំងបណ្តុះបណ្តាលលើទិន្នន័យចៃដន្យ (ប្រើជាបន្ទាត់គោល)</td>
+                <td>ផ្តល់នូវវិធីសាស្ត្រដ៏ល្អមួយដើម្បីផ្ទៀងផ្ទាត់សុពលភាព (Face-validity test) សម្រាប់ទិន្នន័យតាមស៊េរីពេលវេលា ដោយធានាថាលទ្ធផលនៃម៉ូដែលគោលមិនមែនកើតឡើងដោយចៃដន្យ។</td>
+                <td>លុបបំបាត់ទំនាក់ទំនងតាមពេលវេលាទាំងអស់ (Temporal dependencies) ធ្វើឱ្យវាមិនអាចប្រើប្រាស់សម្រាប់ការទស្សន៍ទាយជាក់ស្តែងបានឡើយ។</td>
+                <td>មានតម្លៃ Log-likelihood (LL) ទាបជាងម៉ូដែលគោលយ៉ាងខ្លាំង (p < .05, d = 1.36 និង 1.33) ដែលបញ្ជាក់ថាម៉ូដែលគោលមានប្រសិទ្ធភាពខ្ពស់ពិតប្រាកដ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានបច្ចេកវិទ្យាសម្រាប់កត់ត្រាសកម្មភាព និងចំណេះដឹងផ្នែកវិភាគទិន្នន័យតាមស៊េរីពេលវេលាកម្រិតខ្ពស់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានអេក្រង់ពីរ (Dual-monitor system) កាមេរ៉ាថតវីដេអូផ្ទៃមុខ និងឧបករណ៍វាស់សម្ពាធរាងកាយ (Tekscan's Body Pressure Measurement System)។</li>
+        
+        <li><strong>Software:</strong> ប្រព័ន្ធបង្រៀនឆ្លាតវៃ (AutoTutor Intelligent Tutoring System) ដែលអាចទទួលសំឡេង និងវាយអត្ថបទ និងកូដដំណើរការក្បួនដោះស្រាយ Baum-Welch algorithm សម្រាប់បណ្តុះបណ្តាល HMMs។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យវាយតម្លៃអារម្មណ៍ថយក្រោយ (Retrospective affect judgments) ប្រមាណ ៦០៦៦ កំណត់ត្រា ពីនិស្សិតសរុប ៥៨ នាក់ (ពីការសិក្សាទាំង២)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកចិត្តសាស្ត្រនៃការយល់ដឹង (Cognitive Psychology) និងជំនាញរៀបចំទិន្នន័យតាមស៊េរីពេលវេលា (Time Series Data Processing)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការស្រាវជ្រាវនេះត្រូវបានធ្វើឡើងលើនិស្សិតបរិញ្ញាបត្រនៅសាកលវិទ្យាល័យមួយក្នុងសហរដ្ឋអាមេរិក ដោយអ្នកចូលរួមភាគច្រើនជានិស្សិតនារី និងផ្តោតលើមុខវិជ្ជាអក្ខរកម្មកុំព្យូទ័រ (Computer literacy)។ នេះបញ្ជាក់ថាទិន្នន័យអាចមានគម្លាតវប្បធម៌ និងមិនអាចឆ្លុះបញ្ចាំងពេញលេញពីសិស្សានុសិស្សនៅប្រទេសកម្ពុជា ដែលមានបរិបទអប់រំ របៀបរៀនសូត្រ និងការបញ្ចេញអារម្មណ៍ខុសគ្នានោះទេ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ថ្វីបើមានគម្លាតវប្បធម៌ក៏ដោយ វិធីសាស្ត្រនៃការប្រើប្រាស់ម៉ូដែល HMM នេះមានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធអប់រំឌីជីថលនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធអប់រំឌីជីថលរបស់ក្រសួងអប់រំ (MoEYS E-learning Platforms):</strong> អាចបញ្ចូលប្រព័ន្ធតាមដានសកម្មភាពសិស្ស ដើម្បីវិភាគថាពេលណាសិស្សកំពុងជាប់គាំង (Stuck) ឬធុញទ្រាន់ (Boredom) រួចផ្តល់ការពន្យល់បន្ថែមដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>វិស័យអប់រំវិទ្យាសាស្ត្រ និងបច្ចេកវិទ្យា (STEM Education in Cambodia):</strong> អាចប្រើប្រាស់ម៉ូដែលនេះដើម្បីតាមដានថាមវន្តផ្លូវចិត្តរបស់និស្សិតវិស្វកម្ម ឬព័ត៌មានវិទ្យានៅពេលដោះស្រាយលំហាត់សរសេរកូដ ដើម្បីជួយគ្រូដឹងពីចំណុចខ្សោយនិងជួយអន្តរាគមន៍ទាន់ពេល។</li>
+            
+        </ul>
+        
+        
+        <p>ការទាញយកប្រយោជន៍ពីវិធីសាស្ត្រនេះ នឹងជួយឱ្យអ្នកអភិវឌ្ឍន៍កម្មវិធីអប់រំនៅកម្ពុជាអាចបង្កើតប្រព័ន្ធរៀនសូត្រឆ្លាតវៃដែលអាច 'យល់ចិត្ត' និងសម្របខ្លួនទៅនឹងស្ថានភាពផ្លូវចិត្តរបស់សិស្សបានកាន់តែប្រសើរ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីទ្រឹស្តីវិសមតាការយល់ដឹង (Cognitive Disequilibrium Theory):</strong> និស្សិតគួរអាននិងស្វែងយល់ពីទំនាក់ទំនងរវាងការយល់ដឹងនិងអារម្មណ៍ ដូចជាការផ្លាស់ប្តូរពីការភាន់ច្រឡំទៅការរកឃើញដំណោះស្រាយថ្មី (Insight) ដោយស្វែងរកឯកសារពី <span class="en">Google Scholar</span> ទាក់ទងនឹងប្រធានបទ <span class="en">Affect Dynamics in Learning</span>។</li>
+            
+            <li><strong>រៀនពីម៉ូដែលម៉ាកូវលាក់កំបាំង (HMMs):</strong> ចាប់ផ្តើមរៀនពីមូលដ្ឋានគ្រឹះនៃ HMM រួមមាន Emission Matrix និង Transition Matrix ព្រមទាំងការប្រើប្រាស់ក្បួនដោះស្រាយ <span class="en">Baum-Welch algorithm</span> សម្រាប់ការប៉ាន់ស្មានប៉ារ៉ាម៉ែត្រ ដោយអនុវត្តផ្ទាល់ជាមួយបណ្ណាល័យ <span class="en">hmmlearn</span> នៅក្នុងភាសា <span class="en">Python</span>។</li>
+            
+            <li><strong>រៀបចំការប្រមូលទិន្នន័យសាកល្បងខ្នាតតូច (Pilot Data Collection):</strong> រៀបចំការពិសោធន៍តូចមួយដោយឱ្យសិស្សកម្ពុជាដោះស្រាយលំហាត់នៅលើកុំព្យូទ័រ ដោយប្រើប្រាស់កម្មវិធី <span class="en">OBS Studio</span> ដើម្បីថតវីដេអូផ្ទៃមុខនិងអេក្រង់។ បន្ទាប់មក ប្រើប្រាស់វិធីសាស្ត្រ Retrospective affect judgment protocol ដើម្បីឱ្យសិស្សរាយការណ៍ពីអារម្មណ៍របស់ពួកគេតាមចន្លោះពេលនីមួយៗ។</li>
+            
+            <li><strong>ការបណ្តុះបណ្តាល និងធ្វើតេស្តម៉ូដែល (Model Training and Validation):</strong> ប្រើប្រាស់ទិន្នន័យស៊េរីពេលវេលាដែលប្រមូលបាន ដើម្បីសាងសង់ HMM។ អនុវត្តវិធីសាស្ត្រវាយតម្លៃ <span class="en">Leave-One-Out Cross-Validation (LOOCV)</span> ដូចដែលមានក្នុងឯកសារ ដើម្បីវាស់ស្ទង់ភាពត្រឹមត្រូវ និងទប់ស្កាត់បញ្ហា Overfitting។</li>
+            
+            <li><strong>ការធ្វើសមាហរណកម្មជាមួយប្រព័ន្ធគ្រប់គ្រងការសិក្សា (LMS Integration):</strong> ធ្វើការសាកល្បងបញ្ចូលម៉ូដែលនេះទៅក្នុងប្រព័ន្ធសិក្សាដូចជា <span class="en">Moodle</span> ឬកម្មវិធី Web Application ដើម្បីផ្តល់មតិកែលម្អ (Feedback) ឬប្តូរកម្រិតលំបាកនៃមេរៀនដោយស្វ័យប្រវត្តិ នៅពេលប្រព័ន្ធព្យាករណ៍ថាសិស្សកំពុងចូលក្នុងស្ថានភាពធុញទ្រាន់ឬបាត់បង់ការយកចិត្តទុកដាក់ (Disengaged)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Models (HMMs)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិនិងគណិតវិទ្យាមួយប្រភេទដែលប្រើសម្រាប់ទស្សន៍ទាយឬវិភាគប្រព័ន្ធមួយដែលមានដំណើរការឆ្លាស់គ្នាទៅវិញទៅមកនៃស្ថានភាពដែលយើងមិនអាចមើលឃើញផ្ទាល់ (Hidden States) ប៉ុន្តែវាបញ្ចេញនូវរោគសញ្ញាឬលទ្ធផលដែលយើងអាចសង្កេតឃើញ (Observable States)។ នៅក្នុងការស្រាវជ្រាវនេះ វាប្រើដើម្បីទាយពីស្ថានភាពចិត្តគំនិតខាងក្នុងរបស់សិស្សតាមរយៈការបង្ហាញទឹកមុខខាងក្រៅ។</td>
+                <td>ដូចជាការទាយថាអាកាសធាតុថ្ងៃនេះមានពពកឬអត់ (ស្ថានភាពដែលមើលមិនឃើញពីក្នុងបន្ទប់) ដោយគ្រាន់តែសង្កេតមើលថាតើមនុស្សនៅខាងក្រៅកំពុងកាន់ឆ័ត្រឬអត់ (រោគសញ្ញាដែលអាចមើលឃើញ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cognitive disequilibrium</span></td>
+                <td>ជាស្ថានភាពអតុល្យភាពនៃការយល់ដឹង ដែលកើតឡើងនៅពេលសិស្សជួបប្រទះនឹងឧបសគ្គ ភាពផ្ទុយគ្នា ឬរឿងដែលមិននឹកស្មានដល់ក្នុងពេលរៀន ដែលជំរុញឱ្យពួកគេមានភាពភាន់ច្រឡំ ប៉ុន្តែវាជាការភាន់ច្រឡំក្នុងន័យស្ថាបនាដែលតម្រូវឱ្យសិស្សប្រឹងប្រែងដោះស្រាយបញ្ហាដើម្បីស្វែងយល់បន្ថែមនិងទទួលបានចំណេះដឹងថ្មី។</td>
+                <td>ដូចជាពេលយើងកំពុងដើរតាមផ្លូវដែលធ្លាប់ស្គាល់ ស្រាប់តែឃើញផ្លូវនោះត្រូវគេបិទ ដែលធ្វើឱ្យយើងងឿងឆ្ងល់ និងត្រូវឈប់គិតរកផ្លូវថ្មីដើម្បីទៅដល់គោលដៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Emission probability matrix</span></td>
+                <td>ជាម៉ាទ្រីសគណិតវិទ្យានៅក្នុងម៉ូដែល HMM ដែលកំណត់ពីអត្រាប្រូបាប៊ីលីតេ (ឱកាស) ដែលស្ថានភាពលាក់កំបាំងមួយ (ឧទាហរណ៍៖ ការជាប់គាំងក្នុងខួរក្បាល) នឹងបញ្ចេញនូវសញ្ញាដែលអាចសង្កេតឃើញ (ឧទាហរណ៍៖ ទឹកមុខខកចិត្ត ឬភាពធុញទ្រាន់) នៅពេលវេលាជាក់លាក់ណាមួយ។</td>
+                <td>ដូចជាតារាងបញ្ជាក់ពីភាគរយដែលអ្នកជំងឺម្នាក់អាចនឹងក្អក (សញ្ញាខាងក្រៅ) ប្រសិនបើគាត់មានជំងឺផ្តាសាយធំ (ស្ថានភាពលាក់កំបាំងខាងក្នុង)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transition probability matrix</span></td>
+                <td>ជាម៉ាទ្រីសដែលពណ៌នាពីឱកាសនៃការផ្លាស់ប្តូរពីស្ថានភាពលាក់កំបាំងមួយនៅពេលបច្ចុប្បន្ន ទៅកាន់ស្ថានភាពលាក់កំបាំងមួយទៀត (ឬបន្តនៅស្ថានភាពដដែល) នៅជំហានបន្ទាប់ក្នុងប្រព័ន្ធពេលវេលា។ វាជួយបង្ហាញពីលំហូរនៃថាមវន្តអារម្មណ៍របស់សិស្សពីមួយនាទីទៅមួយនាទី។</td>
+                <td>ដូចជាតារាងទស្សន៍ទាយថា ប្រសិនបើថ្ងៃនេះភ្លៀង តើថ្ងៃស្អែកមានឱកាសប៉ុន្មានភាគរយដែលមេឃនឹងស្រឡះវិញ ឬបន្តភ្លៀងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Retrospective judgment protocol</span></td>
+                <td>ជានីតិវិធីប្រមូលទិន្នន័យដែលតម្រូវឱ្យអ្នកចូលរួមមើលវីដេអូថតសកម្មភាពរបស់ខ្លួនឯងឡើងវិញ បន្ទាប់ពីការធ្វើតេស្តឬការសិក្សាបានបញ្ចប់ រួចធ្វើការវាយតម្លៃនិងកត់ត្រាពីអារម្មណ៍ដែលពួកគេបានជួបប្រទះនៅតាមចំណុចពេលវេលានីមួយៗ។ វិធីនេះជួយមិនឱ្យរំខានដល់ការគិតរបស់សិស្សក្នុងពេលកំពុងរៀន។</td>
+                <td>ដូចជាការមើលវីដេអូកាមេរ៉ាសុវត្ថិភាពឡើងវិញ ហើយរៀបរាប់ប្រាប់គេថា "នៅនាទីនោះ ខ្ញុំកំពុងតែមានអារម្មណ៍ភ័យខ្លាច"។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Baum-Welch algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយតាមបែបគណិតវិទ្យាដែលត្រូវបានប្រើយ៉ាងទូលំទូលាយសម្រាប់បង្ហាត់ម៉ូដែល HMM ដោយវាធ្វើការកែសម្រួលតម្លៃប៉ារ៉ាម៉ែត្រដំបូងម្តងបន្តិចៗ (Iteratively) រហូតទាល់តែការព្យាករណ៍របស់ម៉ូដែលស៊ីសង្វាក់គ្នា និងត្រឹមត្រូវបំផុតជាមួយទិន្នន័យពិតដែលទទួលបានពីការសង្កេត។</td>
+                <td>ដូចជាជាងកាត់ដេរដែលកាត់ខោអាវសាកល្បងលើកទី១ រួចហៅភ្ញៀវមកល្បងពាក់ ហើយបន្តកែតម្រូវទំហំម្តងបន្តិចៗរហូតដល់ខោអាវនោះសមល្មមឥតខ្ចោះជាមួយរាងកាយភ្ញៀវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Leave-one-out cross validation (LVOCV)</span></td>
+                <td>ជាវិធីសាស្ត្រវាយតម្លៃភាពត្រឹមត្រូវនៃម៉ូដែលម៉ាស៊ីនរៀន (Machine Learning) ដោយបង្ហាត់ម៉ូដែលនោះលើទិន្នន័យរបស់មនុស្សទាំងអស់លើកលែងតែមនុស្សម្នាក់ រួចយកម៉ូដែលនោះទៅធ្វើតេស្តលើទិន្នន័យរបស់មនុស្សម្នាក់ដែលបានដកចេញនោះ (ធ្វើបែបនេះត្រឡប់ចុះឡើងសម្រាប់មនុស្សគ្រប់គ្នា) ដើម្បីធានាថាម៉ូដែលនេះអាចប្រើប្រាស់បានជាទូទៅនិងមិនចេះតែទន្ទេញចាំទិន្នន័យចាស់ (Overfitting)។</td>
+                <td>ដូចជាការរៀនធ្វើម្ហូបដោយភ្លក់ស្នាដៃចុងភៅ១០នាក់ រួចព្យាយាមទាយថាតើចុងភៅទី១១ នឹងដាក់គ្រឿងផ្សំអ្វីខ្លះ ដើម្បីបញ្ជាក់ថាយើងពិតជាយល់ពីក្បួនធ្វើម្ហូបនោះមែន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Integrating+Affect+Sensors+in+an+Intelligent+Tutoring+System%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9E%89%E1%9F%92%E1%9E%85%E1%9E%BC%E1%9E%9B%E1%9E%A7%E1%9E%94%E1%9E%80%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%85%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%9F%E1%9E%89%E1%9F%92%E1%9E%89%E1%9E%B6%E1%9E%A2%E1%9E%B6%E1%9E%9A%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%8E%E1%9F%8D%E1%9E%91%E1%9F%85%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%94%E1%9E%84%E1%9F%92%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%86%E1%9F%92%E1%9E%9B%E1%9E%B6%E1%9E%8F%E1%9E%9C%E1%9F%83%27%2C+%27url%27%3A+%27%2Fpapers%2Feducation%2Fintegrating-affect-sensors-autotutor-2005.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Integrating Affect Sensors in an Intelligent Tutoring System', 'khmer_title': 'ការបញ្ចូលឧបករណ៍ចាប់សញ្ញាអារម្មណ៍ទៅក្នុងប្រព័ន្ធបង្រៀនឆ្លាតវៃ', 'url': '/papers/education/integrating-affect-sensors-autotutor-2005.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Responding+to+Learners%E2%80%99+Cognitive-Affective+States+with+Supportive+and+Shakeup+Dialogues%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%86%E1%9F%92%E1%9E%9B%E1%9E%BE%E1%9E%99%E1%9E%8F%E1%9E%94%E1%9E%91%E1%9F%85%E1%9E%93%E1%9E%B9%E1%9E%84%E1%9E%9F%E1%9F%92%E1%9E%90%E1%9E%B6%E1%9E%93%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%99%E1%9E%9B%E1%9F%8B%E1%9E%8A%E1%9E%B9%E1%9E%84%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%98%E1%9E%93%E1%9F%84%E1%9E%9F%E1%9E%89%E1%9F%92%E1%9E%85%E1%9F%81%E1%9E%8F%E1%9E%93%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9E%9F%E1%9F%8B%E1%9E%A2%E1%9F%92%E1%9E%93%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9F%92%E1%9E%9F%E1%9E%B6+%E1%9E%87%E1%9E%B6%E1%9E%98%E1%9E%BD%E1%9E%99%E1%9E%93%E1%9E%B9%E1%9E%84%E1%9E%80%E1%9E%B7%E1%9E%85%E1%9F%92%E1%9E%85%E1%9E%9F%E1%9E%93%E1%9F%92%E1%9E%91%E1%9E%93%E1%9E%B6%E1%9E%94%E1%9F%82%E1%9E%94%E1%9E%82%E1%9E%B6%E1%9F%86%E1%9E%91%E1%9F%92%E1%9E%9A+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%8A%E1%9E%B6%E1%9E%9F%E1%9F%8B%E1%9E%8F%E1%9E%BF%E1%9E%93%27%2C+%27url%27%3A+%27%2Fpapers%2Feducation%2Fresponding-cognitive-affective-autotutor.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Responding to Learners’ Cognitive-Affective States with Supportive and Shakeup Dialogues', 'khmer_title': 'ការឆ្លើយតបទៅនឹងស្ថានភាពនៃការយល់ដឹងនិងមនោសញ្ចេតនារបស់អ្នកសិក្សា ជាមួយនឹងកិច្ចសន្ទនាបែបគាំទ្រ និងការដាស់តឿន', 'url': '/papers/education/responding-cognitive-affective-autotutor.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=affective+computing+in+intelligent+tutoring+systems" target="_blank" rel="noopener"><span class="en">affective computing in intelligent tutoring systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=cognitive+disequilibrium+theory+in+learning" target="_blank" rel="noopener"><span class="en">cognitive disequilibrium theory in learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hidden+markov+models+for+educational+data+mining" target="_blank" rel="noopener"><span class="en">hidden markov models for educational data mining</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=detecting+student+frustration+and+boredom+in+digital+learning" target="_blank" rel="noopener"><span class="en">detecting student frustration and boredom in digital learning</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

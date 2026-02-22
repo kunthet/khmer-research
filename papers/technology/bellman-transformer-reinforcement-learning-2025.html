@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>Transformer Bellman សម្រាប់ធ្វើសមាហរណកម្មការរៀនពង្រឹង៖ TD(0) ជាប្រព័ន្ធទី១ និង SARSA(λ) ជាប្រព័ន្ធទី២ | KhmerResearch.com</title>
+    <meta name="description" content="ប្រព័ន្ធរៀនពង្រឹង (Reinforcement Learning) បច្ចុប្បន្នជួបប្រទះបញ្ហាក្នុងការរក្សាតុល្យភាពរវាងការសម្រេចចិត្តយ៉ាងរហ័សនៅក្នុងបរិស្ថានដែលមានការប្រែប្រួល និងការរៀន...">
+    
+    <meta name="keywords" content="Reinforcement Learning, Transformers, Dual-Process Theory, Eligibility Traces, Reflective Learning, Temporal Difference, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/bellman-transformer-reinforcement-learning-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/bellman-transformer-reinforcement-learning-2025.html">
+    <meta property="og:title" content="Transformer Bellman សម្រាប់ធ្វើសមាហរណកម្មការរៀនពង្រឹង៖ TD(0) ជាប្រព័ន្ធទី១ និង SARSA(λ) ជាប្រព័ន្ធទី២ | KhmerResearch.com">
+    <meta property="og:description" content="ប្រព័ន្ធរៀនពង្រឹង (Reinforcement Learning) បច្ចុប្បន្នជួបប្រទះបញ្ហាក្នុងការរក្សាតុល្យភាពរវាងការសម្រេចចិត្តយ៉ាងរហ័សនៅក្នុងបរិស្ថានដែលមានការប្រែប្រួល និងការរៀនសូត្របែបឆ្លុះបញ្ចាំងស៊ីជម្រៅដែលចាំបាច់សម...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2025 (Manuscript)">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Transformers">
+    
+    <meta property="article:tag" content="Dual-Process Theory">
+    
+    <meta property="article:tag" content="Eligibility Traces">
+    
+    <meta property="article:tag" content="Reflective Learning">
+    
+    <meta property="article:tag" content="Temporal Difference">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="Transformer Bellman សម្រាប់ធ្វើសមាហរណកម្មការរៀនពង្រឹង៖ TD(0) ជាប្រព័ន្ធទី១ និង SARSA(λ) ជាប្រព័ន្ធទី២">
+    <meta name="twitter:description" content="ប្រព័ន្ធរៀនពង្រឹង (Reinforcement Learning) បច្ចុប្បន្នជួបប្រទះបញ្ហាក្នុងការរក្សាតុល្យភាពរវាងការសម្រេចចិត្តយ៉ាងរហ័សនៅក្នុងបរិស្ថានដែលមានការប្រែប្រួល និងការរៀនសូត្របែបឆ្លុះបញ្ចាំងស៊ីជម្រៅដែលចាំបាច់សម...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "Transformer Bellman \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1792\u17d2\u179c\u17be\u179f\u1798\u17b6\u17a0\u179a\u178e\u1780\u1798\u17d2\u1798\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u17d6 TD(0) \u1787\u17b6\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u17b8\u17e1 \u1793\u17b7\u1784 SARSA(\u03bb) \u1787\u17b6\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u17b8\u17e2",
+      "name": "Bellman Transformer to Internalize Reinforcement Learning: TD(0) as System 1 and SARSA(\u03bb) as System 2",
+      "description": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement Learning) \u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1794\u1789\u17d2\u17a0\u17b6\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u1780\u17d2\u179f\u17b6\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u179a\u179c\u17b6\u1784\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u1799\u17c9\u17b6\u1784\u179a\u17a0\u17d0\u179f\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u178a\u17c2\u179b\u1798\u17b6\u1793\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a\u1794\u17c2\u1794\u1786\u17d2\u179b\u17bb\u17c7\u1794\u1789\u17d2\u1785\u17b6\u17c6\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u178a\u17c2\u179b\u1785\u17b6\u17c6\u1794\u17b6\u1785\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u179a\u1799\u17c8\u1796\u17c1\u179b\u179c\u17c2\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/bellman-transformer-reinforcement-learning-2025.html",
+      "author": [{"@type": "Person", "name": "Dyuti Ghosh"},{"@type": "Person", "name": "Dibya Ghosh"},{"@type": "Person", "name": "Debi Prasad Ghosh"}],
+      "datePublished": "2025 (Manuscript)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Bellman Transformer to Internalize Reinforcement Learning: TD(0) as System 1 and SARSA(\u03bb) as System 2",
+        "url": "N/A"
+      },
+      "keywords": ["Reinforcement Learning", "Transformers", "Dual-Process Theory", "Eligibility Traces", "Reflective Learning", "Temporal Difference"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Transformer Bellman \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1792\u17d2\u179c\u17be\u179f\u1798\u17b6\u17a0\u179a\u178e\u1780\u1798\u17d2\u1798\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u17d6 TD(0) \u1787\u17b6\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u17b8\u17e1 \u1793\u17b7\u1784 SARSA(\u03bb) \u1787\u17b6\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u17b8\u17e2",
+          "item": "https://khmerresearch.com/papers/technology/bellman-transformer-reinforcement-learning-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>Transformer Bellman សម្រាប់ធ្វើសមាហរណកម្មការរៀនពង្រឹង៖ TD...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Bellman Transformer to Internalize Reinforcement Learning: TD(0) as System 1 and SARSA(λ) as System 2<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>Transformer Bellman សម្រាប់ធ្វើសមាហរណកម្មការរៀនពង្រឹង៖ TD(0) ជាប្រព័ន្ធទី១ និង SARSA(λ) ជាប្រព័ន្ធទី២</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Bellman Transformer to Internalize Reinforcement Learning: TD(0) as System 1 and SARSA(λ) as System 2</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Dyuti Ghosh, Dibya Ghosh, Debi Prasad Ghosh</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025 (Manuscript)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ប្រព័ន្ធរៀនពង្រឹង (Reinforcement Learning) បច្ចុប្បន្នជួបប្រទះបញ្ហាក្នុងការរក្សាតុល្យភាពរវាងការសម្រេចចិត្តយ៉ាងរហ័សនៅក្នុងបរិស្ថានដែលមានការប្រែប្រួល និងការរៀនសូត្របែបឆ្លុះបញ្ចាំងស៊ីជម្រៅដែលចាំបាច់សម្រាប់ប្រសិទ្ធភាពរយៈពេលវែង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើឡើងនូវស្ថាបត្យកម្មថ្មីមួយហៅថា Bellman Transformer ដែលបញ្ចូលទ្រឹស្តីដំណើរការទ្វេភាគ (Dual-Process Dynamics) នៃខួរក្បាលមនុស្សទៅក្នុងប្រព័ន្ធ Transformer ។
+        
+        <ul>
+            
+            <li>ការទាញយកផលប្រយោជន៍រហ័សតាមរយៈយន្តការ TD(0) (Fast Exploitation via TD(0)) សម្រាប់ប្រព័ន្ធទី១ (System 1) ដើម្បីធ្វើការសម្រេចចិត្តក្នុងពេលវេលាជាក់ស្តែង។</li>
+            
+            <li>ការរៀនសូត្របែបឆ្លុះបញ្ចាំងតាមរយៈ SARSA(λ) (Reflective Learning via SARSA(λ)) ដោយប្រើប្រាស់ដានសិទ្ធិ (Eligibility Traces) សម្រាប់ប្រព័ន្ធទី២ (System 2) ដើម្បីវាយតម្លៃសកម្មភាពអតីតកាលឡើងវិញ។</li>
+            
+            <li>ការធ្វើសមាហរណកម្មជាមួយបច្ចេកទេសបន្សុទ្ធគោលការណ៍ (Policy Distillation) និងការរៀន Off-Policy Q-Learning ដែលប្រៀបបានទៅនឹងដំណើរការយល់សប្តិរបស់មនុស្ស (Dream and Deep Sleep Analogies) ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ស្ថាបត្យកម្ម Bellman Transformer អាចរួមបញ្ចូលគ្នានូវការសម្រេចចិត្តរហ័ស និងការរៀនសូត្របែបស៊ីជម្រៅ ដោយផ្តល់នូវតុល្យភាពរវាងល្បឿននិងយុទ្ធសាស្ត្រ ដែលប្រសើរជាងវិធីសាស្ត្រធម្មតា (Single-mode baselines) ។</li>
+            
+            <li>ការសាកល្បងលើកម្រិតគំរូបង្ហាញថា យន្តការ Attention អាចបង្កើតលំនាំនៃការសម្រេចចិត្តដែលអាចបកស្រាយបាន (Interpretable decision patterns) ដែលស្របទៅនឹងយន្តការរៀនសូត្រតាមបែបជីវសាស្រ្ត។</li>
+            
+            <li>ប្រព័ន្ធនេះមានសក្តានុពលខ្ពស់ក្នុងការអនុវត្តលើវិស័យបញ្ជាមនុស្សយន្ត (Robotic control tasks) និងការរុករកក្នុងបរិស្ថានដែលមានរង្វាន់តិចតួច ដោយជួយកាត់បន្ថយអត្រាគ្រោះថ្នាក់នៅក្នុងប្រតិបត្តិការជាក់ស្តែង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Vanilla Reinforcement Learning / Single-mode TD(0)</span></strong><br>ការរៀនពង្រឹងបែបបុរាណ / ម៉ូដែលរបៀបទោល TD(0)</td>
+                <td>មានភាពរហ័សក្នុងការសម្រេចចិត្ត (Fast exploitation) មិនសូវមានភាពប្រែប្រួលខ្លាំង (Low variance) និងងាយស្រួលក្នុងការគណនាសម្រាប់បរិស្ថានដែលមានល្បឿនលឿន។</td>
+                <td>មានភាពមើលឃើញខ្លី (Myopic) មិនអាចដោះស្រាយបានល្អចំពោះបរិស្ថានដែលផ្តល់រង្វាន់យឺតយ៉ាវ (Delayed rewards) និងខ្វះយន្តការឆ្លុះបញ្ចាំងពីកំហុសអតីតកាល។</td>
+                <td>សម្រេចបានអត្រាឈ្នះ ៨០% នៅក្នុងការធ្វើតេស្តហ្គេម Atari Pong (ក្នុងចំនួន 1M steps)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Bellman Transformer (Dual-Process architecture)</span></strong><br>ស្ថាបត្យកម្ម Bellman Transformer (ដំណើរការទ្វេភាគ)</td>
+                <td>រក្សាតុល្យភាពរវាងការសម្រេចចិត្តរហ័ស (System 1) និងការរៀនឆ្លុះបញ្ចាំងស៊ីជម្រៅ (System 2) ព្រមទាំងមានសមត្ថភាពខ្ពស់ក្នុងការដោះស្រាយរង្វាន់ដែលពន្យារពេលតាមរយៈ SARSA(λ)។</td>
+                <td>ដំណើរការមានភាពយឺតជាងម៉ូដែលធម្មតា (Slower inference) ទាមទារទំហំអង្គចងចាំធំសម្រាប់ផ្ទុកទិន្នន័យ Eligibility traces និងងាយរងឥទ្ធិពលពីការកំណត់ Hyperparameters (ឧ. តម្លៃ λ)។</td>
+                <td>បង្កើនអត្រាឈ្នះបន្ថែម ១៥% (+15% win rate) នៅក្នុងហ្គេម Pong និងធ្វើឱ្យប្រសើរឡើងនូវការស្វែងរកផ្លូវល្អបំផុតនៅក្នុងបរិស្ថាន Grid-world ដែលមានរង្វាន់តិចតួច (Sparse rewards)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ស្ថាបត្យកម្មនេះទាមទារធនធានកុំព្យូទ័រ និងអង្គចងចាំខ្ពស់ជាងម៉ូដែល Transformer ធម្មតា ដោយសារតែប្រតិបត្តិការទ្វេភាគ (Dual-mode) និងការគ្រប់គ្រងដានសិទ្ធិ (Eligibility traces)។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការប្រព័ន្ធដំណើរការកម្រិតខ្ពស់ ឬ Hardware ចម្រុះ (Hybrid hardware) ដូចជាការប្រើប្រាស់ TPUs សម្រាប់ប្រតិបត្តិការ TD(0) ស្របពេលប្រើប្រាស់ CPUs សម្រាប់គណនា SARSA(λ)។</li>
+        
+        <li><strong>Software:</strong> ទាមទារការប្រើប្រាស់ Frameworks ស៊ីជម្រៅដូចជា PyTorch (ដោយប្រើ Distributed Data Parallel - DDP) ឬ TensorFlow (MirroredStrategy) សម្រាប់ការបែងចែកការគណនា (Parallelization)។</li>
+        
+        <li><strong>Memory Overhead:</strong> ទាមទារទំហំផ្ទុកធំ និងរីកធំតាមទំហំទិន្នន័យ (Linearly) សម្រាប់រក្សាទុក Eligibility trace buffers ធ្វើឱ្យវាមានដែនកំណត់សម្រាប់កិច្ចការដែលមានទំហំប្រតិបត្តិការវែង (Long-horizon tasks)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញដែលមានចំណេះដឹងស៊ីជម្រៅលើ Machine Learning ផ្នែក Reinforcement Learning, Transformer Architectures និង Policy Distillation។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្អែកជាចម្បងលើការធ្វើត្រាប់តាមបរិស្ថាននិម្មិត (Simulated environments) ដូចជាហ្គេម Atari Pong និងការរុករកលើ Grid-worlds ដោយមិនទាន់មានការសាកល្បងជាមួយទិន្នន័យរូបវន្តពិតប្រាកដនៅឡើយ។ សម្រាប់បរិបទប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកអនុវត្តក្នុងវិស័យពិត (ឧទាហរណ៍ វិស័យសុខាភិបាល) អាចបង្កជាហានិភ័យនៃភាពលម្អៀងពីទិន្នន័យប្រវត្តិសាស្ត្រ (Historical data bias) ប្រសិនបើទិន្នន័យមូលដ្ឋានមិនមានភាពពេញលេញ ឬតំណាងគ្រប់គ្រាន់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាម៉ូដែលនេះស្ថិតក្នុងដំណាក់កាលអភិវឌ្ឍន៍កម្រិតគំរូ (Conceptual phase) ក៏ដោយ វាមានសក្តានុពលខ្ពស់ក្នុងការយកមកដោះស្រាយបញ្ហាស្មុគស្មាញនៅកម្ពុជា ជាពិសេសលើវិស័យដែលទាមទារការសម្រេចចិត្តក្នុងពេលជាក់ស្តែង និងការកែលម្អជាប្រចាំ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យស្វ័យប្រវត្តិកម្មកសិកម្ម (Agricultural Drones ក្នុងខេត្តបាត់ដំបង):</strong> អាចបញ្ចូលក្នុងប្រព័ន្ធបញ្ជាដ្រូនកសិកម្ម ដើម្បីឱ្យដ្រូនអាចគេចវេះពីឧបសគ្គភ្លាមៗ (TD(0)) និងរៀនសូត្រពីបទពិសោធន៍ហោះហើរប្រចាំថ្ងៃ ដើម្បីកែលម្អគន្លងផ្លូវ (SARSA(λ)) ឱ្យកាន់តែមានសុវត្ថិភាព។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល (មន្ទីរពេទ្យកាល់ម៉ែត ឬគន្ធបុប្ផា):</strong> អាចប្រើប្រាស់ជាប្រព័ន្ធ AI ជំនួយការគ្រូពេទ្យ ដែលផ្តល់ការវិនិច្ឆ័យរហ័សក្នុងករណីបន្ទាន់ (System 1) និងការវិភាគបែបស៊ីជម្រៅដោយផ្អែកលើប្រវត្តិព្យាបាលអ្នកជំងឺ (System 2) ដើម្បីកាត់បន្ថយផលប៉ះពាល់នៃការប្រើប្រាស់ថ្នាំ។</li>
+            
+            <li><strong>ការគ្រប់គ្រងចរាចរណ៍ឆ្លាតវៃ (Smart City នៅរាជធានីភ្នំពេញ):</strong> អាចអនុវត្តជាមួយប្រព័ន្ធបញ្ជាភ្លើងស្តុបចរាចរណ៍ ដែលអាចកែប្រែភ្លើងសញ្ញាភ្លាមៗតាមស្ថានភាពជាក់ស្តែង និងរៀនពីទិន្នន័យចរាចរណ៍អតីតកាលដើម្បីរៀបចំផែនការកាត់បន្ថយការកកស្ទះយូរអង្វែង។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ស្ថាបត្យកម្ម Bellman Transformer អាចក្លាយជាមូលដ្ឋានគ្រឹះដ៏សំខាន់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធ AI ដែលមានសមត្ថភាពសម្របខ្លួនខ្ពស់នៅកម្ពុជា ប្រសិនបើបញ្ហាខ្វះខាតទិន្នន័យ និងដែនកំណត់ផ្នែក Hardware ត្រូវបានដោះស្រាយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាមូលដ្ឋានគ្រឹះនៃ RL និង Transformers:</strong> និស្សិតគប្បីចាប់ផ្តើមអានសៀវភៅមូលដ្ឋាន 'Reinforcement Learning: An Introduction' របស់ Sutton & Barto និងស្រាវជ្រាវពីឯកសារដើម 'Attention Is All You Need' ដើម្បីយល់ពីយន្តការការងាររបស់ Q-learning និង Self-attention។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តការសរសេរកូដក្នុងបរិស្ថាននិម្មិត:</strong> ប្រើប្រាស់បណ្ណាល័យ Gymnasium (អតីត OpenAI Gym) ជាមួយនឹង PyTorch ឬ TensorFlow ដើម្បីសរសេរកូដម៉ូដែល RL ធម្មតា (Vanilla RL) ដូចជាក្បួនដោះស្រាយ TD(0) និង SARSA ដោយអនុវត្តលើហ្គេមសាមញ្ញ។</li>
+            
+            <li><strong>ជំហានទី៣៖ ពិសោធន៍ជាមួយស្ថាបត្យកម្ម Dual-Process:</strong> សិក្សា និងសាកល្បងសរសេរកូដបង្កើតយន្តការ Bellman-Attention ដោយផ្អែកលើអត្ថបទស្រាវជ្រាវនេះ ព្រមទាំងតេស្តម៉ូដែលក្នុងបរិស្ថាន Grid-world ទំហំ 20x20 ដោយប្រើប្រាស់ Google Colab ដើម្បីទទួលបានការគាំទ្រ GPU ឥតគិតថ្លៃ។</li>
+            
+            <li><strong>ជំហានទី៤៖ អនុវត្តលើគម្រោងជាក់ស្តែងខ្នាតតូច:</strong> រៀបចំគម្រោងស្រាវជ្រាវ (Mini-project) ដោយយកម៉ូដែលនេះទៅអនុវត្តលើទិន្នន័យជាក់ស្តែង ឧទាហរណ៍ ការធ្វើត្រាប់តាមការហោះហើរដ្រូន (Drone simulation) ដោយផ្តោតលើការកែសម្រួល Hyperparameter (តម្លៃ λ និង learning rate) ដើម្បីរក្សាតុល្យភាពរវាងល្បឿន និងភាពជាក់លាក់។</li>
+            
+            <li><strong>ជំហានទី៥៖ ចែករំលែកលទ្ធផល និងសហការ:</strong> ចងក្រងលទ្ធផលដែលរកឃើញ ហើយធ្វើបទបង្ហាញក្នុងព្រឹត្តិការណ៍បច្ចេកវិទ្យាក្នុងស្រុក ដូចជា BarCamp Cambodia ឬវេទិកាស្រាវជ្រាវរបស់សាកលវិទ្យាល័យ ដើម្បីទទួលបានមតិកែលម្អ និងស្វែងរកឱកាសអភិវឌ្ឍបន្តជាមួយអ្នកស្រាវជ្រាវផ្សេងទៀត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Temporal Difference Learning (TD(0))</span></td>
+                <td>វិធីសាស្ត្ររៀនសូត្រក្នុង AI ដែលធ្វើបច្ចុប្បន្នភាពតម្លៃនៃការសម្រេចចិត្តដោយផ្អែកលើរង្វាន់ភ្លាមៗ និងការទស្សន៍ទាយលទ្ធផលបន្ទាប់ ដោយមិនចាំបាច់រង់ចាំរហូតដល់ចប់សកម្មភាព។ វាតំណាងឱ្យប្រព័ន្ធទី១ (System 1) សម្រាប់ការកេងចំណេញរហ័ស។</td>
+                <td>ដូចជាការលេងកីឡាដែលអ្នកប្តូរយុទ្ធសាស្ត្រភ្លាមៗគ្រាន់តែឃើញចលនារបស់គូប្រកួត ដោយមិនចាំបាច់រង់ចាំដល់ចប់ការប្រកួតទើបដឹងថាចាញ់ឬឈ្នះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SARSA(λ)</span></td>
+                <td>ក្បួនដោះស្រាយសម្រាប់ប៉ាន់ស្មានតម្លៃនៃសកម្មភាព (Action-value) ដោយប្រើប្រាស់យន្តការតាមដានកំហុសអតីតកាលដើម្បីទាញយករង្វាន់ដែលនៅឆ្ងាយ (Delayed rewards) ត្រឡប់មកវាយតម្លៃសកម្មភាពដែលបានធ្វើពីមុន។ វាតំណាងឱ្យប្រព័ន្ធទី២ (System 2) សម្រាប់ការរៀនសូត្របែបឆ្លុះបញ្ចាំង។</td>
+                <td>ដូចជាការអង្គុយគិតឡើងវិញក្រោយពេលប្រឡងធ្លាក់ ដើម្បីរកមើលថាតើកំហុសក្នុងការរៀនសូត្រកាលពីប៉ុន្មានខែមុនមួយណាដែលធ្វើឱ្យអ្នកបានពិន្ទុទាបនៅថ្ងៃនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Eligibility Traces</span></td>
+                <td>យន្តការចងចាំបណ្តោះអាសន្ននៅក្នុង Reinforcement Learning ដែលកត់ត្រាថាតើសកម្មភាពណាមួយត្រូវបានធ្វើឡើងញឹកញាប់ ឬថ្មីៗប៉ុណ្ណា ដើម្បីបែងចែកចំណែកនៃរង្វាន់ (Credit) ឱ្យបានត្រឹមត្រូវនៅពេលទទួលបានរង្វាន់ធំនៅពេលក្រោយ។</td>
+                <td>ដូចជាការដាក់សញ្ញាសម្គាល់លើផ្លូវដែលអ្នកធ្លាប់ដើរកាត់ បើចុងបញ្ចប់អ្នករកឃើញកំណប់ អ្នកនឹងដើរតាមស្នាមជើងនោះត្រឡប់មកវិញ ហើយដឹងគុណដល់រាល់ជំហាននីមួយៗដែលនាំអ្នកមកដល់ទីនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dual-Process Theory</span></td>
+                <td>ទ្រឹស្តីចិត្តសាស្ត្រដែលពន្យល់ពីដំណើរការគិតរបស់មនុស្សជាពីរប្រព័ន្ធ៖ ប្រព័ន្ធទី១ (System 1) គិតលឿន ប្រើទម្លាប់និងវិចារណញាណ និងប្រព័ន្ធទី២ (System 2) គិតយឺត ប្រើហេតុផល និងការវិភាគស៊ីជម្រៅ។</td>
+                <td>ដូចជាការបើកបរឡាន ប្រព័ន្ធទី១ ជួយអ្នកឱ្យជាន់ហ្វ្រាំងភ្លាមៗពេលមានឆ្កែរត់កាត់ ចំណែកប្រព័ន្ធទី២ ជួយអ្នកក្នុងការគិតគូររកផ្លូវកាត់ពេលស្ទះចរាចរណ៍។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Policy Distillation</span></td>
+                <td>ដំណើរការនៃការផ្ទេរចំណេះដឹងពីម៉ូដែល AI ធំៗ ឬម៉ូដែលជំនាញច្រើន (Teachers) ទៅកាន់ម៉ូដែល AI តូចមួយ (Student) ដើម្បីឱ្យម៉ូដែលតូចនោះមានសមត្ថភាពប្រហាក់ប្រហែល តែដំណើរការលឿនជាង និងប្រើធនធានកុំព្យូទ័រតិចជាង។</td>
+                <td>ដូចជាការដែលសិស្សម្នាក់អានសៀវភៅសង្ខេបមេរៀនដែលចងក្រងដោយសាស្ត្រាចារ្យជំនាញៗជាច្រើន ដើម្បីទទួលបានចំណេះដឹងសរុបដោយមិនចាំបាច់ទៅអង្គុយអានសៀវភៅរាប់ពាន់ក្បាលដោយខ្លួនឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Experience Replay</span></td>
+                <td>បច្ចេកទេសរក្សាទុកទិន្នន័យនៃបទពិសោធន៍អតីតកាល (ស្ថានភាព, សកម្មភាព, រង្វាន់) នៅក្នុងអង្គចងចាំ (Buffer) រួចទាញយកមកវិភាគនិងរៀនសូត្រឡើងវិញជាបន្តបន្ទាប់ ដើម្បីការពារការភ្លេច និងបង្កើនប្រសិទ្ធភាពនៃការទាញយកទិន្នន័យមកប្រើប្រាស់។</td>
+                <td>ដូចជាការដែលអ្នកដេកយល់សប្តិឃើញរឿងដែលកើតឡើងនៅពេលថ្ងៃឡើងវិញ ហើយខួរក្បាលរបស់អ្នកឆ្លៀតទាញយកមេរៀនពីហេតុការណ៍នោះទុកជាបទពិសោធន៍សម្រាប់ថ្ងៃស្អែក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Credit Assignment</span></td>
+                <td>ដំណើរការនៃការកំណត់ថាតើសកម្មភាពមួយណា ឬការសម្រេចចិត្តណាមួយក្នុងចំណោមសកម្មភាពជាបន្តបន្ទាប់នាពេលកន្លងមក ដែលជាអ្នករួមចំណែកពិតប្រាកដក្នុងការទទួលបានរង្វាន់ ឬលទ្ធផលនៅទីបញ្ចប់។</td>
+                <td>ដូចជាការបែងចែកប្រាក់រង្វាន់ក្នុងក្រុមបាល់ទាត់ ដោយត្រូវរកឱ្យឃើញថាអ្នកណាជាអ្នកបញ្ជូនបាល់ (Assist) តាំងពីពាក់កណ្តាលតារាង មិនមែនឱ្យរង្វាន់តែអ្នកទាត់ចូលទី (Striker) នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bellman Transformer</span></td>
+                <td>ស្ថាបត្យកម្ម AI ថ្មីដែលស្នើឡើងក្នុងឯកសារនេះ ដោយរួមបញ្ចូលគ្នានូវបច្ចេកវិទ្យា Transformer (ដែលពូកែចងចាំពត៌មានជាបន្តបន្ទាប់) ជាមួយប្រព័ន្ធ Reinforcement Learning ដើម្បីឱ្យ AI អាចសម្រេចចិត្តលឿនផង និងចេះវាយតម្លៃកំហុសអតីតកាលផង។</td>
+                <td>ដូចជាការបំពាក់ខួរក្បាលមនុស្សយន្តឱ្យមានទាំង 'សភាវគតិឆ្លើយតបរហ័ស' និង 'សមត្ថភាពអង្គុយគិតពិចារណា' នៅក្នុងម៉ាស៊ីនតែមួយយ៉ាងមានប្រសិទ្ធភាព។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Foundation+model+for+Reinforcement+Learning%27%2C+%27khmer_title%27%3A+%27%E1%9E%98%E1%9F%89%E1%9E%BC%E1%9E%8A%E1%9F%82%E1%9E%9B%E1%9E%98%E1%9E%BC%E1%9E%9B%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%B6%E1%9E%93%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%96%E1%9E%84%E1%9F%92%E1%9E%9A%E1%9E%B9%E1%9E%84+%28Foundation+model+for+Reinforcement+Learning%29%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Ffoundation-model-for-reinforcement-learning.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Foundation model for Reinforcement Learning', 'khmer_title': 'ម៉ូដែលមូលដ្ឋានសម្រាប់ការរៀនពង្រឹង (Foundation model for Reinforcement Learning)', 'url': '/papers/technology/foundation-model-for-reinforcement-learning.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Dual-process+theory+in+reinforcement+learning+models" target="_blank" rel="noopener"><span class="en">Dual-process theory in reinforcement learning models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Transformer+architectures+for+sequential+decision+making" target="_blank" rel="noopener"><span class="en">Transformer architectures for sequential decision making</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Eligibility+traces+and+temporal+credit+assignment+in+deep+RL" target="_blank" rel="noopener"><span class="en">Eligibility traces and temporal credit assignment in deep RL</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Biologically+inspired+artificial+intelligence+and+cognitive+modeling" target="_blank" rel="noopener"><span class="en">Biologically inspired artificial intelligence and cognitive modeling</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

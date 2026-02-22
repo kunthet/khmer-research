@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>បច្ចេកទេសរៀបចំទិន្នន័យជាមុនសម្រាប់ការលើកកម្ពស់គុណភាពទិន្នន័យថែទាំសុខភាពដោយប្រើប្រាស់បញ្ញាសិប្បនិម្មិត | KhmerResearch.com</title>
+    <meta name="description" content="សំណុំទិន្នន័យថែទាំសុខភាព (Healthcare datasets) ជារឿយៗមានទំហំធំ មានការខូចទ្រង់ទ្រាយ បាត់បង់តម្លៃ និងគ្មានតុល្យភាព ដែលបញ្ហាទាំងអស់នេះធ្វើឱ្យថយចុះប្រសិទ្ធភាព និ...">
+    
+    <meta name="keywords" content="Data Pre-Processing, Healthcare Data, Artificial Intelligence, Missing Value Imputation, Outlier Detection, SMOTE, Class Imbalance, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/data-preprocessing-healthcare-ai-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/data-preprocessing-healthcare-ai-2024.html">
+    <meta property="og:title" content="បច្ចេកទេសរៀបចំទិន្នន័យជាមុនសម្រាប់ការលើកកម្ពស់គុណភាពទិន្នន័យថែទាំសុខភាពដោយប្រើប្រាស់បញ្ញាសិប្បនិម្មិត | KhmerResearch.com">
+    <meta property="og:description" content="សំណុំទិន្នន័យថែទាំសុខភាព (Healthcare datasets) ជារឿយៗមានទំហំធំ មានការខូចទ្រង់ទ្រាយ បាត់បង់តម្លៃ និងគ្មានតុល្យភាព ដែលបញ្ហាទាំងអស់នេះធ្វើឱ្យថយចុះប្រសិទ្ធភាព និងភាពត្រឹមត្រូវនៃក្បួនដោះស្រាយម៉ាស៊ីនរៀន ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024, International Journal of Scientific Research in Science and Technology">
+    
+    <meta property="article:tag" content="Data Pre-Processing">
+    
+    <meta property="article:tag" content="Healthcare Data">
+    
+    <meta property="article:tag" content="Artificial Intelligence">
+    
+    <meta property="article:tag" content="Missing Value Imputation">
+    
+    <meta property="article:tag" content="Outlier Detection">
+    
+    <meta property="article:tag" content="SMOTE">
+    
+    <meta property="article:tag" content="Class Imbalance">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="បច្ចេកទេសរៀបចំទិន្នន័យជាមុនសម្រាប់ការលើកកម្ពស់គុណភាពទិន្នន័យថែទាំសុខភាពដោយប្រើប្រាស់បញ្ញាសិប្បនិម្មិត">
+    <meta name="twitter:description" content="សំណុំទិន្នន័យថែទាំសុខភាព (Healthcare datasets) ជារឿយៗមានទំហំធំ មានការខូចទ្រង់ទ្រាយ បាត់បង់តម្លៃ និងគ្មានតុល្យភាព ដែលបញ្ហាទាំងអស់នេះធ្វើឱ្យថយចុះប្រសិទ្ធភាព និងភាពត្រឹមត្រូវនៃក្បួនដោះស្រាយម៉ាស៊ីនរៀន ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179a\u17c0\u1794\u1785\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b6\u1798\u17bb\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179b\u17be\u1780\u1780\u1798\u17d2\u1796\u179f\u17cb\u1782\u17bb\u178e\u1797\u17b6\u1796\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1790\u17c2\u1791\u17b6\u17c6\u179f\u17bb\u1781\u1797\u17b6\u1796\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f",
+      "name": "Data Pre-Processing Technique for Enhancing Healthcare Data Quality Using Artificial Intelligence",
+      "description": "\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1790\u17c2\u1791\u17b6\u17c6\u179f\u17bb\u1781\u1797\u17b6\u1796 (Healthcare datasets) \u1787\u17b6\u179a\u17bf\u1799\u17d7\u1798\u17b6\u1793\u1791\u17c6\u17a0\u17c6\u1792\u17c6 \u1798\u17b6\u1793\u1780\u17b6\u179a\u1781\u17bc\u1785\u1791\u17d2\u179a\u1784\u17cb\u1791\u17d2\u179a\u17b6\u1799 \u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u178f\u1798\u17d2\u179b\u17c3 \u1793\u17b7\u1784\u1782\u17d2\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796 \u178a\u17c2\u179b\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b6\u17c6\u1784\u17a2\u179f\u17cb\u1793\u17c1\u17c7\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1790\u1799\u1785\u17bb\u17c7\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796 \u1793\u17b7\u1784\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179a\u17c0\u1793 (Machine learning algorithms)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/data-preprocessing-healthcare-ai-2024.html",
+      "author": [{"@type": "Person", "name": "Arati K Kale, Department of Computer Science and Engineering, Kalinga University, Naya Raipur, Chhattisgarh, India"},{"@type": "Person", "name": "Dr. Dev Ras Pandey, Department of Computer Science and Engineering, Kalinga University, Naya Raipur, Chhattisgarh, India"}],
+      "datePublished": "2024, International Journal of Scientific Research in Science and Technology",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Data Pre-Processing Technique for Enhancing Healthcare Data Quality Using Artificial Intelligence",
+        "url": "https://doi.org/10.32628/IJSRST52411130"
+      },
+      "keywords": ["Data Pre-Processing", "Healthcare Data", "Artificial Intelligence", "Missing Value Imputation", "Outlier Detection", "SMOTE", "Class Imbalance"],
+      "about": "Health Informatics / Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179a\u17c0\u1794\u1785\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b6\u1798\u17bb\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179b\u17be\u1780\u1780\u1798\u17d2\u1796\u179f\u17cb\u1782\u17bb\u178e\u1797\u17b6\u1796\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1790\u17c2\u1791\u17b6\u17c6\u179f\u17bb\u1781\u1797\u17b6\u1796\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f",
+          "item": "https://khmerresearch.com/papers/technology/data-preprocessing-healthcare-ai-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>បច្ចេកទេសរៀបចំទិន្នន័យជាមុនសម្រាប់ការលើកកម្ពស់គុណភាពទិន្ន...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Data Pre-Processing Technique for Enhancing Healthcare Data Quality Using Artificial Intelligence<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.32628/IJSRST52411130" target="_blank">doi.org/10.32628/IJSRST52411130</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>បច្ចេកទេសរៀបចំទិន្នន័យជាមុនសម្រាប់ការលើកកម្ពស់គុណភាពទិន្នន័យថែទាំសុខភាពដោយប្រើប្រាស់បញ្ញាសិប្បនិម្មិត</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Data Pre-Processing Technique for Enhancing Healthcare Data Quality Using Artificial Intelligence</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Arati K Kale, Department of Computer Science and Engineering, Kalinga University, Naya Raipur, Chhattisgarh, India, Dr. Dev Ras Pandey, Department of Computer Science and Engineering, Kalinga University, Naya Raipur, Chhattisgarh, India</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, International Journal of Scientific Research in Science and Technology</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Health Informatics / Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> សំណុំទិន្នន័យថែទាំសុខភាព (Healthcare datasets) ជារឿយៗមានទំហំធំ មានការខូចទ្រង់ទ្រាយ បាត់បង់តម្លៃ និងគ្មានតុល្យភាព ដែលបញ្ហាទាំងអស់នេះធ្វើឱ្យថយចុះប្រសិទ្ធភាព និងភាពត្រឹមត្រូវនៃក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine learning algorithms)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើងនូវវិធីសាស្ត្ររៀបចំទិន្នន័យជាមុន (Data pre-processing) ដោយប្រើប្រាស់បញ្ញាសិប្បនិម្មិត ដើម្បីលើកកម្ពស់គុណភាពទិន្នន័យ និងកែលម្អដំណើរការចំណាត់ថ្នាក់ទិន្នន័យវេជ្ជសាស្រ្តពិតប្រាកដ។
+        
+        <ul>
+            
+            <li>ការប៉ាន់ស្មាន និងបំពេញតម្លៃដែលបាត់បង់ដោយប្រើវិធីសាស្ត្រផ្អែកលើចម្ងាយ K-Nearest Neighbor (KNN-based Missing Value Imputation)</li>
+            
+            <li>ការរកឃើញទិន្នន័យខុសប្រក្រតី ឬខុសពីគេដោយប្រើក្បួនដោះស្រាយផ្អែកលើការចង្កោម (Cluster-based Outlier Detection) តាមរយៈក្បួន SOM (Self Organization Map)</li>
+            
+            <li>ការដោះស្រាយបញ្ហាទិន្នន័យអតុល្យភាព (Imbalanced data) ដោយប្រើប្រាស់បច្ចេកទេស SMOTE និងការយកគំរូឡើងវិញដោយចៃដន្យ (Random Resampling)</li>
+            
+            <li>ការវាយតម្លៃប្រសិទ្ធភាពម៉ូដែលដោយប្រើក្បួនដោះស្រាយម៉ាស៊ីនរៀនចំនួន ៤ ដូចជា Naïve Bayes (NB), KNN, Random Forest (RF), និង Support Vector Machine (SVM)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេសរៀបចំទិន្នន័យជាមុន បានបង្ហាញពីការធ្វើឱ្យប្រសើរឡើងយ៉ាងខ្លាំងនូវភាពត្រឹមត្រូវ (Accuracy) របស់ម៉ូដែល បើប្រៀបធៀបទៅនឹងការប្រើប្រាស់ទិន្នន័យដែលមិនទាន់បានរៀបចំ។</li>
+            
+            <li>បន្ទាប់ពីការដកចេញទិន្នន័យខុសប្រក្រតី (Outlier removal) ម៉ូដែល SVM ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុតរហូតដល់ ៩៩.២៤% សម្រាប់សំណុំទិន្នន័យសើស្បែក (Dermatology) និង ៩៨.៩៧% សម្រាប់សំណុំទិន្នន័យ Ecoli។</li>
+            
+            <li>ការអនុវត្តបច្ចេកទេសធ្វើឱ្យមានតុល្យភាពទិន្នន័យ (Over-sampling ជាមួយ SMOTE) បានជួយបង្កើនសមត្ថភាពព្យាករណ៍យ៉ាងមានប្រសិទ្ធភាព ដែលក្នុងនោះក្បួនដោះស្រាយ Random Forest ទទួលបានភាពត្រឹមត្រូវ ៩៧.០៧% និងម៉ូដែល SVM ទទួលបាន ៩៧.៨៧% លើទិន្នន័យសើស្បែក។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM) + Pre-processing</span></strong><br>ម៉ាស៊ីនវ៉ិចទ័រគាំទ្រ (SVM) រួមជាមួយការរៀបចំទិន្នន័យ</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវខ្ពស់បំផុត និងមានស្ថិរភាពល្អប្រសើរ ជាពិសេសបន្ទាប់ពីការអនុវត្តបច្ចេកទេសដកចេញទិន្នន័យខុសប្រក្រតី (Outlier removal) លើទិន្នន័យច្រើនវិមាត្រ។</td>
+                <td>អាចចំណាយពេលគណនាយូរ និងទាមទារធនធានកុំព្យូទ័រច្រើនជាងក្បួនដោះស្រាយសាមញ្ញ នៅពេលសំណុំទិន្នន័យមានទំហំធំខ្លាំង។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ ៩៩.២៤% លើសំណុំទិន្នន័យ Dermatology និង ៩៦.០៥% លើសំណុំទិន្នន័យ Stroke ក្រោយពេលដកទិន្នន័យខុសប្រក្រតីចេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest (RF) + Pre-processing</span></strong><br>ព្រៃចៃដន្យ (Random Forest) រួមជាមួយការរៀបចំទិន្នន័យ</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការទប់ទល់នឹងទិន្នន័យរំខាន (Noise) និងមានប្រសិទ្ធភាពខ្លាំងក្នុងការកសាងម៉ូដែលជាមួយទិន្នន័យដែលបានធ្វើតុល្យភាព (SMOTE)។</td>
+                <td>ម៉ូដែលដែលកសាងឡើងមានលក្ខណៈស្មុគស្មាញ (Black box) ដែលធ្វើឱ្យពិបាកក្នុងការបកស្រាយលទ្ធផលចុងក្រោយប្រាប់ដល់គ្រូពេទ្យ។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ ៩៧.៨១% លើសំណុំទិន្នន័យ Dermatology និង ៩៧.៤២% លើសំណុំទិន្នន័យ Hepatitis C ក្រោយពេលធ្វើ Under-sampling។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Naïve Bayes (NB) + Pre-processing</span></strong><br>ណាយបាយយេស (Naïve Bayes) រួមជាមួយការរៀបចំទិន្នន័យ</td>
+                <td>ដំណើរការបានលឿនបំផុត ងាយស្រួលក្នុងការអនុវត្ត និងផ្តល់លទ្ធផលគួរសមទោះបីជាសំណុំទិន្នន័យមានទំហំតូចក៏ដោយ។</td>
+                <td>មានការសន្មតថាអថេរទាំងអស់មានឯករាជ្យភាពពីគ្នា ដែលជាទូទៅវាមិនសូវពិតប្រាកដនៅក្នុងកម្រងទិន្នន័យវេជ្ជសាស្ត្រជាក់ស្តែង។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវរហូតដល់ ៩៧.៩៤% លើសំណុំទិន្នន័យ Ecoli បន្ទាប់ពីការកម្ចាត់ Outlier។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនបានបញ្ជាក់លម្អិតពីទំហំផ្នែករឹង (Hardware) នោះទេ ប៉ុន្តែបានបញ្ជាក់ថាការក្លែងធ្វើ និងការវាយតម្លៃត្រូវបានអនុវត្តដោយប្រើប្រាស់ភាសាប្រोग्राम Java ជាមួយនឹងក្បួនដោះស្រាយម៉ាស៊ីនរៀនកម្រិតស្តង់ដារ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> បរិស្ថានសម្រាប់សរសេរកូដភាសា Java (Java Development Environment) និងបណ្ណាល័យសម្រាប់ដំណើរការក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine Learning Libraries)។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យវេជ្ជសាស្ត្រពិតប្រាកដពី UCI Machine Learning Repository (ដូចជា Dermatology, Ecoli) និង Kaggle (ដូចជា Stroke, Hepatitis C) ដែលមានទំហំចាប់ពី ៣៣៦ ដល់ ៥១១០ កំណត់ត្រា។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រយួរដៃ ឬកុំព្យូទ័រលើតុស្តង់ដារដែលមានស៊ីភីយូ (CPU) ធម្មតាអាចដំណើរការបាន ដោយមិនតម្រូវឱ្យមានអង្គគណនាក្រាហ្វិក (GPU) សម្រាប់ក្បួនដោះស្រាយប្រភេទនេះឡើយ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្អែកលើសំណុំទិន្នន័យសាធារណៈពី UCI និង Kaggle ដែលភាគច្រើនប្រមូលផ្តុំពីប្រជាជននៅលោកខាងលិច ឬប្រទេសអភិវឌ្ឍន៍។ នេះជារឿងគួរឱ្យកត់សម្គាល់សម្រាប់ប្រទេសកម្ពុជា ពីព្រោះប្រវត្តិហ្សែន លក្ខខណ្ឌរស់នៅ និងអត្រាប្រេវ៉ាឡង់នៃជំងឺរបស់ប្រជាជនកម្ពុជាមានភាពខុសគ្នា ដែលទាមទារឱ្យមានការសាកល្បងម៉ូដែលនេះផ្ទាល់ជាមួយសំណុំទិន្នន័យអ្នកជំងឺក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្ររៀបចំទិន្នន័យជាមុននេះមានភាពពាក់ព័ន្ធ និងផ្តល់អត្ថប្រយោជន៍យ៉ាងធំធេងសម្រាប់ការដោះស្រាយបញ្ហាទិន្នន័យសុខាភិបាលនៅក្នុងប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធព័ត៌មានសុខាភិបាលថ្នាក់ជាតិ (National HMIS):</strong> មន្ទីរពេទ្យបង្អែក និងមណ្ឌលសុខភាពនៅតាមបណ្តាខេត្តនានាក្នុងប្រទេសកម្ពុជា ជារឿយៗជួបប្រទះបញ្ហាការបញ្ចូលទិន្នន័យមិនពេញលេញ ឬបាត់បង់តម្លៃ។ វិធីសាស្ត្រ KNN-based Imputation អាចជួយបំពេញទិន្នន័យទាំងនេះបានដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ការវិភាគជំងឺឆ្លង និងរ៉ាំរ៉ៃ (ឧ. ជំងឺទឹកនោមផ្អែម និងថ្លើម):</strong> ដោយសារអត្រាអ្នកកើតជំងឺទឹកនោមផ្អែម (Diabetes) និងរលាកថ្លើមមានការកើនឡើង ការប្រើប្រាស់បច្ចេកទេស SMOTE អាចជួយថ្លឹងថ្លែងទិន្នន័យរវាងអ្នកមានជំងឺ និងគ្មានជំងឺ ដើម្បីឱ្យម៉ូដែលទស្សន៍ទាយមានភាពសុក្រឹតខ្ពស់ មិនលម្អៀងទៅរកក្រុមដែលមានចំនួនច្រើន។</li>
+            
+            <li><strong>ការស្រាវជ្រាវនៅសាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល (UHS):</strong> និស្សិត និងអ្នកស្រាវជ្រាវវេជ្ជសាស្ត្រអាចអនុវត្តក្បួន Cluster-based Outlier Detection ដើម្បីច្រោះយកទិន្នន័យមិនប្រក្រតីចេញពីសំណាកគំរូតូចៗ (Small sample sizes) មុននឹងបោះពុម្ពផ្សាយលទ្ធផលស្រាវជ្រាវរបស់ពួកគេ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការចាប់យកបច្ចេកទេសសម្អាត និងរៀបចំទិន្នន័យ AI នេះ គឺជាជំហានដំបូងដ៏សំខាន់សម្រាប់ស្ថាប័នសុខាភិបាលកម្ពុជា ក្នុងការកសាងប្រព័ន្ធជំនួយការសម្រេចចិត្តវេជ្ជសាស្ត្រដែលគួរឱ្យទុកចិត្ត ទោះបីជាគុណភាពទិន្នន័យដើមនៅមានកម្រិតក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ ការប្រមូលទិន្នន័យ និងការវិភាគបឋម (EDA):</strong> ចាប់ផ្តើមដោយការទាញយកសំណុំទិន្នន័យវេជ្ជសាស្ត្រពីប្រភពបើកចំហ (ឧ. Kaggle) ឬប្រើប្រាស់ទិន្នន័យអនាមិកពីមន្ទីរពេទ្យ។ ប្រើប្រាស់ <span class="en">Python Pandas</span> ដើម្បីស្វែងយល់ពីរចនាសម្ព័ន្ធទិន្នន័យ និងគណនាភាគរយនៃទិន្នន័យដែលបាត់បង់ (Missing rate) ក្នុងជួរឈរនីមួយៗ។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តការបំពេញទិន្នន័យដែលបាត់បង់ដោយប្រើ KNN:</strong> ប្រសិនបើជួរឈរមានអត្រាបាត់បង់លើសពី ៤០% សូមលុបវាចោល។ សម្រាប់ទិន្នន័យដែលនៅសល់ សូមប្រើប្រាស់ <span class="en">Scikit-Learn KNNImputer</span> ដើម្បីប៉ាន់ស្មាន និងបំពេញចន្លោះទិន្នន័យទាំងនោះដោយផ្អែកលើចម្ងាយ Euclidean នៃអ្នកជំងឺដែលមានលក្ខណៈស្រដៀងគ្នា។</li>
+            
+            <li><strong>ជំហានទី៣៖ ចាប់យក និងលុបចោលទិន្នន័យខុសប្រក្រតី (Outlier Removal):</strong> ប្រើប្រាស់ក្បួនដោះស្រាយចង្កោម ដូចជា <span class="en">MiniSom (Self-Organizing Maps)</span> ឬ <span class="en">DBSCAN</span> ដើម្បីបែងចែកទិន្នន័យជាក្រុម។ គណនាចម្ងាយពីចំណុចទិន្នន័យនីមួយៗទៅកាន់កណ្តាលនៃចង្កោម (Centroid) ហើយលុបចោលចំណុចណាដែលស្ថិតនៅឆ្ងាយខុសពីធម្មតា (Outliers)។</li>
+            
+            <li><strong>ជំហានទី៤៖ ធ្វើតុល្យភាពទិន្នន័យចំណាត់ថ្នាក់ (Data Balancing):</strong> ដោះស្រាយបញ្ហាសំណុំទិន្នន័យអតុល្យភាព (ឧ. អ្នកជំងឺតិចជាងអ្នកជាសះស្បើយខ្លាំង) ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">imbalanced-learn</span> ជាពិសេសអនុវត្តបច្ចេកទេស <span class="en">SMOTE</span> ដើម្បីបង្កើតទិន្នន័យសំយោគបន្ថែមសម្រាប់ក្រុមទិន្នន័យភាគតិច (Minority class)។</li>
+            
+            <li><strong>ជំហានទី៥៖ បណ្តុះបណ្តាលម៉ូដែល និងប្រៀបធៀបប្រសិទ្ធភាព:</strong> បែងចែកទិន្នន័យដែលបានរៀបចំរួចជា Training និង Testing sets។ បង្កើតម៉ូដែលដោយប្រើ <span class="en">Support Vector Machine (SVM)</span> និង <span class="en">Random Forest Classifier</span> បន្ទាប់មកប្រៀបធៀបលទ្ធផលភាពត្រឹមត្រូវ (Accuracy), ភាពប្រាកដ (Precision), និងការរំលឹក (Recall) ដើម្បីជ្រើសរើសម៉ូដែលដែលល្អបំផុត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Pre-Processing</span></td>
+                <td>ដំណើរការសម្អាត កែតម្រូវ និងរៀបចំទិន្នន័យឆៅឱ្យមានរបៀបរៀបរយ មុននឹងបញ្ជូនវាទៅឱ្យកុំព្យូទ័រវិភាគ ដើម្បីធានាថាទិន្នន័យមានគុណភាពខ្ពស់ និងជួយឱ្យម៉ូដែលម៉ាស៊ីនរៀនដំណើរការបានត្រឹមត្រូវ។</td>
+                <td>ដូចជាការលាងសម្អាត និងហាន់បន្លែសាច់ឱ្យបានស្អាតបាត មុននឹងចាប់ផ្តើមចម្អិនម្ហូប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Missing Value Imputation</span></td>
+                <td>បច្ចេកទេសគណិតវិទ្យាក្នុងការប៉ាន់ស្មាន និងបំពេញចន្លោះទិន្នន័យដែលបាត់បង់ (ឧទាហរណ៍ ព័ត៌មានអ្នកជំងឺដែលមិនបានបំពេញ) ដោយប្រើប្រាស់ទិន្នន័យដទៃទៀតដែលមានស្រាប់ ដើម្បីកុំឱ្យបាត់បង់ព័ត៌មានសំខាន់ៗពេលវិភាគ។</td>
+                <td>ដូចជាការទស្សន៍ទាយពាក្យដែលបាត់នៅក្នុងប្រយោគមួយ ដោយមើលទៅលើអត្ថន័យនៃពាក្យនៅខាងមុខ និងខាងក្រោយវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Outlier Detection</span></td>
+                <td>ការស្វែងរក និងកំណត់សម្គាល់ទិន្នន័យដែលខុសប្រក្រតី ឬនៅឆ្ងាយដាច់ពីគេខ្លាំង ដែលទិន្នន័យទាំងនោះអាចជាកំហុសក្នុងការកត់ត្រា ឬជារោគសញ្ញាជំងឺកម្រណាមួយដែលត្រូវយកចិត្តទុកដាក់។</td>
+                <td>ដូចជាការកត់សម្គាល់ឃើញសត្វទាពណ៌ខ្មៅមួយក្បាល ដែលឈរនៅកណ្តាលហ្វូងសត្វទាពណ៌សរាប់រយក្បាល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Class Imbalance</span></td>
+                <td>ស្ថានភាពដែលទិន្នន័យក្នុងក្រុមមួយមានចំនួនច្រើនលើសលប់ ធៀបនឹងក្រុមមួយទៀត (ឧទាហរណ៍ ទិន្នន័យអ្នកជាសះស្បើយ ៩៩% និងអ្នកមានជំងឺ ១%) ដែលធ្វើឱ្យម៉ូដែលកុំព្យូទ័ររៀនបានតែម្ខាង និងទស្សន៍ទាយលម្អៀង។</td>
+                <td>ដូចជាការរៀបចំការប្រកួតទាញព្រ័ត្រដែលក្រុមម្ខាងមានមនុស្ស ១១នាក់ ឯក្រុមម្ខាងទៀតមានតែ ២នាក់ ដែលធ្វើឱ្យការប្រកួតមិនមានភាពយុត្តិធម៌។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTE (Synthetic Minority Over-Sampling Technique)</span></td>
+                <td>បច្ចេកទេសដោះស្រាយបញ្ហាអតុល្យភាពទិន្នន័យ ដោយបង្កើតទិន្នន័យក្លែងក្លាយ (សំយោគ) ថ្មីៗសម្រាប់ក្រុមដែលមានទិន្នន័យតិច ដោយផ្អែកលើលក្ខណៈនៃទិន្នន័យពិត ដើម្បីធ្វើឱ្យក្រុមទាំងពីរមានចំនួនស្មើគ្នា។</td>
+                <td>ដូចជាការយកកូនសិស្សពូកែដែលខ្វះខាតម្នាក់ ទៅបង្កើតជាសិស្សក្លែងកាយដែលមានចរិតស្រដៀងគ្នា ដើម្បីឱ្យក្រុមសិស្សពូកែមានចំនួនស្មើនឹងក្រុមសិស្សមធ្យម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (KNN)</span></td>
+                <td>ក្បួនដោះស្រាយដែលធ្វើចំណាត់ថ្នាក់ ឬទស្សន៍ទាយតម្លៃទិន្នន័យថ្មី ដោយស្វែងរកចំណុចទិន្នន័យចាស់ៗចំនួន K (ឧទាហរណ៍ ៥) ដែលមានលក្ខណៈស្រដៀងគ្នា (នៅក្បែរបំផុត) ទៅនឹងទិន្នន័យថ្មីនោះ។</td>
+                <td>ដូចជាការសន្និដ្ឋានពីចរិតលក្ខណៈរបស់មនុស្សម្នាក់ ដោយគ្រាន់តែមើលទៅលើមិត្តភក្តិជិតស្និទ្ធបំផុតរបស់គាត់ចំនួន ៥នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Self Organization Map (SOM)</span></td>
+                <td>ប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដែលបង្រួម និងរៀបចំទិន្នន័យច្រើនវិមាត្រឱ្យទៅជាផែនទី ឬចង្កោមសាមញ្ញ ដើម្បីងាយស្រួលរកមើលភាពស្រដៀងគ្នា និងទិន្នន័យខុសប្រក្រតី។</td>
+                <td>ដូចជាការរៀបចំសៀវភៅរាប់ពាន់ក្បាលក្នុងបណ្ណាល័យ ដោយស្វ័យប្រវត្តិដាក់សៀវភៅប្រភេទដូចគ្នានៅទូក្បែរៗគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machine (SVM)</span></td>
+                <td>ក្បួនដោះស្រាយម៉ាស៊ីនរៀនដ៏មានអានុភាព ដែលព្យាយាមគូសបន្ទាត់ ឬប្លង់ព្រំដែនដ៏ល្អបំផុត ដើម្បីញែកក្រុមទិន្នន័យពីរ ឬច្រើនឱ្យដាច់ពីគ្នា ដោយរក្សាគម្លាតសុវត្ថិភាពឱ្យបានធំបំផុតតាមដែលអាចធ្វើទៅបាន។</td>
+                <td>ដូចជាការសង់របងនៅលើដី ដើម្បីខណ្ឌចែករវាងហ្វូងសត្វឆ្មា និងហ្វូងសត្វឆ្កែ ឱ្យនៅដាច់ពីគ្នាបានច្បាស់លាស់ និងមានសុវត្ថិភាពបំផុត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Advanced+missing+value+imputation+techniques+for+medical+datasets" target="_blank" rel="noopener"><span class="en">Advanced missing value imputation techniques for medical datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+class+imbalance+in+electronic+health+records+using+SMOTE" target="_blank" rel="noopener"><span class="en">Handling class imbalance in electronic health records using SMOTE</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Cluster-based+outlier+detection+algorithms+for+healthcare+analytics" target="_blank" rel="noopener"><span class="en">Cluster-based outlier detection algorithms for healthcare analytics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Impact+of+data+preprocessing+on+machine+learning+model+accuracy" target="_blank" rel="noopener"><span class="en">Impact of data preprocessing on machine learning model accuracy</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>សក្តានុពលនៃអនុគមន៍ Hash Ascon៖ ការវាស់វែងសមត្ថភាព ទម្រង់ផ្នែករឹង និងការយល់ដឹងអំពីកម្មវិធីសម្រាប់ប្រព័ន្ធ IoT និង Blockchain ដែលមានសុវត្ថិភាព | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃកង្វះខាតទិន្នន័យជាក់ស្តែងស្តីពីការវាស់វែងសមត្ថភាព (Benchmarking) នៃអនុគមន៍ Ascon Hash ដែលទើបត្រូវបានជ្រើសរើសដោយ NIST សម្រាប់កា...">
+    
+    <meta name="keywords" content="Ascon-Hash256, Lightweight Cryptography, IoT Security, Blockchain, Post-Quantum Cryptography, SMHasher, Bloom Filter, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/ascon-hash-functions-iot-blockchain-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/ascon-hash-functions-iot-blockchain-2025.html">
+    <meta property="og:title" content="សក្តានុពលនៃអនុគមន៍ Hash Ascon៖ ការវាស់វែងសមត្ថភាព ទម្រង់ផ្នែករឹង និងការយល់ដឹងអំពីកម្មវិធីសម្រាប់ប្រព័ន្ធ IoT និង Blockchain ដែលមានសុវត្ថិភាព | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃកង្វះខាតទិន្នន័យជាក់ស្តែងស្តីពីការវាស់វែងសមត្ថភាព (Benchmarking) នៃអនុគមន៍ Ascon Hash ដែលទើបត្រូវបានជ្រើសរើសដោយ NIST សម្រាប់ការការពារប្រព័ន្ធដែលមានធនធានកម្រិតទាប ដោយផ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2025 (Sensors)">
+    
+    <meta property="article:tag" content="Ascon-Hash256">
+    
+    <meta property="article:tag" content="Lightweight Cryptography">
+    
+    <meta property="article:tag" content="IoT Security">
+    
+    <meta property="article:tag" content="Blockchain">
+    
+    <meta property="article:tag" content="Post-Quantum Cryptography">
+    
+    <meta property="article:tag" content="SMHasher">
+    
+    <meta property="article:tag" content="Bloom Filter">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="សក្តានុពលនៃអនុគមន៍ Hash Ascon៖ ការវាស់វែងសមត្ថភាព ទម្រង់ផ្នែករឹង និងការយល់ដឹងអំពីកម្មវិធីសម្រាប់ប្រព័ន្ធ IoT និង Blockchain ដែលមានសុវត្ថិភាព">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃកង្វះខាតទិន្នន័យជាក់ស្តែងស្តីពីការវាស់វែងសមត្ថភាព (Benchmarking) នៃអនុគមន៍ Ascon Hash ដែលទើបត្រូវបានជ្រើសរើសដោយ NIST សម្រាប់ការការពារប្រព័ន្ធដែលមានធនធានកម្រិតទាប ដោយផ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179f\u1780\u17d2\u178f\u17b6\u1793\u17bb\u1796\u179b\u1793\u17c3\u17a2\u1793\u17bb\u1782\u1798\u1793\u17cd Hash Ascon\u17d6 \u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179c\u17c2\u1784\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796 \u1791\u1798\u17d2\u179a\u1784\u17cb\u1795\u17d2\u1793\u17c2\u1780\u179a\u17b9\u1784 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u17a2\u17c6\u1796\u17b8\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 IoT \u1793\u17b7\u1784 Blockchain \u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796",
+      "name": "The Untapped Potential of Ascon Hash Functions: Benchmarking, Hardware Profiling, and Application Insights for Secure IoT and Blockchain Systems",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u1784\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u179f\u17d2\u178f\u17b8\u1796\u17b8\u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179c\u17c2\u1784\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796 (Benchmarking) \u1793\u17c3\u17a2\u1793\u17bb\u1782\u1798\u1793\u17cd Ascon Hash \u178a\u17c2\u179b\u1791\u17be\u1794\u178f\u17d2\u179a\u17bc\u179c\u1794\u17b6\u1793\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u178a\u17c4\u1799 NIST \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17b6\u179a\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u178a\u17c2\u179b\u1798\u17b6\u1793\u1792\u1793\u1792\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f\u1791\u17b6\u1794 \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 IoT \u1793\u17b7\u1784 Blockchain\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/ascon-hash-functions-iot-blockchain-2025.html",
+      "author": [{"@type": "Person", "name": "Meera Gladis Kurian (University of Houston)"},{"@type": "Person", "name": "Yuhua Chen (University of Houston)"}],
+      "datePublished": "2025 (Sensors)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "The Untapped Potential of Ascon Hash Functions: Benchmarking, Hardware Profiling, and Application Insights for Secure IoT and Blockchain Systems",
+        "url": "https://doi.org/10.3390/s25195936"
+      },
+      "keywords": ["Ascon-Hash256", "Lightweight Cryptography", "IoT Security", "Blockchain", "Post-Quantum Cryptography", "SMHasher", "Bloom Filter"],
+      "about": "Cybersecurity and Cryptography"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179f\u1780\u17d2\u178f\u17b6\u1793\u17bb\u1796\u179b\u1793\u17c3\u17a2\u1793\u17bb\u1782\u1798\u1793\u17cd Hash Ascon\u17d6 \u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179c\u17c2\u1784\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796 \u1791\u1798\u17d2\u179a\u1784\u17cb\u1795\u17d2\u1793\u17c2\u1780\u179a\u17b9\u1784 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u17a2\u17c6\u1796\u17b8\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 IoT \u1793\u17b7\u1784 Blockchain \u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796",
+          "item": "https://khmerresearch.com/papers/technology/ascon-hash-functions-iot-blockchain-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>សក្តានុពលនៃអនុគមន៍ Hash Ascon៖ ការវាស់វែងសមត្ថភាព ទម្រង់ផ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> The Untapped Potential of Ascon Hash Functions: Benchmarking, Hardware Profiling, and Application Insights for Secure IoT and Blockchain Systems<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/s25195936" target="_blank">doi.org/10.3390/s25195936</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>សក្តានុពលនៃអនុគមន៍ Hash Ascon៖ ការវាស់វែងសមត្ថភាព ទម្រង់ផ្នែករឹង និងការយល់ដឹងអំពីកម្មវិធីសម្រាប់ប្រព័ន្ធ IoT និង Blockchain ដែលមានសុវត្ថិភាព</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> The Untapped Potential of Ascon Hash Functions: Benchmarking, Hardware Profiling, and Application Insights for Secure IoT and Blockchain Systems</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Meera Gladis Kurian (University of Houston), Yuhua Chen (University of Houston)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025 (Sensors)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Cybersecurity and Cryptography</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃកង្វះខាតទិន្នន័យជាក់ស្តែងស្តីពីការវាស់វែងសមត្ថភាព (Benchmarking) នៃអនុគមន៍ Ascon Hash ដែលទើបត្រូវបានជ្រើសរើសដោយ NIST សម្រាប់ការការពារប្រព័ន្ធដែលមានធនធានកម្រិតទាប ដោយផ្តោតលើការប្រើប្រាស់ក្នុងប្រព័ន្ធ IoT និង Blockchain។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់វិធីសាស្ត្រត្រួតពិនិត្យពីរដំណាក់កាល ដោយរួមបញ្ចូលការធ្វើតេស្តស្ថិតិស្តង់ដារ និងការពិសោធន៍លើកម្មវិធីជាក់ស្តែងតាមរយៈការសរសេរកូដ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ក្របខ័ណ្ឌ SMHasher ដើម្បីវាយតម្លៃភាពរឹងមាំនៃស្ថិតិ និងលក្ខណៈរចនាសម្ព័ន្ធ (Structural robustness) ក្រោមលក្ខខណ្ឌធាតុចូលផ្សេងៗគ្នា។</li>
+            
+            <li>ការពិសោធន៍ជាក់ស្តែងលើភាសា Python សម្រាប់ប្រព័ន្ធ Bloom filter, ការប្រមូលផ្តុំ Merkle tree និងការកំណត់អត្តសញ្ញាណឧបករណ៍ (Device fingerprinting)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>Ascon-Hash256 បង្ហាញពីការសាយភាយទិន្នន័យ (Diffusion) ខ្លាំង និងមានកម្រិតលំអៀងស្ថិតិទាប ដែលមានសមត្ថភាពប្រហាក់ប្រហែល ឬល្អជាងអនុគមន៍ SHA3 និង BLAKE2s។</li>
+            
+            <li>ការពិសោធន៍បានបង្ហាញថា Ascon មានប្រសិទ្ធភាពខ្ពស់ក្នុងការប្រើប្រាស់ជាមួយ Bloom filter សម្រាប់ការពារការវាយប្រហារសារឡើងវិញ (Replay detection) និងរក្សាស្ថេរភាព FPR បានល្អ។</li>
+            
+            <li>អនុគមន៍នេះស័ក្តិសមបំផុតសម្រាប់ការដាក់ឱ្យប្រើប្រាស់ក្នុងប្រព័ន្ធដែលមានធនធានកំណត់ដូចជា IoT និងជាជម្រើសដ៏ល្អសម្រាប់ប្រព័ន្ធសុវត្ថិភាពកុំព្យូទ័រយុគសម័យក្រោយកង់ទិច (Post-quantum cryptography)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Ascon-Hash256 (Proposed)</span></strong><br>ការប្រើប្រាស់អនុគមន៍ Hash នៃគ្រួសារ Ascon ដែលត្រូវបានអនុម័តដោយ NIST សម្រាប់ឧបករណ៍ធនធានតិច</td>
+                <td>មានតុល្យភាពល្អបំផុតរវាងសុវត្ថិភាព និងប្រសិទ្ធភាពលើឧបករណ៍ IoT ។ វាមានភាពធន់នឹងការវាយប្រហារតាមរយៈរចនាសម្ព័ន្ធ (Structural bias) និងមានទំហំតូចលើ Hardware (FPGA)។</td>
+                <td>នៅមិនទាន់មានការគាំទ្រទូលំទូលាយពីបណ្ណាល័យកូដស្តង់ដារ (Standard Libraries) ដូច SHA3 នៅឡើយ ហើយល្បឿនយឺតជាងអនុគមន៍ដែលមិនមែនជាគ្រីបតូ។</td>
+                <td>ពិន្ទុ Avalanche bias ទាបបំផុត (០.៨២៣%) និងភាពលំអៀងក្នុងរចនាសម្ព័ន្ធទាបបំផុត (០.០៨១%) ធៀបនឹងគូប្រជែង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SHA3-256 (Cryptographic Standard)</span></strong><br>ស្តង់ដារ Hash គ្រីបតូដែលប្រើប្រាស់រចនាសម្ព័ន្ធ Sponge ដូចគ្នា</td>
+                <td>មានសុវត្ថិភាពខ្ពស់ និងត្រូវបានទទួលស្គាល់ជាសកលសម្រាប់ការប្រើប្រាស់ទូទៅ។</td>
+                <td>ត្រូវការធនធានគណនា និងថាមពលខ្ពស់ជាង ដែលមិនសូវសាកសមសម្រាប់ឧបករណ៍ចាប់សញ្ញា (Sensors) តូចៗ។</td>
+                <td>មាន Avalanche bias (១.០១៣%) ខ្ពស់ជាង Ascon-Hash256 បន្តិចក្នុងការធ្វើតេស្ត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">MurmurHash3 / xxHash (Non-cryptographic)</span></strong><br>អនុគមន៍ Hash ដែលផ្តោតលើល្បឿនលឿន មិនមែនសម្រាប់សុវត្ថិភាព</td>
+                <td>មានល្បឿនលឿនខ្លាំង សាកសមសម្រាប់ការងារទូទៅដែលមិនត្រូវការសុវត្ថិភាពខ្ពស់។</td>
+                <td>ងាយរងគ្រោះនឹងការវាយប្រហារបង្កើតទិន្នន័យស្ទួន (Collision attacks) និងមានភាពលំអៀងខ្ពស់នៅពេលទិន្នន័យចូលមានទម្រង់ជាក់លាក់។</td>
+                <td>បរាជ័យក្នុងការធ្វើតេស្តសុវត្ថិភាពមួយចំនួន (ដូចជា Sparse និង Cyclic tests) ដែលបង្ហាញពីហានិភ័យក្នុងការប្រើប្រាស់សម្រាប់ប្រព័ន្ធសុវត្ថិភាព។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្ត Ascon ទាមទារធនធានតិចតួចបំផុត ដែលស័ក្តិសមសម្រាប់បរិបទនៃប្រទេសកំពុងអភិវឌ្ឍន៍ ប៉ុន្តែទាមទារចំណេះដឹងផ្នែកបច្ចេកទេសជាក់លាក់។
+    
+    <ul>
+        
+        <li><strong>Hardware Requirements:</strong> អាចដំណើរការបានល្អលើ Microcontrollers (ដូចជា ESP32, Cortex-M) ឬ FPGA ដោយប្រើប្រាស់ Logic Gates (LUTs) តិចជាង ៧.០k (សម្រាប់ Ascon-Sign)។</li>
+        
+        <li><strong>Software & Tools:</strong> ត្រូវការ Python 3.10+ និងបណ្ណាល័យជំនួយដូចជា xoflib និង SMHasher សម្រាប់ការធ្វើតេស្ត។</li>
+        
+        <li><strong>Computational Power:</strong> មិនត្រូវការកុំព្យូទ័រដែលមានកម្លាំងខ្លាំងទេ (Standard CPU គឺគ្រប់គ្រាន់) ប៉ុន្តែត្រូវការការយល់ដឹងអំពីការគ្រប់គ្រងអង្គចងចាំ (Memory Management) ក្នុងប្រព័ន្ធតូចៗ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះធ្វើឡើងដោយផ្អែកលើការពិសោធន៍ (Simulation) និងទិន្នន័យសំយោគ (Synthetic inputs) តាមរយៈឧបករណ៍ SMHasher មិនមែនជាទិន្នន័យអ្នកប្រើប្រាស់ជាក់ស្តែងទេ។ សម្រាប់កម្ពុជា នេះមានន័យថាលទ្ធផលគឺអាចយកទៅអនុវត្តបានជាសកល ប៉ុន្តែត្រូវប្រុងប្រយ័ត្នចំពោះកត្តាបរិស្ថានជាក់ស្តែងដូចជា ភាពរអាក់រអួលនៃបណ្តាញអ៊ីនធឺណិត ឬឧបករណ៍ដែលមានគុណភាពទាប។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសារៈសំខាន់ខ្លាំងសម្រាប់កម្ពុជា ដែលកំពុងជំរុញការប្រើប្រាស់ប្រព័ន្ធឌីជីថល និងហេដ្ឋារចនាសម្ព័ន្ធឆ្លាតវៃ (Smart Infrastructure)។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> ការប្រើប្រាស់ Ascon លើឧបករណ៍ចាប់សញ្ញា (Sensors) ដើម្បីតាមដានអាកាសធាតុ ឬដីនៅតាមខេត្តនានា ដោយធានាថាទិន្នន័យមិនត្រូវបានកែប្រែ (Tamper-evident) ដោយមិនប្រើប្រាស់ថាមពលថ្មច្រើន។</li>
+            
+            <li><strong>ប្រព័ន្ធ Blockchain និង Fintech:</strong> អាចយកទៅសិក្សាដើម្បីកែលម្អប្រសិទ្ធភាពនៃប្រព័ន្ធទូទាត់ឌីជីថល ឬប្រព័ន្ធដែលស្រដៀងនឹង Bakong ក្នុងការកាត់បន្ថយទំហំផ្ទុកទិន្នន័យ និងបង្កើនល្បឿនផ្ទៀងផ្ទាត់។</li>
+            
+            <li><strong>សុវត្ថិភាពតាមព្រំដែន និងច្រកទ្វារ (Edge Computing):</strong> ការប្រើប្រាស់ Bloom filter ជាមួយ Ascon ដើម្បីការពារការវាយប្រហារសារឡើងវិញ (Replay attacks) លើប្រព័ន្ធកាមេរ៉ាសុវត្ថិភាព ឬឧបករណ៍ IoT នៅតាមច្រកព្រំដែន។</li>
+            
+        </ul>
+        
+        
+        <p>Ascon គឺជាជម្រើសដ៏ល្អសម្រាប់កម្ពុជាក្នុងការកសាងប្រព័ន្ធ IoT ដែលមានសុវត្ថិភាព និងចំណាយតិច ជាពិសេសត្រៀមខ្លួនសម្រាប់យុគសម័យក្រោយកង់ទិច (Post-quantum era)។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១៖ ការសិក្សាមូលដ្ឋានគ្រឹះ:</strong> និស្សិតគួរចាប់ផ្តើមដោយសិក្សាអំពីស្តង់ដារ NIST Lightweight Cryptography និងរចនាសម្ព័ន្ធ Sponge functions ដោយអានឯកសារបច្ចេកទេសរបស់ Ascon។</li>
+            
+            <li><strong>ជំហានទី ២៖ ការដំឡើងបរិស្ថានពិសោធន៍:</strong> ដំឡើង Python និងបណ្ណាល័យ xoflib ដើម្បីសាកល្បងបង្កើត Hash ពី Ascon និងប្រៀបធៀបល្បឿនជាមួយបណ្ណាល័យ hashlib (SHA3)។</li>
+            
+            <li><strong>ជំហានទី ៣៖ ការអនុវត្ត Bloom Filter:</strong> សរសេរកូដ Python ដើម្បីបង្កើតប្រព័ន្ធ Bloom Filter ដោយប្រើ Ascon-Hash ជាអ្នកបង្កើត Index ដើម្បីយល់ពីរបៀបដែលវាការពារទិន្នន័យស្ទួន និងការវាយប្រហារ។</li>
+            
+            <li><strong>ជំហានទី ៤៖ ការធ្វើតេស្តលើឧបករណ៍ជាក់ស្តែង:</strong> ប្រសិនបើអាច និស្សិតគួរព្យាយាមដំណើរការកូដនេះលើឧបករណ៍ Microcontroller តូចៗដូចជា ESP32 ដើម្បីវាស់វែងការប្រើប្រាស់ថាមពល និងល្បឿនជាក់ស្តែង។</li>
+            
+            <li><strong>ជំហានទី ៥៖ ការវិភាគសម្រាប់ប្រព័ន្ធ Blockchain:</strong> សិក្សាអំពីរបៀបបង្កើត Merkle Tree ដោយប្រើ Ascon និងវិភាគថាតើវាអាចកាត់បន្ថយទំហំទិន្នន័យបានប៉ុន្មានធៀបនឹងវិធីសាស្ត្រចាស់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Sponge Construction</span></td>
+                <td>ទម្រង់រចនាសម្ព័ន្ធគ្រឹះនៃអនុគមន៍ Hash (ដូចជា Ascon) ដែលដំណើរការដោយការស្រូបយកទិន្នន័យចូល (Absorb) ទៅក្នុងអង្គចងចាំខាងក្នុង បន្ទាប់មកធ្វើការលាយបញ្ចូលគ្នា ហើយចុងក្រោយច្របាច់បញ្ចេញលទ្ធផល (Squeeze) តាមប្រវែងដែលត្រូវការ។</td>
+                <td>ដូចជាអេប៉ុងដែលស្រូបទឹកចូល (ទិន្នន័យ) រួចច្របាច់ទឹកចេញមកវិញតាមបរិមាណដែលយើងចង់បាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Avalanche Effect</span></td>
+                <td>លក្ខណៈសម្បត្តិសុវត្ថិភាពដែលតម្រូវថា ប្រសិនបើទិន្នន័យដើមផ្លាស់ប្តូរតែបន្តិច (សូម្បីតែ ១ ប៊ីត) លទ្ធផល Hash ចុងក្រោយត្រូវតែផ្លាស់ប្តូរយ៉ាងខ្លាំង (ប្រហែល ៥០%) ដើម្បីកុំឱ្យគេអាចទាយដឹងពីទំនាក់ទំនងរវាងទិន្នន័យដើម និងលទ្ធផល។</td>
+                <td>ដូចជាការគោះដミノមួយគ្រាប់នៅដើមជួរ ធ្វើឱ្យដミノរាប់រយគ្រាប់ផ្សេងទៀតដួលរលំផ្លាស់ប្តូរទ្រង់ទ្រាយទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bloom Filter</span></td>
+                <td>រចនាសម្ព័ន្ធទិន្នន័យបែបប្រូបាប៊ីលីតេ ដែលប្រើសម្រាប់ពិនិត្យមើលថា តើធាតុមួយធ្លាប់មាននៅក្នុងប្រព័ន្ធហើយឬនៅ ដោយប្រើទំហំផ្ទុកតូចបំផុត និងល្បឿនលឿន ប៉ុន្តែអាចមានកំហុសតិចតួច (False Positive)។ នៅក្នុងឯកសារនេះ វាប្រើសម្រាប់ការពារការវាយប្រហារសារឡើងវិញ។</td>
+                <td>ដូចជាការមើលបញ្ជីឈ្មោះសង្ខេប ដើម្បីដឹងថាមានឈ្មោះនរណាម្នាក់ឬអត់ ដោយមិនចាំបាច់អានសៀវភៅឈ្មោះទាំងមូល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Merkle Tree</span></td>
+                <td>រចនាសម្ព័ន្ធទិន្នន័យរាងដូចដើមឈើ ដែលប្រើអនុគមន៍ Hash ដើម្បីសង្ខេប និងផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវនៃទិន្នន័យដ៏ច្រើន (ដូចជាក្នុង Blockchain) ដោយគ្រាន់តែផ្ទៀងផ្ទាត់ឫសគល់ (Root Hash) មួយប៉ុណ្ណោះ។</td>
+                <td>ដូចជាការបូកសរុបស្នាមម្រាមដៃនៃឯកសារជាច្រើនបញ្ចូលគ្នា ដើម្បីបង្កើតជាស្នាមម្រាមដៃមេមួយសម្រាប់ត្រួតពិនិត្យឯកសារទាំងអស់នោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Post-Quantum Cryptography (PQC)</span></td>
+                <td>ក្បួនដោះស្រាយកូដសម្ងាត់ជំនាន់ថ្មី ដែលត្រូវបានរចនាឡើងដើម្បីការពារទិន្នន័យពីការវាយប្រហារដោយកុំព្យូទ័រ Quantum (កុំព្យូទ័រដែលមានល្បឿនគណនាលឿនជាងកុំព្យូទ័របច្ចុប្បន្នរាប់លានដង)។</td>
+                <td>ដូចជាការសាងសង់ទ្វារដែកក្រាស់ពិសេស ដើម្បីការពារពីចោរដែលមានឧបករណ៍កាត់ដែកឡាស៊ែរទំនើបបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Replay Attack</span></td>
+                <td>ការវាយប្រហារដែល Hacker លួចស្ទាក់ចាប់យកទិន្នន័យដែលត្រឹមត្រូវ (ដូចជាសារបញ្ជាក់អត្តសញ្ញាណ) ហើយបញ្ជូនវាទៅប្រព័ន្ធម្តងទៀតដើម្បីឱ្យប្រព័ន្ធយល់ច្រឡំនិងអនុវត្តតាមបញ្ជានោះម្តងទៀតដោយខុសច្បាប់។</td>
+                <td>ដូចជាការលួចថតសំឡេងពាក្យសម្ងាត់របស់អ្នកដទៃ ហើយយកទៅចាក់ឱ្យម៉ាស៊ីនស្តាប់ដើម្បីបើកទ្វារ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Lightweight Cryptography</span></td>
+                <td>សាខានៃការសរសេរកូដសម្ងាត់ដែលផ្តោតលើការបង្កើតក្បួនដោះស្រាយសម្រាប់ឧបករណ៍តូចៗ (ដូចជា IoT, Smart Cards) ដែលមានកម្លាំងថ្ម និងអង្គចងចាំតិចតួច ដោយមិនធ្វើឱ្យបាត់បង់សុវត្ថិភាព។</td>
+                <td>ដូចជាការបង្កើតអាវក្រោះការពារគ្រាប់កាំភ្លើង ប៉ុន្តែមានទម្ងន់ស្រាលដូចអាវយឺត ដើម្បីឱ្យទាហានអាចរត់បានលឿន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27PRISEC%3A+Comparison+of+Symmetric+Key+Algorithms+for+IoT+Devices%27%2C+%27khmer_title%27%3A+%27PRISEC%E1%9F%96+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9F%80%E1%9E%94%E1%9E%92%E1%9F%80%E1%9E%94%E1%9E%80%E1%9F%92%E1%9E%94%E1%9E%BD%E1%9E%93%E1%9E%8A%E1%9F%84%E1%9F%87%E1%9E%9F%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%99%E1%9E%80%E1%9E%BC%E1%9E%93%E1%9E%9F%E1%9F%84%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%98%E1%9F%81%E1%9E%91%E1%9F%92%E1%9E%9A%E1%9E%B8%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%A7%E1%9E%94%E1%9E%80%E1%9E%9A%E1%9E%8E%E1%9F%8D+IoT%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fprisec-comparison-symmetric-key-algorithms-iot-2019.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'PRISEC: Comparison of Symmetric Key Algorithms for IoT Devices', 'khmer_title': 'PRISEC៖ ការប្រៀបធៀបក្បួនដោះស្រាយកូនសោស៊ីមេទ្រីសម្រាប់ឧបករណ៍ IoT', 'url': '/papers/technology/prisec-comparison-symmetric-key-algorithms-iot-2019.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Proposal+Framework+to+Light+Weight+Cryptography+Primitives%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9F%92%E1%9E%9A%E1%9E%94%E1%9E%81%E1%9F%90%E1%9E%8E%E1%9F%92%E1%9E%8C%E1%9E%9F%E1%9F%86%E1%9E%8E%E1%9E%BE%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%98%E1%9E%BC%E1%9E%9B%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%B6%E1%9E%93%E1%9E%82%E1%9F%92%E1%9E%9A%E1%9E%B9%E1%9F%87%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%BC%E1%9E%8A%E1%9E%93%E1%9E%B8%E1%9E%99%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%91%E1%9E%98%E1%9F%92%E1%9E%84%E1%9E%93%E1%9F%8B%E1%9E%9F%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%9B%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fproposal-framework-lightweight-cryptography-primitives-2022.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Proposal Framework to Light Weight Cryptography Primitives', 'khmer_title': 'ក្របខ័ណ្ឌសំណើសម្រាប់មូលដ្ឋានគ្រឹះនៃកូដនីយកម្មទម្ងន់ស្រាល', 'url': '/papers/technology/proposal-framework-lightweight-cryptography-primitives-2022.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=NIST+Lightweight+Cryptography+%28LWC%29+standardization+process" target="_blank" rel="noopener"><span class="en">NIST Lightweight Cryptography (LWC) standardization process</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Sponge+construction+in+cryptographic+hash+functions" target="_blank" rel="noopener"><span class="en">Sponge construction in cryptographic hash functions</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Performance+of+SPHINCS%2B+post-quantum+signature+scheme" target="_blank" rel="noopener"><span class="en">Performance of SPHINCS+ post-quantum signature scheme</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Bloom+filter+applications+in+IoT+replay+attack+mitigation" target="_blank" rel="noopener"><span class="en">Bloom filter applications in IoT replay attack mitigation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

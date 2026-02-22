@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបង្កើត Docker ដោយស្វ័យប្រវត្តិសម្រាប់កម្មវិធីវិបសាយផ្អែកលើ Python | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមទាក់ទងនឹងភាពស្មុគស្មាញ និងការលំបាកក្នុងការប្រើប្រាស់ Docker សម្រាប់អ្នកអភិវឌ្ឍន៍ដែលខ្វះបទពិសោធន៍ ជាពិសេសគឺការបង្កើត Docker ...">
+    
+    <meta name="keywords" content="Docker, Python, Automation, Dockerization, Virtual Machines, Nginx, Cloud Services, Django, Flask, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/automated-dockerization-python-web-apps-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/automated-dockerization-python-web-apps-2020.html">
+    <meta property="og:title" content="ការបង្កើត Docker ដោយស្វ័យប្រវត្តិសម្រាប់កម្មវិធីវិបសាយផ្អែកលើ Python | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមទាក់ទងនឹងភាពស្មុគស្មាញ និងការលំបាកក្នុងការប្រើប្រាស់ Docker សម្រាប់អ្នកអភិវឌ្ឍន៍ដែលខ្វះបទពិសោធន៍ ជាពិសេសគឺការបង្កើត Docker images ដោយដៃដែលចំណាយពេលយូរ និងងាយមានកំហុស។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020, National College of Ireland">
+    
+    <meta property="article:tag" content="Docker">
+    
+    <meta property="article:tag" content="Python">
+    
+    <meta property="article:tag" content="Automation">
+    
+    <meta property="article:tag" content="Dockerization">
+    
+    <meta property="article:tag" content="Virtual Machines">
+    
+    <meta property="article:tag" content="Nginx">
+    
+    <meta property="article:tag" content="Cloud Services">
+    
+    <meta property="article:tag" content="Django">
+    
+    <meta property="article:tag" content="Flask">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបង្កើត Docker ដោយស្វ័យប្រវត្តិសម្រាប់កម្មវិធីវិបសាយផ្អែកលើ Python">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមទាក់ទងនឹងភាពស្មុគស្មាញ និងការលំបាកក្នុងការប្រើប្រាស់ Docker សម្រាប់អ្នកអភិវឌ្ឍន៍ដែលខ្វះបទពិសោធន៍ ជាពិសេសគឺការបង្កើត Docker images ដោយដៃដែលចំណាយពេលយូរ និងងាយមានកំហុស។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f Docker \u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179c\u17b7\u1794\u179f\u17b6\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be Python",
+      "name": "Automated Dockerization of Python based Web Apps",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1791\u17b6\u1780\u17cb\u1791\u1784\u1793\u17b9\u1784\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Docker \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u17d2\u1793\u1780\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1793\u17cd\u178a\u17c2\u179b\u1781\u17d2\u179c\u17c7\u1794\u1791\u1796\u17b7\u179f\u17c4\u1792\u1793\u17cd \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1782\u17ba\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f Docker images \u178a\u17c4\u1799\u178a\u17c3\u178a\u17c2\u179b\u1785\u17c6\u178e\u17b6\u1799\u1796\u17c1\u179b\u1799\u17bc\u179a \u1793\u17b7\u1784\u1784\u17b6\u1799\u1798\u17b6\u1793\u1780\u17c6\u17a0\u17bb\u179f\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/automated-dockerization-python-web-apps-2020.html",
+      "author": [{"@type": "Person", "name": "Shryni Kedambadi Shreekar (National College of Ireland)"}],
+      "datePublished": "2020, National College of Ireland",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Automated Dockerization of Python based Web Apps",
+        "url": "N/A"
+      },
+      "keywords": ["Docker", "Python", "Automation", "Dockerization", "Virtual Machines", "Nginx", "Cloud Services", "Django", "Flask"],
+      "about": "Cloud Computing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f Docker \u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179c\u17b7\u1794\u179f\u17b6\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be Python",
+          "item": "https://khmerresearch.com/papers/technology/automated-dockerization-python-web-apps-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបង្កើត Docker ដោយស្វ័យប្រវត្តិសម្រាប់កម្មវិធីវិបសាយផ្អ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Automated Dockerization of Python based Web Apps<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបង្កើត Docker ដោយស្វ័យប្រវត្តិសម្រាប់កម្មវិធីវិបសាយផ្អែកលើ Python</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Automated Dockerization of Python based Web Apps</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Shryni Kedambadi Shreekar (National College of Ireland)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020, National College of Ireland</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Cloud Computing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមទាក់ទងនឹងភាពស្មុគស្មាញ និងការលំបាកក្នុងការប្រើប្រាស់ Docker សម្រាប់អ្នកអភិវឌ្ឍន៍ដែលខ្វះបទពិសោធន៍ ជាពិសេសគឺការបង្កើត Docker images ដោយដៃដែលចំណាយពេលយូរ និងងាយមានកំហុស។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានអភិវឌ្ឍកម្មវិធីកុំព្យូទ័រមួយដោយប្រើភាសា Python ដើម្បីបង្កើតបរិស្ថាន Docker ដោយស្វ័យប្រវត្តិ តាមរយៈចំណុចប្រទាក់អ្នកប្រើប្រាស់ (GUI) ដ៏សាមញ្ញ។
+        
+        <ul>
+            
+            <li>ការអភិវឌ្ឍចំណុចប្រទាក់អ្នកប្រើ (GUI) ដោយប្រើក្របខ័ណ្ឌ Python Tkinter</li>
+            
+            <li>ការប្រើប្រាស់ម៉ូឌុល Subprocess ដើម្បីដំណើរការពាក្យបញ្ជា Docker (Docker CLI)</li>
+            
+            <li>ការប្រើប្រាស់ Nginx សម្រាប់ធ្វើជា Web Server និងការចែករំលែកបន្ទុកការងារ (Load Balancing)</li>
+            
+            <li>ការធ្វើតេស្តជាមួយក្របខ័ណ្ឌ Django និង Flask</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់ឧបករណ៍ស្វ័យប្រវត្តិកម្មនេះបានជួយលាក់បាំងភាពស្មុគស្មាញនៃពាក្យបញ្ជា Docker និងធ្វើឱ្យដំណើរការនៃការផ្លាស់ប្តូរកម្មវិធីទៅជា Container កាន់តែងាយស្រួល។</li>
+            
+            <li>ល្បឿននៃការប្រតិបត្តិការបង្កើត Docker image ចំណាយពេលត្រឹមតែ ៥ ទៅ ១៥ នាទីប៉ុណ្ណោះ អាស្រ័យលើទំហំនៃកម្មវិធី។</li>
+            
+            <li>ដំណោះស្រាយនេះមានប្រសិទ្ធភាពខ្ពស់ក្នុងការដាក់ពង្រាយកម្មវិធីវិបសាយ Python (ដូចជា Django និង Flask) ទៅកាន់បរិស្ថាន Cloud ដោយមិនចាំបាច់មានចំណេះដឹងស៊ីជម្រៅអំពី Docker។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Virtual Machines (VMs)</span></strong><br>ការប្រើប្រាស់ម៉ាស៊ីននិម្មិត</td>
+                <td>មានភាពដាច់ដោយឡែកខ្លាំង (Strong Isolation) និងដំណើរការប្រព័ន្ធប្រតិបត្តិការពេញលេញ។</td>
+                <td>ប្រើប្រាស់ធនធានច្រើន (Memory/CPU) ដំណើរការចាប់ផ្តើមយឺត និងមានទំហំធំ។</td>
+                <td>ស្មុគស្មាញក្នុងការដំឡើង និងគ្រប់គ្រងជាងការប្រើប្រាស់ Container។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Manual Dockerization</span></strong><br>ការប្រើប្រាស់ Docker ដោយដៃ (តាមរយៈ CLI)</td>
+                <td>មានស្តង់ដារឧស្សាហកម្ម ស្រាល និងអាចចល័តបាន (Portable) លើគ្រប់បរិស្ថាន។</td>
+                <td>ទាមទារចំណេះដឹងខ្ពស់អំពីពាក្យបញ្ជា (Command Line) និងងាយមានកំហុសសម្រាប់អ្នកចាប់ផ្តើមដំបូង។</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ ប៉ុន្តែមានឧបសគ្គសម្រាប់អ្នកអភិវឌ្ឍន៍ថ្មីថ្មោង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Automated Dockerization Tool (Proposed)</span></strong><br>ឧបករណ៍បង្កើត Docker ដោយស្វ័យប្រវត្តិ (ស្នើឡើងក្នុងគម្រោង)</td>
+                <td>ចំណុចប្រទាក់ងាយស្រួល (GUI) កាត់បន្ថយការសរសេរកូដ និងរៀបចំ Nginx ដោយស្វ័យប្រវត្តិ។</td>
+                <td>បច្ចុប្បន្នគាំទ្រតែគម្រោង Python (Django/Flask) និងមិនទាន់គាំទ្រភាសាផ្សេងទៀត។</td>
+                <td>បង្កើត Docker Image បានជោគជ័យក្នុងរយៈពេលត្រឹមតែ ៥ ទៅ ១៥ នាទី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តគម្រោងនេះទាមទារធនធានកុំព្យូទ័រទូទៅ ប៉ុន្តែត្រូវការប្រព័ន្ធប្រតិបត្តិការជាក់លាក់សម្រាប់ការប្រើប្រាស់ Docker Desktop ។
+    
+    <ul>
+        
+        <li><strong>Hardware / OS:</strong> កុំព្យូទ័រដែលដំណើរការ Windows (ណែនាំ Windows Pro ដើម្បីប្រើ Docker Desktop បានពេញលេញ) ឬ Linux។</li>
+        
+        <li><strong>Software:</strong> តម្រូវឱ្យមាន Python 3.x, Docker Desktop, និងបណ្ណាល័យ Tkinter សម្រាប់ GUI។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងមូលដ្ឋានអំពី Python និងការយល់ដឹងខ្លះៗអំពីគោលការណ៍របស់ Web Application (ដូចជា Port និង Directory)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅ National College of Ireland ដោយប្រើប្រាស់គម្រោង Open Source ពី GitHub ដើម្បីធ្វើតេស្ត។ វាមិនមានទិន្នន័យលំអៀងផ្នែកប្រជាសាស្រ្តទេ ប៉ុន្តែលំអៀងផ្នែកបច្ចេកទេសដោយផ្តោតតែលើ Python Frameworks (Django/Flask) ដែលធ្វើឱ្យលទ្ធផលអាចមិនទាន់អនុវត្តបានចំពោះភាសាដទៃដូចជា PHP ឬ Java ដែលនិយមប្រើនៅកម្ពុជាដែរ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្រ្តនេះមានសារៈប្រយោជន៍ខ្លាំងសម្រាប់បរិបទបច្ចេកវិទ្យានៅកម្ពុជា ជាពិសេសសម្រាប់ការបណ្តុះបណ្តាល និងការចាប់ផ្តើមអាជីវកម្មថ្មី។</p>
+        
+        <ul>
+            
+            <li><strong>សាកលវិទ្យាល័យ (RUPP, ITC, NIPTICT):</strong> អាចប្រើជាឧបករណ៍ជំនួយក្នុងការបង្រៀនមុខវិជ្ជា Cloud Computing ដើម្បីឱ្យនិស្សិតយល់ពីគំនិតនៃ Containerization ដោយមិនបាច់ចំណាយពេលច្រើនលើ Command Line ស្មុគស្មាញ។</li>
+            
+            <li><strong>វិស័យធុរកិច្ចថ្មី (Tech Startups):</strong> ជួយក្រុមអ្នកអភិវឌ្ឍន៍តូចៗនៅភ្នំពេញ ដែលខ្វះអ្នកជំនាញ DevOps ឱ្យអាចដាក់ពង្រាយកម្មវិធី (Deploy) ទៅកាន់ Cloud បានលឿន និងមានស្តង់ដារ។</li>
+            
+            <li><strong>ការអភិវឌ្ឍរដ្ឋាភិបាលឌីជីថល:</strong> អាចជាគំរូសម្រាប់ការបង្កើតឧបករណ៍ស្វ័យប្រវត្តិកម្មក្នុងការគ្រប់គ្រងហេដ្ឋារចនាសម្ព័ន្ធ IT របស់ស្ថាប័នរដ្ឋ ដើម្បីកាត់បន្ថយការងារដែលធ្វើដោយដៃ (Manual Work)។</li>
+            
+        </ul>
+        
+        
+        <p>វាជាជំហានចាប់ផ្តើមដ៏ល្អក្នុងការជំរុញការប្រើប្រាស់បច្ចេកវិទ្យា Cloud Native នៅកម្ពុជា ដោយកាត់បន្ថយរបាំងបច្ចេកទេសសម្រាប់អ្នកអភិវឌ្ឍន៍។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Python GUI និង Docker:</strong> និស្សិតគួរចាប់ផ្តើមរៀនប្រើប្រាស់បណ្ណាល័យ (Tkinter) សម្រាប់បង្កើត GUI និងស្វែងយល់ពីពាក្យបញ្ជាគោលរបស់ (Docker CLI) និងរបៀបសរសេរ (Dockerfile)។</li>
+            
+            <li><strong>អនុវត្តការបង្កើត Automation Script:</strong> សាកល្បងសរសេរកូដ Python ដោយប្រើម៉ូឌុល (Subprocess) ដើម្បីហៅពាក្យបញ្ជា Docker ពីក្នុងកូដ ដូចបានបង្ហាញក្នុងឯកសារស្រាវជ្រាវ។</li>
+            
+            <li><strong>ធ្វើតេស្តជាមួយគម្រោងជាក់ស្តែង:</strong> ទាញយកគម្រោង (Django) ឬ (Flask) សាមញ្ញពី GitHub ហើយប្រើប្រាស់ Script ដែលបានបង្កើតដើម្បីបំប្លែងវាទៅជា Docker Image ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ពង្រីកវិសាលភាពទៅភាសាផ្សេង:</strong> បន្ទាប់ពីជោគជ័យជាមួយ Python និស្សិតគួរព្យាយាមកែសម្រួលឧបករណ៍នេះឱ្យគាំទ្រភាសាផ្សេងទៀតដែលពេញនិយមនៅកម្ពុជា ដូចជា (Node.js) ឬ (PHP/Laravel)។</li>
+            
+            <li><strong>ការដាក់ពង្រាយលើ Cloud:</strong> សាកល្បងយក Docker Image ដែលបង្កើតបាន ទៅដាក់ដំណើរការលើសេវាកម្ម Cloud ដូចជា (AWS EC2) ឬ (Google Cloud Run) ដើម្បីយល់ពីដំណើរការពេញលេញ (End-to-End Deployment)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Dockerization</span></td>
+                <td>ដំណើរការនៃការវេចខ្ចប់កម្មវិធីកុំព្យូទ័រ រួមជាមួយបណ្ណាល័យ (Libraries) និងការកំណត់ផ្សេងៗដែលវាត្រូវការ ទៅក្នុងកញ្ចប់តែមួយហៅថា Container ដើម្បីឱ្យវាអាចដំណើរការបានលើគ្រប់កុំព្យូទ័រដោយមិនមានបញ្ហាភាពមិនចុះសម្រុងគ្នា។</td>
+                <td>ដូចជាការវេចខ្ចប់អាហារ និងចានក្បានចូលក្នុងប្រអប់អាហារ (Lunchbox) ដែលអាចយកទៅញ៉ាំនៅកន្លែងណាក៏បាន ដោយមិនបាច់ខ្វល់ថាទីនោះមានចានឬអត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Virtualization</span></td>
+                <td>បច្ចេកវិទ្យាដែលអនុញ្ញាតឱ្យបង្កើតម៉ាស៊ីននិម្មិត (Virtual Machines) ជាច្រើននៅលើកុំព្យូទ័រពិតតែមួយ ដោយម៉ាស៊ីននិម្មិតនីមួយៗមានប្រព័ន្ធប្រតិបត្តិការផ្ទាល់ខ្លួន និងដំណើរការដាច់ដោយឡែកពីគ្នា។</td>
+                <td>ដូចជាការបែងចែកផ្ទះធំមួយ ឱ្យទៅជាបន្ទប់ជួលតូចៗជាច្រើន ដែលអ្នកជួលនីមួយៗអាចរស់នៅដាច់ដោយឡែកពីគ្នាបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hypervisor</span></td>
+                <td>ស្រទាប់កម្មវិធី (Software Layer) ដែលស្ថិតនៅចន្លោះផ្នែករឹង (Hardware) និងម៉ាស៊ីននិម្មិត មានតួនាទីគ្រប់គ្រង និងបែងចែកធនធានដូចជា CPU និង Memory ទៅឱ្យម៉ាស៊ីននិម្មិតនីមួយៗ។</td>
+                <td>ដូចជាអ្នកគ្រប់គ្រងអគារខុនដូ ដែលមានតួនាទីចាត់ចែងទឹក និងភ្លើងទៅកាន់បន្ទប់នីមួយៗឱ្យបានត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Microservices</span></td>
+                <td>រចនាសម្ព័ន្ធនៃការបង្កើតកម្មវិធីកុំព្យូទ័រ ដោយបំបែកវាជាសេវាកម្មតូចៗជាច្រើនដែលដំណើរការឯករាជ្យពីគ្នា ប៉ុន្តែទាក់ទងគ្នាទៅវិញទៅមក ជាជាងការបង្កើតជាដុំធំតែមួយ (Monolithic)។</td>
+                <td>ដូចជាការរៀបចំក្រុមបាល់ទាត់ ដែលកីឡាករម្នាក់ៗមានតួនាទីច្បាស់លាស់ (អ្នកចាំទី, ខ្សែការពារ, ខ្សែប្រយុទ្ធ) ជាជាងមនុស្សម្នាក់លេងគ្រប់តួនាទីទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Nginx</span></td>
+                <td>ជា Web Server ដែលមានប្រសិទ្ធភាពខ្ពស់ ប្រើសម្រាប់ទទួលសំណើពីអ្នកប្រើប្រាស់ និងបញ្ជូនបន្ត (Reverse Proxy) ឬប្រើសម្រាប់បែងចែកបន្ទុកការងារ (Load Balancing) ទៅកាន់ Server ផ្សេងទៀត។</td>
+                <td>ដូចជាអ្នកទទួលភ្ញៀវនៅសណ្ឋាគារ ដែលជួយណែនាំភ្ញៀវទៅកាន់បន្ទប់ ឬសេវាកម្មដែលពួកគេត្រូវការ ដោយមិនឱ្យភ្ញៀវដើររកដោយខ្លួនឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Subprocess</span></td>
+                <td>ម៉ូឌុលនៅក្នុងភាសា Python ដែលប្រើសម្រាប់បង្កើតដំណើរការថ្មី (New Process) អនុញ្ញាតឱ្យកូដ Python អាចបញ្ជា ឬដំណើរការកម្មវិធីផ្សេងទៀតនៅក្នុងប្រព័ន្ធប្រតិបត្តិការបាន។</td>
+                <td>ដូចជាការប្រើតេឡេបញ្ជា (Remote) ដើម្បីបញ្ជាឱ្យទូរទស្សន៍បើក ឬប្តូរប៉ុស្តិ៍ ដោយមិនចាំបាច់ទៅចុចនៅតួទូរទស្សន៍ផ្ទាល់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=containerization+vs+virtualization+performance+analysis" target="_blank" rel="noopener"><span class="en">containerization vs virtualization performance analysis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=automated+deployment+of+python+web+applications+with+docker" target="_blank" rel="noopener"><span class="en">automated deployment of python web applications with docker</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=microservices+architecture+with+docker+and+kubernetes" target="_blank" rel="noopener"><span class="en">microservices architecture with docker and kubernetes</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=security+best+practices+for+docker+containers+in+cloud+environments" target="_blank" rel="noopener"><span class="en">security best practices for docker containers in cloud environments</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

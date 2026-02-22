@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់៖ វិធីសាស្រ្ត LSTM-EMD ដ៏ទូលំទូលាយ និងការសិក្សាករណីចម្រុះជាច្រើន | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃតម្រូវការការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់ដែលមានភាពជាក់លាក់ខ្ពស់ ដើម្បីបង្កើនប្រសិទ្ធភាពនៃការគ្រប់គ្រងថាមពលនៅកម្រិតអ្នកប...">
+    
+    <meta name="keywords" content="electric load forecasting, LSTM, Empirical Mode Decomposition, outlier detection, energy management, neural networks, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/day-ahead-electric-load-forecast-lstm-emd-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/day-ahead-electric-load-forecast-lstm-emd-2023.html">
+    <meta property="og:title" content="ការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់៖ វិធីសាស្រ្ត LSTM-EMD ដ៏ទូលំទូលាយ និងការសិក្សាករណីចម្រុះជាច្រើន | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃតម្រូវការការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់ដែលមានភាពជាក់លាក់ខ្ពស់ ដើម្បីបង្កើនប្រសិទ្ធភាពនៃការគ្រប់គ្រងថាមពលនៅកម្រិតអ្នកប្រើប្រាស់ (Behind-the-Meter) ដោយផ្តោតលើក...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023 (Forecasting)">
+    
+    <meta property="article:tag" content="electric load forecasting">
+    
+    <meta property="article:tag" content="LSTM">
+    
+    <meta property="article:tag" content="Empirical Mode Decomposition">
+    
+    <meta property="article:tag" content="outlier detection">
+    
+    <meta property="article:tag" content="energy management">
+    
+    <meta property="article:tag" content="neural networks">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់៖ វិធីសាស្រ្ត LSTM-EMD ដ៏ទូលំទូលាយ និងការសិក្សាករណីចម្រុះជាច្រើន">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃតម្រូវការការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់ដែលមានភាពជាក់លាក់ខ្ពស់ ដើម្បីបង្កើនប្រសិទ្ធភាពនៃការគ្រប់គ្រងថាមពលនៅកម្រិតអ្នកប្រើប្រាស់ (Behind-the-Meter) ដោយផ្តោតលើក...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1794\u1793\u17d2\u1791\u17bb\u1780\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1790\u17d2\u1784\u17c3\u1794\u1793\u17d2\u1791\u17b6\u1794\u17cb\u17d6 \u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u179a\u17d2\u178f LSTM-EMD \u178a\u17cf\u1791\u17bc\u179b\u17c6\u1791\u17bc\u179b\u17b6\u1799 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1780\u179a\u178e\u17b8\u1785\u1798\u17d2\u179a\u17bb\u17c7\u1787\u17b6\u1785\u17d2\u179a\u17be\u1793",
+      "name": "Day Ahead Electric Load Forecast: A Comprehensive LSTM-EMD Methodology and Several Diverse Case Studies",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1794\u1793\u17d2\u1791\u17bb\u1780\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1790\u17d2\u1784\u17c3\u1794\u1793\u17d2\u1791\u17b6\u1794\u17cb\u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u1787\u17b6\u1780\u17cb\u179b\u17b6\u1780\u17cb\u1781\u17d2\u1796\u179f\u17cb \u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1790\u17b6\u1798\u1796\u179b\u1793\u17c5\u1780\u1798\u17d2\u179a\u17b7\u178f\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb (Behind-the-Meter) \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u1798\u17b7\u1793\u179b\u17b8\u1793\u17c1\u17a2\u17ca\u17c2\u179a \u1793\u17b7\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/day-ahead-electric-load-forecast-lstm-emd-2023.html",
+      "author": [{"@type": "Person", "name": "Michael Wood (Politecnico di Milano)"},{"@type": "Person", "name": "Emanuele Ogliari (Politecnico di Milano)"},{"@type": "Person", "name": "Alfredo Nespoli (Politecnico di Milano)"},{"@type": "Person", "name": "Travis Simpkins (muGrid Analyics LLC)"},{"@type": "Person", "name": "Sonia Leva (Politecnico di Milano)"}],
+      "datePublished": "2023 (Forecasting)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Day Ahead Electric Load Forecast: A Comprehensive LSTM-EMD Methodology and Several Diverse Case Studies",
+        "url": "https://doi.org/10.3390/forecast5010016"
+      },
+      "keywords": ["electric load forecasting", "LSTM", "Empirical Mode Decomposition", "outlier detection", "energy management", "neural networks"],
+      "about": "Energy Engineering / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1794\u1793\u17d2\u1791\u17bb\u1780\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1790\u17d2\u1784\u17c3\u1794\u1793\u17d2\u1791\u17b6\u1794\u17cb\u17d6 \u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u179a\u17d2\u178f LSTM-EMD \u178a\u17cf\u1791\u17bc\u179b\u17c6\u1791\u17bc\u179b\u17b6\u1799 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1780\u179a\u178e\u17b8\u1785\u1798\u17d2\u179a\u17bb\u17c7\u1787\u17b6\u1785\u17d2\u179a\u17be\u1793",
+          "item": "https://khmerresearch.com/papers/technology/day-ahead-electric-load-forecast-lstm-emd-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់៖ វិធីសាស្រ្ត ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Day Ahead Electric Load Forecast: A Comprehensive LSTM-EMD Methodology and Several Diverse Case Studies<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/forecast5010016" target="_blank">doi.org/10.3390/forecast5010016</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់៖ វិធីសាស្រ្ត LSTM-EMD ដ៏ទូលំទូលាយ និងការសិក្សាករណីចម្រុះជាច្រើន</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Day Ahead Electric Load Forecast: A Comprehensive LSTM-EMD Methodology and Several Diverse Case Studies</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Michael Wood (Politecnico di Milano), Emanuele Ogliari (Politecnico di Milano), Alfredo Nespoli (Politecnico di Milano), Travis Simpkins (muGrid Analyics LLC), Sonia Leva (Politecnico di Milano)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 (Forecasting)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Energy Engineering / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហានៃតម្រូវការការព្យាករណ៍បន្ទុកអគ្គិសនីសម្រាប់ថ្ងៃបន្ទាប់ដែលមានភាពជាក់លាក់ខ្ពស់ ដើម្បីបង្កើនប្រសិទ្ធភាពនៃការគ្រប់គ្រងថាមពលនៅកម្រិតអ្នកប្រើប្រាស់ (Behind-the-Meter) ដោយផ្តោតលើការដោះស្រាយទិន្នន័យដែលមានលក្ខណៈមិនលីនេអ៊ែរ និងទិន្នន័យមិនប្រក្រតី។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានបង្កើតវិធីសាស្រ្តរួមបញ្ចូលគ្នាមួយដោយប្រើប្រាស់បច្ចេកទេសរៀនសូត្រស៊ីជម្រៅ (Deep Learning) និងការរៀបចំទិន្នន័យកម្រិតខ្ពស់ ដើម្បីធ្វើតេស្តលើសំណុំទិន្នន័យចំនួន ៧ ផ្សេងៗគ្នា។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេស k-means clustering និង Z-score ដើម្បីរកមើលទិន្នន័យមិនប្រក្រតី (Outlier detection)</li>
+            
+            <li>ការបំបែកទិន្នន័យដោយប្រើ Empirical Mode Decomposition (EMD) ដើម្បីទាញយកលក្ខណៈពិសេសនៃសញ្ញា</li>
+            
+            <li>ការប្រើប្រាស់បណ្តាញសរសៃប្រសាទ Long Short-Term Memory (LSTM) សម្រាប់ការធ្វើការព្យាករណ៍</li>
+            
+            <li>ការប្រៀបធៀបលទ្ធផលជាមួយគំរូស្តង់ដារ SARIMA និង Seasonal Naive Persistence</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្រ្តនេះត្រូវបានសាកល្បងលើករណីសិក្សាចំនួន ៧ រួមមានលំនៅដ្ឋាន សណ្ឋាគារ រោងចក្រ និងស្ថានីយសាករថយន្តអគ្គិសនី ដោយទទួលបានពិន្ទុជំនាញ (Skill Scores) ចន្លោះពី -៦.៣% ទៅ ៧៣%។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នានៃ LSTM និង EMD បានបង្ហាញប្រសិទ្ធភាពខ្ពស់ជាងគំរូធម្មតា (Benchmarks) ក្នុងករណីភាគច្រើន ជាពិសេសចំពោះទិន្នន័យដែលមានភាពស្មុគស្មាញ។</li>
+            
+            <li>ទោះជាយ៉ាងណាក៏ដោយ ចំពោះទិន្នន័យដែលមានលំនាំថេរខ្លាំង (Stationary) ដូចជាទិន្នន័យសណ្ឋាគារ គំរូ SARIMA អាចផ្តល់លទ្ធផលល្អប្រហាក់ប្រហែល ឬល្អជាងវិធីសាស្រ្តសរសៃប្រសាទដ៏ស្មុគស្មាញ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">LSTM-EMD (Long Short-Term Memory with Empirical Mode Decomposition)</span></strong><br>គំរូ LSTM រួមបញ្ចូលជាមួយបច្ចេកទេសបំបែកសញ្ញា EMD</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការចាប់យកលំនាំទិន្នន័យដែលមានភាពស្មុគស្មាញ និងមិនលីនេអ៊ែរ (Non-linear)។ ផ្តល់លទ្ធផលល្អបំផុតចំពោះទិន្នន័យដែលមានការប្រែប្រួលខ្លាំង ដូចជារោងចក្រ និងបណ្តាញចែកចាយ។</td>
+                <td>ទាមទារធនធានកុំព្យូទ័រខ្ពស់ក្នុងការបណ្តុះបណ្តាល (Training) និងមានភាពស្មុគស្មាញក្នុងការកំណត់ប៉ារ៉ាម៉ែត្រ (Hyperparameter tuning)។</td>
+                <td>ទទួលបានពិន្ទុជំនាញ (Skill Score) រហូតដល់ ៧៣% លើសពីគំរូស្តង់ដារចំពោះទិន្នន័យរោងចក្រឧស្សាហកម្ម។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SARIMA (Seasonal Auto-Regressive Integrated Moving Average)</span></strong><br>គំរូស្ថិតិសម្រាប់ការវិភាគស계៊េរីពេលវេលាដែលមានរដូវកាល</td>
+                <td>ងាយស្រួលយល់ មានតម្លាភាព និងចំណាយពេលតិចក្នុងការបណ្តុះបណ្តាល។ មានប្រសិទ្ធភាពល្អចំពោះទិន្នន័យដែលមានលំនាំទៀងទាត់ខ្លាំង។</td>
+                <td>មិនអាចចាប់យកលំនាំទិន្នន័យដែលមានភាពស្មុគស្មាញ ឬការប្រែប្រួលរហ័សបានល្អដូច Deep Learning ទេ។</td>
+                <td>ផ្តល់លទ្ធផលល្អប្រសើរជាង ឬប្រហាក់ប្រហែលនឹង LSTM ចំពោះទិន្នន័យសណ្ឋាគារដែលមានលំនាំប្រើប្រាស់ថាមពលទៀងទាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Seasonal Naive Persistence (NP)</span></strong><br>វិធីសាស្រ្តសាមញ្ញដោយយកទិន្នន័យពីអតីតកាលមកប្រើផ្ទាល់</td>
+                <td>មិនត្រូវការការបណ្តុះបណ្តាល ងាយស្រួលបំផុត និងប្រើជាបន្ទាត់មូលដ្ឋាន (Baseline) សម្រាប់ប្រៀបធៀប។</td>
+                <td>មានកម្រិតលំអៀងខ្ពស់ និងមិនអាចព្យាករណ៍ការផ្លាស់ប្តូរដែលមិនធ្លាប់កើតឡើង។</td>
+                <td>ត្រូវបានប្រើជាមូលដ្ឋានប្រៀបធៀប (Benchmark) ដោយគំរូ LSTM-EMD អាចកាត់បន្ថយកំហុស RMSE បានយ៉ាងច្រើនធៀបនឹងវិធីសាស្រ្តនេះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រកម្រិតមធ្យម ដែលអាចដំណើរការបាននៅលើសេវាកម្មក្លោដ (Cloud) ដោយមិនចាំបាច់មានហេដ្ឋារចនាសម្ព័ន្ធធំដុំ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ប្រើប្រាស់ Google Colaboratory ដែលមាន GPU RAM 2GB និង CPU RAM 16GB។</li>
+        
+        <li><strong>Software:</strong> Python libraries: Tensorflow 2.6.0, Keras, Scikit-learn និង pmdarima។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យរង្វាស់ថាមពលអគ្គិសនីជាក់ស្តែង (Real power measurements) ក្នុងចន្លោះពេល ១០, ១៥ ឬ ៦០ នាទី សម្រាប់រយៈពេលយ៉ាងតិច ២-៣ ឆ្នាំ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីសហរដ្ឋអាមេរិក (USA) និងអ៊ីតាលី (Italy) ដែលមានអាកាសធាតុនិងលំនាំនៃការប្រើប្រាស់ថាមពលខុសពីប្រទេសកម្ពុជា។ ទោះជាយ៉ាងណាក៏ដោយ លក្ខណៈនៃបន្ទុកឧស្សាហកម្ម និងពាណិជ្ជកម្ម (ដូចជាសណ្ឋាគារ) អាចមានលក្ខណៈស្រដៀងគ្នាដែលអាចយកមកអនុវត្តបាន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្រ្តនេះមានសារៈសំខាន់ និងអាចអនុវត្តបានខ្ពស់សម្រាប់វិស័យថាមពលនៅកម្ពុជា ជាពិសេសក្នុងបរិបទនៃការកើនឡើងនៃការប្រើប្រាស់ថាមពលសូឡា។</p>
+        
+        <ul>
+            
+            <li><strong>អគ្គិសនីកម្ពុជា (EDC):</strong> អាចប្រើប្រាស់វិធីសាស្រ្តនេះដើម្បីព្យាករណ៍បន្ទុកលើបណ្តាញចែកចាយ និងបណ្តាញបញ្ជូន ដើម្បីគ្រប់គ្រងការផ្គត់ផ្គង់ឱ្យមានស្ថេរភាព។</li>
+            
+            <li><strong>វិស័យរោងចក្រកាត់ដេរ និងតំបន់សេដ្ឋកិច្ចពិសេស:</strong> រោងចក្រដែលមានការប្រើប្រាស់ថាមពលខ្ពស់អាចប្រើប្រាស់គំរូនេះដើម្បីគ្រប់គ្រងការប្រើប្រាស់ថាមពល និងកាត់បន្ថយថ្លៃដើម ជាពិសេសប្រសិនបើមានការប្រើប្រាស់ថាមពលពន្លឺព្រះអាទិត្យ (Rooftop Solar)។</li>
+            
+            <li><strong>អគារពាណិជ្ជកម្ម និងសណ្ឋាគារធំៗ:</strong> ការប្រើប្រាស់គំរូព្យាករណ៍ ដើម្បីគ្រប់គ្រងប្រព័ន្ធត្រជាក់ (HVAC) និងការប្រើប្រាស់ថាមពលឱ្យមានប្រសិទ្ធភាពខ្ពស់។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តវិធីសាស្រ្ត LSTM-EMD អាចជួយបង្កើនប្រសិទ្ធភាពនៃការគ្រប់គ្រងថាមពលនៅកម្ពុជា ប៉ុន្តែចាំបាច់ត្រូវមានការប្រមូលទិន្នន័យដែលមានគុណភាពក្នុងស្រុកជាមុនសិន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Time Series និង Python:</strong> និស្សិតត្រូវចេះប្រើប្រាស់ Python libraries ដូចជា Pandas និង Numpy ដើម្បីរៀបចំទិន្នន័យពេលវេលា (Time Series Data) និងស្វែងយល់ពីលក្ខណៈ Seasonality និង Trend។</li>
+            
+            <li><strong>ការបង្កើតគំរូព្យាករណ៍កម្រិតដំបូង:</strong> ចាប់ផ្តើមអនុវត្តជាមួយគំរូស្ថិតិ SARIMA ដោយប្រើប្រាស់ library pmdarima ដើម្បីយល់ពីការប្រែប្រួលនៃបន្ទុកអគ្គិសនីមុននឹងឈានទៅរក Deep Learning។</li>
+            
+            <li><strong>ការសិក្សា និងអនុវត្ត Deep Learning:</strong> សិក្សាពីរបៀបបង្កើតបណ្តាញសរសៃប្រសាទ LSTM ដោយប្រើប្រាស់ TensorFlow ឬ Keras និងស្វែងយល់ពីរបៀបប្រើប្រាស់ Hyperband សម្រាប់ការកំណត់ប៉ារ៉ាម៉ែត្រ។</li>
+            
+            <li><strong>ការអនុវត្តគម្រោងជាក់ស្តែង:</strong> ប្រមូលទិន្នន័យប្រើប្រាស់អគ្គិសនីពីអគារសាកលវិទ្យាល័យ ឬទិន្នន័យសាធារណៈ ហើយសាកល្បងអនុវត្តវិធីសាស្រ្ត LSTM-EMD ដើម្បីធ្វើការព្យាករណ៍សម្រាប់រយៈពេល ២៤ ម៉ោងបន្ទាប់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Long Short-Term Memory (LSTM)</span></td>
+                <td>ជាប្រភេទនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Recurrent Neural Network) ដែលមានសមត្ថភាពពិសេសក្នុងការចងចាំព័ត៌មានពីអតីតកាលរយៈពេលយូរ ដើម្បីយកមកវិភាគនិងធ្វើការព្យាករណ៍ទិន្នន័យបន្តបន្ទាប់គ្នា (Time Series)។ វាដោះស្រាយបញ្ហាដែលបណ្តាញធម្មតាមិនអាចចងចាំព្រឹត្តិការណ៍ឆ្ងាយៗបាន។</td>
+                <td>ដូចជាការអានសៀវភៅដែលយើងចងចាំសាច់រឿងតាំងពីជំពូកទី ១ ដើម្បីយល់ពីជំពូកទី ១០ មិនមែនគ្រាន់តែអានប្រយោគចុងក្រោយហើយយល់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Empirical Mode Decomposition (EMD)</span></td>
+                <td>ជាបច្ចេកទេសបំបែកសញ្ញាដ៏ស្មុគស្មាញទៅជាផ្នែកតូចៗដែលហៅថា Intrinsic Mode Functions (IMFs) ដើម្បីងាយស្រួលក្នុងការវិភាគរកមើលលំនាំ ឬនិន្នាការនៅក្នុងទិន្នន័យដែលមានភាពមិនទៀងទាត់។</td>
+                <td>ប្រៀបដូចជាការបំបែកសំឡេងតន្ត្រីចម្រុះ ទៅជាសំឡេងឧបករណ៍នីមួយៗ (ដូចជា ស្គរ ហ្គីតា និងព្យាណូ) ដាច់ដោយឡែកពីគ្នា ដើម្បីងាយស្រួលស្តាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Behind-the-Meter (BTM)</span></td>
+                <td>សំដៅលើប្រព័ន្ធថាមពល (ដូចជាផ្ទាំងសូឡា ឬអាគុយផ្ទុកភ្លើង) ដែលត្រូវបានដំឡើងនៅទីតាំងរបស់អ្នកប្រើប្រាស់ផ្ទាល់ (នៅខាងក្រោយកុងទ័រភ្លើង) ជាជាងនៅខាងក្រុមហ៊ុនផ្គត់ផ្គង់អគ្គិសនី។</td>
+                <td>ដូចជាការដាំបន្លែហូបខ្លួនឯងនៅក្នុងសួនក្រោយផ្ទះ ជំនួសឱ្យការទៅទិញបន្លែពីផ្សាររាល់ថ្ងៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept Drift</span></td>
+                <td>ជាបាតុភូតដែលលំនាំស្ថិតិនៃទិន្នន័យគោលដៅមានការផ្លាស់ប្តូរតាមពេលវេលា (ឧទាហរណ៍៖ ឥរិយាបថប្រើប្រាស់ភ្លើងប្រែប្រួលដោយសារបច្ចេកវិទ្យាថ្មី) ធ្វើឱ្យគំរូដែលធ្លាប់បណ្តុះបណ្តាលពីមុន លែងសូវមានប្រសិទ្ធភាព។</td>
+                <td>ដូចជាការព្យាករណ៍ម៉ូដសម្លៀកបំពាក់បច្ចុប្បន្ន ដោយផ្អែកលើទិន្នន័យពីទសវត្សរ៍ឆ្នាំ ៩០ ដែលច្បាប់នៃការស្លៀកពាក់បានផ្លាស់ប្តូរអស់ទៅហើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperband</span></td>
+                <td>ជាក្បួនដោះស្រាយ (Algorithm) សម្រាប់ស្វែងរកការកំណត់ប៉ារ៉ាម៉ែត្រ (Hyperparameters) ដ៏ល្អបំផុតសម្រាប់គំរូកុំព្យូទ័រ ដោយប្រើវិធីសាស្ត្រកាត់ចោលនូវជម្រើសណាដែលមិនល្អបានឆាប់រហ័ស ដើម្បីសន្សំពេល។</td>
+                <td>ដូចជាការប្រកួតចម្រៀងដែលគណៈកម្មការឱ្យអ្នកច្រៀងមិនល្អឈប់ភ្លាមៗក្នុងរយៈពេល ១០ វិនាទីដំបូង ដើម្បីទុកពេលឱ្យអ្នកពូកែបានបង្ហាញសមត្ថភាព។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stationarity</span></td>
+                <td>ជាលក្ខណៈនៃទិន្នន័យស៊េរីពេលវេលា (Time Series) ដែលមានតម្លៃមធ្យម (Mean) និងបម្រែបម្រួល (Variance) នៅថេរមិនប្រែប្រួលតាមពេលវេលា។ ទិន្នន័យដែលមាន Stationarity ងាយស្រួលធ្វើការព្យាករណ៍ជាង។</td>
+                <td>ដូចជាផ្ទៃទឹកទន្លេដែលហូរស្មោះត្រង់ក្នុងកម្ពស់ថេរ មិនមែនហូរចុះឡើងវឹកវរដូចទឹកជ្រោះនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dropout</span></td>
+                <td>ជាបច្ចេកទេសមួយក្នុង Deep Learning ដែលបិទដំណើរការផ្នែកខ្លះនៃបណ្តាញសរសៃប្រសាទដោយចៃដន្យអំឡុងពេលបណ្តុះបណ្តាល ដើម្បីបង្ការកុំឱ្យកុំព្យូទ័រទន្ទេញទិន្នន័យ (Overfitting) ជំនួសឱ្យការរៀនលំនាំពិតប្រាកដ។</td>
+                <td>ដូចជាការរៀនត្រៀមប្រឡងដោយយកដៃបិទចម្លើយខ្លះៗ ដើម្បីបង្ខំឱ្យខួរក្បាលគិតរកហេតុផល មិនមែនគ្រាន់តែទន្ទេញចាំមាត់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Short-term+load+forecasting+using+LSTM+networks" target="_blank" rel="noopener"><span class="en">Short-term load forecasting using LSTM networks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Empirical+Mode+Decomposition+for+time+series+feature+extraction" target="_blank" rel="noopener"><span class="en">Empirical Mode Decomposition for time series feature extraction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Behind-the-Meter+energy+optimization+strategies" target="_blank" rel="noopener"><span class="en">Behind-the-Meter energy optimization strategies</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SARIMA+vs+Neural+Networks+for+electricity+demand" target="_blank" rel="noopener"><span class="en">SARIMA vs Neural Networks for electricity demand</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hyperband+algorithm+for+hyperparameter+tuning" target="_blank" rel="noopener"><span class="en">Hyperband algorithm for hyperparameter tuning</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

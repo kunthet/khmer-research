@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ស្ថាបត្យកម្មថ្នាំងឧបករណ៍ចាប់សញ្ញា LoRaWAN បែបបើកចំហសម្រាប់ការអនុវត្តកសិកម្ម | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាកង្វះខាតទិន្នន័យលម្អិតអំពីអាកាសធាតុ និងដីសម្រាប់កសិកម្មក្នុងទីក្រុង (Urban Agriculture) ដោយសារប្រព័ន្ធដែលមានស្រាប់មានតម្លៃថ្លៃ ព...">
+    
+    <meta name="keywords" content="LoRaWAN, Wireless Sensor Node, Urban Agriculture, Real-Time Monitoring, Low Power Wide Area Network, STM32, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/open-lorawan-sensor-node-agriculture-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/open-lorawan-sensor-node-agriculture-2021.html">
+    <meta property="og:title" content="ស្ថាបត្យកម្មថ្នាំងឧបករណ៍ចាប់សញ្ញា LoRaWAN បែបបើកចំហសម្រាប់ការអនុវត្តកសិកម្ម | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាកង្វះខាតទិន្នន័យលម្អិតអំពីអាកាសធាតុ និងដីសម្រាប់កសិកម្មក្នុងទីក្រុង (Urban Agriculture) ដោយសារប្រព័ន្ធដែលមានស្រាប់មានតម្លៃថ្លៃ ពិបាកថែទាំ ឬមិនអាចផ្តល់ទិន្នន័យតាមពេលវេលា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2021">
+    
+    <meta property="article:tag" content="LoRaWAN">
+    
+    <meta property="article:tag" content="Wireless Sensor Node">
+    
+    <meta property="article:tag" content="Urban Agriculture">
+    
+    <meta property="article:tag" content="Real-Time Monitoring">
+    
+    <meta property="article:tag" content="Low Power Wide Area Network">
+    
+    <meta property="article:tag" content="STM32">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ស្ថាបត្យកម្មថ្នាំងឧបករណ៍ចាប់សញ្ញា LoRaWAN បែបបើកចំហសម្រាប់ការអនុវត្តកសិកម្ម">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាកង្វះខាតទិន្នន័យលម្អិតអំពីអាកាសធាតុ និងដីសម្រាប់កសិកម្មក្នុងទីក្រុង (Urban Agriculture) ដោយសារប្រព័ន្ធដែលមានស្រាប់មានតម្លៃថ្លៃ ពិបាកថែទាំ ឬមិនអាចផ្តល់ទិន្នន័យតាមពេលវេលា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179f\u17d2\u1790\u17b6\u1794\u178f\u17d2\u1799\u1780\u1798\u17d2\u1798\u1790\u17d2\u1793\u17b6\u17c6\u1784\u17a7\u1794\u1780\u179a\u178e\u17cd\u1785\u17b6\u1794\u17cb\u179f\u1789\u17d2\u1789\u17b6 LoRaWAN \u1794\u17c2\u1794\u1794\u17be\u1780\u1785\u17c6\u17a0\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798",
+      "name": "Open LoRaWAN Sensor Node Architecture for Agriculture Applications",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1780\u1784\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179b\u1798\u17d2\u17a2\u17b7\u178f\u17a2\u17c6\u1796\u17b8\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb \u1793\u17b7\u1784\u178a\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798\u1780\u17d2\u1793\u17bb\u1784\u1791\u17b8\u1780\u17d2\u179a\u17bb\u1784 (Urban Agriculture) \u178a\u17c4\u1799\u179f\u17b6\u179a\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17d2\u179a\u17b6\u1794\u17cb\u1798\u17b6\u1793\u178f\u1798\u17d2\u179b\u17c3\u1790\u17d2\u179b\u17c3 \u1796\u17b7\u1794\u17b6\u1780\u1790\u17c2\u1791\u17b6\u17c6 \u17ac\u1798\u17b7\u1793\u17a2\u17b6\u1785\u1795\u17d2\u178f\u179b\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178f\u17b6\u1798\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/open-lorawan-sensor-node-agriculture-2021.html",
+      "author": [{"@type": "Person", "name": "Philipp Bolte (South Westphalia University of Applied Sciences)"},{"@type": "Person", "name": "Ulf Witkowski (South Westphalia University of Applied Sciences)"},{"@type": "Person", "name": "Rolf Morgenstern (South Westphalia University of Applied Sciences)"}],
+      "datePublished": "2021",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Open LoRaWAN Sensor Node Architecture for Agriculture Applications",
+        "url": "https://doi.org/10.5121/csit.2021.111505"
+      },
+      "keywords": ["LoRaWAN", "Wireless Sensor Node", "Urban Agriculture", "Real-Time Monitoring", "Low Power Wide Area Network", "STM32"],
+      "about": "Computer Science \u0026 Agriculture (IoT)"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179f\u17d2\u1790\u17b6\u1794\u178f\u17d2\u1799\u1780\u1798\u17d2\u1798\u1790\u17d2\u1793\u17b6\u17c6\u1784\u17a7\u1794\u1780\u179a\u178e\u17cd\u1785\u17b6\u1794\u17cb\u179f\u1789\u17d2\u1789\u17b6 LoRaWAN \u1794\u17c2\u1794\u1794\u17be\u1780\u1785\u17c6\u17a0\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798",
+          "item": "https://khmerresearch.com/papers/technology/open-lorawan-sensor-node-agriculture-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ស្ថាបត្យកម្មថ្នាំងឧបករណ៍ចាប់សញ្ញា LoRaWAN បែបបើកចំហសម្រាប...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Open LoRaWAN Sensor Node Architecture for Agriculture Applications<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.5121/csit.2021.111505" target="_blank">doi.org/10.5121/csit.2021.111505</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ស្ថាបត្យកម្មថ្នាំងឧបករណ៍ចាប់សញ្ញា LoRaWAN បែបបើកចំហសម្រាប់ការអនុវត្តកសិកម្ម</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Open LoRaWAN Sensor Node Architecture for Agriculture Applications</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Philipp Bolte (South Westphalia University of Applied Sciences), Ulf Witkowski (South Westphalia University of Applied Sciences), Rolf Morgenstern (South Westphalia University of Applied Sciences)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science & Agriculture (IoT)</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាកង្វះខាតទិន្នន័យលម្អិតអំពីអាកាសធាតុ និងដីសម្រាប់កសិកម្មក្នុងទីក្រុង (Urban Agriculture) ដោយសារប្រព័ន្ធដែលមានស្រាប់មានតម្លៃថ្លៃ ពិបាកថែទាំ ឬមិនអាចផ្តល់ទិន្នន័យតាមពេលវេលាជាក់ស្តែង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានស្នើឡើង និងអភិវឌ្ឍថ្នាំងឧបករណ៍ចាប់សញ្ញាឥតខ្សែ (Wireless Sensor Node) ដោយប្រើបច្ចេកវិទ្យា LoRaWAN ដែលមានលក្ខណៈម៉ូឌុល និងសន្សំសំចៃថាមពល ដើម្បីភ្ជាប់ទៅកាន់ប្រព័ន្ធគ្រប់គ្រងទិន្នន័យលើពពក (Cloud Application)។
+        
+        <ul>
+            
+            <li>ការអភិវឌ្ឍផ្នែករឹងនិងផ្នែកទន់ដោយប្រើ STM32 និង LoRa Modem (Hardware & Software Development)</li>
+            
+            <li>ការវិភាគការប្រើប្រាស់ថាមពល និងការព្យាករណ៍អាយុកាលថ្ម (Power Interval Analysis)</li>
+            
+            <li>ការវាយតម្លៃចម្ងាយនៃការបញ្ជូនសញ្ញាទាំងក្នុង និងក្រៅអគារ (Range Evaluation - LOS/NLOS)</li>
+            
+            <li>ការប្រៀបធៀបភាពត្រឹមត្រូវនៃឧបករណ៍ចាប់សញ្ញាជាមួយស្ថានីយ៍អាកាសធាតុអាជីព (Sensor Accuracy Evaluation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធនេះអាចដំណើរការបានរហូតដល់ ១ ឆ្នាំជាមួយនឹងថ្ម LiPo ទំហំ 2200mAh ដោយកំណត់ការបញ្ជូនទិន្នន័យរៀងរាល់ ១០ នាទីម្តង។</li>
+            
+            <li>ការបញ្ជូនទិន្នន័យមានស្ថេរភាពក្នុងចម្ងាយ ៣០០ ម៉ែត្រនៅក្នុងបរិបទទីក្រុងដែលមានឧបសគ្គ (NLOS) និងអាចឆ្ងាយជាងនេះនៅទីវាល។</li>
+            
+            <li>ឧបករណ៍ចាប់សញ្ញាដែលមានតម្លៃសមរម្យ (ដូចជា DHT22) បង្ហាញលទ្ធផលត្រឹមត្រូវដែលអាចទទួលយកបានសម្រាប់ការប្រើប្រាស់ក្នុងកសិកម្ម បើធៀបនឹងឧបករណ៍ដែលមានតម្លៃថ្លៃ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Proposed LoRaWAN Sensor Node</span></strong><br>ថ្នាំងឧបករណ៍ចាប់សញ្ញា LoRaWAN ដែលបានស្នើឡើង</td>
+                <td>ប្រើប្រាស់ថាមពលតិចបំផុត (Low Power) អាចដំណើរការបានដល់ទៅ ១ ឆ្នាំ និងបញ្ជូនទិន្នន័យបានឆ្ងាយ។</td>
+                <td>ត្រូវការតម្លើង Gateway ដើម្បីទទួលសញ្ញា និងមានកម្រិតទំហំទិន្នន័យទាប (Low Bandwidth)។</td>
+                <td>អាយុកាលថ្មប្រហែល ១ ឆ្នាំ (ជាមួយនឹងការវាស់វែងរៀងរាល់ ១០ នាទី) និងបញ្ជូនបាន ៣០០ម៉ែត្រ ក្នុងតំបន់ទីក្រុង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Offline Data Loggers</span></strong><br>ឧបករណ៍កត់ត្រាទិន្នន័យក្រៅបណ្តាញ (Offline)</td>
+                <td>ងាយស្រួលតម្លើង និងមិនត្រូវការហេដ្ឋារចនាសម្ព័ន្ធបណ្តាញ។</td>
+                <td>គ្មានទិន្នន័យតាមពេលវេលាជាក់ស្តែង (Real-time) និងត្រូវចំណាយពេលទៅយកទិន្នន័យដោយផ្ទាល់។</td>
+                <td>មិនអាចប្រើសម្រាប់ការជូនដំណឹងបន្ទាន់ ឬការត្រួតពិនិត្យពីចម្ងាយបានទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Cellular Connected WSN</span></strong><br>បណ្តាញចាប់សញ្ញាប្រើប្រព័ន្ធទូរស័ព្ទ (GPRS/LTE)</td>
+                <td>មិនត្រូវការ Gateway ផ្ទាល់ខ្លួន អាចប្រើបានគ្រប់ទីកន្លែងដែលមានសេវាទូរស័ព្ទ។</td>
+                <td>ប្រើប្រាស់ថាមពលខ្ពស់ និងត្រូវចំណាយថ្លៃសេវាស៊ីមកាត (SIM Card) ប្រចាំខែ។</td>
+                <td>ចំណាយប្រតិបត្តិការខ្ពស់ជាង និងអាយុកាលថ្មខ្លីជាង LoRaWAN សម្រាប់ការប្រើប្រាស់រយៈពេលវែង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តគម្រោងនេះទាមទារការចំណាយលើផ្នែករឹងកម្រិតមធ្យម ប៉ុន្តែប្រើប្រាស់កម្មវិធីកូដបើកចំហ (Open Source) ដើម្បីកាត់បន្ថយថ្លៃដើម។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការ Microcontroller (STM32), ម៉ូឌុល LoRa (RFM95/RN2483), ឧបករណ៍ចាប់សញ្ញា (DHT22, BMP280) និងថ្ម LiPo។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់កម្មវិធីឥតគិតថ្លៃដូចជា The Things Network (TTN), Node-RED, InfluxDB, និង Grafana សម្រាប់បង្ហាញទិន្នន័យ។</li>
+        
+        <li><strong>Equipment:</strong> ត្រូវការ Gateway (អាចប្រើ Raspberry Pi ឬ LoRa Gateway សម្រេច) ដើម្បីបង្កើតបណ្តាញ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះធ្វើឡើងនៅប្រទេសអាល្លឺម៉ង់ ដែលមានអាកាសធាតុត្រជាក់ និងសើមតាមរដូវកាល។ សម្រាប់កម្ពុជាដែលមានអាកាសធាតុក្តៅហើយសើមខ្លាំង (High Humidity) ពេញមួយឆ្នាំ ការការពារឧបករណ៍ចាប់សញ្ញាពីសំណើម (Condensation) គឺជាបញ្ហាប្រឈមដែលត្រូវយកចិត្តទុកដាក់បន្ថែម ដូចដែលអ្នកនិពន្ធបានណែនាំឱ្យប្រើភ្នាស PTFE ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសារៈសំខាន់ខ្លាំងណាស់សម្រាប់ការធ្វើទំនើបកម្មកសិកម្មនៅកម្ពុជា ដោយសារវាមានតម្លៃសមរម្យ និងសាកសមនឹងតំបន់ដែលគ្មានអគ្គិសនី។</p>
+        
+        <ul>
+            
+            <li><strong>កសិកម្មដំណាំស្រូវ (Rice Farming):</strong> អាចប្រើនៅខេត្តបាត់ដំបង ឬពោធិ៍សាត់ ដើម្បីតាមដានកម្ពស់ទឹក និងសំណើមដីក្នុងវាលស្រែធំៗ ដែលពិបាកតម្លើងប្រព័ន្ធ Wi-Fi ។</li>
+            
+            <li><strong>កសិដ្ឋានក្នុងផ្ទះសំណាញ់ (Greenhouse):</strong> សាកសមសម្រាប់កសិដ្ឋានបន្លែនៅខេត្តកណ្តាល ឬមណ្ឌលគិរី ដើម្បីតាមដានសីតុណ្ហភាព និងសំណើមក្នុងរោង ដោយប្រើប្រព័ន្ធស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>វារីវប្បកម្ម (Aquaculture):</strong> អាចប្រើដើម្បីតាមដានគុណភាពទឹក (pH, Oxygen) សម្រាប់កសិដ្ឋានចិញ្ចឹមត្រី ដែលត្រូវការទិន្នន័យភ្លាមៗដើម្បីជៀសវាងការងាប់របស់ត្រី។</li>
+            
+        </ul>
+        
+        
+        <p>វាជាដំណោះស្រាយដ៏ល្អសម្រាប់កសិករខ្នាតតូច និងមធ្យមនៅកម្ពុជា ដែលចង់បានទិន្នន័យជាក់លាក់ដើម្បីបង្កើនទិន្នផល ប៉ុន្តែមានថវិកាកំណត់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>១. សិក្សាពីមូលដ្ឋានគ្រឹះ LoRaWAN:</strong> និស្សិតគួរចាប់ផ្តើមសិក្សាអំពីរបៀបដែលបច្ចេកវិទ្យា LoRaWAN ដំណើរការ ជាពិសេសស្ថាបត្យកម្មរវាង End-Node, Gateway, និង Network Server (The Things Network)។</li>
+            
+            <li><strong>២. ការជ្រើសរើសផ្នែករឹង (Hardware Selection):</strong> ចាប់ផ្តើមពិសោធន៍ជាមួយផ្ទាំងអភិវឌ្ឍន៍ដែលមានស្រាប់ដូចជា ESP32 LoRa (Heltec ឬ TTGO) ដែលងាយស្រួលរកជាងការរចនា PCB ផ្ទាល់ខ្លួនដូចក្នុងឯកសារនេះ។</li>
+            
+            <li><strong>៣. ការតម្លើង និងការពារឧបករណ៍ចាប់សញ្ញា:</strong> អនុវត្តការការពារសំណើមដោយប្រើប្រអប់ការពារទឹក (IP65 Enclosure) និងសាកល្បងប្រើភ្នាស PTFE លើឧបករណ៍ចាប់សញ្ញា DHT22 ដូចការណែនាំក្នុងឯកសារ។</li>
+            
+            <li><strong>៤. ការបង្កើតប្រព័ន្ធបង្ហាញទិន្នន័យ (Visualization):</strong> រៀនតម្លើង Node-RED និង Grafana ដើម្បីទាញទិន្នន័យពី The Things Network មកបង្ហាញជាក្រាហ្វិកសម្រាប់កសិករមើលងាយស្រួល។</li>
+            
+            <li><strong>៥. ការធ្វើតេស្តជាក់ស្តែងនៅវាលស្រែ:</strong> នាំយកឧបករណ៍ទៅតម្លើងសាកល្បងនៅកសិដ្ឋានសាកលវិទ្យាល័យ ដើម្បីវាស់វែងចម្ងាយបញ្ជូនសញ្ញា និងអាយុកាលថ្មក្នុងបរិយាកាសជាក់ស្តែងរបស់កម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">LoRaWAN (Long Range Wide Area Network)</span></td>
+                <td>ជាបច្ចេកវិទ្យាទំនាក់ទំនងឥតខ្សែដែលមានថាមពលទាប ប៉ុន្តែអាចបញ្ជូនទិន្នន័យបានឆ្ងាយ (រាប់គីឡូម៉ែត្រ)។ វាអនុញ្ញាតឱ្យឧបករណ៍ចាប់សញ្ញា (Sensors) ប្រើថ្មបានយូរខែ ឬយូរឆ្នាំ និងភ្ជាប់ទៅអ៊ីនធឺណិតតាមរយៈ Gateway។</td>
+                <td>ដូចជាការផ្ញើសារខ្លីៗតាមវិទ្យុទាក់ទង ដែលអាចទាក់ទងគ្នាបានឆ្ងាយដោយមិនអស់ថ្មលឿន មិនដូចការប្រើ Wi-Fi ដែលស៊ីថ្មខ្លាំង និងបានជិតៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Chirp Spread Spectrum (CSS)</span></td>
+                <td>ជាបច្ចេកទេសបំប្លែងសញ្ញាវិទ្យុដោយប្រើរលកសំឡេងផ្លាស់ប្តូរប្រេកង់ (Chirps) ដើម្បីឱ្យសញ្ញាអាចធ្វើដំណើរបានឆ្ងាយ និងធន់នឹងការរំខានពីឧបសគ្គ ឬសញ្ញាផ្សេងៗ។</td>
+                <td>ដូចជាសំឡេងបក្សីយំ ឬសំឡេងកញ្ចែ ដែលយើងអាចស្តាប់ឮច្បាស់ទោះបីជានៅឆ្ងាយ ឬមានសំឡេងរំខានផ្សេងៗក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">OTAA (Over-The-Air Activation)</span></td>
+                <td>ជារបៀបភ្ជាប់ចូលបណ្តាញ LoRaWAN ដោយសុវត្ថិភាព ដែលឧបករណ៍នីមួយៗនឹងស្នើសុំកូនសោសម្ងាត់ (Session Key) ថ្មីរាល់ពេលវាចាប់ផ្តើមដំណើរការ ឬចូលបណ្តាញដំបូង។</td>
+                <td>ដូចជាការចុះឈ្មោះចូលសណ្ឋាគារ ហើយទទួលបានកាតសោថ្មីរាល់ពេលចូលស្នាក់នៅ ដើម្បីសុវត្ថិភាពជាងការប្រើសោចាស់ដដែលៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">RSSI (Received Signal Strength Indicator)</span></td>
+                <td>ជាការវាស់កម្រិតកម្លាំងសញ្ញាវិទ្យុដែលឧបករណ៍ទទួលបានពីប្រភពបញ្ជូន។ តម្លៃកាន់តែអវិជ្ជមានខ្លាំង (ឧទាហរណ៍ -120dBm) មានន័យថាសញ្ញាកាន់តែខ្សោយ។</td>
+                <td>ដូចជា "កាំ" សេវាទូរស័ព្ទដែលបង្ហាញលើអេក្រង់ បើកាំកាន់តែច្រើន សេវាកាន់តែខ្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SNR (Signal-to-Noise Ratio)</span></td>
+                <td>ជាសមាមាត្ររវាងកម្លាំងសញ្ញាពិតប្រាកដដែលចង់បាន និងសំឡេងរំខាន (Noise) នៅក្នុងបរិយាកាស។ ក្នុងបច្ចេកវិទ្យា LoRa សូម្បីតែ SNR អវិជ្ជមានក៏នៅតែអាចទទួលទិន្នន័យបានដែរ។</td>
+                <td>ដូចជាការនិយាយគ្នានៅក្នុងពិធីបុណ្យដែលមានសំឡេងធុងបាសខ្លាំង។ បើយើងនិយាយខ្លាំងជាងសំឡេងធុងបាស គេនឹងស្តាប់ឮច្បាស់ (SNR ខ្ពស់)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">MQTT (Message Queuing Telemetry Transport)</span></td>
+                <td>ជាប្រព័ន្ធទំនាក់ទំនងស្តង់ដារសម្រាប់ឧបករណ៍ IoT ដែលអនុញ្ញាតឱ្យឧបករណ៍ចាប់សញ្ញា "បោះផ្សាយ" (Publish) ទិន្នន័យទៅកាន់កុំព្យូទ័រមេ (Server) បានយ៉ាងរហ័សនិងស្រាល ដោយមិនតម្រូវឱ្យមានអ៊ីនធឺណិតល្បឿនលឿន។</td>
+                <td>ដូចជាការបង្ហោះសារក្នុងគ្រុប Telegram ដែលសមាជិកទាំងអស់ក្នុងគ្រុបអាចទទួលបានសារនោះភ្លាមៗ ដោយមិនចាំបាច់ផ្ញើទៅមនុស្សម្តងមួយៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">PTFE membrane</span></td>
+                <td>ជាភ្នាសការពារពិសេសដែលបំពាក់លើឧបករណ៍ចាប់សញ្ញា ដើម្បីអនុញ្ញាតឱ្យខ្យល់ចេញចូលបាន ប៉ុន្តែទប់ស្កាត់ទឹក និងសំណើមមិនឱ្យចូលទៅបំផ្លាញគ្រឿងអេឡិចត្រូនិកខាងក្នុង។</td>
+                <td>ដូចជាអាវភ្លៀងដែលមានរន្ធតូចៗដែលអាចឱ្យខ្យល់ចេញចូលបាន ដើម្បីកុំឱ្យស្អុះ ប៉ុន្តែទឹកភ្លៀងមិនអាចជ្រាបចូលបាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Design%2C+Development+and+Real-world+Evaluation+of+a+Distributed+Cyber-physical+System+for+Precision+Agriculture%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9E%85%E1%9E%93%E1%9E%B6+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%97%E1%9E%B7%E1%9E%9C%E1%9E%8C%E1%9F%92%E1%9E%8D+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9C%E1%9E%B6%E1%9E%99%E1%9E%8F%E1%9E%98%E1%9F%92%E1%9E%9B%E1%9F%83%E1%9E%87%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%9F%E1%9F%92%E1%9E%8F%E1%9F%82%E1%9E%84%E1%9E%93%E1%9F%83%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%9A%E1%9E%BC%E1%9E%94%E1%9E%9C%E1%9E%93%E1%9F%92%E1%9E%8F%E1%9E%8F%E1%9E%B6%E1%9E%98%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%A2%E1%9F%8A%E1%9E%B8%E1%9E%93%E1%9E%92%E1%9E%BA%E1%9E%8E%E1%9E%B7%E1%9E%8F%E1%9E%85%E1%9F%82%E1%9E%80%E1%9E%85%E1%9E%B6%E1%9E%99%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%9F%E1%9E%BB%E1%9E%80%E1%9F%92%E1%9E%9A%E1%9E%B9%E1%9E%8F%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fdesign-development-precision-agriculture-system-2018.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Design, Development and Real-world Evaluation of a Distributed Cyber-physical System for Precision Agriculture', 'khmer_title': 'ការរចនា ការអភិវឌ្ឍ និងការវាយតម្លៃជាក់ស្តែងនៃប្រព័ន្ធរូបវន្តតាមប្រព័ន្ធអ៊ីនធឺណិតចែកចាយសម្រាប់កសិកម្មសុក្រឹត', 'url': '/papers/technology/design-development-precision-agriculture-system-2018.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=LoRaWAN+power+consumption+optimization+for+battery+operated+devices" target="_blank" rel="noopener"><span class="en">LoRaWAN power consumption optimization for battery operated devices</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+of+LPWAN+technologies+for+smart+farming+applications" target="_blank" rel="noopener"><span class="en">Comparison of LPWAN technologies for smart farming applications</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Urban+agriculture+IoT+monitoring+systems+architecture" target="_blank" rel="noopener"><span class="en">Urban agriculture IoT monitoring systems architecture</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=STM32+low+power+modes+for+wireless+sensor+nodes" target="_blank" rel="noopener"><span class="en">STM32 low power modes for wireless sensor nodes</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

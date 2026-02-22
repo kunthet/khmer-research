@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វិធីសាស្ត្រសិក្សាម៉ាស៊ីន (Machine Learning) ដ៏ទំនើបសម្រាប់ការទស្សន៍ទាយជំងឺមហារីកមាត់ស្បូនយ៉ាងត្រឹមត្រូវ | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការទស្សន៍ទាយជំងឺមហារីកមាត់ស្បូន (Cervical Cancer) ដែលបណ្តាលមកពីទិន្នន័យវេជ្ជសាស្រ្តមានភាពមិនមានតុល្យភាព (Imbalanced Da...">
+    
+    <meta name="keywords" content="Cervical Cancer, Decision Tree, SMOTETomek, Recursive Feature Elimination, Imbalanced Data, Medical Diagnosis, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/cervical-cancer-prediction-machine-learning-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/cervical-cancer-prediction-machine-learning-2021.html">
+    <meta property="og:title" content="វិធីសាស្ត្រសិក្សាម៉ាស៊ីន (Machine Learning) ដ៏ទំនើបសម្រាប់ការទស្សន៍ទាយជំងឺមហារីកមាត់ស្បូនយ៉ាងត្រឹមត្រូវ | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការទស្សន៍ទាយជំងឺមហារីកមាត់ស្បូន (Cervical Cancer) ដែលបណ្តាលមកពីទិន្នន័យវេជ្ជសាស្រ្តមានភាពមិនមានតុល្យភាព (Imbalanced Data) និងកម្រិតភាពត្រឹមត្រូវទាបនៃគំរូទស្សន...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2021 - SHS Web of Conferences">
+    
+    <meta property="article:tag" content="Cervical Cancer">
+    
+    <meta property="article:tag" content="Decision Tree">
+    
+    <meta property="article:tag" content="SMOTETomek">
+    
+    <meta property="article:tag" content="Recursive Feature Elimination">
+    
+    <meta property="article:tag" content="Imbalanced Data">
+    
+    <meta property="article:tag" content="Medical Diagnosis">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វិធីសាស្ត្រសិក្សាម៉ាស៊ីន (Machine Learning) ដ៏ទំនើបសម្រាប់ការទស្សន៍ទាយជំងឺមហារីកមាត់ស្បូនយ៉ាងត្រឹមត្រូវ">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការទស្សន៍ទាយជំងឺមហារីកមាត់ស្បូន (Cervical Cancer) ដែលបណ្តាលមកពីទិន្នន័យវេជ្ជសាស្រ្តមានភាពមិនមានតុល្យភាព (Imbalanced Data) និងកម្រិតភាពត្រឹមត្រូវទាបនៃគំរូទស្សន...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u178a\u17cf\u1791\u17c6\u1793\u17be\u1794\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1787\u17c6\u1784\u17ba\u1798\u17a0\u17b6\u179a\u17b8\u1780\u1798\u17b6\u178f\u17cb\u179f\u17d2\u1794\u17bc\u1793\u1799\u17c9\u17b6\u1784\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c",
+      "name": "A Contemporary Machine Learning Method for Accurate Prediction of Cervical Cancer",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1787\u17c6\u1784\u17ba\u1798\u17a0\u17b6\u179a\u17b8\u1780\u1798\u17b6\u178f\u17cb\u179f\u17d2\u1794\u17bc\u1793 (Cervical Cancer) \u178a\u17c2\u179b\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u1780\u1796\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u179a\u17d2\u178f\u1798\u17b6\u1793\u1797\u17b6\u1796\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796 (Imbalanced Data) \u1793\u17b7\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1791\u17b6\u1794\u1793\u17c3\u1782\u17c6\u179a\u17bc\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1798\u17bb\u1793\u17d7\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u17a2\u17d2\u1793\u1780\u1787\u17c6\u1784\u17ba\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/cervical-cancer-prediction-machine-learning-2021.html",
+      "author": [{"@type": "Person", "name": "Jesse Jeremiah Tanimu (Bayero University, Nigeria)"},{"@type": "Person", "name": "Mohamed Hamada (University of Aizu, Japan)"},{"@type": "Person", "name": "Mohammed Hassan (Bayero University, Nigeria)"},{"@type": "Person", "name": "Saratu Yusuf Ilu (Bayero University, Nigeria)"}],
+      "datePublished": "2021 - SHS Web of Conferences",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A Contemporary Machine Learning Method for Accurate Prediction of Cervical Cancer",
+        "url": "https://doi.org/10.1051/shsconf/202110204004"
+      },
+      "keywords": ["Cervical Cancer", "Decision Tree", "SMOTETomek", "Recursive Feature Elimination", "Imbalanced Data", "Medical Diagnosis"],
+      "about": "Computer Science, Medical Informatics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u178a\u17cf\u1791\u17c6\u1793\u17be\u1794\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1787\u17c6\u1784\u17ba\u1798\u17a0\u17b6\u179a\u17b8\u1780\u1798\u17b6\u178f\u17cb\u179f\u17d2\u1794\u17bc\u1793\u1799\u17c9\u17b6\u1784\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c",
+          "item": "https://khmerresearch.com/papers/technology/cervical-cancer-prediction-machine-learning-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>វិធីសាស្ត្រសិក្សាម៉ាស៊ីន (Machine Learning) ដ៏ទំនើបសម្រាប...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A Contemporary Machine Learning Method for Accurate Prediction of Cervical Cancer<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.1051/shsconf/202110204004" target="_blank">doi.org/10.1051/shsconf/202110204004</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វិធីសាស្ត្រសិក្សាម៉ាស៊ីន (Machine Learning) ដ៏ទំនើបសម្រាប់ការទស្សន៍ទាយជំងឺមហារីកមាត់ស្បូនយ៉ាងត្រឹមត្រូវ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A Contemporary Machine Learning Method for Accurate Prediction of Cervical Cancer</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Jesse Jeremiah Tanimu (Bayero University, Nigeria), Mohamed Hamada (University of Aizu, Japan), Mohammed Hassan (Bayero University, Nigeria), Saratu Yusuf Ilu (Bayero University, Nigeria)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021 - SHS Web of Conferences</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science, Medical Informatics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការទស្សន៍ទាយជំងឺមហារីកមាត់ស្បូន (Cervical Cancer) ដែលបណ្តាលមកពីទិន្នន័យវេជ្ជសាស្រ្តមានភាពមិនមានតុល្យភាព (Imbalanced Data) និងកម្រិតភាពត្រឹមត្រូវទាបនៃគំរូទស្សន៍ទាយមុនៗក្នុងការកំណត់អត្តសញ្ញាណអ្នកជំងឺ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានអភិវឌ្ឍគំរូព្យាករណ៍មួយដោយប្រើប្រាស់ក្បួនដោះស្រាយ Decision Tree រួមបញ្ចូលជាមួយបច្ចេកទេសជ្រើសរើសលក្ខណៈសម្បត្តិសំខាន់ៗ និងការធ្វើឱ្យទិន្នន័យមានតុល្យភាព។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ទិន្នន័យពី UCI Machine Learning Repository ដែលមានអ្នកជំងឺចំនួន ៨៥៨ នាក់ និងកត្តាហានិភ័យចំនួន ៣២</li>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេស SMOTETomek ដើម្បីដោះស្រាយបញ្ហាទិន្នន័យមិនមានតុល្យភាព (Imbalanced Data)</li>
+            
+            <li>ការប្រើប្រាស់ Recursive Feature Elimination (RFE) ដើម្បីកាត់បន្ថយចំនួនវិមាត្រទិន្នន័យ និងជ្រើសរើសតែលក្ខណៈពិសេសដែលសំខាន់បំផុត</li>
+            
+            <li>ការវាយតម្លៃគំរូដោយប្រើបច្ចេកទេស 10-fold cross-validation លើក្បួនដោះស្រាយ Decision Tree (DT)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>គំរូដែលបានស្នើឡើងសម្រេចបាននូវកម្រិតភាពត្រឹមត្រូវ (Accuracy) រហូតដល់ ៩៨% ក្នុងការទស្សន៍ទាយលទ្ធផលជំងឺ។</li>
+            
+            <li>លទ្ធផលបង្ហាញថាគំរូនេះមានភាពរសើប (Sensitivity) ១០០% ដែលមានន័យថាវាអាចកំណត់អត្តសញ្ញាណករណីវិជ្ជមាននៃជំងឺមហារីកបានយ៉ាងល្អបំផុត។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នានៃការជ្រើសរើសលក្ខណៈពិសេស (Feature Selection) និង SMOTETomek បានបង្កើនប្រសិទ្ធភាពនៃក្បួនដោះស្រាយ Decision Tree យ៉ាងខ្លាំងបើធៀបនឹងវិធីសាស្ត្រធម្មតា។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Basic Decision Tree (Classifier I)</span></strong><br>គំរូ Decision Tree ធម្មតាដោយគ្មានការជ្រើសរើសលក្ខណៈពិសេស ឬធ្វើឱ្យទិន្នន័យមានតុល្យភាព</td>
+                <td>ងាយស្រួលក្នុងការយល់ និងបកស្រាយលទ្ធផល ប៉ុន្តែដំណើរការបានល្អតែលើទិន្នន័យទូទៅ។</td>
+                <td>មិនអាចកំណត់អត្តសញ្ញាណករណីវិជ្ជមាន (អ្នកមានជំងឺ) បានល្អទេ ដោយសារបញ្ហាទិន្នន័យមិនមានតុល្យភាព។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy) ៩៦% និងភាពរសើប (Sensitivity) ៨៦%</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Decision Tree + RFE (Classifier II)</span></strong><br>ការប្រើប្រាស់ Decision Tree រួមជាមួយបច្ចេកទេស Recursive Feature Elimination (RFE) ដើម្បីជ្រើសរើសលក្ខណៈពិសេស</td>
+                <td>កាត់បន្ថយចំនួនទិន្នន័យដែលមិនចាំបាច់ និងបង្កើនភាពត្រឹមត្រូវជារួម។</td>
+                <td>នៅតែមានកម្រិតទាបក្នុងការចាប់យកករណីវិជ្ជមាន (Sensitivity មិនមានការផ្លាស់ប្តូរ)។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy) ៩៨% និងភាពរសើប (Sensitivity) ៨៦%</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">DT + RFE + SMOTETomek (Classifier III - Proposed)</span></strong><br>វិធីសាស្ត្រដែលស្នើឡើង៖ Decision Tree រួមជាមួយ RFE និងបច្ចេកទេស SMOTETomek សម្រាប់តុល្យភាពទិន្នន័យ</td>
+                <td>ដោះស្រាយបញ្ហាទិន្នន័យមិនស្មើគ្នាបានយ៉ាងមានប្រសិទ្ធភាព និងអាចកំណត់អត្តសញ្ញាណអ្នកជំងឺបានគ្រប់ករណី។</td>
+                <td>តម្រូវឱ្យមានការគណនាបន្ថែមលើការបង្កើតទិន្នន័យសិប្បនិម្មិត (Oversampling) និងការកាត់បន្ថយទិន្នន័យ (Undersampling)។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy) ៩៨% និងភាពរសើប (Sensitivity) ១០០%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនបានបញ្ជាក់ពីតម្លៃធនធានផ្ទាល់ទេ ប៉ុន្តែផ្អែកលើបច្ចេកទេសដែលប្រើ វាត្រូវការធនធានកុំព្យូទ័រកម្រិតមធ្យម។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យពី UCI Repository ដែលមានកំណត់ត្រាអ្នកជំងឺចំនួន ៨៥៨ នាក់ (អាចដំណើរការលើម៉ាស៊ីនកុំព្យូទ័រទូទៅ)។</li>
+        
+        <li><strong>Software:</strong> ភាសា Python និងបណ្ណាល័យដូចជា Scikit-learn និង Imbalanced-learn សម្រាប់បច្ចេកទេស SMOTETomek ។</li>
+        
+        <li><strong>Computational Power:</strong> មិនតម្រូវឱ្យមាន GPU ខ្លាំងក្លាទេ CPU ធម្មតាអាចដំណើរការ Decision Tree និង RFE លើទិន្នន័យទំហំនេះបាន។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ទិន្នន័យដែលប្រើប្រាស់បានមកពីមន្ទីរពេទ្យនៅប្រទេសវេណេស៊ុយអេឡា (Venezuela) ដែលកត្តាប្រជាសាស្ត្រ ហ្សែន និងការរស់នៅអាចខុសគ្នាពីស្ត្រីនៅកម្ពុជា។ លើសពីនេះ ទិន្នន័យមានភាពមិនមានតុល្យភាពខ្លាំង និងមានទិន្នន័យបាត់បង់ (Missing Values) ច្រើន ដែលទាមទារការសម្អាតយ៉ាងប្រុងប្រយ័ត្នមុននឹងយកមកប្រើ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់សម្រាប់វិស័យសុខាភិបាលនៅកម្ពុជា ជាពិសេសក្នុងការជួយគាំទ្រការសម្រេចចិត្តរបស់គ្រូពេទ្យ។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យកាល់ម៉ែត (Calmette Hospital) ឬ មន្ទីរពេទ្យមិត្តភាពខ្មែរ-សូវៀត:</strong> អាចប្រើប្រាស់គំរូនេះដើម្បីវិភាគហានិភ័យបឋមសម្រាប់អ្នកជំងឺដែលមកពិនិត្យសុខភាពមាត់ស្បូន ដោយកាត់បន្ថយការរង់ចាំលទ្ធផល Biopsy យូរ។</li>
+            
+            <li><strong>ការស្រាវជ្រាវនៅសាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល (UHS):</strong> និស្សិតវេជ្ជសាស្ត្រនិង IT អាចសហការគ្នាដើម្បីប្រមូលទិន្នន័យក្នុងស្រុក និងបង្កើតគំរូស្រដៀងគ្នានេះសម្រាប់ប្រជាជនខ្មែរ។</li>
+            
+            <li><strong>មណ្ឌលសុខភាពតាមខេត្ត:</strong> អាចប្រើជាឧបករណ៍ស្គ្រីន (Screening Tool) បឋម ដើម្បីកំណត់ថាអ្នកជំងឺណាគួរត្រូវបានបញ្ជូនមកពិនិត្យនៅភ្នំពេញជាបន្ទាន់។</li>
+            
+        </ul>
+        
+        
+        <p>ទោះបីជាគំរូនេះមានប្រសិទ្ធភាពក៏ដោយ វាចាំបាច់ត្រូវមានការបណ្តុះបណ្តាលឡើងវិញ (Retraining) ជាមួយទិន្នន័យអ្នកជំងឺកម្ពុជា ដើម្បីធានាបាននូវភាពត្រឹមត្រូវខ្ពស់បំផុត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីមូលដ្ឋានគ្រឹះ Python និង Scikit-learn:</strong> និស្សិតគួរចាប់ផ្តើមរៀនសរសេរកូដ Python ដោយផ្តោតលើបណ្ណាល័យ Scikit-learn សម្រាប់ការបង្កើត Decision Tree ។</li>
+            
+            <li><strong>ស្វែងយល់ពីការគ្រប់គ្រងទិន្នន័យមិនមានតុល្យភាព (Imbalanced Data):</strong> សិក្សាពីរបៀបប្រើប្រាស់បណ្ណាល័យ Imbalanced-learn ជាពិសេសបច្ចេកទេស SMOTE និង Tomek Links ដែលជាស្នូលនៃការសិក្សានេះ។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសជ្រើសរើសលក្ខណៈពិសេស (Feature Selection):</strong> រៀនប្រើប្រាស់ Recursive Feature Elimination (RFE) ដើម្បីកំណត់ថាកត្តាហានិភ័យណាខ្លះដែលសំខាន់បំផុតសម្រាប់ជំងឺមហារីក។</li>
+            
+            <li><strong>ការពិសោធន៍ជាមួយទិន្នន័យជាក់ស្តែង:</strong> ទាញយកទិន្នន័យ UCI Cervical Cancer (https://archive.ics.uci.edu) ហើយព្យាយាមបង្កើតគំរូឡើងវិញតាមការណែនាំក្នុងឯកសារ។</li>
+            
+            <li><strong>គម្រោងសហការស្រាវជ្រាវ:</strong> ស្នើសុំធ្វើគម្រោងបញ្ចប់ការសិក្សាដោយសហការជាមួយមន្ទីរពេទ្យក្នុងស្រុក ដើម្បីសាកល្បងគំរូនេះជាមួយទិន្នន័យអនាមិករបស់អ្នកជំងឺនៅកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision Tree (DT)</span></td>
+                <td>ជាគំរូនៃបញ្ញាសិប្បនិម្មិតដែលមានរាងដូចដើមឈើ ដែលបំបែកទិន្នន័យជាជំហានៗដោយផ្អែកលើលក្ខខណ្ឌ ឬសំណួរ ដើម្បីឈានទៅរកការសម្រេចចិត្តចុងក្រោយ ឬការចាត់ថ្នាក់។</td>
+                <td>ដូចជាការលេងល្បែងទាយសត្វ ដោយសួរថា "តើវាមានស្លាបទេ?" បើមាន ទៅសួរទៀត "តើវាចេះហោះទេ?" រហូតទាល់តែទាយត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Recursive Feature Elimination (RFE)</span></td>
+                <td>ជាបច្ចេកទេសជ្រើសរើសលក្ខណៈពិសេសដោយកាត់បន្ថយទិន្នន័យម្តងមួយៗ។ វាដំណើរការដោយលុបចោលកត្តាដែលមិនសូវសំខាន់ចេញពីការវិភាគ ដើម្បីទុកតែកត្តាដែលជះឥទ្ធិពលខ្លាំងបំផុតលើលទ្ធផល។</td>
+                <td>ដូចជាការរៀបចំកាបូបដើរលេង ដោយដករបស់ដែលមិនចាំបាច់ចេញម្តងមួយៗ រហូតដល់សល់តែរបស់សំខាន់បំផុតដែលត្រូវតែមាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTETomek</span></td>
+                <td>ជាវិធីសាស្ត្រកូនកាត់ដែលរួមបញ្ចូលគ្នានូវការបង្កើតទិន្នន័យបន្ថែមសម្រាប់ក្រុមភាគតិច (SMOTE) និងការលុបចោលទិន្នន័យដែលស្រពេចស្រពិល (Tomek Links) ដើម្បីឱ្យទិន្នន័យមានតុល្យភាព។</td>
+                <td>ដូចជាការបន្ថែមសិស្សក្នុងក្រុមតូចឱ្យមានគ្នាច្រើន និងដកសិស្សដែលអង្គុយលាយឡំគ្នាខុសកន្លែងចេញ ដើម្បីឱ្យគ្រូងាយស្រួលបែងចែកក្រុមសិស្សឱ្យដាច់ពីគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sensitivity</span></td>
+                <td>ជាសមត្ថភាពរបស់ម៉ាស៊ីនក្នុងការរកឃើញករណីវិជ្ជមាន (អ្នកមានជំងឺ) យ៉ាងត្រឹមត្រូវ។ ក្នុងវិស័យវេជ្ជសាស្ត្រ វាសំខាន់ជាងភាពត្រឹមត្រូវទូទៅ ព្រោះយើងមិនចង់ឱ្យអ្នកមានជំងឺត្រូវបានវិភាគថា "គ្មានជំងឺ"។</td>
+                <td>ដូចជាប្រព័ន្ធការពារភ្លើងឆេះដែលត្រូវតែរោទិ៍រាល់ពេលមានផ្សែង ដើម្បីធានាថាមិនខកខានពេលមានភ្លើងឆេះពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Specificity</span></td>
+                <td>ជាសមត្ថភាពរបស់ម៉ាស៊ីនក្នុងការកំណត់អត្តសញ្ញាណអ្នកដែលមិនមានជំងឺ (ករណីអវិជ្ជមាន) បានយ៉ាងត្រឹមត្រូវ។</td>
+                <td>ដូចជាការត្រួតពិនិត្យសំបុត្រដែលមិនចាប់ច្រឡំមនុស្សធម្មតាថាជាចោរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Class Imbalance</span></td>
+                <td>ស្ថានភាពដែលទិន្នន័យមួយក្រុមមានចំនួនច្រើនលើសលប់ជាងមួយក្រុមទៀត (ឧទាហរណ៍៖ មនុស្សដែលមានសុខភាពល្អមានច្រើនជាងអ្នកកើតមហារីក) ដែលធ្វើឱ្យកុំព្យូទ័រពិបាករៀនស្គាល់ក្រុមដែលមានចំនួនតិច។</td>
+                <td>ដូចជាការស្វែងរកម្ជុលក្នុងគំនរចំបើង; ដោយសារចំបើងមានច្រើនពេក វាពិបាកនឹងរកឃើញម្ជុលដែលជាគោលដៅសំខាន់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Overfitting</span></td>
+                <td>ជាបញ្ហាដែលកុំព្យូទ័ររៀនទិន្នន័យលម្អិតពេក រហូតដល់ចងចាំទាំងចំណុចមិនសំខាន់ ឬកំហុសតូចតាច ធ្វើឱ្យវាមិនអាចទស្សន៍ទាយទិន្នន័យថ្មីៗបានត្រឹមត្រូវ។</td>
+                <td>ដូចជាសិស្សដែលទន្ទេញចម្លើយប្រឡងចាំរត់មាត់ ប៉ុន្តែពេលចេញវិញ្ញាសាដែលប្លែកបន្តិច គាត់ធ្វើមិនបានព្រោះមិនយល់ពីខ្លឹមសារពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-fold Cross-validation</span></td>
+                <td>ជាវិធីសាស្ត្រវាយតម្លៃប្រសិទ្ធភាពរបស់គំរូដោយបែងចែកទិន្នន័យជាផ្នែកតូចៗជាច្រើន (K-fold) ហើយធ្វើការបណ្តុះបណ្តាល និងធ្វើតេស្តឆ្លាស់គ្នាជាច្រើនដង ដើម្បីធានាថាគំរូនេះពិតជាល្អ។</td>
+                <td>ដូចជាការសាកល្បងម្ហូបឱ្យមនុស្ស ១០ នាក់ផ្សេងគ្នាភ្លក់ ដើម្បីធានាថាវាពិតជាឆ្ងាញ់សម្រាប់មនុស្សទូទៅ មិនមែនត្រូវមាត់តែចំពោះបុគ្គលម្នាក់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=SMOTETomek+for+imbalanced+classification+in+medical+datasets" target="_blank" rel="noopener"><span class="en">SMOTETomek for imbalanced classification in medical datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Recursive+Feature+Elimination+%28RFE%29+applications+in+healthcare" target="_blank" rel="noopener"><span class="en">Recursive Feature Elimination (RFE) applications in healthcare</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Machine+learning+models+for+cancer+risk+prediction" target="_blank" rel="noopener"><span class="en">Machine learning models for cancer risk prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+class+imbalance+in+clinical+data+mining" target="_blank" rel="noopener"><span class="en">Handling class imbalance in clinical data mining</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

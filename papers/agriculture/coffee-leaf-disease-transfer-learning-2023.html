@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការកំណត់អត្តសញ្ញាណសត្វល្អិត និងជំងឺលើស្លឹកកាហ្វេ ដោយផ្អែកលើការរៀនបន្ត (Transfer Learning) និងការចម្រាញ់ចំណេះដឹង (Knowledge Distillation) | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាដែលម៉ូដែល Deep Learning ធំៗមានភាពសុក្រឹតខ្ពស់តែមានរចនាសម្ព័ន្ធស្មុគស្មាញ និងដំណើរការយឺតសម្រាប់ការវិភាគពេលវេលាជាក់ស្តែង (Real-tim...">
+    
+    <meta name="keywords" content="Coffee Leaf, Transfer Learning, Knowledge Distillation, Convolutional Neural Network, Lightweight Model, Plant Disease Identification, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/agriculture/coffee-leaf-disease-transfer-learning-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/agriculture/coffee-leaf-disease-transfer-learning-2023.html">
+    <meta property="og:title" content="ការកំណត់អត្តសញ្ញាណសត្វល្អិត និងជំងឺលើស្លឹកកាហ្វេ ដោយផ្អែកលើការរៀនបន្ត (Transfer Learning) និងការចម្រាញ់ចំណេះដឹង (Knowledge Distillation) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាដែលម៉ូដែល Deep Learning ធំៗមានភាពសុក្រឹតខ្ពស់តែមានរចនាសម្ព័ន្ធស្មុគស្មាញ និងដំណើរការយឺតសម្រាប់ការវិភាគពេលវេលាជាក់ស្តែង (Real-time) ខណៈដែលម៉ូដែលតូចស្រាល (Lightweight mod...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023, Frontiers in Computing and Intelligent Systems">
+    
+    <meta property="article:tag" content="Coffee Leaf">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Knowledge Distillation">
+    
+    <meta property="article:tag" content="Convolutional Neural Network">
+    
+    <meta property="article:tag" content="Lightweight Model">
+    
+    <meta property="article:tag" content="Plant Disease Identification">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការកំណត់អត្តសញ្ញាណសត្វល្អិត និងជំងឺលើស្លឹកកាហ្វេ ដោយផ្អែកលើការរៀនបន្ត (Transfer Learning) និងការចម្រាញ់ចំណេះដឹង (Knowledge Distillation)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាដែលម៉ូដែល Deep Learning ធំៗមានភាពសុក្រឹតខ្ពស់តែមានរចនាសម្ព័ន្ធស្មុគស្មាញ និងដំណើរការយឺតសម្រាប់ការវិភាគពេលវេលាជាក់ស្តែង (Real-time) ខណៈដែលម៉ូដែលតូចស្រាល (Lightweight mod...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u179f\u178f\u17d2\u179c\u179b\u17d2\u17a2\u17b7\u178f \u1793\u17b7\u1784\u1787\u17c6\u1784\u17ba\u179b\u17be\u179f\u17d2\u179b\u17b9\u1780\u1780\u17b6\u17a0\u17d2\u179c\u17c1 \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u1794\u1793\u17d2\u178f (Transfer Learning) \u1793\u17b7\u1784\u1780\u17b6\u179a\u1785\u1798\u17d2\u179a\u17b6\u1789\u17cb\u1785\u17c6\u178e\u17c1\u17c7\u178a\u17b9\u1784 (Knowledge Distillation)",
+      "name": "Identification of Coffee Leaf Pests and Diseases based on Transfer Learning and Knowledge Distillation",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u178a\u17c2\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b Deep Learning \u1792\u17c6\u17d7\u1798\u17b6\u1793\u1797\u17b6\u1796\u179f\u17bb\u1780\u17d2\u179a\u17b9\u178f\u1781\u17d2\u1796\u179f\u17cb\u178f\u17c2\u1798\u17b6\u1793\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789 \u1793\u17b7\u1784\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1799\u17ba\u178f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784 (Real-time) \u1781\u178e\u17c8\u178a\u17c2\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u178f\u17bc\u1785\u179f\u17d2\u179a\u17b6\u179b (Lightweight models) \u1798\u17b6\u1793\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u179b\u17bf\u1793\u178f\u17c2\u1798\u17b7\u1793\u1798\u17b6\u1793\u1797\u17b6\u1796\u179f\u17bb\u1780\u17d2\u179a\u17b9\u178f\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u17b6\u1793\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u1787\u17c6\u1784\u17ba\u179f\u17d2\u179b\u17b9\u1780\u1780\u17b6\u17a0\u17d2\u179c\u17c1\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/agriculture/coffee-leaf-disease-transfer-learning-2023.html",
+      "author": [{"@type": "Person", "name": "Zi Wang (School of Electrical and Information Engineering, Wanjiang University of technology, China)"},{"@type": "Person", "name": "Zheng Ren (School of Electrical and Information Engineering, Wanjiang University of technology, China)"},{"@type": "Person", "name": "Xue Li (School of Economics and Management, Yango University, China)"}],
+      "datePublished": "2023, Frontiers in Computing and Intelligent Systems",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Identification of Coffee Leaf Pests and Diseases based on Transfer Learning and Knowledge Distillation",
+        "url": "N/A"
+      },
+      "keywords": ["Coffee Leaf", "Transfer Learning", "Knowledge Distillation", "Convolutional Neural Network", "Lightweight Model", "Plant Disease Identification"],
+      "about": "Machine Learning in Agriculture"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Agriculture",
+          "item": "https://khmerresearch.com/papers/agriculture/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u179f\u178f\u17d2\u179c\u179b\u17d2\u17a2\u17b7\u178f \u1793\u17b7\u1784\u1787\u17c6\u1784\u17ba\u179b\u17be\u179f\u17d2\u179b\u17b9\u1780\u1780\u17b6\u17a0\u17d2\u179c\u17c1 \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u1794\u1793\u17d2\u178f (Transfer Learning) \u1793\u17b7\u1784\u1780\u17b6\u179a\u1785\u1798\u17d2\u179a\u17b6\u1789\u17cb\u1785\u17c6\u178e\u17c1\u17c7\u178a\u17b9\u1784 (Knowledge Distillation)",
+          "item": "https://khmerresearch.com/papers/agriculture/coffee-leaf-disease-transfer-learning-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/agriculture/">Agriculture</a> &rsaquo;
+        <span>ការកំណត់អត្តសញ្ញាណសត្វល្អិត និងជំងឺលើស្លឹកកាហ្វេ ដោយផ្អែក...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Identification of Coffee Leaf Pests and Diseases based on Transfer Learning and Knowledge Distillation<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការកំណត់អត្តសញ្ញាណសត្វល្អិត និងជំងឺលើស្លឹកកាហ្វេ ដោយផ្អែកលើការរៀនបន្ត (Transfer Learning) និងការចម្រាញ់ចំណេះដឹង (Knowledge Distillation)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Identification of Coffee Leaf Pests and Diseases based on Transfer Learning and Knowledge Distillation</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Zi Wang (School of Electrical and Information Engineering, Wanjiang University of technology, China), Zheng Ren (School of Electrical and Information Engineering, Wanjiang University of technology, China), Xue Li (School of Economics and Management, Yango University, China)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, Frontiers in Computing and Intelligent Systems</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning in Agriculture</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាដែលម៉ូដែល Deep Learning ធំៗមានភាពសុក្រឹតខ្ពស់តែមានរចនាសម្ព័ន្ធស្មុគស្មាញ និងដំណើរការយឺតសម្រាប់ការវិភាគពេលវេលាជាក់ស្តែង (Real-time) ខណៈដែលម៉ូដែលតូចស្រាល (Lightweight models) មានដំណើរការលឿនតែមិនមានភាពសុក្រឹតគ្រប់គ្រាន់សម្រាប់ការកំណត់អត្តសញ្ញាណជំងឺស្លឹកកាហ្វេ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវការរួមបញ្ចូលគ្នានៃការរៀនបន្ត (Transfer Learning) និងការចម្រាញ់ចំណេះដឹង (Knowledge Distillation) ដើម្បីបង្វឹកម៉ូដែលសិស្សដែលមានទំហំតូចដោយប្រើប្រាស់ចំណេះដឹងពីម៉ូដែលគ្រូដែលមានភាពស្មុគស្មាញ។
+        
+        <ul>
+            
+            <li>ការកាត់បន្ថយសំឡេងរំខានលើរូបភាព (Noise Reduction) ក្នុងដំណាក់កាលរៀបចំទិន្នន័យដោយប្រើប្រាស់វិធីសាស្ត្រ Mean Filtering</li>
+            
+            <li>ការប្រើប្រាស់បណ្តាញកម្រិតខ្ពស់ (VGG Network) ដែលបានហ្វឹកហាត់ជាមុននៅលើ ImageNet ដើរតួជាម៉ូដែលគ្រូ (Teacher Network)</li>
+            
+            <li>ការរចនាម៉ូដែលសិស្សតូច និងស្រាល (Lightweight Student Network) ដែលមានស្រទាប់ Convolution ចំនួន ២</li>
+            
+            <li>ការផ្ទេរចំណេះដឹងពីគ្រូទៅសិស្សដោយប្រើប្រាស់អនុគមន៍បាត់បង់ (Cross-entropy Loss Function) សម្រាប់ការចម្រាញ់ចំណេះដឹង</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលដែលបានស្នើឡើងសម្រេចបាននូវអត្រាភាពសុក្រឹត ៩៦.៧៣% ក្នុងការកំណត់អត្តសញ្ញាណសត្វល្អិត និងជំងឺចំនួន ៥ ប្រភេទនៅលើស្លឹកកាហ្វេ។</li>
+            
+            <li>តាមរយៈការប្រើប្រាស់វិធីសាស្ត្រនេះ ភាពសុក្រឹតនៃម៉ូដែលមានការកើនឡើង ៤.២៩% បើប្រៀបធៀបទៅនឹងការបង្វឹកម៉ូដែលស្រាល (Lightweight model) ដោយផ្ទាល់។</li>
+            
+            <li>ល្បឿននៃការគណនារបស់ម៉ូដែលមានភាពរហ័សខ្លាំង (ត្រឹមតែ ០.០៦៩ វិនាទី) ដែលស័ក្តិសមបំផុតសម្រាប់ការយកទៅអនុវត្តក្នុងការតាមដានស្ថានភាពសុខភាពដំណាំក្នុងពេលវេលាជាក់ស្តែង (Real-time analysis)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM)</span></strong><br>ក្បួនដោះស្រាយ SVM (Support Vector Machine)</td>
+                <td>មានល្បឿនក្នុងការគណនាលឿនបំផុតក្នុងចំណោមម៉ូដែលដែលបានធ្វើតេស្ត។ ស័ក្តិសមសម្រាប់កិច្ចការងាររៀនម៉ាស៊ីន (Machine Learning) បែបសាមញ្ញ។</td>
+                <td>អត្រាភាពសុក្រឹតនៅមានកម្រិតទាប មិនអាចធ្វើការទាញយកលក្ខណៈពិសេស (Feature extraction) ពីរូបភាពស្មុគស្មាញបានល្អនោះទេ។</td>
+                <td>អត្រាភាពសុក្រឹត ៨៧.៩១% ជាមួយនឹងល្បឿនគណនា ០.០២៣ វិនាទី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">VGG with pre-trained weights (Teacher Model)</span></strong><br>បណ្ដាញ VGG ដែលមានទម្ងន់ហ្វឹកហាត់ជាមុន (ម៉ូដែលគ្រូ)</td>
+                <td>មានភាពសុក្រឹតខ្ពស់បំផុតក្នុងការកំណត់អត្តសញ្ញាណជំងឺ ដោយសារវាមានរចនាសម្ព័ន្ធជ្រៅ (Deep network) និងបានរៀនពីទិន្នន័យ ImageNet ដ៏ធំ។</td>
+                <td>មានទំហំធំ និងចំនួនប៉ារ៉ាម៉ែត្ររហូតដល់ ១០០លាន ធ្វើឱ្យល្បឿននៃការគណនាយឺត ដែលមិនស័ក្តិសមសម្រាប់ការវិភាគក្នុងពេលវេលាជាក់ស្តែង (Real-time analysis)។</td>
+                <td>អត្រាភាពសុក្រឹត ៩៧.៩៨% ជាមួយនឹងល្បឿនគណនា ១.២៩៧ វិនាទី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Directly Trained Lightweight Model</span></strong><br>ម៉ូដែលស្រាលបង្វឹកដោយផ្ទាល់</td>
+                <td>មានទំហំតូច និងល្បឿនក្នុងការគណនាលឿន ដែលងាយស្រួលក្នុងការដំណើរការលើឧបករណ៍ខ្នាតតូច។</td>
+                <td>ដោយសារតែរចនាសម្ព័ន្ធតូច វាពិបាកក្នុងការចាប់យកលក្ខណៈពិសេសរបស់រូបភាពបានស៊ីជម្រៅ ដែលបណ្តាលឱ្យភាពសុក្រឹតធ្លាក់ចុះច្រើន។</td>
+                <td>អត្រាភាពសុក្រឹត ៩២.៤៤% ជាមួយនឹងល្បឿនគណនា ០.០៦៥ វិនាទី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Proposed Model (Knowledge Distillation)</span></strong><br>ម៉ូដែលស្នើឡើង (តាមរយៈការចម្រាញ់ចំណេះដឹង)</td>
+                <td>ទទួលយកបាននូវលក្ខណៈពិសេសដែលស្រង់ចេញពីម៉ូដែលគ្រូ ធ្វើឱ្យវាមានភាពសុក្រឹតខ្ពស់កៀកនឹងម៉ូដែល VGG ព្រមទាំងរក្សាបានល្បឿនលឿនក្នុងការគណនា។</td>
+                <td>ទាមទារពេលវេលា និងកម្លាំងម៉ាស៊ីនដើម្បីហ្វឹកហាត់ម៉ូដែលគ្រូជាមុនសិន ទើបអាចផ្ទេរចំណេះដឹងមកម៉ូដែលសិស្សនេះបាន។</td>
+                <td>អត្រាភាពសុក្រឹត ៩៦.៧៣% ជាមួយនឹងល្បឿនគណនា ០.០៦៩ វិនាទី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រមធ្យមទៅខ្ពស់សម្រាប់វគ្គបង្វឹកម៉ូដែលគ្រូ (Teacher model) ដំបូង ប៉ុន្តែម៉ូដែលចុងក្រោយអាចដំណើរការបានយ៉ាងរលូនលើឧបករណ៍ដែលមានធនធានទាប។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ TensorFlow Framework សម្រាប់រៀបចំ និងហ្វឹកហាត់រចនាសម្ព័ន្ធបណ្តាញសរសៃប្រសាទ (Neural Networks)។</li>
+        
+        <li><strong>Hardware:</strong> ត្រូវការ GPU កម្រិតមធ្យម ឬខ្ពស់សម្រាប់ការហ្វឹកហាត់បណ្តាញ VGG (Teacher network) ដែលមានប៉ារ៉ាម៉ែត្រយ៉ាងច្រើនក្នុងការគណនា។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យរូបភាពស្លឹកកាហ្វេចំនួន ១៥៩១ សន្លឹក ដែលត្រូវបានបែងចែកជា ៥ ចំណាត់ថ្នាក់ និងប្តូរទំហំទៅជា 64x64 pixels ព្រមទាំងត្រូវការបច្ចេកទេស Mean Filtering ដើម្បីកាត់បន្ថយសំឡេងរំខាន (Noise)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងជ្រៅជ្រះផ្នែក Deep Learning ជាពិសេសបច្ចេកទេស Transfer Learning, Cross-entropy loss, និងចំណេះដឹងជុំវិញរោគសាស្ត្ររុក្ខជាតិ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យរូបភាពស្លឹកកាហ្វេដែលមាន ៥ លក្ខខណ្ឌ (មានសុខភាពល្អ, ពណ៌ត្នោត, ស្វិត, មានប្រហោង, មានស្នាមអុចៗ) ប៉ុន្តែមិនបានបញ្ជាក់ពីទីតាំងភូមិសាស្ត្រនៃការប្រមូលទិន្នន័យច្បាស់លាស់ទេ។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកប្រើប្រាស់ផ្ទាល់អាចប្រឈមនឹងបញ្ហាភាពខុសគ្នានៃប្រភេទពូជកាហ្វេ អាកាសធាតុ និងសំបុកមេរោគប្រចាំតំបន់ ដូច្នេះទាមទារការប្រមូលទិន្នន័យបន្ថែមនៅក្នុងស្រុកដើម្បីធ្វើការ Fine-tune ឱ្យត្រូវនឹងបរិបទកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ Knowledge Distillation ដែលផ្តល់នូវម៉ូដែលស្រាលនិងសុក្រឹតខ្ពស់នេះ មានសក្តានុពលខ្លាំងក្នុងការអភិវឌ្ឍកម្មវិធីទូរស័ព្ទដៃសម្រាប់វិស័យកសិកម្មនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ខេត្តមណ្ឌលគិរី និងរតនគិរី (តំបន់ដាំកាហ្វេធំៗនៅកម្ពុជា):</strong> អាចប្រើប្រាស់កម្មវិធីលើទូរស័ព្ទដៃដើម្បីជួយកសិករពិនិត្យជំងឺលើស្លឹកកាហ្វេបានរហ័ស ដោយមិនត្រូវការអ៊ីនធឺណិតល្បឿនលឿន (Offline detection) ព្រោះម៉ូដែលនេះមានទំហំតូច និងគណនាលឿន។</li>
+            
+            <li><strong>ក្រសួងកសិកម្ម រុក្ខាប្រមាញ់ និងនេសាទ (MAFF):</strong> ស្ថាប័នរដ្ឋអាចទាញយកបច្ចេកទេស Transfer Learning នេះទៅបង្វឹកបន្ថែមដើម្បីកំណត់អត្តសញ្ញាណជំងឺលើដំណាំយុទ្ធសាស្ត្រផ្សេងៗទៀតរបស់កម្ពុជា ដូចជា ស្រូវ ដំឡូងមី និងស្វាយចន្ទី។</li>
+            
+            <li><strong>ក្រុមហ៊ុន AgriTech និង Startup កសិកម្ម:</strong> ក្រុមហ៊ុនក្នុងស្រុកអាចរួមបញ្ចូលម៉ូដែល Lightweight នេះទៅក្នុងប្រព័ន្ធកាមេរ៉ារបស់ឧបករណ៍ Drone ដើម្បីហោះតាមដានសុខភាពដំណាំទ្រង់ទ្រាយធំ ដែលអាចសន្សំសំចៃថាមពលថ្មនិងចំណាយតិច។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការផ្លាស់ប្តូរពីម៉ូដែលធំ និងស្មុគស្មាញ ទៅជាម៉ូដែលតូចស្រាល គឺជាគន្លឹះដ៏សំខាន់ដែលអនុញ្ញាតឱ្យបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត (AI) អាចជ្រៀតចូលទៅដល់ដៃកសិករខ្មែរនៅតំបន់ដាច់ស្រយាលតាមរយៈស្មាតហ្វូនធម្មតា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Computer Vision:</strong> ចាប់ផ្តើមរៀនពីមូលដ្ឋាននៃការវែកញែករូបភាព (Image Classification) ដោយប្រើប្រាស់ Convolutional Neural Networks (CNN) តាមរយៈវគ្គសិក្សាតាមអ៊ីនធឺណិត និងប្រើប្រាស់បណ្ណាល័យ TensorFlow ឬ PyTorch សម្រាប់អនុវត្តជាក់ស្តែង។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសរៀនបន្ត (Transfer Learning):</strong> សាកល្បងទាញយកម៉ូដែលដែលបានហ្វឹកហាត់រួចជាមុន (Pre-trained models) ដូចជា VGG16, ResNet50 ឬ MobileNetV2 ពី ImageNet មកធ្វើការហ្វឹកហាត់បន្ត (Fine-tuning) ដោយប្រើប្រាស់ទិន្នន័យពីរូបភាពរុក្ខជាតិដែលមានជំងឺ (ដូចជា PlantVillage dataset)។</li>
+            
+            <li><strong>ប្រមូលនិងកែច្នៃទិន្នន័យក្នុងស្រុក (Data Preprocessing):</strong> ចុះប្រមូលរូបភាពស្លឹកកាហ្វេ និងដំណាំផ្សេងៗដោយផ្ទាល់នៅតាមចម្ការក្នុងប្រទេសកម្ពុជា រួចប្រើប្រាស់បណ្ណាល័យ OpenCV ដើម្បីអនុវត្តបច្ចេកទេស Mean Filtering សម្អាតសំឡេងរំខាន និងកាត់ទំហំរូបភាពឱ្យត្រូវនឹងទម្រង់ម៉ូដែល (ឧ. 64x64 pixels)។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែលដោយប្រើ Knowledge Distillation:</strong> សរសេរកូដរចនា Teacher Network ឱ្យមានទំហំធំ និង Student Network ឱ្យមានទំហំតូច រួចធ្វើការបង្វឹកដោយប្រើអនុគមន៍បាត់បង់ Cross-entropy ដើម្បីបង្រៀន Student ឱ្យចាប់យកចំណេះដឹង (Probability distributions) ពី Teacher។</li>
+            
+            <li><strong>បម្លែងនិងដាក់ឱ្យដំណើរការម៉ូដែល (Model Deployment):</strong> ធ្វើការបំប្លែងម៉ូដែល Student ទៅជាទម្រង់ TensorFlow Lite ដើម្បីយកទៅដាក់បញ្ចូលក្នុងកម្មវិធីស្មាតហ្វូន Android ឬ iOS ដែលអនុញ្ញាតឱ្យកសិករអាចថតរូបស្កេនរកជំងឺលើស្លឹកដំណាំបានភ្លាមៗដោយមិនបាច់ប្រើអ៊ីនធឺណិត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>ជាវិធីសាស្ត្រមួយក្នុងបញ្ញាសិប្បនិម្មិត (AI) ដែលយកម៉ូដែលធ្លាប់បានហ្វឹកហាត់រួចនៅលើទិន្នន័យដ៏ធំ (ឧទាហរណ៍ ទិន្នន័យ ImageNet ដែលមានរូបភាពរាប់លាន) មកប្រើប្រាស់ និងកែសម្រួលបន្ថែមបន្តិចបន្តួច ដើម្បីដោះស្រាយបញ្ហាថ្មីមួយទៀតដែលមានទិន្នន័យតិចជាង (ឧទាហរណ៍ ការសម្គាល់ជំងឺស្លឹកកាហ្វេ)។ វាជួយសន្សំពេលវេលា និងធនធានកុំព្យូទ័រក្នុងការហ្វឹកហាត់តាំងពីចំណុចសូន្យមក។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលចេះជិះកង់រួចហើយ យកជំនាញរក្សាលំនឹងនោះទៅរៀនជិះម៉ូតូ ដែលធ្វើឱ្យគាត់ឆាប់ចេះជាងអ្នកមិនធ្លាប់មានមូលដ្ឋានជិះកង់សោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Knowledge distillation</span></td>
+                <td>ជាបច្ចេកទេសបង្រួមទំហំម៉ូដែល ដោយបង្ហាត់ម៉ូដែលតូចនិងស្រាល (Student network) ឱ្យរៀនយកតម្រាប់តាមរបៀបគិត និងការវាយតម្លៃរបស់ម៉ូដែលធំនិងស្មុគស្មាញ (Teacher network)។ លទ្ធផលគឺយើងទទួលបានម៉ូដែលខ្នាតតូចដែលមានល្បឿនលឿនសម្រាប់ការប្រើប្រាស់ជាក់ស្តែង តែនៅរក្សាភាពសុក្រឹតបានខ្ពស់កៀកនឹងម៉ូដែលធំ។</td>
+                <td>ដូចជាសិស្សរៀនសង្ខេបមេរៀន និងស្រូបយកចំណេះដឹងពីសាស្ត្រាចារ្យដែលមានបទពិសោធន៍ច្រើនឆ្នាំ មកចងក្រងទុកក្នុងខួរក្បាលខ្លួនឯង ដើម្បីអាចដោះស្រាយលំហាត់បានលឿននិងត្រឹមត្រូវដោយមិនបាច់បើកសៀវភៅក្រាស់ៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean filtering</span></td>
+                <td>ជាបច្ចេកទេសកែច្នៃរូបភាពជាមុន (Preprocessing) ដោយយកតម្លៃមធ្យមនៃភីកសែល (Pixels) ដែលនៅជុំវិញភីកសែលគោលដៅ មកជំនួសតម្លៃដើមរបស់វា។ គោលបំណងគឺដើម្បីលុបបំបាត់ស្នាមអុចៗ ឬសំឡេងរំខាន (Noise) លើរូបភាពដើម ធ្វើឱ្យរូបភាពមានភាពរលោង និងងាយស្រួលក្នុងការទាញយកលក្ខណៈពិសេសជាងមុន។</td>
+                <td>ដូចជាការយកក្រណាត់មកជូតសម្អាតកញ្ចក់ដែលមានស្នាមប្រឡាក់តូចៗ ដើម្បីឱ្យយើងអាចមើលឃើញទេសភាពខាងក្រៅបានច្បាស់ល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">convolution layer</span></td>
+                <td>ជាស្រទាប់គណនាសំខាន់នៅក្នុងប្រព័ន្ធបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (CNN) ដែលដើរតួជាអ្នកស្កេនរូបភាពទាំងមូលដើម្បីទាញយកលក្ខណៈពិសេសៗ (Features) ពីរូបភាព ដូចជា គែមបន្ទាត់, ពណ៌, ទម្រង់រាង, ឬស្នាមជំងឺតូចៗនៅលើស្លឹកឈើ សម្រាប់យកទៅវិភាគនៅស្រទាប់បន្ទាប់។</td>
+                <td>ដូចជាការប្រើកែវពង្រីក (Magnifying glass) ដើម្បីឆ្លុះមើលរាល់ជ្រុងនៃផ្ទាំងគំនូរមួយ ដើម្បីស្វែងរកចំណុចលម្អិតប្លែកៗដែលភ្នែកធម្មតាមើលរំលង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">overfitting</span></td>
+                <td>ជាបញ្ហាមួយនៅពេលដែលម៉ូដែល AI រៀនទន្ទេញចាំទិន្នន័យហ្វឹកហាត់ (Training data) ជ្រុលពេក រហូតដល់វាទទួលបានលទ្ធផលល្អឥតខ្ចោះលើទិន្នន័យចាស់ដែលវាធ្លាប់ឃើញ តែបែរជាមិនអាចទស្សន៍ទាយទិន្នន័យថ្មីៗបានត្រឹមត្រូវ។ នៅក្នុងឯកសារនេះ គេប្រើ Dropout layer ដើម្បីទប់ស្កាត់បញ្ហានេះមិនឱ្យកើតមាន។</td>
+                <td>ដូចជាសិស្សដែលខំទន្ទេញចាំវិញ្ញាសាចាស់ៗដើម្បីប្រឡងបានពិន្ទុល្អ ប៉ុន្តែពេលប្រឡងពិតប្រាកដជួបលំហាត់ថ្មីដែលគ្រូគ្រាន់តែប្តូរលេខ បែរជាធ្វើមិនចេញទាល់តែសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SoftMax function</span></td>
+                <td>ជាអនុគមន៍គណិតវិទ្យាដែលប្រើនៅស្រទាប់ចុងក្រោយបង្អស់របស់ម៉ូដែល ដើម្បីបំប្លែងលទ្ធផលលេខធម្មតា ទៅជាតម្លៃប្រូបាប៊ីលីតេ (Probability) ចន្លោះពី ០ ទៅ ១ សម្រាប់ចំណាត់ថ្នាក់នីមួយៗ (ឧទាហរណ៍ ភាគរយនៃជំងឺទាំង ៥ ប្រភេទ)។ តម្លៃសរុបនៃប្រូបាប៊ីលីតេទាំងអស់បូកចូលគ្នាគឺស្មើនឹង ១ (ឬ ១០០%)។</td>
+                <td>ដូចជាការបែងចែកនំមួយដុំធំ (១០០%) ទៅឱ្យមនុស្ស ៥ នាក់ ដោយផ្អែកលើទំហំនៃការឃ្លានរបស់ពួកគេម្នាក់ៗ អ្នកឃ្លានខ្លាំងបានចំណែកធំជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">cross-entropy loss</span></td>
+                <td>ជាអនុគមន៍សម្រាប់គណនារង្វាស់នៃកំហុស (Error) រវាងលទ្ធផលដែលម៉ូដែលបានទស្សន៍ទាយ និងចម្លើយពិតប្រាកដ។ វាជួយឱ្យម៉ូដែលដឹងថាខ្លួនឯងទាយខុសកម្រិតណា ដើម្បីយកកំហុសនោះទៅកែតម្រូវទម្ងន់ប៉ារ៉ាម៉ែត្រក្នុងការរៀនសូត្រនៅជុំបន្ទាប់ឱ្យកាន់តែសុក្រឹតជាងមុន។</td>
+                <td>ដូចជាការដាក់ពិន្ទុផាកពិន័យដល់អ្នកបាញ់ធ្នូ ប្រសិនបើគាត់បាញ់ខុសគោលដៅកាន់តែឆ្ងាយ គាត់នឹងត្រូវពិន័យកាន់តែធ្ងន់ ដើម្បីរំលឹកឱ្យគាត់ប្រយ័ត្ន និងកែតម្រូវដៃនៅពេលបាញ់លើកក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">T-SNE visualization</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់កាត់បន្ថយវិមាត្រទិន្នន័យ (Dimensionality reduction) ពីកម្រិតខ្ពស់និងស្មុគស្មាញ មកនៅត្រឹម ២ ឬ ៣ វិមាត្រដែលអាចមើលឃើញនឹងភ្នែកបាន ដើម្បីគូរជាគំនូសតាងចំណុចសាច (Scatter plot) បង្ហាញពីរបៀបដែលម៉ូដែលបានញែកក្រុមទិន្នន័យនៃជំងឺផ្សេងៗគ្នាដាច់ពីគ្នាបានល្អកម្រិតណា។</td>
+                <td>ដូចជាការថតរូបសំបុកសត្វស្លាបពីលើអាកាស (២ វិមាត្រ) ដើម្បីមើលពីទីតាំងនិងការប្រមូលផ្តុំរបស់ពួកវា ជាជាងការដើររាប់ពួកវានៅលើដើមឈើផ្ទាល់ (៣ វិមាត្រ) ដែលមានភាពស្មុគស្មាញក្នុងការសង្កេតជារួម។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=knowledge+distillation+for+mobile+agricultural+applications" target="_blank" rel="noopener"><span class="en">knowledge distillation for mobile agricultural applications</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=plant+disease+detection+using+lightweight+CNNs" target="_blank" rel="noopener"><span class="en">plant disease detection using lightweight CNNs</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=transfer+learning+with+VGG+models+in+agriculture" target="_blank" rel="noopener"><span class="en">transfer learning with VGG models in agriculture</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=real-time+crop+health+monitoring+systems" target="_blank" rel="noopener"><span class="en">real-time crop health monitoring systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=computer+vision+for+coffee+plant+pathology" target="_blank" rel="noopener"><span class="en">computer vision for coffee plant pathology</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

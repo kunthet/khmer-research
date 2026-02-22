@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការប្រែត្រឡប់ទិន្នន័យម៉ាញេទិកជា 3D តាមរយៈវិធីសាស្ត្រ Regularization ផ្អែកលើ Wavelet | KhmerResearch.com</title>
+    <meta name="description" content="ការប្រែត្រឡប់ទិន្នន័យភូគព្ភសាស្ត្រ (Geophysical inversion) ជាញឹកញាប់ប្រឈមនឹងបញ្ហាមិនមានលក្ខណៈឯកត្តនាម (Non-unique) និងអស្ថេរភាព ដែលធ្វើឱ្យការកំណត់ព្រំដែនច្បា...">
+    
+    <meta name="keywords" content="Magnetic anomaly, Sparsity constraints, Wavelet transform, 3D modeling, Split Bregman method, Porphyry copper deposit, Inversion algorithm, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/3d-inversion-magnetic-data-wavelet-regularization-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/3d-inversion-magnetic-data-wavelet-regularization-2015.html">
+    <meta property="og:title" content="ការប្រែត្រឡប់ទិន្នន័យម៉ាញេទិកជា 3D តាមរយៈវិធីសាស្ត្រ Regularization ផ្អែកលើ Wavelet | KhmerResearch.com">
+    <meta property="og:description" content="ការប្រែត្រឡប់ទិន្នន័យភូគព្ភសាស្ត្រ (Geophysical inversion) ជាញឹកញាប់ប្រឈមនឹងបញ្ហាមិនមានលក្ខណៈឯកត្តនាម (Non-unique) និងអស្ថេរភាព ដែលធ្វើឱ្យការកំណត់ព្រំដែនច្បាស់លាស់នៃរចនាសម្ព័ន្ធក្រោមដីមានការលំបាក ជ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015 (Int. J. Min. & Geo-Eng.)">
+    
+    <meta property="article:tag" content="Magnetic anomaly">
+    
+    <meta property="article:tag" content="Sparsity constraints">
+    
+    <meta property="article:tag" content="Wavelet transform">
+    
+    <meta property="article:tag" content="3D modeling">
+    
+    <meta property="article:tag" content="Split Bregman method">
+    
+    <meta property="article:tag" content="Porphyry copper deposit">
+    
+    <meta property="article:tag" content="Inversion algorithm">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការប្រែត្រឡប់ទិន្នន័យម៉ាញេទិកជា 3D តាមរយៈវិធីសាស្ត្រ Regularization ផ្អែកលើ Wavelet">
+    <meta name="twitter:description" content="ការប្រែត្រឡប់ទិន្នន័យភូគព្ភសាស្ត្រ (Geophysical inversion) ជាញឹកញាប់ប្រឈមនឹងបញ្ហាមិនមានលក្ខណៈឯកត្តនាម (Non-unique) និងអស្ថេរភាព ដែលធ្វើឱ្យការកំណត់ព្រំដែនច្បាស់លាស់នៃរចនាសម្ព័ន្ធក្រោមដីមានការលំបាក ជ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u178f\u17d2\u179a\u17a1\u1794\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17c9\u17b6\u1789\u17c1\u1791\u17b7\u1780\u1787\u17b6 3D \u178f\u17b6\u1798\u179a\u1799\u17c8\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Regularization \u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be Wavelet",
+      "name": "3D Inversion of Magnetic Data through Wavelet based Regularization Method",
+      "description": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u178f\u17d2\u179a\u17a1\u1794\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1797\u17bc\u1782\u1796\u17d2\u1797\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a (Geophysical inversion) \u1787\u17b6\u1789\u17b9\u1780\u1789\u17b6\u1794\u17cb\u1794\u17d2\u179a\u1788\u1798\u1793\u17b9\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1798\u17b7\u1793\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u17af\u1780\u178f\u17d2\u178f\u1793\u17b6\u1798 (Non-unique) \u1793\u17b7\u1784\u17a2\u179f\u17d2\u1790\u17c1\u179a\u1797\u17b6\u1796 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u1796\u17d2\u179a\u17c6\u178a\u17c2\u1793\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u1793\u17c3\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1780\u17d2\u179a\u17c4\u1798\u178a\u17b8\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780 \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1793\u17c5\u1796\u17c1\u179b\u1798\u17b6\u1793\u1780\u17b6\u179a\u179a\u17c6\u1781\u17b6\u1793\u1796\u17b8\u179f\u17c6\u17a1\u17c1\u1784\u179a\u17c6\u1781\u17b6\u1793 (Noise)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/3d-inversion-magnetic-data-wavelet-regularization-2015.html",
+      "author": [{"@type": "Person", "name": "Maysam Abedi (University of Tehran)"},{"@type": "Person", "name": "Hamid-Reza Siahkoohi (University of Tehran)"},{"@type": "Person", "name": "Ali Gholami (University of Tehran)"},{"@type": "Person", "name": "Gholam-Hossain Norouzi (University of Tehran)"}],
+      "datePublished": "2015 (Int. J. Min. \u0026 Geo-Eng.)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "3D Inversion of Magnetic Data through Wavelet based Regularization Method",
+        "url": "www.SID.ir"
+      },
+      "keywords": ["Magnetic anomaly", "Sparsity constraints", "Wavelet transform", "3D modeling", "Split Bregman method", "Porphyry copper deposit", "Inversion algorithm"],
+      "about": "Geophysics and Mining Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u178f\u17d2\u179a\u17a1\u1794\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17c9\u17b6\u1789\u17c1\u1791\u17b7\u1780\u1787\u17b6 3D \u178f\u17b6\u1798\u179a\u1799\u17c8\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Regularization \u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be Wavelet",
+          "item": "https://khmerresearch.com/papers/science/3d-inversion-magnetic-data-wavelet-regularization-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ការប្រែត្រឡប់ទិន្នន័យម៉ាញេទិកជា 3D តាមរយៈវិធីសាស្ត្រ Regu...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 3D Inversion of Magnetic Data through Wavelet based Regularization Method<br>
+        
+        <strong>Source:</strong> <a href="www.SID.ir" target="_blank">sid.ir</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការប្រែត្រឡប់ទិន្នន័យម៉ាញេទិកជា 3D តាមរយៈវិធីសាស្ត្រ Regularization ផ្អែកលើ Wavelet</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 3D Inversion of Magnetic Data through Wavelet based Regularization Method</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Maysam Abedi (University of Tehran), Hamid-Reza Siahkoohi (University of Tehran), Ali Gholami (University of Tehran), Gholam-Hossain Norouzi (University of Tehran)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015 (Int. J. Min. & Geo-Eng.)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Geophysics and Mining Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការប្រែត្រឡប់ទិន្នន័យភូគព្ភសាស្ត្រ (Geophysical inversion) ជាញឹកញាប់ប្រឈមនឹងបញ្ហាមិនមានលក្ខណៈឯកត្តនាម (Non-unique) និងអស្ថេរភាព ដែលធ្វើឱ្យការកំណត់ព្រំដែនច្បាស់លាស់នៃរចនាសម្ព័ន្ធក្រោមដីមានការលំបាក ជាពិសេសនៅពេលមានការរំខានពីសំឡេងរំខាន (Noise)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្ត្រគំរូប្រែត្រឡប់ 3D ដោយបញ្ចូលលក្ខខណ្ឌកម្រិត Sparsity រួមគ្នា ដែលរួមមានប្រតិបត្តិការ Wavelet សម្រាប់តំបន់រលោង និង Finite-Difference សម្រាប់តំបន់ដែលមានគែមស្រួច។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់គំរូ Wavelet និង Finite-Difference (Wavelet and FD operators) ដើម្បីតំណាងឱ្យការចែកចាយនៃ Magnetic Susceptibility ។</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយ Split Bregman (Split Bregman method) ដើម្បីដោះស្រាយបញ្ហាប្រែត្រឡប់ទិន្នន័យ និងកាត់បន្ថយពេលវេលាគណនា។</li>
+            
+            <li>ការធ្វើតេស្តលើទិន្នន័យសិប្បនិម្មិត និងទិន្នន័យជាក់ស្តែងពីតំបន់រ៉ែទង់ដែង Now Chun ក្នុងប្រទេសអ៊ីរ៉ង់។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រនេះមានសមត្ថភាពខ្ពស់ក្នុងការបង្កើតគំរូ 3D ដែលអាចរក្សាបាននូវភាពច្បាស់លាស់ទាំងតំបន់រលោង និងតំបន់ដែលមានគែមស្រួចនៃរចនាសម្ព័ន្ធភូគព្ភសាស្ត្រ ទោះបីជាទិន្នន័យមានសំឡេងរំខានក៏ដោយ។</li>
+            
+            <li>ការអនុវត្តលើទិន្នន័យជាក់ស្តែងនៅតំបន់រ៉ែទង់ដែង Now Chun បង្ហាញថា តំបន់ដែលមានកម្រិត Magnetic Susceptibility ទាប (តិចជាង 0.06 SI) គឺត្រូវគ្នានឹងទីតាំងដែលមានរ៉ែទង់ដែង (Copper ore mineralization) ដែលបណ្តាលមកពីការផ្លាស់ប្តូរ Sericitic alteration។</li>
+            
+            <li>ការប្រើប្រាស់មុខងារព័ត៌មាន (Information function) អនុញ្ញាតឱ្យជ្រើសរើសប៉ារ៉ាម៉ែត្រ Regularization និងប្រភេទ Wavelet ដ៏ល្អប្រសើរសម្រាប់ការប្រែត្រឡប់ទិន្នន័យជាក់ស្តែង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Joint Sparsity Inversion (Finite Difference - FD Operator)</span></strong><br>ការប្រែត្រឡប់ដោយប្រើ Sparsity រួមគ្នា (ប្រើប្រាស់ FD Operator)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការរក្សាព្រំដែនច្បាស់លាស់នៃរចនាសម្ព័ន្ធភូគព្ភសាស្ត្រ និងកាត់បន្ថយការរំខាន (Noise) បានល្អ។</td>
+                <td>ទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រ Regularization (alpha & beta) ឱ្យបានត្រឹមត្រូវ បើមិនដូច្នេះទេលទ្ធផលអាចមិនសុក្រឹត។</td>
+                <td>ផ្តល់តម្លៃកំហុសទាបបំផុត (Low model error) និងបង្កើតរូបភាព 3D ដែលត្រូវគ្នានឹងទិន្នន័យភូគព្ភសាស្ត្រជាក់ស្តែង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Joint Sparsity Inversion (Haar Wavelet Operator)</span></strong><br>ការប្រែត្រឡប់ដោយប្រើ Sparsity រួមគ្នា (ប្រើប្រាស់ Haar Operator)</td>
+                <td>មានប្រសិទ្ធភាពសម្រាប់គំរូដែលមានរាងជាដុំៗ (Blocky models) ឬរចនាសម្ព័ន្ធសាមញ្ញ។</td>
+                <td>អាចបង្កើតជាគំរូដែលមានលក្ខណៈជាជណ្តើរ (Staircase effect) ដែលមិនសូវសមស្របសម្រាប់រចនាសម្ព័ន្ធដែលមានការប្រែប្រួលរលូន។</td>
+                <td>មានតម្លៃកំហុសខ្ពស់ជាងការប្រើប្រាស់ FD Operator បន្តិចនៅក្នុងការធ្វើតេស្តនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Standard Smooth Inversion (Tikhonov)</span></strong><br>ការប្រែត្រឡប់បែបស្តង់ដារដែលផ្តល់លទ្ធផលរលូន (Standard Smooth Inversion)</td>
+                <td>ងាយស្រួលអនុវត្ត និងមានស្ថេរភាពក្នុងការគណនា។</td>
+                <td>ធ្វើឱ្យព្រំដែននៃរចនាសម្ព័ន្ធមិនច្បាស់លាស់ (Blurred edges) ដែលពិបាកក្នុងការកំណត់ទីតាំងរ៉ែឱ្យចំគោលដៅ។</td>
+                <td>មិនអាចបង្ហាញព្រំដែនស្រួច (Sharp boundaries) បានល្អដូចវិធីសាស្ត្រ Sparsity ទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រ និងទិន្នន័យដែលមានតម្លៃសមរម្យសម្រាប់ការស្រាវជ្រាវកម្រិតសាកលវិទ្យាល័យ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កូដត្រូវបានសរសេរដោយប្រើ MATLAB (ដូចដែលបានបង្ហាញតាមរយៈការប្រើប្រាស់មុខងារ 'shrink') ឬអាចប្រើ Python (SciPy) ជាជម្រើសឥតគិតថ្លៃ។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមាន RAM ខ្ពស់ (16GB+) ត្រូវបានណែនាំសម្រាប់ការគណនា Inversion ក្នុងទម្រង់ 3D (ចំនួន 32,768 ប្រអប់នៅក្នុងគំរូ)។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យស្ទង់ម៉ាញេទិកលើដី (Ground-based magnetic survey) ដែលមានគុណភាពបង្ហាញខ្ពស់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះធ្វើឡើងនៅតំបន់រ៉ែទង់ដែង Now Chun ខេត្ត Kerman ប្រទេសអ៊ីរ៉ង់ ដែលជាប្រភេទរ៉ែ Porphyry Copper។ ទោះបីជាទិន្នន័យមានលក្ខណៈជាក់លាក់សម្រាប់តំបន់នោះ ប៉ុន្តែលក្ខណៈភូគព្ភសាស្ត្រនៃរ៉ែ Porphyry គឺមានភាពស្រដៀងគ្នាជាសកល រួមទាំងនៅកម្ពុជាផងដែរ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់វិស័យរ៉ែនៅកម្ពុជា ជាពិសេសសម្រាប់ការរុករកនៅក្រោមស្រទាប់ដីក្រាស់។</p>
+        
+        <ul>
+            
+            <li><strong>ខេត្តមណ្ឌលគិរី និងរតនគិរី (Mondulkiri & Ratanakiri):</strong> តំបន់ទាំងនេះសម្បូរទៅដោយសក្តានុពលរ៉ែទង់ដែង និងមាស (Gold/Copper Porphyry) ដែលត្រូវការបច្ចេកទេស Inversion ដើម្បីកំណត់ទីតាំងក្រោមដី។</li>
+            
+            <li><strong>ក្រសួងរ៉ែ និងថាមពល (MME):</strong> អាចប្រើប្រាស់បច្ចេកទេសនេះដើម្បីវិភាគទិន្នន័យ Aeromagnetic ដែលមានស្រាប់ ដើម្បីកំណត់តំបន់សក្តានុពលថ្មីៗ។</li>
+            
+            <li><strong>វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា (ITC):</strong> និស្សិតផ្នែកធនធានរ៉ែ និងភូគព្ភសាស្ត្រ អាចយកវិធីសាស្ត្រនេះទៅធ្វើជាគម្រោងបញ្ចប់ការសិក្សា ដើម្បីអភិវឌ្ឍជំនាញវិភាគទិន្នន័យ។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់បច្ចេកទេស Wavelet based Regularization នឹងជួយកាត់បន្ថយហានិភ័យក្នុងការខួងរុករក ដោយផ្តល់នូវរូបភាពក្រោមដីច្បាស់លាស់ជាងមុន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Inverse Problems:</strong> ស្វែងយល់អំពី Tikhonov Regularization និងទ្រឹស្តី Wavelet Transform ដោយប្រើប្រាស់ឯកសារបង្រៀន ឬវគ្គសិក្សាតាមអ៊ីនធឺណិត (ឧ. Coursera ឬ YouTube)។</li>
+            
+            <li><strong>រៀបចំឧបករណ៍សរសេរកូដ:</strong> ដំឡើងកម្មវិធី MATLAB ឬ Python (ជាមួយនឹងបណ្ណាល័យ NumPy និង PyWavelets) ដើម្បីចាប់ផ្តើមអនុវត្តកូដគណនា។</li>
+            
+            <li><strong>អនុវត្តជាមួយទិន្នន័យសិប្បនិម្មិត (Synthetic Data):</strong> បង្កើតគំរូសាមញ្ញ (ដូចរូបទី 2 ក្នុងឯកសារ) និងអនុវត្តក្បួនដោះស្រាយ Split Bregman ដើម្បីមើលពីរបៀបដែលវាប្រែត្រឡប់ទិន្នន័យម៉ាញេទិក។</li>
+            
+            <li><strong>អនុវត្តលើទិន្នន័យជាក់ស្តែងនៅកម្ពុជា:</strong> ស្នើសុំទិន្នន័យម៉ាញេទិកចាស់ៗពីក្រុមហ៊ុនរុករករ៉ែ ឬប្រភពបើកចំហ (Open Source) សម្រាប់តំបន់ណាមួយនៅកម្ពុជា ហើយសាកល្បងធ្វើ 3D Inversion។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">3D Inversion</span></td>
+                <td>ជាដំណើរការគណិតវិទ្យាដែលប្រើប្រាស់ទិន្នន័យវាស់វែងលើផ្ទៃដី (ដូចជាដែនម៉ាញេទិក) ដើម្បីគណនានិងបង្កើតរូបភាពត្រីមាត្រ (3D) នៃរចនាសម្ព័ន្ធក្រោមដីឡើងវិញ។ វាជួយឱ្យយើងដឹងថាមានអ្វីនៅខាងក្រោមដោយមិនចាំបាច់ជីក។</td>
+                <td>ដូចជាការប្រើប្រាស់រូបរាងស្រមោល ដើម្បីទស្សន៍ទាយថាតើវត្ថុម្យ៉ាងមានរូបរាងពិតប្រាកដបែបណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Magnetic Susceptibility</span></td>
+                <td>ជាលក្ខណៈរូបសាស្ត្រនៃថ្ម ឬសារធាតុរ៉ែ ដែលបង្ហាញថាវាអាចត្រូវបានធ្វើឱ្យក្លាយជាដែកឆក់ (Magnetized) បានងាយកម្រិតណា នៅពេលស្ថិតក្នុងដែនម៉ាញេទិក។ តម្លៃនេះជួយអ្នកស្រាវជ្រាវញែកប្រភេទរ៉ែផ្សេងៗគ្នា។</td>
+                <td>ប្រៀបដូចជាការវាស់ថា តើអេប៉ុងមួយអាចស្រូបទឹកបានងាយកម្រិតណា (ថ្មខ្លះស្រូបដែកឆក់ខ្លាំង ខ្លះស្រូបតិច)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Wavelet Transform</span></td>
+                <td>ជាបច្ចេកទេសគណិតវិទ្យាសម្រាប់បំបែកសញ្ញា ឬរូបភាពទៅជាផ្នែកតូចៗ (Wavelets) ដើម្បីវិភាគមើលទាំងភាពរលូន និងភាពគួរសមនៃទិន្នន័យក្នុងពេលតែមួយ។ ក្នុងការសិក្សានេះ វាជួយសម្គាល់ព្រំដែននៃរ៉ែក្រោមដី។</td>
+                <td>ដូចជាការប្រើកែវយឹតដែលអាចមើលឃើញទាំងទិដ្ឋភាពទូទៅនៃព្រៃឈើ និងអាចពង្រីកមើលស្លឹកឈើមួយសន្លឹកៗបានយ៉ាងច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sparsity Constraints</span></td>
+                <td>ជាលក្ខខណ្ឌដែលដាក់ក្នុងសមីការគណិតវិទ្យា ដើម្បីបង្ខំឱ្យចម្លើយចុងក្រោយមានភាពសាមញ្ញ និងច្បាស់លាស់ ដោយកាត់បន្ថយភាពរញ៉េរញ៉ៃ។ វាជួយឱ្យគំរូបង្ហាញព្រំដែននៃវត្ថុក្រោមដីដាច់ៗពីគ្នាជាជាងរូបភាពព្រាលៗ។</td>
+                <td>ដូចជាការគូររូបដោយប្រើតែបន្ទាត់សំខាន់ៗមួយចំនួន ដើម្បីឱ្យឃើញរូបរាងច្បាស់ ជាជាងការផាត់ពណ៌ពេញក្រដាសដែលមើលទៅរញ៉េរញ៉ៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Regularization</span></td>
+                <td>ជាវិធីសាស្ត្របន្ថែមព័ត៌មាន ឬការដាក់កំហិតទៅលើការគណនា ដើម្បីដោះស្រាយបញ្ហាដែលមានចម្លើយច្រើន ឬមិនច្បាស់លាស់ (Ill-posed problems) ឱ្យទទួលបានចម្លើយមួយដែលមានស្ថេរភាព។</td>
+                <td>ប្រៀបដូចជាការដាក់វិន័យដល់សិស្ស ដើម្បីឱ្យពួកគេដើរត្រង់ជួរ និងមិនរត់ចេញក្រៅផ្លូវក្នុងពេលដង្ហែរក្បួន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Split Bregman method</span></td>
+                <td>ជាក្បួនដោះស្រាយ (Algorithm) ដ៏មានប្រសិទ្ធភាពសម្រាប់ដោះស្រាយបញ្ហាគណិតវិទ្យាស្មុគស្មាញដែលទាក់ទងនឹង Sparsity (L1-norm) ដើម្បីស្វែងរកចម្លើយដែលល្អបំផុតក្នុងរយៈពេលខ្លី និងកាត់បន្ថយការប្រើប្រាស់ធនធានកុំព្យូទ័រ។</td>
+                <td>ដូចជាផ្លូវកាត់ដ៏ឆ្លាតវៃមួយ ដែលជួយឱ្យយើងដោះស្រាយលំហាត់ពិបាកៗបានលឿនជាងវិធីសាស្ត្រធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Porphyry Copper Deposit</span></td>
+                <td>ជាប្រភេទរ៉ែទង់ដែងដែលកកើតឡើងដោយសារសារធាតុរាវក្តៅ (Hydrothermal fluids) ពីម៉ាក់ម៉ាក្រក្រោមដី។ វាជាគោលដៅសំខាន់នៃការរុករកនៅក្នុងការសិក្សានេះ។</td>
+                <td>ដូចជាប្រភពកំណប់រ៉ែដ៏ធំមួយដែលកប់ជ្រៅក្នុងដី ដែលជាធម្មតាមានទំហំធំតែមានកំហាប់រ៉ែរាយប៉ាយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Tikhonov+regularization+in+geophysical+inversion" target="_blank" rel="noopener"><span class="en">Tikhonov regularization in geophysical inversion</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Split+Bregman+method+for+L1-regularization+problems" target="_blank" rel="noopener"><span class="en">Split Bregman method for L1-regularization problems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Magnetic+signatures+of+porphyry+copper+deposits" target="_blank" rel="noopener"><span class="en">Magnetic signatures of porphyry copper deposits</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Wavelet+transform+applications+in+geophysics" target="_blank" rel="noopener"><span class="en">Wavelet transform applications in geophysics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=3D+inversion+of+potential+field+data" target="_blank" rel="noopener"><span class="en">3D inversion of potential field data</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

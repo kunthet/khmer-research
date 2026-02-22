@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវិភាគលំហូរទឹកក្រោមដីបែបស្តូកាស្ទិចក្នុងស្រទាប់ថ្មផ្ទុកទឹកមិនស្មើភាពគ្នា ដោយប្រើបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតផ្អែកលើរូបវិទ្យា និងការស្វែងរកស្ថាបត្យកម្មសរសៃប្រសាទ (NAS) ដែលបានកែច្នៃ រួមជាមួយការរៀនផ្ទេរ | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហាប្រឈមក្នុងការគណនា និងក្លែងធ្វើលំហូរទឹកក្រោមដីនៅក្នុងមជ្ឈដ្ឋានដែលមានភាពមិនស្មើភាពគ្នាខ្លាំង (heterogeneous porous media) ដោយស្វែងរកវិ...">
+    
+    <meta name="keywords" content="Physics-Informed Neural Networks, Neural Architecture Search, Transfer Learning, Stochastic Groundwater Flow, Deep Collocation Method, Hyperparameter Optimization, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/stochastic-groundwater-flow-nas-pinns-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/stochastic-groundwater-flow-nas-pinns-2020.html">
+    <meta property="og:title" content="ការវិភាគលំហូរទឹកក្រោមដីបែបស្តូកាស្ទិចក្នុងស្រទាប់ថ្មផ្ទុកទឹកមិនស្មើភាពគ្នា ដោយប្រើបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតផ្អែកលើរូបវិទ្យា និងការស្វែងរកស្ថាបត្យកម្មសរសៃប្រសាទ (NAS) ដែលបានកែច្នៃ រួមជាមួយការរៀនផ្ទេរ | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាប្រឈមក្នុងការគណនា និងក្លែងធ្វើលំហូរទឹកក្រោមដីនៅក្នុងមជ្ឈដ្ឋានដែលមានភាពមិនស្មើភាពគ្នាខ្លាំង (heterogeneous porous media) ដោយស្វែងរកវិធីសាស្រ្តកែលម្អការកំណត់រចនាសម្ព័ន្ធបណ្តា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020 (arXiv)">
+    
+    <meta property="article:tag" content="Physics-Informed Neural Networks">
+    
+    <meta property="article:tag" content="Neural Architecture Search">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Stochastic Groundwater Flow">
+    
+    <meta property="article:tag" content="Deep Collocation Method">
+    
+    <meta property="article:tag" content="Hyperparameter Optimization">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវិភាគលំហូរទឹកក្រោមដីបែបស្តូកាស្ទិចក្នុងស្រទាប់ថ្មផ្ទុកទឹកមិនស្មើភាពគ្នា ដោយប្រើបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតផ្អែកលើរូបវិទ្យា និងការស្វែងរកស្ថាបត្យកម្មសរសៃប្រសាទ (NAS) ដែលបានកែច្នៃ រួមជាមួយការរៀនផ្ទេរ">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាប្រឈមក្នុងការគណនា និងក្លែងធ្វើលំហូរទឹកក្រោមដីនៅក្នុងមជ្ឈដ្ឋានដែលមានភាពមិនស្មើភាពគ្នាខ្លាំង (heterogeneous porous media) ដោយស្វែងរកវិធីសាស្រ្តកែលម្អការកំណត់រចនាសម្ព័ន្ធបណ្តា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b9\u1780\u1780\u17d2\u179a\u17c4\u1798\u178a\u17b8\u1794\u17c2\u1794\u179f\u17d2\u178f\u17bc\u1780\u17b6\u179f\u17d2\u1791\u17b7\u1785\u1780\u17d2\u1793\u17bb\u1784\u179f\u17d2\u179a\u1791\u17b6\u1794\u17cb\u1790\u17d2\u1798\u1795\u17d2\u1791\u17bb\u1780\u1791\u17b9\u1780\u1798\u17b7\u1793\u179f\u17d2\u1798\u17be\u1797\u17b6\u1796\u1782\u17d2\u1793\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179a\u17bc\u1794\u179c\u17b7\u1791\u17d2\u1799\u17b6 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u179f\u17d2\u1790\u17b6\u1794\u178f\u17d2\u1799\u1780\u1798\u17d2\u1798\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791 (NAS) \u178a\u17c2\u179b\u1794\u17b6\u1793\u1780\u17c2\u1785\u17d2\u1793\u17c3 \u179a\u17bd\u1798\u1787\u17b6\u1798\u17bd\u1799\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a",
+      "name": "Stochastic groundwater flow analysis in heterogeneous aquifer with modified neural architecture search (NAS) based physics-informed neural networks using transfer learning",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1782\u178e\u1793\u17b6 \u1793\u17b7\u1784\u1780\u17d2\u179b\u17c2\u1784\u1792\u17d2\u179c\u17be\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b9\u1780\u1780\u17d2\u179a\u17c4\u1798\u178a\u17b8\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1798\u1787\u17d2\u1788\u178a\u17d2\u178b\u17b6\u1793\u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u1798\u17b7\u1793\u179f\u17d2\u1798\u17be\u1797\u17b6\u1796\u1782\u17d2\u1793\u17b6\u1781\u17d2\u179b\u17b6\u17c6\u1784 (heterogeneous porous media) \u178a\u17c4\u1799\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u179a\u17d2\u178f\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u178a\u17be\u1798\u17d2\u1794\u17b8\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u179f\u1798\u17b8\u1780\u17b6\u179a\u178c\u17b8\u1795\u17c1\u179a\u17c9\u1784\u17cb\u179f\u17d2\u1799\u17c2\u179b (PDEs) \u17b1\u17d2\u1799\u1794\u17b6\u1793\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 \u1793\u17b7\u1784\u179f\u1793\u17d2\u179f\u17c6\u179f\u17c6\u1785\u17c3\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/stochastic-groundwater-flow-nas-pinns-2020.html",
+      "author": [{"@type": "Person", "name": "Hongwei Guo"},{"@type": "Person", "name": "Xiaoying Zhuang"},{"@type": "Person", "name": "Dawei Liang"},{"@type": "Person", "name": "Timon Rabczuk"}],
+      "datePublished": "2020 (arXiv)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Stochastic groundwater flow analysis in heterogeneous aquifer with modified neural architecture search (NAS) based physics-informed neural networks using transfer learning",
+        "url": "https://arxiv.org/abs/2010.12344v1"
+      },
+      "keywords": ["Physics-Informed Neural Networks", "Neural Architecture Search", "Transfer Learning", "Stochastic Groundwater Flow", "Deep Collocation Method", "Hyperparameter Optimization"],
+      "about": "Computational Mechanics / Hydrogeology"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b9\u1780\u1780\u17d2\u179a\u17c4\u1798\u178a\u17b8\u1794\u17c2\u1794\u179f\u17d2\u178f\u17bc\u1780\u17b6\u179f\u17d2\u1791\u17b7\u1785\u1780\u17d2\u1793\u17bb\u1784\u179f\u17d2\u179a\u1791\u17b6\u1794\u17cb\u1790\u17d2\u1798\u1795\u17d2\u1791\u17bb\u1780\u1791\u17b9\u1780\u1798\u17b7\u1793\u179f\u17d2\u1798\u17be\u1797\u17b6\u1796\u1782\u17d2\u1793\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179a\u17bc\u1794\u179c\u17b7\u1791\u17d2\u1799\u17b6 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u179f\u17d2\u1790\u17b6\u1794\u178f\u17d2\u1799\u1780\u1798\u17d2\u1798\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791 (NAS) \u178a\u17c2\u179b\u1794\u17b6\u1793\u1780\u17c2\u1785\u17d2\u1793\u17c3 \u179a\u17bd\u1798\u1787\u17b6\u1798\u17bd\u1799\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a",
+          "item": "https://khmerresearch.com/papers/technology/stochastic-groundwater-flow-nas-pinns-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការវិភាគលំហូរទឹកក្រោមដីបែបស្តូកាស្ទិចក្នុងស្រទាប់ថ្មផ្ទុក...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Stochastic groundwater flow analysis in heterogeneous aquifer with modified neural architecture search (NAS) based physics-informed neural networks using transfer learning<br>
+        
+        <strong>Source:</strong> <a href="https://arxiv.org/abs/2010.12344v1" target="_blank">arxiv.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវិភាគលំហូរទឹកក្រោមដីបែបស្តូកាស្ទិចក្នុងស្រទាប់ថ្មផ្ទុកទឹកមិនស្មើភាពគ្នា ដោយប្រើបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតផ្អែកលើរូបវិទ្យា និងការស្វែងរកស្ថាបត្យកម្មសរសៃប្រសាទ (NAS) ដែលបានកែច្នៃ រួមជាមួយការរៀនផ្ទេរ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Stochastic groundwater flow analysis in heterogeneous aquifer with modified neural architecture search (NAS) based physics-informed neural networks using transfer learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Hongwei Guo, Xiaoying Zhuang, Dawei Liang, Timon Rabczuk</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 (arXiv)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computational Mechanics / Hydrogeology</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហាប្រឈមក្នុងការគណនា និងក្លែងធ្វើលំហូរទឹកក្រោមដីនៅក្នុងមជ្ឈដ្ឋានដែលមានភាពមិនស្មើភាពគ្នាខ្លាំង (heterogeneous porous media) ដោយស្វែងរកវិធីសាស្រ្តកែលម្អការកំណត់រចនាសម្ព័ន្ធបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតដើម្បីដោះស្រាយសមីការឌីផេរ៉ង់ស្យែល (PDEs) ឱ្យបានស្វ័យប្រវត្តិ និងសន្សំសំចៃពេលវេលា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានរួមបញ្ចូលវិធីសាស្រ្តបង្កើតដែនចម្លងទឹកបែបស្តូកាស្ទិច ជាមួយនឹងការស្វែងរកស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទ (NAS) ដើម្បីបង្កើតម៉ូដែល PINNs ស្វ័យប្រវត្តិ ព្រមទាំងប្រើប្រាស់បច្ចេកទេសរៀនផ្ទេរ (Transfer Learning) ដើម្បីពន្លឿនការបណ្តុះបណ្តាល។
+        
+        <ul>
+            
+            <li>ការតំណាងវិសាលគមដោយចៃដន្យ (Randomized Spectral Representation) សម្រាប់ការក្លែងធ្វើ</li>
+            
+            <li>ការស្វែងរកស្ថាបត្យកម្មសរសៃប្រសាទដែលបានកែច្នៃ (Modified Neural Architecture Search - NAS)</li>
+            
+            <li>វិធីសាស្រ្តដំណោះស្រាយប្រឌិត (Method of Manufactured Solutions - MMS) សម្រាប់វាយតម្លៃកំហុស</li>
+            
+            <li>បណ្តាញសរសៃប្រសាទផ្អែកលើរូបវិទ្យា (Physics-Informed Neural Networks - PINNs)</li>
+            
+            <li>វិធីសាស្រ្តធ្វើឱ្យប្រសើរប៉ារ៉ាម៉ែត្រកម្រិតខ្ពស់ (Hyper-parameter optimization algorithms) ដូចជា Bayesian Optimization</li>
+            
+            <li>ការរៀនផ្ទេរ (Transfer Learning) និងវិធីសាស្រ្ត Deep Collocation</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>អនុគមន៍សហសម្ព័ន្ធហ្កូស (Gaussian correlation) ផ្តល់លទ្ធផលល្អប្រសើរជាងអនុគមន៍អិចស្ប៉ូណង់ស្យែល (Exponential correlation) ក្នុងការបង្កើតដែនចម្លងទឹកសម្រាប់ម៉ូដែល PINNs។</li>
+            
+            <li>ក្បួនដោះស្រាយសុទិដ្ឋិកម្មបេយស៍ (Bayesian optimization algorithm) ត្រូវបានរកឃើញថាមានភាពស័ក្តិសមបំផុតសម្រាប់យុទ្ធសាស្ត្រស្វែងរកក្នុងម៉ូដែល NAS ដោយផ្តល់ភាពត្រឹមត្រូវខ្ពស់បំផុត និងប្រើពេលខ្លី។</li>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេសរៀនផ្ទេរ (Transfer learning) កាត់បន្ថយពេលវេលាគណនាបានយ៉ាងច្រើន និងបង្កើនភាពត្រឹមត្រូវនៃវិធីសាស្រ្ត Deep Collocation ជាពិសេសសម្រាប់បញ្ហាត្រីមាត្រ (3D) បើប្រៀបធៀបទៅនឹងវិធីសាស្រ្ត Finite Difference Method (FDM) ប្រពៃណី។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">NAS-based Deep Collocation Method (DCM) with Transfer Learning</span></strong><br>វិធីសាស្រ្តការដាក់ទីតាំងស៊ីជម្រៅ (DCM) ផ្អែកលើ NAS រួមជាមួយការរៀនផ្ទេរ</td>
+                <td>មានល្បឿនលឿន និងមានភាពត្រឹមត្រូវខ្ពស់ក្នុងការគណនាលំហូរទឹកក្នុងទម្រង់ត្រីមាត្រ (3D) ដោយមិនតម្រូវឱ្យមានការបែងចែកក្រឡាចត្រង្គ (Meshfree)។ បច្ចេកទេសរៀនផ្ទេរ (Transfer Learning) ជួយកាត់បន្ថយពេលវេលាបណ្តុះបណ្តាលម៉ូដែលបានយ៉ាងច្រើន។</td>
+                <td>ការបណ្តុះបណ្តាលបណ្តាញសរសៃប្រសាទដែលមានការដាក់កំហិតរូបវិទ្យា (Physics-informed constraints) គឺមានភាពលំបាកក្នុងការធ្វើឱ្យប្រសើរ (Optimization)។ វាទាមទារការស្វែងរកប៉ារ៉ាម៉ែត្រកម្រិតខ្ពស់ (Hyperparameter optimization) យ៉ាងស្មុគស្មាញជាមុនសិន។</td>
+                <td>សម្រាប់ម៉ូដែលត្រីមាត្រ (3D) វិធីសាស្រ្តនេះផ្តល់អត្រាកំហុសធៀបត្រឹមតែ 8.864e-3 និងចំណាយពេលគណនាត្រឹមតែ 1.9 វិនាទីប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Finite Difference Method (FDM)</span></strong><br>វិធីសាស្រ្តភាពខុសគ្នាមានកំណត់ (FDM)</td>
+                <td>ជាវិធីសាស្រ្តប្រពៃណីដែលងាយស្រួលយល់ និងផ្តល់លទ្ធផលល្អសម្រាប់ការក្លែងធ្វើក្នុងទម្រង់ឯកមាត្រ (1D)។ មិនទាមទារការបណ្តុះបណ្តាលម៉ូដែល (Training phase) ដូចបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតនោះទេ។</td>
+                <td>ទាមទារក្រឡាចត្រង្គ (Grid) ញឹកញាប់ដើម្បីទទួលបានភាពត្រឹមត្រូវ ដែលធ្វើឱ្យចំណាយពេលគណនាយូរខ្លាំងសម្រាប់ទម្រង់ពហុវិមាត្រ (2D និង 3D)។ មិនសូវមានប្រសិទ្ធភាពសម្រាប់ស្រទាប់ដីដែលមានភាពមិនស្មើភាពគ្នាខ្លាំង (Highly heterogeneous aquifers)។</td>
+                <td>សម្រាប់ម៉ូដែលត្រីមាត្រ (3D) FDM ផ្តល់អត្រាកំហុសធៀបរហូតដល់ 5.711 និងចំណាយពេលគណនារហូតដល់ 1245 វិនាទី ដែលខ្សោយជាងវិធីសាស្រ្តស្នើឡើងឆ្ងាយណាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Bayesian Optimization Algorithm</span></strong><br>ក្បួនដោះស្រាយសុទិដ្ឋិកម្មបេយស៍ សម្រាប់ការស្វែងរកប៉ារ៉ាម៉ែត្រ (NAS)</td>
+                <td>អាចទស្សន៍ទាយបន្សំនៃប៉ារ៉ាម៉ែត្រដែលល្អបំផុតដោយស្វ័យប្រវត្តិ ដោយផ្អែកលើការវាយតម្លៃដែលមានស្រាប់។ កាត់បន្ថយចំនួនដងនៃការសាកល្បង និងផ្តល់លទ្ធផលសុក្រឹតជាងវិធីសាស្រ្តចៃដន្យ (Random Search)។</td>
+                <td>ទាមទារការគណនាស្មុគស្មាញនៅដំណាក់កាលរៀបចំដំបូង (Setup phase) ក្នុងការបង្កើតម៉ូដែលដំណើរការហ្កូសសៀន (Gaussian process)។</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវខ្ពស់បំផុត (កំហុសធៀប 0.00032) ក្នុងរយៈពេលខ្លីបំផុត (1395 វិនាទី) ធៀបនឹងក្បួនដោះស្រាយផ្សេងទៀតដូចជា RSM, Hyperband, និង Jaya។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបានបញ្ជាក់យ៉ាងច្បាស់អំពីតម្រូវការផ្នែករឹង (Hardware) កម្រិតមធ្យម និងកម្មវិធីកុំព្យូទ័រសម្រាប់ដំណើរការម៉ូដែលនេះ ដែលស័ក្តិសមសម្រាប់អ្នកស្រាវជ្រាវទូទៅ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនមេ (Server) ប្រើប្រាស់ប្រព័ន្ធប្រតិបត្តិការ 64-bit Windows 10, ស៊ីភីយូ Intel(R) Core(TM) i7-7700HQ CPU, និងអង្គចងចាំ (RAM) ទំហំ 8GB (មិនទាមទារ Supercomputer នោះទេ)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី MATLAB (សម្រាប់បង្កើតវាលចៃដន្យស្តូកាស្ទិច) និង Python ដែលមានបណ្ណាល័យ SALib (សម្រាប់ការវិភាគភាពរសើប Sensitivity Analysis)។</li>
+        
+        <li><strong>Dataset:</strong> មិនប្រើប្រាស់ទិន្នន័យជាក់ស្តែងទេ ប៉ុន្តែប្រើវិធីសាស្រ្តដំណោះស្រាយប្រឌិត (Method of Manufactured Solutions - MMS) ដើម្បីបង្កើតទិន្នន័យសម្រាប់វាយតម្លៃកំហុស។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅផ្នែកសមីការឌីផេរ៉ង់ស្យែល (PDEs), ជលធរណីវិទ្យា (Hydrogeology), និងការរចនាស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទ (Deep Learning Architecture)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះមិនបានប្រើប្រាស់ទិន្នន័យជលធរណីវិទ្យាពិតប្រាកដពីតំបន់ណាមួយនោះទេ ផ្ទុយទៅវិញវាពឹងផ្អែកទាំងស្រុងលើទិន្នន័យក្លែងធ្វើតាមរយៈវិធីសាស្រ្តដំណោះស្រាយប្រឌិត (Method of Manufactured Solutions) និង Monte Carlo។ សម្រាប់ប្រទេសកម្ពុជា នេះមានន័យថាម៉ូដែលនេះមានភាពរឹងមាំខាងផ្នែកគណិតវិទ្យា ប៉ុន្តែមុននឹងយកមកប្រើប្រាស់ជាក់ស្តែង គេចាំបាច់ត្រូវមានទិន្នន័យស្រាវជ្រាវផ្ទាល់ពីស្រទាប់ទឹកក្រោមដីនៅកម្ពុជា ដើម្បីបំបាត់ភាពលម្អៀង និងធានាភាពស៊ីសង្វាក់គ្នានៃលក្ខខណ្ឌភូមិសាស្ត្រ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្រ្តនេះមានសក្តានុពល និងសារៈសំខាន់ខ្លាំងណាស់សម្រាប់កម្ពុជា ក្នុងការសិក្សាស្រាវជ្រាវ និងគ្រប់គ្រងធនធានទឹកក្រោមដីឱ្យបានចីរភាព។</p>
+        
+        <ul>
+            
+            <li><strong>អាងទន្លេមេគង្គ និងតំបន់ជុំវិញបឹងទន្លេសាប (Mekong Basin and Tonle Sap Region):</strong> អាចប្រើម៉ូដែលនេះដើម្បីក្លែងធ្វើការហូរជ្រាបនៃទឹក និងការសាយភាយសារធាតុគីមីកសិកម្ម ទៅក្នុងស្រទាប់ទឹកក្រោមដីដែលមានទម្រង់ដីមិនស្មើភាពគ្នា (Heterogeneous aquifers) ជួយវាយតម្លៃហានិភ័យនៃការបំពុលទឹក។</li>
+            
+            <li><strong>តំបន់វាលទំនាបកសិកម្មនារដូវប្រាំង (Dry Season Agricultural Plains):</strong> ជួយដល់ក្រសួងធនធានទឹកក្នុងការធ្វើម៉ូដែលប៉ាន់ស្មានបរិមាណទឹកក្រោមដី ដែលអាចបូមយកមកប្រើប្រាស់សម្រាប់វិស័យកសិកម្ម ដោយប្រើប្រាស់ធនធានកុំព្យូទ័រតិច (Computer resources) តាមរយៈការប្រើប្រាស់ម៉ូដែលដែលបានបង្ហាត់រួច (Pre-trained Transfer Learning models)។</li>
+            
+            <li><strong>ខេត្តតំបន់ឆ្នេរ (Coastal Provinces e.g. Kampot, Kep, Koh Kong):</strong> អាចអភិវឌ្ឍម៉ូដែលនេះបន្ថែមដើម្បីវិភាគបញ្ហាលំហូរទឹកក្រោមដី និងហានិភ័យនៃការជ្រៀតចូលនៃទឹកប្រៃ (Saltwater intrusion) ដែលជាបញ្ហាប្រឈមនៃបម្រែបម្រួលអាកាសធាតុ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យា PINNs រួមជាមួយ Transfer Learning ផ្តល់នូវដំណោះស្រាយទំនើប និងសន្សំសំចៃពេលវេលា ដែលស្ថាប័នស្រាវជ្រាវនៅកម្ពុជាអាចយកទៅអនុវត្តក្នុងការវាយតម្លៃ និងរៀបចំគោលនយោបាយគ្រប់គ្រងធនធានទឹកក្រោមដីបានយ៉ាងមានប្រសិទ្ធភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីមូលដ្ឋានគ្រឹះនៃសមីការជលធរណីវិទ្យា:</strong> និស្សិតត្រូវចាប់ផ្តើមសិក្សាពីច្បាប់របស់ដាស៊ី (Darcy's Law) សម្រាប់លំហូរទឹកក្នុងមជ្ឈដ្ឋានដែលមានរន្ធប្រហោង និងរបៀបតំណាងវាជាសមីការឌីផេរ៉ង់ស្យែល (PDEs)។</li>
+            
+            <li><strong>សាងសង់បណ្តាញសរសៃប្រសាទផ្អែកលើរូបវិទ្យា (PINNs):</strong> អនុវត្តការសរសេរកូដដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">TensorFlow</span> ឬ <span class="en">PyTorch</span> ដើម្បីបង្កើតម៉ូដែល PINN ជាមូលដ្ឋាន ដោយបញ្ចូលសមីការ PDEs ទៅក្នុងអនុគមន៍បាត់បង់ (Loss Function)។</li>
+            
+            <li><strong>អនុវត្តការវិភាគភាពរសើបនៃប៉ារ៉ាម៉ែត្រ (Sensitivity Analysis):</strong> ប្រើប្រាស់កញ្ចប់កូដ <span class="en">SALib</span> នៅក្នុងភាសា Python ដើម្បីកំណត់អត្តសញ្ញាណប៉ារ៉ាម៉ែត្រសំខាន់ៗ (ដូចជាចំនួន Layer និង Neuron) តាមរយៈវិធីសាស្រ្ត Morris និង eFAST ដើម្បីកាត់បន្ថយទំហំនៃការស្វែងរក។</li>
+            
+            <li><strong>ស្វ័យប្រវត្តិកម្មស្ថាបត្យកម្មបណ្តាញ (NAS & Bayesian Optimization):</strong> រៀនសរសេរកូដប្រើប្រាស់ក្បួនដោះស្រាយ <span class="en">Bayesian Optimization</span> ដើម្បីស្វែងរកទម្រង់បណ្តាញសរសៃប្រសាទដែលផ្តល់លទ្ធផលល្អបំផុតដោយស្វ័យប្រវត្តិ ជំនួសឱ្យការកែតម្រូវដោយដៃ។</li>
+            
+            <li><strong>អនុវត្តការរៀនផ្ទេរ (Transfer Learning) លើទិន្នន័យជាក់ស្តែង:</strong> ប្រមូលទិន្នន័យភូមិសាស្ត្រ និងជលធរណីវិទ្យាពីតំបន់ណាមួយនៅកម្ពុជា (ឧ. ទិន្នន័យអណ្តូងទឹក) ហើយប្រើប្រាស់ម៉ូដែលដែលបានបង្ហាត់រួច (Pre-trained model) មកធ្វើការ <span class="en">Fine-tuning</span> ដើម្បីពន្លឿនការទស្សន៍ទាយលំហូរទឹកក្រោមដីពិតប្រាកដ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Physics-informed neural networks (PINNs)</span></td>
+                <td>ជាប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតដែលបញ្ចូលច្បាប់រូបវិទ្យា (ដូចជាសមីការឌីផេរ៉ង់ស្យែលនៃលំហូរទឹក) ទៅក្នុងដំណើរការរៀនសូត្ររបស់វា ដើម្បីធានាថាលទ្ធផលទស្សន៍ទាយមិនត្រឹមតែត្រូវនឹងទិន្នន័យប៉ុណ្ណោះទេ តែថែមទាំងគោរពតាមច្បាប់ធម្មជាតិយ៉ាងតឹងរ៉ឹងផងដែរ។</td>
+                <td>ដូចជាការបង្រៀនក្មេងឱ្យចេះគូររូបកង់ឡាន ដោយប្រាប់គេជាមុនថាកង់ត្រូវតែមានរាងមូលជានិច្ច ទោះបីជាគេមិនធ្លាប់ឃើញកង់គ្រប់ប្រភេទក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Neural architecture search (NAS)</span></td>
+                <td>ជាវិធីសាស្រ្តស្វ័យប្រវត្តិក្នុងការស្វែងរក និងរៀបចំរចនាសម្ព័ន្ធដ៏ល្អបំផុតរបស់ម៉ូដែលបញ្ញាសិប្បនិម្មិត (ដូចជាការកំណត់ចំនួនស្រទាប់ Layer និងចំនួនណឺរ៉ូន) សម្រាប់ដោះស្រាយបញ្ហាណាមួយ ដោយមិនបាច់ឱ្យមនុស្សអង្គុយសាកល្បងរៀបចំម្តងមួយៗនោះទេ។</td>
+                <td>ដូចជាកម្មវិធីស្ថាបត្យករស្វ័យប្រវត្តិ ដែលអាចគូរនិងជ្រើសរើសប្លង់ផ្ទះដ៏រឹងមាំបំផុតដោយខ្លួនឯង ដោយផ្អែកលើទំហំដីនិងគោលបំណងនៃការសាងសង់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer learning</span></td>
+                <td>ជាបច្ចេកទេសក្នុងវិស័យបញ្ញាសិប្បនិម្មិត ដែលយកចំណេះដឹង (ទម្ងន់ប៉ារ៉ាម៉ែត្រ) ពីម៉ូដែលដែលធ្លាប់បានបណ្តុះបណ្តាលរួចរាល់លើបញ្ហាមួយ មកប្រើប្រាស់ដើម្បីដោះស្រាយបញ្ហាថ្មីដែលស្រដៀងគ្នា ដើម្បីជួយកាត់បន្ថយពេលវេលាគណនាយ៉ាងច្រើន។</td>
+                <td>ដូចជាអ្នកដែលចេះលេងហ្គីតារួចហើយ ពេលប្តូរទៅរៀនលេងអ៊ុយគូឡេឡេ (Ukulele) គឺឆាប់ចេះជាងអ្នកដែលមិនធ្លាប់ចេះលេងតន្ត្រីសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stochastic groundwater flow</span></td>
+                <td>ជាការសិក្សាពីលំហូរទឹកនៅក្រោមដី ដោយគិតបញ្ចូលនូវភាពមិនច្បាស់លាស់ និងការប្រែប្រួលដោយចៃដន្យនៃលក្ខណៈដី និងថ្មរន្ធប្រហោង ព្រោះយើងមិនអាចចុះវាស់ស្ទង់ទម្រង់ដីបានគ្រប់សង់ទីម៉ែត្រក្នុងពិភពពិតនោះទេ។</td>
+                <td>ដូចជាការទស្សន៍ទាយផ្លូវទឹកហូរនៅលើកម្រាលព្រំដែលមានកន្លែងក្រាស់កន្លែងស្តើង ខុសប្លែកគ្នាដោយមិនមានសណ្តាប់ធ្នាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep collocation method</span></td>
+                <td>ជាវិធីសាស្រ្តគណនាគណិតវិទ្យាដែលប្រើប្រាស់បណ្តាញសរសៃប្រសាទដើម្បីស្វែងរកចម្លើយនៃសមីការ ដោយគ្រាន់តែរើសយកចំណុចចៃដន្យ (Collocation points) នៅក្នុងលំហ ជំនួសឱ្យការត្រូវគូសក្រឡាចត្រង្គ (Mesh) ខ្វាត់ខ្វែងដែលស្មុគស្មាញ និងស៊ីពេល។</td>
+                <td>ដូចជាការបាញ់ព្រួញសាកល្បងទៅគ្រប់ទីតាំងចៃដន្យលើផ្ទាំងស៊ីប ដើម្បីស្វែងរកចំណុចកណ្តាល ដោយមិនបាច់គូសក្រឡាចត្រង្គលើផ្ទាំងស៊ីបនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bayesian optimization</span></td>
+                <td>ជាក្បួនដោះស្រាយគណិតវិទ្យាដែលជួយស្វែងរកជម្រើសដ៏ល្អបំផុតដោយឆ្លាតវៃ ដោយវាចេះប្រើប្រាស់ម៉ូដែលប្រូបាប៊ីលីតេ (Gaussian process) ដើម្បីរៀនពីលទ្ធផលចាស់ៗ រួចទស្សន៍ទាយថាគួរទៅសាកល្បងចំណុចណាទីណាទៀត ទើបទទួលបានលទ្ធផលល្អជាងមុនលឿនបំផុត។</td>
+                <td>ដូចជាអ្នករកផ្សិតក្នុងព្រៃ ដែលប្រើបទពិសោធន៍ពីការរកឃើញកន្លែងមានផ្សិតពីមុន ដើម្បីទាយដឹងថាគួរដើរទៅរកនៅកន្លែងណាទៀតទើបសំបូរផ្សិត ជំនួសឱ្យការដើររកស្មានៗគ្រប់កន្លែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Method of manufactured solutions (MMS)</span></td>
+                <td>ជាវិធីសាស្រ្តសម្រាប់ផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវនៃកូដកុំព្យូទ័រ ដោយការប្រឌិតចម្លើយមួយទុកជាមុន រួចបញ្ចូលវាទៅក្នុងសមីការដើម្បីបង្កើតជាលំហាត់ (Source term) ហើយឱ្យកុំព្យូទ័រគណនារកចម្លើយនោះវិញ ដើម្បីមើលថាតើកុំព្យូទ័រគណនាត្រូវឬទេ។</td>
+                <td>ដូចជាគ្រូបង្កើតលំហាត់គណិតវិទ្យា ដោយយកចម្លើយដែលគាត់ចង់បានទៅបង្កើតជាប្រធានលំហាត់ ដើម្បីយកមកតេស្តសិស្ស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Darcy equation</span></td>
+                <td>ជាសមីការរូបវិទ្យាដែលពិពណ៌នាអំពីល្បឿន និងទិសដៅនៃការហូររបស់អង្គធាតុរាវ (ដូចជាទឹក) ឆ្លងកាត់មជ្ឈដ្ឋានដែលមានរន្ធប្រហោង (ដូចជាដីខ្សាច់ ឬថ្ម) ដោយអាស្រ័យលើកម្រិតជម្រាលសម្ពាធទឹក និងភាពជ្រាបទឹកនៃមជ្ឈដ្ឋាននោះ។</td>
+                <td>ដូចជារូបមន្តគណនាថា តើទឹកអាចហូរជ្រាបកាត់ប៉ុងលាងចានបានលឿនប៉ុណ្ណា ពេលដែលយើងចាក់ទឹកពីលើ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Physics-informed+neural+networks+for+solving+partial+differential+equations" target="_blank" rel="noopener"><span class="en">Physics-informed neural networks for solving partial differential equations</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Automated+machine+learning+and+Neural+Architecture+Search+%28NAS%29" target="_blank" rel="noopener"><span class="en">Automated machine learning and Neural Architecture Search (NAS)</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Stochastic+modeling+of+heterogeneous+porous+media" target="_blank" rel="noopener"><span class="en">Stochastic modeling of heterogeneous porous media</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Transfer+learning+applications+in+scientific+computing+and+fluid+dynamics" target="_blank" rel="noopener"><span class="en">Transfer learning applications in scientific computing and fluid dynamics</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែលមូលដ្ឋានសម្រាប់ការរៀនពង្រឹង (Foundation model for Reinforcement Learning) | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលមូលដ្ឋាន (Foundation Models) សម្រាប់ការរៀនពង្រឹង (Reinforcement Learning) ដោយផ្តោតលើការផ្លាស់ប្តូរពីការ...">
+    
+    <meta name="keywords" content="Reinforcement Learning, Foundation Models, Policy Distillation, Offline Reinforcement Learning, Transformers, In-Context Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/foundation-model-for-reinforcement-learning.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/foundation-model-for-reinforcement-learning.html">
+    <meta property="og:title" content="ម៉ូដែលមូលដ្ឋានសម្រាប់ការរៀនពង្រឹង (Foundation model for Reinforcement Learning) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលមូលដ្ឋាន (Foundation Models) សម្រាប់ការរៀនពង្រឹង (Reinforcement Learning) ដោយផ្តោតលើការផ្លាស់ប្តូរពីការរៀនកិច្ចការដាច់ដោយឡែក ទៅជាវិធីសាស្ត្ររៀន...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="N/A">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Foundation Models">
+    
+    <meta property="article:tag" content="Policy Distillation">
+    
+    <meta property="article:tag" content="Offline Reinforcement Learning">
+    
+    <meta property="article:tag" content="Transformers">
+    
+    <meta property="article:tag" content="In-Context Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែលមូលដ្ឋានសម្រាប់ការរៀនពង្រឹង (Foundation model for Reinforcement Learning)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលមូលដ្ឋាន (Foundation Models) សម្រាប់ការរៀនពង្រឹង (Reinforcement Learning) ដោយផ្តោតលើការផ្លាស់ប្តូរពីការរៀនកិច្ចការដាច់ដោយឡែក ទៅជាវិធីសាស្ត្ររៀន...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784 (Foundation model for Reinforcement Learning)",
+      "name": "Foundation model for Reinforcement Learning",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793 (Foundation Models) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement Learning) \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1796\u17b8\u1780\u17b6\u179a\u179a\u17c0\u1793\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u178a\u17b6\u1785\u17cb\u178a\u17c4\u1799\u17a1\u17c2\u1780 \u1791\u17c5\u1787\u17b6\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179a\u17c0\u1793\u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u1794\u1791 (In-Context Learning) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1785\u1798\u17d2\u179a\u17b6\u1789\u17cb\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd (Policy Distillation)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/foundation-model-for-reinforcement-learning.html",
+      "author": [{"@type": "Person", "name": "Volodymyr Mudryi (Independent Researcher, Lviv, Ukraine)"}],
+      "datePublished": "N/A",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Foundation model for Reinforcement Learning",
+        "url": "N/A"
+      },
+      "keywords": ["Reinforcement Learning", "Foundation Models", "Policy Distillation", "Offline Reinforcement Learning", "Transformers", "In-Context Learning"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784 (Foundation model for Reinforcement Learning)",
+          "item": "https://khmerresearch.com/papers/technology/foundation-model-for-reinforcement-learning.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ម៉ូដែលមូលដ្ឋានសម្រាប់ការរៀនពង្រឹង (Foundation model for R...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Foundation model for Reinforcement Learning<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែលមូលដ្ឋានសម្រាប់ការរៀនពង្រឹង (Foundation model for Reinforcement Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Foundation model for Reinforcement Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Volodymyr Mudryi (Independent Researcher, Lviv, Ukraine)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> N/A</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលមូលដ្ឋាន (Foundation Models) សម្រាប់ការរៀនពង្រឹង (Reinforcement Learning) ដោយផ្តោតលើការផ្លាស់ប្តូរពីការរៀនកិច្ចការដាច់ដោយឡែក ទៅជាវិធីសាស្ត្ររៀនក្នុងបរិបទ (In-Context Learning) តាមរយៈការចម្រាញ់គោលការណ៍ (Policy Distillation)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> វិធីសាស្ត្រនៃការស្រាវជ្រាវនេះគឺផ្អែកលើការរួមបញ្ចូលគ្នានៃការធ្វើម៉ូដែលតាមលំដាប់លំដោយ (Sequential modeling) ស្ថាបត្យកម្ម Transformer និងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline reinforcement learning)។
+        
+        <ul>
+            
+            <li>ការវាយតម្លៃសមត្ថភាពស្ថាបត្យកម្ម LSTM ដើម្បីដោះស្រាយទិន្នន័យបញ្ចូលដែលមានទំហំធំ (Performance Evaluation of LSTM Architecture)</li>
+            
+            <li>ការរួមបញ្ចូលវិធីសាស្ត្របរិបទទំនើបៗដូចជា Longformer និង Nystromformer សម្រាប់ដោះស្រាយបរិបទធំៗ (Integration of Modern Contextual Methods)</li>
+            
+            <li>ការប្រើប្រាស់ការរៀនពាក់កណ្តាលមានការត្រួតពិនិត្យ ដើម្បីទាញយកទិន្នន័យសំខាន់ៗ (Leveraging Semi-Supervised Learning for Distillation)</li>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែលដែលបានបណ្តុះបណ្តាលរួច ដើម្បីបង្កើតទិន្នន័យបន្ថែមដោយខ្លួនឯង (Self-Generated Data for Augmentation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការបង្កើតម៉ូដែល (Causal Model) ដែលអាចទស្សន៍ទាយសកម្មភាពដោយស្វ័យប្រវត្តិ ដោយផ្អែកលើប្រវត្តិដែលបានរៀនពីមុន ព្រមទាំងបង្កើនប្រសិទ្ធភាពក្នុងការប្រើប្រាស់ទិន្នន័យ។</li>
+            
+            <li>រំពឹងថានឹងអាចជួយកាត់បន្ថយពេលវេលា និងធនធានដែលត្រូវការសម្រាប់ការបណ្តុះបណ្តាលដំណោះស្រាយ RL តាមរយៈការកែសម្រួល (Fine-tuning) ដ៏សាមញ្ញដោយប្រើប្រាស់ទិន្នន័យតិចតួច។</li>
+            
+            <li>វិធីសាស្ត្រនេះមានសក្តានុពលក្នុងការបដិវត្តន៍ការរៀនសូត្រក្នុងបរិស្ថានស្មុគស្មាញ និងមានហានិភ័យខ្ពស់ ដូចជាវិស័យវេជ្ជសាស្ត្រ និងប្រព័ន្ធ AI សន្ទនាឆ្លាតវៃ (Conversational chatbots)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Algorithm Distillation / Transformer-based RL</span></strong><br>វិធីសាស្ត្រ Algorithm Distillation ឬ RL ផ្អែកលើ Transformer</td>
+                <td>អាចធ្វើទូទៅកម្ម (Generalization) បានយ៉ាងល្អក្រៅទិន្នន័យដើម និងអាចរៀនពីប្រវត្តិសកម្មភាពរបស់ភ្នាក់ងារ (Agent) បានប្រកបដោយប្រសិទ្ធភាព។</td>
+                <td>មានបញ្ហាប្រឈមនៅពេលប្រើទំហំផ្ទាំងបញ្ចូលទិន្នន័យ (Context Window) ធំ ដែលទាមទារកម្លាំងកុំព្យូទ័រ និងអង្គចងចាំខ្ពស់។</td>
+                <td>ឯកសារនេះជាសំណើស្រាវជ្រាវ ហេតុនេះមិនទាន់មានលទ្ធផលជាក់លាក់ទេ ប៉ុន្តែរំពឹងថានឹងជួយកាត់បន្ថយពេលវេលា និងធនធានក្នុងការហ្វឹកហាត់ម៉ូដែល។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">LSTM architecture as Causal Model</span></strong><br>ការប្រើប្រាស់បណ្តាញ LSTM ជាម៉ូដែល Causal</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការគ្រប់គ្រងអង្គចងចាំ (Memory Efficiency) ដែលស័ក្តិសមសម្រាប់ផ្ទាំងបញ្ចូលទិន្នន័យ (Inputs) ធំៗ។</td>
+                <td>អាចមានល្បឿនយឺតជាងស្ថាបត្យកម្ម Transformer ក្នុងការហ្វឹកហាត់ទិន្នន័យស្របគ្នា (Parallel Training)។</td>
+                <td>ស្ថិតក្នុងដំណាក់កាលស្នើឱ្យមានការវាយតម្លៃប្រៀបធៀបលើដំណើរការ ល្បឿន និងប្រសិទ្ធភាពអង្គចងចាំធៀបជាមួយ Transformer។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Modern Contextual Methods (Longformer / Nystromformer)</span></strong><br>វិធីសាស្ត្រ Contextual ទំនើប (Longformer និង Nystromformer)</td>
+                <td>យន្តការ Attention អាចធ្វើមាត្រដ្ឋាន (Scale) ជាលីនេអ៊ែរ ដែលជួយដោះស្រាយបញ្ហាទំហំផ្ទាំងបញ្ចូល (Context Window) ធំបានយ៉ាងល្អ។</td>
+                <td>តម្រូវឱ្យមានការកែសម្រួលស្មុគស្មាញដើម្បីអនុវត្តជាមួយបរិស្ថាន Reinforcement Learning។</td>
+                <td>នឹងត្រូវយកមកធ្វើតេស្តជាក់ស្តែងជាមួយការងារ Benchmark ដូចជា Adversarial Bandit និង Dark Room។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រ និងទិន្នន័យច្រើន ដោយសារវាផ្តោតលើការហ្វឹកហាត់ Foundation Models សម្រាប់ Reinforcement Learning (RL) លើទិន្នន័យទំហំធំ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនកុំព្យូទ័រដែលមាន GPU កម្រិតខ្ពស់ (ឧទាហរណ៍៖ NVIDIA RTX 3090 ឬ A100) សម្រាប់ការហ្វឹកហាត់ម៉ូដែល Transformer និង LSTM លើទិន្នន័យធំ។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យ Offline RL ពីអន្តរកម្មប្រវត្តិសាស្រ្ត (Historical Interactions) និងបរិស្ថានស្មុគស្មាញ (ឧទាហរណ៍៖ សំណុំហ្គេម Atari សម្រាប់ Pixel-based Environments)។</li>
+        
+        <li><strong>Software:</strong> បរិស្ថានសម្រាប់សរសេរកូដ Deep Learning ដូចជា PyTorch ឬ TensorFlow រួមជាមួយបណ្ណាល័យសម្រាប់ Transformer និង Reinforcement Learning។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងជ្រៅជ្រះផ្នែក Deep Reinforcement Learning, Sequence Modeling, និងស្ថាបត្យកម្ម Transformer។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>សំណើស្រាវជ្រាវនេះមិនបានបញ្ជាក់ពីសំណុំទិន្នន័យជាក់លាក់ណាមួយដែលទាក់ទងនឹងប្រជាសាស្ត្រនោះទេ ដោយវាផ្ដោតលើការបង្កើត Foundation Model តាមរយៈបរិស្ថានសិប្បនិម្មិត (ដូចជា Atari games) និងទិន្នន័យប្រវត្តិសកម្មភាព (Offline Data) ទូទៅ។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកប្រើប្រាស់ក្នុងវិស័យពិតៗដូចជា សុខាភិបាល ឬហិរញ្ញវត្ថុ តម្រូវឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកដែលមានគុណភាពខ្ពស់ ដើម្បីជៀសវាងភាពលម្អៀង (Bias) ដែលកើតចេញពីបរិបទ និងប្រជាសាស្ត្របរទេស។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់សម្រាប់ប្រទេសកម្ពុជា ពិសេសក្នុងការអភិវឌ្ឍប្រព័ន្ធស្វ័យប្រវត្តិកម្ម និងការសម្រេចចិត្តឆ្លាតវៃ (Smart Decision-Making) ក្នុងវិស័យគន្លឹះនានា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសុខាភិបាល (ឧទាហរណ៍៖ មន្ទីរពេទ្យកាល់ម៉ែត):</strong> អាចប្រើប្រាស់ប្រវត្តិព្យាបាលរបស់អ្នកជំងឺ ដើម្បីជួយគ្រូពេទ្យក្នុងការសម្រេចចិត្តផ្តល់ការព្យាបាលប្រកបដោយប្រសិទ្ធភាពខ្ពស់ និងកាត់បន្ថយកំហុសឆ្គងវេជ្ជសាស្ត្រ។</li>
+            
+            <li><strong>វិស័យហិរញ្ញវត្ថុ និងធនាគារ (ឧទាហរណ៍៖ ធនាគារពាណិជ្ជនៅកម្ពុជា):</strong> ការរកឃើញការក្លែងបន្លំ (Fraud Detection) និងការវិភាគហានិភ័យឥណទាន ដោយប្រើម៉ូដែលដែលអាចបន្សាំខ្លួនលឿនទៅនឹងបរិបទថ្មីៗ ដោយមិនត្រូវការទិន្នន័យថ្មីច្រើន។</li>
+            
+            <li><strong>សេវាកម្មអតិថិជន (ឧទាហរណ៍៖ ក្រុមហ៊ុនទូរគមនាគមន៍ Smart ឬ Cellcard):</strong> ការបង្កើត Chatbot ឆ្លាតវៃដែលអាចដោះស្រាយបញ្ហាអតិថិជនបានដោយស្វ័យប្រវត្តិ ជួយកាត់បន្ថយការចំណាយប្រតិបត្តិការ និងពន្លឿនការឆ្លើយតប។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះអាចជួយជំរុញនវានុវត្តន៍ឌីជីថលនៅកម្ពុជាឱ្យកាន់តែទំនើប ប៉ុន្តែទាមទារការវិនិយោគលើផ្នែករឹង (Hardware) និងការបណ្តុះបណ្តាលធនធានមនុស្សជាមុនសិន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Reinforcement Learning:</strong> ចាប់ផ្តើមដោយការរៀនទ្រឹស្តីជាមូលដ្ឋាននៃ RL និង Sequence Modeling ដោយអនុវត្តផ្ទាល់ជាមួយបណ្ណាល័យ <span class="en">OpenAI Gym</span> និង <span class="en">Stable Baselines3</span> នៅក្នុងភាសា <span class="en">Python</span>។</li>
+            
+            <li><strong>ស្វែងយល់ពីស្ថាបត្យកម្ម Transformer:</strong> សិក្សាពីរបៀបដែលម៉ូដែល Sequence ដំណើរការ និងប្រើប្រាស់ <span class="en">Hugging Face Transformers</span> ដើម្បីស្វែងយល់ពីការអ៊ិនកូដ (Encoding) និងយន្តការ Attention សម្រាប់ទិន្នន័យជាបន្តបន្ទាប់ (Sequential Data)។</li>
+            
+            <li><strong>សាកល្បងជាមួយ Offline Reinforcement Learning:</strong> ទាញយកនិងសាកល្បងប្រើសំណុំទិន្នន័យ <span class="en">D4RL (Datasets for Deep Data-Driven Reinforcement Learning)</span> ដើម្បីអនុវត្តកូដ <span class="en">Decision Transformer</span> ខ្នាតតូចដោយខ្លួនឯង។</li>
+            
+            <li><strong>អនុវត្តការរៀនបែបពាក់កណ្តាលមានការត្រួតពិនិត្យ (Semi-Supervised Learning):</strong> សរសេរកូដសាកល្បងប្រើប្រាស់ <span class="en">Contrastive Loss</span> ឬ <span class="en">Triplet Loss</span> ជាមួយ <span class="en">PyTorch</span> ដើម្បីធ្វើការកាត់បន្ថយទំហំទិន្នន័យ (Data Subsampling) ដូចដែលបានស្នើក្នុងឯកសារស្រាវជ្រាវនេះ។</li>
+            
+            <li><strong>ពង្រីកគម្រោងទៅកាន់បរិស្ថានស្មុគស្មាញ (Complex Environments):</strong> នៅពេលដែលអ្នកស្ទាត់ជំនាញមូលដ្ឋានហើយ សូមសាកល្បងហ្វឹកហាត់ម៉ូដែលរបស់អ្នកជាមួយបរិស្ថាន <span class="en">Atari Learning Environment (ALE)</span> ដើម្បីវាយតម្លៃសមត្ថភាពម៉ូដែលក្នុងការដោះស្រាយបញ្ហាស្មុគស្មាញ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Reinforcement Learning</span></td>
+                <td>ជាវិធីសាស្ត្របង្រៀនប្រព័ន្ធបញ្ញាសិប្បនិម្មិត (AI) ឱ្យចេះសម្រេចចិត្តដោយខ្លួនឯង តាមរយៈការធ្វើសកម្មភាពនៅក្នុងបរិស្ថានណាមួយ រួចទទួលបានរង្វាន់ (Reward) បើធ្វើត្រូវ ឬពិន័យ (Penalty) បើធ្វើខុស រហូតទាល់តែវាចេះយុទ្ធសាស្ត្រល្អបំផុត។</td>
+                <td>ដូចជាការបង្ហាត់សត្វឆ្កែឱ្យចេះអង្គុយ ដោយឱ្យចំណីពេលវាធ្វើតាមបញ្ជា និងមិនឱ្យអ្វីទាំងអស់ពេលវាធ្វើខុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Policy Distillation</span></td>
+                <td>ជាដំណើរការនៃការទាញយកចំណេះដឹង ឬយុទ្ធសាស្ត្រ (Policy) ពីម៉ូដែលបញ្ញាសិប្បនិម្មិតដែលធំនិងស្មុគស្មាញ ឬពីប្រវត្តិសកម្មភាពរបស់ភ្នាក់ងារជាច្រើនបញ្ចូលគ្នា ទៅដាក់ក្នុងម៉ូដែលតែមួយតូចជាងមុន ដែលអាចធ្វើការបានលឿននិងមានប្រសិទ្ធភាពជាងមុន។</td>
+                <td>ដូចជាការសង្ខេបមេរៀនពីសៀវភៅក្រាស់ៗជាច្រើនក្បាល បញ្ចូលទៅក្នុងសៀវភៅសង្ខេបតែមួយក្បាលដែលងាយស្រួលអាននិងឆាប់យល់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline reinforcement learning</span></td>
+                <td>ការហ្វឹកហាត់ម៉ូដែល AI ដោយប្រើប្រាស់សំណុំទិន្នន័យចាស់ៗដែលបានប្រមូលទុកជាមុន (ប្រវត្តិសកម្មភាពរបស់ភ្នាក់ងារផ្សេង) ដើម្បីរៀនពីកំហុសនិងភាពជោគជ័យ ដោយមិនតម្រូវឱ្យវាទៅសាកល្បងធ្វើសកម្មភាពផ្ទាល់ និងខុសផ្ទាល់នៅក្នុងបរិស្ថានជាក់ស្តែងឡើយ។</td>
+                <td>ដូចជាការរៀនទាត់បាល់តាមរយៈការមើលវីដេអូប្រកួតចាស់ៗរបស់កីឡាករល្បីៗ ជាជាងការចុះទៅសាកល្បងទាត់ផ្ទាល់នៅលើទីលាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transformers architecture</span></td>
+                <td>ជាទម្រង់រចនាសម្ព័ន្ធបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដែលមានសមត្ថភាពខ្ពស់ក្នុងការវិភាគទិន្នន័យតាមលំដាប់លំដោយ ដោយប្រើបច្ចេកទេសផ្តោតការយកចិត្តទុកដាក់ (Attention) ទៅលើផ្នែកសំខាន់ៗនៃព័ត៌មាន ទោះបីជាព័ត៌មាននោះនៅឆ្ងាយពីគ្នាក៏ដោយ។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលកំពុងអានសៀវភៅ ហើយអាចចាំនិងភ្ជាប់សាច់រឿងពីទំព័រទី១ មកទំព័រទី១០០ បានយ៉ាងច្បាស់ដោយដឹងថាពាក្យមួយណាទាក់ទងនឹងពាក្យមួយណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Causal Model</span></td>
+                <td>ម៉ូដែលដែលប្រើប្រាស់ក្បួនគណិតវិទ្យាដើម្បីទស្សន៍ទាយសកម្មភាព ឬទិន្នន័យបន្ទាប់ (Autoregressive Prediction) ដោយផ្អែកលើព្រឹត្តិការណ៍ ឬប្រវត្តិសកម្មភាពដែលបានកើតឡើងពីមុនៗតាមលំដាប់លំដោយពេលវេលា ដោយយល់ពីទំនាក់ទំនងហេតុនិងផល។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាអាកាសធាតុនឹងភ្លៀង ដោយសារតែអ្នកបានសង្កេតឃើញមេឃងងឹតនិងមានខ្យល់បក់ខ្លាំងកាលពីប៉ុន្មាននាទីមុន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">In-Context model</span></td>
+                <td>ម៉ូដែលដែលអាចរៀន និងសម្របខ្លួនទៅនឹងការងារថ្មីៗបានភ្លាមៗ តាមរយៈការស្វែងយល់ពីព័ត៌មាន ឬឧទាហរណ៍ដែលយើងផ្តល់ឱ្យនៅក្នុងទិន្នន័យបញ្ចូល (Input Text/Context) ដោយមិនចាំបាច់កែប្រែកូដ ឬហ្វឹកហាត់ទម្ងន់ទិន្នន័យ (Weights) វាម្តងទៀតឡើយ។</td>
+                <td>ដូចជាចុងភៅដ៏ចំណានម្នាក់ដែលអាចធ្វើម្ហូបថ្មីមួយបានភ្លាមៗ គ្រាន់តែអានរូបមន្តដែលគេហុចឱ្យ ដោយមិនបាច់ត្រឡប់ទៅរៀនវគ្គធ្វើម្ហូបជាថ្មី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Algorithm Distillation</span></td>
+                <td>បច្ចេកទេសដែលចម្លងយក "របៀបរៀន" របស់ក្បួនដោះស្រាយ (RL Algorithms) ពីមុនៗមកប្រើប្រាស់ ដើម្បីជួយឱ្យម៉ូដែលថ្មីយល់ពីយន្តការនៃការរៀនសូត្រ (Learning how to learn) ដែលធ្វើឱ្យវាកាន់តែឆ្លាតនិងមានលទ្ធភាពដោះស្រាយបញ្ហាថ្មីៗបានល្អ។</td>
+                <td>ដូចជាការរៀនពី "វិធីសាស្ត្ររៀនសូត្រឱ្យពូកែ" របស់សិស្សឆ្នើម ជាជាងការកត់ត្រាតែចម្លើយរបស់ពួកគេយកមកទន្ទេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Semi-Supervised Learning</span></td>
+                <td>វិធីសាស្ត្រហ្វឹកហាត់ម៉ូដែល AI ដោយប្រើប្រាស់ទិន្នន័យដែលគេបានចាត់ថ្នាក់រួច (Labeled Data) ក្នុងបរិមាណតិចតួច បញ្ចូលគ្នាជាមួយទិន្នន័យដែលមិនទាន់ចាត់ថ្នាក់ (Unlabeled Data) ក្នុងបរិមាណច្រើនសន្ធឹកសន្ធាប់ ដើម្បីសន្សំសំចៃពេលវេលានិងកម្លាំងក្នុងដំណើរការរៀបចំទិន្នន័យ។</td>
+                <td>ដូចជាគ្រូបង្រៀនពន្យល់លំហាត់គំរូតែ២ទៅ៣ប៉ុណ្ណោះ រួចទុកឱ្យសិស្សប្រើគំរូនោះដើម្បីស្វែងយល់និងធ្វើលំហាត់១០០ទៀតដោយខ្លួនឯង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Bellman+Transformer+to+Internalize+Reinforcement+Learning%3A+TD%280%29+as+System+1+and+SARSA%28%CE%BB%29+as+System+2%27%2C+%27khmer_title%27%3A+%27Transformer+Bellman+%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%92%E1%9F%92%E1%9E%9C%E1%9E%BE%E1%9E%9F%E1%9E%98%E1%9E%B6%E1%9E%A0%E1%9E%9A%E1%9E%8E%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%96%E1%9E%84%E1%9F%92%E1%9E%9A%E1%9E%B9%E1%9E%84%E1%9F%96+TD%280%29+%E1%9E%87%E1%9E%B6%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%91%E1%9E%B8%E1%9F%A1+%E1%9E%93%E1%9E%B7%E1%9E%84+SARSA%28%CE%BB%29+%E1%9E%87%E1%9E%B6%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%91%E1%9E%B8%E1%9F%A2%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fbellman-transformer-reinforcement-learning-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Bellman Transformer to Internalize Reinforcement Learning: TD(0) as System 1 and SARSA(λ) as System 2', 'khmer_title': 'Transformer Bellman សម្រាប់ធ្វើសមាហរណកម្មការរៀនពង្រឹង៖ TD(0) ជាប្រព័ន្ធទី១ និង SARSA(λ) ជាប្រព័ន្ធទី២', 'url': '/papers/technology/bellman-transformer-reinforcement-learning-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Offline+reinforcement+learning+and+policy+distillation" target="_blank" rel="noopener"><span class="en">Offline reinforcement learning and policy distillation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Transformer+architectures+for+long+sequence+modeling" target="_blank" rel="noopener"><span class="en">Transformer architectures for long sequence modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Semi-supervised+learning+in+reinforcement+learning+environments" target="_blank" rel="noopener"><span class="en">Semi-supervised learning in reinforcement learning environments</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Algorithm+distillation+and+in-context+learning+in+AI" target="_blank" rel="noopener"><span class="en">Algorithm distillation and in-context learning in AI</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

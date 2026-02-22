@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វេទិកាប្រភពបើកចំហសម្រាប់ការគ្រប់គ្រងទិន្នន័យ GIS និងការវិភាគ | KhmerResearch.com</title>
+    <meta name="description" content="កសិកម្មច្បាស់លាស់ (Precision Agriculture) ទាមទារឱ្យមានការប្រមូល និងវិភាគទិន្នន័យពីប្រភពចម្រុះ (ដី យន្តហោះដ្រូន និងផ្កាយរណប) ដែលមានភាពត្រឹមត្រូវ និងទាន់ពេលវេល...">
+    
+    <meta name="keywords" content="Geographical Information Systems, Precision Agriculture, Remote Sensing, Open Source Software, Soil Mapping, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/agriculture/open-source-platform-gis-data-management-analytics-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/agriculture/open-source-platform-gis-data-management-analytics-2023.html">
+    <meta property="og:title" content="វេទិកាប្រភពបើកចំហសម្រាប់ការគ្រប់គ្រងទិន្នន័យ GIS និងការវិភាគ | KhmerResearch.com">
+    <meta property="og:description" content="កសិកម្មច្បាស់លាស់ (Precision Agriculture) ទាមទារឱ្យមានការប្រមូល និងវិភាគទិន្នន័យពីប្រភពចម្រុះ (ដី យន្តហោះដ្រូន និងផ្កាយរណប) ដែលមានភាពត្រឹមត្រូវ និងទាន់ពេលវេលា ប៉ុន្តែឧបករណ៍ដែលមានស្រាប់ភាគច្រើនមានតម...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023 (Sensors)">
+    
+    <meta property="article:tag" content="Geographical Information Systems">
+    
+    <meta property="article:tag" content="Precision Agriculture">
+    
+    <meta property="article:tag" content="Remote Sensing">
+    
+    <meta property="article:tag" content="Open Source Software">
+    
+    <meta property="article:tag" content="Soil Mapping">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វេទិកាប្រភពបើកចំហសម្រាប់ការគ្រប់គ្រងទិន្នន័យ GIS និងការវិភាគ">
+    <meta name="twitter:description" content="កសិកម្មច្បាស់លាស់ (Precision Agriculture) ទាមទារឱ្យមានការប្រមូល និងវិភាគទិន្នន័យពីប្រភពចម្រុះ (ដី យន្តហោះដ្រូន និងផ្កាយរណប) ដែលមានភាពត្រឹមត្រូវ និងទាន់ពេលវេលា ប៉ុន្តែឧបករណ៍ដែលមានស្រាប់ភាគច្រើនមានតម...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17c1\u1791\u17b7\u1780\u17b6\u1794\u17d2\u179a\u1797\u1796\u1794\u17be\u1780\u1785\u17c6\u17a0\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 GIS \u1793\u17b7\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782",
+      "name": "An Open-Source Platform for GIS Data Management and Analytics",
+      "description": "\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb (Precision Agriculture) \u1791\u17b6\u1798\u1791\u17b6\u179a\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1794\u17d2\u179a\u1798\u17bc\u179b \u1793\u17b7\u1784\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u17b8\u1794\u17d2\u179a\u1797\u1796\u1785\u1798\u17d2\u179a\u17bb\u17c7 (\u178a\u17b8 \u1799\u1793\u17d2\u178f\u17a0\u17c4\u17c7\u178a\u17d2\u179a\u17bc\u1793 \u1793\u17b7\u1784\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c \u1793\u17b7\u1784\u1791\u17b6\u1793\u17cb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u1794\u17c9\u17bb\u1793\u17d2\u178f\u17c2\u17a7\u1794\u1780\u179a\u178e\u17cd\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793\u1798\u17b6\u1793\u178f\u1798\u17d2\u179b\u17c3\u1790\u17d2\u179b\u17c3 \u1793\u17b7\u1784\u1781\u17d2\u179c\u17c7\u179b\u1791\u17d2\u1792\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u178a\u17b6\u1780\u17cb\u1794\u1789\u17d2\u1785\u17bc\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u178f\u17b6\u1798\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/agriculture/open-source-platform-gis-data-management-analytics-2023.html",
+      "author": [{"@type": "Person", "name": "Flavio Piccoli (Istituto Nazionale di Fisica Nucleare)"},{"@type": "Person", "name": "Simone Giuseppe Locatelli (Universit\u00e0 Milano-Bicocca)"},{"@type": "Person", "name": "Raimondo Schettini (Universit\u00e0 Milano-Bicocca)"},{"@type": "Person", "name": "Paolo Napoletano (Universit\u00e0 Milano-Bicocca)"}],
+      "datePublished": "2023 (Sensors)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "An Open-Source Platform for GIS Data Management and Analytics",
+        "url": "https://doi.org/10.3390/s23083788"
+      },
+      "keywords": ["Geographical Information Systems", "Precision Agriculture", "Remote Sensing", "Open Source Software", "Soil Mapping"],
+      "about": "Precision Agriculture / Geoinformatics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Agriculture",
+          "item": "https://khmerresearch.com/papers/agriculture/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17c1\u1791\u17b7\u1780\u17b6\u1794\u17d2\u179a\u1797\u1796\u1794\u17be\u1780\u1785\u17c6\u17a0\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 GIS \u1793\u17b7\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782",
+          "item": "https://khmerresearch.com/papers/agriculture/open-source-platform-gis-data-management-analytics-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/agriculture/">Agriculture</a> &rsaquo;
+        <span>វេទិកាប្រភពបើកចំហសម្រាប់ការគ្រប់គ្រងទិន្នន័យ GIS និងការវិភាគ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> An Open-Source Platform for GIS Data Management and Analytics<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/s23083788" target="_blank">doi.org/10.3390/s23083788</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វេទិកាប្រភពបើកចំហសម្រាប់ការគ្រប់គ្រងទិន្នន័យ GIS និងការវិភាគ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> An Open-Source Platform for GIS Data Management and Analytics</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Flavio Piccoli (Istituto Nazionale di Fisica Nucleare), Simone Giuseppe Locatelli (Università Milano-Bicocca), Raimondo Schettini (Università Milano-Bicocca), Paolo Napoletano (Università Milano-Bicocca)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 (Sensors)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Precision Agriculture / Geoinformatics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> កសិកម្មច្បាស់លាស់ (Precision Agriculture) ទាមទារឱ្យមានការប្រមូល និងវិភាគទិន្នន័យពីប្រភពចម្រុះ (ដី យន្តហោះដ្រូន និងផ្កាយរណប) ដែលមានភាពត្រឹមត្រូវ និងទាន់ពេលវេលា ប៉ុន្តែឧបករណ៍ដែលមានស្រាប់ភាគច្រើនមានតម្លៃថ្លៃ និងខ្វះលទ្ធភាពក្នុងការដាក់បញ្ចូលម៉ូដែលព្យាករណ៍តាមតម្រូវការ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើង និងអភិវឌ្ឍវេទិកាវិបសាយ (Web Platform) ដោយប្រើប្រាស់បច្ចេកវិទ្យាប្រភពបើកចំហ ដើម្បីគ្រប់គ្រង និងវិភាគទិន្នន័យដីធ្លីសម្រាប់កសិកម្ម។
+        
+        <ul>
+            
+            <li>ការអភិវឌ្ឍវេទិកា Pignoletto ដោយប្រើប្រាស់ QGIS និង PostGIS (Platform Development)</li>
+            
+            <li>ការធ្វើតេស្តលទ្ធភាពប្រើប្រាស់ (Usability Testing) ជាមួយអ្នកប្រើប្រាស់ចំនួន ២០នាក់ (ទាំងអ្នកជំនាញ និងមិនមែនអ្នកជំនាញ)</li>
+            
+            <li>ការប្រើប្រាស់ទិន្នន័យរូបភាព អ៊ីពែរសפקត្រ (Hyperspectral data) និងសំណាកដីពីមន្ទីរពិសោធន៍ដើម្បីបង្កើតផែនទីដី</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វេទិកានេះត្រូវបានវាយតម្លៃថាមានភាពងាយស្រួលក្នុងការប្រើប្រាស់ ដោយអ្នកប្រើប្រាស់ទូទៅចំណាយពេលជាមធ្យមត្រឹមតែ ១០ នាទីប៉ុណ្ណោះដើម្បីបញ្ចប់កិច្ចការ។</li>
+            
+            <li>ប្រព័ន្ធនេះអាចបង្កើតផែនទីលក្ខណៈដី (ដូចជា កាបូនសរីរាង្គ) បានយ៉ាងជោគជ័យ ដោយប្រើប្រាស់បច្ចេកទេស Inverse Distance Weighting (IDW)។</li>
+            
+            <li>វាផ្តល់នូវដំណោះស្រាយដែលមានប្រសិទ្ធភាព និងចំណាយតិចសម្រាប់ការគាំទ្រការសម្រេចចិត្តក្នុងវិស័យកសិកម្ម ដោយអនុញ្ញាតឱ្យមានការដាក់បញ្ចូលទិន្នន័យថ្មីៗ និងម៉ូដែល AI ផ្ទាល់ខ្លួន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Pignoletto Platform (Proposed)</span></strong><br>វេទិកា Pignoletto (ស្នើឡើងដោយការសិក្សានេះ)</td>
+                <td>ជាកម្មវិធីប្រភពបើកចំហ (Open Source) អាចដំណើរការលើវិបសាយ គាំទ្រទិន្នន័យចម្រុះ (ដី និងដ្រូន) និងអនុញ្ញាតឱ្យបញ្ចូលម៉ូដែល AI ផ្ទាល់ខ្លួន។</td>
+                <td>ទាមទារការដំឡើងតាមរយៈ Docker និងចំណេះដឹងផ្នែកបច្ចេកទេសខ្លះក្នុងការគ្រប់គ្រង Server បើធៀបនឹងកម្មវិធីដែលដំឡើងស្រាប់។</td>
+                <td>អ្នកប្រើប្រាស់អាចបញ្ចប់កិច្ចការក្នុងរយៈពេលមធ្យម ៥-១០ នាទី ជាមួយនឹងកម្រិតពេញចិត្តខ្ពស់លើភាពងាយស្រួលប្រើប្រាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">FREEWAT (Alternative)</span></strong><br>កម្មវិធី FREEWAT (ឧបករណ៍ជំនួស)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់សម្រាប់ការគ្រប់គ្រងធនធានទឹក និងការធ្វើគំរូនៃលំហូរទឹកក្រោមដី។</td>
+                <td>ដំណើរការតែជា Plugin នៅក្នុង QGIS ប៉ុណ្ណោះ ដែលកំណត់លទ្ធភាពប្រើប្រាស់សម្រាប់តែអ្នកចេះ QGIS និងមិនមែនជាប្រព័ន្ធ Web-based ពេញលេញ។</td>
+                <td>ផ្តោតសំខាន់លើការគ្រប់គ្រងទឹកជាជាងការធ្វើផែនទីដីកសិកម្មបែបឌីជីថលទូទៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Commercial GIS (e.g., ArcGIS)</span></strong><br>ប្រព័ន្ធ GIS បែបពាណិជ្ជកម្ម (ឧទាហរណ៍ ArcGIS)</td>
+                <td>មានភាពរឹងមាំខ្លាំង (Robust) មានការគាំទ្របច្ចេកទេសពេញលេញ និងស្តង់ដារឧស្សាហកម្ម។</td>
+                <td>មានតម្លៃថ្លៃសម្រាប់អាជ្ញាប័ណ្ណប្រើប្រាស់ ដែលជាឧបសគ្គសម្រាប់ស្ថាប័នតូចៗ ឬកសិករ។</td>
+                <td>មិនត្រូវបានប្រើនៅក្នុងការសិក្សានេះទេ ដោយសារគោលដៅគឺបង្កើតដំណោះស្រាយដែលមានតម្លៃទាប និងបើកចំហ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> វេទិកានេះត្រូវបានរចនាឡើងដើម្បីឱ្យមានតម្លៃទាបបំផុត ដោយប្រើប្រាស់បច្ចេកវិទ្យាប្រភពបើកចំហ និងមិនទាមទារកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់ពេកនោះទេ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនមេ (Server) ដែលមាន CPU ល្បឿន 2+ GHz និង RAM យ៉ាងតិច 4GB (ក្នុងការពិសោធន៍ប្រើ Intel Core i5 និង RAM ធម្មតា)។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់កម្មវិធីឥតគិតថ្លៃទាំងអស់រួមមាន Docker, QGIS Server, PostgreSQL/PostGIS, និងភាសា Python។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកបច្ចេកទេសដែលមានចំណេះដឹងអំពី Docker និងការគ្រប់គ្រងប្រព័ន្ធ GIS ដើម្បីដំឡើងនិងថែទាំ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានអនុវត្តនៅក្នុងតំបន់ Lombardy ប្រទេសអ៊ីតាលី ដោយប្រើប្រាស់ទិន្នន័យដី និងរូបភាពពីតំបន់នោះប៉ុណ្ណោះ។ ការវាយតម្លៃលើភាពងាយស្រួលនៃការប្រើប្រាស់ (Usability Test) ធ្វើឡើងជាមួយអ្នកចូលរួមចំនួន ២០ នាក់ ដែលជាចំនួនតិចតួចដែលអាចមិនទាន់តំណាងឱ្យកសិករដែលមានកម្រិតបច្ចេកវិទ្យាទាបនៅក្នុងប្រទេសកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វេទិកានេះមានសក្ដានុពលខ្ពស់សម្រាប់ប្រទេសកម្ពុជា ដោយសារវាជាប្រព័ន្ធឥតគិតថ្លៃ (Open Source) ដែលអាចជួយកាត់បន្ថយចំណាយលើបច្ចេកវិទ្យាកសិកម្ម។</p>
+        
+        <ul>
+            
+            <li><strong>សាកលវិទ្យាល័យកសិកម្ម (RUA/NUBB):</strong> អាចប្រើប្រាស់ជាឧបករណ៍បង្រៀន និងស្រាវជ្រាវសម្រាប់និស្សិតផ្នែកកសិកម្ម និងភូមិសាស្ត្រ ដោយមិនចាំបាច់ចំណាយលើអាជ្ញាប័ណ្ណកម្មវិធីថ្លៃៗ។</li>
+            
+            <li><strong>ការគ្រប់គ្រងដំណាំស្រូវនៅបាត់ដំបង:</strong> អាចប្រើដើម្បីបង្កើតផែនទីជីជាតិដី (Soil Mapping) សម្រាប់ណែនាំកសិករអំពីការប្រើប្រាស់ជីឱ្យចំគោលដៅ កាត់បន្ថយការខ្ជះខ្ជាយ។</li>
+            
+            <li><strong>ចម្ការកៅស៊ូ និងដំឡូងមី:</strong> ក្រុមហ៊ុនសម្បទានដីសេដ្ឋកិច្ចអាចប្រើប្រព័ន្ធនេះដើម្បីវិភាគទិន្នន័យពីដ្រូន (Drone) សម្រាប់តាមដានសុខភាពដំណាំលើផ្ទៃដីធំ។</li>
+            
+        </ul>
+        
+        
+        <p>ទោះបីជាវាមានប្រយោជន៍ខ្លាំង ប៉ុន្តែការយកមកប្រើនៅកម្ពុជាទាមទារឱ្យមានការបកប្រែចំណុចប្រទាក់ (Interface) និងការបណ្តុះបណ្តាលបច្ចេកទេសដល់មន្ត្រីកសិកម្មជាមុនសិន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១៖ ការដំឡើងប្រព័ន្ធសាកល្បង:</strong> ទាញយកកូដពី GitHub (Pignoletto Platform) និងដំឡើងនៅលើកុំព្យូទ័រដែលមាន Docker ដើម្បីសិក្សាពីរបៀបដំណើរការរបស់វា។</li>
+            
+            <li><strong>ជំហានទី ២៖ ការប្រមូលទិន្នន័យមូលដ្ឋាន:</strong> សហការជាមួយមន្ទីរពិសោធន៍កសិកម្ម ដើម្បីប្រមូលទិន្នន័យសំណាកដី (ដូចជា កម្រិត N, P, K, pH) ព្រមទាំងកូអរដោនេ GPS ជាក់លាក់នៅក្នុងតំបន់គោលដៅណាមួយ។</li>
+            
+            <li><strong>ជំហានទី ៣៖ ការរៀបចំទិន្នន័យ GIS:</strong> ប្រើប្រាស់កម្មវិធី QGIS ដើម្បីរៀបចំស្រទាប់ផែនទី (Map Layers) នៃតំបន់សិក្សា និងបញ្ចូលទិន្នន័យសំណាកដីទៅក្នុងទម្រង់ដែលប្រព័ន្ធអាចទទួលស្គាល់បាន។</li>
+            
+            <li><strong>ជំហានទី ៤៖ ការបង្កើតផែនទីព្យាករណ៍:</strong> សាកល្បងប្រើមុខងារ Inverse Distance Weighting (IDW) នៅក្នុងវេទិកា ដើម្បីបង្កើតផែនទីឌីជីថលនៃសារធាតុចិញ្ចឹមក្នុងដី និងផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ។</li>
+            
+            <li><strong>ជំហានទី ៥៖ ការបណ្តុះបណ្តាល និងផ្សព្វផ្សាយ:</strong> រៀបចំសិក្ខាសាលាខ្លីមួយបង្ហាញពីរបៀបប្រើប្រាស់ប្រព័ន្ធនេះដល់និស្សិត ឬមន្ត្រីកសិកម្ម ដើម្បីវាយតម្លៃពីលទ្ធភាពនៃការយកទៅអនុវត្តជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Precision Agriculture</span></td>
+                <td>ជាយុទ្ធសាស្ត្រគ្រប់គ្រងកសិកម្មដោយប្រើប្រាស់បច្ចេកវិទ្យាដើម្បីតាមដាន និងវិភាគតម្រូវការជាក់លាក់របស់ដំណាំនៅទីតាំងនីមួយៗ (ដូចជា កម្រិតជី ឬសំណើម) ដើម្បីប្រើប្រាស់ធនធានឱ្យចំគោលដៅ និងមានប្រសិទ្ធភាពខ្ពស់។</td>
+                <td>ដូចជាការផ្តល់ថ្នាំព្យាបាលឱ្យចំកន្លែងដែលឈឺនៅលើរាងកាយ ជំនួសឱ្យការលេបថ្នាំប៉ូវរាងកាយទាំងមូល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Geographical Information Systems (GIS)</span></td>
+                <td>ជាប្រព័ន្ធកុំព្យូទ័រសម្រាប់ប្រមូល ទុកដាក់ វិភាគ និងបង្ហាញទិន្នន័យដែលមានទីតាំងភូមិសាស្ត្រជាក់លាក់ ដើម្បីបង្កើតជាផែនទីព័ត៌មានច្រើនស្រទាប់សម្រាប់ជួយក្នុងការសម្រេចចិត្ត។</td>
+                <td>ប្រៀបដូចជាផែនទី Google Maps ប៉ុន្តែមានបន្ថែមស្រទាប់ព័ត៌មានជាច្រើនពីលើគ្នា ដូចជាប្រភេទដី ប្រភពទឹក និងព្រំប្រទល់ម្ចាស់កម្មសិទ្ធិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperspectral Imaging</span></td>
+                <td>ជាបច្ចេកវិទ្យាថតរូបភាពដែលចាប់យកពន្លឺរាប់រយពណ៌ (លើសពីពណ៌ក្រហម បៃតង ខៀវ ដែលភ្នែកមនុស្សមើលឃើញ) ដើម្បីវិភាគសារធាតុគីមី ឬលក្ខណៈជីវសាស្រ្តរបស់ដី និងដំណាំ។</td>
+                <td>ដូចជាកាមេរ៉ាពិសេសដែលអាចមើលឃើញ "ពណ៌ដែលលាក់កំបាំង" ដើម្បីដឹងថានៅក្នុងដីមានសារធាតុអ្វីខ្លះ ឬដំណាំកំពុងឈឺឬអត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Inverse Distance Weighting (IDW)</span></td>
+                <td>ជាវិធីសាស្ត្រគណិតវិទ្យាសម្រាប់បង្កើតផែនទីពេញលេញមួយ ដោយធ្វើការប៉ាន់ស្មានតម្លៃនៅចន្លោះចំណុចដែលមិនមានទិន្នន័យ ដោយផ្អែកលើតម្លៃនៃចំណុចដែលនៅក្បែរៗនោះបំផុត។</td>
+                <td>ដូចជាការទាយថាអាកាសធាតុនៅផ្ទះយើងជាអ្វី ដោយមើលទៅលើអាកាសធាតុនៅផ្ទះអ្នកជិតខាងដែលនៅជាប់របងយើង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision Support Systems (DSS)</span></td>
+                <td>ជាកម្មវិធីកុំព្យូទ័រដែលវិភាគទិន្នន័យស្មុគស្មាញជាច្រើន ដើម្បីផ្តល់ជាអនុសាសន៍ ឬជម្រើសដល់កសិករក្នុងការសម្រេចចិត្ត (ឧទាហរណ៍៖ តើគួរដាក់ជីនៅពេលណា និងបរិមាណប៉ុន្មាន)។</td>
+                <td>ដូចជាកម្មវិធីផែនទីក្នុងទូរស័ព្ទ ដែលណែនាំផ្លូវដែលលឿនបំផុតឱ្យយើងបើកបរ ដោយផ្អែកលើស្ថានភាពចរាចរណ៍ជាក់ស្តែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Remote Sensing</span></td>
+                <td>ជាការប្រមូលព័ត៌មានអំពីវត្ថុ ឬផ្ទៃដីពីចម្ងាយ (តាមរយៈដ្រូន ឬផ្កាយរណប) ដោយមិនចាំបាច់ចុះទៅប៉ះផ្ទាល់ ដែលអនុញ្ញាតឱ្យតាមដានផ្ទៃដីធំៗបានយ៉ាងឆាប់រហ័ស។</td>
+                <td>ដូចជាការថតរូបពីលើអាកាសដើម្បីមើលថាតើដំបូលផ្ទះណាខ្លះធ្លុះ ដោយមិនចាំបាច់ឡើងទៅពិនិត្យគ្រប់ផ្ទះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27AI+AND+THE+ENVIRONMENT+%3A+TOWARD+SUSTAINABLE+DEVELOPMENT+AND+CONSERVATION%27%2C+%27khmer_title%27%3A+%27%E1%9E%94%E1%9E%89%E1%9F%92%E1%9E%89%E1%9E%B6%E1%9E%9F%E1%9E%B7%E1%9E%94%E1%9F%92%E1%9E%94%E1%9E%93%E1%9E%B7%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%B7%E1%9E%8F%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%94%E1%9E%9A%E1%9E%B7%E1%9E%9F%E1%9F%92%E1%9E%90%E1%9E%B6%E1%9E%93%E1%9F%96+%E1%9E%86%E1%9F%92%E1%9E%96%E1%9F%84%E1%9F%87%E1%9E%91%E1%9F%85%E1%9E%9A%E1%9E%80%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%97%E1%9E%B7%E1%9E%9C%E1%9E%8C%E1%9F%92%E1%9E%8D%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%80%E1%9E%94%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%85%E1%9E%B8%E1%9E%9A%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%97%E1%9E%B7%E1%9E%9A%E1%9E%80%E1%9F%92%E1%9E%9F%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fai-environment-sustainable-development-conservation-2023.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'AI AND THE ENVIRONMENT : TOWARD SUSTAINABLE DEVELOPMENT AND CONSERVATION', 'khmer_title': 'បញ្ញាសិប្បនិម្មិតនិងបរិស្ថាន៖ ឆ្ពោះទៅរកការអភិវឌ្ឍប្រកបដោយចីរភាពនិងការអភិរក្ស', 'url': '/papers/technology/ai-environment-sustainable-development-conservation-2023.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27UAV+Technology%3A+Applications%2C+economical+reliance+and+feasibility+in+Indian+Agriculture%27%2C+%27khmer_title%27%3A+%27%E1%9E%94%E1%9E%85%E1%9F%92%E1%9E%85%E1%9F%81%E1%9E%80%E1%9E%9C%E1%9E%B7%E1%9E%91%E1%9F%92%E1%9E%99%E1%9E%B6+UAV%E1%9F%96+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%93%E1%9E%BB%E1%9E%9C%E1%9E%8F%E1%9F%92%E1%9E%8F+%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%A2%E1%9E%B6%E1%9E%9F%E1%9F%92%E1%9E%9A%E1%9F%90%E1%9E%99%E1%9E%9B%E1%9E%BE%E1%9E%9F%E1%9F%81%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%80%E1%9E%B7%E1%9E%85%E1%9F%92%E1%9E%85+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%9B%E1%9E%91%E1%9F%92%E1%9E%92%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%93%E1%9E%BB%E1%9E%9C%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%9C%E1%9E%B7%E1%9E%9F%E1%9F%90%E1%9E%99%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%A5%E1%9E%8E%E1%9F%92%E1%9E%8C%E1%9E%B6%27%2C+%27url%27%3A+%27%2Fpapers%2Fagriculture%2Fuav-technology-indian-agriculture-2024.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'UAV Technology: Applications, economical reliance and feasibility in Indian Agriculture', 'khmer_title': 'បច្ចេកវិទ្យា UAV៖ ការអនុវត្ត ភាពអាស្រ័យលើសេដ្ឋកិច្ច និងលទ្ធភាពនៃការអនុវត្តក្នុងវិស័យកសិកម្មឥណ្ឌា', 'url': '/papers/agriculture/uav-technology-indian-agriculture-2024.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Awareness+of+environmental+issues+through+Artificial+Intelligence%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%99%E1%9E%9B%E1%9F%8B%E1%9E%8A%E1%9E%B9%E1%9E%84%E1%9E%A2%E1%9F%86%E1%9E%96%E1%9E%B8%E1%9E%94%E1%9E%89%E1%9F%92%E1%9E%A0%E1%9E%B6%E1%9E%94%E1%9E%9A%E1%9E%B7%E1%9E%9F%E1%9F%92%E1%9E%90%E1%9E%B6%E1%9E%93%E1%9E%8F%E1%9E%B6%E1%9E%98%E1%9E%9A%E1%9E%99%E1%9F%88%E1%9E%94%E1%9E%89%E1%9F%92%E1%9E%89%E1%9E%B6%E1%9E%9F%E1%9E%B7%E1%9E%94%E1%9F%92%E1%9E%94%E1%9E%93%E1%9E%B7%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%B7%E1%9E%8F%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fawareness-environmental-issues-ai-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Awareness of environmental issues through Artificial Intelligence', 'khmer_title': 'ការយល់ដឹងអំពីបញ្ហាបរិស្ថានតាមរយៈបញ្ញាសិប្បនិម្មិត', 'url': '/papers/technology/awareness-environmental-issues-ai-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27The+Delineation+of+Management+Zones+of+the+Halyomorpha+halys+%28Hemiptera%3A+Pentatomidae%29+Population+Based+on+Its+Spatiotemporal+Distribution+for+Precision+Agriculture+Purposes%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%80%E1%9F%86%E1%9E%8E%E1%9E%8F%E1%9F%8B%E1%9E%8F%E1%9F%86%E1%9E%94%E1%9E%93%E1%9F%8B%E1%9E%82%E1%9F%92%E1%9E%9A%E1%9E%94%E1%9F%8B%E1%9E%82%E1%9F%92%E1%9E%9A%E1%9E%84%E1%9E%93%E1%9F%83%E1%9E%85%E1%9F%86%E1%9E%93%E1%9E%BD%E1%9E%93%E1%9E%9F%E1%9E%8F%E1%9F%92%E1%9E%9C%E1%9E%9B%E1%9F%92%E1%9E%A2%E1%9E%B7%E1%9E%8F+Halyomorpha+halys+%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%95%E1%9F%92%E1%9E%A2%E1%9F%82%E1%9E%80%E1%9E%9B%E1%9E%BE%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9F%82%E1%9E%84%E1%9E%85%E1%9F%82%E1%9E%80%E1%9E%8F%E1%9E%B6%E1%9E%98%E1%9E%9B%E1%9F%86%E1%9E%A0+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%96%E1%9F%81%E1%9E%9B%E1%9E%9C%E1%9F%81%E1%9E%9B%E1%9E%B6+%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%82%E1%9F%84%E1%9E%9B%E1%9E%94%E1%9F%86%E1%9E%8E%E1%9E%84%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%9F%E1%9E%BB%E1%9E%80%E1%9F%92%E1%9E%9A%E1%9E%B7%E1%9E%8F%27%2C+%27url%27%3A+%27%2Fpapers%2Fagriculture%2Fmanagement-zones-halyomorpha-halys-precision-ag-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'The Delineation of Management Zones of the Halyomorpha halys (Hemiptera: Pentatomidae) Population Based on Its Spatiotemporal Distribution for Precision Agriculture Purposes', 'khmer_title': 'ការកំណត់តំបន់គ្រប់គ្រងនៃចំនួនសត្វល្អិត Halyomorpha halys ដោយផ្អែកលើការបែងចែកតាមលំហ និងពេលវេលា សម្រាប់គោលបំណងកសិកម្មសុក្រិត', 'url': '/papers/agriculture/management-zones-halyomorpha-halys-precision-ag-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Crop+Yield+Prediction+in+Precision+Agriculture%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%91%E1%9E%9F%E1%9F%92%E1%9E%9F%E1%9E%93%E1%9F%8D%E1%9E%91%E1%9E%B6%E1%9E%99%E1%9E%91%E1%9E%B7%E1%9E%93%E1%9F%92%E1%9E%93%E1%9E%95%E1%9E%9B%E1%9E%8A%E1%9F%86%E1%9E%8E%E1%9E%B6%E1%9F%86%E1%9E%93%E1%9F%85%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%80%E1%9E%94%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%87%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%9B%E1%9E%B6%E1%9E%80%E1%9F%8B%27%2C+%27url%27%3A+%27%2Fpapers%2Fagriculture%2Fcrop-yield-prediction-precision-agriculture-2022.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Crop Yield Prediction in Precision Agriculture', 'khmer_title': 'ការទស្សន៍ទាយទិន្នផលដំណាំនៅក្នុងកសិកម្មប្រកបដោយភាពជាក់លាក់', 'url': '/papers/agriculture/crop-yield-prediction-precision-agriculture-2022.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=AI-based+predictive+systems+for+soil+digital+mapping" target="_blank" rel="noopener"><span class="en">AI-based predictive systems for soil digital mapping</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Open+source+GIS+decision+support+systems+in+agriculture" target="_blank" rel="noopener"><span class="en">Open source GIS decision support systems in agriculture</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hyperspectral+imaging+for+soil+organic+carbon+estimation" target="_blank" rel="noopener"><span class="en">Hyperspectral imaging for soil organic carbon estimation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Usability+evaluation+of+agricultural+decision+support+systems" target="_blank" rel="noopener"><span class="en">Usability evaluation of agricultural decision support systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Integrating+QGIS+and+PostGIS+for+environmental+monitoring" target="_blank" rel="noopener"><span class="en">Integrating QGIS and PostGIS for environmental monitoring</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

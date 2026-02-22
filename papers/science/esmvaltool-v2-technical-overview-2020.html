@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ឧបករណ៍វាយតម្លៃគំរូប្រព័ន្ធផែនដី (ESMValTool) កំណែ ២.០ – ទិដ្ឋភាពបច្ចេកទេសទូទៅ | KhmerResearch.com</title>
+    <meta name="description" content="ការកើនឡើងយ៉ាងខ្លាំងនៃបរិមាណទិន្នន័យពីគម្រោង CMIP6 និងគំរូប្រព័ន្ធផែនដី (ESMs) ដែលមានគុណភាពបង្ហាញខ្ពស់ បានបង្កជាបញ្ហាប្រឈមធ្ងន់ធ្ងរដល់ការវិភាគ និងការវាយតម្លៃ ...">
+    
+    <meta name="keywords" content="ESMValTool, Earth System Models, CMIP6, Python Iris Library, Climate Diagnostics, High-Performance Computing, Data Preprocessing, Reproducibility, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/esmvaltool-v2-technical-overview-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/esmvaltool-v2-technical-overview-2020.html">
+    <meta property="og:title" content="ឧបករណ៍វាយតម្លៃគំរូប្រព័ន្ធផែនដី (ESMValTool) កំណែ ២.០ – ទិដ្ឋភាពបច្ចេកទេសទូទៅ | KhmerResearch.com">
+    <meta property="og:description" content="ការកើនឡើងយ៉ាងខ្លាំងនៃបរិមាណទិន្នន័យពីគម្រោង CMIP6 និងគំរូប្រព័ន្ធផែនដី (ESMs) ដែលមានគុណភាពបង្ហាញខ្ពស់ បានបង្កជាបញ្ហាប្រឈមធ្ងន់ធ្ងរដល់ការវិភាគ និងការវាយតម្លៃ ដែលធ្វើឱ្យឧបករណ៍ជំនាន់មុន (v1.0) មានដំណើ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020 (Geosci. Model Dev.)">
+    
+    <meta property="article:tag" content="ESMValTool">
+    
+    <meta property="article:tag" content="Earth System Models">
+    
+    <meta property="article:tag" content="CMIP6">
+    
+    <meta property="article:tag" content="Python Iris Library">
+    
+    <meta property="article:tag" content="Climate Diagnostics">
+    
+    <meta property="article:tag" content="High-Performance Computing">
+    
+    <meta property="article:tag" content="Data Preprocessing">
+    
+    <meta property="article:tag" content="Reproducibility">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ឧបករណ៍វាយតម្លៃគំរូប្រព័ន្ធផែនដី (ESMValTool) កំណែ ២.០ – ទិដ្ឋភាពបច្ចេកទេសទូទៅ">
+    <meta name="twitter:description" content="ការកើនឡើងយ៉ាងខ្លាំងនៃបរិមាណទិន្នន័យពីគម្រោង CMIP6 និងគំរូប្រព័ន្ធផែនដី (ESMs) ដែលមានគុណភាពបង្ហាញខ្ពស់ បានបង្កជាបញ្ហាប្រឈមធ្ងន់ធ្ងរដល់ការវិភាគ និងការវាយតម្លៃ ដែលធ្វើឱ្យឧបករណ៍ជំនាន់មុន (v1.0) មានដំណើ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u17a7\u1794\u1780\u179a\u178e\u17cd\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1782\u17c6\u179a\u17bc\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1795\u17c2\u1793\u178a\u17b8 (ESMValTool) \u1780\u17c6\u178e\u17c2 \u17e2.\u17e0 \u2013 \u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u1791\u17bc\u1791\u17c5",
+      "name": "Earth System Model Evaluation Tool (ESMValTool) v2.0 \u2013 technical overview",
+      "description": "\u1780\u17b6\u179a\u1780\u17be\u1793\u17a1\u17be\u1784\u1799\u17c9\u17b6\u1784\u1781\u17d2\u179b\u17b6\u17c6\u1784\u1793\u17c3\u1794\u179a\u17b7\u1798\u17b6\u178e\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u17b8\u1782\u1798\u17d2\u179a\u17c4\u1784 CMIP6 \u1793\u17b7\u1784\u1782\u17c6\u179a\u17bc\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1795\u17c2\u1793\u178a\u17b8 (ESMs) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1782\u17bb\u178e\u1797\u17b6\u1796\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1781\u17d2\u1796\u179f\u17cb \u1794\u17b6\u1793\u1794\u1784\u17d2\u1780\u1787\u17b6\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1792\u17d2\u1784\u1793\u17cb\u1792\u17d2\u1784\u179a\u178a\u179b\u17cb\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u17a7\u1794\u1780\u179a\u178e\u17cd\u1787\u17c6\u1793\u17b6\u1793\u17cb\u1798\u17bb\u1793 (v1.0) \u1798\u17b6\u1793\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1799\u17ba\u178f\u1799\u17c9\u17b6\u179c \u1793\u17b7\u1784\u1798\u17b7\u1793\u17a2\u17b6\u1785\u1786\u17d2\u179b\u17be\u1799\u178f\u1794\u1793\u17b9\u1784\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/esmvaltool-v2-technical-overview-2020.html",
+      "author": [{"@type": "Person", "name": "Mattia Righi (DLR, Germany)"},{"@type": "Person", "name": "Bouwe Andela (Netherlands eScience Center)"},{"@type": "Person", "name": "Veronika Eyring (DLR/University of Bremen)"},{"@type": "Person", "name": "Axel Lauer (DLR)"},{"@type": "Person", "name": "Valeriu Predoi (University of Reading)"},{"@type": "Person", "name": "Manuel Schlund (DLR)"}],
+      "datePublished": "2020 (Geosci. Model Dev.)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Earth System Model Evaluation Tool (ESMValTool) v2.0 \u2013 technical overview",
+        "url": "https://doi.org/10.5194/gmd-13-1179-2020"
+      },
+      "keywords": ["ESMValTool", "Earth System Models", "CMIP6", "Python Iris Library", "Climate Diagnostics", "High-Performance Computing", "Data Preprocessing", "Reproducibility"],
+      "about": "Earth System Science / Climate Modelling"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u17a7\u1794\u1780\u179a\u178e\u17cd\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1782\u17c6\u179a\u17bc\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1795\u17c2\u1793\u178a\u17b8 (ESMValTool) \u1780\u17c6\u178e\u17c2 \u17e2.\u17e0 \u2013 \u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u1791\u17bc\u1791\u17c5",
+          "item": "https://khmerresearch.com/papers/science/esmvaltool-v2-technical-overview-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ឧបករណ៍វាយតម្លៃគំរូប្រព័ន្ធផែនដី (ESMValTool) កំណែ ២.០ – ទ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Earth System Model Evaluation Tool (ESMValTool) v2.0 – technical overview<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.5194/gmd-13-1179-2020" target="_blank">doi.org/10.5194/gmd-13-1179-2020</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ឧបករណ៍វាយតម្លៃគំរូប្រព័ន្ធផែនដី (ESMValTool) កំណែ ២.០ – ទិដ្ឋភាពបច្ចេកទេសទូទៅ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Earth System Model Evaluation Tool (ESMValTool) v2.0 – technical overview</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Mattia Righi (DLR, Germany), Bouwe Andela (Netherlands eScience Center), Veronika Eyring (DLR/University of Bremen), Axel Lauer (DLR), Valeriu Predoi (University of Reading), Manuel Schlund (DLR)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 (Geosci. Model Dev.)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Earth System Science / Climate Modelling</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការកើនឡើងយ៉ាងខ្លាំងនៃបរិមាណទិន្នន័យពីគម្រោង CMIP6 និងគំរូប្រព័ន្ធផែនដី (ESMs) ដែលមានគុណភាពបង្ហាញខ្ពស់ បានបង្កជាបញ្ហាប្រឈមធ្ងន់ធ្ងរដល់ការវិភាគ និងការវាយតម្លៃ ដែលធ្វើឱ្យឧបករណ៍ជំនាន់មុន (v1.0) មានដំណើរការយឺតយ៉ាវ និងមិនអាចឆ្លើយតបនឹងតម្រូវការ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ក្រុមអ្នកស្រាវជ្រាវបានរចនាឧបករណ៍នេះឡើងវិញទាំងស្រុងដោយប្រើភាសា Python និងបណ្ណាល័យ Iris ដើម្បីប្រមូលផ្តុំប្រតិបត្តិការរៀបចំទិន្នន័យ (Preprocessing) និងអនុញ្ញាតឱ្យមានការប្រតិបត្តិការងារស្របគ្នា។
+        
+        <ul>
+            
+            <li>Revised Preprocessor (ប្រព័ន្ធរៀបចំទិន្នន័យថ្មីដែលសរសេរដោយ Python សម្រាប់ដោះស្រាយទិន្នន័យធំ)</li>
+            
+            <li>YAML Configuration Recipes (ការកំណត់រចនាសម្ព័ន្ធតាមរយៈឯកសារ YAML ដើម្បីគ្រប់គ្រងលំហូរការងារ)</li>
+            
+            <li>Task-based Parallelization (ការបែងចែកភារកិច្ចឱ្យដំណើរការស្របគ្នា ដើម្បីបង្កើនល្បឿននៃការគណនា)</li>
+            
+            <li>CMOR Check and Fixes (ការត្រួតពិនិត្យនិងកែតម្រូវទិន្នន័យឱ្យស្របតាមស្តង់ដារ CMOR)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>កំណែថ្មីនេះមានល្បឿនលឿនជាងកំណែមុនប្រហែល ៣ ដង នៅក្នុងការរត់សាកល្បងជាលំដាប់ (Serial mode)។</li>
+            
+            <li>ការប្រើប្រាស់មុខងារប្រតិបត្តិការងារស្របគ្នា (Parallelization) អាចបង្កើនល្បឿនបានរហូតដល់ជាង ៣០ ដង នៅលើប្រព័ន្ធកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់។</li>
+            
+            <li>ឧបករណ៍នេះផ្តល់នូវភាពងាយស្រួលជាងមុនក្នុងការដំឡើង ការកំណត់រចនាសម្ព័ន្ធ និងការកត់ត្រាប្រភពដើមនៃទិន្នន័យ (Provenance) សម្រាប់ការស្រាវជ្រាវបែបវិទ្យាសាស្ត្រ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">ESMValTool v1.0 (Serial Execution)</span></strong><br>កំណែចាស់ v1.0 (ដំណើរការជាលំដាប់ដោយគ្មានមុខងារ Parallel)</td>
+                <td>មានមូលដ្ឋានកូដដែលអ្នកប្រើប្រាស់ចាស់ធ្លាប់ស្គាល់ ប៉ុន្តែដំណើរការលើទិន្នន័យ CMIP5 បានល្អក្នុងកម្រិតមួយ។</td>
+                <td>ការរៀបចំទិន្នន័យ (Preprocessing) មានភាពយឺតយ៉ាវខ្លាំង ពិបាកដំឡើង និងមិនអាចប្រើប្រាស់ធនធានកុំព្យូទ័របានពេញលេញ។</td>
+                <td>ចំណាយពេល ៥៣៤.១ នាទី សម្រាប់ការរត់តេស្តស្តង់ដារ (Benchmark Recipe)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ESMValTool v2.0 (Serial Mode)</span></strong><br>កំណែថ្មី v2.0 (ដំណើរការជាលំដាប់ដោយប្រើ Preprocessor ថ្មី)</td>
+                <td>មានការរចនាកូដថ្មីដោយប្រើ Python និង Iris library ដែលធ្វើឱ្យការរៀបចំទិន្នន័យមានប្រសិទ្ធភាពជាងមុន និងងាយស្រួលដំឡើង។</td>
+                <td>នៅតែត្រូវបានកំណត់ដោយល្បឿននៃ CPU តែមួយគ្រាប់ (Single core) បើទោះបីជាលឿនជាងកំណែមុនក៏ដោយ។</td>
+                <td>ចំណាយពេល ១៧៧.១ នាទី (លឿនជាងកំណែមុនប្រហែល ៣ ដង)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ESMValTool v2.0 (Parallel Mode)</span></strong><br>កំណែថ្មី v2.0 (ដំណើរការស្របគ្នា/Parallelization)</td>
+                <td>អាចបែងចែកការងារទៅឱ្យ CPU ច្រើនធ្វើការព្រមគ្នា ដែលកាត់បន្ថយពេលវេលាយ៉ាងខ្លាំងសម្រាប់ការវិភាគទិន្នន័យធំៗ។</td>
+                <td>តម្រូវឱ្យមានអង្គចងចាំ (RAM) ខ្ពស់ខ្លាំង (រហូតដល់ ៧៥ GB ក្នុងការពិសោធន៍) ដែលអាចជាឧបសគ្គសម្រាប់កុំព្យូទ័រធម្មតា។</td>
+                <td>ចំណាយពេលត្រឹមតែ ១៦.២ នាទី (លឿនជាងកំណែមុនជាង ៣០ ដង នៅពេលប្រើ ៦៨ tasks)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការប្រើប្រាស់ឧបករណ៍នេះតម្រូវឱ្យមានកុំព្យូទ័រដែលមានសមត្ថភាពមធ្យមទៅខ្ពស់ ជាពិសេសប្រសិនបើចង់ប្រើប្រាស់មុខងារ Parallelization ដើម្បីវិភាគទិន្នន័យច្រើន។
+    
+    <ul>
+        
+        <li><strong>Software Environment:</strong> តម្រូវឱ្យមានប្រព័ន្ធប្រតិបត្តិការ Linux ឬ macOS និងការដំឡើងតាមរយៈ Conda (Python 3 environment)។</li>
+        
+        <li><strong>Hardware (RAM):</strong> សម្រាប់គម្រោងធំៗ ឬការរត់ស្របគ្នា (Parallel) ត្រូវការ RAM ខ្ពស់ (១៦ GB ឡើងទៅ ឬដល់ ៦៤ GB សម្រាប់ការងារធ្ងន់)។</li>
+        
+        <li><strong>Data Access:</strong> ការតភ្ជាប់អ៊ីនធឺណិតល្បឿនលឿនដើម្បីទាញយកទិន្នន័យពី ESGF (Earth System Grid Federation) ឬការចូលប្រើប្រាស់ថ្នាំងកុំព្យូទ័រ (Compute Node) ដែលមានទិន្នន័យស្រាប់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យសកល (CMIP5/CMIP6) និងធ្វើតេស្តនៅលើ Supercomputer នៅប្រទេសអាល្លឺម៉ង់ (DKRZ)។ សម្រាប់កម្ពុជា ការប្រើប្រាស់គំរូសកល (Global Models) អាចមានកម្រិតលំអៀង (Bias) ក្នុងការបង្ហាញទិន្នន័យទឹកភ្លៀងតំបន់ត្រូពិច ដូច្នេះចាំបាច់ត្រូវមានការផ្ទៀងផ្ទាត់ជាមួយទិន្នន័យអង្កេតក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ឧបករណ៍នេះមានសារៈសំខាន់ខ្លាំងសម្រាប់កម្ពុជា ក្នុងការវាយតម្លៃការព្យាករណ៍អាកាសធាតុរយៈពេលវែង និងការប្រែប្រួលអាកាសធាតុ។</p>
+        
+        <ul>
+            
+            <li><strong>ការស្រាវជ្រាវកសិកម្ម (CARDI/RUA):</strong> អាចប្រើដើម្បីវាយតម្លៃការប្រែប្រួលរបបទឹកភ្លៀង និងសីតុណ្ហភាពដែលប៉ះពាល់ដល់ទិន្នផលស្រូវ និងដំណាំផ្សេងៗ។</li>
+            
+            <li><strong>ការគ្រប់គ្រងធនធានទឹក (MRC/MOWRAM):</strong> ប្រើសម្រាប់វិភាគគំរូជលសាស្ត្រនៃទន្លេមេគង្គ ដោយជ្រើសរើសយកតែទិន្នន័យសម្រាប់តំបន់អាស៊ីអាគ្នេយ៍ (Subsetting region)។</li>
+            
+            <li><strong>ការសិក្សាសេដ្ឋកិច្ចសង្គម:</strong> ជួយអ្នកស្រាវជ្រាវបង្កើតសេណារីយ៉ូអាកាសធាតុ (Climate Scenarios) ដើម្បីវិភាគផលប៉ះពាល់សេដ្ឋកិច្ចនាពេលអនាគត។</li>
+            
+        </ul>
+        
+        
+        <p>ESMValTool v2.0 ជួយកាត់បន្ថយភាពស្មុគស្មាញផ្នែកបច្ចេកទេស ដោយអនុញ្ញាតឱ្យអ្នកស្រាវជ្រាវកម្ពុជាអាចផ្តោតលើការវិភាគលទ្ធផលវិទ្យាសាស្ត្រ ជាជាងចំណាយពេលសរសេរកូដរៀបចំទិន្នន័យ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី ១៖ ការរៀបចំប្រព័ន្ធកុំព្យូទ័រ:</strong> ដំឡើង Anaconda ឬ Miniconda និងបង្កើត environment សម្រាប់ Python 3 ដើម្បីត្រៀមដំឡើង ESMValTool ។</li>
+            
+            <li><strong>ជំហានទី ២៖ ការដំឡើង និងកំណត់រចនាសម្ព័ន្ធ:</strong> ដំឡើង ESMValTool v2.0 តាមរយៈ Conda និងរៀបចំឯកសារ config-user.yml ដើម្បីកំណត់ទីតាំងរក្សាទុកទិន្នន័យ។</li>
+            
+            <li><strong>ជំហានទី ៣៖ ការទទួលបានទិន្នន័យគំរូ:</strong> ចុះឈ្មោះបង្កើតគណនីនៅលើ ESGF (Earth System Grid Federation) ដើម្បីទាញយកទិន្នន័យ CMIP6 មួយចំនួនតូចសម្រាប់ការសាកល្បង។</li>
+            
+            <li><strong>ជំហានទី ៤៖ ការរត់សាកល្បង Recipe ដំបូង:</strong> សាកល្បងរត់ recipe_python.yml ដែលជាឧទាហរណ៍មានស្រាប់ ដើម្បីយល់ពីដំណើរការ Preprocessor និងការបង្កើតក្រាហ្វិក។</li>
+            
+            <li><strong>ជំហានទី ៥៖ ការអនុវត្តសម្រាប់តំបន់កម្ពុជា:</strong> កែប្រែ Recipe ដោយប្រើមុខងារ extract_region ដើម្បីកាត់យកតែទិន្នន័យរយៈបណ្តោយ និងរយៈទទឹងដែលគ្របដណ្តប់ប្រទេសកម្ពុជា និងតំបន់មេគង្គ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Coupled Model Intercomparison Project (CMIP)</span></td>
+                <td>ជាគម្រោងសហប្រតិបត្តិការអន្តរជាតិដ៏ធំមួយ ដែលកំណត់ស្តង់ដារសម្រាប់ក្រុមអ្នកវិទ្យាសាស្ត្រទូទាំងពិភពលោក ក្នុងការបង្កើតនិងដំណើរការគំរូអាកាសធាតុ (Climate Models) ដើម្បីឱ្យលទ្ធផលអាចយកមកប្រៀបធៀបគ្នាបានយ៉ាងត្រឹមត្រូវ។</td>
+                <td>ប្រៀបដូចជាការកំណត់វិញ្ញាសាប្រឡងរួមមួយសម្រាប់សិស្សទូទាំងប្រទេស ដើម្បីដឹងថាសិស្ស (ឬគំរូអាកាសធាតុ) ណាខ្លាំងត្រង់ចំណុចណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Preprocessor</span></td>
+                <td>ជាផ្នែកមួយនៃកម្មវិធីកុំព្យូទ័រដែលមានតួនាទីរៀបចំ សម្អាត កែសម្រួល និងផ្លាស់ប្តូរទម្រង់ទិន្នន័យឆៅ (Raw Data) ឱ្យទៅជាទម្រង់ស្តង់ដារ មុននឹងបញ្ជូនទិន្នន័យនោះទៅធ្វើការវិភាគលម្អិត ឬគូរជាក្រាហ្វិក។</td>
+                <td>ប្រៀបដូចជាចុងភៅដែលត្រូវលាងបន្លែ និងកាប់សាច់ឱ្យស្អាតសិន (Pre-processing) មុននឹងចាប់ផ្តើមចម្អិនម្ហូបជាក់ស្តែង (Analysis)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Regridding</span></td>
+                <td>ជាបច្ចេកទេសនៃការផ្លាស់ប្តូរទំហំ ឬរចនាសម្ព័ន្ធនៃក្រឡាចក្រ (Grid) របស់ទិន្នន័យផែនទីមួយ ឱ្យស្របគ្នាទៅនឹងផែនទីមួយទៀត ដើម្បីអាចយកទិន្នន័យពីប្រភពផ្សេងគ្នា (ឧទាហរណ៍៖ ទិន្នន័យផ្កាយរណប និងទិន្នន័យគំរូកុំព្យូទ័រ) មកប្រៀបធៀបគ្នាបាន។</td>
+                <td>ប្រៀបដូចជាការគូសក្រឡាការ៉ូថ្មីនៅលើរូបភាពមួយ ដើម្បីឱ្យវាមានចំនួនក្រឡាស្មើនឹងរូបភាពមួយទៀត ទើបអាចដាក់ត្រួតលើគ្នាដើម្បីផ្ទៀងផ្ទាត់បាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Lazy evaluation</span></td>
+                <td>ជាយុទ្ធសាស្ត្រនៃការគណនាក្នុងវិទ្យាសាស្ត្រកុំព្យូទ័រ ដែលកម្មវិធីនឹងមិនទាន់ធ្វើការគណនាភ្លាមៗនោះទេ រហូតទាល់តែលទ្ធផលនោះត្រូវបានត្រូវការជាចាំបាច់។ វិធីនេះជួយសន្សំសំចៃអង្គចងចាំ (RAM) យ៉ាងខ្លាំងនៅពេលធ្វើការជាមួយទិន្នន័យធំៗ។</td>
+                <td>ប្រៀបដូចជាអ្នកបម្រើនៅភោជនីយដ្ឋាន ដែលមិនទាន់ប្រាប់ចុងភៅឱ្យធ្វើម្ហូប រហូតទាល់តែភ្ញៀវមកដល់ហើយកុម្ម៉ង់ជាក់ស្តែង ទើបចាប់ផ្តើមធ្វើ ដើម្បីកុំឱ្យសល់ម្ហូបចោល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Provenance</span></td>
+                <td>ជាប្រវត្តិ ឬកំណត់ត្រាលម្អិតអំពីប្រភពដើមនៃទិន្នន័យ និងរាល់ជំហាននៃការកែប្រែដែលបានធ្វើឡើងលើទិន្នន័យនោះ តាំងពីដើមរហូតដល់ចប់។ វាមានសារៈសំខាន់ណាស់ដើម្បីធានាថា អ្នកផ្សេងអាចយកការពិសោធន៍នោះមកធ្វើឡើងវិញ (Reproducibility) បានត្រឹមត្រូវ។</td>
+                <td>ប្រៀបដូចជា "សំបុត្រកំណើត" និង "ប្រវត្តិរូប" នៃទិន្នន័យ ដែលប្រាប់ថាវាមានប្រភពមកពីណា និងអ្នកណាបានយកវាទៅធ្វើអ្វីខ្លះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-model statistics</span></td>
+                <td>ជាការប្រើប្រាស់វិធីសាស្ត្រស្ថិតិ (ដូចជា មធ្យមភាគ ឬ មេដ្យាន) លើលទ្ធផលដែលបានមកពីគំរូអាកាសធាតុជាច្រើនផ្សេងៗគ្នា ដើម្បីកាត់បន្ថយភាពមិនប្រាកដប្រជា និងទទួលបានការព្យាករណ៍ដែលគួរឱ្យទុកចិត្តជាងការប្រើគំរូតែមួយ។</td>
+                <td>ប្រៀបដូចជាការសួរយោបល់ពីគ្រូពេទ្យជំនាញច្រើននាក់ ដើម្បីប្រាកដថាការព្យាបាលមួយណាដែលត្រឹមត្រូវបំផុត ជាជាងជឿលើគ្រូពេទ្យតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">YAML (YAML Ain't Markup Language)</span></td>
+                <td>ជាទម្រង់នៃភាសាកុំព្យូទ័រដែលត្រូវបានរចនាឡើងឱ្យងាយស្រួលសម្រាប់មនុស្សអាន និងសរសេរ។ នៅក្នុង ESMValTool វាត្រូវបានប្រើសម្រាប់បង្កើត "Recipe" ឬបញ្ជីនៃការណែនាំ ដើម្បីប្រាប់កម្មវិធីឱ្យដឹងថាត្រូវយកទិន្នន័យអ្វីមកវិភាគ និងវិភាគតាមរបៀបណា។</td>
+                <td>ប្រៀបដូចជាការសរសេរ "បញ្ជីមុខម្ហូប" និង "របៀបធ្វើ" ដាក់លើក្រដាសយ៉ាងច្បាស់លាស់ ដើម្បីឱ្យចុងភៅ (កុំព្យូទ័រ) ធ្វើតាម។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Coupled+Model+Intercomparison+Project+Phase+6+%28CMIP6%29+experimental+design" target="_blank" rel="noopener"><span class="en">Coupled Model Intercomparison Project Phase 6 (CMIP6) experimental design</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Iris%3A+A+Python+library+for+analysing+and+visualising+meteorological+data" target="_blank" rel="noopener"><span class="en">Iris: A Python library for analysing and visualising meteorological data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Climate+Model+Output+Rewriter+%28CMOR%29+standards+and+tables" target="_blank" rel="noopener"><span class="en">Climate Model Output Rewriter (CMOR) standards and tables</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Provenance+and+reproducibility+in+Earth+system+modeling" target="_blank" rel="noopener"><span class="en">Provenance and reproducibility in Earth system modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=High-performance+computing+for+climate+data+analysis" target="_blank" rel="noopener"><span class="en">High-performance computing for climate data analysis</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

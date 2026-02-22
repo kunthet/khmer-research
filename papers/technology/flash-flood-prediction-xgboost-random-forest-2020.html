@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រសិទ្ធភាពនៃការទស្សន៍ទាយទឹកជំនន់រហ័សដោយប្រើប្រាស់ XGBoost និង Random Forest ជាមួយនឹងទិន្នន័យសេនស័ររយៈពេល ១៥ នាទី និង ១ ម៉ោង | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហានៃការទស្សន៍ទាយទឹកជំនន់រហ័ស (Flash Flood Nowcasting) ដោយប្រើប្រាស់ទិន្នន័យសេនស័រក្នុងចន្លោះពេលខ្លីដើម្បីផ្តល់ការព្រមានបានទា...">
+    
+    <meta name="keywords" content="Flash Flood Prediction, XGBoost, Random Forest, Machine Learning, AWS Sagemaker, Time Series Analysis, Sensor Data, Flood Nowcasting, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/flash-flood-prediction-xgboost-random-forest-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/flash-flood-prediction-xgboost-random-forest-2020.html">
+    <meta property="og:title" content="ប្រសិទ្ធភាពនៃការទស្សន៍ទាយទឹកជំនន់រហ័សដោយប្រើប្រាស់ XGBoost និង Random Forest ជាមួយនឹងទិន្នន័យសេនស័ររយៈពេល ១៥ នាទី និង ១ ម៉ោង | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហានៃការទស្សន៍ទាយទឹកជំនន់រហ័ស (Flash Flood Nowcasting) ដោយប្រើប្រាស់ទិន្នន័យសេនស័រក្នុងចន្លោះពេលខ្លីដើម្បីផ្តល់ការព្រមានបានទាន់ពេលវេលា និងជួយសង្គ្រោះអាយុជីវិតមនុស្ស។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020, National College of Ireland">
+    
+    <meta property="article:tag" content="Flash Flood Prediction">
+    
+    <meta property="article:tag" content="XGBoost">
+    
+    <meta property="article:tag" content="Random Forest">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="AWS Sagemaker">
+    
+    <meta property="article:tag" content="Time Series Analysis">
+    
+    <meta property="article:tag" content="Sensor Data">
+    
+    <meta property="article:tag" content="Flood Nowcasting">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រសិទ្ធភាពនៃការទស្សន៍ទាយទឹកជំនន់រហ័សដោយប្រើប្រាស់ XGBoost និង Random Forest ជាមួយនឹងទិន្នន័យសេនស័ររយៈពេល ១៥ នាទី និង ១ ម៉ោង">
+    <meta name="twitter:description" content="ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហានៃការទស្សន៍ទាយទឹកជំនន់រហ័ស (Flash Flood Nowcasting) ដោយប្រើប្រាស់ទិន្នន័យសេនស័រក្នុងចន្លោះពេលខ្លីដើម្បីផ្តល់ការព្រមានបានទាន់ពេលវេលា និងជួយសង្គ្រោះអាយុជីវិតមនុស្ស។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1791\u17b9\u1780\u1787\u17c6\u1793\u1793\u17cb\u179a\u17a0\u17d0\u179f\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb XGBoost \u1793\u17b7\u1784 Random Forest \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17c1\u1793\u179f\u17d0\u179a\u179a\u1799\u17c8\u1796\u17c1\u179b \u17e1\u17e5 \u1793\u17b6\u1791\u17b8 \u1793\u17b7\u1784 \u17e1 \u1798\u17c9\u17c4\u1784",
+      "name": "Efficiency of Flash Flood Prediction by XGBoost and Random Forest using 15 minutes \u0026 1 hour time period sensor data.",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1791\u17b9\u1780\u1787\u17c6\u1793\u1793\u17cb\u179a\u17a0\u17d0\u179f (Flash Flood Nowcasting) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17c1\u1793\u179f\u17d0\u179a\u1780\u17d2\u1793\u17bb\u1784\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1796\u17c1\u179b\u1781\u17d2\u179b\u17b8\u178a\u17be\u1798\u17d2\u1794\u17b8\u1795\u17d2\u178f\u179b\u17cb\u1780\u17b6\u179a\u1796\u17d2\u179a\u1798\u17b6\u1793\u1794\u17b6\u1793\u1791\u17b6\u1793\u17cb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u1793\u17b7\u1784\u1787\u17bd\u1799\u179f\u1784\u17d2\u1782\u17d2\u179a\u17c4\u17c7\u17a2\u17b6\u1799\u17bb\u1787\u17b8\u179c\u17b7\u178f\u1798\u1793\u17bb\u179f\u17d2\u179f\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/flash-flood-prediction-xgboost-random-forest-2020.html",
+      "author": [{"@type": "Person", "name": "Ghiridhar Iyer, National College of Ireland"},{"@type": "Person", "name": "Dr. Manuel Tova-Izquierdo, National College of Ireland (Supervisor)"}],
+      "datePublished": "2020, National College of Ireland",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Efficiency of Flash Flood Prediction by XGBoost and Random Forest using 15 minutes \u0026 1 hour time period sensor data.",
+        "url": "N/A"
+      },
+      "keywords": ["Flash Flood Prediction", "XGBoost", "Random Forest", "Machine Learning", "AWS Sagemaker", "Time Series Analysis", "Sensor Data", "Flood Nowcasting"],
+      "about": "Machine Learning / Cloud Computing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1791\u17b9\u1780\u1787\u17c6\u1793\u1793\u17cb\u179a\u17a0\u17d0\u179f\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb XGBoost \u1793\u17b7\u1784 Random Forest \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17c1\u1793\u179f\u17d0\u179a\u179a\u1799\u17c8\u1796\u17c1\u179b \u17e1\u17e5 \u1793\u17b6\u1791\u17b8 \u1793\u17b7\u1784 \u17e1 \u1798\u17c9\u17c4\u1784",
+          "item": "https://khmerresearch.com/papers/technology/flash-flood-prediction-xgboost-random-forest-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រសិទ្ធភាពនៃការទស្សន៍ទាយទឹកជំនន់រហ័សដោយប្រើប្រាស់ XGBoos...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Efficiency of Flash Flood Prediction by XGBoost and Random Forest using 15 minutes & 1 hour time period sensor data.<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រសិទ្ធភាពនៃការទស្សន៍ទាយទឹកជំនន់រហ័សដោយប្រើប្រាស់ XGBoost និង Random Forest ជាមួយនឹងទិន្នន័យសេនស័ររយៈពេល ១៥ នាទី និង ១ ម៉ោង</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Efficiency of Flash Flood Prediction by XGBoost and Random Forest using 15 minutes & 1 hour time period sensor data.</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ghiridhar Iyer, National College of Ireland, Dr. Manuel Tova-Izquierdo, National College of Ireland (Supervisor)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020, National College of Ireland</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Cloud Computing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហានៃការទស្សន៍ទាយទឹកជំនន់រហ័ស (Flash Flood Nowcasting) ដោយប្រើប្រាស់ទិន្នន័យសេនស័រក្នុងចន្លោះពេលខ្លីដើម្បីផ្តល់ការព្រមានបានទាន់ពេលវេលា និងជួយសង្គ្រោះអាយុជីវិតមនុស្ស។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះប្រើប្រាស់ទិន្នន័យសេនស័រពីទីភ្នាក់ងារបរិស្ថានចក្រភពអង់គ្លេស រួមផ្សំជាមួយនឹងបច្ចេកវិទ្យា Cloud Computing និង Machine Learning ដើម្បីបង្កើត និងវាយតម្លៃម៉ូដែលទស្សន៍ទាយ។
+        
+        <ul>
+            
+            <li>ការប្រមូល និងរៀបចំទិន្នន័យសេនស័រ (Sensor Data Processing & Formatting) តាមរយៈកូដ SQL លើ AWS Athena</li>
+            
+            <li>ការបង្កើតទិន្នន័យក្លែងក្លាយបន្ថែមដោយប្រើប្រាស់បណ្តាញ (Generative Adversarial Network - GAN) ដើម្បីពង្រីកទំហំទិន្នន័យសម្រាប់ហ្វឹកហាត់ម៉ូដែល</li>
+            
+            <li>ការបង្ហាត់ម៉ូដែល Machine Learning ដោយប្រើប្រាស់ក្បួនដោះស្រាយ XGBoost និង Random Forest លើប្រព័ន្ធ AWS Sagemaker</li>
+            
+            <li>ការវាយតម្លៃប្រសិទ្ធភាពម៉ូដែលតាមរយៈបច្ចេកទេស PASS (Precision, Accuracy, Sensitivity, Specificity)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ XGBoost បានបង្ហាញប្រសិទ្ធភាពខ្ពស់ជាង Random Forest លើគ្រប់ទិដ្ឋភាពនៃការវាយតម្លៃទាំងអស់ រួមមានភាពត្រឹមត្រូវ (Accuracy) ភាពប្រែប្រួល (Sensitivity) និងភាពជាក់លាក់ (Precision)។</li>
+            
+            <li>ការប្រើប្រាស់ទិន្នន័យដែលមានចន្លោះពេល ១៥ នាទីផ្តល់នូវលទ្ធផលទស្សន៍ទាយ និងការចាប់យកនិន្នាការល្អប្រសើរជាងទិន្នន័យដែលមានចន្លោះពេល ១ ម៉ោង ព្រោះវាជួយកាត់បន្ថយបញ្ហាការផ្តល់សញ្ញាព្រមានខុស (Erroneous Triggers)។</li>
+            
+            <li>បច្ចេកទេសវាយតម្លៃ PASS ផ្តល់នូវការវាស់វែងជាក់ស្តែងសម្រាប់ប្រសិទ្ធភាពម៉ូដែលទស្សន៍ទាយទឹកជំនន់ ល្អជាងការផ្អែកទៅលើតែពិន្ទុស្ថិតិ R-Square (R-Square Score) តែមួយមុខ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">XGBoost (Extreme Gradient Boosting)</span></strong><br>ក្បួនដោះស្រាយ XGBoost</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់ក្នុងការទស្សន៍ទាយកម្រិតទឹក (Precision និង Sensitivity ខ្ពស់បំផុត) ទាំងសម្រាប់ទិន្នន័យចន្លោះពេល១៥នាទី និង១ម៉ោង។ វាមានសមត្ថភាពខ្ពស់ក្នុងការកាត់បន្ថយកំហុស និងមិនសូវមានការរោទិ៍ខុស (False alarms)។</td>
+                <td>មាននិន្នាការក្នុងការទស្សន៍ទាយតម្លៃទាបជាងការពិតបន្តិចបន្តួច (Underestimates) យោងតាមកត្តា Accuracy ហើយទាមទារការស្វែងយល់ស៊ីជម្រៅក្នុងការកំណត់ទម្រង់ប៉ារ៉ាម៉ែត្រ (Hyperparameter tuning)។</td>
+                <td>ទទួលបានអត្រា Precision ៩៩.០៣% សម្រាប់ទិន្នន័យ១៥នាទី និង ៩៣.១០% សម្រាប់ទិន្នន័យ១ម៉ោង និងមានសមត្ថភាពចាប់សញ្ញាព្រមានបាន ១០២ ក្នុងចំណោម ១០៣ ករណី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest</span></strong><br>ក្បួនដោះស្រាយ Random Forest</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងទទួលបានពិន្ទុ R-Square ខ្ពស់គួរឱ្យកត់សម្គាល់ ដែលស័ក្តិសមក្នុងការស្វែងរកទំនាក់ទំនងរវាងអថេរផ្សេងៗក្នុងទិន្នន័យ។</td>
+                <td>មានកំហុសក្នុងការទស្សន៍ទាយច្រើនជាងដោយមាននិន្នាការទាយតម្លៃខ្ពស់ជាងការពិត (Overestimates) ព្រមទាំងខកខានក្នុងការព្រមានទឹកជំនន់មួយចំនួនធំ (Missed warnings)។</td>
+                <td>ទទួលបានអត្រា Precision ត្រឹមតែ ៩១.២៦% (១៥នាទី) និង ៧២.៤១% (១ម៉ោង) ហើយខកខានការព្រមានចំនួន ៩ ដង ក្នុងចំណោម ១០៣ ករណី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះពឹងផ្អែកយ៉ាងខ្លាំងលើហេដ្ឋារចនាសម្ព័ន្ធ Cloud សម្រាប់ការផ្ទុក និងកែច្នៃទិន្នន័យ ខណៈពេលដែលទាមទារធនធានកុំព្យូទ័រ (Compute Power) ល្មមសម្រាប់ការហ្វឹកហាត់ម៉ូដែល។
+    
+    <ul>
+        
+        <li><strong>Software & Frameworks:</strong> ប្រើប្រាស់ភាសា Python បណ្ណាល័យ Scikit-learn, CTGAN (សម្រាប់បង្កើតទិន្នន័យក្លែងក្លាយ), និង Boto3 (AWS SDK)។</li>
+        
+        <li><strong>Cloud Infrastructure:</strong> ត្រូវការសេវាកម្ម AWS ដូចជា Amazon S3 សម្រាប់ផ្ទុកទិន្នន័យ, AWS Athena សម្រាប់បំលែងទិន្នន័យ, Amazon SageMaker សម្រាប់ហ្វឹកហាត់ម៉ូដែល និង Amazon QuickSight សម្រាប់បង្ហាញក្រាហ្វិក (Data Visualization)។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យសេនស័រ (កម្ពស់ទឹក ទឹកភ្លៀង សីតុណ្ហភាព និងកម្លាំងខ្យល់) រយៈពេល ១ខែ ពីចក្រភពអង់គ្លេស និងការបង្កើតទិន្នន័យបន្លំ (GAN data) រយៈពេល ១ខែបន្ថែម។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រមូលទិន្នន័យពីទន្លេ Mersey ក្នុងទីក្រុង Liverpool ចក្រភពអង់គ្លេស ដែលមានលក្ខណៈភូមិសាស្ត្រ និងអាកាសធាតុខុសស្រឡះពីប្រទេសកម្ពុជា។ ម្យ៉ាងវិញទៀត ទិន្នន័យពិតប្រាកដមានត្រឹមតែ ១ ខែប៉ុណ្ណោះ ដែលនាំឱ្យការប្រើប្រាស់បច្ចេកវិទ្យា GAN ដើម្បីបង្កើតទិន្នន័យក្លែងក្លាយបន្ថែមអាចនឹងមិនឆ្លុះបញ្ចាំងពីភាពស្មុគស្មាញនៃប្រព័ន្ធទឹកភ្លៀងរដូវវស្សានៅអាស៊ីអាគ្នេយ៍ឡើយ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ថ្វីត្បិតតែលក្ខខណ្ឌភូមិសាស្ត្រខុសគ្នា ប៉ុន្តែវិធីសាស្ត្រប្រើប្រាស់ម៉ូដែលស្វែងរកម៉ាស៊ីន (Machine Learning) នេះមានសក្តានុពលខ្ពស់ណាស់ក្នុងការដោះស្រាយបញ្ហាទឹកជំនន់រហ័សនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>រាជធានីភ្នំពេញ (Phnom Penh Urban Flooding):</strong> អាចប្រើប្រាស់គំរូនេះដើម្បីទស្សន៍ទាយជំនន់ទឹកភ្លៀងភ្លាមៗនៅក្នុងទីក្រុង ដោយភ្ជាប់ជាមួយសេនស័រ IoT វាស់កម្រិតទឹកតាមប្រព័ន្ធលូ ដើម្បីផ្តល់ការព្រមានជាមុនដល់ប្រជាជន ជៀសវាងការខូចខាតយានយន្ត និងទ្រព្យសម្បត្តិ។</li>
+            
+            <li><strong>ខេត្តបន្ទាយមានជ័យ និងបាត់ដំបង (Northwestern Provinces):</strong> តំបន់នេះតែងរងគ្រោះដោយទឹកជំនន់រហ័សធ្លាក់ពីប្រទេសថៃ។ ការប្រើប្រាស់ទិន្នន័យកម្ពស់ទឹក និងទឹកភ្លៀងពីសេនស័ររៀងរាល់ ១៥នាទីម្តង នឹងជួយដល់ការត្រៀមជម្លៀសប្រជាជនទាន់ពេលវេលា។</li>
+            
+            <li><strong>គណៈកម្មាធិការជាតិគ្រប់គ្រងគ្រោះមហន្តរាយ (NCDM):</strong> អាចធ្វើសមាហរណកម្មក្បួនដោះស្រាយ XGBoost នេះទៅក្នុងប្រព័ន្ធតាមដានគ្រោះមហន្តរាយថ្នាក់ជាតិ (National Early Warning System) ដើម្បីផ្តល់សេចក្តីរាយការណ៍ស្វ័យប្រវត្តិទៅកាន់អាជ្ញាធរដែនដី។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកទេស Nowcasting (ទស្សន៍ទាយមុន២៤ម៉ោង) ដោយប្រើប្រាស់ Machine Learning នេះអាចជួយសង្គ្រោះអាយុជីវិត និងទ្រព្យសម្បត្តិប្រជាជនកម្ពុជាបានយ៉ាងច្រើន ប្រសិនបើមានការវិនិយោគលើប្រព័ន្ធសេនស័រ IoT អោយបានទូលំទូលាយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>រៀបចំប្រព័ន្ធប្រមូល និងបន្សុទ្ធទិន្នន័យ (Data Engineering):</strong> ដំឡើងឧបករណ៍សេនស័រវាស់ទឹកភ្លៀង និងកម្ពស់ទឹកតាមដងទន្លេសំខាន់ៗ។ បន្ទាប់មកបញ្ជូនទិន្នន័យចូលទៅកាន់ <span class="en">Amazon S3</span> រួចប្រើប្រាស់ <span class="en">AWS Athena</span> ដើម្បីធ្វើការច្រោះ និងចងក្រងទិន្នន័យតាមចន្លោះពេល ១៥នាទី និង ១ម៉ោង។ ប្រើប្រាស់ <span class="en">CTGAN</span> ក្នុងករណីដែលទិន្នន័យប្រវត្តិសាស្ត្រមានមិនគ្រប់គ្រាន់។</li>
+            
+            <li><strong>អភិវឌ្ឍ និងហ្វឹកហាត់ម៉ូដែល (Model Development):</strong> សរសេរកូដដោយប្រើប្រាស់ភាសា <span class="en">Python</span> ជាមួយនឹងបណ្ណាល័យ <span class="en">XGBoost</span> ព្រោះវាមានប្រសិទ្ធភាពខ្ពស់ជាង Random Forest។ ប្រើប្រាស់ <span class="en">AWS SageMaker</span> ដើម្បីដំណើរការហ្វឹកហាត់ម៉ូដែល (Training) ដោយផ្តោតលើអថេរគោលដៅសំខាន់ៗដូចជា កម្ពស់ទឹក ទឹកភ្លៀង សីតុណ្ហភាព និងខ្យល់។</li>
+            
+            <li><strong>វាយតម្លៃសមត្ថភាពប្រព័ន្ធយ៉ាងតឹងរ៉ឹង (Evaluation with PASS):</strong> កុំពឹងផ្អែកតែលើសូចនាករ R-Square តែមួយមុខ។ ត្រូវវាយតម្លៃម៉ូដែលដោយប្រើប្រាស់ប្រព័ន្ធវាស់ស្ទង់ PASS (Precision, Accuracy, Sensitivity, Specificity) ដើម្បីធានាថាម៉ូដែលមិនបញ្ចេញការរោទិ៍ខុស (False alarms) ច្រើនពេក ព្រោះវាធ្វើឱ្យប៉ះពាល់ដល់ទំនុកចិត្តរបស់ប្រជាជន។ បង្កើត Dashboard ដោយប្រើ <span class="en">Amazon QuickSight</span> ដើម្បីតាមដានលទ្ធផល។</li>
+            
+            <li><strong>ដាក់ឱ្យដំណើរការប្រព័ន្ធព្រមានដោយស្វ័យប្រវត្តិ (Deployment & Alerting):</strong> ប្រើប្រាស់ <span class="en">AWS Lambda</span> ដើម្បីទាញយកទិន្នន័យទស្សន៍ទាយ (Predictions) ពីម៉ូដែលមកវិភាគ ហើយបើរកឃើញថាកម្ពស់ទឹកនឹងឡើងដល់កម្រិតគ្រោះថ្នាក់ ត្រូវភ្ជាប់ប្រព័ន្ធនេះទៅកាន់ SMS Gateway ឬកម្មវិធី Telegram Bots ដើម្បីផ្ញើសារប្រកាសអាសន្នទៅកាន់អាជ្ញាធរពាក់ព័ន្ធ באופןស្វ័យប្រវត្តិ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Nowcasting</span></td>
+                <td>គឺជាការព្យាករណ៍អាកាសធាតុនិងគ្រោះមហន្តរាយ (ដូចជាទឹកជំនន់រហ័ស) ក្នុងរយៈពេលខ្លីបំផុត ពោលគឺចាប់ពីប៉ុន្មាននាទី រហូតដល់ ២៤ ម៉ោងខាងមុខ ដោយពឹងផ្អែកលើទិន្នន័យជាក់ស្តែងពេលបច្ចុប្បន្ន (Real-time data) ជាជាងការព្យាករណ៍សម្រាប់ច្រើនថ្ងៃទៅមុខ (Forecasting)។</td>
+                <td>ដូចជាការមើលឃើញពពកខ្មៅងងឹតមកដល់ ហើយយើងទាយដឹងភ្លាមៗថាភ្លៀងនឹងធ្លាក់ក្នុងរយៈពេល ១០ នាទីទៀត មិនមែនទាយសម្រាប់សប្តាហ៍ក្រោយនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Generative Adversarial Network (GAN)</span></td>
+                <td>គឺជាបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត (AI) ដែលត្រូវបានប្រើប្រាស់នៅក្នុងការស្រាវជ្រាវនេះដើម្បីបង្កើតទិន្នន័យក្លែងក្លាយ (Synthetic Data) បន្ថែមដែលមានលក្ខណៈនិងទម្រង់ការបែកចែកស្រដៀងទៅនឹងទិន្នន័យពិតប្រាកដ ដើម្បីជួយបង្រៀនម៉ូដែលឱ្យកាន់តែឆ្លាតវៃ នៅពេលដែលចំនួនទិន្នន័យពិតមានតិចតួចពេក។</td>
+                <td>ដូចជាវិចិត្រករម្នាក់រៀនគូររូបថតចម្លងឱ្យដូចបេះបិទទៅនឹងរូបពិត រហូតដល់អ្នកមើលមិនអាចបែងចែកដឹងថាមួយណាជារូបពិត និងមួយណាជារូបគូរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">XGBoost</span></td>
+                <td>គឺជាក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine Learning algorithm) ដ៏មានអានុភាពខ្ពស់ ដែលដំណើរការដោយការបង្កើតដើមឈើសម្រេចចិត្ត (Decision Trees) ជាច្រើនបន្តបន្ទាប់គ្នា។ ដើមឈើនីមួយៗព្យាយាមកែតម្រូវកំហុសរបស់ដើមឈើមុនៗ ដែលធ្វើឱ្យវាមានភាពត្រឹមត្រូវ កាត់បន្ថយសំលេងរំខានក្នុងទិន្នន័យ (Noise) និងលឿនក្នុងការទស្សន៍ទាយ។</td>
+                <td>ដូចជាការសួរសិស្សពូកែៗមួយក្រុមឱ្យធ្វើលំហាត់រួមគ្នា ដោយសិស្សម្នាក់ៗជួយកែចំណុចខុសរបស់សិស្សមុន រហូតទទួលបានចម្លើយដ៏ត្រឹមត្រូវបំផុតមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperparameter tuning</span></td>
+                <td>គឺជាដំណើរការនៃការកែតម្រូវ និងស្វែងរកការកំណត់រចនាសម្ព័ន្ធ (Configuration values) ដ៏ប្រសើរបំផុតរបស់ម៉ូដែល Machine Learning មុនពេលចាប់ផ្តើមហ្វឹកហាត់វា ដើម្បីបង្កើនសមត្ថភាពទស្សន៍ទាយ និងការពារកុំឱ្យម៉ូដែលរៀនទន្ទេញទិន្នន័យខុសទម្រង់ធម្មជាតិ (Overfitting)។</td>
+                <td>ដូចជាការរុញប៊ូតុងសារ៉េសំឡេង (Bass, Treble) នៅលើធុងបាសចុះឡើង រហូតទាល់តែយើងលឺសម្លេងតន្ត្រីពិរោះ និងច្បាស់ល្អបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">PASS Evaluation</span></td>
+                <td>គឺជាបណ្តុំនៃរង្វាស់រង្វាល់បច្ចេកទេស (Precision, Accuracy, Sensitivity, Specificity) ដែលប្រើសម្រាប់វាយតម្លៃគុណភាពពិតប្រាកដនៃការទស្សន៍ទាយ។ វាមិនត្រឹមតែប្រាប់ថាទាយត្រូវប៉ុន្មានភាគរយទេ តែវាប្រាប់លម្អិតថាតើកុំព្យូទ័រមានការរោទិ៍សញ្ញាព្រមានខុស (False alarms) ប៉ុន្មានដង ឬខកខានមិនបានព្រមានពេលមានគ្រោះថ្នាក់ពិតប្រាកដប៉ុន្មានដង។</td>
+                <td>ដូចជាការដាក់ពិន្ទុអ្នកយាមទ្វារ ដែលមិនត្រឹមតែសរសើរពេលគាត់ចាប់ចោរបាននោះទេ តែត្រូវកាត់ពិន្ទុពេលគាត់ច្រឡំវាយសមាជិកគ្រួសារថាជាចោរផងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest</span></td>
+                <td>គឺជាក្បួនដោះស្រាយម៉ាស៊ីនរៀន ដែលបង្កើតដើមឈើសម្រេចចិត្ត (Decision Trees) ជាច្រើនដោយចៃដន្យ និងឯករាជ្យពីគ្នា រួចយកលទ្ធផលរបស់ពួកវាទាំងអស់មកបូកបញ្ចូលគ្នា (ជាមធ្យមភាគ ឬតាមសំឡេងឆ្នោតច្រើនជាងគេ) ដើម្បីធ្វើការទស្សន៍ទាយលទ្ធផលរួមមួយដែលមានលំនឹងល្អ។</td>
+                <td>ដូចជាការសួរមតិពីមនុស្ស ១០០ នាក់ផ្សេងៗគ្នាដើម្បីសម្រេចចិត្តលើរឿងមួយ ជាជាងការជឿលើការសម្រេចចិត្តរបស់មនុស្សតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data assimilation</span></td>
+                <td>គឺជាបច្ចេកទេសនៃការបញ្ចូលទិន្នន័យអង្កេតជាក់ស្តែងថ្មីៗ ទៅក្នុងម៉ូដែលព្យាករណ៍គណិតវិទ្យាដែលកំពុងដំណើរការជាបន្តបន្ទាប់ ដើម្បីកែតម្រូវគន្លងទស្សន៍ទាយ និងធ្វើឱ្យលទ្ធផលលើកក្រោយៗកាន់តែមានភាពសុក្រឹត ឆ្លើយតបទៅនឹងការប្រែប្រួលភ្លាមៗ។</td>
+                <td>ដូចជាការបើកបរតាមកម្មវិធី Google Maps ដែលប្រព័ន្ធតែងតែធ្វើបច្ចុប្បន្នភាពណែនាំផ្លូវវាងថ្មីៗភ្លាមៗ នៅពេលវាដឹងថាផ្លូវខាងមុខកំពុងមានការកកស្ទះខ្លាំង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Estimating+the+Probability+of+Loan+Default+in+Melli+Bank%3A+A+Comparative+Study+of+Machine+Learning+and+Econometric+Approaches%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9F%89%E1%9E%B6%E1%9E%93%E1%9F%8B%E1%9E%9F%E1%9F%92%E1%9E%98%E1%9E%B6%E1%9E%93%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BC%E1%9E%94%E1%9E%B6%E1%9E%94%E1%9F%8A%E1%9E%B8%E1%9E%9B%E1%9E%B8%E1%9E%8F%E1%9F%81%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%81%E1%9E%80%E1%9E%81%E1%9E%B6%E1%9E%93%E1%9E%9F%E1%9E%84%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%85%E1%9E%B8%E1%9E%93%E1%9F%85%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%92%E1%9E%93%E1%9E%B6%E1%9E%82%E1%9E%B6%E1%9E%9A+Melli%E1%9F%96+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9F%92%E1%9E%9F%E1%9E%B6%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9F%80%E1%9E%94%E1%9E%92%E1%9F%80%E1%9E%94%E1%9E%9A%E1%9E%9C%E1%9E%B6%E1%9E%84%E1%9E%9C%E1%9E%B7%E1%9E%92%E1%9E%B8%E1%9E%9F%E1%9E%B6%E1%9E%9F%E1%9F%92%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%93+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%9C%E1%9E%B7%E1%9E%92%E1%9E%B8%E1%9E%9F%E1%9E%B6%E1%9E%9F%E1%9F%92%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%9F%E1%9F%81%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%80%E1%9E%B7%E1%9E%85%E1%9F%92%E1%9E%85%E1%9E%98%E1%9E%B6%E1%9E%8F%E1%9F%92%E1%9E%9A%27%2C+%27url%27%3A+%27%2Fpapers%2Feconomics%2Floan-default-melli-bank-machine-learning-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Estimating the Probability of Loan Default in Melli Bank: A Comparative Study of Machine Learning and Econometric Approaches', 'khmer_title': 'ការប៉ាន់ស្មានប្រូបាប៊ីលីតេនៃការខកខានសងប្រាក់កម្ចីនៅក្នុងធនាគារ Melli៖ ការសិក្សាប្រៀបធៀបរវាងវិធីសាស្ត្ររៀនដោយម៉ាស៊ីន និងវិធីសាស្ត្រសេដ្ឋកិច្ចមាត្រ', 'url': '/papers/economics/loan-default-melli-bank-machine-learning-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27A+MACHINE+LEARNING+TECHNIQUE+USED+FOR+SOCIAL+MEDIA+FAKE+PROFILE+DETECTION%27%2C+%27khmer_title%27%3A+%27%E1%9E%94%E1%9E%85%E1%9F%92%E1%9E%85%E1%9F%81%E1%9E%80%E1%9E%91%E1%9F%81%E1%9E%9F%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%93%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%8A%E1%9F%82%E1%9E%9B%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%BC%E1%9E%9C%E1%9E%94%E1%9E%B6%E1%9E%93%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BE%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%9F%E1%9F%8B%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9E%80%E1%9E%83%E1%9E%BE%E1%9E%89%E1%9E%82%E1%9E%8E%E1%9E%93%E1%9E%B8%E1%9E%80%E1%9F%92%E1%9E%9B%E1%9F%82%E1%9E%84%E1%9E%80%E1%9F%92%E1%9E%9B%E1%9E%B6%E1%9E%99%E1%9E%93%E1%9F%85%E1%9E%9B%E1%9E%BE%E1%9E%94%E1%9E%8E%E1%9F%92%E1%9E%8F%E1%9E%B6%E1%9E%89%E1%9E%9F%E1%9E%84%E1%9F%92%E1%9E%82%E1%9E%98%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fml-social-media-fake-profile-detection-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'A MACHINE LEARNING TECHNIQUE USED FOR SOCIAL MEDIA FAKE PROFILE DETECTION', 'khmer_title': 'បច្ចេកទេសម៉ាស៊ីនរៀនដែលត្រូវបានប្រើប្រាស់សម្រាប់ការរកឃើញគណនីក្លែងក្លាយនៅលើបណ្តាញសង្គម', 'url': '/papers/technology/ml-social-media-fake-profile-detection-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27An+IoT+and+Machine+Learning-Based+Predictive+Maintenance+System+for+Electrical+Motors%27%2C+%27khmer_title%27%3A+%27%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%90%E1%9F%82%E1%9E%91%E1%9E%B6%E1%9F%86%E1%9E%96%E1%9F%92%E1%9E%99%E1%9E%B6%E1%9E%80%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%95%E1%9F%92%E1%9E%A2%E1%9F%82%E1%9E%80%E1%9E%9B%E1%9E%BE+IoT+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%9A%E1%9E%94%E1%9E%9F%E1%9F%8B%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%93+%28Machine+Learning%29+%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%98%E1%9F%89%E1%9E%BC%E1%9E%91%E1%9F%90%E1%9E%9A%E1%9E%A2%E1%9E%82%E1%9F%92%E1%9E%82%E1%9E%B7%E1%9E%9F%E1%9E%93%E1%9E%B8%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fiot-ml-predictive-maintenance-motors-2023.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'An IoT and Machine Learning-Based Predictive Maintenance System for Electrical Motors', 'khmer_title': 'ប្រព័ន្ធថែទាំព្យាករណ៍ផ្អែកលើ IoT និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) សម្រាប់ម៉ូទ័រអគ្គិសនី', 'url': '/papers/technology/iot-ml-predictive-maintenance-motors-2023.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Forecasting+the+Municipal+Solid+Waste+Using+GSO-XGBoost+Model%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%96%E1%9F%92%E1%9E%99%E1%9E%B6%E1%9E%80%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%9F%E1%9F%86%E1%9E%8E%E1%9E%9B%E1%9F%8B%E1%9E%9A%E1%9E%B9%E1%9E%84%E1%9E%91%E1%9E%B8%E1%9E%80%E1%9F%92%E1%9E%9A%E1%9E%BB%E1%9E%84%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BE%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%9F%E1%9F%8B%E1%9E%98%E1%9F%89%E1%9E%BC%E1%9E%8A%E1%9F%82%E1%9E%9B+GSO-XGBoost%27%2C+%27url%27%3A+%27%2Fpapers%2Fenvironment%2Fforecasting-municipal-solid-waste-gso-xgboost-2023.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Forecasting the Municipal Solid Waste Using GSO-XGBoost Model', 'khmer_title': 'ការព្យាករណ៍សំណល់រឹងទីក្រុងដោយប្រើប្រាស់ម៉ូដែល GSO-XGBoost', 'url': '/papers/environment/forecasting-municipal-solid-waste-gso-xgboost-2023.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Benchmarking+Machine+Learning+for+Satellite+Precipitation+Downscaling%3A+Insights+into+Superiority%2C+Advantages%2C+and+Transferability%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9C%E1%9E%B6%E1%9E%9F%E1%9F%8B%E1%9E%9C%E1%9F%82%E1%9E%84%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9F%80%E1%9E%94%E1%9E%92%E1%9F%80%E1%9E%94%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%9A%E1%9E%94%E1%9E%9F%E1%9F%8B%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%93%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%80%E1%9E%B6%E1%9E%8F%E1%9F%8B%E1%9E%94%E1%9E%93%E1%9F%92%E1%9E%90%E1%9E%99%E1%9E%98%E1%9E%B6%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%B6%E1%9E%93%E1%9E%91%E1%9E%B9%E1%9E%80%E1%9E%97%E1%9F%92%E1%9E%9B%E1%9F%80%E1%9E%84%E1%9E%96%E1%9E%B8%E1%9E%95%E1%9F%92%E1%9E%80%E1%9E%B6%E1%9E%99%E1%9E%9A%E1%9E%8E%E1%9E%94%E1%9F%96+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%99%E1%9E%9B%E1%9F%8B%E1%9E%8A%E1%9E%B9%E1%9E%84%E1%9E%A2%E1%9F%86%E1%9E%96%E1%9E%B8%E1%9E%A7%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%98%E1%9E%97%E1%9E%B6%E1%9E%96+%E1%9E%82%E1%9E%BB%E1%9E%8E%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%94%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%B7+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%9B%E1%9E%91%E1%9F%92%E1%9E%92%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%95%E1%9F%92%E1%9E%91%E1%9F%81%E1%9E%9A%27%2C+%27url%27%3A+%27%2Fpapers%2Fscience%2Fbenchmarking-ml-satellite-precipitation-downscaling-2024.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability', 'khmer_title': 'ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ', 'url': '/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=time+series+forecasting+for+flash+flood+prediction" target="_blank" rel="noopener"><span class="en">time series forecasting for flash flood prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=generative+adversarial+networks+for+environmental+sensor+data+augmentation" target="_blank" rel="noopener"><span class="en">generative adversarial networks for environmental sensor data augmentation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparing+XGBoost+and+Neural+Networks+for+hydrological+modeling" target="_blank" rel="noopener"><span class="en">comparing XGBoost and Neural Networks for hydrological modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=cloud+computing+architecture+for+real-time+disaster+management" target="_blank" rel="noopener"><span class="en">cloud computing architecture for real-time disaster management</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

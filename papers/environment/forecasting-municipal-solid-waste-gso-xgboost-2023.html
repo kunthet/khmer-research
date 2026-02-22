@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការព្យាករណ៍សំណល់រឹងទីក្រុងដោយប្រើប្រាស់ម៉ូដែល GSO-XGBoost | KhmerResearch.com</title>
+    <meta name="description" content="កំណើនយ៉ាងឆាប់រហ័សនៃការបង្កើតសំណល់ដោយសារកំណើនប្រជាជននិងនគរូបនីយកម្ម កំពុងគំរាមកំហែងដល់សមត្ថភាពទីលានចាក់សំរាម (ឧទាហរណ៍ ទីលានចាក់សំរាម Semakau របស់ប្រទេសសិង្ហបុ...">
+    
+    <meta name="keywords" content="Municipal Solid Waste, Grid Search Optimization, XGBoost, Machine Learning, Waste Management, Sustainability, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/environment/forecasting-municipal-solid-waste-gso-xgboost-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/environment/forecasting-municipal-solid-waste-gso-xgboost-2023.html">
+    <meta property="og:title" content="ការព្យាករណ៍សំណល់រឹងទីក្រុងដោយប្រើប្រាស់ម៉ូដែល GSO-XGBoost | KhmerResearch.com">
+    <meta property="og:description" content="កំណើនយ៉ាងឆាប់រហ័សនៃការបង្កើតសំណល់ដោយសារកំណើនប្រជាជននិងនគរូបនីយកម្ម កំពុងគំរាមកំហែងដល់សមត្ថភាពទីលានចាក់សំរាម (ឧទាហរណ៍ ទីលានចាក់សំរាម Semakau របស់ប្រទេសសិង្ហបុរីនឹងពេញនៅឆ្នាំ២០៣៥) ដែលទាមទារឱ្យមានការព...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023, Intelligent Automation & Soft Computing">
+    
+    <meta property="article:tag" content="Municipal Solid Waste">
+    
+    <meta property="article:tag" content="Grid Search Optimization">
+    
+    <meta property="article:tag" content="XGBoost">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Waste Management">
+    
+    <meta property="article:tag" content="Sustainability">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការព្យាករណ៍សំណល់រឹងទីក្រុងដោយប្រើប្រាស់ម៉ូដែល GSO-XGBoost">
+    <meta name="twitter:description" content="កំណើនយ៉ាងឆាប់រហ័សនៃការបង្កើតសំណល់ដោយសារកំណើនប្រជាជននិងនគរូបនីយកម្ម កំពុងគំរាមកំហែងដល់សមត្ថភាពទីលានចាក់សំរាម (ឧទាហរណ៍ ទីលានចាក់សំរាម Semakau របស់ប្រទេសសិង្ហបុរីនឹងពេញនៅឆ្នាំ២០៣៥) ដែលទាមទារឱ្យមានការព...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u179f\u17c6\u178e\u179b\u17cb\u179a\u17b9\u1784\u1791\u17b8\u1780\u17d2\u179a\u17bb\u1784\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b GSO-XGBoost",
+      "name": "Forecasting the Municipal Solid Waste Using GSO-XGBoost Model",
+      "description": "\u1780\u17c6\u178e\u17be\u1793\u1799\u17c9\u17b6\u1784\u1786\u17b6\u1794\u17cb\u179a\u17a0\u17d0\u179f\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u179f\u17c6\u178e\u179b\u17cb\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17c6\u178e\u17be\u1793\u1794\u17d2\u179a\u1787\u17b6\u1787\u1793\u1793\u17b7\u1784\u1793\u1782\u179a\u17bc\u1794\u1793\u17b8\u1799\u1780\u1798\u17d2\u1798 \u1780\u17c6\u1796\u17bb\u1784\u1782\u17c6\u179a\u17b6\u1798\u1780\u17c6\u17a0\u17c2\u1784\u178a\u179b\u17cb\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796\u1791\u17b8\u179b\u17b6\u1793\u1785\u17b6\u1780\u17cb\u179f\u17c6\u179a\u17b6\u1798 (\u17a7\u1791\u17b6\u17a0\u179a\u178e\u17cd \u1791\u17b8\u179b\u17b6\u1793\u1785\u17b6\u1780\u17cb\u179f\u17c6\u179a\u17b6\u1798 Semakau \u179a\u1794\u179f\u17cb\u1794\u17d2\u179a\u1791\u17c1\u179f\u179f\u17b7\u1784\u17d2\u17a0\u1794\u17bb\u179a\u17b8\u1793\u17b9\u1784\u1796\u17c1\u1789\u1793\u17c5\u1786\u17d2\u1793\u17b6\u17c6\u17e2\u17e0\u17e3\u17e5) \u178a\u17c2\u179b\u1791\u17b6\u1798\u1791\u17b6\u179a\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1794\u179a\u17b7\u1798\u17b6\u178e\u179f\u17c6\u178e\u179b\u17cb\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u178a\u17be\u1798\u17d2\u1794\u17b8\u179a\u17c0\u1794\u1785\u17c6\u17a0\u17c1\u178a\u17d2\u178b\u17b6\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1785\u17b8\u179a\u1797\u17b6\u1796\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/environment/forecasting-municipal-solid-waste-gso-xgboost-2023.html",
+      "author": [{"@type": "Person", "name": "Vaishnavi Jayaraman (B.S. Abdur Rahman Crescent Institute of Science and Technology)"},{"@type": "Person", "name": "Arun Raj Lakshminarayanan (B.S. Abdur Rahman Crescent Institute of Science and Technology)"},{"@type": "Person", "name": "Saravanan Parthasarathy (B.S. Abdur Rahman Crescent Institute of Science and Technology)"},{"@type": "Person", "name": "A. Suganthy (Pondicherry University)"}],
+      "datePublished": "2023, Intelligent Automation \u0026 Soft Computing",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Forecasting the Municipal Solid Waste Using GSO-XGBoost Model",
+        "url": "https://doi.org/10.32604/iasc.2023.037823"
+      },
+      "keywords": ["Municipal Solid Waste", "Grid Search Optimization", "XGBoost", "Machine Learning", "Waste Management", "Sustainability"],
+      "about": "Machine Learning / Environmental Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Environment",
+          "item": "https://khmerresearch.com/papers/environment/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u179f\u17c6\u178e\u179b\u17cb\u179a\u17b9\u1784\u1791\u17b8\u1780\u17d2\u179a\u17bb\u1784\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b GSO-XGBoost",
+          "item": "https://khmerresearch.com/papers/environment/forecasting-municipal-solid-waste-gso-xgboost-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/environment/">Environment</a> &rsaquo;
+        <span>ការព្យាករណ៍សំណល់រឹងទីក្រុងដោយប្រើប្រាស់ម៉ូដែល GSO-XGBoost</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Forecasting the Municipal Solid Waste Using GSO-XGBoost Model<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.32604/iasc.2023.037823" target="_blank">doi.org/10.32604/iasc.2023.037823</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការព្យាករណ៍សំណល់រឹងទីក្រុងដោយប្រើប្រាស់ម៉ូដែល GSO-XGBoost</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Forecasting the Municipal Solid Waste Using GSO-XGBoost Model</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Vaishnavi Jayaraman (B.S. Abdur Rahman Crescent Institute of Science and Technology), Arun Raj Lakshminarayanan (B.S. Abdur Rahman Crescent Institute of Science and Technology), Saravanan Parthasarathy (B.S. Abdur Rahman Crescent Institute of Science and Technology), A. Suganthy (Pondicherry University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, Intelligent Automation & Soft Computing</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Environmental Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> កំណើនយ៉ាងឆាប់រហ័សនៃការបង្កើតសំណល់ដោយសារកំណើនប្រជាជននិងនគរូបនីយកម្ម កំពុងគំរាមកំហែងដល់សមត្ថភាពទីលានចាក់សំរាម (ឧទាហរណ៍ ទីលានចាក់សំរាម Semakau របស់ប្រទេសសិង្ហបុរីនឹងពេញនៅឆ្នាំ២០៣៥) ដែលទាមទារឱ្យមានការព្យាករណ៍បរិមាណសំណល់ច្បាស់លាស់ដើម្បីរៀបចំហេដ្ឋារចនាសម្ព័ន្ធប្រកបដោយចីរភាព។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រើប្រាស់ក្បួនដោះស្រាយយន្តការរៀន (Machine Learning algorithms) ជាច្រើន ដោយផ្តោតជាពិសេសលើការធ្វើឱ្យប្រសើរឡើងនូវម៉ូដែល XGBoost ជាមួយនឹងវិធីសាស្ត្រ Grid Search Optimization ដើម្បីព្យាករណ៍ការបង្កើតប្រភេទសំណល់ធំៗចំនួនបីគឺ ក្រដាសនិងក្រដាសកាតុង ប្លាស្ទិក និងសំណល់អាហារ។
+        
+        <ul>
+            
+            <li>ការប្រមូលនិងរៀបចំទិន្នន័យសំណល់រឹងសិង្ហបុរីពីឆ្នាំ ២០០៣ ដល់ ២០២១ (Singapore solid waste dataset)</li>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែលព្យាករណ៍មូលដ្ឋានរួមមាន KNN, SVR, ExtraTrees, និង CatBoost (Baseline ML models)</li>
+            
+            <li>ការអនុវត្តនិងការកែលម្អម៉ូដែលព្យាករណ៍កម្រិតខ្ពស់ eXtreme Gradient Boosting (XGBoost)</li>
+            
+            <li>ការប្រើប្រាស់វិធីសាស្ត្រស្វែងរកប្រសិទ្ធភាពអតិបរមា Grid Search Optimization (GSO) ដើម្បីស្វែងរកប៉ារ៉ាម៉ែត្រល្អបំផុត (Hyperparameter tuning)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល XGBoost ដើម (Default parameters) បានផ្តល់លទ្ធផលល្អជាងម៉ូដែលផ្សេងទៀត ជាមួយនឹងអត្រាកំហុសជាមធ្យម (MAPE) ៨.៣០៩៣ សម្រាប់សំណល់ក្រដាស ៨.៣២១៧ សម្រាប់សំណល់ប្លាស្ទិក និង ៦.៩៤៩៥ សម្រាប់សំណល់អាហារ។</li>
+            
+            <li>ការធ្វើឱ្យប្រសើរឡើងដោយប្រើម៉ូដែល GSO-XGBoost បានកាត់បន្ថយអត្រាកំហុសបន្ថែមទៀត ដោយទទួលបាន MAPE ទាបបំផុតត្រឹម ៤.៩៣៤៩ (ក្រដាស) ៦.៧៩៦៧ (ប្លាស្ទិក) និង ៥.៩៦២៦ (អាហារ)។</li>
+            
+            <li>ការសិក្សាបង្ហាញថាយន្តការរៀនដែលត្រូវបានកែលម្អប៉ារ៉ាម៉ែត្រ (Optimized ML models) ផ្តល់នូវប្រសិទ្ធភាពខ្ពស់ក្នុងការគាំទ្រដល់អាជ្ញាធរសម្រាប់ការធ្វើសេចក្តីសម្រេចចិត្ត និងការគ្រប់គ្រងសំណល់រឹងប្រកបដោយចីរភាពនាពេលអនាគត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">GSO-XGBoost</span></strong><br>ម៉ូដែល XGBoost ដែលបានកែលម្អប៉ារ៉ាម៉ែត្រដោយ Grid Search Optimization</td>
+                <td>ផ្តល់លទ្ធផលព្យាករណ៍បានច្បាស់លាស់បំផុត និងមានអត្រាកំហុសទាបបំផុតសម្រាប់គ្រប់ប្រភេទសំណល់ ដោយសារការស្វែងរកប៉ារ៉ាម៉ែត្រប្រសើរបំផុត (Optimal hyperparameters)។</td>
+                <td>ទាមទារពេលវេលាគណនាយូរជាងម៉ូដែលដើម ដោយសារវាត្រូវសាកល្បងរាល់បន្សំនៃប៉ារ៉ាម៉ែត្រ (Grid Search)។</td>
+                <td>អត្រាកំហុសជាមធ្យម (MAPE) ទាបបំផុត: ៤.៩៣ (ក្រដាស), ៦.៧៩ (ប្លាស្ទិក), ៥.៩៦ (អាហារ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">XGBoost (Default)</span></strong><br>ម៉ូដែល XGBoost ដើម (មិនកែប្រែប៉ារ៉ាម៉ែត្រ)</td>
+                <td>ដំណើរការលឿន មានប្រសិទ្ធភាពខ្ពស់ក្នុងការរៀនពីទិន្នន័យ (Gradient descent framework) និងមានលទ្ធផលល្អប្រសើរជាងម៉ូដែលប្រពៃណីផ្សេងទៀត។</td>
+                <td>នៅមានកម្រិតកំហុសខ្ពស់ជាងម៉ូដែលដែលបានធ្វើ GSO (Optimization) ព្រោះប៉ារ៉ាម៉ែត្រដើមអាចមិនស័ក្តិសមបំផុតសម្រាប់ទិន្នន័យជាក់លាក់នេះ។</td>
+                <td>អត្រាកំហុសជាមធ្យម (MAPE): ៨.៣០ (ក្រដាស), ៨.៣២ (ប្លាស្ទិក), ៦.៩៤ (អាហារ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ExtraTrees</span></strong><br>ម៉ូដែលដើមឈើសម្រេចចិត្តច្រើន (Extremely Randomized Trees)</td>
+                <td>មានសមត្ថភាពល្អក្នុងការចាប់យកទម្រង់ទិន្នន័យសំណល់ប្លាស្ទិក និងអាហារ ដោយទទួលបានចំណាត់ថ្នាក់ទី២ ក្នុងការទស្សន៍ទាយ។</td>
+                <td>ប្រសិទ្ធភាពធ្លាក់ចុះនៅពេលជួបប្រទះទិន្នន័យដែលមានភាពស្មុគស្មាញ និងប្រែប្រួលខ្លាំងដូចជាសំណល់ក្រដាស។</td>
+                <td>អត្រាកំហុសជាមធ្យម (MAPE): ១០.៤៦ (ក្រដាស), ៨.៤១ (ប្លាស្ទិក), ៧.០៥ (អាហារ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SVR (Support Vector Regressor)</span></strong><br>ការតំរែតំរង់វ៉ិចទ័រគាំទ្រ</td>
+                <td>មានស្ថិរភាពគួរសមសម្រាប់ការទស្សន៍ទាយទិន្នន័យសំណល់អាហារ ដែលមានទម្រង់ចែកចាយជាក់លាក់។</td>
+                <td>ដំណើរការខ្សោយបំផុតសម្រាប់ទិន្នន័យសំណល់ក្រដាសដែលមានភាពស្មុគស្មាញ និងមានអត្រាកំហុសខ្ពស់ជាងគេ។</td>
+                <td>អត្រាកំហុសជាមធ្យម (MAPE): ១៩.៧៧ (ក្រដាស), ១០.៥៨ (ប្លាស្ទិក), ៧.៥៣ (អាហារ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">KNN (k-Nearest Neighbors)</span></strong><br>ក្បួនដោះស្រាយអ្នកជិតខាង k</td>
+                <td>ងាយស្រួលយល់ និងអនុវត្តដោយមិនចាំបាច់មានការកំណត់រចនាសម្ព័ន្ធស្មុគស្មាញច្រើន។</td>
+                <td>ផ្តល់លទ្ធផលខ្សោយបំផុតជាទូទៅ ពិសេសលើសំណល់ប្លាស្ទិក និងអាហារ ព្រោះវាមិនសូវពូកែទាញយកលក្ខណៈពិសេសនៃទិន្នន័យ Time-series។</td>
+                <td>អត្រាកំហុសជាមធ្យម (MAPE): ១៣.៤៤ (ក្រដាស), ១៥.០៩ (ប្លាស្ទិក), ១០.៧០ (អាហារ)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារមិនបានបញ្ជាក់លម្អិតពីធនធានកុំព្យូទ័រដែលបានប្រើប្រាស់នោះទេ ប៉ុន្តែដោយផ្អែកលើទំហំទិន្នន័យ និងវិធីសាស្ត្រ វាអាចត្រូវបានដំណើរការលើកុំព្យូទ័រធម្មតាបាន។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យប្រវត្តិសំណល់រឹងសិង្ហបុរីរយៈពេល ១៨ ឆ្នាំ (២០០៣-២០២១) ដែលមានទំហំតូចនិងងាយស្រួលផ្ទុក។</li>
+        
+        <li><strong>Software:</strong> ភាសាកូដ Python រួមជាមួយបណ្ណាល័យ Machine Learning ដូចជា Scikit-learn, XGBoost និង CatBoost សម្រាប់ការបង្កើតម៉ូដែល។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រធម្មតា (Standard PC/Laptop) ដែលមាន CPU និង RAM មធ្យមគឺគ្រប់គ្រាន់ មិនចាំបាច់ប្រើ GPU ធំដុំនោះទេ លើកលែងតែពេលដំណើរការ Grid Search អាចប្រើពេលគណនាបន្តិច។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីទីភ្នាក់ងារបរិស្ថានជាតិសិង្ហបុរី (NEA) ដែលជាប្រទេសអភិវឌ្ឍន៍ មានប្រព័ន្ធប្រមូលសំរាម និងកែច្នៃស្តង់ដារខ្ពស់កម្រិតពិភពលោក។ សម្រាប់ប្រទេសកម្ពុជា លក្ខណៈប្រជាសាស្ត្រ ការបែងចែកសំរាមនៅប្រភពដើម និងអត្រាកែច្នៃមានភាពខុសគ្នាស្រឡះ (ភាគច្រើនជាសំណល់សរីរាង្គ និងមានអ្នករើសអេតចាយក្រៅផ្លូវការ) ដែលធ្វើឱ្យការយកម៉ូដែលនេះមកប្រើប្រាស់ផ្ទាល់អាចមានគម្លាតប្រសិទ្ធភាពបើសិនមិនប្រើទិន្នន័យក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យមានភាពខុសគ្នាក៏ដោយ វិធីសាស្ត្រ GSO-XGBoost នេះមានសារៈសំខាន់ និងអាចយកមកអនុវត្តយ៉ាងមានប្រសិទ្ធភាពសម្រាប់ការគ្រប់គ្រងសំណល់នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>រាជធានីភ្នំពេញ (Phnom Penh Municipality):</strong> អាចប្រើម៉ូដែលនេះជាមួយទិន្នន័យរបស់ក្រុមហ៊ុនប្រមូលសំរាម (ដូចជា Cintri, Mizuda, 800 Super) ដើម្បីទស្សន៍ទាយបរិមាណសំរាមប្រចាំថ្ងៃ និងរៀបចំផ្លូវប្រមូលសំរាម (Route optimization) ក៏ដូចជាកាត់បន្ថយការកកស្ទះនៅទីលានចាក់សំរាមដង្កោ ឬទីលានថ្មី។</li>
+            
+            <li><strong>ខេត្តទេសចរណ៍ (Siem Reap & Preah Sihanouk):</strong> ទស្សន៍ទាយការកើនឡើងនៃសំណល់ប្លាស្ទិក និងសំណល់អាហារក្នុងរដូវកាលទេសចរណ៍ (High season) ដើម្បីត្រៀមរៀបចំធុងសំរាម និងរថយន្តដឹកជញ្ជូនឱ្យបានគ្រប់គ្រាន់។</li>
+            
+            <li><strong>ក្រសួងបរិស្ថាន (Ministry of Environment):</strong> ប្រើប្រាស់ការទស្សន៍ទាយរយៈពេលវែងសម្រាប់ធ្វើសេចក្តីសម្រេចចិត្តក្នុងការកសាងរោងចក្រដុតសំរាមយកថាមពល (Waste-to-Energy) និងកំណត់គោលដៅកែច្នៃសំណល់រឹងថ្នាក់ជាតិ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តវិធីសាស្ត្រ Machine Learning នេះដោយប្រើប្រាស់ទិន្នន័យជាក់ស្តែងរបស់កម្ពុជា នឹងជួយពន្យារអាយុកាលទីលានចាក់សំរាម និងជំរុញការគ្រប់គ្រងបរិស្ថានប្រកបដោយចីរភាពកាន់តែប្រសើរ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ ការប្រមូល និងសម្អាតទិន្នន័យសំណល់ (Data Collection & Preprocessing):</strong> និស្សិតត្រូវស្វែងរកទិន្នន័យសំណល់រឹងពីក្រសួងបរិស្ថាន ឬរដ្ឋបាលរាជធានី-ខេត្ត រួចប្រើប្រាស់ <span class="en">Pandas</span> ក្នុង Python ដើម្បីសម្អាតទិន្នន័យ (Missing values) និងបែងចែកទិន្នន័យជា Training និង Testing sets។</li>
+            
+            <li><strong>ជំហានទី២៖ សិក្សាពីក្បួនដោះស្រាយ XGBoost (Mastering XGBoost):</strong> ចាប់ផ្តើមអនុវត្តម៉ូដែល <span class="en">XGBRegressor</span> ដោយប្រើប្រាស់ប៉ារ៉ាម៉ែត្រដើម (Default) ដើម្បីស្វែងយល់ពីរបៀបដែលម៉ូដែលរៀនពីទិន្នន័យ (Gradient descent) និងវាយតម្លៃលទ្ធផលបឋម។</li>
+            
+            <li><strong>ជំហានទី៣៖ ការធ្វើឱ្យប្រសើរឡើងដោយ Grid Search Optimization (Hyperparameter Tuning):</strong> ប្រើប្រាស់ឧបករណ៍ <span class="en">GridSearchCV</span> ពីបណ្ណាល័យ <span class="en">Scikit-learn</span> ដើម្បីកំណត់ជួរនៃប៉ារ៉ាម៉ែត្រ (ឧទាហរណ៍: max_depth=3 ដល់ 6, n_estimators=50 ដល់ 200) រួចស្វែងរកបន្សំដែលល្អបំផុតសម្រាប់ទិន្នន័យកម្ពុជា។</li>
+            
+            <li><strong>ជំហានទី៤៖ ការវាយតម្លៃ និងប្រៀបធៀបប្រសិទ្ធភាពម៉ូដែល (Model Evaluation):</strong> វាស់ស្ទង់សមត្ថភាពម៉ូដែល GSO-XGBoost ធៀបជាមួយម៉ូដែលផ្សេងៗ (ដូចជា SVR, Random Forest) ដោយប្រើប្រាស់រង្វាស់ស្តង់ដារដូចជា <span class="en">MAPE</span>, <span class="en">MAE</span>, និង <span class="en">RMSE</span> តាមរយៈកូដ Python។</li>
+            
+            <li><strong>ជំហានទី៥៖ បង្កើត Dashboard ទស្សន៍ទាយ (Visualization & Deployment):</strong> ប្រើប្រាស់ <span class="en">Streamlit</span> ឬ <span class="en">Dash</span> ដើម្បីសង់ជាផ្ទាំងគ្រប់គ្រង (Dashboard) ដែលអនុញ្ញាតឱ្យអាជ្ញាធរអាចមើលឃើញក្រាហ្វិកព្យាករណ៍បរិមាណសំរាមនាពេលអនាគត និងជួយសម្រួលដល់ការធ្វើសេចក្តីសម្រេចចិត្ត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">XGBoost (eXtreme Gradient Boosting)</span></td>
+                <td>ជាក្បួនដោះស្រាយយន្តការរៀន (Machine Learning) ដ៏មានឥទ្ធិពលដែលបង្កើត "ដើមឈើសម្រេចចិត្ត" (Decision Trees) ជាច្រើនបន្តបន្ទាប់គ្នា ដោយដើមឈើថ្មីនីមួយៗព្យាយាមកែតម្រូវកំហុសដែលដើមឈើចាស់បានធ្វើ ដើម្បីទទួលបានលទ្ធផលព្យាករណ៍ចុងក្រោយមួយដែលសុក្រឹតបំផុត។</td>
+                <td>ដូចជាក្រុមសិស្សធ្វើលំហាត់រួមគ្នា ដែលសិស្សទី២ កែរាល់កំហុសរបស់សិស្សទី១ ហើយសិស្សទី៣ កែកំហុសបន្តពីសិស្សទី២ រហូតដល់លំហាត់នោះត្រឹមត្រូវល្អឥតខ្ចោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Grid Search Optimization (GSO)</span></td>
+                <td>ជាវិធីសាស្ត្រក្នុងការស្វែងរកតម្លៃល្អបំផុតសម្រាប់ប៉ារ៉ាម៉ែត្ររបស់ម៉ូដែល ដោយវាធ្វើការសាកល្បងរាល់បន្សំ (Combinations) នៃប៉ារ៉ាម៉ែត្រទាំងអស់ដែលមានក្នុងបញ្ជី រហូតដល់រកឃើញបន្សំមួយណាដែលផ្តល់លទ្ធផលព្យាករណ៍ត្រឹមត្រូវជាងគេបំផុត។</td>
+                <td>ដូចជាការសាកល្បងចាក់សោរលេខកូដវ៉ាលី ដោយយើងសាកល្បងរាល់លេខទាំងអស់ពី 000 ដល់ 999 ម្តងមួយៗ រហូតដល់រកឃើញលេខកូដដែលត្រឹមត្រូវអាចបើកវ៉ាលីបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperparameters</span></td>
+                <td>គឺជាការកំណត់រចនាសម្ព័ន្ធ (Settings) ជាមុនដែលយើងត្រូវផ្តល់ឱ្យម៉ូដែល Machine Learning មុនពេលវាចាប់ផ្តើមរៀនពីទិន្នន័យ (ឧទាហរណ៍ កំណត់ចំនួនដើមឈើ ឬជម្រៅរបស់វា) ដែលវាជួយគ្រប់គ្រងរបៀបនិងល្បឿនដែលម៉ូដែលនោះដំណើរការ។</td>
+                <td>ដូចជាការកំណត់កម្ដៅ និងពេលវេលានៅលើម៉ាស៊ីនដុតនំប៉័ង មុនពេលយើងដាក់នំប៉័ងចូលដុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Municipal Solid Waste (MSW)</span></td>
+                <td>ជាសំណល់រឹង ឬសំរាមទូទៅដែលត្រូវបានបង្កើតឡើងដោយប្រជាជននៅតាមលំនៅដ្ឋាន សាលារៀន អាជីវកម្មដ្ឋាន និងទីកន្លែងសាធារណៈនានា ដែលអាជ្ញាធរត្រូវប្រមូលយកទៅកែច្នៃ ឬចោលនៅទីលានចាក់សំរាម។</td>
+                <td>គឺជា "សំរាម" គ្រប់ប្រភេទដែលយើងតែងតែបោះចោលក្នុងធុងសំរាមរាល់ថ្ងៃនៅផ្ទះ ឬកន្លែងធ្វើការ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean Absolute Percentage Error (MAPE)</span></td>
+                <td>ជារង្វាស់ស្ថិតិដែលគេប្រើដើម្បីវាយតម្លៃភាពសុក្រឹតនៃម៉ូដែលព្យាករណ៍ ដោយវាគណនាគម្លាតរវាងតម្លៃដែលម៉ូដែលទស្សន៍ទាយបាន និងតម្លៃពិតប្រាកដ រួចបំប្លែងវាទៅជាភាគរយនៃកំហុសជាមធ្យម។ តួលេខ MAPE កាន់តែតូច បញ្ជាក់ថាម៉ូដែលកាន់តែពូកែ។</td>
+                <td>ដូចជាការប្រឡងបាញ់ធ្នូ បើសិនជាអ្នកបាញ់ខុសចំកណ្តាលស៊ីបគិតជាភាគរយប្រហែល ៥% នោះ ៥% នេះគឺជាតម្លៃកំហុស MAPE។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Classification and Regression Tree (CART)</span></td>
+                <td>ជាទម្រង់នៃម៉ូដែលរៀនពីទិន្នន័យដែលបំបែកទិន្នន័យជាមែកធាងជាច្រើនដំណាក់កាលដោយផ្អែកលើលក្ខខណ្ឌ ដើម្បីធ្វើការចាត់ថ្នាក់ទិន្នន័យ (Classification) ឬទស្សន៍ទាយជាតួលេខបន្តបន្ទាប់ (Regression) ដែលវាជាធាតុផ្សំមូលដ្ឋានរបស់ម៉ូដែល XGBoost។</td>
+                <td>ដូចជាការលេងហ្គេមសួរសំណួរ "តើវាជាសត្វ ឬរុក្ខជាតិ?" "តើវាចេះហោះទេ?" ដែលសំណួរនីមួយៗជួយបំបែកចម្លើយជាមែកធាងរហូតដល់រកឃើញចម្លើយត្រឹមត្រូវនៅចុងបញ្ចប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Overfitting</span></td>
+                <td>ជាបញ្ហាក្នុង Machine Learning នៅពេលដែលម៉ូដែលរៀនទន្ទេញចាំទិន្នន័យហ្វឹកហាត់ (Training data) ច្បាស់លាស់ពេក រហូតដល់ចងចាំទាំងចំណុចខុសឆ្គង (Noise) ដែលធ្វើឱ្យវាមិនអាចធ្វើការទស្សន៍ទាយបានល្អនៅពេលជួបប្រទះទិន្នន័យថ្មីដែលវាមិនធ្លាប់ស្គាល់។</td>
+                <td>ដូចជាសិស្សដែលខំទន្ទេញចាំចម្លើយវិញ្ញាសាចាស់ៗគ្រប់ម៉ាត់រហូតចាំស្ទាត់ ប៉ុន្តែពេលប្រឡងជួបវិញ្ញាសាថ្មីដែលប្តូរលេខសោះ បែរជាធ្វើមិនចេញទាល់តែសោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Benchmarking+Machine+Learning+for+Satellite+Precipitation+Downscaling%3A+Insights+into+Superiority%2C+Advantages%2C+and+Transferability%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9C%E1%9E%B6%E1%9E%9F%E1%9F%8B%E1%9E%9C%E1%9F%82%E1%9E%84%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9F%80%E1%9E%94%E1%9E%92%E1%9F%80%E1%9E%94%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%9A%E1%9E%94%E1%9E%9F%E1%9F%8B%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%93%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%80%E1%9E%B6%E1%9E%8F%E1%9F%8B%E1%9E%94%E1%9E%93%E1%9F%92%E1%9E%90%E1%9E%99%E1%9E%98%E1%9E%B6%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%B6%E1%9E%93%E1%9E%91%E1%9E%B9%E1%9E%80%E1%9E%97%E1%9F%92%E1%9E%9B%E1%9F%80%E1%9E%84%E1%9E%96%E1%9E%B8%E1%9E%95%E1%9F%92%E1%9E%80%E1%9E%B6%E1%9E%99%E1%9E%9A%E1%9E%8E%E1%9E%94%E1%9F%96+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%99%E1%9E%9B%E1%9F%8B%E1%9E%8A%E1%9E%B9%E1%9E%84%E1%9E%A2%E1%9F%86%E1%9E%96%E1%9E%B8%E1%9E%A7%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%98%E1%9E%97%E1%9E%B6%E1%9E%96+%E1%9E%82%E1%9E%BB%E1%9E%8E%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%94%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%B7+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%9B%E1%9E%91%E1%9F%92%E1%9E%92%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%95%E1%9F%92%E1%9E%91%E1%9F%81%E1%9E%9A%27%2C+%27url%27%3A+%27%2Fpapers%2Fscience%2Fbenchmarking-ml-satellite-precipitation-downscaling-2024.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability', 'khmer_title': 'ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ', 'url': '/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Irregular+Stock+Data+Prediction+Performance+Optimisation+Based+on+the+Simple+Linear+Interpolation%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9E%84%E1%9F%92%E1%9E%80%E1%9E%BE%E1%9E%93%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%9F%E1%9E%B7%E1%9E%91%E1%9F%92%E1%9E%92%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%91%E1%9E%9F%E1%9F%92%E1%9E%9F%E1%9E%93%E1%9F%8D%E1%9E%91%E1%9E%B6%E1%9E%99%E1%9E%91%E1%9E%B7%E1%9E%93%E1%9F%92%E1%9E%93%E1%9E%93%E1%9F%90%E1%9E%99%E1%9E%97%E1%9E%B6%E1%9E%82%E1%9E%A0%E1%9F%8A%E1%9E%BB%E1%9E%93%E1%9E%98%E1%9E%B7%E1%9E%93%E1%9E%91%E1%9F%80%E1%9E%84%E1%9E%91%E1%9E%B6%E1%9E%8F%E1%9F%8B%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%95%E1%9F%92%E1%9E%A2%E1%9F%82%E1%9E%80%E1%9E%9B%E1%9E%BE%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9F%89%E1%9E%B6%E1%9E%93%E1%9F%8B%E1%9E%9F%E1%9F%92%E1%9E%98%E1%9E%B6%E1%9E%93%E1%9E%9B%E1%9E%B8%E1%9E%93%E1%9F%81%E1%9E%A2%E1%9F%8A%E1%9F%82%E1%9E%9A%E1%9E%9F%E1%9E%B6%E1%9E%98%E1%9E%89%E1%9F%92%E1%9E%89+%28Simple+Linear+Interpolation%29%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Firregular-stock-data-prediction-sli-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Irregular Stock Data Prediction Performance Optimisation Based on the Simple Linear Interpolation', 'khmer_title': 'ការបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយទិន្នន័យភាគហ៊ុនមិនទៀងទាត់ដោយផ្អែកលើការប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation)', 'url': '/papers/technology/irregular-stock-data-prediction-sli-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Efficiency+of+Flash+Flood+Prediction+by+XGBoost+and+Random+Forest+using+15+minutes+%26+1+hour+time+period+sensor+data.%27%2C+%27khmer_title%27%3A+%27%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%9F%E1%9E%B7%E1%9E%91%E1%9F%92%E1%9E%92%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%91%E1%9E%9F%E1%9F%92%E1%9E%9F%E1%9E%93%E1%9F%8D%E1%9E%91%E1%9E%B6%E1%9E%99%E1%9E%91%E1%9E%B9%E1%9E%80%E1%9E%87%E1%9F%86%E1%9E%93%E1%9E%93%E1%9F%8B%E1%9E%9A%E1%9E%A0%E1%9F%90%E1%9E%9F%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BE%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%9F%E1%9F%8B+XGBoost+%E1%9E%93%E1%9E%B7%E1%9E%84+Random+Forest+%E1%9E%87%E1%9E%B6%E1%9E%98%E1%9E%BD%E1%9E%99%E1%9E%93%E1%9E%B9%E1%9E%84%E1%9E%91%E1%9E%B7%E1%9E%93%E1%9F%92%E1%9E%93%E1%9E%93%E1%9F%90%E1%9E%99%E1%9E%9F%E1%9F%81%E1%9E%93%E1%9E%9F%E1%9F%90%E1%9E%9A%E1%9E%9A%E1%9E%99%E1%9F%88%E1%9E%96%E1%9F%81%E1%9E%9B+%E1%9F%A1%E1%9F%A5+%E1%9E%93%E1%9E%B6%E1%9E%91%E1%9E%B8+%E1%9E%93%E1%9E%B7%E1%9E%84+%E1%9F%A1+%E1%9E%98%E1%9F%89%E1%9F%84%E1%9E%84%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fflash-flood-prediction-xgboost-random-forest-2020.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Efficiency of Flash Flood Prediction by XGBoost and Random Forest using 15 minutes & 1 hour time period sensor data.', 'khmer_title': 'ប្រសិទ្ធភាពនៃការទស្សន៍ទាយទឹកជំនន់រហ័សដោយប្រើប្រាស់ XGBoost និង Random Forest ជាមួយនឹងទិន្នន័យសេនស័ររយៈពេល ១៥ នាទី និង ១ ម៉ោង', 'url': '/papers/technology/flash-flood-prediction-xgboost-random-forest-2020.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Analysis+of+the+Use+of+the+XGBoost+Algorithm+for+Predicting+the+Behavior+of+Contaminants+in+International+Aquatic+Ecosystems%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9C%E1%9E%B7%E1%9E%97%E1%9E%B6%E1%9E%82%E1%9E%9B%E1%9E%BE%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BE%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%9F%E1%9F%8B%E1%9E%80%E1%9F%92%E1%9E%94%E1%9E%BD%E1%9E%93%E1%9E%8A%E1%9F%84%E1%9F%87%E1%9E%9F%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%99+XGBoost+%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%96%E1%9F%92%E1%9E%99%E1%9E%B6%E1%9E%80%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%A5%E1%9E%9A%E1%9E%B7%E1%9E%99%E1%9E%B6%E1%9E%94%E1%9E%90%E1%9E%93%E1%9F%83%E1%9E%9F%E1%9E%B6%E1%9E%9A%E1%9E%92%E1%9E%B6%E1%9E%8F%E1%9E%BB%E1%9E%94%E1%9F%86%E1%9E%96%E1%9E%BB%E1%9E%9B%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%A2%E1%9F%81%E1%9E%80%E1%9E%BC%E1%9E%A1%E1%9E%BC%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%91%E1%9E%B9%E1%9E%80%E1%9E%A2%E1%9E%93%E1%9F%92%E1%9E%8F%E1%9E%9A%E1%9E%87%E1%9E%B6%E1%9E%8F%E1%9E%B7%27%2C+%27url%27%3A+%27%2Fpapers%2Fenvironment%2Fxgboost-contaminant-prediction-aquatic-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Analysis of the Use of the XGBoost Algorithm for Predicting the Behavior of Contaminants in International Aquatic Ecosystems', 'khmer_title': 'ការវិភាគលើការប្រើប្រាស់ក្បួនដោះស្រាយ XGBoost សម្រាប់ព្យាករណ៍ឥរិយាបថនៃសារធាតុបំពុលក្នុងប្រព័ន្ធអេកូឡូស៊ីក្នុងទឹកអន្តរជាតិ', 'url': '/papers/environment/xgboost-contaminant-prediction-aquatic-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Estimating+the+Probability+of+Loan+Default+in+Melli+Bank%3A+A+Comparative+Study+of+Machine+Learning+and+Econometric+Approaches%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%94%E1%9F%89%E1%9E%B6%E1%9E%93%E1%9F%8B%E1%9E%9F%E1%9F%92%E1%9E%98%E1%9E%B6%E1%9E%93%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BC%E1%9E%94%E1%9E%B6%E1%9E%94%E1%9F%8A%E1%9E%B8%E1%9E%9B%E1%9E%B8%E1%9E%8F%E1%9F%81%E1%9E%93%E1%9F%83%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%81%E1%9E%80%E1%9E%81%E1%9E%B6%E1%9E%93%E1%9E%9F%E1%9E%84%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%85%E1%9E%B8%E1%9E%93%E1%9F%85%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%92%E1%9E%93%E1%9E%B6%E1%9E%82%E1%9E%B6%E1%9E%9A+Melli%E1%9F%96+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9F%92%E1%9E%9F%E1%9E%B6%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9F%80%E1%9E%94%E1%9E%92%E1%9F%80%E1%9E%94%E1%9E%9A%E1%9E%9C%E1%9E%B6%E1%9E%84%E1%9E%9C%E1%9E%B7%E1%9E%92%E1%9E%B8%E1%9E%9F%E1%9E%B6%E1%9E%9F%E1%9F%92%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%98%E1%9F%89%E1%9E%B6%E1%9E%9F%E1%9F%8A%E1%9E%B8%E1%9E%93+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%9C%E1%9E%B7%E1%9E%92%E1%9E%B8%E1%9E%9F%E1%9E%B6%E1%9E%9F%E1%9F%92%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%9F%E1%9F%81%E1%9E%8A%E1%9F%92%E1%9E%8B%E1%9E%80%E1%9E%B7%E1%9E%85%E1%9F%92%E1%9E%85%E1%9E%98%E1%9E%B6%E1%9E%8F%E1%9F%92%E1%9E%9A%27%2C+%27url%27%3A+%27%2Fpapers%2Feconomics%2Floan-default-melli-bank-machine-learning-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Estimating the Probability of Loan Default in Melli Bank: A Comparative Study of Machine Learning and Econometric Approaches', 'khmer_title': 'ការប៉ាន់ស្មានប្រូបាប៊ីលីតេនៃការខកខានសងប្រាក់កម្ចីនៅក្នុងធនាគារ Melli៖ ការសិក្សាប្រៀបធៀបរវាងវិធីសាស្ត្ររៀនដោយម៉ាស៊ីន និងវិធីសាស្ត្រសេដ្ឋកិច្ចមាត្រ', 'url': '/papers/economics/loan-default-melli-bank-machine-learning-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+methods+for+socioeconomic+waste+generation+forecasting" target="_blank" rel="noopener"><span class="en">deep learning methods for socioeconomic waste generation forecasting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hyperparameter+tuning+in+XGBoost+for+environmental+datasets" target="_blank" rel="noopener"><span class="en">hyperparameter tuning in XGBoost for environmental datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=municipal+solid+waste+prediction+using+artificial+neural+networks" target="_blank" rel="noopener"><span class="en">municipal solid waste prediction using artificial neural networks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Singapore+National+Environment+Agency+waste+statistics+analysis" target="_blank" rel="noopener"><span class="en">Singapore National Environment Agency waste statistics analysis</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

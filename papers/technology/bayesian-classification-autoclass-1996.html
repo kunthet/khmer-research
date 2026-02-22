@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើចំណាត់ថ្នាក់តាមបែបបាយេស (AutoClass)៖ ទ្រឹស្តី និងលទ្ធផល | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកលំនាំ ឬរចនាសម្ព័ន្ធដែលលាក់កំបាំងនៅក្នុងទិន្នន័យធំៗ និងស្មុគស្មាញដោយមិនមានការកំណត់ស្លាកជាមុន (Unsupervised Learning) ...">
+    
+    <meta name="keywords" content="AutoClass, Bayesian classification, Unsupervised learning, Finite mixture models, Expectation Maximization, Knowledge Discovery in Databases (KDD), Occam's razor, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/bayesian-classification-autoclass-1996.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/bayesian-classification-autoclass-1996.html">
+    <meta property="og:title" content="ការធ្វើចំណាត់ថ្នាក់តាមបែបបាយេស (AutoClass)៖ ទ្រឹស្តី និងលទ្ធផល | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកលំនាំ ឬរចនាសម្ព័ន្ធដែលលាក់កំបាំងនៅក្នុងទិន្នន័យធំៗ និងស្មុគស្មាញដោយមិនមានការកំណត់ស្លាកជាមុន (Unsupervised Learning) ដែលអ្នកជំនាញមិនអាចមើលឃើញដោយងាយ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="1996 (Advances in Knowledge Discovery and Data Mining)">
+    
+    <meta property="article:tag" content="AutoClass">
+    
+    <meta property="article:tag" content="Bayesian classification">
+    
+    <meta property="article:tag" content="Unsupervised learning">
+    
+    <meta property="article:tag" content="Finite mixture models">
+    
+    <meta property="article:tag" content="Expectation Maximization">
+    
+    <meta property="article:tag" content="Knowledge Discovery in Databases (KDD)">
+    
+    <meta property="article:tag" content="Occam's razor">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើចំណាត់ថ្នាក់តាមបែបបាយេស (AutoClass)៖ ទ្រឹស្តី និងលទ្ធផល">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកលំនាំ ឬរចនាសម្ព័ន្ធដែលលាក់កំបាំងនៅក្នុងទិន្នន័យធំៗ និងស្មុគស្មាញដោយមិនមានការកំណត់ស្លាកជាមុន (Unsupervised Learning) ដែលអ្នកជំនាញមិនអាចមើលឃើញដោយងាយ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178f\u17b6\u1798\u1794\u17c2\u1794\u1794\u17b6\u1799\u17c1\u179f (AutoClass)\u17d6 \u1791\u17d2\u179a\u17b9\u179f\u17d2\u178f\u17b8 \u1793\u17b7\u1784\u179b\u1791\u17d2\u1792\u1795\u179b",
+      "name": "Bayesian Classification (AutoClass): Theory and Results",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u179b\u17c6\u1793\u17b6\u17c6 \u17ac\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u178a\u17c2\u179b\u179b\u17b6\u1780\u17cb\u1780\u17c6\u1794\u17b6\u17c6\u1784\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1792\u17c6\u17d7 \u1793\u17b7\u1784\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u178a\u17c4\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u179f\u17d2\u179b\u17b6\u1780\u1787\u17b6\u1798\u17bb\u1793 (Unsupervised Learning) \u178a\u17c2\u179b\u17a2\u17d2\u1793\u1780\u1787\u17c6\u1793\u17b6\u1789\u1798\u17b7\u1793\u17a2\u17b6\u1785\u1798\u17be\u179b\u1783\u17be\u1789\u178a\u17c4\u1799\u1784\u17b6\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/bayesian-classification-autoclass-1996.html",
+      "author": [{"@type": "Person", "name": "Peter Cheeseman (RIACS)"},{"@type": "Person", "name": "John Stutz (NASA)"}],
+      "datePublished": "1996 (Advances in Knowledge Discovery and Data Mining)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Bayesian Classification (AutoClass): Theory and Results",
+        "url": "N/A"
+      },
+      "keywords": ["AutoClass", "Bayesian classification", "Unsupervised learning", "Finite mixture models", "Expectation Maximization", "Knowledge Discovery in Databases (KDD)", "Occam\u0027s razor"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178f\u17b6\u1798\u1794\u17c2\u1794\u1794\u17b6\u1799\u17c1\u179f (AutoClass)\u17d6 \u1791\u17d2\u179a\u17b9\u179f\u17d2\u178f\u17b8 \u1793\u17b7\u1784\u179b\u1791\u17d2\u1792\u1795\u179b",
+          "item": "https://khmerresearch.com/papers/technology/bayesian-classification-autoclass-1996.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើចំណាត់ថ្នាក់តាមបែបបាយេស (AutoClass)៖ ទ្រឹស្តី និងលទ្ធផល</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Bayesian Classification (AutoClass): Theory and Results<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើចំណាត់ថ្នាក់តាមបែបបាយេស (AutoClass)៖ ទ្រឹស្តី និងលទ្ធផល</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Bayesian Classification (AutoClass): Theory and Results</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Peter Cheeseman (RIACS), John Stutz (NASA)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 1996 (Advances in Knowledge Discovery and Data Mining)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកលំនាំ ឬរចនាសម្ព័ន្ធដែលលាក់កំបាំងនៅក្នុងទិន្នន័យធំៗ និងស្មុគស្មាញដោយមិនមានការកំណត់ស្លាកជាមុន (Unsupervised Learning) ដែលអ្នកជំនាញមិនអាចមើលឃើញដោយងាយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានអភិវឌ្ឍប្រព័ន្ធ AutoClass ដោយប្រើប្រាស់ទ្រឹស្តីបាយេស (Bayesian theory) ដើម្បីស្វែងរកចំនួនថ្នាក់ (Classes) និងការពិពណ៌នាថ្នាក់ដែលទំនងបំផុតដោយស្វ័យប្រវត្តិ។
+        
+        <ul>
+            
+            <li>Bayesian Finite Mixture Models (គំរូល្បាយកំណត់តាមបែបបាយេស)</li>
+            
+            <li>Expectation Maximization Algorithm (ក្បួនដោះស្រាយ EM សម្រាប់ប៉ាន់ស្មានប៉ារ៉ាម៉ែត្រ)</li>
+            
+            <li>Maximum Posterior Probability (MAP) (ការស្វែងរកប្រូបាប៊ីលីតេខ្ពស់បំផុតនៃគំរូ)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>AutoClass បានរកឃើញប្រភេទផ្កាយថ្មីៗ និងកំហុសនៃការវាស់វែងនៅក្នុងទិន្នន័យតារាសាស្ត្រ IRAS ដែលអ្នកជំនាញមិនធ្លាប់ដឹងពីមុនមក។</li>
+            
+            <li>នៅក្នុងទិន្នន័យ DNA កម្មវិធីនេះបានរកឃើញលំនាំនៃប្រេកង់អាស៊ីតអាមីណូជាក់លាក់ (C-rich patterns) ដែលមានសារៈសំខាន់សម្រាប់ការសិក្សាជីវវិទ្យាម៉ូលេគុល។</li>
+            
+            <li>ការសិក្សានេះបង្ហាញថា ការរកឃើញចំណេះដឹងពីទិន្នន័យ (Data Mining) គឺជាដំណើរការដែលទាមទារការចូលរួមយ៉ាងសកម្មពីអ្នកជំនាញដើម្បីបកស្រាយលទ្ធផល និងត្រួតពិនិត្យគុណភាពទិន្នន័យ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">AutoClass (Bayesian Mixture Model)</span></strong><br>ការធ្វើចំណាត់ថ្នាក់ស្វ័យប្រវត្តិបែបបាយេស (AutoClass)</td>
+                <td>អាចកំណត់ចំនួនថ្នាក់ (Classes) ដោយស្វ័យប្រវត្តិមិនចាំបាច់កំណត់ទុកជាមុន និងផ្តល់នូវប្រូបាប៊ីលីតេនៃការចូលជាសមាជិករបស់ទិន្នន័យនីមួយៗជំនួសឱ្យការកាត់សេចក្តីដាច់ខាត។</td>
+                <td>ទាមទារថាមពលកុំព្យូទ័រខ្ពស់សម្រាប់ការគណនា (Computationally Expensive) និងអាចជាប់គាំងត្រឹមចំណុចល្អបំផុតក្នុងតំបន់ (Local Maxima) នៃលំហស្វែងរក។</td>
+                <td>បានរកឃើញប្រភេទផ្កាយថ្មីៗនៅក្នុងទិន្នន័យ IRAS និងលំនាំ DNA ដែលវិធីសាស្ត្រផ្សេងទៀតមិនអាចរកឃើញ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Maximum Likelihood / Hard Clustering</span></strong><br>ការបែងចែកក្រុមតាមបែបប្រពៃណី (Hard Clustering)</td>
+                <td>មានដំណើរការលឿនជាង និងងាយស្រួលយល់សម្រាប់ទិន្នន័យដែលមានព្រំដែនច្បាស់លាស់។</td>
+                <td>ងាយរងគ្រោះចំពោះទិន្នន័យដែលមានភាពស្រពិចស្រពិល (Brittle behavior) និងមិនអាចផ្តល់ព័ត៌មានលម្អិតអំពីភាពមិនច្បាស់លាស់នៃការចាត់ថ្នាក់បានទេ។</td>
+                <td>មិនត្រូវបានណែនាំក្នុងឯកសារនេះទេ ដោយសារវាខ្វះសមត្ថភាពក្នុងការដោះស្រាយទិន្នន័យស្មុគស្មាញ និងទិន្នន័យដែលមានលក្ខណៈចម្រុះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តវិធីសាស្ត្រនេះទាមទារធនធានកុំព្យូទ័រខ្ពស់ និងកិច្ចសហការជិតស្និទ្ធជាមួយអ្នកជំនាញតាមវិស័យ។
+    
+    <ul>
+        
+        <li><strong>Computational Power:</strong> ត្រូវការកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់ ឬប្រព័ន្ធ Parallel Processing (ដូចជាម៉ាស៊ីន LISP ឬ CM-2 ដែលប្រើក្នុងឯកសារ) ដើម្បីដំណើរការក្បួនដោះស្រាយ EM លើទិន្នន័យធំ។</li>
+        
+        <li><strong>Data Quality:</strong> ទាមទារទិន្នន័យដើម (Raw Data) ដែលមិនទាន់ឆ្លងកាត់ការកែតម្រូវ ឬ Normalization ខ្លាំងពេក ដើម្បីជៀសវាងការបាត់បង់ព័ត៌មានសំខាន់ៗ។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការអ្នកជំនាញវិស័យ (Domain Experts) ដើម្បីបកស្រាយអត្ថន័យនៃថ្នាក់ (Classes) ដែលម៉ាស៊ីនបានរកឃើញ ថាតើវាមានអត្ថន័យពិតប្រាកដឬជាកំហុសទិន្នន័យ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យតារាសាស្ត្រ (IRAS), ជីវវិទ្យា (DNA), និងរូបភាពផ្កាយរណប (LandSat) ពីសហរដ្ឋអាមេរិក។ សម្រាប់កម្ពុជា បញ្ហាមិនមែនជាភាពលំអៀងនៃក្បួនដោះស្រាយទេ ប៉ុន្តែគឺកង្វះខាតទិន្នន័យឌីជីថលដែលមានគុណភាពខ្ពស់ និងទិន្នន័យដើម (Raw Data) ក្នុងវិស័យកសិកម្ម ឬសុខាភិបាលដើម្បីយកមកវិភាគ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជាក្នុងការរុករកចំណេះដឹងថ្មីៗពីទិន្នន័យធំៗដែលមិនទាន់មានការចាត់ថ្នាក់។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្ម និងការប្រើប្រាស់ដី (Land Use):</strong> អាចប្រើប្រាស់ជាមួយទិន្នន័យរូបភាពផ្កាយរណប (ដូចករណីសិក្សា LandSat ក្នុងឯកសារ) ដើម្បីវិភាគប្រភេទដី ដំណាំ ឬការកាប់បំផ្លាញព្រៃឈើនៅតំបន់បឹងទន្លេសាប ដោយបែងចែកតំបន់ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>វិស័យសុខាភិបាលសាធារណៈ:</strong> អាចប្រើដើម្បីស្វែងរកលំនាំនៃជំងឺឆ្លង (ដូចជា គ្រុនឈាម ឬ គ្រុនចាញ់) ដោយដាក់ក្រុមអ្នកជំងឺដែលមានរោគសញ្ញា ឬទីតាំងភូមិសាស្ត្រស្រដៀងគ្នា ដើម្បីកំណត់ការផ្ទុះឡើងនៃជំងឺ។</li>
+            
+            <li><strong>ការស្រាវជ្រាវជីវចម្រុះ (Biodiversity):</strong> ជួយអ្នកស្រាវជ្រាវនៅសាកលវិទ្យាល័យភូមិន្ទភ្នំពេញក្នុងការចាត់ថ្នាក់ប្រភេទរុក្ខជាតិ ឬសត្វ ដោយផ្អែកលើលក្ខណៈរូបសាស្ត្រ ឬហ្សែន ដោយមិនចាំបាច់មានអ្នកជំនាញកំណត់អត្តសញ្ញាណគ្រប់ករណី។</li>
+            
+        </ul>
+        
+        
+        <p>AutoClass គឺជាឧបករណ៍ដ៏មានឥទ្ធិពលសម្រាប់ការស្រាវជ្រាវបែបស្វែងរក (Exploratory Research) នៅកម្ពុជា ប៉ុន្តែវាទាមទារឱ្យមានការប្រមូលទិន្នន័យដែលមានស្តង់ដារ និងការបណ្តុះបណ្តាលអ្នកវិភាគទិន្នន័យកម្រិតខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាទ្រឹស្តីស្ថិតិបាយេស (Bayesian Statistics):</strong> និស្សិតគួរចាប់ផ្តើមពីការយល់ដឹងអំពីទ្រឹស្តីបាយេស និងគំរូល្បាយ (Mixture Models) ដោយប្រើប្រាស់ធនធានដូចជាសៀវភៅ ឬវគ្គសិក្សាតាមអនឡាញ។</li>
+            
+            <li><strong>រៀនប្រើប្រាស់ឧបករណ៍ទំនើបជំនួស AutoClass:</strong> ដោយសារ AutoClass ជាកម្មវិធីចាស់ និស្សិតគួររៀនប្រើបណ្ណាល័យ Python ទំនើបដូចជា (scikit-learn) សម្រាប់ Gaussian Mixture Models ឬ (PyMC) សម្រាប់ការវិភាគបែបបាយេស។</li>
+            
+            <li><strong>ការប្រមូល និងសម្អាតទិន្នន័យ:</strong> ជ្រើសរើសសំណុំទិន្នន័យក្នុងស្រុក (ឧទាហរណ៍ ទិន្នន័យកសិកម្ម ឬទិន្នន័យជំរឿន)។ សំខាន់បំផុតគឺត្រូវរក្សាទិន្នន័យឱ្យនៅជាទម្រង់ដើម (Raw Data) តាមដែលអាចធ្វើទៅបាន ដោយជៀសវាងការកែតម្រូវដែលមិនចាំបាច់។</li>
+            
+            <li><strong>ការពិសោធន៍ និងការសហការជាមួយអ្នកជំនាញ:</strong> ដំណើរការម៉ូដែលដើម្បីស្វែងរកការបែងចែកក្រុម (Clusters) ហើយបន្ទាប់មកត្រូវយកលទ្ធផលទៅពិភាក្សាជាមួយអ្នកជំនាញក្នុងវិស័យនោះ (ឧទាហរណ៍ កសិករ ឬគ្រូពេទ្យ) ដើម្បីផ្ទៀងផ្ទាត់ថាតើក្រុមដែលរកឃើញមានអត្ថន័យពិតប្រាកដឬទេ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Unsupervised Classification</span></td>
+                <td>ជាដំណើរការដែលកុំព្យូទ័រស្វែងរកក្រុម ឬលំនាំនៅក្នុងទិន្នន័យដោយខ្លួនឯង ដោយមិនចាំបាច់មានមនុស្សប្រាប់ជាមុនថាទិន្នន័យនោះជាអ្វី ឬស្ថិតក្នុងក្រុមណា។ វាខុសពីការរៀនដែលមានការណែនាំ (Supervised Learning) ដែលត្រូវការឧទាហរណ៍ដែលមានស្លាកឈ្មោះជាមុន។</td>
+                <td>ដូចជាការឱ្យក្មេងបែងចែកគ្រាប់ឃ្លីជាក្រុមៗដោយខ្លួនឯង ដោយមិនប្រាប់ថាត្រូវបែងចែកតាមពណ៌ ឬទំហំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Finite Mixture Model</span></td>
+                <td>ជាគំរូគណិតវិទ្យាដែលសន្មតថា ទិន្នន័យសរុបគឺកើតចេញពីការលាយបញ្ចូលគ្នានៃក្រុមតូចៗ (Components/Classes) ជាច្រើន ដែលក្រុមនីមួយៗមានលក្ខណៈស្ថិតិរៀងៗខ្លួន។ AutoClass ប្រើគំរូនេះដើម្បីបំបែកទិន្នន័យចម្រុះឱ្យទៅជាក្រុមដើមវិញ។</td>
+                <td>ដូចជាចានសម្លកគោដែលកើតចេញពីការលាយបញ្ចូលគ្នានៃគ្រឿងផ្សំជាច្រើនមុខ ហើយយើងព្យាយាមវិភាគរកថាមានគ្រឿងផ្សំអ្វីខ្លះ និងបរិមាណប៉ុន្មាននៅក្នុងនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Posterior Probability</span></td>
+                <td>គឺជាប្រូបាប៊ីលីតេ ឬកម្រិតនៃការជឿជាក់ថារឿងមួយពិតជាត្រឹមត្រូវ (ឧទាហរណ៍៖ ទិន្នន័យនេះស្ថិតក្នុងក្រុម A) បន្ទាប់ពីបានពិចារណាលើភស្តុតាងជាក់ស្តែង និងចំណេះដឹងដែលមានពីមុន (Priors)។</td>
+                <td>ដូចជាការផ្លាស់ប្តូរការទស្សន៍ទាយថាក្រុមបាល់ទាត់ណានឹងឈ្នះ បន្ទាប់ពីបានឃើញលទ្ធផលនៅតង់ទីមួយរួចហើយ (ការទស្សន៍ទាយមានភាពច្បាស់លាស់ជាងមុន)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Occam Factor</span></td>
+                <td>ជាយន្តការគណិតវិទ្យានៅក្នុងទ្រឹស្តីបាយេស ដែលដាក់ពិន័យទៅលើគំរូណាដែលមានភាពស្មុគស្មាញពេក។ វាជួយការពារមិនឱ្យកុំព្យូទ័របង្កើតក្រុម (Classes) ច្រើនហួសហេតុពេក ដោយអនុលោមតាមគោលការណ៍ថា 'ការពន្យល់ដែលសាមញ្ញបំផុត តែងតែល្អបំផុត'។</td>
+                <td>ដូចជាការជ្រើសរើសផ្លូវដែលត្រង់ និងខ្លីបំផុតដើម្បីទៅដល់គោលដៅ ជាជាងការជ្រើសរើសផ្លូវវាងឆ្ងាយដែលនាំឱ្យស្មុគស្មាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Expectation Maximization (EM)</span></td>
+                <td>ជាក្បួនដោះស្រាយដែលធ្វើការដដែលៗដើម្បីស្វែងរកប៉ារ៉ាម៉ែត្រល្អបំផុត។ វាចាប់ផ្តើមដោយការស្មាន (Expectation) បន្ទាប់មកគណនាដើម្បីកែតម្រូវការស្មាននោះឱ្យកាន់តែច្បាស់ (Maximization) ហើយធ្វើបែបនេះរហូតដល់ទទួលបានលទ្ធផលដែលមិនប្រែប្រួល។</td>
+                <td>ដូចជាការរាវរកប៉ុស្តិ៍វិទ្យុ ដោយបង្វិលប៊ូតុងទៅមកតិចៗ រហូតទាល់តែសំឡេងច្បាស់ល្អបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Class Probability Density Function (p.d.f)</span></td>
+                <td>ជាអនុគមន៍ដែលពិពណ៌នាអំពីលក្ខណៈ ឬ 'រូបរាង' នៃការចែកចាយទិន្នន័យនៅក្នុងក្រុមមួយ។ វាប្រាប់យើងថា តើទិន្នន័យប្រភេទណាដែលមានឱកាសកើតឡើងខ្ពស់នៅក្នុងក្រុមនោះ។</td>
+                <td>ដូចជាពុម្ពនំដែលកំណត់រូបរាងរបស់នំ។ ក្រុមនីមួយៗមាន 'ពុម្ព' (p.d.f) ផ្ទាល់ខ្លួនសម្រាប់បង្កើតទិន្នន័យដែលមានលក្ខណៈដូចៗគ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Bayesian+mixture+models+for+clustering+data" target="_blank" rel="noopener"><span class="en">Bayesian mixture models for clustering data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Expectation-Maximization+algorithm+in+machine+learning" target="_blank" rel="noopener"><span class="en">Expectation-Maximization algorithm in machine learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Applications+of+AutoClass+in+astronomy+and+biology" target="_blank" rel="noopener"><span class="en">Applications of AutoClass in astronomy and biology</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gaussian+mixture+models+for+unsupervised+classification" target="_blank" rel="noopener"><span class="en">Gaussian mixture models for unsupervised classification</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

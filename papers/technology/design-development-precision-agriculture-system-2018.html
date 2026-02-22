@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរចនា ការអភិវឌ្ឍ និងការវាយតម្លៃជាក់ស្តែងនៃប្រព័ន្ធរូបវន្តតាមប្រព័ន្ធអ៊ីនធឺណិតចែកចាយសម្រាប់កសិកម្មសុក្រឹត | KhmerResearch.com</title>
+    <meta name="description" content="កំណើនប្រជាជនពិភពលោក និងការប្រែប្រួលអាកាសធាតុ តម្រូវឱ្យមានការបង្កើនផលិតភាពកសិកម្ម ខណៈពេលដែលកាត់បន្ថយការប្រើប្រាស់ធនធានទឹក និងជី តាមរយៈប្រព័ន្ធដាំដុះដែលមិនប្រើដី។">
+    
+    <meta name="keywords" content="Precision Agriculture, LoRaWAN, Cyber-physical System, Hydroponics, Wireless Sensor Networks, STM32, IoT, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/design-development-precision-agriculture-system-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/design-development-precision-agriculture-system-2018.html">
+    <meta property="og:title" content="ការរចនា ការអភិវឌ្ឍ និងការវាយតម្លៃជាក់ស្តែងនៃប្រព័ន្ធរូបវន្តតាមប្រព័ន្ធអ៊ីនធឺណិតចែកចាយសម្រាប់កសិកម្មសុក្រឹត | KhmerResearch.com">
+    <meta property="og:description" content="កំណើនប្រជាជនពិភពលោក និងការប្រែប្រួលអាកាសធាតុ តម្រូវឱ្យមានការបង្កើនផលិតភាពកសិកម្ម ខណៈពេលដែលកាត់បន្ថយការប្រើប្រាស់ធនធានទឹក និងជី តាមរយៈប្រព័ន្ធដាំដុះដែលមិនប្រើដី។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2018">
+    
+    <meta property="article:tag" content="Precision Agriculture">
+    
+    <meta property="article:tag" content="LoRaWAN">
+    
+    <meta property="article:tag" content="Cyber-physical System">
+    
+    <meta property="article:tag" content="Hydroponics">
+    
+    <meta property="article:tag" content="Wireless Sensor Networks">
+    
+    <meta property="article:tag" content="STM32">
+    
+    <meta property="article:tag" content="IoT">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរចនា ការអភិវឌ្ឍ និងការវាយតម្លៃជាក់ស្តែងនៃប្រព័ន្ធរូបវន្តតាមប្រព័ន្ធអ៊ីនធឺណិតចែកចាយសម្រាប់កសិកម្មសុក្រឹត">
+    <meta name="twitter:description" content="កំណើនប្រជាជនពិភពលោក និងការប្រែប្រួលអាកាសធាតុ តម្រូវឱ្យមានការបង្កើនផលិតភាពកសិកម្ម ខណៈពេលដែលកាត់បន្ថយការប្រើប្រាស់ធនធានទឹក និងជី តាមរយៈប្រព័ន្ធដាំដុះដែលមិនប្រើដី។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u1785\u1793\u17b6 \u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d \u1793\u17b7\u1784\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179a\u17bc\u1794\u179c\u1793\u17d2\u178f\u178f\u17b6\u1798\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u17a2\u17ca\u17b8\u1793\u1792\u17ba\u178e\u17b7\u178f\u1785\u17c2\u1780\u1785\u17b6\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798\u179f\u17bb\u1780\u17d2\u179a\u17b9\u178f",
+      "name": "Design, Development and Real-world Evaluation of a Distributed Cyber-physical System for Precision Agriculture",
+      "description": "\u1780\u17c6\u178e\u17be\u1793\u1794\u17d2\u179a\u1787\u17b6\u1787\u1793\u1796\u17b7\u1797\u1796\u179b\u17c4\u1780 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb \u178f\u1798\u17d2\u179a\u17bc\u179c\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1795\u179b\u17b7\u178f\u1797\u17b6\u1796\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798 \u1781\u178e\u17c8\u1796\u17c1\u179b\u178a\u17c2\u179b\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1792\u1793\u1792\u17b6\u1793\u1791\u17b9\u1780 \u1793\u17b7\u1784\u1787\u17b8 \u178f\u17b6\u1798\u179a\u1799\u17c8\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u178a\u17b6\u17c6\u178a\u17bb\u17c7\u178a\u17c2\u179b\u1798\u17b7\u1793\u1794\u17d2\u179a\u17be\u178a\u17b8\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/design-development-precision-agriculture-system-2018.html",
+      "author": [{"@type": "Person", "name": "Djordje Simic (Sapienza University of Rome)"}],
+      "datePublished": "2018",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Design, Development and Real-world Evaluation of a Distributed Cyber-physical System for Precision Agriculture",
+        "url": "N/A"
+      },
+      "keywords": ["Precision Agriculture", "LoRaWAN", "Cyber-physical System", "Hydroponics", "Wireless Sensor Networks", "STM32", "IoT"],
+      "about": "Computer Engineering / Internet of Things (IoT)"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u1785\u1793\u17b6 \u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d \u1793\u17b7\u1784\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179a\u17bc\u1794\u179c\u1793\u17d2\u178f\u178f\u17b6\u1798\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u17a2\u17ca\u17b8\u1793\u1792\u17ba\u178e\u17b7\u178f\u1785\u17c2\u1780\u1785\u17b6\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798\u179f\u17bb\u1780\u17d2\u179a\u17b9\u178f",
+          "item": "https://khmerresearch.com/papers/technology/design-development-precision-agriculture-system-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរចនា ការអភិវឌ្ឍ និងការវាយតម្លៃជាក់ស្តែងនៃប្រព័ន្ធរូបវន...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Design, Development and Real-world Evaluation of a Distributed Cyber-physical System for Precision Agriculture<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរចនា ការអភិវឌ្ឍ និងការវាយតម្លៃជាក់ស្តែងនៃប្រព័ន្ធរូបវន្តតាមប្រព័ន្ធអ៊ីនធឺណិតចែកចាយសម្រាប់កសិកម្មសុក្រឹត</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Design, Development and Real-world Evaluation of a Distributed Cyber-physical System for Precision Agriculture</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Djordje Simic (Sapienza University of Rome)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Engineering / Internet of Things (IoT)</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> កំណើនប្រជាជនពិភពលោក និងការប្រែប្រួលអាកាសធាតុ តម្រូវឱ្យមានការបង្កើនផលិតភាពកសិកម្ម ខណៈពេលដែលកាត់បន្ថយការប្រើប្រាស់ធនធានទឹក និងជី តាមរយៈប្រព័ន្ធដាំដុះដែលមិនប្រើដី។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានរចនា និងអភិវឌ្ឍប្រព័ន្ធដាំដុះវារីវប្បកម្ម (Hydroponics) ដែលដំណើរការដោយស្វ័យប្រវត្តិ តាមរយៈការប្រើប្រាស់បណ្តាញឧបករណ៍ចាប់សញ្ញាឥតខ្សែដែលមានថាមពលទាប។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់បច្ចេកវិទ្យាទំនាក់ទំនងចម្ងាយឆ្ងាយថាមពលទាប (LoRaWAN Protocol)</li>
+            
+            <li>ការប្រើប្រាស់មីក្រូកុងត្រូល័រ STM32 (STM32 Nucleo Board) សម្រាប់ការគ្រប់គ្រងឧបករណ៍</li>
+            
+            <li>ប្រព័ន្ធដាំដុះវារីវប្បកម្មបែប Ebb and Flow (Hydroponic System)</li>
+            
+            <li>ការគ្រប់គ្រងទិន្នន័យតាមរយៈ Node-Red និង InfluxDB (Cloud-based Data Management)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធនេះអាចតាមដានសីតុណ្ហភាព សំណើម និងកម្រិតទឹក ព្រមទាំងបញ្ជាម៉ាស៊ីនបូមទឹក និងភ្លើងបំភ្លឺពីចម្ងាយបានយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li>បច្ចេកវិទ្យា LoRaWAN បង្ហាញពីសមត្ថភាពខ្ពស់ក្នុងការតភ្ជាប់ទំនាក់ទំនងក្នុងចម្ងាយឆ្ងាយដោយប្រើថាមពលតិច ដែលសាកសមសម្រាប់ការអនុវត្តក្នុងវិស័យកសិកម្ម។</li>
+            
+            <li>ការរចនាផ្នែករឹង (Hardware) អាចដំណើរការបានដោយប្រើថាមពលពន្លឺព្រះអាទិត្យ (Energy Harvesting) ដែលជួយកាត់បន្ថយការចំណាយលើថាមពល និងការថែទាំ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">LoRaWAN (Proposed System)</span></strong><br>បច្ចេកវិទ្យាទំនាក់ទំនងឥតខ្សែចម្ងាយឆ្ងាយដែលប្រើប្រាស់ថាមពលទាប</td>
+                <td>មានសមត្ថភាពបញ្ជូនទិន្នន័យបានឆ្ងាយ (រហូតដល់រាប់គីឡូម៉ែត្រ) ប្រើប្រាស់ថាមពលតិចតួចបំផុត និងមិនអស់ថ្លៃសេវាប្រចាំខែដូចប្រព័ន្ធទូរស័ព្ទ។</td>
+                <td>អត្រាបញ្ជូនទិន្នន័យទាប (Low Data Rate) មិនអាចបញ្ជូនរូបភាពឬវីដេអូបាន និងមានកម្រិតក្នុងការបញ្ជូនទិន្នន័យញឹកញាប់ពេក (Duty Cycle)។</td>
+                <td>អាចដំណើរការបានដោយថាមពលពន្លឺព្រះអាទិត្យ (Energy Harvesting) និងគ្របដណ្តប់តំបន់កសិកម្មធំទូលាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Short-range WSN (ZigBee/Wi-Fi)</span></strong><br>បច្ចេកវិទ្យាទំនាក់ទំនងឥតខ្សែចម្ងាយជិត (ត្រូវបានលើកឡើងសម្រាប់ប្រៀបធៀប)</td>
+                <td>មានល្បឿនបញ្ជូនទិន្នន័យខ្ពស់ និងអាចបង្កើតបណ្តាញជាលក្ខណៈ Mesh Network បាន។</td>
+                <td>ស៊ីថាមពលខ្លាំងជាង និងមានចម្ងាយខ្លី ដែលតម្រូវឱ្យមានឧបករណ៍ច្រើនដើម្បីគ្របដណ្តប់ផ្ទៃដីកសិកម្មធំ។</td>
+                <td>មិនត្រូវបានជ្រើសរើសសម្រាប់ការសិក្សានេះ ដោយសារកង្វះខាតលើប្រសិទ្ធភាពថាមពល និងចម្ងាយគ្របដណ្តប់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Cellular Network (3G/4G)</span></strong><br>បណ្តាញទូរស័ព្ទចល័ត</td>
+                <td>មានហេដ្ឋារចនាសម្ព័ន្ធស្រាប់ និងល្បឿនលឿន។</td>
+                <td>ចំណាយលើការប្រើប្រាស់ថាមពលខ្ពស់ និងថ្លៃសេវាស៊ីមកាតសម្រាប់ឧបករណ៍នីមួយៗ (Subscription Cost)។</td>
+                <td>ចំណាយប្រតិបត្តិការខ្ពស់ពេកសម្រាប់ការដាក់ពង្រាយឧបករណ៍ចាប់សញ្ញាច្រើនគ្រាប់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តគម្រោងនេះទាមទារការចំណាយលើផ្នែករឹងកម្រិតមធ្យម ប៉ុន្តែចំណាយប្រតិបត្តិការទាបបំផុត ដោយសារការប្រើប្រាស់ថាមពលពន្លឺព្រះអាទិត្យ និងបច្ចេកវិទ្យា LoRa។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> STM32 Nucleo Board, LoRa module (RFM96W), ឧបករណ៍ចាប់សញ្ញា (DS18B20, DHT11), ផ្ទាំងសូឡា និងថ្ម LiPo។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធីសម្រាប់សរសេរកូដ (STM32CubeMX), The Things Network (TTN) សម្រាប់ Network Server, និង Node-Red/InfluxDB សម្រាប់បង្ហាញទិន្នន័យ។</li>
+        
+        <li><strong>Infrastructure:</strong> ប្រព័ន្ធវារីវប្បកម្ម (Hydroponic setup) និងឧបករណ៍ LoRa Gateway (អាចប្រើប្រាស់ Gateway សាធារណៈ ឬបង្កើតផ្ទាល់ខ្លួន)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងបរិបទនៃការស្រាវជ្រាវនៅអឺរ៉ុប (សាកលវិទ្យាល័យ Sapienza ទីក្រុងរ៉ូម) ដែលផ្តោតលើការសាកល្បងគំរូដើម (Prototype) ក្នុងបរិយាកាសដែលមានការគ្រប់គ្រង។ សម្រាប់កម្ពុជា កត្តាអាកាសធាតុ (កម្ដៅ និងសំណើមខ្ពស់) អាចជះឥទ្ធិពលដល់អាយុកាលរបស់ឧបករណ៍ចាប់សញ្ញា និងប្រសិទ្ធភាពនៃប្រព័ន្ធត្រជាក់សម្រាប់រុក្ខជាតិ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់សម្រាប់ប្រទេសកម្ពុជា ជាពិសេសក្នុងការជំរុញវិស័យកសិកម្មឆ្លាតវៃ (Smart Farming)។</p>
+        
+        <ul>
+            
+            <li><strong>តំបន់កសិកម្មដាច់ស្រយាល (Remote Areas):</strong> នៅតាមខេត្តដូចជា មណ្ឌលគិរី ឬ រតនគិរី ដែលសេវាអ៊ីនធឺណិតមិនទាន់គ្របដណ្តប់ពេញលេញ ការប្រើប្រាស់ LoRaWAN អាចជួយកសិករតាមដានដំណាំពីចម្ងាយបានយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li><strong>កសិដ្ឋានវារីវប្បកម្មនៅជាយក្រុង (Urban Farming):</strong> សម្រាប់កសិដ្ឋានដាំបន្លែ hydroponics នៅជុំវិញរាជធានីភ្នំពេញ ប្រព័ន្ធនេះជួយកាត់បន្ថយពលកម្ម និងធានាគុណភាពបន្លែតាមរយៈការត្រួតពិនិត្យស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ការអប់រំ និងស្រាវជ្រាវ (Education):</strong> សាកសមសម្រាប់និស្សិតនៅវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា (ITC) ឬសាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ (RUPP) ក្នុងការសិក្សាអំពីប្រព័ន្ធ IoT និង Embedded Systems។</li>
+            
+        </ul>
+        
+        
+        <p>ការដាក់ឱ្យប្រើប្រាស់ប្រព័ន្ធនេះនឹងជួយកាត់បន្ថយថ្លៃដើមផលិតកម្ម និងបង្កើនទិន្នផលសម្រាប់កសិករខ្នាតតូច និងមធ្យមនៅកម្ពុជា ប៉ុន្តែត្រូវការការបណ្តុះបណ្តាលបច្ចេកទេសជាមុន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ LoRaWAN:</strong> ស្វែងយល់អំពីប្រេកង់ LoRa ដែលអនុញ្ញាតនៅអាស៊ី (AS923) និងរបៀបចុះឈ្មោះប្រើប្រាស់ជាមួយ The Things Network (TTN)។</li>
+            
+            <li><strong>ការជ្រើសរើស និងរៀបចំផ្នែករឹង (Hardware Selection):</strong> ចាប់ផ្តើមពិសោធន៍ជាមួយ STM32 Nucleo ឬអាចប្រើ ESP32 LoRa (ដែលមានតម្លៃសមរម្យសម្រាប់អ្នកចាប់ផ្តើម) រួមជាមួយឧបករណ៍ចាប់សញ្ញាដូចជា DHT11 ឬ DHT22។</li>
+            
+            <li><strong>ការដំឡើង Gateway និង Node:</strong> រៀបចំ LoRaWAN Gateway (អាចប្រើ Single Channel Gateway សម្រាប់ការសិក្សា) និងសរសេរកូដបញ្ចូលទៅក្នុង Microcontroller ដើម្បីអានទិន្នន័យ និងបញ្ជូនទៅកាន់ TTN។</li>
+            
+            <li><strong>ការអភិវឌ្ឍប្រព័ន្ធគ្រប់គ្រងទិន្នន័យ (Dashboard):</strong> ដំឡើង Node-RED និង InfluxDB នៅលើកុំព្យូទ័រ ឬ Raspberry Pi ដើម្បីទាញទិន្នន័យពី TTN មកបង្ហាញជាក្រាហ្វិក និងកំណត់ការបញ្ជាបិទបើកម៉ូទ័រទឹក។</li>
+            
+            <li><strong>ការពិសោធន៍ជាក់ស្តែង:</strong> យកប្រព័ន្ធដែលបានបង្កើតទៅសាកល្បងជាមួយធុងដាំបន្លែតូចមួយ ដើម្បីវាយតម្លៃលើប្រសិទ្ធភាពថាមពល និងភាពធន់នឹងអាកាសធាតុជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Cyber-physical System</span></td>
+                <td>ជាប្រព័ន្ធដែលភ្ជាប់ទំនាក់ទំនងយ៉ាងជិតស្និទ្ធរវាងពិភពរូបវន្ត (ដូចជាឧបករណ៍ចាប់សញ្ញា ឬម៉ូទ័រ) និងពិភពឌីជីថល (កម្មវិធីកុំព្យូទ័រ និងការគណនា) ដើម្បីតាមដាន និងគ្រប់គ្រងដំណើរការនានាដោយស្វ័យប្រវត្តិ។</td>
+                <td>ប្រៀបដូចជាមនុស្សយន្តដែលមានសរសៃប្រសាទ (Sensor) សម្រាប់ដឹងពីមជ្ឈដ្ឋានជុំវិញ និងខួរក្បាល (Software) សម្រាប់បញ្ជាដៃជើងឱ្យធ្វើការងារ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Low-Power Wide-Area Networks (LPWAN)</span></td>
+                <td>ជាប្រភេទបណ្តាញទំនាក់ទំនងឥតខ្សែដែលត្រូវបានរចនាឡើងដើម្បីអនុញ្ញាតឱ្យឧបករណ៍អាចបញ្ជូនទិន្នន័យក្នុងចម្ងាយឆ្ងាយ (រាប់គីឡូម៉ែត្រ) ដោយប្រើប្រាស់ថាមពលថ្មតិចតួចបំផុត សាកសមសម្រាប់ឧបករណ៍ IoT ។</td>
+                <td>ដូចជាការខ្សឹបប្រាប់ដំណឹងខ្លីៗទៅកាន់អ្នកនៅឆ្ងាយ ដោយមិនចាំបាច់ស្រែកខ្លាំងៗដែលធ្វើឱ្យឆាប់អស់កម្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Chirp Spread Spectrum</span></td>
+                <td>ជាបច្ចេកទេសបំប្លែងសញ្ញាដែល LoRa ប្រើប្រាស់ ដោយបង្កើតរលកសញ្ញាដែលផ្លាស់ប្តូរប្រេកង់ឡើងចុះ (ដូចសំឡេងបក្សី ឬសត្វផ្សោត) ដើម្បីធ្វើឱ្យសញ្ញានោះធន់នឹងការរំខាន និងអាចធ្វើដំណើរបានឆ្ងាយ។</td>
+                <td>ប្រៀបដូចជាការប្រើភាសាសញ្ញាពិសេសដែលអាចស្តាប់ឮច្បាស់ ទោះបីជានៅក្នុងបន្ទប់ដែលមានសំឡេង ឡូឡាខ្លាំងក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Adaptive Data Rate</span></td>
+                <td>ជាយន្តការស្វ័យប្រវត្តិរបស់បណ្តាញ LoRaWAN ដែលកែតម្រូវល្បឿននៃការបញ្ជូនទិន្នន័យរបស់ឧបករណ៍ទៅតាមចម្ងាយពីបង្គោលអង់តែន ដើម្បីសន្សំសំចៃថាមពលថ្ម និងបង្កើនសមត្ថភាពបណ្តាញ។</td>
+                <td>ដូចជាការនិយាយយឺតៗច្បាស់ៗពេលនៅឆ្ងាយគ្នា ដើម្បីឱ្យគេស្តាប់ឮ និងនិយាយលឿនៗពេលនៅជិតគ្នា ដើម្បីចំណេញពេល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ebb and Flow</span></td>
+                <td>ជាបច្ចេកទេសដាំដំណាំដោយមិនប្រើដី (Hydroponics) ដែលដំណើរការដោយការបង្ហូរទឹកជីឱ្យលិចឫសដំណាំមួយរយៈខ្លី រួចបង្ហូរចេញវិញជាប្រចាំ ដើម្បីឱ្យឫសទទួលបានទាំងសារធាតុចិញ្ចឹម និងអុកស៊ីសែនគ្រប់គ្រាន់។</td>
+                <td>ប្រៀបដូចជាចង្វាក់ដង្ហើមរបស់រុក្ខជាតិ ដោយមានពេលស្រូបទឹក (ដកដង្ហើមចូល) និងពេលទទួលយកខ្យល់ (ដកដង្ហើមចេញ) ឆ្លាស់គ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Over-the-Air Activation (OTAA)</span></td>
+                <td>ជាវិធីសាស្ត្រសុវត្ថិភាពក្នុងការភ្ជាប់ឧបករណ៍ថ្មីទៅកាន់បណ្តាញ LoRaWAN ដោយឧបករណ៍នឹងទទួលបានកូដសម្ងាត់ (Session Keys) ថ្មីដោយស្វ័យប្រវត្តិរាល់ពេលដែលវាធ្វើការភ្ជាប់ម្តងៗ ដើម្បីការពារការលួចទិន្នន័យ។</td>
+                <td>ដូចជាការទទួលបានលេខកូដសម្ងាត់ថ្មី (OTP) ពីរនាគាររាល់ពេលដែលអ្នកចង់ចូលប្រើគណនី ដើម្បីសុវត្ថិភាពខ្ពស់ជាងការប្រើលេខសម្ងាត់ចាស់ដដែលៗ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Technologies%2C+Protocols%2C+and+applications+of+Internet+of+Things+in+greenhouse+Farming%3A+A+survey+of+recent+advances%27%2C+%27khmer_title%27%3A+%27%E1%9E%94%E1%9E%85%E1%9F%92%E1%9E%85%E1%9F%81%E1%9E%80%E1%9E%9C%E1%9E%B7%E1%9E%91%E1%9F%92%E1%9E%99%E1%9E%B6+%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BC%E1%9E%8F%E1%9E%BC%E1%9E%80%E1%9E%BC%E1%9E%9B+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%93%E1%9E%BB%E1%9E%9C%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%93%E1%9F%83%E1%9E%A2%E1%9F%8A%E1%9E%B8%E1%9E%93%E1%9E%92%E1%9E%BA%E1%9E%8E%E1%9E%B7%E1%9E%8F%E1%9E%93%E1%9F%83%E1%9E%9C%E1%9E%8F%E1%9F%92%E1%9E%90%E1%9E%BB+%28IoT%29+%E1%9E%80%E1%9F%92%E1%9E%93%E1%9E%BB%E1%9E%84%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%95%E1%9F%92%E1%9E%91%E1%9F%87%E1%9E%80%E1%9E%89%E1%9F%92%E1%9E%85%E1%9E%80%E1%9F%8B%E1%9F%96+%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9F%E1%9F%92%E1%9E%91%E1%9E%84%E1%9F%8B%E1%9E%98%E1%9E%8F%E1%9E%B7%E1%9E%A2%E1%9F%86%E1%9E%96%E1%9E%B8%E1%9E%9C%E1%9E%8C%E1%9F%92%E1%9E%8D%E1%9E%93%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%90%E1%9F%92%E1%9E%98%E1%9E%B8%E1%9F%97%27%2C+%27url%27%3A+%27%2Fpapers%2Fagriculture%2Fiot-greenhouse-farming-survey-2024.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Technologies, Protocols, and applications of Internet of Things in greenhouse Farming: A survey of recent advances', 'khmer_title': 'បច្ចេកវិទ្យា ប្រូតូកូល និងការអនុវត្តនៃអ៊ីនធឺណិតនៃវត្ថុ (IoT) ក្នុងកសិកម្មផ្ទះកញ្ចក់៖ ការស្ទង់មតិអំពីវឌ្ឍនភាពថ្មីៗ', 'url': '/papers/agriculture/iot-greenhouse-farming-survey-2024.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27PRECISION+AGRICULTURE+EXTENSION+MODEL+BASED+ON+INTERDISCIPLINARY+COLLABORATION%27%2C+%27khmer_title%27%3A+%27%E1%9E%82%E1%9F%86%E1%9E%9A%E1%9E%BC%E1%9E%95%E1%9F%92%E1%9E%9F%E1%9E%96%E1%9F%92%E1%9E%9C%E1%9E%95%E1%9F%92%E1%9E%9F%E1%9E%B6%E1%9E%99%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%80%E1%9E%94%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%87%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%9B%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%95%E1%9F%92%E1%9E%A2%E1%9F%82%E1%9E%80%E1%9E%9B%E1%9E%BE%E1%9E%80%E1%9E%B7%E1%9E%85%E1%9F%92%E1%9E%85%E1%9E%9F%E1%9E%A0%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%8F%E1%9E%B7%E1%9E%94%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%B7%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%93%E1%9F%92%E1%9E%8F%E1%9E%9A%E1%9E%9C%E1%9E%B7%E1%9E%9F%E1%9F%90%E1%9E%99%27%2C+%27url%27%3A+%27%2Fpapers%2Fagriculture%2Fprecision-agriculture-extension-model-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'PRECISION AGRICULTURE EXTENSION MODEL BASED ON INTERDISCIPLINARY COLLABORATION', 'khmer_title': 'គំរូផ្សព្វផ្សាយកសិកម្មប្រកបដោយភាពជាក់លាក់ផ្អែកលើកិច្ចសហប្រតិបត្តិការអន្តរវិស័យ', 'url': '/papers/agriculture/precision-agriculture-extension-model-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Internet+of+Things%3A+Agriculture+Precision+Monitoring+System+based+on+Low+Power+Wide+Area+Network%27%2C+%27khmer_title%27%3A+%27%E1%9E%A2%E1%9F%8A%E1%9E%B8%E1%9E%93%E1%9E%92%E1%9E%BA%E1%9E%8E%E1%9E%B7%E1%9E%8F%E1%9E%93%E1%9F%83%E1%9E%9C%E1%9E%8F%E1%9F%92%E1%9E%90%E1%9E%BB+%28IoT%29%E1%9F%96+%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%96%E1%9F%90%E1%9E%93%E1%9F%92%E1%9E%92%E1%9E%8F%E1%9F%92%E1%9E%9A%E1%9E%BD%E1%9E%8F%E1%9E%96%E1%9E%B7%E1%9E%93%E1%9E%B7%E1%9E%8F%E1%9F%92%E1%9E%99%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%87%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%9B%E1%9E%B6%E1%9E%80%E1%9F%8B%E1%9E%95%E1%9F%92%E1%9E%A2%E1%9F%82%E1%9E%80%E1%9E%9B%E1%9E%BE%E1%9E%94%E1%9E%8E%E1%9F%92%E1%9E%8F%E1%9E%B6%E1%9E%89%E1%9E%8F%E1%9F%86%E1%9E%94%E1%9E%93%E1%9F%8B%E1%9E%92%E1%9F%86%E1%9E%91%E1%9E%BC%E1%9E%9B%E1%9E%B6%E1%9E%99%E1%9E%8A%E1%9F%82%E1%9E%9B%E1%9E%98%E1%9E%B6%E1%9E%93%E1%9E%90%E1%9E%B6%E1%9E%98%E1%9E%96%E1%9E%9B%E1%9E%91%E1%9E%B6%E1%9E%94+%28LoRaWAN%29%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fiot-agriculture-monitoring-lorawan-2024.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Internet of Things: Agriculture Precision Monitoring System based on Low Power Wide Area Network', 'khmer_title': 'អ៊ីនធឺណិតនៃវត្ថុ (IoT)៖ ប្រព័ន្ធត្រួតពិនិត្យកសិកម្មជាក់លាក់ផ្អែកលើបណ្តាញតំបន់ធំទូលាយដែលមានថាមពលទាប (LoRaWAN)', 'url': '/papers/technology/iot-agriculture-monitoring-lorawan-2024.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Open+LoRaWAN+Sensor+Node+Architecture+for+Agriculture+Applications%27%2C+%27khmer_title%27%3A+%27%E1%9E%9F%E1%9F%92%E1%9E%90%E1%9E%B6%E1%9E%94%E1%9E%8F%E1%9F%92%E1%9E%99%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%90%E1%9F%92%E1%9E%93%E1%9E%B6%E1%9F%86%E1%9E%84%E1%9E%A7%E1%9E%94%E1%9E%80%E1%9E%9A%E1%9E%8E%E1%9F%8D%E1%9E%85%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%9F%E1%9E%89%E1%9F%92%E1%9E%89%E1%9E%B6+LoRaWAN+%E1%9E%94%E1%9F%82%E1%9E%94%E1%9E%94%E1%9E%BE%E1%9E%80%E1%9E%85%E1%9F%86%E1%9E%A0%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%A2%E1%9E%93%E1%9E%BB%E1%9E%9C%E1%9E%8F%E1%9F%92%E1%9E%8F%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%27%2C+%27url%27%3A+%27%2Fpapers%2Ftechnology%2Fopen-lorawan-sensor-node-agriculture-2021.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Open LoRaWAN Sensor Node Architecture for Agriculture Applications', 'khmer_title': 'ស្ថាបត្យកម្មថ្នាំងឧបករណ៍ចាប់សញ្ញា LoRaWAN បែបបើកចំហសម្រាប់ការអនុវត្តកសិកម្ម', 'url': '/papers/technology/open-lorawan-sensor-node-agriculture-2021.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Interoperable+IoT%2FWSN+Sensing+Station+with+Edge+AI-Enabled+Multi-Sensor+Integration+for+Precision+Agriculture%27%2C+%27khmer_title%27%3A+%27%E1%9E%9F%E1%9F%92%E1%9E%90%E1%9E%B6%E1%9E%93%E1%9E%B8%E1%9E%99%E1%9E%9F%E1%9F%81%E1%9E%93%E1%9E%9F%E1%9F%90%E1%9E%9A+IoT%2FWSN+%E1%9E%8A%E1%9F%82%E1%9E%9B%E1%9E%98%E1%9E%B6%E1%9E%93%E1%9E%9F%E1%9E%98%E1%9E%8F%E1%9F%92%E1%9E%90%E1%9E%97%E1%9E%B6%E1%9E%96%E1%9E%92%E1%9F%92%E1%9E%9C%E1%9E%BE%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%87%E1%9E%B6%E1%9E%98%E1%9E%BD%E1%9E%99%E1%9E%82%E1%9F%92%E1%9E%93%E1%9E%B6+%E1%9E%93%E1%9E%B7%E1%9E%84%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9E%BD%E1%9E%98%E1%9E%94%E1%9E%89%E1%9F%92%E1%9E%85%E1%9E%BC%E1%9E%9B%E1%9E%9F%E1%9F%81%E1%9E%93%E1%9E%9F%E1%9F%90%E1%9E%9A%E1%9E%85%E1%9F%92%E1%9E%9A%E1%9E%BE%E1%9E%93%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%97%E1%9F%81%E1%9E%91%E1%9E%8A%E1%9F%84%E1%9E%99%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%BE+Edge+AI+%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%80%E1%9E%9F%E1%9E%B7%E1%9E%80%E1%9E%98%E1%9F%92%E1%9E%98%E1%9E%9F%E1%9E%BB%E1%9E%80%E1%9F%92%E1%9E%9A%E1%9E%B7%E1%9E%8F%27%2C+%27url%27%3A+%27%2Fpapers%2Fagriculture%2Flitecs-iot-wsn-precision-agriculture-2026.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Interoperable IoT/WSN Sensing Station with Edge AI-Enabled Multi-Sensor Integration for Precision Agriculture', 'khmer_title': 'ស្ថានីយសេនស័រ IoT/WSN ដែលមានសមត្ថភាពធ្វើការជាមួយគ្នា និងការរួមបញ្ចូលសេនស័រច្រើនប្រភេទដោយប្រើ Edge AI សម្រាប់កសិកម្មសុក្រិត', 'url': '/papers/agriculture/litecs-iot-wsn-precision-agriculture-2026.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=LoRaWAN+network+architecture+for+smart+farming" target="_blank" rel="noopener"><span class="en">LoRaWAN network architecture for smart farming</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Energy+harvesting+techniques+for+wireless+sensor+nodes" target="_blank" rel="noopener"><span class="en">Energy harvesting techniques for wireless sensor nodes</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Automated+hydroponic+systems+using+IoT" target="_blank" rel="noopener"><span class="en">Automated hydroponic systems using IoT</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Low+Power+Wide+Area+Networks+%28LPWAN%29+performance+analysis" target="_blank" rel="noopener"><span class="en">Low Power Wide Area Networks (LPWAN) performance analysis</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

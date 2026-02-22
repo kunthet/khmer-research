@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែល Decision Transformer សម្រាប់ការរៀនត្រាប់តាមរបស់មនុស្សយន្ត | KhmerResearch.com</title>
+    <meta name="description" content="ការបង្រៀនមនុស្សយន្តតាមរយៈការត្រាប់តាម (Robot imitation learning) ជាទូទៅទាមទារទិន្នន័យពីការបង្ហាញរបស់មនុស្សដែលមានគុណភាពខ្ពស់ ដែលត្រូវចំណាយពេលយូរនិងការលំបាកក្ន...">
+    
+    <meta name="keywords" content="Decision Transformer, Robot Imitation Learning, Offline Reinforcement Learning, Behavioral Cloning, Robomimic Benchmark, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/decision-transformer-robot-imitation-learning-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/decision-transformer-robot-imitation-learning-2022.html">
+    <meta property="og:title" content="ម៉ូដែល Decision Transformer សម្រាប់ការរៀនត្រាប់តាមរបស់មនុស្សយន្ត | KhmerResearch.com">
+    <meta property="og:description" content="ការបង្រៀនមនុស្សយន្តតាមរយៈការត្រាប់តាម (Robot imitation learning) ជាទូទៅទាមទារទិន្នន័យពីការបង្ហាញរបស់មនុស្សដែលមានគុណភាពខ្ពស់ ដែលត្រូវចំណាយពេលយូរនិងការលំបាកក្នុងការប្រមូល។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022">
+    
+    <meta property="article:tag" content="Decision Transformer">
+    
+    <meta property="article:tag" content="Robot Imitation Learning">
+    
+    <meta property="article:tag" content="Offline Reinforcement Learning">
+    
+    <meta property="article:tag" content="Behavioral Cloning">
+    
+    <meta property="article:tag" content="Robomimic Benchmark">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែល Decision Transformer សម្រាប់ការរៀនត្រាប់តាមរបស់មនុស្សយន្ត">
+    <meta name="twitter:description" content="ការបង្រៀនមនុស្សយន្តតាមរយៈការត្រាប់តាម (Robot imitation learning) ជាទូទៅទាមទារទិន្នន័យពីការបង្ហាញរបស់មនុស្សដែលមានគុណភាពខ្ពស់ ដែលត្រូវចំណាយពេលយូរនិងការលំបាកក្នុងការប្រមូល។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Decision Transformer \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u178f\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17b6\u1798\u179a\u1794\u179f\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f",
+      "name": "Decision Transformer for Robot Imitation Learning",
+      "description": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u179a\u17c0\u1793\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f\u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u178f\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17b6\u1798 (Robot imitation learning) \u1787\u17b6\u1791\u17bc\u1791\u17c5\u1791\u17b6\u1798\u1791\u17b6\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u17b8\u1780\u17b6\u179a\u1794\u1784\u17d2\u17a0\u17b6\u1789\u179a\u1794\u179f\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f\u178a\u17c2\u179b\u1798\u17b6\u1793\u1782\u17bb\u178e\u1797\u17b6\u1796\u1781\u17d2\u1796\u179f\u17cb \u178a\u17c2\u179b\u178f\u17d2\u179a\u17bc\u179c\u1785\u17c6\u178e\u17b6\u1799\u1796\u17c1\u179b\u1799\u17bc\u179a\u1793\u17b7\u1784\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u1798\u17bc\u179b\u17d4 \u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u1798\u17d2\u179a\u17bb\u17c7\u178a\u17c2\u179b\u1798\u17b6\u1793\u1782\u17bb\u178e\u1797\u17b6\u1796\u1791\u17b6\u17c6\u1784\u1791\u17b6\u1794\u1793\u17b7\u1784\u1781\u17d2\u1796\u179f\u17cb (Mixed-quality data) \u178a\u17c2\u179b\u1794\u17d2\u179a\u1798\u17bc\u179b\u1795\u17d2\u178f\u17bb\u17c6\u1796\u17b8\u1794\u17d2\u179a\u1797\u1796\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/decision-transformer-robot-imitation-learning-2022.html",
+      "author": [{"@type": "Person", "name": "Alex Chandler (University of Texas at Austin)"},{"@type": "Person", "name": "Jake Grigsby (University of Texas at Austin)"},{"@type": "Person", "name": "Omeed Tehrani (University of Texas at Austin)"}],
+      "datePublished": "2022",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Decision Transformer for Robot Imitation Learning",
+        "url": "https://github.com/jakegrigsby/robomimic-decision-transformer"
+      },
+      "keywords": ["Decision Transformer", "Robot Imitation Learning", "Offline Reinforcement Learning", "Behavioral Cloning", "Robomimic Benchmark"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Decision Transformer \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u178f\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17b6\u1798\u179a\u1794\u179f\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f",
+          "item": "https://khmerresearch.com/papers/technology/decision-transformer-robot-imitation-learning-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ម៉ូដែល Decision Transformer សម្រាប់ការរៀនត្រាប់តាមរបស់មនុស្សយន្ត</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Decision Transformer for Robot Imitation Learning<br>
+        
+        <strong>Source:</strong> <a href="https://github.com/jakegrigsby/robomimic-decision-transformer" target="_blank">github.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែល Decision Transformer សម្រាប់ការរៀនត្រាប់តាមរបស់មនុស្សយន្ត</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Decision Transformer for Robot Imitation Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Alex Chandler (University of Texas at Austin), Jake Grigsby (University of Texas at Austin), Omeed Tehrani (University of Texas at Austin)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការបង្រៀនមនុស្សយន្តតាមរយៈការត្រាប់តាម (Robot imitation learning) ជាទូទៅទាមទារទិន្នន័យពីការបង្ហាញរបស់មនុស្សដែលមានគុណភាពខ្ពស់ ដែលត្រូវចំណាយពេលយូរនិងការលំបាកក្នុងការប្រមូល។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរៀនពីសំណុំទិន្នន័យចម្រុះដែលមានគុណភាពទាំងទាបនិងខ្ពស់ (Mixed-quality data) ដែលប្រមូលផ្តុំពីប្រភពផ្សេងៗគ្នា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះប្រើប្រាស់ស្ថាបត្យកម្ម Decision Transformer (DT) ដែលកែច្នៃរួច ដោយបំប្លែងបញ្ហានៃការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ទៅជាបញ្ហានៃការធ្វើម៉ូដែលតាមលំដាប់លំដោយ (Sequence modeling) ស័ក្តិសមសម្រាប់លំហសកម្មភាពបន្ត (Continuous action spaces)។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់សំណុំទិន្នន័យចម្រុះដែលមានគុណភាពមិនស្មើគ្នា និងបង្កើតដោយប្រភពច្រើន (Robomimic Datasets)</li>
+            
+            <li>ការបង្កើតនិងកំណត់អនុគមន៍រង្វាន់ថ្មីដែលមានលក្ខណៈពាក់កណ្តាលស្តើង (Semi-Sparse Reward Function) ដើម្បីជួយម៉ូដែលក្នុងការវាយតម្លៃ</li>
+            
+            <li>ការប្រើប្រាស់ស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទបែប (Pre-Norm Transformer) ភ្ជាប់ជាមួយគោលនយោបាយស្តូចាស្ទិកបែបកូនកាត់ (Gaussian Mixture Model Policy)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល Decision Transformer ទទួលបានអត្រាជោគជ័យរហូតដល់ ៩៤% លើការងារលើកវត្ថុ (Lift task) និង ៨១% លើការងារចាប់កំប៉ុង (Can task) ដែលបង្ហាញពីលទ្ធផលល្អជាងវិធីសាស្ត្រ Behavioral Cloning ធម្មតាយ៉ាងខ្លាំង។</li>
+            
+            <li>ការបង្កើនទំហំម៉ូដែល និងការពង្រីកប្រវែងនៃលំដាប់បរិបទ (Context sequence lengths) ជួយធ្វើឱ្យការទស្សន៍ទាយសកម្មភាពមានភាពកាន់តែសុក្រឹតនៅក្នុងអំឡុងពេលបណ្តុះបណ្តាល។</li>
+            
+            <li>ការប្រើប្រាស់គោលនយោបាយសកម្មភាពបែប (Gaussian Mixture Model) មានប្រសិទ្ធភាពខ្ពស់ជាងម៉ូដែល (Gaussian) ធម្មតាក្នុងការដោះស្រាយជាមួយទិន្នន័យបង្ហាញដែលមានទម្រង់ចម្រុះ (Multi-modal action distributions)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Naive Behavioral Cloning (BC)</span></strong><br>ការក្លូនអាកប្បកិរិយាធម្មតា ដោយគ្មានបរិបទ (Naive BC)</td>
+                <td>មានភាពសាមញ្ញក្នុងការអនុវត្ត និងដំណើរការបានល្អប្រសើរនៅពេលដែលប្រើប្រាស់តែសំណុំទិន្នន័យពីអ្នកជំនាញសុទ្ធ។</td>
+                <td>បរាជ័យស្ទើរតែទាំងស្រុងនៅពេលព្យាយាមរៀនពីសំណុំទិន្នន័យចម្រុះ (Mixed-quality data) ដែលមានគុណភាពមិនស្មើគ្នា។</td>
+                <td>អត្រាជោគជ័យទាបបំផុត ត្រឹមតែ ៣៥% លើការងារលើកវត្ថុ (Lift-All) និង ១៤% លើការងារចាប់កំប៉ុង (Can-All)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Decision Transformer (DT)</span></strong><br>ម៉ូដែលត្រង់ស្វូម័រសម្រាប់ការសម្រេចចិត្ត ផ្អែកលើលំដាប់បរិបទ (DT)</td>
+                <td>អាចរៀនពីទិន្នន័យចម្រុះបានយ៉ាងល្អ ដោយពឹងផ្អែកលើការចងចាំប្រវត្តិសកម្មភាព និងការកំណត់រង្វាន់គោលដៅ ដើម្បីធ្វើការសម្រេចចិត្តឱ្យបានត្រឹមត្រូវ។</td>
+                <td>អាចប្រឈមនឹងកំហុសប្រមូលផ្តុំ (Compounding errors) នៅពេលអនុវត្តជាក់ស្តែង និងទាមទារការសាកល្បងកំណត់រង្វាន់គោលដៅ (Target Return) ជាមុន។</td>
+                <td>ទទួលបានអត្រាជោគជ័យរហូតដល់ ៩៤% លើការងារ Lift-All (DT-20) និង ៨១% លើការងារ Can-All (DT-3)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Gaussian Mixture Model (GMM) Policy</span></strong><br>គោលនយោបាយម៉ូដែលល្បាយហ្គូសៀន</td>
+                <td>មានភាពបត់បែនខ្ពស់ក្នុងការតំណាងឱ្យសកម្មភាពចម្រុះ និងវិធីសាស្ត្រផ្សេងៗគ្នារបស់មនុស្សក្នុងការដោះស្រាយការងារតែមួយ។</td>
+                <td>មានប៉ារ៉ាម៉ែត្រច្រើនដែលត្រូវបណ្តុះបណ្តាល និងមានភាពស្មុគស្មាញក្នុងការគណនាជាងម៉ូដែលហ្គូសៀនឯករាជ្យធម្មតា។</td>
+                <td>ដំណើរការល្អជាងគោលនយោបាយ Gaussian ឯករាជ្យយ៉ាងច្បាស់លាស់ នៅក្នុងគ្រប់ប្រវែងបរិបទទាំងអស់សម្រាប់ការងារ Lift-All។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារកម្លាំងម៉ាស៊ីនកុំព្យូទ័រធម្យម ប៉ុន្តែត្រូវការក្រាហ្វិកកាត (GPU) ដើម្បីបណ្តុះបណ្តាលម៉ូដែល ព្រមទាំងសំណុំទិន្នន័យធំៗសម្រាប់ការក្លែងធ្វើ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ប្រើប្រាស់ក្រាហ្វិកកាតប្រភេទ NVIDIA GeForce RTX-3090 ចំនួនមួយគ្រាប់ ដែលចំណាយពេលបណ្តុះបណ្តាលម៉ូដែលប្រហែល ៦ ម៉ោង។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យក្លែងធ្វើពី Robomimic Benchmark ដែលមានផ្ទុកទិន្នន័យចម្រុះបង្កើតដោយមនុស្ស និងម៉ាស៊ីន (Machine-generated data)។</li>
+        
+        <li><strong>Software:</strong> បរិស្ថានក្លែងធ្វើ Robosuite simulator និងកូដសម្រាប់ដំណើរការម៉ូដែល Decision Transformer (សរសេរដោយ Python និង PyTorch)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកស្រាវជ្រាវដែលមានចំណេះដឹងផ្នែក Offline Reinforcement Learning, Transformer architectures និង Robotics Simulation។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការស្រាវជ្រាវនេះត្រូវបានធ្វើឡើងដោយពឹងផ្អែកទាំងស្រុងលើទិន្នន័យពីបរិស្ថានក្លែងធ្វើនិម្មិត (Robosuite simulator) និងទិន្នន័យប្រមូលដោយការបញ្ជាមនុស្សយន្តតាមកុំព្យូទ័រ (Teleoperation)។ ទិន្នន័យនេះមិនឆ្លុះបញ្ចាំងពីបញ្ហារូបវន្តក្នុងពិភពពិតដូចជា កកិត សីតុណ្ហភាព ឬវត្ថុមានរូបរាងមិនច្បាស់លាស់នោះទេ។ សម្រាប់ប្រទេសកម្ពុជា នេះមានន័យថាការចង់យកម៉ូដែលនេះមកប្រើប្រាស់ផ្ទាល់នៅក្នុងរោងចក្រ គឺចាំបាច់ត្រូវមានការផ្ទេរចំណេះដឹងពីម៉ាស៊ីនក្លែងធ្វើទៅកាន់ពិភពពិត (Sim-to-Real transfer) និងការប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែម។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាស្ថិតក្នុងដំណាក់កាលស្រាវជ្រាវក្តី វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ក្នុងការអភិវឌ្ឍប្រព័ន្ធស្វ័យប្រវត្តិកម្មដែលមានភាពបត់បែននៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>តំបន់សេដ្ឋកិច្ចពិសេស (SEZ) ឧទាហរណ៍នៅភ្នំពេញ ឬក្រុងព្រះសីហនុ:</strong> រោងចក្រដំឡើងគ្រឿងអេឡិចត្រូនិច ឬគ្រឿងបន្លាស់ អាចប្រើបច្ចេកវិទ្យានេះដើម្បីបង្រៀនមនុស្សយន្តតាមរយៈទិន្នន័យសកម្មភាពការងាររបស់កម្មករ ទោះបីជាកម្មករខ្លះមិនសូវមានជំនាញ (Sub-optimal data) ក៏ដោយ ដែលជួយកាត់បន្ថយថ្លៃដើមក្នុងការសរសេរកម្មវិធីបញ្ជា។</li>
+            
+            <li><strong>វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា (ITC) និងសាកលវិទ្យាល័យបញ្ញាសិប្បនិម្មិត:</strong> និស្សិតផ្នែកមេកានិច ឬ AI អាចយកកូដស្រាវជ្រាវនេះ (Open-source) ជាមូលដ្ឋានសម្រាប់សិក្សាអំពីការប្រើប្រាស់ Transformer នៅក្នុងវិស័យ Robotics និងបង្កើតគម្រោងបញ្ជាមនុស្សយន្តខ្នាតតូច។</li>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> សហគ្រាសកសិកម្មអាចចាប់ផ្តើមស្រាវជ្រាវប្រើមនុស្សយន្តសម្រាប់ប្រមូលផល ដោយប្រមូលទិន្នន័យបញ្ជាពីកសិករផ្ទាល់ ដើម្បីឱ្យមនុស្សយន្តរៀនចាប់និងរើសផ្លែឈើដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក បច្ចេកវិទ្យានេះផ្តល់នូវផ្លូវមួយក្នុងការបណ្តុះបណ្តាលមនុស្សយន្តពីសំណុំទិន្នន័យចម្រុះដែលងាយស្រួលប្រមូល ដែលជាជំហានដ៏សំខាន់សម្រាប់ប្រទេសកំពុងអភិវឌ្ឍក្នុងការចាប់យកស្វ័យប្រវត្តិកម្មកម្រិតខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>យល់ដឹងពីទ្រឹស្តី Offline Reinforcement Learning និង Behavioral Cloning:</strong> និស្សិតត្រូវចាប់ផ្តើមសិក្សាពីភាពខុសគ្នារវាងការរៀនតាមពេលវេលាជាក់ស្តែង (Online RL) និងការរៀនពីទិន្នន័យចាស់ (Offline RL) ដោយស្វែងយល់តាមរយៈវគ្គសិក្សារបស់ឯកសារ <span class="en">Deep RL Course</span> ឬសៀវភៅជំនាញ។</li>
+            
+            <li><strong>សិក្សាពីស្ថាបត្យកម្ម Transformer និងយន្តការ Attention:</strong> ស្វែងយល់ពីរបៀបដែលម៉ូដែល Transformer អាន និងដោះស្រាយលំដាប់ទិន្នន័យ (Sequence Data) ដោយអនុវត្តការសរសេរកូដម៉ូដែលនេះដោយផ្ទាល់ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ។</li>
+            
+            <li><strong>ដំឡើងនិងអនុវត្តជាមួយបរិស្ថានក្លែងធ្វើ Robosuite:</strong> អនុវត្តការដំឡើងកញ្ចប់ទិន្នន័យក្លែងធ្វើ <span class="en">Robomimic Benchmark</span> និង <span class="en">Robosuite</span> នៅលើម៉ាស៊ីនកុំព្យូទ័រ ដើម្បីមើលនិងស្វែងយល់ពីទម្រង់ទិន្នន័យដែលមានដូចជា State, Action និង Reward។</li>
+            
+            <li><strong>ដំណើរការបណ្តុះបណ្តាលម៉ូដែល Decision Transformer:</strong> ទាញយកកូដ <span class="en">Open-Source GitHub</span> របស់អ្នកស្រាវជ្រាវ រួចសាកល្បងហ្វឹកហាត់ម៉ូដែលលើការងារងាយៗដូចជា ការលើកដុំគូប (Lift task) ដោយប្រើប្រាស់ <span class="en">Google Colab Pro</span> ដើម្បីទទួលបានល្បឿន GPU លឿន។</li>
+            
+            <li><strong>បង្កើតគម្រោងសិក្សាភ្ជាប់ម៉ូដែលទៅកាន់មនុស្សយន្តពិត (Sim-to-Real):</strong> ប្រើប្រាស់លទ្ធផលដែលរៀនបាន ដើម្បីអនុវត្តគម្រោងបញ្ជាដៃមនុស្សយន្តពិតប្រាកដក្នុងមន្ទីរពិសោធន៍ (ឧទាហរណ៍ <span class="en">DoBot</span> ឬ <span class="en">Raspberry Pi Robot Arm</span>) ដោយសាកល្បងបញ្ជាឱ្យធ្វើសកម្មភាពស្រដៀងគ្នានៅក្នុងពិភពពិត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision Transformer</span></td>
+                <td>ស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទដែលបំប្លែងបញ្ហានៃការសម្រេចចិត្តរបស់មនុស្សយន្ត ទៅជាការទស្សន៍ទាយលំដាប់លំដោយទិន្នន័យ (Sequence) ដូចជាការអានប្រយោគដើម្បីទាយពាក្យបន្ទាប់។</td>
+                <td>ដូចជាកម្មវិធីទស្សន៍ទាយពាក្យបន្ទាប់នៅលើទូរសព្ទដៃអញ្ចឹង តែជំនួសឱ្យការព្យាករណ៍ពាក្យ វាទស្សន៍ទាយថាតើមនុស្សយន្តគួរធ្វើចលនាអ្វីបន្ទាប់ដើម្បីសម្រេចគោលដៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline Reinforcement Learning</span></td>
+                <td>វិធីសាស្ត្របង្រៀនបញ្ញាសិប្បនិម្មិតដោយប្រើប្រាស់តែសំណុំទិន្នន័យចាស់ៗដែលបានប្រមូលទុកជាមុន ដោយមិនអនុញ្ញាតឱ្យវាធ្វើការសាកល្បងខុសត្រូវដោយផ្ទាល់ក្នុងបរិស្ថានជាក់ស្តែងឡើយ។</td>
+                <td>ដូចជាការរៀនលេងកីឡាដោយមើលតែវីដេអូប្រកួតរបស់កីឡាករកាលពីមុន ដោយមិនបានចុះទៅលេងផ្ទាល់នៅលើទីលានដើម្បីសាកល្បងខ្លួនឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Behavioral Cloning</span></td>
+                <td>បច្ចេកទេសបង្រៀនម៉ូដែលកុំព្យូទ័រឱ្យធ្វើតាមសកម្មភាពរបស់មនុស្សយ៉ាងតឹងរ៉ឹង ដោយប្រើប្រាស់ការរៀនបែបមានអ្នកត្រួតពិនិត្យ (Supervised Learning) ដើម្បីផ្គូផ្គងស្ថានភាពទៅនឹងសកម្មភាព។</td>
+                <td>ដូចជាកូនក្មេងរៀនសរសេរអក្សរតាមរយៈការចម្លងតាមទម្រង់អក្សររបស់គ្រូបេះបិទ ដោយមិនខ្វល់ពីអត្ថន័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Return-to-go (RTG)</span></td>
+                <td>តម្លៃសរុបនៃរង្វាន់ដែលម៉ូដែលរំពឹងថានឹងទទួលបាននាពេលអនាគត គិតចាប់ពីចំណុចពេលវេលាបច្ចុប្បន្នរហូតដល់ចប់បេសកកម្ម ដែលជួយឱ្យម៉ូដែលដឹងពីគុណភាពនៃសកម្មភាពបន្ទាប់របស់ខ្លួន។</td>
+                <td>ដូចជាការគណនាប្រាក់ចំណេញសរុបដែលអ្នករំពឹងថានឹងទទួលបានចាប់ពីថ្ងៃនេះ រហូតដល់ថ្ងៃបញ្ចប់គម្រោង ដោយមិនរាប់បញ្ចូលលុយដែលរកបានពីម្សិលមិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Context Sequence</span></td>
+                <td>ប្រវត្តិបន្តបន្ទាប់គ្នានៃសកម្មភាព ស្ថានភាព និងរង្វាន់ដែលបានកើតឡើងមុននេះបន្តិច ដែលត្រូវបានបញ្ជូនទៅឱ្យម៉ូដែលដើម្បីឱ្យវាមានការចងចាំនិងយល់ពីបរិបទមុននឹងសម្រេចចិត្ត។</td>
+                <td>ដូចជាការអានប្រវត្តិជជែក (Chat history) ចំនួន៥សារចុងក្រោយ ដើម្បីអាចឆ្លើយតបសារបន្ទាប់បានត្រឹមត្រូវនិងស៊ីចង្វាក់គ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian Mixture Model (GMM) Policy</span></td>
+                <td>គោលនយោបាយគណិតវិទ្យាដែលប្រើសម្រាប់តំណាងឱ្យទម្រង់សកម្មភាពចម្រុះនិងស្មុគស្មាញ វាអាចចាប់យកយុទ្ធសាស្ត្រប្លែកៗគ្នារបស់មនុស្សជាច្រើននាក់ក្នុងការដោះស្រាយបញ្ហាតែមួយ។</td>
+                <td>ដូចជាការដឹងថាមានផ្លូវច្រើនខុសៗគ្នាដើម្បីធ្វើដំណើរពីផ្ទះទៅសាលារៀន ហើយរើសផ្លូវណាមួយតាមស្ថានភាពជាក់ស្តែង ជាជាងការជឿថាមានផ្លូវតែមួយគត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-modality</span></td>
+                <td>វត្តមាននៃទិន្នន័យដែលបង្ហាញពីវិធីសាស្ត្រ ឬយុទ្ធសាស្ត្រខុសៗគ្នាជាច្រើន ដើម្បីសម្រេចគោលដៅតែមួយ ដែលធ្វើឱ្យម៉ូដែលពិបាកក្នុងការរៀនប្រសិនបើវាមិនអាចបែងចែកយុទ្ធសាស្ត្រទាំងនោះបាន។</td>
+                <td>ដូចជាការចម្អិនម្ហូបមួយមុខ ដែលចុងភៅ៣នាក់មានវិធីសាស្រ្ត និងលំដាប់លំដោយនៃការដាក់គ្រឿងផ្សំខុសៗគ្នា ប៉ុន្តែនៅតែទទួលបានម្ហូបឆ្ងាញ់ដូចគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Semi-Sparse Reward Function</span></td>
+                <td>ការផ្តល់រង្វាន់ដល់ម៉ូដែលដែលមានការបូកបញ្ចូលគ្នានូវរង្វាន់មូលដ្ឋានតូចៗ និងរង្វាន់ធំនៅពេលបំពេញការងារជោគជ័យ ដែលរង្វាន់ធំនោះនឹងថយចុះបន្តិចម្តងៗទៅតាមពេលវេលាដែលបានចំណាយ។</td>
+                <td>ដូចជាការប្រកួតរត់ប្រណាំង ដែលអ្នករត់ដល់ទីមុនគេទទួលបានរង្វាន់ធំបំផុត ហើយអ្នកមកដល់ក្រោយៗទទួលបានរង្វាន់តិចទៅៗរហូតដល់សូន្យ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%7B%27type%27%3A+%27internal%27%2C+%27title%27%3A+%27Offline+RL+with+Decision+Transformers+for+T1D+Glucose+Control%27%2C+%27khmer_title%27%3A+%27%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%9A%E1%9F%80%E1%9E%93%E1%9E%96%E1%9E%84%E1%9F%92%E1%9E%9A%E1%9E%B9%E1%9E%84%E1%9E%80%E1%9F%92%E1%9E%9A%E1%9F%85%E1%9E%94%E1%9E%8E%E1%9F%92%E1%9E%8F%E1%9E%B6%E1%9E%89+%28Offline+RL%29+%E1%9E%87%E1%9E%B6%E1%9E%98%E1%9E%BD%E1%9E%99%E1%9E%93%E1%9E%B9%E1%9E%84+Decision+Transformers+%E1%9E%9F%E1%9E%98%E1%9F%92%E1%9E%9A%E1%9E%B6%E1%9E%94%E1%9F%8B%E1%9E%80%E1%9E%B6%E1%9E%9A%E1%9E%82%E1%9F%92%E1%9E%9A%E1%9E%94%E1%9F%8B%E1%9E%82%E1%9F%92%E1%9E%9A%E1%9E%84%E1%9E%87%E1%9E%B6%E1%9E%8F%E1%9E%B7%E1%9E%9F%E1%9F%92%E1%9E%80%E1%9E%9A%E1%9E%93%E1%9F%83%E1%9E%87%E1%9F%86%E1%9E%84%E1%9E%BA%E1%9E%91%E1%9E%B9%E1%9E%80%E1%9E%93%E1%9F%84%E1%9E%98%E1%9E%95%E1%9F%92%E1%9E%A2%E1%9F%82%E1%9E%98%E1%9E%94%E1%9F%92%E1%9E%9A%E1%9E%97%E1%9F%81%E1%9E%91%E1%9E%91%E1%9E%B8%E1%9F%A1+%28T1D%29%27%2C+%27url%27%3A+%27%2Fpapers%2Fhealth%2Foffline-rl-decision-transformers-t1d-2025.html%27%7D" target="_blank" rel="noopener"><span class="en">{'type': 'internal', 'title': 'Offline RL with Decision Transformers for T1D Glucose Control', 'khmer_title': 'ការរៀនពង្រឹងក្រៅបណ្តាញ (Offline RL) ជាមួយនឹង Decision Transformers សម្រាប់ការគ្រប់គ្រងជាតិស្ករនៃជំងឺទឹកនោមផ្អែមប្រភេទទី១ (T1D)', 'url': '/papers/health/offline-rl-decision-transformers-t1d-2025.html'}</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=offline+reinforcement+learning+from+mixed+quality+datasets" target="_blank" rel="noopener"><span class="en">offline reinforcement learning from mixed quality datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=decision+transformer+continuous+action+space+robotics" target="_blank" rel="noopener"><span class="en">decision transformer continuous action space robotics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=robomimic+benchmark+for+robot+learning" target="_blank" rel="noopener"><span class="en">robomimic benchmark for robot learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=stochastic+policies+in+sequence+modeling+RL" target="_blank" rel="noopener"><span class="en">stochastic policies in sequence modeling RL</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-modal+action+distributions+in+behavioral+cloning" target="_blank" rel="noopener"><span class="en">multi-modal action distributions in behavioral cloning</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

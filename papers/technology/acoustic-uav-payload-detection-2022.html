@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រព័ន្ធផ្តោតលើវិស្វកម្មលក្ខណៈពិសេសសម្រាប់ការរកឃើញបន្ទុកដ្រូនតាមរយៈសំឡេង | KhmerResearch.com</title>
+    <meta name="description" content="ការកើនឡើងនៃការប្រើប្រាស់យន្តហោះគ្មានមនុស្សបើក (UAVs ឬ Drones) បង្កជាការគំរាមកំហែងដល់សន្តិសុខ ដោយសារពួកវាអាចផ្ទុកនូវអាវុធ ឬគ្រឿងផ្ទុះ ដូច្នេះការកំណត់អត្តសញ្ញា...">
+    
+    <meta name="keywords" content="Acoustic Classification, UAV Payload Detection, Feature Extraction, Machine Learning, Drone Security, MFCC, Neural Networks, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/acoustic-uav-payload-detection-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/acoustic-uav-payload-detection-2022.html">
+    <meta property="og:title" content="ប្រព័ន្ធផ្តោតលើវិស្វកម្មលក្ខណៈពិសេសសម្រាប់ការរកឃើញបន្ទុកដ្រូនតាមរយៈសំឡេង | KhmerResearch.com">
+    <meta property="og:description" content="ការកើនឡើងនៃការប្រើប្រាស់យន្តហោះគ្មានមនុស្សបើក (UAVs ឬ Drones) បង្កជាការគំរាមកំហែងដល់សន្តិសុខ ដោយសារពួកវាអាចផ្ទុកនូវអាវុធ ឬគ្រឿងផ្ទុះ ដូច្នេះការកំណត់អត្តសញ្ញាណថាតើដ្រូនមានផ្ទុកបន្ទុកឬអត់ (Loaded vs ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022, Proceedings of the 14th International Conference on Agents and Artificial Intelligence (ICAART 2022)">
+    
+    <meta property="article:tag" content="Acoustic Classification">
+    
+    <meta property="article:tag" content="UAV Payload Detection">
+    
+    <meta property="article:tag" content="Feature Extraction">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Drone Security">
+    
+    <meta property="article:tag" content="MFCC">
+    
+    <meta property="article:tag" content="Neural Networks">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រព័ន្ធផ្តោតលើវិស្វកម្មលក្ខណៈពិសេសសម្រាប់ការរកឃើញបន្ទុកដ្រូនតាមរយៈសំឡេង">
+    <meta name="twitter:description" content="ការកើនឡើងនៃការប្រើប្រាស់យន្តហោះគ្មានមនុស្សបើក (UAVs ឬ Drones) បង្កជាការគំរាមកំហែងដល់សន្តិសុខ ដោយសារពួកវាអាចផ្ទុកនូវអាវុធ ឬគ្រឿងផ្ទុះ ដូច្នេះការកំណត់អត្តសញ្ញាណថាតើដ្រូនមានផ្ទុកបន្ទុកឬអត់ (Loaded vs ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u179c\u17b7\u179f\u17d2\u179c\u1780\u1798\u17d2\u1798\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1794\u1793\u17d2\u1791\u17bb\u1780\u178a\u17d2\u179a\u17bc\u1793\u178f\u17b6\u1798\u179a\u1799\u17c8\u179f\u17c6\u17a1\u17c1\u1784",
+      "name": "A Feature Engineering Focused System for Acoustic UAV Payload Detection",
+      "description": "\u1780\u17b6\u179a\u1780\u17be\u1793\u17a1\u17be\u1784\u1793\u17c3\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1799\u1793\u17d2\u178f\u17a0\u17c4\u17c7\u1782\u17d2\u1798\u17b6\u1793\u1798\u1793\u17bb\u179f\u17d2\u179f\u1794\u17be\u1780 (UAVs \u17ac Drones) \u1794\u1784\u17d2\u1780\u1787\u17b6\u1780\u17b6\u179a\u1782\u17c6\u179a\u17b6\u1798\u1780\u17c6\u17a0\u17c2\u1784\u178a\u179b\u17cb\u179f\u1793\u17d2\u178f\u17b7\u179f\u17bb\u1781 \u178a\u17c4\u1799\u179f\u17b6\u179a\u1796\u17bd\u1780\u179c\u17b6\u17a2\u17b6\u1785\u1795\u17d2\u1791\u17bb\u1780\u1793\u17bc\u179c\u17a2\u17b6\u179c\u17bb\u1792 \u17ac\u1782\u17d2\u179a\u17bf\u1784\u1795\u17d2\u1791\u17bb\u17c7 \u178a\u17bc\u1785\u17d2\u1793\u17c1\u17c7\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u1790\u17b6\u178f\u17be\u178a\u17d2\u179a\u17bc\u1793\u1798\u17b6\u1793\u1795\u17d2\u1791\u17bb\u1780\u1794\u1793\u17d2\u1791\u17bb\u1780\u17ac\u17a2\u178f\u17cb (Loaded vs Unloaded) \u1782\u17ba\u1798\u17b6\u1793\u179f\u17b6\u179a\u17c8\u179f\u17c6\u1781\u17b6\u1793\u17cb\u178e\u17b6\u179f\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1780\u1798\u17d2\u179a\u17b7\u178f\u17a0\u17b6\u1793\u17b7\u1797\u17d0\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/acoustic-uav-payload-detection-2022.html",
+      "author": [{"@type": "Person", "name": "Yaqin Wang (Computer and Information Technology, Purdue University, IN, U.S.A.)"},{"@type": "Person", "name": "Facundo Esquivel Fagiani (Renard Analytics, San Miguel de Tucum\u00e1n, Argentina)"},{"@type": "Person", "name": "Kar Ee Ho (Computer and Information Technology, Purdue University, IN, U.S.A.)"},{"@type": "Person", "name": "Eric T. Matson (Computer and Information Technology, Purdue University, IN, U.S.A.)"}],
+      "datePublished": "2022, Proceedings of the 14th International Conference on Agents and Artificial Intelligence (ICAART 2022)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A Feature Engineering Focused System for Acoustic UAV Payload Detection",
+        "url": "https://doi.org/10.5220/0010843800003116"
+      },
+      "keywords": ["Acoustic Classification", "UAV Payload Detection", "Feature Extraction", "Machine Learning", "Drone Security", "MFCC", "Neural Networks"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u179c\u17b7\u179f\u17d2\u179c\u1780\u1798\u17d2\u1798\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1794\u1793\u17d2\u1791\u17bb\u1780\u178a\u17d2\u179a\u17bc\u1793\u178f\u17b6\u1798\u179a\u1799\u17c8\u179f\u17c6\u17a1\u17c1\u1784",
+          "item": "https://khmerresearch.com/papers/technology/acoustic-uav-payload-detection-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រព័ន្ធផ្តោតលើវិស្វកម្មលក្ខណៈពិសេសសម្រាប់ការរកឃើញបន្ទុកដ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A Feature Engineering Focused System for Acoustic UAV Payload Detection<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.5220/0010843800003116" target="_blank">doi.org/10.5220/0010843800003116</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រព័ន្ធផ្តោតលើវិស្វកម្មលក្ខណៈពិសេសសម្រាប់ការរកឃើញបន្ទុកដ្រូនតាមរយៈសំឡេង</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A Feature Engineering Focused System for Acoustic UAV Payload Detection</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Yaqin Wang (Computer and Information Technology, Purdue University, IN, U.S.A.), Facundo Esquivel Fagiani (Renard Analytics, San Miguel de Tucumán, Argentina), Kar Ee Ho (Computer and Information Technology, Purdue University, IN, U.S.A.), Eric T. Matson (Computer and Information Technology, Purdue University, IN, U.S.A.)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022, Proceedings of the 14th International Conference on Agents and Artificial Intelligence (ICAART 2022)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការកើនឡើងនៃការប្រើប្រាស់យន្តហោះគ្មានមនុស្សបើក (UAVs ឬ Drones) បង្កជាការគំរាមកំហែងដល់សន្តិសុខ ដោយសារពួកវាអាចផ្ទុកនូវអាវុធ ឬគ្រឿងផ្ទុះ ដូច្នេះការកំណត់អត្តសញ្ញាណថាតើដ្រូនមានផ្ទុកបន្ទុកឬអត់ (Loaded vs Unloaded) គឺមានសារៈសំខាន់ណាស់ក្នុងការវាយតម្លៃកម្រិតហានិភ័យ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះវាយតម្លៃលើវិធីសាស្រ្តប្រើប្រាស់ម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) ដែលផ្អែកលើការទាញយកលក្ខណៈពិសេស (Feature-based approach) ដើម្បីបែងចែកដ្រូនមានផ្ទុកបន្ទុក និងមិនមានផ្ទុកបន្ទុក ដោយប្រើប្រាស់សញ្ញាសំឡេង (Acoustic signals)។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យសំឡេង (Audio Data Collection): ប្រមូលសំឡេងដ្រូន DJI Phantom 4 និង EVO 2 Pro ចំនួន 1232 គំរូ (រយៈពេលសរុប 204.5 នាទី) ដែលបែងចែកជាដ្រូនមានបន្ទុកទឹក 500ml និងគ្មានបន្ទុក។</li>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសនៃសំឡេង (Audio Feature Extraction): ប្រើប្រាស់បណ្ណាល័យ Librosa ដើម្បីទាញយកលក្ខណៈពិសេសចំនួន 5 រួមមាន MFCC, chroma, mel, contrast, និង tonnetz។</li>
+            
+            <li>ការបណ្តុះបណ្តាលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning Training): ប្រើប្រាស់ទិន្នន័យលក្ខណៈពិសេសរួមបញ្ចូលគ្នា និងដាច់ដោយឡែក ដើម្បីបង្ហាត់ម៉ូដែលចំនួន 4 រួមមាន Support Vector Machine (SVM), Gaussian Naive Bayes (GNB), K-Nearest Neighbor (KNN), និង Neural Network (NN)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការរួមបញ្ចូលគ្នានៃលក្ខណៈពិសេស (Combination of features) ផ្តល់នូវលទ្ធផលល្អប្រសើរជាងការប្រើលក្ខណៈពិសេសដាច់ដោយឡែក ដោយទទួលបានភាពត្រឹមត្រូវជាមធ្យមប្រមាណ 99% (99% average accuracy) នៅក្នុងម៉ូដែលរៀនដោយម៉ាស៊ីនទាំង 4។</li>
+            
+            <li>ក្នុងចំណោមលក្ខណៈពិសេសដាច់ដោយឡែក (Individual features) MFCC ដំណើរការបានល្អបំផុតសម្រាប់ម៉ូដែល SVM, GNB, និង NN ខណៈពេលដែល chroma ដំណើរការបានល្អបំផុតនៅក្នុងម៉ូដែល KNN។</li>
+            
+            <li>វិធីសាស្រ្តផ្តោតលើវិស្វកម្មលក្ខណៈពិសេសនេះ ទាមទារធនធានកុំព្យូទ័រតិច (Fewer computational resources) និងមានការពន្យល់ច្បាស់លាស់ (Higher explainability) ជាងបើប្រៀបធៀបទៅនឹងការសិក្សាដែលប្រើវិធីសាស្រ្តរ៉ាដា (Micro-Doppler radar)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM)</span></strong><br>ម៉ាស៊ីនវ៉ិចទ័រគាំទ្រ (Support Vector Machine)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការបែងចែកទិន្នន័យនៅពេលប្រើប្រាស់លក្ខណៈពិសេសរួមបញ្ចូលគ្នា (Combined features) និងមានភាពងាយស្រួលក្នុងការកំណត់រចនាសម្ព័ន្ធ (Parameter C=10, linear kernel)។</td>
+                <td>ទិន្នផលនៃភាពត្រឹមត្រូវមានការធ្លាក់ចុះយ៉ាងខ្លាំងនៅពេលប្រើប្រាស់លក្ខណៈពិសេសដាច់ដោយឡែកមួយចំនួនដូចជា Contrast និង Tonnetz។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ 99.2% (Accuracy) សម្រាប់លក្ខណៈពិសេសរួមបញ្ចូលគ្នា និង 98.6% សម្រាប់ MFCC។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Gaussian Naive Bayes (GNB)</span></strong><br>ហ្គោសៀនណាយបាយអេស (Gaussian Naive Bayes)</td>
+                <td>ទទួលបានលទ្ធផលល្អឥតខ្ចោះស្មើនឹងម៉ូដែល Neural Network ជាមួយនឹងលក្ខណៈពិសេសរួមបញ្ចូលគ្នា និង MFCC ដោយគ្រាន់តែប្រើប្រាស់ការកំណត់រចនាសម្ព័ន្ធដើម (Default parameters)។</td>
+                <td>មានដំណើរការខ្សោយបំផុតក្នុងការប្រើប្រាស់លក្ខណៈពិសេស Contrast ដោយទទួលបានភាពត្រឹមត្រូវទាបបំផុតធៀបនឹងម៉ូដែលផ្សេងៗ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់រហូតដល់ 99.7% ទាំងសម្រាប់លក្ខណៈពិសេសរួមបញ្ចូលគ្នា និង MFCC ចំណែកឯ Contrast ទទួលបានត្រឹម 54.6%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbor (KNN)</span></strong><br>អ្នកជិតខាងជិតបំផុត K (K-Nearest Neighbor)</td>
+                <td>ជាម៉ូដែលតែមួយគត់ដែលលក្ខណៈពិសេស Chroma ដាច់ដោយឡែក (99.5%) ដំណើរការបានល្អជាងលក្ខណៈពិសេសរួមបញ្ចូលគ្នា (98.9%)។</td>
+                <td>ភាពត្រឹមត្រូវនៃលក្ខណៈពិសេសរួមបញ្ចូលគ្នាមានកម្រិតទាបជាងបន្តិចបើប្រៀបធៀបទៅនឹងម៉ូដែល ៣ ផ្សេងទៀត។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ 99.5% សម្រាប់ Chroma ខណៈដែលលក្ខណៈពិសេសរួមបញ្ចូលគ្នាទទួលបាន 98.9%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Neural Network (NN)</span></strong><br>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការរៀនលំនាំស្មុគស្មាញ (Complex patterns) ជាមួយនឹងរចនាសម្ព័ន្ធ 3 dense layers, 2 activation layers និង 2 dropout layers។</td>
+                <td>ទាមទារការរៀបចំរចនាសម្ព័ន្ធម៉ូដែលស្មុគស្មាញជាងម៉ូដែលលីនេអ៊ែរ (Linear models) ផ្សេងទៀត ប៉ុន្តែលទ្ធផលគឺប្រហាក់ប្រហែលនឹង GNB ដែរ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ 99.7% សម្រាប់ទាំងលក្ខណៈពិសេសរួមបញ្ចូលគ្នា និង MFCC និងមាន F-1 score 0.997។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> វិធីសាស្រ្តនេះទាមទារធនធានកុំព្យូទ័រតិចតួចបំផុត ដោយការទាញយកទិន្នន័យនិងបណ្តុះបណ្តាលម៉ូដែលត្រូវបានធ្វើឡើងនៅលើកុំព្យូទ័រយួរដៃធម្មតាប៉ុណ្ណោះ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រ Macbook Air ដែលមានអង្គគណនា 1.1 GHz Quad-Core Intel Core i5 និងអង្គចងចាំ (RAM) ទំហំ 8 GB គឺគ្រប់គ្រាន់សម្រាប់ដំណើរការ។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា Python ជាមួយបណ្ណាល័យ Librosa សម្រាប់ការទាញយកលក្ខណៈពិសេសនៃសំឡេង (Audio feature extraction)។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យសំឡេងចំនួន 1232 គំរូ (រយៈពេល 204.5 នាទី) ដែលត្រូវបានប្រមូលដោយផ្ទាល់ពីដ្រូន DJI Phantom 4 និង EVO 2 Pro ជាមួយនឹងបន្ទុកទឹកចំណុះ 500ml។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅឧទ្យាន McAllister Park រដ្ឋ Indiana សហរដ្ឋអាមេរិក ដោយប្រើប្រាស់ដ្រូនតែ២ប្រភេទ និងបន្ទុកតែ១ប្រភេទប៉ុណ្ណោះ (ដបទឹក 500ml)។ សម្រាប់បរិបទប្រទេសកម្ពុជា កត្តានេះជារឿងសំខាន់ ព្រោះសំឡេងរំខានក្នុងបរិស្ថាន (Ambient noise) នៅកម្ពុជាមានភាពខុសគ្នាខ្លាំង (ឧទាហរណ៍៖ សំឡេងម៉ូតូ សំឡេងសត្វល្អិត ការដ្ឋានសំណង់) ដែលអាចធ្វើឱ្យម៉ូដែលនេះធ្លាក់ចុះភាពត្រឹមត្រូវប្រសិនបើមិនមានការប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែម។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ប្រព័ន្ធនេះពិតជាមានសក្តានុពល និងអត្ថប្រយោជន៍ខ្ពស់សម្រាប់ប្រទេសកម្ពុជា ដោយសារវាជាដំណោះស្រាយដែលមានតម្លៃថោកនិងងាយស្រួលអនុវត្តជាងប្រព័ន្ធរ៉ាដាធំៗ។</p>
+        
+        <ul>
+            
+            <li><strong>ព្រលានយន្តហោះអន្តរជាតិ (e.g., Phnom Penh International Airport):</strong> អាចប្រើប្រាស់ឧបករណ៍ចាប់សញ្ញាសំឡេងនៅជុំវិញរបងព្រលានយន្តហោះ ដើម្បីតាមដានរកមើលដ្រូនដែលហោះហើរខុសច្បាប់ និងអាចបង្កគ្រោះថ្នាក់ដល់សន្តិសុខអាកាសចរណ៍។</li>
+            
+            <li><strong>តំបន់ការពារបេតិកភណ្ឌ (e.g., Angkor Archaeological Park):</strong> អាចដាក់ពង្រាយដើម្បីត្រួតពិនិត្យ និងរារាំងដ្រូនដែលលួចហោះហើរថតរូបដោយគ្មានការអនុញ្ញាត ឬអាចផ្ទុកឧបករណ៍ដែលអាចធ្វើឱ្យខូចខាតដល់ប្រាសាទ។</li>
+            
+            <li><strong>ការការពារសន្តិសុខថ្នាក់ជាតិ និងតំបន់ព្រំដែន (National Security):</strong> ជួយដល់កងកម្លាំងប្រដាប់អាវុធក្នុងការកំណត់អត្តសញ្ញាណដ្រូនស៊ើបការណ៍ ឬដ្រូនដែលផ្ទុកគ្រឿងផ្ទុះ/អាវុធខុសច្បាប់ឆ្លងកាត់ព្រំដែនបានទាន់ពេលវេលា។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់បច្ចេកវិទ្យាវិភាគសំឡេងនេះគឺជាជម្រើសដ៏ឆ្លាតវៃសម្រាប់កម្ពុជា ប៉ុន្តែតម្រូវឱ្យមានការកសាងមូលដ្ឋានទិន្នន័យសំឡេង (Audio Dataset) ដែលមានលក្ខណៈចម្រុះនៅក្នុងបរិស្ថានជាក់ស្តែងនៃប្រទេសកម្ពុជាជាមុនសិន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃការវិភាគសំឡេង (Learn Audio Analysis):</strong> ចាប់ផ្តើមសិក្សាពីការប្រើប្រាស់បណ្ណាល័យ <span class="en">Librosa</span> នៅក្នុង Python ដើម្បីយល់ដឹងពីរបៀបទាញយកលក្ខណៈពិសេសនៃសំឡេងដូចជា MFCC, Chroma, និង Mel spectrograms។</li>
+            
+            <li><strong>ការប្រមូលទិន្នន័យក្នុងស្រុក (Local Data Collection):</strong> ប្រើប្រាស់ឧបករណ៍ថតសំឡេង និងដ្រូនទូទៅ (ដូចជា DJI ម៉ូដែលផ្សេងៗ) ដើម្បីថតសំឡេងហោះហើរនៅក្នុងបរិយាកាសផ្សេងៗគ្នានៅកម្ពុជា (ឧទាហរណ៍៖ ទីក្រុងភ្នំពេញ តំបន់ជនបទ) និងសាកល្បងជាមួយបន្ទុកទម្ងន់ខុសៗគ្នា។</li>
+            
+            <li><strong>ការសាងសង់និងបណ្តុះបណ្តាលម៉ូដែល (Build and Train ML Models):</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">Scikit-Learn</span> ដើម្បីបង្ហាត់ម៉ូដែលមូលដ្ឋានដូចជា SVM និង KNN ដោយប្រើប្រាស់ទិន្នន័យដែលប្រមូលបាន ហើយវាយតម្លៃលទ្ធផល (Accuracy, F1-Score)។</li>
+            
+            <li><strong>ការអភិវឌ្ឍប្រព័ន្ធតាមដានជាក់ស្តែង (Develop Real-Time Hardware):</strong> សាកល្បងដំឡើងម៉ូដែលដែលជោគជ័យទៅលើឧបករណ៍តូចៗដូចជា <span class="en">Raspberry Pi</span> ភ្ជាប់ជាមួយម៉ៃក្រូហ្វូនដែលមានគុណភាពខ្ពស់ ដើម្បីធ្វើការចាប់សញ្ញាសំឡេងនិងផ្តល់ការព្រមានក្នុងពេលជាក់ស្តែង (Real-time detection)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Extraction</span></td>
+                <td>គឺជាដំណើរការនៃការទាញយកលក្ខណៈសម្បត្តិ ឬទិន្នន័យសំខាន់ៗពីទិន្នន័យដើម (ដូចជារលកសំឡេង) ដើម្បីបំប្លែងវាទៅជាទម្រង់លេខ (Vectors) ដែលម៉ាស៊ីនកុំព្យូទ័រអាចយល់ និងរៀនចំណាំបានយ៉ាងងាយស្រួល។</td>
+                <td>ដូចជាការពណ៌នាពីភ្នាក់ងារសម្ងាត់ម្នាក់ដោយប្រាប់តែពីកម្ពស់ ពណ៌សក់ និងស្នាមសម្លាក ជាជាងការពណ៌នារូបរាងទាំងមូល ដើម្បីឱ្យគេងាយស្រួលចំណាំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">MFCC</span></td>
+                <td>គឺជាវិធីសាស្ត្រមួយក្នុងការតំណាងឱ្យលក្ខណៈនៃសំឡេងដោយផ្អែកលើរបៀបដែលត្រចៀកមនុស្សស្តាប់ឮ (Mel scale) ដែលវាជួយបំបែកសំឡេងរំខាន និងចាប់យកតែសម្លេងគោលបានយ៉ាងល្អឥតខ្ចោះ។</td>
+                <td>ដូចជាឧបករណ៍បំពងសំឡេងឆ្លាតវៃ (Equalizer) ដែលចេះតម្លើងសំឡេងអ្នកចម្រៀង និងបន្ថយសំឡេងភ្លេងរំខានដោយស្វ័យប្រវត្តិ ដើម្បីឱ្យយើងស្តាប់បានច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machine (SVM)</span></td>
+                <td>គឺជាក្បួនដោះស្រាយរៀនដោយម៉ាស៊ីន (Machine Learning) ដែលមានតួនាទីគូសបន្ទាត់ ឬព្រំដែនគណិតវិទ្យាដ៏ប្រសើរបំផុតមួយ ដើម្បីបែងចែកក្រុមទិន្នន័យផ្សេងៗគ្នាឱ្យដាច់ពីគ្នាបានយ៉ាងច្បាស់លាស់។</td>
+                <td>ដូចជាការដាក់របាំងខណ្ឌចែកផ្លូវ ដើម្បីបំបែកគន្លងម៉ូតូ និងគន្លងឡានឱ្យដាច់ពីគ្នា ដើម្បីកុំឱ្យមានការភាន់ច្រឡំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Chroma</span></td>
+                <td>គឺជាលក្ខណៈពិសេសនៃសំឡេងដែលផ្តោតទៅលើកម្រិតជម្រាលនៃសូរសព្ទ (Pitch) ដោយបំបែកសំឡេងទៅជាថ្នាក់ខុសៗគ្នាស្រដៀងនឹងណោតភ្លេង ដើម្បីចាប់យកចង្វាក់ ឬលំនាំនៃសំឡេង។</td>
+                <td>ដូចជាការបែងចែកពណ៌នៃឥន្ធនូទៅជា ៧ ពណ៌ដាច់ដោយឡែកពីគ្នា ដើម្បីងាយស្រួលប្រាប់គេថាវត្ថុមួយមានពណ៌អ្វីខ្លះលាយបញ្ចូលគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Micro-Doppler radar</span></td>
+                <td>គឺជាប្រព័ន្ធរ៉ាដាដែលអាចចាប់សញ្ញាចលនាតូចៗបំផុត (ដូចជាការបង្វិលកង្ហាររបស់ដ្រូន) ដោយវាស់ស្ទង់ការផ្លាស់ប្តូរនៃរលកសញ្ញាដែលជះត្រឡប់មកវិញពីវត្ថុគោលដៅ។</td>
+                <td>ដូចជាសត្វប្រចៀវបញ្ចេញសំឡេងខ្ទាតប៉ះសត្វល្អិតដែលកំពុងហោះហើរ ហើយស្តាប់សូរត្រឡប់មកវិញដើម្បីដឹងពីទីតាំងនិងទំហំរបស់ចំណីវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Acoustic Classification</span></td>
+                <td>គឺជាការប្រើប្រាស់ប្រព័ន្ធកុំព្យូទ័រដើម្បីស្តាប់ និងធ្វើចំណាត់ថ្នាក់ប្រភេទសំឡេងដោយស្វ័យប្រវត្តិ ថាតើសំឡេងនោះជាសំឡេងអ្វី (ឧទាហរណ៍៖ សំឡេងដ្រូនមានផ្ទុកទម្ងន់ ឬគ្មានផ្ទុកទម្ងន់)។</td>
+                <td>ដូចជាកម្មវិធី Shazam នៅលើទូរស័ព្ទដៃ ដែលគ្រាន់តែស្តាប់សំឡេងភ្លេងបន្តិច ក៏អាចប្រាប់យើងបានថានោះជាបទចម្រៀងអ្វី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (KNN)</span></td>
+                <td>គឺជាម៉ូដែលចំណាត់ថ្នាក់ដែលទស្សន៍ទាយប្រភេទនៃទិន្នន័យថ្មីមួយ ដោយមើលទៅលើទិន្នន័យចាស់ៗដែលនៅក្បែរវាបំផុត បើទិន្នន័យនៅក្បែរនោះភាគច្រើនជាអ្វី វានឹងចាត់ទុកទិន្នន័យថ្មីនោះជាប្រភេទនោះដែរ។</td>
+                <td>ដូចជាការសន្និដ្ឋានថាអ្នកជាមនុស្សចូលចិត្តលេងកីឡា ប្រសិនបើមិត្តភក្តិជិតស្និទ្ធរបស់អ្នកទាំង ៥ នាក់សុទ្ធតែជាអ្នកកីឡា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=acoustic+signature+identification+for+drone+detection" target="_blank" rel="noopener"><span class="en">acoustic signature identification for drone detection</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=micro-Doppler+radar+feature+extraction+for+UAV+classification" target="_blank" rel="noopener"><span class="en">micro-Doppler radar feature extraction for UAV classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+models+for+audio+classification" target="_blank" rel="noopener"><span class="en">machine learning models for audio classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=real-time+drone+detection+using+polyphonic+sound+data" target="_blank" rel="noopener"><span class="en">real-time drone detection using polyphonic sound data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=feature+engineering+techniques+for+acoustic+anomaly+detection" target="_blank" rel="noopener"><span class="en">feature engineering techniques for acoustic anomaly detection</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
