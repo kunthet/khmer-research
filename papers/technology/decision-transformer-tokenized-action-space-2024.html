@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែល Decision Transformer ជាមួយនឹងលំហសកម្មភាពកូដនីយកម្ម (Tokenized Action Space) | KhmerResearch.com</title>
+    <meta name="description" content="ម៉ូដែល Reinforcement Learning (RL) ជាទូទៅនៅមានកម្រិតក្នុងការបន្ស៊ាំទៅនឹងបរិស្ថានថ្មីៗ (Generalization) ដោយទាមទារការហ្វឹកហាត់ឡើងវិញច្រើន។ ការស្រាវជ្រាវនេះមានគ...">
+    
+    <meta name="keywords" content="Reinforcement Learning, Decision Transformer, Tokenized Action Space, Offline Reinforcement Learning, Foundation Models, Action Quantization, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/decision-transformer-tokenized-action-space-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/decision-transformer-tokenized-action-space-2024.html">
+    <meta property="og:title" content="ម៉ូដែល Decision Transformer ជាមួយនឹងលំហសកម្មភាពកូដនីយកម្ម (Tokenized Action Space) | KhmerResearch.com">
+    <meta property="og:description" content="ម៉ូដែល Reinforcement Learning (RL) ជាទូទៅនៅមានកម្រិតក្នុងការបន្ស៊ាំទៅនឹងបរិស្ថានថ្មីៗ (Generalization) ដោយទាមទារការហ្វឹកហាត់ឡើងវិញច្រើន។ ការស្រាវជ្រាវនេះមានគោលបំណងដោះស្រាយបញ្ហានេះដោយប្រើប្រាស់ម៉ូដែ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024 Association for the Advancement of Artificial Intelligence (AAAI)">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Decision Transformer">
+    
+    <meta property="article:tag" content="Tokenized Action Space">
+    
+    <meta property="article:tag" content="Offline Reinforcement Learning">
+    
+    <meta property="article:tag" content="Foundation Models">
+    
+    <meta property="article:tag" content="Action Quantization">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែល Decision Transformer ជាមួយនឹងលំហសកម្មភាពកូដនីយកម្ម (Tokenized Action Space)">
+    <meta name="twitter:description" content="ម៉ូដែល Reinforcement Learning (RL) ជាទូទៅនៅមានកម្រិតក្នុងការបន្ស៊ាំទៅនឹងបរិស្ថានថ្មីៗ (Generalization) ដោយទាមទារការហ្វឹកហាត់ឡើងវិញច្រើន។ ការស្រាវជ្រាវនេះមានគោលបំណងដោះស្រាយបញ្ហានេះដោយប្រើប្រាស់ម៉ូដែ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Decision Transformer \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u179b\u17c6\u17a0\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1780\u17bc\u178a\u1793\u17b8\u1799\u1780\u1798\u17d2\u1798 (Tokenized Action Space)",
+      "name": "Decision Transformer With Tokenized Action Space",
+      "description": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Reinforcement Learning (RL) \u1787\u17b6\u1791\u17bc\u1791\u17c5\u1793\u17c5\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1793\u17d2\u179f\u17ca\u17b6\u17c6\u1791\u17c5\u1793\u17b9\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u1790\u17d2\u1798\u17b8\u17d7 (Generalization) \u178a\u17c4\u1799\u1791\u17b6\u1798\u1791\u17b6\u179a\u1780\u17b6\u179a\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u17a1\u17be\u1784\u179c\u17b7\u1789\u1785\u17d2\u179a\u17be\u1793\u17d4 \u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u1798\u17b6\u1793\u1782\u17c4\u179b\u1794\u17c6\u178e\u1784\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Decision Transformer \u1782\u17bd\u1794\u1795\u17d2\u179f\u17c6\u1787\u17b6\u1798\u17bd\u1799\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u1780\u17bc\u178a\u1793\u17b8\u1799\u1780\u1798\u17d2\u1798 (Tokenization) \u178a\u17be\u1798\u17d2\u1794\u17b8\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1797\u17b6\u1796\u1794\u178f\u17cb\u1794\u17c2\u1793\u178a\u17bc\u1785\u1791\u17c5\u1793\u17b9\u1784 Large Language Models (LLMs)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/decision-transformer-tokenized-action-space-2024.html",
+      "author": [{"@type": "Person", "name": "Graham Annett (Boise State University)"},{"@type": "Person", "name": "Tim Andersen (Boise State University)"}],
+      "datePublished": "2024 Association for the Advancement of Artificial Intelligence (AAAI)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Decision Transformer With Tokenized Action Space",
+        "url": "https://grahamannett.me/files/dt-action-tokenization.pdf"
+      },
+      "keywords": ["Reinforcement Learning", "Decision Transformer", "Tokenized Action Space", "Offline Reinforcement Learning", "Foundation Models", "Action Quantization"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Decision Transformer \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u179b\u17c6\u17a0\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1780\u17bc\u178a\u1793\u17b8\u1799\u1780\u1798\u17d2\u1798 (Tokenized Action Space)",
+          "item": "https://khmerresearch.com/papers/technology/decision-transformer-tokenized-action-space-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ម៉ូដែល Decision Transformer ជាមួយនឹងលំហសកម្មភាពកូដនីយកម្ម...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Decision Transformer With Tokenized Action Space<br>
+        
+        <strong>Source:</strong> <a href="https://grahamannett.me/files/dt-action-tokenization.pdf" target="_blank">grahamannett.me</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែល Decision Transformer ជាមួយនឹងលំហសកម្មភាពកូដនីយកម្ម (Tokenized Action Space)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Decision Transformer With Tokenized Action Space</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Graham Annett (Boise State University), Tim Andersen (Boise State University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 Association for the Advancement of Artificial Intelligence (AAAI)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ម៉ូដែល Reinforcement Learning (RL) ជាទូទៅនៅមានកម្រិតក្នុងការបន្ស៊ាំទៅនឹងបរិស្ថានថ្មីៗ (Generalization) ដោយទាមទារការហ្វឹកហាត់ឡើងវិញច្រើន។ ការស្រាវជ្រាវនេះមានគោលបំណងដោះស្រាយបញ្ហានេះដោយប្រើប្រាស់ម៉ូដែល Decision Transformer គួបផ្សំជាមួយបច្ចេកទេសកូដនីយកម្ម (Tokenization) ដើម្បីឱ្យមានភាពបត់បែនដូចទៅនឹង Large Language Models (LLMs)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះស្នើឡើងនូវវិធីសាស្ត្រកូដនីយកម្មដែលផ្តោតជាចម្បងទៅលើសកម្មភាព (Action-centric tokenization schema) ដោយរក្សាទុកនូវទម្រង់ដើមនៃលំហស្ថានភាព (State space)។
+        
+        <ul>
+            
+            <li>ការធ្វើកូដនីយកម្មលើសកម្មភាព (Action Tokenization) តាមរយៈប្រព័ន្ធ Quantization ដើម្បីបំប្លែងតម្លៃបន្ត (Continuous values) ទៅជាសញ្ញាសម្គាល់ដាច់ដោយឡែក (Discrete tokens)</li>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្របញ្ចូលទិន្នន័យ (ActionTokenizedEmbedding) និងការពង្រាយសកម្មភាពតាមវិមាត្រម៉ូដាលីតេ (ActionTokenizedSpreadEmbedding)</li>
+            
+            <li>ការប្រើប្រាស់សំណុំទិន្នន័យ Offline RL និងការវាយតម្លៃលើបរិស្ថាន MuJoCo ដូចជា Antmaze, HalfCheetah, Hopper, និង Walker2d (D4RL Offline Datasets)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការធ្វើកូដនីយកម្មលើសកម្មភាពមិនធ្វើឱ្យធ្លាក់ចុះនូវសមត្ថភាពរបស់ម៉ូដែលនោះទេ ពោលគឺវាដំណើរការបានល្អស្មើនឹងម៉ូដែល Decision Transformer ដើម (Baseline DT)។</li>
+            
+            <li>វិធីសាស្ត្រ ActionTokenizedSpreadEmbedding ទោះបីជាមានភាពយឺតយ៉ាវបន្តិចក្នុងការហ្វឹកហាត់ ប៉ុន្តែវាផ្តល់នូវកម្រិតប្រែប្រួលទាប (Lower Variance) និងជួយឱ្យម៉ូដែលបន្ស៊ាំខ្លួនទៅនឹងបរិស្ថានថ្មីៗ (Downstream tasks) បានយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li>លទ្ធផលនៃការសិក្សានេះបើកផ្លូវសម្រាប់អភិវឌ្ឍម៉ូដែលមូលដ្ឋាន (Foundational Models) ក្នុងវិស័យ RL ដែលអាចយកទៅប្រើប្រាស់ក្នុងកិច្ចការចម្រុះដោយគ្រាន់តែធ្វើការហ្វឹកហាត់កែសម្រួលបន្តិចបន្តួច (Minimal fine-tuning) ប៉ុណ្ណោះ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Baseline DT (ActionEmbedding)</span></strong><br>ម៉ូដែល Decision Transformer ដើម (មិនមានកូដនីយកម្មសកម្មភាព)</td>
+                <td>ងាយស្រួលក្នុងការហ្វឹកហាត់ និងដំណើរការបានល្អលើបរិស្ថានដែលធ្លាប់បានហ្វឹកហាត់រួច (Pre-trained environments)។</td>
+                <td>ជួបការលំបាកក្នុងការបន្ស៊ាំទៅនឹងកិច្ចការថ្មីៗ (Downstream tasks) ដោយទាមទារការផ្លាស់ប្តូរទម្រង់ម៉ូដែលច្រើន។</td>
+                <td>ទទួលបានពិន្ទុស្តង់ដារល្អក្នុងការធ្វើតេស្តដើម ប៉ុន្តែស្ទើរតែមិនអាចរៀនបានសោះ (ពិន្ទុទាបខ្លាំង) នៅពេលអនុវត្តលើកិច្ចការថ្មី (Walker2d downstream task) ដែលផ្លាស់ប្តូរតែ Embedding layer។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ActionTokenizedEmbedding</span></strong><br>ម៉ូដែលកូដនីយកម្មសកម្មភាព (រួមបញ្ចូលគ្នា)</td>
+                <td>រក្សាល្បឿនហ្វឹកហាត់បានលឿនសមរម្យ និងមានសមត្ថភាពប្រហាក់ប្រហែលនឹងម៉ូដែល Baseline លើកិច្ចការទូទៅ។</td>
+                <td>មិនអនុញ្ញាតឱ្យប្រើប្រាស់ Embedding layer ដដែលឡើងវិញបានទេ សម្រាប់បរិស្ថានថ្មីដែលមានទំហំសកម្មភាពខុសគ្នា។</td>
+                <td>ទទួលបានពិន្ទុស្តង់ដារមធ្យមប្រមាណ 110.1 លើបរិស្ថាន Pen environment។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ActionTokenizedSpreadEmbedding</span></strong><br>ម៉ូដែលកូដនីយកម្មសកម្មភាព (ពង្រាយតាមវិមាត្រ)</td>
+                <td>មានភាពបត់បែនខ្ពស់ក្នុងការបន្ស៊ាំទៅនឹងកិច្ចការថ្មី (Adaptability) និងមានកម្រិតប្រែប្រួលទាប (Lower Variance) ដោយសារការកាត់បន្ថយភាពរំខាន (Noise filter)។</td>
+                <td>ត្រូវការពេលវេលាហ្វឹកហាត់យូរជាងមុន (Slower to train) និងមិនសូវមានប្រសិទ្ធភាពលើសំណុំទិន្នន័យដែលមានគុណភាពអន់ខ្លាំង។</td>
+                <td>យកឈ្នះម៉ូដែល Baseline ពី 11 ទៅ 13 ពិន្ទុ សម្រាប់ការហ្វឹកហាត់លើកិច្ចការថ្មី (Walker2d downstream) ពេលហ្វឹកហាត់គ្រប់ស្រទាប់ (All layers trained)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ទោះបីជាការស្រាវជ្រាវនេះមានគោលបំណងបង្កើតម៉ូដែលមូលដ្ឋាន (Foundation models) ដែលចំណាយធនធានតិចសម្រាប់ការកែសម្រួល (Fine-tuning) ក៏ដោយ ក៏ការហ្វឹកហាត់ម៉ូដែល RL ជាទូទៅនៅតែទាមទារសមត្ថភាពកុំព្យូទ័រខ្ពស់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីន Server ដែលមាន GPU ខ្លាំង (ឧទាហរណ៍ដូចជា NVIDIA A100/H100 ត្រូវបានលើកឡើងសម្រាប់ការហ្វឹកហាត់ LLM ទោះបីជាវិធីសាស្ត្រនេះព្យាយាមកាត់បន្ថយការប្រើប្រាស់ក៏ដោយ)។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់បណ្ណាល័យ Clean Offline RL (CORL) codebase និង PyTorch សម្រាប់ការកសាងម៉ូដែល។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យ D4RL Offline Datasets និងបរិស្ថានក្លែងធ្វើ MuJoCo (Antmaze, HalfCheetah, Hopper, Walker2d)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅលើ Deep Reinforcement Learning, Transformer Architectures និងបច្ចេកទេស Quantization។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងទៅលើសំណុំទិន្នន័យក្លែងធ្វើ (Simulated environments ដូចជា MuJoCo) ដែលមិនមានការរំខានពីរូបវិទ្យាពិតប្រាកដ (Real-world physics noise) ដូចជាកម្លាំងកកិត ឬខ្យល់បក់ជាដើម។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះទៅប្រើប្រាស់ក្នុងវិស័យមនុស្សយន្តពិតប្រាកដ (Physical Robotics) ទាមទារឱ្យមានសំណុំទិន្នន័យជាក់ស្តែង ឬការប្រើប្រាស់បច្ចេកទេស Sim2Real Transfer ដើម្បីធានាប្រសិទ្ធភាព។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាបច្ចុប្បន្នវាស្ថិតក្នុងដំណាក់កាលស្រាវជ្រាវលើការក្លែងធ្វើ (Simulation) ក៏ដោយ បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់សម្រាប់ប្រព័ន្ធស្វ័យប្រវត្តិកម្មនៅកម្ពុជានាពេលអនាគត។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យស្វ័យប្រវត្តិកម្ម និងមនុស្សយន្ត (Manufacturing & Automation):</strong> អាចប្រើប្រាស់ដើម្បីហ្វឹកហាត់ដៃមនុស្សយន្ត (Robotic arms) នៅក្នុងតំបន់សេដ្ឋកិច្ចពិសេស (SEZs) ដោយប្រើប្រាស់ទិន្នន័យ Offline ពីសកម្មភាពរបស់កម្មករជំនាញ ជួយកាត់បន្ថយថ្លៃដើមក្នុងការសរសេរកូដបញ្ជាមនុស្សយន្តពីដំបូង។</li>
+            
+            <li><strong>ការអប់រំផ្នែកបញ្ញាសិប្បនិម្មិត (AI Education at CADT/RUPP):</strong> វិធីសាស្ត្រនេះអនុញ្ញាតឱ្យសាកលវិទ្យាល័យនៅកម្ពុជាដែលមានធនធានកុំព្យូទ័រ (Compute limitations) មានកម្រិត អាចធ្វើការស្រាវជ្រាវលើ Foundation Models សម្រាប់ RL ដោយគ្រាន់តែធ្វើការ Fine-tuning លើម៉ូដែលដែលមានស្រាប់។</li>
+            
+            <li><strong>កសិកម្មឆ្លាតវៃ (Smart Agriculture Drones):</strong> ម៉ូដែល RL ដែលមានលក្ខណៈ Generalize អាចត្រូវយកមកកែសម្រួលបន្តិចបន្តួច (Minimal fine-tuning) ដើម្បីបញ្ជាដ្រូនបាញ់ថ្នាំ ឬត្រួតពិនិត្យដំណាំ ដែលអាចសម្របខ្លួនទៅនឹងកសិដ្ឋានផ្សេងៗគ្នានៅតាមបណ្តាខេត្ត។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកទេសនេះផ្តល់នូវលទ្ធភាពក្នុងការកសាងប្រព័ន្ធ AI ដ៏មានប្រសិទ្ធភាពដែលអាចប្រើប្រាស់ឆ្លងវិស័យ (Cross-domain) ដោយមិនចាំបាច់ហ្វឹកហាត់ពីសូន្យ ដែលស័ក្តិសមសម្រាប់ប្រទេសកំពុងអភិវឌ្ឍន៍។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Offline Reinforcement Learning:</strong> ចាប់ផ្តើមដោយការសិក្សាពីទ្រឹស្តី Offline RL និងភាពខុសគ្នារបស់វាពី Online RL ដោយប្រើប្រាស់ធនធានដូចជា <span class="en">OpenAI Spinning Up</span> និងស្វែងយល់ពីរបៀបដំណើរការរបស់ <span class="en">D4RL Datasets</span>។</li>
+            
+            <li><strong>ស្វែងយល់ពីនិម្មាបនកម្ម Decision Transformer:</strong> សិក្សាពីរបៀបដែល Sequence Modeling ត្រូវបានប្រើក្នុង RL ដោយអានកូដពិតប្រាកដនៅលើ <span class="en">Hugging Face Decision Transformer</span> ព្រមទាំងសាកល្បងដំណើរការកូដគំរូ។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេស Action Quantization លើទិន្នន័យ:</strong> សរសេរកូដ Python ដើម្បីធ្វើការបំប្លែងតម្លៃសកម្មភាពបន្ត (Continuous actions) ទៅជា discrete tokens ដោយប្រើប្រាស់បច្ចេកទេស Quantization តាមរយៈ <span class="en">numpy</span> ឬ <span class="en">pandas (qcut)</span>។</li>
+            
+            <li><strong>ពិសោធន៍ជាមួយ CORL Codebase:</strong> តម្លើងបណ្ណាល័យ <span class="en">Clean Offline RL (CORL)</span> នៅលើម៉ាស៊ីនរបស់អ្នក ឬ <span class="en">Google Colab</span> ហើយសាកល្បងដំណើរការការហ្វឹកហាត់ម៉ូដែលសារជាថ្មី (Reproduce) លើបរិស្ថានតូចៗដូចជា <span class="en">HalfCheetah</span>។</li>
+            
+            <li><strong>អភិវឌ្ឍគម្រោងផ្ទាល់ខ្លួន (Custom RL Project):</strong> បង្កើតបរិស្ថានក្លែងធ្វើដោយខ្លួនឯងសម្រាប់ដោះស្រាយបញ្ហាក្នុងស្រុក (ឧ. ការបញ្ជាដ្រូន ឬការគ្រប់គ្រងចរាចរណ៍ខ្នាតតូច) ដោយប្រើប្រាស់ <span class="en">PyBullet</span> ឬ <span class="en">Gymnasium</span> រួចអនុវត្តវិធីសាស្ត្រ ActionTokenizedSpreadEmbedding នេះ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline Reinforcement Learning</span></td>
+                <td>ជាវិធីសាស្ត្របង្រៀនភ្នាក់ងារ AI ឱ្យចេះធ្វើការសម្រេចចិត្តដោយរៀនពីសំណុំទិន្នន័យចាស់ៗដែលបានប្រមូលទុកជាមុន ដោយមិនចាំបាច់ឱ្យវាទៅធ្វើអន្តរកម្ម ឬសាកល្បងខុសត្រូវ (trial-and-error) នៅក្នុងបរិស្ថានជាក់ស្តែងនោះទេ។</td>
+                <td>ដូចជាការរៀនទាត់បាល់ដោយអង្គុយមើលវីដេអូកីឡាករល្បីៗប្រកួត ជាជាងការចុះទៅទាត់ផ្ទាល់នៅលើទីលាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision Transformer</span></td>
+                <td>ជានិម្មាបនកម្ម AI មួយប្រភេទដែលយកបច្ចេកទេសពីម៉ូដែលភាសា (ដូចជា ChatGPT) មកទស្សន៍ទាយសកម្មភាពបន្ទាប់ក្នុង RL ដោយផ្អែកលើស្ថានភាពបច្ចុប្បន្ន និងរង្វាន់ដែលចង់បាននាពេលអនាគត (Return-to-go)។</td>
+                <td>ដូចជាកម្មវិធីទស្សន៍ទាយពាក្យបន្ទាប់នៅលើទូរស័ព្ទដៃ ប៉ុន្តែជំនួសឱ្យការព្យាករណ៍ពាក្យ វាទស្សន៍ទាយថាគួរធ្វើសកម្មភាពអ្វីបន្ទាប់ដើម្បីទទួលបានពិន្ទុខ្ពស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Action Tokenization</span></td>
+                <td>ដំណើរការនៃការបំប្លែងសកម្មភាពដែលជាតម្លៃលេខបន្តបន្ទាប់ (Continuous values) ទៅជាកូដ ឬសញ្ញាសម្គាល់ដាច់ឡែកៗពីគ្នា (Discrete tokens) ដើម្បីឱ្យម៉ូដែល AI ងាយស្រួលយល់ និងដំណើរការដូចជាការអានពាក្យក្នុងប្រយោគ។</td>
+                <td>ដូចជាការប្តូរពិន្ទុប្រឡងពីលេខ (ឧ. ៨៥.៥, ៩២.៣) ទៅជានិទ្ទេស (A, B, C) ដើម្បីងាយស្រួលក្នុងការចាត់ថ្នាក់ និងចំណាំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Quantization</span></td>
+                <td>ជាបច្ចេកទេសគណិតវិទ្យាក្នុងការបែងចែកជួរទិន្នន័យធំៗ ឬតម្លៃគ្មានដែនកំណត់ ឱ្យទៅជាប្រអប់ (Bins) តូចៗដែលមានចំនួនកំណត់ ដើម្បីកាត់បន្ថយទំហំផ្ទុក និងសម្រួលដល់ការគណនារបស់ម៉ូដែល។</td>
+                <td>ដូចជាការងាកពីទ្រនិចនាឡិកាដែលវិលជាបន្តបន្ទាប់ ទៅជានាឡិកាឌីជីថលដែលលោតជាលេខដាច់ៗពីគ្នាជារៀងរាល់វិនាទី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Trajectory</span></td>
+                <td>ជាខ្សែស្រឡាយនៃទិន្នន័យដែលកត់ត្រាពីប្រវត្តិរបស់ភ្នាក់ងារ AI ក្នុងបរិស្ថានណាមួយ ដែលរួមមានទិន្នន័យស្ថានភាព (States), សកម្មភាព (Actions), និងរង្វាន់ (Rewards) តាំងពីដើមរហូតដល់ចប់។</td>
+                <td>ដូចជាសៀវភៅកំណត់ហេតុនៃការធ្វើដំណើរ ដែលកត់ត្រាថាអ្នកនៅទីណា បានធ្វើអ្វីខ្លះ និងទទួលបានបទពិសោធន៍អ្វីខ្លះជារៀងរាល់ថ្ងៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Foundation models</span></td>
+                <td>ជាម៉ូដែល AI ដ៏ធំដែលត្រូវបានហ្វឹកហាត់លើទិន្នន័យចម្រុះយ៉ាងច្រើនសន្ធឹកសន្ធាប់ ហើយអាចយកទៅប្រើប្រាស់សម្រាប់កិច្ចការថ្មីៗជាច្រើនទៀត ដោយគ្រាន់តែធ្វើការកែសម្រួលបន្ថែមបន្តិចបន្តួច (Fine-tuning)។</td>
+                <td>ដូចជាសិស្សដែលរៀនពូកែគ្រប់មុខវិជ្ជាមូលដ្ឋាននៅវិទ្យាល័យ ដែលធ្វើឱ្យគាត់ងាយស្រួលក្នុងការចាប់យកជំនាញថ្មីៗណាមួយពេលចូលរៀននៅសាកលវិទ្យាល័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Autoregressive</span></td>
+                <td>យន្តការដែលម៉ូដែលទស្សន៍ទាយលទ្ធផលថ្មីបន្ទាប់ ដោយផ្អែកទាំងស្រុងទៅលើលទ្ធផលដែលវាទើបតែបានបង្កើតចេញមកមុននេះបន្តិច (បង្កើតទិន្នន័យម្តងមួយៗជាបន្តបន្ទាប់)។</td>
+                <td>ដូចជាការនិយាយនិទានរឿង ដែលពាក្យនីមួយៗដែលអ្នកនិយាយបន្ទាប់ គឺពឹងផ្អែកទៅលើពាក្យដែលអ្នកទើបតែនិយាយរួច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Modality dimension</span></td>
+                <td>វិមាត្រ ឬប្រភេទនៃទិន្នន័យផ្សេងៗគ្នាដែលបញ្ចូលទៅក្នុងម៉ូដែល (ឧទាហរណ៍ ស្ថានភាពគឺជាមួយ Modality, សកម្មភាពគឺជា Modality មួយទៀត)។ ការពង្រាយចូលក្នុងវិមាត្រនេះមានន័យថាការរៀបចំទិន្នន័យតាមប្រភេទរបស់វាឱ្យដាច់ពីគ្នា។</td>
+                <td>ដូចជាការរៀបចំឯកសារក្នុងទូ ដោយបំបែកថតឯកសារអត្តសញ្ញាណប័ណ្ណដាក់មួយថត និងសំបុត្រកំណើតដាក់មួយថតផ្សេងទៀត ដើម្បីងាយស្រួលទាញយកមកប្រើ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Offline+reinforcement+learning+methods+and+foundation+models" target="_blank" rel="noopener"><span class="en">Offline reinforcement learning methods and foundation models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Trajectory+Transformer+and+sequence+modeling+in+RL" target="_blank" rel="noopener"><span class="en">Trajectory Transformer and sequence modeling in RL</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Quantization+schemas+for+continuous+control+in+machine+learning" target="_blank" rel="noopener"><span class="en">Quantization schemas for continuous control in machine learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Zero-shot+learning+and+generalization+in+reinforcement+learning+environments" target="_blank" rel="noopener"><span class="en">Zero-shot learning and generalization in reinforcement learning environments</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

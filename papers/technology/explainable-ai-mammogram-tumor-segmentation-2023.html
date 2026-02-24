@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រព័ន្ធ AI ដែលអាចពន្យល់បានសម្រាប់ការកាត់បំបែករូបភាពវេជ្ជសាស្ត្រជាមួយនឹងការរក្សាគុណភាពបង្ហាញក្នុងតំបន់៖ ការកាត់បំបែកដុំសាច់មហារីកសុដន់ | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការបាត់បង់គុណភាពបង្ហាញរូបភាព (Resolution loss) នៅក្នុងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (CNNs) បញ្ហាអតុល្យភាពនៃថ្នាក់ទិន្នន័យកម្រិតភី...">
+    
+    <meta name="keywords" content="Explainable AI (XAI), Medical Image Segmentation, Mammogram Tumor Segmentation, Dilated Convolution, Deep Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/explainable-ai-mammogram-tumor-segmentation-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/explainable-ai-mammogram-tumor-segmentation-2023.html">
+    <meta property="og:title" content="ប្រព័ន្ធ AI ដែលអាចពន្យល់បានសម្រាប់ការកាត់បំបែករូបភាពវេជ្ជសាស្ត្រជាមួយនឹងការរក្សាគុណភាពបង្ហាញក្នុងតំបន់៖ ការកាត់បំបែកដុំសាច់មហារីកសុដន់ | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការបាត់បង់គុណភាពបង្ហាញរូបភាព (Resolution loss) នៅក្នុងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (CNNs) បញ្ហាអតុល្យភាពនៃថ្នាក់ទិន្នន័យកម្រិតភីកសែល (Pixel-level class imbalance) និងកង...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023 IEEE Access">
+    
+    <meta property="article:tag" content="Explainable AI (XAI)">
+    
+    <meta property="article:tag" content="Medical Image Segmentation">
+    
+    <meta property="article:tag" content="Mammogram Tumor Segmentation">
+    
+    <meta property="article:tag" content="Dilated Convolution">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រព័ន្ធ AI ដែលអាចពន្យល់បានសម្រាប់ការកាត់បំបែករូបភាពវេជ្ជសាស្ត្រជាមួយនឹងការរក្សាគុណភាពបង្ហាញក្នុងតំបន់៖ ការកាត់បំបែកដុំសាច់មហារីកសុដន់">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការបាត់បង់គុណភាពបង្ហាញរូបភាព (Resolution loss) នៅក្នុងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (CNNs) បញ្ហាអតុល្យភាពនៃថ្នាក់ទិន្នន័យកម្រិតភីកសែល (Pixel-level class imbalance) និងកង...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 AI \u178a\u17c2\u179b\u17a2\u17b6\u1785\u1796\u1793\u17d2\u1799\u179b\u17cb\u1794\u17b6\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u17c6\u1794\u17c2\u1780\u179a\u17bc\u1794\u1797\u17b6\u1796\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u1780\u17d2\u179f\u17b6\u1782\u17bb\u178e\u1797\u17b6\u1796\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1780\u17d2\u1793\u17bb\u1784\u178f\u17c6\u1794\u1793\u17cb\u17d6 \u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u17c6\u1794\u17c2\u1780\u178a\u17bb\u17c6\u179f\u17b6\u1785\u17cb\u1798\u17a0\u17b6\u179a\u17b8\u1780\u179f\u17bb\u178a\u1793\u17cb",
+      "name": "An Explainable AI System for Medical Image Segmentation With Preserved Local Resolution: Mammogram Tumor Segmentation",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1780\u17b6\u179a\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1782\u17bb\u178e\u1797\u17b6\u1796\u1794\u1784\u17d2\u17a0\u17b6\u1789\u179a\u17bc\u1794\u1797\u17b6\u1796 (Resolution loss) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f (CNNs) \u1794\u1789\u17d2\u17a0\u17b6\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1793\u17c3\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1780\u1798\u17d2\u179a\u17b7\u178f\u1797\u17b8\u1780\u179f\u17c2\u179b (Pixel-level class imbalance) \u1793\u17b7\u1784\u1780\u1784\u17d2\u179c\u17c7\u1797\u17b6\u1796\u17a2\u17b6\u1785\u1796\u1793\u17d2\u1799\u179b\u17cb\u1794\u17b6\u1793 (Explainability) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u17b6\u178f\u17cb\u1794\u17c6\u1794\u17c2\u1780\u179a\u17bc\u1794\u1797\u17b6\u1796\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u17c6\u1794\u17c2\u1780\u178a\u17bb\u17c6\u179f\u17b6\u1785\u17cb\u1798\u17a0\u17b6\u179a\u17b8\u1780\u179f\u17bb\u178a\u1793\u17cb (Mammogram Tumor Segmentation)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/explainable-ai-mammogram-tumor-segmentation-2023.html",
+      "author": [{"@type": "Person", "name": "AYA FARRAG, Lakehead University"},{"@type": "Person", "name": "GAD GAD, Western University"},{"@type": "Person", "name": "ZUBAIR MD. FADLULLAH, Western University"},{"@type": "Person", "name": "MOSTAFA M. FOUDA, Idaho State University"},{"@type": "Person", "name": "MAAZEN ALSABAAN, King Saud University"}],
+      "datePublished": "2023 IEEE Access",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "An Explainable AI System for Medical Image Segmentation With Preserved Local Resolution: Mammogram Tumor Segmentation",
+        "url": "https://doi.org/10.1109/ACCESS.2023.3330465"
+      },
+      "keywords": ["Explainable AI (XAI)", "Medical Image Segmentation", "Mammogram Tumor Segmentation", "Dilated Convolution", "Deep Learning"],
+      "about": "Artificial Intelligence in Medicine"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 AI \u178a\u17c2\u179b\u17a2\u17b6\u1785\u1796\u1793\u17d2\u1799\u179b\u17cb\u1794\u17b6\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u17c6\u1794\u17c2\u1780\u179a\u17bc\u1794\u1797\u17b6\u1796\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u1780\u17d2\u179f\u17b6\u1782\u17bb\u178e\u1797\u17b6\u1796\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1780\u17d2\u1793\u17bb\u1784\u178f\u17c6\u1794\u1793\u17cb\u17d6 \u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u17c6\u1794\u17c2\u1780\u178a\u17bb\u17c6\u179f\u17b6\u1785\u17cb\u1798\u17a0\u17b6\u179a\u17b8\u1780\u179f\u17bb\u178a\u1793\u17cb",
+          "item": "https://khmerresearch.com/papers/technology/explainable-ai-mammogram-tumor-segmentation-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រព័ន្ធ AI ដែលអាចពន្យល់បានសម្រាប់ការកាត់បំបែករូបភាពវេជ្ជ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> An Explainable AI System for Medical Image Segmentation With Preserved Local Resolution: Mammogram Tumor Segmentation<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.1109/ACCESS.2023.3330465" target="_blank">doi.org/10.1109/ACCESS.2023.3330465</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រព័ន្ធ AI ដែលអាចពន្យល់បានសម្រាប់ការកាត់បំបែករូបភាពវេជ្ជសាស្ត្រជាមួយនឹងការរក្សាគុណភាពបង្ហាញក្នុងតំបន់៖ ការកាត់បំបែកដុំសាច់មហារីកសុដន់</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> An Explainable AI System for Medical Image Segmentation With Preserved Local Resolution: Mammogram Tumor Segmentation</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> AYA FARRAG, Lakehead University, GAD GAD, Western University, ZUBAIR MD. FADLULLAH, Western University, MOSTAFA M. FOUDA, Idaho State University, MAAZEN ALSABAAN, King Saud University</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 IEEE Access</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence in Medicine</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការបាត់បង់គុណភាពបង្ហាញរូបភាព (Resolution loss) នៅក្នុងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (CNNs) បញ្ហាអតុល្យភាពនៃថ្នាក់ទិន្នន័យកម្រិតភីកសែល (Pixel-level class imbalance) និងកង្វះភាពអាចពន្យល់បាន (Explainability) នៅក្នុងប្រព័ន្ធកាត់បំបែករូបភាពវេជ្ជសាស្ត្រ ជាពិសេសសម្រាប់ការកាត់បំបែកដុំសាច់មហារីកសុដន់ (Mammogram Tumor Segmentation)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានបង្កើតវិធីសាស្ត្រថ្មីមួយដោយកែច្នៃរចនាសម្ព័ន្ធបណ្ដាញសរសៃប្រសាទ ស្វែងរកអនុគមន៍បាត់បង់ដែលស័ក្តិសមបំផុត និងរួមបញ្ចូលបច្ចេកទេសបកស្រាយ AI លើសំណុំទិន្នន័យរូបភាពមហារីកសុដន់។
+        
+        <ul>
+            
+            <li>ការបង្កើតម៉ូឌុល Convolution ថ្មី (Double-dilated convolution module) ដើម្បីរក្សាគុណភាពបង្ហាញក្នុងតំបន់ និងដោះស្រាយបញ្ហាបាត់បង់ទិន្នន័យ (Gridding effect)។</li>
+            
+            <li>ការប្រៀបធៀបអនុគមន៍បាត់បង់ចំនួន ៤ គឺ BCE, WCE, Dice និង Tversky Loss ក្នុងគោលបំណងដោះស្រាយភាពអតុល្យភាពនៃទិន្នន័យកម្រិតភីកសែល។</li>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេសពន្យល់ AI (Explainable AI - XAI) ដូចជា Grad-CAM និង Occlusion Sensitivity ដើម្បីបង្ហាញពីមូលហេតុនៃការសម្រេចចិត្តរបស់ម៉ូដែល។</li>
+            
+            <li>ការហ្វឹកហាត់ និងការវាយតម្លៃម៉ូដែល (5-Fold Cross-Validation) ដោយប្រើប្រាស់សំណុំទិន្នន័យរូបភាពមហារីកសុដន់ INBreast (INBreast dataset)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលថ្មីដែលប្រើប្រាស់ម៉ូឌុល Double-dilated convolution បានបង្កើនភាពត្រឹមត្រូវនៃការកាត់បំបែកដុំសាច់ ដោយទទួលបានពិន្ទុ Dice similarity ៨១% និងកាត់បន្ថយអត្រានៃការខកខានរកមិនឃើញ (Miss Detection Rate) មកត្រឹម ០.០៤ (ឬ ៤%)។</li>
+            
+            <li>អនុគមន៍ Tversky Loss ត្រូវបានបង្ហាញថាជាជម្រើសដ៏ល្អបំផុតសម្រាប់ការហ្វឹកហាត់លើទិន្នន័យរូបភាពដែលលម្អៀងខ្លាំង ដោយផ្តល់នូវអត្រាវិជ្ជមានមិនពិត (False Positive Rate) ទាបជាងគេត្រឹម ០.២០។</li>
+            
+            <li>បច្ចេកទេស Grad-CAM បានផ្តល់នូវការពន្យល់ដែលត្រឹមត្រូវ និងមានភាពស្មុគស្មាញទាបបំផុត (កម្រិតភាពច្របូកច្របល់ ឬ Entropy ទាបត្រឹម ០.១២) ដែលជួយឱ្យការវិភាគរបស់ប្រព័ន្ធ CAD កាន់តែមានតម្លាភាព និងគួរឱ្យទុកចិត្តសម្រាប់វេជ្ជបណ្ឌិត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Baseline DeepLabv3+ (with Tversky Loss)</span></strong><br>ម៉ូដែល DeepLabv3+ ដើម (ហ្វឹកហាត់ជាមួយ Tversky Loss)</td>
+                <td>មានសមត្ថភាពល្អជាងទម្រង់ដើមក្នុងការកាត់បន្ថយការទស្សន៍ទាយខុស (False Positives) ដោយសារការប្រើ Tversky loss ដើម្បីដោះស្រាយភាពអតុល្យភាពទិន្នន័យ។</td>
+                <td>នៅមានអត្រាមើលរំលងដុំសាច់ (Miss Detection) ខ្ពស់គួរសម ដោយសារការបាត់បង់គុណភាពបង្ហាញរូបភាពក្នុងតំបន់តូចៗនៅពេលធ្វើ Dilated Convolution ធម្មតា។</td>
+                <td>អត្រាមើលរំលងដុំសាច់ (Miss Detection Rate) ០.០៨ និងភាពត្រឹមត្រូវកម្រិតភីកសែល (Dice Similarity) ០.៧៨។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Double-Dilated DeepLabv3+ (Proposed)</span></strong><br>ម៉ូដែល DeepLabv3+ ដែលកែច្នៃប្រើម៉ូឌុល Double-Dilated Convolution</td>
+                <td>អាចរក្សាគុណភាពបង្ហាញរូបភាពក្នុងតំបន់បានល្អ (Preserved Local Resolution) ដែលជួយចាប់យកលក្ខណៈលម្អិតនៃដុំសាច់តូចៗបានយ៉ាងច្បាស់លាស់។</td>
+                <td>ទាមទារធនធានកុំព្យូទ័រ និងអង្គចងចាំខ្ពស់ជាងមុន ដោយសារមានការគណនាស្មុគស្មាញលើមុខងារ Convolution ស្របគ្នាពីរ។</td>
+                <td>អត្រាមើលរំលងដុំសាច់ថយចុះមកត្រឹម ០.០៤ (ល្អជាងមុន២ដង) និងភាពត្រឹមត្រូវកម្រិតភីកសែល (Dice Similarity) កើនដល់ ០.៨១។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Grad-CAM (Gradient-weighted Class Activation Map)</span></strong><br>បច្ចេកទេសពន្យល់ AI ប្រភេទ Grad-CAM</td>
+                <td>ផ្តល់រូបភាពពន្យល់ (Heatmaps) ដែលផ្តោតចំគោលដៅបានល្អ មានភាពច្បាស់លាស់ និងមានកម្រិតភាពច្របូកច្របល់ទាបបំផុត បើធៀបនឹងវិធីសាស្ត្រដទៃ។</td>
+                <td>ពឹងផ្អែកខ្លាំងលើទិន្នន័យពីស្រទាប់ Convolution ចុងក្រោយ ដែលអាចមើលរំលងលក្ខណៈលម្អិតៗនៃស្រទាប់ដំបូងៗនៃបណ្តាញ។</td>
+                <td>ទទួលបានពិន្ទុភាពច្របូកច្របល់ (Average Entropy) ទាបបំផុតត្រឹម ០.១១៩ (សម្រាប់ម៉ូដែលដើម) បង្ហាញពីការពន្យល់ដ៏មានប្រសិទ្ធភាព។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រ និងកម្មវិធីជាក់លាក់សម្រាប់ដំណើរការទិន្នន័យរូបភាពវេជ្ជសាស្ត្រកម្រិតភាពច្បាស់ខ្ពស់ (FFDM) និងការប្រើប្រាស់បច្ចេកទេស XAI។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កម្មវិធី MATLAB R2022b ព្រមទាំងមុខងារភ្ជាប់ស្រាប់សម្រាប់ AI Explainability ដូចជា gradCAM(), occlusionSensitivity() និង ImageDatastore/PixelLabelDatastore។</li>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនកុំព្យូទ័រដែលមានសមត្ថភាពគណនាខ្ពស់ (High computational resources ជាមួយ GPU) សម្រាប់ការហ្វឹកហាត់ម៉ូឌុល Double-dilated convolution និងការដំណើរការសំណុំទិន្នន័យធំ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យសាធារណៈ INBreast ដែលមានរូបភាព Mammogram ប្រភេទ Full-field Digital (FFDM) ចំនួន ៤១០ សន្លឹក និងទិន្នន័យចំណារ (Annotations) កម្រិតភីកសែលដោយគ្រូពេទ្យ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកលើសំណុំទិន្នន័យ INBreast ដែលប្រមូលបានពីមន្ទីរពេទ្យក្នុងប្រទេសព័រទុយហ្កាល់ (អឺរ៉ុប)។ លក្ខណៈជីវសាស្ត្រ ទំហំ និងដង់ស៊ីតេសុដន់របស់ស្ត្រីខ្មែរ អាចមានលក្ខណៈខុសប្លែកពីស្ត្រីនៅអឺរ៉ុប ហើយឧបករណ៍ថតរូបភាពតាមមន្ទីរពេទ្យនៅកម្ពុជាមួយចំនួននៅមានកម្រិតនៅឡើយ។ ដូច្នេះដើម្បីយកមកប្រើប្រាស់នៅកម្ពុជា ម៉ូដែលនេះចាំបាច់ត្រូវមានការហ្វឹកហាត់បន្ថែម (Fine-tuning) ជាមួយនឹងទិន្នន័យអ្នកជំងឺក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសកាត់បំបែករូបភាពវេជ្ជសាស្ត្រដែលអាចពន្យល់បាននេះ មានសក្តានុពលខ្ពស់ក្នុងការយកមកអនុវត្តនៅក្នុងប្រព័ន្ធសុខាភិបាលកម្ពុជា ជាពិសេសសម្រាប់ការពិនិត្យរកជំងឺមហារីកសុដន់ឱ្យបានទាន់ពេលវេលា។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យថ្នាក់ជាតិ និងមជ្ឈមណ្ឌលមហារីក (ឧ. មន្ទីរពេទ្យកាល់ម៉ែត):</strong> អាចប្រើប្រាស់ប្រព័ន្ធនេះជាឧបករណ៍ជំនួយ (CAD System) សម្រាប់ផ្តល់ជាមតិទីពីរ (Second opinion) ជូនគ្រូពេទ្យឯកទេសរ៉ាឌីយ៉ូឡូស៊ី ជួយកាត់បន្ថយពេលវេលាពិនិត្យ និងបង្កើនភាពច្បាស់លាស់។</li>
+            
+            <li><strong>មន្ទីរពេទ្យបង្អែកកម្រិតខេត្ត (ឧ. ខេត្តបាត់ដំបង កំពង់ចាម):</strong> ជួយសម្រួលដល់គ្រូពេទ្យទូទៅដែលមិនមានជំនាញឯកទេសរូបភាពវេជ្ជសាស្ត្រស៊ីជម្រៅ ឱ្យមានសមត្ថភាពកំណត់សម្គាល់ដុំសាច់សង្ស័យ មុននឹងសម្រេចចិត្តបញ្ជូនអ្នកជំងឺមកកាន់រាជធានីភ្នំពេញ។</li>
+            
+            <li><strong>ការកសាងទំនុកចិត្តជាមួយគ្រូពេទ្យកម្ពុជា (Clinical Trust):</strong> ការបញ្ចូលបច្ចេកទេសពន្យល់ AI (XAI ដូចជា Grad-CAM) ជួយឱ្យគ្រូពេទ្យយល់ដឹងពីមូលហេតុដែលកុំព្យូទ័រវាយតម្លៃតំបន់ណាមួយថាមានដុំសាច់ ដែលធ្វើឱ្យពួកគេងាយស្រួលទទួលយក និងជឿទុកចិត្តលើបច្ចេកវិទ្យាថ្មីនេះ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអភិវឌ្ឍប្រព័ន្ធ AI ដែលរឹងមាំ និងមានតម្លាភាពក្នុងការសម្រេចចិត្ត នឹងក្លាយជាកាតាលីករដ៏សំខាន់ក្នុងការលើកកម្ពស់គុណភាពនៃការធ្វើរោគវិនិច្ឆ័យជំងឺមហារីក និងដោះស្រាយបញ្ហាកង្វះខាតធនធានមនុស្សផ្នែកវេជ្ជសាស្ត្រនៅប្រទេសកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាមូលដ្ឋានគ្រឹះនៃ Medical Image Segmentation:</strong> និស្សិតត្រូវចាប់ផ្តើមស្វែងយល់ពីរចនាសម្ព័ន្ធបណ្តាញ CNNs ដូចជា <span class="en">U-Net</span> និង <span class="en">DeepLabv3+</span> ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> ដើម្បីយល់ពីរបៀបចាប់យករូបភាពកម្រិតភីកសែល។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តការប្រើប្រាស់ Loss Functions សម្រាប់ទិន្នន័យអតុល្យភាព:</strong> សរសេរកូដសាកល្បងអនុគមន៍ <span class="en">Tversky Loss</span> និង <span class="en">Dice Loss</span> ដើម្បីដោះស្រាយបញ្ហា <span class="en">Pixel-level class imbalance</span> ដែលតែងតែជួបប្រទះញឹកញាប់ក្នុងការវិភាគរូបភាពវេជ្ជសាស្ត្រ (តំបន់ដុំសាច់មានទំហំតូចជាងផ្ទៃខាងក្រោយរាប់សិបដង)។</li>
+            
+            <li><strong>ជំហានទី៣៖ អភិវឌ្ឍកូដសម្រាប់ Double-Dilated Convolution:</strong> សិក្សាពីកូដ (Custom layer) ដើម្បីកែច្នៃស្រទាប់ <span class="en">Dilated Convolution</span> ធម្មតា ទៅជា <span class="en">Double-Dilated</span> ដើម្បីស្វែងយល់ពីអត្ថប្រយោជន៍ក្នុងការរក្សា <span class="en">Local Spatial Resolution</span> ដូចដែលបានបង្ហាញនៅក្នុងឯកសារស្រាវជ្រាវនេះ។</li>
+            
+            <li><strong>ជំហានទី៤៖ រួមបញ្ចូលប្រព័ន្ធ Explainable AI (XAI):</strong> ប្រើប្រាស់បណ្ណាល័យ AI Explainability ដូចជា <span class="en">Captum (PyTorch)</span> ឬប្រើមុខងារ <span class="en">gradCAM()</span> នៅក្នុង <span class="en">MATLAB</span> ដើម្បីបង្កើត <span class="en">Heatmaps</span> ដែលបង្ហាញពណ៌លេចធ្លោត្រង់ទីតាំងដែលម៉ូដែលផ្តោតការវិភាគ។</li>
+            
+            <li><strong>ជំហានទី៥៖ ធ្វើការតេស្តលើទិន្នន័យជាក់ស្តែង និងសហការជាមួយមន្ទីរពេទ្យ:</strong> ទាញយកសំណុំទិន្នន័យសាធារណៈដូចជា <span class="en">INBreast</span> ឬ <span class="en">CBIS-DDSM</span> មកហ្វឹកហាត់ បន្ទាប់មកព្យាយាមសហការជាមួយមន្ទីរពេទ្យក្នុងស្រុកដើម្បីធ្វើតេស្តម៉ូដែលនេះជាមួយទិន្នន័យរូបភាព Mammogram របស់អ្នកជំងឺកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Double-dilated convolution</span></td>
+                <td>ជាបច្ចេកទេសគណនាគណិតវិទ្យាក្នុងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (CNN) ដែលប្រើប្រាស់កម្រិតពង្រីក (Dilation factors) ពីរផ្សេងគ្នាក្នុងពេលតែមួយ គឺកម្រិតញឹកនៅកណ្តាល និងកម្រិតរង្វើលនៅគែម ដើម្បីពង្រីកវិសាលភាពនៃការចាប់យកទិន្នន័យរូបភាព ដោយមិនបាត់បង់ភាពច្បាស់នៃចំណុចតូចៗក្នុងតំបន់គោលដៅ។</td>
+                <td>ប្រៀបដូចជាការប្រើប្រាស់កែវពង្រីកពិសេសមួយដែលអាចផ្តោតមើលផ្ទៃទូលាយផង និងអាចរក្សាភាពច្បាស់លាស់នៃចំណុចកណ្តាលបានយ៉ាងល្អក្នុងពេលតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Grad-CAM</span></td>
+                <td>ជាបច្ចេកទេសក្នុងបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) ដែលបង្កើតជារូបភាពបង្ហាញកម្តៅ (Heatmap) ដោយប្រើប្រាស់តម្លៃ Gradient ដើម្បីបញ្ជាក់ប្រាប់ថា តើកុំព្យូទ័របានផ្តោតទៅលើចំណុចភីកសែលណាមួយនៃរូបភាពពិតប្រាកដ ទើបឈានដល់ការសម្រេចចិត្តវាយតម្លៃរូបភាពនោះជាដុំសាច់។</td>
+                <td>ដូចជាការគូសរំលេចពណ៌ (Highlight) លើពាក្យគន្លឹះក្នុងសៀវភៅ ដើម្បីប្រាប់គ្រូថាយើងរកឃើញចម្លើយនេះដោយសារការអានត្រង់ចំណុចណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pixel-level class imbalance</span></td>
+                <td>គឺជាបញ្ហាអតុល្យភាពទិន្នន័យនៅក្នុងការកាត់បំបែករូបភាពវេជ្ជសាស្ត្រ ដែលចំនួនភីកសែល (Pixels) នៃតំបន់ដែលយើងចង់រក (ឧទាហរណ៍៖ ដុំសាច់មហារីក) មានចំនួនតិចតួចមែនទែន បើប្រៀបធៀបទៅនឹងចំនួនភីកសែលនៃផ្ទៃខាងក្រោយរូបភាព (ជាលិកាសុដន់ធម្មតា) ដែលធ្វើឱ្យម៉ូដែល AI ងាយនឹងទស្សន៍ទាយលម្អៀងទៅរកផ្ទៃខាងក្រោយ។</td>
+                <td>ដូចជាការស្វែងរកម្ជុលក្នុងបាតសមុទ្រ ដែលធ្វើឱ្យអ្នកស្វែងរកងាយនឹងសន្និដ្ឋានថាគ្មានម្ជុលសោះ ព្រោះសម្លឹងទៅមើលឃើញតែទឹកគ្រប់ទីកន្លែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tversky loss</span></td>
+                <td>ជាអនុគមន៍គណិតវិទ្យាមួយ (Loss function) ប្រើសម្រាប់វាយតម្លៃកំហុសរបស់ម៉ូដែលកុំព្យូទ័រពេលកំពុងហ្វឹកហាត់។ វាត្រូវបានរចនាឡើងយ៉ាងពិសេសដើម្បីដោះស្រាយបញ្ហាទិន្នន័យអតុល្យភាព ដោយអាចកំណត់ទម្ងន់ពិន័យខ្ពស់រាល់ពេលដែលម៉ូដែលទស្សន៍ទាយខកខានមិនបានរកឃើញដុំសាច់មហារីក (False Negatives)។</td>
+                <td>ដូចជាច្បាប់ពិន័យសិស្ស ដោយផ្តល់ទណ្ឌកម្មធ្ងន់ធ្ងរជាងមុននៅពេលសិស្សធ្វើខុសលើលំហាត់សំខាន់ៗ ដើម្បីបង្ខំឱ្យសិស្សខិតខំយកចិត្តទុកដាក់លើលំហាត់ប្រភេទនោះជាពិសេស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Receptive field</span></td>
+                <td>គឺជាទំហំនៃតំបន់នៅលើរូបភាពដើម ដែលស្រទាប់នីមួយៗនៃបណ្ដាញសរសៃប្រសាទ (CNN) អាច "មើលឃើញ" ឬទាញយកព័ត៌មានបាន ដើម្បីយកមកធ្វើការវិភាគនៅដំណាក់កាលនោះ។ បើវាកាន់តែធំ ម៉ូដែលកាន់តែយល់ពីបរិបទជុំវិញនៃរូបភាព។</td>
+                <td>ដូចជាទំហំនៃរន្ធបង្អួចដែលយើងសម្លឹងមើលចេញទៅក្រៅ បើបង្អួចកាន់តែធំ យើងអាចឃើញទេសភាពបានកាន់តែច្រើន និងយល់ពីស្ថានភាពទីធ្លាជុំវិញបានកាន់តែច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gridding phenomenon</span></td>
+                <td>ជាបញ្ហាបាត់បង់ព័ត៌មានដែលកើតឡើងនៅពេលប្រើបច្ចេកទេស Dilated Convolution ដែលបណ្តាលមកពីការរំលងភីកសែល (Zero padding) ធ្វើឱ្យកុំព្យូទ័រចាប់យកទិន្នន័យជារាងសំណាញ់កាត់ៗ (Checkerboard pattern) ជំនួសឱ្យការចាប់យកព័ត៌មានលម្អិតដែលនៅជាប់ៗគ្នា។</td>
+                <td>ដូចជាការមើលរូបភាពតាមរយៈសំណាញ់មុង ដែលធ្វើឱ្យយើងបាត់បង់ការមើលឃើញនូវចំណុចតូចៗមួយចំនួនដែលត្រូវបាំងដោយខ្សែសំណាញ់នោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Occlusion Sensitivity</span></td>
+                <td>ជាវិធីសាស្ត្រពន្យល់ AI មួយទៀត ដែលវាធ្វើការបិទបាំង (Occlude) ផ្នែកខ្លះនៃរូបភាពជាបន្តបន្ទាប់ដោយប្រព័ន្ធស្វ័យប្រវត្តិ ដើម្បីសាកល្បងមើលថាតើការសម្រេចចិត្តរបស់ម៉ូដែលផ្លាស់ប្តូរឬអត់។ ប្រសិនបើពិន្ទុទស្សន៍ទាយធ្លាក់ចុះខ្លាំងពេលបាំងត្រង់ណា មានន័យថាផ្នែកនោះមានសារៈសំខាន់បំផុត។</td>
+                <td>ដូចជាការយកដៃបាំងភ្នែកម្ខាងរបស់វេជ្ជបណ្ឌិតពេលកំពុងពិនិត្យរូបថតសួត បើគាត់លែងដឹងថាមានរោគសញ្ញា មានន័យថាចំណុចដែលត្រូវបាំងនោះហើយគឺជារោគសញ្ញាផ្ទាល់តែម្តង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Explainable+AI+approaches+in+medical+imaging+and+diagnostics" target="_blank" rel="noopener"><span class="en">Explainable AI approaches in medical imaging and diagnostics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=DeepLabV3%2B+optimization+for+semantic+segmentation" target="_blank" rel="noopener"><span class="en">DeepLabV3+ optimization for semantic segmentation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Tversky+loss+function+for+highly+imbalanced+class+distributions" target="_blank" rel="noopener"><span class="en">Tversky loss function for highly imbalanced class distributions</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Grad-CAM+and+saliency+maps+for+CNN+interpretability" target="_blank" rel="noopener"><span class="en">Grad-CAM and saliency maps for CNN interpretability</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

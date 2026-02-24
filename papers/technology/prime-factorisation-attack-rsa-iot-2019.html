@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វិធីសាស្ត្រថ្មីនៃការវាយប្រហារផ្អែកលើការបំបែកកត្តាបឋមទៅលើការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ RSA ក្នុង IoT | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាសុវត្ថិភាពទាក់ទងនឹងប្រព័ន្ធអ៊ីនធឺណិតនៃវត្ថុ (IoT) ដែលមានធនធានកម្រិត ដោយផ្តោតលើភាពងាយរងគ្រោះនៃសោរសម្ងាត់ RSA (RSA keys) ដែលត្រូវបានប្រើប្...">
+    
+    <meta name="keywords" content="Internet of Things, IoT security, RSA keys, semi-prime factorization, binary GCD, lightweight cryptography, crypto attacks, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/prime-factorisation-attack-rsa-iot-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/prime-factorisation-attack-rsa-iot-2019.html">
+    <meta property="og:title" content="វិធីសាស្ត្រថ្មីនៃការវាយប្រហារផ្អែកលើការបំបែកកត្តាបឋមទៅលើការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ RSA ក្នុង IoT | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាសុវត្ថិភាពទាក់ទងនឹងប្រព័ន្ធអ៊ីនធឺណិតនៃវត្ថុ (IoT) ដែលមានធនធានកម្រិត ដោយផ្តោតលើភាពងាយរងគ្រោះនៃសោរសម្ងាត់ RSA (RSA keys) ដែលត្រូវបានប្រើប្រាស់ក្នុងការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវធុនស្រាល។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="Cryptography 2019">
+    
+    <meta property="article:tag" content="Internet of Things">
+    
+    <meta property="article:tag" content="IoT security">
+    
+    <meta property="article:tag" content="RSA keys">
+    
+    <meta property="article:tag" content="semi-prime factorization">
+    
+    <meta property="article:tag" content="binary GCD">
+    
+    <meta property="article:tag" content="lightweight cryptography">
+    
+    <meta property="article:tag" content="crypto attacks">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វិធីសាស្ត្រថ្មីនៃការវាយប្រហារផ្អែកលើការបំបែកកត្តាបឋមទៅលើការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ RSA ក្នុង IoT">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាសុវត្ថិភាពទាក់ទងនឹងប្រព័ន្ធអ៊ីនធឺណិតនៃវត្ថុ (IoT) ដែលមានធនធានកម្រិត ដោយផ្តោតលើភាពងាយរងគ្រោះនៃសោរសម្ងាត់ RSA (RSA keys) ដែលត្រូវបានប្រើប្រាស់ក្នុងការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវធុនស្រាល។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1790\u17d2\u1798\u17b8\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b6\u1799\u1794\u17d2\u179a\u17a0\u17b6\u179a\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1794\u17c6\u1794\u17c2\u1780\u1780\u178f\u17d2\u178f\u17b6\u1794\u178b\u1798\u1791\u17c5\u179b\u17be\u1780\u17b6\u179a\u1795\u17d2\u1791\u17c0\u1784\u1795\u17d2\u1791\u17b6\u178f\u17cb\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c RSA \u1780\u17d2\u1793\u17bb\u1784 IoT",
+      "name": "New Method of Prime Factorisation-Based Attacks on RSA Authentication in IoT",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796\u1791\u17b6\u1780\u17cb\u1791\u1784\u1793\u17b9\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u17a2\u17ca\u17b8\u1793\u1792\u17ba\u178e\u17b7\u178f\u1793\u17c3\u179c\u178f\u17d2\u1790\u17bb (IoT) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1792\u1793\u1792\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1797\u17b6\u1796\u1784\u17b6\u1799\u179a\u1784\u1782\u17d2\u179a\u17c4\u17c7\u1793\u17c3\u179f\u17c4\u179a\u179f\u1798\u17d2\u1784\u17b6\u178f\u17cb RSA (RSA keys) \u178a\u17c2\u179b\u178f\u17d2\u179a\u17bc\u179c\u1794\u17b6\u1793\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1795\u17d2\u1791\u17c0\u1784\u1795\u17d2\u1791\u17b6\u178f\u17cb\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1792\u17bb\u1793\u179f\u17d2\u179a\u17b6\u179b\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/prime-factorisation-attack-rsa-iot-2019.html",
+      "author": [{"@type": "Person", "name": "Sitalakshmi Venkatraman (Melbourne Polytechnic, Australia)"},{"@type": "Person", "name": "Anthony Overmars (Melbourne Polytechnic, Australia)"}],
+      "datePublished": "Cryptography 2019",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "New Method of Prime Factorisation-Based Attacks on RSA Authentication in IoT",
+        "url": "https://doi.org/10.3390/cryptography3030020"
+      },
+      "keywords": ["Internet of Things", "IoT security", "RSA keys", "semi-prime factorization", "binary GCD", "lightweight cryptography", "crypto attacks"],
+      "about": "Cybersecurity / Cryptography"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1790\u17d2\u1798\u17b8\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b6\u1799\u1794\u17d2\u179a\u17a0\u17b6\u179a\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1794\u17c6\u1794\u17c2\u1780\u1780\u178f\u17d2\u178f\u17b6\u1794\u178b\u1798\u1791\u17c5\u179b\u17be\u1780\u17b6\u179a\u1795\u17d2\u1791\u17c0\u1784\u1795\u17d2\u1791\u17b6\u178f\u17cb\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c RSA \u1780\u17d2\u1793\u17bb\u1784 IoT",
+          "item": "https://khmerresearch.com/papers/technology/prime-factorisation-attack-rsa-iot-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>វិធីសាស្ត្រថ្មីនៃការវាយប្រហារផ្អែកលើការបំបែកកត្តាបឋមទៅលើក...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> New Method of Prime Factorisation-Based Attacks on RSA Authentication in IoT<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/cryptography3030020" target="_blank">doi.org/10.3390/cryptography3030020</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វិធីសាស្ត្រថ្មីនៃការវាយប្រហារផ្អែកលើការបំបែកកត្តាបឋមទៅលើការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ RSA ក្នុង IoT</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> New Method of Prime Factorisation-Based Attacks on RSA Authentication in IoT</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Sitalakshmi Venkatraman (Melbourne Polytechnic, Australia), Anthony Overmars (Melbourne Polytechnic, Australia)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> Cryptography 2019</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Cybersecurity / Cryptography</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាសុវត្ថិភាពទាក់ទងនឹងប្រព័ន្ធអ៊ីនធឺណិតនៃវត្ថុ (IoT) ដែលមានធនធានកម្រិត ដោយផ្តោតលើភាពងាយរងគ្រោះនៃសោរសម្ងាត់ RSA (RSA keys) ដែលត្រូវបានប្រើប្រាស់ក្នុងការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវធុនស្រាល។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើវិធីសាស្ត្របំបែកកត្តាពាក់កណ្តាលបឋម (Semi-prime factorisation) ថ្មីមួយដែលប្រើប្រាស់ប្រមាណវិធីគណិតវិទ្យា និងការគណនាធុនស្រាលដើម្បីវាយប្រហារលើសោរ RSA ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ទ្រឹស្តីផលបូកនៃការ៉េបួន (Sum of four squares) ដើម្បីស្វែងរកកត្តាបឋមនៃកូដសម្ងាត់</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយតួចែករួមធំបំផុតប្រព័ន្ធគោលពីរដែលបានកែច្នៃ (Modified binary GCD algorithm)</li>
+            
+            <li>ការប្រើប្រាស់ប្រតិបត្តិការផ្លាស់ទីលេខនព្វន្ធគោលពីរ (Binary arithmetic shifts) ដែលស័ក្តិសមសម្រាប់ឧបករណ៍ IoT ដែលមានធនធានតិច</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រដែលបានស្នើឡើងអាចស្វែងរកកត្តាពាក់កណ្តាលបឋម (Semi-prime factors) បានយ៉ាងឆាប់រហ័ស តាមរយៈការធ្វើតេស្តផលបូកនៃការ៉េបួនរួមជាមួយ Modified binary GCD។</li>
+            
+            <li>ភស្តុតាងតាមរយៈការគណនាគណិតវិទ្យាបានបញ្ជាក់ថា វិធីសាស្ត្រថ្មីនេះមានប្រសិទ្ធភាព និងល្បឿនលឿនជាងវិធីសាស្ត្រមុនៗ ដែលអាចជួយសម្រួលដល់ការវាយប្រហារជោគជ័យទៅលើសោរ RSA នៅក្នុងប្រព័ន្ធ IoT។</li>
+            
+            <li>ការស្រាវជ្រាវនេះបង្ហាញយ៉ាងច្បាស់ពីការគំរាមកំហែង និងដែនកំណត់នៃប្រព័ន្ធកូដសម្ងាត់ធុនស្រាល (Lightweight cryptography) ដែលទាមទារឱ្យមានការរចនាប្រព័ន្ធសុវត្ថិភាព IoT កាន់តែរឹងមាំនាពេលអនាគត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Standard Sum of Four Squares (Euler's method)</span></strong><br>វិធីសាស្ត្រផលបូកនៃការ៉េបួនស្តង់ដារ (វិធីសាស្ត្រ Euler)</td>
+                <td>អាចបំបែកកត្តាពាក់កណ្តាលបឋមបាន (Can factor semi-primes) តាមរយៈការអនុវត្តអត្តសញ្ញាណ Brahmagupta–Fibonacci ។</td>
+                <td>បង្កើតដំណោះស្រាយច្រើនដែលទាមទារការធ្វើតេស្តច្រើនលើកច្រើនសា ធ្វើឱ្យយឺតយ៉ាវនិងស៊ីធនធានគណនា។</td>
+                <td>ទាមទារការគណនាស្មុគស្មាញ និងចំណាយពេលយូរ ដែលមិនស័ក្តិសមសម្រាប់ឧបករណ៍ធនធានកម្រិត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Proposed Modified Binary GCD Method</span></strong><br>វិធីសាស្ត្រតួចែករួមធំបំផុតប្រព័ន្ធគោលពីរដែលបានកែច្នៃ (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>ប្រើប្រាស់ប្រតិបត្តិការផ្លាស់ទីលេខនព្វន្ធគោលពីរ (Binary arithmetic shifts) ដែលលឿន និងស៊ីថាមពលតិចបំផុត។</td>
+                <td>នៅតែស្ថិតក្នុងការបញ្ជាក់ទ្រឹស្តីគណិតវិទ្យា ដែលអាចទាមទារការសាកល្បងបន្ថែមនៅក្នុងប្រព័ន្ធពិត។</td>
+                <td>កាត់បន្ថយចំនួននៃប្រតិបត្តិការគណនាបានយ៉ាងច្រើន និងបង្កើនល្បឿនក្នុងការស្វែងរកកត្តាបឋមនៃសោរ RSA ធុនស្រាល។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់ពីការចំណាយលើផ្នែករឹងឬផ្នែកទន់ជាក់លាក់នោះទេ ប៉ុន្តែវិធីសាស្ត្រនេះត្រូវបានរចនាឡើងយ៉ាងពិសេសដើម្បីកាត់បន្ថយបន្ទុកគណនានិងថាមពលសម្រាប់បរិស្ថាន IoT។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> បរិស្ថានក្លែងធ្វើ (Simulation) ឬឧបករណ៍ IoT ដែលមានធនធានកម្រិត (ឧទាហរណ៍៖ Microcontrollers ដែលមាន RAM និងថាមពលកែច្នៃទាប)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធីសរសេរកូដសម្រាប់សាកល្បងក្បួនដោះស្រាយគណិតវិទ្យា និងពិធីការបណ្តាញ (ឧទាហរណ៍៖ Python, C/C++ ឬ MATLAB)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងស៊ីជម្រៅផ្នែកគណិតវិទ្យា (ទ្រឹស្តីលេខនព្វន្ធ) វិទ្យាសាស្ត្រកូដសម្ងាត់ (Cryptography) និងប្រព័ន្ធសុវត្ថិភាពបណ្តាញ (Network Security)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើការគណនាគណិតវិទ្យា និងការបង្ហាញទ្រឹស្តី (Mathematical proofs) ដោយមិនប្រើប្រាស់សំណុំទិន្នន័យ (Dataset) ពីពិភពពិត ឬក្រុមប្រជាសាស្ត្រណាមួយឡើយ។ សម្រាប់ប្រទេសកម្ពុជា នេះមានន័យថាវិធីសាស្ត្រនេះអាចអនុវត្តបានជាសកល ដោយមិនរងឥទ្ធិពលពីភាពលំអៀងនៃទិន្នន័យក្នុងតំបន់នោះទេ ប៉ុន្តែវាទាមទារការសាកល្បងផ្ទាល់លើឧបករណ៍ IoT ដែលកំពុងប្រើប្រាស់ជាក់ស្តែងក្នុងស្រុកដើម្បីបញ្ជាក់ពីកម្រិតហានិភ័យ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្របំបែកកត្តាបឋម និងការស្វែងយល់ពីចំណុចខ្សោយនៃ RSA នេះមានសារៈសំខាន់ខ្លាំងសម្រាប់ពង្រឹងសុវត្ថិភាពសន្តិសុខសាយប័រក្នុងប្រទេសកម្ពុជា ស្របពេលដែលការប្រើប្រាស់បច្ចេកវិទ្យាឆ្លាតវៃកំពុងកើនឡើង។</p>
+        
+        <ul>
+            
+            <li><strong>កសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> ប្រព័ន្ធស្រោចស្រព និងឧបករណ៍ចាប់សញ្ញា (Sensors) តាមកសិដ្ឋាននានាក្នុងខេត្តបាត់ដំបង ឬសៀមរាប ច្រើនប្រើប្រាស់ប្រព័ន្ធ IoT ដែលមានថាមពលទាប ដែលអាចងាយរងគ្រោះពីការវាយប្រហារសោរ RSA នេះប្រសិនបើមិនមានការការពារត្រឹមត្រូវ។</li>
+            
+            <li><strong>គម្រោងទីក្រុងឆ្លាតវៃ (Smart City Initiatives):</strong> ការអភិវឌ្ឍទីក្រុងឆ្លាតវៃនៅរាជធានីភ្នំពេញ និងក្រុងព្រះសីហនុ ទាមទារការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ (Authentication) លើឧបករណ៍រាប់ពាន់ ដើម្បីការពារការលួចចូលប្រព័ន្ធគ្រប់គ្រងទីក្រុង (ដូចជាភ្លើងស្តុប ឬប្រព័ន្ធកាមេរ៉ាសុវត្ថិភាព)។</li>
+            
+            <li><strong>វិស័យសុខាភិបាលឌីជីថល (Digital Health):</strong> ឧបករណ៍តាមដានសុខភាព (ដូចជាឧបករណ៍វាស់ចង្វាក់បេះដូង) ដែលចាប់ផ្តើមប្រើប្រាស់តាមមន្ទីរពេទ្យទំនើបៗ ត្រូវការប្រព័ន្ធកូដសម្ងាត់ធុនស្រាល (Lightweight cryptography) ដែលមានសុវត្ថិភាពខ្ពស់បំផុតការពារអាយុជីវិតអ្នកជំងឺពីការវាយប្រហារសាយប័រ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការយល់ដឹងពីចំណុចខ្សោយនៃប្រព័ន្ធកូដសម្ងាត់ RSA នៅក្នុងប្រព័ន្ធ IoT ជួយឱ្យអ្នកអភិវឌ្ឍន៍ និងស្ថាប័ននៅកម្ពុជាអាចជ្រើសរើស ឬកែលម្អប្រព័ន្ធសុវត្ថិភាពបានកាន់តែប្រសើរមុននឹងដាក់ឱ្យប្រើប្រាស់ទូលំទូលាយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃប្រព័ន្ធកូដសម្ងាត់ (Cryptography Basics):</strong> ចាប់ផ្តើមរៀនពីគោលការណ៍នៃសោរ RSA និងការបំបែកកត្តាពាក់កណ្តាលបឋម (Semi-prime factorization) ដោយប្រើប្រាស់ធនធានដូចជា <span class='en'>Coursera</span> ឬ <span class='en'>Khan Academy</span>។</li>
+            
+            <li><strong>អនុវត្តក្បួនដោះស្រាយគណិតវិទ្យាជាកូដ (Implement Mathematical Algorithms):</strong> សរសេរកូដសម្រាប់វិធីសាស្ត្រផលបូកនៃការ៉េបួន (Sum of four squares) និង <span class='en'>Stein's Binary GCD algorithm</span> ដោយប្រើប្រាស់ភាសា <span class='en'>Python</span> ដើម្បីស្វែងយល់ពីរបៀបដែលល្បឿននៃការគណនាត្រូវបានកាត់បន្ថយ។</li>
+            
+            <li><strong>សាកល្បងលើឧបករណ៍ IoT ជាក់ស្តែង (Test on Real IoT Devices):</strong> ប្រើប្រាស់ឧបករណ៍ <span class='en'>Arduino</span> ឬ <span class='en'>Raspberry Pi</span> ដើម្បីក្លែងធ្វើបរិស្ថាន IoT ដែលមានធនធានកម្រិត រួចសាកល្បងអនុវត្តការវាយប្រហារបំបែកសោរ RSA ធុនស្រាល (Lightweight RSA attack simulation) ដើម្បីវាស់ស្ទង់ពេលវេលាជាក់ស្តែង។</li>
+            
+            <li><strong>ស្រាវជ្រាវកែលម្អប្រព័ន្ធការពារ (Research Defensive Mechanisms):</strong> ផ្អែកលើលទ្ធផលនៃការវាយប្រហារ សូមសិក្សាពីការរចនាពិធីការផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវថ្មី (New authentication protocols) ឬផ្លាស់ប្តូរទៅប្រើប្រាស់កូដសម្ងាត់ធុនស្រាលផ្សេងទៀតដូចជា <span class='en'>Elliptic Curve Cryptography (ECC)</span> ជំនួសឱ្យ RSA សម្រាប់គម្រោង IoT របស់អ្នកនៅកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Internet of Things (IoT)</span></td>
+                <td>បណ្តាញនៃឧបករណ៍ប្រើប្រាស់ប្រចាំថ្ងៃ (ដូចជា អំពូលភ្លើង ទូទឹកកក កាមេរ៉ាសុវត្ថិភាព) ដែលត្រូវបានបំពាក់ដោយសេនស័រ និងប្រព័ន្ធភ្ជាប់អ៊ីនធឺណិត ដើម្បីឱ្យពួកវាអាចប្រមូលទិន្នន័យ ទាក់ទងគ្នា និងធ្វើការងារដោយស្វ័យប្រវត្តិដោយមិនចាំបាច់មានការបញ្ជាផ្ទាល់ពីមនុស្ស។</td>
+                <td>ដូចជាការបង្រៀនរបស់របរក្នុងផ្ទះឱ្យចេះនិយាយទាក់ទងគ្នា និងធ្វើការជំនួសយើងតាមរយៈការភ្ជាប់អ៊ីនធឺណិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">RSA (Rivest–Shamir–Adleman)</span></td>
+                <td>ជាក្បួនដោះស្រាយកូដសម្ងាត់ដ៏ពេញនិយមមួយដែលប្រើប្រាស់ប្រព័ន្ធសោរពីរផ្សេងគ្នា គឺសោរសាធារណៈសម្រាប់បំប្លែងសារជាកូដសម្ងាត់ (ចាក់សោរ) និងសោរឯកជនសម្រាប់បកប្រែកូដសម្ងាត់នោះមកជាសារដើមវិញ (បើកសោរ) ដើម្បីការពារសុវត្ថិភាពទិន្នន័យពេលបញ្ជូនតាមបណ្តាញ។</td>
+                <td>ដូចជាប្រអប់សំបុត្រដែលមានរន្ធចំហសម្រាប់អ្នកណាក៏អាចទម្លាក់សំបុត្រចូលបាន (សោរសាធារណៈ) ប៉ុន្តែមានតែម្ចាស់ប្រអប់ដែលមានកូនសោរ (សោរឯកជន) ទើបអាចបើកយកសំបុត្រមកអានបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Semi-prime</span></td>
+                <td>គឺជាតួលេខគណិតវិទ្យាធំមួយ ដែលកើតចេញពីការគុណបញ្ចូលគ្នានូវលេខបឋម (Prime numbers) តែពីរគត់។ នៅក្នុងប្រព័ន្ធ RSA លេខនេះត្រូវបានចាត់ទុកជាសោរសាធារណៈ ហើយសុវត្ថិភាពរបស់វាពឹងផ្អែកលើភាពលំបាកក្នុងការរកឱ្យឃើញថាតើលេខបឋមពីរណាខ្លះដែលជាកត្តាដើមរបស់វា។</td>
+                <td>ដូចជាការលាយថ្នាំពណ៌ពីរចូលគ្នាឱ្យចេញជាពណ៌ថ្មីមួយ ដែលអ្នកដទៃពិបាកនឹងទាយដឹងថាវាផ្សំចេញពីពណ៌ដើមអ្វីខ្លះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Prime factorization</span></td>
+                <td>ដំណើរការគណិតវិទ្យាក្នុងការបំបែកលេខធំមួយ (ដូចជាលេខ Semi-prime) ទៅជាកត្តាលេខបឋមដើមរបស់វាវិញ។ ក្នុងន័យសន្តិសុខសាយប័រ នេះគឺជាវិធីដែលអ្នកវាយប្រហារ (Hackers) ប្រើកុំព្យូទ័រដើម្បីទាញយកសោរឯកជនពីសោរសាធារណៈ ដើម្បីលួចអានទិន្នន័យសម្ងាត់។</td>
+                <td>ដូចជាការព្យាយាមភ្លក់ម្ហូបមួយមុខ រួចទាយរកមើលថាតើចុងភៅបានដាក់គ្រឿងផ្សំដើមអ្វីខ្លះដើម្បីចម្អិនវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Lightweight cryptography</span></td>
+                <td>ការរចនា និងការប្រើប្រាស់ប្រព័ន្ធកូដសម្ងាត់ដែលទាមទារធនធានដំណើរការតិចតួចបំផុត (RAM តូច ថាមពលថ្មទាប) ដើម្បីផ្តល់ការការពារទិន្នន័យប្រកបដោយសុវត្ថិភាពសម្រាប់ឧបករណ៍ IoT តូចៗ ដែលមិនមានសមត្ថភាពដំណើរការកម្មវិធីកូដសម្ងាត់ធ្ងន់ៗបាន។</td>
+                <td>ដូចជាការច្នៃមួកសុវត្ថិភាពឱ្យមានទម្ងន់ស្រាលបំផុត ងាយស្រួលពាក់ តែនៅតែអាចការពារក្បាលបានយ៉ាងល្អសម្រាប់អ្នកជិះកង់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Binary greatest common divisor (GCD)</span></td>
+                <td>ក្បួនដោះស្រាយគណិតវិទ្យា (ស្គាល់ថា Stein's algorithm) ដែលប្រើសម្រាប់ស្វែងរកតួចែករួមធំបំផុតនៃលេខពីរ ដោយបោះបង់ការចែកលេខស្មុគស្មាញ ហើយងាកមកប្រើប្រាស់តែប្រមាណវិធីសាមញ្ញៗរបស់កុំព្យូទ័រ (រំកិលលេខគោលពីរ បូក និងដក) ដែលជួយឱ្យការទម្លាយកូដសម្ងាត់មានល្បឿនលឿនជាងមុន។</td>
+                <td>ដូចជាវិធីកាត់ផ្លូវកាត់ដ៏ឆ្លាតវៃមួយ ដើម្បីស្វែងរករបស់ដែលដូចគ្នារវាងប្រអប់ពីរយ៉ាងរហ័ស ដោយមិនបាច់រើកកាយមើលគ្រប់កន្លែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Man-in-the-middle (MITM) attack</span></td>
+                <td>ទម្រង់នៃការវាយប្រហារសាយប័រ ដែលជនខិលខូចលួចជ្រៀតចូលនៅចន្លោះកណ្តាលនៃការប្រាស្រ័យទាក់ទងគ្នារវាងភាគីពីរ។ ជននោះអាចលួចស្តាប់ ទាញយកទិន្នន័យ ឬប្តូរសោរសាធារណៈដោយសម្ងាត់ ធ្វើឱ្យភាគីទាំងពីរគិតថាពួកគេកំពុងជជែកគ្នាដោយសុវត្ថិភាព ប៉ុន្តែការពិតទិន្នន័យត្រូវធ្លាក់ក្នុងដៃអ្នកទីបី។</td>
+                <td>ដូចជាអ្នករត់សំបុត្រក្បត់ទំនុកចិត្តម្នាក់ ដែលលួចបើកអាន និងកែប្រែសារក្នុងសំបុត្រសម្ងាត់របស់អ្នក មុននឹងយកទៅឱ្យអ្នកទទួល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Resource-constrained</span></td>
+                <td>ពាក្យបច្ចេកទេសពិពណ៌នាអំពីលក្ខខណ្ឌឧបករណ៍ (ជាពិសេសនៅក្នុងបណ្តាញ IoT) ដែលមានដែនកំណត់យ៉ាងខ្លាំងទៅលើទំហំផ្ទុកទិន្នន័យ (Memory) អង្គគណនា (Processor) និងថាមពលអគ្គិសនី (ថ្ម) ដែលជាហេតុធ្វើឱ្យវាមិនអាចបំពាក់ប្រព័ន្ធសុវត្ថិភាពស្តង់ដារធំៗបាន។</td>
+                <td>ដូចជារថយន្តម៉ាស៊ីនតូចមួយដែលសន្សំសំចៃសាំងខ្លាំង តែមិនអាចដឹកឥវ៉ាន់ធ្ងន់ៗ ឬបើកបរក្នុងល្បឿនលឿនខ្លាំងបានឡើយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=lightweight+cryptographic+algorithms+for+resource-constrained+IoT+devices" target="_blank" rel="noopener"><span class="en">lightweight cryptographic algorithms for resource-constrained IoT devices</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=side-channel+attacks+on+IoT+authentication+protocols" target="_blank" rel="noopener"><span class="en">side-channel attacks on IoT authentication protocols</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=integer+factorization+algorithms+and+RSA+security" target="_blank" rel="noopener"><span class="en">integer factorization algorithms and RSA security</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+factorization+methods+using+Lebesgue%27s+identity" target="_blank" rel="noopener"><span class="en">hybrid factorization methods using Lebesgue's identity</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

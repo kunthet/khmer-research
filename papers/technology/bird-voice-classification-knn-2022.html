@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការចាត់ថ្នាក់សំឡេងសត្វស្លាបដោយផ្អែកលើការរួមបញ្ចូលគ្នានៃការទាញយកលក្ខណៈពិសេស និងការកាត់បន្ថយវិមាត្រជាមួយ K-Nearest Neighbor | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការចាត់ថ្នាក់ និងសម្គាល់ប្រភេទសត្វស្លាបដែលកំពុងរងការគំរាមកំហែងជិតផុតពូជ តាមរយៈការវិភាគគំរូសំឡេងនៅក្នុងបរិស្ថានបើកចំហ ដោយសារការស្តាប់ដោ...">
+    
+    <meta name="keywords" content="Bird sound classification, Feature extraction, MFCC, GTCC, K-Nearest Neighbor, Bioacoustics, Audio segmentation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/bird-voice-classification-knn-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/bird-voice-classification-knn-2022.html">
+    <meta property="og:title" content="ការចាត់ថ្នាក់សំឡេងសត្វស្លាបដោយផ្អែកលើការរួមបញ្ចូលគ្នានៃការទាញយកលក្ខណៈពិសេស និងការកាត់បន្ថយវិមាត្រជាមួយ K-Nearest Neighbor | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការចាត់ថ្នាក់ និងសម្គាល់ប្រភេទសត្វស្លាបដែលកំពុងរងការគំរាមកំហែងជិតផុតពូជ តាមរយៈការវិភាគគំរូសំឡេងនៅក្នុងបរិស្ថានបើកចំហ ដោយសារការស្តាប់ដោយត្រចៀកមនុស្សផ្ទាល់មានដែនកំណត់និងភាពលំបាក។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022, International Journal of Intelligent Engineering and Systems">
+    
+    <meta property="article:tag" content="Bird sound classification">
+    
+    <meta property="article:tag" content="Feature extraction">
+    
+    <meta property="article:tag" content="MFCC">
+    
+    <meta property="article:tag" content="GTCC">
+    
+    <meta property="article:tag" content="K-Nearest Neighbor">
+    
+    <meta property="article:tag" content="Bioacoustics">
+    
+    <meta property="article:tag" content="Audio segmentation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការចាត់ថ្នាក់សំឡេងសត្វស្លាបដោយផ្អែកលើការរួមបញ្ចូលគ្នានៃការទាញយកលក្ខណៈពិសេស និងការកាត់បន្ថយវិមាត្រជាមួយ K-Nearest Neighbor">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការចាត់ថ្នាក់ និងសម្គាល់ប្រភេទសត្វស្លាបដែលកំពុងរងការគំរាមកំហែងជិតផុតពូជ តាមរយៈការវិភាគគំរូសំឡេងនៅក្នុងបរិស្ថានបើកចំហ ដោយសារការស្តាប់ដោយត្រចៀកមនុស្សផ្ទាល់មានដែនកំណត់និងភាពលំបាក។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u179f\u178f\u17d2\u179c\u179f\u17d2\u179b\u17b6\u1794\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f \u1793\u17b7\u1784\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u179c\u17b7\u1798\u17b6\u178f\u17d2\u179a\u1787\u17b6\u1798\u17bd\u1799 K-Nearest Neighbor",
+      "name": "Bird Voice Classification Based on Combination Feature Extraction and Reduction Dimension with the K-Nearest Neighbor",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb \u1793\u17b7\u1784\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u1794\u17d2\u179a\u1797\u17c1\u1791\u179f\u178f\u17d2\u179c\u179f\u17d2\u179b\u17b6\u1794\u178a\u17c2\u179b\u1780\u17c6\u1796\u17bb\u1784\u179a\u1784\u1780\u17b6\u179a\u1782\u17c6\u179a\u17b6\u1798\u1780\u17c6\u17a0\u17c2\u1784\u1787\u17b7\u178f\u1795\u17bb\u178f\u1796\u17bc\u1787 \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1782\u17c6\u179a\u17bc\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u1794\u17be\u1780\u1785\u17c6\u17a0 \u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u179f\u17d2\u178f\u17b6\u1794\u17cb\u178a\u17c4\u1799\u178f\u17d2\u179a\u1785\u17c0\u1780\u1798\u1793\u17bb\u179f\u17d2\u179f\u1795\u17d2\u1791\u17b6\u179b\u17cb\u1798\u17b6\u1793\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb\u1793\u17b7\u1784\u1797\u17b6\u1796\u179b\u17c6\u1794\u17b6\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/bird-voice-classification-knn-2022.html",
+      "author": [{"@type": "Person", "name": "Pulung Nurtantio Andono (Universitas Dian Nuswantoro)"},{"@type": "Person", "name": "Guruh Fajar Shidik"},{"@type": "Person", "name": "Dwi Puji Prabowo"},{"@type": "Person", "name": "Dewi Pergiwati"},{"@type": "Person", "name": "Ricardus Anggi Pramunendar"}],
+      "datePublished": "2022, International Journal of Intelligent Engineering and Systems",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Bird Voice Classification Based on Combination Feature Extraction and Reduction Dimension with the K-Nearest Neighbor",
+        "url": "https://doi.org/10.22266/ijies2022.0228.24"
+      },
+      "keywords": ["Bird sound classification", "Feature extraction", "MFCC", "GTCC", "K-Nearest Neighbor", "Bioacoustics", "Audio segmentation"],
+      "about": "Machine Learning and Bioacoustics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u179f\u178f\u17d2\u179c\u179f\u17d2\u179b\u17b6\u1794\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f \u1793\u17b7\u1784\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u179c\u17b7\u1798\u17b6\u178f\u17d2\u179a\u1787\u17b6\u1798\u17bd\u1799 K-Nearest Neighbor",
+          "item": "https://khmerresearch.com/papers/technology/bird-voice-classification-knn-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការចាត់ថ្នាក់សំឡេងសត្វស្លាបដោយផ្អែកលើការរួមបញ្ចូលគ្នានៃកា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Bird Voice Classification Based on Combination Feature Extraction and Reduction Dimension with the K-Nearest Neighbor<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.22266/ijies2022.0228.24" target="_blank">doi.org/10.22266/ijies2022.0228.24</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការចាត់ថ្នាក់សំឡេងសត្វស្លាបដោយផ្អែកលើការរួមបញ្ចូលគ្នានៃការទាញយកលក្ខណៈពិសេស និងការកាត់បន្ថយវិមាត្រជាមួយ K-Nearest Neighbor</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Bird Voice Classification Based on Combination Feature Extraction and Reduction Dimension with the K-Nearest Neighbor</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Pulung Nurtantio Andono (Universitas Dian Nuswantoro), Guruh Fajar Shidik, Dwi Puji Prabowo, Dewi Pergiwati, Ricardus Anggi Pramunendar</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022, International Journal of Intelligent Engineering and Systems</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning and Bioacoustics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការចាត់ថ្នាក់ និងសម្គាល់ប្រភេទសត្វស្លាបដែលកំពុងរងការគំរាមកំហែងជិតផុតពូជ តាមរយៈការវិភាគគំរូសំឡេងនៅក្នុងបរិស្ថានបើកចំហ ដោយសារការស្តាប់ដោយត្រចៀកមនុស្សផ្ទាល់មានដែនកំណត់និងភាពលំបាក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានស្នើឡើងនូវប្រព័ន្ធស្វ័យប្រវត្តិមួយដោយប្រើប្រាស់បច្ចេកទេសបំបាត់សំឡេងរំខាន ការទាញយកលក្ខណៈពិសេសចម្រុះ និងការកាត់បន្ថយវិមាត្រទិន្នន័យដើម្បីធ្វើចំណាត់ថ្នាក់សំឡេងសត្វស្លាបឱ្យបានត្រឹមត្រូវ។
+        
+        <ul>
+            
+            <li>ការសម្គាល់ព្រំដែនសំឡេង និងការបំបាត់សំឡេងរំខានដោយប្រើប្រាស់ YAMNet Neural Network (Voice Segmentation and Noise Reduction)</li>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសដោយរួមបញ្ចូលវិធីសាស្ត្រ MFCC និង GTCC (Combination Feature Extraction)</li>
+            
+            <li>ការកាត់បន្ថយវិមាត្រទិន្នន័យ និងកាត់បន្ថយទិន្នន័យក្រៅគែមដោយប្រើប្រាស់ k-Means Clustering (Outlier Reduction)</li>
+            
+            <li>ការធ្វើចំណាត់ថ្នាក់ប្រភេទសំឡេងសត្វស្លាបដោយប្រើក្បួនដោះស្រាយ K-Nearest Neighbor (KNN Classification)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការរួមបញ្ចូលគ្នានៃលក្ខណៈពិសេស MFCC និង GTCC ជាមួយនឹងក្បួនដោះស្រាយ KNN អាចផ្តល់នូវភាពត្រឹមត្រូវ (Accuracy) ជាមធ្យមរហូតដល់ 78.11% ក្នុងការសម្គាល់សំឡេងសត្វស្លាប។</li>
+            
+            <li>វិធីសាស្ត្រដែលបានស្នើនេះផ្តល់លទ្ធផលល្អប្រសើរជាងការប្រើប្រាស់វិធីសាស្ត្រទាញយកលក្ខណៈពិសេសផ្សេងទៀត (ដូចជាការប្រើ MFCC សុទ្ធ ឬ GTCC សុទ្ធ) ដែលបានអនុវត្តការកាត់បន្ថយវិមាត្រដូចគ្នា។</li>
+            
+            <li>ក្បួនដោះស្រាយ KNN ដំណើរការបានល្អ និងមានភាពត្រឹមត្រូវខ្ពស់ជាងវិធីសាស្ត្រ Decision Tree (DT), Naïve Bayes (NB), និង Neural Network (NN) សម្រាប់ការចាត់ថ្នាក់ទិន្នន័យសំឡេងនេះ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">MFCC + GTCC + KNN (Proposed Method)</span></strong><br>ការទាញយកលក្ខណៈពិសេស MFCC និង GTCC រួមបញ្ចូលគ្នា ជាមួយក្បួនចាត់ថ្នាក់ KNN</td>
+                <td>ផ្តល់លទ្ធផលត្រឹមត្រូវខ្ពស់បំផុត ដោយប្រើប្រាស់ចំណុចខ្លាំងនៃការកំណត់សំឡេងរបស់ MFCC និងសមត្ថភាពទប់ទល់នឹងសំឡេងរំខានរបស់ GTCC។ មិនតម្រូវឱ្យមានពេលវេលាបង្វឹក (Training time) យូរនោះទេ។</td>
+                <td>ត្រូវការទំហំផ្ទុកទិន្នន័យច្រើន និងមានភាពស្មុគស្មាញក្នុងការគណនាខ្ពស់នៅពេលដែលចំនួនទិន្នន័យកើនឡើងច្រើន។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវជាមធ្យម ៧៨.១១% ដែលជាលទ្ធផលខ្ពស់ជាងគេក្នុងការពិសោធន៍។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Decision Tree (DT)</span></strong><br>មែកធាងសេចក្តីសម្រេច (Decision Tree)</td>
+                <td>ងាយស្រួលយល់ និងបកស្រាយពីលក្ខខណ្ឌនៃការសម្រេចចិត្តក្នុងការចាត់ថ្នាក់សំឡេង។</td>
+                <td>មិនអាចកែប្រែម៉ូដែលបានទេនៅពេលមានព័ត៌មានថ្មីចូល ពោលគឺត្រូវបង្កើតមែកធាងពីដើមឡើងវិញ ដែលចំណាយពេល។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៧០.៨៦% (ទាបជាង KNN ប្រមាណ ៧.២៥%)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Neural Network (NN)</span></strong><br>បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network)</td>
+                <td>អាចរៀន និងស្វែងយល់ពីទំនាក់ទំនងដ៏ស្មុគស្មាញនៃទិន្នន័យសំឡេងបានយ៉ាងល្អ។</td>
+                <td>ត្រូវការពេលវេលាបង្វឹក (Training time) យូរខ្លាំង និងតម្រូវឱ្យមានការកំណត់ Hyperparameters ច្រើននិងស្មុគស្មាញ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវត្រឹមតែប្រហែល ៥៧.៤៨% ប៉ុណ្ណោះ ដែលទាបជាងការរំពឹងទុកសម្រាប់ទិន្នន័យនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Naive Bayes (NB)</span></strong><br>ក្បួនដោះស្រាយ Naive Bayes</td>
+                <td>ជាក្បួនដោះស្រាយសាមញ្ញ ដំណើរការលឿន និងងាយស្រួលក្នុងការអនុវត្តលើទិន្នន័យទូទៅ។</td>
+                <td>ដំណើរការមិនបានល្អលើទិន្នន័យនេះទាល់តែសោះ ដោយសារវាជា Parametric classification និងជាប្រភេទ Generative model ដែលបង្កើតករណីថ្មី។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទាបបំផុត គឺត្រឹមតែប្រហែល ២៦.៥៥% ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះតម្រូវឱ្យមានកម្មវិធីកុំព្យូទ័រឯកទេស និងសមត្ថភាពដំណើរការម៉ាស៊ីន (Hardware) ក្នុងកម្រិតមធ្យមទៅខ្ពស់ សម្រាប់ការទាញយកលក្ខណៈពិសេសសំឡេង និងការប្រើប្រាស់ KNN លើសំណុំទិន្នន័យធំ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់កម្មវិធី MATLAB R2021a (ជំនាន់ 9.10.0) សម្រាប់កែលម្អសញ្ញាសំឡេង ទាញយកលក្ខណៈពិសេស និងការធ្វើចំណាត់ថ្នាក់។ ប្រើប្រាស់ប្រព័ន្ធ YAMNet សម្រាប់កាត់ផ្តាច់សំឡេងសត្វស្លាប (Segmentation)។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់ទិន្នន័យសំឡេងសត្វស្លាបចំនួន ២១,៣៧៥ ពីមជ្ឈមណ្ឌល Cornell Lab of Ornithology's Center for Conservation Bioacoustics ដែលជាទិន្នន័យធំទាមទារការរៀបចំច្បាស់លាស់។</li>
+        
+        <li><strong>Hardware / Computation:</strong> តម្រូវឱ្យមានទំហំផ្ទុក (Memory/RAM) ធំ និងសមត្ថភាព CPU ខ្ពស់ ដោយសារម៉ូដែល KNN មានភាពស្មុគស្មាញផ្នែកលំហ (Spatial complexity) និងការគណនាខ្ពស់នៅពេលផ្ទៀងផ្ទាត់ទិន្នន័យ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យសាធារណៈពី Cornell Lab of Ornithology (សហរដ្ឋអាមេរិក) ដែលមានសត្វស្លាប ២៦៤ ប្រភេទ ទោះបីជាអ្នកស្រាវជ្រាវមានមូលដ្ឋាននៅប្រទេសឥណ្ឌូនេស៊ីក៏ដោយ។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកប្រើប្រាស់ផ្ទាល់អាចប្រឈមនឹងបញ្ហាភាពត្រឹមត្រូវ ដោយសារសត្វស្លាបក្នុងស្រុក (Endemic species) និងសូរសព្ទបរិស្ថានព្រៃឈើនៅកម្ពុជាមានលក្ខណៈខុសប្លែកពីសំណុំទិន្នន័យដើម។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានៃការចាត់ថ្នាក់សំឡេងនេះមានសក្តានុពលខ្ពស់ខ្លាំងក្នុងការយកមកអនុវត្តនៅកម្ពុជា ជាពិសេសក្នុងវិស័យអភិរក្សបរិស្ថាន។</p>
+        
+        <ul>
+            
+            <li><strong>ការអភិរក្សសត្វព្រៃនៅតំបន់ជួរភ្នំក្រវាញ និងព្រៃឡង់:</strong> អាចប្រើប្រាស់ប្រព័ន្ធនេះដើម្បីតាមដានវត្តមានសត្វស្លាបកម្រ និងជិតផុតពូជ (ដូចជា ត្រយងយក្ស) ដោយគ្រាន់តែដាក់ឧបករណ៍ថតសំឡេងលាក់ក្នុងព្រៃ ដោយមិនចាំបាច់មានវត្តមានមនុស្សផ្ទាល់ដែលរំខានដល់សត្វ។</li>
+            
+            <li><strong>វិស័យទេសចរណ៍ធម្មជាតិ (Ecotourism) នៅបឹងទន្លេសាប:</strong> អាចអភិវឌ្ឍជាកម្មវិធីទូរស័ព្ទ (Mobile App) សម្រាប់ភ្ញៀវទេសចរនៅតំបន់ព្រែកទាល់ ដើម្បីកំណត់អត្តសញ្ញាណសត្វស្លាបដោយស្វ័យប្រវត្តិតាមរយៈការថតសំឡេង និងស្តាប់។</li>
+            
+            <li><strong>ក្រសួងបរិស្ថាន (MoE) និងអង្គការអភិរក្ស (NGOs):</strong> ជួយសម្រួលការងារអ្នកស្រាវជ្រាវ (Ornithologists) ក្នុងការវិភាគទិន្នន័យសំឡេងរាប់ពាន់ម៉ោងបានលឿនជាងការស្តាប់ដោយត្រចៀកមនុស្ស សម្រាប់ការវាយតម្លៃសុខភាពប្រព័ន្ធអេកូឡូស៊ី។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការយកបច្ចេកទេស Machine Learning មកវិភាគសំឡេងសត្វស្លាប (Bioacoustics) នឹងជួយពង្រឹងប្រសិទ្ធភាពនៃការការពារជីវៈចម្រុះនៅកម្ពុជាដោយសន្សំសំចៃពេលវេលា និងធនធានមនុស្ស។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងរៀបចំសំណុំទិន្នន័យសំឡេងសត្វស្លាបកម្ពុជា:</strong> សហការជាមួយអង្គការអភិរក្សដូចជា WCS ឬ BirdLife International ដើម្បីប្រមូលឯកសារសំឡេងសត្វស្លាបក្នុងស្រុក។ ប្រើប្រាស់កម្មវិធី <span class="en">Audacity</span> ឬបណ្ណាល័យ <span class="en">Librosa</span> ក្នុង <span class="en">Python</span> ដើម្បីកាត់ត និងសម្អាតទិន្នន័យបឋម។</li>
+            
+            <li><strong>អនុវត្តការបំបាត់សំឡេងរំខានដោយប្រើប្រាស់ YAMNet:</strong> សិក្សា និងអនុវត្ត <span class="en">TensorFlow AudioSet YAMNet</span> ដើម្បីស្វែងរកព្រំដែននៃសំឡេងសត្វស្លាប (Voice Segmentation) និងបំបាត់សំឡេងរំខានបរិស្ថាន (Noise Reduction) ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ទាញយកលក្ខណៈពិសេសសំឡេងចម្រុះ (MFCC និង GTCC):</strong> សរសេរកូដដោយប្រើប្រាស់ <span class="en">MATLAB</span> ឬបណ្ណាល័យ <span class="en">pyAudioAnalysis</span> ដើម្បីទាញយកលក្ខណៈពិសេស <span class="en">MFCC</span> (ឆ្លុះបញ្ចាំងពីការស្តាប់របស់មនុស្ស) និង <span class="en">GTCC</span> (ទប់ទល់នឹងសំឡេងរំខាន) រួចបញ្ចូលវាជាវ៉ិចទ័រតែមួយ។</li>
+            
+            <li><strong>កាត់បន្ថយវិមាត្រទិន្នន័យដើម្បីបង្កើនល្បឿនគណនា:</strong> ប្រើប្រាស់ក្បួនដោះស្រាយ <span class="en">k-Means Clustering</span> ពីបណ្ណាល័យ <span class="en">Scikit-learn</span> ដើម្បីកាត់បន្ថយចំណុចទិន្នន័យដែលស្រដៀងគ្នាត្រួតស៊ីគ្នា (Redundant data) ដែលជួយសម្រាលបន្ទុកក្នុងការប្រើប្រាស់ Memory ម៉ាស៊ីន។</li>
+            
+            <li><strong>អភិវឌ្ឍគំរូចាត់ថ្នាក់ KNN និងធ្វើតេស្តលទ្ធផល:</strong> ប្រើប្រាស់ <span class="en">K-Nearest Neighbor (KNN) classifier</span> ដើម្បីចាត់ថ្នាក់ប្រភេទសត្វស្លាប។ ធ្វើការកែសម្រួលតម្លៃ Hyperparameter 'k' ដើម្បីស្វែងរកភាពត្រឹមត្រូវខ្ពស់បំផុត និងអាចធ្វើការប្រៀបធៀបវាជាមួយនឹងម៉ូដែល Deep Learning ផ្សេងទៀតនៅជំហានបន្ទាប់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Mel Frequency Cepstral Coefficients (MFCC)</span></td>
+                <td>ជាវិធីសាស្ត្រទាញយកលក្ខណៈពិសេសនៃសំឡេង ដែលដំណើរការស្រដៀងនឹងរបៀបដែលត្រចៀកមនុស្សស្តាប់ឮ ដោយវាបំប្លែងរលកសំឡេងទៅជាទិន្នន័យលេខតាមរយៈរង្វាស់ប្រេកង់ (Mel Scale) ដែលងាយចាប់យកលក្ខណៈខុសគ្នានៃសំឡេងនីមួយៗ។</td>
+                <td>ដូចជាឧបករណ៍បកប្រែសំឡេងធម្មជាតិ ឱ្យទៅជាភាសាលេខកូដដែលកុំព្យូទ័រអាចយល់បាន ដោយផ្ដោតលើតែកម្រិតសំឡេងណាដែលត្រចៀកមនុស្សអាចឮច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gammatone Cepstral Coefficients (GTCC)</span></td>
+                <td>ជាបច្ចេកទេសទាញយកព័ត៌មានពីសំឡេង ដោយក្លែងធ្វើតាមដំណើរការនៃក្រដាសត្រចៀកមនុស្ស (Cochlea) ដែលវាមានសមត្ថភាពខ្ពស់ក្នុងការកាត់បំបាត់សំឡេងរំខាន (Noise) ពីបរិស្ថានជុំវិញដោយមិនបាត់បង់អត្តសញ្ញាណសំឡេងដើម។</td>
+                <td>ដូចជាតម្រងត្រងទឹក ដែលច្រោះយកតែកម្ទេចកម្ទីកខ្វក់ចេញ ហើយរក្សាទុកតែទឹកស្អាតសុទ្ធល្អ (ទាញយកតែសំឡេងសត្វស្លាបសុទ្ធចេញពីខ្យល់និងសំឡេងរំខាន)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (KNN)</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ធ្វើចំណាត់ថ្នាក់ទិន្នន័យថ្មី ដោយប្រៀបធៀបវាទៅនឹងទិន្នន័យចាស់ៗដែលនៅក្បែរវាបំផុតចំនួន K (ផ្អែកលើភាពស្រដៀងគ្នា) ដោយមិនទាមទារការបង្វឹកម៉ូដែល (Training) ទុកជាមុននោះទេ។</td>
+                <td>ដូចជាការទស្សន៍ទាយចរិតរបស់សិស្សថ្មីម្នាក់ ដោយសង្កេតមើលទៅលើចរិតរបស់មិត្តភក្តិជិតស្និទ្ធបំផុតចំនួន ៣ ឬ ៥ នាក់ដែលអង្គុយក្បែរគាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">k-Means clustering</span></td>
+                <td>ជាវិធីសាស្ត្របែងចែកទិន្នន័យទៅជាក្រុមៗ (Clusters) ចំនួន k ដោយស្វ័យប្រវត្តិ ដោយប្រមូលផ្ដុំទិន្នន័យដែលមានលក្ខណៈស្រដៀងគ្នាចូលក្នុងក្រុមតែមួយ ដើម្បីងាយស្រួលកាត់បន្ថយទិន្នន័យដែលជាន់គ្នា។</td>
+                <td>ដូចជាការរៀបចំសៀវភៅក្នុងបណ្ណាល័យ ដោយយកសៀវភៅដែលមានប្រធានបទដូចគ្នា ទៅដាក់លើធ្នើរតែមួយជាមួយគ្នា ដើម្បីងាយស្រួលរក និងចំណេញកន្លែងផ្ទុក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">YAMNet</span></td>
+                <td>ជាបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដែលត្រូវបានបង្វឹកជាស្រេច ដើម្បីស្កេនរកមើល និងកាត់បំបែកសំឡេងគោលដៅ (ដូចជាសំឡេងសត្វស្លាប) ចេញពីសំឡេងផ្សេងៗនៅក្នុងប្រព័ន្ធអូឌីយ៉ូ។</td>
+                <td>ដូចជានាឡិការោទ៍ឆ្លាតវៃ ដែលចេះរើសស្តាប់តែសំឡេងម្ចាស់ហៅ ទោះបីជានៅក្បែរនោះមានសំឡេងឡានម៉ូតូខ្លាំងប៉ុណ្ណាក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Discrete Fourier Transform (DFT)</span></td>
+                <td>ជាសមីការគណិតវិទ្យាដែលបំប្លែងរលកសញ្ញាសំឡេងពីទម្រង់ពេលវេលា (Time domain) ទៅជាទម្រង់ប្រេកង់ (Frequency domain) ដើម្បីវិភាគរកមើលថាតើថាមពលសំឡេងនោះស្ថិតនៅកម្រិតប្រេកង់ណាខ្លះ។</td>
+                <td>ដូចជាការយកទឹកក្រឡុកផ្លែឈើចម្រុះមួយកែវ ទៅបំបែកចេញវិញជាផ្លែឈើនីមួយៗ ឱ្យដឹងច្បាស់ថាមានផ្លែប៉ោមប៉ុន្មានភាគរយ និងផ្លែក្រូចប៉ុន្មានភាគរយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Windowing</span></td>
+                <td>ជាបច្ចេកទេសកាត់បំបែករលកសំឡេងវែងៗទៅជាកង់តូចៗ (Frames) ដែលត្រួតស៊ីគ្នា ដើម្បីរក្សាភាពជាប់គ្នានៃសញ្ញាសំឡេង ការពារកុំឱ្យបាត់បង់ព័ត៌មានសំខាន់ៗនៅត្រង់ចំណុចកាត់។</td>
+                <td>ដូចជាការថតរូបភាពបន្តបន្ទាប់គ្នា (Panorama) ដោយរូបនីមួយៗមានជាប់ទេសភាពត្រួតគ្នាបន្តិចបន្តួច ដើម្បីឱ្យពេលផ្គុំចូលគ្នាវិញឃើញទេសភាពនោះពេញលេញតភ្ជាប់គ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+techniques+for+endangered+bird+species+conservation" target="_blank" rel="noopener"><span class="en">machine learning techniques for endangered bird species conservation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparison+of+MFCC+and+GTCC+in+environmental+audio+processing" target="_blank" rel="noopener"><span class="en">comparison of MFCC and GTCC in environmental audio processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+approaches+for+bioacoustics+and+animal+call+recognition" target="_blank" rel="noopener"><span class="en">deep learning approaches for bioacoustics and animal call recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=dimensionality+reduction+techniques+for+large+scale+audio+datasets" target="_blank" rel="noopener"><span class="en">dimensionality reduction techniques for large scale audio datasets</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

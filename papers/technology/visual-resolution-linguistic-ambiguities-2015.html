@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>តើអ្នកយល់ពីអ្វីដែលខ្ញុំចង់មានន័យទេ? ការដោះស្រាយភាពស្រពិចស្រពិលនៃភាសាតាមរយៈរូបភាព | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការយល់ដឹងភាសាដោយផ្អែកលើរូបភាព (Grounded language understanding) ដោយផ្តោតលើការបកស្រាយភាពស្រពិចស្រពិលនៃភាសា (Linguistic ambiguities) តាម...">
+    
+    <meta name="keywords" content="Grounded language understanding, Linguistic ambiguities, Multimodal corpus, Hidden Markov Models, Video-sentence matching, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/visual-resolution-linguistic-ambiguities-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/visual-resolution-linguistic-ambiguities-2015.html">
+    <meta property="og:title" content="តើអ្នកយល់ពីអ្វីដែលខ្ញុំចង់មានន័យទេ? ការដោះស្រាយភាពស្រពិចស្រពិលនៃភាសាតាមរយៈរូបភាព | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការយល់ដឹងភាសាដោយផ្អែកលើរូបភាព (Grounded language understanding) ដោយផ្តោតលើការបកស្រាយភាពស្រពិចស្រពិលនៃភាសា (Linguistic ambiguities) តាមរយៈការប្រើប្រាស់បរិបទវីដេអូ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015 Conference on Empirical Methods in Natural Language Processing">
+    
+    <meta property="article:tag" content="Grounded language understanding">
+    
+    <meta property="article:tag" content="Linguistic ambiguities">
+    
+    <meta property="article:tag" content="Multimodal corpus">
+    
+    <meta property="article:tag" content="Hidden Markov Models">
+    
+    <meta property="article:tag" content="Video-sentence matching">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="តើអ្នកយល់ពីអ្វីដែលខ្ញុំចង់មានន័យទេ? ការដោះស្រាយភាពស្រពិចស្រពិលនៃភាសាតាមរយៈរូបភាព">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការយល់ដឹងភាសាដោយផ្អែកលើរូបភាព (Grounded language understanding) ដោយផ្តោតលើការបកស្រាយភាពស្រពិចស្រពិលនៃភាសា (Linguistic ambiguities) តាមរយៈការប្រើប្រាស់បរិបទវីដេអូ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u178f\u17be\u17a2\u17d2\u1793\u1780\u1799\u179b\u17cb\u1796\u17b8\u17a2\u17d2\u179c\u17b8\u178a\u17c2\u179b\u1781\u17d2\u1789\u17bb\u17c6\u1785\u1784\u17cb\u1798\u17b6\u1793\u1793\u17d0\u1799\u1791\u17c1? \u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1797\u17b6\u1796\u179f\u17d2\u179a\u1796\u17b7\u1785\u179f\u17d2\u179a\u1796\u17b7\u179b\u1793\u17c3\u1797\u17b6\u179f\u17b6\u178f\u17b6\u1798\u179a\u1799\u17c8\u179a\u17bc\u1794\u1797\u17b6\u1796",
+      "name": "Do You See What I Mean? Visual Resolution of Linguistic Ambiguities",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u1797\u17b6\u179f\u17b6\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179a\u17bc\u1794\u1797\u17b6\u1796 (Grounded language understanding) \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1797\u17b6\u1796\u179f\u17d2\u179a\u1796\u17b7\u1785\u179f\u17d2\u179a\u1796\u17b7\u179b\u1793\u17c3\u1797\u17b6\u179f\u17b6 (Linguistic ambiguities) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u179a\u17b7\u1794\u1791\u179c\u17b8\u178a\u17c1\u17a2\u17bc\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/visual-resolution-linguistic-ambiguities-2015.html",
+      "author": [{"@type": "Person", "name": "Yevgeni Berzak (CSAIL MIT)"},{"@type": "Person", "name": "Andrei Barbu (CSAIL MIT)"},{"@type": "Person", "name": "Daniel Harari (CSAIL MIT)"},{"@type": "Person", "name": "Boris Katz (CSAIL MIT)"},{"@type": "Person", "name": "Shimon Ullman (Weizmann Institute of Science)"}],
+      "datePublished": "2015 Conference on Empirical Methods in Natural Language Processing",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Do You See What I Mean? Visual Resolution of Linguistic Ambiguities",
+        "url": "N/A"
+      },
+      "keywords": ["Grounded language understanding", "Linguistic ambiguities", "Multimodal corpus", "Hidden Markov Models", "Video-sentence matching"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u178f\u17be\u17a2\u17d2\u1793\u1780\u1799\u179b\u17cb\u1796\u17b8\u17a2\u17d2\u179c\u17b8\u178a\u17c2\u179b\u1781\u17d2\u1789\u17bb\u17c6\u1785\u1784\u17cb\u1798\u17b6\u1793\u1793\u17d0\u1799\u1791\u17c1? \u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1797\u17b6\u1796\u179f\u17d2\u179a\u1796\u17b7\u1785\u179f\u17d2\u179a\u1796\u17b7\u179b\u1793\u17c3\u1797\u17b6\u179f\u17b6\u178f\u17b6\u1798\u179a\u1799\u17c8\u179a\u17bc\u1794\u1797\u17b6\u1796",
+          "item": "https://khmerresearch.com/papers/technology/visual-resolution-linguistic-ambiguities-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>តើអ្នកយល់ពីអ្វីដែលខ្ញុំចង់មានន័យទេ? ការដោះស្រាយភាពស្រពិចស...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Do You See What I Mean? Visual Resolution of Linguistic Ambiguities<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>តើអ្នកយល់ពីអ្វីដែលខ្ញុំចង់មានន័យទេ? ការដោះស្រាយភាពស្រពិចស្រពិលនៃភាសាតាមរយៈរូបភាព</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Do You See What I Mean? Visual Resolution of Linguistic Ambiguities</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Yevgeni Berzak (CSAIL MIT), Andrei Barbu (CSAIL MIT), Daniel Harari (CSAIL MIT), Boris Katz (CSAIL MIT), Shimon Ullman (Weizmann Institute of Science)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015 Conference on Empirical Methods in Natural Language Processing</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការយល់ដឹងភាសាដោយផ្អែកលើរូបភាព (Grounded language understanding) ដោយផ្តោតលើការបកស្រាយភាពស្រពិចស្រពិលនៃភាសា (Linguistic ambiguities) តាមរយៈការប្រើប្រាស់បរិបទវីដេអូ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតកញ្ចប់ទិន្នន័យថ្មី និងអភិវឌ្ឍម៉ូដែលកុំព្យូទ័រដែលវិភាគរួមគ្នារវាងអត្ថបទនិងវីដេអូដើម្បីជ្រើសរើសអត្ថន័យដែលត្រឹមត្រូវ។
+        
+        <ul>
+            
+            <li>ការបង្កើតកញ្ចប់ទិន្នន័យពហុទម្រង់ LAVA (LAVA Multimodal Corpus) ដែលមានប្រយោគនិងវីដេអូបង្ហាញពីភាពស្រពិចស្រពិលផ្នែកវាក្យសម្ព័ន្ធ អត្ថន័យ និងវោហារសព្ទ</li>
+            
+            <li>ការប្រើប្រាស់តក្កវិទ្យាលំដាប់ទីមួយ (First-order logic formulas) ដើម្បីតំណាងអត្ថន័យប្លែកៗគ្នានៃប្រយោគ</li>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែល Hidden Markov Models (HMMs) រួមផ្សំជាមួយប្រព័ន្ធតាមដានវត្ថុ (Object Trackers) ដើម្បីភ្ជាប់ពាក្យទៅនឹងសកម្មភាពក្នុងវីដេអូ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលនេះទទួលបានភាពត្រឹមត្រូវសរុប ៧៥.៣៦% លើការបកស្រាយភាពស្រពិចស្រពិលនៃប្រយោគទាំងអស់ក្នុងកញ្ចប់ទិន្នន័យ LAVA។</li>
+            
+            <li>បើបំបែកតាមប្រភេទ ម៉ូដែលសម្រេចបានភាពត្រឹមត្រូវ ៨៤.២៦% សម្រាប់ភាពស្រពិចស្រពិលផ្នែកវាក្យសម្ព័ន្ធ (Syntactic), ៧២.២៨% សម្រាប់អត្ថន័យ (Semantic), និង ៦៤.៤៤% សម្រាប់វោហារសព្ទ (Discourse)។</li>
+            
+            <li>កំហុសភាគច្រើននៃម៉ូដែលគឺបណ្តាលមកពីការបរាជ័យរបស់ប្រព័ន្ធចាប់យកវត្ថុ (Poor object detections) និងបញ្ហាក្នុងការតាមដានព្រឹត្តិការណ៍ក្នុងវីដេអូរយៈពេលខ្លី។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Compositional Cross-Modal Model (Extended Sentence Tracker)</span></strong><br>ម៉ូដែលតាមដានប្រយោគរួមផ្សំពហុទម្រង់ (ពង្រីកពីម៉ូដែលគំរូចាស់ដោយបន្ថែមតក្កវិទ្យាលំដាប់ទីមួយ)</td>
+                <td>អាចដោះស្រាយភាពស្រពិចស្រពិលនៃភាសាបានច្រើនប្រភេទ (វាក្យសម្ព័ន្ធ អត្ថន័យ និងវោហារសព្ទ) ដោយផ្អែកលើបរិបទវីដេអូ។ វាមានសមត្ថភាពបែងចែកវត្ថុ ឬតួអង្គផ្សេងគ្នាបានល្អតាមរយៈការបន្ថែមតក្កវិទ្យាថ្មី (not equal)។</td>
+                <td>ដំណើរការរបស់វាពឹងផ្អែកខ្លាំងលើភាពត្រឹមត្រូវនៃប្រព័ន្ធចាប់យកវត្ថុ (Object Detectors) ហើយជួបការលំបាកជាមួយវត្ថុតូចៗ (ឧ. តេឡេទស្សន៍) ឬការបិទបាំងដោយដៃ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវសរុប ៧៥.៣៦% លើការទស្សន៍ទាយ (៨៤.២៦% សម្រាប់វាក្យសម្ព័ន្ធ, ៧២.២៨% សម្រាប់អត្ថន័យ និង ៦៤.៤៤% សម្រាប់វោហារសព្ទ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Chance Baseline</span></strong><br>ការទស្សន៍ទាយដោយចៃដន្យ (Random Baseline)</td>
+                <td>មិនទាមទារការគណនាស្មុគស្មាញ ការចាប់យកវត្ថុក្នុងរូបភាព ឬការហ្វឹកហាត់ម៉ូដែលនោះទេ។</td>
+                <td>គ្មានភាពវៃឆ្លាតទាល់តែសោះ ដោយគ្រាន់តែជ្រើសរើសចម្លើយដោយចៃដន្យ (១ ក្នុងចំណោម ២ ឬ ៣ ជម្រើស) ដែលមិនអាចយកទៅប្រើប្រាស់ក្នុងការអនុវត្តជាក់ស្តែងបាន។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវត្រឹមតែ ៤៩.០៤% ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតពីទំហំកម្លាំងម៉ាស៊ីន (Hardware) នោះទេ ប៉ុន្តែការប្រើប្រាស់ប្រព័ន្ធបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (CNNs) និងការវិភាគវីដេអូទាមទារធនធានគណនាខ្ពស់។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យ LAVA Multimodal Corpus ដែលមានវីដេអូសរុបចំនួន ១៦៧៩ និងប្រយោគចំនួន ២៣៧ ដែលត្រូវបានបង្កើត និងថតឡើងដោយក្រុមអ្នកស្រាវជ្រាវផ្ទាល់។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារម៉ាស៊ីនកុំព្យូទ័រដែលមានក្រាហ្វិកកាត (GPU) កម្រិតខ្ពស់សម្រាប់ដំណើរការម៉ូដែល CNN លើការចាប់យកវត្ថុចេញពីស៊ុមវីដេអូ (Video frames) រាប់ពាន់ស៊ុម។</li>
+        
+        <li><strong>Software & Algorithms:</strong> ម៉ូដែល HMMs (Hidden Markov Models), Viterbi algorithm ព្រមទាំងប្រព័ន្ធចាប់វត្ថុដូចជា DPM និង CNN។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅផ្នែកកុំព្យូទ័រយល់ដឹងពីរូបភាព (Computer Vision) ការដំណើរការភាសាធម្មជាតិ (NLP) និងការបំប្លែងភាសាទៅជាតក្កវិទ្យាលំដាប់ទីមួយ (First-order logic)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់កញ្ចប់ទិន្នន័យ LAVA ដែលថតនៅក្នុងបរិវេណបិទជិត (indoor environment) ដោយមានតួអង្គនិងវត្ថុកំណត់មួយចំនួន ហើយផ្តោតតែលើភាសាអង់គ្លេស។ ទិន្នន័យនេះមានទំហំតូច និងមិនតំណាងឱ្យភាពចម្រុះនៃបរិស្ថានទូទៅក្នុងពិភពពិតនោះទេ។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តម៉ូដែលនេះតម្រូវឱ្យមានការបង្កើតទិន្នន័យថ្មីដែលឆ្លុះបញ្ចាំងពីបរិបទសង្គម វប្បធម៌ និងរចនាសម្ព័ន្ធដ៏ស្មុគស្មាញនៃភាសាខ្មែរ ដែលមានភាពស្រពិចស្រពិលច្រើនដោយសារការមិនដកឃ្លារវាងពាក្យ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាម៉ូដែលនេះត្រូវបានបង្កើតឡើងសម្រាប់ភាសាអង់គ្លេសក្ដី វិធីសាស្ត្រនៃការផ្សារភ្ជាប់ភាសាទៅនឹងបរិបទរូបភាព (Grounded language understanding) មានសក្តានុពលខ្ពស់ក្នុងការអភិវឌ្ឍបច្ចេកវិទ្យា AI ក្នុងស្រុក។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធតាមដានសុវត្ថិភាពឆ្លាតវៃ (Smart Surveillance) នៅតាមទីក្រុងធំៗ (ឧ. រាជធានីភ្នំពេញ):</strong> អាចប្រើប្រាស់ដើម្បីស្វែងរកសកម្មភាព ឬជនសង្ស័យក្នុងវីដេអូកាមេរ៉ាសុវត្ថិភាព ដោយគ្រាន់តែវាយបញ្ចូលប្រយោគបរិយាយសកម្មភាព ឬការសង្ស័យដែលស្មុគស្មាញ ដោយប្រព័ន្ធនឹងវិភាគរូបភាពដើម្បីដោះស្រាយអត្ថន័យប្រយោគនោះ។</li>
+            
+            <li><strong>ការស្វែងរកនិងរៀបចំឯកសារវីដេអូ (Video Retrieval) សម្រាប់ស្ថាប័នប្រព័ន្ធផ្សព្វផ្សាយជាតិ:</strong> ជួយឱ្យទូរទស្សន៍ជាតិកម្ពុជា (ទទក) ឬស្ថាប័នផ្សព្វផ្សាយនានា អាចស្វែងរកទិន្នន័យវីដេអូចាស់ៗបានយ៉ាងលឿនតាមរយៈការវាយបញ្ចូលអត្ថបទពិពណ៌នា ដោយមិនមានការភាន់ច្រឡំលើអត្ថន័យ។</li>
+            
+            <li><strong>បច្ចេកវិទ្យាជំនួយជនពិការភ្នែក (Assistive Technologies):</strong> អាចអភិវឌ្ឍជាកម្មវិធីទូរស័ព្ទសម្រាប់ជួយជនពិការភ្នែកនៅកម្ពុជា (ឧ. សហការជាមួយអង្គការគ្រួសារថ្មី) ដើម្បីបកប្រែសកម្មភាពជុំវិញខ្លួនទៅជាសំឡេងភាសាខ្មែរដែលច្បាស់លាស់ ដោយយល់ពីបរិបទជុំវិញ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះគឺជាមូលដ្ឋានគ្រឹះដ៏សំខាន់សម្រាប់អ្នកស្រាវជ្រាវកម្ពុជាក្នុងការកសាងប្រព័ន្ធ AI ពហុទម្រង់ (Multimodal AI) ដែលអាចយល់ដឹងបរិបទពិភពពិតនិងភាសាខ្មែរបានកាន់តែស៊ីជម្រៅជាងមុន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ យល់ដឹងពីមូលដ្ឋានគ្រឹះនៃ Computer Vision និង NLP:</strong> ចាប់ផ្តើមសិក្សាអំពីទ្រឹស្តីនៃការចាប់យកវត្ថុក្នុងរូបភាព និងការកសាងម៉ូដែលភាសា ដោយរៀនសរសេរកូដជាភាសា Python និងប្រើប្រាស់បណ្ណាល័យដូចជា <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span>។</li>
+            
+            <li><strong>ជំហានទី២៖ សិក្សាពីម៉ូដែលចាប់យកវត្ថុ (Object Detection) និងការតាមដាន (Tracking):</strong> សាកល្បងប្រើប្រាស់បច្ចេកវិទ្យាទំនើបដូចជា <span class="en">YOLOv8</span> ឬ <span class="en">Detectron2</span> ជំនួសឱ្យ DPM ចាស់ ដើម្បីចាប់យកវត្ថុក្នុងវីដេអូ ហើយរៀនពីរបៀបអនុវត្ត <span class="en">Hidden Markov Models (HMMs)</span> ដើម្បីតាមដានចលនារបស់វត្ថុពីស៊ុមមួយទៅស៊ុមមួយ។</li>
+            
+            <li><strong>ជំហានទី៣៖ កសាងកញ្ចប់ទិន្នន័យសាកល្បងខ្នាតតូច (Mini Multimodal Dataset) ជាភាសាខ្មែរ:</strong> ថតវីដេអូខ្លីៗពីសកម្មភាពប្រចាំថ្ងៃ ហើយសរសេរប្រយោគភាសាខ្មែរពិពណ៌នាពីសកម្មភាពទាំងនោះ (រួមបញ្ចូលប្រយោគដែលមានភាពស្រពិចស្រពិល) ដោយប្រើប្រាស់ឧបករណ៍ចំណារពន្យល់ដូចជា <span class="en">CVAT (Computer Vision Annotation Tool)</span>។</li>
+            
+            <li><strong>ជំហានទី៤៖ សាកល្បងជាមួយ Vision-Language Models (VLMs) ទំនើប:</strong> ជំនួសឱ្យការប្រើតក្កវិទ្យាលំដាប់ទីមួយ (First-order logic) ដែលស្មុគស្មាញ សូមសាកល្បងប្រើប្រាស់ម៉ូដែលបណ្តុះបណ្តាលរួចជាស្រេចដូចជា <span class="en">CLIP (Contrastive Language-Image Pretraining)</span> ឬ <span class="en">VideoBERT</span> ដើម្បីសាកល្បងផ្ទៀងផ្ទាត់អត្ថបទភាសាខ្មែរនិងវីដេអូ។</li>
+            
+            <li><strong>ជំហានទី៥៖ វាយតម្លៃ និងកែលម្អប្រព័ន្ធ (Evaluation & Optimization):</strong> វាស់ស្ទង់ភាពត្រឹមត្រូវនៃម៉ូដែលរបស់អ្នកដោយប្រៀបធៀបជាមួយលទ្ធផលរំពឹងទុក និងដោះស្រាយបញ្ហាទូទៅដូចជាការបិទបាំងវត្ថុក្នុងរូបភាព (Occlusion) ដោយប្រើប្រាស់បច្ចេកទេស <span class="en">Data Augmentation</span>។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Grounded language understanding</span></td>
+                <td>ជាដំណើរការដែលប្រព័ន្ធកុំព្យូទ័រព្យាយាមយល់ន័យរបស់ភាសាដោយផ្សារភ្ជាប់ពាក្យពេចន៍ទាំងនោះទៅនឹងទិន្នន័យពីពិភពពិត ដូចជារូបភាព វីដេអូ ឬសំឡេង ជាជាងការយល់ត្រឹមតែអត្ថបទសុទ្ធសាធ។</td>
+                <td>ដូចជាក្មេងតូចម្នាក់រៀនស្គាល់ពាក្យ "ឆ្កែ" ដោយសារម្តាយចង្អុលបង្ហាញសត្វឆ្កែផ្ទាល់ភ្នែក មិនមែនគ្រាន់តែប្រាប់អត្ថន័យនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Linguistic ambiguities</span></td>
+                <td>គឺជាលក្ខណៈនៃប្រយោគ ឬឃ្លាដែលមានអត្ថន័យលើសពីមួយ ដែលតម្រូវឱ្យអ្នកស្តាប់ ឬកុំព្យូទ័រត្រូវពឹងផ្អែកលើបរិបទបន្ថែម (ដូចជារូបភាព) ដើម្បីកំណត់ថាតើអត្ថន័យមួយណាជារឿងពិតប្រាកដ។</td>
+                <td>ដូចជាពេលគេនិយាយថា "ញ៉ាំបាយជាមួយស្លាបព្រា" វាអាចមានន័យថាប្រើស្លាបព្រាដើម្បីដួសបាយ ឬញ៉ាំបាយបណ្តើរទំពារស្លាបព្រាបណ្តើរ (ទាល់តែឃើញរូបភាពទើបដឹងច្បាស់)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Models (HMMs)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិដែលត្រូវបានប្រើប្រាស់ដើម្បីទស្សន៍ទាយលំដាប់លំដោយនៃព្រឹត្តិការណ៍ដែលយើងមិនអាចមើលឃើញផ្ទាល់ ដោយពឹងផ្អែកលើទិន្នន័យឬសញ្ញាដែលយើងអាចសង្កេតឃើញ ដូចជាការយកចលនារបស់វត្ថុមកទស្សន៍ទាយសកម្មភាពពិតប្រាកដ។</td>
+                <td>ដូចជាការមើលឃើញមនុស្សកាន់ឆ័ត្រសើមដើរចូលក្នុងផ្ទះ (អ្វីដែលសង្កេតឃើញ) ទើបយើងទាយដឹងថាខាងក្រៅកំពុងមានភ្លៀងធ្លាក់ (អ្វីដែលលាក់កំបាំង)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">First-order logic</span></td>
+                <td>ជាទម្រង់នៃការសរសេរកូដបែបគណិតវិទ្យានិងតក្កវិទ្យា ដើម្បីបំប្លែងប្រយោគភាសាធម្មជាតិទៅជារចនាសម្ព័ន្ធច្បាស់លាស់មួយដែលកុំព្យូទ័រអាចយល់ និងទាញយកហេតុផលបាន ដោយកំណត់យ៉ាងច្បាស់ពីវត្ថុនិងទំនាក់ទំនងរវាងវត្ថុទាំងនោះ។</td>
+                <td>ដូចជាការបំប្លែងប្រយោគ "សុខវាយចៅ" ទៅជារូបមន្តគណិតវិទ្យា វាយ(សុខ, ចៅ) ដើម្បីឱ្យម៉ាស៊ីនងាយស្រួលគណនា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi algorithm</span></td>
+                <td>គឺជាក្បួនដោះស្រាយ (Algorithm) គណិតវិទ្យាដែលជួយស្វែងរកផ្លូវ ឬលំដាប់លំដោយនៃព្រឹត្តិការណ៍ដែលទំនងជាត្រឹមត្រូវបំផុត ក្នុងចំណោមជម្រើសរាប់ពាន់ម៉ឺនដែលមាននៅក្នុងម៉ូដែល HMM ដូចជាការរកមើលស៊ុមរូបភាពដែលត្រូវគ្នានឹងសកម្មភាពបំផុត។</td>
+                <td>ដូចជាការប្រើកម្មវិធី Google Maps ដើម្បីរកមើលផ្លូវដែលលឿន និងល្អបំផុតក្នុងចំណោមផ្លូវវាងរាប់រយខ្សែកំឡុងពេលស្ទះចរាចរណ៍។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Object tracker</span></td>
+                <td>គឺជាប្រព័ន្ធកុំព្យូទ័រដែលវិភាគលើវីដេអូដើម្បីធ្វើការតាមដានទីតាំងនិងចលនារបស់វត្ថុឬមនុស្សណាមួយដោយស្វ័យប្រវត្តិ ពីស៊ុមវីដេអូមួយទៅស៊ុមវីដេអូមួយទៀតជាបន្តបន្ទាប់។</td>
+                <td>ដូចជាភ្នែករបស់យើងដែលសម្លឹងតាមមើលចលនារបស់បាល់មិនដាក់ភ្នែកពេលកំពុងទស្សនាការប្រកួតបាល់ទាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pronoun Anaphora</span></td>
+                <td>ជាបាតុភូតក្នុងភាសាដែលសព្វនាមមួយ (ដូចជា វា, គាត់, គេ) ត្រូវបានប្រើដើម្បីជំនួសឱ្យនាមដែលបានលើកឡើងពីមុន ប៉ុន្តែវាអាចបង្កើតភាពស្រពិចស្រពិលប្រសិនបើមាននាមច្រើននៅពីមុខ។</td>
+                <td>ដូចជាពេលនិយាយថា "ប៉ាបានទិញនំឱ្យកូន តែគាត់បានញ៉ាំវាបាត់ហើយ" ពាក្យ "គាត់" អាចមានន័យថាប៉ា ឬកូន (ទាល់តែដឹងបរិបទសិន)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bipartite graph</span></td>
+                <td>ជារចនាសម្ព័ន្ធបណ្តាញដែលចែកថ្នាំង (Nodes) ជាពីរក្រុមដាច់ពីគ្នា ដែលថ្នាំងក្នុងក្រុมนីមួយៗមិនអាចភ្ជាប់គ្នាឯងបានទេ តែត្រូវភ្ជាប់ឆ្លងទៅក្រុមមួយទៀត ដូចជាការភ្ជាប់ពាក្យកិរិយាសព្ទ (ក្រុមទី១) ទៅនឹងតួអង្គក្នុងវីដេអូ (ក្រុមទី២) ជាដើម។</td>
+                <td>ដូចជាការគូសខ្សែផ្គូផ្គងរវាងក្រុមសិស្ស (ក្រុម១) និងក្រុមមុខវិជ្ជា (ក្រុម២) ដោយសិស្សម្នាក់ៗត្រូវជ្រើសរើសមុខវិជ្ជា តែសិស្សមិនអាចផ្គូផ្គងជាមួយសិស្សដូចគ្នាបានទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=visually+grounded+language+acquisition" target="_blank" rel="noopener"><span class="en">visually grounded language acquisition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multimodal+coreference+resolution" target="_blank" rel="noopener"><span class="en">multimodal coreference resolution</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=video+captioning+and+grounding" target="_blank" rel="noopener"><span class="en">video captioning and grounding</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=compositional+visual-semantic+models" target="_blank" rel="noopener"><span class="en">compositional visual-semantic models</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរកឃើញគល់ឈើដោយផ្អែកលើរូបភាពដែលអាចមើលឃើញ និងរូបភាពកម្ដៅជាមួយនឹងការរៀនស៊ីជម្រៅ (Deep Learning) សម្រាប់មនុស្សយន្តចល័តក្នុងវិស័យព្រៃឈើ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការគ្រប់គ្រងបញ្ជីសារពើភណ្ឌព្រៃឈើ និងការរុករកដោយស្វ័យប្រវត្តិរបស់យានយន្ត ដោយផ្តោតលើការស្រាវជ្រាវស្វែងរកគល់ឈើនៅកម្រិតដីដោយប្រើប្រាស់មនុស...">
+    
+    <meta name="keywords" content="deep learning, forest mobile robotics, object detection, thermal imaging, YOLOv4, SSD, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/visible-thermal-trunk-detection-deep-learning-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/visible-thermal-trunk-detection-deep-learning-2021.html">
+    <meta property="og:title" content="ការរកឃើញគល់ឈើដោយផ្អែកលើរូបភាពដែលអាចមើលឃើញ និងរូបភាពកម្ដៅជាមួយនឹងការរៀនស៊ីជម្រៅ (Deep Learning) សម្រាប់មនុស្សយន្តចល័តក្នុងវិស័យព្រៃឈើ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការគ្រប់គ្រងបញ្ជីសារពើភណ្ឌព្រៃឈើ និងការរុករកដោយស្វ័យប្រវត្តិរបស់យានយន្ត ដោយផ្តោតលើការស្រាវជ្រាវស្វែងរកគល់ឈើនៅកម្រិតដីដោយប្រើប្រាស់មនុស្សយន្តចល័ត (Mobile Robotics) នៅក្នុងតំបន់ព្រៃឈើ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2021 Journal of Imaging">
+    
+    <meta property="article:tag" content="deep learning">
+    
+    <meta property="article:tag" content="forest mobile robotics">
+    
+    <meta property="article:tag" content="object detection">
+    
+    <meta property="article:tag" content="thermal imaging">
+    
+    <meta property="article:tag" content="YOLOv4">
+    
+    <meta property="article:tag" content="SSD">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរកឃើញគល់ឈើដោយផ្អែកលើរូបភាពដែលអាចមើលឃើញ និងរូបភាពកម្ដៅជាមួយនឹងការរៀនស៊ីជម្រៅ (Deep Learning) សម្រាប់មនុស្សយន្តចល័តក្នុងវិស័យព្រៃឈើ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការគ្រប់គ្រងបញ្ជីសារពើភណ្ឌព្រៃឈើ និងការរុករកដោយស្វ័យប្រវត្តិរបស់យានយន្ត ដោយផ្តោតលើការស្រាវជ្រាវស្វែងរកគល់ឈើនៅកម្រិតដីដោយប្រើប្រាស់មនុស្សយន្តចល័ត (Mobile Robotics) នៅក្នុងតំបន់ព្រៃឈើ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1782\u179b\u17cb\u1788\u17be\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179a\u17bc\u1794\u1797\u17b6\u1796\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1798\u17be\u179b\u1783\u17be\u1789 \u1793\u17b7\u1784\u179a\u17bc\u1794\u1797\u17b6\u1796\u1780\u1798\u17d2\u178a\u17c5\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep Learning) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f\u1785\u179b\u17d0\u178f\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u179f\u17d0\u1799\u1796\u17d2\u179a\u17c3\u1788\u17be",
+      "name": "Visible and Thermal Image-Based Trunk Detection with Deep Learning for Forestry Mobile Robotics",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1794\u1789\u17d2\u1787\u17b8\u179f\u17b6\u179a\u1796\u17be\u1797\u178e\u17d2\u178c\u1796\u17d2\u179a\u17c3\u1788\u17be \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u17bb\u1780\u179a\u1780\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179a\u1794\u179f\u17cb\u1799\u17b6\u1793\u1799\u1793\u17d2\u178f \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1782\u179b\u17cb\u1788\u17be\u1793\u17c5\u1780\u1798\u17d2\u179a\u17b7\u178f\u178a\u17b8\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f\u1785\u179b\u17d0\u178f (Mobile Robotics) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u178f\u17c6\u1794\u1793\u17cb\u1796\u17d2\u179a\u17c3\u1788\u17be\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/visible-thermal-trunk-detection-deep-learning-2021.html",
+      "author": [{"@type": "Person", "name": "Daniel Queir\u00f3s da Silva (INESC TEC; UTAD)"},{"@type": "Person", "name": "Filipe Neves dos Santos (INESC TEC)"},{"@type": "Person", "name": "Armando Jorge Sousa (INESC TEC; FEUP)"},{"@type": "Person", "name": "V\u00edtor Filipe (INESC TEC; UTAD)"}],
+      "datePublished": "2021 Journal of Imaging",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Visible and Thermal Image-Based Trunk Detection with Deep Learning for Forestry Mobile Robotics",
+        "url": "https://doi.org/10.3390/jimaging7090176"
+      },
+      "keywords": ["deep learning", "forest mobile robotics", "object detection", "thermal imaging", "YOLOv4", "SSD"],
+      "about": "Robotics and Computer Vision"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1782\u179b\u17cb\u1788\u17be\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179a\u17bc\u1794\u1797\u17b6\u1796\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1798\u17be\u179b\u1783\u17be\u1789 \u1793\u17b7\u1784\u179a\u17bc\u1794\u1797\u17b6\u1796\u1780\u1798\u17d2\u178a\u17c5\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep Learning) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f\u1785\u179b\u17d0\u178f\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u179f\u17d0\u1799\u1796\u17d2\u179a\u17c3\u1788\u17be",
+          "item": "https://khmerresearch.com/papers/technology/visible-thermal-trunk-detection-deep-learning-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរកឃើញគល់ឈើដោយផ្អែកលើរូបភាពដែលអាចមើលឃើញ និងរូបភាពកម្ដៅជ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Visible and Thermal Image-Based Trunk Detection with Deep Learning for Forestry Mobile Robotics<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/jimaging7090176" target="_blank">doi.org/10.3390/jimaging7090176</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរកឃើញគល់ឈើដោយផ្អែកលើរូបភាពដែលអាចមើលឃើញ និងរូបភាពកម្ដៅជាមួយនឹងការរៀនស៊ីជម្រៅ (Deep Learning) សម្រាប់មនុស្សយន្តចល័តក្នុងវិស័យព្រៃឈើ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Visible and Thermal Image-Based Trunk Detection with Deep Learning for Forestry Mobile Robotics</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Daniel Queirós da Silva (INESC TEC; UTAD), Filipe Neves dos Santos (INESC TEC), Armando Jorge Sousa (INESC TEC; FEUP), Vítor Filipe (INESC TEC; UTAD)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021 Journal of Imaging</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Robotics and Computer Vision</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការគ្រប់គ្រងបញ្ជីសារពើភណ្ឌព្រៃឈើ និងការរុករកដោយស្វ័យប្រវត្តិរបស់យានយន្ត ដោយផ្តោតលើការស្រាវជ្រាវស្វែងរកគល់ឈើនៅកម្រិតដីដោយប្រើប្រាស់មនុស្សយន្តចល័ត (Mobile Robotics) នៅក្នុងតំបន់ព្រៃឈើ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានបង្កើតសំណុំទិន្នន័យរូបភាពព្រៃឈើដែលប្រមូលបានដោយផ្ទាល់ និងបានប្រើប្រាស់ក្បួនដោះស្រាយការរៀនស៊ីជម្រៅ (Deep Learning) ជាច្រើន ដើម្បីធ្វើការប្រៀបធៀបប្រសិទ្ធភាពក្នុងការរកឃើញ។
+        
+        <ul>
+            
+            <li>ការប្រមូល និងបង្កើតសំណុំទិន្នន័យរូបភាព (Dataset Creation) ចំនួន ២៨៩៥ រូបភាព ដែលមានទាំងរូបភាពកម្ដៅ (Thermal Images) និងរូបភាពដែលអាចមើលឃើញ (Visible Images) ពីកាមេរ៉ាចំនួន៤ផ្សេងគ្នា។</li>
+            
+            <li>ការបន្ថែមទិន្នន័យ (Data Augmentation) ដូចជា ការបង្វិលរូបភាព និងការផ្លាស់ប្តូរពន្លឺ ដើម្បីបង្កើនចំនួនទិន្នន័យសម្រាប់ការបង្ហាត់ដល់ ២៤,២១០ រូបភាព។</li>
+            
+            <li>ការបង្ហាត់ម៉ូដែលរៀនស៊ីជម្រៅ (Deep Learning Models Training) រួមមានម៉ូដែលដូចជា SSD MobileNetV2, SSD Inception-v2, SSD ResNet50, SSDLite MobileDet និង YOLOv4 Tiny។</li>
+            
+            <li>ការវាយតម្លៃប្រសិទ្ធភាព (Performance Evaluation) ដោយប្រើប្រាស់រង្វាស់ AP (Average Precision), ពិន្ទុ F1 (F1 Score) និងពេលវេលាដំណើរការ (Inference Time) នៅលើ CPU និង GPU។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល YOLOv4 Tiny ទទួលបានលទ្ធផលល្អបំផុត ដោយមានភាពត្រឹមត្រូវកម្រិតមធ្យម (AP) ៩០% និងពិន្ទុ F1 ៨៩% ព្រមទាំងមានល្បឿនលឿនបំផុតត្រឹមតែ ៨ មិល្លីវិនាទី (8 ms) នៅលើ GPU។</li>
+            
+            <li>ការរកឃើញគល់ឈើនៅក្នុងរូបភាពកម្ដៅ (Thermal Images) អាចធ្វើទៅបានជាមួយនឹងកម្រិតភាពត្រឹមត្រូវខ្ពស់ ដែលអនុញ្ញាតឱ្យមនុស្សយន្តអាចធ្វើប្រតិបត្តិការនៅពេលយប់បានប្រកបដោយសុវត្ថិភាព។</li>
+            
+            <li>ម៉ូដែល SSD Inception-v2 និង SSD MobileNetV2 បង្ហាញពីស្ថិរភាពខ្ពស់បំផុតនៅពេលដែលកម្រិតទំនុកចិត្ត (Confidence Level) ត្រូវបានបង្កើន បើទោះបីជាលទ្ធផលរួមទាបជាង YOLOv4 បន្តិចក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">YOLOv4 Tiny</span></strong><br>ការរកឃើញវត្ថុតាមរចនាសម្ព័ន្ធ YOLOv4 Tiny (You Only Look Once)</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវខ្ពស់បំផុត និងមានល្បឿនលឿនខ្លាំងសម្រាប់ការប្រើប្រាស់លើ GPU ស័ក្តិសមបំផុតសម្រាប់ប្រព័ន្ធដំណើរការផ្ទាល់ (Real-time)។</td>
+                <td>ប្រសិទ្ធភាពធ្លាក់ចុះនៅពេលដែលកម្រិតទំនុកចិត្ត (Confidence Threshold) ត្រូវបានកំណត់ខ្ពស់ ដែលតម្រូវឱ្យមានការថ្លឹងថ្លែងឱ្យបានច្បាស់លាស់។</td>
+                <td>ទទួលបានលទ្ធផលល្អបំផុតគឺ AP 89.84% និង F1 89.37% ដោយប្រើពេលតែ 9ms ប៉ុណ្ណោះលើ GPU។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SSD MobileNetV2</span></strong><br>បណ្តាញសរសៃប្រសាទ MobileNetV2 ជាមួយបច្ចេកទេស SSD</td>
+                <td>មានល្បឿនលឿនបំផុតនៅលើ CPU និងមានស្ថិរភាពខ្ពស់ទោះបីជាដំឡើងកម្រិតទំនុកចិត្តខ្ពស់ក៏ដោយ។</td>
+                <td>ភាពត្រឹមត្រូវមានកម្រិតទាប បើប្រៀបធៀបជាមួយ YOLO មិនសូវស័ក្តិសមសម្រាប់ការងារដែលទាមទារភាពសុក្រឹតខ្ពស់ខ្លាំង។</td>
+                <td>សម្រេចបាន AP 72.68% តែមានល្បឿនលឿនលើ CPU (58ms ក្នុងមួយរូបភាព)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SSD ResNet50</span></strong><br>បណ្តាញសរសៃប្រសាទ ResNet50 ជាមួយបច្ចេកទេស SSD</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវមធ្យមគួរសម ល្អជាង MobileNetV2 ក្នុងការទាញយកលក្ខណៈពិសេសនៃរូបភាពសាំញ៉ាំ។</td>
+                <td>យឺតជាងគេបំផុតក្នុងការវាយតម្លៃ ទាមទារអង្គចងចាំធំ និងធ្លាក់ចុះគុណភាពខ្លាំងនៅពេលបន្ថែមទំនុកចិត្តខ្ពស់។</td>
+                <td>សម្រេចបាន AP 78.19% និង F1 84.75% ប៉ុន្តែយឺតខ្លាំងលើ CPU (1789ms) និង GPU (50ms)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SSD Inception-v2</span></strong><br>បណ្តាញសរសៃប្រសាទ Inception-v2 ជាមួយបច្ចេកទេស SSD</td>
+                <td>មានស្ថិរភាពខ្ពស់ជាងគេបំផុត ធ្លាក់ចុះឥទ្ធិពលតិចតួចបំផុតទោះបីជាបង្កើនកម្រិតទំនុកចិត្តខ្ពស់រហូតដល់ ៩៥% ក៏ដោយ។</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវកម្រិតមធ្យម មិនទាន់អាចប្រកួតប្រជែងជាមួយ YOLOv4 បានទេទាក់ទងនឹងភាពសុក្រឹតសរុប។</td>
+                <td>ទម្លាក់កម្រិត AP ត្រឹមតែ 9.13% ទេនៅពេលដំឡើងកម្រិតទំនុកចិត្តដល់ ៩៥% ដោយរក្សាបាន AP ជាមធ្យម 75.29%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SSDLite MobileDet</span></strong><br>ម៉ូដែលទម្ងន់ស្រាល SSDLite MobileDet សម្រាប់ឧបករណ៍ចល័ត</td>
+                <td>ស៊ីទំហំផ្ទុកតិច និងត្រូវបានរចនាឡើងពិសេសសម្រាប់ឧបករណ៍ដែលមានថាមពលទាបបំផុត។</td>
+                <td>ទទួលបានលទ្ធផលអន់ជាងគេបំផុត ទាំងកម្រិតភាពត្រឹមត្រូវ (AP) និងពិន្ទុ F1។</td>
+                <td>ទទួលបានលទ្ធផលទាបបំផុតគឺ AP 68.08% និងពិន្ទុ F1 73.53%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបានបញ្ជាក់យ៉ាងច្បាស់អំពីតម្រូវការផ្នែករឹង និងផ្នែកទន់ ដោយប្រើប្រាស់ប្រព័ន្ធ Cloud ដើម្បីទូទាត់សងជាមួយធនធានផ្ទាល់ខ្លួនដែលមានកំណត់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រយួរដៃ (Intel i7 4x2.40 GHz, 4GB RAM) សម្រាប់ការវាស់ស្ទង់លើ CPU និងប្រើប្រាស់ NVIDIA Tesla T4 GPU (12GB) លើប្រព័ន្ធ Cloud សម្រាប់ការបង្ហាត់ម៉ូដែល។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ TensorFlow Object Detection API សម្រាប់ម៉ូដែលត្រកូល SSD, កម្មវិធី Darknet សម្រាប់បង្ហាត់ YOLOv4, និង Google Colaboratory សម្រាប់ផ្តល់បរិស្ថានកុំព្យូទ័រ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យរូបភាពចំនួន ២៨៩៥ ប្លង់ (មើលឃើញ និងកម្ដៅ) ថតដោយកាមេរ៉ា ៤ ប្រភេទផ្សេងគ្នា និងបានពង្រីក (Data Augmentation) ដល់ ២៤,២១០ រូបភាព។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការចំណេះដឹងផ្នែកកុំព្យូទ័រចក្ខុ (Computer Vision), ការគូសចំណាំទិន្នន័យ (Data Annotation ជាមួយ CVAT) និងការប្រើប្រាស់បណ្ណាល័យ Deep Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងតំបន់ព្រៃឈើនៃប្រទេសព័រទុយហ្គាល់ ដោយផ្តោតលើប្រភេទដើមប្រេងខ្យល់ និងដើមស្រល់។ នេះមានន័យថា សំណុំទិន្នន័យមិនឆ្លុះបញ្ចាំងពីលក្ខខណ្ឌអាកាសធាតុ កម្រិតពន្លឺ និងរុក្ខជាតិក្នុងតំបន់ត្រូពិកឡើយ។ សម្រាប់ប្រទេសកម្ពុជា ម៉ូដែលទាំងនេះចាំបាច់ត្រូវតែបង្ហាត់ឡើងវិញ (Retrain) ជាមួយប្រភេទដើមឈើក្នុងស្រុក (ដូចជា ដើមកៅស៊ូ ស្វាយចន្ទី ឬម៉ៃសាក់) ទើបអាចធានាបាននូវប្រសិទ្ធភាពខ្ពស់ក្នុងការប្រើប្រាស់ជាក់ស្តែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់សម្រាប់ការអនុវត្តក្នុងវិស័យកសិកម្ម-ឧស្សាហកម្ម និងការអភិរក្សព្រៃឈើនៅប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិ-ឧស្សាហកម្មកៅស៊ូ (ខេត្តកំពង់ចាម ត្បូងឃ្មុំ មណ្ឌលគិរី):</strong> បច្ចេកវិទ្យានេះអាចបំពាក់លើមនុស្សយន្ត UGV ដើម្បីស្វែងរកគល់កៅស៊ូដោយស្វ័យប្រវត្តិ ដែលជាមូលដ្ឋានគ្រឹះឈានទៅរកការបង្កើតមនុស្សយន្តចៀរកៅស៊ូដោយមិនបាច់ប្រើមនុស្ស។</li>
+            
+            <li><strong>ចំការស្វាយចន្ទី និងស្វាយ (ខេត្តកំពង់ធំ ក្រចេះ):</strong> គាំទ្រដល់មនុស្សយន្តកសិកម្មក្នុងការធ្វើដំណើរដោយខ្លួនឯង (Autonomous Navigation) ចៀសវាងការបុកដើមឈើ និងជួយរាប់ចំនួនដើមឈើដើម្បីប៉ាន់ស្មានទិន្នផលបានលឿន។</li>
+            
+            <li><strong>ការល្បាត និងអភិរក្សព្រៃឈើ (តំបន់ព្រៃឡង់ និងជួរភ្នំក្រវាញ):</strong> ការប្រើប្រាស់រូបភាពកម្ដៅ (Thermal Images) ដើម្បីសម្គាល់ឧបសគ្គ ឬរថយន្តកែច្នៃរបស់ជនល្មើសក្នុងព្រៃនៅពេលយប់ ដោយអាចបំពាក់កាមេរ៉ាលើ Drone ឬរថយន្តល្បាតដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ul>
+        
+        
+        <p>ការរួមបញ្ចូលប្រព័ន្ធកាមេរ៉ាកម្ដៅ និងម៉ូដែលរៀនស៊ីជម្រៅនេះ នឹងជួយកម្ពុជាផ្លាស់ប្តូរពីកសិកម្មពលកម្មប្រពៃណី ទៅជាកសិកម្មឆ្លាតវៃដែលប្រើប្រាស់មនុស្សយន្តកម្រិតខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ ការប្រមូល និងចំណាំទិន្នន័យរូបភាព (Data Collection & Annotation):</strong> ថតរូបភាពគល់ឈើ (ឧទាហរណ៍ ដើមកៅស៊ូ) នៅចំការក្នុងស្រុកឱ្យបានយ៉ាងហោចណាស់ ១០០០សន្លឹក រួចប្រើប្រាស់កម្មវិធីសូហ្វវែរអនឡាញដូចជា <span class="en">CVAT</span> ឬ <span class="en">Roboflow</span> ដើម្បីគូសប្រអប់ចំណាំ (Bounding Box) ជុំវិញគល់ឈើនីមួយៗ។</li>
+            
+            <li><strong>ជំហានទី២៖ ការពង្រីកចំនួនទិន្នន័យ (Data Augmentation):</strong> សរសេរកូដ Python ដោយប្រើបណ្ណាល័យ <span class="en">Albumentations</span> ដើម្បីបង្កើតរូបភាពថ្មីៗពីទិន្នន័យដើម តាមរយៈការបង្វិលរូបភាព ផ្លាស់ប្តូរកម្រិតពន្លឺ (Brightness) និងការបន្ថែមគ្រាប់អុជ Noise ដើម្បិឱ្យម៉ូដែលស៊ាំនឹងកម្រិតពន្លឺព្រៃក្នុងប្រទេសកម្ពុជា។</li>
+            
+            <li><strong>ជំហានទី៣៖ ការបង្ហាត់ម៉ូដែលរៀនស៊ីជម្រៅ (Model Training):</strong> ជ្រើសរើសប្រើប្រាស់ម៉ូដែល <span class="en">YOLOv8</span> (ជំនាន់ថ្មី និងងាយស្រួលជាង YOLOv4 Tiny) ដោយដំណើរការវានៅលើ <span class="en">Google Colab</span> ដើម្បីទទួលបានការប្រើប្រាស់ GPU ដោយឥតគិតថ្លៃ និងសន្សំសំចៃថវិកា។</li>
+            
+            <li><strong>ជំហានទី៤៖ ការវាយតម្លៃម៉ូដែល (Model Evaluation):</strong> ប្រើប្រាស់ទិន្នន័យសាកល្បង (Test Set) ដើម្បីវាស់ស្ទង់ប្រសិទ្ធភាព ដោយតាមដានសូចនាករ mAP និងកំណត់កម្រិតទំនុកចិត្ត (Confidence Threshold) ប្រហែល ៥០% ទៅ ៦០% ក្នុងកូដ Python របស់អ្នក ដើម្បីរក្សាតុល្យភាពល្អរវាងការរកឃើញ និងភាពត្រឹមត្រូវ។</li>
+            
+            <li><strong>ជំហានទី៥៖ ការដាក់ឱ្យដំណើរការលើ Hardware ខ្នាតតូច (Edge Deployment):</strong> បំប្លែង (Export) ម៉ូដែលដែលបង្ហាត់រួចទៅជាទម្រង់ <span class="en">TensorFlow Lite</span> ឬ <span class="en">ONNX</span> ដើម្បីកាត់បន្ថយទំហំ បន្ទាប់មកដំឡើងវាទៅក្នុងប្រព័ន្ធកុំព្យូទ័រខ្នាតតូចដូចជា <span class="en">Raspberry Pi 4</span> ឬ <span class="en">NVIDIA Jetson Nano</span> ដែលតភ្ជាប់ជាមួយកាមេរ៉ាដើម្បីដាក់លើមនុស្សយន្តសាកល្បង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Network (CNN)</span></td>
+                <td>ជាប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតដែលត្រូវបានរចនាឡើងយ៉ាងពិសេសសម្រាប់វិភាគ និងសម្គាល់រូបភាព ដោយវាដំណើរការត្រងយកលក្ខណៈពិសេសៗរបស់រូបភាពមួយតាំងពីកម្រិតបន្ទាត់ គែម ទម្រង់រហូតដល់ពណ៌របស់វត្ថុ។</td>
+                <td>ដូចជាភ្នែក និងខួរក្បាលរបស់មនុស្សដែលសម្លឹងមើលទៅបំណែករាងកាយនីមួយៗ រួចផ្តុំគ្នាដើម្បីសម្គាល់ថានោះគឺជាមនុស្ស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Single-Shot Detector (SSD)</span></td>
+                <td>ជាក្បួនដោះស្រាយក្នុងការរកឃើញវត្ថុ ដែលដំណើរការស្កេនរូបភាពទាំងមូលតែម្តងគត់ (Single pass) ដើម្បីកំណត់ទីតាំង និងប្រភេទវត្ថុក្នុងពេលតែមួយ ដែលធ្វើឱ្យវាមានល្បឿនលឿនសម្រាប់ប្រតិបត្តិការភ្លាមៗ។</td>
+                <td>ដូចជាការសម្លឹងមើលទិដ្ឋភាពក្នុងបន្ទប់ទាំងមូលក្នុងមួយព្រិចភ្នែក ហើយអាចប្រាប់បានភ្លាមៗថានរណាអង្គុយនៅឯណា ដោយមិនបាច់សម្លឹងមើលស្វែងរកម្ដងម្នាក់ៗនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Intersection over Union (IoU)</span></td>
+                <td>ជារង្វាស់គណិតវិទ្យាសម្រាប់វាយតម្លៃភាពសុក្រឹតនៃការរកឃើញវត្ថុ ដោយវាធ្វើការប្រៀបធៀបផ្ទៃត្រួតស៊ីគ្នារវាងប្រអប់ទីតាំងដែលកុំព្យូទ័រទាយ (Predicted Box) និងប្រអប់ទីតាំងពិតប្រាកដដែលមនុស្សបានគូសចំណាំ (Ground-truth Box)។</td>
+                <td>ដូចជាការគូសរង្វង់ពីរ មួយជាផ្ទាំងស៊ីបពិតប្រាកដ និងមួយទៀតជាកន្លែងដែលអ្នកគប់ត្រូវ បើវានៅត្រួតស៊ីគ្នាជិត ១០០% មានន័យថាអ្នកគប់បានចំគោលដៅល្អបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Non-Maximum Suppression (NMS)</span></td>
+                <td>ជាបច្ចេកទេសច្រោះយកតែលទ្ធផលល្អបំផុត ដោយលុបចោលនូវប្រអប់ទីតាំងស្ទួនៗគ្នាជាច្រើនដែលកុំព្យូទ័របានគូសជុំវិញវត្ថុតែមួយ ដោយរក្សាទុកតែប្រអប់មួយដែលមានពិន្ទុទំនុកចិត្ត (Confidence Score) ខ្ពស់ជាងគេ។</td>
+                <td>ដូចជាការថតរូបសន្លឹកមនុស្សម្នាក់ច្រើនប៉ុស្តិ៍ក្នុងពេលតែមួយ ហើយយើងរើសយកតែរូបមួយណាដែលច្បាស់ជាងគេបំផុត រួចលុបរូបផ្សេងៗទៀតចោលដើម្បីកុំឱ្យជាន់គ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>ជាវិធីសាស្ត្រយកចំណេះដឹងពីម៉ូដែលដែលត្រូវបានបង្ហាត់រួចរាល់លើទិន្នន័យរាប់លាន (ដូចជាសំណុំទិន្នន័យ COCO) មកប្រើប្រាស់ជាគ្រឹះដើម្បីបង្ហាត់បន្តលើកិច្ចការថ្មីមួយទៀត (ដូចជារកគល់ឈើ) ដើម្បីចំណេញពេលវេលា និងមិនត្រូវការទិន្នន័យច្រើន។</td>
+                <td>ដូចជាអ្នកដែលចេះជិះកង់ស្ទាត់ជំនាញរួចហើយ ពេលប្តូរមកហាត់ជិះម៉ូតូ អ្នកនោះនឹងឆាប់ចេះជាងអ្នកដែលមិនធ្លាប់ចេះជិះអ្វីសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Augmentation</span></td>
+                <td>ជាបច្ចេកទេសពង្រីកចំនួនទិន្នន័យសម្រាប់បង្ហាត់កុំព្យូទ័រ តាមរយៈការយកទិន្នន័យរូបភាពដើមមកកែច្នៃបន្ថែម ដូចជាការបង្វិល ត្រឡប់ ផ្លាស់ប្តូរពន្លឺ ឬបន្ថែមចំណុចព្រិល ដើម្បីឱ្យកុំព្យូទ័រស៊ាំនឹងការប្រែប្រួលផ្សេងៗក្នុងបរិស្ថានពិត។</td>
+                <td>ដូចជាការឱ្យក្មេងមើលរូបថតសត្វឆ្កែតែមួយក្បាល ក្នុងទិដ្ឋភាពផ្ងារកាឡាប់ ងងឹត និងព្រិល ដើម្បីឱ្យក្មេងនោះអាចចំណាំសត្វឆ្កែបានទោះបីជានៅក្នុងស្ថានភាពណាក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Average Precision (AP)</span></td>
+                <td>ជាសូចនាករសង្ខេបដែលវាយតម្លៃសមត្ថភាពរួមរបស់ម៉ូដែលក្នុងការរកឃើញវត្ថុ ដោយវាគណនាមធ្យមភាគនៃភាពត្រឹមត្រូវ (Precision) និងសមត្ថភាពរកឃើញកុំឱ្យចន្លោះ (Recall) បញ្ចូលគ្នាទៅជាតម្លៃតែមួយ។</td>
+                <td>ដូចជាពិន្ទុមធ្យមសរុបប្រចាំឆ្នាំរបស់សិស្ស ដែលឆ្លុះបញ្ចាំងពីសមត្ថភាពរៀនសូត្ររបស់គេលើគ្រប់មុខវិជ្ជា និងរាល់ការប្រឡងទាំងអស់បញ្ចូលគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bounding Box</span></td>
+                <td>ជាប្រអប់រាងចតុកោណកែងដែលក្បួនដោះស្រាយកុំព្យូទ័រគូសបញ្ជាក់ទីតាំង និងទំហំរបស់វត្ថុគោលដៅនៅក្នុងរូបភាព ដើម្បីបង្ហាញថាវត្ថុដែលវាស្រាវជ្រាវរកឃើញនោះស្ថិតនៅត្រង់ចំណុចណាពិតប្រាកដ។</td>
+                <td>ដូចជាការយកប៊ិចពណ៌ទៅគូសរង្វង់ព័ទ្ធជុំវិញមុខរបស់មិត្តភក្តិក្នុងសន្លឹករូបថតរួមគ្នា ដើម្បីចង្អុលប្រាប់អ្នកដទៃថាគាត់ឈរនៅត្រង់ណា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=autonomous+navigation+in+unstructured+forest+environments" target="_blank" rel="noopener"><span class="en">autonomous navigation in unstructured forest environments</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+based+obstacle+avoidance+for+ground+vehicles" target="_blank" rel="noopener"><span class="en">deep learning based obstacle avoidance for ground vehicles</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multispectral+and+thermal+imaging+datasets+for+forestry" target="_blank" rel="noopener"><span class="en">multispectral and thermal imaging datasets for forestry</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=quantization-aware+training+for+edge+device+object+detection" target="_blank" rel="noopener"><span class="en">quantization-aware training for edge device object detection</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

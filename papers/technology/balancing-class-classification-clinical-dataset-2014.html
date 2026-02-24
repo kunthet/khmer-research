@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើឱ្យមានតុល្យភាពចំណាត់ថ្នាក់សម្រាប់ប្រសិទ្ធភាពនៃការធ្វើចំណាត់ថ្នាក់ជាមួយនឹងសំណុំទិន្នន័យគ្លីនិក | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបែងចែកចំណាត់ថ្នាក់ទិន្នន័យដែលគ្មានតុល្យភាព (Imbalanced class distribution) នៅក្នុងសំណុំទិន្នន័យគ្លីនិក ដែលក្បួនដោះស្រាយចំណាត់ថ្នាក់...">
+    
+    <meta name="keywords" content="Class balancing, Data sampling, Clinical data, Recall, SMOTE, Under-sampling, Machine learning, Missing values imputation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/balancing-class-classification-clinical-dataset-2014.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/balancing-class-classification-clinical-dataset-2014.html">
+    <meta property="og:title" content="ការធ្វើឱ្យមានតុល្យភាពចំណាត់ថ្នាក់សម្រាប់ប្រសិទ្ធភាពនៃការធ្វើចំណាត់ថ្នាក់ជាមួយនឹងសំណុំទិន្នន័យគ្លីនិក | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបែងចែកចំណាត់ថ្នាក់ទិន្នន័យដែលគ្មានតុល្យភាព (Imbalanced class distribution) នៅក្នុងសំណុំទិន្នន័យគ្លីនិក ដែលក្បួនដោះស្រាយចំណាត់ថ្នាក់ (Classification algorithms) តែងតែមានភាព...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2014, Proceedings of the World Congress on Engineering (WCE)">
+    
+    <meta property="article:tag" content="Class balancing">
+    
+    <meta property="article:tag" content="Data sampling">
+    
+    <meta property="article:tag" content="Clinical data">
+    
+    <meta property="article:tag" content="Recall">
+    
+    <meta property="article:tag" content="SMOTE">
+    
+    <meta property="article:tag" content="Under-sampling">
+    
+    <meta property="article:tag" content="Machine learning">
+    
+    <meta property="article:tag" content="Missing values imputation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើឱ្យមានតុល្យភាពចំណាត់ថ្នាក់សម្រាប់ប្រសិទ្ធភាពនៃការធ្វើចំណាត់ថ្នាក់ជាមួយនឹងសំណុំទិន្នន័យគ្លីនិក">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបែងចែកចំណាត់ថ្នាក់ទិន្នន័យដែលគ្មានតុល្យភាព (Imbalanced class distribution) នៅក្នុងសំណុំទិន្នន័យគ្លីនិក ដែលក្បួនដោះស្រាយចំណាត់ថ្នាក់ (Classification algorithms) តែងតែមានភាព...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1782\u17d2\u179b\u17b8\u1793\u17b7\u1780",
+      "name": "Balancing Class for Performance of Classification with a Clinical Dataset",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u17c2\u1784\u1785\u17c2\u1780\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1782\u17d2\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796 (Imbalanced class distribution) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1782\u17d2\u179b\u17b8\u1793\u17b7\u1780 \u178a\u17c2\u179b\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb (Classification algorithms) \u178f\u17c2\u1784\u178f\u17c2\u1798\u17b6\u1793\u1797\u17b6\u1796\u179b\u17c6\u17a2\u17c0\u1784\u1791\u17c5\u179a\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793 \u1793\u17b7\u1784\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17c6\u17a0\u17bb\u179f\u1781\u17d2\u1796\u179f\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1797\u17b6\u1782\u178f\u17b7\u1785 (\u17a7\u1791\u17b6\u17a0\u179a\u178e\u17cd\u17d6 \u1780\u179a\u178e\u17b8\u17a2\u17d2\u1793\u1780\u1787\u17c6\u1784\u17ba\u179f\u17d2\u179b\u17b6\u1794\u17cb)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/balancing-class-classification-clinical-dataset-2014.html",
+      "author": [{"@type": "Person", "name": "N. Poolsawad (University of Hull)"},{"@type": "Person", "name": "C. Kambhampati (University of Hull)"},{"@type": "Person", "name": "J.G.F. Cleland (Hull York Medical School)"}],
+      "datePublished": "2014, Proceedings of the World Congress on Engineering (WCE)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Balancing Class for Performance of Classification with a Clinical Dataset",
+        "url": "https://www.researchgate.net/profile/Chandra-Kambhampati/publication/288795645_Balancing_Class_for_Performance_of_Classification_with_a_Clinical_Dataset/links/5818783108ae50812f5d9d64/Balancing-Class-for-Performance-of-Classification-with-a-Clinical-Dataset.pdf"
+      },
+      "keywords": ["Class balancing", "Data sampling", "Clinical data", "Recall", "SMOTE", "Under-sampling", "Machine learning", "Missing values imputation"],
+      "about": "Data Mining / Health Informatics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1782\u17d2\u179b\u17b8\u1793\u17b7\u1780",
+          "item": "https://khmerresearch.com/papers/technology/balancing-class-classification-clinical-dataset-2014.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើឱ្យមានតុល្យភាពចំណាត់ថ្នាក់សម្រាប់ប្រសិទ្ធភាពនៃការធ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Balancing Class for Performance of Classification with a Clinical Dataset<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Chandra-Kambhampati/publication/288795645_Balancing_Class_for_Performance_of_Classification_with_a_Clinical_Dataset/links/5818783108ae50812f5d9d64/Balancing-Class-for-Performance-of-Classification-with-a-Clinical-Dataset.pdf" target="_blank">researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើឱ្យមានតុល្យភាពចំណាត់ថ្នាក់សម្រាប់ប្រសិទ្ធភាពនៃការធ្វើចំណាត់ថ្នាក់ជាមួយនឹងសំណុំទិន្នន័យគ្លីនិក</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Balancing Class for Performance of Classification with a Clinical Dataset</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> N. Poolsawad (University of Hull), C. Kambhampati (University of Hull), J.G.F. Cleland (Hull York Medical School)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2014, Proceedings of the World Congress on Engineering (WCE)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Data Mining / Health Informatics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការបែងចែកចំណាត់ថ្នាក់ទិន្នន័យដែលគ្មានតុល្យភាព (Imbalanced class distribution) នៅក្នុងសំណុំទិន្នន័យគ្លីនិក ដែលក្បួនដោះស្រាយចំណាត់ថ្នាក់ (Classification algorithms) តែងតែមានភាពលំអៀងទៅរកទិន្នន័យភាគច្រើន និងធ្វើឱ្យមានកំហុសខ្ពស់ក្នុងការទស្សន៍ទាយទិន្នន័យភាគតិច (ឧទាហរណ៍៖ ករណីអ្នកជំងឺស្លាប់)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស៊ើបអង្កេត និងប្រៀបធៀបយុទ្ធសាស្រ្តនៃការយកគំរូទិន្នន័យ (Data sampling) ចំនួនពីរ ដើម្បីធ្វើឱ្យសំណុំទិន្នន័យគ្លីនិកមានតុល្យភាព មុននឹងអនុវត្តក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine learning classifiers)។
+        
+        <ul>
+            
+            <li>ការយកគំរូទិន្នន័យបន្ថែម (Over-sampling strategy) ដោយប្រើប្រាស់បច្ចេកទេសបង្កើតទិន្នន័យសិប្បនិម្មិត SMOTE</li>
+            
+            <li>ការកាត់បន្ថយគំរូទិន្នន័យភាគច្រើនផ្អែកលើចម្ងាយ (Distance-based random under-sampling)</li>
+            
+            <li>ការបំពេញទិន្នន័យដែលបាត់ (Missing values imputation) ដោយប្រើប្រាស់ SVM សម្រាប់សំណុំទិន្នន័យ LIFELAB</li>
+            
+            <li>ការវាយតម្លៃដោយប្រើប្រាស់ក្បួនដោះស្រាយចំណាត់ថ្នាក់ចំនួន៥ ដូចជា MLP, RBFN, SVM, DT, និង RF (Random Forest)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការធ្វើឱ្យមានតុល្យភាពទិន្នន័យជួយកែលម្អប្រសិទ្ធភាពនៃក្បួនដោះស្រាយចំណាត់ថ្នាក់យ៉ាងខ្លាំង ជាពិសេសបង្កើនអត្រានៃការរំលឹក (Recall rates) សម្រាប់ទិន្នន័យភាគតិច (ករណីអ្នកជំងឺស្លាប់) យ៉ាងកត់សម្គាល់។</li>
+            
+            <li>យុទ្ធសាស្រ្តកាត់បន្ថយគំរូទិន្នន័យ (Under-sampling) ផ្តល់នូវអត្រារំលឹក (Recall rates) ល្អជាងការយកគំរូទិន្នន័យបន្ថែម (Over-sampling) បន្តិចបន្តួច និងជួយកាត់បន្ថយអត្រាកំហុសនៃការទស្សន៍ទាយជារួមសម្រាប់ទិន្នន័យភាគតិច។</li>
+            
+            <li>ក្នុងចំណោមក្បួនដោះស្រាយទាំងអស់ ក្បួនដោះស្រាយ Random Forest (RF) ផ្តល់នូវភាពត្រឹមត្រូវ (Accuracy) ខ្ពស់ជាងគេបំផុត ជាមួយនឹងអត្រា Precision និង Recall លើសពី ៩០% សម្រាប់ទាំងពីរចំណាត់ថ្នាក់នៅលើទិន្នន័យហ្វឹកហាត់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Imbalanced Data Classification (Baseline)</span></strong><br>ការធ្វើចំណាត់ថ្នាក់លើទិន្នន័យគ្មានតុល្យភាព (ម៉ូដែលដើម)</td>
+                <td>មិនមានការកែប្រែ ឬបន្ថែមទិន្នន័យសិប្បនិម្មិត ដែលរក្សាបាននូវទម្រង់ដើមនៃទិន្នន័យ។</td>
+                <td>ម៉ូដែលរៀនសូត្រលំអៀងទៅរកទិន្នន័យភាគច្រើន (អ្នកជំងឺរស់) ធ្វើឱ្យមានកំហុសខ្ពស់ក្នុងការទស្សន៍ទាយទិន្នន័យភាគតិច (អ្នកជំងឺស្លាប់)។</td>
+                <td>ក្បួន Random Forest (RF) ផ្តល់អត្រា Recall ត្រឹមតែ ៥៦.៣% ប៉ុណ្ណោះសម្រាប់ចំណាត់ថ្នាក់អ្នកជំងឺ 'ស្លាប់'។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Over-sampling via SMOTE</span></strong><br>ការយកគំរូទិន្នន័យបន្ថែមតាមរយៈបច្ចេកទេស SMOTE</td>
+                <td>ជួយបង្កើនទិន្នន័យភាគតិចដោយមិនបាត់បង់ព័ត៌មានដើមនៃទិន្នន័យភាគច្រើន ធ្វើឱ្យម៉ូដែលរៀនបានកាន់តែល្អ។</td>
+                <td>ការបង្កើតទិន្នន័យសិប្បនិម្មិតច្រើនពេកអាចបណ្តាលឱ្យមានបញ្ហា Overfitting លើទិន្នន័យហ្វឹកហាត់។</td>
+                <td>ក្បួន Random Forest (RF) បង្កើនអត្រា Recall ដល់ ៧៩.៨% និង Precision ដល់ ៧៧.៦% សម្រាប់ចំណាត់ថ្នាក់អ្នកជំងឺ 'ស្លាប់'។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Distance-based random under-sampling</span></strong><br>ការកាត់បន្ថយគំរូទិន្នន័យដោយចៃដន្យផ្អែកលើចម្ងាយ</td>
+                <td>កាត់បន្ថយពេលវេលាក្នុងការហ្វឹកហាត់ម៉ូដែល និងផ្តល់អត្រា Recall (Sensitivity) ល្អជាងគេបន្តិចបន្តួចសម្រាប់ករណីភាគតិច។</td>
+                <td>អាចប្រឈមនឹងការបាត់បង់ទិន្នន័យ ឬព័ត៌មានសំខាន់ៗមួយចំនួនពីក្រុមទិន្នន័យភាគច្រើន។</td>
+                <td>ក្បួន Random Forest (RF) ផ្តល់អត្រា Recall ខ្ពស់បំផុតរហូតដល់ ៨២.៦% សម្រាប់ចំណាត់ថ្នាក់អ្នកជំងឺ 'ស្លាប់'។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារមិនបានបញ្ជាក់លម្អិតអំពីតម្រូវការផ្នែករឹង (Hardware) នោះទេ ប៉ុន្តែការអនុវត្តបច្ចេកទេសនេះទាមទារកម្មវិធីដែលអាចដំណើរការក្បួនដោះស្រាយ Machine Learning និងទំហំផ្ទុកគ្រប់គ្រាន់សម្រាប់សំណុំទិន្នន័យ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យគ្លីនិកជាក់ស្តែង (LIFELAB dataset) ដែលមានទំហំធំល្មម (១៩៤៤ សំណាក និង ៦០ អថេរ)។</li>
+        
+        <li><strong>Software:</strong> បណ្ណាល័យ ឬកម្មវិធីវិភាគទិន្នន័យ (ដូចជា Python រួមជាមួយ scikit-learn ឬ imbalanced-learn) សម្រាប់អនុវត្ត SMOTE, SVM Imputation និង Random Forest។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកវិទ្យាសាស្រ្តទិន្នន័យ និងការយល់ដឹងស៊ីជម្រៅអំពីសូចនាករវេជ្ជសាស្រ្ត (Precision និង Recall) ដើម្បីវាយតម្លៃហានិភ័យនៃកំហុសទស្សន៍ទាយ (False Negative/Positive)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់សំណុំទិន្នន័យ LIFELAB ដែលផ្តោតលើអ្នកជំងឺខ្សោយបេះដូងនៅតំបន់អឺរ៉ុប (ចក្រភពអង់គ្លេស)។ លក្ខណៈជីវសាស្រ្ត របៀបរស់នៅ និងប្រព័ន្ធថែទាំសុខភាពនៅទីនោះមានភាពខុសគ្នាពីប្រទេសកម្ពុជា។ ដូច្នេះ ការយកម៉ូដែលនេះមកអនុវត្តផ្ទាល់នៅកម្ពុជាអាចប្រឈមនឹងភាពលំអៀង (Bias) ប្រសិនបើមិនមានការកែសម្រួល ឬហ្វឹកហាត់ឡើងវិញជាមួយទិន្នន័យអ្នកជំងឺក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យមានប្រភពមកពីក្រៅប្រទេសក្តី វិធីសាស្រ្ត និងបច្ចេកទេសក្នុងឯកសារនេះមានប្រយោជន៍ខ្លាំងណាស់សម្រាប់វិស័យសុខាភិបាលកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យថ្នាក់ជាតិ (ឧទាហរណ៍៖ មន្ទីរពេទ្យកាល់ម៉ែត):</strong> អាចប្រើប្រាស់បច្ចេកទេស Under-sampling ឬ SMOTE ដើម្បីទស្សន៍ទាយអត្រាស្លាប់របស់អ្នកជំងឺសង្គ្រោះបន្ទាន់ ឬជំងឺរ៉ាំរ៉ៃ ដែលទិន្នន័យអ្នកស្លាប់តែងតែមានតិចជាងអ្នករស់។</li>
+            
+            <li><strong>ការស្រាវជ្រាវសុខភាពសាធារណៈ (វិទ្យាស្ថានប៉ាស្ទ័រកម្ពុជា):</strong> អាចអនុវត្តបច្ចេកទេសនេះដើម្បីដោះស្រាយបញ្ហាទិន្នន័យគ្មានតុល្យភាពនៅពេលវិភាគរកជំងឺឆ្លងកម្រិតធ្ងន់ ឬជំងឺកម្រនៅក្នុងសហគមន៍។</li>
+            
+        </ul>
+        
+        
+        <p>ការយល់ដឹងពីបច្ចេកទេសធ្វើឱ្យទិន្នន័យមានតុល្យភាព នឹងជួយឱ្យអ្នកស្រាវជ្រាវកម្ពុជាអាចបង្កើតប្រព័ន្ធ AI ផ្នែកវេជ្ជសាស្រ្តដែលមានភាពសុក្រឹតខ្ពស់ និងជួយសង្គ្រោះអាយុជីវិតបានទាន់ពេលវេលា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Machine Learning:</strong> ស្វែងយល់ពីក្បួនដោះស្រាយចំណាត់ថ្នាក់ជាមូលដ្ឋាន ជាពិសេសក្បួន Random Forest (RF) និង Support Vector Machine (SVM) តាមរយៈការអនុវត្តជាមួយបណ្ណាល័យ scikit-learn ក្នុង Python។</li>
+            
+            <li><strong>ដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់ (Missing Values):</strong> មុននឹងធ្វើចំណាត់ថ្នាក់ ត្រូវរៀនអនុវត្តបច្ចេកទេស SVM-based Imputation ឬប្រើប្រាស់ KNNImputer ដើម្បីបំពេញចន្លោះទិន្នន័យដែលបាត់ក្នុងសំណុំទិន្នន័យគ្លីនិក។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសធ្វើឱ្យទិន្នន័យមានតុល្យភាព:</strong> ប្រើប្រាស់កញ្ចប់កម្មវិធី imbalanced-learn នៅក្នុង Python ដើម្បីសាកល្បងអនុវត្តបច្ចេកទេស SMOTE (សម្រាប់ Over-sampling) និង NearMiss ឬ RandomUnderSampler (សម្រាប់ Under-sampling) លើសំណុំទិន្នន័យរបស់អ្នក។</li>
+            
+            <li><strong>វាយតម្លៃម៉ូដែលដោយប្រើ Confusion Matrix:</strong> បញ្ឈប់ការពឹងផ្អែកតែលើសូចនាករ Accuracy។ ត្រូវរៀនវាយតម្លៃម៉ូដែលដោយផ្តោតសំខាន់លើសូចនាករ Precision និង Recall តាមរយៈការវិភាគ Confusion Matrix ដើម្បីធានាថាការទស្សន៍ទាយករណីគ្រោះថ្នាក់ (Minority class) មានប្រសិទ្ធភាពខ្ពស់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imbalanced dataset</span></td>
+                <td>គឺជាស្ថានភាពដែលទិន្នន័យក្នុងក្រុមមួយមានចំនួនច្រើនលើសលប់ធៀបនឹងក្រុមមួយទៀត (ឧទាហរណ៍៖ ទិន្នន័យអ្នកជំងឺរស់មានច្រើនជាងអ្នកស្លាប់ឆ្ងាយណាស់) ដែលធ្វើឱ្យកុំព្យូទ័ររៀនទន្ទេញតែលក្ខណៈរបស់ក្រុមភាគច្រើន និងទស្សន៍ទាយខុសលើក្រុមភាគតិច។</td>
+                <td>ដូចជាសិស្សដែលរៀនសៀវភៅដែលមានលំហាត់បូក ១០០០ តែមានលំហាត់ដកតែ ៥ ពេលប្រឡងគាត់ចេះតែបូក តែធ្វើដកមិនចេញទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTE (Synthetic Minority Over-sampling Technique)</span></td>
+                <td>គឺជាបច្ចេកទេសបង្កើតទិន្នន័យថ្មីៗ (សិប្បនិម្មិត) សម្រាប់ក្រុមដែលមានទិន្នន័យតិច ដោយវាគណនាចម្ងាយរវាងទិន្នន័យចាស់ៗ រួចបង្កើតចំណុចទិន្នន័យថ្មីនៅចន្លោះកណ្តាលនោះ ដើម្បីឱ្យក្រុមទាំងពីរមានចំនួនស្មើគ្នា។</td>
+                <td>ដូចជាការថតចម្លងឯកសារ និងកែសម្រួលពាក្យបន្តិចបន្តួច ដើម្បីឱ្យមានសៀវភៅអានគ្រប់គ្រាន់សម្រាប់សិស្សម្នាក់ៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Under-sampling</span></td>
+                <td>គឺជាវិធីសាស្រ្តកាត់បន្ថយចំនួនទិន្នន័យពីក្រុមដែលមានភាគច្រើន (Majority class) ដោយជ្រើសរើសយកតែទិន្នន័យសំខាន់ៗ ដើម្បីទាញទំហំទិន្នន័យឱ្យធ្លាក់មកស្មើនឹងក្រុមភាគតិច (Minority class)។</td>
+                <td>ដូចជាការរើសយកតែផ្លែប៉ោមល្អៗ១០ផ្លែ ពីក្នុងកន្ត្រកដែលមាន១០០ផ្លែ ដើម្បីយកមកប្រៀបធៀបជាមួយផ្លែក្រូចដែលមានតែ១០ផ្លែ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Recall (Sensitivity)</span></td>
+                <td>ជារង្វាស់វាយតម្លៃម៉ូដែលដែលបង្ហាញថា ក្នុងចំណោមករណីគោលដៅទាំងអស់ (ឧទាហរណ៍៖ អ្នកជំងឺស្លាប់) តើប្រព័ន្ធអាចស្វែងរកឃើញត្រឹមត្រូវប៉ុន្មានភាគរយដោយមិនរំលងចោល។ វាមានសារៈសំខាន់បំផុតក្នុងវិស័យពេទ្យ។</td>
+                <td>ដូចជាការប្រើសំណាញ់ចាប់ត្រី តើសំណាញ់នោះអាចចាប់ត្រីដែលមានក្នុងស្រះបានប៉ុន្មានក្បាល (ទោះបីជាជាប់សំរាមខ្លះក៏ដោយ សំខាន់កុំឱ្យរួចត្រី)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">False negative</span></td>
+                <td>គឺជាកំហុសក្នុងការធ្វើចំណាត់ថ្នាក់ ដែលប្រព័ន្ធកុំព្យូទ័រទស្សន៍ទាយថា "អវិជ្ជមាន ឬគ្មានបញ្ហាទេ" ប៉ុន្តែការពិតជាក់ស្តែងគឺ "វិជ្ជមាន ឬមានបញ្ហាធ្ងន់ធ្ងរ"។ កំហុសនេះអាចបណ្តាលឱ្យបាត់បង់ជីវិតអ្នកជំងឺដោយសារព្យាបាលមិនទាន់ពេល។</td>
+                <td>ដូចជាប្រព័ន្ធរោទិ៍អគ្គិភ័យមិនបន្លឺសំឡេង និងគិតថាគ្មានផ្សែង នៅពេលដែលមានភ្លើងកំពុងឆេះផ្ទះពិតមែន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest (RF)</span></td>
+                <td>គឺជាក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine Learning Algorithm) ដែលបង្កើតនិងប្រើប្រាស់ "ដើមឈើសម្រេចចិត្ត" (Decision Trees) ជាច្រើនដើមរួមគ្នា ដើម្បីធ្វើការបោះឆ្នោតសម្រេចថាតើទិន្នន័យថ្មីមួយគួរស្ថិតក្នុងក្រុមចំណាត់ថ្នាក់ណា។</td>
+                <td>ដូចជាការសួរយោបល់ពីគ្រូពេទ្យជំនាញ១០០នាក់ រួចយកចម្លើយដែលមានអ្នកបោះឆ្នោតគាំទ្រច្រើនជាងគេ ដើម្បីធ្វើរោគវិនិច្ឆ័យចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Missing values imputation</span></td>
+                <td>គឺជាដំណើរការនៃការប្រើប្រាស់ក្បួនគណិតវិទ្យា ឬក្បួនម៉ាស៊ីនរៀន (ដូចជា SVM) ដើម្បីទស្សន៍ទាយ និងបំពេញចន្លោះទិន្នន័យដែលបាត់បង់ ឬមិនបានកត់ត្រា ដើម្បីរក្សាគុណភាពទិន្នន័យសម្រាប់វិភាគបន្ត។</td>
+                <td>ដូចជាការបំពេញពាក្យក្នុងចន្លោះនៃល្បះ ដោយទាយមើលអត្ថន័យនៃពាក្យដែលនៅសងខាងវា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Machine+learning+techniques+for+imbalanced+medical+datasets" target="_blank" rel="noopener"><span class="en">Machine learning techniques for imbalanced medical datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+missing+values+in+clinical+data+using+SVM+imputation" target="_blank" rel="noopener"><span class="en">Handling missing values in clinical data using SVM imputation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+of+SMOTE+and+under-sampling+in+healthcare+predictive+modeling" target="_blank" rel="noopener"><span class="en">Comparison of SMOTE and under-sampling in healthcare predictive modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Random+forest+classification+for+heart+failure+mortality+prediction" target="_blank" rel="noopener"><span class="en">Random forest classification for heart failure mortality prediction</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

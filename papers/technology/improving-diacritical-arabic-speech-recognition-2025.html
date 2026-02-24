@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការកែលម្អការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក់ការបញ្ចេញសំឡេង៖ ម៉ូដែលផ្អែកលើ Transformer ជាមួយនឹងការរៀនផ្ទេរចំណេះដឹង និងការបង្កើនទិន្នន័យចម្រុះ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក់ការបញ្ចេញសំឡេង (Diacritical Arabic) ដែលជួបប្រទះនឹងបញ្ហាខ្វះខាតទិន្នន័យសម្រាប់បង្វឹក ន...">
+    
+    <meta name="keywords" content="Automatic Speech Recognition, Diacritical Arabic, Transformer Models, Transfer Learning, Data Augmentation, Wav2Vec2, XLSR, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/improving-diacritical-arabic-speech-recognition-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/improving-diacritical-arabic-speech-recognition-2025.html">
+    <meta property="og:title" content="ការកែលម្អការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក់ការបញ្ចេញសំឡេង៖ ម៉ូដែលផ្អែកលើ Transformer ជាមួយនឹងការរៀនផ្ទេរចំណេះដឹង និងការបង្កើនទិន្នន័យចម្រុះ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក់ការបញ្ចេញសំឡេង (Diacritical Arabic) ដែលជួបប្រទះនឹងបញ្ហាខ្វះខាតទិន្នន័យសម្រាប់បង្វឹក និងភាពស្មុគស្មាញនៃទម្រង់ពាក្យកម្រិតខ្ពស់។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2025, Information (MDPI)">
+    
+    <meta property="article:tag" content="Automatic Speech Recognition">
+    
+    <meta property="article:tag" content="Diacritical Arabic">
+    
+    <meta property="article:tag" content="Transformer Models">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Data Augmentation">
+    
+    <meta property="article:tag" content="Wav2Vec2">
+    
+    <meta property="article:tag" content="XLSR">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការកែលម្អការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក់ការបញ្ចេញសំឡេង៖ ម៉ូដែលផ្អែកលើ Transformer ជាមួយនឹងការរៀនផ្ទេរចំណេះដឹង និងការបង្កើនទិន្នន័យចម្រុះ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក់ការបញ្ចេញសំឡេង (Diacritical Arabic) ដែលជួបប្រទះនឹងបញ្ហាខ្វះខាតទិន្នន័យសម្រាប់បង្វឹក និងភាពស្មុគស្មាញនៃទម្រង់ពាក្យកម្រិតខ្ពស់។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u1797\u17b6\u179f\u17b6\u17a2\u17b6\u179a\u17c9\u17b6\u1794\u17cb\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u1789\u17d2\u1789\u17b6\u1794\u1789\u17d2\u1787\u17b6\u1780\u17cb\u1780\u17b6\u179a\u1794\u1789\u17d2\u1785\u17c1\u1789\u179f\u17c6\u17a1\u17c1\u1784\u17d6 \u1798\u17c9\u17bc\u178a\u17c2\u179b\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be Transformer \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a\u1785\u17c6\u178e\u17c1\u17c7\u178a\u17b9\u1784 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u1798\u17d2\u179a\u17bb\u17c7",
+      "name": "Improving Diacritical Arabic Speech Recognition: Transformer-Based Models with Transfer Learning and Hybrid Data Augmentation",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u1797\u17b6\u179f\u17b6\u17a2\u17b6\u179a\u17c9\u17b6\u1794\u17cb\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u1789\u17d2\u1789\u17b6\u1794\u1789\u17d2\u1787\u17b6\u1780\u17cb\u1780\u17b6\u179a\u1794\u1789\u17d2\u1785\u17c1\u1789\u179f\u17c6\u17a1\u17c1\u1784 (Diacritical Arabic) \u178a\u17c2\u179b\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1793\u17b9\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u1784\u17d2\u179c\u17b9\u1780 \u1793\u17b7\u1784\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1793\u17c3\u1791\u1798\u17d2\u179a\u1784\u17cb\u1796\u17b6\u1780\u17d2\u1799\u1780\u1798\u17d2\u179a\u17b7\u178f\u1781\u17d2\u1796\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/improving-diacritical-arabic-speech-recognition-2025.html",
+      "author": [{"@type": "Person", "name": "Haifa Alaqel (King Saud University, Imam Mohammad Ibn Saud Islamic University)"},{"@type": "Person", "name": "Khalil El Hindi (King Saud University)"}],
+      "datePublished": "2025, Information (MDPI)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Improving Diacritical Arabic Speech Recognition: Transformer-Based Models with Transfer Learning and Hybrid Data Augmentation",
+        "url": "https://doi.org/10.3390/info16030161"
+      },
+      "keywords": ["Automatic Speech Recognition", "Diacritical Arabic", "Transformer Models", "Transfer Learning", "Data Augmentation", "Wav2Vec2", "XLSR"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u1797\u17b6\u179f\u17b6\u17a2\u17b6\u179a\u17c9\u17b6\u1794\u17cb\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u1789\u17d2\u1789\u17b6\u1794\u1789\u17d2\u1787\u17b6\u1780\u17cb\u1780\u17b6\u179a\u1794\u1789\u17d2\u1785\u17c1\u1789\u179f\u17c6\u17a1\u17c1\u1784\u17d6 \u1798\u17c9\u17bc\u178a\u17c2\u179b\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be Transformer \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a\u1785\u17c6\u178e\u17c1\u17c7\u178a\u17b9\u1784 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u1798\u17d2\u179a\u17bb\u17c7",
+          "item": "https://khmerresearch.com/papers/technology/improving-diacritical-arabic-speech-recognition-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការកែលម្អការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Improving Diacritical Arabic Speech Recognition: Transformer-Based Models with Transfer Learning and Hybrid Data Augmentation<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/info16030161" target="_blank">doi.org/10.3390/info16030161</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការកែលម្អការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក់ការបញ្ចេញសំឡេង៖ ម៉ូដែលផ្អែកលើ Transformer ជាមួយនឹងការរៀនផ្ទេរចំណេះដឹង និងការបង្កើនទិន្នន័យចម្រុះ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Improving Diacritical Arabic Speech Recognition: Transformer-Based Models with Transfer Learning and Hybrid Data Augmentation</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Haifa Alaqel (King Saud University, Imam Mohammad Ibn Saud Islamic University), Khalil El Hindi (King Saud University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025, Information (MDPI)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្គាល់សំឡេងនិយាយភាសាអារ៉ាប់ដែលមានសញ្ញាបញ្ជាក់ការបញ្ចេញសំឡេង (Diacritical Arabic) ដែលជួបប្រទះនឹងបញ្ហាខ្វះខាតទិន្នន័យសម្រាប់បង្វឹក និងភាពស្មុគស្មាញនៃទម្រង់ពាក្យកម្រិតខ្ពស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្រផ្អែកលើបណ្ដាញ Transformer ដោយរួមបញ្ចូលការរៀនផ្ទេរចំណេះដឹង (Transfer Learning) និងការបង្កើនទិន្នន័យ (Data Augmentation) ដើម្បីបង្កើតប្រព័ន្ធសម្គាល់សំឡេងស្វ័យប្រវត្តិ (ASR)។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែល XLSR ដែលបានបង្វឹកជាមុនលើ៥៣ភាសា (Pretrained cross-lingual speech representation) រួមទាំងម៉ូដែលឯកទេសភាសាអារ៉ាប់ (XLSR-53-Arabic)។</li>
+            
+            <li>ការកែសម្រួលឧបករណ៍បំបែកពាក្យ (Tokenizer modification) ដើម្បីប្រព័ន្ធអាចស្គាល់សញ្ញាស្រៈអារ៉ាប់។</li>
+            
+            <li>ការអនុវត្តអនុគមន៍បាត់បង់ (Connectionist Temporal Classification Loss - CTC) សម្រាប់ការតម្រឹមអត្ថបទនិងសំឡេងដោយផ្ទាល់។</li>
+            
+            <li>បច្ចេកទេសបង្កើនទិន្នន័យចម្រុះ (Hybrid Data Augmentation) ដូចជាការផ្លាស់ប្តូរកម្រិតសំឡេង (Volume), ល្បឿន (Speed) និងកម្រិតញ័រ (Pitch) ជាលក្ខណៈស្របគ្នា និងបន្តបន្ទាប់។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលដែលបានស្នើឡើងកម្រិតទី២ (DAASR 2) ទទួលបានអត្រាកំហុសពាក្យ (Word Error Rate - WER) ត្រឹមតែ ១៣.៧% មុនពេលប្រើការបង្កើនទិន្នន័យ ដែលប្រសើរជាងម៉ូដែលទំនើបៗជំនាន់មុនៗយ៉ាងច្រើន។</li>
+            
+            <li>ការរួមបញ្ចូលបច្ចេកទេសបង្កើនទិន្នន័យចម្រុះស្របគ្នា (Parallel Hybrid Data Augmentation) ក្នុងអត្រា ៥០% បានកាត់បន្ថយអត្រាកំហុសពាក្យ (WER) បន្ថែមទៀតរហូតដល់ទាបបំផុតត្រឹម ១២.១៧%។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នានៃការរៀនផ្ទេរចំណេះដឹង (Transfer Learning) និងស្ថាបត្យកម្ម Transformer បង្ហាញពីប្រសិទ្ធភាពដ៏អស្ចារ្យក្នុងការដោះស្រាយបញ្ហាខ្វះខាតទិន្នន័យសម្រាប់ប្រព័ន្ធសម្គាល់សំឡេងភាសាអារ៉ាប់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Traditional ASR (e.g., GMM-SI, DNN, HMM)</span></strong><br>ប្រព័ន្ធ ASR ប្រពៃណី (ឧ. GMM-SI, DNN, HMM)</td>
+                <td>អាចដំណើរការបានគួរសមលើទិន្នន័យតូចៗ ដោយប្រើលក្ខណៈពិសេសនៃសំឡេងដែលត្រូវបានទាញយកតាមវិធីសាស្ត្របុរាណ។</td>
+                <td>ទាមទារដំណើរការស្មុគស្មាញច្រើនដំណាក់កាល (Multi-stage) និងត្រូវការការតម្រឹមទិន្នន័យសំឡេងនិងអត្ថបទដោយផ្ទាល់ដោយមនុស្ស។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ស្ថិតនៅចន្លោះពី ៣១.៤% ដល់ ៣៩.៧% លើទិន្នន័យ SASSC។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">End-to-End CNN-LSTM with Attention</span></strong><br>បណ្ដាញ CNN-LSTM ជាមួយយន្តការ Attention (E2E)</td>
+                <td>សម្រួលខ្សែសង្វាក់នៃដំណើរការទាំងមូលទៅជាបណ្ដាញសរសៃប្រសាទតែមួយ (End-to-End)។</td>
+                <td>នៅមានកម្រិតក្នុងការចាប់យកបរិបទវែងៗ និងដោះស្រាយភាពស្មុគស្មាញនៃសញ្ញាស្រៈអារ៉ាប់ បើធៀបនឹងស្ថាបត្យកម្ម Transformer។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ទទួលបាន ២៨.៤%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">DAASR 2 (Wav2Vec2-XLSR-Arabic + Parallel Hybrid Data Augmentation)</span></strong><br>ម៉ូដែល DAASR 2 (ផ្អែកលើ Wav2Vec2 ជាមួយការបង្កើនទិន្នន័យចម្រុះ)</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់បំផុត ប្រើប្រាស់ការរៀនផ្ទេរចំណេះដឹងឆ្លងភាសាបានល្អ និងដោះស្រាយបញ្ហាខ្វះទិន្នន័យតាមរយៈការបង្កើនទិន្នន័យ។</td>
+                <td>ទាមទារធនធានកុំព្យូទ័រខ្ពស់សម្រាប់ការបង្វឹក និងការកែសម្រួល Tokenizer យ៉ាងប្រុងប្រយ័ត្ន។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ទាបបំផុតរហូតដល់ ១២.១៧% ដែលជាកំណត់ត្រាថ្មីមួយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបានបញ្ជាក់យ៉ាងច្បាស់អំពីតម្រូវការធនធានកុំព្យូទ័រខ្ពស់ និងការរៀបចំទិន្នន័យដើម្បីបង្វឹកម៉ូដែល Transformer ដ៏ធំនេះ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារ GPU ខ្លាំង (អ្នកស្រាវជ្រាវប្រើប្រាស់ Tesla T4 GPU លើ Google Colab PRO Plus) ដោយសារទំហំម៉ូដែលធំ តម្រូវឱ្យបន្ថយ Batch size មកត្រឹម 1។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យចម្រុះរួមមានទិន្នន័យគោល SASSC (៧ម៉ោង) និងទិន្នន័យភាសាអារ៉ាប់ទូទៅ Common Voice 6.1 (១២៨ម៉ោង) សម្រាប់ Transfer Learning។</li>
+        
+        <li><strong>Software:</strong> បណ្ណាល័យ Hugging Face សម្រាប់ម៉ូដែល Wav2Vec2, កូដសម្រាប់កែសម្រួល Tokenizer, និងបច្ចេកទេស CTC (Connectionist Temporal Classification) Loss។</li>
+        
+        <li><strong>Data Augmentation Tools:</strong> ត្រូវការកូដឬកម្មវិធីសម្រាប់កែប្រែលក្ខណៈសំឡេង (Pitch shifting, Speed adjustment, Volume modification)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកចម្បងលើទិន្នន័យ SASSC ដែលជាបណ្ដុំទិន្នន័យមានអ្នកនិយាយតែម្នាក់គត់ (Single-speaker corpus) រយៈពេលជាង ៧ ម៉ោង។ ទោះបីជាមានការប្រើប្រាស់ Data Augmentation ក៏ដោយ ក៏ម៉ូដែលនេះប្រហែលជាមិនអាចឆ្លើយតបបានល្អចំពោះភាពចម្រុះនៃសំឡេង យេនឌ័រ ឬគ្រាមភាសានៅក្នុងពិភពពិតនោះទេ។ សម្រាប់កម្ពុជា ការយកគំរូតាមដោយប្រើទិន្នន័យអ្នកនិយាយម្នាក់ នឹងធ្វើឱ្យប្រព័ន្ធមិនអាចស្គាល់សំឡេងគ្រាមភាសាតំបន់ផ្សេងៗ (ឧ. អ្នកបាត់ដំបង អ្នកស្វាយរៀង) បានឡើយ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការប្រើប្រាស់ Transfer Learning និងការកែសម្រួល Tokenizer នេះពិតជាមានសក្តានុពលខ្លាំងក្នុងការយកមកអនុវត្តសម្រាប់ប្រព័ន្ធសម្គាល់សំឡេងភាសាខ្មែរ (Khmer ASR) ដែលប្រឈមនឹងបញ្ហាខ្វះទិន្នន័យ និងភាពស្មុគស្មាញនៃជើងអក្សរដូចគ្នា។</p>
+        
+        <ul>
+            
+            <li><strong>CADT (Cambodia Academy of Digital Technology):</strong> អ្នកស្រាវជ្រាវនៅ CADT អាចប្រើប្រាស់បច្ចេកទេសកែសម្រួល Tokenizer នេះ ដើម្បីដោះស្រាយបញ្ហាស្រៈ និងជើងអក្សរខ្មែរ (តួបន្តុប) ដែលមានលក្ខណៈស្មុគស្មាញស្រដៀងនឹងសញ្ញាស្រៈភាសាអារ៉ាប់ (Diacritics)។</li>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (ABA, ACLEDA):</strong> អាចអភិវឌ្ឍប្រព័ន្ធស្វ័យប្រវត្តិកម្មផ្នែកសេវាកម្មអតិថិជន (Voicebots) ដោយស្គាល់សំឡេងភាសាខ្មែរបានច្បាស់លាស់ ទោះបីជាអតិថិជននិយាយលឿន ឬខ្សោយ (ឆ្លងកាត់ការប្រើបច្ចេកទេស Speed/Volume Augmentation)។</li>
+            
+            <li><strong>កម្មវិធីជំនួយបច្ចេកវិទ្យាបញ្ជាដោយសំឡេង (Accessibility/EdTech):</strong> បង្កើតកម្មវិធីបំប្លែងសំឡេងទៅជាអត្ថបទដែលមានភាពសុក្រឹតខ្ពស់ សម្រាប់ជួយដល់អ្នកមិនចេះអក្សរ អ្នកមានពិការភាពភ្នែក ឬកសិករនៅតាមបណ្តាខេត្តនានា ក្នុងការស្វែងរកព័ត៌មានតាមរយៈសំឡេង។</li>
+            
+        </ul>
+        
+        
+        <p>ការរួមបញ្ចូលគ្នានៃការប្រើម៉ូដែលដែលបង្វឹកជាមុន (Pre-trained Multilingual Models) និងបច្ចេកទេសបង្កើនទិន្នន័យ (Data Augmentation) គឺជាដំណោះស្រាយដ៏មានប្រសិទ្ធភាព និងចំណាយតិច សម្រាប់ជំរុញការអភិវឌ្ឍប្រព័ន្ធ AI ភាសាខ្មែរឱ្យមានភាពលេចធ្លោ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃម៉ូដែលឆ្លងភាសា:</strong> ចាប់ផ្តើមពីការសិក្សាស្វែងយល់ពីរបៀបដែលម៉ូដែល <span class="en">Wav2Vec2</span> និង <span class="en">XLSR-53</span> ធ្វើការរៀនផ្ទេរចំណេះដឹង (Transfer Learning) ដោយផ្តោតលើស្ថាបត្យកម្ម Transformer និងយន្តការ Self-attention។</li>
+            
+            <li><strong>ប្រមូល និងសម្អាតទិន្នន័យសំឡេងភាសាខ្មែរ:</strong> ទាញយកទិន្នន័យសំឡេងភាសាខ្មែរដែលមានស្រាប់ (ឧ. ពី <span class="en">Mozilla Common Voice Khmer</span>) និងធ្វើការសម្អាត (Pre-processing) ដូចជាកែតម្រូវ Sample rate ទៅ 16kHz និងជម្រះនិមិត្តសញ្ញាដែលមិនចាំបាច់ចេញពីអត្ថបទ។</li>
+            
+            <li><strong>កែសម្រួល Tokenizer សម្រាប់អក្សរខ្មែរ:</strong> ប្រើប្រាស់ឧបករណ៍របស់ <span class="en">Hugging Face Transformers</span> ដើម្បីកែសម្រួល Tokenizer ឱ្យស្គាល់ព្យញ្ជនៈ ស្រៈ ជើងអក្សរ (Subscripts) និងវណ្ណយុត្តិខ្មែរនីមួយៗបានត្រឹមត្រូវ ដោយមិនបាត់បង់អត្ថន័យដើមនៃសូរសព្ទ។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសបង្កើនទិន្នន័យចម្រុះ (Hybrid Data Augmentation):</strong> សរសេរកូដ Python (ឧទាហរណ៍ប្រើបណ្ណាល័យ <span class="en">Torchaudio</span> ឬ <span class="en">Audiomentations</span>) ដើម្បីបង្កើតទិន្នន័យបន្ថែមតាមរយៈការផ្លាស់ប្តូរល្បឿន (Speed) កម្រិតញ័រ (Pitch) និងកម្រិតសំឡេង (Volume) ទាំងក្នុងទម្រង់ស្របគ្នា និងបន្តបន្ទាប់។</li>
+            
+            <li><strong>បង្វឹកម៉ូដែល និងវាយតម្លៃដោយប្រើ CTC:</strong> ប្រើប្រាស់ <span class="en">Google Colab Pro</span> ឬម៉ាស៊ីន Server ក្នុងស្រុកដែលមាន GPU ខ្ពស់ ដើម្បី Fine-tune ម៉ូដែលដោយប្រើ <span class="en">CTC Loss function</span> រួចធ្វើការវាយតម្លៃអត្រាកំហុសពាក្យ (WER) ធៀបនឹងម៉ូដែលចាស់ៗ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Connectionist Temporal Classification (CTC)</span></td>
+                <td>ជាយន្តការគណិតវិទ្យាមួយនៅក្នុងម៉ូដែលបញ្ញាសិប្បនិម្មិត ដែលជួយផ្គូផ្គងសញ្ញាសំឡេងបន្តបន្ទាប់គ្នា ទៅនឹងតួអក្សរដោយស្វ័យប្រវត្តិ ដោយកាត់ចោលនូវសំឡេងស្ងាត់ ឬតួអក្សរដែលកុំព្យូទ័រទាយផ្ទួនគ្នា ដោយមិនចាំបាច់មានមនុស្សរៀបចំកាត់តម្រឹមសំឡេងនិងអក្សរជាមុននោះទេ។</td>
+                <td>ដូចជាលេខាធិការកត់ត្រាដ៏ឆ្លាតម្នាក់ ដែលចេះរំលងភាពស្ងៀមស្ងាត់ និងពាក្យរដឺនៗរបស់វាគ្មិន រួចសរសេរយកតែពាក្យត្រឹមត្រូវចេញមក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>ជាវិធីសាស្ត្រផ្ទេរចំណេះដឹង ដោយយកម៉ូដែលបញ្ញាសិប្បនិម្មិតដែលធ្លាប់បានបង្វឹកលើទិន្នន័យដ៏ច្រើនសន្ធឹកសន្ធាប់រួចមកហើយ (ឧទាហរណ៍ ភាសាទូទៅ) មកបង្រៀនបន្តបន្តិចបន្តួចបន្ថែមលើកិច្ចការថ្មីមួយទៀតដែលមានទិន្នន័យតិចតួច ដើម្បីសន្សំពេលវេលា និងបង្កើនភាពត្រឹមត្រូវ។</td>
+                <td>ដូចជាការយកចុងភៅដែលពូកែធ្វើម្ហូបអឺរ៉ុបរួចជាស្រេច មកបង្រៀនបន្ថែមតែបន្តិចពីរបៀបប្រើប្រាស់គ្រឿងទេសខ្មែរ ដើម្បីឱ្យគាត់ចេះធ្វើម្ហូបខ្មែរបានឆ្ងាញ់យ៉ាងរហ័សដោយមិនបាច់រៀនកាត់បន្លែសារជាថ្មី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hybrid Data Augmentation</span></td>
+                <td>ជាបច្ចេកទេសបង្កើតទិន្នន័យថ្មីៗបន្ថែមពីលើទិន្នន័យដើម ដោយធ្វើការកែប្រែលក្ខណៈសំឡេងជាច្រើនបញ្ចូលគ្នា (ដូចជាប្តូរល្បឿនបញ្ចេញសំឡេង ប្តូរកម្រិតឮខ្លាំងឬខ្សោយ និងប្តូរភាពញ័រ) ក្នុងពេលតែមួយ ដើម្បីជួយឱ្យម៉ូដែលអាចស្គាល់ទម្រង់សំឡេងមនុស្សគ្រប់ប្រភេទ។</td>
+                <td>ដូចជាការយកគំនូរមួយផ្ទាំងមកថតចម្លងដោយប្តូរពណ៌ ពង្រីក និងបង្រួម ដើម្បីយកទៅបង្រៀនសិស្សឱ្យបានស្គាល់គំនូរនេះច្បាស់ក្នុងគ្រប់កាលៈទេសៈនិងទម្រង់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transformer</span></td>
+                <td>ជាស្ថាបត្យកម្មបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដែលពូកែក្នុងការចាប់យកទំនាក់ទំនងនៃពាក្យនីមួយៗក្នុងប្រយោគវែងៗ តាមរយៈយន្តការផ្ដោតការយកចិត្តទុកដាក់ (Self-attention) ដែលជួយម៉ូដែលឱ្យដឹងថាពាក្យមួយណាមានឥទ្ធិពលលើពាក្យមួយណាក្នុងបរិបទទាំងមូល។</td>
+                <td>ដូចជាអ្នកអានសៀវភៅដ៏ពូកែម្នាក់ ដែលពេលអានដល់ចុងប្រយោគ គាត់នៅតែចងចាំនិងយល់ពីទំនាក់ទំនងរបស់វាជាមួយពាក្យនៅដើមប្រយោគបានយ៉ាងច្បាស់ជានិច្ច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Error Rate (WER)</span></td>
+                <td>ជារង្វាស់ស្តង់ដារសម្រាប់វាយតម្លៃគុណភាពនៃប្រព័ន្ធបំប្លែងសំឡេងទៅជាអត្ថបទ (ASR) ដោយវាគណនាភាគរយនៃចំនួនពាក្យដែលកុំព្យូទ័រស្ដាប់ខុស (សរសេរខុស បន្ថែមពាក្យលើស ឬបាត់ពាក្យ) ធៀបនឹងចំនួនពាក្យដែលបាននិយាយសរុប។</td>
+                <td>ដូចជាការកាត់ពិន្ទុសិស្សនៅក្នុងការប្រឡងសរសេរតាមអាន ដោយរាប់ចំនួនពាក្យដែលសិស្សសរសេរខុស បាត់ ឬសរសេរលើសពីអ្វីដែលគ្រូបានអាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cross-Lingual Speech Representation (XLSR)</span></td>
+                <td>ជាម៉ូដែល AI ដែលត្រូវបានបង្វឹកជាមុនដោយឱ្យស្តាប់ទិន្នន័យសំឡេងរាប់ម៉ឺនម៉ោងពីភាសាចម្រុះជាង៥០ភាសា ដើម្បីឱ្យវាចាប់បាននូវលក្ខណៈរួមនៃសូរសព្ទមនុស្សទូទៅ មុននឹងគេយកវាទៅកែសម្រួលបំពាក់លើប្រព័ន្ធសម្គាល់ភាសាជាក់លាក់ណាមួយដែលខ្វះទិន្នន័យ។</td>
+                <td>ដូចជាកុមារដែលធំដឹងក្តីក្នុងបរិស្ថានអន្តរជាតិ ដែលធ្លាប់ឮមនុស្សនិយាយច្រើនសំនៀងនិងច្រើនភាសា ធ្វើឱ្យគេងាយស្រួលក្នុងការចាប់យកនិងរៀនភាសាថ្មីមួយទៀតបានលឿនជាងក្មេងធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tokenizer</span></td>
+                <td>ជាក្បួន ឬឧបករណ៍នៅក្នុងប្រព័ន្ធដំណើរការភាសាធម្មជាតិ (NLP) ដែលមានតួនាទីកាត់បំបែកអត្ថបទ ឬសំឡេង ទៅជាបំណែកតូចៗបំផុត (ហៅថា Token ដូចជាតួអក្សរ ស្រៈ ឬជើងអក្សរ) រួចបំប្លែងជាលេខកូដ ដើម្បីឱ្យម៉ាស៊ីនកុំព្យូទ័រអាចគណនា និងរៀនពីទម្រង់នៃភាសាទាំងនោះបាន។</td>
+                <td>ដូចជាម៉ាស៊ីនកាត់នំប៉័ង ដែលហាន់នំប៉័ងធំមួយដុំទៅជាបន្ទះតូចៗប៉ុនៗគ្នា ដើម្បីងាយស្រួលក្នុងការយកទៅញ៉ាំ ឬកែច្នៃបន្ត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=low-resource+language+speech+recognition+transformer+models" target="_blank" rel="noopener"><span class="en">low-resource language speech recognition transformer models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=connectionist+temporal+classification+in+end-to-end+ASR" target="_blank" rel="noopener"><span class="en">connectionist temporal classification in end-to-end ASR</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+data+augmentation+techniques+for+audio+processing" target="_blank" rel="noopener"><span class="en">hybrid data augmentation techniques for audio processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multilingual+pretrained+models+for+Arabic+dialect+recognition" target="_blank" rel="noopener"><span class="en">multilingual pretrained models for Arabic dialect recognition</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

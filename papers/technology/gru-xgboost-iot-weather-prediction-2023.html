@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ដំណើរការរបស់ GRU និង XGBoost ជាមួយនឹងការកែតម្រូវ Hyperparameter ដោយប្រើ GridSearchCV និង Bayesian Optimization លើប្រព័ន្ធព្យាករណ៍អាកាសធាតុផ្អែកលើ IoT | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយអំពីបញ្ហាប្រឈមក្នុងការទស្សន៍ទាយអាកាសធាតុឱ្យបានត្រឹមត្រូវដោយសារតែលក្ខណៈចម្រុះនិងស្មុគស្មាញនៃទិន្នន័យអាកាសធាតុ (Weather Data) តាមរយៈការជំនួសវិធ...">
+    
+    <meta name="keywords" content="Gated Recurrent Unit (GRU), XGBoost, Hyperparameter Tuning, Multivariate Weather Prediction, Internet of Things (IoT), Bayesian Optimization, GridSearchCV, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/gru-xgboost-iot-weather-prediction-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/gru-xgboost-iot-weather-prediction-2023.html">
+    <meta property="og:title" content="ដំណើរការរបស់ GRU និង XGBoost ជាមួយនឹងការកែតម្រូវ Hyperparameter ដោយប្រើ GridSearchCV និង Bayesian Optimization លើប្រព័ន្ធព្យាករណ៍អាកាសធាតុផ្អែកលើ IoT | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយអំពីបញ្ហាប្រឈមក្នុងការទស្សន៍ទាយអាកាសធាតុឱ្យបានត្រឹមត្រូវដោយសារតែលក្ខណៈចម្រុះនិងស្មុគស្មាញនៃទិន្នន័យអាកាសធាតុ (Weather Data) តាមរយៈការជំនួសវិធីសាស្ត្របុរាណដោយបញ្ញាសិប្បនិម្មិត។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023, International Journal on Advanced Science Engineering Information Technology">
+    
+    <meta property="article:tag" content="Gated Recurrent Unit (GRU)">
+    
+    <meta property="article:tag" content="XGBoost">
+    
+    <meta property="article:tag" content="Hyperparameter Tuning">
+    
+    <meta property="article:tag" content="Multivariate Weather Prediction">
+    
+    <meta property="article:tag" content="Internet of Things (IoT)">
+    
+    <meta property="article:tag" content="Bayesian Optimization">
+    
+    <meta property="article:tag" content="GridSearchCV">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ដំណើរការរបស់ GRU និង XGBoost ជាមួយនឹងការកែតម្រូវ Hyperparameter ដោយប្រើ GridSearchCV និង Bayesian Optimization លើប្រព័ន្ធព្យាករណ៍អាកាសធាតុផ្អែកលើ IoT">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយអំពីបញ្ហាប្រឈមក្នុងការទស្សន៍ទាយអាកាសធាតុឱ្យបានត្រឹមត្រូវដោយសារតែលក្ខណៈចម្រុះនិងស្មុគស្មាញនៃទិន្នន័យអាកាសធាតុ (Weather Data) តាមរយៈការជំនួសវិធីសាស្ត្របុរាណដោយបញ្ញាសិប្បនិម្មិត។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u179a\u1794\u179f\u17cb GRU \u1793\u17b7\u1784 XGBoost \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u1780\u17c2\u178f\u1798\u17d2\u179a\u17bc\u179c Hyperparameter \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be GridSearchCV \u1793\u17b7\u1784 Bayesian Optimization \u179b\u17be\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be IoT",
+      "name": "GRU and XGBoost Performance with Hyperparameter Tuning Using GridSearchCV and Bayesian Optimization on an IoT-Based Weather Prediction System",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u17a2\u17c6\u1796\u17b8\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb\u17b1\u17d2\u1799\u1794\u17b6\u1793\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u178a\u17c4\u1799\u179f\u17b6\u179a\u178f\u17c2\u179b\u1780\u17d2\u1781\u178e\u17c8\u1785\u1798\u17d2\u179a\u17bb\u17c7\u1793\u17b7\u1784\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1793\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb (Weather Data) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1787\u17c6\u1793\u17bd\u179f\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u17bb\u179a\u17b6\u178e\u178a\u17c4\u1799\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/gru-xgboost-iot-weather-prediction-2023.html",
+      "author": [{"@type": "Person", "name": "Hendri Darmawan (Politeknik Elektronika Negeri Surabaya)"},{"@type": "Person", "name": "Mike Yuliana (Politeknik Elektronika Negeri Surabaya)"},{"@type": "Person", "name": "Moch. Zen Samsono Hadi (Politeknik Elektronika Negeri Surabaya)"}],
+      "datePublished": "2023, International Journal on Advanced Science Engineering Information Technology",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "GRU and XGBoost Performance with Hyperparameter Tuning Using GridSearchCV and Bayesian Optimization on an IoT-Based Weather Prediction System",
+        "url": "https://pdfs.semanticscholar.org/ae8a/e4362b8107ae56001c849449e9201a69a732.pdf"
+      },
+      "keywords": ["Gated Recurrent Unit (GRU)", "XGBoost", "Hyperparameter Tuning", "Multivariate Weather Prediction", "Internet of Things (IoT)", "Bayesian Optimization", "GridSearchCV"],
+      "about": "Machine Learning and Meteorology"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u179a\u1794\u179f\u17cb GRU \u1793\u17b7\u1784 XGBoost \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u1780\u17c2\u178f\u1798\u17d2\u179a\u17bc\u179c Hyperparameter \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be GridSearchCV \u1793\u17b7\u1784 Bayesian Optimization \u179b\u17be\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be IoT",
+          "item": "https://khmerresearch.com/papers/technology/gru-xgboost-iot-weather-prediction-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ដំណើរការរបស់ GRU និង XGBoost ជាមួយនឹងការកែតម្រូវ Hyperpar...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> GRU and XGBoost Performance with Hyperparameter Tuning Using GridSearchCV and Bayesian Optimization on an IoT-Based Weather Prediction System<br>
+        
+        <strong>Source:</strong> <a href="https://pdfs.semanticscholar.org/ae8a/e4362b8107ae56001c849449e9201a69a732.pdf" target="_blank">pdfs.semanticscholar.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ដំណើរការរបស់ GRU និង XGBoost ជាមួយនឹងការកែតម្រូវ Hyperparameter ដោយប្រើ GridSearchCV និង Bayesian Optimization លើប្រព័ន្ធព្យាករណ៍អាកាសធាតុផ្អែកលើ IoT</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> GRU and XGBoost Performance with Hyperparameter Tuning Using GridSearchCV and Bayesian Optimization on an IoT-Based Weather Prediction System</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Hendri Darmawan (Politeknik Elektronika Negeri Surabaya), Mike Yuliana (Politeknik Elektronika Negeri Surabaya), Moch. Zen Samsono Hadi (Politeknik Elektronika Negeri Surabaya)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, International Journal on Advanced Science Engineering Information Technology</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning and Meteorology</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយអំពីបញ្ហាប្រឈមក្នុងការទស្សន៍ទាយអាកាសធាតុឱ្យបានត្រឹមត្រូវដោយសារតែលក្ខណៈចម្រុះនិងស្មុគស្មាញនៃទិន្នន័យអាកាសធាតុ (Weather Data) តាមរយៈការជំនួសវិធីសាស្ត្របុរាណដោយបញ្ញាសិប្បនិម្មិត។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> វិធីសាស្ត្រនៃការស្រាវជ្រាវត្រូវបានបែងចែកជាបីដំណាក់កាលសំខាន់ៗ រួមមានការរៀបចំទិន្នន័យ ការបង្កើតម៉ូដែល និងការដាក់ឱ្យដំណើរការជាមួយឧបករណ៍ IoT ក្នុងតំបន់ជាក់ស្តែង។
+        
+        <ul>
+            
+            <li>ការរៀបចំនិងសម្អាតទិន្នន័យ (Data Preparation and Pre-processing): ការបំពេញទិន្នន័យដែលបាត់ (Interpolation) ការកាត់បន្ថយតម្លៃខុសប្រក្រតី (Outliers) ការចម្រោះទិន្នន័យដោយប្រើ Fast Fourier Transform (FFT) និងការធ្វើឱ្យទិន្នន័យមានស្តង់ដារ (Normalization)។</li>
+            
+            <li>ការបង្កើតម៉ូដែលម៉ាស៊ីនរៀនសូត្រ (Machine Learning Modeling): ការប្រើប្រាស់ក្បួនដោះស្រាយ Gated Recurrent Unit (GRU) និង Extreme Gradient Boosting (XGBoost) ដើម្បីធ្វើតំរែតំរង់ (Regression) និងចំណាត់ថ្នាក់ (Classification) សម្រាប់ការព្យាករណ៍អាកាសធាតុ ៤ ថ្ងៃទៅមុខ។</li>
+            
+            <li>ការកែតម្រូវប៉ារ៉ាម៉ែត្រ (Hyperparameter Tuning): ការប្រើប្រាស់វិធីសាស្ត្រ GridSearchCV សម្រាប់បំពាក់ម៉ូដែល GRU និងការប្រើប្រាស់ Bayesian Optimization សម្រាប់បំពាក់ម៉ូដែល XGBoost។</li>
+            
+            <li>ការដាក់ពង្រាយឧបករណ៍ IoT (Microcontroller and Model Deployment): ការតភ្ជាប់ម៉ូដែលនៅលើ Cloud ជាមួយឧបករណ៍ microcontroller ESP32 ដែលបំពាក់ដោយសេនស័រវាស់អាកាសធាតុដូចជា BME280 និងឧបករណ៍វាស់ទឹកភ្លៀងនៅប្រទេសឥណ្ឌូនេស៊ី។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>នៅក្នុងដំណាក់កាលសាកល្បងទីមួយ ម៉ូដែលតំរែតំរង់ XGBoost (Regression) ដំណើរការបានល្អជាងម៉ូដែល GRU ដោយទទួលបានតម្លៃមធ្យមនៃកំហុស (RMSE) ១.២៧ ធៀបនឹង ១.៥៥ របស់ GRU។</li>
+            
+            <li>ទោះជាយ៉ាងណាក៏ដោយ នៅក្នុងការធ្វើតេស្តជាមួយទិន្នន័យជាក់ស្តែងពីឧបករណ៍ IoT ម៉ូដែលតំរែតំរង់ GRU បែរជាដំណើរការបានល្អជាង ដោយទទួលបានតម្លៃ RMSE ២.២៣ ខណៈដែល XGBoost ទទួលបាន ២.២៨។</li>
+            
+            <li>សម្រាប់ការធ្វើចំណាត់ថ្នាក់ទស្សន៍ទាយទឹកភ្លៀង (Classification) ម៉ូដែល GRU ទទួលបានពិន្ទុ F1 Score ខ្ពស់ជាង (០.៨៨ ធៀបនឹង ០.៨៦ របស់ XGBoost) និងមានភាពត្រឹមត្រូវខ្ពស់ក្នុងការពិចារណាលើបរិបទនៃការព្យាករណ៍ ដែលជួយកាត់បន្ថយអត្រានៃការទាយខុសថាមានភ្លៀងធ្លាក់ (False Positive) បានយ៉ាងល្អ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Gated Recurrent Unit (GRU)</span></strong><br>ម៉ូដែលបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត Gated Recurrent Unit (GRU)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការស្វែងយល់ពីបរិបទនិងទិន្នន័យតាមលំដាប់លំដោយ (Sequential Data) ដែលជួយកាត់បន្ថយអត្រាការព្យាករណ៍ខុស (False Positives) ក្នុងការទាយទឹកភ្លៀង និងដំណើរការល្អប្រសើរជាមួយទិន្នន័យឧបករណ៍ IoT ជាក់ស្តែង។</td>
+                <td>ទាមទារពេលវេលាហ្វឹកហាត់យូរ និងត្រូវការទិន្នន័យប្រវត្តិសាស្រ្តវែងជាង (រហូតដល់ ១៤ ថ្ងៃនៃប្រវត្តិទិន្នន័យ) ដើម្បីធ្វើការព្យាករណ៍ ដែលធ្វើឱ្យការគណនាមានភាពយឺតយ៉ាវជាង។</td>
+                <td>ទទួលបានតម្លៃ RMSE ២.២៣ សម្រាប់ម៉ូដែល Regression (ល្អជាង XGBoost លើទិន្នន័យ IoT) និងទទួលបានពិន្ទុ F1 ០.៨៨ សម្រាប់ការធ្វើចំណាត់ថ្នាក់ទាយទឹកភ្លៀង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Extreme Gradient Boosting (XGBoost)</span></strong><br>ក្បួនដោះស្រាយ Extreme Gradient Boosting (XGBoost)</td>
+                <td>មានល្បឿនលឿន និងទាមទារទិន្នន័យប្រវត្តិសាស្រ្តត្រឹមតែ ៧ ថ្ងៃប៉ុណ្ណោះសម្រាប់ការទស្សន៍ទាយ ព្រមទាំងដំណើរការបានល្អបំផុតនៅពេលប្រើជាមួយទិន្នន័យស្តង់ដារពីស្ថានីយឧតុនិយមធំៗ។</td>
+                <td>ងាយនឹងជួបប្រទះបញ្ហាវិមាត្រទិន្នន័យ (Dimensionality Issues) នៅពេលទិន្នន័យមានទំហំធំ និងមានអត្រាទាយខុសថាមានភ្លៀងខ្ពស់ជាង GRU បន្តិចនៅពេលសាកល្បងជាមួយទិន្នន័យប្រែប្រួល។</td>
+                <td>ទទួលបានតម្លៃ RMSE ១.២៧ សម្រាប់ម៉ូដែល Regression (ល្អជាង GRU លើទិន្នន័យស្ថានីយស្តង់ដារ) និងទទួលបានពិន្ទុ F1 ០.៨៦ សម្រាប់ការធ្វើចំណាត់ថ្នាក់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធនេះទាមទារការរួមបញ្ចូលគ្នារវាងឧបករណ៍ផ្នែករឹង (Hardware) សម្រាប់ការប្រមូលទិន្នន័យផ្ទាល់ និងផ្នែកទន់ (Cloud/Software) សម្រាប់រក្សាទុក និងដំណើរការម៉ូដែលម៉ាស៊ីនរៀនសូត្រ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការបន្ទះឈីប Microcontroller ESP32, សេនស័រវាស់អាកាសធាតុ (BME280), ឧបករណ៍វាស់ល្បឿនខ្យល់ (Anemometer), ឧបករណ៍វាស់ទឹកភ្លៀង (Rain Gauge) និងការតភ្ជាប់អ៊ីនធឺណិត (Wi-Fi)។</li>
+        
+        <li><strong>Software & Cloud Services:</strong> ម៉ាស៊ីនមេ Cloud Server, ការប្រើប្រាស់ Python Flask សម្រាប់បង្កើត API, មូលដ្ឋានទិន្នន័យ MySQL សម្រាប់រក្សាទុកទិន្នន័យសេនស័រ និង Google Firebase Real-time Database សម្រាប់ភ្ជាប់ជាមួយផ្ទាំងគ្រប់គ្រង (Dashboard)។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យប្រវត្តិអាកាសធាតុរយៈពេលវែង (ក្នុងឯកសារនេះប្រើទិន្នន័យ ២០.៥ ឆ្នាំ) ដើម្បីយកមកបង្ហាត់ម៉ូដែលឱ្យបានច្បាស់លាស់ មុននឹងដាក់ឱ្យប្រើប្រាស់ជាមួយទិន្នន័យ IoT ផ្ទាល់។</li>
+        
+        <li><strong>Computing Power:</strong> ទាមទារកុំព្យូទ័រដែលមានសមត្ថភាពមធ្យម ឬខ្ពស់ (មាន GPU គួរសម) សម្រាប់ការហ្វឹកហាត់ម៉ូដែល Deep Learning (GRU) និងដំណើរការកែតម្រូវ Hyperparameter តាមរយៈ Bayesian Optimization។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យអាកាសធាតុពីស្ថានីយឧតុនិយម BMKG នៅខេត្ត Sidoarjo ប្រទេសឥណ្ឌូនេស៊ី ដែលជាតំបន់ត្រូពិចមានលក្ខណៈអាកាសធាតុស្រដៀងនឹងប្រទេសកម្ពុជា។ ទោះជាយ៉ាងណាក៏ដោយ លក្ខណៈភូមិសាស្ត្រមីក្រូ (Microclimate) អាចមានភាពខុសគ្នា ដូច្នេះការយកមកអនុវត្តនៅកម្ពុជាទាមទារការបង្ហាត់ម៉ូដែលឡើងវិញជាមួយទិន្នន័យប្រវត្តិសាស្រ្តក្នុងស្រុកពីក្រសួងធនធានទឹក និងឧតុនិយម ទើបអាចធានាបាននូវភាពត្រឹមត្រូវខ្ពស់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ការរួមបញ្ចូលគ្នារវាងបច្ចេកវិទ្យា IoT តម្លៃថោក និងបញ្ញាសិប្បនិម្មិតសម្រាប់ការទស្សន៍ទាយអាកាសធាតុ គឺជាដំណោះស្រាយដ៏ស័ក្តិសម និងមានសក្តានុពលខ្ពស់សម្រាប់កម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture) នៅតាមបណ្តាខេត្តកសិកម្ម:</strong> អាចដាក់ពង្រាយនៅខេត្តបាត់ដំបង ពោធិ៍សាត់ ឬព្រៃវែង ដើម្បីជួយកសិករព្យាករណ៍ទឹកភ្លៀង និងសីតុណ្ហភាពក្នុងកម្រិតមូលដ្ឋានភូមិឃុំ ដែលជួយសម្រួលដល់ការគ្រប់គ្រងប្រព័ន្ធស្រោចស្រព និងកាត់បន្ថយការខូចខាតដំណាំដោយសារអាកាសធាតុប្រែប្រួល។</li>
+            
+            <li><strong>ការត្រៀមបង្ការ និងគ្រប់គ្រងគ្រោះមហន្តរាយ (Disaster Management):</strong> អាចប្រើប្រាស់ដោយអាជ្ញាធរពាក់ព័ន្ធដើម្បីតាមដាន និងព្យាករណ៍ទឹកភ្លៀងនៅតំបន់ងាយរងគ្រោះដោយទឹកជំនន់ ដូចជានៅតាមបណ្តោយទន្លេសាប ឬតំបន់ទំនាប ដើម្បីចេញសេចក្តីប្រកាសអាសន្នបានទាន់ពេលវេលា។</li>
+            
+            <li><strong>វិស័យទេសចរណ៍ និងនាវាចរណ៍ (Tourism and Navigation):</strong> ផ្តល់ព័ត៌មានអាកាសធាតុច្បាស់លាស់សម្រាប់តំបន់ឆ្នេរ ដូចជាខេត្តព្រះសីហនុ និងកែប ដើម្បីផ្តល់ការព្រមានអំពីល្បឿនខ្យល់និងភ្លៀងធ្លាក់ ធានាដល់សុវត្ថិភាពនៃការធ្វើដំណើរតាមទូក និងការកម្សាន្តរបស់ភ្ញៀវទេសចរ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ប្រព័ន្ធនេះផ្តល់នូវលទ្ធភាពឱ្យប្រទេសកម្ពុជាអាចកសាងបណ្តាញស្ថានីយឧតុនិយមខ្នាតតូច (Micro-weather stations) ដែលមានតម្លៃសមរម្យនៅទូទាំងប្រទេស ដើម្បីគាំទ្រដល់ការអភិវឌ្ឍសេដ្ឋកិច្ចនិងសង្គមប្រកបដោយចីរភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការរៀបចំផ្នែករឹង និងការតភ្ជាប់ IoT (Hardware Setup):</strong> ចាប់ផ្តើមដោយការទិញនិងដំឡើងឧបករណ៍ <span class="en">ESP32 Microcontroller</span> រួចភ្ជាប់វាជាមួយនឹងសេនស័រ <span class="en">BME280</span> ឧបករណ៍វាស់ល្បឿនខ្យល់ (<span class="en">Anemometer</span>) និងប្រដាប់វាស់ទឹកភ្លៀង។ រៀបចំកូដ <span class="en">C++ / Arduino IDE</span> ដើម្បីឱ្យវាអាចអានទិន្នន័យរៀងរាល់នាទីរួចបញ្ជូនទៅកាន់ Server ។</li>
+            
+            <li><strong>ការប្រមូល និងសម្អាតទិន្នន័យ (Data Collection & Pre-processing):</strong> ស្នើសុំទិន្នន័យអាកាសធាតុប្រវត្តិសាស្ត្រពីស្ថានីយឧតុនិយមក្នុងស្រុក រួចប្រើប្រាស់បណ្ណាល័យ <span class="en">Pandas</span> និង <span class="en">Scikit-learn</span> ក្នុង <span class="en">Python</span> ដើម្បីបំពេញទិន្នន័យដែលបាត់ (Interpolation) កាត់ចោលទិន្នន័យខុសប្រក្រតី (Outliers) និងធ្វើការកែសម្រួលមាត្រដ្ឋានទិន្នន័យ (Min-Max Scaling) ។</li>
+            
+            <li><strong>ការអភិវឌ្ឍន៍ និងកែតម្រូវម៉ូដែល (Model Development & Tuning):</strong> សរសេរកូដបង្កើតម៉ូដែល <span class="en">GRU</span> ដោយប្រើប្រាស់ <span class="en">TensorFlow/Keras</span> និងម៉ូដែល <span class="en">XGBoost</span> តាមរយៈបណ្ណាល័យដើមរបស់វា។ អនុវត្ត <span class="en">GridSearchCV</span> សម្រាប់ម៉ូដែល GRU និង <span class="en">Bayesian Optimization</span> សម្រាប់ XGBoost ដើម្បីស្វែងរកចំនួន Hyperparameters ដែលធ្វើឱ្យកំហុស (RMSE) តូចបំផុត។</li>
+            
+            <li><strong>ការដាក់ឱ្យដំណើរការប្រព័ន្ធ Cloud API (Cloud API Deployment):</strong> អភិវឌ្ឍន៍ Server-side API ដោយប្រើប្រាស់ <span class="en">Python Flask</span> ដើម្បីធ្វើជាច្រកទទួលទិន្នន័យពី ESP32។ បង្កើតកូដដើម្បីបញ្ចូលទិន្នន័យទៅកាន់ <span class="en">MySQL</span> សម្រាប់ទុកជាប្រវត្តិ និងភ្ជាប់ទៅ <span class="en">Firebase Real-time Database</span> សម្រាប់ការបង្ហាញទិន្នន័យបច្ចុប្បន្នភ្លាមៗ។</li>
+            
+            <li><strong>ការបង្កើតផ្ទាំងគ្រប់គ្រងសម្រាប់អ្នកប្រើប្រាស់ (User Dashboard Creation):</strong> បង្កើតគេហទំព័រ ឬកម្មវិធីទូរស័ព្ទ (អាចប្រើ <span class="en">React</span> ឬ <span class="en">Flutter</span>) ដែលទាញយកទិន្នន័យព្យាករណ៍ ៤ ថ្ងៃទៅមុខពី Firebase មកបង្ហាញជាទម្រង់ក្រាហ្វិកងាយយល់ និងមានមុខងារលោតសារព្រមាន (Push Notifications) នៅពេលដែលម៉ូដែលទាយថាមានភ្លៀងធ្លាក់ខ្លាំង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Gated Recurrent Unit (GRU)</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Recurrent Neural Network) ដែលមានសមត្ថភាពចងចាំព័ត៌មានពីអតីតកាលក្នុងរយៈពេលវែងដោយប្រើប្រាស់ច្រកត្រួតពិនិត្យ (Update and Reset Gates) ដើម្បីសម្រេចថាព័ត៌មានណាគួររក្សាទុក ឬលុបចោល ដែលស័ក្តិសមបំផុតសម្រាប់រៀនសូត្រពីទិន្នន័យប្រែប្រួលតាមពេលវេលាដូចជាអាកាសធាតុ។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលចេះកត់ត្រាតែមេរៀនសំខាន់ៗទុកក្នុងសៀវភៅ និងលុបចោលរឿងមិនសំខាន់ ដើម្បីត្រៀមប្រឡងនៅថ្ងៃស្អែក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Extreme Gradient Boosting (XGBoost)</span></td>
+                <td>ជាក្បួនដោះស្រាយម៉ាស៊ីនរៀនសូត្រ (Machine Learning) ដែលបង្កើតមែកធាងសេចក្តីសម្រេច (Decision Trees) តូចៗជាច្រើនបន្តបន្ទាប់គ្នា ដោយមែកធាងនីមួយៗព្យាយាមកែតម្រូវកំហុសរបស់មែកធាងមុនៗ ដើម្បីបង្កើតបានជាម៉ូដែលទស្សន៍ទាយមួយដ៏រឹងមាំ និងសុក្រឹត។</td>
+                <td>ដូចជាក្រុមសិស្សដែលធ្វើការរួមគ្នា ដោយសិស្សម្នាក់ៗជួយកែចំណុចខ្សោយរបស់សិស្សមុន រហូតទទួលបានលទ្ធផលកិច្ចការស្រាវជ្រាវដ៏ល្អឥតខ្ចោះមួយរួមគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperparameter Tuning</span></td>
+                <td>គឺជាដំណើរការនៃការស្វែងរក និងកែតម្រូវប៉ារ៉ាម៉ែត្រខាងក្រៅនៃម៉ូដែលម៉ាស៊ីនរៀនសូត្រ (ដូចជាល្បឿននៃការរៀនសូត្រ ឬចំនួនស្រទាប់បណ្តាញ) មុនពេលចាប់ផ្តើមហ្វឹកហាត់ ដើម្បីស្វែងរកការកំណត់ដែលធ្វើឱ្យម៉ូដែលនោះដំណើរការបានល្អបំផុត។</td>
+                <td>ដូចជាការសារ៉េខ្សែហ្គីតាឱ្យត្រូវសម្លេង (Tuning) មុនពេលចាប់ផ្តើមលេងតន្ត្រី ដើម្បីឱ្យបទភ្លេងស្តាប់ទៅពិរោះរណ្តំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">GridSearchCV</span></td>
+                <td>ជាវិធីសាស្ត្រមួយក្នុងការស្វែងរកតម្លៃ Hyperparameter ល្អបំផុត ដោយវាធ្វើការសាកល្បងរាល់ការផ្គូផ្គងទាំងអស់នៃប៉ារ៉ាម៉ែត្រដែលយើងបានកំណត់ទុកជាមុន (សាកល្បងមួយជួរម្តងៗ) ដើម្បីរកមើលថាតើការផ្គូផ្គងមួយណាដែលផ្តល់លទ្ធផលកំហុសតិចជាងគេបំផុត។</td>
+                <td>ដូចជាការសាកល្បងចាក់សោរលេខដោយរាប់តាំងពីលេខ 000 ដល់ 999 មួយម្តងៗតាមលំដាប់ រហូតទាល់តែសោររបូតបើក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bayesian Optimization</span></td>
+                <td>ជាបច្ចេកទេសកែតម្រូវម៉ូដែលដោយប្រើប្រូបាប៊ីលីតេ (Probabilistic Model) ដែលវាប្រើប្រាស់បទពិសោធន៍ពីការសាកល្បងមុនៗ ដើម្បីទស្សន៍ទាយ និងជ្រើសរើសយកតម្លៃប៉ារ៉ាម៉ែត្រថ្មីណាដែលមានឱកាសខ្ពស់ក្នុងការផ្តល់លទ្ធផលល្អ ដែលជួយសន្សំសំចៃពេលវេលាជាងការសាកល្បងទាំងអស់ (Grid Search)។</td>
+                <td>ដូចជាអ្នកស្វែងរកកំណប់ដែលចេះវិភាគសញ្ញាសម្គាល់ពីកន្លែងដែលខ្លួនធ្លាប់ជីកខុស ដើម្បីតម្រង់ទៅរកកន្លែងថ្មីដែលមានកំណប់ពិតប្រាកដ ដោយមិនចាំបាច់ជីកគ្រប់កន្លែងទាំងអស់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fast Fourier Transform (FFT)</span></td>
+                <td>ជារូបមន្តគណិតវិទ្យាដែលបំប្លែងទិន្នន័យពីទម្រង់ពេលវេលា (Time Domain) ទៅជាទម្រង់ប្រេកង់ (Frequency Domain)។ នៅក្នុងការស្រាវជ្រាវនេះ វាត្រូវបានប្រើដើម្បីចម្រោះយកទិន្នន័យរំខាន (Noise) ចេញពីទិន្នន័យអាកាសធាតុ ជួយឱ្យម៉ូដែលងាយស្រួលចាប់យកលំនាំ (Patterns) ពិតប្រាកដ។</td>
+                <td>ដូចជាការប្រើប្រាស់ឧបករណ៍ចម្រោះ (Filter) ដើម្បីត្រងយកកករដីចេញពីទឹកល្អក់ ធ្វើឱ្យយើងទទួលបានទឹកថ្លាដែលអាចប្រើប្រាស់បានយ៉ាងមានសុវត្ថិភាព។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Root Mean Square Error (RMSE)</span></td>
+                <td>គឺជារង្វាស់ស្តង់ដារសម្រាប់វាស់កម្រិតកំហុសរបស់ម៉ូដែលព្យាករណ៍តំរែតំរង់ (Regression) ដោយគណនាពីគម្លាតជាមធ្យមរវាងតម្លៃដែលម៉ូដែលទាយបាន និងតម្លៃពិតប្រាកដដែលកើតឡើងជាក់ស្តែង។ តម្លៃ RMSE កាន់តែតូច បង្ហាញថាម៉ូដែលកាន់តែសុក្រឹត។</td>
+                <td>ដូចជាការបាញ់ព្រួញទៅកាន់ផ្ទាំងគោលដៅ បើគ្រាប់ព្រួញបាញ់ទៅចំកណ្តាល ឬក្បែរៗចំណុចកណ្តាលច្រើន នោះមានន័យថាអ្នកបាញ់មានកម្រិតកំហុស (RMSE) តូចបំផុត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+learning+models+for+multivariate+weather+forecasting" target="_blank" rel="noopener"><span class="en">Deep learning models for multivariate weather forecasting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=IoT-based+meteorological+data+collection+systems" target="_blank" rel="noopener"><span class="en">IoT-based meteorological data collection systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hyperparameter+tuning+algorithms+Grid+Search+vs+Bayesian+Optimization" target="_blank" rel="noopener"><span class="en">Hyperparameter tuning algorithms Grid Search vs Bayesian Optimization</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+imbalanced+data+in+rainfall+prediction+classification" target="_blank" rel="noopener"><span class="en">Handling imbalanced data in rainfall prediction classification</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

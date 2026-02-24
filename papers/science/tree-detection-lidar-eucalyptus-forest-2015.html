@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការប្រើប្រាស់ក្បួនដោះស្រាយការរាវរកដើមឈើដើម្បីទស្សន៍ទាយផ្ទៃសាច់ឈើ (Sapwood Area) ផ្ទៃបាត (Basal Area) និងដង់ស៊ីតេស្តុក (Stocking Density) នៅក្នុងព្រៃ Eucalyptus regnans | KhmerResearch.com</title>
+    <meta name="description" content="អ្នកគ្រប់គ្រងតំបន់ព្រៃឈើដែលផ្គត់ផ្គង់ទឹក (Forested water supply catchments) ត្រូវការវិធីសាស្ត្រច្បាស់លាស់ និងមានប្រសិទ្ធភាពដើម្បីវាស់ស្ទង់ពីការផ្លាស់ប្តូរនៃក...">
+    
+    <meta name="keywords" content="LiDAR, tree detection algorithms, forest hydrology, basal area, sapwood area, normalised cut, local maximum filtering, Eucalyptus regnans, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/tree-detection-lidar-eucalyptus-forest-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/tree-detection-lidar-eucalyptus-forest-2015.html">
+    <meta property="og:title" content="ការប្រើប្រាស់ក្បួនដោះស្រាយការរាវរកដើមឈើដើម្បីទស្សន៍ទាយផ្ទៃសាច់ឈើ (Sapwood Area) ផ្ទៃបាត (Basal Area) និងដង់ស៊ីតេស្តុក (Stocking Density) នៅក្នុងព្រៃ Eucalyptus regnans | KhmerResearch.com">
+    <meta property="og:description" content="អ្នកគ្រប់គ្រងតំបន់ព្រៃឈើដែលផ្គត់ផ្គង់ទឹក (Forested water supply catchments) ត្រូវការវិធីសាស្ត្រច្បាស់លាស់ និងមានប្រសិទ្ធភាពដើម្បីវាស់ស្ទង់ពីការផ្លាស់ប្តូរនៃការប្រើប្រាស់ទឹករបស់ព្រៃឈើ បន្ទាប់ពីមានកា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015, Remote Sensing">
+    
+    <meta property="article:tag" content="LiDAR">
+    
+    <meta property="article:tag" content="tree detection algorithms">
+    
+    <meta property="article:tag" content="forest hydrology">
+    
+    <meta property="article:tag" content="basal area">
+    
+    <meta property="article:tag" content="sapwood area">
+    
+    <meta property="article:tag" content="normalised cut">
+    
+    <meta property="article:tag" content="local maximum filtering">
+    
+    <meta property="article:tag" content="Eucalyptus regnans">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការប្រើប្រាស់ក្បួនដោះស្រាយការរាវរកដើមឈើដើម្បីទស្សន៍ទាយផ្ទៃសាច់ឈើ (Sapwood Area) ផ្ទៃបាត (Basal Area) និងដង់ស៊ីតេស្តុក (Stocking Density) នៅក្នុងព្រៃ Eucalyptus regnans">
+    <meta name="twitter:description" content="អ្នកគ្រប់គ្រងតំបន់ព្រៃឈើដែលផ្គត់ផ្គង់ទឹក (Forested water supply catchments) ត្រូវការវិធីសាស្ត្រច្បាស់លាស់ និងមានប្រសិទ្ធភាពដើម្បីវាស់ស្ទង់ពីការផ្លាស់ប្តូរនៃការប្រើប្រាស់ទឹករបស់ព្រៃឈើ បន្ទាប់ពីមានកា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1780\u17b6\u179a\u179a\u17b6\u179c\u179a\u1780\u178a\u17be\u1798\u1788\u17be\u178a\u17be\u1798\u17d2\u1794\u17b8\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1795\u17d2\u1791\u17c3\u179f\u17b6\u1785\u17cb\u1788\u17be (Sapwood Area) \u1795\u17d2\u1791\u17c3\u1794\u17b6\u178f (Basal Area) \u1793\u17b7\u1784\u178a\u1784\u17cb\u179f\u17ca\u17b8\u178f\u17c1\u179f\u17d2\u178f\u17bb\u1780 (Stocking Density) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1796\u17d2\u179a\u17c3 Eucalyptus regnans",
+      "name": "Using Tree Detection Algorithms to Predict Stand Sapwood Area, Basal Area and Stocking Density in Eucalyptus regnans Forest",
+      "description": "\u17a2\u17d2\u1793\u1780\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u178f\u17c6\u1794\u1793\u17cb\u1796\u17d2\u179a\u17c3\u1788\u17be\u178a\u17c2\u179b\u1795\u17d2\u1782\u178f\u17cb\u1795\u17d2\u1782\u1784\u17cb\u1791\u17b9\u1780 (Forested water supply catchments) \u178f\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb \u1793\u17b7\u1784\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u178a\u17be\u1798\u17d2\u1794\u17b8\u179c\u17b6\u179f\u17cb\u179f\u17d2\u1791\u1784\u17cb\u1796\u17b8\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1793\u17c3\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b9\u1780\u179a\u1794\u179f\u17cb\u1796\u17d2\u179a\u17c3\u1788\u17be \u1794\u1793\u17d2\u1791\u17b6\u1794\u17cb\u1796\u17b8\u1798\u17b6\u1793\u1780\u17b6\u179a\u179a\u17c6\u1781\u17b6\u1793\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u1780\u17b6\u1794\u17cb\u1788\u17be \u17ac\u1797\u17d2\u179b\u17be\u1784\u1786\u17c1\u17c7\u1796\u17d2\u179a\u17c3\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/tree-detection-lidar-eucalyptus-forest-2015.html",
+      "author": [{"@type": "Person", "name": "Dominik Jaskierniak (University of Melbourne)"},{"@type": "Person", "name": "George Kuczera (University of Newcastle)"},{"@type": "Person", "name": "Richard Benyon (University of Melbourne)"},{"@type": "Person", "name": "Luke Wallace (University of Tasmania)"}],
+      "datePublished": "2015, Remote Sensing",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Using Tree Detection Algorithms to Predict Stand Sapwood Area, Basal Area and Stocking Density in Eucalyptus regnans Forest",
+        "url": "https://doi.org/10.3390/rs70607298"
+      },
+      "keywords": ["LiDAR", "tree detection algorithms", "forest hydrology", "basal area", "sapwood area", "normalised cut", "local maximum filtering", "Eucalyptus regnans"],
+      "about": "Forestry and Remote Sensing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1780\u17b6\u179a\u179a\u17b6\u179c\u179a\u1780\u178a\u17be\u1798\u1788\u17be\u178a\u17be\u1798\u17d2\u1794\u17b8\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1795\u17d2\u1791\u17c3\u179f\u17b6\u1785\u17cb\u1788\u17be (Sapwood Area) \u1795\u17d2\u1791\u17c3\u1794\u17b6\u178f (Basal Area) \u1793\u17b7\u1784\u178a\u1784\u17cb\u179f\u17ca\u17b8\u178f\u17c1\u179f\u17d2\u178f\u17bb\u1780 (Stocking Density) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1796\u17d2\u179a\u17c3 Eucalyptus regnans",
+          "item": "https://khmerresearch.com/papers/science/tree-detection-lidar-eucalyptus-forest-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ការប្រើប្រាស់ក្បួនដោះស្រាយការរាវរកដើមឈើដើម្បីទស្សន៍ទាយផ្ទ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Using Tree Detection Algorithms to Predict Stand Sapwood Area, Basal Area and Stocking Density in Eucalyptus regnans Forest<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/rs70607298" target="_blank">doi.org/10.3390/rs70607298</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការប្រើប្រាស់ក្បួនដោះស្រាយការរាវរកដើមឈើដើម្បីទស្សន៍ទាយផ្ទៃសាច់ឈើ (Sapwood Area) ផ្ទៃបាត (Basal Area) និងដង់ស៊ីតេស្តុក (Stocking Density) នៅក្នុងព្រៃ Eucalyptus regnans</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Using Tree Detection Algorithms to Predict Stand Sapwood Area, Basal Area and Stocking Density in Eucalyptus regnans Forest</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Dominik Jaskierniak (University of Melbourne), George Kuczera (University of Newcastle), Richard Benyon (University of Melbourne), Luke Wallace (University of Tasmania)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015, Remote Sensing</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Forestry and Remote Sensing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> អ្នកគ្រប់គ្រងតំបន់ព្រៃឈើដែលផ្គត់ផ្គង់ទឹក (Forested water supply catchments) ត្រូវការវិធីសាស្ត្រច្បាស់លាស់ និងមានប្រសិទ្ធភាពដើម្បីវាស់ស្ទង់ពីការផ្លាស់ប្តូរនៃការប្រើប្រាស់ទឹករបស់ព្រៃឈើ បន្ទាប់ពីមានការរំខានដោយសារការកាប់ឈើ ឬភ្លើងឆេះព្រៃ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីបច្ចេកវិទ្យាពន្លឺឡាស៊ែរ (LiDAR) និងអនុវត្តក្បួនដោះស្រាយការរាវរកដើមឈើនីមួយៗ (Individual Tree Detection - ITD) ដើម្បីទស្សន៍ទាយលក្ខណៈរូបសាស្ត្រ និងរចនាសម្ព័ន្ធព្រៃឈើ។
+        
+        <ul>
+            
+            <li>ការប្រមូល និងវិភាគទិន្នន័យពន្លឺឡាស៊ែរជម្រៅ (LiDAR Data Analysis ជាមួយនឹងកម្រិត 0.9 pulses m^-2)</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយការច្រោះយកចំណុចខ្ពស់បំផុតក្នុងតំបន់ (Local Maximum Filtering - LMF)</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយ Normalised Cut (NCut) សម្រាប់បំបែកចម្រុះដើមឈើក្នុងទម្រង់ 3D</li>
+            
+            <li>ការប៉ាន់ស្មានដង់ស៊ីតេស្តុក (Stocking Density), ផ្ទៃបាត (Basal Area) និងផ្ទៃសាច់ឈើ (Sapwood Area)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>អត្រានៃការរាវរកដើមឈើបានត្រឹមត្រូវដោយប្រើវិធីសាស្ត្រ LMF គឺ ៧២% និងវិធីសាស្ត្រ NCut គឺ ៦៨% ដែលស័ក្តិសមបំផុតសម្រាប់កម្រិតដង់ស៊ីតេព្រៃឈើខ្ពស់។</li>
+            
+            <li>វិធីសាស្ត្រ LMF ទាមទារថាមពលកុំព្យូទ័រក្នុងការគណនាតិចជាង ដែលធ្វើឱ្យវាមានភាពស័ក្តិសមជាង និងចំណេញពេលវេលាសម្រាប់ការទស្សន៍ទាយដង់ស៊ីតេស្តុកនៅលើផ្ទៃដីព្រៃឈើធំៗ។</li>
+            
+            <li>ការទស្សន៍ទាយផ្ទៃសាច់ឈើ (Sapwood area) ដោយផ្ទាល់តាមរយៈសន្ទស្សន៍ LiDAR ទទួលបានភាពត្រឹមត្រូវខ្ពស់ជាង (R² = 0.56) បើប្រៀបធៀបទៅនឹងការប៉ាន់ស្មានដោយប្រយោល (R² = 0.50) ប៉ុន្តែវាទាមទារការគណនាស្មុគស្មាញជាងមុន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Local Maximum Filtering (LMF)</span></strong><br>វិធីសាស្ត្រចម្រោះយកចំណុចខ្ពស់បំផុតក្នុងតំបន់</td>
+                <td>មានដំណើរការលឿន ទាមទារថាមពលកុំព្យូទ័រតិច និងមានកំហុសវិភាគដើមឈើតែមួយជាពីរ (over-segmentation) ទាបបំផុត (ត្រឹមតែ ២%) ដែលស័ក្តិសមសម្រាប់ធ្វើការលើផ្ទៃដីធំទូលាយ។</td>
+                <td>អាចរំលងដើមឈើតូចៗច្រើន (omission error ២៥%) ជាពិសេសនៅក្នុងតំបន់ព្រៃដែលមានដង់ស៊ីតេដើមឈើដុះក្រាស់ និងកៀកៗគ្នា។</td>
+                <td>អាចរកឃើញដើមឈើនីមួយៗបានយ៉ាងត្រឹមត្រូវក្នុងអត្រា ៧២%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Normalised Cut (NCut) segmentation</span></strong><br>វិធីសាស្ត្រកាត់បំបែកតាមលក្ខណៈស្តង់ដារដើម្បីកំណត់រូបរាងដើមឈើ 3D</td>
+                <td>អាចទស្សន៍ទាយផ្ទៃបាត (Basal Area) និងផ្ទៃសាច់ឈើ (Sapwood Area) បានច្បាស់លាស់ និងលម្អិតជាងវិធីសាស្ត្រចាស់ ដោយយកចិត្តទុកដាក់លើរចនាសម្ព័ន្ធដើមឈើនីមួយៗ។</td>
+                <td>ទាមទារថាមពលកុំព្យូទ័រខ្លាំងបំផុត (មានតម្លៃខ្ពស់) និងមានកំហុសក្នុងការកាត់បំបែកដើមឈើធំមួយជាពីរច្រើន (១២%) សម្រាប់តំបន់ដែលមានចន្លោះប្រហោងព្រៃធំៗ។</td>
+                <td>អត្រារកឃើញដើមឈើបានត្រឹមត្រូវមាន ៦៨% ប៉ុន្តែអាចពន្យល់ពីបម្រែបម្រួលនៃផ្ទៃបាត (Basal Area) បានល្អជាងវិធីសាស្ត្រមុនពី ៧% ទៅ ៣០%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Area-based mixture distribution functions</span></strong><br>វិធីសាស្ត្រផ្អែកលើផ្ទៃដីដោយប្រើអនុគមន៍បែងចែកចម្រុះ (វិធីសាស្ត្រគោល)</td>
+                <td>មិនសូវស្មុគស្មាញ និងមិនតម្រូវឱ្យមានការកំណត់ទីតាំងដើមឈើនីមួយៗ (Individual Tree Detection) នោះទេ ដែលធ្វើឱ្យវាងាយស្រួលប្រើសម្រាប់ទិន្នន័យកម្រិតទាប។</td>
+                <td>ភាពត្រឹមត្រូវនៃការប៉ាន់ស្មានលក្ខណៈរូបសាស្ត្រព្រៃឈើ (ដូចជា Basal Area) មានកម្រិតទាប ព្រោះមិនបានបំបែកចំណុចទិន្នន័យដែលជាដើមឈើនៅក្រៅព្រំប្រទល់ដីវាស់ស្ទង់។</td>
+                <td>មានភាពត្រឹមត្រូវទាបជាងក្បួនដោះស្រាយ NCut ជាមធ្យម ៩% ក្នុងការគណនាផ្ទៃបាត (Basal Area)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រខ្ពស់ខ្លាំង ជាពិសេសសម្រាប់ដំណើរការក្បួនដោះស្រាយ NCut ដែលតម្រូវឱ្យប្រើប្រាស់កុំព្យូទ័រមេខ្នាតធំ (Mainframe Computer)។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនកុំព្យូទ័រខ្នាតធំកម្រិតខ្ពស់ (ដូចជា VLSCI របស់អូស្ត្រាលី) ដែលត្រូវការ RAM ពី ៤០GB ដល់ ៣៥០GB អាស្រ័យលើទំហំផ្ទៃដីចាប់ពី ១.៧ ដល់ ២.៩ ហិកតា។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី R (កញ្ចប់ GAMLSS) សម្រាប់បង្កើតម៉ូដែល, MATLAB (មុខងារ alphavol សម្រាប់បង្កើត Alpha Shapes រូបរាងដើមឈើ) និងក្បួនដោះស្រាយ NCut/LMF។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យ LiDAR ដែលមានដង់ស៊ីតេចាប់ពី ០.៩ ទៅ ៤ pulses/m² និងរូបភាព Orthophoto ថតចេញពីយន្តហោះគ្មានមនុស្សបើក (UAV/Drone) ក្នុងកម្រិតភាពច្បាស់ ២សង់ទីម៉ែត្រ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងព្រៃ Eucalyptus regnans ដែលមានអាយុកាល ៦៩-៧៣ ឆ្នាំ ក្នុងរដ្ឋ Victoria ប្រទេសអូស្ត្រាលី ដែលជាប្រភេទព្រៃមានដើមឈើខ្ពស់ៗខ្លាំង (រហូតដល់ >៧៥ម៉ែត្រ) និងមានអាយុកាលប្រហាក់ប្រហែលគ្នា។ សម្រាប់ប្រទេសកម្ពុជា ទិន្នន័យនេះអាចមានដែនកំណត់បន្តិច ដោយសារព្រៃឈើនៅកម្ពុជាភាគច្រើនជាព្រៃត្រូពិចចម្រុះ (Tropical mixed forests) ដែលមានរចនាសម្ព័ន្ធស្មុគស្មាញ និងមានកម្ពស់ឬអាយុដើមឈើចម្រុះគ្នា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាប្រភេទព្រៃឈើខុសគ្នាក៏ដោយ បច្ចេកវិទ្យា LiDAR និងវិធីសាស្ត្រវិភាគទាំងនេះមានសក្តានុពលខ្ពស់សម្រាប់ការគ្រប់គ្រងព្រៃឈើទំនើបនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>គម្រោងឥណទានកាបូន (REDD+) នៅជួរភ្នំក្រវាញ:</strong> ការប្រើប្រាស់វិធីសាស្ត្រ Local Maximum Filtering (LMF) ជាមួយទិន្នន័យ LiDAR អាចជួយប៉ាន់ស្មានដង់ស៊ីតេដើមឈើ និងរាប់ចំនួនដើមឈើលើផ្ទៃដីរាប់សែនហិកតាបានយ៉ាងរហ័ស និងចំណាយតិចជាងការចុះវាស់ផ្ទាល់។</li>
+            
+            <li><strong>ការគ្រប់គ្រងធនធានទឹកនៅតំបន់ព្រៃឡង់:</strong> ការប៉ាន់ស្មានផ្ទៃសាច់ឈើ (Sapwood Area) ដែលជាសូចនាករនៃការប្រើប្រាស់ទឹករបស់ព្រៃឈើ (Transpiration) អាចជួយឱ្យអ្នកស្រាវជ្រាវកម្ពុជាយល់ដឹងពីតុល្យភាពទឹកនៅក្នុងតំបន់រងទឹកភ្លៀង។</li>
+            
+            <li><strong>ចម្ការកៅស៊ូ ឬចម្ការម៉ៃសាក់ (Plantation Forests) នៅខេត្តរតនគិរី:</strong> ក្បួនដោះស្រាយ NCut និង LMF នឹងដំណើរការបានល្អឥតខ្ចោះនៅក្នុងចម្ការកៅស៊ូ ឬម៉ៃសាក់ ដោយសារវាជាព្រៃដាំដែលមានអាយុកាល និងកម្ពស់ប្រហាក់ប្រហែលគ្នា ស្រដៀងទៅនឹងលក្ខខណ្ឌព្រៃ Eucalyptus ក្នុងការសិក្សានេះ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការសកល្បងយកវិធីសាស្ត្រ LMF មកប្រើប្រាស់ជាមួយទិន្នន័យ LiDAR នៅកម្ពុជា អាចជួយសន្សំសំចៃធនធាន និងពេលវេលាបានយ៉ាងច្រើនក្នុងការវាយតម្លៃស្តុកព្រៃឈើ និងស្រាវជ្រាវបរិស្ថាន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទិន្នន័យ LiDAR:</strong> និស្សិតគួរស្វែងយល់ពីរបៀបដំណើរការនៃទិន្នន័យពពកចំណុច (Point Cloud Data) ដោយទាញយកទិន្នន័យគំរូដោយឥតគិតថ្លៃពីគេហទំព័រដូចជា OpenTopography ឬ EarthExplorer មកធ្វើការស្វែងយល់ពីរចនាសម្ព័ន្ធទិន្នន័យ (.las ឬ .laz)។</li>
+            
+            <li><strong>អនុវត្តការសរសេរកូដវិភាគទិន្នន័យ:</strong> ចាប់ផ្តើមរៀនសរសេរកូដក្នុងកម្មវិធី R ដោយប្រើប្រាស់កញ្ចប់ <span class='en'>lidR</span> ឬប្រើប្រាស់ Python ជាមួយបណ្ណាល័យ <span class='en'>PDAL</span> និង <span class='en'>Laspy</span> ដើម្បីសម្អាត កាត់ចំណាត់ថ្នាក់ដី (Ground classification) និងបង្កើតម៉ូដែល CHM (Canopy Height Model)។</li>
+            
+            <li><strong>សាកល្បងក្បួនដោះស្រាយ រាវរកដើមឈើ (LMF):</strong> ប្រើប្រាស់មុខងារស្វែងរកចំណុចខ្ពស់បំផុត (Local Maximum) នៅក្នុងកញ្ចប់ R <span class='en'>lidR</span> ទៅលើម៉ូដែល CHM ដែលបានបង្កើត ដើម្បីសាកល្បងរាប់ចំនួនដើមឈើនៅក្នុងផ្ទៃដីសាកល្បងតូចមួយ (ឧ. ១ហិកតា) ដោយកំណត់ទំហំផ្ទាំងស្វែងរក (Search Window) ឱ្យសមស្របនឹងទំហំមកុដព្រៃឈើនៅកម្ពុជា។</li>
+            
+            <li><strong>កសាងម៉ូដែលទស្សន៍ទាយលក្ខណៈព្រៃឈើ (Regression Models):</strong> ប្រមូលទិន្នន័យវាស់វែងជាក់ស្តែងពីកន្លែង (Field Data) ដូចជាទំហំដើម (DBH) ហើយប្រើប្រាស់បច្ចេកទេស <span class='en'>Ridge Regression</span> ឬ Machine Learning ក្នុង <span class='en'>scikit-learn</span> របស់ Python ដើម្បីបង្កើតទំនាក់ទំនងវាងសន្ទស្សន៍ LiDAR និងផ្ទៃបាត (Basal Area)។</li>
+            
+            <li><strong>បង្កើនសមត្ថភាពវិភាគខ្នាតធំ (Cloud Computing):</strong> ដោយសារតែទិន្នន័យ LiDAR ទាមទារ RAM កុំព្យូទ័រធំ និស្សិតគួរសិក្សាពីបច្ចេកទេសបែងចែកទិន្នន័យជាផ្ទាំងតូចៗ (Tiling) និងសាកល្បងដំណើរការកូដរបស់ខ្លួននៅលើប្រព័ន្ធ Cloud ដូចជា <span class='en'>Google Earth Engine</span> ឬ <span class='en'>AWS</span> ដើម្បីត្រៀមខ្លួនសម្រាប់គម្រោងខ្នាតជាតិ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Light Detection and Ranging (LiDAR)</span></td>
+                <td>បច្ចេកវិទ្យាប្រើប្រាស់ពន្លឺឡាស៊ែរបាញ់ពីយន្តហោះ ដ្រូន ឬផ្កាយរណបមកផ្ទៃដី ដើម្បីវាស់ចម្ងាយយ៉ាងច្បាស់លាស់ និងបង្កើតជាទិន្នន័យចំណុច 3D (Point Cloud) នៃរចនាសម្ព័ន្ធព្រៃឈើ និងដី។</td>
+                <td>ដូចជាសត្វប្រចៀវប្រើសំឡេងខ្ទាតត្រឡប់មកវិញដើម្បីដឹងពីទីតាំងឧបសគ្គនៅពេលយប់ ប៉ុន្តែបច្ចេកវិទ្យានេះប្រើពន្លឺឡាស៊ែរជំនួសវិញដើម្បីគូរផែនទីព្រៃឈើ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Individual Tree Detection (ITD)</span></td>
+                <td>ជាក្បួនដោះស្រាយកុំព្យូទ័រដែលវិភាគលើទិន្នន័យ 3D ដើម្បីញែក កំណត់ទីតាំង និងរាប់ចំនួនដើមឈើនីមួយៗដាច់ដោយឡែកពីគ្នានៅក្នុងតំបន់ព្រៃដ៏ធំមួយ។</td>
+                <td>ដូចជាកម្មវិធី Face ID ដែលអាចស្កេននិងញែកមុខមនុស្សម្នាក់ៗនៅក្នុងរូបថតដែលមានមនុស្សរាប់រយនាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Local Maximum Filtering (LMF)</span></td>
+                <td>វិធីសាស្ត្រក្នុងការវិភាគទិន្នន័យដោយស្វែងរកចំណុចដែលខ្ពស់ជាងគេបំផុតនៅក្នុងតំបន់ផ្ទាំងក្រណាត់ (Grid) តូចមួយ ដែលចំណុចខ្ពស់បំផុតនោះត្រូវបានសន្មតថាជាចុងកំពូលនៃដើមឈើមួយដើម។</td>
+                <td>ដូចជាការដើររកមើលសិស្សដែលខ្ពស់ជាងគេបំផុតនៅក្នុងក្រុមតូចៗនីមួយៗ ដើម្បីរាប់ថាតើមានប៉ុន្មានក្រុម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Normalised Cut (NCut)</span></td>
+                <td>ក្បួនដោះស្រាយគណិតវិទ្យាដ៏ស្មុគស្មាញដែលកាត់បំបែកទិន្នន័យ 3D ជាផ្នែកៗ ដោយប្រមូលផ្តុំចំណុច (Voxels) ដែលនៅកៀកគ្នា និងមានលក្ខណៈស្រដៀងគ្នាចូលជាក្រុមតែមួយ ដើម្បីបង្កើតជារូបរាងមកុដដើមឈើ។</td>
+                <td>ដូចជាការបែងចែកសិស្សរាប់ពាន់នាក់នៅទីធ្លា ដោយចងក្រងអ្នកដែលឈរកៀកគ្នាបំផុតឱ្យចូលជាក្រុមរង្វង់តែមួយ ដើម្បីងាយស្រួលរាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sapwood Area</span></td>
+                <td>ផ្ទៃក្រឡានៃសាច់ឈើផ្នែកខាងក្រៅ (រវាងសំបក និងស្នូលឈើ) ដែលមានមុខងារដឹកនាំទឹកពីឫសទៅកាន់ស្លឹក ដែលអ្នកវិទ្យាសាស្ត្រប្រើវាដើម្បីគណនាពីបរិមាណទឹកដែលព្រៃឈើនោះស្រូបយក។</td>
+                <td>ដូចជាទំហំនៃបំពង់ទុយោទឹកនៅក្នុងផ្ទះ ប្រសិនបើមុខកាត់បំពង់កាន់តែធំ ទឹកក៏អាចហូរបានកាន់តែច្រើន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Basal Area</span></td>
+                <td>ទំហំផ្ទៃក្រឡាសរុបនៃមុខកាត់ដើមឈើទាំងអស់ក្នុងមួយហិកតា ដែលជាទូទៅវាស់នៅកម្ពស់ដើមទ្រូងមនុស្ស (១.៣ម៉ែត្រ) ត្រូវបានប្រើសម្រាប់វាយតម្លៃដង់ស៊ីតេ និងទំហំឈើក្នុងព្រៃ។</td>
+                <td>ប្រសិនបើយើងកាត់រំលំដើមឈើទាំងអស់ក្នុងចម្ការត្រឹមចង្កេះ ហើយយកផ្ទៃមុខកាត់របស់គល់ឈើទាំងអស់នោះមកបូកបញ្ចូលគ្នា នោះហើយគឺជា Basal Area។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Canopy Height Model (CHM)</span></td>
+                <td>ម៉ូដែលផ្ទៃរាបឌីជីថល (Raster) ដែលបង្ហាញតែពីកម្ពស់ពិតប្រាកដរបស់រុក្ខជាតិ ដោយយកទិន្នន័យផ្ទៃខាងលើបង្អស់របស់ព្រៃ ដកជាមួយនឹងកម្ពស់ផ្ទៃដីខាងក្រោមចេញ។</td>
+                <td>ដូចជាការយកកម្ពស់សរុបរបស់មនុស្សម្នាក់ដែលឈរលើកៅអី ដកកម្ពស់កៅអីនោះចេញ ដើម្បីទទួលបានកម្ពស់ពិតរបស់មនុស្សនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Voxel</span></td>
+                <td>ប្រអប់គូបតូចៗក្នុងទម្រង់ 3D (Volumetric pixel) ដែលគេប្រើសម្រាប់បែងចែកលំហទិន្នន័យព្រៃឈើ ដើម្បីងាយស្រួលដល់កុំព្យូទ័រក្នុងការវិភាគនិងគណនារូបរាងដោយប្រើក្បួនដោះស្រាយ (ដូចជា NCut)។</td>
+                <td>ដូចជាដុំឡេហ្គោ (Lego) តូចៗដែលគេយកមកតម្រៀបផ្គុំគ្នា ដើម្បីបង្កើតជារូបរាងផ្ទះ ឬដើមឈើក្នុងកុំព្យូទ័រ 3D។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ridge regression</span></td>
+                <td>បច្ចេកទេសស្ថិតិសម្រាប់បង្កើតម៉ូដែលទស្សន៍ទាយ (Predictive Model) ដែលជួយដោះស្រាយបញ្ហាទិន្នន័យដែលមានអថេរច្រើនពេក ដោយកាត់បន្ថយឥទ្ធិពលនៃអថេរដែលមិនសូវសំខាន់ ដើម្បីចៀសវាងបញ្ហា Over-fitting។</td>
+                <td>ដូចជាការដាក់ពិន័យដល់សិស្សដែលរៀនទន្ទេញចាំមាត់តែមិនយល់ ដើម្បីបង្ខំឱ្យពួកគេចេះគិតវិភាគរកចម្លើយដោយខ្លួនឯងសម្រាប់សំណួរថ្មីៗនៅថ្ងៃប្រឡង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=LiDAR+applications+in+forest+inventory+and+management" target="_blank" rel="noopener"><span class="en">LiDAR applications in forest inventory and management</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Ecohydrology+of+Eucalyptus+regnans+forests" target="_blank" rel="noopener"><span class="en">Ecohydrology of Eucalyptus regnans forests</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Normalised+cut+algorithm+for+3D+point+cloud+segmentation" target="_blank" rel="noopener"><span class="en">Normalised cut algorithm for 3D point cloud segmentation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Individual+tree+detection+%28ITD%29+methods+in+dense+forests" target="_blank" rel="noopener"><span class="en">Individual tree detection (ITD) methods in dense forests</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Estimating+forest+transpiration+from+sapwood+area" target="_blank" rel="noopener"><span class="en">Estimating forest transpiration from sapwood area</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

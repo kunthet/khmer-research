@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តសម្រាប់ការគ្រប់គ្រងមនុស្សយន្ត | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះផ្តោតលើការអនុវត្តស្ថាបត្យកម្មត្រង់ស្វ័រម័រ (Transformer models) សម្រាប់ដោះស្រាយបញ្ហាគ្រប់គ្រងមនុស្សយន្តដែលមានសកម្មភាពជាបន្តបន្ទាប់ (Continuous roboti...">
+    
+    <meta name="keywords" content="Decision Transformer, Robotic Control, Reinforcement Learning, Offline RL, Fetch Environment, Generative Trajectory Modeling, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/decision-transformers-robotic-control.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/decision-transformers-robotic-control.html">
+    <meta property="og:title" content="ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តសម្រាប់ការគ្រប់គ្រងមនុស្សយន្ត | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះផ្តោតលើការអនុវត្តស្ថាបត្យកម្មត្រង់ស្វ័រម័រ (Transformer models) សម្រាប់ដោះស្រាយបញ្ហាគ្រប់គ្រងមនុស្សយន្តដែលមានសកម្មភាពជាបន្តបន្ទាប់ (Continuous robotic control tasks) តាមរយៈការបំប្លែងការរៀនម...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="Oregon State University">
+    
+    <meta property="article:tag" content="Decision Transformer">
+    
+    <meta property="article:tag" content="Robotic Control">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Offline RL">
+    
+    <meta property="article:tag" content="Fetch Environment">
+    
+    <meta property="article:tag" content="Generative Trajectory Modeling">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តសម្រាប់ការគ្រប់គ្រងមនុស្សយន្ត">
+    <meta name="twitter:description" content="ឯកសារនេះផ្តោតលើការអនុវត្តស្ថាបត្យកម្មត្រង់ស្វ័រម័រ (Transformer models) សម្រាប់ដោះស្រាយបញ្ហាគ្រប់គ្រងមនុស្សយន្តដែលមានសកម្មភាពជាបន្តបន្ទាប់ (Continuous robotic control tasks) តាមរយៈការបំប្លែងការរៀនម...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u178f\u17d2\u179a\u1784\u17cb\u179f\u17d2\u179c\u17d0\u179a\u1798\u17d0\u179a\u1792\u17d2\u179c\u17be\u179f\u17c1\u1785\u1780\u17d2\u178f\u17b8\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f",
+      "name": "Decision Transformers for Robotic Control",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179f\u17d2\u1790\u17b6\u1794\u178f\u17d2\u1799\u1780\u1798\u17d2\u1798\u178f\u17d2\u179a\u1784\u17cb\u179f\u17d2\u179c\u17d0\u179a\u1798\u17d0\u179a (Transformer models) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1787\u17b6\u1794\u1793\u17d2\u178f\u1794\u1793\u17d2\u1791\u17b6\u1794\u17cb (Continuous robotic control tasks) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1794\u17c6\u1794\u17d2\u179b\u17c2\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1794\u17c2\u1794\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement learning) \u1791\u17c5\u1787\u17b6\u1780\u17b6\u179a\u179a\u17c0\u1793\u178f\u17b6\u1798\u179b\u17c6\u178a\u17b6\u1794\u17cb\u179b\u17c6\u178a\u17c4\u1799 (Sequence learning)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/decision-transformers-robotic-control.html",
+      "author": [{"@type": "Person", "name": "Aidan Beery (Oregon State University)"},{"@type": "Person", "name": "Nathan Funckes (Oregon State University)"},{"@type": "Person", "name": "Ali Martz (Oregon State University)"}],
+      "datePublished": "Oregon State University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Decision Transformers for Robotic Control",
+        "url": "https://github.com/Aidan-B1409/AI535_DecisionTransformer"
+      },
+      "keywords": ["Decision Transformer", "Robotic Control", "Reinforcement Learning", "Offline RL", "Fetch Environment", "Generative Trajectory Modeling"],
+      "about": "Machine Learning / Robotics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u178f\u17d2\u179a\u1784\u17cb\u179f\u17d2\u179c\u17d0\u179a\u1798\u17d0\u179a\u1792\u17d2\u179c\u17be\u179f\u17c1\u1785\u1780\u17d2\u178f\u17b8\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f",
+          "item": "https://khmerresearch.com/papers/technology/decision-transformers-robotic-control.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តសម្រាប់ការគ្រប់គ្រងមនុស្សយន្ត</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Decision Transformers for Robotic Control<br>
+        
+        <strong>Source:</strong> <a href="https://github.com/Aidan-B1409/AI535_DecisionTransformer" target="_blank">github.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តសម្រាប់ការគ្រប់គ្រងមនុស្សយន្ត</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Decision Transformers for Robotic Control</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Aidan Beery (Oregon State University), Nathan Funckes (Oregon State University), Ali Martz (Oregon State University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> Oregon State University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Robotics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះផ្តោតលើការអនុវត្តស្ថាបត្យកម្មត្រង់ស្វ័រម័រ (Transformer models) សម្រាប់ដោះស្រាយបញ្ហាគ្រប់គ្រងមនុស្សយន្តដែលមានសកម្មភាពជាបន្តបន្ទាប់ (Continuous robotic control tasks) តាមរយៈការបំប្លែងការរៀនម៉ាស៊ីនបែបពង្រឹង (Reinforcement learning) ទៅជាការរៀនតាមលំដាប់លំដោយ (Sequence learning)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្រ្តនៃការធ្វើម៉ូដែលគន្លងសកម្មភាព (Generative trajectory modeling) ដោយយកទិន្នន័យក្រៅបណ្តាញ (Offline data) ពីបរិស្ថានក្លែងធ្វើមនុស្សយន្តមកបង្ហាត់ម៉ូដែល។
+        
+        <ul>
+            
+            <li>ការរៀបចំសំណុំទិន្នន័យក្រៅបណ្តាញ (Offline RL Dataset Preparation): ការប្រមូលនិងប្រើប្រាស់ទិន្នន័យគន្លងសកម្មភាពរបស់អ្នកជំនាញ (Expert trajectories) ចំនួន ៤ពាន់គន្លង និងទិន្នន័យចៃដន្យ (Random trajectories) ចំនួនជិត ៤ម៉ឺនគន្លង។</li>
+            
+            <li>បរិស្ថានសាកល្បងមនុស្សយន្ត (Fetch Environment): ការធ្វើតេស្តលើកិច្ចការចំនួន៤រួមមាន Slide, Pick & Place, Reach, និង Push ដោយប្រើមនុស្សយន្តដែលមានកម្រិតសេរីភាពចំនួន៧ (7-DoF manipulator)។</li>
+            
+            <li>ការហ្វឹកហាត់ម៉ូដែល (Decision Transformer Training): ការព្យាករណ៍សកម្មភាពបន្ទាប់ដោយស្វ័យប្រវត្តិ (Autoregressive generation) ដោយពឹងផ្អែកលើស្ថានភាព (States), សកម្មភាព (Actions) និងផលតបស្នងដែលរំពឹងទុក (Returns-To-Go)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលដែលត្រូវបានហ្វឹកហាត់ដោយទិន្នន័យអ្នកជំនាញ (Expert data) ទទួលបានអត្រាជោគជ័យខ្ពស់គឺ ១០០% សម្រាប់កិច្ចការ Reach, ៩៦% សម្រាប់ Pick & Place និង ៧៣% សម្រាប់ Push នៅពេលផ្តល់ចំនួន ១០០ ជំហាន (100 steps)។</li>
+            
+            <li>ម៉ូដែលនេះជួបប្រទះការលំបាកយ៉ាងខ្លាំងក្នុងការរៀនសូត្រពីកិច្ចការ Slide ដោយទទួលបានជោគជ័យត្រឹមតែ ៤% ប៉ុណ្ណោះ ដែលបង្ហាញពីដែនកំណត់ក្នុងការរៀនសកម្មភាពដែលមានផលប៉ះពាល់ដល់រង្វាន់នៅចម្ងាយឆ្ងាយ (Long-distance effects on reward)។</li>
+            
+            <li>លទ្ធផលជារួមបង្ហាញថា Decision Transformers ពិតជាមានសក្តានុពលក្នុងការចម្លងឥរិយាបថអ្នកជំនាញ (Behavioral cloning) ក្នុងបរិស្ថានបន្តបន្ទាប់ (Continuous-valued environments) ដោយមិនចាំបាច់ប្រើប្រាស់បច្ចេកទេស Hindsight ឡើយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Decision Transformer (Expert Data)</span></strong><br>ម៉ូដែល Decision Transformer (ហ្វឹកហាត់ដោយទិន្នន័យអ្នកជំនាញ)</td>
+                <td>អាចចម្លងឥរិយាបថអ្នកជំនាញបានយ៉ាងល្អ និងទទួលបានអត្រាជោគជ័យខ្ពស់លើកិច្ចការស្មុគស្មាញ (Behavioral cloning)។</td>
+                <td>ត្រូវការទិន្នន័យពីអ្នកជំនាញដែលពិបាកនិងចំណាយពេលក្នុងការប្រមូល ហើយនៅតែជួបការលំបាកខ្លាំងលើកិច្ចការ Slide។</td>
+                <td>អត្រាជោគជ័យ ១០០% (Reach), ៩៦% (Pick & Place) និង ៧៣% (Push) ក្នុងរយៈកាល ១០០ ជំហាន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Decision Transformer (Random Data)</span></strong><br>ម៉ូដែល Decision Transformer (ហ្វឹកហាត់ដោយទិន្នន័យចៃដន្យទាំងស្រុង)</td>
+                <td>មិនត្រូវការចំណាយពេលប្រមូលទិន្នន័យពីអ្នកជំនាញ ងាយស្រួលបង្កើតទិន្នន័យដោយស្វ័យប្រវត្តិសម្រាប់ការហ្វឹកហាត់ទ្រង់ទ្រាយធំ។</td>
+                <td>អត្រាជោគជ័យទាបខ្លាំងលើកិច្ចការភាគច្រើន ព្រោះម៉ូដែលពិបាករៀនពីទិន្នន័យដែលគ្មានគោលដៅច្បាស់លាស់។</td>
+                <td>អត្រាជោគជ័យ ១០០% សម្រាប់កិច្ចការងាយ (Reach) ប៉ុន្តែទទួលបានត្រឹម ៧% (Pick & Place) និង ២% (Slide)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Decision Transformer (90/10 Split Data)</span></strong><br>ម៉ូដែល Decision Transformer (ទិន្នន័យចៃដន្យ ៩០% និងអ្នកជំនាញ ១០%)</td>
+                <td>មានតុល្យភាពរវាងទំហំទិន្នន័យ និងគុណភាព ដោយធ្វើឲ្យអត្រាជោគជ័យកើនឡើងគួរឲ្យកត់សម្គាល់ធៀបនឹងការប្រើទិន្នន័យចៃដន្យសុទ្ធ។</td>
+                <td>ទោះបីជាលទ្ធផលមានភាពប្រសើរឡើង តែក៏មិនទាន់អាចប្រកួតប្រជែងជាមួយម៉ូដែលដែលប្រើទិន្នន័យអ្នកជំនាញទាំងស្រុងបាននៅឡើយ។</td>
+                <td>អត្រាជោគជ័យកើនដល់ ៥០% (Pick & Place) និង ២៤% (Push) ក្នុងរយៈកាល ១០០ ជំហាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រ និងទិន្នន័យគួរសម ពិសេសសម្រាប់ការធ្វើត្រាប់តាមបរិស្ថានក្លែងធ្វើមនុស្សយន្ត និងការហ្វឹកហាត់ម៉ូដែលស្ថាបត្យកម្ម Transformer។
+    
+    <ul>
+        
+        <li><strong>Software & Frameworks:</strong> ទាមទារការប្រើប្រាស់បណ្ណាល័យ gymnasium-robotics និង MuJoCo physics simulator ព្រមទាំង HuggingFace Transformers សម្រាប់ស្ថាបត្យកម្មម៉ូដែល។</li>
+        
+        <li><strong>Hardware:</strong> ត្រូវការកុំព្យូទ័រដែលមានក្រាហ្វិកកាត (GPU) ខ្លាំង ដើម្បីគណនា និងហ្វឹកហាត់ម៉ូដែល Transformer ដែលមាន Self-attention heads ជាច្រើន។</li>
+        
+        <li><strong>Dataset:</strong> ពឹងផ្អែកលើទិន្នន័យគន្លងសកម្មភាពក្រៅបណ្តាញ (Offline RL dataset) ដែលមានរហូតដល់ ៤៤,០០០ គន្លង (៤ម៉ឺនចៃដន្យ និង ៤ពាន់ពីអ្នកជំនាញ)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងទាំងស្រុងនៅក្នុងបរិស្ថានក្លែងធ្វើ (Simulation) តាមរយៈកុំព្យូទ័រ ដោយមិនមានការសាកល្បងលើមនុស្សយន្តពិតប្រាកដ (Physical robots) នោះទេ។ នេះមានសារៈសំខាន់សម្រាប់ប្រទេសកម្ពុជា ព្រោះការរៀននៅក្នុងការក្លែងធ្វើជួយសន្សំសំចៃថវិកា ប៉ុន្តែនៅពេលយកទៅអនុវត្តផ្ទាល់នៅក្នុងរោងចក្រ អាចនឹងជួបប្រទះបញ្ហាគម្លាតរវាងការក្លែងធ្វើនិងការពិត (Sim-to-Real gap) ក៏ដូចជាកត្តារូបវិទ្យានៅក្នុងពិភពពិត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្រ្តនៃការប្រើប្រាស់ Decision Transformers ក្នុងការបញ្ជាមនុស្សយន្តតាមរយៈទិន្នន័យក្រៅបណ្តាញ (Offline RL) មានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍវិស័យស្វ័យប្រវត្តិកម្មនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកម្មន្តសាល និងរោងចក្រ (ឧ. តំបន់សេដ្ឋកិច្ចពិសេសភ្នំពេញ - PPSEZ):</strong> កិច្ចការមនុស្សយន្តដូចជា Pick & Place (ចាប់យកនិងដាក់) និង Push (រុញ) គឺស្រដៀងគ្នាខ្លាំងទៅនឹងចង្វាក់ផលិតកម្ម និងការវេចខ្ចប់ ដែលរោងចក្រនៅកម្ពុជាអាចយកទៅអនុវត្តដើម្បីបង្កើនផលិតភាព។</li>
+            
+            <li><strong>ការស្រាវជ្រាវ និងការអប់រំ (ឧ. វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា - ITC):</strong> និស្សិតអាចប្រើប្រាស់ទិន្នន័យ Offline RL និង Simulator ដើម្បីរៀននិងស្រាវជ្រាវពីការបញ្ជាមនុស្សយន្តកម្រិតខ្ពស់ ដោយមិនចាំបាច់មានថវិកាទិញដៃមនុស្សយន្តតម្លៃថ្លៃៗឡើយ។</li>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> អាចប្រើប្រាស់គំនិតនៃការរៀនសកម្មភាពស្វ័យប្រវត្តិ ដើម្បីអភិវឌ្ឍមនុស្សយន្តសម្រាប់ការប្រមូលផល ឬរៀបចំចំណាត់ថ្នាក់កសិផល។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្ត Offline RL ជួយបើកផ្លូវឲ្យស្ថាប័នអប់រំ និងឧស្សាហកម្មនៅកម្ពុជាអាចចាប់ផ្តើមស្រាវជ្រាវបញ្ញាសិប្បនិម្មិតនិងមនុស្សយន្តដោយចំណាយធនធានតិចតួច។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាពីស្ថាបត្យកម្ម និងដំឡើងបរិស្ថានក្លែងធ្វើ:</strong> និស្សិតត្រូវចាប់ផ្តើមសិក្សាពីទ្រឹស្តីនៃ Sequence Modeling ព្រមទាំងដំឡើងបរិស្ថានកូដ <span class="en">gymnasium-robotics</span> និង <span class="en">MuJoCo physics simulator</span> ដើម្បីស្វែងយល់ពីរបៀបដែលមនុស្សយន្តធ្វើអន្តរកម្ម។</li>
+            
+            <li><strong>ជំហានទី២៖ ការរៀបចំនិងស្វែងយល់ពីទិន្នន័យ Offline:</strong> ប្រើប្រាស់ទិន្នន័យស្រាប់ពី <span class="en">D4RL</span> ឬប្រមូលទិន្នន័យដែលបង្កើតដោយ <span class="en">GoFAR</span> ដើម្បីយល់ពីការរៀបចំទិន្នន័យប្រភេទ Trajectories (States, Actions, Rewards) សម្រាប់បញ្ចូនទៅឲ្យម៉ូដែល។</li>
+            
+            <li><strong>ជំហានទី៣៖ អភិវឌ្ឍម៉ូដែល Decision Transformer:</strong> សរសេរកូដអភិវឌ្ឍម៉ូដែលដោយប្រើបណ្ណាល័យ <span class="en">HuggingFace Transformers</span> ហើយកែសម្រួលប៉ារ៉ាម៉ែត្រ ដូចជាការបន្ថយស្រទាប់ Layers ទៅ ២ និងបង្កើន Attention heads ទៅ ៤ ដើម្បីឲ្យសក្តិសមនឹងទំហំ Observation space ។</li>
+            
+            <li><strong>ជំហានទី៤៖ ហ្វឹកហាត់ និងវាយតម្លៃលើកិច្ចការជាក់លាក់:</strong> ដំណើរការហ្វឹកហាត់ម៉ូដែលជាមុនលើកិច្ចការងាយស្រួលដូចជា <span class="en">Reach</span> មុននឹងបន្តទៅ <span class="en">Pick & Place</span> ព្រមទាំងសាកល្បងផ្លាស់ប្តូរទម្ងន់នៃរង្វាន់ (Reward shaping) និងបង្កើនចំនួនជំហានដល់ ១០០ steps ដើម្បីបង្កើនអត្រាជោគជ័យ។</li>
+            
+            <li><strong>ជំហានទី៥៖ សាកល្បងបំប្លែងទៅកាន់ការអនុវត្តពិត (Sim-to-Real):</strong> សហការជាមួយមន្ទីរពិសោធន៍មនុស្សយន្តនៅតាមសាកលវិទ្យាល័យ ដើម្បីផ្ទេរកូដដែលបានហ្វឹកហាត់ក្នុង Simulator រួច យកទៅសាកល្បងបញ្ជាលើដៃមនុស្សយន្តខ្នាតតូចពិតប្រាកដ ដោយវាស់ស្ទង់ពីបញ្ហា Numerical instability។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision Transformer</span></td>
+                <td>ជាស្ថាបត្យកម្មបញ្ញាសិប្បនិម្មិតដែលជាទូទៅប្រើប្រាស់សម្រាប់ការបកប្រែឬវិភាគភាសា ប៉ុន្តែនៅក្នុងឯកសារនេះត្រូវបានយកមកប្រើដើម្បីទស្សន៍ទាយនិងកំណត់សកម្មភាពបន្ទាប់របស់មនុស្សយន្ត ដោយផ្អែកលើប្រវត្តិសកម្មភាព ស្ថានភាពបច្ចុប្បន្ន និងរង្វាន់ដែលចង់បាន។</td>
+                <td>ដូចជាសិស្សដែលអានសៀវភៅប្រវត្តិសាស្ត្រ រួចទាយថាតើព្រឹត្តិការណ៍អ្វីនឹងកើតឡើងបន្ទាប់ដោយផ្អែកលើលំដាប់លំដោយនៃសាច់រឿងដែលបានកើតឡើងរួចមកហើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline Reinforcement Learning</span></td>
+                <td>ជាបច្ចេកទេសបង្រៀនម៉ូដែលបញ្ញាសិប្បនិម្មិតឲ្យចេះធ្វើការសម្រេចចិត្ត ដោយរៀនពីសំណុំទិន្នន័យចាស់ៗដែលបានប្រមូលទុកជាមុន (កំណត់ត្រាសកម្មភាព) ដោយមិនចាំបាច់ឲ្យម៉ូដែលនោះទៅសាកល្បងខុសត្រូវដោយផ្ទាល់នៅក្នុងបរិស្ថានជាក់ស្តែងនោះទេ។</td>
+                <td>ដូចជាការរៀនបើកបរដោយត្រឹមតែមើលវីដេអូកំណត់ត្រារបស់អ្នកដទៃបើកបរ ជាជាងការទៅអង្គុយសាកល្បងបើកបរផ្ទាល់នៅលើដងផ្លូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Return To Go (RTG)</span></td>
+                <td>ជាការគណនានិងបូកសរុបនូវរង្វាន់ ឬលទ្ធផលរំពឹងទុកដែលម៉ូដែលនឹងទទួលបាននាពេលអនាគត ចាប់ពីចំណុចបច្ចុប្បន្នរហូតដល់ចប់កិច្ចការ ដើម្បីជាត្រីវិស័យជួយឲ្យម៉ូដែលដឹងថាត្រូវធ្វើសកម្មភាពអ្វីបន្ទាប់ទើបទទួលបានផលចំណេញខ្ពស់បំផុត។</td>
+                <td>ដូចជាការសម្លឹងមើលចំនួនគីឡូម៉ែត្រដែលនៅសល់រហូតដល់គោលដៅចុងក្រោយ ដើម្បីគណនាថាតើត្រូវប្រឹងជាន់ហ្គែរប៉ុណ្ណាទៀតទើបទៅដល់ទាន់ពេលវេលា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hindsight Experience Replay (HER)</span></td>
+                <td>ជាបច្ចេកទេសបង្រៀនម៉ូដែលឲ្យរៀនពីកំហុស ដោយយកលទ្ធផលចុងក្រោយដែលខុសពីគោលដៅដើម មកបន្លំចាត់ទុកថាជា "គោលដៅថ្មី" ដើម្បីឲ្យម៉ូដែលនៅតែមានឱកាសរៀនពីរបៀបធ្វើដំណើរទៅកាន់ចំណុចនោះ ទោះបីជាវាជាបរាជ័យក៏ដោយ។</td>
+                <td>ដូចជាអ្នកបាញ់ធ្នូខុសគោលដៅចូលទៅចំដើមឈើ រួចប្រាប់ខ្លួនឯងថា "ការពិតខ្ញុំមានបំណងបាញ់ដើមឈើនេះតើ" ដើម្បីរៀនពីរបៀបបាញ់ឲ្យចំដើមឈើនោះនៅពេលក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Behavioral cloning</span></td>
+                <td>ដំណើរការដែលម៉ូដែលបញ្ញាសិប្បនិម្មិតព្យាយាមចម្លង និងធ្វើតាមរាល់សកម្មភាពរបស់អ្នកជំនាញបេះបិទ ដោយយកទិន្នន័យគន្លងសកម្មភាពល្អៗរបស់អ្នកជំនាញមកធ្វើជាគំរូដើមសម្រាប់រៀនសូត្រ។</td>
+                <td>ដូចជាកូនក្មេងដែលរៀនចងខ្សែស្បែកជើងដោយការសម្លឹងមើល និងធ្វើតាមចលនាដៃរបស់ឪពុកម្តាយគ្រប់ៗជំហាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sparse binary reward</span></td>
+                <td>ប្រព័ន្ធផ្តល់រង្វាន់ដែលម៉ូដែលនឹងទទួលបានសញ្ញាវិជ្ជមាន (ឧ. លេខ ០) តែនៅពេលដែលវាសម្រេចគោលដៅចុងក្រោយប៉ុណ្ណោះ ហើយវានឹងមិនទទួលបានការលើកទឹកចិត្តឬតម្រុយអ្វីទាំងអស់ (ឧ. លេខ -១) នៅចន្លោះពេលកំពុងពុះពារធ្វើកិច្ចការនោះ។</td>
+                <td>ដូចជាការប្រលងដែលគ្រូដាក់ពិន្ទុត្រឹមតែ "ជាប់" ឬ "ធ្លាក់" ដោយមិនមានការឲ្យពិន្ទុបណ្តើរៗលើចំណុចនីមួយៗដែលសិស្សបានធ្វើត្រូវឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Autoregressive action generation</span></td>
+                <td>ជាដំណើរការដែលម៉ូដែលព្យាករណ៍ និងបង្កើតទិន្នន័យ ឬសកម្មភាពបន្ទាប់ ម្តងមួយៗតាមលំដាប់លំដោយយ៉ាងតឹងរ៉ឹង ដោយផ្អែកលើសកម្មភាពដែលវាទើបតែបានសម្រេចចិត្តកាលពីជំហានមុន។</td>
+                <td>ដូចជាការសរសេរប្រយោគមួយ ដែលពាក្យនីមួយៗត្រូវបានជ្រើសរើសដោយពឹងផ្អែកទាំងស្រុងទៅលើពាក្យដែលយើងទើបតែបានសរសេររួចពីមុន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Offline+reinforcement+learning+for+continuous+control" target="_blank" rel="noopener"><span class="en">Offline reinforcement learning for continuous control</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Goal-conditioned+reinforcement+learning+in+robotics" target="_blank" rel="noopener"><span class="en">Goal-conditioned reinforcement learning in robotics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Trajectory+sequence+modeling+using+transformers" target="_blank" rel="noopener"><span class="en">Trajectory sequence modeling using transformers</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hindsight+Experience+Replay+%28HER%29+in+robotic+manipulation" target="_blank" rel="noopener"><span class="en">Hindsight Experience Replay (HER) in robotic manipulation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

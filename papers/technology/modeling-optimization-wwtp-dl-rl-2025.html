@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើគំរូ និងការធ្វើឱ្យប្រសើរឡើងនូវរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ដោយប្រើប្រាស់ Deep Learning និង Reinforcement Learning | KhmerResearch.com</title>
+    <meta name="description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការធ្វើឱ្យប្រសើរឡើងនូវការកម្ចាត់ជាតិផូស្វ័រនៅក្នុងរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ (WWTPs) ដើម្បីគោរពតាមបទប្បញ្ញត្តិបរិស្ថាន...">
+    
+    <meta name="keywords" content="Wastewater Treatment Plants (WWTP), Phosphorus Removal, Deep Reinforcement Learning (DRL), Long Short-Term Memory (LSTM), Soft Actor-Critic (SAC), Process Optimization, Time Series Forecasting, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/modeling-optimization-wwtp-dl-rl-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/modeling-optimization-wwtp-dl-rl-2025.html">
+    <meta property="og:title" content="ការធ្វើគំរូ និងការធ្វើឱ្យប្រសើរឡើងនូវរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ដោយប្រើប្រាស់ Deep Learning និង Reinforcement Learning | KhmerResearch.com">
+    <meta property="og:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការធ្វើឱ្យប្រសើរឡើងនូវការកម្ចាត់ជាតិផូស្វ័រនៅក្នុងរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ (WWTPs) ដើម្បីគោរពតាមបទប្បញ្ញត្តិបរិស្ថានដ៏តឹងរ៉ឹង ទន្ទឹមនឹងការកាត់បន្ថយថ្លៃដើមប្...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2025 Aalborg University Open Publishing">
+    
+    <meta property="article:tag" content="Wastewater Treatment Plants (WWTP)">
+    
+    <meta property="article:tag" content="Phosphorus Removal">
+    
+    <meta property="article:tag" content="Deep Reinforcement Learning (DRL)">
+    
+    <meta property="article:tag" content="Long Short-Term Memory (LSTM)">
+    
+    <meta property="article:tag" content="Soft Actor-Critic (SAC)">
+    
+    <meta property="article:tag" content="Process Optimization">
+    
+    <meta property="article:tag" content="Time Series Forecasting">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើគំរូ និងការធ្វើឱ្យប្រសើរឡើងនូវរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ដោយប្រើប្រាស់ Deep Learning និង Reinforcement Learning">
+    <meta name="twitter:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការធ្វើឱ្យប្រសើរឡើងនូវការកម្ចាត់ជាតិផូស្វ័រនៅក្នុងរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ (WWTPs) ដើម្បីគោរពតាមបទប្បញ្ញត្តិបរិស្ថានដ៏តឹងរ៉ឹង ទន្ទឹមនឹងការកាត់បន្ថយថ្លៃដើមប្...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc \u1793\u17b7\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u17a1\u17be\u1784\u1793\u17bc\u179c\u179a\u17c4\u1784\u1785\u1780\u17d2\u179a\u1794\u17d2\u179a\u1796\u17d2\u179a\u17b9\u178f\u17d2\u178f\u1780\u1798\u17d2\u1798\u1791\u17b9\u1780\u1780\u1781\u17d2\u179c\u1780\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Deep Learning \u1793\u17b7\u1784 Reinforcement Learning",
+      "name": "Modeling and Optimization of Wastewater Treatment Plants with Deep Learning and Reinforcement Learning",
+      "description": "\u1793\u17b7\u1780\u17d2\u1781\u17c1\u1794\u1794\u1791\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u17a1\u17be\u1784\u1793\u17bc\u179c\u1780\u17b6\u179a\u1780\u1798\u17d2\u1785\u17b6\u178f\u17cb\u1787\u17b6\u178f\u17b7\u1795\u17bc\u179f\u17d2\u179c\u17d0\u179a\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179a\u17c4\u1784\u1785\u1780\u17d2\u179a\u1794\u17d2\u179a\u1796\u17d2\u179a\u17b9\u178f\u17d2\u178f\u1780\u1798\u17d2\u1798\u1791\u17b9\u1780\u1780\u1781\u17d2\u179c\u1780\u17cb (WWTPs) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1782\u17c4\u179a\u1796\u178f\u17b6\u1798\u1794\u1791\u1794\u17d2\u1794\u1789\u17d2\u1789\u178f\u17d2\u178f\u17b7\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u178a\u17cf\u178f\u17b9\u1784\u179a\u17c9\u17b9\u1784 \u1791\u1793\u17d2\u1791\u17b9\u1798\u1793\u17b9\u1784\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1790\u17d2\u179b\u17c3\u178a\u17be\u1798\u1794\u17d2\u179a\u178f\u17b7\u1794\u178f\u17d2\u178f\u17b7\u1780\u17b6\u179a \u1793\u17b7\u1784\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1797\u17b6\u1796\u1799\u17ba\u178f\u1799\u17c9\u17b6\u179c\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 (Time Delays)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/modeling-optimization-wwtp-dl-rl-2025.html",
+      "author": [{"@type": "Person", "name": "Esmaeel Mohammadi (Aalborg University)"}],
+      "datePublished": "2025 Aalborg University Open Publishing",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Modeling and Optimization of Wastewater Treatment Plants with Deep Learning and Reinforcement Learning",
+        "url": "https://doi.org/10.54337/aau784100707"
+      },
+      "keywords": ["Wastewater Treatment Plants (WWTP)", "Phosphorus Removal", "Deep Reinforcement Learning (DRL)", "Long Short-Term Memory (LSTM)", "Soft Actor-Critic (SAC)", "Process Optimization", "Time Series Forecasting"],
+      "about": "Environmental Engineering and Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc \u1793\u17b7\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u17a1\u17be\u1784\u1793\u17bc\u179c\u179a\u17c4\u1784\u1785\u1780\u17d2\u179a\u1794\u17d2\u179a\u1796\u17d2\u179a\u17b9\u178f\u17d2\u178f\u1780\u1798\u17d2\u1798\u1791\u17b9\u1780\u1780\u1781\u17d2\u179c\u1780\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Deep Learning \u1793\u17b7\u1784 Reinforcement Learning",
+          "item": "https://khmerresearch.com/papers/technology/modeling-optimization-wwtp-dl-rl-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើគំរូ និងការធ្វើឱ្យប្រសើរឡើងនូវរោងចក្រប្រព្រឹត្តកម្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Modeling and Optimization of Wastewater Treatment Plants with Deep Learning and Reinforcement Learning<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.54337/aau784100707" target="_blank">doi.org/10.54337/aau784100707</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើគំរូ និងការធ្វើឱ្យប្រសើរឡើងនូវរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ដោយប្រើប្រាស់ Deep Learning និង Reinforcement Learning</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Modeling and Optimization of Wastewater Treatment Plants with Deep Learning and Reinforcement Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Esmaeel Mohammadi (Aalborg University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025 Aalborg University Open Publishing</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Environmental Engineering and Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការធ្វើឱ្យប្រសើរឡើងនូវការកម្ចាត់ជាតិផូស្វ័រនៅក្នុងរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ (WWTPs) ដើម្បីគោរពតាមបទប្បញ្ញត្តិបរិស្ថានដ៏តឹងរ៉ឹង ទន្ទឹមនឹងការកាត់បន្ថយថ្លៃដើមប្រតិបត្តិការ និងការគ្រប់គ្រងភាពយឺតយ៉ាវនៃប្រព័ន្ធ (Time Delays)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតបរិស្ថានក្លែងធ្វើដោយផ្អែកលើទិន្នន័យ (Data-driven Simulation) និងបានបង្ហាត់ភ្នាក់ងារ Deep Reinforcement Learning (DRL) ដើម្បីបង្កើនប្រសិទ្ធភាពដំណើរការនេះ។
+        
+        <ul>
+            
+            <li>ការប្រមូល និងរៀបចំទិន្នន័យពិតពីប្រព័ន្ធ SCADA របស់រោងចក្រ (Data Collection and Preprocessing)</li>
+            
+            <li>ការបង្កើតម៉ូដែលក្លែងធ្វើដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទដូចជា LSTM និង Transformer សម្រាប់ការទស្សន៍ទាយតាមស៊េរីពេលវេលា (Time Series Forecasting)</li>
+            
+            <li>ការកែលម្អម៉ូដែលដោយបញ្ចូលអញ្ញាតខាងក្រៅ (Exogenous Variables) និងអនុគមន៍វាយតម្លៃពហុជំហាន (Multi-step Loss Function) ដើម្បីកាត់បន្ថយកំហុស</li>
+            
+            <li>ការបង្ហាត់ក្បួន Soft Actor-Critic (SAC) សម្រាប់ត្រួតពិនិត្យដំណើរការដោយគិតបញ្ចូលនូវការពន្យារពេល (Delay-Aware Mechanisms)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែល Soft Actor-Critic ដែលគិតពីការពន្យារពេលប្រភេទចៃដន្យ (SAC-RD) អាចកាត់បន្ថយការបំភាយជាតិផូស្វ័របានចំនួន ៣៦% ប្រៀបធៀបនឹងឧបករណ៍បញ្ជា PID ប្រពៃណី។</li>
+            
+            <li>ភ្នាក់ងារ SAC-RD បានកាត់បន្ថយគម្លាតកំហាប់ផូស្វ័រពីគោលដៅរហូតដល់ ៧៧% និងបង្កើនរង្វាន់សរុប (Total Reward) ៥៥% នៅក្នុងការក្លែងធ្វើ។</li>
+            
+            <li>វិធីសាស្ត្រនេះបានជួយកាត់បន្ថយចំណាយប្រតិបត្តិការសរុបចំនួន ៩% រួមទាំងការសន្សំសំចៃការប្រើប្រាស់សារធាតុគីមី ខណៈពេលដែលនៅតែធានាបាននូវការអនុលោមតាមបទប្បញ្ញត្តិយ៉ាងខ្ជាប់ខ្ជួន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Traditional PID Controller</span></strong><br>ឧបករណ៍បញ្ជា PID ប្រពៃណី</td>
+                <td>ងាយស្រួលអនុវត្ត និងប្រើប្រាស់ទូទៅក្នុងឧស្សាហកម្ម។ មានប្រសិទ្ធភាពក្នុងការកែតម្រូវគម្លាតកំហាប់ផូស្វ័រភ្លាមៗ។</td>
+                <td>ខ្វះសមត្ថភាពទស្សន៍ទាយទុកជាមុន និងពិបាកគ្រប់គ្រងភាពយឺតយ៉ាវ (Time Delays) ព្រមទាំងបម្រែបម្រួលថាមវន្តនៃប្រព័ន្ធស្មុគស្មាញ។</td>
+                <td>ចំណាយប្រតិបត្តិការសរុបមានកម្រិតខ្ពស់ (២៩២៤.៦៩ DKK) និងមានអត្រាគម្លាតពីគោលដៅដែលបានកំណត់រហូតដល់ ២៤.១៧%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Soft Actor-Critic with Random Delay (SAC-RD)</span></strong><br>អភិក្រម Soft Actor-Critic ដែលគិតគូរពីការពន្យារពេលចៃដន្យ</td>
+                <td>មានភាពបត់បែនខ្ពស់ក្នុងការសម្របខ្លួនទៅនឹងការពន្យារពេលមិនទៀងទាត់ (Random Delays)។ អាចរក្សាលំនឹងកំហាប់ផូស្វ័របានល្អ និងសន្សំសំចៃសារធាតុគីមី។</td>
+                <td>ទាមទារថាមពលកុំព្យូទ័រ និងទិន្នន័យច្រើនសម្រាប់ការបង្ហាត់ (Training) ហើយត្រូវពឹងផ្អែកលើការបង្កើតបរិស្ថានក្លែងធ្វើ (Simulator) ដែលមានភាពសុក្រឹតខ្ពស់កម្រិតយន្តការស្មុគស្មាញ។</td>
+                <td>កាត់បន្ថយអត្រាគម្លាតគោលដៅបាន ៧៧% កាត់បន្ថយការបំភាយជាតិផូស្វ័រ ៥៥% និងសន្សំសំចៃចំណាយប្រតិបត្តិការសរុបបាន ៩.៣% ធៀបនឹង PID។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">LSTM-based Simulator with Iterative Correction</span></strong><br>ម៉ូដែលក្លែងធ្វើ LSTM ជាមួយការកែតម្រូវចម្លើយតបជាលំដាប់</td>
+                <td>ពូកែក្នុងការចាប់យកទំនាក់ទំនងទិន្នន័យប្រែប្រួលតាមពេលវេលា (Long-term dependencies) និងអាចកែតម្រូវកំហុសប្រមូលផ្តុំបានល្អ។</td>
+                <td>ទាមទារការរៀបចំមុខងារទម្រង់ច្បាប់ (Loss Function) ស្មុគស្មាញ (ឧ. DILATE) ដើម្បីចៀសវាងការធ្លាក់ចុះគុណភាពនៅពេលទស្សន៍ទាយរយៈពេលយូរ។</td>
+                <td>បន្ទាប់ពីកែលម្អ វាបានកាត់បន្ថយកំហុសទស្សន៍ទាយពហុជំហាន (Multi-step simulation errors) រហូតដល់ ៩៨% ផ្នែកលើពិន្ទុ DTW។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រ និងកម្រិតបច្ចេកទេសខ្ពស់ សម្រាប់ការប្រមូលទិន្នន័យធំៗ និងបង្ហាត់ម៉ូដែល Deep Learning/Reinforcement Learning។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនមេ (Compute Node) លំដាប់ខ្ពស់ ដែលមានស៊ីភីយូ (CPU Intel Xeon), រ៉េមធំ (1.5 TB) និងមានអង្គគណនាត្រាប់ក្រាហ្វិក NVIDIA Tesla V100 GPUs ទំហំ 32GB ចំនួនច្រើនដើម្បីពន្លឿនដំណើរការ។</li>
+        
+        <li><strong>Software:</strong> ភាសា Python រួមជាមួយបណ្ណាល័យជំនាញដូចជា PyTorch, OpenAI Gym (បច្ចុប្បន្ន Gymnasium), Stable Baselines3 ព្រមទាំង Optuna សម្រាប់រៀបចំ Hyperparameter។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យប្រវត្តិប្រតិបត្តិការជាក់ស្តែងពីប្រព័ន្ធ SCADA របស់រោងចក្ររយៈពេល ២ឆ្នាំ ដោយកត់ត្រារៀងរាល់ ១ ទៅ ៥នាទីម្តង។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅលើវិស័យ Artificial Intelligence (RL & DL), វិស្វកម្មបរិស្ថាន (Wastewater Treatment Dynamics), និងការរៀបចំស៊េរីទិន្នន័យ (Time-series data engineering)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីរោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់ Agtrup នៅក្នុងប្រទេសដាណឺម៉ាក ដែលប្រតិបត្តិការក្នុងបរិយាកាសអាកាសធាតុត្រជាក់ និងលក្ខណៈទឹកកខ្វក់តាមស្តង់ដារអឺរ៉ុប។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកអនុវត្តផ្ទាល់អាចជួបបញ្ហាប្រឈមដោយសារកម្ពុជាមានអាកាសធាតុក្តៅសើម របបទឹកភ្លៀងខុសគ្នាខ្លាំងរវាងរដូវប្រាំងនិងវស្សា ដែលធ្វើឱ្យសីតុណ្ហភាព និងសមាសធាតុទឹកខុសគ្នា។ ហេតុនេះ ទាមទារឱ្យមានការប្រមូលទិន្នន័យ និងបង្ហាត់ម៉ូដែលសាជាថ្មី។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រប្រើប្រាស់ AI សម្រាប់កែលម្អការគ្រប់គ្រងរោងចក្រទឹកកខ្វក់នេះ មានសក្តានុពលដ៏ធំធេងសម្រាប់ប្រទេសកម្ពុជា ពិសេសក្នុងបរិបទដែលទីក្រុងកំពុងពង្រីកខ្លួនយ៉ាងរហ័ស។</p>
+        
+        <ul>
+            
+            <li><strong>រោងចក្រប្រព្រឹត្តកម្មទឹកកខ្វក់នៅរាជធានីភ្នំពេញ (ឧ. ស្ថានីយជើងឯក):</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យានេះដើម្បីបង្កើនប្រសិទ្ធភាពបន្សុទ្ធ កាត់បន្ថយថ្លៃដើមនៃការប្រើប្រាស់សារធាតុគីមី និងធានាថាទឹកដែលបញ្ចេញទៅកាន់តំបន់បឹងធម្មជាតិមានសុវត្ថិភាព ស្របតាមស្តង់ដារបរិស្ថានថ្នាក់ជាតិ។</li>
+            
+            <li><strong>តំបន់ទេសចរណ៍ និងឆ្នេរសមុទ្រ (ឧ. ខេត្តព្រះសីហនុ):</strong> ការកើនឡើងនូវសណ្ឋាគារ និងការអភិវឌ្ឍន៍ឆ្នេរ តម្រូវឱ្យមានការគ្រប់គ្រងទឹកកខ្វក់ដ៏ឆ្លាតវៃ ដើម្បីការពារការបំពុលទឹកសមុទ្រ ថែរក្សាផ្កាថ្ម និងសោភ័ណភាពបរិស្ថានទាក់ទាញភ្ញៀវទេសចរ។</li>
+            
+            <li><strong>វិស័យឧស្សាហកម្មកាត់ដេរ និងផលិតកម្ម:</strong> អាចកែច្នៃវិធីសាស្ត្រនេះ (AI-driven optimization) ដើម្បីត្រួតពិនិត្យដោយស្វ័យប្រវត្តិ និងកាត់បន្ថយសារធាតុពុលក្នុងទឹកកខ្វក់ចេញពីរោងចក្រ មុននឹងអនុញ្ញាតឱ្យបង្ហូរចូលប្រភពទឹកសាធារណៈ។</li>
+            
+        </ul>
+        
+        
+        <p>ការបំពាក់បច្ចេកវិទ្យា Reinforcement Learning ជាមួយប្រព័ន្ធ IoT ក្នុងវិស័យគ្រប់គ្រងទឹកកខ្វក់ នឹងជួយកម្ពុជាឆ្ពោះទៅរកទីក្រុងឆ្លាតវៃ (Smart City) និងអភិវឌ្ឍន៍ហេដ្ឋារចនាសម្ព័ន្ធបៃតងប្រកបដោយចីរភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះ Machine Learning និង Time-Series:</strong> ចាប់ផ្តើមរៀនសរសេរកូដ <span class="en">Python</span> និងការប្រើប្រាស់បណ្ណាល័យ <span class="en">PyTorch</span> ដើម្បីសង់ម៉ូដែល <span class="en">LSTM</span> សម្រាប់រៀនទស្សន៍ទាយទិន្នន័យដែលមានទម្រង់ជាស៊េរីពេលវេលា។</li>
+            
+            <li><strong>ស្វែងយល់ពីក្បួន Reinforcement Learning:</strong> ធ្វើការសិក្សាស៊ីជម្រៅលើទ្រឹស្តី <span class="en">Markov Decision Processes (MDPs)</span> និងក្បួន <span class="en">Soft Actor-Critic (SAC)</span> ដោយសាកល្បងប្រើប្រាស់ <span class="en">Stable Baselines3</span> នៅក្នុងបរិស្ថាន <span class="en">Gymnasium</span>។</li>
+            
+            <li><strong>អនុវត្តការរៀបចំទិន្នន័យ (Data Engineering):</strong> អនុវត្តការសំអាតទិន្នន័យពិត (Data imputation, Outlier removal) តាមរយៈការប្រមូលទិន្នន័យតូចៗពីសេនស័រទឹក ឬអាកាសធាតុ ដោយប្រើប្រាស់ <span class="en">Pandas</span> និង <span class="en">Scikit-learn</span>។</li>
+            
+            <li><strong>បង្កើតប្រព័ន្ធក្លែងធ្វើ (Simulator Development):</strong> សាកល្បងបង្កើតបរិស្ថានក្លែងធ្វើដោយប្រើកូដ (Custom Gym Environment) ដើម្បីតំណាងឱ្យប្រព័ន្ធរូបវន្តណាមួយ (ឧ. ប្រព័ន្ធគ្រប់គ្រងសីតុណ្ហភាព) ហើយបង្វឹកភ្នាក់ងារ <span class="en">RL Agent</span> ឱ្យរៀនគ្រប់គ្រងប្រព័ន្ធនោះ។</li>
+            
+            <li><strong>សហការសិក្សាស្រាវជ្រាវ (Field Application):</strong> ទាក់ទងមន្ទីរពិសោធន៍ ឬស្ថានីយ៍ប្រព្រឹត្តកម្មទឹកក្នុងស្រុកដើម្បីស្នើសុំសំណុំទិន្នន័យមួយផ្នែកយកមកសាកល្បងកែច្នៃ បង្កើតជាគម្រោងបញ្ចប់ឆ្នាំដែលភ្ជាប់ជាមួយបញ្ហាជាក់ស្តែងនៅកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Reinforcement Learning (DRL)</span></td>
+                <td>ជាបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត (AI) ដែលភ្នាក់ងារ (Agent) រៀនធ្វើសេចក្តីសម្រេចចិត្តដោយស្វ័យប្រវត្តិ តាមរយៈការសាកល្បងខុសនិងត្រូវ នៅក្នុងបរិស្ថានក្លែងធ្វើ ហើយទទួលបានរង្វាន់ពេលធ្វើត្រូវ ឬពិន័យពេលធ្វើខុស ដោយប្រើប្រាស់បណ្តាញសរសៃប្រសាទ (Neural Networks) ដ៏ស្មុគស្មាញដើម្បីបង្កើនប្រសិទ្ធភាពជម្រើស។</td>
+                <td>ដូចជាការបង្ហាត់សត្វសុនខឱ្យចេះរើសបាល់ ដោយឱ្យនំចំណីពេលវាធ្វើបានល្អ និងស្តីបន្ទោសពេលវាធ្វើខុស រហូតដល់វាចេះគិតថាត្រូវធ្វើបែបណាទើបបាននំច្រើនបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Long Short-Term Memory (LSTM)</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (RNN) ដែលមានសមត្ថភាពពិសេសក្នុងការចងចាំព័ត៌មានពីអតីតកាលក្នុងរយៈពេលយូរ ហើយយកវាទស្សន៍ទាយនិន្នាការទៅអនាគត។ វាកាត់ចោលព័ត៌មានមិនចាំបាច់ និងរក្សាទុកតែទិន្នន័យសំខាន់ៗដែលមានប្រយោជន៍សម្រាប់ប្រព័ន្ធ។</td>
+                <td>ដូចជាមនុស្សម្នាក់អានសៀវភៅរឿងវែងមួយ ដែលគាត់អាចចងចាំតួអង្គសំខាន់ៗពីដើមរឿងមកភ្ជាប់នឹងសាច់រឿងបច្ចុប្បន្ន ខណៈពេលបំភ្លេចចោលនូវឈុតឆាកតូចតាចដែលមិនសំខាន់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Soft Actor-Critic (SAC)</span></td>
+                <td>ជាក្បួនអាល់កូរីតទឹមនៃ Reinforcement Learning មួយប្រភេទដែលប្រើបណ្តាញពីរគឺ៖ Actor (អ្នកធ្វើសកម្មភាព) និង Critic (អ្នកវាយតម្លៃ)។ វាមានលក្ខណៈពិសេសក្នុងការលើកទឹកចិត្តឱ្យភ្នាក់ងារស្វែងរកយុទ្ធសាស្ត្រថ្មីៗ (Exploration) ជាជាងការធ្វើតែរឿងដដែលៗដែលធ្លាប់ទទួលបានពិន្ទុខ្ពស់។</td>
+                <td>ដូចជាសិស្សម្នាក់ (Actor) កំពុងរៀនគូរគំនូរដោយមានគ្រូ (Critic) ចាំផ្តល់មតិកែលម្អ ខណៈដែលគ្រូតែងលើកទឹកចិត្តឱ្យសិស្សសាកល្បងលាយពណ៌ថ្មីៗប្លែកៗជាជាងគូរតែរូបដដែលៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Exogenous Variables</span></td>
+                <td>ជាអញ្ញាត ឬកត្តាខាងក្រៅដែលអាចជះឥទ្ធិពលដល់លទ្ធផលនៃប្រព័ន្ធមួយ ប៉ុន្តែប្រព័ន្ធនោះមិនអាចបញ្ជា ឬគ្រប់គ្រងកត្តាទាំងនោះបានឡើយ ឧទាហរណ៍ដូចជាសីតុណ្ហភាពអាកាសធាតុ លំហូរទឹក ឬកម្រិតទឹកភ្លៀងនៅក្នុងរោងចក្រចម្រោះទឹក។</td>
+                <td>ដូចជាការបើកបរកង់បីលក់កាហ្វេ ដែលអ្នកអាចគ្រប់គ្រងរសជាតិកាហ្វេបាន (កត្តាខាងក្នុង) ប៉ុន្តែអ្នកមិនអាចបញ្ជាកុំឱ្យមានភ្លៀងធ្លាក់ (កត្តាខាងក្រៅ) ដែលធ្វើឱ្យប៉ះពាល់ដល់ការលក់របស់អ្នកបានទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dynamic Time Warping (DTW)</span></td>
+                <td>ជាវិធីសាស្ត្រគណិតវិទ្យាសម្រាប់វាស់ស្ទង់ភាពស្រដៀងគ្នារវាងស៊េរីទិន្នន័យពីរ ដែលមានល្បឿន ឬចង្វាក់ពេលវេលាខុសគ្នា។ វាជួយយឺតតម្រូវ ឬបង្រួមទិន្នន័យដែលដើរលឿន ឬយឺតជាងគ្នាឱ្យស៊ីចង្វាក់គ្នាវិញ ដើម្បីយកមកប្រៀបធៀបភាពត្រឹមត្រូវ។</td>
+                <td>ដូចជាមនុស្សពីរនាក់ច្រៀងបទចម្រៀងតែមួយ ប៉ុន្តែម្នាក់ច្រៀងរាងញាប់ ម្នាក់ទៀតច្រៀងរាងយឺត តែឧបករណ៍នេះនៅតែអាចស្តាប់ដឹងនិងវាស់ស្ទង់ថាពួកគេកំពុងច្រៀងបទតែមួយបានយ៉ាងត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Compounding Errors</span></td>
+                <td>ជាបញ្ហានៃការកើនឡើងកំហុសតូចៗជាបន្តបន្ទាប់នៅក្នុងការទស្សន៍ទាយពហុជំហាន (Multi-step predictions)។ នៅពេលដែលទិន្នន័យទស្សន៍ទាយខុសបន្តិចនៅជំហានទី១ ត្រូវបានយកទៅប្រើជាមូលដ្ឋានសម្រាប់ជំហានទី២ វាធ្វើឱ្យកំហុសកាន់តែរីកធំឡើងៗរហូតដល់លទ្ធផលចុងក្រោយខុសស្រឡះពីការពិត។</td>
+                <td>ដូចជាការថតចម្លងឯកសារ (Copy) ពីសន្លឹកដែលបាន Copy រួចម្តងហើយម្តងទៀត ដែលធ្វើឱ្យសន្លឹកទី១០០ ក្លាយជាព្រិលមើលលែងយល់ ខុសឆ្ងាយពីសន្លឹកដើមដំបូង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Proportional-Integral-Derivative (PID) Control</span></td>
+                <td>ជាប្រព័ន្ធគ្រប់គ្រងបែបរូបវន្តប្រពៃណីដែលប្រើប្រាស់ការគណនាគម្លាតរវាងស្ថានភាពបច្ចុប្បន្ននិងគោលដៅ (Error) រួចធ្វើការកែតម្រូវម៉ាស៊ីនភ្លាមៗ។ វាមានចំណុចខ្សោយត្រង់ថាវាមិនអាចទស្សន៍ទាយអនាគត និងពិបាកគ្រប់គ្រងប្រព័ន្ធដែលមានការឆ្លើយតបយឺតយ៉ាវ (Time delays)។</td>
+                <td>ដូចជាអ្នកបើកបរឡានម្នាក់ដែលរង់ចាំទាល់តែឡានរេខុសគន្លងផ្លូវទើបប្រញាប់កាច់ចង្កូតត្រឡប់មកវិញ ដោយមិនបានមើលផ្លូវកោងនៅខាងមុខដើម្បីត្រៀមបត់ជាមុន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov Decision Processes (MDPs)</span></td>
+                <td>ជាក្របខណ្ឌគណិតវិទ្យាដែលពិពណ៌នាពីដំណើរការនៃការធ្វើសេចក្តីសម្រេចចិត្តក្នុងស្ថានភាពដែលលទ្ធផលពាក់កណ្តាលកើតឡើងដោយចៃដន្យ និងពាក់កណ្តាលទៀតកើតចេញពីសកម្មភាពរបស់អ្នកសម្រេចចិត្ត។ នេះជាមូលដ្ឋានគ្រឹះសម្រាប់ការបង្វឹក AI កំណត់ស្ថានភាព សកម្មភាព និងរង្វាន់។</td>
+                <td>ដូចជាការលេងល្បែងអុក ដែលទោះបីជាអ្នកមានយុទ្ធសាស្ត្រដើរត្រឹមត្រូវក៏ដោយ ស្ថានភាពក្តារអុកបន្ទាប់នៅតែអាស្រ័យលើការដើរតបតដោយនឹកស្មានមិនដល់ពីដៃគូប្រកួតរបស់អ្នកដែរ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+reinforcement+learning+for+industrial+process+control" target="_blank" rel="noopener"><span class="en">Deep reinforcement learning for industrial process control</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Predictive+modeling+of+wastewater+treatment+plants+using+LSTM" target="_blank" rel="noopener"><span class="en">Predictive modeling of wastewater treatment plants using LSTM</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Time+delay+compensation+in+reinforcement+learning+continuous+control" target="_blank" rel="noopener"><span class="en">Time delay compensation in reinforcement learning continuous control</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Data-driven+optimization+of+chemical+dosing+for+phosphorus+removal" target="_blank" rel="noopener"><span class="en">Data-driven optimization of chemical dosing for phosphorus removal</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយពីបញ្ហាអតុល្យភាពថ្នាក់ (Class Imbalance Problem) នៅក្នុងសំណុំទិន្នន័យ ដែលធ្វើឱ្យក្បួនដោះស្រាយចំណាត់ថ្នាក់ភាគច្រើនមានការលម្អៀងទៅរកថ្នាក់ភាគច្រ...">
+    
+    <meta name="keywords" content="Class imbalance problem, Imbalanced datasets, Imbalanced classification, Big data, Machine learning, Sampling techniques, Cost-sensitive learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/classification-class-imbalance-review-2013.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/classification-class-imbalance-review-2013.html">
+    <meta property="og:title" content="ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយពីបញ្ហាអតុល្យភាពថ្នាក់ (Class Imbalance Problem) នៅក្នុងសំណុំទិន្នន័យ ដែលធ្វើឱ្យក្បួនដោះស្រាយចំណាត់ថ្នាក់ភាគច្រើនមានការលម្អៀងទៅរកថ្នាក់ភាគច្រើន (Majority class) និងមិនអាចកំណត់អត្តសញ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2013, Int. J. Advance Soft Compu. Appl">
+    
+    <meta property="article:tag" content="Class imbalance problem">
+    
+    <meta property="article:tag" content="Imbalanced datasets">
+    
+    <meta property="article:tag" content="Imbalanced classification">
+    
+    <meta property="article:tag" content="Big data">
+    
+    <meta property="article:tag" content="Machine learning">
+    
+    <meta property="article:tag" content="Sampling techniques">
+    
+    <meta property="article:tag" content="Cost-sensitive learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយពីបញ្ហាអតុល្យភាពថ្នាក់ (Class Imbalance Problem) នៅក្នុងសំណុំទិន្នន័យ ដែលធ្វើឱ្យក្បួនដោះស្រាយចំណាត់ថ្នាក់ភាគច្រើនមានការលម្អៀងទៅរកថ្នាក់ភាគច្រើន (Majority class) និងមិនអាចកំណត់អត្តសញ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1794\u1789\u17d2\u17a0\u17b6\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17d6 \u1780\u17b6\u179a\u178f\u17d2\u179a\u17bd\u178f\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789",
+      "name": "Classification with class imbalance problem: a review",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1796\u17b8\u1794\u1789\u17d2\u17a0\u17b6\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1790\u17d2\u1793\u17b6\u1780\u17cb (Class Imbalance Problem) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u1798\u17d2\u17a2\u17c0\u1784\u1791\u17c5\u179a\u1780\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793 (Majority class) \u1793\u17b7\u1784\u1798\u17b7\u1793\u17a2\u17b6\u1785\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1797\u17b6\u1782\u178f\u17b7\u1785 (Minority class) \u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17b6\u179a\u17c8\u179f\u17c6\u1781\u17b6\u1793\u17cb\u1794\u17b6\u1793\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/classification-class-imbalance-review-2013.html",
+      "author": [{"@type": "Person", "name": "Aida Ali (Universiti Teknologi Malaysia)"},{"@type": "Person", "name": "Siti Mariyam Shamsuddin (Universiti Teknologi Malaysia)"},{"@type": "Person", "name": "Anca L. Ralescu (University of Cincinnati)"}],
+      "datePublished": "2013, Int. J. Advance Soft Compu. Appl",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Classification with class imbalance problem: a review",
+        "url": "https://www.researchgate.net/profile/Aida-Ali-4/publication/288228469_Classification_with_class_imbalance_problem_A_review/links/57b556d008ae19a365faff16/Classification-with-class-imbalance-problem-A-review.pdf"
+      },
+      "keywords": ["Class imbalance problem", "Imbalanced datasets", "Imbalanced classification", "Big data", "Machine learning", "Sampling techniques", "Cost-sensitive learning"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1794\u1789\u17d2\u17a0\u17b6\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17d6 \u1780\u17b6\u179a\u178f\u17d2\u179a\u17bd\u178f\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789",
+          "item": "https://khmerresearch.com/papers/technology/classification-class-imbalance-review-2013.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Classification with class imbalance problem: a review<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Aida-Ali-4/publication/288228469_Classification_with_class_imbalance_problem_A_review/links/57b556d008ae19a365faff16/Classification-with-class-imbalance-problem-A-review.pdf" target="_blank">researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Classification with class imbalance problem: a review</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Aida Ali (Universiti Teknologi Malaysia), Siti Mariyam Shamsuddin (Universiti Teknologi Malaysia), Anca L. Ralescu (University of Cincinnati)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2013, Int. J. Advance Soft Compu. Appl</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយពីបញ្ហាអតុល្យភាពថ្នាក់ (Class Imbalance Problem) នៅក្នុងសំណុំទិន្នន័យ ដែលធ្វើឱ្យក្បួនដោះស្រាយចំណាត់ថ្នាក់ភាគច្រើនមានការលម្អៀងទៅរកថ្នាក់ភាគច្រើន (Majority class) និងមិនអាចកំណត់អត្តសញ្ញាណទិន្នន័យភាគតិច (Minority class) ដែលមានសារៈសំខាន់បានត្រឹមត្រូវ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានធ្វើការត្រួតពិនិត្យឡើងវិញនូវបញ្ហាប្រឈម និងបូកសរុបនូវវិធីសាស្រ្តផ្សេងៗដែលមានស្រាប់សម្រាប់ដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់នៅក្នុងម៉ូដែលរៀនម៉ាស៊ីន (Machine Learning Models)។
+        
+        <ul>
+            
+            <li>ការវិភាគទៅលើបញ្ហាប្រឈម (Challenges analysis): ដូចជាទំហំគំរូតូចតាច ការត្រួតគ្នានៃថ្នាក់ (Class overlapping) និង Disjuncts តូចៗនៅក្នុងថ្នាក់។</li>
+            
+            <li>វិធីសាស្រ្តកម្រិតទិន្នន័យ (Data-level approach): ការប្រើប្រាស់បច្ចេកទេសបែងចែកសំណាក (Sampling methods ឧទាហរណ៍ SMOTE) និងការជ្រើសរើសលក្ខណៈពិសេស (Feature selection)។</li>
+            
+            <li>វិធីសាស្រ្តកម្រិតក្បួនដោះស្រាយ (Algorithm-level approach): រួមមាន ការកែលម្អក្បួនចំណាត់ថ្នាក់ ការរៀនតែមួយថ្នាក់ (One-class learning) និងការរៀនដោយគិតគូរពីតម្លៃទម្ងន់ខុសត្រូវ (Cost-sensitive learning)។</li>
+            
+            <li>វិធីសាស្រ្តចម្រុះ និងបណ្តុំ (Ensemble and Hybrid approaches): ការប្រើប្រាស់ Bagging, Boosting និងការបន្សំវិធីសាស្រ្តច្រើនបញ្ចូលគ្នាដើម្បីបង្កើនប្រសិទ្ធភាពចំណាត់ថ្នាក់។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយស្តង់ដារភាគច្រើនដែលផ្តោតលើភាពត្រឹមត្រូវរួម (Overall accuracy) គឺមិនគ្រប់គ្រាន់ទេសម្រាប់វាស់ស្ទង់សំណុំទិន្នន័យអតុល្យភាព ដោយទាមទារឱ្យមានការប្រើប្រាស់រង្វាស់រង្វាល់ថ្មីដូចជា F-measure, G-mean និង AUC (Area Under the ROC Curve)។</li>
+            
+            <li>ការត្រួតគ្នានៃថ្នាក់ (Class overlapping) គឺជាបញ្ហាចម្បងមួយដែលរារាំងដល់ដំណើរការទស្សន៍ទាយរបស់ក្បួនចំណាត់ថ្នាក់ ខ្លាំងជាងបញ្ហាអតុល្យភាពថ្នាក់ទៅទៀត ដោយទាមទារឱ្យមានការសម្អាតទិន្នន័យ និងការជ្រើសរើសលក្ខណៈពិសេស (Feature selection) ឱ្យបានត្រឹមត្រូវ។</li>
+            
+            <li>និន្នាការនាពេលអនាគតនៃការស្រាវជ្រាវ នឹងផ្តោតលើការដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់នៅក្នុងបរិបទនៃការគណនាទិន្នន័យធំ (Big Data Computing) និងការវិភាគមនោសញ្ចេតនានៅលើបណ្តាញសង្គម (Sentiment Analysis) ដែលជាបញ្ហាកើតមានឡើងជារឿយៗមិនអាចជៀសវាងបាន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Data-level Approach (Sampling: SMOTE, Undersampling)</span></strong><br>វិធីសាស្រ្តកម្រិតទិន្នន័យ (ការបែងចែកសំណាក)</td>
+                <td>មានភាពងាយស្រួលយល់ និងត្រូវបានប្រើប្រាស់យ៉ាងទូលំទូលាយនៅក្នុងកម្មវិធីស្រាវជ្រាវជាច្រើន។ ជួយឱ្យទិន្នន័យមានតុល្យភាពមុនពេលបញ្ជូនទៅកាន់ម៉ូដែល។</td>
+                <td>ការចម្លងទិន្នន័យ (Oversampling) អាចបណ្តាលឱ្យមានបញ្ហា Over-fitting ចំណែកការលុបទិន្នន័យ (Undersampling) អាចធ្វើឱ្យបាត់បង់ព័ត៌មានសំខាន់ៗ។</td>
+                <td>បង្កើតបាននូវព្រំដែនចំណាត់ថ្នាក់ (Decision boundary) ធំជាងមុន តែមិនធានាដោះស្រាយបញ្ហាត្រួតគ្នានៃថ្នាក់ (Class overlapping) ទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Cost-sensitive Learning</span></strong><br>ការរៀនដោយគិតគូរពីតម្លៃទម្ងន់ខុសត្រូវ</td>
+                <td>ជាវិធីសាស្រ្តសាមញ្ញ និងមានដំណើរការលឿន ដោយមិនតម្រូវឱ្យមានការកែប្រែទំហំសំណុំទិន្នន័យដើមនោះទេ។</td>
+                <td>មិនមានប្រសិទ្ធភាពទេប្រសិនបើតម្លៃខាតបង់ពិតប្រាកដ (Real cost) មិនត្រូវបានដឹង ហើយអាចទាមទារពេលវេលាបន្ថែមដើម្បីស្វែងរកតម្លៃ Cost matrix ដ៏សក្តិសម។</td>
+                <td>អាចកាត់បន្ថយអត្រានៃការទស្សន៍ទាយខុស (Misclassification) លើថ្នាក់ភាគតិចដែលជាគោលដៅសំខាន់បានយ៉ាងប្រសើរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Ensemble Methods (SMOTEBoost, RUSBoost)</span></strong><br>វិធីសាស្ត្របណ្តុំម៉ូដែល (Boosting & Bagging)</td>
+                <td>ជាវិធីសាស្រ្តដែលមានភាពបត់បែនខ្ពស់ក្នុងការដោះស្រាយអតុល្យភាពថ្នាក់ ដោយរួមបញ្ចូលម៉ូដែលច្រើនបញ្ជូលគ្នាដើម្បីបង្កើនភាពត្រឹមត្រូវ។</td>
+                <td>ភាពស្មុគស្មាញនៃការគណនានឹងកើនឡើងស្របតាមចំនួននៃក្បួនចំណាត់ថ្នាក់ដែលត្រូវបានប្រើប្រាស់។</td>
+                <td>ក្បួនដោះស្រាយដូចជា RUSBoost ផ្តល់នូវលទ្ធផលចំណាត់ថ្នាក់ល្អប្រសើរ (AUC results ខ្ពស់) និងស៊ីកម្លាំងគណនាតិចជាងវិធីសាស្រ្ត Ensemble ផ្សេងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Feature Selection</span></strong><br>ការជ្រើសរើសលក្ខណៈពិសេស</td>
+                <td>ជួយកាត់បន្ថយបញ្ហានៃការត្រួតគ្នារវាងថ្នាក់ (Class overlapping) ដោយកម្ចាត់ចោលនូវលក្ខណៈពិសេសដែលមិនពាក់ព័ន្ធ ឬស្ទួនគ្នា។</td>
+                <td>ទាមទារកម្លាំងគណនាខ្ពស់ (Extra computational cost) និងពេលវេលាបន្ថែមសម្រាប់ដំណើរការរៀបចំទិន្នន័យជាមុន (Pre-processing task)។</td>
+                <td>ជួយបង្កើនប្រសិទ្ធភាពក្បួនចំណាត់ថ្នាក់ កាត់បន្ថយទំហំផ្ទុក និងជួយពន្យល់ពីទម្រង់នៃទិន្នន័យបានកាន់តែច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hybrid Approach</span></strong><br>វិធីសាស្រ្តចម្រុះរួមបញ្ចូលគ្នា</td>
+                <td>កំពុងទទួលបានការពេញនិយមដោយសារវាទាញយកអត្ថប្រយោជន៍ពីវិធីសាស្រ្តផ្សេងៗគ្នាមកបញ្ចូលគ្នា (Symbiosis learning) ដូចជាការបន្សំ Sampling ជាមួយ Cost-sensitive។</td>
+                <td>ទាមទារឱ្យមានការវាយតម្លៃ និងរចនាយ៉ាងប្រុងប្រយ័ត្ន ដើម្បីធានាថាវិធីសាស្រ្តនីមួយៗបំពេញខ្វះខាតឱ្យគ្នាទៅវិញទៅមកបានល្អ។</td>
+                <td>ផ្តល់នូវដំណោះស្រាយដ៏រឹងមាំសម្រាប់បញ្ហាអតុល្យភាពទិន្នន័យ ដែលមានសភាពស្មុគស្មាញ និងទំហំធំ (Big Data)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបានបញ្ជាក់ថាការដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់ ទាមទារឱ្យមានធនធានគណនាខ្ពស់ ជាពិសេសនៅពេលអនុវត្តវិធីសាស្ត្រជ្រើសរើសលក្ខណៈពិសេស (Wrapper methods) និងការវិភាគលើទិន្នន័យទំហំធំ (Big Data)។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការកម្លាំងគណនា (Computational power) ខ្ពស់ និងអង្គចងចាំ (Memory) ច្រើន សម្រាប់ដំណើរការវិធីសាស្ត្រ Ensemble, ក្បួន SVM Quadratic programming និងទិន្នន័យធំៗដែលមានវិមាត្រច្រើន។</li>
+        
+        <li><strong>Software:</strong> ចាំបាច់ត្រូវមាន Machine Learning Frameworks និងឧបករណ៍គណនាទិន្នន័យធំ (ឧទាហរណ៍ MapReduce ត្រូវបានលើកឡើងសម្រាប់ការដោះស្រាយទិន្នន័យ Big data)។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យដែលមានការបែងចែកថ្នាក់ (Labeled datasets) នៅក្នុងវិស័យពិតៗ ដូចជាទិន្នន័យហិរញ្ញវត្ថុ វេជ្ជសាស្ត្រ និងបណ្តាញសង្គម ទោះបីជាវាមានទម្រង់អតុល្យភាពក៏ដោយ។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការចំណេះដឹងពីអ្នកជំនាញឯកទេស (Domain experts) ដើម្បីកំណត់ទម្ងន់នៃការខាតបង់ (Cost matrix) ឱ្យបានត្រឹមត្រូវ និងសម្រាប់កំណត់និយមន័យច្បាប់ (Fuzzy rules) ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ដោយសារឯកសារនេះជាអត្ថបទត្រួតពិនិត្យ (Review paper) វាមិនបានផ្តោតលើសំណុំទិន្នន័យជាក់លាក់ណាមួយទេ ប៉ុន្តែបានទាញយកទិន្នន័យពីវិស័យវេជ្ជសាស្ត្រ ការឆបោកធនាគារ និងបណ្តាញសង្គម។ សម្រាប់ប្រទេសកម្ពុជា នេះជារឿងដ៏សំខាន់ ព្រោះទិន្នន័យក្នុងស្រុកនៅតាមមន្ទីរពេទ្យ ឬធនាគារ ភាគច្រើនមានទំហំតូច និងមានភាពអតុល្យភាពខ្លាំង (ឧទាហរណ៍៖ ទិន្នន័យអ្នកបោកប្រាស់មានចំនួនតិចតួចបំផុតប្រៀបធៀបនឹងអតិថិជនទូទៅ) ដែលងាយនឹងធ្វើឱ្យម៉ូដែលលម្អៀង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេស និងវិធីសាស្រ្តដែលបានរៀបរាប់ក្នុងឯកសារនេះ ពិតជាមានភាពចាំបាច់ និងអាចយកមកអនុវត្តបានយ៉ាងមានប្រសិទ្ធភាពនៅក្នុងបរិបទនៃការអភិវឌ្ឍបញ្ញាសិប្បនិម្មិត (AI) នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសុខាភិបាល (Healthcare & Medical Diagnosis):</strong> មានសារៈប្រយោជន៍សម្រាប់ការទស្សន៍ទាយជំងឺកម្រ ឬករណីឆ្លងជំងឺគ្រុនឈាម ផ្អែកលើទិន្នន័យអ្នកជំងឺពីមន្ទីរពេទ្យនានា (ឧ. មន្ទីរពេទ្យកាល់ម៉ែត ឬមន្ទីរពេទ្យកុមារអង្គរ) ដែលទិន្នន័យអ្នកមានជំងឺជារឿយៗមានចំនួនតិចជាងមនុស្សធម្មតា។</li>
+            
+            <li><strong>វិស័យហិរញ្ញវត្ថុ និងធនាគារ (Banking & Fraud Detection):</strong> អាចយកទៅអនុវត្តសម្រាប់ការរកឃើញប្រតិបត្តិការឆបោក (Fraud detection) នៅក្នុងប្រព័ន្ធទូទាត់ឌីជីថលដូចជា KHQR, កម្មវិធី ABA ឬទ្រនាប់ទូទាត់បាគង ដោយសារតែប្រតិបត្តិការខុសប្រក្រតីមានភាគរយតិចតួចបំផុត។</li>
+            
+            <li><strong>ការវិភាគបណ្តាញសង្គម (Social Media Sentiment Analysis):</strong> អនុវត្តសម្រាប់ការវិភាគមនោសញ្ចេតនា (Sentiment Analysis) លើមតិយោបល់របស់ប្រជាពលរដ្ឋនៅលើទំព័រ Facebook ឬតេឡេក្រាម ដើម្បីស្វែងយល់ពីការវាយតម្លៃអវិជ្ជមាន ឬពាក្យបណ្តឹងនានាដែលកម្រមាន តែមានសារៈសំខាន់សម្រាប់ធុរកិច្ច។</li>
+            
+        </ul>
+        
+        
+        <p>ការជ្រើសរើសវិធីសាស្ត្រដោះស្រាយអតុល្យភាពទិន្នន័យបានត្រឹមត្រូវ នឹងជួយឱ្យអ្នកស្រាវជ្រាវ និងវិស្វករកម្ពុជាអាចបង្កើតម៉ូដែល AI ដែលមានភាពសុក្រឹត និងអាចជឿទុកចិត្តបានសម្រាប់ការប្រើប្រាស់ជាក់ស្តែងក្នុងសង្គមជាតិ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សារង្វាស់រង្វាល់សម្រាប់វាយតម្លៃម៉ូដែល (Mastering Evaluation Metrics):</strong> និស្សិតត្រូវឈប់ពឹងផ្អែកតែទៅលើរង្វាស់ 'Accuracy' សម្រាប់ទិន្នន័យអតុល្យភាព។ ត្រូវហ្វឹកហាត់ប្រើប្រាស់រង្វាស់រង្វាល់ថ្មីៗដូចជា <span class="en">Confusion Matrix, Precision, Recall, F-measure, G-mean</span> និង <span class="en">ROC AUC</span> ដើម្បីវាយតម្លៃប្រសិទ្ធភាពម៉ូដែលឱ្យបានច្បាស់លាស់។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសបែងចែកសំណាកកម្រិតទិន្នន័យ (Apply Data-level Techniques):</strong> សាកល្បងសរសេរកូដដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">imbalanced-learn</span> នៅក្នុងភាសា Python ដើម្បីអនុវត្តវិធីសាស្ត្រ <span class="en">SMOTE</span> (Oversampling) និងការកាត់បន្ថយទិន្នន័យ <span class="en">Undersampling</span> ទៅលើសំណុំទិន្នន័យអតុល្យភាពណាមួយ។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែលផ្អែកលើការគិតគូរតម្លៃខាតបង់ (Implement Cost-sensitive Models):</strong> រៀនកែប្រែក្បួនដោះស្រាយ (Algorithm) ឱ្យផ្តោតលើថ្នាក់ភាគតិច ដោយប្រើប្រាស់មុខងាររបស់ <span class="en">scikit-learn</span> (ឧទាហរណ៍៖ ការកំណត់ប៉ារ៉ាម៉ែត្រ <span class="en">class_weight='balanced'</span> នៅក្នុងម៉ូដែល <span class="en">Random Forest</span> ឬ <span class="en">SVM</span>)។</li>
+            
+            <li><strong>សិក្សាពីការរួមបញ្ចូលម៉ូដែលកម្រិតខ្ពស់ (Explore Ensemble Approaches):</strong> ស្វែងយល់ និងអនុវត្តវិធីសាស្ត្ររួមបញ្ចូលគ្នា (Ensemble Methods) ដូចជា <span class="en">SMOTEBoost</span> ឬ <span class="en">RUSBoost</span> ដែលសក្តិសមបំផុតសម្រាប់ដោះស្រាយសំណុំទិន្នន័យដែលមានបញ្ហាត្រួតគ្នានៃថ្នាក់ (Class overlapping)។</li>
+            
+            <li><strong>អនុវត្តលើគម្រោងស្រាវជ្រាវផ្ទាល់ខ្លួនជាមួយទិន្នន័យក្នុងស្រុក (Real-world Project):</strong> ប្រមូលទិន្នន័យជាក់ស្តែងក្នុងប្រទេសកម្ពុជា (ឧទាហរណ៍ ទិន្នន័យអតិថិជនសុំកម្ចីធនាគារ ឬទិន្នន័យមតិយោបល់អតិថិជនតាមហាងកាហ្វេ) ហើយអនុវត្តវិធីសាស្រ្តចម្រុះ (<span class="en">Hybrid Approach</span>) ដោយបញ្ចូលការជ្រើសរើស <span class="en">Feature Selection</span> និងបច្ចេកទេស <span class="en">Sampling</span> រួចធ្វើបទបង្ហាញពីលទ្ធផល។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Class imbalance problem</span></td>
+                <td>ស្ថានភាពដែលទិន្នន័យសម្រាប់ហ្វឹកហាត់ម៉ូដែលរៀនម៉ាស៊ីនមានចំនួនមិនស្មើគ្នាខ្លាំងរវាងក្រុមមួយនិងក្រុមមួយទៀត ដែលធ្វើឱ្យម៉ូដែលទោរទន់លម្អៀងទៅរកក្រុមដែលមានទិន្នន័យច្រើន (Majority class) និងមិនអាចចំណាត់ថ្នាក់ក្រុមដែលមានទិន្នន័យតិច (Minority class) បានល្អ។</td>
+                <td>ដូចជាគ្រូបង្រៀនសិស្សពីសត្វដោយបង្ហាញរូបឆ្កែ១០០សន្លឹក និងរូបឆ្មា១សន្លឹក ពេលប្រឡងសិស្សនឹងស្គាល់តែឆ្កែ តែមិនស្គាល់ឆ្មានោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTE (Synthetic Minority Over-sampling Technique)</span></td>
+                <td>បច្ចេកទេសបង្កើតទិន្នន័យក្លែងក្លាយ (Synthetic data) សម្រាប់ក្រុមភាគតិច ដោយធ្វើការគណនារកចំណុចកណ្តាលនៃចន្លោះទិន្នន័យពិតដែលមានស្រាប់ ដើម្បីបង្កើនចំនួនទិន្នន័យឱ្យមានតុល្យភាពជាមួយក្រុមភាគច្រើន ដោយមិនមែនគ្រាន់តែជាការចម្លងទិន្នន័យដើមដដែលៗនោះទេ។</td>
+                <td>ដូចជាការយកទឹកក្រូច និងទឹកក្រូចឆ្មារដែលមានស្រាប់មកលាយបញ្ចូលគ្នា ដើម្បីបង្កើតជារសជាតិថ្មីមួយទៀតដែលស្រដៀងដើម ដើម្បីឱ្យមានភេសជ្ជៈច្រើនកែវជាងមុនសម្រាប់ការភ្លក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Class overlapping</span></td>
+                <td>បញ្ហានៅពេលដែលលក្ខណៈពិសេស (Features) នៃទិន្នន័យក្នុងក្រុមពីរខុសគ្នា មានលក្ខណៈស្រដៀងគ្នាខ្លាំង ឬត្រួតស៊ីគ្នានៅក្នុងលំហទិន្នន័យតែមួយ ដែលធ្វើឱ្យម៉ូដែលពិបាកក្នុងការគូសបន្ទាត់បែងចែកក្រុមទាំងពីរឱ្យដាច់ពីគ្នាទោះបីជាមានទិន្នន័យច្រើនក៏ដោយ។</td>
+                <td>ដូចជាការព្យាយាមបែងចែកផ្លែក្រូចពោធិ៍សាត់ និងផ្លែក្រូចថ្លុងតូចៗ ដែលមានទំហំប៉ុនគ្នា និងពណ៌ខៀវដូចគ្នា ធ្វើឱ្យយើងពិបាកមើលដឹងថាមួយណាជាអ្វីឱ្យប្រាកដបើមិនបកសំបក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cost-sensitive learning</span></td>
+                <td>ក្បួនដោះស្រាយដែលដាក់ទណ្ឌកម្ម (Penalty) ឬតម្លៃខាតបង់ (Cost) ខ្ពស់នៅពេលដែលម៉ូដែលទាយខុសលើក្រុមភាគតិច ដើម្បីបង្ខំឱ្យម៉ូដែលកែប្រែទម្ងន់គណនារបស់ខ្លួន និងយកចិត្តទុកដាក់ខ្ពស់ក្នុងការទាយក្រុមភាគតិចនោះឱ្យបានត្រឹមត្រូវបំផុត។</td>
+                <td>ដូចជាច្បាប់ចរាចរណ៍ដែលផាកពិន័យត្រឹម៥ម៉ឺនរៀលបើអត់ពាក់មួកសុវត្ថិភាព តែផាកពិន័យដល់១លានរៀលបើបើកបរពេលស្រវឹង ដើម្បីបង្ខំឱ្យមនុស្សប្រុងប្រយ័ត្នខ្ពស់ចំពោះការញ៉ាំស្រាហើយបើកបរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ensemble method</span></td>
+                <td>វិធីសាស្ត្រនៃការបណ្តុំក្បួនចំណាត់ថ្នាក់ (Classifiers) ច្រើនប្រភេទ ឬច្រើនម៉ូដែលបញ្ចូលគ្នា ដើម្បីធ្វើការទស្សន៍ទាយលទ្ធផលចុងក្រោយរួមមួយ ដោយផ្អែកលើការបោះឆ្នោត ឬការបូកសរុបលទ្ធផល ដែលជួយកាត់បន្ថយភាពលម្អៀង និងបង្កើនភាពសុក្រឹតជាងការប្រើម៉ូដែលតែមួយ។</td>
+                <td>ដូចជាការសួរយោបល់ពីគ្រូពេទ្យឯកទេស៥នាក់ផ្សេងគ្នា មុននឹងសម្រេចចិត្តធ្វើការវះកាត់ធំ ជាជាងជឿទៅលើការវិភាគរបស់គ្រូពេទ្យតែម្នាក់ឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Small disjuncts</span></td>
+                <td>បញ្ហាអតុល្យភាពដែលមានលាក់កំបាំងនៅក្នុងក្រុមតែមួយ (Within-class imbalance) ដែលក្រុមនោះមានបែងចែកជាក្រុមតូចៗ (Sub-clusters) ជាច្រើនទៀត ហើយក្រុមតូចៗទាំងនោះមានចំនួនទិន្នន័យមិនស្មើគ្នា ដែលធ្វើឱ្យម៉ូដែលពិបាកចាប់យកទម្រង់រួមនៃក្រុមធំទាំងមូល។</td>
+                <td>ដូចជាការរៀនស្គាល់ "រថយន្ត" ដែលក្នុងនោះមានឡានតូចស្ព័រច្រើនណាស់ តែឡានដឹកដីមានតែមួយគ្រឿង ធ្វើឱ្យក្មេងស្មានថាឡានដឹកដីមិនមែនជារថយន្តទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision boundary</span></td>
+                <td>បន្ទាត់ ឬព្រំដែននិម្មិតដែលក្បួនដោះស្រាយរៀនម៉ាស៊ីន (Machine Learning Algorithm) គណនា និងសាងសង់ឡើងនៅក្នុងលំហទិន្នន័យ ដើម្បីសន្មត និងបែងចែកទិន្នន័យថ្មីៗមិនធ្លាប់ស្គាល់ ថាគួរតែត្រូវចាត់ថ្នាក់ចូលទៅក្នុងក្រុម (Class) ណាមួយ។</td>
+                <td>ដូចជារបងព្រំប្រទល់ប្រទេស ដែលខណ្ឌចែកឱ្យដឹងច្បាស់ថា ដីត្រង់ចំណុចណាជាដីកម្ពុជា ហើយចំណុចណាជាដីប្រទេសជិតខាង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">G-mean (geometric mean)</span></td>
+                <td>រង្វាស់រង្វាល់សម្រាប់វាស់សមត្ថភាពម៉ូដែលដែលគណនាតាមរយៈការយកតម្លៃឫសការ៉េនៃផលគុណរវាង Sensitivity (ភាពត្រឹមត្រូវលើក្រុមភាគតិច) និង Specificity (ភាពត្រឹមត្រូវលើក្រុមភាគច្រើន) ដើម្បីធានាថាម៉ូដែលមួយអស្ចារ្យលុះត្រាតែវាអាចទស្សន៍ទាយត្រូវទាំងសងខាងក្នុងកម្រិតស្មើៗគ្នា។</td>
+                <td>ដូចជាពិន្ទុវាយតម្លៃសិស្សពូកែទូទាំងប្រទេស ដែលតម្រូវឱ្យសិស្សត្រូវតែពូកែខ្លាំងទាំងមុខវិជ្ជាសិល្បៈ និងមុខវិជ្ជាវិទ្យាសាស្ត្រទើបបានពិន្ទុខ្ពស់ មិនអាចពូកែតែម្ខាងបានទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+for+big+data+analytics" target="_blank" rel="noopener"><span class="en">machine learning for big data analytics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=handling+class+overlapping+in+imbalanced+datasets" target="_blank" rel="noopener"><span class="en">handling class overlapping in imbalanced datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=cost-sensitive+learning+algorithms+vs+sampling" target="_blank" rel="noopener"><span class="en">cost-sensitive learning algorithms vs sampling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ensemble+methods+for+imbalanced+classification" target="_blank" rel="noopener"><span class="en">ensemble methods for imbalanced classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=sentiment+analysis+with+imbalanced+social+media+data" target="_blank" rel="noopener"><span class="en">sentiment analysis with imbalanced social media data</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

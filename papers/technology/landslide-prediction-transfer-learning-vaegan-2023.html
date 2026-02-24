@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរៀនផ្ទេរ (Transfer Learning) ជាមួយនឹងលក្ខណៈសម្បត្តិដើម្បីកែលម្អប្រសិទ្ធភាពនៃការការព្យាករណ៍លំហនៃការបាក់ដីនៅតំបន់ខ្វះខាតគំរូ ដោយផ្អែកលើបណ្តាញ Variational Autoencoder Generative Adversarial | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលការព្យាករណ៍លំហនៃការបាក់ដី (Landslide Spatial Prediction - LSP) ប្រកបដោយភាពត្រឹមត្រូវ នៅក្នុងតំបន់ដែលមានទិន្នន័យ...">
+    
+    <meta name="keywords" content="Transfer Learning, Landslide Spatial Prediction, VAEGAN, Deep Learning, Convolutional Neural Networks, Sample-scarce Areas, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/landslide-prediction-transfer-learning-vaegan-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/landslide-prediction-transfer-learning-vaegan-2023.html">
+    <meta property="og:title" content="ការរៀនផ្ទេរ (Transfer Learning) ជាមួយនឹងលក្ខណៈសម្បត្តិដើម្បីកែលម្អប្រសិទ្ធភាពនៃការការព្យាករណ៍លំហនៃការបាក់ដីនៅតំបន់ខ្វះខាតគំរូ ដោយផ្អែកលើបណ្តាញ Variational Autoencoder Generative Adversarial | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលការព្យាករណ៍លំហនៃការបាក់ដី (Landslide Spatial Prediction - LSP) ប្រកបដោយភាពត្រឹមត្រូវ នៅក្នុងតំបន់ដែលមានទិន្នន័យគំរូតិចតួច (Sample-scarce areas) ដោយសារភ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023, Land (MDPI)">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Landslide Spatial Prediction">
+    
+    <meta property="article:tag" content="VAEGAN">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Convolutional Neural Networks">
+    
+    <meta property="article:tag" content="Sample-scarce Areas">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរៀនផ្ទេរ (Transfer Learning) ជាមួយនឹងលក្ខណៈសម្បត្តិដើម្បីកែលម្អប្រសិទ្ធភាពនៃការការព្យាករណ៍លំហនៃការបាក់ដីនៅតំបន់ខ្វះខាតគំរូ ដោយផ្អែកលើបណ្តាញ Variational Autoencoder Generative Adversarial">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលការព្យាករណ៍លំហនៃការបាក់ដី (Landslide Spatial Prediction - LSP) ប្រកបដោយភាពត្រឹមត្រូវ នៅក្នុងតំបន់ដែលមានទិន្នន័យគំរូតិចតួច (Sample-scarce areas) ដោយសារភ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a (Transfer Learning) \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u179b\u1780\u17d2\u1781\u178e\u17c8\u179f\u1798\u17d2\u1794\u178f\u17d2\u178f\u17b7\u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u179b\u17c6\u17a0\u1793\u17c3\u1780\u17b6\u179a\u1794\u17b6\u1780\u17cb\u178a\u17b8\u1793\u17c5\u178f\u17c6\u1794\u1793\u17cb\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1782\u17c6\u179a\u17bc \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u178e\u17d2\u178f\u17b6\u1789 Variational Autoencoder Generative Adversarial",
+      "name": "Transfer learning with attributes for improving the landslide spatial prediction performance in sample-scarce area based on variational autoencoder generative adversarial network",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u179b\u17c6\u17a0\u1793\u17c3\u1780\u17b6\u179a\u1794\u17b6\u1780\u17cb\u178a\u17b8 (Landslide Spatial Prediction - LSP) \u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u178f\u17c6\u1794\u1793\u17cb\u178a\u17c2\u179b\u1798\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1782\u17c6\u179a\u17bc\u178f\u17b7\u1785\u178f\u17bd\u1785 (Sample-scarce areas) \u178a\u17c4\u1799\u179f\u17b6\u179a\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1785\u17c6\u178e\u17b6\u1799\u1781\u17d2\u1796\u179f\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u1798\u17bc\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u17b8\u1791\u17b8\u178f\u17b6\u17c6\u1784\u1794\u17b6\u1780\u17cb\u178a\u17b8\u1795\u17d2\u1791\u17b6\u179b\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/landslide-prediction-transfer-learning-vaegan-2023.html",
+      "author": [{"@type": "Person", "name": "Mansheng Lin (School of Civil and Transportation Engineering, Guangdong University of Technology)"},{"@type": "Person", "name": "Shuai Teng (School of Civil and Transportation Engineering, Guangdong University of Technology)"},{"@type": "Person", "name": "Gongfa Chen (School of Civil and Transportation Engineering, Guangdong University of Technology)"},{"@type": "Person", "name": "David Bassir (Centre Borelli, ENS-University of Paris-Saclay \u0026 UTBM, IRAMAT)"}],
+      "datePublished": "2023, Land (MDPI)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Transfer learning with attributes for improving the landslide spatial prediction performance in sample-scarce area based on variational autoencoder generative adversarial network",
+        "url": "https://doi.org/10.3390/xxxxx"
+      },
+      "keywords": ["Transfer Learning", "Landslide Spatial Prediction", "VAEGAN", "Deep Learning", "Convolutional Neural Networks", "Sample-scarce Areas"],
+      "about": "Geohazards and Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a (Transfer Learning) \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u179b\u1780\u17d2\u1781\u178e\u17c8\u179f\u1798\u17d2\u1794\u178f\u17d2\u178f\u17b7\u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u179b\u17c6\u17a0\u1793\u17c3\u1780\u17b6\u179a\u1794\u17b6\u1780\u17cb\u178a\u17b8\u1793\u17c5\u178f\u17c6\u1794\u1793\u17cb\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1782\u17c6\u179a\u17bc \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u178e\u17d2\u178f\u17b6\u1789 Variational Autoencoder Generative Adversarial",
+          "item": "https://khmerresearch.com/papers/technology/landslide-prediction-transfer-learning-vaegan-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរៀនផ្ទេរ (Transfer Learning) ជាមួយនឹងលក្ខណៈសម្បត្តិដើម...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Transfer learning with attributes for improving the landslide spatial prediction performance in sample-scarce area based on variational autoencoder generative adversarial network<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/xxxxx" target="_blank">doi.org/10.3390/xxxxx</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរៀនផ្ទេរ (Transfer Learning) ជាមួយនឹងលក្ខណៈសម្បត្តិដើម្បីកែលម្អប្រសិទ្ធភាពនៃការការព្យាករណ៍លំហនៃការបាក់ដីនៅតំបន់ខ្វះខាតគំរូ ដោយផ្អែកលើបណ្តាញ Variational Autoencoder Generative Adversarial</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Transfer learning with attributes for improving the landslide spatial prediction performance in sample-scarce area based on variational autoencoder generative adversarial network</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Mansheng Lin (School of Civil and Transportation Engineering, Guangdong University of Technology), Shuai Teng (School of Civil and Transportation Engineering, Guangdong University of Technology), Gongfa Chen (School of Civil and Transportation Engineering, Guangdong University of Technology), David Bassir (Centre Borelli, ENS-University of Paris-Saclay & UTBM, IRAMAT)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, Land (MDPI)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Geohazards and Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលការព្យាករណ៍លំហនៃការបាក់ដី (Landslide Spatial Prediction - LSP) ប្រកបដោយភាពត្រឹមត្រូវ នៅក្នុងតំបន់ដែលមានទិន្នន័យគំរូតិចតួច (Sample-scarce areas) ដោយសារភាពស្មុគស្មាញ និងការចំណាយខ្ពស់ក្នុងការប្រមូលទិន្នន័យពីទីតាំងបាក់ដីផ្ទាល់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវយុទ្ធសាស្ត្រថ្មីមួយគឺ ការរៀនផ្ទេរជាមួយនឹងលក្ខណៈសម្បត្តិ (Transfer Learning with Attributes - TLAs) ដោយប្រើប្រាស់បណ្តាញបង្កើតទិន្នន័យ VAEGAN រួមជាមួយម៉ូដែលរៀនស៊ីជម្រៅដើម្បីបង្កើនភាពស្រដៀងគ្នានៃទិន្នន័យ។
+        
+        <ul>
+            
+            <li>បណ្តាញ Variational Autoencoder Generative Adversarial Network (VAEGAN) សម្រាប់ការបង្កើតទិន្នន័យឡើងវិញជាមួយនឹងលក្ខណៈសម្បត្តិរួមបញ្ចូលគ្នា (Data Reconstruction with Attributes)</li>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែល Convolutional Neural Networks (CNN), BiLSTM, និង GRU ជាឧបករណ៍ទាញយកលក្ខណៈពិសេស (Feature Extractors) និងជាម៉ូដែលព្យាករណ៍ (Prediction Models)</li>
+            
+            <li>យុទ្ធសាស្ត្រនៃការរៀនផ្ទេរជាមួយនឹងលក្ខណៈសម្បត្តិ (Transfer Learning with Attributes - TLAs) ដើម្បីកាត់បន្ថយគម្លាតទិន្នន័យរវាងតំបន់ពីរផ្សេងគ្នា</li>
+            
+            <li>ការវាយតម្លៃកត្តាជម្រុញការបាក់ដី (Landslide Influencing Factors Assessment) ចំនួន១៤កត្តាដោយប្រើប្រាស់បច្ចេកទេស Gain Ratio (GR)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>យុទ្ធសាស្ត្រ TLAs បានបង្កើនតម្លៃមធ្យមនៃរង្វាស់វាយតម្លៃដូចជា AUROC, F1-score, ភាពត្រឹមត្រូវ (Precision និង Accuracy) ប្រមាណ ២% ទៅ ៧% បើប្រៀបធៀបទៅនឹងយុទ្ធសាស្ត្រការរៀនផ្ទេរធម្មតា (TL)។</li>
+            
+            <li>ម៉ូដែលបណ្តាញប្រសាទ CNN (Convolutional Neural Networks) បង្ហាញពីប្រសិទ្ធភាព និងភាពអាចទុកចិត្តបានខ្ពស់ជាងគេបំផុត ទាំងក្នុងតួនាទីជាម៉ូដែលការព្យាករណ៍ និងជាភ្នាក់ងារទាញយកលក្ខណៈពិសេសសម្រាប់ VAEGAN។</li>
+            
+            <li>ការពិសោធន៍បង្ហាញថា យុទ្ធសាស្ត្រ TLAs មានសមត្ថភាពផ្ទេរចំណេះដឹង (Transferability) បានយ៉ាងល្អប្រសើរ ដែលជួយពង្រឹងយ៉ាងមានប្រសិទ្ធភាពនូវការព្យាករណ៍ការបាក់ដីនៅក្នុងតំបន់ដែលខ្វះខាតទិន្នន័យគំរូសម្រាប់ការបណ្តុះបណ្តាលម៉ូដែល។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Supervised Learning (SL)</span></strong><br>ការរៀនបែបមានការត្រួតពិនិត្យ (មិនមានការផ្ទេរចំណេះដឹង)</td>
+                <td>ងាយស្រួលអនុវត្តនិងសាងសង់ម៉ូដែលនៅពេលដែលតំបន់សិក្សាមានទិន្នន័យគំរូគ្រប់គ្រាន់។</td>
+                <td>ដំណើរការមិនបានល្អ និងមានភាពលម្អៀងខ្ពស់ (Overfitting) នៅតំបន់ដែលមានទិន្នន័យគំរូតិចតួច។</td>
+                <td>ទទួលបានតម្លៃមធ្យម AUROC ត្រឹមតែ ០.៧៧១ (សម្រាប់តំបន់ GG) ដោយប្រើម៉ូដែល CNN ជាមូលដ្ឋាន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Standard Transfer Learning (TL)</span></strong><br>ការរៀនផ្ទេរចំណេះដឹងទូទៅ (មិនរួមបញ្ចូលលក្ខណៈសម្បត្តិ)</td>
+                <td>អាចទាញយកចំណេះដឹងពីតំបន់ដែលមានទិន្នន័យសម្បូរបែប មកប្រើប្រាស់ក្នុងតំបន់គោលដៅ។</td>
+                <td>មិនសូវមានប្រសិទ្ធភាព ឬអាចធ្វើឱ្យលទ្ធផលធ្លាក់ចុះ បើទិន្នន័យតំបន់ទាំងពីរមានលក្ខណៈខុសគ្នាខ្លាំង (Dataset bias)។</td>
+                <td>អត្រាភាពត្រឹមត្រូវជារួមមានការថយចុះនៅក្នុងការសាកល្បងតំបន់ ZG (AUROC ធ្លាក់មក ០.៧៥៣ បើធៀបនឹង SL ០.៧៧៥) ដោយសារគម្លាតលក្ខណៈទិន្នន័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Transfer Learning with Attributes (TLA) via VAEGAN</span></strong><br>ការរៀនផ្ទេរជាមួយនឹងលក្ខណៈសម្បត្តិដោយប្រើ VAEGAN (យុទ្ធសាស្ត្រស្នើឡើង)</td>
+                <td>ជួយបង្កើនភាពស្រដៀងគ្នានៃទិន្នន័យរវាងតំបន់ពីរ កាត់បន្ថយគម្លាតទិន្នន័យ និងបង្កើនភាពត្រឹមត្រូវខ្ពស់ទោះមានគំរូតិចក៏ដោយ។</td>
+                <td>ទាមទារការគណនាស្មុគស្មាញ និងចំណាយធនធានកុំព្យូទ័រព្រមទាំងពេលវេលាយូរក្នុងការបង្ហាត់បណ្តាញ VAEGAN។</td>
+                <td>បង្កើនតម្លៃមធ្យមនៃរង្វាស់វាយតម្លៃប្រមាណ ២% ទៅ ៧% (AUROC កើនដល់ ០.៨៤៤ សម្រាប់ GG និង ០.៨១៨ សម្រាប់ ZG)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់ក្នុងការដំណើរការម៉ូដែលរៀនស៊ីជម្រៅ (Deep Learning) ព្រមទាំងកម្មវិធីឯកទេសសម្រាប់ការវិភាគទិន្នន័យលំហ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ត្រូវការកម្មវិធី <span class='en'>MATLAB 2022a</span> សម្រាប់ការសរសេរកូដម៉ូដែល AI និង <span class='en'>ArcGIS 10.8</span> សម្រាប់រៀបចំផែនទីនិងទាញយកទិន្នន័យលំហ។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារកុំព្យូទ័រដែលមានអង្គគណនា <span class='en'>GPU</span> ខ្លាំង ដើម្បីអាចបង្ហាត់ម៉ូដែលបណ្តាញប្រសាទស្មុគស្មាញដូចជា <span class='en'>CNN, BiLSTM</span> និង <span class='en'>VAEGAN</span> បានលឿន។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការប្រភពទិន្នន័យកត្តាជម្រុញការបាក់ដីចំនួន១៤កត្តា (ដូចជាទិន្នន័យកម្ពស់ដី <span class='en'>DEM</span> ទឹកភ្លៀង គម្របព្រៃឈើ <span class='en'>NDVI</span> និងផែនទីភូគព្ភសាស្ត្រជាដើម)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានអនុវត្តនៅក្នុងតំបន់ភ្នំនៃខេត្ត Guangdong, Guangxi និង Hubei នៃប្រទេសចិន ដែលមានលក្ខណៈភូមិសាស្ត្រ និងអាកាសធាតុជាក់លាក់។ ទិន្នន័យគំរូត្រូវបានយកចេញពីកំណត់ត្រាប្រវត្តិសាស្ត្រនៃការបាក់ដីនៅក្នុងតំបន់ទាំងនេះ។ សម្រាប់ប្រទេសកម្ពុជា ការយល់ដឹងពីគម្លាតទិន្នន័យនេះមានសារៈសំខាន់ ព្រោះលក្ខណៈដី របបទឹកភ្លៀង និងគម្របព្រៃឈើនៅកម្ពុជាអាចមានភាពខុសប្លែកពីប្រទេសចិន ដែលទាមទារឱ្យមានការកែសម្រួលម៉ូដែលមុននឹងយកមកអនុវត្ត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្ររៀនផ្ទេរចំណេះដឹង (TLA) នេះមានសក្តានុពលខ្ពស់ខ្លាំងសម្រាប់ប្រទេសកម្ពុជា ជាពិសេសនៅក្នុងតំបន់ដែលខ្វះខាតទិន្នន័យប្រវត្តិនៃការបាក់ដីគ្រប់គ្រាន់សម្រាប់ការសិក្សា។</p>
+        
+        <ul>
+            
+            <li><strong>តំបន់ជួរភ្នំក្រវាញ តំបន់ឆ្នេរ និងភូមិភាគឦសាន (ឧ. មណ្ឌលគិរី ព្រះសីហនុ កោះកុង):</strong> អាចប្រើវិធីសាស្ត្រនេះដើម្បីបង្កើតផែនទីការព្យាករណ៍ហានិភ័យបាក់ដីនៅតាមបណ្តោយផ្លូវជាតិដែលកាត់តាមជ្រលងភ្នំ និងតំបន់អភិវឌ្ឍន៍នានា ក្នុងរដូវវស្សា ទោះបីជាគ្មានកំណត់ត្រាបាក់ដីពីមុនច្រើនក៏ដោយ។</li>
+            
+            <li><strong>គណៈកម្មាធិការជាតិគ្រប់គ្រងគ្រោះមហន្តរាយ (NCDM) និង MOWRAM:</strong> ស្ថាប័នរដ្ឋអាចអនុវត្តយុទ្ធសាស្ត្រ TLA នេះដោយប្រើប្រាស់ទិន្នន័យបាក់ដីពីប្រទេសជិតខាង (ដូចជាថៃ ឬវៀតណាម) ដើម្បីបង្ហាត់ម៉ូដែលសម្រាប់វាយតម្លៃ និងរៀបចំផែនការឆ្លើយតបគ្រោះអាសន្ននៅកម្ពុជា។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះផ្តល់នូវដំណោះស្រាយដ៏ឆ្លាតវៃក្នុងការទាញយកប្រយោជន៍ពីទិន្នន័យតំបន់ផ្សេង ដើម្បីកសាងប្រព័ន្ធប្រកាសអាសន្នជាមុន (Early Warning System) ការពារអាយុជីវិត និងហេដ្ឋារចនាសម្ព័ន្ធនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យភូមិសាស្ត្រ (Geospatial Data Collection):</strong> ទាញយកទិន្នន័យ <span class='en'>DEM</span>, <span class='en'>NDVI</span> ពី <span class='en'>Google Earth Engine</span> ឬ <span class='en'>MODIS</span> និងប្រមូលទិន្នន័យទឹកភ្លៀង ទីតាំងផ្លូវ តាមរយៈកម្មវិធី <span class='en'>QGIS</span> ឬ <span class='en'>ArcGIS</span> សម្រាប់តំបន់គោលដៅ។</li>
+            
+            <li><strong>កំណត់តំបន់ប្រភព និងតំបន់គោលដៅ (Define Source and Target Domains):</strong> ស្វែងរកសំណុំទិន្នន័យបើកទូលាយ (Open-source datasets) ពីតំបន់ដែលមានប្រវត្តិបាក់ដីច្រើនធ្វើជាតំបន់ប្រភព និងយកតំបន់ប្រឈមនៅកម្ពុជាធ្វើជាតំបន់គោលដៅ ដោយទាញយកលក្ខណៈពិសេស (Feature extraction)។</li>
+            
+            <li><strong>កសាង និងបង្ហាត់ម៉ូដែល VAEGAN (Train VAEGAN Model):</strong> សរសេរកូដដោយប្រើប្រាស់ <span class='en'>Python (PyTorch / TensorFlow)</span> ដើម្បីបង្កើតបណ្តាញ <span class='en'>VAEGAN</span> ដែលប្រើ <span class='en'>CNN</span> ក្នុងគោលបំណងបង្កើតទិន្នន័យថ្មី (Reconstructed Data) ដែលរួមបញ្ចូលលក្ខណៈសម្បត្តិនៃតំបន់ទាំងពីរ។</li>
+            
+            <li><strong>អនុវត្តការរៀនផ្ទេរ និងវាយតម្លៃម៉ូដែល (Apply TLA and Evaluate):</strong> បង្ហាត់ម៉ូដែលព្យាករណ៍ (LSP model) បឋមជាមួយទិន្នន័យដែលបង្កើតថ្មីនោះ រួចធ្វើការ <span class='en'>Fine-tuning</span> ជាមួយទិន្នន័យពិតបន្តិចបន្តួចនៅកម្ពុជា និងវាយតម្លៃភាពត្រឹមត្រូវដោយប្រើ <span class='en'>AUROC</span> និង <span class='en'>F1-Score</span> មុននឹងដាក់ឱ្យប្រើប្រាស់ជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer learning with attributes (TLAs)</span></td>
+                <td>យុទ្ធសាស្ត្រក្នុងម៉ាស៊ីនរៀន (Machine Learning) ដែលទាញយកចំណេះដឹងពីម៉ូដែលដែលបានបង្ហាត់រួចនៅតំបន់មួយ មកច្របាច់បញ្ចូលគ្នាជាមួយលក្ខណៈសម្បត្តិ (Attributes) នៃតំបន់គោលដៅ ដើម្បីបង្កើនសមត្ថភាពទស្សន៍ទាយនៅតំបន់ថ្មីនោះ ទោះបីជាតំបន់នោះមានទិន្នន័យតិចតួចក៏ដោយ។</td>
+                <td>ដូចជាមនុស្សដែលចេះជិះកង់ស្ទាត់ជំនាញស្រាប់ ពេលមកតាក់តែងរៀនជិះម៉ូតូ គាត់គ្រាន់តែស្វែងយល់បន្ថែមពីលក្ខណៈម៉ាស៊ីនបន្តិច គឺអាចជិះបានលឿនជាងអ្នកដែលមិនចេះជិះកង់សោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Variational autoencoder generative adversarial network (VAEGAN)</span></td>
+                <td>ជាបណ្តាញប្រសាទសិប្បនិម្មិតកម្រិតខ្ពស់ដែលរួមបញ្ចូលគ្នារវាង VAE (បំបែកនិងចម្លងលក្ខណៈទិន្នន័យ) និង GAN (ប្រកួតប្រជែងដើម្បីវាយតម្លៃភាពពិតប្រាកដ) ដើម្បីបង្កើតទិន្នន័យក្លែងក្លាយថ្មីៗ (Reconstructed Data) ដែលមានលក្ខណៈស្រដៀងនឹងទិន្នន័យពិតក្នុងតំបន់គោលដៅបំផុត។</td>
+                <td>ដូចជាវិចិត្រករម្នាក់ដែលចេះគូររូបដោយផ្តិតយកលក្ខណៈពិសេសពីបរិស្ថានជុំវិញ (VAE) ហើយមានអ្នករិះគន់ម្នាក់ទៀតជួយផ្តល់យោបល់កែលម្អរហូតដល់រូបគំនូរនោះមើលទៅដូចរូបថតពិតៗ (GAN)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Landslide spatial prediction (LSP)</span></td>
+                <td>ដំណើរការប្រើប្រាស់ក្បួនគណនាកុំព្យូទ័រនិងទិន្នន័យភូមិសាស្ត្រ ដើម្បីវិភាគ និងបង្កើតជាផែនទីបង្ហាញពីកម្រិតហានិភ័យ ឬប្រូបាប៊ីលីតេនៃការកើតមានការបាក់ដីនៅតាមទីតាំងនីមួយៗក្នុងតំបន់ណាមួយ។</td>
+                <td>ដូចជាការមើលផែនទីព្យាករណ៍អាកាសធាតុដែលប្រាប់យើងថាខេត្តណាអាចនឹងមានភ្លៀងធ្លាក់ខ្លាំង តែនេះគឺសម្រាប់ទស្សន៍ទាយរកទីតាំងដែលអាចនឹងមានការបាក់ស្រុតដី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional neural networks (CNNs)</span></td>
+                <td>ប្រភេទនៃបណ្តាញប្រសាទសិប្បនិម្មិត (AI) ដែលមានសមត្ថភាពខ្ពស់ក្នុងការស្រូបទាញយកលក្ខណៈពិសេស (Feature extraction) ពីទិន្នន័យដែលមានរចនាសម្ព័ន្ធស្មុគស្មាញ ដោយប្រើស្រទាប់ត្រង (Filters) បន្តបន្ទាប់គ្នាដើម្បីស្វែងរកទម្រង់ដែលលាក់កំបាំងនៅក្នុងទិន្នន័យនោះ។</td>
+                <td>ដូចជាកែវពង្រីកវេទមន្តដែលអ្នកស៊ើបអង្កេតប្រើដើម្បីឆ្លុះរករូបរាង ស្នាមម្រាមដៃ ឬតម្រុយតូចៗនៅលើផ្ទាំងគំនូរ ដើម្បីកាត់ក្តីរកឱ្យឃើញថាតើនរណាជាអ្នកគូរពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sample-scarce area</span></td>
+                <td>តំបន់ភូមិសាស្ត្រណាមួយដែលខ្វះខាតទិន្នន័យ ឬមិនមានកំណត់ត្រាប្រវត្តិសាស្ត្រជាក់ស្តែងគ្រប់គ្រាន់ (ឧទាហរណ៍៖ ព័ត៌មានពីទីតាំងដែលធ្លាប់បាក់ដីពីមុន) ដែលធ្វើឱ្យការបង្ហាត់ម៉ូដែល AI ជួបការលំបាកយ៉ាងខ្លាំងក្នុងការស្វែងរកភាពត្រឹមត្រូវ។</td>
+                <td>ដូចជាសិស្សដែលត្រូវត្រៀមប្រឡងចូលរៀនមុខវិជ្ជាថ្មីស្រឡាងមួយ តែសាលាមិនមានសៀវភៅ ឬវិញ្ញាសាចាស់ៗសម្រាប់ឱ្យសិស្សមើលធ្វើជាគំរូសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Latent space</span></td>
+                <td>លំហអរូបីនៅក្នុងប្រព័ន្ធកុំព្យូទ័រ ជាកន្លែងដែលទិន្នន័យធំៗនិងស្មុគស្មាញត្រូវបានបម្លែង និងបង្រួមទៅជាទម្រង់វ៉ិចទ័រសាមញ្ញ តំណាងឱ្យតែលក្ខណៈស្នូលសំខាន់ៗបំផុតរបស់វា ដើម្បីងាយស្រួលក្នុងការទាញយកទៅបំប្លែង ឬវិភាគបន្ត។</td>
+                <td>ដូចជាការសង្ខេបសៀវភៅប្រលោមលោកដ៏ក្រាស់មួយក្បាលឱ្យនៅសល់ត្រឹមមួយទំព័រ ដែលមានសរសេរតែសាច់រឿងសំខាន់ៗបំផុត ដើម្បីងាយស្រួលចងចាំនិងប្រាប់ទៅអ្នកដទៃបន្ត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Area under the receiver operating characteristic (AUROC)</span></td>
+                <td>ជារង្វាស់ស្តង់ដារមួយក្នុងបច្ចេកវិទ្យាម៉ាស៊ីនរៀន ដែលប្រើសម្រាប់វាយតម្លៃសមត្ថភាពជារួមរបស់ម៉ូដែលក្នុងការបែងចែករវាងវណ្ណៈពីរ (ឧទាហរណ៍៖ កន្លែងបាក់ដី និងកន្លែងមិនបាក់ដី) ដែលតម្លៃកាន់តែខិតជិត ១ មានន័យថាម៉ូដែលកាន់តែមានភាពសុក្រឹតខ្ពស់។</td>
+                <td>ដូចជាពិន្ទុប្រឡងសញ្ញាបត្រប្រចាំឆ្នាំរបស់សិស្សដែរ បើបានពិន្ទុកាន់តែខ្ពស់ (ជិតដល់ ១០០%) មានន័យថាសិស្សនោះពូកែនិងមានសមត្ថភាពអាចវាយតម្លៃដោះស្រាយលំហាត់បានត្រឹមត្រូវ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+learning+frameworks+for+landslide+susceptibility+mapping" target="_blank" rel="noopener"><span class="en">Deep learning frameworks for landslide susceptibility mapping</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Domain+adaptation+and+transfer+learning+in+geohazard+prediction" target="_blank" rel="noopener"><span class="en">Domain adaptation and transfer learning in geohazard prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Variational+Autoencoder+Generative+Adversarial+Networks+%28VAEGAN%29+applications" target="_blank" rel="noopener"><span class="en">Variational Autoencoder Generative Adversarial Networks (VAEGAN) applications</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+sample-scarce+datasets+in+spatial+modeling" target="_blank" rel="noopener"><span class="en">Handling sample-scarce datasets in spatial modeling</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

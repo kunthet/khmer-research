@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទាញយកដើមឈើនីមួយៗពីពពកចំណុច UAV LiDAR ដោយផ្អែកលើការបែងចែក Mean Shift សម្របខ្លួនដោយស្វ័យប្រវត្តិ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាភាពត្រឹមត្រូវទាប និងតម្រូវការក្នុងការកំណត់ប៉ារ៉ាម៉ែត្រដោយដៃច្រើន នៅក្នុងវិធីសាស្ត្រទាញយកដើមឈើនីមួយៗពីទិន្នន័យពពកចំណុច (Point clouds) របស...">
+    
+    <meta name="keywords" content="UAV LiDAR, Individual tree extraction, Mean shift segmentation, DBSCAN clustering, Forest inventory, Point cloud processing, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/uav-lidar-tree-extraction-mean-shift-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/uav-lidar-tree-extraction-mean-shift-2021.html">
+    <meta property="og:title" content="ការទាញយកដើមឈើនីមួយៗពីពពកចំណុច UAV LiDAR ដោយផ្អែកលើការបែងចែក Mean Shift សម្របខ្លួនដោយស្វ័យប្រវត្តិ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាភាពត្រឹមត្រូវទាប និងតម្រូវការក្នុងការកំណត់ប៉ារ៉ាម៉ែត្រដោយដៃច្រើន នៅក្នុងវិធីសាស្ត្រទាញយកដើមឈើនីមួយៗពីទិន្នន័យពពកចំណុច (Point clouds) របស់ UAV LiDAR ក្នុងបរិស្ថានព្រៃឈើដែលមានភាព...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2021 ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences">
+    
+    <meta property="article:tag" content="UAV LiDAR">
+    
+    <meta property="article:tag" content="Individual tree extraction">
+    
+    <meta property="article:tag" content="Mean shift segmentation">
+    
+    <meta property="article:tag" content="DBSCAN clustering">
+    
+    <meta property="article:tag" content="Forest inventory">
+    
+    <meta property="article:tag" content="Point cloud processing">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទាញយកដើមឈើនីមួយៗពីពពកចំណុច UAV LiDAR ដោយផ្អែកលើការបែងចែក Mean Shift សម្របខ្លួនដោយស្វ័យប្រវត្តិ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាភាពត្រឹមត្រូវទាប និងតម្រូវការក្នុងការកំណត់ប៉ារ៉ាម៉ែត្រដោយដៃច្រើន នៅក្នុងវិធីសាស្ត្រទាញយកដើមឈើនីមួយៗពីទិន្នន័យពពកចំណុច (Point clouds) របស់ UAV LiDAR ក្នុងបរិស្ថានព្រៃឈើដែលមានភាព...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u178a\u17be\u1798\u1788\u17be\u1793\u17b8\u1798\u17bd\u1799\u17d7\u1796\u17b8\u1796\u1796\u1780\u1785\u17c6\u178e\u17bb\u1785 UAV LiDAR \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1794\u17c2\u1784\u1785\u17c2\u1780 Mean Shift \u179f\u1798\u17d2\u179a\u1794\u1781\u17d2\u179b\u17bd\u1793\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7",
+      "name": "INDIVIDUAL TREE EXTRACTION FROM UAV LIDAR POINT CLOUDS BASED ON SELF-ADAPTIVE MEAN SHIFT SEGMENTATION",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1791\u17b6\u1794 \u1793\u17b7\u1784\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u178a\u17c4\u1799\u178a\u17c3\u1785\u17d2\u179a\u17be\u1793 \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1791\u17b6\u1789\u1799\u1780\u178a\u17be\u1798\u1788\u17be\u1793\u17b8\u1798\u17bd\u1799\u17d7\u1796\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u1796\u1780\u1785\u17c6\u178e\u17bb\u1785 (Point clouds) \u179a\u1794\u179f\u17cb UAV LiDAR \u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u1796\u17d2\u179a\u17c3\u1788\u17be\u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/uav-lidar-tree-extraction-mean-shift-2021.html",
+      "author": [{"@type": "Person", "name": "Z. Hui (Faculty of Geomatics, East China University of Technology, Nanchang, China)"},{"@type": "Person", "name": "N. Li"},{"@type": "Person", "name": "Y. Xia"},{"@type": "Person", "name": "P. Cheng"},{"@type": "Person", "name": "Y. He"}],
+      "datePublished": "2021 ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "INDIVIDUAL TREE EXTRACTION FROM UAV LIDAR POINT CLOUDS BASED ON SELF-ADAPTIVE MEAN SHIFT SEGMENTATION",
+        "url": "https://doi.org/10.5194/isprs-annals-V-1-2021-25-2021"
+      },
+      "keywords": ["UAV LiDAR", "Individual tree extraction", "Mean shift segmentation", "DBSCAN clustering", "Forest inventory", "Point cloud processing"],
+      "about": "Remote Sensing and Forestry"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u178a\u17be\u1798\u1788\u17be\u1793\u17b8\u1798\u17bd\u1799\u17d7\u1796\u17b8\u1796\u1796\u1780\u1785\u17c6\u178e\u17bb\u1785 UAV LiDAR \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1794\u17c2\u1784\u1785\u17c2\u1780 Mean Shift \u179f\u1798\u17d2\u179a\u1794\u1781\u17d2\u179b\u17bd\u1793\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7",
+          "item": "https://khmerresearch.com/papers/technology/uav-lidar-tree-extraction-mean-shift-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការទាញយកដើមឈើនីមួយៗពីពពកចំណុច UAV LiDAR ដោយផ្អែកលើការបែងច...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> INDIVIDUAL TREE EXTRACTION FROM UAV LIDAR POINT CLOUDS BASED ON SELF-ADAPTIVE MEAN SHIFT SEGMENTATION<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.5194/isprs-annals-V-1-2021-25-2021" target="_blank">doi.org/10.5194/isprs-annals-V-1-2021-25-2021</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទាញយកដើមឈើនីមួយៗពីពពកចំណុច UAV LiDAR ដោយផ្អែកលើការបែងចែក Mean Shift សម្របខ្លួនដោយស្វ័យប្រវត្តិ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> INDIVIDUAL TREE EXTRACTION FROM UAV LIDAR POINT CLOUDS BASED ON SELF-ADAPTIVE MEAN SHIFT SEGMENTATION</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Z. Hui (Faculty of Geomatics, East China University of Technology, Nanchang, China), N. Li, Y. Xia, P. Cheng, Y. He</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021 ISPRS Annals of the Photogrammetry, Remote Sensing and Spatial Information Sciences</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Remote Sensing and Forestry</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាភាពត្រឹមត្រូវទាប និងតម្រូវការក្នុងការកំណត់ប៉ារ៉ាម៉ែត្រដោយដៃច្រើន នៅក្នុងវិធីសាស្ត្រទាញយកដើមឈើនីមួយៗពីទិន្នន័យពពកចំណុច (Point clouds) របស់ UAV LiDAR ក្នុងបរិស្ថានព្រៃឈើដែលមានភាពស្មុគស្មាញ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្របែងចែក Mean Shift ដោយស្វ័យប្រវត្តិ ដែលអាចគណនាទំហំ Bandwidth ដោយខ្លួនឯងរួមជាមួយបច្ចេកទេសបែងចែកតាមឋានានុក្រម។
+        
+        <ul>
+            
+            <li>ការច្រោះចំណុចដីចេញដោយប្រើប្រាស់តម្រងរូបវិទ្យាដែលបានធ្វើឱ្យប្រសើរឡើង (Improved morphological filtering)</li>
+            
+            <li>ការចង្កោមចំណុចគល់ឈើដោយប្រើក្បួនដោះស្រាយ DBSCAN (DBSCAN clustering for trunk points)</li>
+            
+            <li>ការប៉ាន់ស្មានទំហំមកុដឈើដើម្បីកំណត់កម្រិត Bandwidth ផ្ដេកដោយស្វ័យប្រវត្តិ (Self-adaptive horizontal bandwidth estimation based on crown sizes)</li>
+            
+            <li>ការបែងចែក Mean shift តាមឋានានុក្រមដើម្បីទាញយកដើមឈើនីមួយៗជាបន្តបន្ទាប់ (Hierarchy mean shift segmentation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រដែលបានស្នើឡើងអាចទាញយកដើមឈើនីមួយៗបានយ៉ាងល្អប្រសើរ ដោយមិនតម្រូវឱ្យមានការកំណត់ប៉ារ៉ាម៉ែត្រ Bandwidth ដោយដៃនោះទេ។</li>
+            
+            <li>បើប្រៀបធៀបជាមួយវិធីសាស្ត្រ Mean shift បែបប្រពៃណី វិធីសាស្ត្រថ្មីនេះទទួលបានអត្រាភាពពេញលេញ (Completeness) និងភាពត្រឹមត្រូវមធ្យម (Mean accuracy) ខ្ពស់ជាង។</li>
+            
+            <li>ការគណនាទំហំ Bandwidth ដោយស្វ័យប្រវត្តិជួយលុបបំបាត់ភាពលំបាកក្នុងការកែសម្រួលប៉ារ៉ាម៉ែត្រ ដែលធ្វើឱ្យវិធីសាស្ត្រនេះងាយស្រួលក្នុងការអនុវត្តសូម្បីតែសម្រាប់អ្នកដែលមិនសូវមានបទពិសោធន៍ក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Self-Adaptive Mean Shift Segmentation (Proposed)</span></strong><br>ការបែងចែក Mean Shift ដោយសម្របខ្លួនឯង (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>មិនតម្រូវឱ្យកំណត់ប៉ារ៉ាម៉ែត្រ Bandwidth ដោយដៃទេ ព្រោះវាគណនាទំហំមកុដឈើដោយស្វ័យប្រវត្តិ។ ដំណើរការដោយស្វ័យប្រវត្តិកម្មខ្ពស់។</td>
+                <td>ការគណនាដំបូងដើម្បីកំណត់ទីតាំងគល់ឈើ (Trunk points) អាចមានភាពស្មុគស្មាញ និងទាមទារការពឹងផ្អែកលើចំណុចដែលនៅជិតដី។</td>
+                <td>ទទួលបានអត្រាភាពពេញលេញ (Completeness) និងភាពត្រឹមត្រូវមធ្យម (Mean accuracy) ខ្ពស់បំផុតដោយមិនចាំបាច់កែតម្រូវប៉ារ៉ាម៉ែត្រអ្វីឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Mean Shift Segmentation (Ferraz et al., 2012)</span></strong><br>ការបែងចែក Mean Shift បែបប្រពៃណី</td>
+                <td>ជាវិធីសាស្ត្រមូលដ្ឋានដែលងាយស្រួលយល់ និងអនុវត្ត ប្រសិនបើដឹងពីទំហំមកុដឈើប្រហាក់ប្រហែលជាមុន។</td>
+                <td>តម្រូវឱ្យសាកល្បងកំណត់ប៉ារ៉ាម៉ែត្រ Bandwidth (Trial and error) ដោយដៃច្រើនដង។ លទ្ធផលងាយប្រែប្រួលខ្លាំងអាស្រ័យលើតម្លៃដែលបានកំណត់។</td>
+                <td>លទ្ធផលនៃភាពត្រឹមត្រូវកើនឡើងហើយធ្លាក់ចុះវិញអាស្រ័យលើទំហំ Bandwidth ផ្ដេក (ពី 1.0m ដល់ 3.5m) ដោយទាមទារការស្វែងរកទំហំដ៏ប្រសើរបំផុតដោយដៃ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ទោះបីជាឯកសារមិនបានបញ្ជាក់លម្អិតពីថ្លៃដើមក៏ដោយ ប៉ុន្តែការអនុវត្តវិធីសាស្ត្រនេះតម្រូវឱ្យមានឧបករណ៍ ទិន្នន័យ និងចំណេះដឹងកម្រិតខ្ពស់ដូចខាងក្រោម៖
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ដ្រូន (UAV) បំពាក់ដោយម៉ាស៊ីនស្កេនឡាស៊ែរ (ឧទាហរណ៍ Riegl Ricopter ជាមួយ VUX-1UAV) និងកុំព្យូទ័រដែលមានសមត្ថភាពដំណើរការទិន្នន័យ 3D ធំៗ។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យពពកចំណុច (3D Point Clouds) ពី UAV LiDAR ដែលមានដង់ស៊ីតេខ្ពស់ និងអាចឆ្លុះដល់ផ្ទៃដីដើម្បីចាប់យកគល់ឈើ។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធីសម្រាប់មើល និងកែសម្រួលទិន្នន័យ 3D ដូចជា CloudCompare និងបរិស្ថានសរសេរកូដសម្រាប់ដំណើរការក្បួនដោះស្រាយ Clustering។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងជំនាញផ្នែកកែច្នៃទិន្នន័យ Point Cloud ផ្នែកក្បួនដោះស្រាយ Machine Learning (DBSCAN, Mean Shift) និងផ្នែករុក្ខាប្រមាញ់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យ UAV LiDAR ពីតំបន់ព្រៃឈើដែលមានដើម Douglas Fir ជាចម្បង ដែលជាប្រភេទឈើនៅតំបន់ត្រជាក់មានទម្រង់មកុដស្រួចនិងច្បាស់លាស់។ សម្រាប់ប្រទេសកម្ពុជា ដែលមានព្រៃត្រូពិចក្រាស់ និងរុក្ខជាតិចម្រុះ ទម្រង់មកុដឈើមានភាពត្រួតស៊ីគ្នានិងស្មុគស្មាញជាង ដែលអាចតម្រូវឱ្យមានការកែតម្រូវក្បួនដោះស្រាយបន្ថែម ដើម្បីធានាបាននូវភាពត្រឹមត្រូវខ្ពស់នៅពេលអនុវត្តជាក់ស្តែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្ដានុពលខ្ពស់ខ្លាំងសម្រាប់ការគ្រប់គ្រង និងស្រាវជ្រាវធនធានព្រៃឈើ និងកសិកម្មនៅប្រទេសកម្ពុជា ដោយសារវាមិនតម្រូវឱ្យកំណត់ប៉ារ៉ាម៉ែត្រដោយដៃច្រើន។</p>
+        
+        <ul>
+            
+            <li><strong>កសិកម្មខ្នាតធំ (ចម្ការកៅស៊ូ និងស្វាយចន្ទី):</strong> អាចប្រើប្រាស់សម្រាប់រាប់ចំនួនដើម និងវាយតម្លៃការលូតលាស់នៃមកុដឈើនៅក្នុងចម្ការកៅស៊ូ (ខេត្តកំពង់ចាម ត្បូងឃ្មុំ) ឬចម្ការស្វាយចន្ទី ដើម្បីប៉ាន់ស្មានទិន្នផលបានយ៉ាងរហ័ស។</li>
+            
+            <li><strong>ការត្រួតពិនិត្យតំបន់ការពារធម្មជាតិ (Prey Lang, Cardamom Mountains):</strong> ជួយដល់ក្រសួងបរិស្ថាន និងអង្គការនានាក្នុងការធ្វើសារពើភ័ណ្ឌព្រៃឈើ (Forest Inventory) និងតាមដានរចនាសម្ព័ន្ធព្រៃឈើនៅតំបន់ព្រៃឡង់ ឬជួរភ្នំក្រវាញ ដោយមិនបាច់ចុះវាស់ផ្ទាល់ដែលចំណាយពេលយូរ និងប្រឈមហានិភ័យ។</li>
+            
+            <li><strong>គម្រោងឥណទានកាបូន (REDD+):</strong> អាចគាំទ្រដល់គម្រោងឥណទានកាបូននៅកម្ពុជា ដោយផ្តល់នូវទិន្នន័យ 3D នៃរចនាសម្ព័ន្ធដើមឈើនីមួយៗ ដែលមានភាពត្រឹមត្រូវខ្ពស់សម្រាប់យកទៅគណនាបរិមាណជីវម៉ាស និងកាបូនស្តុកទុក។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក បច្ចេកវិទ្យា UAV LiDAR និងក្បួនដោះស្រាយនេះ អាចជួយជំរុញការធ្វើទំនើបកម្មលើការគ្រប់គ្រងធនធានធម្មជាតិ និងកសិ-ឧស្សាហកម្មនៅកម្ពុជា ប្រសិនបើមានការគាំទ្រផ្នែកថវិកាលើឧបករណ៍ដ្រូន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទិន្នន័យ Point Cloud:</strong> ចាប់ផ្តើមស្វែងយល់ពីទម្រង់ទិន្នន័យ 3D Point Cloud និងរបៀបដំណើរការវាដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">Open3D</span> ឬ <span class="en">PDAL</span> នៅក្នុង <span class="en">Python</span> ដើម្បីចេះត្រងយកចំណុចដី (Ground filtering) ចេញពីទិន្នន័យ។</li>
+            
+            <li><strong>អនុវត្តក្បួនដោះស្រាយ DBSCAN ជាមុន:</strong> សិក្សា និងសរសេរកូដសាកល្បងក្បួនដោះស្រាយ <span class="en">DBSCAN</span> ដោយប្រើប្រាស់ <span class="en">Scikit-Learn</span> លើទិន្នន័យគំរូតូចៗ ដើម្បីស្វែងយល់ពីរបៀបចាប់យកចំណុចគល់ឈើ (Trunk clustering) និងការដកចេញនូវចំណុចរំខាន (Outliers)។</li>
+            
+            <li><strong>សាកល្បងបែងចែកដើមឈើជាមួយ Mean Shift:</strong> អនុវត្តក្បួនដោះស្រាយ <span class="en">Mean Shift Clustering</span> សម្រាប់បែងចែកមកុដឈើ។ អ្នកគួរប្រើប្រាស់កម្មវិធី <span class="en">CloudCompare</span> ជាមុនដើម្បីមើលទិន្នន័យជាក់ស្តែង មុននឹងសរសេរកូដកែសម្រួល Bandwidth ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ប្រមូល និងសាកល្បងជាមួយទិន្នន័យក្នុងស្រុក:</strong> ស្វែងរកទិន្នន័យ <span class="en">UAV LiDAR</span> ដែលបើកទូលាយ (Open-source) ឬស្នើសុំសហការជាមួយស្ថាប័នក្នុងស្រុក ដើម្បីយកទិន្នន័យព្រៃឈើ ឬចម្ការនៅកម្ពុជាមកសាកល្បង និងវាស់ស្ទង់ភាពត្រឹមត្រូវនៃក្បួនដោះស្រាយ។</li>
+            
+            <li><strong>បង្កើតប្រព័ន្ធស្វ័យប្រវត្តិកម្មពេញលេញ (Pipeline):</strong> ចងក្រងកូដទាំងអស់ (ការច្រោះដី, DBSCAN សម្រាប់គល់ឈើ, និងការគណនាទំហំមកុដឈើសម្រាប់ Mean Shift) ទៅជា <span class="en">Pipeline</span> តែមួយ ដើម្បីបង្កើតជាប្រព័ន្ធទាញយកដើមឈើនីមួយៗដោយស្វ័យប្រវត្តិពីទិន្នន័យ LiDAR ឆៅ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">UAV LiDAR</span></td>
+                <td>បច្ចេកវិទ្យាប្រើប្រាស់ដ្រូន (UAV) បំពាក់ឧបករណ៍បាញ់ពន្លឺឡាស៊ែរ (LiDAR) ទៅកាន់ផ្ទៃដី ដើម្បីវាស់ចម្ងាយដោយគណនារយៈពេលដែលពន្លឺនោះចំណាយពេលផ្លាតត្រឡប់មកវិញ ដែលអាចបង្កើតជាទិន្នន័យ 3D នៃរចនាសម្ព័ន្ធព្រៃឈើបានយ៉ាងច្បាស់លាស់។</td>
+                <td>ដូចជាសត្វប្រចៀវបញ្ចេញសំឡេងដើម្បីស្វែងរកទីតាំងចំណីក្នុងទីងងឹត ប៉ុន្តែនេះប្រើពន្លឺឡាស៊ែរពីលើអាកាសដើម្បីវាស់និងគូររូបភាពដីនិងដើមឈើ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Point Clouds</span></td>
+                <td>បណ្ដុំនៃចំណុចទិន្នន័យរាប់លាននៅក្នុងលំហ 3D (ដែលមានកូអរដោណេ x, y, z) ដែលប្រមូលបានពីឧបករណ៍ LiDAR ដើម្បីតំណាងឱ្យរូបរាងពិតប្រាកដនៃវត្ថុ ផ្ទៃដី ឬដើមឈើ។ ឯកសារនេះប្រើវាដើម្បីទាញយកទម្រង់ដើមឈើនីមួយៗ។</td>
+                <td>ដូចជាការយកគ្រាប់ខ្សាច់តូចៗរាប់លានគ្រាប់មកតម្រៀបបញ្ឈរទល់មុខគ្នា ឱ្យចេញជារូបរាងដើមឈើ ឬផ្ទះមួយនៅក្នុងកុំព្យូទ័រ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean Shift Segmentation</span></td>
+                <td>ក្បួនដោះស្រាយផ្នែក Machine Learning សម្រាប់បែងចែកទិន្នន័យជាក្រុម (Clustering) ដោយស្វែងរកតំបន់ដែលមានដង់ស៊ីតេទិន្នន័យខ្ពស់បំផុត (ឧទាហរណ៍ ចំណុចកណ្ដាលនៃមកុដឈើ) ហើយប្រមូលចំណុចនៅជុំវិញនោះចូលជាក្រុមតែមួយ ដើម្បីកាត់ផ្តាច់ដើមឈើមួយពីដើមឈើមួយទៀត។</td>
+                <td>ដូចជាការទម្លាក់មេដែកចូលក្នុងគំនរដែកគោល មេដែកនោះនឹងទាញទាក់ដែកគោលដែលនៅជិតៗវាបំផុតឱ្យផ្តុំគ្នាជាដុំៗដាច់ដោយឡែកពីគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bandwidth</span></td>
+                <td>នៅក្នុងបរិបទនៃ Mean Shift ពាក្យនេះមិនមែនជាល្បឿនអ៊ីនធឺណិតទេ តែវាសំដៅលើទំហំកាំ (Radius) នៃរង្វង់ឬស្វ៊ែរដែលប្រើសម្រាប់រុករក និងប្រមូលផ្តុំចំណុចទិន្នន័យ។ បើវាតូចពេក ដើមឈើមួយអាចត្រូវបែកជាពីរ បើវាធំពេក ដើមឈើពីរអាចត្រូវច្របាច់បញ្ចូលគ្នាជាដើមឈើតែមួយ។</td>
+                <td>ដូចជាទំហំនៃសំណាញ់ចាប់ត្រី បើប្រើសំណាញ់តូច ចាប់បានតែត្រីនៅជិតៗខ្លួន បើប្រើសំណាញ់ធំ អាចចាប់បានត្រីក្នុងបរិវេណធំទូលាយជាង និងអាចជាប់ទាំងកំទេចកំទីផ្សេងៗមកជាមួយផងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">DBSCAN Clustering</span></td>
+                <td>ក្បួនដោះស្រាយសម្រាប់ចាប់ក្រុមទិន្នន័យដោយផ្អែកលើភាពកកកុញ (Density-based) ដែលអាចរកឃើញរូបរាងក្រុមទិន្នន័យស្មុគស្មាញ និងទម្លាក់ចោលចំណុចរំខាន (Outliers) ដែលនៅដាច់តែឯង។ ក្នុងឯកសារនេះ វាត្រូវប្រើសម្រាប់ចង្កោមចំណុចឱ្យក្លាយជាគល់ឈើ។</td>
+                <td>ដូចជាការកំណត់សម្គាល់ក្រុមមនុស្សនៅក្នុងពិធីបុណ្យ តំបន់ណាមានមនុស្សឈរជុំគ្នាច្រើនចាត់ទុកជាក្រុមមួយ ចំណែកអ្នកដែលឈរនៅឆ្ងាយដាច់តែឯងត្រូវបានចាត់ទុកជាអ្នកដើរកាត់ (Outliers)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Canopy Height Model (CHM)</span></td>
+                <td>ម៉ូដែលឌីជីថលតំណាងឱ្យកម្ពស់សុទ្ធរបស់មកុដឈើ (Canopy) ដែលទទួលបានតាមរយៈការយកកម្ពស់ផ្ទៃខាងលើបង្អស់នៃព្រៃឈើដកកម្ពស់ផ្ទៃដីធម្មតាចេញ ដើម្បីដឹងថាតើដើមឈើនោះខ្ពស់ផុតពីដីប៉ុន្មានម៉ែត្រ។</td>
+                <td>ដូចជាការវាស់កម្ពស់មនុស្សដោយដកកម្រាស់ស្បែកជើងចេញ ដើម្បីដឹងថាតើមនុស្សនោះមានកម្ពស់ពិតប្រាកដប៉ុន្មានចាប់ពីបាតជើងដល់កំពូលក្បាល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Morphological filtering</span></td>
+                <td>ដំណើរការនៃក្បួនដោះស្រាយក្នុងការសម្អាតទិន្នន័យ Point Clouds តាមរយៈការវិភាគរូបរាង និងកម្ពស់ ដើម្បីបែងចែកឱ្យដាច់រវាងចំណុចដែលជាដី (Ground) និងចំណុចដែលជាវត្ថុនៅពីលើដី (Non-ground ដូចជាដើមឈើ) មុននឹងឈានទៅធ្វើការវិភាគបន្ត។</td>
+                <td>ដូចជាការប្រើកញ្ច្រែងដើម្បីច្រោះយកគ្រាប់ក្រួសធំៗចេញពីខ្សាច់ម៉ដ្ឋ ដើម្បីយកតែដីខ្សាច់សុទ្ធ (តំណាងឱ្យផ្ទៃដី) ទុកសម្រាប់ប្រើប្រាស់បន្ត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=UAV+LiDAR+applications+in+precision+forestry" target="_blank" rel="noopener"><span class="en">UAV LiDAR applications in precision forestry</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+learning+methods+for+3D+point+cloud+segmentation" target="_blank" rel="noopener"><span class="en">Deep learning methods for 3D point cloud segmentation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=DBSCAN+clustering+parameter+optimization+for+spatial+data" target="_blank" rel="noopener"><span class="en">DBSCAN clustering parameter optimization for spatial data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparative+studies+on+CHM-based+vs+point-based+tree+extraction" target="_blank" rel="noopener"><span class="en">Comparative studies on CHM-based vs point-based tree extraction</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរៀនពីអតុល្យភាពចំណាត់ថ្នាក់នៅក្នុងការជីកទិន្នន័យ – ការសិក្សាស្រាវជ្រាវ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះធ្វើការដោះស្រាយបញ្ហានៃការរៀនពីទិន្នន័យដែលមានអតុល្យភាពចំណាត់ថ្នាក់ (Class Imbalance) នៅក្នុងវិស័យជីកទិន្នន័យ (Data Mining) ដែលជាបញ្ហាធ្វើឱ្យម៉ូដែលចំណា...">
+    
+    <meta name="keywords" content="Data Mining, Classification, Class Imbalance Learning, Oversampling, Undersampling, Decision Trees, Cost-sensitive learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/class-imbalance-learning-data-mining-survey-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/class-imbalance-learning-data-mining-survey-2015.html">
+    <meta property="og:title" content="ការរៀនពីអតុល្យភាពចំណាត់ថ្នាក់នៅក្នុងការជីកទិន្នន័យ – ការសិក្សាស្រាវជ្រាវ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះធ្វើការដោះស្រាយបញ្ហានៃការរៀនពីទិន្នន័យដែលមានអតុល្យភាពចំណាត់ថ្នាក់ (Class Imbalance) នៅក្នុងវិស័យជីកទិន្នន័យ (Data Mining) ដែលជាបញ្ហាធ្វើឱ្យម៉ូដែលចំណាត់ថ្នាក់មានភាពលម្អៀងទៅរកចំណាត់ថ្នាក់ដែលម...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015, International Journal of Communication Technology for Social Networking Services">
+    
+    <meta property="article:tag" content="Data Mining">
+    
+    <meta property="article:tag" content="Classification">
+    
+    <meta property="article:tag" content="Class Imbalance Learning">
+    
+    <meta property="article:tag" content="Oversampling">
+    
+    <meta property="article:tag" content="Undersampling">
+    
+    <meta property="article:tag" content="Decision Trees">
+    
+    <meta property="article:tag" content="Cost-sensitive learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរៀនពីអតុល្យភាពចំណាត់ថ្នាក់នៅក្នុងការជីកទិន្នន័យ – ការសិក្សាស្រាវជ្រាវ">
+    <meta name="twitter:description" content="ឯកសារនេះធ្វើការដោះស្រាយបញ្ហានៃការរៀនពីទិន្នន័យដែលមានអតុល្យភាពចំណាត់ថ្នាក់ (Class Imbalance) នៅក្នុងវិស័យជីកទិន្នន័យ (Data Mining) ដែលជាបញ្ហាធ្វើឱ្យម៉ូដែលចំណាត់ថ្នាក់មានភាពលម្អៀងទៅរកចំណាត់ថ្នាក់ដែលម...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1787\u17b8\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u2013 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c",
+      "name": "Class Imbalance Learning in Data Mining \u2013 A Survey",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1792\u17d2\u179c\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1798\u17b6\u1793\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb (Class Imbalance) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u179f\u17d0\u1799\u1787\u17b8\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Mining) \u178a\u17c2\u179b\u1787\u17b6\u1794\u1789\u17d2\u17a0\u17b6\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1798\u17b6\u1793\u1797\u17b6\u1796\u179b\u1798\u17d2\u17a2\u17c0\u1784\u1791\u17c5\u179a\u1780\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178a\u17c2\u179b\u1798\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u17d2\u179a\u17be\u1793 (Majority Class)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/class-imbalance-learning-data-mining-survey-2015.html",
+      "author": [{"@type": "Person", "name": "Ali Mirza Mahmood (Associate Professor, DMS SVH College of Engineering, Machilipatnam, India)"}],
+      "datePublished": "2015, International Journal of Communication Technology for Social Networking Services",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Class Imbalance Learning in Data Mining \u2013 A Survey",
+        "url": "http://dx.doi.org/10.21742/ijctsns.2015.3.2.2"
+      },
+      "keywords": ["Data Mining", "Classification", "Class Imbalance Learning", "Oversampling", "Undersampling", "Decision Trees", "Cost-sensitive learning"],
+      "about": "Computer Science / Data Mining / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1787\u17b8\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u2013 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c",
+          "item": "https://khmerresearch.com/papers/technology/class-imbalance-learning-data-mining-survey-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរៀនពីអតុល្យភាពចំណាត់ថ្នាក់នៅក្នុងការជីកទិន្នន័យ – ការស...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Class Imbalance Learning in Data Mining – A Survey<br>
+        
+        <strong>Source:</strong> <a href="http://dx.doi.org/10.21742/ijctsns.2015.3.2.2" target="_blank">dx.doi.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរៀនពីអតុល្យភាពចំណាត់ថ្នាក់នៅក្នុងការជីកទិន្នន័យ – ការសិក្សាស្រាវជ្រាវ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Class Imbalance Learning in Data Mining – A Survey</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ali Mirza Mahmood (Associate Professor, DMS SVH College of Engineering, Machilipatnam, India)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015, International Journal of Communication Technology for Social Networking Services</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Data Mining / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះធ្វើការដោះស្រាយបញ្ហានៃការរៀនពីទិន្នន័យដែលមានអតុល្យភាពចំណាត់ថ្នាក់ (Class Imbalance) នៅក្នុងវិស័យជីកទិន្នន័យ (Data Mining) ដែលជាបញ្ហាធ្វើឱ្យម៉ូដែលចំណាត់ថ្នាក់មានភាពលម្អៀងទៅរកចំណាត់ថ្នាក់ដែលមានទិន្នន័យច្រើន (Majority Class)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះគឺជាការត្រួតពិនិត្យយ៉ាងទូលំទូលាយ (Comprehensive Review) ទៅលើបច្ចេកវិទ្យា និងវិធីសាស្ត្របច្ចុប្បន្នសម្រាប់ការកសាងម៉ូដែល និងដោះស្រាយអតុល្យភាពទិន្នន័យ។
+        
+        <ul>
+            
+            <li>បច្ចេកទេសថ្លឹងថ្លែងទិន្នន័យ (Data Balancing Techniques) ដូចជា ការយកគំរូទាប (Undersampling) ការយកគំរូលើប (Oversampling) និងវិធីសាស្ត្រកូនកាត់ (Hybrid Methods)</li>
+            
+            <li>រង្វាស់វាយតម្លៃ (Evaluation Criteria) ដូចជា Area Under Curve (AUC), Precision, ទិន្នផល F-measure, True Positive Rate និង True Negative Rate</li>
+            
+            <li>ការវិភាគទៅលើម៉ូដែលដើមឈើការសម្រេចចិត្ត (Decision Trees) សម្រាប់ការបែងចែកចំណាត់ថ្នាក់</li>
+            
+            <li>ការរួមបញ្ចូលវិធីសាស្ត្ររៀនជាក្រុម (Ensemble Methods) និងការរៀនដែលគិតពីតម្លៃ (Cost-Sensitive Learning)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>អត្រាកំហុស (Error Rate) មិនមែនជារង្វាស់ត្រឹមត្រូវសម្រាប់ការវាយតម្លៃលើទិន្នន័យដែលមានអតុល្យភាពនោះទេ ដោយគប្បីប្រើប្រាស់រង្វាស់ដូចជា AUC ឬ F-measure ជំនួសវិញ ដើម្បីទទួលបានការវាយតម្លៃច្បាស់លាស់។</li>
+            
+            <li>វិធីសាស្ត្រកូនកាត់ (Hybrid Methods) ដែលរួមបញ្ចូលការយកគំរូទិន្នន័យ (Data Sampling) ជាមួយនឹងក្បួនដោះស្រាយ Boosting (ឧទាហរណ៍៖ SMOTEBoost, RUSBoost) ផ្តល់នូវប្រសិទ្ធភាពកាន់តែប្រសើរក្នុងការដោះស្រាយបញ្ហាអតុល្យភាពចំណាត់ថ្នាក់។</li>
+            
+            <li>ការស្រាវជ្រាវនាពេលអនាគតគួរតែផ្តោតសំខាន់លើការរួមបញ្ចូលការរៀនពីអតុល្យភាពចំណាត់ថ្នាក់ ជាមួយនឹងបច្ចេកទេសបញ្ញាសិប្បនិម្មិត (AI) ផ្សេងទៀត ដើម្បីបង្កើនសមត្ថភាពទស្សន៍ទាយទៅលើទិន្នន័យជាក់ស្តែង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Undersampling</span></strong><br>ការយកគំរូទាបដោយចៃដន្យ (កាត់បន្ថយទិន្នន័យក្រុមភាគច្រើន)</td>
+                <td>ជួយធ្វើឱ្យទិន្នន័យមានតុល្យភាពលឿន និងកាត់បន្ថយទំហំទិន្នន័យដែលធ្វើឱ្យដំណើរការរៀនបានលឿន។</td>
+                <td>អាចបាត់បង់ទិន្នន័យសំខាន់ៗពី Majority class ដែលចាំបាច់សម្រាប់ការសាងសង់ម៉ូដែលបានត្រឹមត្រូវ។</td>
+                <td>ជាវិធីសាស្ត្រមូលដ្ឋានដែលជួយសម្រួលការបែងចែកចំណាត់ថ្នាក់ ប៉ុន្តែងាយបាត់បង់ព័ត៌មានមានតម្លៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Oversampling</span></strong><br>ការយកគំរូលើបដោយចៃដន្យ (ចម្លងទិន្នន័យក្រុមភាគតិច)</td>
+                <td>មិនមានការបាត់បង់ព័ត៌មានពីទិន្នន័យដើមឡើយ និងជួយបង្កើនអត្រានៃការរៀនលើទិន្នន័យក្រុមភាគតិច។</td>
+                <td>អាចបណ្តាលឱ្យមានបញ្ហា Overfitting យ៉ាងងាយ ដោយសារតែវាគ្រាន់តែធ្វើការចម្លង (copy) ទិន្នន័យដដែលៗ។</td>
+                <td>ជាទូទៅផ្តល់ភាពត្រឹមត្រូវខ្ពស់ជាង undersampling លើ minority class ប៉ុន្តែប្រឈមនឹងបញ្ហា overfitting ខ្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hybrid Methods (e.g., SMOTEBoost, RUSBoost)</span></strong><br>វិធីសាស្ត្រកូនកាត់ និងការរៀនជាក្រុម (បញ្ចូលការយកគំរូជាមួយវិធីសាស្ត្រ Boosting)</td>
+                <td>កាត់បន្ថយបញ្ហា Overfitting នៃ oversampling ព្រមទាំងផ្តល់លទ្ធផលល្អប្រសើរដោយប្រើបច្ចេកទេសបង្កើតទិន្នន័យសំយោគ (SMOTE)។</td>
+                <td>មានភាពស្មុគស្មាញខ្ពស់ និងតម្រូវការកម្លាំងកុំព្យូទ័រ (computation power) ច្រើនជាងវិធីសាស្ត្រធម្មតា។</td>
+                <td>ផ្តល់នូវសមត្ថភាពទស្សន៍ទាយខ្ពស់ និងជាក្បួនដោះស្រាយដ៏មានប្រសិទ្ធភាពបំផុតមួយនៅក្នុងការសិក្សាស្រាវជ្រាវនេះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីតម្លៃធនធាន Hardware ឬ Software នោះទេ ដោយសារវាជាឯកសារប្រមូលផ្តុំការសិក្សា (Survey Paper) ប៉ុន្តែការអនុវត្តវិធីសាស្ត្រទាំងនេះទាមទារបរិស្ថានសរសេរកូដ និងធនធានម៉ាស៊ីនកម្រិតស្តង់ដារ។
+    
+    <ul>
+        
+        <li><strong>Datasets:</strong> ប្រើប្រាស់សំណុំទិន្នន័យគោល (Benchmark Datasets) ចំនួន ៦៦ ដែលមានអតុល្យភាពផ្សេងៗគ្នា យកពី UCI Machine Learning Repository។</li>
+        
+        <li><strong>Software:</strong> ទាមទារភាសាកម្មវិធីដែលមានបណ្ណាល័យ Machine Learning (ឧទាហរណ៍៖ Python ជាមួយ Scikit-learn និង Imbalanced-learn) សម្រាប់ការអនុវត្តម៉ូដែល។</li>
+        
+        <li><strong>Hardware:</strong> សម្រាប់ការអនុវត្តវិធីសាស្ត្រ Ensemble ដូចជា RUSBoost ឬ CO2RBFN ត្រូវការកុំព្យូទ័រដែលមាន CPU ច្រើនគ្រាប់ (Multi-core) និង RAM គ្រប់គ្រាន់សម្រាប់ផ្ទុកទិន្នន័យក្នុង Memory។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកលើសំណុំទិន្នន័យគោលរបស់ UCI (Benchmark Datasets) ពីជុំវិញពិភពលោក ដែលភាគច្រើនមិនឆ្លុះបញ្ចាំងពីបរិបទប្រជាសាស្ត្រជាក់លាក់ណាមួយឡើយ។ សម្រាប់កម្ពុជា ការយល់ដឹងពីបញ្ហាអតុល្យភាពទិន្នន័យនេះមានសារៈសំខាន់ខ្លាំង ព្រោះទិន្នន័យក្នុងស្រុក (ដូចជាកំណត់ត្រាវេជ្ជសាស្ត្រ ឬទិន្នន័យហិរញ្ញវត្ថុ) តែងតែមានលក្ខណៈលម្អៀង និងអតុល្យភាពខ្លាំង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រក្នុងឯកសារនេះមានអត្ថប្រយោជន៍យ៉ាងធំធេង និងអាចយកមកអនុវត្តជាក់ស្តែងសម្រាប់ការវិភាគទិន្នន័យនៅប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសុខាភិបាលនៅកម្ពុជា (Healthcare & Medical Diagnosis):</strong> អាចប្រើដើម្បីទស្សន៍ទាយ និងធ្វើរោគវិនិច្ឆ័យជំងឺកម្រនានានៅតាមមន្ទីរពេទ្យធំៗ ព្រោះអ្នកជំងឺដែលមានជំងឺកម្រ (Minority Class) មានចំនួនតិចតួចបំផុតបើធៀបនឹងអ្នកអត់មានជំងឺ។</li>
+            
+            <li><strong>វិស័យហិរញ្ញវត្ថុ និងធនាគារ (Banking & Fraud Detection):</strong> មានប្រសិទ្ធភាពខ្ពស់សម្រាប់ការចាប់យកប្រតិបត្តិការក្លែងបន្លំតាមប្រព័ន្ធធនាគារ (Fraud transactions) ឬការវាយតម្លៃឥណទានដែលមានហានិភ័យខូច (Loan defaults) ដែលជាបញ្ហាអតុល្យភាពទិន្នន័យដ៏ធំនៅកម្ពុជា។</li>
+            
+            <li><strong>ការតាមដានបរិស្ថាន និងកសិកម្ម (Remote Sensing & Environment):</strong> អនុវត្តក្នុងការវិភាគទិន្នន័យពីផ្កាយរណប ដើម្បីចាប់យកតំបន់ដែលរងការបំពុល ឬការកាប់បំផ្លាញព្រៃឈើខុសច្បាប់ (ដែលជាព្រឹត្តិការណ៍កម្រកើតមានក្នុងទំហំទិន្នន័យធំ)។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអនុវត្តបច្ចេកទេសដោះស្រាយអតុល្យភាពទិន្នន័យនេះ នឹងជួយពង្រឹងភាពត្រឹមត្រូវនៃម៉ូដែលបញ្ញាសិប្បនិម្មិត (AI) ដែលកំពុងអភិវឌ្ឍដោយស្ថាប័នរដ្ឋ និងឯកជននៅក្នុងប្រទេសកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីការវាស់វែង និងរង្វាស់វាយតម្លៃ (Evaluation Metrics):</strong> បញ្ឈប់ការប្រើប្រាស់ត្រឹមតែ Accuracy សំរាប់វាស់ស្ទង់ទិន្នន័យដែលមានអតុល្យភាព។ ត្រូវប្តូរមកសិក្សា និងប្រើប្រាស់រង្វាស់ដូចជា <span class="en">AUC (Area Under Curve)</span>, <span class="en">Precision</span>, <span class="en">Recall</span>, និង <span class="en">F-measure</span> ជំនួសវិញ។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសថ្លឹងថ្លែងទិន្នន័យកម្រិតមូលដ្ឋាន (Data Balancing):</strong> សាកល្បងប្រើប្រាស់វិធីសាស្ត្រ <span class="en">Random Undersampling</span> និង <span class="en">Random Oversampling</span> ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">Imbalanced-learn</span> នៅក្នុងភាសា <span class="en">Python</span> ដើម្បីស្វែងយល់ពីឥទ្ធិពលរបស់វាទៅលើទិន្នន័យ។</li>
+            
+            <li><strong>អនុវត្តវិធីសាស្ត្រទិន្នន័យសំយោគកម្រិតខ្ពស់ (Advanced Oversampling):</strong> រៀនសរសេរកូដដើម្បីអនុវត្តក្បួនដោះស្រាយ <span class="en">SMOTE (Synthetic Minority Over-sampling Technique)</span> ដើម្បីបង្កើតទិន្នន័យក្លែងក្លាយឱ្យ Minority Class ដែលវាជួយកាត់បន្ថយបញ្ហា Overfitting បានយ៉ាងល្អ។</li>
+            
+            <li><strong>អនុវត្តវិធីសាស្ត្រកូនកាត់ (Hybrid & Ensemble Techniques):</strong> ស្រាវជ្រាវ និងសាងសង់ម៉ូដែលដោយប្រើប្រាស់ <span class="en">RUSBoost</span> ឬ <span class="en">SMOTEBoost</span> ដោយប្រើ <span class="en">Scikit-learn</span> រួចប្រៀបធៀបលទ្ធផលជាមួយនឹងម៉ូដែលដើមឈើការសម្រេចចិត្តធម្មតា (<span class="en">Decision Trees/C4.5</span>) ដើម្បីឃើញពីការវិវឌ្ឍប្រសិទ្ធភាពជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Class Imbalance Learning</span></td>
+                <td>ជាដំណើរការបង្រៀនម៉ាស៊ីនកុំព្យូទ័រ (Machine Learning) ឱ្យចេះបែងចែកចំណាត់ថ្នាក់ទិន្នន័យ ក្នុងស្ថានភាពដែលក្រុមទិន្នន័យមួយមានចំនួនច្រើនលើសលប់ ខណៈក្រុមទិន្នន័យមួយទៀតមានចំនួនតិចតួចបំផុត ដែលធ្វើឱ្យកុំព្យូទ័រងាយនឹងទស្សន៍ទាយលម្អៀង។</td>
+                <td>ដូចជាការបង្រៀនសិស្សឱ្យស្គាល់សត្វ ដោយបង្ហាញរូបសត្វឆ្កែ១០០សន្លឹក និងរូបសត្វខ្លាឃ្មុំតែ១សន្លឹក ដែលធ្វើឱ្យសិស្សងាយនឹងច្រឡំឆ្លើយថាខ្លាឃ្មុំនោះជាឆ្កែដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision trees</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ធ្វើចំណាត់ថ្នាក់ទិន្នន័យ ដែលមានទម្រង់ដូចជាមែកធាង ដោយចាប់ផ្តើមពីសំណួរបែងចែកលក្ខណៈទូទៅបំផុត រហូតដល់ចម្លើយចុងក្រោយនៅខាងចុងស្លឹក ដែលជាចំណាត់ថ្នាក់ត្រឹមត្រូវនៃទិន្នន័យ។</td>
+                <td>ដូចជាការលេងហ្គេមសួរសំណួរ 'បាទ/ទេ' បន្តបន្ទាប់គ្នា (ឧ. តើសត្វនេះមានរោមឬទេ? តើវាចេះហោះឬទេ?) ដើម្បីស្វែងរកចម្លើយចុងក្រោយថាតើវាជាសត្វអ្វី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random oversampling</span></td>
+                <td>ជាបច្ចេកទេសដោះស្រាយអតុល្យភាពទិន្នន័យ ដោយធ្វើការថតចម្លង (Copy) ទិន្នន័យក្នុងក្រុមភាគតិច (Minority class) ដោយចៃដន្យ រហូតទាល់តែចំនួនរបស់វាស្មើនឹងក្រុមភាគច្រើន ដើម្បីកុំឱ្យម៉ូដែលរៀនលម្អៀង។</td>
+                <td>ដូចជាការថតចម្លងសន្លឹកកិច្ចការរបស់សិស្សពូកែម្នាក់ជាច្រើនសន្លឹក ដើម្បីឱ្យមានចំនួនកិច្ចការស្មើនឹងសិស្សធម្មតាដ៏ច្រើនផ្សេងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random undersampling</span></td>
+                <td>ជាបច្ចេកទេសធ្វើឱ្យទិន្នន័យមានតុល្យភាព ដោយធ្វើការលុបចោលនូវទិន្នន័យមួយចំនួនក្នុងក្រុមភាគច្រើន (Majority class) ដោយចៃដន្យ ដើម្បីឱ្យចំនួនរបស់វាធ្លាក់មកស្មើនឹងក្រុមភាគតិចវិញ។</td>
+                <td>ដូចជាការដកសិស្សធម្មតាជំនាញទូទៅចេញពីថ្នាក់រៀនខ្លះ ដើម្បីឱ្យមានចំនួនស្មើគ្នានឹងសិស្សជំនាញពិសេសដែលមានចំនួនតិចតួចនៅក្នុងថ្នាក់នោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTE (Synthetic minority oversampling technique)</span></td>
+                <td>ជាបច្ចេកទេសបង្កើតទិន្នន័យថ្មីសម្រាប់ក្រុមភាគតិច ជំនួសឱ្យការគ្រាន់តែថតចម្លងទិន្នន័យចាស់។ វាគណនាលក្ខណៈស្រដៀងគ្នានៃទិន្នន័យជិតខាង រួចបង្កើតជាទិន្នន័យសំយោគថ្មីមួយដែលមានលក្ខណៈសមហេតុផល។</td>
+                <td>ដូចជាការបង្កើតមុខម្ហូបថ្មីមួយ ដោយយកលាយបញ្ចូលគ្នានូវគ្រឿងផ្សំពីមុខម្ហូបពីរមុខដែលអ្នកធ្លាប់ស្គាល់ ដើម្បីឱ្យបានមុខម្ហូបថ្មីតែមានរសជាតិស្រដៀងរបស់ដើម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cost-sensitive learning</span></td>
+                <td>ជាវិធីសាស្ត្របង្រៀនម៉ូដែលកុំព្យូទ័រ ដោយដាក់ការពិន័យ (Cost) ខ្ពស់នៅពេលដែលវាទស្សន៍ទាយខុសទៅលើក្រុមទិន្នន័យភាគតិច (ដែលជាទិន្នន័យសំខាន់) ដើម្បីបង្ខំឱ្យម៉ូដែលប្រុងប្រយ័ត្នជាងមុនក្នុងការទស្សន៍ទាយក្រុមនោះ។</td>
+                <td>ដូចជាការប្រាប់សិស្សថា បើធ្វើខុសលំហាត់ធម្មតាត្រូវកាត់១ពិន្ទុ តែបើធ្វើខុសលំហាត់ពិសេសត្រូវកាត់១០ពិន្ទុ ដើម្បីឱ្យសិស្សប្រុងប្រយ័ត្នខ្លាំងលើលំហាត់ពិសេស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ensemble learning</span></td>
+                <td>ជាការរួមបញ្ចូលគ្នានូវម៉ូដែលកុំព្យូទ័រតូចៗជាច្រើន (ដូចជា Decision trees ច្រើនដើម) ដើម្បីធ្វើការទស្សន៍ទាយរួមគ្នា ដែលផ្តល់នូវលទ្ធផលត្រឹមត្រូវ និងមានស្ថេរភាពជាងការប្រើប្រាស់ម៉ូដែលតែមួយ។</td>
+                <td>ដូចជាការប្រជុំក្រុមគ្រូពេទ្យ៥នាក់ដើម្បីវិភាគរោគសញ្ញាអ្នកជំងឺម្នាក់ ដែលអាចផ្តល់ការសន្និដ្ឋានច្បាស់លាស់ជាងការពិនិត្យដោយគ្រូពេទ្យតែម្នាក់ឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Area under Curve (AUC)</span></td>
+                <td>ជារង្វាស់មួយសម្រាប់វាយតម្លៃសមត្ថភាពរបស់ម៉ូដែលចំណាត់ថ្នាក់ ក្នុងការបែងចែករវាងក្រុមទិន្នន័យពីរផ្សេងគ្នា (ឧ. អ្នកឈឺ និងអ្នកជា) ដែលស័ក្តិសមបំផុតសម្រាប់វាស់ស្ទង់ទិន្នន័យដែលមានអតុល្យភាពខ្លាំង។</td>
+                <td>ដូចជាពិន្ទុវាយតម្លៃរួមមួយដែលបង្ហាញថាតើអ្នកស៊ើបអង្កេតម្នាក់ពូកែបំបែករវាងជនសង្ស័យ និងជនស្លូតត្រង់កម្រិតណា ទោះបីជាចំនួនជនសង្ស័យមានតិចតួចក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=advanced+oversampling+techniques+for+imbalanced+datasets" target="_blank" rel="noopener"><span class="en">advanced oversampling techniques for imbalanced datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=cost-sensitive+learning+algorithms+in+machine+learning" target="_blank" rel="noopener"><span class="en">cost-sensitive learning algorithms in machine learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=evaluation+metrics+for+class+imbalanced+classification" target="_blank" rel="noopener"><span class="en">evaluation metrics for class imbalanced classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ensemble+methods+and+boosting+for+data+mining" target="_blank" rel="noopener"><span class="en">ensemble methods and boosting for data mining</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទស្សន៍ទាយតម្លៃ pH នៃគុណភាពទឹកដោយប្រើប្រាស់ក្បួនដោះស្រាយ Random Forest និង LightGBM | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយតម្រូវការក្នុងការទស្សន៍ទាយតម្លៃ pH ឱ្យបានត្រឹមត្រូវ ដែលជាប៉ារ៉ាម៉ែត្រដ៏សំខាន់ក្នុងការវាយតម្លៃគុណភាពទឹក តាមរយៈការវាយតម្លៃ និងប្រៀបធៀបក្បួន...">
+    
+    <meta name="keywords" content="Water quality, pH prediction, Random Forest, LightGBM, Machine learning, Kaggle dataset, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/environment/water-quality-ph-prediction-lightgbm-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/environment/water-quality-ph-prediction-lightgbm-2025.html">
+    <meta property="og:title" content="ការទស្សន៍ទាយតម្លៃ pH នៃគុណភាពទឹកដោយប្រើប្រាស់ក្បួនដោះស្រាយ Random Forest និង LightGBM | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយតម្រូវការក្នុងការទស្សន៍ទាយតម្លៃ pH ឱ្យបានត្រឹមត្រូវ ដែលជាប៉ារ៉ាម៉ែត្រដ៏សំខាន់ក្នុងការវាយតម្លៃគុណភាពទឹក តាមរយៈការវាយតម្លៃ និងប្រៀបធៀបក្បួនដោះស្រាយយន្តការរៀនម៉ាស៊ីន (Machine learn...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2025, Memba Water Sciences Journal">
+    
+    <meta property="article:tag" content="Water quality">
+    
+    <meta property="article:tag" content="pH prediction">
+    
+    <meta property="article:tag" content="Random Forest">
+    
+    <meta property="article:tag" content="LightGBM">
+    
+    <meta property="article:tag" content="Machine learning">
+    
+    <meta property="article:tag" content="Kaggle dataset">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទស្សន៍ទាយតម្លៃ pH នៃគុណភាពទឹកដោយប្រើប្រាស់ក្បួនដោះស្រាយ Random Forest និង LightGBM">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយតម្រូវការក្នុងការទស្សន៍ទាយតម្លៃ pH ឱ្យបានត្រឹមត្រូវ ដែលជាប៉ារ៉ាម៉ែត្រដ៏សំខាន់ក្នុងការវាយតម្លៃគុណភាពទឹក តាមរយៈការវាយតម្លៃ និងប្រៀបធៀបក្បួនដោះស្រាយយន្តការរៀនម៉ាស៊ីន (Machine learn...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3 pH \u1793\u17c3\u1782\u17bb\u178e\u1797\u17b6\u1796\u1791\u17b9\u1780\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Random Forest \u1793\u17b7\u1784 LightGBM",
+      "name": "Prediction of Water Quality\u2019s pH value using Random Forest and LightGBM Algorithms",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3 pH \u17b1\u17d2\u1799\u1794\u17b6\u1793\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c \u178a\u17c2\u179b\u1787\u17b6\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u178a\u17cf\u179f\u17c6\u1781\u17b6\u1793\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1782\u17bb\u178e\u1797\u17b6\u1796\u1791\u17b9\u1780 \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3 \u1793\u17b7\u1784\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1799\u1793\u17d2\u178f\u1780\u17b6\u179a\u179a\u17c0\u1793\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine learning algorithms) \u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/environment/water-quality-ph-prediction-lightgbm-2025.html",
+      "author": [{"@type": "Person", "name": "\u0130brahim Budak (Kastamonu University, T\u00fcrkiye)"}],
+      "datePublished": "2025, Memba Water Sciences Journal",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Prediction of Water Quality\u2019s pH value using Random Forest and LightGBM Algorithms",
+        "url": "https://doi.org/10.58626/memba.1667338"
+      },
+      "keywords": ["Water quality", "pH prediction", "Random Forest", "LightGBM", "Machine learning", "Kaggle dataset"],
+      "about": "Environmental Data Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Environment",
+          "item": "https://khmerresearch.com/papers/environment/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3 pH \u1793\u17c3\u1782\u17bb\u178e\u1797\u17b6\u1796\u1791\u17b9\u1780\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Random Forest \u1793\u17b7\u1784 LightGBM",
+          "item": "https://khmerresearch.com/papers/environment/water-quality-ph-prediction-lightgbm-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/environment/">Environment</a> &rsaquo;
+        <span>ការទស្សន៍ទាយតម្លៃ pH នៃគុណភាពទឹកដោយប្រើប្រាស់ក្បួនដោះស្រា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Prediction of Water Quality’s pH value using Random Forest and LightGBM Algorithms<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.58626/memba.1667338" target="_blank">doi.org/10.58626/memba.1667338</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទស្សន៍ទាយតម្លៃ pH នៃគុណភាពទឹកដោយប្រើប្រាស់ក្បួនដោះស្រាយ Random Forest និង LightGBM</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Prediction of Water Quality’s pH value using Random Forest and LightGBM Algorithms</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> İbrahim Budak (Kastamonu University, Türkiye)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025, Memba Water Sciences Journal</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Environmental Data Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយតម្រូវការក្នុងការទស្សន៍ទាយតម្លៃ pH ឱ្យបានត្រឹមត្រូវ ដែលជាប៉ារ៉ាម៉ែត្រដ៏សំខាន់ក្នុងការវាយតម្លៃគុណភាពទឹក តាមរយៈការវាយតម្លៃ និងប្រៀបធៀបក្បួនដោះស្រាយយន្តការរៀនម៉ាស៊ីន (Machine learning algorithms) ផ្សេងៗគ្នា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់ម៉ូដែលយន្តការរៀនម៉ាស៊ីន (Machine learning models) ចំនួនពីរ ដែលត្រូវបានវាយតម្លៃលើសំណុំទិន្នន័យគុណភាពទឹកដ៏ធំ ដើម្បីកំណត់រកប្រសិទ្ធភាពនៃការទស្សន៍ទាយដែលល្អបំផុត។
+        
+        <ul>
+            
+            <li>សំណុំទិន្នន័យពី Kaggle (Kaggle Dataset) ដែលមានចំនួន ១៥,០០០ ទិន្នន័យ</li>
+            
+            <li>ក្បួនដោះស្រាយ Random Forest Regression (Random Forest Regression Algorithm)</li>
+            
+            <li>ក្បួនដោះស្រាយ LightGBM (LightGBM Algorithm)</li>
+            
+            <li>រង្វាស់វាស់វែងប្រសិទ្ធភាពម៉ូដែលដូចជា RMSE, R-squared និង AUC (Evaluation metrics: RMSE, R-squared, AUC)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ LightGBM បង្ហាញដំណើរការល្អជាង Random Forest សម្រាប់ការទស្សន៍ទាយតម្លៃ pH ដោយទទួលបានតម្លៃ AUC ០.៨៦ ធៀបនឹង ០.៨៤។</li>
+            
+            <li>LightGBM សម្រេចបានអត្រាកំហុសទាបជាង (RMSE = ០.២០៧) និងភាពត្រឹមត្រូវខ្ពស់ជាង (R-squared = ០.៤៨១) ធៀបនឹង Random Forest (RMSE = ០.២៣៣, R-squared = ០.៣៤៦)។</li>
+            
+            <li>ការសិក្សានេះបង្ហាញថា LightGBM មានប្រសិទ្ធភាពខ្ពស់សម្រាប់សំណុំទិន្នន័យធំ និងស្មុគស្មាញ ដែលផ្តល់នូវសក្តានុពលយ៉ាងសំខាន់សម្រាប់ការត្រួតពិនិត្យ និងការគ្រប់គ្រងគុណភាពទឹកក្នុងពេលវេលាជាក់ស្តែង (Real-time monitoring)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest Regression</span></strong><br>ក្បួនដោះស្រាយ Random Forest Regression (RFR)</td>
+                <td>មានសមត្ថភាពទូទៅល្អក្នុងការដោះស្រាយបញ្ហាស៊ាំញ៉ាំ និងត្រូវការការរៀបចំទិន្នន័យជាមុន (Data preprocessing) តិចតួច។ វាជួយកាត់បន្ថយបញ្ហា Overfitting តាមរយៈការរួមបញ្ចូលមែកធាងការសម្រេចចិត្ត (Decision trees) ជាច្រើន។</td>
+                <td>ទទួលបានលទ្ធផលទាបជាង LightGBM ក្នុងការសិក្សានេះ ហើយជាទូទៅដំណើរការយឺតជាង និងប្រើប្រាស់ធនធានច្រើនសម្រាប់ការគណនាលើទិន្នន័យធំៗ។</td>
+                <td>RMSE = ០.២៣៣, R-squared = ០.៣៤៦, និង AUC = ០.៨៤</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Light Gradient Boosting Machine (LightGBM)</span></strong><br>ក្បួនដោះស្រាយ LightGBM</td>
+                <td>មានល្បឿនបង្វឹកម៉ូដែល (Training time) លឿន ប្រើប្រាស់អង្គចងចាំ (Memory) តិច និងមានភាពត្រឹមត្រូវខ្ពស់ ជាពិសេសសម្រាប់សំណុំទិន្នន័យធំ និងមានវិមាត្រច្រើន។</td>
+                <td>ដោយសារតែវាផ្តោតលើការលូតលាស់តាមស្លឹក (Leaf-wise growth) វាអាចងាយនឹងជួបបញ្ហា Overfitting ប្រសិនបើប្រើប្រាស់លើសំណុំទិន្នន័យតូចពេក។</td>
+                <td>ទទួលបានលទ្ធផលល្អជាងដោយមាន RMSE = ០.២០៧, R-squared = ០.៤៨១, និង AUC = ០.៨៦</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ភាសាកម្មវិធី Python សម្រាប់ការវិភាគទិន្នន័យ ប៉ុន្តែមិនបានបញ្ជាក់លម្អិតពីទំហំផ្នែករឹង (Hardware) ដែលត្រូវការនោះទេ តែបានសង្កត់ធ្ងន់ថា LightGBM ជួយកាត់បន្ថយការប្រើប្រាស់អង្គចងចាំ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសាកម្មវិធី Python ជាភាសាកម្រិតខ្ពស់សម្រាប់សរសេរកូដ និងដំណើរការក្បួនដោះស្រាយដើម្បីវិភាគទិន្នន័យ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យគុណភាពទឹកពី Kaggle ដែលមាន ១៥,០០០ គំរូ (បែងចែកជា ១០,០០០ សម្រាប់បង្វឹកម៉ូដែល និង ៥,០០០ សម្រាប់ធ្វើតេស្ត)។</li>
+        
+        <li><strong>Hardware:</strong> មិនបានបញ្ជាក់ច្បាស់លាស់ក្នុងឯកសារ ប៉ុន្តែក្បួនដោះស្រាយ LightGBM ត្រូវបានរចនាឡើងដើម្បីស៊ី Memory តិច និងគាំទ្រដំណើរការស្របគ្នា (Parallel processing) ដែលធ្វើឲ្យកុំព្យូទ័រទូទៅក៏អាចដំណើរការបានលឿន។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ 'waterdataset' ពីវេទិកា Kaggle ដែលមិនបានបញ្ជាក់ពីទីតាំងភូមិសាស្ត្រជាក់លាក់នៃប្រភពទឹកនោះទេ។ នេះមានន័យថាម៉ូដែលនេះអាចនឹងមិនឆ្លុះបញ្ចាំងពីលក្ខណៈពិសេសនៃធនធានទឹកនៅកម្ពុជា (ដូចជាលក្ខណៈទឹកទន្លេមេគង្គ ឬបឹងទន្លេសាប) ឡើយ។ ដូច្នេះ ដើម្បីធានាបាននូវភាពត្រឹមត្រូវសម្រាប់ការប្រើប្រាស់នៅកម្ពុជា គេចាំបាច់ត្រូវប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែមដើម្បីយកមកបង្វឹកម៉ូដែលនេះឡើងវិញ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់សម្រាប់អនុវត្តនៅកម្ពុជា ក្នុងការតាមដាន និងគ្រប់គ្រងគុណភាពទឹកប្រកបដោយប្រសិទ្ធភាព ដោយប្រើប្រាស់បច្ចេកវិទ្យាយន្តការរៀនម៉ាស៊ីន (Machine Learning)។</p>
+        
+        <ul>
+            
+            <li><strong>ការគ្រប់គ្រងធនធានទឹកនៅបឹងទន្លេសាប (Tonle Sap Water Management):</strong> អាចប្រើប្រាស់ម៉ូដែល LightGBM ដើម្បីទស្សន៍ទាយតម្លៃ pH និងគុណភាពទឹកបឹងទន្លេសាប ដែលអាចជួយដល់ការអភិរក្សពូជត្រី និងតាមដានការប្រែប្រួលនៃប្រព័ន្ធអេកូឡូស៊ី។</li>
+            
+            <li><strong>រោងចក្រប្រព្រឹត្តកម្មទឹកស្អាត (Water Treatment Plants - PPWSA):</strong> រដ្ឋាករទឹកស្វយ័តក្រុងភ្នំពេញ អាចយកម៉ូដែលនេះទៅបញ្ចូលក្នុងប្រព័ន្ធតាមដានពេលវេលាជាក់ស្តែង (Real-time monitoring system) ដើម្បីគ្រប់គ្រងគុណភាពទឹកម៉ាស៊ីនឱ្យស្របតាមស្តង់ដារសុខាភិបាល។</li>
+            
+            <li><strong>ការត្រួតពិនិត្យទឹកកខ្វក់តាមតំបន់ឧស្សាហកម្ម (Industrial Wastewater Monitoring):</strong> ក្រសួងបរិស្ថានអាចប្រើប្រាស់វាដើម្បីតាមដានកម្រិត pH នៃទឹកដែលបង្ហូរចេញពីរោងចក្រកាត់ដេរនៅជាយក្រុងភ្នំពេញ ឬតំបន់សេដ្ឋកិច្ចពិសេសនានា ដើម្បីទប់ស្កាត់ការបំពុលបរិស្ថាន។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់ក្បួនដោះស្រាយ LightGBM អាចផ្តល់នូវដំណោះស្រាយរហ័ស ឆ្លាតវៃ និងចំណាយតិចសម្រាប់ការតាមដានគុណភាពទឹកនៅកម្ពុជា ប្រសិនបើមានការរួមបញ្ចូលជាមួយឧបករណ៍ចាប់សញ្ញា (Sensors) និងទិន្នន័យក្នុងស្រុក។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីភាសា Python និងបណ្ណាល័យវិភាគទិន្នន័យ:</strong> និស្សិតគួរចាប់ផ្តើមរៀនសរសេរកូដ Python និងប្រើប្រាស់បណ្ណាល័យដូចជា <span class='en'>Pandas</span> សម្រាប់រៀបចំទិន្នន័យ (Data normalization) និង <span class='en'>Scikit-Learn</span> សម្រាប់ការអនុវត្ត Machine Learning ជាមូលដ្ឋាន និងគណនារង្វាស់ RMSE។</li>
+            
+            <li><strong>អនុវត្តផ្ទាល់ជាមួយសំណុំទិន្នន័យ Kaggle:</strong> ទាញយកសំណុំទិន្នន័យ 'waterdataset' ពី <span class='en'>Kaggle</span> ដូចដែលបានប្រើក្នុងការសិក្សានេះ ហើយសាកល្បងសរសេរកូដដើម្បីបង្វឹកម៉ូដែល <span class='en'>Random Forest</span> ដោយខ្លួនឯងដើម្បីស្វែងយល់ពីដំណើរការ។</li>
+            
+            <li><strong>សិក្សាស៊ីជម្រៅលើ LightGBM:</strong> ដំឡើងបណ្ណាល័យ <span class='en'>LightGBM</span> ក្នុង Python សិក្សាពីរបៀបកែតម្រូវ Hyperparameters (ដូចជា Learning rate និង Number of leaves) រួចប្រៀបធៀបលទ្ធផល AUC និង R-squared ជាមួយម៉ូដែល Random Forest។</li>
+            
+            <li><strong>ប្រមូល និងសាកល្បងជាមួយទិន្នន័យនៅកម្ពុជា:</strong> ទាក់ទងស្វែងរកសំណុំទិន្នន័យគុណភាពទឹកពីក្រសួងបរិស្ថាន ឬគម្រោងស្រាវជ្រាវនានានៅកម្ពុជា ដើម្បីយកមកធ្វើតេស្តថាតើម៉ូដែលនេះនៅតែរក្សាបានភាពត្រឹមត្រូវកម្រិតណា នៅពេលប្រើជាមួយទិន្នន័យភូមិសាស្ត្រថ្មី។</li>
+            
+            <li><strong>បង្កើតផ្ទាំងគ្រប់គ្រងតាមដាន (Monitoring Dashboard):</strong> ប្រើប្រាស់ឧបករណ៍ដូចជា <span class='en'>Streamlit</span> ក្នុងការសាងសង់ផ្ទាំងគ្រប់គ្រងទិន្នន័យ ដែលអាចទាញយកទិន្នន័យគុណភាពទឹក និងបង្ហាញការទស្សន៍ទាយកម្រិត pH ក្នុងពេលវេលាជាក់ស្តែង (Real-time prediction) សម្រាប់អ្នកប្រើប្រាស់ចុងក្រោយ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest Regression</span></td>
+                <td>យន្តការរៀនម៉ាស៊ីនដែលបង្កើតជា 'មែកធាងការសម្រេចចិត្ត' (Decision trees) ជាច្រើនដោយចៃដន្យ ហើយយកចម្លើយទស្សន៍ទាយរបស់មែកធាងនីមួយៗមកគណនាជាមធ្យម ដើម្បីទទួលបានលទ្ធផលរួមមួយដែលច្បាស់លាស់ និងកាត់បន្ថយកំហុសប្រភេទ Overfitting។</td>
+                <td>ដូចជាការសួរសុំយោបល់ពីអ្នកជំនាញ១០០នាក់ផ្សេងៗគ្នា រួចយកចម្លើយដែលភាគច្រើនឯកភាពគ្នា ដើម្បីធ្វើការសម្រេចចិត្តចុងក្រោយ ជាជាងជឿលើមនុស្សតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">LightGBM Algorithm</span></td>
+                <td>ក្បួនដោះស្រាយដ៏មានអានុភាពដែលរៀនពីកំហុសនៃម៉ូដែលមុនៗជាបន្តបន្ទាប់ (Gradient Boosting) ត្រូវបានរចនាឡើងពិសេសដើម្បីដំណើរការលឿន ស៊ីអង្គចងចាំ (Memory) តិច និងស័ក្តិសមបំផុតសម្រាប់ទស្សន៍ទាយលើទិន្នន័យធំៗរាប់ម៉ឺនជួរដោយមានភាពត្រឹមត្រូវខ្ពស់។</td>
+                <td>ដូចជាសិស្សដែលរៀនពូកែ និងឆ្លាតវៃ ដោយផ្តោតលើការកែតម្រូវតែចំណុចខ្សោយ ឬលំហាត់ណាដែលខ្លួនធ្វើខុសពីមុន ដើម្បីឱ្យប្រឡងលើកក្រោយបានពិន្ទុល្អឥតខ្ចោះក្នុងពេលដ៏ខ្លី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">RMSE (Root Mean Square Error)</span></td>
+                <td>រង្វាស់គណិតវិទ្យាសម្រាប់វាស់កម្រិតកំហុសនៃម៉ូដែលទស្សន៍ទាយ ដោយបង្ហាញពីគម្លាតជាមធ្យមរវាងតម្លៃដែលម៉ូដែលទាយបាន និងតម្លៃជាក់ស្តែងពិតប្រាកដ។ តម្លៃ RMSE កាន់តែតូច មានន័យថាម៉ូដែលកាន់តែមានភាពត្រឹមត្រូវ។</td>
+                <td>ដូចជាការវាស់ចម្ងាយខុសគោលដៅនៃការបាញ់ព្រួញ ប្រសិនបើព្រួញភាគច្រើនបាញ់ចំជិតចំណុចកណ្តាល នោះកម្រិតលម្អៀង (RMSE) គឺមានទំហំតូច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">AUC (Area Under Curve)</span></td>
+                <td>រង្វាស់វាយតម្លៃជារួមដែលបង្ហាញពីសមត្ថភាពរបស់ម៉ូដែលក្នុងការបែងចែក ឬទស្សន៍ទាយបានត្រឹមត្រូវរវាងទិន្នន័យខុសៗគ្នា។ តម្លៃ AUC កាន់តែខិតជិត ១ បង្ហាញថាម៉ូដែលទស្សន៍ទាយបានល្អឥតខ្ចោះ ចំណែកឯតម្លៃ ០.៥ មានន័យថាវាទាយដោយការស្មានចៃដន្យធម្មតា។</td>
+                <td>ដូចជាពិន្ទុប្រឡងសរុបរបស់សិស្សម្នាក់ ដែលពិន្ទុកាន់តែខិតជិត ១០០% (ឬ ១.០) បង្ហាញថាសិស្សនោះមានសមត្ថភាពដោះស្រាយបញ្ហាពិតប្រាកដ មិនមែនចេះតែគូសស្មាននោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gradient Boosting</span></td>
+                <td>បច្ចេកទេសសាងសង់ម៉ូដែលរៀនម៉ាស៊ីនដោយបន្ថែម 'មែកធាង' ថ្មីៗជាបន្តបន្ទាប់ ដែលមែកធាងថ្មីនីមួយៗមានតួនាទីយ៉ាងសំខាន់ក្នុងការកែតម្រូវ និងបង្រួមកំហុសដែលបន្សល់ទុកដោយមែកធាងចាស់ៗមុនវា។</td>
+                <td>ដូចជាការសាងសង់ជញ្ជាំងឥដ្ឋ ដែលជាងម្នាក់រៀបឥដ្ឋឱ្យចេញជារូបរាង រួចជាងម្នាក់ទៀតដើរតាមក្រោយដើម្បីបូកស៊ីម៉ងត៍លុបចន្លោះប្រហោងដែលជាងមុនធ្វើឱ្យរលាត់ ដើម្បីឱ្យជញ្ជាំងកាន់តែរឹងមាំ និងស្អាត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Out-of-Bag (OOB) error</span></td>
+                <td>វិធីសាស្ត្រវាយតម្លៃកំហុសរបស់ Random Forest ដោយប្រើប្រាស់ទិន្នន័យដែលនៅសល់ (មិនត្រូវបានជ្រើសរើសយកទៅបង្វឹកមែកធាងនោះ) មកធ្វើតេស្តសមត្ថភាពម៉ូដែលដោយផ្ទាល់ ដែលជួយសន្សំសំចៃមិនបាច់បែងចែកទិន្នន័យតេស្ត (Test set) ដាច់ដោយឡែក។</td>
+                <td>ដូចជាការយកវិញ្ញាសាដែលគ្រូមិនទាន់បានបង្រៀននៅក្នុងថ្នាក់ មកធ្វើជាវិញ្ញាសាប្រឡង ដើម្បីវាស់ស្ទង់សមត្ថភាពដោះស្រាយបញ្ហាជាក់ស្តែងរបស់សិស្សយ៉ាងពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Leaf-Wise Growth Strategy</span></td>
+                <td>យុទ្ធសាស្ត្រលូតលាស់មែកធាងរបស់ LightGBM ដែលវាយតម្លៃ និងជ្រើសរើសពង្រីកតែ 'ស្លឹក' (ចំណុចសម្រេចចិត្ត) ណាដែលផ្តល់អត្ថប្រយោជន៍ ឬជួយកាត់បន្ថយកំហុសទិន្នន័យបានច្រើនជាងគេបំផុត ជាជាងការលូតលាស់គ្រប់មែកឱ្យស្មើគ្នាតាមកម្រិតជួរ។</td>
+                <td>ដូចជាការប្រឡង ដោយជ្រើសរើសធ្វើតែលំហាត់ណាដែលខ្លួនចេះច្បាស់និងទទួលបានពិន្ទុច្រើនមុនគេ ដើម្បីសន្សំពេលនិងបានពិន្ទុសរុបខ្ពស់ ជាជាងខំធ្វើរៀងតាមលំដាប់តាំងពីលំហាត់ទី១ដល់ចប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision trees</span></td>
+                <td>រចនាសម្ព័ន្ធក្បួនដោះស្រាយដែលដំណើរការជាទម្រង់សំនួរ ឬលក្ខខណ្ឌ 'ពិត/មិនពិត' បន្តបន្ទាប់គ្នា (មានរាងដូចជាមែកធាង) ដើម្បីបំបែកទិន្នន័យជាក្រុមតូចៗបណ្តើរៗ រហូតដល់ទទួលបានចម្លើយទស្សន៍ទាយចុងក្រោយមួយនៅលើចុងស្លឹករបស់វា។</td>
+                <td>ដូចជាការលេងហ្គេមទាយឈ្មោះសត្វ ដោយយើងសួរជម្រុះម្តងមួយៗ (ឧ. តើវាមានជើងបួនទេ? តើវាស៊ីសាច់ជាអាហារទេ?) រហូតដល់ទាយដឹងថាវាជាសត្វអ្វីឱ្យប្រាកដ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Machine+learning+algorithms+for+water+quality+prediction" target="_blank" rel="noopener"><span class="en">Machine learning algorithms for water quality prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gradient+boosting+vs+Random+Forest+on+high-dimensional+data" target="_blank" rel="noopener"><span class="en">Gradient boosting vs Random Forest on high-dimensional data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Real-time+environmental+monitoring+systems+using+AI" target="_blank" rel="noopener"><span class="en">Real-time environmental monitoring systems using AI</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hybrid+geostatistical+methods+for+environmental+parameters" target="_blank" rel="noopener"><span class="en">Hybrid geostatistical methods for environmental parameters</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

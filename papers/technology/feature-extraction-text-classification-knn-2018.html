@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ចំណាត់ថ្នាក់អត្ថបទផ្អែកលើការទាញយកលក្ខណៈពិសេស ដោយប្រើក្បួនដោះស្រាយ K-Nearest Neighbor | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការចាត់ថ្នាក់ឯកសារបោះពុម្ពផ្សាយវិទ្យាសាស្ត្រដែលកំពុងកើនឡើងយ៉ាងឆាប់រហ័ស ដោយធ្វើការវិភាគលើប្រសិទ្ធភាពនៃក្បួនដោះស្រាយចំណាត់ថ្នាក់...">
+    
+    <meta name="keywords" content="K-Nearest Neighbor, Naive Bayes, Text Classification, Feature Extraction, Rapid Miner, Bagging and Boosting, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/feature-extraction-text-classification-knn-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/feature-extraction-text-classification-knn-2018.html">
+    <meta property="og:title" content="ចំណាត់ថ្នាក់អត្ថបទផ្អែកលើការទាញយកលក្ខណៈពិសេស ដោយប្រើក្បួនដោះស្រាយ K-Nearest Neighbor | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការចាត់ថ្នាក់ឯកសារបោះពុម្ពផ្សាយវិទ្យាសាស្ត្រដែលកំពុងកើនឡើងយ៉ាងឆាប់រហ័ស ដោយធ្វើការវិភាគលើប្រសិទ្ធភាពនៃក្បួនដោះស្រាយចំណាត់ថ្នាក់អត្ថបទផ្សេងៗ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2018, IJCSNS International Journal of Computer Science and Network Security">
+    
+    <meta property="article:tag" content="K-Nearest Neighbor">
+    
+    <meta property="article:tag" content="Naive Bayes">
+    
+    <meta property="article:tag" content="Text Classification">
+    
+    <meta property="article:tag" content="Feature Extraction">
+    
+    <meta property="article:tag" content="Rapid Miner">
+    
+    <meta property="article:tag" content="Bagging and Boosting">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ចំណាត់ថ្នាក់អត្ថបទផ្អែកលើការទាញយកលក្ខណៈពិសេស ដោយប្រើក្បួនដោះស្រាយ K-Nearest Neighbor">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការចាត់ថ្នាក់ឯកសារបោះពុម្ពផ្សាយវិទ្យាសាស្ត្រដែលកំពុងកើនឡើងយ៉ាងឆាប់រហ័ស ដោយធ្វើការវិភាគលើប្រសិទ្ធភាពនៃក្បួនដោះស្រាយចំណាត់ថ្នាក់អត្ថបទផ្សេងៗ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 K-Nearest Neighbor",
+      "name": "Feature Extraction based Text Classification using K-Nearest Neighbor Algorithm",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17af\u1780\u179f\u17b6\u179a\u1794\u17c4\u17c7\u1796\u17bb\u1798\u17d2\u1796\u1795\u17d2\u179f\u17b6\u1799\u179c\u17b7\u1791\u17d2\u1799\u17b6\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u178a\u17c2\u179b\u1780\u17c6\u1796\u17bb\u1784\u1780\u17be\u1793\u17a1\u17be\u1784\u1799\u17c9\u17b6\u1784\u1786\u17b6\u1794\u17cb\u179a\u17a0\u17d0\u179f \u178a\u17c4\u1799\u1792\u17d2\u179c\u17be\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179b\u17be\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u1795\u17d2\u179f\u17c1\u1784\u17d7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/feature-extraction-text-classification-knn-2018.html",
+      "author": [{"@type": "Person", "name": "Muhammad Azam (Department of Computer Science and Information Technology, Superior University Lahore, Lahore, Pakistan)"},{"@type": "Person", "name": "Tanvir Ahmed (Department of Computer Science and Information Technology, Superior University Lahore, Lahore, Pakistan)"},{"@type": "Person", "name": "Fahad Sabah (Department of Computer Science and Information Technology, Superior University Lahore, Lahore, Pakistan)"},{"@type": "Person", "name": "Muhammad Iftikhar Hussain (Faculty of Information Technology \u0026 Beijing Engineering Research Center for IoT Software and Systems, Beijing University of Technology, Beijing 100124, China)"}],
+      "datePublished": "2018, IJCSNS International Journal of Computer Science and Network Security",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Feature Extraction based Text Classification using K-Nearest Neighbor Algorithm",
+        "url": "https://www.researchgate.net/profile/Muhammad-Azam-101/publication/362325313_Feature_Extraction_based_Text_Classification_using_K-Nearest_Neighbor_Algorithm/links/62e378a43c0ea8788764610d/Feature-Extraction-based-Text-Classification-using-K-Nearest-Neighbor-Algorithm.pdf"
+      },
+      "keywords": ["K-Nearest Neighbor", "Naive Bayes", "Text Classification", "Feature Extraction", "Rapid Miner", "Bagging and Boosting"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 K-Nearest Neighbor",
+          "item": "https://khmerresearch.com/papers/technology/feature-extraction-text-classification-knn-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ចំណាត់ថ្នាក់អត្ថបទផ្អែកលើការទាញយកលក្ខណៈពិសេស ដោយប្រើក្បួន...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Feature Extraction based Text Classification using K-Nearest Neighbor Algorithm<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Muhammad-Azam-101/publication/362325313_Feature_Extraction_based_Text_Classification_using_K-Nearest_Neighbor_Algorithm/links/62e378a43c0ea8788764610d/Feature-Extraction-based-Text-Classification-using-K-Nearest-Neighbor-Algorithm.pdf" target="_blank">researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ចំណាត់ថ្នាក់អត្ថបទផ្អែកលើការទាញយកលក្ខណៈពិសេស ដោយប្រើក្បួនដោះស្រាយ K-Nearest Neighbor</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Feature Extraction based Text Classification using K-Nearest Neighbor Algorithm</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Muhammad Azam (Department of Computer Science and Information Technology, Superior University Lahore, Lahore, Pakistan), Tanvir Ahmed (Department of Computer Science and Information Technology, Superior University Lahore, Lahore, Pakistan), Fahad Sabah (Department of Computer Science and Information Technology, Superior University Lahore, Lahore, Pakistan), Muhammad Iftikhar Hussain (Faculty of Information Technology & Beijing Engineering Research Center for IoT Software and Systems, Beijing University of Technology, Beijing 100124, China)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018, IJCSNS International Journal of Computer Science and Network Security</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការចាត់ថ្នាក់ឯកសារបោះពុម្ពផ្សាយវិទ្យាសាស្ត្រដែលកំពុងកើនឡើងយ៉ាងឆាប់រហ័ស ដោយធ្វើការវិភាគលើប្រសិទ្ធភាពនៃក្បួនដោះស្រាយចំណាត់ថ្នាក់អត្ថបទផ្សេងៗ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់កម្មវិធី Rapid Miner ដើម្បីដំណើរការ និងចាត់ថ្នាក់ទិន្នន័យពីអត្ថបទសង្ខេបចំនួន ១ម៉ឺនឯកសារពី Scopus ដោយប្រើប្រាស់ក្បួនដោះស្រាយរួមផ្សំនឹងបច្ចេកទេស Bagging និង Boosting ។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈពិសេស និងការបង្កើតវ៉ិចទ័រពាក្យដោយប្រើប្រាស់ (TF-IDF)</li>
+            
+            <li>ការសម្អាតទិន្នន័យអត្ថបទដូចជា ការកាត់តម្រឹមពាក្យ (Stemming) និងការលុបបំបាត់ពាក្យមិនចាំបាច់ (Stop Words Elimination)</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយចាត់ថ្នាក់ដូចជា (K-Nearest Neighbor) និង (Naïve Bayes)</li>
+            
+            <li>ការអនុវត្តបច្ចេកទេសប្រមូលផ្តុំបន្ថែមដូចជា (Bagging) និង (Bayesian Boost)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ K-NN ផ្តល់លទ្ធផលភាពត្រឹមត្រូវទូទៅ (Overall Accuracy) ប្រមាណ ៧៨.៦៧% ដែលល្អជាងក្បួនដោះស្រាយ Naïve Bayes ដែលទទួលបានត្រឹមតែ ៧១.១១%។</li>
+            
+            <li>ការបញ្ចូលបច្ចេកទេស Bayesian Boost ទៅក្នុងក្បួនដោះស្រាយ K-NN បានជួយបង្កើនភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់រហូតដល់ ៨០.០០%។</li>
+            
+            <li>ជារួម ការប្រើប្រាស់ក្បួនដោះស្រាយ K-NN ជាមួយនឹងបច្ចេកទេស Bagging និង Boosting គឺជាជម្រើសដ៏ប្រសើរបំផុតក្នុងការចាត់ថ្នាក់ប្រភេទឯកសារបោះពុម្ពផ្សាយវិទ្យាសាស្ត្រនៅក្នុងសំណុំទិន្នន័យនេះ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Naïve Bayes (NB)</span></strong><br>ក្បួនដោះស្រាយ Naïve Bayes (ផ្អែកលើទ្រឹស្តីប្រូបាប៊ីលីតេ)</td>
+                <td>ងាយស្រួលយល់ មានល្បឿនលឿនក្នុងការគណនា និងទាមទារទិន្នន័យហ្វឹកហាត់តិចតួចដើម្បីទាយលទ្ធផល។ វាអាចទាញយកអត្ថប្រយោជន៍ពីបច្ចេកទេស Boosting បានល្អ។</td>
+                <td>វាសន្មតថាគ្រប់លក្ខណៈពិសេស (Features) ទាំងអស់គឺឯករាជ្យពីគ្នា ដែលមិនតែងតែពិតប្រាកដក្នុងទិន្នន័យជាក់ស្តែង ធ្វើឱ្យភាពត្រឹមត្រូវទាបជាងគេនៅពេលមិនប្រើបច្ចេកទេសរួមផ្សំ។</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវទូទៅ (Accuracy) ៧១.១១% និងពិន្ទុ F-Score ៧២.៩៥% លើទិន្នន័យដើម។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbor (K-NN)</span></strong><br>ក្បួនដោះស្រាយ K-Nearest Neighbor (រៀនដោយប្រៀបធៀបជាមួយភាពជិតបំផុត)</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់ជាង Naïve Bayes ជាទូទៅងាយស្រួលអនុវត្តសម្រាប់ទិន្នន័យអត្ថបទដែលមានវិមាត្រច្រើន ព្រោះវាប្រៀបធៀបគំរូដោយផ្ទាល់តាមរយៈចម្ងាយ (Euclidean distance)។</td>
+                <td>ត្រូវការពេលវេលាគណនាយូរនៅពេលទិន្នន័យតេស្តមានទំហំធំ ព្រោះវាត្រូវស្វែងរកចម្ងាយជាមួយគ្រប់ទិន្នន័យហ្វឹកហាត់ ហើយភាពត្រឹមត្រូវអាស្រ័យខ្លាំងលើការជ្រើសរើសតម្លៃ k ល្អបំផុត។</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវទូទៅ (Accuracy) ៧៨.៦៧% និងពិន្ទុ F-Score ៧៨.៨១%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Bayesian Boost (K-NN)</span></strong><br>ក្បួនដោះស្រាយ K-NN រួមផ្សំជាមួយបច្ចេកទេស Bayesian Boost</td>
+                <td>ជួយពង្រឹងម៉ូដែលឲ្យកាន់តែមានស្ថិរភាព និងកាត់បន្ថយកំហុសបានយ៉ាងមានប្រសិទ្ធភាព ដោយផ្តល់ទម្ងន់សាឡើងវិញទៅលើទិន្នន័យដែលពិបាកចាត់ថ្នាក់ក្នុងជុំនីមួយៗនៃការហ្វឹកហាត់។</td>
+                <td>ប្រើប្រាស់ធនធានម៉ាស៊ីន និងពេលវេលាគណនាច្រើនជាងម៉ូដែលធម្មតា ហើយមានភាពស្មុគស្មាញក្នុងការរៀបចំដំណើរការ (Parameters tuning)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទូទៅខ្ពស់បំផុតរហូតដល់ ៨០.០០% និង F-Score ៨០.១៥% ដែលជាលទ្ធផលល្អបំផុតក្នុងការសិក្សានេះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីតម្លៃ ឬទំហំធនធានកុំព្យូទ័រ (Hardware specs) នោះទេ ប៉ុន្តែបានបញ្ជាក់ច្បាស់លាស់ពីកម្មវិធី និងទិន្នន័យដែលត្រូវបានប្រើប្រាស់។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ត្រូវការកម្មវិធី Rapid Miner ដែលជាឧបករណ៍ Data Mining បើកទូលាយ (Open source) សម្រាប់ដំណើរការ និងបង្កើតម៉ូដែល។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់សំណុំទិន្នន័យអត្ថបទសង្ខេប (Abstracts) និងប្រភេទអត្ថបទពី Scopus ចំនួន ១ម៉ឺនឯកសារ (10K instances) ដែលចែកជា ៥ ប្រភេទ។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារកុំព្យូទ័រដែលមានសមត្ថភាព CPU និង RAM កម្រិតមធ្យម ឬខ្ពស់ ដើម្បីអាចដំណើរការការបង្កើតពាក្យវ៉ិចទ័រ (TF-IDF vector creation) និងបច្ចេកទេស Ensemble ដូចជា Bagging/Boosting ដោយរលូន។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងផ្នែក Text Preprocessing (ការសម្អាតទិន្នន័យ), Tokenization, Machine Learning Algorithms និងការប្រើប្រាស់រង្វាស់រង្វាល់វាយតម្លៃម៉ូដែល (Precision, Recall, F-measure)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យឯកសារបោះពុម្ពផ្សាយពី Scopus ដែលជាអត្ថបទវិទ្យាសាស្ត្រជាភាសាអង់គ្លេស។ វាមិនមានផ្ទុកទិន្នន័យ ឬបរិបទជាភាសាខ្មែរឡើយ។ សម្រាប់ប្រទេសកម្ពុជា នេះគឺជាបញ្ហាប្រឈមមួយ ព្រោះភាសាខ្មែរមិនមានការដកឃ្លារវាងពាក្យនិមួយៗច្បាស់លាស់ទេ (No word boundaries) ដែលទាមទារឱ្យមានបច្ចេកទេសបំបែកពាក្យខ្មែរ (Khmer Word Segmentation) ដ៏រឹងមាំជាមុនសិន មុននឹងអាចអនុវត្តក្បួនដោះស្រាយទាំងនេះបានល្អ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាជួបបញ្ហាប្រឈមផ្នែកភាសាក៏ដោយ វិធីសាស្ត្ររួមបញ្ចូលគ្នានូវ K-NN និងបច្ចេកទេស Boosting/Bagging សម្រាប់ការចាត់ថ្នាក់ឯកសារ គឺមានអត្ថប្រយោជន៍ និងអាចអនុវត្តបានខ្ពស់នៅក្នុងស្ថាប័ននានានៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>បណ្ណាល័យជាតិ និងសាកលវិទ្យាល័យ (ឧ. សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ):</strong> អាចប្រើប្រាស់បច្ចេកទេសនេះដើម្បីរៀបចំ និងចាត់ថ្នាក់ឯកសារសារណា អត្ថបទស្រាវជ្រាវ និងសៀវភៅអេឡិចត្រូនិចរបស់និស្សិតទៅតាមមុខជំនាញ (ឧ. វិទ្យាសាស្ត្រកុំព្យូទ័រ សេដ្ឋកិច្ច អក្សរសាស្ត្រ) ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>វិស័យព័ត៌មានវិទ្យា និងប្រព័ន្ធផ្សព្វផ្សាយព័ត៌មានអនឡាញ:</strong> គេហទំព័រព័ត៌មាននានា (ដូចជា Fresh News ឬ Thmey Thmey) អាចប្រើប្រាស់ម៉ូដែលនេះដើម្បីចាត់ថ្នាក់ព័ត៌មានប្រចាំថ្ងៃទៅជាប្រភេទផ្សេងៗ (សន្តិសុខ កីឡា កម្សាន្ត) ជួយសម្រួលដល់ការគ្រប់គ្រងមាតិកា។</li>
+            
+            <li><strong>ក្រសួង និងស្ថាប័នរដ្ឋាភិបាលឌីជីថល:</strong> ប្រព័ន្ធរដ្ឋបាលអេឡិចត្រូនិកអាចកសាងម៉ូដែលនេះ ដើម្បីចាត់ថ្នាក់លិខិតចូល-ចេញ អនុក្រឹត្យ ឬឯកសារច្បាប់ទៅតាមប្រធានបទ ជួយចំណេញពេលវេលា និងងាយស្រួលស្វែងរកទិន្នន័យរដ្ឋបាលពាក់ព័ន្ធ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យាចាត់ថ្នាក់អត្ថបទនេះអាចដើរតួនាទីយ៉ាងសំខាន់ក្នុងការជំរុញស្វ័យប្រវត្តិកម្ម និងរដ្ឋបាលឌីជីថលនៅកម្ពុជា ប៉ុន្តែស្ថាប័នពាក់ព័ន្ធត្រូវវិនិយោគលើការបង្កើតសំណុំទិន្នន័យ និងបច្ចេកវិទ្យាដំណើរការភាសាខ្មែរ (Khmer NLP) ជាមុន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាមូលដ្ឋានគ្រឹះនៃ Text Preprocessing និងភាសាខ្មែរ:</strong> និស្សិតត្រូវយល់ដឹងពីបច្ចេកទេសសម្អាតអត្ថបទ (Tokenization, Stopword removal, Stemming) ដោយអនុវត្តជាមួយ Python តាមរយៈបណ្ណាល័យ <span class='en'>NLTK</span> ឬ <span class='en'>spaCy</span>។ ពិសេសត្រូវស្វែងយល់ពីបច្ចេកវិទ្យា <span class='en'>Khmer NLP</span> ដោយប្រើប្រាស់ឧបករណ៍បំបែកពាក្យដូចជា <span class='en'>khmer-nltk</span> ដើម្បីបំបែកប្រយោគខ្មែរជាពាក្យៗ។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តការទាញយកលក្ខណៈពិសេសអត្ថបទ (Feature Extraction):</strong> សិក្សាពីរបៀបបំប្លែងទិន្នន័យអត្ថបទទៅជាវ៉ិចទ័រតំណាងលេខ ដើម្បីឲ្យកុំព្យូទ័រយល់បាន។ សាកល្បងប្រើប្រាស់វិធីសាស្ត្រ <span class='en'>TF-IDF (Term Frequency-Inverse Document Frequency)</span> ឬ <span class='en'>CountVectorizer</span> តាមរយៈបណ្ណាល័យ <span class='en'>Scikit-learn</span> ដោយប្រើសំណុំទិន្នន័យតូចៗសិន។</li>
+            
+            <li><strong>ជំហានទី៣៖ កសាងម៉ូដែល Machine Learning ជាមូលដ្ឋាន:</strong> ប្រើប្រាស់ឧបករណ៍ <span class='en'>Scikit-learn</span> ឬកម្មវិធី <span class='en'>Rapid Miner</span> ដូចការសិក្សានេះ ដើម្បីបង្ហាត់ម៉ូដែល <span class='en'>Naïve Bayes</span> និង <span class='en'>K-Nearest Neighbor (K-NN)</span>។ សាកល្បងផ្លាស់ប្តូរតម្លៃ K ក្នុងម៉ូដែល K-NN (ឧ. K=3, 5, 7) ដើម្បីប្រៀបធៀបលទ្ធផល។</li>
+            
+            <li><strong>ជំហានទី៤៖ បង្កើនប្រសិទ្ធភាពដោយបច្ចេកទេស Ensemble Learning:</strong> នៅពេលដែលម៉ូដែលមូលដ្ឋានដំណើរការហើយ ត្រូវដាក់បញ្ចូលបច្ចេកទេស <span class='en'>Bagging</span> និង <span class='en'>Boosting (ឧទាហរណ៍ AdaBoost ឬ Gradient Boosting)</span> ដើម្បីបង្កើនភាពត្រឹមត្រូវនៃការទាយលទ្ធផល និងដោះស្រាយបញ្ហា Overfitting ស្របតាមការរកឃើញក្នុងឯកសារស្រាវជ្រាវនេះ។</li>
+            
+            <li><strong>ជំហានទី៥៖ វាយតម្លៃ និងដាក់ដំណើរការជាក់ស្តែង (Model Deployment):</strong> ប្រើប្រាស់ <span class='en'>Confusion Matrix</span> ដើម្បីវាស់ស្ទង់សមត្ថភាពម៉ូដែលតាមរយៈ <span class='en'>Accuracy, Precision, និង Recall</span>។ បន្ទាប់មក និស្សិតអាចសាកល្បងដាក់ពង្រាយម៉ូដែល (Deploy) ជាកម្មវិធី Web ខ្នាតតូចតាមរយៈ <span class='en'>Streamlit</span> ឬ <span class='en'>Flask</span> ដើម្បីឲ្យអ្នកប្រើប្រាស់អាចបញ្ចូលអត្ថបទ និងទទួលបានលទ្ធផលនៃការចាត់ថ្នាក់ភ្លាមៗ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Extraction</span></td>
+                <td>វាជាដំណើរការទាញយកព័ត៌មានឬលក្ខណៈសំខាន់ៗចេញពីទិន្នន័យឆៅ (ដូចជាអត្ថបទទាំងមូល) ហើយបំប្លែងវាទៅជាទម្រង់លេខ ដើម្បីឱ្យកុំព្យូទ័រអាចយល់ គណនា និងរៀនពីវាបានក្នុងការចាត់ថ្នាក់។</td>
+                <td>ដូចជាការអានសៀវភៅមួយក្បាល ហើយកត់ត្រាតែចំណុចសំខាន់ៗជាចំណុចៗទុកសម្រាប់ប្រឡង ជំនួសឱ្យការទន្ទេញចាំគ្រប់ពាក្យពេចន៍ទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (K-NN)</span></td>
+                <td>វាជាក្បួនដោះស្រាយសម្រាប់ចាត់ថ្នាក់ទិន្នន័យថ្មី ដោយស្វែងរកនិងប្រៀបធៀបវាទៅនឹងទិន្នន័យចាស់ចំនួន K ដែលមានលក្ខណៈស្រដៀងវា (មានចម្ងាយជិតបំផុត) មុននឹងសម្រេចថាវាជាប្រភេទអ្វី។</td>
+                <td>ដូចជាការចង់ដឹងថាមនុស្សម្នាក់ជាសិស្សពូកែឬអត់ ដោយគ្រាន់តែមើលទៅលើមិត្តភក្តិជិតស្និទ្ធបំផុតរបស់គេចំនួន ៥ នាក់ បើមិត្តគេពូកែ គេក៏ប្រហែលជាពូកែដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Naïve Bayes (NB)</span></td>
+                <td>វាជាក្បួនដោះស្រាយផ្អែកលើទ្រឹស្តីប្រូបាប៊ីលីតេ (ភាគរយដែលអាចកើតឡើង) ដើម្បីទស្សន៍ទាយចំណាត់ថ្នាក់ ដោយវាសន្មតថាលក្ខណៈពិសេសនីមួយៗនៃទិន្នន័យគឺឯករាជ្យ និងមិនមានទំនាក់ទំនងគ្នាទាល់តែសោះ។</td>
+                <td>ដូចជាការទាយថាផ្លែឈើមួយជា 'ផ្លែប៉ោម' ដោយសារតែវាមានពណ៌ក្រហម មូល និងទំហំប៉ុនកណ្តាប់ដៃ ទោះបីជាលក្ខណៈទាំងនេះមិនមានឥទ្ធិពលលើគ្នាក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bagging</span></td>
+                <td>វាជាបច្ចេកទេសបង្កើតម៉ូដែលតូចៗជាច្រើនដោយប្រើការចាប់យកទិន្នន័យហ្វឹកហាត់ដោយចៃដន្យ រួចបូកបញ្ចូលលទ្ធផលនៃការទាយរបស់វាបញ្ជូលគ្នា ដើម្បីទទួលបានលទ្ធផលចុងក្រោយដែលសុក្រឹតជាងមុន និងមិនលម្អៀង។</td>
+                <td>ដូចជាការសួរមតិពីក្រុមគ្រូពេទ្យជាច្រើននាក់ដាច់ដោយឡែកពីគ្នាអំពីជំងឺមួយ រួចយកចម្លើយដែលគ្រូពេទ្យភាគច្រើនឆ្លើយស្របគ្នាជាការសម្រេចចិត្តចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Boosting</span></td>
+                <td>វាជាបច្ចេកទេសហ្វឹកហាត់ម៉ូដែលជាបន្តបន្ទាប់ ដោយម៉ូដែលក្រោយៗត្រូវផ្តល់ការយកចិត្តទុកដាក់ (ផ្តល់ទម្ងន់) កាន់តែខ្លាំងទៅលើទិន្នន័យដែលម៉ូដែលមុនៗបានទាយខុស ដើម្បីកាត់បន្ថយកំហុសរួម។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលប្រឡងធ្លាក់មុខវិជ្ជាគណិតវិទ្យា ដូច្នេះនៅឆមាសបន្ទាប់ គេត្រូវខិតខំរៀនបំប៉នតែមុខវិជ្ជានោះឱ្យបានច្រើនជាងគេដើម្បីឱ្យពិន្ទុរួមបានល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tokenization</span></td>
+                <td>វាជាដំណើរការបំបែកអត្ថបទវែងៗ ឬកថាខណ្ឌ ឱ្យទៅជាបំណែកតូចៗដាច់ៗពីគ្នា ដូចជាពាក្យនីមួយៗ ឬប្រយោគនីមួយៗ ដើម្បីឱ្យកុំព្យូទ័រងាយស្រួលក្នុងការវិភាគអត្ថន័យ។</td>
+                <td>ដូចជាការកាត់នំប៉័ងមួយដើមធំ ឱ្យទៅជាចំណិតស្តើងៗ ដើម្បីងាយស្រួលញ៉ាំ ឬយកទៅច្នៃបន្ត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stemming</span></td>
+                <td>វាជាដំណើរការកាត់ចោលនូវបច្ច័យ ឬបុព្វបទនៃពាក្យ (ដូចជា -ing, -ed ក្នុងភាសាអង់គ្លេស) ដើម្បីទាញយកទម្រង់ឫសគល់ដើមនៃពាក្យនោះ ដែលជួយកាត់បន្ថយភាពស្មុគស្មាញនៃទិន្នន័យអត្ថបទ។</td>
+                <td>ដូចជាការកាត់ស្លឹក និងមែកតូចៗចេញពីដើមឈើ ដោយរក្សាទុកតែគល់និងដើមធំដើម្បីងាយស្រួលក្នុងការដឹកជញ្ជូន និងចាត់ថ្នាក់ប្រភេទឈើ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TF-IDF</span></td>
+                <td>វាជារូបមន្តគណិតវិទ្យាសម្រាប់វាស់ស្ទង់ភាពសំខាន់នៃពាក្យមួយនៅក្នុងឯកសារ ដោយពាក្យដែលលេចឡើងញឹកញាប់ក្នុងឯកសារមួយ ប៉ុន្តែកម្រមានក្នុងឯកសារផ្សេងទៀត នឹងទទួលបានពិន្ទុខ្ពស់។</td>
+                <td>ដូចជាពាក្យ 'បាល់ទាត់' នៅក្នុងសៀវភៅកីឡាគឺជារឿងធម្មតា ប៉ុន្តែប្រសិនបើវាលេចឡើងក្នុងសៀវភៅធ្វើម្ហូប វាបញ្ជាក់ថាពាក្យនោះជួយញែកសៀវភៅនោះឱ្យប្លែកពីគេយ៉ាងច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">F-measure</span></td>
+                <td>វាជារង្វាស់ដែលរួមបញ្ចូលគ្នារវាងភាពជាក់លាក់ (Precision) និងភាពគ្របដណ្តប់ (Recall) ដើម្បីផ្តល់នូវពិន្ទុវាយតម្លៃរួមមួយដែលបង្ហាញពីប្រសិទ្ធភាពពិតប្រាកដ និងតុល្យភាពរបស់ម៉ូដែល។</td>
+                <td>ដូចជារង្វាស់សមត្ថភាពរបស់អ្នកនេសាទ ដែលវាស់ទាំងការចាប់បានត្រីចំគោលដៅ (មិនមែនចាប់បានសំរាម) និងការមិនបណ្តោយឱ្យត្រីក្នុងបឹងរួចផុតពីសំណាញ់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=text+classification+using+deep+learning+and+transformer+models" target="_blank" rel="noopener"><span class="en">text classification using deep learning and transformer models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ensemble+learning+techniques+in+natural+language+processing" target="_blank" rel="noopener"><span class="en">ensemble learning techniques in natural language processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=TF-IDF+and+advanced+feature+extraction+methodologies" target="_blank" rel="noopener"><span class="en">TF-IDF and advanced feature extraction methodologies</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=handling+class+imbalance+in+document+categorization" target="_blank" rel="noopener"><span class="en">handling class imbalance in document categorization</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

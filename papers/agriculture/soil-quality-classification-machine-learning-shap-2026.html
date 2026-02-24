@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ចំណាត់ថ្នាក់គុណភាពដីពីសមាសធាតុគីមីដោយប្រើប្រាស់វិធីសាស្ត្រ Machine Learning ជាមួយនឹងការពន្យល់ផ្អែកលើ SHAP | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវាយតម្លៃ និងចំណាត់ថ្នាក់គុណភាពដីដោយផ្អែកលើសូចនាករគីមីកសិកម្ម ដើម្បីគាំទ្រដល់ការប្រើប្រាស់ដីប្រកបដោយនិរន្តរភាព និងប្រព័ន្ធកសិកម្មច្បាស់លាស់។">
+    
+    <meta name="keywords" content="Soil quality, Agrochemical assessment, Machine learning, Multi-Layer Perceptron (MLP), SHAP analysis, Precision agriculture, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/agriculture/soil-quality-classification-machine-learning-shap-2026.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/agriculture/soil-quality-classification-machine-learning-shap-2026.html">
+    <meta property="og:title" content="ចំណាត់ថ្នាក់គុណភាពដីពីសមាសធាតុគីមីដោយប្រើប្រាស់វិធីសាស្ត្រ Machine Learning ជាមួយនឹងការពន្យល់ផ្អែកលើ SHAP | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវាយតម្លៃ និងចំណាត់ថ្នាក់គុណភាពដីដោយផ្អែកលើសូចនាករគីមីកសិកម្ម ដើម្បីគាំទ្រដល់ការប្រើប្រាស់ដីប្រកបដោយនិរន្តរភាព និងប្រព័ន្ធកសិកម្មច្បាស់លាស់។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2026 Environmental Challenges">
+    
+    <meta property="article:tag" content="Soil quality">
+    
+    <meta property="article:tag" content="Agrochemical assessment">
+    
+    <meta property="article:tag" content="Machine learning">
+    
+    <meta property="article:tag" content="Multi-Layer Perceptron (MLP)">
+    
+    <meta property="article:tag" content="SHAP analysis">
+    
+    <meta property="article:tag" content="Precision agriculture">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ចំណាត់ថ្នាក់គុណភាពដីពីសមាសធាតុគីមីដោយប្រើប្រាស់វិធីសាស្ត្រ Machine Learning ជាមួយនឹងការពន្យល់ផ្អែកលើ SHAP">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវាយតម្លៃ និងចំណាត់ថ្នាក់គុណភាពដីដោយផ្អែកលើសូចនាករគីមីកសិកម្ម ដើម្បីគាំទ្រដល់ការប្រើប្រាស់ដីប្រកបដោយនិរន្តរភាព និងប្រព័ន្ធកសិកម្មច្បាស់លាស់។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1782\u17bb\u178e\u1797\u17b6\u1796\u178a\u17b8\u1796\u17b8\u179f\u1798\u17b6\u179f\u1792\u17b6\u178f\u17bb\u1782\u17b8\u1798\u17b8\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Machine Learning \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u1796\u1793\u17d2\u1799\u179b\u17cb\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be SHAP",
+      "name": "Soil quality classification from chemical composition using machine learning methods with SHAP-based explanation",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3 \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1782\u17bb\u178e\u1797\u17b6\u1796\u178a\u17b8\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179f\u17bc\u1785\u1793\u17b6\u1780\u179a\u1782\u17b8\u1798\u17b8\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1782\u17b6\u17c6\u1791\u17d2\u179a\u178a\u179b\u17cb\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u178a\u17b8\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1793\u17b7\u179a\u1793\u17d2\u178f\u179a\u1797\u17b6\u1796 \u1793\u17b7\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/agriculture/soil-quality-classification-machine-learning-shap-2026.html",
+      "author": [{"@type": "Person", "name": "Halyna Humeniuk (Department of General Biology and Methods of Teaching Natural Sciences, Ternopil Volodymyr Hnatiuk National Pedagogical University)"},{"@type": "Person", "name": "Dmytro Tymoshchuk (Department of Artificial Intelligence Systems and Data Analysis, Ternopil Ivan Puluj National Technical University)"},{"@type": "Person", "name": "Andrii Sverstiuk (Department of Medical Informatics, I. Horbachevsky Ternopil National Medical University)"}],
+      "datePublished": "2026 Environmental Challenges",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Soil quality classification from chemical composition using machine learning methods with SHAP-based explanation",
+        "url": "https://doi.org/10.1016/j.envc.2025.101404"
+      },
+      "keywords": ["Soil quality", "Agrochemical assessment", "Machine learning", "Multi-Layer Perceptron (MLP)", "SHAP analysis", "Precision agriculture"],
+      "about": "Environmental Science / Agricultural Data Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Agriculture",
+          "item": "https://khmerresearch.com/papers/agriculture/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1782\u17bb\u178e\u1797\u17b6\u1796\u178a\u17b8\u1796\u17b8\u179f\u1798\u17b6\u179f\u1792\u17b6\u178f\u17bb\u1782\u17b8\u1798\u17b8\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Machine Learning \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u1796\u1793\u17d2\u1799\u179b\u17cb\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be SHAP",
+          "item": "https://khmerresearch.com/papers/agriculture/soil-quality-classification-machine-learning-shap-2026.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/agriculture/">Agriculture</a> &rsaquo;
+        <span>ចំណាត់ថ្នាក់គុណភាពដីពីសមាសធាតុគីមីដោយប្រើប្រាស់វិធីសាស្ត្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Soil quality classification from chemical composition using machine learning methods with SHAP-based explanation<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.1016/j.envc.2025.101404" target="_blank">doi.org/10.1016/j.envc.2025.101404</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ចំណាត់ថ្នាក់គុណភាពដីពីសមាសធាតុគីមីដោយប្រើប្រាស់វិធីសាស្ត្រ Machine Learning ជាមួយនឹងការពន្យល់ផ្អែកលើ SHAP</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Soil quality classification from chemical composition using machine learning methods with SHAP-based explanation</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Halyna Humeniuk (Department of General Biology and Methods of Teaching Natural Sciences, Ternopil Volodymyr Hnatiuk National Pedagogical University), Dmytro Tymoshchuk (Department of Artificial Intelligence Systems and Data Analysis, Ternopil Ivan Puluj National Technical University), Andrii Sverstiuk (Department of Medical Informatics, I. Horbachevsky Ternopil National Medical University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2026 Environmental Challenges</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Environmental Science / Agricultural Data Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការវាយតម្លៃ និងចំណាត់ថ្នាក់គុណភាពដីដោយផ្អែកលើសូចនាករគីមីកសិកម្ម ដើម្បីគាំទ្រដល់ការប្រើប្រាស់ដីប្រកបដោយនិរន្តរភាព និងប្រព័ន្ធកសិកម្មច្បាស់លាស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រមូលគំរូដីជាង ៧០០ គំរូ និងបានប្រើប្រាស់ក្បួនដោះស្រាយ Machine Learning ផ្សេងៗ ដើម្បីទស្សន៍ទាយចំណាត់ថ្នាក់គុណភាពដី ដោយរួមបញ្ចូលទាំងការបកស្រាយលទ្ធផលតាមរយៈវិធីសាស្ត្រ SHAP (SHapley Additive exPlanations)។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យគីមីកសិកម្ម (Agrochemical Data Collection) រួមមាន ការវាស់វែង pH កាបូនសរីរាង្គ អាសូតអាម៉ូញ៉ូមនិងនីត្រាត ផូស្វ័រ កាល់ស្យូម និងប៉ូតាស្យូម។</li>
+            
+            <li>ការចាត់ថ្នាក់គុណភាពដី (Soil Quality Classification) ជា ៣ ថ្នាក់៖ ទាប មធ្យម និងខ្ពស់ ដោយផ្អែកលើកម្រិតភាពមានជីជាតិ។</li>
+            
+            <li>ការបណ្តុះបណ្តាលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning Model Training) ដោយប្រើក្បួនដោះស្រាយចំនួន ៨ ដូចជា Random Forest, XGBoost, និង MLP Neural Network។</li>
+            
+            <li>ការវិភាគបកស្រាយម៉ូដែល (SHAP-based Explanation) ដើម្បីវាយតម្លៃបរិមាណនៃឥទ្ធិពល និងការចូលរួមរបស់កត្តាធាតុចូលនីមួយៗទៅលើលទ្ធផលនៃការទស្សន៍ទាយ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត MLP (Multi-Layer Perceptron) បានបង្ហាញពីដំណើរការល្អបំផុតក្នុងការធ្វើតេស្តលើទិន្នន័យឯករាជ្យថ្មី ដោយសម្រេចបាននូវតុល្យភាពចំណាត់ថ្នាក់ខ្ពស់ជាមួយនឹងតម្លៃ F1-score ស្មើនឹង 0.884, 0.921, និង 0.773 សម្រាប់ថ្នាក់ទី១ ទី២ និងទី៣ រៀងគ្នា។</li>
+            
+            <li>តាមរយៈការវិភាគកម្រិតសកល (Global SHAP analysis) បានរកឃើញថា ផូស្វ័រដែលអាចប្រើប្រាស់បាន (Available phosphorus) កម្រិតជាតិអាស៊ីតនៃដី (Soil acidity/pH) និងកាបូនសរីរាង្គ (Organic carbon) គឺជាកត្តាដែលមានឥទ្ធិពលខ្លាំងជាងគេបំផុតក្នុងការទស្សន៍ទាយគុណភាពដី។</li>
+            
+            <li>អភិក្រមដែលស្នើឡើងនៅក្នុងការសិក្សានេះ មិនត្រឹមតែអាចបង្កើនភាពត្រឹមត្រូវក្នុងការចាត់ថ្នាក់គុណភាពដីប៉ុណ្ណោះទេ ប៉ុន្តែក៏បានផ្តល់នូវការបកស្រាយបែបគីមីកសិកម្មប្រកបដោយអត្ថន័យជាក់ស្តែង ដែលជួយដល់អ្នកជំនាញកសិកម្ម អ្នកគ្រប់គ្រងដីធ្លី និងកសិករក្នុងការអភិវឌ្ឍប្រព័ន្ធគ្រប់គ្រងដីប្រកបដោយប្រសិទ្ធភាព។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Multi-Layer Perceptron (MLP)</span></strong><br>បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត MLP</td>
+                <td>មានស្ថិរភាពខ្ពស់បំផុត និងរក្សាបាននូវតុល្យភាពល្អរវាងភាពត្រឹមត្រូវ (Accuracy) និងការចងចាំ (Recall) លើទិន្នន័យថ្មី។ អាចបកស្រាយបានស៊ីជម្រៅតាមរយៈ SHAP ដើម្បីមើលពីឥទ្ធិពលនៃកត្តាគីមីនីមួយៗ។</td>
+                <td>ត្រូវការពេលវេលាបង្វឹកយូរ និងការកែសម្រួលប៉ារ៉ាម៉ែត្រស្មុគស្មាញ (Hyperparameter tuning) ច្រើនជាងម៉ូដែលទូទៅ ដោយសារតែមានស្រទាប់ Hidden layers ច្រើន។</td>
+                <td>ទទួលបានតម្លៃ F1-score 0.884 (ថ្នាក់ទី១), 0.921 (ថ្នាក់ទី២) និង 0.773 (ថ្នាក់ទី៣) លើសំណុំទិន្នន័យសាកល្បងថ្មីឯករាជ្យ (192 គំរូ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest (RF)</span></strong><br>ក្បួនដោះស្រាយ Random Forest</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់នៅលើទិន្នន័យតេស្តដំបូង និងមានស្ថិរភាពល្អក្នុងការចាត់ថ្នាក់ទិន្នន័យថ្មីភាគច្រើន ដោយមិនងាយជួបបញ្ហា Overfitting នោះទេ។</td>
+                <td>ជួបប្រទះការលំបាកខ្លះក្នុងការបែងចែកគុណភាពដីកម្រិតមធ្យម (ថ្នាក់ទី២) នៅពេលអនុវត្តលើសំណុំទិន្នន័យថ្មី បើប្រៀបធៀបជាមួយ MLP។</td>
+                <td>ទទួលបាន F1-score 0.9103 សម្រាប់ថ្នាក់ទី១ ប៉ុន្តែធ្លាក់ចុះមកត្រឹម 0.8783 សម្រាប់ថ្នាក់ទី២ លើទិន្នន័យថ្មី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">eXtreme Gradient Boosting (XGBoost)</span></strong><br>ក្បួនដោះស្រាយ XGBoost</td>
+                <td>ដំណើរការបានយ៉ាងល្អឥតខ្ចោះលើសំណុំទិន្នន័យតេស្តដំបូង (Accuracy 100%) ដោយសារការពង្រឹងរចនាសម្ព័ន្ធមែកធាងជាបន្តបន្ទាប់។</td>
+                <td>ធ្លាក់ចុះសមត្ថភាពធ្វើទូទៅកម្ម (Generalization issue) យ៉ាងខ្លាំងនៅពេលអនុវត្តលើសំណុំទិន្នន័យថ្មី ជាពិសេសក្នុងការកំណត់ថ្នាក់ទី១។</td>
+                <td>F1-score សម្រាប់ថ្នាក់ទី១ ធ្លាក់ចុះមកត្រឹម 0.6610 លើសំណុំទិន្នន័យថ្មី (Recall ទាបត្រឹមតែ 0.52 ប៉ុណ្ណោះ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Logistic Regression (LR)</span></strong><br>តម្រែតម្រង់ឡូជីស្ទីក</td>
+                <td>មានលក្ខណៈសាមញ្ញ ងាយស្រួលយល់ និងប្រើប្រាស់ធនធានកុំព្យូទ័រតិចតួចសម្រាប់ការគណនានិងការបណ្តុះបណ្តាល។</td>
+                <td>មិនអាចចាប់យកទំនាក់ទំនងស្មុគស្មាញ (Non-linear relationships) រវាងកត្តាគីមីដីបានល្អនោះទេ ដែលធ្វើឱ្យមានកំហុសច្រើនក្នុងការធ្វើចំណាត់ថ្នាក់។</td>
+                <td>មានកំហុសក្នុងការចាត់ថ្នាក់សំណាកដីថ្នាក់ទី២ ដោយមាន 8 សំណាកខុសទៅថ្នាក់ទី១ និង 4 សំណាកខុសទៅថ្នាក់ទី៣ លើទិន្នន័យតេស្ត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រនិងកម្មវិធី Software កម្រិតមធ្យមសម្រាប់ការវិភាគទិន្នន័យ ប៉ុន្តែទាមទារការចំណាយធនធានច្រើនលើការពិសោធន៍គីមីក្នុងមន្ទីរពិសោធន៍។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ភាសា Python រួមជាមួយបណ្ណាល័យ Scikit-learn, XGBoost, និង TensorFlow/Keras សម្រាប់ការបង្កើតម៉ូដែល រួមទាំង SHAP (DeepExplainer) សម្រាប់ការបកស្រាយលទ្ធផល។</li>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនកុំព្យូទ័រដែលមានកម្លាំងមធ្យម (Standard CPU/RAM) គឺគ្រប់គ្រាន់សម្រាប់សំណុំទិន្នន័យតូច (ប្រហែល ៩៦០ គំរូ) ប៉ុន្តែអាចត្រូវការ GPU បើអនុវត្តលើទិន្នន័យកម្រិតរាប់ម៉ឺនសំណាក។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យសំណាកដីដែលមានការវិភាគពីមន្ទីរពិសោធន៍ដើម្បីកំណត់កត្តាគីមីកសិកម្មទាំង៧ (pH, Corg, NH4+, NO3-, P2O5, Ca2+, K+) យ៉ាងជាក់លាក់។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញវិទ្យាសាស្ត្រទិន្នន័យ (Data Scientist) និងអ្នកជំនាញកសិកម្មវិទ្យា (Agronomist) ដើម្បីធានាថាការបកស្រាយលទ្ធផលម៉ូដែលស្របតាមអត្ថន័យគីមីកសិកម្មពិតប្រាកដ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងតំបន់ Khmelnytskyi ប្រទេសអ៊ុយក្រែន ដែលផ្តោតលើប្រភេទដី podzolized chernozems ។ សម្រាប់ប្រទេសកម្ពុជា លក្ខខណ្ឌអាកាសធាតុត្រូពិច និងប្រភេទដី (ឧទាហរណ៍៖ ដីល្បាយខ្សាច់ ដីក្រហម ដីលិចទឹក) មានលក្ខណៈខុសគ្នាស្រឡះ។ ដូច្នេះ ម៉ូដែលនេះមិនអាចយកមកប្រើដោយផ្ទាល់បានទេ ប៉ុន្តែវិធីសាស្ត្ររួមរបស់វាអាចយកមកអនុវត្តបានដោយតម្រូវឱ្យមានការប្រមូលទិន្នន័យដីក្នុងស្រុកមកបង្វឹកម៉ូដែលឡើងវិញ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការប្រើប្រាស់ Machine Learning និង SHAP នេះមានសក្តានុពលខ្ពស់សម្រាប់ជួយជំរុញវិស័យកសិកម្មច្បាស់លាស់ (Precision Agriculture) នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ខេត្តបាត់ដំបង និងបន្ទាយមានជ័យ (តំបន់ផលិតកម្មស្រូវនិងដំឡូងមី):</strong> អាចប្រើវិធីសាស្ត្រនេះដើម្បីវាយតម្លៃកម្រិត pH ផូស្វ័រ និងកាបូនសរីរាង្គ ដើម្បីផ្តល់អនុសាសន៍ដល់កសិករពីការប្រើប្រាស់ជីឱ្យចំគោលដៅ ជួយកាត់បន្ថយការចំណាយមិនចាំបាច់ និងបង្កើនទិន្នផល។</li>
+            
+            <li><strong>ខេត្តមណ្ឌលគិរី និងរតនគិរី (ដំណាំឧស្សាហកម្ម):</strong> ជួយដល់ការតាមដានគុណភាពដីក្រហម (Ferralsols) សម្រាប់ដំណាំកៅស៊ូ និងស្វាយចន្ទី ក្នុងរយៈពេលវែង ដើម្បីការពារការខូចគុណភាពដីដោយសារការបាត់បង់ជាតិកាល់ស្យូម ឬអាស៊ីតកើនឡើង។</li>
+            
+            <li><strong>វិទ្យាស្ថានស្រាវជ្រាវ និងអភិវឌ្ឍន៍កសិកម្មកម្ពុជា (CARDI):</strong> អាចប្រើប្រាស់អភិក្រមនេះក្នុងការធ្វើផែនទីគុណភាពដី (Soil Quality Mapping) ទូទាំងប្រទេស ដើម្បីធ្វើប្លង់គោលប្រើប្រាស់ដីធ្លីកសិកម្មប្រកបដោយនិរន្តរភាព។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក អភិក្រមនេះអាចជួយធ្វើទំនើបកម្មប្រព័ន្ធវាយតម្លៃដីកសិកម្មនៅកម្ពុជា ដោយផ្លាស់ប្តូរពីការប៉ាន់ស្មានទូទៅ ទៅជាការផ្តល់ប្រឹក្សាផ្អែកលើទិន្នន័យនិងការពន្យល់បែបវិទ្យាសាស្ត្រច្បាស់លាស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការប្រមូលសំណាក និងវិភាគដីក្នុងស្រុក:</strong> រៀបចំគម្រោងសហការជាមួយមន្ទីរកសិកម្មខេត្តដើម្បីប្រមូលសំណាកដីពីតំបន់កសិកម្មសំខាន់ៗ (ឧ. តំបន់ជុំវិញបឹងទន្លេសាប) រួចធ្វើការវិភាគរកធាតុគីមីស្នូលទាំង៧នៅមន្ទីរពិសោធន៍ CARDI ដើម្បីបង្កើតសំណុំទិន្នន័យកម្ពុជា។</li>
+            
+            <li><strong>ការរៀបចំទិន្នន័យ និងសាងសង់ម៉ូដែលមូលដ្ឋាន:</strong> ប្រើប្រាស់កម្មវិធី Python ជាមួយបណ្ណាល័យ Scikit-learn និង TensorFlow ដើម្បីសម្អាតទិន្នន័យ និងចាប់ផ្តើមសាងសង់ម៉ូដែល Random Forest និង MLP ដោយធ្វើការបែងចែកទិន្នន័យ Training និង Testing ឱ្យបានត្រឹមត្រូវ។</li>
+            
+            <li><strong>ការបកស្រាយលទ្ធផលដោយប្រើប្រាស់បច្ចេកវិទ្យា SHAP:</strong> បញ្ចូលបណ្ណាល័យ SHAP (DeepExplainer) ទៅក្នុងកូដដើម្បិវិភាគរកមើលថា តើកត្តាគីមីមួយណាមានឥទ្ធិពលខ្លាំងជាងគេ (ឧ. pH ឬកាបូនសរីរាង្គ) លើគុណភាពដីនៅកម្ពុជា ដើម្បីផ្តល់អំណះអំណាងច្បាស់លាស់ជូនអ្នកជំនាញ។</li>
+            
+            <li><strong>ការធ្វើតេស្តសាកល្បងលើទិន្នន័យឯករាជ្យ (Independent Validation):</strong> ប្រមូលសំណាកដីពីតំបន់ថ្មីស្រឡាងមួយទៀតនៅក្នុងប្រទេសកម្ពុជា ដើម្បីយកមកធ្វើតេស្តភាពត្រឹមត្រូវរបស់ម៉ូដែល MLP និងធានាថាម៉ូដែលមិនមានបញ្ហា Overfitting មុននឹងយកទៅប្រើប្រាស់ជាក់ស្តែង។</li>
+            
+            <li><strong>ការអភិវឌ្ឍកម្មវិធីផ្តល់ប្រឹក្សា (Web Application):</strong> បង្កើត Web App សាមញ្ញមួយដោយប្រើប្រាស់ Streamlit ដែលអនុញ្ញាតឱ្យមន្ត្រីកសិកម្មស្រុកបញ្ចូលទិន្នន័យគីមីដី ហើយប្រព័ន្ធនឹងបង្ហាញលទ្ធផលចំណាត់ថ្នាក់ដី រួមជាមួយក្រាហ្វពន្យល់ពីមូលហេតុ (SHAP Waterfall plot)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">SHAP (SHapley Additive exPlanations)</span></td>
+                <td>ជាវិធីសាស្ត្រគណិតវិទ្យាដែលផ្អែកលើទ្រឹស្តីល្បែង (Game Theory) ដើម្បីជួយបកស្រាយលទ្ធផលរបស់ម៉ូដែល Machine Learning ដោយវាធ្វើការគណនាច្បាស់លាស់ថា តើកត្តាធាតុចូលនីមួយៗ (ឧ. កម្រិតអាស៊ីតដី ផូស្វ័រ) បានចូលរួមចំណែកប៉ុន្មានភាគរយក្នុងការជំរុញឱ្យម៉ូដែលសម្រេចចិត្តទស្សន៍ទាយលទ្ធផលណាមួយ។</td>
+                <td>ដូចជាការបែងចែកប្រាក់រង្វាន់ដល់កីឡាករក្នុងក្រុមបាល់ទាត់ម្នាក់ៗ ដោយវាយតម្លៃច្បាស់លាស់ថាអ្នកណាទាត់បញ្ចូលទី អ្នកណាបោះបាល់ឱ្យ និងអ្នកណាការពារបានល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-Layer Perceptron (MLP)</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Artificial Neural Network) ដែលមានស្រទាប់កណ្ដាល (Hidden layers) ជាច្រើនសម្រាប់ទទួលយកទិន្នន័យ គណនាទម្ងន់ទិន្នន័យ និងបញ្ជូនបន្តរហូតដល់ទទួលបានលទ្ធផលចុងក្រោយ ដោយវាពូកែក្នុងការស្វែងរកទំនាក់ទំនងស្មុគស្មាញនៃសមាសធាតុគីមីដែលរូបមន្តគណិតវិទ្យាធម្មតាមើលមិនឃើញ។</td>
+                <td>ដូចជារោងចក្រដែលមានច្រកត្រួតពិនិត្យគុណភាពច្រើនតង់ ដោយច្រកនីមួយៗចម្រាញ់ព័ត៌មានកាន់តែលម្អិតឡើងៗរហូតដល់ចេញជាការសម្រេចចិត្តដ៏ត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest</span></td>
+                <td>ជាក្បួនដោះស្រាយ Machine Learning ដែលបង្កើតសំណុំនៃ "មែកធាងការសម្រេចចិត្ត" (Decision Trees) រាប់រយឬរាប់ពាន់ដាច់ដោយឡែកពីគ្នា រួចយកចម្លើយពីមែកធាងទាំងអស់នោះមកបោះឆ្នោតជ្រើសរើសយកចម្លើយដែលមានសំឡេងគាំទ្រច្រើនជាងគេបំផុត ដើម្បីកាត់បន្ថយកំហុសនិងភាពលម្អៀង។</td>
+                <td>ដូចជាការសួរសំណួរទៅកាន់ទីប្រឹក្សារាប់រយនាក់ក្នុងពេលតែមួយ ហើយសម្រេចចិត្តធ្វើតាមមតិភាគច្រើន ដើម្បីធានាថាការសម្រេចចិត្តនោះមិនមានការលម្អៀងពីបុគ្គលណាម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">eXtreme Gradient Boosting (XGBoost)</span></td>
+                <td>ជាវិធីសាស្ត្រ Machine Learning ដែលបង្កើតមែកធាងការសម្រេចចិត្តជាបន្តបន្ទាប់គ្នា ដោយមែកធាងថ្មីនីមួយៗត្រូវបានបង្វឹកនិងបង្កើតឡើងជាពិសេសដើម្បីផ្តោតលើការកែតម្រូវកំហុសដែលមែកធាងមុនៗបានធ្វើខុស ដែលជួយឱ្យម៉ូដែលនេះមានភាពមុតស្រួចនិងរៀនបានលឿន។</td>
+                <td>ដូចជាសិស្សដែលធ្វើលំហាត់ហើយពិនិត្យមើលកំហុសខ្លួនឯង រួចខិតខំរៀនផ្តោតតែលើចំណុចដែលខ្លួនធ្លាប់ធ្វើខុសនោះ ដើម្បីប្រឡងលើកក្រោយឱ្យបានពិន្ទុល្អជាងមុនជានិច្ច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Precision-Recall curve</span></td>
+                <td>ជាក្រាហ្វដែលប្រើសម្រាប់វាយតម្លៃសមត្ថភាពម៉ូដែលក្នុងការថ្លឹងថ្លែងរវាង "ភាពសុក្រឹត ឬ Precision" (ទស្សន៍ទាយថាត្រូវ ហើយពិតជាត្រូវមែន) និង "ការចងចាំ ឬ Recall" (អាចរកឃើញករណីគោលដៅពិតប្រាកដបានប៉ុន្មានភាគរយ) ដែលវាមានសារៈសំខាន់ខ្លាំងនៅពេលទិន្នន័យមានចំនួនថ្នាក់មិនស្មើគ្នា។</td>
+                <td>ដូចជាការថ្លឹងថ្លែងរបស់ប៉ូលីសរវាងការព្យាយាមចាប់ចោរឱ្យបានទាំងអស់ (Recall) ប៉ុន្តែត្រូវប្រយ័ត្នគ្រប់ជំហានកុំឱ្យចាប់ខុសមនុស្សល្អ (Precision)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Generalization capability</span></td>
+                <td>គឺជាសមត្ថភាពរបស់ម៉ូដែលកុំព្យូទ័រក្នុងការរក្សាបាននូវភាពត្រឹមត្រូវដដែល ឬប្រហាក់ប្រហែល នៅពេលដែលវាត្រូវបានយកទៅអនុវត្តលើសំណុំទិន្នន័យថ្មីស្រឡាង (New Dataset) ដែលវាមិនធ្លាប់បានឃើញ ឬត្រូវបានបង្វឹកពីមុនមក។</td>
+                <td>ដូចជាសិស្សដែលរៀនយល់ពីមេរៀនពិតប្រាកដ អាចដោះស្រាយលំហាត់ថ្មីៗប្លែកៗក្នុងម៉ោងប្រឡងបានដោយមិនគិតតែពីទន្ទេញចាំមាត់នូវលំហាត់ចាស់ៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Agrochemical indicators</span></td>
+                <td>ជារង្វាស់នៃសមាសធាតុគីមីដែលមាននៅក្នុងដី ដូចជាកម្រិតជាតិអាស៊ីត (pH) កាបូនសរីរាង្គ (Corg) និងសារធាតុចិញ្ចឹមរុក្ខជាតិ (អាសូត ផូស្វ័រ ប៉ូតាស្យូម) ដែលគេយកមកប្រើប្រាស់ដើម្បីវាយតម្លៃកម្រិតភាពមានជីជាតិ និងសុខភាពទូទៅរបស់ដីសម្រាប់បម្រើដល់ការដាំដុះដំណាំ។</td>
+                <td>ដូចជាលទ្ធផលនៃការពិនិត្យឈាមរបស់មនុស្ស ដើម្បីដឹងថារាងកាយខ្វះវីតាមីនឬសារធាតុអ្វីខ្លះទើបអាចផ្សំថ្នាំប៉ូវបានត្រឹមត្រូវនិងចំគោលដៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">GridSearchCV</span></td>
+                <td>ជាយន្តការសាកល្បងដោយស្វ័យប្រវត្តិដើម្បីស្វែងរកការកំណត់រចនាសម្ព័ន្ធ (Hyperparameters) ដែលល្អបំផុតសម្រាប់ម៉ូដែល Machine Learning ដោយវាធ្វើការសាកល្បងគ្រប់បន្សំទាំងអស់នៃជម្រើសដែលយើងបានកំណត់ រួចធ្វើការវាយតម្លៃរកមើលបន្សំណាដែលផ្តល់លទ្ធផលល្អជាងគេ។</td>
+                <td>ដូចជាការសាកល្បងមួលកាច់ប៉ុស្តិ៍វិទ្យុ និងកម្រិតសំឡេងជាច្រើនរបៀបខុសៗគ្នា រហូតទាល់តែរកឃើញរលកសញ្ញាដែលច្បាស់បំផុតគ្មានសម្លេងរំខាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Explainable+AI+%28XAI%29+in+agriculture+and+soil+science" target="_blank" rel="noopener"><span class="en">Explainable AI (XAI) in agriculture and soil science</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+learning+approaches+for+spatial+soil+property+prediction" target="_blank" rel="noopener"><span class="en">Deep learning approaches for spatial soil property prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Agrochemical+indicators+and+soil+fertility+assessment+methods" target="_blank" rel="noopener"><span class="en">Agrochemical indicators and soil fertility assessment methods</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Integrating+remote+sensing+data+with+soil+chemical+composition+for+yield+prediction" target="_blank" rel="noopener"><span class="en">Integrating remote sensing data with soil chemical composition for yield prediction</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

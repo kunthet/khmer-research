@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ឧបករណ៍ត្រួតពិនិត្យបឋមសម្រាប់ការរៀនពង្រឹងប្រកបដោយសុវត្ថិភាពដោយប្រើប្រាស់ Transformer ជាមួយតំណាង State-Action-Reward | KhmerResearch.com</title>
+    <meta name="description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមនៃតុល្យភាពរវាងការរុករកនិងសុវត្ថិភាព (exploration-safety trade-off) នៅក្នុងការរៀនពង្រឹង (Reinforcement Learning) ជាពិសេសនៅក្នុងប...">
+    
+    <meta name="keywords" content="Reinforcement Learning, Safe RL, Transformer, StARformer, Pre-controller, Sequence Modeling, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/pre-controller-safe-rl-starformer-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/pre-controller-safe-rl-starformer-2024.html">
+    <meta property="og:title" content="ឧបករណ៍ត្រួតពិនិត្យបឋមសម្រាប់ការរៀនពង្រឹងប្រកបដោយសុវត្ថិភាពដោយប្រើប្រាស់ Transformer ជាមួយតំណាង State-Action-Reward | KhmerResearch.com">
+    <meta property="og:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមនៃតុល្យភាពរវាងការរុករកនិងសុវត្ថិភាព (exploration-safety trade-off) នៅក្នុងការរៀនពង្រឹង (Reinforcement Learning) ជាពិសេសនៅក្នុងបរិស្ថានដែលមានហានិភ័យខ្ពស់ និងភាពស្មុគស្ម...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024 Waseda University">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Safe RL">
+    
+    <meta property="article:tag" content="Transformer">
+    
+    <meta property="article:tag" content="StARformer">
+    
+    <meta property="article:tag" content="Pre-controller">
+    
+    <meta property="article:tag" content="Sequence Modeling">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ឧបករណ៍ត្រួតពិនិត្យបឋមសម្រាប់ការរៀនពង្រឹងប្រកបដោយសុវត្ថិភាពដោយប្រើប្រាស់ Transformer ជាមួយតំណាង State-Action-Reward">
+    <meta name="twitter:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមនៃតុល្យភាពរវាងការរុករកនិងសុវត្ថិភាព (exploration-safety trade-off) នៅក្នុងការរៀនពង្រឹង (Reinforcement Learning) ជាពិសេសនៅក្នុងបរិស្ថានដែលមានហានិភ័យខ្ពស់ និងភាពស្មុគស្ម...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u17a7\u1794\u1780\u179a\u178e\u17cd\u178f\u17d2\u179a\u17bd\u178f\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u1794\u178b\u1798\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Transformer \u1787\u17b6\u1798\u17bd\u1799\u178f\u17c6\u178e\u17b6\u1784 State-Action-Reward",
+      "name": "Pre-controller for Safe Reinforcement Learning using Transformer with State-Action-Reward Representations",
+      "description": "\u1793\u17b7\u1780\u17d2\u1781\u17c1\u1794\u1794\u1791\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1793\u17c3\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u179a\u179c\u17b6\u1784\u1780\u17b6\u179a\u179a\u17bb\u1780\u179a\u1780\u1793\u17b7\u1784\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796 (exploration-safety trade-off) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement Learning) \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u178a\u17c2\u179b\u1798\u17b6\u1793\u17a0\u17b6\u1793\u17b7\u1797\u17d0\u1799\u1781\u17d2\u1796\u179f\u17cb \u1793\u17b7\u1784\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u1780\u17d2\u179f\u17b6\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796\u1797\u17d2\u1793\u17b6\u1780\u17cb\u1784\u17b6\u179a AI\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/pre-controller-safe-rl-starformer-2024.html",
+      "author": [{"@type": "Person", "name": "Zhiwei Shen (Waseda University)"},{"@type": "Person", "name": "Shinichi Honiden (Waseda University)"}],
+      "datePublished": "2024 Waseda University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Pre-controller for Safe Reinforcement Learning using Transformer with State-Action-Reward Representations",
+        "url": "https://waseda.repo.nii.ac.jp/record/2001358/files/t5122fg09.pdf"
+      },
+      "keywords": ["Reinforcement Learning", "Safe RL", "Transformer", "StARformer", "Pre-controller", "Sequence Modeling"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u17a7\u1794\u1780\u179a\u178e\u17cd\u178f\u17d2\u179a\u17bd\u178f\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u1794\u178b\u1798\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Transformer \u1787\u17b6\u1798\u17bd\u1799\u178f\u17c6\u178e\u17b6\u1784 State-Action-Reward",
+          "item": "https://khmerresearch.com/papers/technology/pre-controller-safe-rl-starformer-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ឧបករណ៍ត្រួតពិនិត្យបឋមសម្រាប់ការរៀនពង្រឹងប្រកបដោយសុវត្ថិភា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Pre-controller for Safe Reinforcement Learning using Transformer with State-Action-Reward Representations<br>
+        
+        <strong>Source:</strong> <a href="https://waseda.repo.nii.ac.jp/record/2001358/files/t5122fg09.pdf" target="_blank">waseda.repo.nii.ac.jp</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ឧបករណ៍ត្រួតពិនិត្យបឋមសម្រាប់ការរៀនពង្រឹងប្រកបដោយសុវត្ថិភាពដោយប្រើប្រាស់ Transformer ជាមួយតំណាង State-Action-Reward</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Pre-controller for Safe Reinforcement Learning using Transformer with State-Action-Reward Representations</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Zhiwei Shen (Waseda University), Shinichi Honiden (Waseda University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 Waseda University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមនៃតុល្យភាពរវាងការរុករកនិងសុវត្ថិភាព (exploration-safety trade-off) នៅក្នុងការរៀនពង្រឹង (Reinforcement Learning) ជាពិសេសនៅក្នុងបរិស្ថានដែលមានហានិភ័យខ្ពស់ និងភាពស្មុគស្មាញក្នុងការរក្សាសុវត្ថិភាពភ្នាក់ងារ AI។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើងនូវយន្តការឧបករណ៍ត្រួតពិនិត្យបឋម (Pre-controller) ដោយរួមបញ្ចូលជាមួយម៉ូដែល State-Action-Reward Transformer (StARformer) ដើម្បីវាយតម្លៃ និងធានាសុវត្ថិភាពមុនពេលធ្វើសកម្មភាព។
+        
+        <ul>
+            
+            <li>ការធ្វើសមាហរណកម្មកត្តាសុវត្ថិភាព (Integrating Safety Factor): ការពង្រីកក្រុម token ពី ៣ (state, action, reward) ទៅជា ៤ (state, action, reward, safety) ដើម្បីបណ្តុះបណ្តាលម៉ូដែល។</li>
+            
+            <li>ការដាក់បញ្ចូលទម្ងន់សុវត្ថិភាព (Incorporating Safety Weights): ការគុណទម្ងន់សុវត្ថិភាពជាមួយរង្វាន់ (reward) ដើម្បីផ្លាស់ប្តូរសញ្ញារង្វាន់សម្រាប់សកម្មភាពដែលប្រឈមនឹងហានិភ័យ។</li>
+            
+            <li>ការវាយតម្លៃលើបរិស្ថាន Atari (Atari Evaluation): ធ្វើតេស្តម៉ូដែលលើហ្គេម Breakout នៃ Atari Learning Environment ដោយប្រើប្រាស់ទិន្នន័យពិតប្រាកដពី DQN Replay Dataset។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រនៃការគុណទម្ងន់សុវត្ថិភាពជាមួយនឹងរង្វាន់ (Safety Weight) ទទួលបានលទ្ធផលល្អបំផុត ដោយផ្តល់នូវរង្វាន់វគ្គ (episodic reward) ខ្ពស់បំផុតរហូតដល់ ៨±៥ បើធៀបនឹងម៉ូដែលដើមដែលទទួលបានត្រឹម ៤.៩±២។</li>
+            
+            <li>ម៉ូដែល StARformer ដែលមានទម្ងន់សុវត្ថិភាព (Safety Weight) បានកាត់បន្ថយអត្រាបុកទង្គិច (collision frequency) យ៉ាងមានប្រសិទ្ធភាព ពោលគឺធ្លាក់ចុះពី ០.៤ មកត្រឹម ០.១។</li>
+            
+            <li>ការបំពាក់យន្តការត្រួតពិនិត្យបឋម (Pre-controller) ទៅក្នុងដំណើរការរៀនសូត្ររបស់ StARformer បង្ហាញពីប្រសិទ្ធភាពខ្ពស់ក្នុងការសម្រេចបាននូវតុល្យភាពរវាងដំណើរការការងារ (performance) ខ្ពស់ និងការធានាសុវត្ថិភាពដ៏រឹងមាំ ដោយមិនធ្វើឲ្យប៉ះពាល់ដល់លទ្ធផលជារួម។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">StARformer (Original/Baseline)</span></strong><br>ម៉ូដែល StARformer ដើម</td>
+                <td>មានសមត្ថភាពអាចរៀនពីទិន្នន័យជាបន្តបន្ទាប់ (Sequential data) បានល្អ និងមានស្ថាបត្យកម្ម Transformer ទំនើប។</td>
+                <td>មានអត្រានៃការសម្រេចចិត្តខុសដែលបណ្តាលឱ្យមានការបុកទង្គិចខ្ពស់ (Safety risk) ព្រោះមិនមានយន្តការសុវត្ថិភាពច្បាស់លាស់។</td>
+                <td>ទទួលបានរង្វាន់វគ្គ (Episodic Reward) ចំនួន ៤.៩±២ និងមានអត្រាបុកទង្គិច ០.៤។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">StARformer with Safety factor</span></strong><br>StARformer បន្ថែមកត្តាសុវត្ថិភាពជា Input</td>
+                <td>ជួយកាត់បន្ថយអត្រាបុកទង្គិចបានមួយកម្រិត ដោយម៉ូដែលចាប់ផ្តើមយល់ដឹងពីហានិភ័យ។</td>
+                <td>ធ្វើឱ្យប្រសិទ្ធភាពនៃការប្រមូលរង្វាន់ធ្លាក់ចុះទាបជាងម៉ូដែលដើម ដោយសារម៉ូដែលផ្តោតលើសុវត្ថិភាពខ្លាំងពេក។</td>
+                <td>ទទួលបានរង្វាន់វគ្គត្រឹមតែ ៣.៥±៣.៥ ប៉ុន្តែអត្រាបុកទង្គិចធ្លាក់ចុះមកត្រឹម ០.៣។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">StARformer with Safety weight</span></strong><br>StARformer គុណទម្ងន់សុវត្ថិភាពជាមួយនឹងរង្វាន់</td>
+                <td>ទទួលបានលទ្ធផលល្អបំផុតទាំងការប្រមូលរង្វាន់ និងការរក្សាសុវត្ថិភាព (តុល្យភាពដ៏អស្ចារ្យ)។</td>
+                <td>ទាមទារឱ្យមានការគណនា និងកំណត់ទម្ងន់សុវត្ថិភាព (Safety weights) ឱ្យបានត្រឹមត្រូវនិងហ្មត់ចត់ជាមុន។</td>
+                <td>ទទួលបានរង្វាន់វគ្គខ្ពស់បំផុតរហូតដល់ ៨±៥ និងអត្រាបុកទង្គិចទាបបំផុតត្រឹមតែ ០.១។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> យោងតាមឯកសារ ម៉ូដែលនេះទាមទារធនធានកុំព្យូទ័រខ្ពស់ និងចំណាយពេលបណ្តុះបណ្តាលយូរ (Resource intensive) ដោយសារភាពស្មុគស្មាញនៃស្ថាបត្យកម្ម Transformer ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់ទិន្នន័យ DQN Replay Dataset ចំនួន ៥០០,០០០ ជំហាន (តំណាងឱ្យ ១% នៃទិន្នន័យសរុប ៥០លាន) សម្រាប់ហ្គេម Atari Breakout។</li>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនដែលមានកម្លាំង GPU ខ្លាំង និងអង្គចងចាំ (RAM/VRAM) ខ្ពស់ ដើម្បីដំណើរការម៉ូដែល Transformer លើទិន្នន័យរូបភាព (84x84 grayscale) និងស៊ុមវីដេអូជាបន្តបន្ទាប់។</li>
+        
+        <li><strong>Software / Frameworks:</strong> ទាមទារការប្រើប្រាស់ Arcade Learning Environment (ALE) សម្រាប់ការសាកល្បង និងបណ្ណាល័យ Deep Learning (ដូចជា PyTorch ឬ TensorFlow)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើង និងវាយតម្លៃដោយប្រើប្រាស់តែទិន្នន័យត្រាប់តាមពីហ្គេម Atari (Breakout) ប៉ុណ្ណោះ ដែលជាបរិស្ថាន 2D មានលក្ខណៈសាមញ្ញ។ វាមិនទាន់ឆ្លុះបញ្ចាំងពីភាពស្មុគស្មាញនៃទិន្នន័យពិភពពិត (Real-world data) ឡើយ។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលដែលហ្វឹកហាត់លើហ្គេមទៅអនុវត្តក្នុងស្ថានភាពជាក់ស្តែង (ឧទាហរណ៍៖ ចរាចរណ៍) តម្រូវឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែម និងការប្រុងប្រយ័ត្នខ្ពស់ចំពោះ Domain Shift។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាសាកល្បងលើហ្គេមក៏ពិតមែន ប៉ុន្តែគំនិតនៃ 'ឧបករណ៍ត្រួតពិនិត្យបឋមប្រកបដោយសុវត្ថិភាព' (Safe Pre-controller) គឺមានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍ AI នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យដឹកជញ្ជូន និងចរាចរណ៍នៅរាជធានីភ្នំពេញ:</strong> អាចយកគោលការណ៍កាត់បន្ថយការបុកទង្គិចនេះទៅស្រាវជ្រាវលើប្រព័ន្ធជំនួយការបើកបរ (ADAS) ឬរថយន្តស្វ័យប្រវត្តិ ដើម្បីរុករកដោយសុវត្ថិភាពក្នុងស្ថានភាពចរាចរណ៍ដ៏ចង្អៀត និងស្មុគស្មាញនៅទីក្រុងភ្នំពេញ។</li>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> អាចប្រើប្រាស់យន្តការសុវត្ថិភាពនេះសម្រាប់គ្រប់គ្រងមនុស្សយន្តកសិកម្ម (Agricultural Drones/Robots) ឱ្យធ្វើការបាញ់ថ្នាំ ឬប្រមូលផលដោយស្វ័យប្រវត្តិ ដោយចៀសវាងការបំផ្លាញដំណាំ ឬបង្កគ្រោះថ្នាក់ដល់កសិករ។</li>
+            
+            <li><strong>ការគ្រប់គ្រងថាមពល (Energy Grid Management):</strong> អាចប្រើដើម្បីបង្កើនប្រសិទ្ធភាពនៃការចែកចាយអគ្គិសនី (អគ្គិសនីកម្ពុជា - EDC) ដោយធានាបាននូវការវាយតម្លៃហានិភ័យមុននឹងធ្វើការសម្រេចចិត្តបែងចែកថាមពល ដើម្បីទប់ស្កាត់ការដាច់ភ្លើងដោយសារ Overload។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក វិធីសាស្ត្រនេះផ្តល់នូវមូលដ្ឋានគ្រឹះដ៏រឹងមាំមួយសម្រាប់ការស្រាវជ្រាវ AI ដែលមិនត្រឹមតែផ្តោតលើលទ្ធផល តែថែមទាំងធានាសុវត្ថិភាព ដែលជាតម្រូវការចាំបាច់សម្រាប់ការដាក់ពង្រាយបច្ចេកវិទ្យាក្នុងសង្គមជាក់ស្តែង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Sequence Modeling ក្នុង RL:</strong> និស្សិតគប្បីចាប់ផ្តើមដោយការយល់ដឹងអំពី <span class='en'>Decision Transformer</span> និងរបៀបដែលការរៀនពង្រឹង (RL) អាចប្រែក្លាយទៅជាបញ្ហា <span class='en'>Sequence Modeling</span> ដោយប្រើប្រាស់ <span class='en'>State-Action-Reward Triplets</span>។</li>
+            
+            <li><strong>រៀបចំបរិស្ថានសាកល្បង និងទិន្នន័យ (Environment & Data Setup):</strong> ដំឡើង <span class='en'>Arcade Learning Environment (ALE)</span> ឬ <span class='en'>OpenAI Gym</span> និងទាញយកទិន្នន័យ <span class='en'>DQN Replay Dataset</span> (ប្រហែល ១% នៃទិន្នន័យសរុប) សម្រាប់ការហ្វឹកហាត់ <span class='en'>Offline RL</span>។</li>
+            
+            <li><strong>អនុវត្តស្ថាបត្យកម្ម StARformer ដំបូង (Baseline Implementation):</strong> សរសេរកូដបង្កើតម៉ូដែល <span class='en'>StARformer</span> ដែលមាន <span class='en'>Step Transformer</span> និង <span class='en'>Sequence Transformer</span> ដោយប្រើប្រាស់ <span class='en'>PyTorch</span> ដើម្បីធ្វើការទស្សន៍ទាយសកម្មភាព (Action prediction)។</li>
+            
+            <li><strong>ដាក់បញ្ចូលយន្តការទម្ងន់សុវត្ថិភាព (Integrate Safety Weight):</strong> អនុវត្តវិធីសាស្ត្រដ៏ល្អបំផុតពីឯកសារស្រាវជ្រាវនេះ ដោយកំណត់ <span class='en'>Safety Weight</span> គុណជាមួយនឹងរង្វាន់ (Reward) នៅក្នុង <span class='en'>Token</span> នីមួយៗ ដើម្បីរារាំងម៉ូដែលមិនឱ្យជ្រើសរើសសកម្មភាពដែលមានហានិភ័យ។</li>
+            
+            <li><strong>ពង្រីកការស្រាវជ្រាវទៅកាន់បញ្ហាជាក់ស្តែង (Scale to Real-world Use Case):</strong> បន្ទាប់ពីជោគជ័យលើហ្គេម Atari ត្រូវសាកល្បងផ្លាស់ប្តូរបរិស្ថានទៅជា <span class='en'>Traffic Simulator (ដូចជា SUMO ឬ CARLA)</span> ដើម្បីដោះស្រាយបញ្ហាសុវត្ថិភាពចរាចរណ៍ ដែលជាប្រធានបទដ៏មានប្រយោជន៍សម្រាប់កម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Reinforcement Learning (RL)</span></td>
+                <td>ជាផ្នែកមួយនៃបញ្ញាសិប្បនិម្មិត (AI) ដែលភ្នាក់ងារ (Agent) រៀនធ្វើការសម្រេចចិត្តតាមរយៈការសាកល្បងខុសនិងត្រូវ នៅក្នុងបរិស្ថានណាមួយ ដើម្បីស្វែងរកយុទ្ធសាស្ត្រដែលទទួលបានរង្វាន់ ឬលទ្ធផលល្អបំផុតក្នុងរយៈពេលវែង។</td>
+                <td>ដូចជាការបង្វឹកសត្វសុនខឱ្យចេះធ្វើតាមបញ្ជា ដោយផ្តល់ចំណីនៅពេលវាធ្វើត្រូវ និងមិនផ្តល់ឱ្យនៅពេលវាធ្វើខុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pre-controller</span></td>
+                <td>ជាយន្តការត្រួតពិនិត្យសុវត្ថិភាពដែលដំណើរការមុនពេលភ្នាក់ងារ AI អនុវត្តសកម្មភាពណាមួយ។ វាដើរតួជាអ្នកច្រោះ (Filter) ដើម្បីទប់ស្កាត់ កែប្រែ ឬបដិសេធសកម្មភាពណាដែលត្រូវបានវាយតម្លៃថាអាចបង្កគ្រោះថ្នាក់ដល់ប្រព័ន្ធ ឬបរិស្ថាន។</td>
+                <td>ដូចជាប្រព័ន្ធហ្វ្រាំងស្វ័យប្រវត្តិនៅក្នុងរថយន្តទំនើប ដែលជួយចាប់ហ្វ្រាំងភ្លាមៗជាមុននៅពេលដឹងថានឹងអាចមានការបុកទង្គិច ទោះបីជាអ្នកបើកបរកំពុងជាន់ហ្គែរក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transformer</span></td>
+                <td>ជាស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដ៏មានឥទ្ធិពលដែលពូកែខាងចាប់យកទំនាក់ទំនងនៃទិន្នន័យដែលកើតឡើងជាបន្តបន្ទាប់ (Sequential data) ដោយប្រើប្រាស់យន្តការផ្តោតការយកចិត្តទុកដាក់ (Attention mechanism) លើផ្នែកសំខាន់ៗនៃទិន្នន័យក្នុងពេលតែមួយ។</td>
+                <td>ដូចជាមនុស្សកំពុងអានសៀវភៅ ដែលខួរក្បាលចេះផ្តោតការយកចិត្តទុកដាក់តែទៅលើពាក្យគន្លឹះសំខាន់ៗក្នុងប្រយោគ ដើម្បីយល់ន័យទាំងមូលបានយ៉ាងរហ័ស ដោយមិនបាច់អានមួយពាក្យម្តងៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">State-Action-Reward</span></td>
+                <td>ជាការចងក្រងទិន្នន័យជាក្រុមដែលមានធាតុបីរួមមាន៖ ស្ថានភាពបច្ចុប្បន្ននៃបរិស្ថាន (State) សកម្មភាពដែលភ្នាក់ងារបានជ្រើសរើស (Action) និងរង្វាន់ដែលទទួលបានត្រឡប់មកវិញ (Reward) ដែលជួយឱ្យម៉ូដែល AI ងាយស្រួលរៀនពីទំនាក់ទំនងនៃហេតុនិងផល។</td>
+                <td>ដូចជាកំណត់ហេតុប្រចាំថ្ងៃ ដែលកត់ត្រាថា "ថ្ងៃនេះអាកាសធាតុក្តៅ (State) ខ្ញុំញ៉ាំការ៉េម (Action) ធ្វើឱ្យខ្ញុំមានអារម្មណ៍ស្រស់ស្រាយ (Reward)"។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline Reinforcement Learning</span></td>
+                <td>ជាវិធីសាស្ត្របណ្តុះបណ្តាលភ្នាក់ងារ AI ដោយប្រើប្រាស់តែសំណុំទិន្នន័យចាស់ៗដែលបានប្រមូលរួចជាស្រេច (Fixed dataset) ដោយមិនតម្រូវឱ្យ AI នោះទៅធ្វើអន្តរកម្មសាកល្បងថ្មីៗផ្ទាល់ជាមួយបរិស្ថានអំឡុងពេលរៀននោះទេ។</td>
+                <td>ដូចជាការរៀនទាត់បាល់តាមរយៈការមើលវីដេអូកីឡាករល្បីៗប្រកួតកន្លងមកក្នុង YouTube ជាជាងការចុះទៅហាត់ទាត់ផ្ទាល់នៅលើទីលាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov Decision Process (MDP)</span></td>
+                <td>ជាក្របខ័ណ្ឌគណិតវិទ្យាដែលគេប្រើសម្រាប់កំណត់គំរូនៃដំណើរការសម្រេចចិត្ត ដែលច្បាប់គោលរបស់វាគឺស្ថានភាពបន្ទាប់ (Next state) គឺពឹងផ្អែកតែលើស្ថានភាពបច្ចុប្បន្ន និងសកម្មភាពបច្ចុប្បន្នប៉ុណ្ណោះ មិនពឹងផ្អែកលើប្រវត្តិសកម្មភាពកន្លងមកឡើយ។</td>
+                <td>ដូចជាការលេងកូនអុក ដែលការដើរជំហានបន្ទាប់គឺគិតតែពីទីតាំងកូនអុកនៅលើក្តារបច្ចុប្បន្ន មិនមែនគិតពីប្រវត្តិដែលដើរតាំងពីចាប់ផ្តើមហ្គេមនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Episodic Reward</span></td>
+                <td>ជារង្វាន់សរុប (Cumulative reward) ទាំងអស់ដែលភ្នាក់ងារ AI ប្រមូលបាននៅក្នុងវគ្គនៃការសាកល្បង ឬការលេងហ្គេមមួយជុំពេញ តាំងពីចំណុចចាប់ផ្តើមរហូតដល់បញ្ចប់ ឬចាញ់។ វាជារង្វាស់គោលសម្រាប់វាស់ស្ទង់ភាពជោគជ័យរបស់ម៉ូដែល។</td>
+                <td>ដូចជាពិន្ទុសរុបចុងក្រោយដែលសិស្សម្នាក់ៗទទួលបាននៅពេលបញ្ចប់ការប្រឡងឆមាស។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=offline+reinforcement+learning+sequence+modeling" target="_blank" rel="noopener"><span class="en">offline reinforcement learning sequence modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=decision+transformer+and+safe+reinforcement+learning" target="_blank" rel="noopener"><span class="en">decision transformer and safe reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=shielded+reinforcement+learning+architectures" target="_blank" rel="noopener"><span class="en">shielded reinforcement learning architectures</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=safety+constraints+in+high-dimensional+RL+environments" target="_blank" rel="noopener"><span class="en">safety constraints in high-dimensional RL environments</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

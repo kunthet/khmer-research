@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វិធីសាស្ត្ររៀនដោយម៉ាស៊ីនសម្រាប់ការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហាប្រឈមក្នុងការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ (Arabic Handwritten Text) ដោយសារតែលក្ខណៈស្មុគស្មាញ និងទម្រង់សរសេរតភ្ជាប់គ្នាយ៉ាងពិប...">
+    
+    <meta name="keywords" content="Optical Character Recognition (OCR), Machine Learning, Arabic Handwriting, ResNet, BiLSTM, Connectionist Temporal Classification (CTC), ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/machine-learning-arabic-handwriting-recognition-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/machine-learning-arabic-handwriting-recognition-2024.html">
+    <meta property="og:title" content="វិធីសាស្ត្ររៀនដោយម៉ាស៊ីនសម្រាប់ការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហាប្រឈមក្នុងការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ (Arabic Handwritten Text) ដោយសារតែលក្ខណៈស្មុគស្មាញ និងទម្រង់សរសេរតភ្ជាប់គ្នាយ៉ាងពិបាកអាននៃអក្សរអារ៉ាប់។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024, Applied Sciences (MDPI)">
+    
+    <meta property="article:tag" content="Optical Character Recognition (OCR)">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Arabic Handwriting">
+    
+    <meta property="article:tag" content="ResNet">
+    
+    <meta property="article:tag" content="BiLSTM">
+    
+    <meta property="article:tag" content="Connectionist Temporal Classification (CTC)">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វិធីសាស្ត្ររៀនដោយម៉ាស៊ីនសម្រាប់ការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ">
+    <meta name="twitter:description" content="ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហាប្រឈមក្នុងការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ (Arabic Handwritten Text) ដោយសារតែលក្ខណៈស្មុគស្មាញ និងទម្រង់សរសេរតភ្ជាប់គ្នាយ៉ាងពិបាកអាននៃអក្សរអារ៉ាប់។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u1780\u17d2\u179f\u179a\u17a2\u17b6\u179a\u17c9\u17b6\u1794\u17cb\u179f\u179a\u179f\u17c1\u179a\u178a\u17c4\u1799\u178a\u17c3",
+      "name": "Machine Learning Approach for Arabic Handwritten Recognition",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u1780\u17d2\u179f\u179a\u17a2\u17b6\u179a\u17c9\u17b6\u1794\u17cb\u179f\u179a\u179f\u17c1\u179a\u178a\u17c4\u1799\u178a\u17c3 (Arabic Handwritten Text) \u178a\u17c4\u1799\u179f\u17b6\u179a\u178f\u17c2\u179b\u1780\u17d2\u1781\u178e\u17c8\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789 \u1793\u17b7\u1784\u1791\u1798\u17d2\u179a\u1784\u17cb\u179f\u179a\u179f\u17c1\u179a\u178f\u1797\u17d2\u1787\u17b6\u1794\u17cb\u1782\u17d2\u1793\u17b6\u1799\u17c9\u17b6\u1784\u1796\u17b7\u1794\u17b6\u1780\u17a2\u17b6\u1793\u1793\u17c3\u17a2\u1780\u17d2\u179f\u179a\u17a2\u17b6\u179a\u17c9\u17b6\u1794\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/machine-learning-arabic-handwriting-recognition-2024.html",
+      "author": [{"@type": "Person", "name": "A. M. Mutawa (Kuwait University / University of Hamburg)"},{"@type": "Person", "name": "Mohammad Y. Allaho (Kuwait University)"},{"@type": "Person", "name": "Monirah Al-Hajeri (Kuwait University)"}],
+      "datePublished": "2024, Applied Sciences (MDPI)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Machine Learning Approach for Arabic Handwritten Recognition",
+        "url": "https://doi.org/10.3390/app14199020"
+      },
+      "keywords": ["Optical Character Recognition (OCR)", "Machine Learning", "Arabic Handwriting", "ResNet", "BiLSTM", "Connectionist Temporal Classification (CTC)"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u1780\u17d2\u179f\u179a\u17a2\u17b6\u179a\u17c9\u17b6\u1794\u17cb\u179f\u179a\u179f\u17c1\u179a\u178a\u17c4\u1799\u178a\u17c3",
+          "item": "https://khmerresearch.com/papers/technology/machine-learning-arabic-handwriting-recognition-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>វិធីសាស្ត្ររៀនដោយម៉ាស៊ីនសម្រាប់ការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Machine Learning Approach for Arabic Handwritten Recognition<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/app14199020" target="_blank">doi.org/10.3390/app14199020</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វិធីសាស្ត្ររៀនដោយម៉ាស៊ីនសម្រាប់ការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Machine Learning Approach for Arabic Handwritten Recognition</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> A. M. Mutawa (Kuwait University / University of Hamburg), Mohammad Y. Allaho (Kuwait University), Monirah Al-Hajeri (Kuwait University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Applied Sciences (MDPI)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហាប្រឈមក្នុងការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ (Arabic Handwritten Text) ដោយសារតែលក្ខណៈស្មុគស្មាញ និងទម្រង់សរសេរតភ្ជាប់គ្នាយ៉ាងពិបាកអាននៃអក្សរអារ៉ាប់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវគំរូរៀនស៊ីជម្រៅ (Deep Learning Model) ថ្មីមួយដែលរួមបញ្ចូលគ្នានូវបណ្តាញសរសៃប្រសាទ (Neural Networks) ចំនួនពីរ រួមជាមួយនឹងគំរូភាសាសម្រាប់ការកែសម្រួលទិន្នន័យ។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសពីរូបភាពអត្ថបទដោយប្រើប្រាស់គំរូ ResNet (Feature Extraction using ResNet)</li>
+            
+            <li>ការធ្វើគំរូលំដាប់ដោយប្រើប្រាស់បណ្តាញ BiLSTM និង CTC (Sequence Modeling using BiLSTM and CTC)</li>
+            
+            <li>ការកែសម្រួលក្រោយដំណើរការដោយប្រើប្រាស់គំរូភាសា 3-gram (Post-processing using 3-gram Language Model)</li>
+            
+            <li>ការវាយតម្លៃប្រព័ន្ធដោយប្រើប្រាស់សំណុំទិន្នន័យស្តង់ដារ KHATT និង AHTID/MW (Evaluation using KHATT and AHTID/MW datasets)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធដែលបានស្នើឡើងនេះសម្រេចបានអត្រាកំហុសតួអក្សរ (CER) ១៣.២% និងអត្រាកំហុសពាក្យ (WER) ២៧.៣១% នៅលើសំណុំទិន្នន័យ KHATT។</li>
+            
+            <li>សម្រាប់សំណុំទិន្នន័យ AHTID/MW គំរូនេះទទួលបានលទ្ធផលកាន់តែប្រសើរ ដោយមានកម្រិត CER ត្រឹមតែ ៦.៦% និង WER ១៧.៤២%។</li>
+            
+            <li>ការសិក្សាបង្ហាញថាការរួមបញ្ចូលគ្នារវាងការទាញយកលក្ខណៈពិសេសដោយ ResNet និងការធ្វើគំរូលំដាប់ដោយ BiLSTM មានប្រសិទ្ធភាពខ្ពស់ក្នុងការបង្កើនភាពត្រឹមត្រូវសម្រាប់ការសម្គាល់អក្សរអារ៉ាប់សរសេរដោយដៃ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Proposed Model (ResNet-BiLSTM-CTC)</span></strong><br>គំរូដែលបានស្នើឡើងរួមបញ្ចូល ResNet ជាមួយ BiLSTM និង CTC</td>
+                <td>មានភាពសុក្រឹតខ្ពស់ក្នុងការសម្គាល់អក្សរតភ្ជាប់គ្នា និងមានសមត្ថភាពកែតម្រូវកំហុសបានល្អតាមរយៈការប្រើប្រាស់គំរូភាសា (Language Model)។</td>
+                <td>ទាមទារថាមពលកុំព្យូទ័រ (GPU) ខ្ពស់សម្រាប់ការហ្វឹកហាត់ ដោយសារតែភាពស្មុគស្មាញនៃទំហំបណ្តាញសរសៃប្រសាទកម្រិតជ្រៅ។</td>
+                <td>សម្រេចបានអត្រាកំហុសពាក្យ (WER) ២៧.៣១% និងអត្រាកំហុសតួអក្សរ (CER) ១៣.២% លើសំណុំទិន្នន័យ KHATT។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">BiLSTM (Jemni et al.)</span></strong><br>គំរូ BiLSTM ស្នើដោយ Jemni និងសហការី (២០១៨)</td>
+                <td>អាចចាប់យកព័ត៌មានបរិបទ (Contextual Information) បានល្អពីទិសដៅទាំងពីរនៃអត្ថបទ។</td>
+                <td>មានការកំណត់លើទំហំវាក្យសព្ទ (Limited vocabulary) បើប្រៀបធៀបទៅនឹងវិធីសាស្ត្រថ្មីៗ។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ២៩.១៣% និងអត្រាកំហុសតួអក្សរ (CER) ១៦.២៧% លើសំណុំទិន្នន័យ KHATT។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Transformer with attention (Momeni & BabaAli)</span></strong><br>គំរូ Transformer ដែលមានយន្តការ Attention</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការរៀនពីទំនាក់ទំនងរវាងតួអក្សរក្នុងប្រយោគវែងៗ។</td>
+                <td>ជួបប្រទះបញ្ហាទាក់ទងនឹងសមត្ថភាពទូទៅ (Generalizability) នៅពេលជួបប្រទះទិន្នន័យថ្មីដែលមិនធ្លាប់មានក្នុងសំណុំហ្វឹកហាត់។</td>
+                <td>អត្រាកំហុសតួអក្សរ (CER) ១៨.៤៥% លើសំណុំទិន្នន័យ KHATT។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រ និងផ្នែករឹងកម្រិតខ្ពស់សម្រាប់ការដំណើរការគំរូរៀនស៊ីជម្រៅ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនមេលើពពក (Cloud Server) របស់ Amazon Web Services (AWS) ជាមួយការប្រើប្រាស់ 16GB NVIDIA V100 GPU សម្រាប់ការហ្វឹកហាត់។</li>
+        
+        <li><strong>Software:</strong> ភាសាប្រೋಗ្រាម Python 3, បណ្ណាល័យម៉ាស៊ីនរៀន PyTorch, និងឧបករណ៍ KenLM សម្រាប់បង្កើតគំរូភាសា (Language Model)។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យ KHATT (អ្នកសរសេរ ១០០០នាក់) និង AHTID/MW (អ្នកសរសេរ ៥៣នាក់) ដែលជាទិន្នន័យអត្ថបទអារ៉ាប់សរសេរដោយដៃ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ KHATT និង AHTID/MW ដែលប្រមូលផ្តុំពីអ្នកសរសេរជនជាតិអារ៉ាប់រាប់ពាន់នាក់។ សម្រាប់ប្រទេសកម្ពុជា ការពឹងផ្អែកលើសំណុំទិន្នន័យភាសាដទៃគឺមិនអាចយកមកប្រើផ្ទាល់បានទេ ហេតុនេះយើងចាំបាច់ត្រូវបង្កើតសំណុំទិន្នន័យអក្សរខ្មែរសរសេរដោយដៃផ្ទាល់ខ្លួនដែលមានលក្ខណៈចម្រុះ (គ្រប់វ័យ គ្រប់តំបន់) ដើម្បីធានាថាគំរូអាចស្គាល់ទម្រង់សរសេរដៃខ្មែរពិតប្រាកដ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្ររួមបញ្ចូលគ្នា (ResNet ជាមួយ BiLSTM ព្រមទាំង CTC) នេះគឺស័ក្តិសមយ៉ាងខ្លាំងសម្រាប់ការអភិវឌ្ឍប្រព័ន្ធសម្គាល់អក្សរខ្មែរសរសេរដោយដៃ ព្រោះអក្សរខ្មែរមានទម្រង់ស្មុគស្មាញ តភ្ជាប់គ្នា និងមានស្រៈលើក្រោមស្រដៀងនឹងអក្សរអារ៉ាប់។</p>
+        
+        <ul>
+            
+            <li><strong>ប័ណ្ណសារដ្ឋានជាតិកម្ពុជា (National Archives of Cambodia):</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យានេះដើម្បីធ្វើឌីជីថលូបនីយកម្ម (Digitization) ឯកសារប្រវត្តិសាស្ត្រ សំបុត្រ ឬកំណត់ត្រាសរសេរដោយដៃចាស់ៗឱ្យក្លាយជាអត្ថបទកុំព្យូទ័រ។</li>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (Banking and Finance Sector):</strong> ជួយសម្រួលដល់ការអាន និងផ្ទៀងផ្ទាត់មូលប្បទានប័ត្រ (Cheques) និងទម្រង់បែបបទបំពេញដោយដៃដោយស្វ័យប្រវត្តិ កាត់បន្ថយកំហុសនិងពេលវេលាប្រតិបត្តិការ។</li>
+            
+            <li><strong>វិស័យអប់រំ និងរដ្ឋបាលសាធារណៈ (Education and Public Administration):</strong> អាចជួយក្នុងការទាញយកនិងបញ្ចូលទិន្នន័យពីទម្រង់បែបបទក្រដាស (ឧទាហរណ៍ ជំរឿន ឬសំបុត្រអត្រានុកូលដ្ឋាន) ទៅក្នុងប្រព័ន្ធទិន្នន័យជាតិយ៉ាងឆាប់រហ័ស។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអនុវត្តស្ថាបត្យកម្មរៀនស៊ីជម្រៅនេះអាចផ្លាស់ប្តូររបៀបដែលស្ថាប័នរដ្ឋនិងឯកជននៅកម្ពុជាគ្រប់គ្រងឯកសារ ដោយបំប្លែងក្រដាសស្នាមឱ្យទៅជាទិន្នន័យឌីជីថលប្រកបដោយប្រសិទ្ធភាព និងចំណាយពេលតិច។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃម៉ូដែល:</strong> សិក្សាស្វែងយល់ពីស្ថាបត្យកម្ម <span class='en'>Convolutional Neural Networks (CNN)</span> ដូចជា <span class='en'>ResNet</span> សម្រាប់ការទាញយកលក្ខណៈពិសេសពីរូបភាព និង <span class='en'>BiLSTM</span> រួមជាមួយ <span class='en'>CTC Loss</span> សម្រាប់ការសម្គាល់លំដាប់តួអក្សរជាបន្តបន្ទាប់។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យអក្សរខ្មែរ:</strong> បង្កើតឬស្វែងរកសំណុំទិន្នន័យអក្សរខ្មែរសរសេរដោយដៃ បន្ទាប់មកអនុវត្តការកាត់ផ្ទៃសចេញ (Cropping), ការលុបសំឡេងរំខានពីរូបភាព (Noise Filtering), និងការធ្វើឱ្យរូបភាពមានស្តង់ដាររួមមួយដោយប្រើបច្ចេកទេស <span class='en'>Image Normalization</span>។</li>
+            
+            <li><strong>រៀបចំបរិស្ថានកូដ និងធនធាន:</strong> ដំឡើងភាសា <span class='en'>Python</span> និងបណ្ណាល័យ <span class='en'>PyTorch</span>។ ប្រើប្រាស់សេវាកម្ម <span class='en'>Cloud GPU</span> ដូចជា <span class='en'>AWS</span> ឬ <span class='en'>Google Colab Pro</span> ដើម្បីទទួលបានថាមពលគណនាគ្រប់គ្រាន់សម្រាប់ការហ្វឹកហាត់ម៉ូដែលប្រកបដោយភាពរលូន។</li>
+            
+            <li><strong>បង្កើត និងហ្វឹកហាត់គំរូ:</strong> សរសេរកូដផ្គុំ <span class='en'>ResNet-32</span> ភ្ជាប់ជាមួយ <span class='en'>BiLSTM (512 hidden units)</span> ចំនួនបីស្រទាប់។ ប្រើប្រាស់ <span class='en'>Adadelta Optimizer</span> និងអនុវត្តបច្ចេកទេស <span class='en'>Dropout (0.2)</span> ដើម្បីការពារបញ្ហា <span class='en'>Overfitting</span> កំឡុងពេលហ្វឹកហាត់គំរូនៅលើទិន្នន័យ។</li>
+            
+            <li><strong>អនុវត្តគំរូភាសាសម្រាប់ការកែតម្រូវក្រោយពេលព្យាករណ៍:</strong> ប្រើប្រាស់ឧបករណ៍ <span class='en'>KenLM Toolkit</span> ដើម្បីហ្វឹកហាត់ <span class='en'>3-gram Language Model</span> លើអត្ថបទភាសាខ្មែរទូទៅ ដែលវានឹងជួយកែតម្រូវកំហុសនៃការទាយពាក្យដោយម៉ាស៊ីន (ពីមុខងារ CTC) ឱ្យកាន់តែត្រឹមត្រូវតាមវេយ្យាករណ៍និងអក្ខរាវិរុទ្ធ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Optical Character Recognition (OCR)</span></td>
+                <td>បច្ចេកវិទ្យាដែលប្រើសម្រាប់វិភាគរូបភាពនៃអត្ថបទ (ដូចជាក្រដាសសៀវភៅស្កេន ឬអក្សរសរសេរដៃ) ហើយបំប្លែងវាទៅជាទិន្នន័យអត្ថបទឌីជីថល ដែលកុំព្យូទ័រអាចយល់ កែសម្រួល និងស្វែងរកបានយ៉ាងងាយស្រួល។</td>
+                <td>ដូចជាការយកភ្នែកមនុស្សទៅអានអក្សរលើក្រដាស រួចវាយបញ្ចូលទៅក្នុងកុំព្យូទ័រដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Residual Network (ResNet)</span></td>
+                <td>ជាប្រភេទស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទ (CNN) កម្រិតជ្រៅ ដែលប្រើប្រាស់បច្ចេកទេស 'ផ្លូវកាត់' (Identity Shortcut Connection) ដើម្បីបញ្ជូនព័ត៌មានរំលងស្រទាប់មួយចំនួន។ វាជួយឱ្យម៉ូដែលអាចរៀនទាញយកលក្ខណៈពិសេសពីរូបភាពបានកាន់តែល្អ និងការពារមិនឱ្យដំណើរការហ្វឹកហាត់គាំងនៅពេលបណ្តាញមានស្រទាប់ច្រើនពេក។</td>
+                <td>ដូចជាការសាងសង់ស្ពានអាកាសរំលងផ្លូវខ្វែងកាត់គ្នា ដើម្បីឱ្យរថយន្ត(ព័ត៌មាន)អាចធ្វើដំណើរទៅដល់គោលដៅបានលឿន និងមិនស្ទះចរាចរណ៍នៅកណ្តាលទីក្រុង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bidirectional Long Short-Term Memory (BiLSTM)</span></td>
+                <td>ជាម៉ូដែលបណ្តាញសរសៃប្រសាទដែលអាចចងចាំព័ត៌មានតាមលំដាប់លំដោយ។ វាដំណើរការអត្ថបទពីទិសដៅទាំងពីរ (ពីអតីតកាលទៅអនាគតកាល និងពីអនាគតកាលមកអតីតកាល) ដើម្បីស្វែងយល់ពីបរិបទនៃតួអក្សរនីមួយៗបានយ៉ាងច្បាស់លាស់ ដោយផ្អែកលើតួអក្សរមុននិងតួអក្សរបន្ទាប់របស់វា។</td>
+                <td>ដូចជាការអានសៀវភៅមួយវគ្គដោយមើលទាំងប្រយោគខាងដើម និងប្រយោគខាងចុង ដើម្បីទាយដឹងថាពាក្យដែលពិបាកអាននៅកណ្តាលនោះគឺជាពាក្យអ្វីពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Connectionist Temporal Classification (CTC)</span></td>
+                <td>ជាមុខងារបណ្តាញសរសៃប្រសាទមួយដែលប្រើប្រាស់ដើម្បីទស្សន៍ទាយលំដាប់តួអក្សរ ដោយមិនចាំបាច់ដឹងមុនថាតួអក្សរនីមួយៗស្ថិតនៅទីតាំងពិតប្រាកដណាមួយក្នុងរូបភាពឡើយ។ វាមានប្រយោជន៍ខ្លាំងសម្រាប់ការសម្គាល់អក្សរតភ្ជាប់គ្នាដោយមិនបាច់កាត់ពាក្យជាចម្រៀកៗ (Segmentation-free)។</td>
+                <td>ដូចជាការស្តាប់អ្នកចម្រៀងច្រៀងអូសបន្លាយសម្លេងយូរឬលឿន ប៉ុន្តែយើងនៅតែអាចកត់ត្រាពាក្យពេចន៍បានត្រឹមត្រូវ ដោយមិនខ្វល់ថាសម្លេងនោះវែងឬខ្លីប៉ុណ្ណានោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Language Model (LM)</span></td>
+                <td>ជាគំរូស្ថិតិដែលគណនាប្រូបាប៊ីលីតេ (ឱកាសកើតឡើង) នៃលំដាប់ពាក្យនៅក្នុងភាសាមួយ។ នៅក្នុងប្រព័ន្ធនេះ វាត្រូវបានប្រើនៅដំណាក់កាលចុងក្រោយដើម្បីកែតម្រូវកំហុសរបស់ម៉ាស៊ីន ដោយជ្រើសរើសពាក្យណាដែលទំនងជាត្រឹមត្រូវបំផុតតាមវេយ្យាករណ៍និងទម្លាប់ប្រើប្រាស់ទូទៅ។</td>
+                <td>ដូចជាមុខងារកែអក្សរស្វ័យប្រវត្តិ (Auto-correct) លើទូរស័ព្ទដៃ ដែលជួយកែពាក្យខុសទៅជាពាក្យត្រូវដោយស្មានតាមទម្លាប់នៃការសរសេរប្រចាំថ្ងៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Error Rate (WER)</span></td>
+                <td>ជារង្វាស់សម្រាប់វាយតម្លៃកម្រិតនៃភាពត្រឹមត្រូវរបស់ប្រព័ន្ធសម្គាល់អត្ថបទ ដោយគណនាផ្អែកលើចំនួនពាក្យដែលប្រព័ន្ធទាយខុស (ដូចជាការជំនួសពាក្យខុស បាត់ពាក្យ ឬបន្ថែមពាក្យលើស) ធៀបនឹងចំនួនពាក្យសរុបពិតប្រាកដ។ អត្រាកាន់តែទាប មានន័យថាម៉ូដែលកាន់តែមានប្រសិទ្ធភាព។</td>
+                <td>ដូចជាការប្រឡងសរសេរតាមអាន បើសរសេរខុស១០ពាក្យក្នុងចំណោម១០០ពាក្យ នោះអត្រាកំហុស (WER) របស់អ្នកគឺ ១០%។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Erosion and Dilation</span></td>
+                <td>ជាបច្ចេកទេសផ្លាស់ប្តូរទម្រង់រូបភាព (Morphological operators) ដើម្បីលុបចំណុចរំខានចេញពីអត្ថបទ។ Erosion ធ្វើឱ្យទំហំតួអក្សររួញតូចដើម្បីលុបស្នាមអុចៗចោល រីឯ Dilation ធ្វើឱ្យតួអក្សររីកធំជាងមុនដើម្បីជួយតភ្ជាប់ខ្សែបន្ទាត់អក្សរដែលដាច់ៗឱ្យជាប់គ្នាវិញ។</td>
+                <td>ដូចជាការយកជ័រលុបមកលុបស្នាមប្រឡាក់តូចៗជុំវិញអក្សរ រួចយកប៊ិចមកគូសបន្ថែមលើស្នាមអក្សរដែលដាច់ៗដើម្បីឱ្យមើលទៅច្បាស់ល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vanishing/exploding gradient problem</span></td>
+                <td>ជាបញ្ហាបច្ចេកទេសដែលកើតឡើងពេលហ្វឹកហាត់បណ្តាញសរសៃប្រសាទសិប្បនិម្មិតដែលមានស្រទាប់ច្រើនជាន់ពេក ធ្វើឱ្យតម្លៃនៃការកែតម្រូវកំហុសមានទំហំតូចពេក រហូតដល់បាត់សូន្យ ឬធំពេក រហូតដល់ផ្ទុះ ដែលបណ្តាលឱ្យម៉ូដែលមិនអាចរៀនសូត្របន្តទៀតបាន។</td>
+                <td>ដូចជាការលេងខ្សឹបតគ្នាពីម្នាក់ទៅម្នាក់ក្នុងជួរដ៏វែងមួយ សារដើមអាចនឹងបាត់បង់ន័យទាំងស្រុង ឬប្រែប្រួលក្លាយជារឿងខុសស្រឡះពេលទៅដល់អ្នកចុងក្រោយគេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+architectures+for+cursive+handwritten+text+recognition" target="_blank" rel="noopener"><span class="en">deep learning architectures for cursive handwritten text recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=transformer+models+for+offline+optical+character+recognition" target="_blank" rel="noopener"><span class="en">transformer models for offline optical character recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=connectionist+temporal+classification+loss+function+in+sequence+recognition" target="_blank" rel="noopener"><span class="en">connectionist temporal classification loss function in sequence recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=data+augmentation+techniques+for+historical+document+digitization" target="_blank" rel="noopener"><span class="en">data augmentation techniques for historical document digitization</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

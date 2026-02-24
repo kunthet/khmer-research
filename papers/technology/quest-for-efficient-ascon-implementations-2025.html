@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការស្វែងរកការអនុវត្ត ASCON ប្រកបដោយប្រសិទ្ធភាព៖ ការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីយុទ្ធសាស្រ្តអនុវត្ត និងបញ្ហាប្រឈមនានា | KhmerResearch.com</title>
+    <meta name="description" content="កំណើនយ៉ាងឆាប់រហ័សនៃអ៊ីនធឺណិតនៃវត្ថុ (IoT) តម្រូវឱ្យមានក្បួនដោះស្រាយគ្រីបដែលសុវត្ថិភាពនិងសន្សំសំចៃធនធាន ដែលជំរុញឱ្យមានការជ្រើសរើសស្តង់ដារ ASCON ។ ទោះជាយ៉ាងណាក...">
+    
+    <meta name="keywords" content="ASCON, lightweight cryptography, hardware accelerators, side-channel attacks, masking schemes, IoT security, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/quest-for-efficient-ascon-implementations-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/quest-for-efficient-ascon-implementations-2025.html">
+    <meta property="og:title" content="ការស្វែងរកការអនុវត្ត ASCON ប្រកបដោយប្រសិទ្ធភាព៖ ការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីយុទ្ធសាស្រ្តអនុវត្ត និងបញ្ហាប្រឈមនានា | KhmerResearch.com">
+    <meta property="og:description" content="កំណើនយ៉ាងឆាប់រហ័សនៃអ៊ីនធឺណិតនៃវត្ថុ (IoT) តម្រូវឱ្យមានក្បួនដោះស្រាយគ្រីបដែលសុវត្ថិភាពនិងសន្សំសំចៃធនធាន ដែលជំរុញឱ្យមានការជ្រើសរើសស្តង់ដារ ASCON ។ ទោះជាយ៉ាងណាក៏ដោយ ការការពារការអនុវត្តផ្នែករឹង (Hardwa...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="Chips 2025">
+    
+    <meta property="article:tag" content="ASCON">
+    
+    <meta property="article:tag" content="lightweight cryptography">
+    
+    <meta property="article:tag" content="hardware accelerators">
+    
+    <meta property="article:tag" content="side-channel attacks">
+    
+    <meta property="article:tag" content="masking schemes">
+    
+    <meta property="article:tag" content="IoT security">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការស្វែងរកការអនុវត្ត ASCON ប្រកបដោយប្រសិទ្ធភាព៖ ការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីយុទ្ធសាស្រ្តអនុវត្ត និងបញ្ហាប្រឈមនានា">
+    <meta name="twitter:description" content="កំណើនយ៉ាងឆាប់រហ័សនៃអ៊ីនធឺណិតនៃវត្ថុ (IoT) តម្រូវឱ្យមានក្បួនដោះស្រាយគ្រីបដែលសុវត្ថិភាពនិងសន្សំសំចៃធនធាន ដែលជំរុញឱ្យមានការជ្រើសរើសស្តង់ដារ ASCON ។ ទោះជាយ៉ាងណាក៏ដោយ ការការពារការអនុវត្តផ្នែករឹង (Hardwa...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f ASCON \u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u17d6 \u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789\u1799\u17c9\u17b6\u1784\u1791\u17bc\u179b\u17c6\u1791\u17bc\u179b\u17b6\u1799\u17a2\u17c6\u1796\u17b8\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u179a\u17d2\u178f\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f \u1793\u17b7\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1793\u17b6\u1793\u17b6",
+      "name": "The Quest for Efficient ASCON Implementations: A Comprehensive Review of Implementation Strategies and Challenges",
+      "description": "\u1780\u17c6\u178e\u17be\u1793\u1799\u17c9\u17b6\u1784\u1786\u17b6\u1794\u17cb\u179a\u17a0\u17d0\u179f\u1793\u17c3\u17a2\u17ca\u17b8\u1793\u1792\u17ba\u178e\u17b7\u178f\u1793\u17c3\u179c\u178f\u17d2\u1790\u17bb (IoT) \u178f\u1798\u17d2\u179a\u17bc\u179c\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1782\u17d2\u179a\u17b8\u1794\u178a\u17c2\u179b\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796\u1793\u17b7\u1784\u179f\u1793\u17d2\u179f\u17c6\u179f\u17c6\u1785\u17c3\u1792\u1793\u1792\u17b6\u1793 \u178a\u17c2\u179b\u1787\u17c6\u179a\u17bb\u1789\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u179f\u17d2\u178f\u1784\u17cb\u178a\u17b6\u179a ASCON \u17d4 \u1791\u17c4\u17c7\u1787\u17b6\u1799\u17c9\u17b6\u1784\u178e\u17b6\u1780\u17cf\u178a\u17c4\u1799 \u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17b6\u179a\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1795\u17d2\u1793\u17c2\u1780\u179a\u17b9\u1784 (Hardware implementations) \u179a\u1794\u179f\u17cb\u179c\u17b6\u1796\u17b8\u1780\u17b6\u179a\u179c\u17b6\u1799\u1794\u17d2\u179a\u17a0\u17b6\u179a\u178f\u17b6\u1798\u1794\u178e\u17d2\u178f\u17b6\u1789\u1785\u17c6\u17a0\u17c0\u1784 (Side-channel attacks) \u179f\u17d2\u179a\u1794\u1796\u17c1\u179b\u179a\u1780\u17d2\u179f\u17b6\u1794\u17b6\u1793\u1793\u17bc\u179c\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1781\u17d2\u1796\u179f\u17cb\u1793\u17c5\u178f\u17c2\u1787\u17b6\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u178a\u17cf\u1792\u17c6\u1798\u17bd\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/quest-for-efficient-ascon-implementations-2025.html",
+      "author": [{"@type": "Person", "name": "Mattia Mirigaldi (Politecnico di Torino)"},{"@type": "Person", "name": "Valeria Piscopo (Politecnico di Torino)"},{"@type": "Person", "name": "Maurizio Martina (Politecnico di Torino)"},{"@type": "Person", "name": "Guido Masera (Politecnico di Torino)"}],
+      "datePublished": "Chips 2025",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "The Quest for Efficient ASCON Implementations: A Comprehensive Review of Implementation Strategies and Challenges",
+        "url": "https://doi.org/10.3390/chips4020015"
+      },
+      "keywords": ["ASCON", "lightweight cryptography", "hardware accelerators", "side-channel attacks", "masking schemes", "IoT security"],
+      "about": "Cybersecurity and Hardware Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f ASCON \u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u17d6 \u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789\u1799\u17c9\u17b6\u1784\u1791\u17bc\u179b\u17c6\u1791\u17bc\u179b\u17b6\u1799\u17a2\u17c6\u1796\u17b8\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u179a\u17d2\u178f\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f \u1793\u17b7\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1793\u17b6\u1793\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/quest-for-efficient-ascon-implementations-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការស្វែងរកការអនុវត្ត ASCON ប្រកបដោយប្រសិទ្ធភាព៖ ការពិនិត្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> The Quest for Efficient ASCON Implementations: A Comprehensive Review of Implementation Strategies and Challenges<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/chips4020015" target="_blank">doi.org/10.3390/chips4020015</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការស្វែងរកការអនុវត្ត ASCON ប្រកបដោយប្រសិទ្ធភាព៖ ការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីយុទ្ធសាស្រ្តអនុវត្ត និងបញ្ហាប្រឈមនានា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> The Quest for Efficient ASCON Implementations: A Comprehensive Review of Implementation Strategies and Challenges</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Mattia Mirigaldi (Politecnico di Torino), Valeria Piscopo (Politecnico di Torino), Maurizio Martina (Politecnico di Torino), Guido Masera (Politecnico di Torino)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> Chips 2025</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Cybersecurity and Hardware Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> កំណើនយ៉ាងឆាប់រហ័សនៃអ៊ីនធឺណិតនៃវត្ថុ (IoT) តម្រូវឱ្យមានក្បួនដោះស្រាយគ្រីបដែលសុវត្ថិភាពនិងសន្សំសំចៃធនធាន ដែលជំរុញឱ្យមានការជ្រើសរើសស្តង់ដារ ASCON ។ ទោះជាយ៉ាងណាក៏ដោយ ការការពារការអនុវត្តផ្នែករឹង (Hardware implementations) របស់វាពីការវាយប្រហារតាមបណ្តាញចំហៀង (Side-channel attacks) ស្របពេលរក្សាបាននូវប្រសិទ្ធភាពខ្ពស់នៅតែជាបញ្ហាប្រឈមដ៏ធំមួយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការពិនិត្យឡើងវិញនូវឯកសារស្រាវជ្រាវយ៉ាងទូលំទូលាយ ដោយប្រៀបធៀបស្ថាបត្យកម្មផ្នែករឹង ASCON ផ្សេងៗ និងវិភាគភាពងាយរងគ្រោះ ព្រមទាំងយន្តការការពាររបស់ពួកវា។
+        
+        <ul>
+            
+            <li>ការវាយតម្លៃឧបករណ៍បង្កើនល្បឿនផ្នែករឹង (Hardware Accelerators Evaluation): ការអនុវត្តតាមបែប Serialized, Unrolled, និង Round-based លើ FPGA និង ASIC ។</li>
+            
+            <li>ការវិភាគការវាយប្រហារតាមបណ្តាញចំហៀង (Side-Channel Attacks Analysis): ការប្រើប្រាស់ DPA, CPA, និងការវិភាគតាមបណ្តាញចំហៀងដោយរៀនស៊ីជម្រៅ (Deep Learning SCA ឬ DLSCA) ។</li>
+            
+            <li>ការវាយតម្លៃវិធានការការពារ (Countermeasure Assessment): ការប្រើប្រាស់បច្ចេកទេសបិទបាំង (Masking schemes) ដូចជា Threshold Implementation (TI) និង Domain-Oriented Masking (DOM) ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ស្ថាបត្យកម្មផ្អែកលើជុំ (Round-based architectures) ផ្តល់នូវតុល្យភាពល្អបំផុតរវាងទំហំផ្ទៃលំហប្រតិបត្តិការ (Area) និងទិន្នផល (Throughput) សម្រាប់ការអនុវត្តស្តង់ដារ ASCON លើឧបករណ៍ដែលមានធនធានកំណត់។</li>
+            
+            <li>ប្រព័ន្ធ ASCON ដែលគ្មានការការពារគឺងាយរងគ្រោះខ្លាំងចំពោះការវាយប្រហារតាមគំរូ (Template attacks) និង DLSCA ដោយតម្រូវឱ្យមានចន្លោះត្រឹមតែពី ១០ ទៅ ២៤,០០០ ដាន (Traces) ប៉ុណ្ណោះដើម្បីទាញយកសោសម្ងាត់ (Secret key) បានជោគជ័យ។</li>
+            
+            <li>វិធានការការពារដូចជាការបិទបាំង (Masking) បង្កើនបន្ទុកផ្នែករឹងបន្ថែមច្រើន (Overhead) ដែលបញ្ជាក់ពីតម្រូវការបន្ទាន់សម្រាប់ការស្រាវជ្រាវនាពេលអនាគតដើម្បីបង្កើតវិធីសាស្ត្រការពារដែលសន្សំសំចៃថាមពលនិងកាត់បន្ថយតម្រូវការចៃដន្យ (Randomness requirements) ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Unrolled Implementation</span></strong><br>ការអនុវត្តតាមបែបពន្លាត (Unrolled)</td>
+                <td>ផ្តល់នូវទិន្នផលបញ្ជូនទិន្នន័យ (Throughput) ខ្ពស់បំផុត និងអាចធ្វើការអ៊ិនគ្រីប/ឌីគ្រីបបានលឿនក្នុងមួយជុំនាឡិកា (Clock cycle)។</td>
+                <td>ប្រើប្រាស់ទំហំផ្ទៃលំហប្រតិបត្តិការផ្នែករឹង (Area) ធំខ្លាំង និងស៊ីថាមពលច្រើន ដែលមិនស័ក្តិសមសម្រាប់ឧបករណ៍តូចៗ។</td>
+                <td>សម្រេចបានទិន្នផលរហូតដល់ ១៣ Gbps លើបន្ទះ Virtex-7 FPGA។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Serialized Implementation</span></strong><br>ការអនុវត្តជាស៊េរី (Serialized)</td>
+                <td>សន្សំសំចៃទំហំផ្ទៃលំហប្រតិបត្តិការផ្នែករឹងបានច្រើនបំផុត ដោយដំណើរការត្រឹមតែ ១ ប៊ីត ក្នុងមួយជុំនាឡិកា។</td>
+                <td>មានភាពយឺតយ៉ាវខ្លាំង (High latency) និងមានទិន្នផលបញ្ជូនទិន្នន័យទាបបំផុត។</td>
+                <td>ស៊ីទំហំត្រឹមតែ ១០៣០ LUTs តែមានទិន្នផលត្រឹម ៦.៥ Mbps ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Round-based Implementation</span></strong><br>ការអនុវត្តផ្អែកលើជុំ (Round-based)</td>
+                <td>ផ្តល់នូវតុល្យភាពល្អបំផុតរវាងការប្រើប្រាស់ទំហំ Area និងល្បឿនទិន្នផល (Throughput)។</td>
+                <td>នៅតែទាមទារអង្គចងចាំ (Registers) ដើម្បីរក្សាទុកទិន្នន័យបណ្តោះអាសន្ននៅចន្លោះជុំនីមួយៗ។</td>
+                <td>ជាជម្រើសដ៏ល្អបំផុតសម្រាប់ឧបករណ៍ IoT ដែលមានធនធានកំណត់ (Resource-constrained devices)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">First-order Masking (TI/DOM)</span></strong><br>បច្ចេកទេសបិទបាំងលំដាប់ទី១ (Threshold Implementation / Domain-Oriented Masking)</td>
+                <td>ការពារការវាយប្រហារតាមបណ្តាញចំហៀង (SCA) ដូចជា DPA និង CPA យ៉ាងមានប្រសិទ្ធភាព។</td>
+                <td>ធ្វើឱ្យទំហំផ្នែករឹងកើនឡើងពី ៣ ទៅ ៤ ដង និងតម្រូវឱ្យមានការបង្កើតលេខចៃដន្យ (Randomness overhead) ច្រើន។</td>
+                <td>ការពារបានពីការវាយប្រហារ DPA តែនៅតែអាចរងគ្រោះដោយសារការវាយប្រហារតាមរយៈ Deep Learning (DLSCA)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សាស្រាវជ្រាវ និងការអនុវត្តជាក់ស្តែងនៃ ASCON តម្រូវឱ្យមានការប្រើប្រាស់បន្ទះសៀគ្វី (FPGA/ASIC) ឧបករណ៍វាស់ស្ទង់សញ្ញាអគ្គិសនី និងកម្លាំងម៉ាស៊ីនកុំព្យូទ័រខ្លាំងសម្រាប់ដំណើរការ AI។
+    
+    <ul>
+        
+        <li><strong>Hardware (ឧបករណ៍ផ្នែករឹង):</strong> បន្ទះ FPGAs (ដូចជា Artix-7, Kintex-7, Spartan-7), បន្ទះវាយតម្លៃសន្តិសុខផ្នែករឹង (ChipWhisperer, SAKURA-G) និងឧបករណ៍ Oscilloscope (ឧ. PicoScope) សម្រាប់ប្រមូលទិន្នន័យរលកសញ្ញាអគ្គិសនី (Power traces)។</li>
+        
+        <li><strong>Software & Tools (កម្មវិធី និងឧបករណ៍):</strong> កម្មវិធីរចនាផ្នែករឹងដូចជា Xilinx Vivado, កម្មវិធីវាយតម្លៃថាមពល Synopsys PrimePower, និងកម្មវិធី SAT solver សម្រាប់បង្កើតលេខចៃដន្យ។</li>
+        
+        <li><strong>Machine Learning Frameworks:</strong> តម្រូវឱ្យប្រើប្រាស់ TensorFlow ឬ PyTorch សម្រាប់បណ្តុះបណ្តាលម៉ូដែល Deep Learning (CNN, MLP) ដើម្បីធ្វើការវាយប្រហារ DLSCA។</li>
+        
+        <li><strong>Expertise (ជំនាញពាក់ព័ន្ធ):</strong> ចំណេះដឹងស៊ីជម្រៅខាង Hardware Description Language (Verilog/VHDL), គ្រីបតូក្រាហ្វី (Cryptography) និងការវិភាគរលកសញ្ញាអគ្គិសនី (Side-Channel Analysis)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្អែកលើទិន្នន័យដែលប្រមូលបានពីបន្ទះសៀគ្វីស្ដង់ដារ (FPGA/ASIC) នៅក្នុងមន្ទីរពិសោធន៍ដែលមានការគ្រប់គ្រងបរិយាកាសត្រឹមត្រូវ តាមរយៈឧបករណ៍ដូចជា ChipWhisperer។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តជាក់ស្តែងអាចប្រឈមនឹងអាកាសធាតុក្តៅ ឬសំណើម ដែលអាចជះឥទ្ធិពលដល់លក្ខណៈនៃរលកសញ្ញាអគ្គិសនី (Power leakage) និងការប្រើប្រាស់ឧបករណ៍ដែលមានតម្លៃថោកជាងនេះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការអនុវត្តស្តង់ដារ ASCON នេះមានសារៈសំខាន់ខ្លាំងណាស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធអេកូឡូស៊ី IoT ប្រកបដោយសុវត្ថិភាពនៅក្នុងប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>កសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> ការប្រើប្រាស់ ASCON ដែលស៊ីថាមពលតិច (Low Power) សម្រាប់ឧបករណ៍សេនស័រវាស់សំណើមដី និងអាកាសធាតុនៅក្នុងខេត្តបាត់ដំបង ដែលប្រើប្រាស់ថាមពលថ្ម (Battery-powered)។</li>
+            
+            <li><strong>ទីក្រុងឆ្លាតវៃ (Smart City & Traffic Management):</strong> ការប្រើប្រាស់ ASCON តាមបែបពន្លាត (Unrolled ASCON) ដើម្បីធានាសុវត្ថិភាពទិន្នន័យវីដេអូពីកាមេរ៉ាសុវត្ថិភាព (CCTV) និងប្រព័ន្ធចរាចរណ៍ក្នុងរាជធានីភ្នំពេញ ដែលទាមទារល្បឿនបញ្ជូនទិន្នន័យ (Throughput) ខ្ពស់។</li>
+            
+            <li><strong>ឧបករណ៍វេជ្ជសាស្ត្រឆ្លាតវៃ (IoMT - Healthcare):</strong> ការប្រើប្រាស់ស្ថាបត្យកម្ម ASCON រួមជាមួយយន្តការការពារបិទបាំង (Masking) ដើម្បីការពារទិន្នន័យសុខភាពឯកជននៅលើឧបករណ៍ពាក់តាមខ្លួន (Wearables) របស់អ្នកជំងឺ។</li>
+            
+        </ul>
+        
+        
+        <p>ការជ្រើសរើសស្ថាបត្យកម្ម ASCON ឱ្យស្របតាមតម្រូវការជាក់ស្តែង (ទំហំ ល្បឿន ឬថាមពល) នឹងជួយឱ្យកម្ពុជាអាចកសាងហេដ្ឋារចនាសម្ព័ន្ធឌីជីថលប្រកបដោយសុវត្ថិភាពខ្ពស់ ជាមួយចំណាយលើផ្នែករឹងទាប។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ ASCON:</strong> ចាប់ផ្តើមសិក្សាពីក្បួនដោះស្រាយ ASCON និងយន្តការរបស់ Lightweight Cryptography តាមរយៈការសរសេរកូដជាភាសា <span class="en">C</span> ឬ <span class="en">Python</span> ដោយប្រើប្រាស់ <span class="en">NIST LWC Reference Implementations</span>។</li>
+            
+            <li><strong>អភិវឌ្ឍជំនាញរចនាផ្នែករឹង (Hardware Design):</strong> អនុវត្តការរចនាស្ថាបត្យកម្មផ្នែករឹង (Serial, Round-based, Unrolled) តាមរយៈការសរសេរកូដ <span class="en">Verilog/VHDL</span> និងប្រើប្រាស់កម្មវិធី <span class="en">Xilinx Vivado</span> ដើម្បីសាកល្បងលើបន្ទះ <span class="en">FPGA</span>។</li>
+            
+            <li><strong>អនុវត្តការវាយប្រហារតាមបណ្តាញចំហៀង (SCA):</strong> ប្រើប្រាស់ឧបករណ៍ <span class="en">ChipWhisperer</span> និងឯកសារបង្រៀនរបស់ <span class="en">NewAE</span> ដើម្បីរៀនពីរបៀបទាញយករលកសញ្ញាអគ្គិសនី និងធ្វើការវាយប្រហារបែប <span class="en">DPA (Differential Power Analysis)</span>។</li>
+            
+            <li><strong>ប្រើប្រាស់ AI សម្រាប់វិភាគសន្តិសុខ (DLSCA):</strong> ប្រមូលទិន្នន័យរលកសញ្ញាអគ្គិសនី រួចប្រើប្រាស់ <span class="en">TensorFlow</span> ឬ <span class="en">PyTorch</span> ដើម្បីបង្កើតម៉ូដែល <span class="en">CNN/MLP</span> សម្រាប់ធ្វើការវាយប្រហារបែប <span class="en">Deep Learning Side-Channel Attacks</span>។</li>
+            
+            <li><strong>រចនាវិធានការការពារ (Countermeasures):</strong> សិក្សា និងអនុវត្តយន្តការការពារផ្នែករឹងដូចជា <span class="en">Threshold Implementation (TI)</span> ឬ <span class="en">Domain-Oriented Masking (DOM)</span> ដើម្បីការពារសៀគ្វីប្រឆាំងនឹងការវាយប្រហារ រួចធ្វើការប្រៀបធៀបទំហំ Area ដែលកើនឡើង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Authenticated Encryption with Associated Data (AEAD)</span></td>
+                <td>គឺជាដំណើរការគ្រីបតូក្រាហ្វីដែលមិនត្រឹមតែធ្វើកូដនីយកម្ម (Encrypt) លាក់ការសម្ងាត់នៃទិន្នន័យប៉ុណ្ណោះទេ ថែមទាំងធានាភាពត្រឹមត្រូវនិងប្រភពដើមនៃទិន្នន័យ (Authenticate) ព្រមទាំងការពារទិន្នន័យភ្ជាប់ផ្សេងៗទៀតមិនឱ្យគេលួចកែប្រែបានឡើយ។</td>
+                <td>ដូចជាការផ្ញើលិខិតសម្ងាត់ដែលដាក់ក្នុងស្រោមសំបុត្របិទជិត ព្រមទាំងមានបោះត្រាប្រិមប្រិយ៍ដែលបញ្ជាក់ថាពិតជាមកពីអ្នកផ្ញើពិតប្រាកដមែន ដោយគ្មានអ្នកណាលួចបើកមើលឬដូរអត្ថន័យឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Side-Channel Attacks (SCA)</span></td>
+                <td>គឺជាការវាយប្រហារដើម្បីលួចយកសោសម្ងាត់ពីឧបករណ៍អេឡិចត្រូនិក ដោយមិនបាច់បំបែកក្បួនដោះស្រាយផ្ទាល់ តែតាមរយៈការវាស់ស្ទង់ព័ត៌មានបន្ទាប់បន្សំដែលលេចធ្លាយចេញពីផ្នែករឹង ដូចជាការស៊ីភ្លើង (Power consumption) ពេលវេលាដែលប្រើ (Timing) ឬរលកអេឡិចត្រូម៉ាញេទិកជាដើម។</td>
+                <td>ដូចជាការទស្សន៍ទាយលេខសម្ងាត់ទូដែក ដោយប្រើកាសស្តាប់សំឡេង "តឹកៗ" ពេលម្ចាស់ទូដែកកំពុងបង្វិលសោ ជំនួសឱ្យការប្រើកម្លាំងវាយបំបែកទូដែកដោយផ្ទាល់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Differential Power Analysis (DPA)</span></td>
+                <td>ជាបច្ចេកទេសវាយប្រហារតាមបណ្តាញចំហៀងមួយប្រភេទ ដែលប្រើប្រាស់ស្ថិតិដើម្បីវិភាគភាពខុសគ្នានៃកម្រិតថាមពលអគ្គិសនីដែលឧបករណ៍ប្រើប្រាស់ ពេលកំពុងដំណើរការទិន្នន័យផ្សេងៗគ្នា ដើម្បីឈានទៅរកការទាញយកសោសម្ងាត់។</td>
+                <td>ដូចជាការតាមដានមើលកុងទ័រភ្លើងផ្ទះអ្នកណាម្នាក់ ដើម្បីដឹងថាពេលណាគេបើកម៉ាស៊ីនត្រជាក់ ឬបើកទូរទស្សន៍ ដោយផ្អែកលើការប្រែប្រួលនៃចរន្តអគ្គិសនី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Learning Side-Channel Analysis (DLSCA)</span></td>
+                <td>ជាការប្រើប្រាស់បច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត (AI/Deep Learning) ដូចជាបណ្តាញណឺរ៉ូន ដើម្បីរៀននិងវិភាគរកលំនាំកម្រិតខ្ពស់នៃរលកសញ្ញាអគ្គិសនីដែលលេចធ្លាយ ទោះបីជាប្រព័ន្ធនោះមានការការពារម៉្យាងហើយក៏ដោយ ដើម្បីទាញយកសោសម្ងាត់បានយ៉ាងមានប្រសិទ្ធភាព។</td>
+                <td>ដូចជាការប្រើប្រាស់កាមេរ៉ា AI ដើម្បីចំណាំមុខអ្នកកុហក ទោះបីជាអ្នកនោះពាក់ម៉ាសនិងវ៉ែនតាខ្មៅក៏ដោយ ក៏ AI អាចចាប់សញ្ញាលម្អិតបានយ៉ាងច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Masking</span></td>
+                <td>ជាវិធានការការពារផ្នែករឹងប្រឆាំងនឹងការវាយប្រហារតាមបណ្តាញចំហៀង (SCA) ដោយបំបែកទិន្នន័យសម្ងាត់ ឬសោសម្ងាត់ ទៅជាចំណែកតូចៗបែបចៃដន្យជាច្រើន (Shares) មុននឹងយកទៅគណនា ដើម្បីធ្វើឱ្យការវាស់ស្ទង់ចរន្តអគ្គិសនីមិនអាចបញ្ជាក់ពីទិន្នន័យដើមបាន។</td>
+                <td>ដូចជាការបំបែកផែនទីកំណប់មួយជា ៣ ចំណែក រួចចែកឱ្យមនុស្ស ៣ នាក់កាន់ ដែលបើខ្វះអ្នកណាម្នាក់ ក៏មិនអាចដឹងថាកំណប់នៅឯណាដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Threshold Implementation (TI)</span></td>
+                <td>ជាទម្រង់មួយនៃបច្ចេកទេស Masking សម្រាប់ផ្នែករឹង ដែលធានាថាការលេចធ្លាយថាមពលនៅពេលសៀគ្វីដំណើរការមិនអាស្រ័យលើតម្លៃទិន្នន័យសម្ងាត់ឡើយ ទោះបីជាមានភាពរអាក់រអួលនៃសញ្ញាអគ្គិសនី (Glitches) នៅក្នុងសៀគ្វីកុំព្យូទ័រក៏ដោយ។</td>
+                <td>ដូចជាការប្រើសោ ៣ គ្រាប់ផ្សេងគ្នា ដើម្បីចាក់ទ្វារឃ្លាំងសម្ងាត់ បើចោរលួចបានសោរតែ ១ ឬ ២ គ្រាប់ ក៏នៅតែមិនអាចបើកទ្វារនោះបានដដែល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Substitution-box (S-box)</span></td>
+                <td>ជាសមាសធាតុស្នូលនៅក្នុងក្បួនដោះស្រាយគ្រីបតូក្រាហ្វីដែលបំពេញមុខងារផ្លាស់ប្តូរទិន្នន័យបញ្ចូល (Input) ទៅជាទិន្នន័យចេញ (Output) បែបស្មុគស្មាញ (Non-linear) ដើម្បីបិទបាំងទំនាក់ទំនងរវាងសោសម្ងាត់និងទិន្នន័យដែលបានអ៊ិនគ្រីបកុំឱ្យអ្នកវាយប្រហារទស្សន៍ទាយដឹង។</td>
+                <td>ដូចជាម៉ាស៊ីនកិនទឹកក្រឡុក ដែលពេលយើងដាក់ផ្លែឈើចូលទៅ វាបំប្លែងទៅជាទឹកផ្លែឈើដែលយើងមើលលែងដឹងថាមានរូបរាងដើមយ៉ាងម៉េច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Unrolled Implementation</span></td>
+                <td>គឺជាស្ថាបត្យកម្មរចនាផ្នែករឹងដែលចម្លងសៀគ្វីគណនាមួយជុំ (Round) ឱ្យទៅជាច្រើនជុំតភ្ជាប់គ្នា ដើម្បីឱ្យវាអាចគណនាប្រតិបត្តិការទាំងមូលបានចប់ក្នុងពេលតែមួយ (One clock cycle) ដែលជួយបង្កើនល្បឿនបញ្ជូនទិន្នន័យឱ្យលឿនបំផុត។</td>
+                <td>ដូចជាការជួលជាងកាត់ដេរ ១០ នាក់ឱ្យកាត់ខោអាវ ១០ ដំណាក់កាលក្នុងពេលតែមួយ ជំនួសឱ្យការឱ្យជាងម្នាក់ធ្វើតាំងពីដើមដល់ចប់ ដែលជួយសន្សំពេលវេលាបានយ៉ាងលឿនបំផុត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=hardware+implementation+of+lightweight+cryptography+for+IoT" target="_blank" rel="noopener"><span class="en">hardware implementation of lightweight cryptography for IoT</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+side-channel+analysis+%28DLSCA%29+against+cryptographic+devices" target="_blank" rel="noopener"><span class="en">deep learning side-channel analysis (DLSCA) against cryptographic devices</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=energy-efficient+masking+schemes+for+ASCON+and+Keccak" target="_blank" rel="noopener"><span class="en">energy-efficient masking schemes for ASCON and Keccak</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=threshold+implementation+and+domain-oriented+masking" target="_blank" rel="noopener"><span class="en">threshold implementation and domain-oriented masking</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការកំណត់ហេតុផលសម្រាប់ការរកឃើញភាពមិនប្រក្រតីនៃប្រព័ន្ធ ICS ដោយផ្អែកលើ ML៖ ពីទ្រឹស្តីទៅការអនុវត្តជាក់ស្តែង | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការកំណត់រកមូលហេតុដើម (ឧបករណ៍ចាប់សញ្ញា ឬឧបករណ៍បញ្ជាដែលត្រូវបានគេវាយប្រហារ) នៅក្នុងប្រព័ន្ធគ្រប់គ្រងឧស្សាហកម្ម (ICS) នៅពេលដែលម៉ូដែលរៀនដោ...">
+    
+    <meta name="keywords" content="Industrial Control Systems (ICS), Anomaly Detection, Machine Learning Attribution, Deep Learning, Saliency Maps, SHAP, Model Interpretability, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/attributions-ml-ics-anomaly-detection-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/attributions-ml-ics-anomaly-detection-2024.html">
+    <meta property="og:title" content="ការកំណត់ហេតុផលសម្រាប់ការរកឃើញភាពមិនប្រក្រតីនៃប្រព័ន្ធ ICS ដោយផ្អែកលើ ML៖ ពីទ្រឹស្តីទៅការអនុវត្តជាក់ស្តែង | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការកំណត់រកមូលហេតុដើម (ឧបករណ៍ចាប់សញ្ញា ឬឧបករណ៍បញ្ជាដែលត្រូវបានគេវាយប្រហារ) នៅក្នុងប្រព័ន្ធគ្រប់គ្រងឧស្សាហកម្ម (ICS) នៅពេលដែលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) រកឃើញភាពមិនប...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024 Network and Distributed System Security (NDSS) Symposium">
+    
+    <meta property="article:tag" content="Industrial Control Systems (ICS)">
+    
+    <meta property="article:tag" content="Anomaly Detection">
+    
+    <meta property="article:tag" content="Machine Learning Attribution">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Saliency Maps">
+    
+    <meta property="article:tag" content="SHAP">
+    
+    <meta property="article:tag" content="Model Interpretability">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការកំណត់ហេតុផលសម្រាប់ការរកឃើញភាពមិនប្រក្រតីនៃប្រព័ន្ធ ICS ដោយផ្អែកលើ ML៖ ពីទ្រឹស្តីទៅការអនុវត្តជាក់ស្តែង">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការកំណត់រកមូលហេតុដើម (ឧបករណ៍ចាប់សញ្ញា ឬឧបករណ៍បញ្ជាដែលត្រូវបានគេវាយប្រហារ) នៅក្នុងប្រព័ន្ធគ្រប់គ្រងឧស្សាហកម្ម (ICS) នៅពេលដែលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) រកឃើញភាពមិនប...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a0\u17c1\u178f\u17bb\u1795\u179b\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1797\u17b6\u1796\u1798\u17b7\u1793\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 ICS \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be ML\u17d6 \u1796\u17b8\u1791\u17d2\u179a\u17b9\u179f\u17d2\u178f\u17b8\u1791\u17c5\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784",
+      "name": "Attributions for ML-based ICS Anomaly Detection: From Theory to Practice",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u179a\u1780\u1798\u17bc\u179b\u17a0\u17c1\u178f\u17bb\u178a\u17be\u1798 (\u17a7\u1794\u1780\u179a\u178e\u17cd\u1785\u17b6\u1794\u17cb\u179f\u1789\u17d2\u1789\u17b6 \u17ac\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u1789\u17d2\u1787\u17b6\u178a\u17c2\u179b\u178f\u17d2\u179a\u17bc\u179c\u1794\u17b6\u1793\u1782\u17c1\u179c\u17b6\u1799\u1794\u17d2\u179a\u17a0\u17b6\u179a) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u17a7\u179f\u17d2\u179f\u17b6\u17a0\u1780\u1798\u17d2\u1798 (ICS) \u1793\u17c5\u1796\u17c1\u179b\u178a\u17c2\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u179a\u1780\u1783\u17be\u1789\u1797\u17b6\u1796\u1798\u17b7\u1793\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u178e\u17b6\u1798\u17bd\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/attributions-ml-ics-anomaly-detection-2024.html",
+      "author": [{"@type": "Person", "name": "Clement Fung (Carnegie Mellon University)"},{"@type": "Person", "name": "Eric Zeng (Carnegie Mellon University)"},{"@type": "Person", "name": "Lujo Bauer (Carnegie Mellon University)"}],
+      "datePublished": "2024 Network and Distributed System Security (NDSS) Symposium",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Attributions for ML-based ICS Anomaly Detection: From Theory to Practice",
+        "url": "https://dx.doi.org/10.14722/ndss.2024.23216"
+      },
+      "keywords": ["Industrial Control Systems (ICS)", "Anomaly Detection", "Machine Learning Attribution", "Deep Learning", "Saliency Maps", "SHAP", "Model Interpretability"],
+      "about": "Cybersecurity / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a0\u17c1\u178f\u17bb\u1795\u179b\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1797\u17b6\u1796\u1798\u17b7\u1793\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 ICS \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be ML\u17d6 \u1796\u17b8\u1791\u17d2\u179a\u17b9\u179f\u17d2\u178f\u17b8\u1791\u17c5\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784",
+          "item": "https://khmerresearch.com/papers/technology/attributions-ml-ics-anomaly-detection-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការកំណត់ហេតុផលសម្រាប់ការរកឃើញភាពមិនប្រក្រតីនៃប្រព័ន្ធ ICS...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Attributions for ML-based ICS Anomaly Detection: From Theory to Practice<br>
+        
+        <strong>Source:</strong> <a href="https://dx.doi.org/10.14722/ndss.2024.23216" target="_blank">dx.doi.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការកំណត់ហេតុផលសម្រាប់ការរកឃើញភាពមិនប្រក្រតីនៃប្រព័ន្ធ ICS ដោយផ្អែកលើ ML៖ ពីទ្រឹស្តីទៅការអនុវត្តជាក់ស្តែង</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Attributions for ML-based ICS Anomaly Detection: From Theory to Practice</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Clement Fung (Carnegie Mellon University), Eric Zeng (Carnegie Mellon University), Lujo Bauer (Carnegie Mellon University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 Network and Distributed System Security (NDSS) Symposium</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Cybersecurity / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការកំណត់រកមូលហេតុដើម (ឧបករណ៍ចាប់សញ្ញា ឬឧបករណ៍បញ្ជាដែលត្រូវបានគេវាយប្រហារ) នៅក្នុងប្រព័ន្ធគ្រប់គ្រងឧស្សាហកម្ម (ICS) នៅពេលដែលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) រកឃើញភាពមិនប្រក្រតីណាមួយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានធ្វើការប្រៀបធៀបវិធីសាស្ត្រកំណត់ហេតុផល (Attribution Methods) ជាច្រើនប្រភេទ ដោយអនុវត្តទៅលើម៉ូដែលរកឃើញភាពមិនប្រក្រតីផ្សេងៗគ្នា និងប្រើយកសំណុំទិន្នន័យវាយប្រហារជាក់ស្តែង រួមទាំងការស្ទង់មតិពីអ្នកប្រតិបត្តិការផ្ទាល់។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់សំណុំទិន្នន័យវាយប្រហារប្រព័ន្ធ ICS ជាក់ស្តែង និងសំណុំទិន្នន័យក្លែងធ្វើ (SWaT, WADI, TEP datasets)</li>
+            
+            <li>ការវាយតម្លៃម៉ូដែលរកឃើញភាពមិនប្រក្រតីចំនួន ៥ ប្រភេទ (AR, PASAD, CNN, GRU, LSTM Models)</li>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្រកំណត់ហេតុផលកម្រិតខ្ពស់ (Attribution Methods) រួមមានវិធីសាស្ត្រ Black-box (LIME, SHAP, LEMNA) និង White-box (Saliency Maps)</li>
+            
+            <li>ការស្ទង់មតិប្រតិបត្តិករប្រព័ន្ធ ICS (Operator Survey) ដើម្បីវាស់ស្ទង់ពីអត្ថប្រយោជន៍នៃការប្រើប្រាស់ប្រព័ន្ធនេះក្នុងប្រតិបត្តិការជាក់ស្តែង</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រកំណត់ហេតុផលផ្អែកលើ ML ដំណើរការបានល្អជាងការប្រើការចាត់ថ្នាក់កំហុសធម្មតា (Raw-error rankings) លុះត្រាតែទិន្នន័យត្រូវបានគណនាចំពេលដែលភាពមិនប្រក្រតីនោះចាប់ផ្តើមភ្លាមៗ។</li>
+            
+            <li>ការវាយប្រហារដែលមានទំហំតូច (Low-magnitude) និងការវាយប្រហារលើឧបករណ៍បញ្ជាប្រភេទកាតេហ្គោរី (Categorical actuators) គឺជាប្រភេទការវាយប្រហារដែលពិបាកក្នុងការកំណត់ហេតុផលបំផុត។</li>
+            
+            <li>ការប្រើប្រាស់វិធីសាស្ត្រចម្រុះ (Ensemble method) ដែលរួមបញ្ចូលលទ្ធផលពីវិធីសាស្ត្រជាច្រើន ផ្តល់លទ្ធផលល្អប្រសើរជាងការប្រើប្រាស់វិធីសាស្ត្រទោល ហើយប្រតិបត្តិករយល់ថាប្រព័ន្ធនេះពិតជាមានប្រយោជន៍សម្រាប់ការស៊ើបអង្កេត ទោះបីជាវាមិនមានភាពសុក្រឹត១០០ភាគរយក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Raw-error ranking (MSE)</span></strong><br>ចំណាត់ថ្នាក់កំហុសដើម (MSE)</td>
+                <td>មានភាពសាមញ្ញក្នុងការអនុវត្ត និងផ្តល់លទ្ធផលល្អសម្រាប់ការវាយប្រហារលើឧបករណ៍ចាប់សញ្ញា (sensors) ដែលមានទំហំធំ និងដំណើរការលឿនក្នុងពេលជាក់ស្តែង។</td>
+                <td>មិនមានភាពសុក្រឹតទេនៅពេលមានអន្តរកម្មស្មុគស្មាញរវាងឧបករណ៍ ហើយខ្សោយខ្លាំងសម្រាប់ការវាយប្រហារលើឧបករណ៍បញ្ជា (actuators)។</td>
+                <td>មានអត្រាភាពត្រឹមត្រូវទាបបំផុត (AvgRank ខ្ពស់ចន្លោះ ០.១៤ ដល់ ០.៣៨) និងអាចរកឃើញមុខសញ្ញាពិតប្រាកដក្នុងកម្រិតកំពូលបានតិចជាង ៤០% នៃការវាយប្រហារសរុប។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Black-box ML Attributions (SHAP, LEMNA)</span></strong><br>វិធីសាស្ត្រ Black-box ML (SHAP, LEMNA)</td>
+                <td>អាចស្វែងយល់ពីទំនាក់ទំនងអន្តរមុខងាររវាងឧបករណ៍បានល្អ និងមានភាពត្រឹមត្រូវខ្ពស់សម្រាប់ការវាយប្រហារលើឧបករណ៍បញ្ជា (actuators)។</td>
+                <td>ទាមទារការគណនាច្រើន ប្រើប្រាស់ពេលវេលាយូរ និងត្រូវការការកំណត់ពេលវេលាចាប់ផ្តើមឱ្យបានត្រឹមត្រូវបំផុត (best-guess timing) ដើម្បីទទួលបានលទ្ធផលល្អ។</td>
+                <td>LEMNA ទទួលបាន AvgRank ល្អប្រសើរ (០.០៧០ ដល់ ០.១២៤) ពេលប្រើប្រាស់ជាមួយការចាប់ពេលវេលាត្រឹមត្រូវ (best-guess timing) ប៉ុន្តែខ្សោយនៅពេលប្រើក្នុងពេលជាក់ស្តែង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">White-box ML Attributions (Saliency Maps)</span></strong><br>វិធីសាស្ត្រ White-box ML (Saliency Maps)</td>
+                <td>ប្រើប្រាស់ក្រាហ្វិកខាងក្នុងម៉ូដែល (internal gradients) ដើម្បីរកមូលហេតុ ដែលមានល្បឿនលឿនជាង Black-box និងដំណើរការល្អប្រសើរជាមួយទិន្នន័យក្លែងធ្វើ។</td>
+                <td>ងាយរងឥទ្ធិពលពីបំរែបំរួលតូចៗនៃទិន្នន័យបញ្ចូល ហើយមិនសូវមានប្រសិទ្ធភាពខ្ពស់ដូចរំពឹងទុកនៅពេលជួបប្រទះភាពស្មុគស្មាញនៃប្រព័ន្ធ ICS ពិតប្រាកដ។</td>
+                <td>Saliency Maps ជាវិធីសាស្ត្រ White-box ដ៏ល្អជាងគេដោយឈ្នះវិធីសាស្ត្រ MSE ធម្មតា ប៉ុន្តែនៅតែមានប្រសិទ្ធភាពទាបជាងវិធីសាស្ត្រចម្រុះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Ensemble Method (Proposed)</span></strong><br>វិធីសាស្ត្រចម្រុះ (Ensemble Method)</td>
+                <td>រួបរួមចំណុចខ្លាំងនៃវិធីសាស្ត្រនីមួយៗ (MSE, SM, និង LEMNA) ដែលផ្តល់លទ្ធផលល្អបំផុតទាំងសម្រាប់ឧបករណ៍ចាប់សញ្ញា និងឧបករណ៍បញ្ជា ទោះមិនដឹងពេលវេលាចាប់ផ្តើមច្បាស់លាស់ក៏ដោយ។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការអភិវឌ្ឍរៀបចំ និងទាមទារធនធានកុំព្យូទ័រក្នុងការគណនាខ្ពស់ជាងវិធីសាស្ត្រទោល។</td>
+                <td>ផ្តល់នូវចំណាត់ថ្នាក់ល្អបំផុត (AvgRank ទាបជាងគេបំផុត) គ្រប់កាលៈទេសៈទាំងអស់ ដោយឈ្នះដាច់វិធីសាស្ត្រនីមួយៗដែលដំណើរការដាច់ដោយឡែកពីគ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធរកឃើញភាពមិនប្រក្រតី និងការកំណត់ហេតុផលនេះ ទាមទារធនធានកុំព្យូទ័រមធ្យមទៅខ្ពស់ ព្រមទាំងទាមទារជំនាញកម្រិតខ្ពស់ផ្នែករៀនដោយម៉ាស៊ីន (Machine Learning) និងចំណេះដឹងពីប្រព័ន្ធគ្រប់គ្រងឧស្សាហកម្ម។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ត្រូវការភាសា Python 3.7 ជាមួយបណ្ណាល័យសំខាន់ៗដូចជា SHAP, LIME ព្រមទាំងកម្មវិធី MATLAB R2021a សម្រាប់ដំណើរការប្រព័ន្ធក្លែងធ្វើ (TEP simulator)។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារម៉ាស៊ីនកុំព្យូទ័រដែលមាន CPU/GPU ខ្លាំង ព្រោះការគណនា ML Attributions (ជាពិសេស Black-box) សម្រាប់ទិន្នន័យរាប់រយជំហានអាចចំណាយពេលរាប់ម៉ោងសម្រាប់ដំណើរការម្តងៗ។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យប្រតិបត្តិការប្រវត្តិសាស្ត្រនៃប្រព័ន្ធ ICS ក្នុងស្ថានភាពធម្មតា (Benign Data) យ៉ាងច្រើនដើម្បីបង្វឹកម៉ូដែល (ដូចជាសំណុំទិន្នន័យ SWaT និង WADI)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកមានជំនាញខាង Deep Learning (ជាពិសេសក្នុងការកសាងម៉ូដែល CNN, GRU, LSTM សម្រាប់ទិន្នន័យ time-series) និងស្វែងយល់ស៊ីជម្រៅពីសុវត្ថិភាពហេដ្ឋារចនាសម្ព័ន្ធបច្ចេកវិទ្យាប្រតិបត្តិការ (OT Security)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកលើសំណុំទិន្នន័យពីប្រព័ន្ធប្រព្រឹត្តកម្មទឹកស្អាតខ្នាតតូចនៅប្រទេសសិង្ហបុរី (SWaT, WADI) និងប្រព័ន្ធក្លែងធ្វើសារធាតុគីមី (TEP)។ ទោះបីជាប្រព័ន្ធទាំងនេះមានស្តង់ដារអន្តរជាតិក៏ដោយ ការកំណត់រចនាសម្ព័ន្ធ និងបរិបទនៃប្រតិបត្តិការជាក់ស្តែងនៅកម្ពុជាអាចមានភាពខុសគ្នាស្រឡះ និងប្រើប្រាស់ឧបករណ៍ម៉ាកផ្សេងៗគ្នា។ នេះមានន័យថាម៉ូដែលត្រូវតែមានការហ្វឹកហាត់សារជាថ្មីដោយប្រើប្រាស់ទិន្នន័យជាក់ស្តែងពីរោងចក្រក្នុងស្រុក ដើម្បីឆ្លើយតបទៅនឹងទម្រង់នៃការវាយប្រហារ និងកម្រិតនៃកំហុសបច្ចេកទេសជាក់ស្តែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រដែលបានស្នើឡើងនៅក្នុងឯកសារនេះ មានសក្តានុពលខ្ពស់ខ្លាំងក្នុងការការពារហេដ្ឋារចនាសម្ព័ន្ធរិះគន់ (Critical Infrastructures) នៅប្រទេសកម្ពុជា ដែលកំពុងបោះជំហានយ៉ាងលឿនទៅរកឌីជីថលនីយកម្ម។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យផ្គត់ផ្គង់ទឹកស្អាត (រដ្ឋាករទឹកស្វយ័តក្រុងភ្នំពេញ - PPWSA):</strong> ការអនុវត្តប្រព័ន្ធរកឃើញភាពមិនប្រក្រតីនេះ អាចជួយការពារប្រព័ន្ធចម្រោះ និងបណ្តាញចែកចាយទឹកស្អាតពីការវាយប្រហារតាមអ៊ីនធឺណិត (ឧទាហរណ៍ ការបិទបើកសន្ទះទឹកខុសប្រក្រតី) ដែលអាចប៉ះពាល់ធ្ងន់ធ្ងរដល់សន្តិសុខទឹកស្អាតសម្រាប់ប្រជាពលរដ្ឋរាប់លាននាក់។</li>
+            
+            <li><strong>វិស័យថាមពលអគ្គិសនី (អគ្គិសនីកម្ពុជា - EDC):</strong> ជួយឱ្យប្រតិបត្តិករគ្រប់គ្រងបណ្តាញអគ្គិសនីជាតិ អាចកំណត់រកទីតាំងឧបករណ៍បញ្ជូន (Sensors) ឬកុងតាក់ត្រួតពិនិត្យ (Relays/Actuators) ណាមួយដែលត្រូវរងការវាយប្រហារ ឬដំណើរការខុសប្រក្រតីបានយ៉ាងលឿន កាត់បន្ថយហានិភ័យនៃការដាច់ភ្លើងទូទាំងតំបន់។</li>
+            
+            <li><strong>រោងចក្រផលិតកម្មខ្នាតធំ (តំបន់សេដ្ឋកិច្ចពិសេសភ្នំពេញ រឺព្រះសីហនុ):</strong> ការពារខ្សែសង្វាក់ផលិតកម្មស្វ័យប្រវត្តិកម្ម (PLCs/SCADA systems) ពីការវាយប្រហារលាក់មុខ ឬបញ្ជាខុសប្រក្រតី ដែលអាចបណ្តាលឱ្យខូចខាតម៉ាស៊ីនតម្លៃរាប់លានដុល្លារ ឬរអាក់រអួលចង្វាក់ផលិតកម្មទាំងមូល។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការស្វែងយល់ និងយកវិធីសាស្ត្រកំណត់ហេតុផលចម្រុះ (Ensemble Attribution) មកប្រើប្រាស់ជាមួយប្រព័ន្ធតាមដានទិន្នន័យកណ្តាល នឹងជួយពន្លឿនការស៊ើបអង្កេតរបស់មន្ត្រីសន្តិសុខប្រព័ន្ធអ៊ិនធឺណិត (SOC Analysts) នៅតាមស្ថាប័នសំខាន់ៗនៅកម្ពុជាបានយ៉ាងមានប្រសិទ្ធភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាស្វែងយល់ពីប្រព័ន្ធ ICS និងសំណុំទិន្នន័យអន្តរជាតិ:</strong> និស្សិតត្រូវចាប់ផ្តើមដោយការធ្វើសំណើរសុំទាញយកសំណុំទិន្នន័យ <span class='en'>SWaT</span> ឬ <span class='en'>WADI</span> (តាមរយៈគេហទំព័ររបស់ស្ថាប័ន iTrust នៃសាកលវិទ្យាល័យ SUTD) រួចធ្វើការវិភាគលើរចនាសម្ព័ន្ធទិន្នន័យ <span class='en'>Time-series</span> របស់ឧបករណ៍ចាប់សញ្ញា (sensors) និងឧបករណ៍បញ្ជា (actuators) ដើម្បីយល់ពីឥរិយាបថធម្មតានិងពេលមានការវាយប្រហារ។</li>
+            
+            <li><strong>ជំហានទី២៖ កសាងម៉ូដែលរកឃើញភាពមិនប្រក្រតីផ្អែកលើ Deep Learning:</strong> អនុវត្តការសរសេរកូដបង្កើតម៉ូដែល <span class='en'>Unsupervised Learning</span> ដូចជា <span class='en'>CNN, GRU, ឬ LSTM</span> ដោយប្រើប្រាស់បណ្ណាល័យ <span class='en'>TensorFlow/Keras</span> ជាភាសា <span class='en'>Python</span> ដើម្បីធ្វើការទស្សន៍ទាយតម្លៃបន្ទាប់នៃប្រព័ន្ធ (Next-state prediction) និងគណនាកំហុស (Reconstruction Error / MSE)។</li>
+            
+            <li><strong>ជំហានទី៣៖ អនុវត្តនិងប្រៀបធៀបវិធីសាស្ត្រកំណត់ហេតុផល (Attribution Methods):</strong> សាកល្បងបញ្ចូលបណ្ណាល័យ <span class='en'>SHAP</span> និង <span class='en'>LIME</span> ព្រមទាំងសរសេរកូដសម្រាប់ <span class='en'>Saliency Maps</span> ទៅក្នុងម៉ូដែលរបស់អ្នក ដើម្បីគណនាពិន្ទុឥទ្ធិពល (Attribution scores) របស់មុខងារនីមួយៗនៅពេលប្រព័ន្ធប្រកាសអាសន្ន រួចប្រៀបធៀបប្រសិទ្ធភាពរបស់វាជាមួយនឹងការប្រើត្រឹម <span class='en'>Raw MSE</span>។</li>
+            
+            <li><strong>ជំហានទី៤៖ បង្កើតវិធីសាស្ត្រចម្រុះ (Ensemble Method) និងវាយតម្លៃដោយប្រើ AvgRank:</strong> សរសេរកូដដើម្បីគណនាមធ្យមភាគមានទម្ងន់ (Weighted average) រវាងលទ្ធផលដែលទទួលបានពី <span class='en'>MSE, Saliency Maps, និង LEMNA/SHAP</span> (ដោយផ្តល់ទម្ងន់ខ្ពស់លើ ML attributions សម្រាប់ឧបករណ៍ actuators) រួចប្រើប្រាស់រង្វាស់ <span class='en'>AvgRank</span> ដើម្បីធានាថាវាផ្តល់លទ្ធផលល្អជាងវិធីសាស្ត្រដាច់ដោយឡែក។</li>
+            
+            <li><strong>ជំហានទី៥៖ ធ្វើសមាហរណកម្មប្រព័ន្ធសម្រាប់ប្រើប្រាស់ក្រោយហេតុការណ៍ (Post-hoc Analysis):</strong> បង្កើតផ្ទាំងគ្រប់គ្រង (Dashboard) សាមញ្ញមួយ ឧទាហរណ៍ដោយប្រើ <span class='en'>Streamlit</span> ឬ <span class='en'>Dash</span> ដើម្បីបង្ហាញបញ្ជីឧបករណ៍ដែលសង្ស័យជាងគេទាំង ១០ ទៅកាន់អ្នកប្រតិបត្តិការ ដោយផ្តោតលើការទាញយកទិន្នន័យពី <span class='en'>Data Historian</span> មកវិភាគក្រោយពេលមានសញ្ញាព្រមាន ជំនួសឱ្យការបង្ខំគណនាក្នុងពេលជាក់ស្តែងភ្លាមៗ (Real-time)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Industrial Control Systems (ICS)</span></td>
+                <td>ជាបណ្តាញប្រព័ន្ធកុំព្យូទ័រ និងគ្រឿងចក្រដែលធ្វើការរួមគ្នាដើម្បីគ្រប់គ្រង និងស្វ័យប្រវត្តិកម្មដំណើរការរូបវន្តខ្នាតធំ ដូចជាការគ្រប់គ្រងសម្ពាធទឹកក្នុងរោងចក្រទឹកស្អាត ឬការគ្រប់គ្រងចរន្តអគ្គិសនីក្នុងរោងចក្រថាមពលជាដើម។</td>
+                <td>ដូចជាខួរក្បាល និងប្រព័ន្ធសរសៃប្រសាទដែលបញ្ជាសាច់ដុំ (ម៉ាស៊ីន) ឱ្យធ្វើការក្នុងរាងកាយមនុស្ស ដើម្បីធានាថារាងកាយដំណើរការដោយរលូន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Attribution methods</span></td>
+                <td>ជាបច្ចេកទេសមួយក្នុងវិស័យបញ្ញាសិប្បនិម្មិត (AI) ដែលមានតួនាទីគណនា និងរៀបចំណាត់ថ្នាក់កត្តាបញ្ចូល (inputs) ណាមួយ ដើម្បីស្វែងរកទីតាំងឧបករណ៍ (ឧ. សេនស័រ) ដែលជាដើមហេតុពិតប្រាកដធ្វើឱ្យប្រព័ន្ធចាប់បានភាពមិនប្រក្រតី។</td>
+                <td>ដូចជាអ្នកស៊ើបអង្កេតដែលតាមដានភស្តុតាង ដើម្បីវែកមុខរកជនសង្ស័យម្នាក់ដែលជាអ្នកបង្កហេតុពិតប្រាកដ ក្នុងចំណោមមនុស្សជាច្រើននៅកន្លែងកើតហេតុ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Anomaly Detection</span></td>
+                <td>ជាយន្តការផ្នែកទន់ (Software) ដែលប្រើប្រាស់ក្បួន Machine Learning ដើម្បីតាមដានលំហូរទិន្នន័យជាប្រចាំ ហើយវាស់ស្ទង់រកមើលអាកប្បកិរិយា ឬទិន្នន័យណាដែលលោតខុសឆ្ងាយពីសកម្មភាពប្រក្រតី ដើម្បីប្រកាសអាសន្នពីការវាយប្រហារតាមសាយប័រ។</td>
+                <td>ដូចជាសន្តិសុខយាមទ្វារដែលចាំសង្កេតមើលភ្ញៀវចូលរួមកម្មវិធី ហើយឃាត់សួរអ្នកណាដែលស្លៀកពាក់ ឬមានអាកប្បកិរិយាគួរឱ្យសង្ស័យខុសពីភ្ញៀវទូទៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Reconstruction error</span></td>
+                <td>ជារង្វាស់គណិតវិទ្យា (ច្រើនគិតជាមធ្យមភាគការ៉េនៃកំហុស - MSE) ដែលវាស់ពីគម្លាតរវាងទិន្នន័យសេនស័រជាក់ស្តែងដែលកំពុងដើរ និងទិន្នន័យដែលម៉ូដែល AI ទស្សន៍ទាយថាគួរតែមាន។ បើគម្លាតនេះធំ មានន័យថាប្រព័ន្ធកំពុងរងការវាយប្រហារ។</td>
+                <td>ដូចជាការប្រៀបធៀបគំនូរដែលអ្នកគូរចម្លងដោយផ្អែកលើការចងចាំ ទៅនឹងរូបភាពដើមពិតប្រាកដ បើខុសគ្នាខ្លាំង មានន័យថាមានអ្វីមួយមិនប្រក្រតី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Actuators</span></td>
+                <td>ជាឧបករណ៍មេកានិក ឬអេឡិចត្រូនិកនៅក្នុងរោងចក្រ ដែលទទួលការបញ្ជាពីប្រព័ន្ធកុំព្យូទ័រ (Controllers) ដើម្បីធ្វើសកម្មភាពផ្លាស់ប្តូរស្ថានភាពរូបវន្តផ្ទាល់ ដូចជាការបើកសន្ទះបំពង់ទឹក ការបញ្ឆេះម៉ូទ័រ ឬការបិទកុងតាក់អគ្គិសនី។</td>
+                <td>ដូចជាដៃនិងជើងរបស់យើង ដែលធ្វើចលនាកាន់របស់របរ ឬដើរ ទៅតាមការបញ្ជារបស់ខួរក្បាល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Saliency maps</span></td>
+                <td>ជាវិធីសាស្ត្រ White-box ដែលមើលចូលទៅក្នុងសមីការគណិតវិទ្យាខាងក្នុងរបស់ម៉ូដែល AI ដើម្បីគូសផែនទីបង្ហាញពីអថេរ (features) ណាដែលការផ្លាស់ប្តូររបស់វាមានឥទ្ធិពលខ្លាំងជាងគេទៅលើការកើនឡើងនៃកំហុស (Error) របស់ប្រព័ន្ធទាំងមូល។</td>
+                <td>ដូចជាការប្រើកាមេរ៉ាចាប់កម្តៅ (Thermal camera) ថតមើលម៉ាស៊ីនរថយន្ត ដើម្បីដឹងភ្លាមៗថាតើផ្នែកណាខ្លះនៃម៉ាស៊ីនកំពុងឡើងកម្តៅខុសធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Black-box attribution</span></td>
+                <td>ជាក្រុមនៃវិធីសាស្ត្រ (ដូចជា SHAP, LIME, LEMNA) ដែលស្វែងរកមូលហេតុនៃភាពមិនប្រក្រតី ដោយមិនចាំបាច់ដឹងពីរចនាសម្ព័ន្ធកូដខាងក្នុងរបស់ម៉ូដែល AI ឡើយ។ ពួកគេធ្វើការផ្លាស់ប្តូរទិន្នន័យបញ្ចូលបន្តិចម្តងៗ ហើយសង្កេតមើលពីរបៀបដែលលទ្ធផលប្រែប្រួល។</td>
+                <td>ដូចជាការព្យាយាមស្ទាបស្ទង់រកមើលថាតើប្រអប់បិទជិតមួយមានផ្ទុកអ្វី ដោយគ្រាន់តែចាប់អង្រួន និងស្តាប់សំឡេងតបមកវិញ ដោយមិនបាច់បើកប្រអប់មើលខាងក្នុង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">AvgRank</span></td>
+                <td>ជារង្វាស់ដែលវាស់ពីទីតាំងមធ្យមនៃឧបករណ៍ដែលត្រូវគេវាយប្រហារ នៅក្នុងបញ្ជីចំណាត់ថ្នាក់ពិន្ទុអាក្រក់បំផុត (Attribution score) ធៀបនឹងចំនួនឧបករណ៍សរុប។ បើពិន្ទុ AvgRank កាន់តែទាប (កៀកនឹង ០) មានន័យថាវិធីសាស្ត្រនោះកាន់តែច្បាស់លាស់ក្នុងការចង្អុលបង្ហាញកន្លែងត្រូវវាយប្រហារ។</td>
+                <td>ដូចជាចំណាត់ថ្នាក់របស់សិស្សប្រចាំថ្នាក់ដែរ បើទទួលបានលេខរៀងមធ្យមកាន់តែតូច (ឧទាហរណ៍ លេខ២ ឬលេខ៣) មានន័យថាសិស្សនោះរៀនកាន់តែពូកែ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+model+interpretability+in+cybersecurity" target="_blank" rel="noopener"><span class="en">machine learning model interpretability in cybersecurity</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=explainable+AI+for+industrial+control+systems" target="_blank" rel="noopener"><span class="en">explainable AI for industrial control systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=time-series+anomaly+detection+algorithms" target="_blank" rel="noopener"><span class="en">time-series anomaly detection algorithms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=false+data+injection+attacks+in+smart+grids" target="_blank" rel="noopener"><span class="en">false data injection attacks in smart grids</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

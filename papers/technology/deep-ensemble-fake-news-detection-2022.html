@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែលការរកឃើញព័ត៌មានក្លែងក្លាយរួមគ្នាស៊ីជម្រៅដោយប្រើប្រាស់បច្ចេកទេសសិក្សាស៊ីជម្រៅតាមលំដាប់លំដោយ | KhmerResearch.com</title>
+    <meta name="description" content="ការរកឃើញព័ត៌មានក្លែងក្លាយ (Fake news detection) ជួបប្រទះនឹងបញ្ហាប្រឈមធំៗ ដោយសារការប្រើប្រាស់ភាសាស្រដៀងគ្នារវាងព័ត៌មានពិតនិងក្លែងក្លាយ ព្រមទាំងបញ្ហាប្រយោគខ្លី...">
+    
+    <meta name="keywords" content="fake news detection, misinformation, deep learning, ensemble model, natural language processing, TF-IDF, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/deep-ensemble-fake-news-detection-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/deep-ensemble-fake-news-detection-2022.html">
+    <meta property="og:title" content="ម៉ូដែលការរកឃើញព័ត៌មានក្លែងក្លាយរួមគ្នាស៊ីជម្រៅដោយប្រើប្រាស់បច្ចេកទេសសិក្សាស៊ីជម្រៅតាមលំដាប់លំដោយ | KhmerResearch.com">
+    <meta property="og:description" content="ការរកឃើញព័ត៌មានក្លែងក្លាយ (Fake news detection) ជួបប្រទះនឹងបញ្ហាប្រឈមធំៗ ដោយសារការប្រើប្រាស់ភាសាស្រដៀងគ្នារវាងព័ត៌មានពិតនិងក្លែងក្លាយ ព្រមទាំងបញ្ហាប្រយោគខ្លីៗនៅលើបណ្តាញសង្គមដែលធ្វើឱ្យបច្ចេកទេសតំណាង...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022, Sensors (MDPI)">
+    
+    <meta property="article:tag" content="fake news detection">
+    
+    <meta property="article:tag" content="misinformation">
+    
+    <meta property="article:tag" content="deep learning">
+    
+    <meta property="article:tag" content="ensemble model">
+    
+    <meta property="article:tag" content="natural language processing">
+    
+    <meta property="article:tag" content="TF-IDF">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែលការរកឃើញព័ត៌មានក្លែងក្លាយរួមគ្នាស៊ីជម្រៅដោយប្រើប្រាស់បច្ចេកទេសសិក្សាស៊ីជម្រៅតាមលំដាប់លំដោយ">
+    <meta name="twitter:description" content="ការរកឃើញព័ត៌មានក្លែងក្លាយ (Fake news detection) ជួបប្រទះនឹងបញ្ហាប្រឈមធំៗ ដោយសារការប្រើប្រាស់ភាសាស្រដៀងគ្នារវាងព័ត៌មានពិតនិងក្លែងក្លាយ ព្រមទាំងបញ្ហាប្រយោគខ្លីៗនៅលើបណ្តាញសង្គមដែលធ្វើឱ្យបច្ចេកទេសតំណាង...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1780\u17d2\u179b\u17c2\u1784\u1780\u17d2\u179b\u17b6\u1799\u179a\u17bd\u1798\u1782\u17d2\u1793\u17b6\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179f\u17b7\u1780\u17d2\u179f\u17b6\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u178f\u17b6\u1798\u179b\u17c6\u178a\u17b6\u1794\u17cb\u179b\u17c6\u178a\u17c4\u1799",
+      "name": "Deep Ensemble Fake News Detection Model Using Sequential Deep Learning Technique",
+      "description": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1780\u17d2\u179b\u17c2\u1784\u1780\u17d2\u179b\u17b6\u1799 (Fake news detection) \u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1793\u17b9\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1792\u17c6\u17d7 \u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1797\u17b6\u179f\u17b6\u179f\u17d2\u179a\u178a\u17c0\u1784\u1782\u17d2\u1793\u17b6\u179a\u179c\u17b6\u1784\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1796\u17b7\u178f\u1793\u17b7\u1784\u1780\u17d2\u179b\u17c2\u1784\u1780\u17d2\u179b\u17b6\u1799 \u1796\u17d2\u179a\u1798\u1791\u17b6\u17c6\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1799\u17c4\u1782\u1781\u17d2\u179b\u17b8\u17d7\u1793\u17c5\u179b\u17be\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u1784\u17d2\u1782\u1798\u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u178f\u17c6\u178e\u17b6\u1784\u17a2\u178f\u17d2\u1790\u1794\u1791\u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793\u1798\u17b7\u1793\u179f\u17bc\u179c\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/deep-ensemble-fake-news-detection-2022.html",
+      "author": [{"@type": "Person", "name": "Abdullah Marish Ali (King Abdulaziz University)"},{"@type": "Person", "name": "Fuad A. Ghaleb (Universiti Teknologi Malaysia)"},{"@type": "Person", "name": "Bander Ali Saleh Al-Rimy (Universiti Teknologi Malaysia)"},{"@type": "Person", "name": "Fawaz Jaber Alsolami (King Abdulaziz University)"},{"@type": "Person", "name": "Asif Irshad Khan (King Abdulaziz University)"}],
+      "datePublished": "2022, Sensors (MDPI)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Deep Ensemble Fake News Detection Model Using Sequential Deep Learning Technique",
+        "url": "https://doi.org/10.3390/s22186970"
+      },
+      "keywords": ["fake news detection", "misinformation", "deep learning", "ensemble model", "natural language processing", "TF-IDF"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1780\u17d2\u179b\u17c2\u1784\u1780\u17d2\u179b\u17b6\u1799\u179a\u17bd\u1798\u1782\u17d2\u1793\u17b6\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179f\u17b7\u1780\u17d2\u179f\u17b6\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u178f\u17b6\u1798\u179b\u17c6\u178a\u17b6\u1794\u17cb\u179b\u17c6\u178a\u17c4\u1799",
+          "item": "https://khmerresearch.com/papers/technology/deep-ensemble-fake-news-detection-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ម៉ូដែលការរកឃើញព័ត៌មានក្លែងក្លាយរួមគ្នាស៊ីជម្រៅដោយប្រើប្រា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Deep Ensemble Fake News Detection Model Using Sequential Deep Learning Technique<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/s22186970" target="_blank">doi.org/10.3390/s22186970</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែលការរកឃើញព័ត៌មានក្លែងក្លាយរួមគ្នាស៊ីជម្រៅដោយប្រើប្រាស់បច្ចេកទេសសិក្សាស៊ីជម្រៅតាមលំដាប់លំដោយ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Deep Ensemble Fake News Detection Model Using Sequential Deep Learning Technique</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Abdullah Marish Ali (King Abdulaziz University), Fuad A. Ghaleb (Universiti Teknologi Malaysia), Bander Ali Saleh Al-Rimy (Universiti Teknologi Malaysia), Fawaz Jaber Alsolami (King Abdulaziz University), Asif Irshad Khan (King Abdulaziz University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022, Sensors (MDPI)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការរកឃើញព័ត៌មានក្លែងក្លាយ (Fake news detection) ជួបប្រទះនឹងបញ្ហាប្រឈមធំៗ ដោយសារការប្រើប្រាស់ភាសាស្រដៀងគ្នារវាងព័ត៌មានពិតនិងក្លែងក្លាយ ព្រមទាំងបញ្ហាប្រយោគខ្លីៗនៅលើបណ្តាញសង្គមដែលធ្វើឱ្យបច្ចេកទេសតំណាងអត្ថបទបច្ចុប្បន្នមិនសូវមានប្រសិទ្ធភាព។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើងនូវម៉ូដែលរួមគ្នាស៊ីជម្រៅ (Deep ensemble model) ដែលដំណើរការជា ៣ ដំណាក់កាល ដើម្បីពង្រឹងភាពសុក្រឹតនៃការទស្សន៍ទាយចំណាត់ថ្នាក់ព័ត៌មាន។
+        
+        <ul>
+            
+            <li>ការទាញយកនិងតំណាងលក្ខណៈពិសេស (Feature Extraction and Representation) ពីអត្ថបទព័ត៌មានដោយប្រើប្រាស់បច្ចេកទេស n-gram និង TF-IDF។</li>
+            
+            <li>ការបង្កើតបណ្ដាញសិក្សាស៊ីជម្រៅតាមលំដាប់ (Sequential Deep Learning) ដើម្បីទាញយកលក្ខណៈពិសេសដែលលាក់កំបាំង (Hidden Features) ដោយផ្អែកលើកម្រិតនៃភាពត្រឹមត្រូវផ្សេងៗគ្នារបស់ព័ត៌មាន។</li>
+            
+            <li>ការចាត់ថ្នាក់ចុងក្រោយដោយប្រើបណ្តាញពហុស្រទាប់ (Multilayer Perceptron - MLP) ដែលទទួលយកលទ្ធផលពីបណ្តាញចំណាត់ថ្នាក់គោលពីរ (Binary classifiers) មកធ្វើការសម្រេចចិត្តពហុចំណាត់ថ្នាក់ (Multi-class decision)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលដែលបានស្នើសម្រេចបានភាពត្រឹមត្រូវ (Accuracy) ១០០% ទាំងស្រុងសម្រាប់ការសាកល្បងលើសំណុំទិន្នន័យ ISOT ដែលមានអត្ថបទវែងៗ។</li>
+            
+            <li>សម្រាប់សំណុំទិន្នន័យ LIAR ដែលមានភាពស្មុគស្មាញនិងប្រយោគខ្លីៗ ម៉ូដែលនេះទទួលបានពិន្ទុ F1-Score ៥១.០៥% ពោលគឺកើនឡើងប្រមាណ ២.៤១% បើធៀបនឹងម៉ូដែលទំនើបៗមុនៗ។</li>
+            
+            <li>លទ្ធផលបង្ហាញយ៉ាងច្បាស់ថា ការប្រើប្រាស់លក្ខណៈពិសេសដាច់ដោយឡែកពីអត្ថបទ (Content-based features) បូករួមនឹងការរចនាម៉ូដែលបានត្រឹមត្រូវ មានប្រសិទ្ធភាពខ្ពស់ជាងការប្រើប្រាស់បច្ចេកទេសបង្កប់អត្ថបទ (Text embedding techniques) ដូចជា Word2Vec ឬ BERT សម្រាប់ការកំណត់អត្តសញ្ញាណព័ត៌មានក្លែងក្លាយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Proposed Model (TF-IDF-IG + SDL-MLP)</span></strong><br>ម៉ូដែលស្នើឡើង (ការប្រើប្រាស់ TF-IDF ជាមួយបណ្តាញសិក្សាស៊ីជម្រៅតាមលំដាប់លំដោយ)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការកំណត់អត្តសញ្ញាណអត្ថបទខ្លីៗ ស៊ីទំហំអង្គចងចាំតិច (Memory efficient) និងមិនទាមទារកម្លាំងម៉ាស៊ីនធំដុំ។</td>
+                <td>ពឹងផ្អែកតែលើលក្ខណៈពិសេសនៃខ្លឹមសារអត្ថបទប៉ុណ្ណោះ ដោយមិនបានវិភាគលើបរិបទ ឬប្រភពដើមនៃព័ត៌មាន។</td>
+                <td>ទទួលបានពិន្ទុ F1-Score ៥១.០៥% លើសំណុំទិន្នន័យ LIAR (អត្ថបទខ្លី) និង ១០០% លើសំណុំទិន្នន័យ ISOT (អត្ថបទវែង)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Samadi et al. (Funnel + CNN)</span></strong><br>ម៉ូដែលប្រើប្រាស់ Contextualized Embeddings (Funnel) បូកជាមួយបណ្តាញ CNN</td>
+                <td>មានសមត្ថភាពចាប់យកអត្ថន័យ និងបរិបទនៃពាក្យបានល្អតាមរយៈបច្ចេកទេសបង្កប់ពាក្យទំនើប (Word Embeddings)។</td>
+                <td>មានភាពស្មុគស្មាញ តម្រូវការកម្លាំងកុំព្យូទ័រខ្ពស់ និងមិនសូវមានប្រសិទ្ធភាពចំពោះអត្ថបទដែលខ្លីពេក។</td>
+                <td>ទទួលបានពិន្ទុ F1-Score ៤៨.៦៤% លើសំណុំទិន្នន័យ LIAR និង ៩៩.៩៦% លើសំណុំទិន្នន័យ ISOT។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hakak et al. (Statistical + Random Forest)</span></strong><br>ម៉ូដែលប្រើប្រាស់លក្ខណៈស្ថិតិបូកជាមួយក្បួនដោះស្រាយ Random Forest</td>
+                <td>ដំណើរការបានយ៉ាងល្អឥតខ្ចោះចំពោះសំណុំទិន្នន័យដែលមានអត្ថបទវែងៗ និងងាយស្រួលក្នុងការបកស្រាយលទ្ធផល។</td>
+                <td>ជួបប្រទះបញ្ហា Overfitting និងមានសមត្ថភាពទាបបំផុតក្នុងការទស្សន៍ទាយចំណាត់ថ្នាក់អត្ថបទខ្លីៗ (Generalization ខ្សោយ)។</td>
+                <td>ទទួលបានពិន្ទុ F1-Score ១០០% លើសំណុំទិន្នន័យ ISOT តែទទួលបានត្រឹម ៤៤.១៥% ប៉ុណ្ណោះលើទិន្នន័យ LIAR។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Wang (Word2Vec + Hybrid CNN)</span></strong><br>ម៉ូដែលកូនកាត់ប្រើប្រាស់ Word2Vec បូកជាមួយ Hybrid CNN</td>
+                <td>ជាម៉ូដែលមូលដ្ឋានដ៏ល្អសម្រាប់ការស្រាវជ្រាវដំបូងៗស្តីពីការប្រើប្រាស់ Deep Learning លើការរកឃើញព័ត៌មានក្លែងក្លាយ។</td>
+                <td>ប្រឈមនឹងបញ្ហា Sparse tensors ដែលធ្វើឱ្យភាពត្រឹមត្រូវធ្លាក់ចុះយ៉ាងខ្លាំងនៅពេលជួបប្រយោគខ្លីៗ ឬព័ត៌មានថ្មីៗ។</td>
+                <td>ទទួលបានពិន្ទុ F1-Score ទាបត្រឹមតែ ២៧.០១% ប៉ុណ្ណោះលើសំណុំទិន្នន័យ LIAR។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះបានបញ្ជាក់យ៉ាងច្បាស់អំពីធនធានកុំព្យូទ័រដែលបានប្រើប្រាស់សម្រាប់ការពិសោធន៍ ដែលបង្ហាញថាម៉ូដែលនេះមិនទាមទារកម្លាំងម៉ាស៊ីនធំដុំ (ដូចជា GPU) នោះទេ ដោយសារការប្រើប្រាស់ទិន្នន័យប្រភេទ n-gram និង TF-IDF ជួយកាត់បន្ថយទំហំទិន្នន័យបានច្រើន។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ប្រើប្រាស់កុំព្យូទ័រធម្មតាដែលមាន CPU ចំនួន ៤ គ្រាប់ (Intel Core i7 2.5 GHz) និងអង្គចងចាំ (RAM) ទំហំ 8 GB។</li>
+        
+        <li><strong>Software:</strong> ភាសាសរសេរកូដ Python 3.7 និងបណ្ណាល័យសម្រាប់សិក្សាស៊ីជម្រៅ (Deep Learning Frameworks)។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យសាធារណៈ LIAR (១២,៨៣៦ ឃ្លាខ្លីៗ) និង ISOT (៤៤,៨៩៨ អត្ថបទព័ត៌មានវែងៗ)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យជាភាសាអង់គ្លេសដែលផ្តោតជាចម្បងលើបរិបទនយោបាយនៅសហរដ្ឋអាមេរិក (Politifact) និងព័ត៌មានអន្តរជាតិ (Reuters)។ សម្រាប់ប្រទេសកម្ពុជា ការពឹងផ្អែកលើលទ្ធផលនេះមិនអាចយកមកអនុវត្តផ្ទាល់ដោយគ្មានការកែច្នៃបានទេ ដោយសារព័ត៌មានក្លែងក្លាយនៅកម្ពុជាភាគច្រើនសរសេរជាភាសាខ្មែរ មានទម្រង់ខុសគ្នា និងជារឿយៗត្រូវបានចែកចាយតាមរយៈបណ្តាញសង្គមដោយមានលាយឡំរូបភាព ឬវីដេអូ។ ទោះជាយ៉ាងណាក៏ដោយ វិធីសាស្ត្រនៃការប្រើអត្ថបទខ្លីៗគឺស្រដៀងទៅនឹងទម្លាប់ប្រើប្រាស់បណ្តាញសង្គមរបស់ពលរដ្ឋខ្មែរ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់និងស័ក្តិសមក្នុងការយកមកអនុវត្តនៅកម្ពុជា ដោយសារវាមានប្រសិទ្ធភាពខ្ពស់ក្នុងការវិភាគអត្ថបទខ្លីៗ (ដូចជាការបង្ហោះលើ Facebook) ដោយមិនតម្រូវឱ្យមានហេដ្ឋារចនាសម្ព័ន្ធកុំព្យូទ័រថ្លៃៗ។</p>
+        
+        <ul>
+            
+            <li><strong>គណៈកម្មាធិការប្រយុទ្ធប្រឆាំងព័ត៌មានក្លែងក្លាយ (Anti-Fake News Committee):</strong> អាចប្រើប្រាស់ម៉ូដែលនេះដើម្បីតាមដាន និងផ្តល់សញ្ញាព្រមានស្វ័យប្រវត្តិទៅលើការបង្ហោះខ្លីៗតាមទំព័រ Facebook ឬក្រុម Telegram ដែលមាននិន្នាការជាព័ត៌មានញុះញង់ ឬបំផ្លើសការពិត។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល (ក្រសួងសុខាភិបាល):</strong> ត្រងនិងវាយតម្លៃព័ត៌មានមិនពិតទាក់ទងនឹងសុខភាព ឱសថក្លែងក្លាយ ឬការផ្ទុះជំងឺរាតត្បាត ដែលតែងតែត្រូវបានចែកចាយយ៉ាងលឿនក្នុងទម្រង់ជាអត្ថបទខ្លីៗក្នុងចំណោមប្រជាជនកម្ពុជា។</li>
+            
+            <li><strong>អង្គការផ្ទៀងផ្ទាត់ការពិត (Fact-checking NGOs ដូចជា Fact-Check Cambodia):</strong> អាចអភិវឌ្ឍប្រព័ន្ធនេះជាជំនួយការ AI ក្នុងការសម្រាំងអត្ថបទរាប់ពាន់ប្រចាំថ្ងៃ ទុកឱ្យក្រុមការងារមនុស្សចុះធ្វើការស៊ើបអង្កេតបន្តតែលើអត្ថបទដែលមានហានិភ័យខ្ពស់។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ប្រសិនបើមានការស្រាវជ្រាវបន្ថែមក្នុងការកាត់ពាក្យខ្មែរ និងចងក្រងសំណុំទិន្នន័យជាភាសាខ្មែរបានត្រឹមត្រូវ ម៉ូដែលនេះនឹងក្លាយជាឧបករណ៍ដ៏មុតស្រួចមួយក្នុងការទប់ស្កាត់ព័ត៌មានក្លែងក្លាយនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីការរៀបចំទិន្នន័យអត្ថបទភាសាខ្មែរ (Text Preprocessing):</strong> ចាប់ផ្តើមរៀនពីរបៀបសម្អាតអត្ថបទនិងការកាត់ពាក្យ (Word Tokenization) សម្រាប់ភាសាខ្មែរ ដោយប្រើប្រាស់ឧបករណ៍ដែលមានស្រាប់ដូចជា <span class="en">Khmer Natural Language Processing (KhmerNLP)</span> ឬ <span class="en">sekhmer</span>។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសទាញយកលក្ខណៈពិសេសអត្ថបទ (Feature Extraction):</strong> រៀនបំប្លែងអត្ថបទទៅជាទិន្នន័យលេខដោយប្រើប្រាស់បច្ចេកទេស <span class="en">TF-IDF</span> និងការចងក្រងពាក្យ <span class="en">n-gram</span> (ឧ. bi-gram) តាមរយៈបណ្ណាល័យ <span class="en">Scikit-Learn</span> នៅក្នុង <span class="en">Python</span>។</li>
+            
+            <li><strong>រៀបចំសំណុំទិន្នន័យព័ត៌មានពិតនិងក្លែងក្លាយជាភាសាខ្មែរ:</strong> ប្រមូលអត្ថបទព័ត៌មានខ្លីៗពីទំព័រផ្លូវការ (ព័ត៌មានពិត) និងប្រភពដែលគ្មានប្រភពច្បាស់លាស់ (អាចជាព័ត៌មានក្លែងក្លាយ) រួចធ្វើការបិទស្លាក (Labeling) ជាថ្នាក់ផ្សេងៗគ្នា (ពិតប្រាកដ ពាក់កណ្តាលពិត ឬក្លែងក្លាយទាំងស្រុង)។</li>
+            
+            <li><strong>សាងសង់បណ្តាញសិក្សាស៊ីជម្រៅតាមលំដាប់ (Sequential Deep Learning):</strong> ប្រើប្រាស់ <span class="en">TensorFlow</span> ឬ <span class="en">Keras</span> ដើម្បីបង្កើតម៉ូដែល AI ដែលមាន <span class="en">Dense Layers</span> និងប្រើប្រាស់ <span class="en">Dropout layers</span> ដើម្បីការពារបញ្ហាការចងចាំទិន្នន័យហួសកម្រិត (Overfitting)។</li>
+            
+            <li><strong>បង្កើតម៉ូដែលរួមបញ្ចូលគ្នា (Ensemble Model) និងវាយតម្លៃ:</strong> ហ្វឹកហាត់បញ្ញាសិប្បនិម្មិតជាច្រើន (Binary classifiers) ទៅលើសំណុំទិន្នន័យរបស់អ្នក រួចយកលទ្ធផលរបស់វាបញ្ចូលទៅក្នុងបណ្តាញ <span class="en">Multilayer Perceptron (MLP)</span> ដើម្បីធ្វើការសម្រេចចិត្តចុងក្រោយ និងវាស់ស្ទង់ភាពត្រឹមត្រូវដោយប្រើប្រាស់ <span class="en">F1-Score</span>។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Ensemble Model</span></td>
+                <td>ជាទម្រង់នៃការសាងសង់ម៉ូដែលបញ្ញាសិប្បនិម្មិត (AI) ដែលយកម៉ូដែលតូចៗជាច្រើនមកធ្វើការរួមគ្នា ដើម្បីធ្វើការសម្រេចចិត្តរួមមួយដែលមានភាពសុក្រឹតនិងត្រឹមត្រូវជាងការប្រើប្រាស់ម៉ូដែលតែមួយឯកឯង។</td>
+                <td>ដូចជាការសួរសំណួរមួយទៅកាន់ក្រុមអ្នកប្រាជ្ញជាច្រើននាក់ រួចយកចម្លើយអ្នកទាំងអស់នោះមកបូកបញ្ចូលគ្នាដើម្បីរកចម្លើយដែលត្រឹមត្រូវបំផុត ជាជាងការជឿលើមនុស្សតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TF-IDF</span></td>
+                <td>ជាបច្ចេកទេសបំប្លែងអត្ថបទទៅជាតួលេខ ដោយវាស់ស្ទង់ភាពញឹកញាប់នៃពាក្យមួយនៅក្នុងអត្ថបទមួយ ធៀបនឹងចំនួនដងដែលពាក្យនោះលេចឡើងក្នុងអត្ថបទទាំងអស់។ វាជួយទម្លាក់តម្លៃពាក្យទូទៅ (ដូចជា "និង", "ឬ") និងលើកតម្លៃពាក្យសំខាន់ៗដែលសម្គាល់អត្ថបទនោះ។</td>
+                <td>ដូចជាការរកមើលគ្រឿងផ្សំពិសេសប្រចាំហាងនីមួយៗ ដោយមិនខ្វល់ពីអំបិលឬស្ករដែលមាននៅគ្រប់ហាងនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">n-gram</span></td>
+                <td>ជាវិធីសាស្ត្រកាត់អត្ថបទជាបំណែកៗដោយចាប់យកពាក្យជាប់គ្នាជាក្រុម (ឧទាហរណ៍ bi-gram គឺចាប់យក ២ ពាក្យជាប់គ្នា) ដើម្បីរក្សាអត្ថន័យនៃឃ្លា ជាជាងការមើលតែពាក្យមួយៗដាច់ពីគ្នា។</td>
+                <td>ដូចជាការអានពាក្យ "ក្តៅ" និង "ស៊ី" ជាប់គ្នាជា "ក្តៅស៊ី" (ខឹង) ដែលមានន័យខុសស្រឡះពីការអានពាក្យ "ក្តៅ" និង "ស៊ី" ដាច់ដោយឡែកពីគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multilayer Perceptron (MLP)</span></td>
+                <td>ជាប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Artificial Neural Network) បុរាណដែលមានស្រទាប់ជាច្រើន (Input, Hidden, Output)។ នៅក្នុងការសិក្សានេះ វាត្រូវបានប្រើនៅដំណាក់កាលចុងក្រោយដើម្បីយកលទ្ធផលពីម៉ូដែលមុនៗមកធ្វើការវាយតម្លៃនិងកាត់ក្តីជាចំណាត់ថ្នាក់ចុងក្រោយ។</td>
+                <td>ដូចជាចៅក្រមតុលាការកំពូលដែលស្តាប់សក្ខីកម្មពីសាក្សីជាច្រើន (ស្រទាប់មុនៗ) មុននឹងសម្រេចក្តីចុងក្រោយថាតើព័ត៌មាននោះពិត ឬក្លែងក្លាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sequential Deep Learning</span></td>
+                <td>ជាទម្រង់នៃបណ្តាញសិក្សាស៊ីជម្រៅដែលស្រទាប់នីមួយៗ (Layers) ត្រូវបានតម្រៀបបន្តបន្ទាប់គ្នាជាលំដាប់លំដោយ។ ទិន្នន័យរត់ពីស្រទាប់មួយទៅស្រទាប់មួយទៀតដើម្បីទាញយកលក្ខណៈពិសេសដែលលាក់កំបាំងកាន់តែស៊ីជម្រៅទៅៗ។</td>
+                <td>ដូចជារោងចក្រដំឡើងរថយន្ត ដែលគ្រឿងបន្លាស់ត្រូវឆ្លងកាត់ពីផ្នែកមួយទៅផ្នែកមួយទៀតតាមលំដាប់លំដោយរហូតចេញជារថយន្តពេញលេញមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sparse tensor</span></td>
+                <td>ជាទម្រង់ផ្ទុកទិន្នន័យ (ម៉ាទ្រីសពហុវិមាត្រ) ដែលពោរពេញទៅដោយតម្លៃសូន្យច្រើនជាងតម្លៃពិតប្រាកដ។ ក្នុងដំណើរការវិភាគអត្ថបទខ្លីៗ វាធ្វើឱ្យម៉ូដែល AI ពិបាករៀនសូត្រ ដោយសារតែខ្វះព័ត៌មាន (Features) គ្រប់គ្រាន់សម្រាប់ចាប់យកលំនាំ (Patterns)។</td>
+                <td>ដូចជាសៀវភៅមួយក្បាលធំដែលមានអក្សរតែពីរបីទំព័រ ចំណែកទំព័រផ្សេងទៀតទទេ។ វាធ្វើឱ្យអ្នកអានពិបាកយល់សាច់រឿងទាំងមូល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Contextualized text representation</span></td>
+                <td>ជាបច្ចេកទេសទំនើបដែលបំប្លែងពាក្យទៅជាតួលេខដោយពិចារណាលើបរិបទ ឬពាក្យដែលនៅជុំវិញវា (ដូចជា BERT ឬ Word2Vec)។ ទោះបីជាទំនើប ប៉ុន្តែការសិក្សានេះរកឃើញថាវាមិនសូវមានប្រសិទ្ធភាពសម្រាប់អត្ថបទខ្លីៗពេកនោះទេ។</td>
+                <td>ដូចជាមនុស្សដែលពូកែស្តាប់និងយល់ន័យធៀបនៃពាក្យសម្តីតាមកាលៈទេសៈ ប៉ុន្តែអាចនឹងគិតស្មុគស្មាញពេកនៅពេលឮពាក្យលេងសើចខ្លីៗធម្មតា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=contextualized+word+embeddings+for+short+text+fake+news+detection" target="_blank" rel="noopener"><span class="en">contextualized word embeddings for short text fake news detection</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+CNN-RNN+architectures+for+rumor+detection+on+social+media" target="_blank" rel="noopener"><span class="en">hybrid CNN-RNN architectures for rumor detection on social media</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-class+fake+news+classification+datasets+LIAR+and+ISOT" target="_blank" rel="noopener"><span class="en">multi-class fake news classification datasets LIAR and ISOT</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=incorporating+user+contextual+features+in+deep+learning+misinformation+models" target="_blank" rel="noopener"><span class="en">incorporating user contextual features in deep learning misinformation models</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

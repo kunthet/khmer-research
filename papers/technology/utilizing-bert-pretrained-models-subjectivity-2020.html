@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការប្រើប្រាស់ម៉ូដែលហ្វឹកហាត់ជាមុន BERT ជាមួយនឹងវិធីសាស្ត្រកែសម្រួលម៉ត់ចត់ផ្សេងៗក្នុងកិច្ចការស្វែងរកភាពលំអៀង | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយលើកិច្ចការនៃការស្វែងរកភាពលំអៀង (Subjectivity detection) ដែលពាក់ព័ន្ធនឹងការចាត់ថ្នាក់ប្រយោគទៅជាប្រយោគមានមតិយោបល់ (Subjective) ឬប្រយោគអព្យាក្រឹ...">
+    
+    <meta name="keywords" content="BERT, Subjectivity Detection, Fine-tuning, Multi-task Learning, One Cycle Policy, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/utilizing-bert-pretrained-models-subjectivity-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/utilizing-bert-pretrained-models-subjectivity-2020.html">
+    <meta property="og:title" content="ការប្រើប្រាស់ម៉ូដែលហ្វឹកហាត់ជាមុន BERT ជាមួយនឹងវិធីសាស្ត្រកែសម្រួលម៉ត់ចត់ផ្សេងៗក្នុងកិច្ចការស្វែងរកភាពលំអៀង | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយលើកិច្ចការនៃការស្វែងរកភាពលំអៀង (Subjectivity detection) ដែលពាក់ព័ន្ធនឹងការចាត់ថ្នាក់ប្រយោគទៅជាប្រយោគមានមតិយោបល់ (Subjective) ឬប្រយោគអព្យាក្រឹត (Objective) ដោយស្វែងរកយុទ្ធសាស្ត្រកែសម...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020 DEIM Forum">
+    
+    <meta property="article:tag" content="BERT">
+    
+    <meta property="article:tag" content="Subjectivity Detection">
+    
+    <meta property="article:tag" content="Fine-tuning">
+    
+    <meta property="article:tag" content="Multi-task Learning">
+    
+    <meta property="article:tag" content="One Cycle Policy">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការប្រើប្រាស់ម៉ូដែលហ្វឹកហាត់ជាមុន BERT ជាមួយនឹងវិធីសាស្ត្រកែសម្រួលម៉ត់ចត់ផ្សេងៗក្នុងកិច្ចការស្វែងរកភាពលំអៀង">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយលើកិច្ចការនៃការស្វែងរកភាពលំអៀង (Subjectivity detection) ដែលពាក់ព័ន្ធនឹងការចាត់ថ្នាក់ប្រយោគទៅជាប្រយោគមានមតិយោបល់ (Subjective) ឬប្រយោគអព្យាក្រឹត (Objective) ដោយស្វែងរកយុទ្ធសាស្ត្រកែសម...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u1787\u17b6\u1798\u17bb\u1793 BERT \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1780\u17c2\u179f\u1798\u17d2\u179a\u17bd\u179b\u1798\u17c9\u178f\u17cb\u1785\u178f\u17cb\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1797\u17b6\u1796\u179b\u17c6\u17a2\u17c0\u1784",
+      "name": "Utilizing BERT pretrained models with various fine-tune methods in subjectivity tasks",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u179b\u17be\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u1793\u17c3\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1797\u17b6\u1796\u179b\u17c6\u17a2\u17c0\u1784 (Subjectivity detection) \u178a\u17c2\u179b\u1796\u17b6\u1780\u17cb\u1796\u17d0\u1793\u17d2\u1792\u1793\u17b9\u1784\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1794\u17d2\u179a\u1799\u17c4\u1782\u1791\u17c5\u1787\u17b6\u1794\u17d2\u179a\u1799\u17c4\u1782\u1798\u17b6\u1793\u1798\u178f\u17b7\u1799\u17c4\u1794\u179b\u17cb (Subjective) \u17ac\u1794\u17d2\u179a\u1799\u17c4\u1782\u17a2\u1796\u17d2\u1799\u17b6\u1780\u17d2\u179a\u17b9\u178f (Objective) \u178a\u17c4\u1799\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1780\u17c2\u179f\u1798\u17d2\u179a\u17bd\u179b\u1798\u17c9\u178f\u17cb\u1785\u178f\u17cb (Fine-tuning strategies) \u178a\u17cf\u179b\u17d2\u17a2\u1794\u17d2\u179a\u179f\u17be\u179a\u1794\u17c6\u1795\u17bb\u178f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1797\u17b6\u179f\u17b6 BERT \u178a\u17c2\u179b\u1794\u17b6\u1793\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u1787\u17b6\u1798\u17bb\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/utilizing-bert-pretrained-models-subjectivity-2020.html",
+      "author": [{"@type": "Person", "name": "Hairong Huo (Waseda University)"},{"@type": "Person", "name": "Mizuho Iwaihara (Waseda University)"}],
+      "datePublished": "2020 DEIM Forum",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Utilizing BERT pretrained models with various fine-tune methods in subjectivity tasks",
+        "url": "https://db-event.jpn.org/deim2020/post/proceedings/papers/G1-1.pdf"
+      },
+      "keywords": ["BERT", "Subjectivity Detection", "Fine-tuning", "Multi-task Learning", "One Cycle Policy"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u1787\u17b6\u1798\u17bb\u1793 BERT \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1780\u17c2\u179f\u1798\u17d2\u179a\u17bd\u179b\u1798\u17c9\u178f\u17cb\u1785\u178f\u17cb\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1797\u17b6\u1796\u179b\u17c6\u17a2\u17c0\u1784",
+          "item": "https://khmerresearch.com/papers/technology/utilizing-bert-pretrained-models-subjectivity-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការប្រើប្រាស់ម៉ូដែលហ្វឹកហាត់ជាមុន BERT ជាមួយនឹងវិធីសាស្ត្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Utilizing BERT pretrained models with various fine-tune methods in subjectivity tasks<br>
+        
+        <strong>Source:</strong> <a href="https://db-event.jpn.org/deim2020/post/proceedings/papers/G1-1.pdf" target="_blank">db-event.jpn.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការប្រើប្រាស់ម៉ូដែលហ្វឹកហាត់ជាមុន BERT ជាមួយនឹងវិធីសាស្ត្រកែសម្រួលម៉ត់ចត់ផ្សេងៗក្នុងកិច្ចការស្វែងរកភាពលំអៀង</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Utilizing BERT pretrained models with various fine-tune methods in subjectivity tasks</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Hairong Huo (Waseda University), Mizuho Iwaihara (Waseda University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 DEIM Forum</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយលើកិច្ចការនៃការស្វែងរកភាពលំអៀង (Subjectivity detection) ដែលពាក់ព័ន្ធនឹងការចាត់ថ្នាក់ប្រយោគទៅជាប្រយោគមានមតិយោបល់ (Subjective) ឬប្រយោគអព្យាក្រឹត (Objective) ដោយស្វែងរកយុទ្ធសាស្ត្រកែសម្រួលម៉ត់ចត់ (Fine-tuning strategies) ដ៏ល្អប្រសើរបំផុតសម្រាប់ម៉ូដែលភាសា BERT ដែលបានហ្វឹកហាត់ជាមុន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការពិសោធន៍ដោយប្រើប្រាស់ម៉ូដែលគោល BERT-base និងប្រៀបធៀបយុទ្ធសាស្ត្រកែសម្រួលម៉ត់ចត់ (Fine-tuning strategies) ផ្សេងៗគ្នា ជាមួយនឹងឧបករណ៍ចាត់ថ្នាក់បណ្តាញសរសៃប្រសាទ (Neural network classifiers) ច្រើនប្រភេទដើម្បីស្វែងរកលទ្ធផលល្អបំផុត។
+        
+        <ul>
+            
+            <li>ការកែសម្រួលម៉ត់ចត់តាមកម្រិតស្រទាប់ (Layer-wise discriminative fine-tuning)</li>
+            
+            <li>គោលការណ៍វដ្តតែមួយ (One cycle policy) សម្រាប់កំណត់អត្រាសិក្សា (Learning rate)</li>
+            
+            <li>ការបំបាត់ការបង្កកជាបណ្តើរៗ (Gradual unfreezing) នៃស្រទាប់ម៉ូដែលដើម្បីការពារការភ្លេចព័ត៌មាន</li>
+            
+            <li>ការរៀនពហុកិច្ចការ (Multi-task learning) ដោយរួមបញ្ចូលសំណុំទិន្នន័យ (Datasets) ចំនួន ៦ និងកិច្ចការចំនួន ៤ ផ្សេងគ្នា</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់គោលការណ៍វដ្តតែមួយ (One cycle policy) ជួយបង្កើនប្រសិទ្ធភាពលើសំណុំទិន្នន័យតូចៗ និងការពារបញ្ហាការរៀនហួសកម្រិត (Over-fitting)។</li>
+            
+            <li>ការរៀនពហុកិច្ចការ (Multi-task learning) ផ្តល់នូវភាពប្រសើរឡើងគួរឱ្យកត់សម្គាល់ ដោយសម្រេចបានភាពត្រឹមត្រូវ ៩៥.២៣% លើសំណុំទិន្នន័យ SUBJ និង ៩៣.០៧% លើសំណុំទិន្នន័យ IMDb។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នារវាងការរៀនពហុកិច្ចការ (MTL) និងគោលការណ៍វដ្តតែមួយ ផ្តល់លទ្ធផលល្អបំផុត ដោយសម្រេចបានភាពត្រឹមត្រូវរហូតដល់ ៨៤.០៥% លើសំណុំទិន្នន័យ Wikipedia biased statements ដោយយកឈ្នះលើម៉ូដែលមុនៗចាស់ៗ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Standard BERT-base fine-tuning</span></strong><br>ការកែសម្រួលម៉ត់ចត់កម្រិតស្តង់ដារលើម៉ូដែល BERT-base</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងដើរតួជាគោល (Baseline) ដ៏ល្អសម្រាប់ប្រៀបធៀបជាមួយវិធីសាស្ត្រផ្សេងៗ។</td>
+                <td>មិនទាន់អាចទាញយកសក្តានុពលពេញលេញនៃទិន្នន័យ និងរចនាសម្ព័ន្ធម៉ូដែលបានល្អបំផុតនោះទេ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៤.២% លើសំណុំទិន្នន័យ SUBJ និង ៨១.៥៦% លើ Wikipedia Biased Statements។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">BERT-base with LSTM / BiLSTM</span></strong><br>ការប្រើប្រាស់ម៉ូដែល BERT-base រួមជាមួយបណ្តាញ LSTM ឬ BiLSTM</td>
+                <td>អនុញ្ញាតឱ្យមានការបន្ថែមស្រទាប់បណ្តាញសរសៃប្រសាទស្មុគស្មាញពីលើតួម៉ូដែល BERT សម្រាប់ការចាត់ថ្នាក់អត្ថបទ។</td>
+                <td>ធ្វើឱ្យប្រសិទ្ធភាពធ្លាក់ចុះ ព្រោះ BERT មានបណ្តាញជ្រៅ និងយុទ្ធសាស្ត្រទាញយកលក្ខណៈពិសេស (Feature extraction) ល្អរួចទៅហើយ ការបន្ថែមនេះគឺមិនចាំបាច់ទេ។</td>
+                <td>ភាពត្រឹមត្រូវធ្លាក់ចុះមកត្រឹម ៩២.៩៤% (LSTM) និង ៩២.៤៨% (BiLSTM) លើសំណុំទិន្នន័យ SUBJ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">BERT-base with One Cycle Policy</span></strong><br>ការប្រើប្រាស់ BERT-base ជាមួយគោលការណ៍វដ្តតែមួយ (One Cycle Policy)</td>
+                <td>ជួយការពារបញ្ហាការរៀនហួសកម្រិត (Over-fitting) និងមានប្រសិទ្ធភាពខ្ពស់លើសំណុំទិន្នន័យតូចៗ ដោយប្រើប្រាស់អត្រាសិក្សា (Learning rate) ថាមវន្ត។</td>
+                <td>មិនមានភាពប្រសើរឡើងគួរឱ្យកត់សម្គាល់លើសំណុំទិន្នន័យធំៗដូចជា IMDb នោះទេ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៤.៥៣% លើ SUBJ និង ៨២.១៧% លើទិន្នន័យ Wikipedia។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">BERT-base Multi-Task Learning (6 datasets)</span></strong><br>ការរៀនពហុកិច្ចការ (MTL) ដោយប្រើសំណុំទិន្នន័យ ៦</td>
+                <td>បង្កើនទំហំទិន្នន័យហ្វឹកហាត់ និងជួយឱ្យម៉ូដែលយល់ដឹងកាន់តែទូលំទូលាយពីបរិបទភាសាផ្សេងៗគ្នា។</td>
+                <td>ទាមទារធនធានកុំព្យូទ័រ និងពេលវេលាច្រើនក្នុងការហ្វឹកហាត់កិច្ចការច្រើនក្នុងពេលតែមួយ។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវខ្ពស់រហូតដល់ ៩៥.២៣% លើ SUBJ និង ៩៣.០៧% លើ IMDb ដែលវ៉ាដាច់ម៉ូដែលមុនៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">BERT-base MTL + 1 cycle policy</span></strong><br>ការរួមបញ្ចូលគ្នារវាងការរៀនពហុកិច្ចការ និងគោលការណ៍វដ្តតែមួយ</td>
+                <td>ទទួលបានលទ្ធផលល្អបំផុតក្នុងការស្វែងរកភាពលំអៀងលើសំណុំទិន្នន័យ Wikipedia ដោយរួមបញ្ចូលចំណុចខ្លាំងនៃវិធីសាស្ត្រទាំងពីរ។</td>
+                <td>មិនមានការកើនឡើងប្រសិទ្ធភាពបន្ថែមទៀតលើសំណុំទិន្នន័យ SUBJ និង IMDb បើធៀបនឹងការប្រើ MTL តែឯង។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុតរហូតដល់ ៨៤.០៥% លើទិន្នន័យ Wikipedia Biased Statements។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការហ្វឹកហាត់ម៉ូដែល BERT និងវិធីសាស្ត្ររៀនពហុកិច្ចការ (Multi-task learning) ទាមទារធនធានកុំព្យូទ័រធុនធ្ងន់ ជាពិសេសអង្គគណនាដោះស្រាយក្រាហ្វិក (GPU) និងសំណុំទិន្នន័យចម្រុះជាច្រើន។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការអង្គគណនា GPU ដែលមានសមត្ថភាពខ្ពស់ដើម្បីហ្វឹកហាត់ម៉ូដែល BERT-base ដែលមានប៉ារ៉ាម៉ែត្ររហូតដល់ ១១០ លាន និង Batch size ចំនួន ៣២។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ Framework <span class='en'>PyTorch</span> និង <span class='en'>Adam Optimizer</span> សម្រាប់កសាងម៉ូដែល និងដំណើរការកូដ។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការសំណុំទិន្នន័យធំៗចំនួន ៦ (STS-B, SNLI, QNLI, SUBJ, Wikipedia, IMDb) សម្រាប់ការរៀនពហុកិច្ចការ (MTL)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅផ្នែក Natural Language Processing (NLP), Transfer Learning និងការកែសម្រួលប៉ារ៉ាម៉ែត្រ (Hyperparameter tuning)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើសំណុំទិន្នន័យភាសាអង់គ្លេស (ដូចជា Wikipedia និង IMDb) ដែលឆ្លុះបញ្ចាំងពីវប្បធម៌ និងរបៀបបញ្ចេញមតិរបស់លោកខាងលិច។ ភាពលំអៀង និងការបញ្ចេញមតិផ្ទាល់ខ្លួន (Subjectivity) នៅក្នុងភាសាខ្មែរមានទម្រង់ និងបរិបទសង្គមខុសគ្នា ដែលធ្វើឱ្យម៉ូដែលនេះមិនអាចយកមកអនុវត្តផ្ទាល់នៅកម្ពុជាបានទេ បើគ្មានការហ្វឹកហាត់ឡើងវិញជាមួយអត្ថបទភាសាខ្មែរ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យជាភាសាអង់គ្លេសក៏ដោយ វិធីសាស្ត្រនៃការកែសម្រួលម៉ត់ចត់ (Fine-tuning strategies) នេះមានសក្តានុពលខ្ពស់ក្នុងការយកមកអនុវត្តនៅប្រទេសកម្ពុជា ពិសេសដើម្បីដោះស្រាយបញ្ហាខ្វះខាតទិន្នន័យ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសារព័ត៌មាន និងប្រព័ន្ធផ្សព្វផ្សាយ (Media and Journalism):</strong> អាចប្រើប្រាស់ដើម្បីពិនិត្យរកមើលភាពលំអៀង (Bias) ឬការបញ្ចេញមតិផ្ទាល់ខ្លួននៅក្នុងអត្ថបទព័ត៌មាន ដើម្បីជួយដល់អ្នកកាសែតនៅកម្ពុជាក្នុងការធានាបាននូវវិជ្ជាជីវៈ និងការសរសេរប្រកបដោយអព្យាក្រឹតភាព។</li>
+            
+            <li><strong>ការវិភាគមតិអតិថិជន (E-commerce and Services):</strong> ក្រុមហ៊ុន និងធនាគារនៅកម្ពុជាអាចប្រើប្រាស់វាដើម្បីបែងចែកមតិយោបល់របស់អតិថិជន (Customer reviews) ទៅជាមតិស្ថាបនាផ្អែកលើការពិត ឬមតិរិះគន់ផ្ទាល់ខ្លួន ដើម្បីយកមកកែលម្អសេវាកម្ម។</li>
+            
+            <li><strong>ស្ថាប័នផ្ទៀងផ្ទាត់ព័ត៌មាន (Fact-Checking Initiatives):</strong> ជួយដល់អង្គការ ឬក្រុមការងារផ្ទៀងផ្ទាត់ព័ត៌មានក្លែងក្លាយនៅកម្ពុជា ក្នុងការវាយតម្លៃបឋមថាតើអត្ថបទមួយផ្អែកលើការពិត (Objective fact) ឬគ្រាន់តែជាមតិយោបល់បុគ្គល និងពាក្យចចាមអារ៉ាម (Subjective opinion)។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកទេស Multi-task learning និង One Cycle Policy នេះ គឺស័ក្តិសមបំផុតសម្រាប់កម្ពុជា ព្រោះវាអាចជួយដោះស្រាយបញ្ហាខ្វះខាតទិន្នន័យបណ្តុះបណ្តាល (Low-resource context) សម្រាប់ផ្នែក NLP ភាសាខ្មែរបានយ៉ាងមានប្រសិទ្ធភាពនាពេលអនាគត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ BERT និង PyTorch:</strong> ចាប់ផ្តើមដោយការសិក្សាពីស្ថាបត្យកម្ម Transformer និងរបៀបប្រើប្រាស់ <span class='en'>PyTorch</span> រួមជាមួយបណ្ណាល័យ <span class='en'>Hugging Face Transformers</span> ដើម្បីយល់ពីរបៀបដំណើរការម៉ូដែលភាសា។</li>
+            
+            <li><strong>សាកល្បងហ្វឹកហាត់ម៉ូដែលកម្រិតមូលដ្ឋាន (Baseline Fine-tuning):</strong> ប្រើប្រាស់ម៉ូដែល <span class='en'>BERT-base</span> ដើម្បីសាកល្បងអនុវត្តការកែសម្រួលម៉ត់ចត់ (Fine-tune) លើកិច្ចការចំណាត់ថ្នាក់អត្ថបទសាមញ្ញ តាមរយៈសៀវភៅកូដអនឡាញ <span class='en'>Google Colab</span>។</li>
+            
+            <li><strong>អនុវត្តយុទ្ធសាស្ត្រ One Cycle Policy:</strong> សរសេរកូដដើម្បីអនុវត្ត <span class='en'>One Cycle Policy</span> ក្នុងការកែតម្រូវអត្រាសិក្សា (Learning Rate) ថាមវន្ត ដោយប្រើប្រាស់មុខងារ <span class='en'>LR Range Test</span> ដើម្បីស្វែងរកតម្លៃល្អបំផុតមុនពេលហ្វឹកហាត់។</li>
+            
+            <li><strong>អភិវឌ្ឍប្រព័ន្ធរៀនពហុកិច្ចការ (Multi-Task Learning):</strong> រៀបចំរចនាសម្ព័ន្ធទិន្នន័យ និងសរសេរកូដសម្រាប់ <span class='en'>Multi-Task Learning</span> ដោយប្រើប្រាស់ស្រទាប់ចែករំលែក (Shared Layers) សម្រាប់កិច្ចការខុសៗគ្នាក្នុងពេលតែមួយ ដើម្បីបង្កើនភាពត្រឹមត្រូវនៃតួម៉ូដែល។</li>
+            
+            <li><strong>ស្រាវជ្រាវ និងអនុវត្តលើអត្ថបទភាសាខ្មែរ:</strong> ប្រមូលសំណុំទិន្នន័យភាសាខ្មែរតូចៗ និងសាកល្បងប្រើប្រាស់វិធីសាស្ត្រខាងលើជាមួយម៉ូដែលដែលបានហ្វឹកហាត់ភាសាខ្មែរស្រាប់ដូចជា <span class='en'>Khmer-RoBERTa</span> ឬ <span class='en'>Multilingual BERT</span> ដើម្បីដោះស្រាយបញ្ហាវិភាគអត្ថបទជាក់ស្តែងនៅកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">BERT</span></td>
+                <td>វាជាម៉ូដែលបញ្ញាសិប្បនិម្មិតកម្រិតខ្ពស់ដែលត្រូវបានហ្វឹកហាត់ជាមុនលើអត្ថបទរាប់លាន ដើម្បីយល់ពីបរិបទ និងអត្ថន័យនៃពាក្យក្នុងប្រយោគទាំងសងខាង (ពីឆ្វេងទៅស្តាំ និងស្តាំទៅឆ្វេង)។ បន្ទាប់មកគេអាចយកវាទៅប្រើសម្រាប់កិច្ចការភាសាផ្សេងៗទៀត។</td>
+                <td>ដូចជានិស្សិតម្នាក់ដែលបានអានសៀវភៅរាប់ពាន់ក្បាលនៅបណ្ណាល័យដើម្បីយល់ដឹងពីភាសាទូទៅ មុននឹងចាប់ផ្តើមរៀនមុខវិជ្ជាឯកទេស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Subjectivity detection</span></td>
+                <td>ជាដំណើរការប្រើប្រាស់កុំព្យូទ័រដើម្បីបែងចែកថា តើប្រយោគមួយគ្រាន់តែជាការរៀបរាប់ការពិត (អព្យាក្រឹត) ឬជាការបញ្ចេញមតិយោបល់ផ្ទាល់ខ្លួន អារម្មណ៍ ឬភាពលំអៀងរបស់អ្នកសរសេរ។</td>
+                <td>ដូចជាអាជ្ញាកណ្តាលដែលកាត់ក្តីថា សម្តីមួយឃ្លាជារឿងពិត ឬគ្រាន់តែជាការបញ្ចេញមតិផ្ទាល់ខ្លួនរបស់គេប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fine-tuning</span></td>
+                <td>ជាវិធីសាស្ត្រយកម៉ូដែល AI ដែលបានហ្វឹកហាត់រួចជាស្រេច (Pretrained model) មកបន្តបង្ហាត់បន្តិចបន្តួចបន្ថែមទៀតជាមួយទិន្នន័យជាក់លាក់ ដើម្បីឱ្យវាចេះធ្វើកិច្ចការថ្មីមួយបានល្អ ដោយមិនបាច់ចាប់ផ្តើមហ្វឹកហាត់ពីសូន្យ។</td>
+                <td>ដូចជាជាងឈើដែលមានជំនាញជាមូលដ្ឋានរួចហើយ គ្រាន់តែទៅរៀនបន្ថែមតិចតួចពីរបៀបធ្វើទូក ដើម្បីក្លាយជាជាងធ្វើទូកដ៏ចំណាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">One cycle policy</span></td>
+                <td>ជាយុទ្ធសាស្ត្រក្នុងការកែតម្រូវល្បឿននៃការរៀនរបស់ម៉ូដែល (Learning rate) ក្នុងពេលកំពុងហ្វឹកហាត់ ដោយចាប់ផ្តើមពីរៀនយឺតៗ រួចបង្កើនល្បឿនដល់កម្រិតកំពូល ហើយបន្ទាប់មកបន្ថយល្បឿនមកវិញ ដើម្បីជៀសវាងបញ្ហាម៉ូដែលទន្ទេញចាំទិន្នន័យ (Over-fitting)។</td>
+                <td>ដូចជាការរត់ម៉ារ៉ាតុង ដែលយើងចាប់ផ្តើមរត់យឺតៗ រួចបង្កើនល្បឿននៅពាក់កណ្តាលទី ហើយបន្ថយល្បឿនវិញនៅពេលជិតដល់ទីដៅដើម្បីកុំឱ្យដាច់ខ្យល់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Catastrophic forgetting</span></td>
+                <td>ជាបាតុភូតមួយដែលកើតឡើងនៅពេលម៉ូដែល AI រៀនចំណេះដឹងថ្មី ប៉ុន្តែបែរជាភ្លេចចំណេះដឹងចាស់ដែលវាធ្លាប់បានរៀនពីមុនមក ធ្វើឱ្យសមត្ថភាពរួមរបស់វាធ្លាក់ចុះ។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលខំរៀនភាសាចិនរហូតចេះស្ទាត់ ប៉ុន្តែបែរជាភ្លេចរបៀបនិយាយភាសាអង់គ្លេសដែលខ្លួនធ្លាប់ចេះពីមុនមកអស់រលីង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gradual unfreezing</span></td>
+                <td>ជាបច្ចេកទេសហ្វឹកហាត់ម៉ូដែល AI ដោយដោះសោ (Unfreeze) ស្រទាប់បណ្តាញរបស់វាឱ្យរៀនម្តងមួយស្រទាប់ៗពីលើចុះក្រោម ជាជាងឱ្យស្រទាប់ទាំងអស់រៀនក្នុងពេលតែមួយ ដើម្បីការពារកុំឱ្យវាភ្លេចចំណេះដឹងដើម។</td>
+                <td>ដូចជាការបង្រៀនសិស្សឱ្យចេះកែប្រែកំហុសម្តងមួយមុខវិជ្ជា ជាជាងប្រាប់កំហុសទាំងអស់ក្នុងពេលតែមួយដែលអាចធ្វើឱ្យសិស្សវង្វេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-task learning</span></td>
+                <td>ជាការបង្ហាត់ម៉ូដែល AI មួយឱ្យចេះធ្វើកិច្ចការច្រើនផ្សេងគ្នាក្នុងពេលតែមួយ ដើម្បីឱ្យវាអាចទាញយកអត្ថប្រយោជន៍ និងចំណេះដឹងពីកិច្ចការមួយទៅជួយបំពេញកិច្ចការមួយទៀតឱ្យកាន់តែប្រសើរ។</td>
+                <td>ដូចជាការរៀនលេងហ្គីតា និងព្យាណូក្នុងពេលតែមួយ ដែលការយល់ដឹងពីចង្វាក់ភ្លេងមួយអាចជួយឱ្យអ្នកលេងឧបករណ៍មួយទៀតបានកាន់តែងាយស្រួល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Layer-wise discriminative fine-tuning</span></td>
+                <td>ជាការកំណត់ល្បឿននៃការរៀន (Learning rate) ខុសៗគ្នាសម្រាប់ស្រទាប់នីមួយៗរបស់ម៉ូដែល ដោយស្រទាប់ខាងក្រោម (ដែលចាប់យកព័ត៌មានទូទៅ) រៀនយឺតជាងស្រទាប់ខាងលើ (ដែលចាប់យកព័ត៌មានជាក់លាក់)។</td>
+                <td>ដូចជាការគ្រប់គ្រងក្រុមហ៊ុន ដែលបុគ្គលិកថ្នាក់ក្រោមបន្តធ្វើការងារមូលដ្ឋានរាល់ថ្ងៃ (ផ្លាស់ប្តូរតិចតួច) ខណៈពេលដែលអ្នកគ្រប់គ្រងថ្នាក់លើផ្លាស់ប្តូរយុទ្ធសាស្ត្រថ្មីៗជានិច្ច (ផ្លាស់ប្តូរលឿន)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-task+learning+in+natural+language+processing" target="_blank" rel="noopener"><span class="en">multi-task learning in natural language processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=one+cycle+policy+for+neural+network+learning+rates" target="_blank" rel="noopener"><span class="en">one cycle policy for neural network learning rates</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=sentiment+analysis+and+bias+detection+in+Wikipedia" target="_blank" rel="noopener"><span class="en">sentiment analysis and bias detection in Wikipedia</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=layer-wise+discriminative+fine-tuning+for+language+models" target="_blank" rel="noopener"><span class="en">layer-wise discriminative fine-tuning for language models</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>នៅពេលអតីតកាល != អនាគត៖ ការវាយតម្លៃលើផលប៉ះពាល់នៃការផ្លាស់ប្តូរទិន្នន័យ (Dataset Drift) ទៅលើភាពយុត្តិធម៌នៃម៉ូដែលវិភាគការសិក្សា | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាទាក់ទងនឹងការសន្មត់ខុសថាទិន្នន័យចាស់និងថ្មីមានលក្ខណៈដូចគ្នាជានិច្ច ដែលធ្វើឱ្យម៉ូដែលវិភាគការសិក្សា (Learning Analytics) អាចបាត់បង់ភាពយុត្ត...">
+    
+    <meta name="keywords" content="Algorithmic Fairness, Learning Analytics, Dataset Drift, Predictive Modelling, Machine Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/dataset-drift-fairness-learning-analytics.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/dataset-drift-fairness-learning-analytics.html">
+    <meta property="og:title" content="នៅពេលអតីតកាល != អនាគត៖ ការវាយតម្លៃលើផលប៉ះពាល់នៃការផ្លាស់ប្តូរទិន្នន័យ (Dataset Drift) ទៅលើភាពយុត្តិធម៌នៃម៉ូដែលវិភាគការសិក្សា | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាទាក់ទងនឹងការសន្មត់ខុសថាទិន្នន័យចាស់និងថ្មីមានលក្ខណៈដូចគ្នាជានិច្ច ដែលធ្វើឱ្យម៉ូដែលវិភាគការសិក្សា (Learning Analytics) អាចបាត់បង់ភាពយុត្តិធម៌នៅពេលដែលទិន្នន័យមានការផ្លាស់ប្តូរ (D...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="IEEE Transactions on Learning Technologies">
+    
+    <meta property="article:tag" content="Algorithmic Fairness">
+    
+    <meta property="article:tag" content="Learning Analytics">
+    
+    <meta property="article:tag" content="Dataset Drift">
+    
+    <meta property="article:tag" content="Predictive Modelling">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="នៅពេលអតីតកាល != អនាគត៖ ការវាយតម្លៃលើផលប៉ះពាល់នៃការផ្លាស់ប្តូរទិន្នន័យ (Dataset Drift) ទៅលើភាពយុត្តិធម៌នៃម៉ូដែលវិភាគការសិក្សា">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាទាក់ទងនឹងការសន្មត់ខុសថាទិន្នន័យចាស់និងថ្មីមានលក្ខណៈដូចគ្នាជានិច្ច ដែលធ្វើឱ្យម៉ូដែលវិភាគការសិក្សា (Learning Analytics) អាចបាត់បង់ភាពយុត្តិធម៌នៅពេលដែលទិន្នន័យមានការផ្លាស់ប្តូរ (D...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1793\u17c5\u1796\u17c1\u179b\u17a2\u178f\u17b8\u178f\u1780\u17b6\u179b != \u17a2\u1793\u17b6\u1782\u178f\u17d6 \u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179b\u17be\u1795\u179b\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u1793\u17c3\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Dataset Drift) \u1791\u17c5\u179b\u17be\u1797\u17b6\u1796\u1799\u17bb\u178f\u17d2\u178f\u17b7\u1792\u1798\u17cc\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179c\u17b7\u1797\u17b6\u1782\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6",
+      "name": "When the past != the future: Assessing the Impact of Dataset Drift on the Fairness of Learning Analytics Models",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b6\u1780\u17cb\u1791\u1784\u1793\u17b9\u1784\u1780\u17b6\u179a\u179f\u1793\u17d2\u1798\u178f\u17cb\u1781\u17bb\u179f\u1790\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u17b6\u179f\u17cb\u1793\u17b7\u1784\u1790\u17d2\u1798\u17b8\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u178a\u17bc\u1785\u1782\u17d2\u1793\u17b6\u1787\u17b6\u1793\u17b7\u1785\u17d2\u1785 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179c\u17b7\u1797\u17b6\u1782\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6 (Learning Analytics) \u17a2\u17b6\u1785\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1797\u17b6\u1796\u1799\u17bb\u178f\u17d2\u178f\u17b7\u1792\u1798\u17cc\u1793\u17c5\u1796\u17c1\u179b\u178a\u17c2\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a (Dataset Drift) \u178f\u17b6\u1798\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/dataset-drift-fairness-learning-analytics.html",
+      "author": [{"@type": "Person", "name": "Oscar Blessed Deho (University of South Australia)"},{"@type": "Person", "name": "Lin Liu"},{"@type": "Person", "name": "Jiuyong Li"},{"@type": "Person", "name": "Jixue Liu"},{"@type": "Person", "name": "Chen Zhan"},{"@type": "Person", "name": "Srecko Joksimovic"}],
+      "datePublished": "IEEE Transactions on Learning Technologies",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "When the past != the future: Assessing the Impact of Dataset Drift on the Fairness of Learning Analytics Models",
+        "url": "https://www.researchgate.net/profile/Oscar-Deho/publication/368476909_When_the_past_the_future_Assessing_the_Impact_of_Dataset_Drift_on_the_Fairness_of_Learning_Analytics_Models/links/6549e99cce88b87031d0d31b/When-the-past-the-future-Assessing-the-Impact-of-Dataset-Drift-on-the-Fairness-of-Learning-Analytics-Models.pdf"
+      },
+      "keywords": ["Algorithmic Fairness", "Learning Analytics", "Dataset Drift", "Predictive Modelling", "Machine Learning"],
+      "about": "Machine Learning / Educational Data Mining"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1793\u17c5\u1796\u17c1\u179b\u17a2\u178f\u17b8\u178f\u1780\u17b6\u179b != \u17a2\u1793\u17b6\u1782\u178f\u17d6 \u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179b\u17be\u1795\u179b\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u1793\u17c3\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Dataset Drift) \u1791\u17c5\u179b\u17be\u1797\u17b6\u1796\u1799\u17bb\u178f\u17d2\u178f\u17b7\u1792\u1798\u17cc\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179c\u17b7\u1797\u17b6\u1782\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/dataset-drift-fairness-learning-analytics.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>នៅពេលអតីតកាល != អនាគត៖ ការវាយតម្លៃលើផលប៉ះពាល់នៃការផ្លាស់ប...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> When the past != the future: Assessing the Impact of Dataset Drift on the Fairness of Learning Analytics Models<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Oscar-Deho/publication/368476909_When_the_past_the_future_Assessing_the_Impact_of_Dataset_Drift_on_the_Fairness_of_Learning_Analytics_Models/links/6549e99cce88b87031d0d31b/When-the-past-the-future-Assessing-the-Impact-of-Dataset-Drift-on-the-Fairness-of-Learning-Analytics-Models.pdf" target="_blank">researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>នៅពេលអតីតកាល != អនាគត៖ ការវាយតម្លៃលើផលប៉ះពាល់នៃការផ្លាស់ប្តូរទិន្នន័យ (Dataset Drift) ទៅលើភាពយុត្តិធម៌នៃម៉ូដែលវិភាគការសិក្សា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> When the past != the future: Assessing the Impact of Dataset Drift on the Fairness of Learning Analytics Models</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Oscar Blessed Deho (University of South Australia), Lin Liu, Jiuyong Li, Jixue Liu, Chen Zhan, Srecko Joksimovic</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> IEEE Transactions on Learning Technologies</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Educational Data Mining</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាទាក់ទងនឹងការសន្មត់ខុសថាទិន្នន័យចាស់និងថ្មីមានលក្ខណៈដូចគ្នាជានិច្ច ដែលធ្វើឱ្យម៉ូដែលវិភាគការសិក្សា (Learning Analytics) អាចបាត់បង់ភាពយុត្តិធម៌នៅពេលដែលទិន្នន័យមានការផ្លាស់ប្តូរ (Dataset Drift) តាមពេលវេលាជាក់ស្តែង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រើប្រាស់ទិន្នន័យប្រវត្តិសិក្សារបស់និស្សិតពីវគ្គសិក្សា STEM ចំនួនពីរ (ឆ្នាំ ២០១៥-២០២០) ដើម្បីធ្វើការបណ្តុះបណ្តាលម៉ូដែលទស្សន៍ទាយ និងវាយតម្លៃពីទំនាក់ទំនងរវាងការផ្លាស់ប្តូរទិន្នន័យ និងភាពអយុត្តិធម៌នៃម៉ូដែល។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយសម្រាប់ទស្សន៍ទាយភាពជោគជ័យរបស់និស្សិត (Random Forest Algorithm)</li>
+            
+            <li>ការវាស់ស្ទង់ទំហំនៃការផ្លាស់ប្តូរទិន្នន័យដោយប្រើសន្ទស្សន៍ស្ថិរភាពចំនួនប្រជាជន (Population Stability Index - PSI) និងចម្ងាយ Jensen-Shannon (JSD)</li>
+            
+            <li>ការវាស់ស្ទង់ភាពយុត្តិធម៌នៃម៉ូដែលដោយប្រើរង្វាស់ Equalized Odds និងរង្វាស់ ABROCA (Fairness Metrics)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ទំហំនៃការផ្លាស់ប្តូរទិន្នន័យ (Dataset Drift) មានសមាមាត្រស្របគ្នាទៅនឹងកម្រិតនៃភាពអយុត្តិធម៌របស់ម៉ូដែល ពោលគឺនៅពេលដែលទិន្នន័យផ្លាស់ប្តូរកាន់តែខ្លាំង ម៉ូដែលកាន់តែមានភាពលម្អៀង។</li>
+            
+            <li>ការផ្លាស់ប្តូរអថេរឯករាជ្យ (Covariate Drift) មានផលប៉ះពាល់ធ្ងន់ធ្ងរជាងគេទៅលើភាពយុត្តិធម៌របស់ម៉ូដែល បើប្រៀបធៀបទៅនឹងការផ្លាស់ប្តូរលទ្ធផលគោលដៅ (Target Drift)។</li>
+            
+            <li>មិនមានការធានាថាម៉ូដែលដែលធ្លាប់តែមានភាពយុត្តិធម៌នៅពេលបង្កើតដំបូង នឹងបន្តរក្សាភាពយុត្តិធម៌នោះទេនៅពេលដែលទិន្នន័យប្រែប្រួល ដែលទាមទារឱ្យមានការសាកល្បងភាពធន់ (Robustness Check) ជាមុនសិនមុននឹងដាក់ឱ្យប្រើប្រាស់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Equalized odds-fair model</span></strong><br>ម៉ូដែលយុត្តិធម៌ដោយផ្អែកលើ Equalized Odds</td>
+                <td>ជារង្វាស់យុត្តិធម៌ទូទៅដែលងាយស្រួលយល់ ដែលព្យាយាមធ្វើឱ្យអត្រានៃការទស្សន៍ទាយត្រូវ (True Positive) និងអត្រានៃការទស្សន៍ទាយខុស (False Positive) មានភាពស្មើគ្នារវាងក្រុមប្រជាសាស្ត្រ។</td>
+                <td>ពឹងផ្អែកទៅលើកម្រិតវាយតម្លៃ (threshold) តែមួយគត់ និងមានអស្ថិរភាពយ៉ាងខ្លាំង (លោតចុះឡើង) នៅពេលប្រឈមនឹងការផ្លាស់ប្តូរទិន្នន័យ (Covariate Drift)។</td>
+                <td>នៅពេលដែលទិន្នន័យមានការផ្លាស់ប្តូរ កម្រិតនៃភាពយុត្តិធម៌របស់ម៉ូដែលនេះមានការប្រែប្រួលខ្លាំង ដែលជួនកាលផ្តល់លទ្ធផលអយុត្តិធម៌ខ្លាំងជាងមុនដោយមិនអាចទាយទុកជាមុនបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ABROCA-fair model</span></strong><br>ម៉ូដែលយុត្តិធម៌ដោយផ្អែកលើ ABROCA (Absolute Between-ROC Area)</td>
+                <td>គិតគូរទៅលើគ្រប់កម្រិតនៃការវាយតម្លៃទាំងអស់ (all possible classification thresholds) ដែលធ្វើឱ្យការវាស់ស្ទង់មានភាពច្បាស់លាស់ជាងមុន។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការគណនា និងពិបាកក្នុងការបកស្រាយលទ្ធផលជាងការប្រើប្រាស់ Equalized Odds សម្រាប់អ្នកដែលមិនមែនជាអ្នកជំនាញ។</td>
+                <td>បង្ហាញពីការវាស់ស្ទង់កម្រិតភាពអយុត្តិធម៌បានថេរ និងមានស្ថិរភាពល្អជាង (consistent) ទោះបីជាម៉ូដែលបាត់បង់ភាពយុត្តិធម៌នៅពេលមានការផ្លាស់ប្តូរទិន្នន័យក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះពឹងផ្អែកជាចម្បងលើទិន្នន័យប្រវត្តិសិក្សារបស់និស្សិតក្នុងប្រព័ន្ធអនឡាញ កម្មវិធីវិភាគទិន្នន័យ និងចំណេះដឹងស៊ីជម្រៅផ្នែកក្បួនដោះស្រាយម៉ាស៊ីន។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យប្រវត្តិសិក្សា និងការចូលប្រើប្រាស់ប្រព័ន្ធសិក្សាអនឡាញ (VLE/Moodle) របស់និស្សិតពីវគ្គសិក្សា STEM ចំនួន ២ ពីឆ្នាំ ២០១៥ ដល់ ២០២០ រួមទាំងព័ត៌មានប្រជាសាស្ត្រ និងពិន្ទុ។</li>
+        
+        <li><strong>Software:</strong> ភាសាសរសេរកូដ (ដូចជា Python) បណ្ណាល័យ Machine Learning (ឧទាហរណ៍ Scikit-learn សម្រាប់ Random Forest) និងកញ្ចប់កូដគណនាការផ្លាស់ប្តូរទិន្នន័យ (PSI & JSD)។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានសមត្ថភាពមធ្យម ឬ Server សម្រាប់ដំណើរការបង្វឹកម៉ូដែលកម្រិតខ្ពស់ (Hyperparameter tuning ជាមួយ Grid Search) និងដំណើរការ Cross-validation។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកវិទ្យាសាស្ត្រទិន្នន័យអប់រំ (Educational Data Mining) ការយល់ដឹងពីបច្ចេកទេសវាយតម្លៃភាពយុត្តិធម៌ (Algorithmic Fairness) និងស្ថិតិ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យនិស្សិតពីសាកលវិទ្យាល័យនៅប្រទេសអូស្ត្រាលី ដោយផ្តោតលើសញ្ជាតិ និងភាសាដើមជាកត្តាប្រជាសាស្ត្រ។ សម្រាប់ប្រទេសកម្ពុជា ទិន្នន័យនេះប្រហែលជាមិនឆ្លុះបញ្ចាំងពីបរិបទជាក់ស្តែងនោះទេ ប៉ុន្តែគោលគំនិតនៃការលម្អៀងនេះមានសារៈសំខាន់ណាស់ ដោយសារនិស្សិតកម្ពុជាមានគម្លាតធំរវាងតំបន់ទីក្រុង (ឧទាហរណ៍ ភ្នំពេញ) និងជនបទ ព្រមទាំងលទ្ធភាពទទួលបានឧបករណ៍ឌីជីថល ដែលអាចធ្វើឱ្យម៉ូដែល AI លម្អៀងទៅរកសិស្សនៅទីក្រុងបើមិនបានត្រួតពិនិត្យ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រក្នុងការត្រួតពិនិត្យការផ្លាស់ប្តូរទិន្នន័យ និងការវាយតម្លៃភាពយុត្តិធម៌នេះ មានសារៈប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់គ្រឹះស្ថានអប់រំនៅកម្ពុជា ដែលកំពុងផ្លាស់ប្តូរទៅរកការសិក្សាតាមបែបឌីជីថលកាន់តែច្រើន។</p>
+        
+        <ul>
+            
+            <li><strong>គ្រឹះស្ថានឧត្តមសិក្សា (ឧទាហរណ៍ RUPP, ITC):</strong> អាចប្រើប្រាស់វិធីសាស្ត្រនេះដើម្បីតាមដាន និងវាយតម្លៃម៉ូដែលទស្សន៍ទាយនិស្សិតដែលមានហានិភ័យបោះបង់ការសិក្សា ដោយធានាថាមិនមានការរើសអើង ឬលម្អៀងលើក្រុមនិស្សិតមកពីខេត្ត ឬសិស្សដែលមានឧបករណ៍រៀនសូត្រខ្សោយ។</li>
+            
+            <li><strong>ក្រសួងអប់រំ យុវជន និងកីឡា (MoEYS):</strong> មានប្រយោជន៍សម្រាប់ការរៀបចំគោលនយោបាយ AI ក្នុងវិស័យអប់រំ ដើម្បីធានាថាការប្រើប្រាស់ប្រព័ន្ធវិភាគទិន្នន័យនៅថ្នាក់ជាតិមានភាពយុត្តិធម៌សម្រាប់សិស្សទូទាំងប្រទេស ជាពិសេសការប្រៀបធៀបទិន្នន័យឥរិយាបថសិក្សាមុន និងក្រោយការរាតត្បាតកូវីដ១៩។</li>
+            
+            <li><strong>ក្រុមហ៊ុនអភិវឌ្ឍន៍ប្រព័ន្ធ EdTech ក្នុងស្រុក (ឧទាហរណ៍ Sala, E-School Cambodia):</strong> អាចរួមបញ្ចូលរង្វាស់តាមដានការផ្លាស់ប្តូរទិន្នន័យទៅក្នុងប្រព័ន្ធ e-learning របស់ពួកគេ ដើម្បីការពារកុំឱ្យប្រព័ន្ធផ្តល់អនុសាសន៍ ឬវាយតម្លៃខុស នៅពេលដែលទម្លាប់នៃការប្រើប្រាស់កម្មវិធីរបស់សិស្សមានការផ្លាស់ប្តូរពីមួយឆ្នាំទៅមួយឆ្នាំ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តការត្រួតពិនិត្យភាពធន់នៃម៉ូដែលទិន្នន័យ (Model Robustness Check) នឹងជួយការពារស្ថាប័នអប់រំកម្ពុជាពីការប្រើប្រាស់បច្ចេកវិទ្យាដែលបង្កើតនូវវិសមភាពដោយអចេតនា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូលនិងសម្អាតទិន្នន័យប្រវត្តិសិក្សា:</strong> ចាប់ផ្តើមដោយការទាញយកទិន្នន័យពីប្រព័ន្ធគ្រប់គ្រងការសិក្សាដូចជា <span class="en">Moodle</span> ឬ Google Classroom ដោយប្រើប្រាស់ <span class="en">Python (Pandas)</span> ដើម្បីរៀបចំទិន្នន័យសកម្មភាពនិស្សិត (ការចូលមើលវីដេអូ, ការផ្ញើកិច្ចការ, ចំនួនដងនៃការចូលប្រព័ន្ធ) និងទិន្នន័យប្រវត្តិរូប។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែលទស្សន៍ទាយ (Predictive Modeling):</strong> អនុវត្តការសរសេរកូដដើម្បីបង្កើតម៉ូដែល <span class="en">Random Forest Classifier</span> តាមរយៈបណ្ណាល័យ <span class="en">Scikit-Learn</span> ដើម្បីធ្វើការទស្សន៍ទាយឱកាសនៃការប្រឡងជាប់ ឬធ្លាក់របស់និស្សិត ដោយផ្អែកលើទិន្នន័យអតីតកាល។</li>
+            
+            <li><strong>វាស់ស្ទង់ការផ្លាស់ប្តូរទិន្នន័យ (Drift Detection):</strong> សរសេរកូដគណនាសន្ទស្សន៍ស្ថិរភាពចំនួនប្រជាជន <span class="en">(Population Stability Index - PSI)</span> និងចម្ងាយ <span class="en">Jensen-Shannon (JSD)</span> ដើម្បីប្រៀបធៀបបំណែងចែកទិន្នន័យ (Data Distribution) រវាងជំនាន់សិស្សឆ្នាំមុន និងជំនាន់សិស្សឆ្នាំបច្ចុប្បន្ន។</li>
+            
+            <li><strong>វាយតម្លៃភាពយុត្តិធម៌របស់ម៉ូដែល (Fairness Assessment):</strong> ប្រើប្រាស់ឧបករណ៍វាយតម្លៃភាពលម្អៀងដូចជា <span class="en">AI Fairness 360 (AIF360)</span> ដើម្បីគណនារង្វាស់ <span class="en">Equalized Odds</span> និងរង្វាស់ <span class="en">ABROCA</span> ដើម្បីពិនិត្យមើលថាតើការទស្សន៍ទាយរបស់ម៉ូដែលមានភាពអយុត្តិធម៌ចំពោះក្រុមសិស្សណាមួយដែរឬទេ (ឧទាហរណ៍ សិស្សមកពីតំបន់ជនបទធៀបនឹងសិស្សទីក្រុង)។</li>
+            
+            <li><strong>បង្កើតប្រព័ន្ធតាមដានជាប្រចាំ (Continuous Monitoring):</strong> រៀបចំផ្ទាំងគ្រប់គ្រង <span class="en">(Monitoring Dashboard)</span> ដោយប្រើ <span class="en">Streamlit</span> ឬ <span class="en">Grafana</span> ដែលផ្តល់ការជូនដំណឹង (Alerts) ដោយស្វ័យប្រវត្តិនៅពេលដែលទំហំនៃការផ្លាស់ប្តូរទិន្នន័យ (Dataset Drift) កើនឡើងដល់កម្រិតកំណត់មួយ ដើម្បីបញ្ជាក់ថាដល់ពេលដែលត្រូវបង្វឹកម៉ូដែលនោះឡើងវិញហើយ (Model Retraining)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Dataset Drift</span></td>
+                <td>គឺជាបាតុភូតដែលលក្ខណៈ ឬទម្រង់នៃទិន្នន័យផ្លាស់ប្តូរទៅតាមពេលវេលា ដែលធ្វើឱ្យម៉ូដែល AI ដែលធ្លាប់តែទស្សន៍ទាយបានត្រឹមត្រូវពីមុន ប្រែជាលែងសូវច្បាស់លាស់ ឬលម្អៀងនៅពេលយកមកអនុវត្តលើទិន្នន័យថ្មី។</td>
+                <td>ដូចជាការពាក់អាវរងាដែលធ្លាប់តែផ្តល់ភាពកក់ក្តៅក្នុងរដូវរងារ ប៉ុន្តែវានឹងលែងមានប្រយោជន៍ និងធ្វើឱ្យយើងក្តៅស្អុះស្អាប់នៅពេលដែលអាកាសធាតុប្រែប្រួលចូលដល់រដូវក្តៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Covariate drift</span></td>
+                <td>ជាប្រភេទនៃការផ្លាស់ប្តូរទិន្នន័យ ដែលកត្តា ឬអថេរដើមដែលយើងប្រើសម្រាប់ធ្វើការទស្សន៍ទាយមានការប្រែប្រួល ប៉ុន្តែលទ្ធផលចុងក្រោយដែលយើងចង់ទាយនៅដដែល។ ឧទាហរណ៍ ទម្លាប់នៃការប្រើប្រាស់ប្រព័ន្ធសិក្សាអនឡាញរបស់សិស្សមានការផ្លាស់ប្តូរខុសពីមុន។</td>
+                <td>ដូចជាសិស្សដែលធ្លាប់តែអានសៀវភៅក្រដាសដើម្បីប្រឡងជាប់ ឥឡូវប្តូរមកមើលវីដេអូក្នុងទូរស័ព្ទវិញដើម្បីប្រឡងជាប់ដូចគ្នា (សកម្មភាពប្តូរ តែលទ្ធផលប្រឡងនៅដដែល)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Target drift</span></td>
+                <td>ជាការផ្លាស់ប្តូរអត្រា ឬចំនួនសរុបនៃលទ្ធផលគោលដៅនៅក្នុងទិន្នន័យពីមួយឆ្នាំទៅមួយឆ្នាំ (ឧទាហរណ៍ អត្រាសិស្សប្រឡងធ្លាក់កើនឡើងដោយសារវិញ្ញាសាពិបាកជាងមុន) ទោះបីជាអាកប្បកិរិយាសិក្សារបស់សិស្សនៅដដែលក៏ដោយ។</td>
+                <td>ដូចជាអត្រានៃការកើតជំងឺផ្តាសាយធំកើនឡើងខុសប្រក្រតីនៅរដូវភ្លៀង ទោះបីជាមនុស្សនៅតែរក្សាអនាម័យបានល្អដូចរាល់ដងក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Equalized odds</span></td>
+                <td>ជារង្វាស់យុត្តិធម៌មួយនៅក្នុងបញ្ញាសិប្បនិម្មិត ដែលតម្រូវឱ្យម៉ូដែលត្រូវតែមានអត្រានៃការទាយត្រូវ (True Positive Rate) និងអត្រានៃការទាយខុស (False Positive Rate) ស្មើៗគ្នាសម្រាប់គ្រប់ក្រុមមនុស្សទាំងអស់។</td>
+                <td>ដូចជាគ្រូបង្រៀនដែលធ្វើឱ្យមានកំហុសក្នុងការដាក់ពិន្ទុខុសដោយអចេតនា ក្នុងអត្រាស្មើៗគ្នាទាំងលើសិស្សពូកែនិងសិស្សខ្សោយ ដោយមិនមានភាពលម្អៀងទៅរកភាគីណាមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">ABROCA</span></td>
+                <td>ជារង្វាស់សម្រាប់វាស់កម្រិតភាពអយុត្តិធម៌របស់ម៉ូដែល ដោយធ្វើការគណនាផ្ទៃគម្លាតរវាងខ្សែកោងប្រតិបត្តិការ (ROC Curves) របស់ក្រុមមនុស្សពីរផ្សេងគ្នា ដើម្បីដឹងថាម៉ូដែលនោះលម្អៀងកម្រិតណា ទោះបីជាគេប្រើកម្រិតវាយតម្លៃ (Classification Threshold) ណាក៏ដោយ។</td>
+                <td>ដូចជាការយកបន្ទាត់មកវាស់គម្លាតរវាងខ្សែរត់របស់អត្តពលិកពីរនាក់នៅគ្រប់វិនាទីទាំងអស់ ដើម្បីមើលថាតើអ្នកណាមានប្រៀបជាងអ្នកណាតាំងពីដើមរហូតដល់ចប់ការប្រកួត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Population Stability Index (PSI)</span></td>
+                <td>ជារង្វាស់ស្ថិតិដែលគេប្រើដើម្បីគណនាទំហំនៃការប្រែប្រួលនៃទិន្នន័យ (Data Distribution) រវាងពេលពីរផ្សេងគ្នា ដូចជាទិន្នន័យឆ្នាំចាស់ និងទិន្នន័យឆ្នាំថ្មី ដើម្បីដឹងថាតើវាមានការផ្លាស់ប្តូរទម្រង់ដើមធ្ងន់ធ្ងរដែរឬទេ។</td>
+                <td>ដូចជាការថ្លឹងទម្ងន់ផ្លែឈើក្នុងកន្ត្រកនៅថ្ងៃនេះ និងសប្តាហ៍ក្រោយ ដើម្បីចង់ដឹងថាតើទម្ងន់របស់វាថយចុះ (ស្វិត) ខុសប្លែកពីមុនធ្ងន់ធ្ងរកម្រិតណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Jensen-Shannon Distance (JSD)</span></td>
+                <td>ជារូបមន្តគណិតវិទ្យាដែលប្រើសម្រាប់វាស់គម្លាត ឬភាពខុសគ្នារវាងបណ្តុំទិន្នន័យពីរ ដែលវាផ្តល់នូវតម្លៃចន្លោះពី ០ ដល់ ១ ធ្វើឱ្យអ្នកស្រាវជ្រាវងាយស្រួលយល់ពីទំហំនៃការផ្លាស់ប្តូរទិន្នន័យ (បើកៀក ១ គឺប្រែប្រួលខ្លាំង)។</td>
+                <td>ដូចជាម៉ែត្រវាស់ចម្ងាយដែលប្រាប់យើងយ៉ាងច្បាស់ថា រថយន្តពីរគ្រឿងកំពុងស្ថិតនៅឆ្ងាយពីគ្នាប៉ុន្មានម៉ែត្រ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Learning Analytics (LA)</span></td>
+                <td>ជាការប្រមូល និងវិភាគទិន្នន័យផ្សេងៗរបស់សិស្ស (ដូចជាការចូលរៀន ការធ្វើកិច្ចការ) ដើម្បីស្វែងយល់ពីឥរិយាបថសិក្សារបស់ពួកគេ និងស្វែងរកវិធីសាស្ត្រដើម្បីជួយឱ្យពួកគេរៀនបានកាន់តែពូកែ ឬការពារកុំឱ្យបោះបង់ការសិក្សា។</td>
+                <td>ដូចជាគ្រូពេទ្យដែលពិនិត្យមើលចង្វាក់បេះដូង និងសីតុណ្ហភាពរបស់អ្នកជំងឺជាប្រចាំ ដើម្បីដឹងថាត្រូវផ្តល់ថ្នាំ ឬការព្យាបាលបែបណាទើបអ្នកជំងឺឆាប់ជាសះស្បើយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Fairness-aware+machine+learning+under+dataset+shift" target="_blank" rel="noopener"><span class="en">Fairness-aware machine learning under dataset shift</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Algorithmic+bias+in+educational+data+mining" target="_blank" rel="noopener"><span class="en">Algorithmic bias in educational data mining</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Measuring+and+mitigating+covariate+drift+in+predictive+modeling" target="_blank" rel="noopener"><span class="en">Measuring and mitigating covariate drift in predictive modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Robust+fairness+constraints+for+dynamic+machine+learning+environments" target="_blank" rel="noopener"><span class="en">Robust fairness constraints for dynamic machine learning environments</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

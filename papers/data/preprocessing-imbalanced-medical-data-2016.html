@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសិក្សាពីអត្ថប្រយោជន៍នៃវិធីសាស្ត្ររៀបចំបឋមក្នុងការវិភាគទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងអតុល្យភាពខ្លាំង | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរៀបចំទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងមានអតុល្យភាពខ្លាំង (multidimensional and highly imbalanced medical data) ដើម្បីបង្កើ...">
+    
+    <meta name="keywords" content="Data preprocessing, Imbalanced data, Multidimensional data, SMOTE, Feature selection, Osteoporosis prediction, Machine learning classifiers, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/data/preprocessing-imbalanced-medical-data-2016.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/data/preprocessing-imbalanced-medical-data-2016.html">
+    <meta property="og:title" content="ការសិក្សាពីអត្ថប្រយោជន៍នៃវិធីសាស្ត្ររៀបចំបឋមក្នុងការវិភាគទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងអតុល្យភាពខ្លាំង | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរៀបចំទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងមានអតុល្យភាពខ្លាំង (multidimensional and highly imbalanced medical data) ដើម្បីបង្កើតឧបករណ៍គណនាហានិភ័យនៃជំងឺពុកឆ្អឹង (osteop...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2016">
+    
+    <meta property="article:tag" content="Data preprocessing">
+    
+    <meta property="article:tag" content="Imbalanced data">
+    
+    <meta property="article:tag" content="Multidimensional data">
+    
+    <meta property="article:tag" content="SMOTE">
+    
+    <meta property="article:tag" content="Feature selection">
+    
+    <meta property="article:tag" content="Osteoporosis prediction">
+    
+    <meta property="article:tag" content="Machine learning classifiers">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសិក្សាពីអត្ថប្រយោជន៍នៃវិធីសាស្ត្ររៀបចំបឋមក្នុងការវិភាគទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងអតុល្យភាពខ្លាំង">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរៀបចំទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងមានអតុល្យភាពខ្លាំង (multidimensional and highly imbalanced medical data) ដើម្បីបង្កើតឧបករណ៍គណនាហានិភ័យនៃជំងឺពុកឆ្អឹង (osteop...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1796\u17b8\u17a2\u178f\u17d2\u1790\u1794\u17d2\u179a\u1799\u17c4\u1787\u1793\u17cd\u1793\u17c3\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179a\u17c0\u1794\u1785\u17c6\u1794\u178b\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u1798\u17b6\u178f\u17d2\u179a\u1785\u17d2\u179a\u17be\u1793 \u1793\u17b7\u1784\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1781\u17d2\u179b\u17b6\u17c6\u1784",
+      "name": "The study of preprocessing methods\u0027 utility in analysis of multidimensional and highly imbalanced medical data",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1794\u1785\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u1798\u17b6\u178f\u17d2\u179a\u1785\u17d2\u179a\u17be\u1793 \u1793\u17b7\u1784\u1798\u17b6\u1793\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1781\u17d2\u179b\u17b6\u17c6\u1784 (multidimensional and highly imbalanced medical data) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u1784\u17d2\u1780\u17be\u178f\u17a7\u1794\u1780\u179a\u178e\u17cd\u1782\u178e\u1793\u17b6\u17a0\u17b6\u1793\u17b7\u1797\u17d0\u1799\u1793\u17c3\u1787\u17c6\u1784\u17ba\u1796\u17bb\u1780\u1786\u17d2\u17a2\u17b9\u1784 (osteoporosis risk calculator)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/data/preprocessing-imbalanced-medical-data-2016.html",
+      "author": [{"@type": "Person", "name": "Aleksandra Werner, Silesian University of Technology, Gliwice, Poland"},{"@type": "Person", "name": "Ma\u0142gorzata Bach, Silesian University of Technology, Gliwice, Poland"},{"@type": "Person", "name": "Wojciech Pluskiewicz, Medical University of Silesia, Katowice, Poland"}],
+      "datePublished": "2016",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "The study of preprocessing methods\u0027 utility in analysis of multidimensional and highly imbalanced medical data",
+        "url": "https://www.researchgate.net/profile/Malgorzata-Bach/publication/308786598_The_study_of_preprocessing_methods\u0027_utility_in_analysis_of_multidimensional_and_highly_imbalanced_medical_data/links/58c97a35a6fdcc08b164919a/The-study-of-preprocessing-methods-utility-in-analysis-of-multidimensional-and-highly-imbalanced-medical-data.pdf"
+      },
+      "keywords": ["Data preprocessing", "Imbalanced data", "Multidimensional data", "SMOTE", "Feature selection", "Osteoporosis prediction", "Machine learning classifiers"],
+      "about": "Health Informatics / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Data",
+          "item": "https://khmerresearch.com/papers/data/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1796\u17b8\u17a2\u178f\u17d2\u1790\u1794\u17d2\u179a\u1799\u17c4\u1787\u1793\u17cd\u1793\u17c3\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179a\u17c0\u1794\u1785\u17c6\u1794\u178b\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u1798\u17b6\u178f\u17d2\u179a\u1785\u17d2\u179a\u17be\u1793 \u1793\u17b7\u1784\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1781\u17d2\u179b\u17b6\u17c6\u1784",
+          "item": "https://khmerresearch.com/papers/data/preprocessing-imbalanced-medical-data-2016.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/data/">Data</a> &rsaquo;
+        <span>ការសិក្សាពីអត្ថប្រយោជន៍នៃវិធីសាស្ត្ររៀបចំបឋមក្នុងការវិភាគ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> The study of preprocessing methods' utility in analysis of multidimensional and highly imbalanced medical data<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Malgorzata-Bach/publication/308786598_The_study_of_preprocessing_methods'_utility_in_analysis_of_multidimensional_and_highly_imbalanced_medical_data/links/58c97a35a6fdcc08b164919a/The-study-of-preprocessing-methods-utility-in-analysis-of-multidimensional-and-highly-imbalanced-medical-data.pdf" target="_blank">researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសិក្សាពីអត្ថប្រយោជន៍នៃវិធីសាស្ត្ររៀបចំបឋមក្នុងការវិភាគទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងអតុល្យភាពខ្លាំង</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> The study of preprocessing methods' utility in analysis of multidimensional and highly imbalanced medical data</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Aleksandra Werner, Silesian University of Technology, Gliwice, Poland, Małgorzata Bach, Silesian University of Technology, Gliwice, Poland, Wojciech Pluskiewicz, Medical University of Silesia, Katowice, Poland</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2016</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Health Informatics / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការរៀបចំទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងមានអតុល្យភាពខ្លាំង (multidimensional and highly imbalanced medical data) ដើម្បីបង្កើតឧបករណ៍គណនាហានិភ័យនៃជំងឺពុកឆ្អឹង (osteoporosis risk calculator)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានធ្វើតេស្ត និងប្រៀបធៀបបច្ចេកទេសរៀបចំទិន្នន័យបឋមរួមមានវិធីសាស្ត្រកាត់បន្ថយ និងបង្កើនចំនួនទិន្នន័យ ព្រមទាំងការកាត់បន្ថយលក្ខណៈពិសេសរបស់ទិន្នន័យ រួចធ្វើការវាយតម្លៃជាមួយម៉ូដែលចំណាត់ថ្នាក់ផ្សេងៗ។
+        
+        <ul>
+            
+            <li>បច្ចេកទេសបង្កើន និងកាត់បន្ថយទិន្នន័យ (SMOTE Over-sampling and Under-sampling)</li>
+            
+            <li>វិធីសាស្ត្រជ្រើសរើសលក្ខណៈពិសេសទិន្នន័យ (Feature selection methods: CFS, InfoGain, GainRatio, MeanDecreaseGini)</li>
+            
+            <li>ក្បួនច្បាប់ចំណាត់ថ្នាក់ (Classifiers: C4.5, Random Forest, Naive Bayes, ADTree)</li>
+            
+            <li>រង្វាស់វាយតម្លៃសមត្ថភាពម៉ូដែល (Evaluation metrics: ROC, GMean, Specificity, Sensitivity)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេស SMOTE ជាមួយម៉ូដែល Random Forest ផ្តល់លទ្ធផលល្អបំផុត និងមានប្រសិទ្ធភាពខ្ពស់ក្នុងការទស្សន៍ទាយអ្នកជំងឺពុកឆ្អឹង។</li>
+            
+            <li>ការកាត់បន្ថយលក្ខណៈពិសេស (Feature reduction) មិនត្រឹមតែជួយសម្រួលដល់ការបកស្រាយលទ្ធផលប៉ុណ្ណោះទេ ថែមទាំងមិនមានផលប៉ះពាល់អវិជ្ជមានដល់ភាពសុក្រឹតនៃការធ្វើចំណាត់ថ្នាក់ (classification accuracy) ឡើយក្នុងករណីភាគច្រើន។</li>
+            
+            <li>ពេលវេលាដែលប្រើសម្រាប់ការធ្វើចំណាត់ថ្នាក់លើទិន្នន័យដែលបានកាត់បន្ថយអថេរួច (reduced features' vector) គឺលឿនជាងមុនជាមធ្យម ៧៥% បើធៀបនឹងការប្រើទិន្នន័យដើមទាំងស្រុង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest (with SMOTE & Feature Selection)</span></strong><br>ក្បួនច្បាប់ Random Forest (ប្រើជាមួយ SMOTE និងការកាត់បន្ថយលក្ខណៈទិន្នន័យ)</td>
+                <td>ផ្តល់លទ្ធផលល្អបំផុតក្នុងការទស្សន៍ទាយ និងដំណើរការបានល្អជាមួយទិន្នន័យដែលមានវិមាត្រច្រើន។ វាជួយរក្សាភាពត្រឹមត្រូវខ្ពស់ទោះបីជាលក្ខណៈពិសេស (Features) ត្រូវបានកាត់បន្ថយក៏ដោយ។</td>
+                <td>អាចត្រូវការធនធានកុំព្យូទ័រក្នុងការគណនាច្រើន ប្រសិនបើមិនមានការកាត់បន្ថយលក្ខណៈទិន្នន័យជាមុន។</td>
+                <td>ទទួលបានប្រសិទ្ធភាពខ្ពស់បំផុតដោយរក្សាបាននូវតម្លៃ AUC និង GMean ខ្ពស់ (ឧ. AUC 0.979 នៅ 600% SMOTE)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ADTree (with Wrappers or CFS)</span></strong><br>ក្បួនច្បាប់ ADTree (ប្រើជាមួយបច្ចេកទេស Wrappers ឬ CFS)</td>
+                <td>ដំណើរការបានយ៉ាងល្អជាមួយបច្ចេកទេសជ្រើសរើសលក្ខណៈទិន្នន័យប្រភេទ Wrappers និង CFS ដែលជួយកែលម្អគុណភាពនៃការទស្សន៍ទាយបានយ៉ាងច្រើន។</td>
+                <td>នៅក្នុងកម្មវិធី Weka ក្បួនច្បាប់នេះគាំទ្រតែចំណាត់ថ្នាក់ទិន្នន័យដែលមានពីរថ្នាក់ (Two-class problems) ប៉ុណ្ណោះ។</td>
+                <td>ទទួលបានលទ្ធផលល្អប្រសើរជាងមុនពេលប្រើប្រាស់ជាមួយបច្ចេកទេស Wrappers បើប្រៀបធៀបទៅនឹងការប្រើប្រាស់ Filters ធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Naive Bayes</span></strong><br>ក្បួនច្បាប់ Naive Bayes</td>
+                <td>មានដំណើរការរហ័ស និងបង្ហាញតម្លៃ Sensitivity ព្រមទាំង GMean ខ្ពស់គួរសមនៅលើទិន្នន័យដើមដែលមិនទាន់បានកែច្នៃ។</td>
+                <td>គុណភាពនៃការទស្សន៍ទាយមិនសូវមានការកើនឡើងគួរឲ្យកត់សម្គាល់នោះទេ ទោះបីជាមានការប៉ុនប៉ងថ្លឹងថ្លែងទិន្នន័យដោយប្រើ SMOTE ក៏ដោយ។</td>
+                <td>ត្រូវបានដកចេញពីការវិភាគស៊ីជម្រៅបន្ទាប់ ព្រោះតម្លៃ AUC របស់វាមិនអាចឈានដល់កម្រិតស្តង់ដារពេទ្យ (ចន្លោះ 0.8 ដល់ 0.95) ឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">C4.5 (J48)</span></strong><br>ក្បួនច្បាប់ដើមឈើសម្រេចចិត្ត C4.5 (ជំនាន់ J48)</td>
+                <td>ងាយស្រួលក្នុងការយល់ដឹងពីក្បួនច្បាប់ (If-then rules) ដែលវាបង្កើតឡើង និងដំណើរការបានល្អជាមួយបច្ចេកទេស MeanDecreaseGini។</td>
+                <td>នៅពេលប្រើលើទិន្នន័យដើមដែលគ្មានការថ្លឹងថ្លែង វាទស្សន៍ទាយលម្អៀងទៅរកក្រុមទិន្នន័យភាគច្រើនដោយតម្លៃ Sensitivity ធ្លាក់ដល់ 0។</td>
+                <td>តម្លៃ AUC បានកើនឡើងជាលំដាប់រហូតដល់ 0.892 នៅពេលដែលទិន្នន័យក្រុមភាគតិចត្រូវបានបង្កើនដល់ 600%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារកម្មវិធីកុំព្យូទ័រសម្រាប់ការវិភាគទិន្នន័យ និងចំណាយពេលវេលាគណនាខ្ពស់សម្រាប់បច្ចេកទេសមួយចំនួន។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ទាមទារកម្មវិធីរៀបចំ និងវិភាគទិន្នន័យដូចជា Weka (ជំនាន់ 3.7.13) និង R Software Environment។</li>
+        
+        <li><strong>Data:</strong> ត្រូវការប្រមូលទិន្នន័យប្រវត្តិវេជ្ជសាស្ត្រគ្លីនិកជាក់ស្តែង ដែលមានភាពស្មុគស្មាញ និងទាមទារការសម្អាតទិន្នន័យ (Data cleaning) យ៉ាងហ្មត់ចត់។</li>
+        
+        <li><strong>Computational Time:</strong> ការប្រើប្រាស់បច្ចេកទេស Wrappers ត្រូវការពេលវេលាគណនាយូរជាងវិធីសាស្ត្រ Filters ចំណែកឯការកាត់បន្ថយលក្ខណៈទិន្នន័យរួចជួយកាត់បន្ថយពេលចំណាត់ថ្នាក់បាន ៧៥%។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយផ្អែកលើទិន្នន័យអ្នកជំងឺចំនួន ៧២៩ នាក់ មកពីតំបន់ Racibórz ភាគខាងត្បូងប្រទេសប៉ូឡូញ។ កត្តាប្រឈមនៃជំងឺពុកឆ្អឹងអាចមានការប្រែប្រួលទៅតាមតំបន់នីមួយៗលើពិភពលោក ដោយសារអាកាសធាតុ របបអាហារ ហ្សែន និងស្ថានភាពសេដ្ឋកិច្ច។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកប្រើដោយផ្ទាល់អាចនឹងមិនត្រឹមត្រូវ ១០០% ទេ លុះត្រាតែមានការបង្វឹកឡើងវិញជាមួយនឹងទិន្នន័យអ្នកជំងឺកម្ពុជាផ្ទាល់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យប្រភពមកពីតំបន់អឺរ៉ុបក៏ដោយ វិធីសាស្ត្របច្ចេកទេសក្នុងការដោះស្រាយបញ្ហាទិន្នន័យអតុល្យភាពនេះ គឺមានសារៈសំខាន់ និងអាចយកមកអនុវត្តបានយ៉ាងល្អនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសុខភាពសាធារណៈ (ឧ. មន្ទីរពេទ្យកាល់ម៉ែត ឬ មន្ទីរពេទ្យគន្ធបុប្ផា):</strong> បច្ចេកទេស SMOTE អាចត្រូវបានប្រើដើម្បីទស្សន៍ទាយជំងឺកម្រ ឬករណីអ្នកជំងឺធ្ងន់ធ្ងរ ដែលទិន្នន័យអ្នកជំងឺប្រភេទនេះមានចំនួនតិចតួចធៀបនឹងចំនួនអ្នកជំងឺធម្មតាទូទៅនៅក្នុងមូលដ្ឋានទិន្នន័យមន្ទីរពេទ្យ។</li>
+            
+            <li><strong>ការស្រាវជ្រាវរោគរាតត្បាតនៅតាមបណ្តាខេត្ត:</strong> វិធីសាស្ត្រ Feature Selection (ដូចជា MeanDecreaseGini) អាចជួយអ្នកស្រាវជ្រាវកម្ពុជាក្នុងការទាញយកកត្តាចម្បងៗ (Risk factors) តែពីរបីចំណុច ពីក្នុងកម្រងសំណួរដ៏វែង ដើម្បីសន្សំពេលវេលាស្ទង់មតិនៅតាមតំបន់ជនបទ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តវិធីសាស្ត្ររៀបចំទិន្នន័យបឋមទាំងនេះ នឹងជួយស្ថាប័នវេជ្ជសាស្ត្រកម្ពុជាអាចបង្កើតប្រព័ន្ធវាយតម្លៃហានិភ័យជំងឺប្រកបដោយភាពសុក្រឹត ទោះបីជាកំពុងប្រឈមនឹងបញ្ហាកង្វះខាតទិន្នន័យអ្នកជំងឺ (Imbalanced data) ក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីឧបករណ៍វិភាគទិន្នន័យម៉ាស៊ីន (Machine Learning Tools):</strong> ចាប់ផ្តើមរៀនប្រើប្រាស់កម្មវិធីកុំព្យូទ័រ <span class="en">Weka</span> និង <span class="en">R Software</span> ដើម្បីអនុវត្តការសម្អាត និងធ្វើចំណាត់ថ្នាក់ទិន្នន័យបឋម។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសថ្លឹងថ្លែងទិន្នន័យ:</strong> យកទិន្នន័យវេជ្ជសាស្ត្រក្នុងស្រុក (ដែលជាទូទៅមានអតុល្យភាព) មកធ្វើការពិសោធន៍ជាមួយនឹងបច្ចេកទេស <span class="en">SMOTE</span> ដើម្បីបង្កើតទិន្នន័យសិប្បនិម្មិតសម្រាប់ក្រុមទិន្នន័យភាគតិច។</li>
+            
+            <li><strong>កាត់បន្ថយទំហំវិមាត្រទិន្នន័យ (Dimensionality Reduction):</strong> សាកល្បងប្រើប្រាស់វិធីសាស្ត្រ Filter ដូចជា <span class="en">MeanDecreaseGini</span> និង <span class="en">CFS (Correlation-based Feature Selection)</span> ដើម្បីច្រោះយកតែអថេរណាដែលពិតជាមានឥទ្ធិពលលើការទស្សន៍ទាយជំងឺ។</li>
+            
+            <li><strong>ប្រៀបធៀប និងវាយតម្លៃម៉ូដែល:</strong> បង្វឹកម៉ូដែលកុំព្យូទ័រដោយប្រើ <span class="en">Random Forest</span> និង <span class="en">ADTree</span> រួចធ្វើការប្រៀបធៀបលទ្ធផលដោយប្រើរង្វាស់ <span class="en">AUC (Area Under the Curve)</span> និង <span class="en">GMean</span>។</li>
+            
+            <li><strong>អភិវឌ្ឍឧបករណ៍សម្រាប់ប្រើប្រាស់ជាក់ស្តែង:</strong> ផ្អែកលើម៉ូដែលដែលទទួលបានលទ្ធផលល្អបំផុត សូមសហការជាមួយអ្នកជំនាញដើម្បីបង្កើតជា <span class="en">Online Risk Calculator</span> សម្រាប់ឲ្យវេជ្ជបណ្ឌិត ឬប្រជាជននៅកម្ពុជាអាចចូលទៅវាយតម្លៃហានិភ័យសុខភាពដោយខ្លួនឯងបាន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Data imbalancing</span></td>
+                <td>ស្ថានភាពដែលទិន្នន័យក្នុងក្រុមមួយមានចំនួនច្រើនលើសលប់ធៀបនឹងក្រុមមួយទៀត (ឧទាហរណ៍៖ ទិន្នន័យអ្នកជំងឺពុកឆ្អឹងមានត្រឹមតែ ៧% ចំណែកអ្នកដែលគ្មានជំងឺមានរហូតដល់ ៩៣%) ដែលធ្វើឱ្យប្រព័ន្ធកុំព្យូទ័ររៀនទាយលម្អៀងទៅរកក្រុមដែលមានគ្នាច្រើន។</td>
+                <td>ដូចជាការបង្រៀនក្មេងម្នាក់ឱ្យស្គាល់សត្វ ដោយបង្ហាញរូបឆ្កែចំនួន១០០សន្លឹក និងរូបឆ្មាតែ១សន្លឹក ដែលធ្វើឱ្យក្មេងនោះងាយនឹងទាយខុសថាឆ្មាគឺជាឆ្កែនៅពេលក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTE</span></td>
+                <td>បច្ចេកទេសបង្កើតទិន្នន័យសិប្បនិម្មិតសម្រាប់ក្រុមទិន្នន័យដែលមានចំនួនតិចតួច ដោយយកលក្ខណៈទិន្នន័យចាស់ដែលនៅជិតគ្នាមកបូកបញ្ចូលគ្នា ដើម្បីធ្វើឱ្យចំនួនទិន្នន័យរវាងក្រុមទាំងពីរមានតុល្យភាពក្នុងការបង្វឹកកុំព្យូទ័រ។</td>
+                <td>ដូចជាការយកពិន្ទុ និងលក្ខណៈរបស់សិស្សពូកែពីរនាក់ដែលអង្គុយជិតគ្នា មកគណនាបង្កើតជាទិន្នន័យ "សិស្សពូកែសិប្បនិម្មិត" ម្នាក់ទៀត ដើម្បីបង្កើនចំនួនសិស្សពូកែក្នុងបញ្ជី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data multidimensionality</span></td>
+                <td>ស្ថានភាពដែលទិន្នន័យមានផ្ទុកចំនួនអថេរ (Variables) ឬលក្ខណៈពិសេសច្រើនសន្ធឹកសន្ធាប់ពេកសម្រាប់សំណាកនីមួយៗ (ឧទាហរណ៍៖ អ្នកជំងឺម្នាក់មានលក្ខណៈសម្បត្តិនិងប្រវត្តិរហូតដល់ ២២០ ចំណុច) ដែលធ្វើឱ្យការគណនាវិភាគមានភាពស្មុគស្មាញ និងស៊ីពេលយូរ។</td>
+                <td>ដូចជាការតម្រូវឱ្យពណ៌នារូបរាងមនុស្សម្នាក់ ដោយត្រូវចងចាំព័ត៌មានរាប់រយចំណុចតាំងពីទំហំសរសៃសក់ ចំនួនរោមចិញ្ចើម រហូតដល់កម្រាស់ក្រចកជើង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature selection</span></td>
+                <td>ដំណើរការនៃការជ្រើសរើសយកតែលក្ខណៈពិសេស ឬអថេរណាដែលសំខាន់បំផុត និងមានឥទ្ធិពលខ្លាំងក្នុងការទស្សន៍ទាយលទ្ធផលជំងឺ ដោយបោះបង់ចោលទិន្នន័យដែលមិនចាំបាច់ ដើម្បីកាត់បន្ថយភាពស្មុគស្មាញ និងបង្កើនល្បឿនគណនារបស់ម៉ូដែល។</td>
+                <td>ដូចជាការរៀបចំវ៉ាលីធ្វើដំណើរ ដោយរើសយកតែខោអាវណាដែលត្រូវពាក់ពិតប្រាកដ និងដករបស់របរមិនចាំបាច់ចេញ ដើម្បីកុំឱ្យធ្ងន់ពេក និងងាយស្រួលដើរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest</span></td>
+                <td>ក្បួនច្បាប់បញ្ញាសិប្បនិម្មិត (Machine Learning Algorithm) ដែលបង្កើត "ដើមឈើសម្រេចចិត្ត" (Decision Trees) ជាច្រើនបំបែកពីគ្នា រួចយកលទ្ធផលនៃការទស្សន៍ទាយរបស់ដើមឈើនីមួយៗមកបោះឆ្នោតជ្រើសរើសយកចម្លើយដែលមានសម្លេងគាំទ្រច្រើនជាងគេ ដើម្បីទទួលបានភាពត្រឹមត្រូវខ្ពស់ក្នុងការកំណត់រោគវិនិច្ឆ័យ។</td>
+                <td>ដូចជាការសួរសំណួរទៅកាន់ទីប្រឹក្សា១០០នាក់ផ្សេងគ្នា រួចយកចម្លើយដែលអ្នកទាំងនោះភាគច្រើនឆ្លើយស្របគ្នា មកធ្វើជាការសម្រេចចិត្តចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sensitivity</span></td>
+                <td>រង្វាស់វាយតម្លៃសមត្ថភាពរបស់ម៉ូដែលកុំព្យូទ័រ ក្នុងការទស្សន៍ទាយរកអ្នកដែលមានជំងឺពិតប្រាកដ (វិជ្ជមានពិត) ឱ្យបានត្រឹមត្រូវចេញពីចំណោមអ្នកដែលមានជំងឺទាំងអស់ ជៀសវាងការប្រាប់អ្នកជំងឺថាគាត់មិនមានជំងឺ។</td>
+                <td>ដូចជាសមត្ថភាពរបស់ម៉ាស៊ីនស្កេនអាវុធនៅព្រលានយន្តហោះ ដែលអាចរកឃើញកាំភ្លើងពិតប្រាកដគ្រប់រាល់ពេលដែលជនសង្ស័យលាក់វាតាមខ្លួន ដោយមិនរំលង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Specificity</span></td>
+                <td>រង្វាស់វាយតម្លៃសមត្ថភាពម៉ូដែល ក្នុងការកំណត់អត្តសញ្ញាណអ្នកដែលគ្មានជំងឺ (អវិជ្ជមានពិត) ឱ្យបានត្រឹមត្រូវ១០០% ដែលជួយកាត់បន្ថយការប្រកាសអាសន្នមិនពិត (ការប្រាប់មនុស្សធម្មតាថាមានជំងឺ)។</td>
+                <td>ដូចជាឆ្កែប៉ូលីសដែលព្រុសតែពេលហិតក្លិនឃើញគ្រឿងញៀនពិតប្រាកដ និងមិនព្រុសផ្តេសផ្តាសពេលហិតប៉ះម្សៅទឹកដោះគោធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">AUC</span></td>
+                <td>តំណាងឱ្យ Area Under the Curve វាជាតម្លៃទូទៅចាប់ពី 0.5 ដល់ 1 ដែលវាស់ស្ទង់សមត្ថភាពសរុបរបស់ម៉ូដែលចំណាត់ថ្នាក់ក្នុងការបែងចែករវាងក្រុមមានជំងឺ និងក្រុមគ្មានជំងឺ (តម្លៃកាន់តែខិតជិត 1 មានន័យថាម៉ូដែលកាន់តែពូកែ)។</td>
+                <td>ដូចជាពិន្ទុមធ្យមភាគប្រចាំឆ្នាំរបស់សិស្សម្នាក់ ដែលសរុបបញ្ចូលគ្នានូវគ្រប់មុខវិជ្ជា ដើម្បីបញ្ជាក់ពីសមត្ថភាពទូទៅរបស់គាត់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+techniques+for+imbalanced+medical+datasets" target="_blank" rel="noopener"><span class="en">machine learning techniques for imbalanced medical datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=handling+high+dimensionality+in+clinical+data+mining" target="_blank" rel="noopener"><span class="en">handling high dimensionality in clinical data mining</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SMOTE+and+other+resampling+methods+for+classification" target="_blank" rel="noopener"><span class="en">SMOTE and other resampling methods for classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=osteoporosis+risk+prediction+models+using+artificial+intelligence" target="_blank" rel="noopener"><span class="en">osteoporosis risk prediction models using artificial intelligence</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

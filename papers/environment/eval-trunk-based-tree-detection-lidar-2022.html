@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវាយតម្លៃប្រៀបធៀបនៃយុទ្ធសាស្ត្ររកឃើញ និងកំណត់ទីតាំងដើមឈើផ្អែកលើគល់ឈើដែលទើបនឹងអភិវឌ្ឍថ្មី លើទិន្នន័យសំណុំចំណុច Leaf-Off LiDAR ដែលមានលក្ខណៈប្រែប្រួល | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរកឃើញ និងកំណត់ទីតាំងដើមឈើ (Tree detection and localization) សម្រាប់ការវាយតម្លៃធនធានព្រៃឈើ ដោយធ្វើការប្រៀបធៀបក្បួនដោះស្រ...">
+    
+    <meta name="keywords" content="LiDAR point clouds, tree detection, forest inventory, UAV LiDAR, Geiger-mode LiDAR, DBSCAN clustering, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/environment/eval-trunk-based-tree-detection-lidar-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/environment/eval-trunk-based-tree-detection-lidar-2022.html">
+    <meta property="og:title" content="ការវាយតម្លៃប្រៀបធៀបនៃយុទ្ធសាស្ត្ររកឃើញ និងកំណត់ទីតាំងដើមឈើផ្អែកលើគល់ឈើដែលទើបនឹងអភិវឌ្ឍថ្មី លើទិន្នន័យសំណុំចំណុច Leaf-Off LiDAR ដែលមានលក្ខណៈប្រែប្រួល | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរកឃើញ និងកំណត់ទីតាំងដើមឈើ (Tree detection and localization) សម្រាប់ការវាយតម្លៃធនធានព្រៃឈើ ដោយធ្វើការប្រៀបធៀបក្បួនដោះស្រាយផ្សេងៗលើទិន្នន័យ LiDAR ដែលមានលក្ខណៈខុស...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022, Remote Sensing">
+    
+    <meta property="article:tag" content="LiDAR point clouds">
+    
+    <meta property="article:tag" content="tree detection">
+    
+    <meta property="article:tag" content="forest inventory">
+    
+    <meta property="article:tag" content="UAV LiDAR">
+    
+    <meta property="article:tag" content="Geiger-mode LiDAR">
+    
+    <meta property="article:tag" content="DBSCAN clustering">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវាយតម្លៃប្រៀបធៀបនៃយុទ្ធសាស្ត្ររកឃើញ និងកំណត់ទីតាំងដើមឈើផ្អែកលើគល់ឈើដែលទើបនឹងអភិវឌ្ឍថ្មី លើទិន្នន័យសំណុំចំណុច Leaf-Off LiDAR ដែលមានលក្ខណៈប្រែប្រួល">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរកឃើញ និងកំណត់ទីតាំងដើមឈើ (Tree detection and localization) សម្រាប់ការវាយតម្លៃធនធានព្រៃឈើ ដោយធ្វើការប្រៀបធៀបក្បួនដោះស្រាយផ្សេងៗលើទិន្នន័យ LiDAR ដែលមានលក្ខណៈខុស...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1793\u17c3\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179a\u1780\u1783\u17be\u1789 \u1793\u17b7\u1784\u1780\u17c6\u178e\u178f\u17cb\u1791\u17b8\u178f\u17b6\u17c6\u1784\u178a\u17be\u1798\u1788\u17be\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1782\u179b\u17cb\u1788\u17be\u178a\u17c2\u179b\u1791\u17be\u1794\u1793\u17b9\u1784\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1790\u17d2\u1798\u17b8 \u179b\u17be\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17c6\u178e\u17bb\u17c6\u1785\u17c6\u178e\u17bb\u1785 Leaf-Off LiDAR \u178a\u17c2\u179b\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b",
+      "name": "Comparative Evaluation of a Newly Developed Trunk-Based Tree Detection/Localization Strategy on Leaf-Off LiDAR Point Clouds with Varying Characteristics",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789 \u1793\u17b7\u1784\u1780\u17c6\u178e\u178f\u17cb\u1791\u17b8\u178f\u17b6\u17c6\u1784\u178a\u17be\u1798\u1788\u17be (Tree detection and localization) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1792\u1793\u1792\u17b6\u1793\u1796\u17d2\u179a\u17c3\u1788\u17be \u178a\u17c4\u1799\u1792\u17d2\u179c\u17be\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1795\u17d2\u179f\u17c1\u1784\u17d7\u179b\u17be\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 LiDAR \u178a\u17c2\u179b\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u1781\u17bb\u179f\u17d7\u1782\u17d2\u1793\u17b6 \u179a\u17bd\u1798\u1791\u17b6\u17c6\u1784\u178a\u1784\u17cb\u179f\u17ca\u17b8\u178f\u17c1 \u1793\u17b7\u1784\u1797\u17b6\u1796\u179f\u17bb\u1780\u17d2\u179a\u17b9\u178f\u1792\u179a\u178e\u17b8\u1798\u17b6\u178f\u17d2\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/environment/eval-trunk-based-tree-detection-lidar-2022.html",
+      "author": [{"@type": "Person", "name": "Tian Zhou (Lyles School of Civil Engineering, Purdue University)"},{"@type": "Person", "name": "Renato C\u00e9sar dos Santos (S\u00e3o Paulo State University)"},{"@type": "Person", "name": "Jidong Liu (Purdue University)"},{"@type": "Person", "name": "Yi-Chun Lin (Purdue University)"},{"@type": "Person", "name": "William Changhao Fei (Purdue University)"},{"@type": "Person", "name": "Songlin Fei (Department of Forestry and Natural Resources, Purdue University)"},{"@type": "Person", "name": "Ayman Habib (Lyles School of Civil Engineering, Purdue University)"}],
+      "datePublished": "2022, Remote Sensing",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Comparative Evaluation of a Newly Developed Trunk-Based Tree Detection/Localization Strategy on Leaf-Off LiDAR Point Clouds with Varying Characteristics",
+        "url": "https://doi.org/10.3390/rs14153738"
+      },
+      "keywords": ["LiDAR point clouds", "tree detection", "forest inventory", "UAV LiDAR", "Geiger-mode LiDAR", "DBSCAN clustering"],
+      "about": "Remote Sensing and Forestry"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Environment",
+          "item": "https://khmerresearch.com/papers/environment/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1793\u17c3\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179a\u1780\u1783\u17be\u1789 \u1793\u17b7\u1784\u1780\u17c6\u178e\u178f\u17cb\u1791\u17b8\u178f\u17b6\u17c6\u1784\u178a\u17be\u1798\u1788\u17be\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1782\u179b\u17cb\u1788\u17be\u178a\u17c2\u179b\u1791\u17be\u1794\u1793\u17b9\u1784\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1790\u17d2\u1798\u17b8 \u179b\u17be\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17c6\u178e\u17bb\u17c6\u1785\u17c6\u178e\u17bb\u1785 Leaf-Off LiDAR \u178a\u17c2\u179b\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b",
+          "item": "https://khmerresearch.com/papers/environment/eval-trunk-based-tree-detection-lidar-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/environment/">Environment</a> &rsaquo;
+        <span>ការវាយតម្លៃប្រៀបធៀបនៃយុទ្ធសាស្ត្ររកឃើញ និងកំណត់ទីតាំងដើមឈ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Comparative Evaluation of a Newly Developed Trunk-Based Tree Detection/Localization Strategy on Leaf-Off LiDAR Point Clouds with Varying Characteristics<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/rs14153738" target="_blank">doi.org/10.3390/rs14153738</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវាយតម្លៃប្រៀបធៀបនៃយុទ្ធសាស្ត្ររកឃើញ និងកំណត់ទីតាំងដើមឈើផ្អែកលើគល់ឈើដែលទើបនឹងអភិវឌ្ឍថ្មី លើទិន្នន័យសំណុំចំណុច Leaf-Off LiDAR ដែលមានលក្ខណៈប្រែប្រួល</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Comparative Evaluation of a Newly Developed Trunk-Based Tree Detection/Localization Strategy on Leaf-Off LiDAR Point Clouds with Varying Characteristics</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Tian Zhou (Lyles School of Civil Engineering, Purdue University), Renato César dos Santos (São Paulo State University), Jidong Liu (Purdue University), Yi-Chun Lin (Purdue University), William Changhao Fei (Purdue University), Songlin Fei (Department of Forestry and Natural Resources, Purdue University), Ayman Habib (Lyles School of Civil Engineering, Purdue University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022, Remote Sensing</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Remote Sensing and Forestry</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរកឃើញ និងកំណត់ទីតាំងដើមឈើ (Tree detection and localization) សម្រាប់ការវាយតម្លៃធនធានព្រៃឈើ ដោយធ្វើការប្រៀបធៀបក្បួនដោះស្រាយផ្សេងៗលើទិន្នន័យ LiDAR ដែលមានលក្ខណៈខុសៗគ្នា រួមទាំងដង់ស៊ីតេ និងភាពសុក្រឹតធរណីមាត្រ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ក្រុមអ្នកស្រាវជ្រាវបានបង្កើតវិធីសាស្ត្រថ្មីមួយផ្អែកលើភាពខុសគ្នានៃកម្ពស់ ហើយប្រៀបធៀបវាជាមួយវិធីសាស្ត្រទំនើបៗចំនួនពីរផ្សេងទៀតនៅលើសំណុំទិន្នន័យពីឧបករណ៍ និងប្រព័ន្ធប្លែកៗគ្នា។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យពីដ្រូន (UAV LiDAR) និងប្រព័ន្ធ Geiger-mode ក្នុងលក្ខខណ្ឌដែលដើមឈើគ្មានស្លឹក (Leaf-Off conditions)</li>
+            
+            <li>ការធ្វើតេស្តក្បួនដោះស្រាយពពកចំណុចផ្អែកលើដង់ស៊ីតេ និងកម្ពស់ (DBSCAN-based and height/density-based approaches)</li>
+            
+            <li>ការអភិវឌ្ឍវិធីសាស្ត្រថ្មីផ្អែកលើភាពខុសគ្នានៃកម្ពស់ក្នុងតំបន់មូលដ្ឋាន (Height-difference-based approach)</li>
+            
+            <li>ការកែតម្រូវភាពសុក្រឹតប្រព័ន្ធ (System Calibration) សម្រាប់ទិន្នន័យដ្រូនដោយប្រើប្រាស់ទីតាំងគល់ឈើ និងផ្ទៃដី</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>សម្រាប់ទិន្នន័យពីដ្រូន (UAV) ដែលមានដង់ស៊ីតេខ្ពស់ វិធីសាស្ត្រ DBSCAN និងវិធីសាស្ត្រផ្អែកលើកម្ពស់/ដង់ស៊ីតេ ទទួលបានលទ្ធផលល្អអស្ចារ្យ (ពិន្ទុ F1 > 0.99 និងភាពសុក្រឹតទីតាំង 0.1 ម៉ែត្រ) ក្រោយពេលកែតម្រូវប៉ារ៉ាម៉ែត្រ (Threshold fine-tuning)។</li>
+            
+            <li>វិធីសាស្ត្រថ្មីផ្អែកលើភាពខុសគ្នានៃកម្ពស់ (Height-difference-based) អាចចាប់យកទីតាំងដើមឈើបានកម្រិតខ្ពស់ដោយមិនទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រស្មុគស្មាញ ប៉ុន្តែភាពសុក្រឹតនៃទីតាំងនៅមានកម្រិតទាបជាងវិធីសាស្ត្រពីរផ្សេងទៀតបន្តិច។</li>
+            
+            <li>សម្រាប់ទិន្នន័យ Geiger-mode ដែលមានដង់ស៊ីតេចំណុចទាប វិធីសាស្ត្រថ្មី (Height-difference-based) ដំណើរការបានល្អជាងគេបំផុត ដោយទទួលបានចំនួនរកឃើញពិតប្រាកដ (True positives) និងពិន្ទុ F1 ខ្ពស់បំផុត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">DBSCAN-based approach</span></strong><br>វិធីសាស្ត្រផ្អែកលើក្បួនដោះស្រាយ DBSCAN ចង្អោមចំណុច</td>
+                <td>ផ្តល់ភាពសុក្រឹតខ្ពស់សម្រាប់ការកំណត់ទីតាំងដើមឈើ (ត្រឹមត្រូវប្រមាណ ០.១ ម៉ែត្រ) ក្នុងទិន្នន័យដែលមានដង់ស៊ីតេខ្ពស់។</td>
+                <td>ទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រស្មុគស្មាញ (minPts, ε) និងចំណាយពេលដំណើរការយូរខ្លាំងនៅពេលទិន្នន័យមានចំនួនចំណុចច្រើន។</td>
+                <td>ទទួលបានពិន្ទុ F1 > 0.99 សម្រាប់ទិន្នន័យ UAV ដង់ស៊ីតេខ្ពស់ ប៉ុន្តែធ្លាក់ចុះដល់ F1 = 0.808 សម្រាប់ទិន្នន័យ Geiger-mode ដង់ស៊ីតេទាប។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Height/Density-based approach</span></strong><br>វិធីសាស្ត្រផ្អែកលើកម្ពស់ និងដង់ស៊ីតេចំណុច</td>
+                <td>ចំណាយពេលដំណើរការលឿនជាងគេបំផុតសម្រាប់ទិន្នន័យដង់ស៊ីតេខ្ពស់ និងផ្តល់ភាពសុក្រឹតទីតាំងដើមឈើបានល្អ។</td>
+                <td>ត្រូវការការសាកល្បងកែតម្រូវប៉ារ៉ាម៉ែត្រច្រើន ហើយងាយរងផលប៉ះពាល់យ៉ាងខ្លាំងនៅពេលទិន្នន័យមានដង់ស៊ីតេទាប ឬខុសធរណីមាត្រ។</td>
+                <td>ទទួលបានពិន្ទុ F1 > 0.99 សម្រាប់ទិន្នន័យ UAV ប៉ុន្តែដំណើរការខ្សោយជាងគេលើទិន្នន័យដង់ស៊ីតេទាប (F1 = 0.746)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Height-Difference-based approach (Proposed)</span></strong><br>វិធីសាស្ត្រថ្មីផ្អែកលើភាពខុសគ្នានៃកម្ពស់ក្នុងតំបន់មូលដ្ឋាន</td>
+                <td>មិនពឹងផ្អែកលើដង់ស៊ីតេចំណុច ងាយស្រួលកំណត់ប៉ារ៉ាម៉ែត្រតាមវិចារណញាណ និងដំណើរការបានល្អបំផុតសម្រាប់ទិន្នន័យដែលខ្សត់ចំណុច។</td>
+                <td>ងាយចាប់យកទីតាំងខុស (False positives) ដោយសារកម្ទេចកម្ទីឈើ ឬមែកទាបៗ ហើយភាពសុក្រឹតទីតាំងជាក់លាក់មានកម្រិតទាបជាងវិធីសាស្ត្រផ្សេងបន្តិច។</td>
+                <td>ទទួលបានពិន្ទុ F1 > 0.99 សម្រាប់ទិន្នន័យ UAV និងមានប្រសិទ្ធភាពខ្ពស់បំផុតលើទិន្នន័យ Geiger-mode ដង់ស៊ីតេទាប (F1 = 0.902)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារកុំព្យូទ័រដែលមានកម្លាំងមធ្យមសម្រាប់ការកែច្នៃទិន្នន័យ ព្រមទាំងឧបករណ៍ LiDAR ដែលមានតម្លៃថ្លៃ និងបច្ចេកទេសហោះហើរដើម្បីប្រមូលទិន្នន័យប្រកបដោយគុណភាព។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានអង្គគណនា Intel Core i7-6700 និង RAM 16GB ឬខ្ពស់ជាងនេះ សម្រាប់ដំណើរការទិន្នន័យ Point Cloud រាប់លានចំណុច។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យពពកចំណុច 3D ពីឧបករណ៍ UAV LiDAR (ឧ. Velodyne VLP-32C) ឬ Geiger-mode LiDAR ដែលថតក្នុងលក្ខខណ្ឌឈើជ្រុះស្លឹក (Leaf-off)។</li>
+        
+        <li><strong>Algorithms & Software:</strong> បណ្ណាល័យកូដដែលអាចដំណើរការក្បួនដោះស្រាយ DBSCAN, KD-Tree structure និង Cloth Simulation Filter (CSF) សម្រាប់បំបែកចំណុចដី។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅតំបន់ព្រៃដាំ Martell Forest (សហរដ្ឋអាមេរិក) ដែលមានដើមឈើដាំជាជួរៗមានរបៀបរៀបរយ និងស្ថិតក្នុងរដូវជ្រុះស្លឹក (Leaf-off) អនុញ្ញាតឲ្យកាំរស្មីឡាស៊ែរឆ្លុះដល់គល់ឈើបានល្អ។ សម្រាប់ប្រទេសកម្ពុជា ទិន្នន័យនេះមានភាពលម្អៀង ព្រោះព្រៃឈើធម្មជាតិនៅកម្ពុជាភាគច្រើនជាព្រៃត្រូពិចក្រាស់ មានរុក្ខជាតិគម្របដី និងវល្លិច្រើន (Understory vegetation) ដែលធ្វើឲ្យការចាប់យកទីតាំងគល់ឈើជួបការលំបាកខ្លាំង ទោះបីប្រើ LiDAR ក៏ដោយ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានបញ្ហាប្រឈមជាមួយព្រៃត្រូពិចក្តី វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់សម្រាប់ការអនុវត្តលើការគ្រប់គ្រងព្រៃដាំ និងចម្ការកសិ-ឧស្សាហកម្មនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ការគ្រប់គ្រងចម្ការកៅស៊ូ និងស្វាយចន្ទី (ខេត្តត្បូងឃ្មុំ កំពង់ចាម និងរតនគិរី):</strong> ចម្ការទាំងនេះមានរចនាសម្ព័ន្ធដាំដុះជាជួរៗស្រដៀងនឹងទីតាំងសិក្សាក្នុងឯកសារ ដែលអនុញ្ញាតឲ្យក្រសួងកសិកម្ម ឬក្រុមហ៊ុនឯកជន អាចប្រើប្រាស់ Drone LiDAR ដើម្បីរាប់ចំនួនដើម និងប៉ាន់ស្មានទំហំគល់ឈើបានលឿនជាងការចុះវាស់ផ្ទាល់។</li>
+            
+            <li><strong>គម្រោងឥណទានកាបូន REDD+ (តំបន់កែវសីមា ឬជួរភ្នំក្រវាញ):</strong> វិធីសាស្ត្រ Height-Difference-based ដែលដំណើរការបានល្អលើទិន្នន័យដង់ស៊ីតេទាប អាចត្រូវយកមកប្រើជាមួយទិន្នន័យ Airborne LiDAR (ពីយន្តហោះ) ដើម្បីរាប់ចំនួនដើមឈើធំៗ (Dominant trees) ក្នុងតំបន់អភិរក្សធំៗ សម្រាប់ប៉ាន់ស្មានបរិមាណជីវម៉ាស និងកាបូន។</li>
+            
+            <li><strong>ការតាមដានព្រៃល្បោះ (Dry Dipterocarp Forests ក្នុងខេត្តមណ្ឌលគិរី):</strong> ព្រៃល្បោះនៅកម្ពុជាមានរដូវជ្រុះស្លឹក (Leaf-off) ស្រដៀងនឹងលក្ខខណ្ឌនៃការសិក្សានេះ ដែលអំណោយផលដល់ការហោះហើរ UAV LiDAR នៅរដូវប្រាំង ដើម្បីធ្វើជំរឿនធនធានព្រៃឈើដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម វិធីសាស្ត្រពឹងផ្អែកលើគល់ឈើនេះ គឺជាឧបករណ៍ដ៏មានប្រសិទ្ធភាពមួយសម្រាប់អ្នកស្រាវជ្រាវ និងស្ថាប័នពាក់ព័ន្ធនៅកម្ពុជា ក្នុងការធ្វើទំនើបកម្មប្រព័ន្ធគ្រប់គ្រងទិន្នន័យព្រៃដាំ និងគម្រោងព្រៃឈើពាណិជ្ជកម្ម។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីមូលដ្ឋានគ្រឹះនៃការមើល និងកែច្នៃទិន្នន័យ 3D Point Cloud:</strong> និស្សិតគួរចាប់ផ្តើមដំឡើង និងប្រើប្រាស់កម្មវិធីកូដបើកចំហរដូចជា <span class="en">CloudCompare</span> ដើម្បីរៀនមើលទិន្នន័យ LiDAR, សិក្សាពីប្រព័ន្ធកូអរដោនេ និងសាកល្បងសម្អាតទិន្នន័យ Noise ដោយដៃ។</li>
+            
+            <li><strong>អនុវត្តការបំបែកចំណុចផ្ទៃដី (Ground Filtering & DTM Generation):</strong> ត្រូវស្វែងយល់ពីក្បួនដោះស្រាយ <span class="en">Cloth Simulation Filter (CSF)</span> ឬប្រើប្រាស់បណ្ណាល័យកូដ <span class="en">PDAL</span> ក្នុង Python ដើម្បីបំបែកចំណុចផ្ទៃដីចេញពីចំណុចដើមឈើ និងបង្កើតម៉ូដែល DTM។</li>
+            
+            <li><strong>អភិវឌ្ឍក្បួនដោះស្រាយការស្វែងរកដើមឈើ (Tree Clustering Algorithms):</strong> ប្រើប្រាស់ភាសា <span class="en">Python</span> ជាមួយបណ្ណាល័យ <span class="en">scikit-learn</span> សម្រាប់អនុវត្ត <span class="en">DBSCAN</span> និងបណ្ណាល័យ <span class="en">scipy</span> សម្រាប់អនុវត្ត <span class="en">KD-Tree</span> ដើម្បីសាកល្បងចាប់យកទីតាំងគល់ឈើតាមវិធីសាស្ត្រដែលរៀបរាប់ក្នុងឯកសារ។</li>
+            
+            <li><strong>ប្រមូលទិន្នន័យជាក់ស្តែង និងធ្វើតេស្តសុក្រឹតភាព (Field Testing):</strong> សហការជាមួយដេប៉ាតឺម៉ង់ព្រៃឈើ ឬក្រុមហ៊ុនកសិកម្ម ដើម្បីហោះហើរដ្រូន <span class="en">DJI Matrice 300 RTK</span> ជាមួយសេនស័រ <span class="en">Zenmuse L1/L2</span> ថតយកទិន្នន័យចម្ការកៅស៊ូ រួចយកកូដដែលសរសេររួចមកវិភាគ និងប្រៀបធៀបជាមួយទិន្នន័យចុះវាស់ផ្ទាល់ (Ground truth)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Point Cloud</span></td>
+                <td>បណ្តុំនៃចំណុចកូអរដោនេ 3D (X, Y, Z) រាប់លានដែលប្រមូលបានដោយឧបករណ៍ឡាស៊ែរ (LiDAR) បាញ់ផ្លាតពីវត្ថុ ដើម្បីបង្កើតជារូបរាងទីតាំង ឬរចនាសម្ព័ន្ធវត្ថុណាមួយនៅក្នុងប្រព័ន្ធកុំព្យូទ័រសម្រាប់ការវិភាគ។</td>
+                <td>ដូចជាការយកគ្រាប់ខ្សាច់តូចៗរាប់លានគ្រាប់មកតម្រៀបបញ្ឈរលើគ្នាដើម្បីបង្កើតជារូបរាងដើមឈើ ឬផ្ទះក្មេងលេងក្នុងលំហ 3D។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Geiger-mode LiDAR</span></td>
+                <td>ប្រព័ន្ធឡាស៊ែរស្កេនប្រភេទថ្មីដែលមានសេនស័រចាប់សញ្ញាពន្លឺបានយ៉ាងល្អិតល្អន់បំផុត (ទោះជាមានពន្លឺត្រលប់មកវិញត្រឹមតែមួយ ហ្វូតុង ឬ Photon ក៏វាអាចកត់ត្រាបាន) ដែលអនុញ្ញាតឱ្យគេហោះហើរយន្តហោះបានខ្ពស់ និងលឿនជាងមុន ដើម្បីប្រមូលទិន្នន័យ។</td>
+                <td>ដូចជាកាមេរ៉ាទំនើបដែលអាចថតរូបបានច្បាស់ល្អ ទោះបីជានៅក្នុងទីងងឹតដែលមានពន្លឺភ្លើងអំពិលអំពែកតែមួយគ្រាប់ក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">DBSCAN</span></td>
+                <td>ក្បួនដោះស្រាយកុំព្យូទ័រ (Algorithm) សម្រាប់ចាប់ផ្ដុំចំណុចទីតាំងដែលនៅកៀកៗគ្នាឱ្យក្លាយជាក្រុមតែមួយ (ឧទាហរណ៍៖ ចាប់យកគល់ឈើមួយដើម) ដោយផ្អែកលើកម្រិតដង់ស៊ីតេចំណុច ហើយទាត់ចោលចំណុចនៅរាយប៉ាយចាត់ទុកជាសំរាម (Noise)។</td>
+                <td>ដូចជាការសង្កេតមើលសិស្សដែលឈរផ្តុំគ្នាក្នុងទីធ្លាសាលា ហើយចាត់ទុកពួកគេជាក្រុមរៀងៗខ្លួន ចំណែកអ្នកណាឈរឆ្ងាយពីគេឯង ត្រូវបានចាត់ទុកថាជាអ្នកដើរលេងម្នាក់ឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Digital Terrain Model (DTM)</span></td>
+                <td>ម៉ូដែល 3D ដែលបង្ហាញតែពីទម្រង់ផ្ទៃដី និងជម្រាលសុទ្ធសាធ ដោយប្រព័ន្ធកុំព្យូទ័របានកាត់ជម្រះ ឬលុបចេញនូវរាល់ដើមឈើ អគារ និងវត្ថុផ្សេងៗនៅលើដីចេញអស់។</td>
+                <td>ដូចជាការស្រមៃមើលផែនដីទទេស្អាត បន្ទាប់ពីយើងកោរសក់ (ដើមឈើ) និងដោះមួក (អគារ) ចេញពីក្បាល (ផ្ទៃដី) អស់អញ្ចឹង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cloth Simulation</span></td>
+                <td>ក្បួនបច្ចេកទេសសម្រាប់បំបែកចំណុចផ្ទៃដីចេញពីចំណុចវត្ថុផ្សេងៗ ដោយប្រើគំនិតគណិតវិទ្យាក្លែងធ្វើជាការទម្លាក់ក្រណាត់មួយផ្ទាំង គ្របពីលើពពកចំណុចដែលត្រូវបានផ្កាប់បញ្ច្រាស។</td>
+                <td>ដូចជាការយកក្រណាត់ទៅគ្របពីលើតុដែលមានរាយប៉ាយកែវចាន បន្ទាប់មកមើលរាងក្រណាត់នោះដើម្បីស្មានដឹងថាឯណាជាផ្ទៃតុទទេរាបស្មើ ហើយឯណាជាវត្ថុ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">KD-Tree</span></td>
+                <td>រចនាសម្ព័ន្ធទិន្នន័យក្នុងវិទ្យាសាស្ត្រកុំព្យូទ័រ ដែលរៀបចំចំណុច 3D ជាថ្នាក់ៗ និងជាតំបន់ៗ ដើម្បីជួយឱ្យការស្វែងរកចំណុចដែលនៅក្បែរគ្នាមានភាពរហ័ស ដោយមិនបាច់ចំណាយពេលទាញរកគ្រប់ចំណុចទាំងអស់ឡើយ។</td>
+                <td>ដូចជាការស្វែងរកសៀវភៅក្នុងបណ្ណាល័យដែលគេបានរៀបចំតាមកាតាឡុកអក្ខរក្រម និងមុខវិជ្ជាយ៉ាងមានសណ្តាប់ធ្នាប់ ជំនួសឱ្យការដើររើសមើលគ្រប់ធ្នើរទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Voronoi diagram</span></td>
+                <td>ការគូសបែងចែកលំហផ្ទៃដីជាតំបន់ៗ ដោយធានាថាគ្រប់ទីតាំងក្នុងតំបន់មួយ គឺស្ថិតនៅកៀកនឹងចំណុចកណ្តាលមួយ (ឧទាហរណ៍៖ គល់ឈើមួយ) ជាជាងចំណុចកណ្តាលនៃតំបន់ផ្សេងទៀត ដើម្បីចាត់ថ្នាក់ចំណុចទាំងនោះជារបស់ដើមឈើតែមួយ។</td>
+                <td>ដូចជាការគូសផែនទីបែងចែកព្រំដែនសង្កាត់ ដោយតម្រូវថាផ្ទះអ្នកណាដែលនៅជិតសាលាសង្កាត់ណាមួយជាងគេ គឺត្រូវចុះឈ្មោះចូលជាសមាជិករបស់សង្កាត់នោះដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Leaf-Off conditions</span></td>
+                <td>លក្ខខណ្ឌបរិស្ថានក្នុងរដូវកាលដែលដើមឈើជ្រុះស្លឹកអស់ពីមែក ដែលអនុញ្ញាតឱ្យកាំរស្មីឡាស៊ែរពីយន្តហោះ អាចបាញ់ទម្លុះចន្លោះមែកឈើទៅប៉ះនឹងគល់ឈើ និងផ្ទៃដីបានយ៉ាងងាយស្រួលដើម្បីយកទិន្នន័យលម្អិតពីខាងក្រោម។</td>
+                <td>ដូចជាការថតកាំរស្មីអិច (X-ray) ដែលយើងអាចមើលឃើញរចនាសម្ព័ន្ធឆ្អឹងច្បាស់ នៅពេលដែលគ្មានសម្លៀកបំពាក់ក្រាស់ៗបាំងពីក្រៅ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=UAV+LiDAR+applications+in+precision+forestry+and+tree+structure+mapping" target="_blank" rel="noopener"><span class="en">UAV LiDAR applications in precision forestry and tree structure mapping</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Geiger-mode+LiDAR+point+cloud+filtering+and+classification" target="_blank" rel="noopener"><span class="en">Geiger-mode LiDAR point cloud filtering and classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=DBSCAN+clustering+algorithms+for+3D+point+cloud+segmentation" target="_blank" rel="noopener"><span class="en">DBSCAN clustering algorithms for 3D point cloud segmentation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Individual+tree+crown+segmentation+using+multi-source+remote+sensing" target="_blank" rel="noopener"><span class="en">Individual tree crown segmentation using multi-source remote sensing</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

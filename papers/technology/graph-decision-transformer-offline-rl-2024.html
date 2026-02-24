@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តបែបក្រាហ្វសម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៅក្នុងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ដោយផ្តោតលើការយកឈ្នះលើដែនកំណត់នៃគំរូតាមលំដាប់លំដោយ (Sequence Modeling) តាម...">
+    
+    <meta name="keywords" content="Offline Reinforcement Learning, Graph Decision Transformer, Sequence Modeling, Graph Neural Networks, Markov Decision Process, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/graph-decision-transformer-offline-rl-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/graph-decision-transformer-offline-rl-2024.html">
+    <meta property="og:title" content="ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តបែបក្រាហ្វសម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៅក្នុងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ដោយផ្តោតលើការយកឈ្នះលើដែនកំណត់នៃគំរូតាមលំដាប់លំដោយ (Sequence Modeling) តាមរយៈការប្រើប្រាស់រចនាសម្ព័ន្ធក្រាហ្វដើម្ប...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024, SCIENCE CHINA Information Sciences">
+    
+    <meta property="article:tag" content="Offline Reinforcement Learning">
+    
+    <meta property="article:tag" content="Graph Decision Transformer">
+    
+    <meta property="article:tag" content="Sequence Modeling">
+    
+    <meta property="article:tag" content="Graph Neural Networks">
+    
+    <meta property="article:tag" content="Markov Decision Process">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តបែបក្រាហ្វសម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៅក្នុងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ដោយផ្តោតលើការយកឈ្នះលើដែនកំណត់នៃគំរូតាមលំដាប់លំដោយ (Sequence Modeling) តាមរយៈការប្រើប្រាស់រចនាសម្ព័ន្ធក្រាហ្វដើម្ប...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u178f\u17d2\u179a\u1784\u17cb\u179f\u17d2\u179c\u17d0\u179a\u1798\u17d0\u179a\u1792\u17d2\u179c\u17be\u179f\u17c1\u1785\u1780\u17d2\u178f\u17b8\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u1794\u17c2\u1794\u1780\u17d2\u179a\u17b6\u17a0\u17d2\u179c\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789",
+      "name": "Graph decision transformer for offline reinforcement learning",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789 (Offline Reinforcement Learning) \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u1799\u1780\u1788\u17d2\u1793\u17c7\u179b\u17be\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb\u1793\u17c3\u1782\u17c6\u179a\u17bc\u178f\u17b6\u1798\u179b\u17c6\u178a\u17b6\u1794\u17cb\u179b\u17c6\u178a\u17c4\u1799 (Sequence Modeling) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1780\u17d2\u179a\u17b6\u17a0\u17d2\u179c\u178a\u17be\u1798\u17d2\u1794\u17b8\u1785\u17b6\u1794\u17cb\u1799\u1780\u1791\u17c6\u1793\u17b6\u1780\u17cb\u1791\u17c6\u1793\u1784\u1793\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/graph-decision-transformer-offline-rl-2024.html",
+      "author": [{"@type": "Person", "name": "Shengchao Hu (Shanghai Jiao Tong University, Shanghai AI Laboratory)"},{"@type": "Person", "name": "Li Shen (Shenzhen Campus of Sun Yat-sen University)"},{"@type": "Person", "name": "Ya Zhang (Shanghai Jiao Tong University, Shanghai AI Laboratory)"},{"@type": "Person", "name": "Dacheng Tao (Nanyang Technological University)"}],
+      "datePublished": "2024, SCIENCE CHINA Information Sciences",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Graph decision transformer for offline reinforcement learning",
+        "url": "http://scis.scichina.com/en/2025/169101-supplementary.pdf"
+      },
+      "keywords": ["Offline Reinforcement Learning", "Graph Decision Transformer", "Sequence Modeling", "Graph Neural Networks", "Markov Decision Process"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u178f\u17d2\u179a\u1784\u17cb\u179f\u17d2\u179c\u17d0\u179a\u1798\u17d0\u179a\u1792\u17d2\u179c\u17be\u179f\u17c1\u1785\u1780\u17d2\u178f\u17b8\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u1794\u17c2\u1794\u1780\u17d2\u179a\u17b6\u17a0\u17d2\u179c\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789",
+          "item": "https://khmerresearch.com/papers/technology/graph-decision-transformer-offline-rl-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តបែបក្រាហ្វសម្រាប់ការរៀ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Graph decision transformer for offline reinforcement learning<br>
+        
+        <strong>Source:</strong> <a href="http://scis.scichina.com/en/2025/169101-supplementary.pdf" target="_blank">scis.scichina.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តបែបក្រាហ្វសម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Graph decision transformer for offline reinforcement learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Shengchao Hu (Shanghai Jiao Tong University, Shanghai AI Laboratory), Li Shen (Shenzhen Campus of Sun Yat-sen University), Ya Zhang (Shanghai Jiao Tong University, Shanghai AI Laboratory), Dacheng Tao (Nanyang Technological University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, SCIENCE CHINA Information Sciences</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៅក្នុងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ដោយផ្តោតលើការយកឈ្នះលើដែនកំណត់នៃគំរូតាមលំដាប់លំដោយ (Sequence Modeling) តាមរយៈការប្រើប្រាស់រចនាសម្ព័ន្ធក្រាហ្វដើម្បីចាប់យកទំនាក់ទំនងនៃទិន្នន័យ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើឡើងនូវវិធីសាស្រ្តថ្មីមួយដែលរួមបញ្ចូលគ្នារវាងបច្ចេកទេសក្រាហ្វ និងការធ្វើគំរូតាមលំដាប់លំដោយ ដើម្បីបង្កើតជាគំរូមួយឈ្មោះថា Graph Decision Transformer (GDT)។
+        
+        <ul>
+            
+            <li>ការតំណាងទិន្នន័យជាក្រាហ្វ (Graph Representation): បំប្លែងទិន្នន័យលំដាប់លំដោយទៅជាក្រាហ្វដែលមានទំនាក់ទំនងអាស្រ័យគ្នា (Dependency relationships) ដើម្បីបង្ហាញពីលក្ខណៈម៉ាកូវ (Markovian property)។</li>
+            
+            <li>ត្រង់ស្វ័រម័រក្រាហ្វ (Graph Transformer): ប្រើប្រាស់យន្តការយកចិត្តទុកដាក់ដែលពង្រឹងដោយទំនាក់ទំនង (Relation-enhanced mechanism) សម្រាប់ដំណើរការ និងចាប់យកទំនាក់ទំនងរយៈពេលវែង។</li>
+            
+            <li>ត្រង់ស្វ័រម័រផ្នែក (Patch Transformer): ជម្រើសបន្ថែមដើម្បីទាញយកព័ត៌មានទំហំលម្អិត (Fine-grained spatial information) សម្រាប់កិច្ចការដែលផ្អែកលើរូបភាព (Visual tasks) ដូចជាហ្គេម Atari។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>គំរូ GDT ទទួលបានលទ្ធផលល្អប្រសើរជាងក្បួនដោះស្រាយតាមបែបប្រពៃណី និងគំរូ Decision Transformer (DT) នៅលើការធ្វើតេស្ត Atari ដោយទទួលបានពិន្ទុមធ្យម ១២៧.៦ ធៀបនឹង ៨៧.៥ របស់គំរូ DT។</li>
+            
+            <li>នៅក្នុងការធ្វើតេស្ត D4RL ជាមួយនឹងទិន្នន័យចម្រុះ គំរូ GDT បង្ហាញពីសមត្ថភាពល្អផ្តាច់គេក្នុងការគ្រប់គ្រងការសម្រេចចិត្តជាបន្តបន្ទាប់ (Continuous control tasks)។</li>
+            
+            <li>ការបន្ថែម Patch Transformer (GDT-plus) ជួយបង្កើនប្រសិទ្ធភាពយ៉ាងខ្លាំងនៅក្នុងបរិស្ថានដែលត្រូវការការវិភាគរូបភាព (Atari) ជាមួយចំនួនប៉ារ៉ាម៉ែត្រត្រឹមតែ ០.១០៣M ដែលតិចជាងគំរូ StAR យ៉ាងច្រើន (០.៨៧២M)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">GDT-plus (Graph Decision Transformer Plus)</span></strong><br>ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តបែបក្រាហ្វ (បូកបញ្ចូលការវិភាគរូបភាព)</td>
+                <td>ចាប់យកទំនាក់ទំនងម៉ាកូវ (Markovian dependencies) បានយ៉ាងល្អ និងមានប្រសិទ្ធភាពខ្ពស់លើកិច្ចការវិភាគរូបភាពដោយប្រើប៉ារ៉ាម៉ែត្រតិចតួចបំផុត។</td>
+                <td>ទាមទារពេលវេលាក្នុងការធ្វើសេចក្តីសន្និដ្ឋាន (Inference time) យូរជាងគំរូ DT ធម្មតារហូតដល់ ៥ដង។</td>
+                <td>ទទួលបានពិន្ទុមធ្យមខ្ពស់បំផុត ១៤២.៣ លើហ្គេម Atari និង ៧៩.១ លើតារាង D4RL Gym។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">DT (Decision Transformer)</span></strong><br>ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្ត (ផ្អែកលើលំដាប់លំដោយ)</td>
+                <td>មានភាពសាមញ្ញ ងាយស្រួលអនុវត្ត និងប្រើប្រាស់ពេលវេលាក្នុងការទស្សន៍ទាយលឿន (ត្រឹមតែ ០.៦៥៤ វិនាទី)។</td>
+                <td>មិនអាចចាប់យកទំនាក់ទំនងរយៈពេលវែងបានល្អ និងធ្លាក់ចុះប្រសិទ្ធភាពយ៉ាងខ្លាំងនៅពេលទិន្នន័យមានប្រវែងវែងពេក។</td>
+                <td>ទទួលបានពិន្ទុមធ្យមត្រឹមតែ ៨៧.៥ លើហ្គេម Atari និង ៧៤.៧ លើតារាង D4RL Gym។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">StARformer (StAR)</span></strong><br>ត្រង់ស្វ័រម័រតំណាងសកម្មភាពនិងរង្វាន់</td>
+                <td>មានសមត្ថភាពខ្លាំងក្នុងការដោះស្រាយបញ្ហាដែលពឹងផ្អែកលើរូបភាពភាពស្មុគស្មាញ (Visual RL)។</td>
+                <td>ត្រូវការប៉ារ៉ាម៉ែត្រច្រើនរហូតដល់ ១៤.៣៥៨M សម្រាប់ Atari ដែលធ្វើឱ្យទាមទារថាមពលកុំព្យូទ័រខ្ពស់ជាង GDT-plus។</td>
+                <td>ទទួលបានពិន្ទុមធ្យម ១៤០.៧ លើហ្គេម Atari តែទទួលបានត្រឹម ៦៦.២ លើ D4RL Gym។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CQL (Conservative Q-Learning)</span></strong><br>ការរៀន Q-Learning បែបអភិរក្ស</td>
+                <td>ជាក្បួនដោះស្រាយតាមបែបប្រពៃណី (TD-learning) ដែលមានស្ថិរភាព និងត្រូវបានគេប្រើប្រាស់យ៉ាងទូលំទូលាយ។</td>
+                <td>ទទួលបានលទ្ធផលទាបជាងបច្ចេកទេស Sequence Modeling ជំនាន់ថ្មីៗនៅក្នុងកិច្ចការភាគច្រើន។</td>
+                <td>ទទួលបានពិន្ទុមធ្យម ៩០.៦ លើហ្គេម Atari និង ៦៣.៩ លើតារាង D4RL Gym។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបានបញ្ជាក់យ៉ាងច្បាស់អំពីតម្រូវការផ្នែករឹង ពេលវេលាគណនា និងចំនួនប៉ារ៉ាម៉ែត្រដែលគំរូនីមួយៗត្រូវប្រើប្រាស់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការអង្គចងចាំកម្រិតមធ្យម (ប្រហែល 507MB សម្រាប់មួយជំហានទស្សន៍ទាយ) ប៉ុន្តែទាមទារ GPU ដែលមានសមត្ថភាពគណនាប្រតិបត្តិការគុណបូក (MACs) ខ្ពស់។</li>
+        
+        <li><strong>Time:</strong> ពេលវេលាធ្វើសេចក្តីសន្និដ្ឋាន (Inference time) សម្រាប់ GDT គឺ 3.586 វិនាទី ដែលយឺតជាង DT ប៉ុន្តែផ្តល់លទ្ធផលត្រឹមត្រូវជាង។</li>
+        
+        <li><strong>Parameters:</strong> គំរូ GDT-plus មានប្រសិទ្ធភាពខ្ពស់ក្នុងការគ្រប់គ្រងទំហំគំរូ ដោយប្រើប៉ារ៉ាម៉ែត្រត្រឹមតែ 0.103M ប៉ុណ្ណោះសម្រាប់ Atari ដែលតិចជាងគំរូប្រកួតប្រជែងដទៃទៀតយ៉ាងច្រើន។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយផ្អែកលើទិន្នន័យសិប្បនិម្មិត (Simulated environments) ទាំងស្រុង ដូចជាហ្គេម Atari និង D4RL Gym ជាជាងទិន្នន័យជាក់ស្តែងក្នុងពិភពលោក។ សម្រាប់ប្រទេសកម្ពុជា ការយកមកប្រើប្រាស់ផ្ទាល់អាចប្រឈមនឹងបញ្ហា Domain Shift ដោយសារខ្វះទិន្នន័យពីបរិយាកាសពិត និងរូបវន្ត ដែលតម្រូវឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែមដើម្បីឱ្យគំរូនេះដំណើរការបានល្អឥតខ្ចោះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្រ្ត Offline RL នេះពិតជាមានសក្តានុពល និងអត្ថប្រយោជន៍ខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធស្វ័យប្រវត្តិកម្មនៅកម្ពុជា ដោយមិនចាំបាច់មានការសាកល្បងប្រថុយប្រថានផ្ទាល់ (Online exploration) ឡើយ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> អាចប្រើប្រាស់ទិន្នន័យចាស់ៗនៃការបញ្ជាដ្រូនបាញ់ថ្នាំ ឬមនុស្សយន្តប្រមូលផល (ដែលកត់ត្រាពីសកម្មភាពមនុស្ស) ដើម្បីបង្វឹកប្រព័ន្ធស្វ័យប្រវត្តិកម្មដោយមិនបាច់ប្រថុយនឹងការខូចខាតដំណាំក្នុងពេលរៀន។</li>
+            
+            <li><strong>វិស័យកម្មន្តសាលនៅតំបន់សេដ្ឋកិច្ចពិសេស (Manufacturing in SEZs):</strong> អាចអនុវត្តគំរូនេះដើម្បីបង្វឹកដៃមនុស្សយន្ត (Robotic arms) នៅក្នុងរោងចក្រ ឱ្យរៀនពីចលនាដ៏ប៉ិនប្រសប់របស់កម្មករជំនាញ តាមរយៈទិន្នន័យវីដេអូ ឬសេនស័រ។</li>
+            
+            <li><strong>ប្រព័ន្ធគ្រប់គ្រងចរាចរណ៍ (Traffic Management Systems):</strong> ប្រើប្រាស់ទិន្នន័យពីកាមេរ៉ាចរាចរណ៍ជាច្រើនឆ្នាំនៅរាជធានីភ្នំពេញ ដើម្បីបង្វឹកគំរូ GDT នេះឱ្យធ្វើការគ្រប់គ្រង និងផ្លាស់ប្តូរភ្លើងស្តុបឆ្លាតវៃ កាត់បន្ថយការកកស្ទះដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក បច្ចេកវិទ្យានេះផ្តល់នូវដំណោះស្រាយដ៏រឹងមាំសម្រាប់ការរៀនពីទិន្នន័យចាស់ៗ ដែលស័ក្តិសមបំផុតសម្រាប់កិច្ចការនៅកម្ពុជាដែលពិបាក ចំណាយលុយច្រើន ឬមានហានិភ័យខ្ពស់ក្នុងការប្រមូលទិន្នន័យសាកល្បងថ្មីៗផ្ទាល់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>យល់ដឹងពីមូលដ្ឋានគ្រឹះនៃ Offline Reinforcement Learning:</strong> ចាប់ផ្តើមសិក្សាពីទ្រឹស្តី Markov Decision Process (MDP) និងបច្ចេកទេស Sequence Modeling តាមរយៈភាសា Python ដោយផ្តោតលើការយល់ដឹងពីភាពខុសគ្នារវាងការរៀនបែប Online និង Offline។</li>
+            
+            <li><strong>សិក្សាស៊ីជម្រៅពីបច្ចេកវិទ្យា Graph និង Transformer:</strong> រៀនពីរបៀបបំប្លែងទិន្នន័យជាជួរ (Sequence) ទៅជាក្រាហ្វ (Graph Representation) និងសាកល្បងសរសេរកូដគំរូ Attention Mechanism តាមរយៈបណ្ណាល័យ PyTorch។</li>
+            
+            <li><strong>សាកល្បងកូដជាមួយទិន្នន័យស្តង់ដារ:</strong> ទាញយកទិន្នន័យសិប្បនិម្មិតពី D4RL Benchmark និង OpenAI Gym ដើម្បីដំណើរការសាកល្បងគំរូ Decision Transformer និងរៀនវិភាគលទ្ធផលពិន្ទុ។</li>
+            
+            <li><strong>ប្រមូលទិន្នន័យក្នុងស្រុក (Local Data Collection):</strong> ចាប់ផ្តើមប្រមូលទិន្នន័យជាក់ស្តែងនៅកម្ពុជា (ឧទាហរណ៍៖ ទិន្នន័យចលនាគ្រឿងចក្រកសិកម្ម ឬកាមេរ៉ាចរាចរណ៍រាជធានីភ្នំពេញ) ហើយរៀបចំវាជាទម្រង់ Offline Dataset។</li>
+            
+            <li><strong>បង្វឹក និងដាក់ឱ្យដំណើរការគំរូពិត (Train and Deploy):</strong> អនុវត្តគំរូ GDT លើទិន្នន័យដែលបានប្រមូល និងប្រើប្រាស់ Cloud Computing ដូចជា AWS ឬ Google Cloud Platform (GCP) ជាមួយ NVIDIA GPUs ដើម្បីបង្កើនល្បឿនក្នុងការបង្វឹកគំរូសម្រាប់ប្រើប្រាស់ពិតប្រាកដ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline Reinforcement Learning</span></td>
+                <td>ការរៀនពង្រឹងក្រៅបណ្តាញ គឺជាវិធីសាស្រ្តបង្វឹកបញ្ញាសិប្បនិម្មិត (AI) ឱ្យចេះធ្វើការសម្រេចចិត្តដោយពឹងផ្អែកទាំងស្រុងលើទិន្នន័យ ឬបទពិសោធន៍ចាស់ៗដែលគេប្រមូលទុកជាមុន ដោយមិនអនុញ្ញាតឱ្យវាទៅសាកល្បងធ្វើសកម្មភាពផ្ទាល់ដើម្បីរៀននៅក្នុងបរិស្ថានជាក់ស្តែងនោះទេ។ វាជួយកាត់បន្ថយហានិភ័យ និងការចំណាយខ្ពស់ក្នុងការសាកល្បងដោយផ្ទាល់។</td>
+                <td>ដូចជាការរៀនទាត់បាល់ដោយគ្រាន់តែមើលវីដេអូកីឡាករល្បីៗប្រកួតពីមុនៗច្រើនដង ដោយមិនបាច់ចុះទៅទាត់ផ្ទាល់នៅលើទីលានឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov Decision Process (MDP)</span></td>
+                <td>ជាក្របខ័ណ្ឌគណិតវិទ្យាសម្រាប់ធ្វើគំរូពីការសម្រេចចិត្តជាបន្តបន្ទាប់ ដែលច្បាប់របស់វាគឺ៖ ស្ថានភាពនៅជំហានបន្ទាប់ និងរង្វាន់ដែលនឹងទទួលបាន គឺអាស្រ័យតែទៅលើស្ថានភាពបច្ចុប្បន្ន និងសកម្មភាពដែលទើបនឹងធ្វើប៉ុណ្ណោះ ដោយមិនខ្វល់ពីរឿងហេតុដែលបានកើតឡើងកាលពីអតីតកាលយូរណាស់មកហើយនោះទេ។</td>
+                <td>ដូចជាការលេងអុក ដែលការដើរកូនអុកបន្ទាប់គឺគិតតែពីទីតាំងកូនអុកនៅលើក្តារពេលនេះ មិនបាច់ខ្វល់ថាពីដើមទីគេដើរវាមកតាមផ្លូវណាខ្លះនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sequence Modeling</span></td>
+                <td>ការធ្វើគំរូតាមលំដាប់លំដោយ គឺជាដំណើរការប្រើប្រាស់ក្បួនដោះស្រាយដើម្បីវិភាគ និងព្យាករណ៍ទិន្នន័យបន្ទាប់ ដោយផ្អែកលើបណ្តុំទិន្នន័យដែលបានកើតឡើងជាបន្តបន្ទាប់គ្នាតាមលំដាប់ពេលវេលាច្បាស់លាស់ (ដូចជា ប្រយោគ សំឡេង ឬសកម្មភាពបន្តបន្ទាប់របស់មនុស្សយន្ត)។</td>
+                <td>ដូចជាមុខងារទស្សន៍ទាយពាក្យបន្ទាប់ (Auto-predict) ពេលយើងវាយអក្សរលើទូរសព្ទដៃ ដោយផ្អែកលើពាក្យដែលយើងទើបតែវាយមុននេះបន្តិច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Return-to-go (RTG)</span></td>
+                <td>គឺជារង្វាន់សរុបដែលគេរំពឹងថានឹងទទួលបានចាប់ពីជំហានបច្ចុប្បន្ន រហូតដល់បញ្ចប់កិច្ចការទាំងមូល។ នៅក្នុងឯកសារនេះ វាត្រូវបានប្រើជាលក្ខខណ្ឌ ឬគោលដៅបញ្ជាឱ្យ AI ជ្រើសរើសសកម្មភាពបច្ចុប្បន្នណាដែលអាចនាំទៅរកការសម្រេចបានរង្វាន់គោលដៅនោះនៅទីបញ្ចប់។</td>
+                <td>ដូចជាការកំណត់គោលដៅលក់ប្រាក់ចំណេញ ៥០០០ដុល្លារ ឱ្យអ្នកលក់ប្រចាំខែ ហើយអ្នកលក់ត្រូវរៀបចំផែនការលក់រាល់ថ្ងៃដើម្បីឱ្យគ្រប់ចំនួនលុយនោះនៅចុងខែ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Graph Neural Networks (GNNs)</span></td>
+                <td>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិតបែបក្រាហ្វ គឺជាប្រភេទ AI ដែលត្រូវបានរចនាឡើងជាពិសេសដើម្បីស្វែងយល់ និងទាញយកព័ត៌មានពីទិន្នន័យដែលមានរចនាសម្ព័ន្ធជាបណ្តាញទំនាក់ទំនងគ្នាទៅវិញទៅមក (មានចំណុច និងខ្សែភ្ជាប់គ្នា) ជាជាងការវិភាគលើទិន្នន័យជួរឈរ ឬតារាងធម្មតា។</td>
+                <td>ដូចជាការស្វែងយល់ពីអត្តចរិតរបស់មនុស្សម្នាក់ ដោយមិនត្រឹមតែមើលលើប្រវត្តិរូបគាត់ តែមើលថាតើគាត់មានមិត្តភក្តិជានរណាខ្លះ ហើយបណ្តាញមិត្តគាត់ទាក់ទងគ្នាធ្វើយ៉ាងម៉េច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Self-attention mechanism</span></td>
+                <td>យន្តការយកចិត្តទុកដាក់លើខ្លួនឯង គឺជាបច្ចេកទេសស្នូលនៅក្នុងគំរូ Transformer ដែលអនុញ្ញាតឱ្យ AI ថ្លឹងថ្លែង និងគណនាពីសារៈសំខាន់នៃធាតុនីមួយៗនៅក្នុងទិន្នន័យ ធៀបនឹងធាតុផ្សេងៗទៀតទាំងអស់ក្នុងពេលតែមួយ ដើម្បីយល់ពីទំនាក់ទំនង និងបរិបទរួមបានច្បាស់លាស់ជាងមុន។</td>
+                <td>ពេលអ្នកអានសៀវភៅ ខួរក្បាលអ្នកចេះផ្តោតសំខាន់តែលើពាក្យគន្លឹះមួយចំនួននៅក្នុងប្រយោគ ដើម្បីយល់ន័យទាំងមូល ដោយមិនចាំបាច់ផ្តោតស្មើៗគ្នាលើគ្រប់ពាក្យនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Distributional shift</span></td>
+                <td>បញ្ហានៃការផ្លាស់ប្តូររបាយទិន្នន័យ គឺជាបញ្ហាដ៏ធំមួយនៅក្នុងការរៀន Machine Learning ដែលកើតឡើងនៅពេលដែលទិន្នន័យដែល AI កំពុងជួបប្រទះពេលយកទៅប្រើប្រាស់ជាក់ស្តែង មានលក្ខណៈខុសប្លែកគ្នាយ៉ាងខ្លាំងពីទិន្នន័យចាស់ៗដែលវាធ្លាប់បានយកមកហ្វឹកហាត់ពីមុន ដែលធ្វើឱ្យវាធ្វើការសម្រេចចិត្តខុស។</td>
+                <td>ដូចជាសិស្សដែលរៀនតែលំហាត់ស្រួលៗក្នុងសៀវភៅ ដល់ពេលប្រឡងគ្រូចេញលំហាត់ខុសពីសៀវភៅ ក៏គិតលែងចេញ ឬធ្វើខុស ដោយសារមិនធ្លាប់ជួបសោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=sequence+modeling+in+offline+reinforcement+learning" target="_blank" rel="noopener"><span class="en">sequence modeling in offline reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=graph+neural+networks+for+decision+making" target="_blank" rel="noopener"><span class="en">graph neural networks for decision making</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=vision+transformers+in+reinforcement+learning" target="_blank" rel="noopener"><span class="en">vision transformers in reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Markovian+inductive+biases+in+sequence+models" target="_blank" rel="noopener"><span class="en">Markovian inductive biases in sequence models</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

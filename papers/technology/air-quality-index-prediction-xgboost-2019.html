@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទស្សន៍ទាយសន្ទស្សន៍គុណភាពខ្យល់ជាមួយនឹងទិន្នន័យឧតុនិយមដោយប្រើប្រាស់ Feature Based Weighted XGBoost | KhmerResearch.com</title>
+    <meta name="description" content="ការបំពុលខ្យល់គឺជាការគំរាមកំហែងយ៉ាងធ្ងន់ធ្ងរដល់សុខភាពមនុស្ស។ ឯកសារនេះដោះស្រាយបញ្ហានៃការទស្សន៍ទាយគុណភាពខ្យល់ ដោយការរួមបញ្ចូលទិន្នន័យកម្រិតជាតិពុល និងកត្តាឧតុនិ...">
+    
+    <meta name="keywords" content="Air Quality Index, Machine Learning, XGBoost, Meteorological Data, Pollutant Prediction, Feature Ranking, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/air-quality-index-prediction-xgboost-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/air-quality-index-prediction-xgboost-2019.html">
+    <meta property="og:title" content="ការទស្សន៍ទាយសន្ទស្សន៍គុណភាពខ្យល់ជាមួយនឹងទិន្នន័យឧតុនិយមដោយប្រើប្រាស់ Feature Based Weighted XGBoost | KhmerResearch.com">
+    <meta property="og:description" content="ការបំពុលខ្យល់គឺជាការគំរាមកំហែងយ៉ាងធ្ងន់ធ្ងរដល់សុខភាពមនុស្ស។ ឯកសារនេះដោះស្រាយបញ្ហានៃការទស្សន៍ទាយគុណភាពខ្យល់ ដោយការរួមបញ្ចូលទិន្នន័យកម្រិតជាតិពុល និងកត្តាឧតុនិយមដែលជារឿយៗត្រូវបានមើលរំលងក្នុងម៉ូដែលទស្...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2019 International Journal of Recent Technology and Engineering (IJRTE)">
+    
+    <meta property="article:tag" content="Air Quality Index">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="XGBoost">
+    
+    <meta property="article:tag" content="Meteorological Data">
+    
+    <meta property="article:tag" content="Pollutant Prediction">
+    
+    <meta property="article:tag" content="Feature Ranking">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទស្សន៍ទាយសន្ទស្សន៍គុណភាពខ្យល់ជាមួយនឹងទិន្នន័យឧតុនិយមដោយប្រើប្រាស់ Feature Based Weighted XGBoost">
+    <meta name="twitter:description" content="ការបំពុលខ្យល់គឺជាការគំរាមកំហែងយ៉ាងធ្ងន់ធ្ងរដល់សុខភាពមនុស្ស។ ឯកសារនេះដោះស្រាយបញ្ហានៃការទស្សន៍ទាយគុណភាពខ្យល់ ដោយការរួមបញ្ចូលទិន្នន័យកម្រិតជាតិពុល និងកត្តាឧតុនិយមដែលជារឿយៗត្រូវបានមើលរំលងក្នុងម៉ូដែលទស្...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u179f\u1793\u17d2\u1791\u179f\u17d2\u179f\u1793\u17cd\u1782\u17bb\u178e\u1797\u17b6\u1796\u1781\u17d2\u1799\u179b\u17cb\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a7\u178f\u17bb\u1793\u17b7\u1799\u1798\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Feature Based Weighted XGBoost",
+      "name": "Air Quality Index Prediction with Meteorological Data Using Feature Based Weighted Xgboost",
+      "description": "\u1780\u17b6\u179a\u1794\u17c6\u1796\u17bb\u179b\u1781\u17d2\u1799\u179b\u17cb\u1782\u17ba\u1787\u17b6\u1780\u17b6\u179a\u1782\u17c6\u179a\u17b6\u1798\u1780\u17c6\u17a0\u17c2\u1784\u1799\u17c9\u17b6\u1784\u1792\u17d2\u1784\u1793\u17cb\u1792\u17d2\u1784\u179a\u178a\u179b\u17cb\u179f\u17bb\u1781\u1797\u17b6\u1796\u1798\u1793\u17bb\u179f\u17d2\u179f\u17d4 \u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1782\u17bb\u178e\u1797\u17b6\u1796\u1781\u17d2\u1799\u179b\u17cb \u178a\u17c4\u1799\u1780\u17b6\u179a\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1780\u1798\u17d2\u179a\u17b7\u178f\u1787\u17b6\u178f\u17b7\u1796\u17bb\u179b \u1793\u17b7\u1784\u1780\u178f\u17d2\u178f\u17b6\u17a7\u178f\u17bb\u1793\u17b7\u1799\u1798\u178a\u17c2\u179b\u1787\u17b6\u179a\u17bf\u1799\u17d7\u178f\u17d2\u179a\u17bc\u179c\u1794\u17b6\u1793\u1798\u17be\u179b\u179a\u17c6\u179b\u1784\u1780\u17d2\u1793\u17bb\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1791\u17bc\u1791\u17c5\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/air-quality-index-prediction-xgboost-2019.html",
+      "author": [{"@type": "Person", "name": "NandigalaVenkatAnurag (SRMIST, Chennai, India)"},{"@type": "Person", "name": "YagnavalkBurra (SRMIST, Chennai, India)"},{"@type": "Person", "name": "S.Sharanya (SRMIST, Chennai, India)"}],
+      "datePublished": "2019 International Journal of Recent Technology and Engineering (IJRTE)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Air Quality Index Prediction with Meteorological Data Using Feature Based Weighted Xgboost",
+        "url": "https://www.researchgate.net/profile/Sharanya-Selvaraj/publication/340032755_Air_Quality_Index_Prediction_with_Meteorological_Data_Using_Feature_Based_Weighted_Xgboost/links/5e7386e3a6fdcc9100206c51/Air-Quality-Index-Prediction-with-Meteorological-Data-Using-Feature-Based-Weighted-Xgboost.pdf"
+      },
+      "keywords": ["Air Quality Index", "Machine Learning", "XGBoost", "Meteorological Data", "Pollutant Prediction", "Feature Ranking"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u179f\u1793\u17d2\u1791\u179f\u17d2\u179f\u1793\u17cd\u1782\u17bb\u178e\u1797\u17b6\u1796\u1781\u17d2\u1799\u179b\u17cb\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a7\u178f\u17bb\u1793\u17b7\u1799\u1798\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Feature Based Weighted XGBoost",
+          "item": "https://khmerresearch.com/papers/technology/air-quality-index-prediction-xgboost-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការទស្សន៍ទាយសន្ទស្សន៍គុណភាពខ្យល់ជាមួយនឹងទិន្នន័យឧតុនិយមដោ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Air Quality Index Prediction with Meteorological Data Using Feature Based Weighted Xgboost<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Sharanya-Selvaraj/publication/340032755_Air_Quality_Index_Prediction_with_Meteorological_Data_Using_Feature_Based_Weighted_Xgboost/links/5e7386e3a6fdcc9100206c51/Air-Quality-Index-Prediction-with-Meteorological-Data-Using-Feature-Based-Weighted-Xgboost.pdf" target="_blank">researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទស្សន៍ទាយសន្ទស្សន៍គុណភាពខ្យល់ជាមួយនឹងទិន្នន័យឧតុនិយមដោយប្រើប្រាស់ Feature Based Weighted XGBoost</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Air Quality Index Prediction with Meteorological Data Using Feature Based Weighted Xgboost</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> NandigalaVenkatAnurag (SRMIST, Chennai, India), YagnavalkBurra (SRMIST, Chennai, India), S.Sharanya (SRMIST, Chennai, India)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2019 International Journal of Recent Technology and Engineering (IJRTE)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការបំពុលខ្យល់គឺជាការគំរាមកំហែងយ៉ាងធ្ងន់ធ្ងរដល់សុខភាពមនុស្ស។ ឯកសារនេះដោះស្រាយបញ្ហានៃការទស្សន៍ទាយគុណភាពខ្យល់ ដោយការរួមបញ្ចូលទិន្នន័យកម្រិតជាតិពុល និងកត្តាឧតុនិយមដែលជារឿយៗត្រូវបានមើលរំលងក្នុងម៉ូដែលទស្សន៍ទាយទូទៅ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើឡើងនូវម៉ូដែល Feature Based Weighted XGBoost ដើម្បីទស្សន៍ទាយសន្ទស្សន៍គុណភាពខ្យល់ (AQI) ដោយផ្អែកលើទិន្នន័យពីស្ថានីយពាណិជ្ជកម្មនៅតំបន់ Velachery ប្រទេសឥណ្ឌា។
+        
+        <ul>
+            
+            <li>ការប្រមូលនិងសម្អាតទិន្នន័យ (Data Collection and Cleansing): ការរៀបចំទិន្នន័យជាតិពុលដូចជា PM2.5 និងទិន្នន័យឧតុនិយម ដោយលុបបំបាត់តម្លៃទិន្នន័យដែលបាត់បង់ (Missing values) និងទិន្នន័យខុសប្រក្រតី (Outliers)។</li>
+            
+            <li>ការវិភាគទិន្នន័យស្វែងយល់ (Exploratory Data Analysis - EDA): ការស្វែងយល់ពីទំនាក់ទំនងរវាងកម្រិតជាតិពុល និងកត្តាឧតុនិយមនានា។</li>
+            
+            <li>ការកំណត់ចំណាត់ថ្នាក់លក្ខណៈពិសេស (Feature Ranking): ការប្រើប្រាស់វិធីសាស្ត្រ Roulette Wheel ដើម្បីផ្តល់ទម្ងន់ (Weights) ដល់ប៉ារ៉ាម៉ែត្រឧតុនិយមដោយផ្អែកលើសារៈសំខាន់របស់វា។</li>
+            
+            <li>ការទស្សន៍ទាយដោយប្រើ XGBoost (XGBoost Prediction): ការបណ្តុះបណ្តាលម៉ូដែលដើមឈើសម្រេចចិត្តដែលមានទម្ងន់រួមបញ្ចូលគ្នា (Ensemble model) ដើម្បីទស្សន៍ទាយ AQI ចុងក្រោយ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល Feature Based Weighted XGBoost ទទួលបានអត្រាកំហុស (RMSE) ទាបត្រឹមតែ 15.97 ដែលបង្ហាញពីភាពត្រឹមត្រូវខ្ពស់ជាងម៉ូដែលបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Networks - 24.14), តម្រែតម្រង់លីនេអ៊ែរចម្រុះ (Multiple Linear Regression - 18.72) និងដើមឈើសម្រេចចិត្ត (Decision Tree - 16.84)។</li>
+            
+            <li>ល្បឿនខ្យល់ (Wind speed) ត្រូវបានរកឃើញថាជាកត្តាឧតុនិយមដែលមានឥទ្ធិពលខ្លាំងជាងគេបំផុតទៅលើគុណភាពខ្យល់ (នៅពេលល្បឿនខ្យល់កើនឡើង សន្ទស្សន៍ AQI ថយចុះ) បន្ទាប់មកគឺកត្តាសីតុណ្ហភាព។</li>
+            
+            <li>ម៉ូដែលនេះមានភាពស័ក្តិសមសម្រាប់ការទស្សន៍ទាយ AQI ក្នុងពេលវេលាជាក់ស្តែង (Real-time prediction) ហើយអាចពង្រីកវិសាលភាពទៅកាន់តំបន់ភូមិសាស្ត្រធំៗផ្សេងទៀតបានដោយគ្រាន់តែបន្ថែមនូវកត្តាពាក់ព័ន្ធថ្មីៗ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Feature based Weighted XGBoost (Proposed)</span></strong><br>ម៉ូដែលដើមឈើសម្រេចចិត្តមានទម្ងន់រួមបញ្ចូលគ្នា (XGBoost ដែលស្នើឡើង)</td>
+                <td>ផ្តល់អត្រាកំហុសទាបបំផុត អាចវាយតម្លៃកត្តាឧតុនិយមតាមទម្ងន់នៃសារៈសំខាន់របស់វា និងងាយស្រួលក្នុងការបកស្រាយលទ្ធផល។</td>
+                <td>តម្រូវឱ្យមានការគណនា gradient លំដាប់ទីមួយ ដែលអាចមានការលះបង់បន្តិចបន្តួចទៅលើល្បឿននៃការជួបប្រសព្វ (convergence speed)។</td>
+                <td>ទទួលបានតម្លៃ RMSE ទាបបំផុតគឺ 15.97។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Decision Tree</span></strong><br>ម៉ូដែលដើមឈើសម្រេចចិត្ត (Decision Tree)</td>
+                <td>មានភាពសាមញ្ញ ងាយស្រួលយល់ និងអាចបង្ហាញពីលំហូរនៃការសម្រេចចិត្តបានច្បាស់លាស់។</td>
+                <td>ងាយរងគ្រោះដោយបញ្ហា Overfitting លើទិន្នន័យថ្មី បើប្រៀបធៀបជាមួយវិធីសាស្ត្របន្សំ (Ensemble)។</td>
+                <td>ទទួលបានតម្លៃ RMSE ស្មើនឹង 16.84។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Multiple Linear Regression</span></strong><br>តម្រែតម្រង់លីនេអ៊ែរចម្រុះ (Multiple Linear Regression)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងមានប្រសិទ្ធភាពសម្រាប់ទិន្នន័យដែលមានទំនាក់ទំនងលីនេអ៊ែរច្បាស់លាស់។</td>
+                <td>មិនសូវមានភាពបត់បែនគ្រប់គ្រាន់សម្រាប់ចាប់យកទំនាក់ទំនងស្មុគស្មាញរវាងអថេរឧតុនិយម និងកម្រិតជាតិពុលនោះទេ។</td>
+                <td>ទទួលបានតម្លៃ RMSE ស្មើនឹង 18.72។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Neural Networks</span></strong><br>បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Networks)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការរៀនសូត្រពីលំនាំស្មុគស្មាញ និងទំនាក់ទំនងដែលមិនមែនជាលីនេអ៊ែរនៅក្នុងទិន្នន័យធំៗ។</td>
+                <td>ម៉ូដែលអាចនឹងផ្តល់ទម្ងន់លើស ឬខកខានក្នុងការចាប់យកលក្ខណៈពិសេសសំខាន់ៗ (Over/Under weigh features) ហើយមានកំហុសខ្ពស់ជាងគេក្នុងការធ្វើតេស្តនេះ។</td>
+                <td>ទទួលបានតម្លៃ RMSE ខ្ពស់ជាងគេគឺ 24.14។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីតម្រូវការផ្នែករឹង (Hardware) នោះទេ ប៉ុន្តែជាទូទៅការអនុវត្ត XGBoost ទាមទារធនធានកុំព្យូទ័រមធ្យម និងទិន្នន័យដែលមានគុណភាព។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យកម្រិតជាតិពុលក្នុងខ្យល់ (CO, NOx, PM2.5, SO2, ល។) និងទិន្នន័យឧតុនិយមរៀងរាល់ម៉ោង (ល្បឿនខ្យល់ សីតុណ្ហភាព សំណើម) ដែលមានទំហំគ្រប់គ្រាន់សម្រាប់ការបែងចែក 80% សម្រាប់បណ្តុះបណ្តាល និង 20% សម្រាប់ធ្វើតេស្ត។</li>
+        
+        <li><strong>Software & Tools:</strong> បរិស្ថានសម្រាប់សរសេរកូដ Machine Learning (ឧទាហរណ៍ Python រួមជាមួយបណ្ណាល័យ XGBoost, Pandas សម្រាប់ការសម្អាតទិន្នន័យ និង Scikit-learn)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកវិទ្យាសាស្ត្រទិន្នន័យ ជាពិសេសជំនាញក្នុងការធ្វើ Exploratory Data Analysis (EDA), ការសម្អាតទិន្នន័យ (Data Cleansing) និងការជ្រើសរើសលក្ខណៈពិសេស (Feature Selection)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រមូលទិន្នន័យពីស្ថានីយពាណិជ្ជកម្ម Velachery ក្នុងរដ្ឋ Tamil Nadu ប្រទេសឥណ្ឌា។ ទោះបីជាបរិបទនៃការកកស្ទះចរាចរណ៍អាចមានភាពស្រដៀងគ្នានឹងទីក្រុងធំៗមួយចំនួន ប៉ុន្តែលក្ខខណ្ឌអាកាសធាតុ និងប្រភេទនៃប្រភពបំពុលអាចមានភាពខុសគ្នាពីប្រទេសកម្ពុជា។ ហេតុនេះ ការយកម៉ូដែលនេះមកអនុវត្តនៅកម្ពុជា តម្រូវឱ្យមានការបណ្តុះបណ្តាលសារជាថ្មី (Retraining) ជាមួយនឹងទិន្នន័យក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រទស្សន៍ទាយដែលប្រើប្រាស់កត្តាឧតុនិយមនេះ មានភាពជាក់ស្តែង និងអាចផ្តល់ប្រយោជន៍យ៉ាងធំធេងសម្រាប់ការគ្រប់គ្រងគុណភាពខ្យល់នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>រាជធានីភ្នំពេញ (Phnom Penh):</strong> ជាតំបន់ដែលមានការដ្ឋានសំណង់ច្រើន និងចរាចរណ៍កកស្ទះ ការប្រើម៉ូដែលនេះដើម្បីទស្សន៍ទាយកម្រិត PM2.5 តាមម៉ោង នឹងជួយប្រជាពលរដ្ឋឱ្យមានការប្រុងប្រយ័ត្ន ជាពិសេសនៅម៉ោងកកស្ទះ (៩ ព្រឹក ដល់ ៥ ល្ងាច)។</li>
+            
+            <li><strong>ក្រសួងបរិស្ថានកម្ពុជា (Ministry of Environment):</strong> អាចប្រើប្រាស់ក្បួនដោះស្រាយនេះជាស្នូលនៃប្រព័ន្ធប្រកាសអាសន្នទាន់ពេលវេលា (Early Warning System) ដោយភ្ជាប់ជាមួយស្ថានីយត្រួតពិនិត្យខ្យល់ដែលមានស្រាប់នៅតាមបណ្តាខេត្ត។</li>
+            
+            <li><strong>វិស័យសុខាភិបាលសាធារណៈ (Public Health Sector):</strong> មន្ទីរពេទ្យ និងស្ថាប័នសុខាភិបាលអាចប្រើប្រាស់លទ្ធផលទស្សន៍ទាយ AQI ដើម្បីត្រៀមលក្ខណៈ និងផ្សព្វផ្សាយសារអប់រំដល់ក្រុមជនងាយរងគ្រោះមុនពេលស្ថានភាពខ្យល់ធ្លាក់ចុះដល់កម្រិតគ្រោះថ្នាក់។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការរួមបញ្ចូលទិន្នន័យអាកាសធាតុទៅក្នុងការទស្សន៍ទាយ AQI តាមរយៈ XGBoost គឺជាដំណោះស្រាយដែលមានប្រសិទ្ធភាពចំណាយខ្ពស់ ដើម្បីលើកកម្ពស់សុខុមាលភាពសាធារណៈនៅប្រទេសកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យបឋម (Data Collection & Preprocessing):</strong> សិស្សត្រូវប្រមូលទិន្នន័យសន្ទស្សន៍គុណភាពខ្យល់ (AQI) ពីឧបករណ៍វាស់ជាក់ស្តែង និងទិន្នន័យអាកាសធាតុប្រចាំថ្ងៃ។ បន្ទាប់មក ប្រើប្រាស់ Pandas ក្នុង Python ដើម្បីសម្អាតទិន្នន័យ (Data Cleansing) ដូចជាការលុបបំបាត់តម្លៃទិន្នន័យដែលបាត់បង់ (NaN values) និងទិន្នន័យខុសប្រក្រតី (Outliers) ដូចដែលបានបង្ហាញក្នុងរូបភាពទី១ នៃឯកសារ។</li>
+            
+            <li><strong>វិភាគទិន្នន័យស្វែងយល់ (Exploratory Data Analysis - EDA):</strong> អនុវត្តការវិភាគ EDA ដោយប្រើប្រាស់ Matplotlib ឬ Seaborn ដើម្បីគូរក្រាហ្វ និងស្វែងយល់ពីទំនាក់ទំនងរវាងកម្រិតជាតិពុល និងកត្តាឧតុនិយម។ សង្កេតមើលជាពិសេសទៅលើឥទ្ធិពលនៃល្បឿនខ្យល់ និងសីតុណ្ហភាព ទៅលើបំរែបំរួលនៃសន្ទស្សន៍ AQI។</li>
+            
+            <li><strong>អនុវត្តការផ្តល់ចំណាត់ថ្នាក់លក្ខណៈពិសេស (Feature Ranking):</strong> ប្រើប្រាស់បច្ចេកទេសវាយតម្លៃដូចជា Roulette Wheel Selection ឬមុខងារ Feature Importance របស់បណ្ណាល័យ XGBoost ដើម្បីផ្តល់ទម្ងន់ និងរៀបចំលំដាប់សារៈសំខាន់នៃអថេរឧតុនិយមនីមួយៗក្នុងការរួមចំណែកបង្កើតការបំពុលខ្យល់។</li>
+            
+            <li><strong>បណ្តុះបណ្តាល និងធ្វើតេស្តម៉ូដែល (Model Training & Evaluation):</strong> បែងចែកទិន្នន័យជាពីរផ្នែក (ឧ. 80% សម្រាប់ Train និង 20% សម្រាប់ Test)។ សរសេរកូដដើម្បីដំណើរការម៉ូដែល XGBoost Regressor រួចធ្វើការវាយតម្លៃភាពត្រឹមត្រូវដោយប្រើរង្វាស់ Root Mean Square Error (RMSE) ដោយប្រៀបធៀបវាជាមួយវិធីសាស្ត្រផ្សេងទៀតដូចជា Decision Tree។</li>
+            
+            <li><strong>ដាក់ពង្រាយជាប្រព័ន្ធតាមដានជាក់ស្តែង (Dashboard Deployment):</strong> ប្រើប្រាស់ Frameworks ដូចជា Streamlit ឬ Flask ដើម្បីបង្កើតផ្ទាំងគ្រប់គ្រង (Dashboard) ដែលអាចទាញយកទិន្នន័យអាកាសធាតុក្នុងពេលជាក់ស្តែង (Real-time API) មកបញ្ចូលក្នុងម៉ូដែលរបស់អ្នក ដើម្បីទស្សន៍ទាយ និងបង្ហាញកម្រិត AQI ឱ្យសាធារណជនងាយស្រួលមើល។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">XGBoost</span></td>
+                <td>ជាក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine Learning algorithm) ដ៏មានឥទ្ធិពលមួយ ដែលបង្កើតឡើងដោយការប្រមូលផ្តុំដើមឈើសម្រេចចិត្ត (Decision Trees) ជាច្រើនបញ្ចូលគ្នា ដើម្បីធ្វើការទស្សន៍ទាយទិន្នន័យបានយ៉ាងរហ័ស និងអាចចាប់យកលំនាំស្មុគស្មាញនៃទិន្នន័យកម្រិតជាតិពុលបានយ៉ាងមានប្រសិទ្ធភាព។</td>
+                <td>ដូចជាការប្រមូលអ្នកជំនាញជាច្រើននាក់មកប្រជុំគ្នាដើម្បីទាយលទ្ធផលអ្វីមួយ ដោយអ្នកដែលទាយត្រូវច្រើនជាងគេពីមុនៗ នឹងមានសិទ្ធិសម្រេចធំជាងគេនៅពេលក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Air Quality Index (AQI)</span></td>
+                <td>ជាសន្ទស្សន៍ស្តង់ដារដែលប្រើសម្រាប់វាស់ស្ទង់ និងរាយការណ៍ពីកម្រិតនៃការបំពុលខ្យល់ប្រចាំថ្ងៃ ដើម្បីប្រាប់ពីកម្រិតហានិភ័យនៃផលប៉ះពាល់ដល់សុខភាពមនុស្សនៅពេលដែលយើងដកដង្ហើមបញ្ចូលខ្យល់ទាំងនោះ។</td>
+                <td>ដូចជាសៀវភៅតាមដានពិន្ទុប្រចាំខែរបស់បរិស្ថានអញ្ចឹង បើពិន្ទុកាន់តែខ្ពស់ មានន័យថាខ្យល់កាន់តែកខ្វក់ និងគ្រោះថ្នាក់ខ្លាំងដល់សុខភាព។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Particulate Matter(P.M 2.5)</span></td>
+                <td>ជាភាគល្អិតធូលីតូចៗបំផុតដែលមានទំហំអង្កត់ផ្ចិតតូចជាង ឬស្មើ ២.៥ មីក្រូម៉ែត្រ ដែលកើតចេញពីចំហេះមិនសព្វ (ដូចជាផ្សែងឡាន ផ្សែងរោងចក្រ) ដែលអាចអណ្តែតក្នុងខ្យល់ និងងាយស្រួលជ្រៀតចូលយ៉ាងជ្រៅទៅក្នុងសួតនិងសរសៃឈាមរបស់មនុស្ស។</td>
+                <td>ដូចជាគ្រាប់ខ្សាច់ដ៏ល្អិតបំផុតដែលតូចជាងសរសៃសក់មនុស្សដល់ទៅ ៣០ ដង ដែលភ្នែកទទេមិនអាចមើលឃើញ តែវាអាចហោះចូលទៅបំផ្លាញសួតយើងបានយ៉ាងងាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Exploratory Data Analysis (EDA)</span></td>
+                <td>គឺជាដំណើរការនៃការត្រួតពិនិត្យ ស្វែងយល់ និងគូរក្រាហ្វពីទិន្នន័យបឋម ដើម្បីស្វែងរកលំនាំ ទំនាក់ទំនងរវាងអថេរ (ឧ. ទំនាក់ទំនងរវាងល្បឿនខ្យល់ និងកម្រិតជាតិពុល) និងភាពខុសប្រក្រតី មុននឹងយកទិន្នន័យនោះទៅបង្រៀនម៉ាស៊ីន។</td>
+                <td>ដូចជាការសង្កេតមើលគ្រឿងផ្សំ និងភ្លក់រសជាតិមុនពេលចាប់ផ្តើមចម្អិនម្ហូបដ៏ធំមួយ ដើម្បីដឹងថាត្រូវថែម ឬថយគ្រឿងទេសអ្វីខ្លះទើបឆ្ងាញ់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ensembling model</span></td>
+                <td>ជាបច្ចេកទេសក្នុងបញ្ញាសិប្បនិម្មិត ដែលគេយកម៉ូដែលទស្សន៍ទាយតូចៗជាច្រើនមកបូកបញ្ចូលគ្នា ដើម្បីបង្កើតបានជាម៉ូដែលរួមមួយដែលអាចធ្វើការទស្សន៍ទាយបានត្រឹមត្រូវ និងទប់ស្កាត់កំហុសឆ្គងបានល្អជាងការប្រើប្រាស់ម៉ូដែលតែមួយឯកឯង។</td>
+                <td>ដូចជាការធ្វើការងារជាក្រុមអញ្ចឹង មនុស្សម្នាក់អាចនឹងគិតខុស តែបើយើងយកគំនិតមនុស្ស ១០ នាក់មកបូកបញ្ចូលគ្នា ការសម្រេចចិត្តនឹងមានភាពត្រឹមត្រូវខ្ពស់ជាង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Roulette wheel method</span></td>
+                <td>ជាវិធីសាស្ត្រជ្រើសរើសដោយផ្អែកលើប្រូបាប៊ីលីតេ ដែលនៅក្នុងឯកសារនេះ វាត្រូវបានប្រើដើម្បីផ្តល់ទម្ងន់ (តម្លៃ) ទៅលើកត្តាឧតុនិយមនានា ដោយកត្តាណាដែលមានឥទ្ធិពលខ្លាំងជាងគេទៅលើគុណភាពខ្យល់ នឹងទទួលបានចំណែកធំជាងគេក្នុងការវាយតម្លៃ។</td>
+                <td>ដូចជាការបង្វិលកងផ្សងសំណាង (កងរ៉ូឡែត) ដែលក្រឡាពណ៌ណាមានទំហំធំជាងគេ (តំណាងឱ្យកត្តាដែលសំខាន់ជាងគេ) នោះវាមានឱកាសខ្ពស់បំផុតដែលម្ជុលនឹងចង្អុលចំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Root Mean Square Error (RMSE)</span></td>
+                <td>ជារង្វាស់គណិតវិទ្យាស្តង់ដារដែលប្រើសម្រាប់គណនាគម្លាតកំហុសរវាង "តម្លៃដែលម៉ូដែលទាយបាន" និង "តម្លៃពិតប្រាកដជាក់ស្តែង" នៅក្នុងសំណុំទិន្នន័យ។ បើតម្លៃ RMSE កាន់តែតូច មានន័យថាម៉ូដែលទស្សន៍ទាយកាន់តែមានភាពត្រឹមត្រូវខ្ពស់។</td>
+                <td>ដូចជាការបាញ់ព្រួញទៅកាន់ផ្ទាំងគោលដៅអញ្ចឹង RMSE គឺជារង្វាស់ប្រាប់យើងថា តើព្រួញរបស់យើងបាញ់ខុសពីចំណុចកណ្តាលប៉ុន្មានសង់ទីម៉ែត្រជាមធ្យម។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+models+for+real-time+air+quality+forecasting" target="_blank" rel="noopener"><span class="en">machine learning models for real-time air quality forecasting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=feature+selection+techniques+in+environmental+datasets" target="_blank" rel="noopener"><span class="en">feature selection techniques in environmental datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=impact+of+meteorological+factors+on+PM2.5+concentrations" target="_blank" rel="noopener"><span class="en">impact of meteorological factors on PM2.5 concentrations</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=spatio-temporal+deep+learning+for+urban+air+pollution" target="_blank" rel="noopener"><span class="en">spatio-temporal deep learning for urban air pollution</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

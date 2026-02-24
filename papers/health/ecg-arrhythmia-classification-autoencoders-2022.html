@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ចំណាត់ថ្នាក់ចង្វាក់បេះដូងខុសប្រក្រតី (ECG Arrhythmia) ដោយផ្អែកលើ Convolutional Autoencoders និង Transfer Learning | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហានៃការវិភាគសញ្ញាវាស់ចង្វាក់បេះដូង (ECG) ដោយស្វ័យប្រវត្តិ ដើម្បីរកមើលភាពមិនប្រក្រតីនៃចង្វាក់បេះដូង (Arrhythmia) ឆ្លើយតបទៅនឹងអត្រ...">
+    
+    <meta name="keywords" content="Electrocardiogram (ECG), Deep Learning, Transfer Learning, Convolutional AutoEncoders, EfficientNet, Heart Arrhythmia Classification, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/health/ecg-arrhythmia-classification-autoencoders-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/health/ecg-arrhythmia-classification-autoencoders-2022.html">
+    <meta property="og:title" content="ចំណាត់ថ្នាក់ចង្វាក់បេះដូងខុសប្រក្រតី (ECG Arrhythmia) ដោយផ្អែកលើ Convolutional Autoencoders និង Transfer Learning | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហានៃការវិភាគសញ្ញាវាស់ចង្វាក់បេះដូង (ECG) ដោយស្វ័យប្រវត្តិ ដើម្បីរកមើលភាពមិនប្រក្រតីនៃចង្វាក់បេះដូង (Arrhythmia) ឆ្លើយតបទៅនឹងអត្រាកំណើននៃជំងឺបេះដូង និងជួយសម្រួលដល់កង្វះខ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022, Majlesi Journal of Electrical Engineering">
+    
+    <meta property="article:tag" content="Electrocardiogram (ECG)">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Convolutional AutoEncoders">
+    
+    <meta property="article:tag" content="EfficientNet">
+    
+    <meta property="article:tag" content="Heart Arrhythmia Classification">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ចំណាត់ថ្នាក់ចង្វាក់បេះដូងខុសប្រក្រតី (ECG Arrhythmia) ដោយផ្អែកលើ Convolutional Autoencoders និង Transfer Learning">
+    <meta name="twitter:description" content="ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហានៃការវិភាគសញ្ញាវាស់ចង្វាក់បេះដូង (ECG) ដោយស្វ័យប្រវត្តិ ដើម្បីរកមើលភាពមិនប្រក្រតីនៃចង្វាក់បេះដូង (Arrhythmia) ឆ្លើយតបទៅនឹងអត្រាកំណើននៃជំងឺបេះដូង និងជួយសម្រួលដល់កង្វះខ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u1794\u17c1\u17c7\u178a\u17bc\u1784\u1781\u17bb\u179f\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8 (ECG Arrhythmia) \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be Convolutional Autoencoders \u1793\u17b7\u1784 Transfer Learning",
+      "name": "ECG Arrhythmia Classification based on Convolutional Autoencoders and Transfer Learning",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179f\u1789\u17d2\u1789\u17b6\u179c\u17b6\u179f\u17cb\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u1794\u17c1\u17c7\u178a\u17bc\u1784 (ECG) \u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 \u178a\u17be\u1798\u17d2\u1794\u17b8\u179a\u1780\u1798\u17be\u179b\u1797\u17b6\u1796\u1798\u17b7\u1793\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u1793\u17c3\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u1794\u17c1\u17c7\u178a\u17bc\u1784 (Arrhythmia) \u1786\u17d2\u179b\u17be\u1799\u178f\u1794\u1791\u17c5\u1793\u17b9\u1784\u17a2\u178f\u17d2\u179a\u17b6\u1780\u17c6\u178e\u17be\u1793\u1793\u17c3\u1787\u17c6\u1784\u17ba\u1794\u17c1\u17c7\u178a\u17bc\u1784 \u1793\u17b7\u1784\u1787\u17bd\u1799\u179f\u1798\u17d2\u179a\u17bd\u179b\u178a\u179b\u17cb\u1780\u1784\u17d2\u179c\u17c7\u1781\u17b6\u178f\u17a2\u17d2\u1793\u1780\u1787\u17c6\u1793\u17b6\u1789\u1794\u17c1\u17c7\u178a\u17bc\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/health/ecg-arrhythmia-classification-autoencoders-2022.html",
+      "author": [{"@type": "Person", "name": "R. M. Obaidi (Ahl Al Bayt University)"},{"@type": "Person", "name": "R. A. Sattar (Al Farahidi University)"},{"@type": "Person", "name": "M. Abd (Al-Manara College For Medical Sciences)"},{"@type": "Person", "name": "I. Amjed Almani (Al-Hadba University College)"},{"@type": "Person", "name": "T. Alghazali (The Islamic University in Najaf)"},{"@type": "Person", "name": "S. Ghazi Talib (Al-Mustaqbal University College)"},{"@type": "Person", "name": "M. Hussein Ali (Al-Nisour University College)"},{"@type": "Person", "name": "M. Q. Mohammed (Al-Esraa University College)"},{"@type": "Person", "name": "T. Abid Mohammad (Al-Zahrawi University College)"},{"@type": "Person", "name": "M. R. Abdul-Sahib (Ashur University College)"}],
+      "datePublished": "2022, Majlesi Journal of Electrical Engineering",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "ECG Arrhythmia Classification based on Convolutional Autoencoders and Transfer Learning",
+        "url": "https://doi.org/10.52547/mjee.16.3.41"
+      },
+      "keywords": ["Electrocardiogram (ECG)", "Deep Learning", "Transfer Learning", "Convolutional AutoEncoders", "EfficientNet", "Heart Arrhythmia Classification"],
+      "about": "Biomedical Signal Processing / Deep Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health",
+          "item": "https://khmerresearch.com/papers/health/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u1794\u17c1\u17c7\u178a\u17bc\u1784\u1781\u17bb\u179f\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8 (ECG Arrhythmia) \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be Convolutional Autoencoders \u1793\u17b7\u1784 Transfer Learning",
+          "item": "https://khmerresearch.com/papers/health/ecg-arrhythmia-classification-autoencoders-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/health/">Health</a> &rsaquo;
+        <span>ចំណាត់ថ្នាក់ចង្វាក់បេះដូងខុសប្រក្រតី (ECG Arrhythmia) ដោយ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> ECG Arrhythmia Classification based on Convolutional Autoencoders and Transfer Learning<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.52547/mjee.16.3.41" target="_blank">doi.org/10.52547/mjee.16.3.41</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ចំណាត់ថ្នាក់ចង្វាក់បេះដូងខុសប្រក្រតី (ECG Arrhythmia) ដោយផ្អែកលើ Convolutional Autoencoders និង Transfer Learning</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> ECG Arrhythmia Classification based on Convolutional Autoencoders and Transfer Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> R. M. Obaidi (Ahl Al Bayt University), R. A. Sattar (Al Farahidi University), M. Abd (Al-Manara College For Medical Sciences), I. Amjed Almani (Al-Hadba University College), T. Alghazali (The Islamic University in Najaf), S. Ghazi Talib (Al-Mustaqbal University College), M. Hussein Ali (Al-Nisour University College), M. Q. Mohammed (Al-Esraa University College), T. Abid Mohammad (Al-Zahrawi University College), M. R. Abdul-Sahib (Ashur University College)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022, Majlesi Journal of Electrical Engineering</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Biomedical Signal Processing / Deep Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហានៃការវិភាគសញ្ញាវាស់ចង្វាក់បេះដូង (ECG) ដោយស្វ័យប្រវត្តិ ដើម្បីរកមើលភាពមិនប្រក្រតីនៃចង្វាក់បេះដូង (Arrhythmia) ឆ្លើយតបទៅនឹងអត្រាកំណើននៃជំងឺបេះដូង និងជួយសម្រួលដល់កង្វះខាតអ្នកជំនាញបេះដូង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្ររៀនស៊ីជម្រៅបែបចម្រុះ (Ensemble Deep Learning) ដែលទាញយកលក្ខណៈពិសេសទាំងពីសញ្ញាដើមផ្ទាល់ និងពីរូបភាពតំណាងសញ្ញា ដើម្បីធ្វើការចាត់ថ្នាក់យ៉ាងសុក្រឹត។
+        
+        <ul>
+            
+            <li>ការប្រមូល និងរៀបចំទិន្នន័យ (Data Collection & Preprocessing): ប្រើប្រាស់សញ្ញា ECG ចំនួន ៣០,០០០ គំរូពីមន្ទីរពេទ្យក្នុងប្រទេសអ៊ីរ៉ាក់ រួចធ្វើការបំប្លែងទៅជារូបភាព Spectrogram។</li>
+            
+            <li>បណ្ដាញ Convolutional Autoencoders (CAE): ប្រើប្រាស់ដើម្បីទាញយកលក្ខណៈពិសេស (Feature extraction) ដោយផ្ទាល់ពីទម្រង់សញ្ញាដើម (Raw signals)។</li>
+            
+            <li>ការផ្ទេរចំណេះដឹង (Transfer Learning): ប្រើប្រាស់ម៉ូដែលបណ្ដាញសរសៃប្រសាទ (EfficientNet/MobileNetV1) ដើម្បីទាញយកលក្ខណៈពិសេសពីរូបភាព Spectrogram នៃសញ្ញា ECG នោះ។</li>
+            
+            <li>ការរង្វាយតម្លៃ (Evaluation Metrics): វាស់ស្ទង់ដំណើរការនៃម៉ូដែលដោយផ្អែកលើ Confusion Matrix, Accuracy, Precision, Recall, និង F1-Score។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលដែលបានស្នើឡើងសម្រេចបាននូវភាពត្រឹមត្រូវ (Accuracy) ខ្ពស់រហូតដល់ ៩៩.៦៧% ក្នុងការចាត់ថ្នាក់សញ្ញា ECG ជា ៤ ប្រភេទផ្សេងគ្នា។</li>
+            
+            <li>ពិន្ទុនៃ Precision, Recall និង F1-Score ទទួលបាន ៩៩.៧០% ដែលបង្ហាញពីស្ថិរភាព និងភាពជឿជាក់ខ្ពស់របស់ម៉ូដែលក្នុងការកាត់បន្ថយកំហុសឆ្គង (False Positives និង False Negatives)។</li>
+            
+            <li>វិធីសាស្ត្រនេះមានសក្ដានុពលខ្ពស់សម្រាប់ការអនុវត្តជាក់ស្តែងក្នុងនីតិវិធីគ្លីនិក ដើម្បីធ្វើស្វ័យប្រវត្តិកម្មដំណើរការធ្វើរោគវិនិច្ឆ័យជំងឺបេះដូង ជាពិសេសនៅតំបន់ដែលមានកង្វះខាតធនធានមនុស្សជំនាញ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Ensemble: Convolutional Autoencoder + EfficientNet (Proposed)</span></strong><br>វិធីសាស្ត្រចម្រុះរួមបញ្ចូល Convolutional Autoencoder និង EfficientNet (ស្នើឡើង)</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុត និងមានស្ថិរភាពល្អក្នុងការទាញយកលក្ខណៈពិសេសទាំងពីសញ្ញាដើមនិងរូបភាព Spectrogram។</td>
+                <td>ទាមទារថាមពលកុំព្យូទ័រខ្ពស់ និងពេលវេលាច្រើនក្នុងការហ្វឹកហាត់ម៉ូដែលបណ្ដាញសរសៃប្រសាទទាំងពីរស្របគ្នា។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy) ៩៩.៦៧%, F1-Score ៩៩.៧០%</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">2D Convolutional Neural Network (Jun et al.)</span></strong><br>បណ្ដាញសរសៃប្រសាទ 2D CNN (Jun និងសហការី)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការវិភាគរូបភាពសញ្ញា ECG (Grayscale images) សម្រាប់ការចាត់ថ្នាក់ចំណាត់ថ្នាក់ចង្វាក់បេះដូង។</td>
+                <td>ពឹងផ្អែកតែលើរូបភាពតំណាង (Image representation) ដោយមិនបានទាញយកលក្ខណៈពិសេសពីទម្រង់សញ្ញាដើម (Raw signals) ផ្ទាល់នោះទេ។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy) ៩៩.០៥%</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbor with DCT (Acharya et al.)</span></strong><br>ក្បួនដោះស្រាយ K-Nearest Neighbor ប្រើជាមួយលក្ខណៈពិសេស DCT</td>
+                <td>ម៉ូដែលមិនសូវស្មុគស្មាញ និងត្រូវការថាមពលកុំព្យូទ័រតិចជាងការរៀនស៊ីជម្រៅ (Deep Learning)។</td>
+                <td>ត្រូវការអ្នកជំនាញដើម្បីទាញយកលក្ខណៈពិសេសដោយដៃ (Manual feature extraction) ជាមុនសិន ដែលស៊ីពេលនិងលំបាក។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy) ៩៨.៥០%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបានបញ្ជាក់យ៉ាងច្បាស់អំពីតម្រូវការផ្នែករឹង (Hardware) និងកម្មវិធី (Software) ដែលមានកម្រិតមធ្យមទៅខ្ពស់ សម្រាប់ដំណើរការម៉ូដែលរៀនស៊ីជម្រៅនេះ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារកុំព្យូទ័រដែលមានអង្គគណនាក្រាហ្វិក (GPU) GeForce GTX 2070 និងស៊ីភីយូ (CPU) Intel® Core™ i7-10500 @ 2.90 GHz។</li>
+        
+        <li><strong>Software:</strong> ភាសាសរសេរកូដ Python 3.8 រួមជាមួយបណ្ណាល័យ Deep Learning PyTorch 1.1 សម្រាប់ការហ្វឹកហាត់ម៉ូដែល។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់ទិន្នន័យ ECG ចំនួន ៣០,០០០ គំរូ (១៥,០០០ ធម្មតា និង ១៥,០០០ មិនប្រក្រតី) ដែលប្រមូលបានពីមន្ទីរពេទ្យ Al-Andalus និង Al Khayal ក្នុងប្រទេសអ៊ីរ៉ាក់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីអ្នកជំងឺចំនួន ៣០,០០០ នាក់ ដែលប្រមូលបានពីមន្ទីរពេទ្យនៅប្រទេសអ៊ីរ៉ាក់ផ្តាច់មុខ។ ទិន្នន័យនេះអាចមានកម្រិតលំអៀងទៅលើហ្សែន របៀបរស់នៅ និងប្រវត្តិវេជ្ជសាស្ត្ររបស់ប្រជាជនតំបន់មជ្ឈិមបូព៌ា។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តម៉ូដែលនេះតម្រូវឱ្យមានការសាកល្បង និងកែសម្រួលបន្ថែម (Fine-tuning) ជាមួយទិន្នន័យប្រជាជនកម្ពុជាផ្ទាល់ ដើម្បីធានាបាននូវភាពសុក្រឹតមុននឹងដាក់ឱ្យប្រើប្រាស់ក្នុងគ្លីនិក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលធំធេងសម្រាប់ប្រព័ន្ធសុខាភិបាលកម្ពុជា ជាពិសេសក្នុងការជួយគាំទ្រដល់គ្រូពេទ្យទូទៅនៅតំបន់ដែលខ្វះខាតអ្នកឯកទេសបេះដូង។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យបង្អែកខេត្ត និងស្រុក (Provincial and District Hospitals):</strong> នៅខេត្តដាច់ស្រយាលដូចជា មណ្ឌលគិរី ព្រះវិហារ ឬរតនគិរី ការមានប្រព័ន្ធវិភាគ ECG ស្វ័យប្រវត្តិអាចជួយគ្រូពេទ្យទូទៅឱ្យធ្វើរោគវិនិច្ឆ័យជំងឺបេះដូងបានលឿន និងសម្រេចចិត្តបញ្ជូនអ្នកជំងឺមកសង្គ្រោះនៅភ្នំពេញបានទាន់ពេលវេលា។</li>
+            
+            <li><strong>មណ្ឌលសុខភាពសហគមន៍ (Community Health Centers):</strong> អាចដាក់បញ្ចូលកូដនេះទៅក្នុងឧបករណ៍វាស់ ECG ចល័តធន់តូច ដើម្បីពិនិត្យសុខភាពបេះដូងបឋមជូនប្រជាពលរដ្ឋនៅតាមសហគមន៍ដោយចំណាយតិចតួចបំផុត។</li>
+            
+            <li><strong>មន្ទីរពេទ្យជាតិ និងស្ថាប័នស្រាវជ្រាវ (National Hospitals & Research Institutes):</strong> មន្ទីរពេទ្យកាល់ម៉ែត ឬមន្ទីរពេទ្យមិត្តភាពខ្មែរ-សូវៀត អាចប្រើប្រាស់បច្ចេកវិទ្យានេះដើម្បីកាត់បន្ថយបន្ទុកការងារ និងធ្វើការស្រាវជ្រាវបង្កើតទិន្នន័យមូលដ្ឋានបេះដូង (ECG Database) សម្រាប់ជនជាតិខ្មែរ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការធ្វើស្វ័យប្រវត្តិកម្មលើការវិភាគ ECG នឹងចូលរួមចំណែកយ៉ាងសំខាន់ក្នុងការកាត់បន្ថយអត្រាមរណភាពដោយជំងឺបេះដូងនៅកម្ពុជា តាមរយៈការរកឃើញរោគសញ្ញាបានទាន់ពេលវេលា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យ ECG (Data Collection & Preprocessing):</strong> ចាប់ផ្តើមដោយការទាញយកទិន្នន័យបើកទូលាយដូចជា <span class='en'>MIT-BIH Arrhythmia Database</span> មកអនុវត្តសិន។ បន្ទាប់មក ប្រើប្រាស់បណ្ណាល័យ <span class='en'>SciPy</span> ឬ <span class='en'>Librosa</span> ក្នុង <span class='en'>Python</span> ដើម្បីសម្អាតរលកសញ្ញា កាត់បន្ថយសំឡេងរំខាន (Noise) និងបំប្លែងសញ្ញាទៅជារូបភាព <span class='en'>Spectrogram</span>។</li>
+            
+            <li><strong>រៀបចំសំណុំម៉ូដែល Convolutional Autoencoders (CAE):</strong> សរសេរកូដបង្កើតម៉ូដែល <span class='en'>CAE</span> ដោយប្រើប្រាស់ <span class='en'>PyTorch</span> ដើម្បីរៀនពីរបៀបបង្រួម (Encode) សញ្ញា ECG ដើម និងទាញយកលក្ខណៈពិសេស (Latent space features) សំខាន់ៗដោយស្វ័យប្រវត្តិ ដោយមិនបាច់ពឹងផ្អែកលើអ្នកជំនាញពេទ្យទាញយកឱ្យ។</li>
+            
+            <li><strong>អនុវត្តការផ្ទេរចំណេះដឹង (Transfer Learning):</strong> ទាញយកម៉ូដែល <span class='en'>EfficientNetV1</span> ឬ <span class='en'>MobileNetV1</span> ដែលមានស្រាប់នៅក្នុង <span class='en'>Torchvision</span> យកមកប្រើប្រាស់ជាមួយរូបភាព <span class='en'>Spectrogram</span> ដើម្បីស្រូបយកលក្ខណៈពិសេសពីរូបភាពតំណាងសញ្ញាបេះដូងបន្ថែមទៀត។</li>
+            
+            <li><strong>បង្រួបបង្រួមម៉ូដែល (Ensemble Model Integration):</strong> បង្កើតបណ្ដាញសរសៃប្រសាទបញ្ចូលគ្នា ដោយយកលទ្ធផល (Features) ដែលបានពី <span class='en'>CAE</span> (សញ្ញាដើម) និង <span class='en'>EfficientNet</span> (រូបភាព Spectrogram) មកតភ្ជាប់គ្នា (Concatenate) រួចបញ្ជូនទៅកាន់ <span class='en'>Fully Connected Layer</span> ដើម្បីចាត់ថ្នាក់ប្រភេទជំងឺ។</li>
+            
+            <li><strong>វាយតម្លៃ និងដាក់ឱ្យដំណើរការ (Evaluation & Deployment):</strong> វាស់ស្ទង់ប្រសិទ្ធភាពម៉ូដែលដោយប្រើ <span class='en'>Confusion Matrix, Accuracy</span> និង <span class='en'>F1-Score</span> តាមរយៈ <span class='en'>Scikit-Learn</span>។ បន្ទាប់មក បង្កើតចំណុចប្រទាក់វេបសាយតូចមួយដោយប្រើ <span class='en'>FastAPI</span> ឬ <span class='en'>Streamlit</span> ដើម្បីឱ្យគ្រូពេទ្យអាចបញ្ជូនឯកសារសញ្ញាផ្ទាល់ចូលប្រព័ន្ធ និងទទួលបានលទ្ធផលភ្លាមៗ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Electrocardiogram (ECG)</span></td>
+                <td>ជាបច្ចេកទេសវេជ្ជសាស្ត្រដែលវាស់ និងកត់ត្រាសកម្មភាពអគ្គិសនីរបស់បេះដូងក្នុងទម្រង់ជារលកសញ្ញា ដើម្បីពិនិត្យមើលភាពប្រក្រតី ឬបញ្ហានៃការលោតរបស់បេះដូងអ្នកជំងឺ។</td>
+                <td>ដូចជាការថតចម្លងចរន្តភ្លើងដែលរត់កាត់ម៉ាស៊ីនបូមទឹក ដើម្បីដឹងថាម៉ាស៊ីននោះដើរស្រួលឬមានបញ្ហាខូចខាត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Arrhythmia</span></td>
+                <td>ជាស្ថានភាពដែលចង្វាក់បេះដូងលោតខុសប្រក្រតី វាអាចថាលោតញាប់ពេក យឺតពេក ឬលោតរអាក់រអួល ដែលជារោគសញ្ញាបញ្ជាក់ពីវត្តមាននៃជំងឺបេះដូងធ្ងន់ធ្ងរ។</td>
+                <td>ដូចជានាឡិកាដែលដើររំលងវិនាទី ឬដើរលឿនខុសធម្មតា ដែលបញ្ជាក់ថាថ្ម ឬគ្រឿងក្នុងរបស់វាមានបញ្ហា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Autoencoders (CAE)</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដែលរៀនបង្រួមទិន្នន័យ (Encode) ទៅជាទម្រង់តូចបំផុត រួចពង្រីកវាវិញ (Decode) ដើម្បីចាប់យកលក្ខណៈពិសេសសំខាន់ៗបំផុតរបស់ទិន្នន័យនោះដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាការសង្ខេបសៀវភៅមួយក្បាលក្រាស់ឱ្យសល់ត្រឹមមួយទំព័រដែលផ្ទុកតែអត្ថន័យសំខាន់ រួចអាចសរសេរពង្រីកសាច់រឿងនោះឡើងវិញបានដោយមិនបាត់បង់អត្ថន័យដើម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>ជាវិធីសាស្ត្រក្នុងបញ្ញាសិប្បនិម្មិត (AI) ដែលយកម៉ូដែលធ្លាប់បានហ្វឹកហាត់រួចជាស្រេចលើការងារមួយដ៏ធំ មកប្រើប្រាស់ និងកែសម្រួលបន្តិចបន្តួចសម្រាប់ការងារថ្មីមួយទៀតដែលស្រដៀងគ្នា ដើម្បីចំណេញពេលវេលា និងធនធាន។</td>
+                <td>ដូចជាការយកអ្នកដែលចេះជិះកង់ស្ទាត់ជំនាញស្រាប់ ទៅបង្រៀនឱ្យជិះម៉ូតូ ដែលគាត់អាចរៀនចេះលឿនជាងអ្នកដែលមិនធ្លាប់ចេះជិះអ្វីសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spectrogram</span></td>
+                <td>ជារូបភាពតំណាងដែលបង្ហាញពីបំរែបំរួលប្រេកង់ (Frequency) នៃរលកសញ្ញាណាមួយធៀបនឹងពេលវេលា ដែលជួយឱ្យកុំព្យូទ័រអាចមើលឃើញសញ្ញាអគ្គិសនីជាទម្រង់រូបភាពមានពណ៌ផ្សេងៗ។</td>
+                <td>ដូចជាការបំប្លែងសម្លេងចម្រៀងទៅជាគំនូរពណ៌រលកតន្ត្រីនៅលើអេក្រង់ ដើម្បីឱ្យយើងអាចមើលឃើញកម្រិតសំឡេងឡើងចុះដោយផ្ទាល់ភ្នែក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Latent Space</span></td>
+                <td>ជាទំហំផ្ទុកទិន្នន័យតូចចង្អៀតដែលត្រូវបានបង្រួមដោយកូដន័រ (Encoder) នៅក្នុង Autoencoder ដែលវាផ្ទុកនូវលក្ខណៈពិសេសស្នូល និងអត្ថន័យសំខាន់ៗបំផុតនៃទិន្នន័យដើមដោយគ្មានរឿងរំខាន (Noise)។</td>
+                <td>ដូចជាការបំប្លែងផ្លែឈើស្រស់មួយកន្ត្រកធំ ទៅជាទឹកស៊ីរ៉ូមួយដបតូចដែលនៅតែរក្សាបាននូវរសជាតិនិងខ្លឹមសារវីតាមីនដើមរបស់ផ្លែឈើនោះទាំងស្រុង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">EfficientNet</span></td>
+                <td>ជាស្ថាបត្យកម្មបណ្ដាញសរសៃប្រសាទ (CNN) កម្រិតខ្ពស់ដែលត្រូវបានបង្កើនប្រសិទ្ធភាពក្នុងការទាញយកលក្ខណៈពិសេសពីរូបភាព ដោយវាធ្វើការពង្រីកទំហំ ជម្រៅ និងទទឹងរបស់បណ្ដាញដោយប្រើរូបមន្តគណិតវិទ្យាសមាមាត្រ។</td>
+                <td>ដូចជាការប្រើប្រាស់កែវពង្រីកឆ្លាតវៃដែលអាចមើលឃើញទាំងទិដ្ឋភាពជារួម និងចំណុចល្អិតៗនៃរូបភាពក្នុងពេលតែមួយ ដោយមិនចាំបាច់ប្រើកាមេរ៉ាធំកម្រិតខ្ពស់ឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Confusion Matrix</span></td>
+                <td>ជាតារាងរង្វាយតម្លៃដែលប្រើដើម្បីបង្ហាញយ៉ាងលម្អិតពីចំនួនទស្សន៍ទាយត្រូវ (True Positives/Negatives) និងចំនួនទស្សន៍ទាយខុស (False Positives/Negatives) របស់ម៉ូដែល AI ធៀបនឹងទិន្នន័យពិតជាក់ស្តែង។</td>
+                <td>ដូចជាតារាងកត់ត្រាពិន្ទុប្រឡង ដែលប្រាប់យ៉ាងច្បាស់ថាសិស្សម្នាក់ឆ្លើយត្រូវប៉ុន្មានសំណួរ ឆ្លើយខុសប៉ុន្មាន និងរំលងប៉ុន្មាន ដើម្បីដឹងពីចំណុចខ្សោយរបស់គាត់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+techniques+for+electrocardiogram+%28ECG%29+signal+processing" target="_blank" rel="noopener"><span class="en">deep learning techniques for electrocardiogram (ECG) signal processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=spectrogram-based+convolutional+neural+networks+for+medical+diagnosis" target="_blank" rel="noopener"><span class="en">spectrogram-based convolutional neural networks for medical diagnosis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ensemble+learning+with+autoencoders+and+transfer+learning" target="_blank" rel="noopener"><span class="en">ensemble learning with autoencoders and transfer learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=automated+clinical+pipelines+for+real-time+arrhythmia+detection" target="_blank" rel="noopener"><span class="en">automated clinical pipelines for real-time arrhythmia detection</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

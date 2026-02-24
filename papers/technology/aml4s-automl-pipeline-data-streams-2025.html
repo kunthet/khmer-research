@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>AML4S៖ បណ្តាញ AutoML សម្រាប់លំហូរទិន្នន័យ (Data Streams) | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់លំហូរទិន្នន័យបន្តបន្ទាប់ (Continuous Data Streams) ដ...">
+    
+    <meta name="keywords" content="AutoML, concept drift, data drift, data streams, online learning, ADWIN, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/aml4s-automl-pipeline-data-streams-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/aml4s-automl-pipeline-data-streams-2025.html">
+    <meta property="og:title" content="AML4S៖ បណ្តាញ AutoML សម្រាប់លំហូរទិន្នន័យ (Data Streams) | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់លំហូរទិន្នន័យបន្តបន្ទាប់ (Continuous Data Streams) ដែលមានការផ្លាស់ប្តូររបាយទិន្នន័យតាមពេលវេល...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2025 Mach. Learn. Knowl. Extr.">
+    
+    <meta property="article:tag" content="AutoML">
+    
+    <meta property="article:tag" content="concept drift">
+    
+    <meta property="article:tag" content="data drift">
+    
+    <meta property="article:tag" content="data streams">
+    
+    <meta property="article:tag" content="online learning">
+    
+    <meta property="article:tag" content="ADWIN">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="AML4S៖ បណ្តាញ AutoML សម្រាប់លំហូរទិន្នន័យ (Data Streams)">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់លំហូរទិន្នន័យបន្តបន្ទាប់ (Continuous Data Streams) ដែលមានការផ្លាស់ប្តូររបាយទិន្នន័យតាមពេលវេល...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "AML4S\u17d6 \u1794\u178e\u17d2\u178f\u17b6\u1789 AutoML \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Streams)",
+      "name": "AML4S: An AutoML Pipeline for Data Streams",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u1793\u17d2\u178f\u1794\u1793\u17d2\u1791\u17b6\u1794\u17cb (Continuous Data Streams) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u179a\u1794\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178f\u17b6\u1798\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b6\u1780\u17cb\u1791\u1784\u1793\u17b9\u1784\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u17a2\u1790\u17c1\u179a\u1782\u17c4\u179b\u178a\u17c5 (Concept Drifts) \u1793\u17b7\u1784\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u1789\u17d2\u1785\u17bc\u179b (Data Drifts) \u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/aml4s-automl-pipeline-data-streams-2025.html",
+      "author": [{"@type": "Person", "name": "Eleftherios Kalaitzidis (Aristotle University of Thessaloniki)"},{"@type": "Person", "name": "Themistoklis Diamantopoulos (Aristotle University of Thessaloniki)"},{"@type": "Person", "name": "Athanasios Michailoudis (Aristotle University of Thessaloniki)"},{"@type": "Person", "name": "Andreas L. Symeonidis (Aristotle University of Thessaloniki)"}],
+      "datePublished": "2025 Mach. Learn. Knowl. Extr.",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "AML4S: An AutoML Pipeline for Data Streams",
+        "url": "https://doi.org/10.3390/make7030087"
+      },
+      "keywords": ["AutoML", "concept drift", "data drift", "data streams", "online learning", "ADWIN"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AML4S\u17d6 \u1794\u178e\u17d2\u178f\u17b6\u1789 AutoML \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Streams)",
+          "item": "https://khmerresearch.com/papers/technology/aml4s-automl-pipeline-data-streams-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>AML4S៖ បណ្តាញ AutoML សម្រាប់លំហូរទិន្នន័យ (Data Streams)</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> AML4S: An AutoML Pipeline for Data Streams<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/make7030087" target="_blank">doi.org/10.3390/make7030087</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>AML4S៖ បណ្តាញ AutoML សម្រាប់លំហូរទិន្នន័យ (Data Streams)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> AML4S: An AutoML Pipeline for Data Streams</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Eleftherios Kalaitzidis (Aristotle University of Thessaloniki), Themistoklis Diamantopoulos (Aristotle University of Thessaloniki), Athanasios Michailoudis (Aristotle University of Thessaloniki), Andreas L. Symeonidis (Aristotle University of Thessaloniki)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025 Mach. Learn. Knowl. Extr.</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការបង្កើតម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់លំហូរទិន្នន័យបន្តបន្ទាប់ (Continuous Data Streams) ដែលមានការផ្លាស់ប្តូររបាយទិន្នន័យតាមពេលវេលា ជាពិសេសការដោះស្រាយបញ្ហាទាក់ទងនឹងការផ្លាស់ប្តូរអថេរគោលដៅ (Concept Drifts) និងការផ្លាស់ប្តូរទិន្នន័យបញ្ចូល (Data Drifts) ដោយស្វ័យប្រវត្តិ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានស្នើឡើងនូវ AML4S ដែលជាបណ្តាញរៀនដោយម៉ាស៊ីនស្វ័យប្រវត្តិ (AutoML Pipeline) សម្រាប់ទិន្នន័យកំពុងហូរ ដោយរួមបញ្ចូលការរៀបចំទិន្នន័យជាមុន ការជ្រើសរើសម៉ូដែល ការកែតម្រូវប៉ារ៉ាម៉ែត្រ និងយន្តការរាវរកការផ្លាស់ប្តូរទិន្នន័យ (Drift Detection)។
+        
+        <ul>
+            
+            <li>ការរៀបចំទិន្នន័យជាមុន និងការជ្រើសរើសលក្ខណៈដោយស្វ័យប្រវត្តិ (Automated preprocessing and feature selection)</li>
+            
+            <li>ការជ្រើសរើសម៉ូដែលអនឡាញ និងការកែតម្រូវប៉ារ៉ាម៉ែត្រ (Online model selection and hyperparameter tuning)</li>
+            
+            <li>ការរាវរកការផ្លាស់ប្តូរទិន្នន័យដោយប្រើក្បួនដោះស្រាយវាយតម្លៃ (Dual drift detection using ADWIN algorithm)</li>
+            
+            <li>ការបង្កើតទិន្នន័យសិប្បនិម្មិត និងការវាយតម្លៃលើសំណុំទិន្នន័យជាក់ស្តែង (Synthetic data generation and real-world dataset evaluation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>AML4S ទទួលបានជោគជ័យក្នុងការរាវរកការផ្លាស់ប្តូរទាំង Concept និង Data Drifts ព្រមទាំងអាចសម្របម៉ូដែលដោយថាមវន្តដើម្បីរក្សាភាពត្រឹមត្រូវកម្រិតខ្ពស់។</li>
+            
+            <li>បណ្តាញដែលបានស្នើឡើងនេះមានដំណើរការល្អជាងម៉ូដែលអនឡាញដែលមានស្រាប់ (ដូចជា Hoeffding Adaptive Tree និង AMF Classifier) យ៉ាងខ្ជាប់ខ្ជួន ជាមួយនឹងកម្រិតភាពត្រឹមត្រូវជាមធ្យម ០.៨៨ លើលំហូរទិន្នន័យសិប្បនិម្មិតនិងជាក់ស្តែង។</li>
+            
+            <li>AML4S ក៏បានបង្ហាញពីដំណើរការល្អជាង និងសមត្ថភាពសម្របខ្លួនបានល្អប្រសើរ បើប្រៀបធៀបទៅនឹងក្បួនដោះស្រាយកម្រិតខ្ពស់ OAML-basic នៅក្នុងសេណារីយ៉ូនៃការវាយតម្លៃនានា។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">AML4S (Proposed Method)</span></strong><br>បណ្តាញ AutoML សម្រាប់លំហូរទិន្នន័យ (រចនាបថស្នើឡើង)</td>
+                <td>អាចរាវរកការផ្លាស់ប្តូរទាំងផ្នែកអថេរគោលដៅ (Concept Drifts) និងផ្នែកទិន្នន័យបញ្ចូល (Data Drifts) ដោយស្វ័យប្រវត្តិ។ មានភាពបត់បែនខ្ពស់ក្នុងការជ្រើសរើសម៉ូដែលនិងប៉ារ៉ាម៉ែត្រដោយឯករាជ្យ។</td>
+                <td>ទាមទារពេលវេលាខ្លះក្នុងការបង្ហាត់ម៉ូដែលឡើងវិញ (Retraining) ពេញលេញនៅពេលប្រព័ន្ធរកឃើញការផ្លាស់ប្តូរធំៗនៅលើទិន្នន័យ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុតលើគ្រប់សេណារីយ៉ូ (ឧទាហរណ៍៖ ៩៣.០៥% លើទិន្នន័យកម្ចី២ថ្នាក់ និង ៩០.៩៣% លើទិន្នន័យអគ្គិសនី)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hoeffding Adaptive Tree (HAT)</span></strong><br>ចំណាត់ថ្នាក់ដើមឈើសម្រេចចិត្តដែលអាចសម្របខ្លួនតាមអនឡាញ</td>
+                <td>ដំណើរការលឿន និងមានយន្តការរាវរក Concept Drift ដាច់ដោយឡែកដោយប្រើបច្ចេកទេស ADWIN ពីធម្មជាតិរបស់វា។</td>
+                <td>មិនអាចរាវរក Data Drifts បានទេ ហើយភាគច្រើនត្រូវការការរៀបចំទិន្នន័យជាមុន (ដូចជា Standard Scaler) ដើម្បីធានាបានលទ្ធផលល្អ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩០.៦៧% (ជាមួយ Scaling) និង ៨៧.៩២% (គ្មាន Scaling) លើទិន្នន័យកម្ចីសិប្បនិម្មិត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Aggregated Mondrian Forest (AMF)</span></strong><br>ចំណាត់ថ្នាក់ប្រភេទព្រៃ (Forest Ensemble) សម្រាប់លំហូរទិន្នន័យ</td>
+                <td>មានភាពរឹងមាំ និងអាចទប់ទល់ជាមួយទិន្នន័យដែលមានលក្ខណៈស្មុគស្មាញច្រើន ព្រមទាំងផ្តល់ស្ថិរភាពលើទិន្នន័យដែលមានសំលេងរំខាន (Noisy data)។</td>
+                <td>ងាយរងឥទ្ធិពលពីលក្ខណៈទិន្នន័យដែលមានរង្វាស់ខុសគ្នាខ្លាំង (តម្រូវឱ្យមានការធ្វើមាត្រដ្ឋាន Data Scaling ជាចាំបាច់)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៤.៤៣% លើទិន្នន័យ Covtype ប៉ុន្តែនៅតែចាញ់ប្រៀប AML4S ក្នុងករណីភាគច្រើន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">OAML-basic</span></strong><br>ក្បួនដោះស្រាយវាយតម្លៃ AutoML អនឡាញមូលដ្ឋាន</td>
+                <td>អាចបង្កើតម៉ូដែលចម្រុះ និងមានប្រសិទ្ធភាពក្នុងការដោះស្រាយលំហូរទិន្នន័យដែលមានការផ្លាស់ប្តូរបន្តិចម្តងៗ។</td>
+                <td>ផ្តោតតែលើ Concept Drifts តាមរយៈយន្តការ EDDM និងមិនមានភាពរហ័សរហួនគ្រប់គ្រាន់ចំពោះការផ្លាស់ប្តូរទិន្នន័យបញ្ចូលភ្លាមៗឡើយ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវត្រឹមតែ ៨១.៧២% ប៉ុណ្ណោះលើទិន្នន័យអគ្គិសនី ដែលទាបជាងឆ្ងាយបើប្រៀបនឹង AML4S ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រកម្រិតមធ្យម ដែលអនុញ្ញាតឱ្យប្រព័ន្ធដំណើរការបានយ៉ាងរលូនក្នុងពេលវេលាជាក់ស្តែង (Real-time) ដោយមិនតម្រូវឱ្យមានអង្គគណនាក្រាហ្វិក (GPU) នោះទេ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ដំណើរការបានយ៉ាងរលូនលើម៉ាស៊ីន CPU (AMD Ryzen 7 5700G) និង RAM ទំហំ 32GB (ប្រើប្រាស់ជាក់ស្តែងតិចតួចបំផុត ដោយសារប្រព័ន្ធពឹងផ្អែកលើល្បឿន CPU ជាចម្បង)។</li>
+        
+        <li><strong>Software:</strong> ទាមទារការសរសេរកូដដោយប្រើភាសា Python និងបណ្ណាល័យគាំទ្រ River ដែលផ្តោតលើការរៀនដោយម៉ាស៊ីនប្រភេទអនឡាញ (Online Machine Learning)។</li>
+        
+        <li><strong>Time / Latency:</strong> ត្រូវការពេលជាមធ្យមត្រឹមតែ ~០.០០៨ វិនាទី ដើម្បីវិភាគទិន្នន័យមួយឯកតា និងចន្លោះពី ៨ ទៅ ២៦ វិនាទី សម្រាប់ការបង្ហាត់បណ្តាញទាំងមូលឡើងវិញ (Pipeline Retraining)។</li>
+        
+        <li><strong>Data Requirements:</strong> តម្រូវឱ្យមានទិន្នន័យបណ្តោះអាសន្នក្នុងអង្គចងចាំ (Memory Buffer) ចំនួន ៤៥០ សំណាកទិន្នន័យថ្មីៗ ដើម្បីដំណើរការវាយតម្លៃអថេរជាប់លាប់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកលើសំណុំទិន្នន័យសិប្បនិម្មិត (ទាក់ទងនឹងកម្ចីហិរញ្ញវត្ថុ) និងទិន្នន័យស្តង់ដារអន្តរជាតិមានស្រាប់ដូចជាទីផ្សារអគ្គិសនីអូស្ត្រាលី អាកាសចរណ៍ និងប្រភេទដើមឈើនៅសហរដ្ឋអាមេរិក។ សម្រាប់ប្រទេសកម្ពុជា លក្ខណៈទិន្នន័យដូចជាឥរិយាបថសេដ្ឋកិច្ចក្រៅប្រព័ន្ធ (Informal economy) ឬលក្ខខណ្ឌអាកាសធាតុក្នុងតំបន់គឺមិនត្រូវបានគ្របដណ្តប់ឡើយ ដែលទាមទារឱ្យមានការសាកល្បងម៉ូដែលនេះផ្ទាល់លើទិន្នន័យកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ AML4S នេះមានសក្តានុពលខ្ពស់ខ្លាំងណាស់សម្រាប់ស្ថាប័នកម្ពុជាដែលធ្វើការជាមួយទិន្នន័យកំពុងហូររាល់វិនាទី ជាពិសេសក្នុងបរិបទដែលឥរិយាបថទីផ្សារផ្លាស់ប្តូរលឿន។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យមីក្រូហិរញ្ញវត្ថុ និងធនាគារពាណិជ្ជ:</strong> អាចប្រើដើម្បីវាយតម្លៃហានិភ័យឥណទាន (Credit Scoring) ក្នុងពេលវេលាជាក់ស្តែង ស្របពេលដែលស្ថានភាពសេដ្ឋកិច្ច ឬប្រាក់ចំណូលរបស់អតិថិជនមានការផ្លាស់ប្តូរ (Data Drift)។</li>
+            
+            <li><strong>ការត្រួតពិនិត្យចរាចរណ៍ក្នុងទីក្រុងឆ្លាតវៃ (រាជធានីភ្នំពេញ):</strong> អាចប្រើវិភាគលំហូរទិន្នន័យពីកាមេរ៉ាសុវត្ថិភាព ឬសេនស័រ (IoT) ដើម្បីព្យាករណ៍ការកកស្ទះ ដែលវាអាចសម្របខ្លួនទៅនឹងការផ្លាស់ប្តូរលំនាំចរាចរណ៍នៅរដូវវស្សា ឬពេលមានពិធីបុណ្យជាតិ។</li>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍កម្ពុជា:</strong> ក្រុមហ៊ុនបណ្តាញទូរស័ព្ទនានាអាចប្រើ Pipeline នេះដើម្បីតាមដានលំហូរទិន្នន័យបណ្តាញ និងរាវរកភាពមិនប្រក្រតី (Anomaly Detection) នៅពេលដែលការប្រើប្រាស់របស់អតិថិជនកើនឡើងខ្លាំងភ្លាមៗ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ក្បួនដោះស្រាយនេះផ្តល់នូវឧបករណ៍វាយតម្លៃស្វ័យប្រវត្តិមួយដ៏រឹងមាំ ដែលអនុញ្ញាតឱ្យស្ថាប័នរដ្ឋ និងឯកជននៅកម្ពុជាឆ្លើយតបទៅនឹងការវិវឌ្ឍនៃទិន្នន័យបានទាន់ពេលវេលា ដោយកាត់បន្ថយការពឹងផ្អែកខ្លាំងលើអន្តរាគមន៍ពីមនុស្ស។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះទ្រឹស្តី Online Machine Learning:</strong> អ្នកស្រាវជ្រាវគួរសិក្សាស្វែងយល់ពីគោលគំនិតនៃ Data Streams, Concept Drift, Data Drift និងក្បួនដោះស្រាយរាវរកការផ្លាស់ប្តូរទិន្នន័យ ដូចជាក្បួនដោះស្រាយ <span class="en">ADWIN</span> ដែលត្រូវបានប្រើប្រាស់នៅក្នុងការសិក្សានេះ។</li>
+            
+            <li><strong>រៀបចំបរិស្ថានការងារ និងបណ្ណាល័យកូដ:</strong> ដំឡើងភាសា <span class="en">Python</span> រួចទាញយកនិងអនុវត្តបណ្ណាល័យ <span class="en">River</span> ដែលជាបណ្ណាល័យស្នូល (Framework) សម្រាប់គាំទ្រការរៀនដោយម៉ាស៊ីនក្នុងទម្រង់ Streaming Data ។</li>
+            
+            <li><strong>ទាញយកនិងសាកល្បងកូដគំរូ AML4S:</strong> ចូលទៅកាន់ឃ្លាំងកូដ <span class="en">GitHub (AuthEceSoftEng/automl-data-streams)</span> ដើម្បីទាញយកកូដមកសាកល្បងដំណើរការ (Run) ជាមួយទិន្នន័យ Loan Dataset ដែលមានស្រាប់ ដើម្បីស្វែងយល់ពីលំហូរការងាររបស់វា។</li>
+            
+            <li><strong>អនុវត្តផ្ទាល់លើសំណុំទិន្នន័យក្នុងស្រុក:</strong> ប្រមូលទិន្នន័យជាក់ស្តែងពីកម្ពុជា ឧទាហរណ៍៖ ទិន្នន័យប្រតិបត្តិការទូទាត់ប្រាក់ពីធនាគារជាតិ ឬទិន្នន័យសេនស័រអាកាសធាតុ ហើយបញ្ជូនវាទៅកាន់ <span class="en">AutoML Pipeline</span> នេះដើម្បីវាយតម្លៃកម្រិតប្រសិទ្ធភាព។</li>
+            
+            <li><strong>កែតម្រូវ និងបង្រួមធនធានប្រើប្រាស់ (Optimization):</strong> ធ្វើការកែតម្រូវទំហំអង្គចងចាំបណ្តោះអាសន្ន (Buffer memory) និងចំនួននៃ <span class="en">Hyperparameters</span> ដើម្បីធានាថាប្រព័ន្ធអាចដំណើរការជា <span class="en">Real-time</span> ដោយមិនទាមទារកម្លាំងម៉ាស៊ីនកុំព្យូទ័រធំពេក ពេលដាក់ឱ្យប្រើប្រាស់ជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Streams</span></td>
+                <td>វាគឺជាទម្រង់នៃទិន្នន័យដែលត្រូវបានបង្កើតឡើង និងបញ្ជូនមកជាបន្តបន្ទាប់ដោយគ្មានទីបញ្ចប់ ដូចជាទិន្នន័យពីសេនស័រឧបករណ៍ឆ្លាតវៃ ប្រតិបត្តិការហិរញ្ញវត្ថុ ឬបណ្តាញសង្គម ដែលតម្រូវឱ្យប្រព័ន្ធកុំព្យូទ័រចាប់យកនិងវិភាគភ្លាមៗក្នុងពេលជាក់ស្តែង (Real-time) ជាជាងការប្រមូលទុកសិនទើបវិភាគតាមក្រោយ។</td>
+                <td>ដូចជាទឹកទន្លេដែលហូរមិនចេះដាច់ ដែលយើងត្រូវត្រងយកមកពិនិត្យមើលភ្លាមៗជាជាងចាំដងដាក់ពាងឱ្យពេញទើបមើល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept Drift</span></td>
+                <td>គឺជាបាតុភូតដែលទំនាក់ទំនងរវាងទិន្នន័យបញ្ចូល (Input) និងលទ្ធផលចុងក្រោយ (Target) ផ្លាស់ប្តូរទៅតាមពេលវេលា។ ឧទាហរណ៍ ដើមឡើយប្រាក់ខែ៥០០ដុល្លារអាចទិញផ្ទះបាន ប៉ុន្តែ១០ឆ្នាំក្រោយប្រាក់ខែ៥០០ដុល្លារលែងអាចទិញផ្ទះបានទៀតហើយ ដែលធ្វើឱ្យក្បួនច្បាប់ដែលម៉ាស៊ីនធ្លាប់រៀនពីមុនលែងត្រឹមត្រូវ និងទាមទារការរៀនសាជាថ្មី។</td>
+                <td>ដូចជាការប្តូរច្បាប់ល្បែងកណ្តាលទី ដែលក្បាច់ដែលយើងធ្លាប់ប្រើឈ្នះពីមុន លែងមានប្រសិទ្ធភាពនៅពេលនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Drift</span></td>
+                <td>គឺជាការផ្លាស់ប្តូរលក្ខណៈ ឬរបាយនៃទិន្នន័យបញ្ចូល (Input features) ខ្លួនឯងតែម្តង ដោយមិនមានការផ្លាស់ប្តូរច្បាប់វាយតម្លៃគោលដៅនោះទេ។ វាធ្វើឱ្យម៉ូដែលជួបប្រទះទិន្នន័យប្រភេទថ្មី ឬទិន្នន័យដែលមានទំហំខុសពីធម្មតា ដែលនាំឱ្យការទស្សន៍ទាយថយចុះភាពត្រឹមត្រូវដោយសារភាពមិនស៊ាំ។</td>
+                <td>ដូចជាអ្នកលក់ដូរដែលធ្លាប់តែលក់ឱ្យអតិថិជនចាស់ៗ ប៉ុន្តែស្រាប់តែថ្ងៃមួយមានភ្ញៀវទេសចរបរទេសដើរចូលមកទិញច្រើនខុសធម្មតា ដែលធ្វើឱ្យគាត់ពិបាកក្នុងការទាក់ទង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">AutoML</span></td>
+                <td>ដំណើរការនៃការធ្វើឱ្យការរចនា និងការបង្កើតបណ្តាញម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning Pipeline) ប្រព្រឹត្តទៅដោយស្វ័យប្រវត្តិ។ វាជួយជ្រើសរើសក្បួនដោះស្រាយ (Algorithm) ល្អបំផុត រៀបចំទិន្នន័យជាមុន និងកែតម្រូវប៉ារ៉ាម៉ែត្រនានាដោយខ្លួនឯង ដោយមិនបាច់ឱ្យវិស្វករសរសេរកូដសាកល្បងដោយដៃម្តងមួយៗ។</td>
+                <td>ដូចជារថយន្តប្រើលេខអូតូ (Auto) ដែលវាចេះដូរលេខដោយខ្លួនឯងទៅតាមល្បឿនផ្លូវ ដោយមិនបាច់ឱ្យអ្នកបើកបរជាន់អំប៊្រាយ៉ានិងចូលលេខដោយដៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Online Learning</span></td>
+                <td>ជាវិធីសាស្ត្របង្វឹកម៉ូដែលបញ្ញាសិប្បនិម្មិត ដោយរៀនពីទិន្នន័យថ្មីៗមួយម្តងៗ (Instance by instance) ភ្លាមៗនៅពេលដែលវាហូរចូលមក។ វិធីនេះមិនទាមទារការរក្សាទុកទិន្នន័យរាប់លានសិនទើបចាប់ផ្តើមរៀន (Batch learning) នោះទេ ដែលជួយឱ្យម៉ាស៊ីនអាចតាមទាន់រាល់ការផ្លាស់ប្តូរស្ថានភាពថ្មីៗបានយ៉ាងរហ័ស។</td>
+                <td>ដូចជាសិស្សដែលរៀនមេរៀន និងធ្វើលំហាត់រាល់ថ្ងៃភ្លាមៗនៅសាលា ជាជាងចាំដល់ថ្ងៃប្រឡងទើបប្រមូលសៀវភៅមកអានដាច់យប់តែម្តង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">ADWIN</span></td>
+                <td>ក្បួនដោះស្រាយតាមដានបម្រែបម្រួល (Adaptive Windowing) ដែលត្រួតពិនិត្យមើលកម្រិតភាពត្រឹមត្រូវនៃម៉ូដែល ឬតម្លៃជាមធ្យមនៃទិន្នន័យ។ ប្រសិនបើវាគណនាឃើញថាទិន្នន័យចាស់ និងទិន្នន័យថ្មីមានគម្លាតខុសគ្នាខ្លាំងខុសធម្មតា វាសន្និដ្ឋានថាមានការផ្លាស់ប្តូរ (Drift) ហើយបញ្ជាឱ្យប្រព័ន្ធបោះបង់ទិន្នន័យចាស់ចោល រួចចាប់ផ្តើមសម្របខ្លួនទៅនឹងទិន្នន័យថ្មី។</td>
+                <td>ដូចជាកាមេរ៉ាចាប់ល្បឿនដែលអាចដឹងថាឡានមួយកំពុងតែបើកបរក្នុងល្បឿនថេរធម្មតា ឬក៏ស្រាប់តែបង្កើនល្បឿនខុសប្រក្រតីភ្លាមៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sliding Window</span></td>
+                <td>បច្ចេកទេសគ្រប់គ្រងទិន្នន័យដែលរក្សាទុកតែចំនួនទិន្នន័យថ្មីៗក្នុងកម្រិតកំណត់មួយ (ឧទាហរណ៍៖ រក្សាទុកតែ ៤៥០ ទិន្នន័យចុងក្រោយ) នៅក្នុងអង្គចងចាំ។ នៅពេលមានទិន្នន័យថ្មីចូលមកមួយ ទិន្នន័យចាស់បំផុតទីមួយនឹងត្រូវរុញចេញ ដើម្បីធានាថាប្រព័ន្ធមានព័ត៌មានទាន់សម័យជានិច្ចសម្រាប់ការគណនា និងមិនស៊ីទំហំផ្ទុកកុំព្យូទ័រ។</td>
+                <td>ដូចជាប្រវត្តិហៅទូរស័ព្ទ (Call History) ក្នុងទូរស័ព្ទដៃ ដែលបង្ហាញតែលេខ ៥០ ចុងក្រោយ ហើយរុញលេខចាស់ៗចោលដោយស្វ័យប្រវត្តិនៅពេលមានអ្នកតេចូលថ្មី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=concept+drift+and+data+drift+detection+algorithms" target="_blank" rel="noopener"><span class="en">concept drift and data drift detection algorithms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=online+machine+learning+for+non-stationary+data+streams" target="_blank" rel="noopener"><span class="en">online machine learning for non-stationary data streams</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hyperparameter+optimization+in+streaming+environments" target="_blank" rel="noopener"><span class="en">hyperparameter optimization in streaming environments</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ensemble+methods+for+imbalanced+data+streams" target="_blank" rel="noopener"><span class="en">ensemble methods for imbalanced data streams</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

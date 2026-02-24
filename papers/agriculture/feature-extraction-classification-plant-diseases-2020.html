@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វិធីសាស្ត្រប្រកបដោយប្រសិទ្ធភាពក្នុងការទាញយកលក្ខណៈសម្បត្តិសម្រាប់ចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិដោយប្រើប្រាស់ម៉ាស៊ីនរៀនសូត្រ (Machine Learning) | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរកឃើញ និងធ្វើចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិ (ជាក់ស្តែងគឺជំងឺលើស្លឹកដំឡូងបារាំង និងទំពាំងបាយជូរ) ឱ្យបានឆាប់រហ័ស ដើម្បីការពារការឆ្លងរាលដាល...">
+    
+    <meta name="keywords" content="Plant disease classification, Machine learning, Feature extraction, GLCM texture, Support Vector Machine, PlantVillage dataset, Image segmentation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/agriculture/feature-extraction-classification-plant-diseases-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/agriculture/feature-extraction-classification-plant-diseases-2020.html">
+    <meta property="og:title" content="វិធីសាស្ត្រប្រកបដោយប្រសិទ្ធភាពក្នុងការទាញយកលក្ខណៈសម្បត្តិសម្រាប់ចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិដោយប្រើប្រាស់ម៉ាស៊ីនរៀនសូត្រ (Machine Learning) | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរកឃើញ និងធ្វើចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិ (ជាក់ស្តែងគឺជំងឺលើស្លឹកដំឡូងបារាំង និងទំពាំងបាយជូរ) ឱ្យបានឆាប់រហ័ស ដើម្បីការពារការឆ្លងរាលដាល និងកាត់បន្ថយការខូចខាតទិន្នផលកសិកម្មដោយប...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020, Indian Journal of Science and Technology">
+    
+    <meta property="article:tag" content="Plant disease classification">
+    
+    <meta property="article:tag" content="Machine learning">
+    
+    <meta property="article:tag" content="Feature extraction">
+    
+    <meta property="article:tag" content="GLCM texture">
+    
+    <meta property="article:tag" content="Support Vector Machine">
+    
+    <meta property="article:tag" content="PlantVillage dataset">
+    
+    <meta property="article:tag" content="Image segmentation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វិធីសាស្ត្រប្រកបដោយប្រសិទ្ធភាពក្នុងការទាញយកលក្ខណៈសម្បត្តិសម្រាប់ចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិដោយប្រើប្រាស់ម៉ាស៊ីនរៀនសូត្រ (Machine Learning)">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរកឃើញ និងធ្វើចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិ (ជាក់ស្តែងគឺជំងឺលើស្លឹកដំឡូងបារាំង និងទំពាំងបាយជូរ) ឱ្យបានឆាប់រហ័ស ដើម្បីការពារការឆ្លងរាលដាល និងកាត់បន្ថយការខូចខាតទិន្នផលកសិកម្មដោយប...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u179f\u1798\u17d2\u1794\u178f\u17d2\u178f\u17b7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17c6\u1784\u17ba\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a (Machine Learning)",
+      "name": "An effective approach to feature extraction for classification of plant diseases using machine learning",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789 \u1793\u17b7\u1784\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17c6\u1784\u17ba\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7 (\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u1782\u17ba\u1787\u17c6\u1784\u17ba\u179b\u17be\u179f\u17d2\u179b\u17b9\u1780\u178a\u17c6\u17a1\u17bc\u1784\u1794\u17b6\u179a\u17b6\u17c6\u1784 \u1793\u17b7\u1784\u1791\u17c6\u1796\u17b6\u17c6\u1784\u1794\u17b6\u1799\u1787\u17bc\u179a) \u17b1\u17d2\u1799\u1794\u17b6\u1793\u1786\u17b6\u1794\u17cb\u179a\u17a0\u17d0\u179f \u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17b6\u179a\u1796\u17b6\u179a\u1780\u17b6\u179a\u1786\u17d2\u179b\u1784\u179a\u17b6\u179b\u178a\u17b6\u179b \u1793\u17b7\u1784\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1780\u17b6\u179a\u1781\u17bc\u1785\u1781\u17b6\u178f\u1791\u17b7\u1793\u17d2\u1793\u1795\u179b\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a (Machine Learning)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/agriculture/feature-extraction-classification-plant-diseases-2020.html",
+      "author": [{"@type": "Person", "name": "S Jeyalakshmi (SDNB Vaishnav College for Women, Chennai, India)"},{"@type": "Person", "name": "R Radha (SDNB Vaishnav College for Women, Chennai, India)"}],
+      "datePublished": "2020, Indian Journal of Science and Technology",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "An effective approach to feature extraction for classification of plant diseases using machine learning",
+        "url": "https://doi.org/10.17485/IJST/v13i32.827"
+      },
+      "keywords": ["Plant disease classification", "Machine learning", "Feature extraction", "GLCM texture", "Support Vector Machine", "PlantVillage dataset", "Image segmentation"],
+      "about": "Computer Science / Agricultural Technology"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Agriculture",
+          "item": "https://khmerresearch.com/papers/agriculture/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u179f\u1798\u17d2\u1794\u178f\u17d2\u178f\u17b7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17c6\u1784\u17ba\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a (Machine Learning)",
+          "item": "https://khmerresearch.com/papers/agriculture/feature-extraction-classification-plant-diseases-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/agriculture/">Agriculture</a> &rsaquo;
+        <span>វិធីសាស្ត្រប្រកបដោយប្រសិទ្ធភាពក្នុងការទាញយកលក្ខណៈសម្បត្តិ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> An effective approach to feature extraction for classification of plant diseases using machine learning<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.17485/IJST/v13i32.827" target="_blank">doi.org/10.17485/IJST/v13i32.827</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វិធីសាស្ត្រប្រកបដោយប្រសិទ្ធភាពក្នុងការទាញយកលក្ខណៈសម្បត្តិសម្រាប់ចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិដោយប្រើប្រាស់ម៉ាស៊ីនរៀនសូត្រ (Machine Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> An effective approach to feature extraction for classification of plant diseases using machine learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> S Jeyalakshmi (SDNB Vaishnav College for Women, Chennai, India), R Radha (SDNB Vaishnav College for Women, Chennai, India)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020, Indian Journal of Science and Technology</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Agricultural Technology</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការរកឃើញ និងធ្វើចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិ (ជាក់ស្តែងគឺជំងឺលើស្លឹកដំឡូងបារាំង និងទំពាំងបាយជូរ) ឱ្យបានឆាប់រហ័ស ដើម្បីការពារការឆ្លងរាលដាល និងកាត់បន្ថយការខូចខាតទិន្នផលកសិកម្មដោយប្រើប្រាស់ម៉ាស៊ីនរៀនសូត្រ (Machine Learning)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រើប្រាស់រូបភាពស្លឹករុក្ខជាតិចំនួនរាប់ពាន់សន្លឹកពីសំណុំទិន្នន័យ PlantVillage ដោយឆ្លងកាត់ដំណើរការកាត់ផ្តាច់រូបភាព ទាញយកលក្ខណៈសម្បត្តិសំខាន់ៗ និងប្រើប្រាស់ក្បួនចំណាត់ថ្នាក់។
+        
+        <ul>
+            
+            <li>ការលុបផ្ទៃខាងក្រោយ និងកំណត់តំបន់ដែលមានជំងឺដោយស្វ័យប្រវត្តិ ដោយប្រើប្រាស់ក្បួន (GrabCut Algorithm)</li>
+            
+            <li>ការទាញយកលក្ខណៈពណ៌ (Color Features Extraction) ដោយផ្អែកលើប្រព័ន្ធពណ៌ RGB និងតម្លៃពណ៌ (Hue) នៃប្រព័ន្ធ HSV</li>
+            
+            <li>ការទាញយកលក្ខណៈវាយនភាពរូបភាព (Texture Features) តាមរយៈម៉ាទ្រីស (Grey Level Co-occurrence Matrix / GLCM) និងការវិភាគអ៊ីស្តូក្រាម (Histogram Analysis)</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនចំណាត់ថ្នាក់ (Classifiers) ចំនួនបីរួមមាន៖ Naïve Bayes (NB), K-Nearest Neighbor (KNN), និង Support Vector Machine (SVM)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួន Support Vector Machine (SVM) ទទួលបានអត្រាភាពត្រឹមត្រូវខ្ពស់បំផុតក្នុងការធ្វើចំណាត់ថ្នាក់ ពោលគឺរហូតដល់ ៩៦,៨៣% សម្រាប់ស្លឹកដំឡូងបារាំង និង ៩៦,០២% សម្រាប់ស្លឹកទំពាំងបាយជូរ។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នានូវលក្ខណៈពណ៌ (Color), អ៊ីស្តូក្រាម (Histogram) និងវាយនភាព (Texture) ជួយឱ្យក្បួនចំណាត់ថ្នាក់មានដំណើរការយ៉ាងល្អប្រសើរ និងមានភាពច្បាស់លាស់។</li>
+            
+            <li>ការសិក្សាបានបង្ហាញថា វិធីសាស្ត្រដែលបានស្នើឡើងមានប្រសិទ្ធភាពខ្ពស់ និងអាចប្រកួតប្រជែងជាមួយលទ្ធផលនៃការស្រាវជ្រាវមុនៗ ក្នុងការបែងចែករវាងស្លឹករុក្ខជាតិដែលមានសុខភាពល្អ និងស្លឹកដែលមានជំងឺ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM)</span></strong><br>ម៉ាស៊ីនរៀនសូត្រ Support Vector Machine (SVM)</td>
+                <td>ទទួលបានអត្រាភាពត្រឹមត្រូវខ្ពស់បំផុតក្នុងចំណោមក្បួនទាំងបី និងមានតម្លៃ Bias និង Variance ទាប ដែលស័ក្តិសមបំផុតសម្រាប់ការធ្វើចំណាត់ថ្នាក់ទិន្នន័យនេះ។</td>
+                <td>ទាមទារការគណនាស្វែងរកបន្ទាត់ព្រំដែន (Optimal Hyperplane) ដែលអាចចំណាយពេលយូរជាងក្បួនសាមញ្ញនៅពេលទិន្នន័យមានទំហំធំ។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ ៩៦,៨៣% សម្រាប់ជំងឺស្លឹកដំឡូងបារាំង និង ៩៦,០២% សម្រាប់ជំងឺស្លឹកទំពាំងបាយជូរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbor (KNN)</span></strong><br>ក្បួន K-Nearest Neighbor (KNN)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងផ្តល់លទ្ធផលល្អប្រសើរដោយពឹងផ្អែកលើការវាស់ចម្ងាយ (Distance Measure) នៃទិន្នន័យ។</td>
+                <td>ទាមទារឱ្យមានការរក្សាទុកទិន្នន័យគំរូទាំងអស់ ដែលធ្វើឱ្យស៊ីទំហំអង្គចងចាំច្រើននៅពេលដាក់ឱ្យដំណើរការជាក់ស្តែង។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ ៩៤,០០% សម្រាប់ជំងឺស្លឹកដំឡូងបារាំង និង ៩៣,១០% សម្រាប់ជំងឺស្លឹកទំពាំងបាយជូរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Naïve Bayes (NB)</span></strong><br>ក្បួនចំណាត់ថ្នាក់ Naïve Bayes (NB)</td>
+                <td>ដំណើរការលឿនក្នុងការគណនា និងមិនសូវរងឥទ្ធិពលខ្លាំងពីការធ្វើកម្រិតទិន្នន័យ (Feature Normalization) ឡើយ។</td>
+                <td>ទទួលបានអត្រាភាពត្រឹមត្រូវទាបជាងគេ ដោយសារវាសន្មតថាលក្ខណៈសម្បត្តិទាំងអស់ឯករាជ្យពីគ្នាទាំងស្រុង ដែលជាក់ស្តែងមិនតែងតែត្រឹមត្រូវទេ។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ ៨៨,៦៧% សម្រាប់ជំងឺស្លឹកដំឡូងបារាំង និង ៨១,៨៧% សម្រាប់ជំងឺស្លឹកទំពាំងបាយជូរ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះមិនបានបញ្ជាក់លម្អិតអំពីថ្លៃដើម ឬប្រភេទកុំព្យូទ័រដែលត្រូវប្រើនោះទេ ប៉ុន្តែវាទាមទារធនធានកុំព្យូទ័រជាមធ្យមសម្រាប់ការទាញយកលក្ខណៈរូបភាពដោយម៉ាទ្រីស GLCM និងដំណើរការម៉ាស៊ីនរៀនសូត្រ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់សំណុំទិន្នន័យ PlantVillage ចំនួន ៣០០០ រូបភាពសម្រាប់ដំឡូងបារាំង និង ៤២៧០ រូបភាពសម្រាប់ទំពាំងបាយជូរ ដែលទាមទារការរៀបចំទិន្នន័យជាមុន។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានកម្លាំង CPU និង RAM គ្រប់គ្រាន់សម្រាប់គណនាម៉ាទ្រីស GLCM ទំហំ 256x256 (ទោះបីអ្នកស្រាវជ្រាវបានបង្រួមមកត្រឹម 32x32 ដើម្បីកាត់បន្ថយភាពស្មុគស្មាញក៏ដោយ)។</li>
+        
+        <li><strong>Software & Expertise:</strong> ទាមទារចំណេះដឹងផ្នែកកែច្នៃរូបភាព (Image Processing) និងការប្រើប្រាស់បណ្ណាល័យកូដដូចជា OpenCV និង Scikit-learn សម្រាប់ទាញយកលក្ខណៈ និងបង្កើនប្រសិទ្ធភាព Machine Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ PlantVillage ដែលភាគច្រើនគឺជារូបភាពថតនៅក្នុងមន្ទីរពិសោធន៍ មានផ្ទៃខាងក្រោយពណ៌ប្រផេះ ឬឯកសណ្ឋាន (Controlled Environment)។ នេះជាចំណុចខ្សោយមួយសម្រាប់ប្រទេសកម្ពុជា ព្រោះរូបភាពជាក់ស្តែងដែលកសិករថតនៅតាមចម្ការមានផ្ទៃខាងក្រោយស្មុគស្មាញ (ដី ស្មៅ ពន្លឺថ្ងៃមិនស្មើគ្នា) ដែលអាចធ្វើឱ្យក្បួនលុបផ្ទៃខាងក្រោយ (GrabCut Algorithm) ធ្លាក់ចុះប្រសិទ្ធភាព។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រទាញយកលក្ខណៈរូបភាពនេះមានសក្តានុពលខ្ពស់ក្នុងការយកមកអនុវត្តនៅក្នុងវិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture) នៅប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ដំណាំយុទ្ធសាស្ត្រកម្ពុជា (ម្រេច និងស្វាយកន្ទី):</strong> តំបន់កសិកម្មនៅខេត្តកំពត កែប ឬកំពង់ចាម អាចកែច្នៃវិធីសាស្ត្រនេះដើម្បីសម្គាល់ជំងឺលើស្លឹកម្រេច ឬស្វាយ ដោយគ្រាន់តែប្តូរទិន្នន័យហ្វឹកហាត់ពីរូបភាពស្លឹកដំឡូង/ទំពាំងបាយជូរ មកជារូបភាពរុក្ខជាតិក្នុងស្រុកវិញ។</li>
+            
+            <li><strong>កម្មវិធីទូរស័ព្ទសម្រាប់កសិករ (Agri-tech Startups):</strong> សហគ្រាសបច្ចេកវិទ្យាកសិកម្មអាចយកក្បួន SVM នេះទៅបញ្ចូលក្នុងកម្មវិធីទូរស័ព្ទ (Mobile App) ដើម្បីឱ្យកសិករថតរូប និងទទួលរោគវិនិច្ឆ័យជំងឺបានភ្លាមៗដោយមិនបាច់ប្រើអ៊ិនធឺណិតកម្លាំងខ្លាំង ព្រោះវាស៊ីធនធានតិចជាង Deep Learning។</li>
+            
+        </ul>
+        
+        
+        <p>ទោះបីជាម៉ូដែលនេះមានប្រសិទ្ធភាពខ្ពស់ ប៉ុន្តែដើម្បីយកមកប្រើប្រាស់ជាក់ស្តែងប្រកបដោយជោគជ័យនៅកម្ពុជា គេចាំបាច់ត្រូវប្រមូលទិន្នន័យរូបភាពពីទីតាំងចម្ការផ្ទាល់ ទើបប្រព័ន្ធនេះមានភាពរឹងមាំចំពោះពន្លឺ និងផ្ទៃខាងក្រោយរូបភាពស្មុគស្មាញពិតប្រាកដ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីការកែច្នៃ និងកាត់ផ្តាច់រូបភាព (Image Segmentation):</strong> ស្វែងយល់ពីរបៀបប្រើប្រាស់បណ្ណាល័យ <span class="en">OpenCV</span> នៅក្នុង <span class="en">Python</span> ដើម្បីបំប្លែងប្រព័ន្ធពណ៌រូបភាព (RGB ទៅ HSV) និងអនុវត្តក្បួន <span class="en">GrabCut Algorithm</span> សម្រាប់លុបផ្ទៃខាងក្រោយរូបភាពស្លឹករុក្ខជាតិ។</li>
+            
+            <li><strong>អនុវត្តការទាញយកលក្ខណៈសម្បត្តិរូបភាព (Feature Extraction):</strong> សរសេរកូដទាញយកលក្ខណៈពណ៌ (Color Features), អ៊ីស្តូក្រាម (Histogram), និងជាពិសេសអនុវត្តការគណនាម៉ាទ្រីសវាយនភាព <span class="en">GLCM (Grey Level Co-occurrence Matrix)</span> ពីកម្រិតពណ៌ Hue ដោយប្រើប្រាស់ <span class="en">scikit-image</span>។</li>
+            
+            <li><strong>ការជ្រើសរើសលក្ខណៈ និងបង្ហាត់ម៉ូដែល (Feature Selection & Training):</strong> ប្រើប្រាស់ការធ្វើតេស្ត <span class="en">Chi-Square</span> ឬ <span class="en">ANOVA</span> ដើម្បីរក្សាតែលក្ខណៈសំខាន់ៗ រួចប្រើប្រាស់ <span class="en">Scikit-Learn</span> ដើម្បីបង្ហាត់ម៉ូដែល <span class="en">SVM</span> ដោយមិនភ្លេចធ្វើ <span class="en">Min-Max Scaling</span>។</li>
+            
+            <li><strong>ការវាយតម្លៃម៉ូដែល (Model Evaluation):</strong> ធ្វើការវាស់ស្ទង់ប្រសិទ្ធភាពម៉ូដែលរបស់អ្នកតាមរយៈ <span class="en">K-Fold Cross Validation</span> និងការវិភាគ <span class="en">Confusion Matrix</span> ដើម្បីធានាថាម៉ូដែលមិនជួបបញ្ហា Overfitting ឬ Underfitting។</li>
+            
+            <li><strong>ការប្រមូលទិន្នន័យក្នុងស្រុក (Local Data Collection):</strong> ចុះប្រមូលទិន្នន័យដោយថតរូបស្លឹករុក្ខជាតិដែលមានជំងឺ (ឧ. ដំឡូងមី ឬស្រូវ) នៅតាមចម្ការជាក់ស្តែងក្នុងប្រទេសកម្ពុជា រួចយកមកធ្វើតេស្តផ្ទឹមជាមួយម៉ូដែលដែលបានបង្កើតរួច ដើម្បីកែលម្អភាពសុក្រឹតនៅបរិយាកាសជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Grey level co-occurrence matrix (GLCM)</span></td>
+                <td>ជាម៉ាទ្រីសគណិតវិទ្យាដែលប្រើសម្រាប់ទាញយកលក្ខណៈវាយនភាព (Texture) នៃរូបភាព។ វាវាស់ស្ទង់ថាតើភីកសែល (Pixels) ដែលមានកម្រិតពណ៌ប្រផេះដូចគ្នា ឬប្រហាក់ប្រហែលគ្នា ស្ថិតនៅក្បែរគ្នាញឹកញាប់ប៉ុណ្ណាក្នុងទិសដៅ និងចម្ងាយជាក់លាក់ណាមួយ ដើម្បីកំណត់ថាតើផ្ទៃរូបភាពនោះរលោង ឬគ្រើម។</td>
+                <td>ដូចជាការសង្កេតមើលក្រណាត់មួយផ្ទាំង ដើម្បីដឹងថាវាជិតសាច់ល្អ (រលោង) ឬមានសរសៃអំបោះគម្លាតគ្នា (គ្រើម) ដោយរាប់ចំនួនសរសៃដែលនៅក្បែរៗគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machine (SVM)</span></td>
+                <td>ជាក្បួនម៉ាស៊ីនរៀនសូត្រ (Machine Learning) ដែលប្រើសម្រាប់ធ្វើចំណាត់ថ្នាក់ទិន្នន័យ។ វាដំណើរការដោយការស្វែងរកបន្ទាត់ព្រំដែន (Optimal Hyperplane) ដ៏ល្អបំផុតដែលស្ថិតនៅចន្លោះកណ្តាល និងនៅឆ្ងាយជាងគេពីទិន្នន័យនៃក្រុមនីមួយៗ ដើម្បីបែងចែកពួកវាឱ្យបានដាច់ស្រឡះពីគ្នាប្រកបដោយភាពត្រឹមត្រូវខ្ពស់។</td>
+                <td>ដូចជាការគូសបន្ទាត់មួយនៅលើដី ដើម្បីបែងចែកក្មេងលេងបាល់ទាត់ និងក្មេងលេងបាល់ទះឱ្យនៅឆ្ងាយពីគ្នាបំផុតតាមដែលអាចធ្វើទៅបាន ដើម្បីកុំឱ្យពួកគេរត់ប៉ះទង្គិចគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Extraction</span></td>
+                <td>ជាដំណើរការនៃការបំប្លែងទិន្នន័យដើម (ឧទាហរណ៍៖ រូបភាពស្លឹករុក្ខជាតិទាំងមូល) ទៅជាសំណុំនៃតម្លៃលេខ ឬលក្ខណៈសម្បត្តិសំខាន់ៗតំណាង (ដូចជាកម្រិតពណ៌ ភាពគ្រើម ឬរូបរាង) ដើម្បីឱ្យកុំព្យូទ័រអាចស្គាល់ និងយកទៅដំណើរការបន្តក្នុងការវាយតម្លៃជំងឺបានលឿនជាងមុន។</td>
+                <td>ដូចជាការសរសេរចំណុចសង្ខេបសំខាន់ៗពីសៀវភៅមួយក្បាលដ៏ក្រាស់ ដើម្បីឱ្យមិត្តភក្តិអានហើយយល់អត្ថន័យភ្លាមៗដោយមិនបាច់អានសៀវភៅទាំងមូលឡើងវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">HSV color space</span></td>
+                <td>ជាប្រព័ន្ធពណ៌ដែលបំបែករូបភាពជាបីផ្នែក៖ H (Hue ឬពណ៌ពិត), S (Saturation ឬភាពឆ្អែតនៃពណ៌), និង V (Value ឬកម្រិតពន្លឺ)។ នៅក្នុងការស្រាវជ្រាវនេះ គេប្រើប្រាស់ផ្នែក Hue ព្រោះវាផ្ទុកព័ត៌មានពណ៌សុទ្ធសាធ ដែលជួយឱ្យប្រព័ន្ធចំណាត់ថ្នាក់មិនសូវរងឥទ្ធិពលពីពន្លឺជុំវិញ (ភ្លឺពេក ឬងងឹតពេក)។</td>
+                <td>ដូចជាការលាយថ្នាំពណ៌ ដោយបំបែកវាងាយៗជា ៣ ជំហាន៖ ជ្រើសរើសពណ៌គោល (Hue) បន្ថែមទឹកដើម្បីឱ្យពណ៌ស្រាលឬដិត (Saturation) និងបន្ថែមពណ៌សឬខ្មៅដើម្បីកំណត់ពន្លឺ (Value)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Fold Cross Validation</span></td>
+                <td>ជាបច្ចេកទេសវាយតម្លៃក្បួនម៉ាស៊ីនរៀនសូត្រ ដោយបែងចែកសំណុំទិន្នន័យជា K ផ្នែក (Folds) ប៉ុនៗគ្នា។ ផ្នែកនីមួយៗនឹងត្រូវបានប្តូរវេនគ្នាធ្វើជាទិន្នន័យសាកល្បង (Test data) ខណៈផ្នែកដែលនៅសល់ត្រូវបានប្រើសម្រាប់បង្ហាត់ម៉ូដែល (Training data) ដើម្បីធានាថាម៉ូដែលពិតជាមានសមត្ថភាពទូទៅ (Generalized) និងមិនចេះតែទន្ទេញចាំទិន្នន័យចាស់ៗ (Overfitting)។</td>
+                <td>ដូចជាការបែងចែកសិស្សក្នុងថ្នាក់ជា ៥ ក្រុមតូចៗ រួចប្តូរវេនគ្នាឱ្យក្រុមនីមួយៗឡើងធ្វើវិញ្ញាសាប្រឡង ខណៈក្រុមផ្សេងទៀតរៀនសូត្រ ដើម្បីប្រាកដថាសិស្សទាំងអស់ពិតជាយល់មេរៀន មិនមែនគ្រាន់តែទន្ទេញចាំចម្លើយវិញ្ញាសាចាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Normalization</span></td>
+                <td>ជាដំណើរការគណិតវិទ្យា (ឧ. Min-Max Scaling) ដើម្បីកែសម្រួលតម្លៃលេខនៃលក្ខណៈសម្បត្តិទាំងអស់ឱ្យស្ថិតនៅក្នុងជួរកម្រិតកំណត់មួយដូចគ្នា (ឧទាហរណ៍ ពី 0 ទៅ 1)។ ការធ្វើបែបនេះគឺដើម្បីកុំឱ្យលក្ខណៈដែលមានតម្លៃលេខធំជាង មានឥទ្ធិពលគ្របដណ្តប់លើលក្ខណៈដែលមានតម្លៃលេខតូចតាច នៅពេលក្បួនរៀនសូត្រធ្វើការវាស់ចម្ងាយ។</td>
+                <td>ដូចជាការប្តូរប្រាក់រៀល ប្រាក់បាត និងប្រាក់យេន ឱ្យទៅជារូបិយប័ណ្ណតែមួយ (ឧ. ដុល្លារ) មុននឹងយកមកប្រៀបធៀបគ្នា ដើម្បីកុំឱ្យច្រឡំថាលេខច្រើនមានតម្លៃធំជាង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">GrabCut algorithm</span></td>
+                <td>ជាក្បួនសម្រាប់កាត់ផ្តាច់រូបភាព (Image Segmentation) ដោយស្វ័យប្រវត្តិ។ វាដំណើរការដោយការប៉ាន់ស្មានផ្ទៃខាងមុខ (ឧ. ស្លឹករុក្ខជាតិ) និងផ្ទៃខាងក្រោយ បន្ទាប់មកគណនា និងកាត់យកតែវត្ថុសំខាន់ដោយបំបាត់ផ្ទៃខាងក្រោយ (ឧ. ដី ឬស្រមោលផ្សេងៗ) ចោល ដើម្បីកុំឱ្យមានសម្លេងរំខាន (Noise) ដល់ការទាញយកលក្ខណៈរូបភាព។</td>
+                <td>ដូចជាការប្រើកន្ត្រៃកាត់តាមរាងតួអង្គមនុស្សចេញពីរូបថតទេសភាពដ៏រញ៉េរញ៉ៃ ដើម្បីយកតែរូបមនុស្សនោះមកបិទលើក្រដាសសស្អាតមួយសន្លឹកទៀត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+models+for+plant+disease+detection" target="_blank" rel="noopener"><span class="en">deep learning models for plant disease detection</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hyperspectral+imaging+in+precision+agriculture" target="_blank" rel="noopener"><span class="en">hyperspectral imaging in precision agriculture</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=image+segmentation+techniques+for+leaf+disease+analysis" target="_blank" rel="noopener"><span class="en">image segmentation techniques for leaf disease analysis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=real-time+plant+disease+classification+on+mobile+edge+devices" target="_blank" rel="noopener"><span class="en">real-time plant disease classification on mobile edge devices</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

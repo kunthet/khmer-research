@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវាយតម្លៃលើឥទ្ធិពលនៃការបង្កើនទិន្នន័យទៅលើបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បានក្នុងការវិភាគរូបភាពវេជ្ជសាស្ត្រ | KhmerResearch.com</title>
+    <meta name="description" content="កង្វះតម្លាភាព និងលទ្ធភាពអាចពន្យល់បាននៅក្នុងម៉ូដែល Deep Learning ដ៏ស្មុគស្មាញ បង្កើនក្តីបារម្ភផ្នែកក្រមសីលធម៌ និងច្បាប់នៅក្នុងវិស័យថែទាំសុខភាព។ និក្ខេបបទនេះដោ...">
+    
+    <meta name="keywords" content="Explainable AI (XAI), Data Augmentation, Medical Image Analysis, Deep Learning, LIME, SHAP, Chest X-ray Classification, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/data-augmentation-explainable-ai-medical-image-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/data-augmentation-explainable-ai-medical-image-2024.html">
+    <meta property="og:title" content="ការវាយតម្លៃលើឥទ្ធិពលនៃការបង្កើនទិន្នន័យទៅលើបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បានក្នុងការវិភាគរូបភាពវេជ្ជសាស្ត្រ | KhmerResearch.com">
+    <meta property="og:description" content="កង្វះតម្លាភាព និងលទ្ធភាពអាចពន្យល់បាននៅក្នុងម៉ូដែល Deep Learning ដ៏ស្មុគស្មាញ បង្កើនក្តីបារម្ភផ្នែកក្រមសីលធម៌ និងច្បាប់នៅក្នុងវិស័យថែទាំសុខភាព។ និក្ខេបបទនេះដោះស្រាយបញ្ហាខ្វះខាតនៃការស្រាវជ្រាវទាក់ទងន...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024, Eindhoven University of Technology">
+    
+    <meta property="article:tag" content="Explainable AI (XAI)">
+    
+    <meta property="article:tag" content="Data Augmentation">
+    
+    <meta property="article:tag" content="Medical Image Analysis">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="LIME">
+    
+    <meta property="article:tag" content="SHAP">
+    
+    <meta property="article:tag" content="Chest X-ray Classification">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវាយតម្លៃលើឥទ្ធិពលនៃការបង្កើនទិន្នន័យទៅលើបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បានក្នុងការវិភាគរូបភាពវេជ្ជសាស្ត្រ">
+    <meta name="twitter:description" content="កង្វះតម្លាភាព និងលទ្ធភាពអាចពន្យល់បាននៅក្នុងម៉ូដែល Deep Learning ដ៏ស្មុគស្មាញ បង្កើនក្តីបារម្ភផ្នែកក្រមសីលធម៌ និងច្បាប់នៅក្នុងវិស័យថែទាំសុខភាព។ និក្ខេបបទនេះដោះស្រាយបញ្ហាខ្វះខាតនៃការស្រាវជ្រាវទាក់ទងន...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179b\u17be\u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1791\u17c5\u179b\u17be\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1796\u1793\u17d2\u1799\u179b\u17cb\u1794\u17b6\u1793\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179a\u17bc\u1794\u1797\u17b6\u1796\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a",
+      "name": "Evaluating the Impact of Data Augmentation on Explainable AI in Medical Image Analysis",
+      "description": "\u1780\u1784\u17d2\u179c\u17c7\u178f\u1798\u17d2\u179b\u17b6\u1797\u17b6\u1796 \u1793\u17b7\u1784\u179b\u1791\u17d2\u1792\u1797\u17b6\u1796\u17a2\u17b6\u1785\u1796\u1793\u17d2\u1799\u179b\u17cb\u1794\u17b6\u1793\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b Deep Learning \u178a\u17cf\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789 \u1794\u1784\u17d2\u1780\u17be\u1793\u1780\u17d2\u178f\u17b8\u1794\u17b6\u179a\u1798\u17d2\u1797\u1795\u17d2\u1793\u17c2\u1780\u1780\u17d2\u179a\u1798\u179f\u17b8\u179b\u1792\u1798\u17cc \u1793\u17b7\u1784\u1785\u17d2\u1794\u17b6\u1794\u17cb\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u179f\u17d0\u1799\u1790\u17c2\u1791\u17b6\u17c6\u179f\u17bb\u1781\u1797\u17b6\u1796\u17d4 \u1793\u17b7\u1780\u17d2\u1781\u17c1\u1794\u1794\u1791\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1793\u17c3\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1791\u17b6\u1780\u17cb\u1791\u1784\u1793\u17b9\u1784\u179a\u1794\u17c0\u1794\u178a\u17c2\u179b\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Data Augmentation) \u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6\u1787\u17c7\u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u178a\u179b\u17cb\u179b\u1791\u17d2\u1792\u1797\u17b6\u1796\u1796\u1793\u17d2\u1799\u179b\u17cb (Explainability) \u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/data-augmentation-explainable-ai-medical-image-2024.html",
+      "author": [{"@type": "Person", "name": "Freddie X.Liu (Eindhoven University of Technology)"}],
+      "datePublished": "2024, Eindhoven University of Technology",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Evaluating the Impact of Data Augmentation on Explainable AI in Medical Image Analysis",
+        "url": "https://research.tue.nl/files/333611106/Liu_X_2_.pdf"
+      },
+      "keywords": ["Explainable AI (XAI)", "Data Augmentation", "Medical Image Analysis", "Deep Learning", "LIME", "SHAP", "Chest X-ray Classification"],
+      "about": "Artificial Intelligence / Medical Image Analysis"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179b\u17be\u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1791\u17c5\u179b\u17be\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1796\u1793\u17d2\u1799\u179b\u17cb\u1794\u17b6\u1793\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u179a\u17bc\u1794\u1797\u17b6\u1796\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a",
+          "item": "https://khmerresearch.com/papers/technology/data-augmentation-explainable-ai-medical-image-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការវាយតម្លៃលើឥទ្ធិពលនៃការបង្កើនទិន្នន័យទៅលើបញ្ញាសិប្បនិម្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Evaluating the Impact of Data Augmentation on Explainable AI in Medical Image Analysis<br>
+        
+        <strong>Source:</strong> <a href="https://research.tue.nl/files/333611106/Liu_X_2_.pdf" target="_blank">research.tue.nl</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវាយតម្លៃលើឥទ្ធិពលនៃការបង្កើនទិន្នន័យទៅលើបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បានក្នុងការវិភាគរូបភាពវេជ្ជសាស្ត្រ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Evaluating the Impact of Data Augmentation on Explainable AI in Medical Image Analysis</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Freddie X.Liu (Eindhoven University of Technology)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Eindhoven University of Technology</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence / Medical Image Analysis</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> កង្វះតម្លាភាព និងលទ្ធភាពអាចពន្យល់បាននៅក្នុងម៉ូដែល Deep Learning ដ៏ស្មុគស្មាញ បង្កើនក្តីបារម្ភផ្នែកក្រមសីលធម៌ និងច្បាប់នៅក្នុងវិស័យថែទាំសុខភាព។ និក្ខេបបទនេះដោះស្រាយបញ្ហាខ្វះខាតនៃការស្រាវជ្រាវទាក់ទងនឹងរបៀបដែលវិធីសាស្ត្របង្កើនទិន្នន័យ (Data Augmentation) ផ្សេងៗគ្នាជះឥទ្ធិពលដល់លទ្ធភាពពន្យល់ (Explainability) នៃម៉ូដែលទស្សន៍ទាយក្នុងការធ្វើចំណាត់ថ្នាក់រូបភាពវេជ្ជសាស្ត្រ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានអនុវត្តម៉ូដែល Deep Learning ប្រភេទ DenseNet-121 លើសំណុំទិន្នន័យកាំរស្មីអ៊ិចទ្រូង (Chest X-ray) ដោយប្រើបច្ចេកទេសបង្កើនទិន្នន័យផ្សេងៗ បន្ទាប់មកអនុវត្តវិធីសាស្ត្រ XAI ដើម្បីវាយតម្លៃភាពពេញលេញ ភាពត្រឹមត្រូវ និងភាពស៊ីសង្វាក់គ្នានៃការពន្យល់។
+        
+        <ul>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្របង្កើនទិន្នន័យតាមបែបប្រពៃណី និងទំនើប (Traditional and Novel Data Augmentation: Flipping+Cropping, Mixup, TrivialAugment)</li>
+            
+            <li>ការបង្កើតការពន្យល់លក្ខណៈមូលដ្ឋានដោយប្រើប្រាស់បច្ចេកទេស LIME និង SHAP (Local Interpretability using LIME and SHAP)</li>
+            
+            <li>ការវាយតម្លៃភាពពេញលេញតាមរយៈពិន្ទុភាពជឿជាក់ (Completeness evaluation via fidelity score)</li>
+            
+            <li>ការត្រួតពិនិត្យភាពត្រឹមត្រូវតាមរយៈការធ្វើឱ្យប៉ារ៉ាម៉ែត្រម៉ូដែលចៃដន្យ (Sanity check via cascading model randomization)</li>
+            
+            <li>ការវាយតម្លៃភាពស៊ីសង្វាក់គ្នាតាមរយៈពិន្ទុត្រួតស៊ីគ្នាជាមួយនឹងការកត់សម្គាល់របស់អ្នកជំនាញវេជ្ជសាស្ត្រ (Coherence evaluation via overlapping scores)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>បច្ចេកទេសបង្កើនទិន្នន័យបានធ្វើឱ្យប្រសើរឡើងនូវភាពត្រឹមត្រូវរួម (Overall accuracy) របស់ម៉ូដែលក្នុងចន្លោះពី 0.90% ទៅ 2.05% បើធៀបនឹងម៉ូដែលគោល (Baseline) ដោយក្នុងនោះវិធីសាស្ត្រ TrivialAugment បង្ហាញពីអត្រានៃការកែលម្អខ្ពស់ជាងគេ។</li>
+            
+            <li>វិធីសាស្ត្រ LIME និង SHAP ទាំងពីរបានឆ្លងកាត់ការត្រួតពិនិត្យភាពត្រឹមត្រូវ (Sanity check) ទោះបីជាមានការប្រើប្រាស់វិធីសាស្ត្របង្កើនទិន្នន័យខុសៗគ្នាក៏ដោយ ដែលបញ្ជាក់ថាពួកវាមានភាពរសើបនិងត្រឹមត្រូវទៅនឹងប៉ារ៉ាម៉ែត្រដែលម៉ូដែលបានរៀន។</li>
+            
+            <li>វិធីសាស្ត្រ TrivialAugment ដំណើរការបានល្អបំផុតក្នុងការបង្កើនភាពពេញលេញ (Completeness) និងភាពស៊ីសង្វាក់គ្នា (Coherence) នៃការពន្យល់ ខណៈពេលដែលវិធីសាស្ត្រ Mixup អាចប៉ះពាល់អវិជ្ជមានខ្លះដល់ភាពស៊ីសង្វាក់គ្នា ហើយវិធីសាស្ត្រ Flipping+Cropping ធ្វើឱ្យធ្លាក់ចុះភាពពេញលេញ។ ជាទូទៅ LIME បង្ហាញភាពស៊ីសង្វាក់គ្នាល្អជាង SHAP សម្រាប់ការសិក្សានេះ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Baseline (No Augmentation)</span></strong><br>ម៉ូដែលគោល (គ្មានការបង្កើនទិន្នន័យ)</td>
+                <td>ងាយស្រួលយល់ និងមិនត្រូវការកម្លាំងម៉ាស៊ីនដើម្បីដំណើរការការកែប្រែទិន្នន័យបន្ថែមកំឡុងពេលហ្វឹកហាត់។</td>
+                <td>ងាយរងការចងចាំទិន្នន័យហួសកម្រិត (Overfitting) និងមានលទ្ធផលភាពត្រឹមត្រូវនៃការទស្សន៍ទាយទាបជាងគេ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទូទៅ (Overall Accuracy) ៩៣.៩៤% និងពិន្ទុ F1 ០.៩៣៩៣។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Flipping + Cropping</span></strong><br>ការត្រឡប់និងកាត់រូបភាព (វិធីសាស្ត្រប្រពៃណី)</td>
+                <td>ងាយស្រួលអនុវត្តបំផុត និងមានឥទ្ធិពលវិជ្ជមានទៅលើភាពស៊ីសង្វាក់គ្នានៃការពន្យល់ (Coherence) ពេលប្រើជាមួយវិធីសាស្ត្រ LIME។</td>
+                <td>ធ្វើឱ្យធ្លាក់ចុះនូវភាពពេញលេញ (Fidelity/Completeness) នៃការពន្យល់របស់ម៉ូដែល ដែលមានន័យថាការពន្យល់មិនសូវស៊ីសង្វាក់ជាមួយម៉ូដែលដើម។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទូទៅ ៩៥.៦៧% និងពិន្ទុ F1 ០.៩៥៦៩។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">TrivialAugment</span></strong><br>ការបង្កើនទិន្នន័យតាមរយៈការស្វែងរកដោយចៃដន្យ (TrivialAugment)</td>
+                <td>ផ្តល់លទ្ធផលល្អបំផុតទាំងភាពត្រឹមត្រូវនៃការទស្សន៍ទាយ និងបង្កើនភាពពេញលេញ (Completeness) ព្រមទាំងភាពស៊ីសង្វាក់គ្នានៃការពន្យល់។</td>
+                <td>ទោះបីជាវាមិនត្រូវការការកំណត់ប៉ារ៉ាម៉ែត្រស្មុគស្មាញ វាអាចនឹងកែប្រែរូបភាពហួសហេតុក្នុងករណីខ្លះបើធៀបនឹងវិធីប្រពៃណី។</td>
+                <td>សម្រេចបានការកែលម្អខ្ពស់បំផុតដោយមានភាពត្រឹមត្រូវទូទៅ ៩៥.៩៩% និងពិន្ទុ F1 ០.៩៦០០។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Mixup (50%)</span></strong><br>ការលាយបញ្ចូលរូបភាពនិងស្លាកទិន្នន័យបញ្ចូលគ្នា (Mixup លាយ ៥០%)</td>
+                <td>ជួយកាត់បន្ថយ Overfitting យ៉ាងមានប្រសិទ្ធភាព និងបង្កើនភាពត្រឹមត្រូវនៃម៉ូដែលបានយ៉ាងល្អ។</td>
+                <td>ធ្វើឱ្យរូបភាពមើលទៅមិនច្បាស់លាស់តាមបែបធម្មជាតិ ប៉ះពាល់អវិជ្ជមានដល់ភាពស៊ីសង្វាក់គ្នានៃការពន្យល់ (ជាពិសេសពេលប្រើជាមួយ SHAP) និងកាត់បន្ថយ Fidelity។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទូទៅ ៩៥.៨៧% និងពិន្ទុ F1 ០.៩៥៨៩។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបានបញ្ជាក់យ៉ាងច្បាស់អំពីធនធានដែលត្រូវបានប្រើប្រាស់សម្រាប់ការពិសោធន៍ ជាពិសេសផ្នែករឹង (Hardware) និងផ្នែកទន់ (Software) ក៏ដូចជាទិន្នន័យ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ប្រើប្រាស់ Google Colab ជាមួយ CPU Intel(R) Xeon(R) @ 2.20GHz និង GPU ប្រភេទ Tesla T4 សម្រាប់ការហ្វឹកហាត់ម៉ូដែលនិងដំណើរការការគណនា Shapley Values (SHAP) ដែលទាមទារកម្លាំងម៉ាស៊ីនខ្លាំង។</li>
+        
+        <li><strong>Software:</strong> បរិស្ថានសរសេរកូដប្រើប្រាស់ Python 3.10.12, PyTorch 2.1.0, Torchvision 0.16.0 រួមជាមួយនឹងបណ្ណាល័យ XAI ដូចជា LIME 0.2.0.1 និង SHAP 0.44.0។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យកាំរស្មីអ៊ិចសួតចំនួនច្រើន (COVID-19 Radiography Database ដែលមាន ២១,១៦៥ រូបភាព) ដើម្បីធានាថាម៉ូដែល Deep Learning អាចរៀនបានគ្រប់គ្រាន់ ទោះបីជាមានការប្រើប្រាស់ Data Augmentation ក៏ដោយ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ COVID-19 Radiography Database ដែលប្រមូលបានពីប្រទេសកាតា បង់ក្លាដែស ប៉ាគីស្ថាន និងម៉ាឡេស៊ី។ ទោះបីជាវាបានតំណាងឱ្យប្រជាសាស្ត្រអាស៊ីមួយចំនួនក៏ដោយ វាមិនអាចឆ្លុះបញ្ចាំងទាំងស្រុងអំពីបរិបទរបស់អ្នកជំងឺកម្ពុជា លក្ខណៈបច្ចេកទេសនៃម៉ាស៊ីនថតកាំរស្មីអ៊ិចតាមមន្ទីរពេទ្យខេត្ត ឬការលាយឡំនៃជំងឺផ្សេងៗ (Co-morbidities) ដែលតែងតែកើតមាននៅកម្ពុជានោះទេ។ ការពឹងផ្អែកលើទិន្នន័យនេះទាំងស្រុងអាចធ្វើឱ្យម៉ូដែលខ្វះភាពសុក្រឹតនៅពេលអនុវត្តផ្ទាល់នៅកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះជាយ៉ាងណាក៏ដោយ វិធីសាស្ត្រក្នុងការស្រាវជ្រាវនេះមានតម្លៃខ្លាំងណាស់ក្នុងការជួយដោះស្រាយបញ្ហាខ្វះខាតធនធានគ្រូពេទ្យជំនាញ និងបញ្ហាកង្វះទិន្នន័យនៅកម្ពុជា តាមរយៈការប្រើប្រាស់ Data Augmentation និង XAI។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យថ្នាក់ជាតិ និងគ្លីនិកឯកជនកម្រិតខ្ពស់:</strong> មន្ទីរពេទ្យដូចជា កាល់ម៉ែត ឬ មន្ទីរពេទ្យមិត្តភាពខ្មែរ-សូវៀត អាចប្រើប្រាស់ម៉ូដែល Deep Learning ដែលមាន XAI ដើម្បីក្លាយជាជំនួយការផ្តល់យោបល់ទីពីរ (Second opinion) ដល់គ្រូពេទ្យ ដោយការពន្យល់ជាលក្ខណៈពណ៌ (Heatmaps) ជួយឱ្យគ្រូពេទ្យអាចផ្ទៀងផ្ទាត់ចំណុចគួរឱ្យសង្ស័យនៃជំងឺសួតបានលឿននិងមានទំនុកចិត្ត។</li>
+            
+            <li><strong>មណ្ឌលសុខភាពនិងមន្ទីរពេទ្យបង្អែកតាមខេត្ត:</strong> នៅតំបន់ដាច់ស្រយាលដែលខ្វះខាតគ្រូពេទ្យជំនាញកាំរស្មីអ៊ិចប្រចាំការ ប្រព័ន្ធវិភាគដែលមានសមត្ថភាពពន្យល់ខ្លួនឯងនេះ អាចជួយឱ្យគ្រូពេទ្យទូទៅធ្វើរោគវិនិច្ឆ័យបឋម និងសម្រេចចិត្តបានត្រឹមត្រូវថាតើគួរញ្ជូនអ្នកជំងឺមកភ្នំពេញឬយ៉ាងណា។</li>
+            
+            <li><strong>សាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល និងស្ថាប័នស្រាវជ្រាវ AI:</strong> និស្សិតនិងអ្នកស្រាវជ្រាវក្នុងស្រុកតែងជួបបញ្ហាកង្វះទិន្នន័យពេទ្យធំៗសម្រាប់ការហ្វឹកហាត់ AI។ ការប្រើប្រាស់វិធីសាស្ត្រដូចជា TrivialAugment អាចជួយពង្រីកទំហំទិន្នន័យក្នុងស្រុកតូចៗឱ្យម៉ូដែលរៀនបានកាន់តែឆ្លាតវៃ ដោយមិនបាត់បង់តម្លាភាព។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការរួមបញ្ចូលបច្ចេកទេសបង្កើនទិន្នន័យ (Data Augmentation) ជាមួយនឹង AI ដែលអាចពន្យល់បាន (XAI) គឺជាស្ពានដ៏សំខាន់មួយដែលអាចជួយឱ្យវិស័យសុខាភិបាលកម្ពុជាហ៊ានទទួលយកបច្ចេកវិទ្យា AI មកប្រើប្រាស់ប្រកបដោយតម្លាភាព និងក្រមសីលធម៌។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Computer Vision ក្នុងវិស័យវេជ្ជសាស្ត្រ:</strong> ស្វែងយល់ពីរបៀបដំណើរការរបស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (CNNs) និងស្ថាបត្យកម្មល្បីៗដូចជា <span class="en">DenseNet-121</span> ដោយប្រើប្រាស់ភាសាសរសេរកូដ <span class="en">Python</span> និងបណ្ណាល័យ <span class="en">PyTorch</span> ជាមូលដ្ឋានសម្រាប់ការទាញយកលក្ខណៈសម្គាល់ពីរូបភាព។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេស Data Augmentation ប្លែកៗ:</strong> រៀនសរសេរកូដដើម្បីអនុវត្តវិធីសាស្ត្របង្កើនទិន្នន័យតាមបែបប្រពៃណី និងបែបទំនើបដូចជា <span class="en">Mixup</span> រួមទាំងវិធីសាស្ត្រ <span class="en">TrivialAugment</span> តាមរយៈបណ្ណាល័យ <span class="en">Torchvision</span> ដើម្បីដោះស្រាយបញ្ហាកង្វះខាតរូបភាពវេជ្ជសាស្ត្រពិតប្រាកដ។</li>
+            
+            <li><strong>សិក្សាស៊ីជម្រៅពីក្បួន Explainable AI (XAI):</strong> ស្វែងយល់ពីទ្រឹស្តីក្បួនគណនានិងការអនុវត្តជាក់ស្តែងនៃកញ្ចប់កូដ <span class="en">LIME</span> និងកញ្ចប់កូដ <span class="en">SHAP</span> ដើម្បីរៀនពីរបៀបបកស្រាយចំណុចសំខាន់ៗដែល AI ប្រើសម្រាប់ធ្វើការសម្រេចចិត្ត និងវាយតម្លៃលើភាពត្រឹមត្រូវនៃការពន្យល់ទាំងនោះ។</li>
+            
+            <li><strong>រៀបចំការពិសោធន៍ឡើងវិញលើ Cloud:</strong> ប្រើប្រាស់បរិយាកាស <span class="en">Google Colab</span> ដើម្បីទទួលបាន GPU ដោយឥតគិតថ្លៃ រួចទាញយកសំណុំទិន្នន័យស្តីពី <span class="en">Chest X-ray</span> មកហ្វឹកហាត់ម៉ូដែល និងសាកល្បងធ្វើការត្រួតពិនិត្យភាពត្រឹមត្រូវ (Sanity Checks) តាមរយៈការសរសេរកូដដោយខ្លួនឯង។</li>
+            
+            <li><strong>ប្រមូលទិន្នន័យក្នុងស្រុកនិងតេស្តក្នុងបរិបទកម្ពុជា:</strong> ចាប់ផ្តើមសហការជាមួយមន្ទីរពេទ្យ ឬសាកលវិទ្យាល័យផ្នែកសុខាភិបាលក្នុងស្រុកដើម្បីប្រមូលទិន្នន័យរូបភាព X-ray របស់អ្នកជំងឺកម្ពុជាយកមកធ្វើតេស្តជាមួយម៉ូដែលដែលបានបង្កើតរួច ដើម្បីផ្ទៀងផ្ទាត់ប្រសិទ្ធភាព និងរៀបចំជាគម្រោងសរសេរសារណាបញ្ចប់ការសិក្សា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Explainable AI (XAI)</span></td>
+                <td>គឺជាបច្ចេកទេស និងក្បួនអានុមានដែលជួយបំប្លែងម៉ូដែលបញ្ញាសិប្បនិម្មិតដ៏ស្មុគស្មាញ (Black-box models) ឱ្យទៅជាទម្រង់ដែលមានតម្លាភាព ដោយវាអាចពន្យល់ប្រាប់មនុស្សពីមូលហេតុដែលវាកំណត់លទ្ធផលឬធ្វើការសម្រេចចិត្តបែបនោះ (ឧទាហរណ៍៖ ការបង្ហាញពណ៌លើតំបន់សួតដែលមានជំងឺ)។</td>
+                <td>ដូចជាគ្រូពេទ្យម្នាក់ដែលមិនត្រឹមតែប្រាប់ថាយើងមានជំងឺអ្វីនោះទេ តែថែមទាំងចង្អុលបង្ហាញរោគសញ្ញាលើរាងកាយដែលធ្វើឱ្យគាត់សន្និដ្ឋានបែបនេះទៀតផង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Augmentation</span></td>
+                <td>គឺជាដំណើរការនៃការបង្កើតទិន្នន័យហ្វឹកហាត់ថ្មីៗបន្ថែមពីលើទិន្នន័យដែលមានស្រាប់ តាមរយៈការកែប្រែទម្រង់រូបភាព (ដូចជាការបង្វិល ការត្រឡប់ ការកាត់ ឬការលាយពណ៌) ដើម្បីជួយឱ្យម៉ូដែលរៀនបានកាន់តែទូលំទូលាយ និងការពារកុំឱ្យវាទន្ទេញចាំទិន្នន័យចាស់ៗពេក (Overfitting)។</td>
+                <td>ដូចជាការថតរូបមួយសន្លឹកពីជ្រុងផ្សេងៗគ្នា និងពន្លឺផ្សេងៗគ្នា ដើម្បីបង្រៀនឱ្យកូនក្មេងចំណាំមុខមនុស្សម្នាក់នោះកាន់តែច្បាស់ ទោះស្ថិតក្នុងស្ថានភាពណាក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">LIME (Local Interpretable Model-agnostic Explanations)</span></td>
+                <td>គឺជាវិធីសាស្ត្រ XAI មួយដែលព្យាយាមពន្យល់ការសម្រេចចិត្តរបស់ម៉ូដែល AI ដ៏ស្មុគស្មាញសម្រាប់ករណីនីមួយៗ (Local) ដោយវាបង្កើតម៉ូដែលគណិតវិទ្យាដ៏សាមញ្ញមួយមកធ្វើការប៉ាន់ស្មាននិងសិក្សាពីឥទ្ធិពលនៃការផ្លាស់ប្តូរទិន្នន័យបញ្ចូលតូចៗនៅជុំវិញករណីនោះ។</td>
+                <td>ដូចជាការយកផែនទីពិភពលោកដ៏ស្មុគស្មាញមួយ មកពង្រីកកាត់យកតែតំបន់ភូមិរបស់យើងដើម្បីងាយស្រួលយល់ និងរៀបរាប់ប្រាប់គេពីផ្លូវក្នុងភូមិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SHAP (SHapley Additive exPlanations)</span></td>
+                <td>គឺជាក្បួនពន្យល់ AI ដែលផ្អែកលើទ្រឹស្តីល្បែង (Game Theory) ផ្នែកសេដ្ឋកិច្ច ដោយវាធ្វើការគណនានិងបែងចែកពិន្ទុឥទ្ធិពល (Importance value) ទៅឱ្យចំណុចនីមួយៗ (Pixels) នៃរូបភាព ដើម្បីបង្ហាញថាចំណុចណាខ្លះដែលរួមចំណែករុញច្រានឱ្យ AI សម្រេចចិត្តបែបនេះ។</td>
+                <td>ដូចជាការបែងចែកប្រាក់រង្វាន់ដល់កីឡាករម្នាក់ៗក្នុងក្រុមបាល់ទាត់ ដោយផ្អែកលើទំហំនៃការប្រឹងប្រែងរបស់ពួកគេក្នុងការទាត់បញ្ចូលទី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sanity Check (Cascading model randomization)</span></td>
+                <td>គឺជាការធ្វើតេស្តដើម្បីផ្ទៀងផ្ទាត់ថាតើវិធីសាស្ត្រពន្យល់របស់ AI (XAI) ពិតជាដំណើរការត្រឹមត្រូវនិងគួរឱ្យទុកចិត្តដែរឬទេ តាមរយៈការសាកល្បងផ្លាស់ប្តូរទិន្នន័យចំណេះដឹងក្នុងបណ្តាញម៉ូដែល (Weights) ទៅជាតម្លៃចៃដន្យម្តងមួយស្រទាប់ៗ ប្រសិនបើការពន្យល់នៅតែដូចដើម មានន័យថាក្បួនពន្យល់នោះគ្មានប្រសិទ្ធភាពទេ។</td>
+                <td>ដូចជាការសាកល្បងដោះគ្រឿងបន្លាស់ម៉ាស៊ីនចេញម្តងមួយៗ ប្រសិនបើម៉ាស៊ីននៅតែអាចដើរបាន មានន័យថាការវិភាគរកមុខងារគ្រឿងបន្លាស់នោះគឺខុសស្រឡះហើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fidelity Score</span></td>
+                <td>គឺជារង្វាស់ដែលប្រើដើម្បីវាយតម្លៃកម្រិតភាពពេញលេញ (Completeness) នៃការពន្យល់របស់ XAI ដោយវាវាស់ស្ទង់ថាតើម៉ូដែលសាមញ្ញ (Surrogate model) អាចចម្លងអាកប្បកិរិយា និងលទ្ធផលរបស់ម៉ូដែលដើមដ៏ស្មុគស្មាញ (Black-box) បានត្រឹមត្រូវកម្រិតណា។</td>
+                <td>ដូចជាការប្រៀបធៀបរូបគំនូរព្រាងរបស់វិចិត្រករ ថាតើវាមានភាពស្រដៀងគ្នាប៉ុនណាទៅនឹងរូបថតពិតប្រាកដរបស់មនុស្សម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Overlapping Score</span></td>
+                <td>ជារង្វាស់ពិន្ទុដែលត្រូវបានបង្កើតឡើងក្នុងការសិក្សានេះដើម្បីវាយតម្លៃភាពស៊ីសង្វាក់គ្នា (Coherence) ដោយគណនាភាគរយនៃតំបន់ដែល AI បានគូសចំណាំ (Highlight) ថាមានការត្រួតស៊ីគ្នាប៉ុនណាទៅនឹងតំបន់ជំងឺពិតប្រាកដដែលត្រូវបានគូសវណ្ឌដោយគ្រូពេទ្យជំនាញ។</td>
+                <td>ដូចជាការយកផ្ទាំងចម្លើយសិស្ស មកដាក់ត្រួតពីលើផ្ទាំងកេសចម្លើយរបស់គ្រូ ដើម្បីរាប់មើលថាតើសិស្សគូសត្រូវចំចំណុចប៉ុន្មានភាគរយពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mixup</span></td>
+                <td>គឺជាបច្ចេកទេសបង្កើនទិន្នន័យបែបទំនើបមួយ ដែលដំណើរការដោយការយកទិន្នន័យរូបភាពពីរខុសគ្នា មកលាយបញ្ចូលគ្នា (Blend) រួមទាំងលាយបញ្ជូលស្លាកឈ្មោះរបស់វាផងដែរ ដើម្បីបង្កើតជារូបភាពព្រាលៗថ្មីមួយសម្រាប់បង្រៀនឱ្យម៉ូដែលចេះបែងចែកលក្ខណៈទូទៅបានល្អជាងមុន។</td>
+                <td>ដូចជាការយកថ្នាំពណ៌ក្រហមពាក់កណ្តាល លាយជាមួយពណ៌ខៀវពាក់កណ្តាល ដើម្បីបង្កើតបានជាពណ៌ស្វាយថ្មីមួយសម្រាប់ឱ្យកុំព្យូទ័ររៀនស្គាល់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TrivialAugment</span></td>
+                <td>គឺជាវិធីសាស្ត្របង្កើនទិន្នន័យបែបស្វែងរកដោយស្វ័យប្រវត្តិ (Search-based) ដែលវានឹងជ្រើសរើសយកប្រតិបត្តិការកែប្រែរូបភាពមួយមុខដោយចៃដន្យ (ឧទាហរណ៍៖ ការប្តូរកម្រិតពន្លឺ) និងអនុវត្តវាទៅលើរូបភាពក្នុងកម្រិតភាពខ្លាំងខ្សោយដោយចៃដន្យដោយមិនចាំបាច់កំណត់ប៉ារ៉ាម៉ែត្រទុកមុន។</td>
+                <td>ដូចជាចុងភៅដែលចាប់យកគ្រឿងទេសមួយមុខដោយចៃដន្យ (ឧទាហរណ៍៖ អំបិល) ហើយដាក់ក្នុងបរិមាណតិចឬច្រើនដោយចៃដន្យចូលទៅក្នុងសម្ល ដើម្បីសាកល្បងរសជាតិថ្មីៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">DenseNet-121</span></td>
+                <td>គឺជាស្ថាបត្យកម្មនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (CNN) ដ៏មានប្រសិទ្ធភាពមួយ ដែលស្រទាប់នីមួយៗមានតំណភ្ជាប់ផ្ទាល់ទៅកាន់ស្រទាប់បន្តបន្ទាប់ទាំងអស់នៅក្នុងបណ្តាញ ដែលជួយកាត់បន្ថយការបាត់បង់ព័ត៌មានកំឡុងពេលទាញយកលក្ខណៈសម្គាល់ពីរូបភាព និងប្រើប្រាស់ប៉ារ៉ាម៉ែត្រតិច។</td>
+                <td>ដូចជារោងចក្រដែលកម្មករគ្រប់ផ្នែកទាំងអស់អាចផ្ញើព័ត៌មានដោយផ្ទាល់ទៅកាន់កម្មករនៅផ្នែកបន្ទាប់ៗទាំងអស់ដោយមិនបាច់ឆ្លងកាត់មេកើយតាមលំដាប់ថ្នាក់ ដើម្បីកុំឱ្យបាត់បង់ចន្លោះប្រហោងព័ត៌មាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Explainable+AI+evaluation+metrics+in+healthcare" target="_blank" rel="noopener"><span class="en">Explainable AI evaluation metrics in healthcare</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Impact+of+generative+adversarial+networks+%28GANs%29+on+medical+image+augmentation" target="_blank" rel="noopener"><span class="en">Impact of generative adversarial networks (GANs) on medical image augmentation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparing+LIME+and+SHAP+for+deep+learning+model+interpretability" target="_blank" rel="noopener"><span class="en">Comparing LIME and SHAP for deep learning model interpretability</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Robustness+of+CNNs+using+TrivialAugment+and+Mixup+in+clinical+datasets" target="_blank" rel="noopener"><span class="en">Robustness of CNNs using TrivialAugment and Mixup in clinical datasets</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

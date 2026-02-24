@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការអភិវឌ្ឍ និងការប្រើប្រាស់ទិន្នន័យស្ពានរបស់សហរដ្ឋអាមេរិក សម្រាប់ការព្យាករណ៍ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន ដោយប្រើប្រាស់ម៉ូដែល Random Forest, XGBoost និង Artificial Neural Network | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទាក់ទងនឹងការខ្វះខាតម៉ូដែលព្យាករណ៍ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន (Bridge Deck Condition Rating) កម្រិតជាតិដែលមានភាពសុក្រឹត ដោយផ្...">
+    
+    <meta name="keywords" content="Bridge Deck Condition Rating, Machine Learning, Random Forest, XGBoost, Artificial Neural Network, National Bridge Inventory (NBI), Geospatial Information Science (GIS), ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/bridge-deck-prediction-ml-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/bridge-deck-prediction-ml-2024.html">
+    <meta property="og:title" content="ការអភិវឌ្ឍ និងការប្រើប្រាស់ទិន្នន័យស្ពានរបស់សហរដ្ឋអាមេរិក សម្រាប់ការព្យាករណ៍ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន ដោយប្រើប្រាស់ម៉ូដែល Random Forest, XGBoost និង Artificial Neural Network | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទាក់ទងនឹងការខ្វះខាតម៉ូដែលព្យាករណ៍ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន (Bridge Deck Condition Rating) កម្រិតជាតិដែលមានភាពសុក្រឹត ដោយផ្តោតលើការទាញយកប្រយោជន៍ពីទិន្នន័យប្រវត្តិស...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024, Remote Sensing (MDPI)">
+    
+    <meta property="article:tag" content="Bridge Deck Condition Rating">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Random Forest">
+    
+    <meta property="article:tag" content="XGBoost">
+    
+    <meta property="article:tag" content="Artificial Neural Network">
+    
+    <meta property="article:tag" content="National Bridge Inventory (NBI)">
+    
+    <meta property="article:tag" content="Geospatial Information Science (GIS)">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការអភិវឌ្ឍ និងការប្រើប្រាស់ទិន្នន័យស្ពានរបស់សហរដ្ឋអាមេរិក សម្រាប់ការព្យាករណ៍ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន ដោយប្រើប្រាស់ម៉ូដែល Random Forest, XGBoost និង Artificial Neural Network">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទាក់ទងនឹងការខ្វះខាតម៉ូដែលព្យាករណ៍ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន (Bridge Deck Condition Rating) កម្រិតជាតិដែលមានភាពសុក្រឹត ដោយផ្តោតលើការទាញយកប្រយោជន៍ពីទិន្នន័យប្រវត្តិស...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17d2\u1796\u17b6\u1793\u179a\u1794\u179f\u17cb\u179f\u17a0\u179a\u178a\u17d2\u178b\u17a2\u17b6\u1798\u17c1\u179a\u17b7\u1780 \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796\u1780\u1798\u17d2\u179a\u17b6\u179b\u179f\u17d2\u1796\u17b6\u1793 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Random Forest, XGBoost \u1793\u17b7\u1784 Artificial Neural Network",
+      "name": "Development and Utilization of Bridge Data of the United States for Predicting Deck Condition Rating Using Random Forest, XGBoost, and Artificial Neural Network",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b6\u1780\u17cb\u1791\u1784\u1793\u17b9\u1784\u1780\u17b6\u179a\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796\u1780\u1798\u17d2\u179a\u17b6\u179b\u179f\u17d2\u1796\u17b6\u1793 (Bridge Deck Condition Rating) \u1780\u1798\u17d2\u179a\u17b7\u178f\u1787\u17b6\u178f\u17b7\u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u179f\u17bb\u1780\u17d2\u179a\u17b9\u178f \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u1794\u17d2\u179a\u1799\u17c4\u1787\u1793\u17cd\u1796\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u178a\u17be\u1798\u17d2\u1794\u17b8\u1787\u17bd\u1799\u178a\u179b\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1794\u1785\u17c6\u1795\u17c2\u1793\u1780\u17b6\u179a\u1790\u17c2\u1791\u17b6\u17c6\u179f\u17d2\u1796\u17b6\u1793\u1793\u17c5\u179f\u17a0\u179a\u178a\u17d2\u178b\u17a2\u17b6\u1798\u17c1\u179a\u17b7\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/bridge-deck-prediction-ml-2024.html",
+      "author": [{"@type": "Person", "name": "Fariba Fard (Department of Information Science, University of North Texas)"},{"@type": "Person", "name": "Fereshteh Sadeghi Naieni Fard (Department of Information Science, University of North Texas)"}],
+      "datePublished": "2024, Remote Sensing (MDPI)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Development and Utilization of Bridge Data of the United States for Predicting Deck Condition Rating Using Random Forest, XGBoost, and Artificial Neural Network",
+        "url": "https://doi.org/10.3390/rs16020367"
+      },
+      "keywords": ["Bridge Deck Condition Rating", "Machine Learning", "Random Forest", "XGBoost", "Artificial Neural Network", "National Bridge Inventory (NBI)", "Geospatial Information Science (GIS)"],
+      "about": "Machine Learning in Civil Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17d2\u1796\u17b6\u1793\u179a\u1794\u179f\u17cb\u179f\u17a0\u179a\u178a\u17d2\u178b\u17a2\u17b6\u1798\u17c1\u179a\u17b7\u1780 \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796\u1780\u1798\u17d2\u179a\u17b6\u179b\u179f\u17d2\u1796\u17b6\u1793 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Random Forest, XGBoost \u1793\u17b7\u1784 Artificial Neural Network",
+          "item": "https://khmerresearch.com/papers/technology/bridge-deck-prediction-ml-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការអភិវឌ្ឍ និងការប្រើប្រាស់ទិន្នន័យស្ពានរបស់សហរដ្ឋអាមេរិក...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Development and Utilization of Bridge Data of the United States for Predicting Deck Condition Rating Using Random Forest, XGBoost, and Artificial Neural Network<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/rs16020367" target="_blank">doi.org/10.3390/rs16020367</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការអភិវឌ្ឍ និងការប្រើប្រាស់ទិន្នន័យស្ពានរបស់សហរដ្ឋអាមេរិក សម្រាប់ការព្យាករណ៍ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន ដោយប្រើប្រាស់ម៉ូដែល Random Forest, XGBoost និង Artificial Neural Network</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Development and Utilization of Bridge Data of the United States for Predicting Deck Condition Rating Using Random Forest, XGBoost, and Artificial Neural Network</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Fariba Fard (Department of Information Science, University of North Texas), Fereshteh Sadeghi Naieni Fard (Department of Information Science, University of North Texas)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Remote Sensing (MDPI)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning in Civil Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាទាក់ទងនឹងការខ្វះខាតម៉ូដែលព្យាករណ៍ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន (Bridge Deck Condition Rating) កម្រិតជាតិដែលមានភាពសុក្រឹត ដោយផ្តោតលើការទាញយកប្រយោជន៍ពីទិន្នន័យប្រវត្តិសាស្ត្រដើម្បីជួយដល់ការរៀបចំផែនការថែទាំស្ពាននៅសហរដ្ឋអាមេរិក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រមូល និងរៀបចំទិន្នន័យស្ពានថ្នាក់ជាតិចំនួនពីរឈុត (ទិន្នន័យឆ្នាំ២០២០ និងទិន្នន័យប្រវត្តិសាស្ត្រ៥ឆ្នាំ ពី២០១៦-២០២០) រួចអភិវឌ្ឍម៉ូដែលរៀនម៉ាស៊ីន (Machine Learning Models) ចំនួនបី ដើម្បីធ្វើការព្យាករណ៍។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យស្តីពីបញ្ជីសារពើភណ្ឌស្ពានជាតិ (National Bridge Inventory - NBI) ទិន្នន័យចរាចរណ៍ និងតំបន់អាកាសធាតុ ដោយប្រើបច្ចេកវិទ្យាប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ (GIS) និងតេឡេតាមដាន (Remote Sensing)</li>
+            
+            <li>ការសម្អាត និងបែងចែកទិន្នន័យ (Data Cleaning and Partitioning) ជា ៨០% សម្រាប់ការបណ្តុះបណ្តាល និង ២០% សម្រាប់ការធ្វើតេស្ត</li>
+            
+            <li>ការបណ្តុះបណ្តាលម៉ូដែលបញ្ញាសិប្បនិម្មិតរួមមាន Random Forest, XGBoost និង Artificial Neural Network (ANN) សម្រាប់ចាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពានពីលេខ ០ ដល់ ៩</li>
+            
+            <li>ការវាយតម្លៃដំណើរការម៉ូដែល (Model Evaluation) ដោយប្រើប្រាស់កម្រិតភាពត្រឹមត្រូវទូទៅ (Overall Accuracy) និង Average F1 Score ព្រមទាំងការវាស់ស្ទង់សារៈសំខាន់នៃអថេរ (Permutation-based Variable Importance)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់ទិន្នន័យប្រវត្តិសាស្ត្រចំនួន ៥ឆ្នាំ បានធ្វើឲ្យប្រសើរឡើងយ៉ាងខ្លាំងនូវសមត្ថភាពព្យាករណ៍របស់ម៉ូដែលទាំងអស់ បើធៀបនឹងការប្រើប្រាស់ទិន្នន័យតែមួយឆ្នាំ (២០២០) ដោយជួយកាត់បន្ថយភាពលម្អៀងក្នុងការចាត់ថ្នាក់។</li>
+            
+            <li>ម៉ូដែល Random Forest ទទួលបានភាពត្រឹមត្រូវទូទៅ (Overall Accuracy) ខ្ពស់ជាងគេគឺ ៨៣.៤% និង Average F1 score ៧៩.៧% ចំណែកឯម៉ូដែល XGBoost ទទួលបាន ៧៩.៤% និង ANN ទទួលបាន ៧៩.៧%។</li>
+            
+            <li>កត្តាអាយុកាលរបស់ស្ពាន (Age) លក្ខខណ្ឌអាកាសធាតុ (Climate regions) និងទិន្នន័យចរាចរណ៍ (Traffic) ត្រូវបានរកឃើញថាជាអថេរដែលជះឥទ្ធិពលសំខាន់ជាងគេបំផុតក្នុងការកំណត់ចំណាត់ថ្នាក់ស្ថានភាពកម្រាលស្ពាន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest</span></strong><br>ម៉ូដែល Random Forest (ព្រៃចៃដន្យ)</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់ជាងគេ ចំណាយពេលហ្វឹកហាត់តិចបំផុត (៧៣ នាទីសម្រាប់ទិន្នន័យធំ) និងអាចចាត់ថ្នាក់ទិន្នន័យដែលមិនមានតុល្យភាពបានល្អ។</td>
+                <td>ទាមទារការចងចាំ (Memory) ខ្ពស់ប្រសិនបើប្រើប្រាស់ដើមឈើសម្រេចចិត្តច្រើន (ឧ. ntree=500) សម្រាប់ការវិភាគទិន្នន័យខ្នាតធំ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទូទៅ (Overall Accuracy) ៨៣.៤% និង Average F1 score ៧៩.៧% លើទិន្នន័យប្រវត្តិសាស្ត្រ ៥ឆ្នាំ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">XGBoost (eXtreme Gradient Boosting)</span></strong><br>ម៉ូដែល XGBoost</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការកែតម្រូវកំហុសពីម៉ូដែលមុនៗ (Boosting) និងផ្តល់ភាពងាយស្រួលក្នុងការបកស្រាយលក្ខណៈពិសេសរបស់ទិន្នន័យដោយប្រើដើមឈើតូចៗ។</td>
+                <td>ចំណាយពេលហ្វឹកហាត់យូរខ្លាំង (៨៩៤ នាទី) និងទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រ (Hyperparameters) ស្មុគស្មាញជាច្រើនដើម្បីជៀសវាងបញ្ហា Overfitting។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទូទៅ (Overall Accuracy) ៧៩.៤% និង Average F1 score ៧៧.៥%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Artificial Neural Network (ANN)</span></strong><br>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការស្វែងយល់ពីទំនាក់ទំនងស្មុគស្មាញ និងមិនលីនេអ៊ែរនៃអថេរផ្សេងៗក្នុងការវាយតម្លៃស្ថានភាពស្ពាន។</td>
+                <td>ទាមទារការសាកល្បងកំណត់រចនាសម្ព័ន្ធច្រើន (Hidden layers, nodes, dropout) និងស៊ីពេលហ្វឹកហាត់យូរគួរសម (២២៥ នាទី)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទូទៅ (Overall Accuracy) ៧៩.៧% និង Average F1 score ៧៨.៤%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបញ្ជាក់ពីតម្រូវការធនធានកុំព្យូទ័រ និងទិន្នន័យក្នុងកម្រិតមធ្យមទៅខ្ពស់ សម្រាប់ការអភិវឌ្ឍម៉ូដែលដោយប្រើទិន្នន័យប្រវត្តិសាស្ត្ររាប់លានកំណត់ត្រា។
+    
+    <ul>
+        
+        <li><strong>Software Tools:</strong> ប្រើប្រាស់ភាសាកម្មវិធី R (ជំនាន់ 4.2.0) ជាមួយកញ្ចប់ ranger (សម្រាប់ Random Forest), xgboost, និង keras (សម្រាប់ ANN) ព្រមទាំងបច្ចេកវិទ្យា GIS សម្រាប់កំណត់ទីតាំងភូមិសាស្ត្រ។</li>
+        
+        <li><strong>Hardware Requirements:</strong> ត្រូវការកុំព្យូទ័រដែលមានសមត្ថភាពដំណើរការខ្ពស់ (CPU/GPU ខ្លាំង) ដោយសារការហ្វឹកហាត់ម៉ូដែល XGBoost លើទិន្នន័យជាង ១.២លានកំណត់ត្រា ត្រូវចំណាយពេលរហូតដល់ជិត ១៥ម៉ោង។</li>
+        
+        <li><strong>Dataset Requirements:</strong> ទាមទារទិន្នន័យខ្នាតធំពីបញ្ជីសារពើភណ្ឌស្ពានជាតិអាមេរិក (NBI) ទិន្នន័យចរាចរណ៍ និងតំបន់អាកាសធាតុ ដោយមានជាង ១.២៤លាន កំណត់ត្រាសម្រាប់ហ្វឹកហាត់ម៉ូដែល។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យស្ពានទាំងស្រុងនៅសហរដ្ឋអាមេរិក ដែលមានលក្ខខណ្ឌអាកាសធាតុ ស្តង់ដារសំណង់ និងការគ្រប់គ្រងចរាចរណ៍ខុសពីកម្ពុជា។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកអនុវត្តដោយផ្ទាល់អាចនឹងមានភាពលម្អៀង ព្រោះកម្ពុជាមានអាកាសធាតុត្រូពិច (ភ្លៀងធ្លាក់ខ្លាំងនិងទឹកជំនន់) និងមានបញ្ហារថយន្តដឹកទំនិញលើសទម្ងន់ដែលធ្វើឲ្យស្ពានឆាប់សឹករិចរិលជាងធម្មតា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ថ្វីបើបរិបទប្រទេសមានភាពខុសគ្នាក៏ដោយ វិធីសាស្ត្រប្រើប្រាស់ Machine Learning នេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់កម្ពុជា ក្នុងការផ្លាស់ប្តូរពីការជួសជុលពេលស្ពានខូច ទៅជាការថែទាំទុកជាមុន។</p>
+        
+        <ul>
+            
+            <li><strong>Ministry of Public Works and Transport (MPWT):</strong> ក្រសួងអាចប្រើប្រាស់វិធីសាស្ត្រនេះដើម្បីបង្កើតប្រព័ន្ធគ្រប់គ្រងទិន្នន័យស្ពានថ្នាក់ជាតិ និងព្យាករណ៍តម្រូវការថវិកាថែទាំប្រចាំឆ្នាំបានយ៉ាងសុក្រឹត។</li>
+            
+            <li><strong>National Roads Infrastructure (e.g., NR4, NR5):</strong> ស្ពានតាមបណ្តោយផ្លូវជាតិសំខាន់ៗដែលរងបន្ទុកដោយរថយន្តដឹកទំនិញធុនធ្ងន់ពីកំពង់ផែ អាចប្រើប្រាស់ម៉ូដែលនេះដើម្បីវាយតម្លៃ និងកាត់បន្ថយហានិភ័យនៃការបាក់ស្រុតជាយថាហេតុ។</li>
+            
+            <li><strong>Provincial and Rural Bridges (DRR):</strong> សម្រាប់ការគ្រប់គ្រងគ្រោះមហន្តរាយ ការបញ្ចូលទិន្នន័យទឹកជំនន់ទៅក្នុងម៉ូដែល អាចជួយព្យាករណ៍ពីកម្រិតភាពធន់របស់ស្ពាននៅតាមតំបន់ជនបទក្នុងរដូវវស្សា។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអនុវត្តគំរូព្យាករណ៍នេះនៅកម្ពុជាអាចជួយសន្សំសំចៃថវិកាជាតិយ៉ាងច្រើន និងធានាសុវត្ថិភាពធ្វើដំណើរ ប្រសិនបើស្ថាប័នពាក់ព័ន្ធអាចប្រមូលទិន្នន័យក្នុងស្រុកបានទូលំទូលាយគ្រប់គ្រាន់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការរៀបចំប្រព័ន្ធទិន្នន័យស្ពានជាតិ (Digitalization of Bridge Inventory):</strong> ក្រសួងពាក់ព័ន្ធត្រូវចាប់ផ្តើមប្រមូល និងធ្វើឌីជីថលនីយកម្មទិន្នន័យស្ពាននៅទូទាំងប្រទេស (ឆ្នាំសាងសង់ ទំហំ ចរាចរណ៍ ប្រភេទសម្ភារៈ) ដោយបង្កើតជាឃ្លាំងទិន្នន័យកណ្តាលមួយស្រដៀងនឹងស្តង់ដារ <span class='en'>National Bridge Inventory (NBI)</span>។</li>
+            
+            <li><strong>ការរួមបញ្ចូលទិន្នន័យភូមិសាស្ត្រ និងអាកាសធាតុ (GIS & Climate Data Integration):</strong> ប្រើប្រាស់កម្មវិធី <span class='en'>QGIS</span> ឬ <span class='en'>ArcGIS</span> ដើម្បីភ្ជាប់ទីតាំងស្ពានទៅនឹងផែនទីតំបន់ទឹកជំនន់ កម្រិតទឹកភ្លៀង និងកម្រិតចរាចរណ៍ ដើម្បីបង្កើតជាអថេរ (<span class='en'>Predictor variables</span>) សម្រាប់ការវិភាគ។</li>
+            
+            <li><strong>ការអភិវឌ្ឍម៉ូដែលសាកល្បង (Model Prototyping):</strong> អ្នកស្រាវជ្រាវ និងវិស្វករអាចប្រើប្រាស់ភាសា <span class='en'>Python</span> រួមជាមួយបណ្ណាល័យ <span class='en'>Scikit-Learn</span> ជំនួសឲ្យ R ដើម្បីសាកល្បងបង្កើតម៉ូដែល <span class='en'>Random Forest</span> លើទិន្នន័យគំរូតូចមួយ (ឧ. ស្ពានក្នុងខេត្តមួយ) សិន ដើម្បីវាយតម្លៃប្រសិទ្ធភាព។</li>
+            
+            <li><strong>ការវិភាគអថេរសំខាន់ៗ (Feature Importance Analysis):</strong> អនុវត្តបច្ចេកទេស <span class='en'>Permutation-based Variable Importance</span> ដើម្បីកំណត់ថាតើកត្តាណាខ្លះ (ឧ. អាយុកាលស្ពាន កម្រិតចរាចរណ៍ ឬ ទឹកជំនន់) ដែលជះឥទ្ធិពលខ្លាំងជាងគេដល់ការខូចខាតកម្រាលស្ពាននៅកម្ពុជា។</li>
+            
+            <li><strong>ការដាក់ពង្រាយប្រព័ន្ធគាំទ្រសេចក្តីសម្រេចចិត្ត (Decision Support System Deployment):</strong> បង្កើតផ្ទាំងព័ត៌មានអន្តរកម្ម (<span class='en'>Interactive Dashboard</span>) ឧទាហរណ៍តាមរយៈ <span class='en'>Streamlit</span> ឬ <span class='en'>Tableau</span> ដើម្បីបង្ហាញលទ្ធផលនៃការព្យាករណ៍ជូនដល់អ្នកធ្វើសេចក្តីសម្រេចចិត្ត ក្នុងការកំណត់អាទិភាពចុះត្រួតពិនិត្យនិងជួសជុល។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Deck Condition Rating</span></td>
+                <td>ប្រព័ន្ធវាយតម្លៃចំណាត់ថ្នាក់ស្ថានភាពរចនាសម្ព័ន្ធកម្រាលស្ពាន ដែលមានពិន្ទុពីលេខ ០ (ខូចខាតទាំងស្រុង) ដល់លេខ ៩ (ល្អឥតខ្ចោះ) ដែលជួយឲ្យវិស្វករដឹងថាតើស្ពានមួយណាគួរតែត្រូវជួសជុលឬថែទាំមុនគេ។</td>
+                <td>ដូចជាការឲ្យពិន្ទុសុខភាពប្រចាំឆ្នាំរបស់មនុស្សម្នាក់ៗ ដើម្បីប្រាប់គ្រូពេទ្យថាអ្នកណាមានជំងឺធ្ងន់ជាងគេ និងត្រូវការសង្គ្រោះបន្ទាន់មុនគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">National Bridge Inventory (NBI)</span></td>
+                <td>មូលដ្ឋានទិន្នន័យថ្នាក់ជាតិដ៏ធំរបស់រដ្ឋាភិបាលសហរដ្ឋអាមេរិក ដែលផ្ទុកព័ត៌មានលម្អិតស្តីពីស្ពានរាប់សែនកន្លែង រួមមានអាយុកាល ប្រភេទសំណង់ កម្រិតចរាចរណ៍ និងស្ថានភាពរូបវន្ត ដើម្បីងាយស្រួលក្នុងការគ្រប់គ្រងហេដ្ឋារចនាសម្ព័ន្ធ។</td>
+                <td>ដូចជាសៀវភៅបញ្ជីសំបុត្រកំណើត និងប្រវត្តិរូបសុខភាពទូទៅរបស់ស្ពានទាំងអស់ដែលស្ថិតនៅក្នុងប្រទេស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest</span></td>
+                <td>ក្បួនដោះស្រាយបញ្ញាសិប្បនិម្មិត (Machine Learning) ដែលបង្កើតជា 'ដើមឈើសម្រេចចិត្ត' (Decision Trees) ជាច្រើនដោយចៃដន្យ រួចប្រមូលយកលទ្ធផលការព្យាករណ៍របស់ដើមឈើទាំងអស់នោះមកធ្វើការបោះឆ្នោតរួមគ្នា ដើម្បីទទួលបានចម្លើយចុងក្រោយមួយដែលត្រឹមត្រូវបំផុត។</td>
+                <td>ដូចជាការសួរយោបល់ពីវេជ្ជបណ្ឌិត១០០នាក់ផ្សេងៗគ្នា អំពីជំងឺមួយ រួចយកចម្លើយដែលវេជ្ជបណ្ឌិតភាគច្រើនយល់ស្របគ្នាជាងគេ ចាត់ទុកជាលទ្ធផលវិនិច្ឆ័យចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">eXtreme Gradient Boosting (XGBoost)</span></td>
+                <td>ម៉ូដែលរៀនម៉ាស៊ីនដ៏មានអានុភាព ដែលដំណើរការដោយការបង្កើតដើមឈើសម្រេចចិត្តតូចៗបន្តបន្ទាប់គ្នាជាស៊េរី ដោយដើមឈើដែលកើតក្រោយៗ ព្យាយាមរៀននិងកែតម្រូវកំហុសដែលដើមឈើមុនៗបានធ្វើខុស ដើម្បីឲ្យលទ្ធផលកាន់តែសុក្រឹត។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលធ្វើលំហាត់ខុស រួចរៀនពីកំហុសនោះយ៉ាងយកចិត្តទុកដាក់ ហើយធ្វើលំហាត់ថ្មីបន្តបន្ទាប់ទៀតរហូតដល់លែងមានកំហុសទាល់តែសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Artificial Neural Network (ANN)</span></td>
+                <td>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិតដែលបង្កើតឡើងដោយចម្លងតាមដំណើរការនៃខួរក្បាលមនុស្ស ដែលមានស្រទាប់ (Layers) និងចំណុចតភ្ជាប់ (Nodes) ជាច្រើន ដើម្បីស្វែងយល់ពីទំនាក់ទំនងដ៏ស្មុគស្មាញនៃទិន្នន័យ ដែលក្បួនគណិតវិទ្យាធម្មតាមិនអាចមើលឃើញ។</td>
+                <td>ដូចជាបណ្តាញខួរក្បាលរបស់ក្មេងដែលរៀនចំណាំមុខម្តាយ ដោយមើលរូបភាពមុខច្រើនដងពីមុំណា ឬពន្លឺណាក៏ដោយ រហូតដល់អាចចំណាំបានដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Permutation-based Variable Importance</span></td>
+                <td>បច្ចេកទេសក្នុងវិទ្យាសាស្ត្រទិន្នន័យ សម្រាប់វាស់ស្ទង់ថាតើអថេរមួយ (ឧ. អាយុស្ពាន) សំខាន់កម្រិតណា ដោយការសាកល្បងច្របល់តម្លៃនៃអថេរនោះចោល រួចមើលថាតើភាពត្រឹមត្រូវរបស់ម៉ូដែលធ្លាក់ចុះប៉ុន្មានភាគរយ។</td>
+                <td>ដូចជាការសាកល្បងមិនដាក់គ្រឿងផ្សំមួយ (ឧទាហរណ៍ អំបិល) ចូលក្នុងស៊ុប ដើម្បីភ្លក់មើលថាតើវាបាត់បង់រសជាតិឆ្ងាញ់កម្រិតណា បើបាត់រសជាតិខ្លាំងមានន័យថាអំបិលសំខាន់ខ្លាំងណាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Out-of-bag (OOB) error</span></td>
+                <td>វិធីសាស្ត្រវាយតម្លៃកំហុសរបស់ម៉ូដែល Random Forest ដោយប្រើប្រាស់ទិន្នន័យដើមមួយផ្នែក ដែលមិនត្រូវបានជ្រើសរើសដោយចៃដន្យយកទៅហ្វឹកហាត់ម៉ូដែលនោះ យកមកធ្វើជាវិញ្ញាសាសាកល្បងសមត្ថភាពម៉ូដែលវិញ។</td>
+                <td>ដូចជាការយកលំហាត់សៀវភៅដែលគ្រូមិនធ្លាប់យកមកបង្រៀននៅក្នុងថ្នាក់ទាល់តែសោះ យកមកធ្វើជាវិញ្ញាសាប្រឡង ដើម្បីវាស់ស្ទង់សមត្ថភាពពិតប្រាកដរបស់សិស្សថាយល់មេរៀនកម្រិតណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Average F1 Score</span></td>
+                <td>រង្វាស់វាយតម្លៃសមត្ថភាពម៉ូដែលម៉ាស៊ីន ដែលគណនាមធ្យមភាគរវាង Precision និង Recall របស់គ្រប់ថ្នាក់ (Classes) ទាំងអស់។ វាមានប្រសិទ្ធភាពខ្ពស់ក្នុងការវាស់ស្ទង់ភាពត្រឹមត្រូវពិតប្រាកដ នៅពេលដែលចំនួនទិន្នន័យក្នុងថ្នាក់នីមួយៗមានគម្លាតមិនស្មើគ្នាខ្លាំង (Imbalanced Data)។</td>
+                <td>ដូចជាការវាយតម្លៃសិស្សពូកែ ដោយមើលលើពិន្ទុមធ្យមគ្រប់មុខវិជ្ជាទាំងអស់រួមបញ្ចូលគ្នា មិនមែនវាយតម្លៃដោយមើលតែមុខវិជ្ជាណាមួយដែលគេពូកែជាងគេនោះទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+applied+to+bridge+deck+condition+prediction" target="_blank" rel="noopener"><span class="en">machine learning applied to bridge deck condition prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=influence+of+climate+and+traffic+data+on+structural+deterioration+modeling" target="_blank" rel="noopener"><span class="en">influence of climate and traffic data on structural deterioration modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=random+forest+vs+xgboost+for+multiclass+classification+on+imbalanced+datasets" target="_blank" rel="noopener"><span class="en">random forest vs xgboost for multiclass classification on imbalanced datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=integration+of+geospatial+data+and+remote+sensing+in+civil+infrastructure" target="_blank" rel="noopener"><span class="en">integration of geospatial data and remote sensing in civil infrastructure</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

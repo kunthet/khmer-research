@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ទិដ្ឋភាពទូទៅនៃការស្រាវជ្រាវលើការរៀនតាមបែបពង្រឹង (Reinforcement Learning) | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះផ្តល់នូវការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីបច្ចេកវិទ្យាការរៀនតាមបែបពង្រឹង (Reinforcement Learning) ដោយផ្តោតលើបញ្ហាស្នូល រចនាសម្ព័ន្ធ ក្បួនដោះស្រាយ និងប...">
+    
+    <meta name="keywords" content="Reinforcement learning, Partially observable environment, Function approximation, Multi-agent reinforcement learning, Markov decision process, Q-learning, TD learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/research-on-reinforcement-learning-review-2004.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/research-on-reinforcement-learning-review-2004.html">
+    <meta property="og:title" content="ទិដ្ឋភាពទូទៅនៃការស្រាវជ្រាវលើការរៀនតាមបែបពង្រឹង (Reinforcement Learning) | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះផ្តល់នូវការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីបច្ចេកវិទ្យាការរៀនតាមបែបពង្រឹង (Reinforcement Learning) ដោយផ្តោតលើបញ្ហាស្នូល រចនាសម្ព័ន្ធ ក្បួនដោះស្រាយ និងបញ្ហាប្រឈមនៅក្នុងបរិស្ថានម៉ាកូវ (Markov) ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2004, ACTA AUTOMATICA SINICA">
+    
+    <meta property="article:tag" content="Reinforcement learning">
+    
+    <meta property="article:tag" content="Partially observable environment">
+    
+    <meta property="article:tag" content="Function approximation">
+    
+    <meta property="article:tag" content="Multi-agent reinforcement learning">
+    
+    <meta property="article:tag" content="Markov decision process">
+    
+    <meta property="article:tag" content="Q-learning">
+    
+    <meta property="article:tag" content="TD learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ទិដ្ឋភាពទូទៅនៃការស្រាវជ្រាវលើការរៀនតាមបែបពង្រឹង (Reinforcement Learning)">
+    <meta name="twitter:description" content="ឯកសារនេះផ្តល់នូវការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីបច្ចេកវិទ្យាការរៀនតាមបែបពង្រឹង (Reinforcement Learning) ដោយផ្តោតលើបញ្ហាស្នូល រចនាសម្ព័ន្ធ ក្បួនដោះស្រាយ និងបញ្ហាប្រឈមនៅក្នុងបរិស្ថានម៉ាកូវ (Markov) ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796\u1791\u17bc\u1791\u17c5\u1793\u17c3\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u178f\u17b6\u1798\u1794\u17c2\u1794\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement Learning)",
+      "name": "\u5f3a\u5316\u5b66\u4e60\u7814\u7a76\u7efc\u8ff0",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1795\u17d2\u178f\u179b\u17cb\u1793\u17bc\u179c\u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789\u1799\u17c9\u17b6\u1784\u1791\u17bc\u179b\u17c6\u1791\u17bc\u179b\u17b6\u1799\u17a2\u17c6\u1796\u17b8\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1780\u17b6\u179a\u179a\u17c0\u1793\u178f\u17b6\u1798\u1794\u17c2\u1794\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement Learning) \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1794\u1789\u17d2\u17a0\u17b6\u179f\u17d2\u1793\u17bc\u179b \u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792 \u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 \u1793\u17b7\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u1798\u17c9\u17b6\u1780\u17bc\u179c (Markov) \u1793\u17b7\u1784\u1798\u17b7\u1793\u1798\u17c2\u1793\u1798\u17c9\u17b6\u1780\u17bc\u179c (Non-Markov)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/research-on-reinforcement-learning-review-2004.html",
+      "author": [{"@type": "Person", "name": "GAO Yang (State Key Laboratory for Novel Software Technology, Nanjing University)"},{"@type": "Person", "name": "CHEN Shi-Fu (Nanjing University)"},{"@type": "Person", "name": "LU Xin (Nanjing University)"}],
+      "datePublished": "2004, ACTA AUTOMATICA SINICA",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "\u5f3a\u5316\u5b66\u4e60\u7814\u7a76\u7efc\u8ff0",
+        "url": "N/A"
+      },
+      "keywords": ["Reinforcement learning", "Partially observable environment", "Function approximation", "Multi-agent reinforcement learning", "Markov decision process", "Q-learning", "TD learning"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796\u1791\u17bc\u1791\u17c5\u1793\u17c3\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u178f\u17b6\u1798\u1794\u17c2\u1794\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement Learning)",
+          "item": "https://khmerresearch.com/papers/technology/research-on-reinforcement-learning-review-2004.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ទិដ្ឋភាពទូទៅនៃការស្រាវជ្រាវលើការរៀនតាមបែបពង្រឹង (Reinforc...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 强化学习研究综述<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ទិដ្ឋភាពទូទៅនៃការស្រាវជ្រាវលើការរៀនតាមបែបពង្រឹង (Reinforcement Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 强化学习研究综述</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> GAO Yang (State Key Laboratory for Novel Software Technology, Nanjing University), CHEN Shi-Fu (Nanjing University), LU Xin (Nanjing University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2004, ACTA AUTOMATICA SINICA</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះផ្តល់នូវការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីបច្ចេកវិទ្យាការរៀនតាមបែបពង្រឹង (Reinforcement Learning) ដោយផ្តោតលើបញ្ហាស្នូល រចនាសម្ព័ន្ធ ក្បួនដោះស្រាយ និងបញ្ហាប្រឈមនៅក្នុងបរិស្ថានម៉ាកូវ (Markov) និងមិនមែនម៉ាកូវ (Non-Markov)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អត្ថបទនេះបានធ្វើការសំយោគឯកសារស្រាវជ្រាវដែលមានស្រាប់ ដើម្បីចាត់ថ្នាក់ក្បួនដោះស្រាយ និងវិភាគយ៉ាងស៊ីជម្រៅលើប្រធានបទកម្រិតខ្ពស់នៃការរៀនតាមបែបពង្រឹង។
+        
+        <ul>
+            
+            <li>ការចាត់ថ្នាក់ និងក្បួនដោះស្រាយការស្វែងរកប្រសើរបំផុត (Algorithmic categorization including TD, Q-learning, and Sarsa)</li>
+            
+            <li>ការដោះស្រាយបញ្ហាបរិស្ថានដែលអាចសង្កេតបានដោយផ្នែក (Partially observable environments - POMDP)</li>
+            
+            <li>ការប៉ាន់ស្មានអនុគមន៍ (Function approximation) សម្រាប់លំហរដ្ឋ (State space) ដែលមានទំហំធំ</li>
+            
+            <li>ការរៀនតាមបែបពង្រឹងដែលមានភ្នាក់ងារច្រើន និងយន្តការទាញយកវិធាន (Multi-agent reinforcement learning and rule extraction)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការរៀនតាមបែបពង្រឹង (Reinforcement Learning) គឺជាបច្ចេកទេសរៀនតាមអ៊ីនធឺណិត (Online learning) ដ៏សំខាន់មួយដែលអាចស្វែងរកគោលការណ៍ប្រសើរបំផុត (Optimal policy) តាមរយៈការសាកល្បងនិងកំហុស (Trial-and-error) ដោយមិនត្រូវការទិន្នន័យហ្វឹកហាត់ជាមុននោះទេ។</li>
+            
+            <li>បច្ចេកទេសប៉ាន់ស្មានអនុគមន៍ (Function approximation) ដូចជាការប្រើប្រាស់បណ្តាញសរសៃប្រសាទ (Neural networks) គឺជាដំណោះស្រាយដ៏មានសក្តានុពលក្នុងការដោះស្រាយបញ្ហាលំហទិន្នន័យដ៏ធំ (Curse of dimensionality) ប៉ុន្តែនៅតែប្រឈមនឹងបញ្ហាធានានូវការរួបរួម (Convergence stability)។</li>
+            
+            <li>ការស្រាវជ្រាវនាពេលអនាគតគួរតែបន្តផ្តោតលើបរិស្ថានមិនមែនម៉ាកូវ (Non-Markov) លក្ខខណ្ឌសង្កេតបានដោយផ្នែក ការពន្លឿនល្បឿននៃការរៀនសូត្រ និងការទំនាក់ទំនងនៅក្នុងប្រព័ន្ធដែលមានភ្នាក់ងារច្រើន (Multi-agent systems)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Q-Learning (Off-policy TD Control)</span></strong><br>ក្បួនដោះស្រាយ Q-Learning (ការរៀនក្រៅគោលការណ៍)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការធានាស្វែងរកគោលការណ៍ល្អបំផុត (Optimal policy) ទោះបីជាភ្នាក់ងារកំពុងធ្វើការរុករកដោយចៃដន្យក៏ដោយ។ មិនតម្រូវឱ្យស្គាល់ម៉ូដែលនៃបរិស្ថាន (Model-free) នោះទេ។</td>
+                <td>អាចប្រឈមនឹងការវាយតម្លៃតម្លៃលើស (Overestimation) នៃសកម្មភាព និងមានភាពយឺតយ៉ាវក្នុងការរួបរួម (Convergence) ប្រសិនបើលំហទិន្នន័យមានទំហំធំ។</td>
+                <td>ត្រូវបានបញ្ជាក់ថាមានការរួបរួម (Convergent) ក្រោមលក្ខខណ្ឌជាក់លាក់ និងជាក្បួនដោះស្រាយគំរូគ្មានម៉ូដែល (Model-free) ដ៏មានប្រសិទ្ធភាពបំផុតមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Sarsa (On-policy TD Control)</span></strong><br>ក្បួនដោះស្រាយ Sarsa (ការរៀនក្នុងគោលការណ៍)</td>
+                <td>មានសុវត្ថិភាពជាង Q-Learning ក្នុងអំឡុងពេលហ្វឹកហាត់ ដោយសារវាគិតគូរពីគោលការណ៍រុករកបច្ចុប្បន្ន ដែលស័ក្តិសមសម្រាប់បរិស្ថានដែលមានការពិន័យធ្ងន់ធ្ងរ។</td>
+                <td>លទ្ធផលចុងក្រោយ និងការស្វែងរកគោលការណ៍ល្អបំផុត គឺពឹងផ្អែកខ្លាំងទៅលើការកំណត់អត្រានៃការរុករក (Exploration rate) របស់ភ្នាក់ងារ។</td>
+                <td>ក្បួនដោះស្រាយរៀនសូត្រពីតម្លៃពិតប្រាកដនៃសកម្មភាពបន្ទាប់ ដែលធ្វើឱ្យវាដំណើរការបានល្អក្នុងបញ្ហាដែលទាមទារការប្រុងប្រយ័ត្ន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Dyna-Q (Model-based RL)</span></strong><br>ក្បួនដោះស្រាយ Dyna-Q (ផ្អែកលើគំរូ)</td>
+                <td>សន្សំសំចៃទិន្នន័យ (Sample efficient) យ៉ាងខ្លាំង ដោយប្រើប្រាស់បទពិសោធន៍ពីបរិស្ថានក្លែងធ្វើដើម្បីពន្លឿនល្បឿននៃការរៀនសូត្រ។</td>
+                <td>ទាមទារថាមពលគណនាច្រើនជាងមុនសម្រាប់ជំហាននីមួយៗ ហើយប្រសិទ្ធភាពរបស់វាអាស្រ័យទាំងស្រុងទៅលើភាពសុក្រឹតនៃម៉ូដែលដែលបានប៉ាន់ស្មាន។</td>
+                <td>ដោះស្រាយបញ្ហាយឺតយ៉ាវនៃក្បួនដោះស្រាយ TD និង Q-Learning តាមរយៈការប្រើប្រាស់បទពិសោធន៍ដែលទទួលបានដើម្បីធ្វើឱ្យប្រសើរឡើងទាំងគោលការណ៍ និងម៉ូដែល។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះគឺជាការពិនិត្យឡើងវិញជាទ្រឹស្តី ដូច្នេះមិនមានការបញ្ជាក់តួលេខច្បាស់លាស់ពីតម្លៃ ឬទំហំធនធាននោះទេ ប៉ុន្តែការអនុវត្ត Reinforcement Learning ជាក់ស្តែងតម្រូវឱ្យមានធនធានដូចខាងក្រោម។
+    
+    <ul>
+        
+        <li><strong>Hardware (កុំព្យូទ័រ និង GPU):</strong> ត្រូវការ CPU/GPU ដែលមានសមត្ថភាពខ្ពស់សម្រាប់ការបណ្តុះបណ្តាលភ្នាក់ងារ ពិសេសនៅពេលប្រើបណ្តាញសរសៃប្រសាទ (Neural Networks) សម្រាប់ការប៉ាន់ស្មានអនុគមន៍ (Function approximation) ក្នុងបរិស្ថានធំៗ។</li>
+        
+        <li><strong>Software and Simulators (កម្មវិធី និងបរិស្ថានក្លែងធ្វើ):</strong> ទាមទារបរិស្ថានក្លែងធ្វើ (Simulators) ដែលមានភាពស្មុគស្មាញ និងត្រឹមត្រូវ ដើម្បីបង្កើតអន្តរកម្មសម្រាប់ភ្នាក់ងារ (Agent) ធ្វើការសាកល្បងរៀនសូត្រដោយសុវត្ថិភាព។</li>
+        
+        <li><strong>Expertise (ចំណេះដឹង និងជំនាញបច្ចេកទេស):</strong> អ្នកអភិវឌ្ឍន៍ត្រូវមានចំណេះដឹងជ្រៅជ្រះផ្នែកគណិតវិទ្យា (Markov Decision Process), ទ្រឹស្តីហ្គេម (Game Theory សម្រាប់ Multi-agent), និងការសរសេរកូដ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ឯកសារនេះគឺជាការចងក្រងការស្រាវជ្រាវ (Review paper) ជាសកលគិតត្រឹមឆ្នាំ ២០០៤ ដោយមិនបានប្រើប្រាស់ទិន្នន័យប្រជាសាស្ត្រ ឬទីតាំងភូមិសាស្ត្រជាក់លាក់ណាមួយឡើយ។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្ត RL នឹងប្រឈមនឹងបញ្ហា 'គម្លាតរវាងការក្លែងធ្វើនិងការពិត' (Sim-to-real gap)។ ប្រសិនបើយើងបណ្តុះបណ្តាលគំរូ AI ដោយប្រើទិន្នន័យបរទេស វានឹងបរាជ័យក្នុងការអនុវត្តជាក់ស្តែងនៅកម្ពុជា ដូចនេះទិន្នន័យក្លែងធ្វើត្រូវតែឆ្លុះបញ្ចាំងពីបរិបទក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យាការរៀនតាមបែបពង្រឹង (Reinforcement Learning) នេះមានសក្តានុពលខ្ពស់ក្នុងការអភិវឌ្ឍប្រព័ន្ធឆ្លាតវៃ និងការធ្វើឱ្យប្រសើរឡើងនូវស្វ័យប្រវត្តិកម្មនៅក្នុងប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ការគ្រប់គ្រងចរាចរណ៍នៅរាជធានីភ្នំពេញ (Traffic Signal Control in Phnom Penh):</strong> រាជធានីភ្នំពេញប្រឈមនឹងការកកស្ទះចរាចរណ៍យ៉ាងខ្លាំង។ ក្បួនដោះស្រាយ RL អាចត្រូវបានប្រើប្រាស់ដើម្បីគ្រប់គ្រងភ្លើងស្តុបដោយស្វ័យប្រវត្តិ ដោយរៀនសូត្រពីលំហូរចរាចរណ៍ជាក់ស្តែងតាមពេលវេលាពិត។</li>
+            
+            <li><strong>វិស័យភស្តុភារ និងការដឹកជញ្ជូន (Logistics and Supply Chain Routing):</strong> ជាមួយនឹងការកើនឡើងនៃពាណិជ្ជកម្មអេឡិចត្រូនិកនៅកម្ពុជា Multi-agent RL អាចជួយក្រុមហ៊ុនដឹកជញ្ជូនក្នុងការរៀបចំកាលវិភាគ រកផ្លូវដឹកជញ្ជូនដែលចំណេញពេលវេលា និងសន្សំសំចៃប្រេងឥន្ធនៈបំផុត។</li>
+            
+            <li><strong>ប្រព័ន្ធកសិកម្មឆ្លាតវៃ (Smart Agriculture & Resource Scheduling):</strong> អាចអនុវត្តនៅក្នុងខេត្តដែលមានសក្តានុពលកសិកម្ម ដូចជាបាត់ដំបង ដើម្បីគ្រប់គ្រងប្រព័ន្ធធារាសាស្ត្រ ឬការដាក់ជីដោយស្វ័យប្រវត្តិ ផ្អែកលើទិន្នន័យអាកាសធាតុ និងសំណើមដី។</li>
+            
+        </ul>
+        
+        
+        <p>ទោះបីជាការចាប់ផ្តើមទាមទារការកសាងហេដ្ឋារចនាសម្ព័ន្ធទិន្នន័យក្លែងធ្វើ និងធនធានកុំព្យូទ័រក៏ដោយ ប៉ុន្តែ RL នឹងក្លាយជាកាតាលីករដ៏សំខាន់សម្រាប់ការធ្វើទំនើបកម្មប្រព័ន្ធស្មុគស្មាញនៅកម្ពុជានាពេលអនាគត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីទ្រឹស្តីមូលដ្ឋាន (Learn the Fundamentals):</strong> និស្សិតគប្បីចាប់ផ្តើមសិក្សាពីទ្រឹស្តីមូលដ្ឋាននៃការរៀនតាមបែបពង្រឹង ដូចជា Markov Decision Process (MDP) និងសមីការ Bellman ។ គួរអានសៀវភៅគោល Reinforcement Learning: An Introduction ដោយ Sutton & Barto។</li>
+            
+            <li><strong>អនុវត្តក្បួនដោះស្រាយជាតារាង (Implement Tabular Algorithms):</strong> សរសេរកូដក្បួនដោះស្រាយមូលដ្ឋានដូចជា Q-Learning និង Sarsa នៅក្នុងភាសា Python។ អនុវត្តសាកល្បងពួកវាជាមួយបរិស្ថានហ្គេមងាយៗ ដោយប្រើប្រាស់បណ្ណាល័យ OpenAI Gym ដើម្បីស្វែងយល់ពីដំណើរការជាក់ស្តែង។</li>
+            
+            <li><strong>ឈានចូលការរៀនតាមបែបពង្រឹងស៊ីជម្រៅ (Deep Reinforcement Learning):</strong> សិក្សាពីការរួមបញ្ចូលគ្នារវាង RL និងបណ្តាញសរសៃប្រសាទ (Neural Networks) ដូចជាក្បួនដោះស្រាយ DQN (Deep Q-Network) ដើម្បីដោះស្រាយបរិស្ថានដែលមានទិន្នន័យធំ ដោយប្រើប្រាស់ Frameworks ដូចជា PyTorch ឬ TensorFlow។</li>
+            
+            <li><strong>សិក្សាពីប្រព័ន្ធភ្នាក់ងារច្រើន (Multi-Agent RL):</strong> ពង្រីកចំណេះដឹងទៅលើប្រព័ន្ធភ្នាក់ងារច្រើន (Multi-Agent Systems) ដែលមានរៀបរាប់ក្នុងឯកសារ (ឧទាហរណ៍ កិច្ចសហការ ឬការប្រកួតប្រជែង)។ អនុវត្តការកូដដោយប្រើប្រាស់បរិស្ថាន PettingZoo សម្រាប់ការគ្រប់គ្រងប្រព័ន្ធស្មុគស្មាញ។</li>
+            
+            <li><strong>បង្កើតគម្រោងជាក់ស្តែងសម្រាប់កម្ពុជា (Build Local Practical Projects):</strong> ជ្រើសរើសបញ្ហាក្នុងស្រុកមួយ (ឧទាហរណ៍៖ ការកកស្ទះចរាចរណ៍ ឬការរៀបចំកាលវិភាគរថយន្តក្រុង) បង្កើតបរិស្ថានក្លែងធ្វើ (Custom Environment) ផ្ទាល់ខ្លួនដោយប្រើប្រាស់ទិន្នន័យពិតនៅកម្ពុជា និងបង្វឹកភ្នាក់ងារ RL ដើម្បីស្វែងរកដំណោះស្រាយ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Reinforcement learning</span></td>
+                <td>ជាបច្ចេកទេសបញ្ញាសិប្បនិម្មិតដែលបង្រៀនកុំព្យូទ័រ (ភ្នាក់ងារ) ឱ្យចេះធ្វើការសម្រេចចិត្តជាបន្តបន្ទាប់ តាមរយៈការសាកល្បងនិងកំហុសនៅក្នុងបរិស្ថានណាមួយ ដើម្បីទទួលបានរង្វាន់ខ្ពស់បំផុតកើនឡើងជាលំដាប់។ វាផ្តោតលើការរៀនតាមរយៈការប្រាស្រ័យទាក់ទងដោយផ្ទាល់ដោយមិនត្រូវការទិន្នន័យបង្រៀនទុកជាមុន។</td>
+                <td>ដូចជាការបង្ហាត់សត្វសុនខឱ្យចេះធ្វើតាមបញ្ជា ដោយការផ្តល់ចំណីនៅពេលវាធ្វើត្រូវ និងមិនផ្តល់ចំណីនៅពេលវាធ្វើខុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov decision process (MDP)</span></td>
+                <td>ជាក្របខ័ណ្ឌគណិតវិទ្យាសម្រាប់ធ្វើគំរូពីដំណើរការនៃការសម្រេចចិត្ត ដែលអះអាងថាលទ្ធផលនៃសកម្មភាពបន្ទាប់គឺអាស្រ័យតែលើស្ថានភាពបច្ចុប្បន្នប៉ុណ្ណោះ មិនអាស្រ័យលើប្រវត្តិ ឬសកម្មភាពចាស់ៗពីអតីតកាលនោះទេ។ វាជាមូលដ្ឋានគ្រឹះនៃបញ្ហាធំៗនៅក្នុងការរៀនតាមបែបពង្រឹង។</td>
+                <td>ដូចជាការលេងអុក ដែលការដើរកូនអុកបន្ទាប់អាស្រ័យលើទីតាំងកូនអុកនៅលើក្តារបច្ចុប្បន្ន មិនមែនអាស្រ័យលើក្បាច់ដែលបានដើររួចតាំងពីដើមហ្គេមនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Exploration and exploitation</span></td>
+                <td>ជាដំណើរការថ្លឹងថ្លែងរវាងការសាកល្បងជម្រើសថ្មីៗដែលភ្នាក់ងារមិនធ្លាប់ស្គាល់ ដើម្បីស្វែងរកលទ្ធផលដែលអាចល្អជាង (Exploration) និងការជ្រើសរើសយកជម្រើសដែលភ្នាក់ងារធ្លាប់ដឹងថាមានលទ្ធផលល្អស្រាប់ ដើម្បីទទួលបានរង្វាន់ខ្ពស់ភ្លាមៗ (Exploitation)។</td>
+                <td>ដូចជាការសម្រេចចិត្តថាតើគួរទៅញ៉ាំបាយនៅហាងដែលធ្លាប់ញ៉ាំឆ្ងាញ់រាល់ដង (Exploitation) ឬសាកល្បងទៅហាងទើបបើកថ្មីដែលសង្ឃឹមថាឆ្ងាញ់ជាងមុន (Exploration)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Temporal difference (TD) learning</span></td>
+                <td>ជាក្បួនដោះស្រាយដែលរៀនសូត្រពីភាពខុសគ្នារវាងការទស្សន៍ទាយពីរពេលផ្សេងគ្នា (បច្ចុប្បន្ន និងអនាគតដ៏ខ្លី) ដោយធ្វើបច្ចុប្បន្នភាពការវាយតម្លៃរបស់វាជាបន្តបន្ទាប់ ដោយមិនបាច់រង់ចាំដល់ទីបញ្ចប់នៃដំណើរការនោះទេ។</td>
+                <td>ដូចជាការទាយថាមេឃនឹងភ្លៀងនៅម៉ោង ៥ លុះដល់ម៉ោង ៤ ឃើញពពកខ្មៅខ្លាំង ក៏កែសម្រួលការព្យាករណ៍ថានឹងភ្លៀងនៅម៉ោង ៤:៣០ វិញ ដោយមិនបាច់រង់ចាំដល់ម៉ោង ៥ ទើបដឹងការពិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Q-learning</span></td>
+                <td>ជាប្រភេទក្បួនដោះស្រាយនៃការរៀនតាមបែបពង្រឹងដែលមិនត្រូវការស្គាល់ម៉ូដែលនៃបរិស្ថាន (Model-free) ដែលវាព្យាយាមរៀនពី 'តម្លៃនៃសកម្មភាព' សម្រាប់ជម្រើសនីមួយៗក្នុងស្ថានភាពជាក់លាក់ ដើម្បីប្រាប់ភ្នាក់ងារពីសកម្មភាពដែលល្អបំផុតដែលគួរធ្វើបន្ទាប់។</td>
+                <td>ដូចជាសៀវភៅណែនាំសម្ងាត់មួយដែលប្រាប់អ្នករាល់ពេលឈានដល់ផ្លូវបំបែកថា តើការបត់ឆ្វេង ឬបត់ស្តាំ មួយណានឹងនាំទៅដល់ទីតាំងលាក់កំណប់ធំជាង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Partially Observable Markov Decision Process (POMDP)</span></td>
+                <td>ជាម៉ូដែលសម្រាប់ដោះស្រាយបញ្ហាដែលភ្នាក់ងារមិនអាចមើលឃើញ ឬទទួលដឹងពីស្ថានភាពទាំងស្រុងនៃបរិស្ថាន (ឧទាហរណ៍ មានព័ត៌មានមិនគ្រប់គ្រាន់)។ ដូច្នេះវាត្រូវពឹងផ្អែកលើប្រវត្តិនៃការសង្កេតដើម្បីទាញការសន្និដ្ឋានអំពីស្ថានភាពពិតប្រាកដ។</td>
+                <td>ដូចជាការបើកបររថយន្តក្នុងអ័ព្ទក្រាស់ ដែលអ្នកអាចមើលឃើញតែផ្លូវខាងមុខបន្តិចបន្តួច ហើយត្រូវពឹងផ្អែកលើការចងចាំ និងការស្មានដើម្បីដឹងពីស្ថានភាពផ្លូវទាំងមូល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Function approximation</span></td>
+                <td>ជាបច្ចេកទេសប្រើប្រាស់រូបមន្តគណិតវិទ្យា ឬបណ្តាញសរសៃប្រសាទ (Neural Networks) ដើម្បីប៉ាន់ស្មានតម្លៃក្នុងលំហស្ថានភាពដែលមានទំហំធំខ្លាំង (Continuous space) ជំនួសឱ្យការកត់ត្រាតម្លៃរាល់ស្ថានភាពនីមួយៗចូលក្នុងតារាង ដែលជួយកាត់បន្ថយការគណនា និងសន្សំសំចៃអង្គចងចាំបានយ៉ាងច្រើន។</td>
+                <td>ដូចជាការព្យាយាមគូរខ្សែបន្ទាត់ត្រង់មួយឱ្យកាត់ចំចំណុចទិន្នន័យជាច្រើន ដើម្បីទាយពីនិន្នាការរួម ដោយមិនបាច់ចាំចំណុចនីមួយៗទាំងអស់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Credit assignment problem</span></td>
+                <td>គឺជាបញ្ហាក្នុងការកំណត់ថាតើសកម្មភាពមួយណានៅក្នុងខ្សែសង្វាក់នៃអតីតកាល ដែលជាអ្នកទទួលខុសត្រូវ (សមនឹងទទួលរង្វាន់ ឬ ការពិន័យ) ចំពោះលទ្ធផលចុងក្រោយដែលទទួលបាន ជាពិសេសនៅពេលដែលលទ្ធផលនោះកើតឡើងយឺតយ៉ាវ (Delayed reward)។</td>
+                <td>ដូចជានៅពេលក្រុមបាល់ទាត់មួយទាត់ចូលទី វាពិបាកក្នុងការវិនិច្ឆ័យថាតើគ្រាប់បាល់នោះកើតឡើងដោយសារខ្សែប្រយុទ្ធ ទម្រង់លេងរបស់គ្រូបង្វឹក ឬការបញ្ជូនបាល់ពីខ្សែការពារកាលពី ២០ វិនាទីមុន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+reinforcement+learning+algorithms+for+continuous+action+spaces" target="_blank" rel="noopener"><span class="en">Deep reinforcement learning algorithms for continuous action spaces</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Convergence+guarantees+in+function+approximation+for+MDPs" target="_blank" rel="noopener"><span class="en">Convergence guarantees in function approximation for MDPs</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Cooperative+and+competitive+multi-agent+reinforcement+learning" target="_blank" rel="noopener"><span class="en">Cooperative and competitive multi-agent reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=POMDP+solvers+and+partially+observable+environments+in+AI" target="_blank" rel="noopener"><span class="en">POMDP solvers and partially observable environments in AI</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Heuristic+rule+extraction+and+bias+in+reinforcement+learning" target="_blank" rel="noopener"><span class="en">Heuristic rule extraction and bias in reinforcement learning</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វិធីសាស្ត្រផ្អែកលើ GIS ដើម្បីរួមបញ្ចូលការប៉ាន់ស្មានទឹកភ្លៀងពីរង្វាស់ទឹកភ្លៀង និងរ៉ាដា ដោយប្រើបច្ចេកទេសបញ្ចូលគ្នាតាមលក្ខខណ្ឌ សម្រាប់ការទស្សន៍ទាយបរិមាណទឹកភ្លៀងកម្រិតច្បាស់ខ្ពស់ នៅតំបន់ភ្នំ Țibleș និង Rodnei | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការប៉ាន់ស្មានបរិមាណទឹកភ្លៀងតាមទីតាំងឱ្យមានភាពត្រឹមត្រូវសម្រាប់អាងទន្លេតូចៗ ដោយការរួមបញ្ចូលទិន្នន័យរង្វាស់ទឹកភ្លៀង (Rain gauges) ដែ...">
+    
+    <meta name="keywords" content="Conditional Merging, Spatial Interpolation, Kriging, Meteorological Radar, Rain Gauge, Flash Flood Forecast, Quantitative Precipitation Forecast, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/environment/gis-radar-raingauge-conditional-merging-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/environment/gis-radar-raingauge-conditional-merging-2022.html">
+    <meta property="og:title" content="វិធីសាស្ត្រផ្អែកលើ GIS ដើម្បីរួមបញ្ចូលការប៉ាន់ស្មានទឹកភ្លៀងពីរង្វាស់ទឹកភ្លៀង និងរ៉ាដា ដោយប្រើបច្ចេកទេសបញ្ចូលគ្នាតាមលក្ខខណ្ឌ សម្រាប់ការទស្សន៍ទាយបរិមាណទឹកភ្លៀងកម្រិតច្បាស់ខ្ពស់ នៅតំបន់ភ្នំ Țibleș និង Rodnei | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការប៉ាន់ស្មានបរិមាណទឹកភ្លៀងតាមទីតាំងឱ្យមានភាពត្រឹមត្រូវសម្រាប់អាងទន្លេតូចៗ ដោយការរួមបញ្ចូលទិន្នន័យរង្វាស់ទឹកភ្លៀង (Rain gauges) ដែលមានភាពត្រឹមត្រូវខ្ពស់តែមានចំនួនតិច ជាមួ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022 Atmosphere (MDPI)">
+    
+    <meta property="article:tag" content="Conditional Merging">
+    
+    <meta property="article:tag" content="Spatial Interpolation">
+    
+    <meta property="article:tag" content="Kriging">
+    
+    <meta property="article:tag" content="Meteorological Radar">
+    
+    <meta property="article:tag" content="Rain Gauge">
+    
+    <meta property="article:tag" content="Flash Flood Forecast">
+    
+    <meta property="article:tag" content="Quantitative Precipitation Forecast">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វិធីសាស្ត្រផ្អែកលើ GIS ដើម្បីរួមបញ្ចូលការប៉ាន់ស្មានទឹកភ្លៀងពីរង្វាស់ទឹកភ្លៀង និងរ៉ាដា ដោយប្រើបច្ចេកទេសបញ្ចូលគ្នាតាមលក្ខខណ្ឌ សម្រាប់ការទស្សន៍ទាយបរិមាណទឹកភ្លៀងកម្រិតច្បាស់ខ្ពស់ នៅតំបន់ភ្នំ Țibleș និង Rodnei">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការប៉ាន់ស្មានបរិមាណទឹកភ្លៀងតាមទីតាំងឱ្យមានភាពត្រឹមត្រូវសម្រាប់អាងទន្លេតូចៗ ដោយការរួមបញ្ចូលទិន្នន័យរង្វាស់ទឹកភ្លៀង (Rain gauges) ដែលមានភាពត្រឹមត្រូវខ្ពស់តែមានចំនួនតិច ជាមួ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be GIS \u178a\u17be\u1798\u17d2\u1794\u17b8\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u1796\u17b8\u179a\u1784\u17d2\u179c\u17b6\u179f\u17cb\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784 \u1793\u17b7\u1784\u179a\u17c9\u17b6\u178a\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6\u178f\u17b6\u1798\u179b\u1780\u17d2\u1781\u1781\u178e\u17d2\u178c \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1794\u179a\u17b7\u1798\u17b6\u178e\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1785\u17d2\u1794\u17b6\u179f\u17cb\u1781\u17d2\u1796\u179f\u17cb \u1793\u17c5\u178f\u17c6\u1794\u1793\u17cb\u1797\u17d2\u1793\u17c6 \u021aible\u0219 \u1793\u17b7\u1784 Rodnei",
+      "name": "A GIS-Based Methodology to Combine Rain Gauge and Radar Rainfall Estimates of Precipitation Using the Conditional Merging Technique for High-Resolution Quantitative Precipitation Forecasts in \u021aible\u0219 and Rodnei Mountains",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u1794\u179a\u17b7\u1798\u17b6\u178e\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u178f\u17b6\u1798\u1791\u17b8\u178f\u17b6\u17c6\u1784\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u17b6\u1784\u1791\u1793\u17d2\u179b\u17c1\u178f\u17bc\u1785\u17d7 \u178a\u17c4\u1799\u1780\u17b6\u179a\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179a\u1784\u17d2\u179c\u17b6\u179f\u17cb\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784 (Rain gauges) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1781\u17d2\u1796\u179f\u17cb\u178f\u17c2\u1798\u17b6\u1793\u1785\u17c6\u1793\u17bd\u1793\u178f\u17b7\u1785 \u1787\u17b6\u1798\u17bd\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179a\u17c9\u17b6\u178a\u17b6\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb (Meteorological radar) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f\u1785\u17d2\u1794\u17b6\u179f\u17cb\u1781\u17d2\u1796\u179f\u17cb\u1791\u17bc\u179b\u17b6\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/environment/gis-radar-raingauge-conditional-merging-2022.html",
+      "author": [{"@type": "Person", "name": "Istv\u00e1n Kocsis (Faculty of Geography, Babes-Bolyai University)"},{"@type": "Person", "name": "Ioan-Aurel Irimu\u0219 (Faculty of Geography, Babes-Bolyai University)"},{"@type": "Person", "name": "Cristian Patriche (Ia\u0219i Subsidiary Geography Section, Romanian Academy)"},{"@type": "Person", "name": "\u0218tefan Bila\u0219co (Faculty of Geography, Babes-Bolyai University)"},{"@type": "Person", "name": "Narcis Maier (National Meteorological Administration, Romania)"},{"@type": "Person", "name": "Sanda Ro\u0219ca (Faculty of Geography, Babes-Bolyai University)"},{"@type": "Person", "name": "D\u0103nu\u021b Petrea (Faculty of Geography, Babes-Bolyai University)"},{"@type": "Person", "name": "Blanka Bart\u00f3k (Faculty of Geography, Babes-Bolyai University)"}],
+      "datePublished": "2022 Atmosphere (MDPI)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A GIS-Based Methodology to Combine Rain Gauge and Radar Rainfall Estimates of Precipitation Using the Conditional Merging Technique for High-Resolution Quantitative Precipitation Forecasts in \u021aible\u0219 and Rodnei Mountains",
+        "url": "https://doi.org/10.3390/atmos13071106"
+      },
+      "keywords": ["Conditional Merging", "Spatial Interpolation", "Kriging", "Meteorological Radar", "Rain Gauge", "Flash Flood Forecast", "Quantitative Precipitation Forecast"],
+      "about": "Meteorology and Hydrology"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Environment",
+          "item": "https://khmerresearch.com/papers/environment/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be GIS \u178a\u17be\u1798\u17d2\u1794\u17b8\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u1796\u17b8\u179a\u1784\u17d2\u179c\u17b6\u179f\u17cb\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784 \u1793\u17b7\u1784\u179a\u17c9\u17b6\u178a\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6\u178f\u17b6\u1798\u179b\u1780\u17d2\u1781\u1781\u178e\u17d2\u178c \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1794\u179a\u17b7\u1798\u17b6\u178e\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1785\u17d2\u1794\u17b6\u179f\u17cb\u1781\u17d2\u1796\u179f\u17cb \u1793\u17c5\u178f\u17c6\u1794\u1793\u17cb\u1797\u17d2\u1793\u17c6 \u021aible\u0219 \u1793\u17b7\u1784 Rodnei",
+          "item": "https://khmerresearch.com/papers/environment/gis-radar-raingauge-conditional-merging-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/environment/">Environment</a> &rsaquo;
+        <span>វិធីសាស្ត្រផ្អែកលើ GIS ដើម្បីរួមបញ្ចូលការប៉ាន់ស្មានទឹកភ្ល...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A GIS-Based Methodology to Combine Rain Gauge and Radar Rainfall Estimates of Precipitation Using the Conditional Merging Technique for High-Resolution Quantitative Precipitation Forecasts in Țibleș and Rodnei Mountains<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/atmos13071106" target="_blank">doi.org/10.3390/atmos13071106</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វិធីសាស្ត្រផ្អែកលើ GIS ដើម្បីរួមបញ្ចូលការប៉ាន់ស្មានទឹកភ្លៀងពីរង្វាស់ទឹកភ្លៀង និងរ៉ាដា ដោយប្រើបច្ចេកទេសបញ្ចូលគ្នាតាមលក្ខខណ្ឌ សម្រាប់ការទស្សន៍ទាយបរិមាណទឹកភ្លៀងកម្រិតច្បាស់ខ្ពស់ នៅតំបន់ភ្នំ Țibleș និង Rodnei</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A GIS-Based Methodology to Combine Rain Gauge and Radar Rainfall Estimates of Precipitation Using the Conditional Merging Technique for High-Resolution Quantitative Precipitation Forecasts in Țibleș and Rodnei Mountains</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> István Kocsis (Faculty of Geography, Babes-Bolyai University), Ioan-Aurel Irimuș (Faculty of Geography, Babes-Bolyai University), Cristian Patriche (Iași Subsidiary Geography Section, Romanian Academy), Ștefan Bilașco (Faculty of Geography, Babes-Bolyai University), Narcis Maier (National Meteorological Administration, Romania), Sanda Roșca (Faculty of Geography, Babes-Bolyai University), Dănuț Petrea (Faculty of Geography, Babes-Bolyai University), Blanka Bartók (Faculty of Geography, Babes-Bolyai University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022 Atmosphere (MDPI)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Meteorology and Hydrology</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហានៃការប៉ាន់ស្មានបរិមាណទឹកភ្លៀងតាមទីតាំងឱ្យមានភាពត្រឹមត្រូវសម្រាប់អាងទន្លេតូចៗ ដោយការរួមបញ្ចូលទិន្នន័យរង្វាស់ទឹកភ្លៀង (Rain gauges) ដែលមានភាពត្រឹមត្រូវខ្ពស់តែមានចំនួនតិច ជាមួយទិន្នន័យរ៉ាដាអាកាសធាតុ (Meteorological radar) ដែលមានកម្រិតច្បាស់ខ្ពស់ទូលាយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> វិធីសាស្ត្រនេះប្រើប្រាស់ប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ (GIS) តាមរយៈបច្ចេកទេសបញ្ចូលគ្នាតាមលក្ខខណ្ឌ (Conditional Merging Technique) ព្រមទាំងវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យតាមទីតាំង ដើម្បីតភ្ជាប់ទិន្នន័យ។
+        
+        <ul>
+            
+            <li>ការប៉ាន់ស្មានទិន្នន័យតាមទីតាំង (Simple Kriging, Ordinary Kriging, and Cokriging)</li>
+            
+            <li>ការរួមបញ្ចូលទិន្នន័យរ៉ាដានិងរង្វាស់ទឹកភ្លៀង (Conditional Merging Technique - CMT)</li>
+            
+            <li>ការវាយតម្លៃភាពត្រឹមត្រូវនៃម៉ូដែលតាមរយៈសូចនាករស្ថិតិ (Model validation using MBE, MAE, and RMSE)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>បច្ចេកទេសបញ្ចូលគ្នាតាមលក្ខខណ្ឌ (CMT) បានបង្កើតផែនទីកម្រិតទឹកភ្លៀងដែលមានភាពច្បាស់ខ្ពស់ដោយជោគជ័យ សម្រាប់ព្រឹត្តិការណ៍ភ្លៀងធ្លាក់ចំនួន ១៥ នៅក្នុងតំបន់សិក្សា។</li>
+            
+            <li>ម៉ូដែលនេះដំណើរការបានយ៉ាងល្អនៅក្នុងព្រឹត្តិការណ៍ភ្លៀងធ្លាក់ចំនួន ១១ ក្នុងចំណោម ១៥ (ប្រមាណ ៧៨%) ដោយទទួលបានកំហុសដាច់ខាតមធ្យម (MAE) ក្រោម ០.៤ ម.ម និងកំហុស RMSE ក្រោម ០.៧ ម.ម។</li>
+            
+            <li>ភាពត្រឹមត្រូវរបស់ម៉ូដែលនេះមានកម្រិតខ្ពស់សម្រាប់ភ្លៀងដែលធ្លាក់រាយប៉ាយស្មើល្អ (Frontal systems) ប៉ុន្តែមានកម្រិតទាបជាងបន្តិចសម្រាប់ភ្លៀងធ្លាក់ខ្លាំងត្រង់កន្លែងនីមួយៗ (Convective cells) ដែលមានបម្រែបម្រួលបរិមាណទឹកភ្លៀងខ្ពស់ខ្លាំង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Conditional Merging Technique (CMT)</span></strong><br>បច្ចេកទេសបញ្ចូលគ្នាតាមលក្ខខណ្ឌ</td>
+                <td>រក្សាបាននូវរចនាសម្ព័ន្ធលំហ (Spatial structure) របស់រ៉ាដា ព្រមទាំងរក្សាភាពត្រឹមត្រូវនៃបរិមាណទឹកភ្លៀងពីស្ថានីយវាស់វែងបានយ៉ាងល្អ។ កាត់បន្ថយកំហុសឆ្គងបានច្រើនបើធៀបនឹងការប្រើប្រាស់វិធីសាស្ត្រតែមួយ។</td>
+                <td>ទាមទារការព្យាបាលទិន្នន័យស្មុគស្មាញ និងដំណើរការដោយដៃជាច្រើនដំណាក់កាលនៅក្នុងកម្មវិធី GIS ប្រសិនបើមិនមានប្រព័ន្ធស្វ័យប្រវត្តិ។</td>
+                <td>ផ្តល់លទ្ធផលល្អប្រសើរសម្រាប់ព្រឹត្តិការណ៍ទឹកភ្លៀង ៧៨% ដោយមានកំហុស MAE ទាបជាង ០.៤ ម.ម និង RMSE ទាបជាង ០.៧ ម.ម។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Meteorological Radar (Standalone)</span></strong><br>ការប្រើប្រាស់រ៉ាដាអាកាសធាតុតែឯង</td>
+                <td>ផ្តល់ទិន្នន័យគ្របដណ្តប់ទីតាំងបានទូលំទូលាយ និងមានកម្រិតភាពច្បាស់ខ្ពស់ (High spatial resolution) ដែលអាចតាមដានបម្រែបម្រួលអាកាសធាតុបានល្អ។</td>
+                <td>ងាយរងកំហុសទិន្នន័យដោយសារលក្ខខណ្ឌអាកាសធាតុ (ឧទាហរណ៍ វត្តមានព្រឹលធ្វើឱ្យរ៉ាដាប៉ាន់ស្មានកម្រិតទឹកភ្លៀងខ្ពស់ពេក) និងឧបសគ្គភូមិសាស្ត្រ។</td>
+                <td>ជារឿយៗប៉ាន់ស្មានទាបជាងការពិតសម្រាប់ភ្លៀងធ្លាក់ខ្លាំងត្រង់កន្លែងនីមួយៗ និងខ្ពស់ជាងការពិតសម្រាប់ភ្លៀងធ្លាក់រាយប៉ាយស្មើល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Rain Gauge Interpolation (Simple/Ordinary Kriging & Cokriging)</span></strong><br>ការប៉ាន់ស្មានទិន្នន័យតាមទីតាំងពីរង្វាស់ទឹកភ្លៀង</td>
+                <td>ផ្តល់ទិន្នន័យបរិមាណទឹកភ្លៀងជាក់លាក់ និងមានភាពត្រឹមត្រូវខ្ពស់បំផុតនៅតាមទីតាំងស្ថានីយនីមួយៗ។</td>
+                <td>មានភាពលំបាកក្នុងការប៉ាន់ស្មានទិន្នន័យតាមទីតាំងជុំវិញ (Interpolation) ដោយសារទិន្នន័យមានការប្រែប្រួលខ្ពស់ ហើយចំនួនស្ថានីយមានកម្រិត (sparse network)។</td>
+                <td>មិនអាចចាប់យកបរិមាណទឹកភ្លៀងអតិបរមានៅតំបន់ដែលគ្មានស្ថានីយ ធ្វើឱ្យប៉ាន់ស្មានបរិមាណទឹកជំនន់ទាបជាងការពិត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តវិធីសាស្ត្រនេះទាមទារកម្មវិធី GIS កម្រិតខ្ពស់ ទិន្នន័យរ៉ាដា និងស្ថានីយវាស់ទឹកភ្លៀង ក៏ដូចជាធនធានមនុស្សដែលមានជំនាញវិភាគទិន្នន័យភូមិសាស្ត្រស្ថិតិ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កម្មវិធីប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ (ឧទាហរណ៍ ArcMap 10.7.1) និងឧបករណ៍គណនា Raster (Raster Calculator) ។</li>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនកុំព្យូទ័រដែលមានសមត្ថភាពមធ្យមទៅខ្ពស់ សម្រាប់ដំណើរការទិន្នន័យ Spatial រូបភាពរ៉ាដា និងការធ្វើ Georeferencing ។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យរ៉ាដាអាកាសធាតុ (WSR-98D radar) ដែលមានកម្រិតភាពច្បាស់ ៤ គ.ម ការ៉េ, ទិន្នន័យបរិមាណទឹកភ្លៀង ២៤ម៉ោងពីស្ថានីយ, និងទិន្នន័យកម្ពស់ដី (Elevation data) សម្រាប់ Cokriging។</li>
+        
+        <li><strong>Expertise:</strong> ជំនាញក្នុងការប្រើប្រាស់កម្មវិធី GIS ការធ្វើការជាមួយទិន្នន័យ Spatial និងចំណេះដឹងផ្នែកភូមិសាស្ត្រស្ថិតិ (Geostatistics) ដូចជាវិធីសាស្ត្រ Kriging ជាដើម។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅតំបន់ភ្នំ Țibleș និង Rodnei ក្នុងប្រទេសរូម៉ានី ដោយប្រើទិន្នន័យរ៉ាដា និងស្ថានីយទឹកភ្លៀងចំនួន ៨ ក្នុងចន្លោះឆ្នាំ ២០១៥-២០១៨។ ទិន្នន័យនេះផ្តោតលើតំបន់ភ្នំដែលមានអាកាសធាតុខុសពីកម្ពុជា ប៉ុន្តែវិធីសាស្ត្រនេះមានសារៈសំខាន់សម្រាប់កម្ពុជាក្នុងការកែលម្អការតាមដានទឹកភ្លៀង ជាពិសេសនៅតំបន់ដែលមិនសូវមានស្ថានីយវាស់ទឹកភ្លៀងគ្រប់គ្រាន់នៅតំបន់ខ្ពង់រាប។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះពិតជាមានអត្ថប្រយោជន៍ខ្ពស់សម្រាប់ប្រទេសកម្ពុជា ក្នុងការដោះស្រាយបញ្ហាខ្វះខាតស្ថានីយវាស់ទឹកភ្លៀង និងពង្រឹងការប្រកាសអាសន្នទឹកជំនន់ភ្លាមៗ។</p>
+        
+        <ul>
+            
+            <li><strong>ការព្យាករណ៍ទឹកជំនន់ភ្លាមៗនៅតំបន់ភ្នំ (Flash Flood Forecasting):</strong> អាចយកមកអនុវត្តនៅតំបន់ជួរភ្នំក្រវាញ ឬតំបន់ខ្ពង់រាបភាគឦសាន (ឧទាហរណ៍ ខេត្តមណ្ឌលគិរី រតនគិរី និងពោធិ៍សាត់) ដែលមានស្ថានីយវាស់ទឹកភ្លៀងតិចតួច ដើម្បីត្រៀមបង្ការទឹកជំនន់ធ្លាក់ពីលើភ្នំយ៉ាងគំហុក។</li>
+            
+            <li><strong>ការគ្រប់គ្រងធនធានទឹកក្នុងវិស័យកសិកម្ម (Water Resource Management):</strong> អាចប្រើប្រាស់នៅតំបន់វាលទំនាបជុំវិញបឹងទន្លេសាប (ឧទាហរណ៍ ខេត្តបាត់ដំបង កំពង់ធំ) ដើម្បីប៉ាន់ស្មានបរិមាណទឹកភ្លៀងឱ្យបានច្បាស់លាស់ ដែលជួយដល់ការរៀបចំប្រព័ន្ធធារាសាស្ត្រ និងផែនការដាំដុះកសិកម្ម។</li>
+            
+            <li><strong>ក្រសួងធនធានទឹក និងឧតុនិយម (MOWRAM):</strong> ក្រសួងអាចរួមបញ្ចូលទិន្នន័យពីរ៉ាដាអាកាសធាតុ (ឧទាហរណ៍ រ៉ាដាអាកាសធាតុតេជោសែន) ជាមួយទិន្នន័យស្ថានីយទឹកភ្លៀងទូទាំងប្រទេស ដើម្បីបង្កើតផែនទីទឹកភ្លៀងដែលមានភាពច្បាស់លាស់ខ្ពស់សម្រាប់ការប្រើប្រាស់ថ្នាក់ជាតិ។</li>
+            
+        </ul>
+        
+        
+        <p>ការរួមបញ្ចូលទិន្នន័យរ៉ាដា និងរង្វាស់ទឹកភ្លៀងនឹងជួយឱ្យកម្ពុជាអាចបង្កើតប្រព័ន្ធព្រមានជាមុនដែលអាចទុកចិត្តបាន កាត់បន្ថយហានិភ័យគ្រោះមហន្តរាយ និងលើកកម្ពស់ការគ្រប់គ្រងធនធានទឹកប្រកបដោយប្រសិទ្ធភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាអំពីប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ និងការវិភាគស្ថិតិ (GIS & Geostatistics):</strong> ចាប់ផ្តើមរៀនប្រើប្រាស់កម្មវិធី <span class="en">ArcGIS</span> ឬ <span class="en">QGIS</span> និងស្វែងយល់ពីទ្រឹស្តីព្រមទាំងវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យតាមទីតាំង (<span class="en">Spatial Interpolation</span>) ដូចជា <span class="en">Kriging</span> និង <span class="en">Cokriging</span>។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យទឹកភ្លៀងមូលដ្ឋាន (Data Collection & Preparation):</strong> ទាញយកទិន្នន័យទឹកភ្លៀងប្រចាំថ្ងៃពីស្ថានីយឧតុនិយមក្នុងស្រុក និងស្វែងរកទិន្នន័យរ៉ាដាអាកាសធាតុដោយធានាថាទិន្នន័យទាំងនោះត្រូវបានធ្វើ <span class="en">Georeferencing</span> ឱ្យត្រូវគ្នានៅលើប្រព័ន្ធកូអរដោនេតែមួយ។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសបញ្ចូលគ្នាតាមលក្ខខណ្ឌ (Apply Conditional Merging Technique):</strong> សាកល្បងអនុវត្ត <span class="en">Conditional Merging Technique (CMT)</span> ដោយប្រើប្រាស់មុខងារ <span class="en">Raster Calculator</span> ក្នុងកម្មវិធី GIS ដើម្បីគណនាគម្លាត (Residuals) រវាងទិន្នន័យរ៉ាដា និងទិន្នន័យប៉ាន់ស្មានពីស្ថានីយផ្ទាល់។</li>
+            
+            <li><strong>វាយតម្លៃភាពត្រឹមត្រូវនៃម៉ូដែល (Model Validation):</strong> ប្រើប្រាស់សូចនាករស្ថិតិដូចជា <span class="en">Mean Bias Error (MBE)</span>, <span class="en">Mean Absolute Error (MAE)</span>, និង <span class="en">Root Mean Square Error (RMSE)</span> ដើម្បីប្រៀបធៀបលទ្ធផលដែលទទួលបានជាមួយទិន្នន័យវាស់វែងជាក់ស្តែង។</li>
+            
+            <li><strong>បង្កើតស្វ័យប្រវត្តិកម្មនៃដំណើរការការងារ (Automate the Workflow):</strong> សិក្សាពីការប្រើប្រាស់ <span class="en">ModelBuilder</span> នៅក្នុង <span class="en">ArcMap/ArcGIS Pro</span> ឬសរសេរកូដ <span class="en">Python (ArcPy)</span> ដើម្បីធ្វើឱ្យដំណើរការបញ្ចូល និងគណនាទិន្នន័យមានភាពស្វ័យប្រវត្តិ និងសន្សំសំចៃពេលវេលា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Conditional Merging Technique (CMT)</span></td>
+                <td>បច្ចេកទេសគណនាដើម្បីច្របាច់បញ្ចូលគ្នានូវទិន្នន័យពីរប្រភពផ្សេងគ្នា គឺទិន្នន័យរ៉ាដាអាកាសធាតុ (ដែលមានវិសាលភាពធំទូលាយ) និងទិន្នន័យរង្វាស់ទឹកភ្លៀងពីស្ថានីយ (ដែលមានភាពច្បាស់លាស់ត្រង់ចំណុច) ដើម្បីបង្កើតបានជាផែនទីរបាយទឹកភ្លៀងមួយដែលមានភាពត្រឹមត្រូវខ្ពស់បំផុត។</td>
+                <td>ដូចជាការយកគំនូរព្រាងទីតាំងទូទៅពីដ្រូន (រ៉ាដា) មកផ្ទឹមជាមួយការវាស់វែងចម្ងាយផ្ទាល់ដោយម៉ែត្រនៅនឹងកន្លែង (រង្វាស់ទឹកភ្លៀង) ដើម្បីគូរបានផែនទីពិតប្រាកដមួយដែលមានសាច់រឿងពេញលេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spatial Interpolation</span></td>
+                <td>វិធីសាស្ត្រគណនាទិន្នន័យលំហ (Spatial Data) ដើម្បីទស្សន៍ទាយ ឬប៉ាន់ស្មានតម្លៃនៃទិន្នន័យ (ដូចជាបរិមាណទឹកភ្លៀង) នៅទីតាំងមួយដែលគ្មានឧបករណ៍វាស់ ដោយផ្អែកលើការទាញយកទិន្នន័យពីទីតាំងជុំវិញដែលមានឧបករណ៍វាស់ពិតប្រាកដ។</td>
+                <td>ដូចជាការទាយដឹងពីសីតុណ្ហភាពនៅកណ្តាលបន្ទប់ ដោយផ្អែកលើសីតុណ្ហភាពដែលយើងបានវាស់ដឹងនៅតាមជ្រុងទាំងបួននៃបន្ទប់នោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Kriging</span></td>
+                <td>ជាវិធីសាស្ត្រមួយនៃ Spatial Interpolation ដែលប្រើប្រាស់រូបមន្តស្ថិតិដើម្បីវាយតម្លៃកម្រិតនៃទំនាក់ទំនងរវាងទីតាំងនីមួយៗ (Spatial Autocorrelation) ដើម្បីប៉ាន់ស្មានតម្លៃទិន្នន័យនៅកន្លែងទំនេរបានកាន់តែរលូន និងសុក្រឹតបំផុត។</td>
+                <td>ដូចជាការទស្សន៍ទាយពិន្ទុប្រឡងរបស់សិស្សម្នាក់ដោយមើលលើពិន្ទុរបស់មិត្តភក្តិជុំវិញគេ ដោយផ្តល់ទម្ងន់ការវាយតម្លៃខ្ពស់បំផុតទៅលើអ្នកដែលអង្គុយជិតគេជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cokriging</span></td>
+                <td>ជាទម្រង់អភិវឌ្ឍន៍បន្ថែមនៃវិធីសាស្ត្រ Kriging ដែលមិនត្រឹមតែប្រើទិន្នន័យគោលមួយ (ឧទាហរណ៍ ទឹកភ្លៀង) មកប៉ាន់ស្មាននោះទេ តែថែមទាំងទាញយកអថេរទីពីរដែលមានទំនាក់ទំនងគ្នា (ឧទាហរណ៍ កម្ពស់ទីតាំងធៀបនឹងនីវ៉ូទឹកសមុទ្រ) មកជួយគណនាដើម្បីបង្កើនភាពត្រឹមត្រូវទ្វេដង។</td>
+                <td>ដូចជាការទស្សន៍ទាយចំណូលរបស់មនុស្សម្នាក់ដោយមិនត្រឹមតែមើលលើចំណូលអ្នកជិតខាងគាត់ប៉ុណ្ណោះទេ តែថែមទាំងយកកម្រិតវប្បធម៌ និងកម្រិតសិក្សារបស់គាត់មកពិចារណាថែមទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Convective cells</span></td>
+                <td>ប្រព័ន្ធអាកាសធាតុរំហួតបញ្ច្រាស ដែលបង្កើតឱ្យមានភ្លៀងធ្លាក់យ៉ាងគំហុក (ភ្លៀងរលាយផ្គររន្ទះ) ក្នុងរយៈពេលខ្លី និងគ្របដណ្តប់លើតំបន់ភូមិសាស្ត្រតូចចង្អៀត ដែលជារឿយៗតែងតែបង្កឱ្យមានទឹកជំនន់ភ្លាមៗ (Flash floods)។</td>
+                <td>ដូចជាការចាក់ទឹកមួយធុងធំស្រោចកណ្ដាលរុក្ខជាតិមួយដើមក្នុងពេលតែមួយប៉ព្រិចភ្នែក ដែលធ្វើឱ្យទឹកហូរហៀរជន់ជុំវិញគល់ភ្លាមៗដោយសារដីស្រូបមិនទាន់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Frontal systems</span></td>
+                <td>ប្រព័ន្ធអាកាសធាតុដែលកើតឡើងនៅពេលផ្ទាំងខ្យល់ក្តៅ និងផ្ទាំងខ្យល់ត្រជាក់ប៉ះទង្គិចគ្នា បង្កើតបានជាភ្លៀងធ្លាក់រាយប៉ាយស្មើល្អ គ្របដណ្តប់លើផ្ទៃដីធំទូលាយ និងមានរយៈពេលធ្លាក់យូរ។</td>
+                <td>ដូចជាការប្រើប្រាស់បំពង់ទឹកបាញ់ស្រោចសួនច្បារទាំងមូលដោយសន្សឹមៗ និងប្រើរយៈពេលយូរ ដែលធ្វើឱ្យដីសើមស្មើគ្នាគ្រប់កន្លែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Semivariogram</span></td>
+                <td>ជាឧបករណ៍តារាងក្រាហ្វិកក្នុងជំនាញស្ថិតិភូមិសាស្ត្រ (Geostatistics) ដែលប្រើសម្រាប់វាស់វែង និងធ្វើម៉ូដែលពីរបៀបដែលទិន្នន័យនៅទីតាំងពីរផ្សេងគ្នា មានភាពស្រដៀងគ្នាថយចុះកម្រិតណា នៅពេលដែលគម្លាតចម្ងាយរវាងទីតាំងទាំងពីរនោះកាន់តែឆ្ងាយពីគ្នា។</td>
+                <td>ដូចជាការវាស់ស្ទង់មើលថា តើមនុស្សពីរនាក់មានចំណង់ចំណូលចិត្តស្រដៀងគ្នាប៉ុនណា បើធៀបនឹងចម្ងាយផ្ទះដែលពួកគេរស់នៅ (ជាទូទៅ អ្នកនៅជិតគ្នាច្រើនមានចរិតស្រដៀងគ្នាជាងអ្នកនៅឆ្ងាយពីគ្នា)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Quantitative Precipitation Estimates (QPE)</span></td>
+                <td>ដំណើរការប៉ាន់ស្មានបរិមាណទឹកភ្លៀងសរុបដែលបានធ្លាក់ចុះមកលើដីជាក់ស្តែង ដោយប្រើប្រាស់ការវិភាគរួមបញ្ចូលគ្នានៃឧបករណ៍ចាប់សញ្ញាពីចម្ងាយ (រ៉ាដា ឬផ្កាយរណប) និងទិន្នន័យផ្ទៀងផ្ទាត់ពីឧបករណ៍វាស់ផ្ទាល់នៅនឹងកន្លែង។</td>
+                <td>ដូចជាការគណនាចំនួនផ្លែឈើដែលជ្រុះពីលើដើមដោយការថតរូបពីលើអាកាស រួចយកមកផ្ទៀងផ្ទាត់ជាមួយចំនួនផ្លែឈើដែលយើងរើសបានផ្ទាល់នៅគល់ដើមដើម្បីរកតួលេខច្បាស់លាស់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=conditional+merging+technique+radar+rain+gauge" target="_blank" rel="noopener"><span class="en">conditional merging technique radar rain gauge</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=spatial+interpolation+methods+for+precipitation" target="_blank" rel="noopener"><span class="en">spatial interpolation methods for precipitation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=flash+flood+forecasting+using+high-resolution+radar+data" target="_blank" rel="noopener"><span class="en">flash flood forecasting using high-resolution radar data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=kriging+and+cokriging+in+hydrometeorology" target="_blank" rel="noopener"><span class="en">kriging and cokriging in hydrometeorology</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
