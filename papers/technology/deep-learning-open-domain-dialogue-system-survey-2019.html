@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការស្ទង់មតិស្តីពីប្រព័ន្ធសន្ទនាដែនបើកចំហដោយផ្អែកលើការរៀនស៊ីជម្រៅ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយលើការអភិវឌ្ឍ ការចាត់ថ្នាក់ និងបញ្ហាប្រឈមសំខាន់ៗនៃប្រព័ន្ធសន្ទនាដែនបើកចំហ (Open-domain dialogue systems) ឬកម្មវិធីផ្ញើសារស្វ័យប្រវត្តិ (Chatbo...">
+    
+    <meta name="keywords" content="Dialogue System, Chatbot, Deep Learning, Sequence-to-Sequence Model, Matching Model, Dialogue System Evaluation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/deep-learning-open-domain-dialogue-system-survey-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/deep-learning-open-domain-dialogue-system-survey-2019.html">
+    <meta property="og:title" content="ការស្ទង់មតិស្តីពីប្រព័ន្ធសន្ទនាដែនបើកចំហដោយផ្អែកលើការរៀនស៊ីជម្រៅ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយលើការអភិវឌ្ឍ ការចាត់ថ្នាក់ និងបញ្ហាប្រឈមសំខាន់ៗនៃប្រព័ន្ធសន្ទនាដែនបើកចំហ (Open-domain dialogue systems) ឬកម្មវិធីផ្ញើសារស្វ័យប្រវត្តិ (Chatbots) ដែលជំរុញដោយទិន្នន័យ និងប្រើប្រាស់បច្...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2019, 计算机学报 (CHINESE JOURNAL OF COMPUTERS)">
+    
+    <meta property="article:tag" content="Dialogue System">
+    
+    <meta property="article:tag" content="Chatbot">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Sequence-to-Sequence Model">
+    
+    <meta property="article:tag" content="Matching Model">
+    
+    <meta property="article:tag" content="Dialogue System Evaluation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការស្ទង់មតិស្តីពីប្រព័ន្ធសន្ទនាដែនបើកចំហដោយផ្អែកលើការរៀនស៊ីជម្រៅ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយលើការអភិវឌ្ឍ ការចាត់ថ្នាក់ និងបញ្ហាប្រឈមសំខាន់ៗនៃប្រព័ន្ធសន្ទនាដែនបើកចំហ (Open-domain dialogue systems) ឬកម្មវិធីផ្ញើសារស្វ័យប្រវត្តិ (Chatbots) ដែលជំរុញដោយទិន្នន័យ និងប្រើប្រាស់បច្...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u17d2\u1791\u1784\u17cb\u1798\u178f\u17b7\u179f\u17d2\u178f\u17b8\u1796\u17b8\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178a\u17c2\u1793\u1794\u17be\u1780\u1785\u17c6\u17a0\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5",
+      "name": "\u57fa\u4e8e\u6df1\u5ea6\u5b66\u4e60\u7684\u5f00\u653e\u9886\u57df\u5bf9\u8bdd\u7cfb\u7edf\u7814\u7a76\u7efc\u8ff0",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u179b\u17be\u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d \u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb \u1793\u17b7\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u179f\u17c6\u1781\u17b6\u1793\u17cb\u17d7\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178a\u17c2\u1793\u1794\u17be\u1780\u1785\u17c6\u17a0 (Open-domain dialogue systems) \u17ac\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1795\u17d2\u1789\u17be\u179f\u17b6\u179a\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 (Chatbots) \u178a\u17c2\u179b\u1787\u17c6\u179a\u17bb\u1789\u178a\u17c4\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u1793\u17b7\u1784\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep learning)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/deep-learning-open-domain-dialogue-system-survey-2019.html",
+      "author": [{"@type": "Person", "name": "\u9648\u6668 (CHEN Chen, Peking University)"},{"@type": "Person", "name": "\u6731\u6674\u6674 (ZHU Qing-Qing, Peking University)"},{"@type": "Person", "name": "\u4e25\u777f (YAN Rui, Peking University)"},{"@type": "Person", "name": "\u67f3\u519b\u98de (LIU Jun-Fei, Peking University)"}],
+      "datePublished": "2019, \u8ba1\u7b97\u673a\u5b66\u62a5 (CHINESE JOURNAL OF COMPUTERS)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "\u57fa\u4e8e\u6df1\u5ea6\u5b66\u4e60\u7684\u5f00\u653e\u9886\u57df\u5bf9\u8bdd\u7cfb\u7edf\u7814\u7a76\u7efc\u8ff0",
+        "url": "N/A"
+      },
+      "keywords": ["Dialogue System", "Chatbot", "Deep Learning", "Sequence-to-Sequence Model", "Matching Model", "Dialogue System Evaluation"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u17d2\u1791\u1784\u17cb\u1798\u178f\u17b7\u179f\u17d2\u178f\u17b8\u1796\u17b8\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178a\u17c2\u1793\u1794\u17be\u1780\u1785\u17c6\u17a0\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5",
+          "item": "https://khmerresearch.com/papers/technology/deep-learning-open-domain-dialogue-system-survey-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការស្ទង់មតិស្តីពីប្រព័ន្ធសន្ទនាដែនបើកចំហដោយផ្អែកលើការរៀនស៊ីជម្រៅ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 基于深度学习的开放领域对话系统研究综述<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការស្ទង់មតិស្តីពីប្រព័ន្ធសន្ទនាដែនបើកចំហដោយផ្អែកលើការរៀនស៊ីជម្រៅ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 基于深度学习的开放领域对话系统研究综述</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> 陈晨 (CHEN Chen, Peking University), 朱晴晴 (ZHU Qing-Qing, Peking University), 严睿 (YAN Rui, Peking University), 柳军飞 (LIU Jun-Fei, Peking University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2019, 计算机学报 (CHINESE JOURNAL OF COMPUTERS)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយលើការអភិវឌ្ឍ ការចាត់ថ្នាក់ និងបញ្ហាប្រឈមសំខាន់ៗនៃប្រព័ន្ធសន្ទនាដែនបើកចំហ (Open-domain dialogue systems) ឬកម្មវិធីផ្ញើសារស្វ័យប្រវត្តិ (Chatbots) ដែលជំរុញដោយទិន្នន័យ និងប្រើប្រាស់បច្ចេកវិទ្យារៀនស៊ីជម្រៅ (Deep learning)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការត្រួតពិនិត្យយ៉ាងទូលំទូលាយ និងចាត់ថ្នាក់ម៉ូដែលរៀនស៊ីជម្រៅ (Deep learning models) សម្រាប់ប្រព័ន្ធសន្ទនាជាបីប្រភេទសំខាន់ៗ រួមទាំងការវិភាគលើបញ្ហាប្រឈម និងវិធីសាស្ត្រវាយតម្លៃ។
+        
+        <ul>
+            
+            <li>ប្រព័ន្ធផ្អែកលើការទាញយក (Retrieval-based Models) សម្រាប់ការស្វែងរកចម្លើយដែលស័ក្តិសមបំផុតពីមូលដ្ឋានទិន្នន័យ</li>
+            
+            <li>ប្រព័ន្ធផ្អែកលើការបង្កើត (Generation-based Models) ដូចជា Sequence-to-Sequence សម្រាប់បង្កើតប្រយោគចម្លើយថ្មីៗ</li>
+            
+            <li>ម៉ូដែលរួមបញ្ចូលគ្នា (Hybrid Models) រវាងការទាញយកនិងការបង្កើតដើម្បីបង្កើនគុណភាពចម្លើយ</li>
+            
+            <li>ការវាយតម្លៃប្រព័ន្ធសន្ទនា (Dialogue System Evaluation) តាមរយៈការវាយតម្លៃដោយមនុស្ស និងម៉ាទ្រីកស្វ័យប្រវត្តិ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>បច្ចេកវិទ្យារៀនស៊ីជម្រៅ (Deep learning) បានជម្រុញការអភិវឌ្ឍយ៉ាងខ្លាំងដល់ប្រព័ន្ធសន្ទនាដែនបើកចំហ ជាពិសេសតាមរយៈយន្តការ Sequence-to-Sequence (Seq2Seq) និង Attention mechanisms។</li>
+            
+            <li>ទោះបីជាមានការរីកចម្រើន ក៏បញ្ហាសំខាន់ៗមួយចំនួននៅតែទាមទារការស្រាវជ្រាវបន្ត ដូចជាភាពចម្រុះនៃចម្លើយ (Response diversity) ការគ្រប់គ្រងប្រធានបទ ការប្រើប្រាស់ចំណេះដឹងខាងក្រៅ និងការបញ្ចូលអារម្មណ៍ចូលក្នុងការសន្ទនា។</li>
+            
+            <li>និន្នាការនាពេលអនាគតរួមមាន ការបង្កើនការឆ្លើយតបប្រកបដោយអារម្មណ៍ដូចមនុស្ស ការគិតបែបតក្កវិជ្ជា ការប្រើប្រាស់ទិន្នន័យចម្រុះ (Multi-modal) និងការបង្កើតយន្តការវាយតម្លៃស្វ័យប្រវត្តិដែលគួរឱ្យទុកចិត្តជាងមុន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en"></span></strong><br></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en"></span></strong><br></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en"></span></strong><br></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្អែកលើទិន្នន័យសន្ទនាពីបណ្តាញសង្គមដូចជា Twitter, Weibo, និងវេទិកាផ្សេងៗ ដែលមានភាសាលាយឡំ កំហុសអក្ខរាវិរុទ្ធ និងពាក្យស្លែង។ សម្រាប់ប្រទេសកម្ពុជា ការខ្វះខាតទិន្នន័យសន្ទនាភាសាខ្មែរដែលមានគុណភាពខ្ពស់ និងការប្រើប្រាស់ភាសាខ្មែរ-អង់គ្លេសលាយគ្នា (Code-switching) គឺជាបញ្ហាប្រឈមដ៏ធំក្នុងការបង្វឹកម៉ូដែលឱ្យបានត្រឹមត្រូវនិងឆ្លើយតបបានរលូន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យាប្រព័ន្ធសន្ទនាដែនបើកចំហនេះមានសក្តានុពលខ្ពស់ក្នុងការអភិវឌ្ឍប្រព័ន្ធសេវាកម្មអតិថិជនស្វ័យប្រវត្តិនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (ឧទាហរណ៍៖ ABA, ACLEDA):</strong> អាចបង្កើតកម្មវិធីជំនួយការនិម្មិត (Virtual Assistants) ដើម្បីឆ្លើយតបសំណួរអតិថិជន ពិនិត្យសមតុល្យគណនី និងផ្តល់សេវាកម្មគាំទ្រ ២៤ ម៉ោងលើ ២៤ ម៉ោងដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ (ឧទាហរណ៍៖ Smart, Cellcard):</strong> ប្រព័ន្ធ Chatbot អាចត្រូវបានប្រើប្រាស់សម្រាប់ដោះស្រាយបញ្ហាបច្ចេកទេសទូទៅ និងណែនាំកញ្ចប់សេវាកម្មអ៊ីនធឺណិតដល់អតិថិជនបានយ៉ាងឆាប់រហ័ស។</li>
+            
+            <li><strong>ពាណិជ្ជកម្មអេឡិចត្រូនិក និងការលក់រាយលើបណ្តាញសង្គម:</strong> ជួយសម្រួលដល់ម្ចាស់អាជីវកម្មក្នុងការឆ្លើយតបសាររបស់អតិថិជន ទាក់ទងនឹងព័ត៌មានផលិតផល តម្លៃ និងការបញ្ជាទិញនៅលើ Facebook Pages ឬ Telegram Bots។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តប្រព័ន្ធសន្ទនាឆ្លាតវៃទាំងនេះនឹងជួយកាត់បន្ថយថ្លៃដើមប្រតិបត្តិការ និងបង្កើនប្រសិទ្ធភាពសេវាកម្មអតិថិជនយ៉ាងខ្លាំងនៅក្នុងស្ថាប័នរដ្ឋនិងឯកជននៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះផ្នែក NLP និង Deep Learning:</strong> ចាប់ផ្តើមរៀនពីទ្រឹស្តីដំណើរការភាសាធម្មជាតិ និងការសរសេរកូដដោយប្រើប្រាស់ <span class="en">Python</span> និងបណ្ណាល័យសំខាន់ៗដូចជា <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> សម្រាប់ការអភិវឌ្ឍម៉ូដែល។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យភាសាខ្មែរ:</strong> ប្រមូលទិន្នន័យសន្ទនាពី <span class="en">Facebook comments</span> ឬ <span class="en">Telegram</span> រួចធ្វើការសម្អាតទិន្នន័យដោយប្រើឧបករណ៍កាត់ពាក្យខ្មែរ (<span class="en">Khmer Word Segmentation</span>) ដើម្បីត្រៀមបង្វឹកម៉ូដែល។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែលស្វែងរកចម្លើយ (Retrieval-based Model):</strong> សាកល្បងបង្កើត <span class="en">Chatbot</span> សាមញ្ញសិនដោយប្រើបច្ចេកទេស <span class="en">BM25</span> ឬ <span class="en">ElasticSearch</span> ដើម្បីស្វែងរកចម្លើយដែលស័ក្តិសមបំផុតពីក្នុងបញ្ជីសំណួរ-ចម្លើយ (FAQ) ដែលមានស្រាប់។</li>
+            
+            <li><strong>បង្វឹកម៉ូដែលបង្កើតចម្លើយ (Generative Model):</strong> ឈានទៅប្រើប្រាស់ស្ថាបត្យកម្ម <span class="en">Sequence-to-Sequence (Seq2Seq)</span> ជាមួយយន្តការ <span class="en">Attention</span> ដើម្បីបង្វឹកម៉ូដែលឱ្យចេះបង្កើតប្រយោគឆ្លើយតបថ្មីៗ និងប្រកបដោយភាពបត់បែន។</li>
+            
+            <li><strong>វាយតម្លៃ និងកែលម្អប្រព័ន្ធសន្ទនា:</strong> ប្រើប្រាស់រង្វាស់រង្វាល់ស្វ័យប្រវត្តិដូចជា <span class="en">BLEU score</span> ឬ <span class="en">ROUGE</span> ព្រមទាំងការវាយតម្លៃដោយមនុស្សពិតប្រាកដ (Human Evaluation) ដើម្បីវាស់ស្ទង់គុណភាព និងកែលម្អភាពរលូននៃការសន្ទនា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Sequence to Sequence</span></td>
+                <td>ជាម៉ូដែលបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដែលទទួលយកទិន្នន័យជាបន្តបន្ទាប់ (ដូចជាប្រយោគសំណួរ) ហើយបង្កើតទិន្នន័យជាបន្តបន្ទាប់មួយទៀត (ដូចជាប្រយោគចម្លើយ) ដោយឆ្លងកាត់ដំណើរការបំប្លែងលេខកូដ (Encoder-Decoder)។</td>
+                <td>ដូចជាអ្នកបកប្រែភាសាដែលស្តាប់ប្រយោគទាំងមូលឱ្យយល់ន័យសិន រួចទើបនិយាយបកប្រែជាភាសាមួយទៀតចេញមកក្រៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Attention Mechanism</span></td>
+                <td>ជាយន្តការដែលជួយឱ្យម៉ូដែលដឹងថាត្រូវ 'ផ្តោតការយកចិត្តទុកដាក់' ទៅលើពាក្យ ឬផ្នែកណាមួយនៃប្រយោគសំណួរដែលសំខាន់បំផុត នៅពេលវាកំពុងបង្កើតពាក្យនីមួយៗនៃប្រយោគចម្លើយ ដើម្បីចៀសវាងការបាត់បង់ព័ត៌មាននៅក្នុងប្រយោគវែងៗ។</td>
+                <td>ដូចជាសិស្សដែលកំពុងអានសៀវភៅក្រាស់មួយ ហើយប្រើហ្វឺតគូសចំណាំ (Highlight) តែពាក្យគន្លឹះសំខាន់ៗដើម្បីយកមកឆ្លើយសំណួរប្រឡង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Embedding</span></td>
+                <td>ជាបច្ចេកទេសបំប្លែងពាក្យពេចន៍ទៅជាវ៉ិចទ័រ ឬតួលេខគណិតវិទ្យា ដែលធ្វើឱ្យកុំព្យូទ័រអាចយល់ពីអត្ថន័យ និងទំនាក់ទំនងរវាងពាក្យដែលស្រដៀងគ្នានៅក្នុងលំហទិន្នន័យ (Vector Space)។</td>
+                <td>ដូចជាការរៀបចំសៀវភៅក្នុងបណ្ណាល័យ ដោយដាក់សៀវភៅដែលមានប្រធានបទស្រដៀងគ្នានៅធ្នើរជិតៗគ្នា ដើម្បីងាយស្រួលរក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Generative Adversarial Networks</span></td>
+                <td>ជាប្រព័ន្ធដែលប្រើប្រាស់ម៉ូដែលពីរប្រកួតប្រជែងគ្នា គឺមួយមានតួនាទីបង្កើតចម្លើយក្លែងក្លាយឱ្យដូចមនុស្សពិត ហើយមួយទៀតមានតួនាទីវាយតម្លៃនិងចាប់កំហុសថាតើចម្លើយនោះជារបស់ម៉ាស៊ីន ឬរបស់មនុស្សរហូតដល់ម៉ូដែលបង្កើតចម្លើយអាចបន្លំបានដោយជោគជ័យ។</td>
+                <td>ដូចជាចោរលួចចម្លងគំនូរ និងអ្នកជំនាញពិនិត្យគំនូរ កាលណាអ្នកជំនាញកាន់តែពូកែចាប់កំហុស ចោរក៏កាន់តែវិវឌ្ឍខ្លួនឱ្យគូរបានកាន់តែដូចពិតៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Recurrent Neural Network</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទដែលត្រូវបានរចនាឡើងពិសេសសម្រាប់ដំណើរការទិន្នន័យជាស៊េរី (ដូចជាប្រយោគ) ដោយវាមានសមត្ថភាពចងចាំព័ត៌មានពីពាក្យមុនៗ ដើម្បីជួយក្នុងការយល់ន័យពាក្យបន្ទាប់នៅក្នុងបរិបទនៃការសន្ទនា។</td>
+                <td>ដូចជាការអានសៀវភៅរឿង ដែលអ្នកត្រូវចងចាំសាច់រឿងពីទំព័រមុនៗ ទើបអាចយល់សាច់រឿងនៅទំព័របន្តបន្ទាប់បានដោយរលូន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Beam Search</span></td>
+                <td>ជាក្បួនដោះស្រាយដែលជួយប្រព័ន្ធសន្ទនាស្វែងរកប្រយោគចម្លើយដែលល្អបំផុត ដោយវាមិនមែនទាយយកពាក្យម្តងមួយៗទេ តែវាសាកល្បងសាងសង់ជម្រើសប្រយោគច្រើនក្នុងពេលតែមួយ ហើយជ្រើសយកប្រយោគណាដែលមានប្រូបាប៊ីលីតេត្រឹមត្រូវជាងគេបំផុត។</td>
+                <td>ដូចជាការលេងអុក ដែលអ្នកលេងត្រូវគិតទុកជាមុននូវជម្រើសដើរ ៣ ទៅ ៤ ជំហាន ដើម្បីរើសយកផ្លូវណាដែលមានឱកាសឈ្នះខ្ពស់បំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Autoencoder</span></td>
+                <td>ជាម៉ូដែលដែលបង្ហាប់ទិន្នន័យបញ្ចូលឱ្យទៅជាទម្រង់តូចចង្អៀត រួចព្យាយាមពន្លាតទិន្នន័យនោះមកវិញឱ្យដូចដើម ដើម្បីឱ្យប្រព័ន្ធរៀនចាប់យកតែលក្ខណៈពិសេសដែលសំខាន់បំផុតរបស់ទិន្នន័យនោះ សម្រាប់យកទៅប្រើប្រាស់ក្នុងការគ្រប់គ្រងការបង្កើតចម្លើយ។</td>
+                <td>ដូចជាការសង្ខេបមេរៀនវែងមួយឱ្យខ្លីដោយរក្សាតែន័យសំខាន់ រួចសាកល្បងសរសេរពន្យល់មេរៀននោះឡើងវិញដោយផ្អែកលើអត្ថបទសង្ខេបនោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+retrieval-based+dialogue+systems" target="_blank" rel="noopener"><span class="en">deep learning retrieval-based dialogue systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=sequence-to-sequence+generation+models+for+chatbots" target="_blank" rel="noopener"><span class="en">sequence-to-sequence generation models for chatbots</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=evaluation+metrics+for+open+domain+dialogue+systems" target="_blank" rel="noopener"><span class="en">evaluation metrics for open domain dialogue systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=incorporating+emotion+and+personality+in+conversational+AI" target="_blank" rel="noopener"><span class="en">incorporating emotion and personality in conversational AI</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-modal+open+domain+dialogue+systems" target="_blank" rel="noopener"><span class="en">multi-modal open domain dialogue systems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

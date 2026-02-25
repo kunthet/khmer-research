@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វិធីសាស្ត្រសម្រាប់ការកាត់បន្ថយមូលដ្ឋានទិន្នន័យសម្របសម្រួលសម្រាប់ការសំយោគអត្ថបទទៅជាសំឡេង | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះផ្តោតលើបញ្ហានៃការកាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យសំឡេង (Speech database reduction) សម្រាប់កម្មវិធីសំយោគអត្ថបទទៅជាសំឡេង (Text-To-Speech synthesis) ដោយសម្...">
+    
+    <meta name="keywords" content="Text-To-Speech (TTS), Speech Synthesis, Database Reduction, Kullback-Leibler Divergence, Unit Selection, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/adaptive-database-reduction-text-to-speech-2007.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/adaptive-database-reduction-text-to-speech-2007.html">
+    <meta property="og:title" content="វិធីសាស្ត្រសម្រាប់ការកាត់បន្ថយមូលដ្ឋានទិន្នន័យសម្របសម្រួលសម្រាប់ការសំយោគអត្ថបទទៅជាសំឡេង | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះផ្តោតលើបញ្ហានៃការកាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យសំឡេង (Speech database reduction) សម្រាប់កម្មវិធីសំយោគអត្ថបទទៅជាសំឡេង (Text-To-Speech synthesis) ដោយសម្របទៅតាមប្រធានបទជាក់លាក់ ដើម្បីឱ្យអាចប្រើ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2007, INTERSPEECH">
+    
+    <meta property="article:tag" content="Text-To-Speech (TTS)">
+    
+    <meta property="article:tag" content="Speech Synthesis">
+    
+    <meta property="article:tag" content="Database Reduction">
+    
+    <meta property="article:tag" content="Kullback-Leibler Divergence">
+    
+    <meta property="article:tag" content="Unit Selection">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វិធីសាស្ត្រសម្រាប់ការកាត់បន្ថយមូលដ្ឋានទិន្នន័យសម្របសម្រួលសម្រាប់ការសំយោគអត្ថបទទៅជាសំឡេង">
+    <meta name="twitter:description" content="ឯកសារនេះផ្តោតលើបញ្ហានៃការកាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យសំឡេង (Speech database reduction) សម្រាប់កម្មវិធីសំយោគអត្ថបទទៅជាសំឡេង (Text-To-Speech synthesis) ដោយសម្របទៅតាមប្រធានបទជាក់លាក់ ដើម្បីឱ្យអាចប្រើ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u1794\u179f\u1798\u17d2\u179a\u17bd\u179b\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u17a2\u178f\u17d2\u1790\u1794\u1791\u1791\u17c5\u1787\u17b6\u179f\u17c6\u17a1\u17c1\u1784",
+      "name": "Approaches for adaptive database reduction for Text-To-Speech synthesis",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1791\u17c6\u17a0\u17c6\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17c6\u17a1\u17c1\u1784 (Speech database reduction) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179f\u17c6\u1799\u17c4\u1782\u17a2\u178f\u17d2\u1790\u1794\u1791\u1791\u17c5\u1787\u17b6\u179f\u17c6\u17a1\u17c1\u1784 (Text-To-Speech synthesis) \u178a\u17c4\u1799\u179f\u1798\u17d2\u179a\u1794\u1791\u17c5\u178f\u17b6\u1798\u1794\u17d2\u179a\u1792\u17b6\u1793\u1794\u1791\u1787\u17b6\u1780\u17cb\u179b\u17b6\u1780\u17cb \u178a\u17be\u1798\u17d2\u1794\u17b8\u17b1\u17d2\u1799\u17a2\u17b6\u1785\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u17b6\u1793\u179b\u17be\u17a7\u1794\u1780\u179a\u178e\u17cd\u178a\u17c2\u179b\u1798\u17b6\u1793\u1791\u17c6\u17a0\u17c6\u1795\u17d2\u1791\u17bb\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178f\u17bc\u1785\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/adaptive-database-reduction-text-to-speech-2007.html",
+      "author": [{"@type": "Person", "name": "Aleksandra Krul (France T\u00e9l\u00e9com R\u0026D Division / GET/ENST)"},{"@type": "Person", "name": "G\u00e9raldine Damnati (France T\u00e9l\u00e9com R\u0026D Division)"},{"@type": "Person", "name": "Fran\u00e7ois Yvon (GET/ENST and CNRS/LTCI)"},{"@type": "Person", "name": "C\u00e9dric Boidin (France T\u00e9l\u00e9com R\u0026D Division)"},{"@type": "Person", "name": "Thierry Moudenc (France T\u00e9l\u00e9com R\u0026D Division)"}],
+      "datePublished": "2007, INTERSPEECH",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Approaches for adaptive database reduction for Text-To-Speech synthesis",
+        "url": "https://doi.org/10.21437/Interspeech.2007-541"
+      },
+      "keywords": ["Text-To-Speech (TTS)", "Speech Synthesis", "Database Reduction", "Kullback-Leibler Divergence", "Unit Selection"],
+      "about": "Speech Synthesis / Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u1794\u179f\u1798\u17d2\u179a\u17bd\u179b\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u17a2\u178f\u17d2\u1790\u1794\u1791\u1791\u17c5\u1787\u17b6\u179f\u17c6\u17a1\u17c1\u1784",
+          "item": "https://khmerresearch.com/papers/technology/adaptive-database-reduction-text-to-speech-2007.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>វិធីសាស្ត្រសម្រាប់ការកាត់បន្ថយមូលដ្ឋានទិន្នន័យសម្របសម្រួល...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Approaches for adaptive database reduction for Text-To-Speech synthesis<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.21437/Interspeech.2007-541" target="_blank">doi.org/10.21437/Interspeech.2007-541</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វិធីសាស្ត្រសម្រាប់ការកាត់បន្ថយមូលដ្ឋានទិន្នន័យសម្របសម្រួលសម្រាប់ការសំយោគអត្ថបទទៅជាសំឡេង</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Approaches for adaptive database reduction for Text-To-Speech synthesis</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Aleksandra Krul (France Télécom R&D Division / GET/ENST), Géraldine Damnati (France Télécom R&D Division), François Yvon (GET/ENST and CNRS/LTCI), Cédric Boidin (France Télécom R&D Division), Thierry Moudenc (France Télécom R&D Division)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2007, INTERSPEECH</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Speech Synthesis / Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះផ្តោតលើបញ្ហានៃការកាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យសំឡេង (Speech database reduction) សម្រាប់កម្មវិធីសំយោគអត្ថបទទៅជាសំឡេង (Text-To-Speech synthesis) ដោយសម្របទៅតាមប្រធានបទជាក់លាក់ ដើម្បីឱ្យអាចប្រើប្រាស់បានលើឧបករណ៍ដែលមានទំហំផ្ទុកទិន្នន័យតូច។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះវាយតម្លៃលើវិធីសាស្ត្រចំនួនពីរសម្រាប់ការកាត់បន្ថយ និងសម្របសម្រួលមូលដ្ឋានទិន្នន័យ ដោយធ្វើការប្រៀបធៀបពួកវាជាមួយនឹងវិធីសាស្ត្រកាត់បន្ថយបែបចៃដន្យ (Random method) និងវិធីសាស្ត្រទូទៅ (General method)។
+        
+        <ul>
+            
+            <li>ការកាត់តម្រឹមមូលដ្ឋានទិន្នន័យផ្អែកលើអាកប្បកិរិយាស្ថិតិ (Database pruning based on statistical behaviour - Ps) នៃក្បួនដោះស្រាយការជ្រើសរើសឯកតា (Unit selection algorithm)</li>
+            
+            <li>វិធីសាស្ត្រកាត់បន្ថយផ្អែកលើរង្វាស់គម្លាត (Kullback-Leibler divergence) ដើម្បីតម្រូវការចែកចាយឯកតាទៅតាមប្រធានបទគោលដៅ</li>
+            
+            <li>ការប្រមូលស្ថិតិ និងការវាយតម្លៃគោលដៅ (Objective evaluation) ដោយប្រើរង្វាស់ដូចជា ប្រវែងចម្រៀកមធ្យម (Average segment length) និងតម្លៃតភ្ជាប់ (Concatenation cost)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រកាត់បន្ថយសម្របសម្រួល (Adaptive reduction methods) ទាំងពីរ ទទួលបានលទ្ធផលប្រសើរជាងវិធីសាស្ត្រកាត់បន្ថយទូទៅ (General Ps) និងវិធីសាស្ត្រចៃដន្យ (Random methods) ដាច់ស្រឡះ ជាពិសេសនៅពេលអនុវត្តលើប្រធានបទជាក់លាក់។</li>
+            
+            <li>វិធីសាស្ត្រផ្អែកលើស្ថិតិប្រធានបទជាក់លាក់ (Domain Ps method) ទទួលបានលទ្ធផលល្អបំផុត ដោយមានតម្លៃតភ្ជាប់មធ្យម និងតម្លៃគោលដៅមធ្យម (Average concatenation and target costs) ទាបជាងគេបំផុត។</li>
+            
+            <li>វិធីសាស្ត្រ Kullback-Leibler (KL based method) ផ្តល់លទ្ធផលប្រហាក់ប្រហែលនឹងប្រវែងចម្រៀកមធ្យមនៃ Domain Ps ដែលបង្ហាញពីសក្តានុពលខ្ពស់ ព្រោះវាទាមទារត្រឹមតែការចែកចាយទិន្នន័យគោលដៅប៉ុណ្ណោះដោយមិនចាំបាច់បញ្ចូលលក្ខណៈពិសេសដទៃទៀត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Domain Ps (Pruning based on statistical behaviour on domain-specific corpus)</span></strong><br>វិធីសាស្ត្រកាត់តម្រឹម Ps ផ្អែកលើស្ថិតិនៃប្រធានបទជាក់លាក់</td>
+                <td>ផ្តល់លទ្ធផលល្អបំផុតក្នុងការកាត់បន្ថយតម្លៃតភ្ជាប់ (Concatenation cost) និងតម្លៃគោលដៅ (Target cost) ព្រមទាំងរក្សាបាននូវប្រវែងចម្រៀកសំឡេងវែង។</td>
+                <td>ទាមទារឱ្យមានការសំយោគទិន្នន័យលើប្រធានបទជាក់លាក់ជាមុន និងពឹងផ្អែកខ្លាំងលើអាកប្បកិរិយារបស់ក្បួនដោះស្រាយការជ្រើសរើសឯកតា (Unit selection algorithm)។</td>
+                <td>ទទួលបានតម្លៃតភ្ជាប់មធ្យម និងតម្លៃគោលដៅមធ្យមទាបបំផុត (ល្អជាងគេ) ធៀបនឹងវិធីសាស្ត្រផ្សេងៗទោះបីជាទិន្នន័យដើមមានទំហំតូចក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">General Ps (Pruning based on statistical behaviour on general corpus)</span></strong><br>វិធីសាស្ត្រកាត់តម្រឹម Ps ផ្អែកលើស្ថិតិទូទៅ</td>
+                <td>មិនទាមទារឱ្យដឹងពីគោលដៅនៃការប្រើប្រាស់ជាក់លាក់ ងាយស្រួលអនុវត្តដោយប្រើទិន្នន័យអត្ថបទកាសែតទូទៅដ៏ធំដើម្បីប្រមូលស្ថិតិ។</td>
+                <td>បង្កើតបានជាមូលដ្ឋានទិន្នន័យដែលមិនសូវមានភាពជាប់គ្នា (ប្រវែងចម្រៀកខ្លី) និងមានតម្លៃតភ្ជាប់ខ្ពស់ជាង Domain Ps យ៉ាងច្បាស់លាស់។</td>
+                <td>ទទួលបានប្រវែងចម្រៀកមធ្យមខ្លី និងលទ្ធផលអន់ជាង Domain Ps យ៉ាងច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Kullback-Leibler (KL dip & KL trip)</span></strong><br>វិធីសាស្ត្រផ្អែកលើរង្វាស់ Kullback-Leibler Divergence (KL dip និង KL trip)</td>
+                <td>មិនទាមទារការសំយោគទិន្នន័យជាមុនទេ គឺត្រូវការត្រឹមតែការចែកចាយអត្ថបទគោលដៅប៉ុណ្ណោះ ព្រមទាំងផ្តល់ប្រវែងចម្រៀកបានល្អប្រហាក់ប្រហែល Domain Ps ដែរ។</td>
+                <td>ដោយសារតែវាប្រើប្រាស់ត្រឹមតែឯកតាធម្មតា (diphones/triphones) វាមិនបានគិតគូរពីលក្ខណៈសំឡេង (acoustic features) ផ្សេងៗ ដែលធ្វើឱ្យតម្លៃគោលដៅនៅខ្ពស់បន្តិច។</td>
+                <td>ទទួលបានប្រវែងចម្រៀកវែងល្អ ប៉ុន្តែតម្លៃតភ្ជាប់ និងតម្លៃគោលដៅខ្ពស់ជាងវិធីសាស្ត្រ Domain Ps បន្តិច ដោយ KL trip ល្អជាង KL dip បន្តិចបន្តួច។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Method</span></strong><br>វិធីសាស្ត្រជ្រើសរើសដោយចៃដន្យ</td>
+                <td>ងាយស្រួលបំផុតក្នុងការអនុវត្ត ដោយមិនទាមទារការគណនាស្មុគស្មាញ ឬការរៀបចំទិន្នន័យអ្វីទាំងអស់។</td>
+                <td>ផ្តល់លទ្ធផលអន់បំផុតគ្រប់ផ្នែក ធ្វើឱ្យគុណភាពសំឡេងធ្លាក់ចុះយ៉ាងខ្លាំង ដោយសារបាត់បង់ឯកតាសំខាន់ៗ។</td>
+                <td>ទទួលបានចំណាត់ថ្នាក់អន់បំផុតលើគ្រប់រង្វាស់ទាំងអស់ ជាពិសេសប្រវែងចម្រៀកខ្លីបំផុត និងតម្លៃតភ្ជាប់ខ្ពស់បំផុត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនបានបញ្ជាក់ពីទំហំផ្នែករឹង (Hardware) ច្បាស់លាស់ឡើយ ប៉ុន្តែវាទាមទារនូវធនធានទិន្នន័យ និងកម្មវិធីជាក់លាក់ដើម្បីដំណើរការក្បួនដោះស្រាយកាត់បន្ថយទំហំទិន្នន័យ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ត្រូវការមូលដ្ឋានទិន្នន័យសំឡេងដើមដ៏ធំ (ក្នុងឯកសារគឺសំឡេងភាសាបារាំង ៧០០០ ប្រយោគ) និងទិន្នន័យអត្ថបទសម្រាប់ប្រធានបទជាក់លាក់ (ឧទាហរណ៍ ៨៨៦៦ ប្រយោគទាក់ទងនឹងអចលនទ្រព្យ)។</li>
+        
+        <li><strong>Software Algorithms:</strong> ត្រូវការប្រព័ន្ធសំយោគសំឡេង (TTS system) ដែលប្រើប្រាស់ក្បួនដោះស្រាយ Unit Selection ព្រមទាំងកម្មវិធីសម្រាប់គណនារង្វាស់ Kullback-Leibler divergence (KL)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងផ្នែកដំណើរការសេពច្បាមភាសាធម្មជាតិ (NLP) និងការសំយោគសំឡេង (Speech Synthesis) ដើម្បីកំណត់រចនាសម្ព័ន្ធ diphone/triphone និងរៀបចំទិន្នន័យ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យសំឡេងរបស់ជនជាតិបារាំងតែម្នាក់ប៉ុណ្ណោះ និងប្រើអត្ថបទអំពីអចលនទ្រព្យជាភាសាបារាំង។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តវិធីសាស្ត្រនេះទាមទារឱ្យមានការបង្កើតមូលដ្ឋានទិន្នន័យសំឡេងភាសាខ្មែរដែលមានគុណភាពខ្ពស់ជាមុនសិន ព្រោះទម្រង់សូរសព្ទ (Phonetics) និងវេយ្យាករណ៍ខ្មែរមានភាពស្មុគស្មាញ និងខុសប្លែកពីភាសាបារាំងទាំងស្រុង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការកាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យទាំងនេះពិតជាមានអត្ថប្រយោជន៍យ៉ាងធំធេងសម្រាប់ប្រទេសកម្ពុជា ពិសេសក្នុងការបង្កើតកម្មវិធីបញ្ចេញសំឡេង (TTS) លើឧបករណ៍ឆ្លាតវៃដែលមានទំហំផ្ទុកទាប និងមិនមានអ៊ីនធឺណិត។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (Banking and Finance):</strong> ធនាគារក្នុងស្រុកអាចបង្កើតប្រព័ន្ធសំយោគសំឡេង (TTS) ក្រៅបណ្តាញ (Offline) នៅលើម៉ាស៊ីន ATM ឬកម្មវិធីទូរស័ព្ទ ដើម្បីអានសមតុល្យគណនី ឬព័ត៌មានហិរញ្ញវត្ថុដោយប្រើប្រាស់ទិន្នន័យសំឡេងដែលត្រូវបានកាត់បន្ថយ និងសម្របតាមពាក្យបច្ចេកទេសធនាគារ (Domain-specific corpus)។</li>
+            
+            <li><strong>សេវាកម្មបម្រើអតិថិជន (Call Centers & Telecommunication):</strong> ក្រុមហ៊ុនទូរគមនាគមន៍អាចប្រើប្រាស់វិធីសាស្ត្រនេះដើម្បីបង្រួមទិន្នន័យប្រព័ន្ធឆ្លើយតបស្វ័យប្រវត្តិ (IVR) ជាភាសាខ្មែរ ឱ្យនៅតូច លឿន និងប្រើប្រាស់ធនធានម៉ាស៊ីនមេ (Server resources) តិចតួចបំផុតក្នុងការដំណើរការ។</li>
+            
+            <li><strong>បច្ចេកវិទ្យាជំនួយសម្រាប់ជនពិការ (Accessibility Services):</strong> អង្គការនានាអាចបង្កើតកម្មវិធីទូរស័ព្ទ (Mobile Apps) អានអត្ថបទជាសំឡេងខ្មែរសម្រាប់ជនពិការភ្នែក ដោយប្រើប្រាស់ទំហំផ្ទុកទិន្នន័យតិចបំផុតនៅលើទូរស័ព្ទដៃ ដែលជាអត្ថប្រយោជន៍ដ៏ធំសម្រាប់ប្រជាជននៅតំបន់ដាច់ស្រយាល។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តបច្ចេកទេសកាត់តម្រឹមទិន្នន័យ (Database Reduction) នេះ នឹងជួយពន្លឿនការអភិវឌ្ឍន៍កម្មវិធីឆ្លាតវៃផ្នែកភាសាខ្មែរ (Khmer NLP) ដែលអាចដំណើរការបានដោយរលូនលើឧបករណ៍ចល័តគ្រប់ប្រភេទ ទោះស្ថិតក្នុងស្ថានភាពខ្វះខាតធនធានក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃបច្ចេកវិទ្យា Unit Selection និង TTS:</strong> និស្សិតត្រូវចាប់ផ្តើមសិក្សាពីគោលការណ៍គ្រឹះនៃ Unit Selection និង Concatenative Speech Synthesis ដោយប្រើប្រាស់ប្រភពកូដបើកចំហរ (Open-source) ដូចជា <span class="en">Festival Speech Synthesis System</span> ឬ <span class="en">MaryTTS</span> ដើម្បីយល់ពីដំណើរការនៃការភ្ជាប់សំឡេង។</li>
+            
+            <li><strong>រៀបចំនិងប្រមូលទិន្នន័យភាសាខ្មែរ (Build Khmer Domain-Specific Corpus):</strong> ចាប់ផ្តើមប្រមូលអត្ថបទភាសាខ្មែរលើប្រធានបទជាក់លាក់ណាមួយ (ឧទាហរណ៍ ព័ត៌មានធនាគារ ឬកសិកម្ម) រួចសម្អាតនិងកាត់ពាក្យទិន្នន័យដោយប្រើប្រាស់បណ្ណាល័យដូចជា <span class="en">Khmer Natural Language Processing (KhmerNLP)</span> ឬ <span class="en">sekhmer</span> ដើម្បីបង្កើតជា Text Corpus ដែលមានគុណភាព។</li>
+            
+            <li><strong>អនុវត្តការគណនា Kullback-Leibler Divergence លើសូរសព្ទខ្មែរ:</strong> សរសេរកូដដោយប្រើប្រាស់ <span class="en">Python</span> និងបណ្ណាល័យគណិតវិទ្យាដូចជា <span class="en">SciPy</span> ឬ <span class="en">NumPy</span> ដើម្បីអនុវត្តក្បួនដោះស្រាយ KL Divergence ក្នុងការប្រៀបធៀបការចែកចាយសូរសព្ទ (Diphone distributions) រវាងទិន្នន័យដើមដ៏ធំ និងទិន្នន័យគោលដៅ (Target distribution) សម្រាប់កាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យ។</li>
+            
+            <li><strong>សាងសង់និងវាយតម្លៃគំរូសាកល្បង (Prototype Construction & Evaluation):</strong> ប្រើប្រាស់វិធីសាស្ត្រ <span class="en">Domain Ps</span> ឬ <span class="en">KL based</span> ដើម្បីបង្កើតមូលដ្ឋានទិន្នន័យសំឡេងដែលត្រូវបានកាត់បន្ថយទំហំ (Reduced database) រួចធ្វើការវាយតម្លៃគុណភាពសំឡេងដោយប្រើរង្វាស់ Objective (ដូចជា Concatenation cost) និងធ្វើតេស្ត <span class="en">Mean Opinion Score (MOS)</span> ជាមួយនឹងអ្នកស្តាប់ជនជាតិខ្មែរ ដើម្បីវាស់ស្ទង់ភាពច្បាស់ និងភាពរលូន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Unit selection</span></td>
+                <td>ជាក្បួនដោះស្រាយនៅក្នុងប្រព័ន្ធសំយោគសំឡេង ដែលធ្វើការស្វែងរក និងជ្រើសរើសយកបំណែកសំឡេងតូចៗ (ឯកតាសំឡេង) ពីក្នុងមូលដ្ឋានទិន្នន័យដ៏ធំមួយ ដើម្បីយកមកតម្រៀបតភ្ជាប់គ្នាបង្កើតជាប្រយោគថ្មីមួយតាមអត្ថបទដែលបានបញ្ចូលដោយរក្សាបាននូវភាពរលូនតាមបែបធម្មជាតិ។</td>
+                <td>ដូចជាការរើសអក្សរ ឬពាក្យនីមួយៗពីកាសែតចាស់ៗ យកមកផ្គុំបិទជាប់គ្នាដើម្បីបង្កើតជាសំបុត្រថ្មីមួយអញ្ចឹងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Kullback-Leibler divergence</span></td>
+                <td>ជារង្វាស់គណិតវិទ្យាដែលប្រើសម្រាប់វាស់ស្ទង់មើលថា តើរបាយប្រូបាប៊ីលីតេមួយ (ការចែកចាយឯកតាសំឡេងក្នុងទិន្នន័យដែលបានកាត់បន្ថយ) មានភាពខុសគ្នាឬស្រដៀងគ្នាប៉ុនណាទៅនឹងរបាយប្រូបាប៊ីលីតេគោលដៅ (ការចែកចាយក្នុងទិន្នន័យដើម)។ កាលណាតម្លៃនេះកាន់តែតូច មានន័យថាទិន្នន័យទាំងពីរមានភាពស្រដៀងគ្នាកាន់តែខ្លាំង។</td>
+                <td>ដូចជាការប្រៀបធៀបរូបមន្តធ្វើម្ហូបពីរមុខ ដើម្បីមើលថាវាមានគ្រឿងផ្សំខុសគ្នាប៉ុនណា កាលណារសជាតិនិងបរិមាណគ្រឿងផ្សំកាន់តែដូចគ្នា នោះតម្លៃនៃភាពខុសគ្នាកាន់តែខិតជិតសូន្យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Diphone</span></td>
+                <td>ជាឯកតាសំឡេងមូលដ្ឋានក្នុងការសំយោគសំឡេង ដែលគ្របដណ្តប់ពីចំណុចកណ្តាលនៃសូរសព្ទមួយ ទៅកាន់ចំណុចកណ្តាលនៃសូរសព្ទមួយទៀតដែលនៅជាប់គ្នា។ ការប្រើប្រាស់ Diphone ជួយរក្សានូវលក្ខណៈសូរសព្ទនៃការផ្លាស់ប្តូរពីសំឡេងមួយទៅសំឡេងមួយទៀត (Transition) ធ្វើឱ្យការបញ្ចេញសំឡេងស្តាប់ទៅរលូនជាងការយកសូរសព្ទនីមួយៗមកតភ្ជាប់គ្នាផ្ទាល់។</td>
+                <td>ដូចជាការថតយករូបភាពនៃការចាប់ដៃគ្នារវាងមនុស្សពីរនាក់ ដែលបង្ហាញពីរបៀបដែលដៃទាំងពីរភ្ជាប់គ្នា មិនមែនគ្រាន់តែជារូបថតដៃម្នាក់ៗដាច់ដោយឡែកនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Database pruning</span></td>
+                <td>ជាដំណើរការនៃការកាត់បន្ថយទំហំមូលដ្ឋានទិន្នន័យសំឡេង ដោយធ្វើការស្វែងរកនិងលុបចោលនូវឯកតាសំឡេងណាដែលមិនសូវសំខាន់ មិនសូវបានប្រើប្រាស់ញឹកញាប់ ឬមានលក្ខណៈជាន់គ្នា (Redundant) ដើម្បីឱ្យប្រព័ន្ធអាចដំណើរការបានលឿន និងអាចដាក់ប្រើប្រាស់លើឧបករណ៍ដែលមានទំហំផ្ទុកតូចៗ (ដូចជាទូរស័ព្ទដៃ)។</td>
+                <td>ដូចជាការកាត់មែកឈើដែលងាប់ ឬស្លឹកដែលមិនសូវសំខាន់ចេញ ដើម្បីឱ្យដើមឈើនៅតូចល្មម តែមានរាងស្អាត និងងាយស្រួលដាំក្នុងផើងតូចក្នុងផ្ទះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Concatenation cost</span></td>
+                <td>ជារង្វាស់ដែលប្រើដើម្បីវាយតម្លៃមើលថា តើការតភ្ជាប់រវាងបំណែកសំឡេងពីរដែលនៅជាប់គ្នា មានភាពរលូន និងស៊ីចង្វាក់គ្នាកម្រិតណាដោយផ្អែកលើលក្ខណៈសូរសព្ទរបស់វា។ បើតម្លៃនេះកាន់តែទាប មានន័យថាការតភ្ជាប់សំឡេងទាំងពីរស្តាប់ទៅកាន់តែធម្មជាតិ និងមិនមានសូររអាក់រអួល ឬដាច់ៗ។</td>
+                <td>ដូចជាការវាស់ស្ទង់ភាពស៊ុមគ្នានៃបន្ទះឈើពីរដែលយកមកផ្គុំគ្នា បើមុខកាត់ឈើទាំងពីរស៊ីគ្នាល្អ នោះស្នាមតភ្ជាប់នឹងមើលមិនសូវឃើញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Target cost</span></td>
+                <td>ជារង្វាស់ដែលគណនាដើម្បីប្រៀបធៀបថាតើ បំណែកសំឡេងដែលប្រព័ន្ធបានទាញយកពីក្នុងឃ្លាំងទិន្នន័យ មានលក្ខណៈ (ដូចជា សំនៀង ការសង្កត់សំឡេង និងប្រវែង) ស្រដៀងទៅនឹងសំឡេងគោលដៅឧត្តមគតិដែលប្រព័ន្ធចង់បានកម្រិតណា។ បើតម្លៃនេះកាន់តែទាប មានន័យថាសំឡេងដែលរើសបានកាន់តែត្រឹមត្រូវ និងសាកសមនឹងបរិបទនៃប្រយោគ។</td>
+                <td>ដូចជាការដើរទិញខោអាវដោយប្រៀបធៀបខ្នាតអាវក្នុងហាង ទៅនឹងខ្នាតដងខ្លួនរបស់អ្នក បើខ្នាតកាន់តែត្រូវគ្នា នោះតម្លៃនៃការខុសខ្នាតគឺកាន់តែទាប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Greedy algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយក្នុងការស្វែងរកចម្លើយ ដែលតែងតែធ្វើការជ្រើសរើសយកជម្រើសណាដែលផ្តល់លទ្ធផលល្អបំផុតភ្លាមៗនៅជំហាននីមួយៗ (Local optimum) ដោយមិនខ្វល់ពីផលប៉ះពាល់ជារួមនៅចុងបញ្ចប់ឡើយ។ នៅក្នុងការសិក្សានេះ វាត្រូវបានប្រើដើម្បីរើសប្រយោគបញ្ចូលក្នុងទិន្នន័យ ដោយរើសយកប្រយោគណាដែលធ្វើឱ្យតម្លៃគម្លាត KL ធ្លាក់ចុះទាបបំផុតភ្លាមៗនៅរាល់ការរើសម្តងៗ។</td>
+                <td>ដូចជាការរើសផ្លែឈើក្នុងកន្ត្រក ដោយរើសយកតែផ្លែណាដែលធំជាងគេនិងឃើញច្បាស់ជាងគេនៅនឹងមុខភ្លាមៗ ជាជាងការចំណាយពេលគិតរកវិធីរើសយកផ្លែឈើទាំងអស់ឱ្យបានលឿនជាងមុន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=database+reduction+techniques+for+concatenative+speech+synthesis" target="_blank" rel="noopener"><span class="en">database reduction techniques for concatenative speech synthesis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Kullback-Leibler+divergence+in+corpus+design" target="_blank" rel="noopener"><span class="en">Kullback-Leibler divergence in corpus design</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=domain+adaptation+for+TTS+systems" target="_blank" rel="noopener"><span class="en">domain adaptation for TTS systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=unit+selection+algorithms+in+text-to-speech" target="_blank" rel="noopener"><span class="en">unit selection algorithms in text-to-speech</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

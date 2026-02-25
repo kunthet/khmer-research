@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវិភាគប្រៀបធៀបលើ Decision Transformers និង Behavioural Cloning សម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ក្នុងបរិស្ថាន ATARI | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះវាយតម្លៃពីសមត្ថភាពរបស់ Decision Transformer (DT) ប្រៀបធៀបជាមួយនឹងការចម្លងអាកប្បកិរិយា (Behavioural Cloning - BC) នៅក្នុងបរិស្ថានហ្គេមដែលការរុករក (exp...">
+    
+    <meta name="keywords" content="Offline Reinforcement Learning, Decision Transformers, Behavioural Cloning, ATARI Environments, General Video Game Playing, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/decision-transformers-vs-bc-offline-rl-atari-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/decision-transformers-vs-bc-offline-rl-atari-2023.html">
+    <meta property="og:title" content="ការវិភាគប្រៀបធៀបលើ Decision Transformers និង Behavioural Cloning សម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ក្នុងបរិស្ថាន ATARI | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះវាយតម្លៃពីសមត្ថភាពរបស់ Decision Transformer (DT) ប្រៀបធៀបជាមួយនឹងការចម្លងអាកប្បកិរិយា (Behavioural Cloning - BC) នៅក្នុងបរិស្ថានហ្គេមដែលការរុករក (exploration) មានភាពស្មុគស្មាញ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023 SACAIR Unconference">
+    
+    <meta property="article:tag" content="Offline Reinforcement Learning">
+    
+    <meta property="article:tag" content="Decision Transformers">
+    
+    <meta property="article:tag" content="Behavioural Cloning">
+    
+    <meta property="article:tag" content="ATARI Environments">
+    
+    <meta property="article:tag" content="General Video Game Playing">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវិភាគប្រៀបធៀបលើ Decision Transformers និង Behavioural Cloning សម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ក្នុងបរិស្ថាន ATARI">
+    <meta name="twitter:description" content="ឯកសារនេះវាយតម្លៃពីសមត្ថភាពរបស់ Decision Transformer (DT) ប្រៀបធៀបជាមួយនឹងការចម្លងអាកប្បកិរិយា (Behavioural Cloning - BC) នៅក្នុងបរិស្ថានហ្គេមដែលការរុករក (exploration) មានភាពស្មុគស្មាញ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179b\u17be Decision Transformers \u1793\u17b7\u1784 Behavioural Cloning \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789 (Offline Reinforcement Learning) \u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793 ATARI",
+      "name": "A Comparative Analysis on Decision Transformers and Behavioural Cloning for Offline Reinforcement Learning in ATARI Environments",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1796\u17b8\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796\u179a\u1794\u179f\u17cb Decision Transformer (DT) \u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u1785\u1798\u17d2\u179b\u1784\u17a2\u17b6\u1780\u1794\u17d2\u1794\u1780\u17b7\u179a\u17b7\u1799\u17b6 (Behavioural Cloning - BC) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u17a0\u17d2\u1782\u17c1\u1798\u178a\u17c2\u179b\u1780\u17b6\u179a\u179a\u17bb\u1780\u179a\u1780 (exploration) \u1798\u17b6\u1793\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/decision-transformers-vs-bc-offline-rl-atari-2023.html",
+      "author": [{"@type": "Person", "name": "Sachin Reddy (University of KwaZulu-Natal)"},{"@type": "Person", "name": "Asad Jeewa (Supervisor, University of KwaZulu-Natal)"}],
+      "datePublished": "2023 SACAIR Unconference",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A Comparative Analysis on Decision Transformers and Behavioural Cloning for Offline Reinforcement Learning in ATARI Environments",
+        "url": "N/A"
+      },
+      "keywords": ["Offline Reinforcement Learning", "Decision Transformers", "Behavioural Cloning", "ATARI Environments", "General Video Game Playing"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179b\u17be Decision Transformers \u1793\u17b7\u1784 Behavioural Cloning \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789 (Offline Reinforcement Learning) \u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793 ATARI",
+          "item": "https://khmerresearch.com/papers/technology/decision-transformers-vs-bc-offline-rl-atari-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការវិភាគប្រៀបធៀបលើ Decision Transformers និង Behavioural ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A Comparative Analysis on Decision Transformers and Behavioural Cloning for Offline Reinforcement Learning in ATARI Environments<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវិភាគប្រៀបធៀបលើ Decision Transformers និង Behavioural Cloning សម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ក្នុងបរិស្ថាន ATARI</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A Comparative Analysis on Decision Transformers and Behavioural Cloning for Offline Reinforcement Learning in ATARI Environments</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Sachin Reddy (University of KwaZulu-Natal), Asad Jeewa (Supervisor, University of KwaZulu-Natal)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 SACAIR Unconference</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះវាយតម្លៃពីសមត្ថភាពរបស់ Decision Transformer (DT) ប្រៀបធៀបជាមួយនឹងការចម្លងអាកប្បកិរិយា (Behavioural Cloning - BC) នៅក្នុងបរិស្ថានហ្គេមដែលការរុករក (exploration) មានភាពស្មុគស្មាញ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់បរិស្ថានហ្គេមវីដេអូ ATARI ចំនួនពីរដែលមានកម្រិតលំបាកខុសៗគ្នា ដើម្បីបង្កើតជាក្របខ័ណ្ឌវាយតម្លៃសម្រាប់ក្បួនដោះស្រាយ (Algorithm) នីមួយៗ។
+        
+        <ul>
+            
+            <li>ការជ្រើសរើសបរិស្ថានហ្គេម (Game Environments): ប្រើប្រាស់ហ្គេម Breakout (ងាយស្រួលរុករក) និង Frostbite (ពិបាករុករក) ពីបណ្តុំ D4RL។</li>
+            
+            <li>ការបណ្តុះបណ្តាលម៉ូដែល (Model Training): ប្រើប្រាស់ទិន្នន័យក្រៅបណ្តាញ (Offline data) ចំនួន 1% សម្រាប់វិធីសាស្ត្រនីមួយៗ និងធ្វើការបណ្តុះបណ្តាលចំនួន 5 epochs។</li>
+            
+            <li>ការវាយតម្លៃ (Evaluation): ធ្វើការប្រៀបធៀបពិន្ទុដែលធ្វើឱ្យមានលក្ខណៈស្តង់ដារ (Normalized scores) ធៀបទៅនឹងក្បួនដោះស្រាយ Double DQN (DDQN)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>នៅក្នុងហ្គេម Breakout ម៉ូដែល DT ទទួលបានពិន្ទុ 19.09 ដែលខ្ពស់ជាង BC ដែលទទួលបានត្រឹម 12.69 (កើនឡើង 50%)។</li>
+            
+            <li>នៅក្នុងហ្គេម Frostbite ម៉ូដែល DT ទទួលបានពិន្ទុ 70.35 ធៀបនឹង BC ដែលទទួលបាន 39.37 (កើនឡើង 79%)។</li>
+            
+            <li>ជារួម Decision Transformer (DT) មានដំណើរការល្អជាង Behavioural Cloning យ៉ាងខ្លាំង ជាពិសេសក្នុងបរិស្ថានដែលទាមទារការរុករកបែបយុទ្ធសាស្ត្រ (Strategic exploration) ទោះបីជាជួបការលំបាកក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Decision Transformer (DT)</span></strong><br>ម៉ូដែលបំលែងការសម្រេចចិត្ត (Decision Transformer)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការរុករកបែបយុទ្ធសាស្ត្រ និងមានភាពរឹងមាំនៅក្នុងបរិស្ថានហ្គេមដែលពិបាករុករក (Hard-exploration environments)។</td>
+                <td>ទាមទារការពិន័យទិន្នន័យតាមទម្រង់លំដាប់លំដោយ (Sequence modeling) និងមានភាពប្រែប្រួលខ្ពស់ (High variance) ក្នុងដំណើរការ។</td>
+                <td>ទទួលបានពិន្ទុស្តង់ដារ 19.09 ក្នុងហ្គេម Breakout និង 70.35 ក្នុងហ្គេម Frostbite។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Behavioural Cloning (BC)</span></strong><br>ការចម្លងអាកប្បកិរិយា (Behavioural Cloning)</td>
+                <td>ជាវិធីសាស្ត្រស្តង់ដារនៃការរៀនតាមរយៈការត្រាប់តាម (Imitation learning) ដែលងាយស្រួលក្នុងការអនុវត្តជាង DT។</td>
+                <td>ជួបការលំបាកខ្លាំងនៅក្នុងបរិស្ថានដែលទាមទារចលនាស្មុគស្មាញ និងការរុករកស៊ីជម្រៅ ដូចជាហ្គេម Frostbite ជាដើម។</td>
+                <td>ទទួលបានពិន្ទុស្តង់ដារត្រឹមតែ 12.69 ក្នុងហ្គេម Breakout និង 39.37 ក្នុងហ្គេម Frostbite។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Double DQN (DDQN)</span></strong><br>ការរៀន Q-Learning ទ្វេដង (Double DQN)</td>
+                <td>ជាក្បួនដោះស្រាយដ៏មានប្រសិទ្ធភាព (SOTA Q-Learning) សម្រាប់កំណត់ជាគោលស្តង់ដារវាយតម្លៃការអនុវត្តរបស់ម៉ូដែលផ្សេងៗ។</td>
+                <td>មិនមែនជាវិធីសាស្ត្រផ្តោតលើទិន្នន័យក្រៅបណ្តាញ (Offline RL) សុទ្ធសាធនោះទេ ព្រោះជាទូទៅទាមទារការធ្វើអន្តរកម្មជាមួយបរិស្ថានផ្ទាល់។</td>
+                <td>ត្រូវបានប្រើជាគោលវាយតម្លៃ ដោយកំណត់ពិន្ទុរបស់វាស្មើនឹង 100 សម្រាប់ធ្វើស្តង់ដារូបនីយកម្មពិន្ទុ (Normalized score)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកម្រិតមធ្យមដោយយកទិន្នន័យហ្វឹកហាត់ត្រឹមតែ ១% នៃទិន្នន័យក្រៅបណ្តាញសរុប និងធ្វើការហ្វឹកហាត់ក្នុងរយៈពេលខ្លី។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់បណ្តុំទិន្នន័យ <span class="en">D4RL benchmark collection</span> ជាពិសេសទិន្នន័យប្រភេទ <span class="en">ATARI-replay Offline dataset</span> សម្រាប់ហ្គេម Breakout និង Frostbite។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារអង្គគណនា (GPU) កម្រិតមធ្យមទៅខ្ពស់ដើម្បីបង្ហាត់ម៉ូដែល <span class="en">Transformer-based</span> និងដំណើរការការវាយតម្លៃជាមួយ <span class="en">128 batch size</span> និងហ្វឹកហាត់ចំនួន <span class="en">5 epochs</span>។</li>
+        
+        <li><strong>Software Frameworks:</strong> ចាំបាច់ត្រូវប្រើប្រាស់បណ្ណាល័យ <span class="en">Deep Learning</span> ដូចជា <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> រួមជាមួយ <span class="en">Arcade Learning Environment (ALE)</span> សម្រាប់ដំណើរការហ្គេមវីដេអូ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងបរិស្ថានវីដេអូហ្គេមនិម្មិត (ATARI) ដែលមានរង្វាន់ច្រើន (Dense rewards) និងគ្មានផលប៉ះពាល់ដល់ពិភពពិត។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តជាក់ស្តែងក្នុងវិស័យផ្សេងៗដូចជាមនុស្សយន្ត ឬចរាចរណ៍ អាចនឹងប្រឈមនឹងបញ្ហានៃរង្វាន់ដ៏កម្រ (Sparse rewards) ដែលទាមទារឱ្យមានទិន្នន័យជាក់ស្តែងក្នុងស្រុកដែលមានភាពស្មុគស្មាញជាងនេះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាការសិក្សានេះផ្តោតលើវីដេអូហ្គេមក៏ដោយ ក៏បច្ចេកវិទ្យា Offline Reinforcement Learning (RL) នេះអាចយកមកកែច្នៃប្រើប្រាស់សម្រាប់ប្រព័ន្ធស្វ័យប្រវត្តិកម្មនៅកម្ពុជាបានយ៉ាងល្អ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យស្វ័យប្រវត្តិកម្ម និងមនុស្សយន្ត (Robotics in SEZs):</strong> អាចប្រើប្រាស់ Offline RL ដើម្បិបង្ហាត់មនុស្សយន្តនៅក្នុងតំបន់សេដ្ឋកិច្ចពិសេសនៅកម្ពុជា តាមរយៈទិន្នន័យចាស់ៗដោយមិនចាំបាច់សាកល្បងផ្ទាល់ ដែលអាចបង្កឱ្យខូចខាតឧបករណ៍ថ្លៃៗ។</li>
+            
+            <li><strong>ការគ្រប់គ្រងចរាចរណ៍ឆ្លាតវៃ (Smart Traffic Management):</strong> រាជធានីភ្នំពេញអាចប្រមូលទិន្នន័យចរាចរណ៍ពីអតីតកាល (Offline data) រួចប្រើប្រាស់ម៉ូដែល Decision Transformer ដើម្បីទស្សន៍ទាយ និងរៀបចំបណ្តាញភ្លើងស្តុបឱ្យបានប្រសើរឡើងដោយមិនរំខានដល់ចរាចរណ៍ពិតប្រាកដ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យា Decision Transformers ផ្តល់នូវសក្តានុពលក្នុងការបង្កើតភ្នាក់ងារ AI ដែលរៀនពីទិន្នន័យអតីតកាលប្រកបដោយសុវត្ថិភាព ដែលសាកសមសម្រាប់ការអភិវឌ្ឍហេដ្ឋារចនាសម្ព័ន្ធបច្ចេកវិទ្យានៅកម្ពុជាកម្រិតបន្ទាប់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីទ្រឹស្តីជាមូលដ្ឋាន:</strong> អ្នកសិក្សាត្រូវស្រាវជ្រាវអំពី <span class="en">Offline Reinforcement Learning</span> និងរបៀបដែល <span class="en">Transformers (GPT architecture)</span> អាចបំប្លែងបញ្ហា RL ទៅជាការទស្សន៍ទាយតាមលំដាប់លំដោយ (<span class="en">Sequence modeling problem</span>)។</li>
+            
+            <li><strong>រៀបចំបរិស្ថានសាកល្បង:</strong> ដំឡើង <span class="en">Python</span> រួមជាមួយបណ្ណាល័យ <span class="en">Arcade Learning Environment (ALE)</span> និងទាញយកបណ្តុំទិន្នន័យ <span class="en">D4RL ATARI-replay dataset</span> ដើម្បីប្រើប្រាស់ជាទិន្នន័យហ្វឹកហាត់។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែលមូលដ្ឋាន Behavioural Cloning:</strong> សរសេរកូដសម្រាប់ម៉ូដែល <span class="en">Behavioural Cloning (BC)</span> ដោយប្រើ <span class="en">PyTorch</span> ធ្វើការបណ្តុះបណ្តាលជាមួយទិន្នន័យ ១% ហើយកត់ត្រាពិន្ទុទុកជាគោលប្រៀបធៀប (Baseline)។</li>
+            
+            <li><strong>កសាងម៉ូដែល Decision Transformer:</strong> បង្កើតស្ថាបត្យកម្មម៉ូដែល <span class="en">Decision Transformer</span> និងហ្វឹកហាត់វាជាមួយទំហំ <span class="en">batch size 128</span> និងរត់ចំនួន <span class="en">5 epochs</span> តាមរយៈឧបករណ៍ <span class="en">GPU</span>។</li>
+            
+            <li><strong>ប្រៀបធៀប និងវាយតម្លៃលទ្ធផល:</strong> ប្រើប្រាស់ម៉ូដែលទាំងពីរឱ្យលេងហ្គេម <span class="en">Breakout</span> និង <span class="en">Frostbite</span> ចំនួន ៣ ដង (<span class="en">3 seeds</span>) រួចគណនាពិន្ទុមធ្យមប្រៀបធៀបជាមួយស្តង់ដារ <span class="en">Double DQN</span> ដើម្បីបញ្ជាក់ពីលទ្ធភាពនៃការរុករក។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline Reinforcement Learning</span></td>
+                <td>វាគឺជាដំណើរការដែលប្រព័ន្ធបញ្ញាសិប្បនិម្មិត (AI) រៀនធ្វើសេចក្តីសម្រេចចិត្ត និងស្វែងរកយុទ្ធសាស្ត្រល្អបំផុតតាមរយៈការវិភាគលើទិន្នន័យចាស់ៗដែលបានប្រមូលទុកជាមុនយ៉ាងច្រើន ដោយមិនចាំបាច់បញ្ជូនវាទៅធ្វើអន្តរកម្មសាកល្បងផ្ទាល់នៅក្នុងបរិស្ថានហ្គេមនោះឡើយ។</td>
+                <td>ដូចជាកីឡាករបាល់ទាត់ដែលរៀនពីក្បួនលេង និងយុទ្ធសាស្ត្រថ្មីៗតាមរយៈការអង្គុយមើលវីដេអូប្រកួតចាស់ៗរបស់អ្នកដទៃ ដោយមិនចាំបាច់ចុះលេងផ្ទាល់នៅលើទីលាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision Transformers</span></td>
+                <td>វាគឺជាស្ថាបត្យកម្មបញ្ញាសិប្បនិម្មិតម៉្យាងដែលយកបញ្ហានៃការរៀនពង្រឹង (RL) មកបំប្លែងជាការទស្សន៍ទាយតាមលំដាប់លំដោយ (Sequence modeling) ដោយប្រើប្រាស់បច្ចេកវិទ្យា Transformer ដើម្បីទស្សន៍ទាយសកម្មភាពដែលត្រូវធ្វើបន្ទាប់ដោយផ្អែកលើលទ្ធផលរង្វាន់ដែលបានកំណត់ទុក។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលអានសៀវភៅតាមលំដាប់លំដោយរហូតដល់យល់សាច់រឿង រួចអាចទាយដឹងច្បាស់ថាជំពូកបន្ទាប់តួឯកគួរធ្វើអ្វីខ្លះដើម្បីទទួលបានលទ្ធផលបញ្ចប់ដ៏មានក្តីសុខ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Behavioural Cloning</span></td>
+                <td>វាជាវិធីសាស្ត្រមួយដែលប្រព័ន្ធ AI ព្យាយាមរៀនតាមរយៈការចម្លងអាកប្បកិរិយា ឬសកម្មភាពរបស់អ្នកជំនាញទាំងស្រុង ដោយផ្អែកលើទិន្នន័យគំរូដែលធ្លាប់មាន ក្នុងគោលបំណងភ្ជាប់ស្ថានភាពដែលបានឃើញទៅនឹងសកម្មភាពដែលត្រូវធ្វើបន្ទាប់ដោយផ្ទាល់។</td>
+                <td>ដូចជាកូនក្មេងដែលរៀនចងខ្សែស្បែកជើងដោយការអង្គុយមើលសកម្មភាពដៃរបស់ឪពុកម្តាយ ហើយព្យាយាមធ្វើតាមរាល់ចលនាទាំងអស់ដោយមិនចាំបាច់យល់ពីហេតុផលស៊ីជម្រៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">General Video Game Playing</span></td>
+                <td>វាជាបញ្ហាប្រឈមក្នុងការបង្កើតភ្នាក់ងារ AI ដែលមានសមត្ថភាពអាចលេងវីដេអូហ្គេមបានច្រើនប្រភេទផ្សេងៗគ្នា ដោយតម្រូវឱ្យវាស្វែងយល់ពីច្បាប់ និងបរិស្ថានហ្គេមនីមួយៗដោយខ្លួនឯង ជំនួសឱ្យការសរសេរកូដជាក់លាក់សម្រាប់តែហ្គេមណាមួយ។</td>
+                <td>ដូចជាអ្នកលេងហ្គេមដ៏ពូកែម្នាក់ដែលអាចលេងហ្គេមថ្មីៗគ្រប់ប្រភេទបានយ៉ាងល្អភ្លាមៗ ទោះបីជាមិនដែលធ្លាប់លេងវាពីមុនមកក៏ដោយ ព្រោះគាត់មានសមត្ថភាពចាប់គន្លឹះហ្គេមបានលឿន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sequence modeling</span></td>
+                <td>គឺជាដំណើរការគណិតវិទ្យាដែលត្រូវបានប្រើប្រាស់សម្រាប់ទស្សន៍ទាយទិន្នន័យ ឬសកម្មភាពបន្ទាប់ ដោយវិភាគទៅលើទិន្នន័យដែលបានកើតឡើងជាបន្តបន្ទាប់គ្នាតាមលំដាប់លំដោយកាលពីអតីតកាល។</td>
+                <td>ដូចជាមុខងារទស្សន៍ទាយពាក្យនៅលើក្តារចុចទូរសព្ទដៃ ដែលដឹងថាអ្នកនឹងវាយពាក្យអ្វីបន្តទៀតដោយផ្អែកលើពាក្យដែលអ្នកទើបតែវាយរួចពីមុនមក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Double DQN</span></td>
+                <td>វាគឺជាក្បួនដោះស្រាយដ៏មានប្រសិទ្ធភាពក្នុងការរៀនពង្រឹង (RL) ដែលជួយកាត់បន្ថយបញ្ហានៃការវាយតម្លៃរង្វាន់ខ្ពស់ហួសហេតុពេក ដែលធ្វើឱ្យភ្នាក់ងារ AI មានភាពវៃឆ្លាតជាងមុន ហើយវាត្រូវបានគេប្រើជាគោលស្តង់ដារសម្រាប់ប្រៀបធៀបនៅក្នុងការសិក្សានេះ។</td>
+                <td>ដូចជាអ្នកវាយតម្លៃអចលនទ្រព្យពីរនាក់ដែលជួយផ្ទៀងផ្ទាត់តម្លៃគ្នាទៅវិញទៅមក ដើម្បីធានាថាផ្ទះមួយមិនត្រូវបានអ្នកទីមួយដាក់តម្លៃលក់ថ្លៃខុសពីការពិតហួសហេតុពេក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Exploration</span></td>
+                <td>នៅក្នុងបរិបទនៃការរៀនពង្រឹង គឺជាដំណើរការដែលភ្នាក់ងារ AI ធ្វើការសាកល្បងសកម្មភាពថ្មីៗដោយចៃដន្យដើម្បីស្វែងយល់ពីរបៀបរៀបចំក្នុងបរិស្ថាន និងស្វែងរកវិធីទទួលបានរង្វាន់ ជាពិសេសក្នុងស្ថានភាពដែលរង្វាន់កម្រនឹងទទួលបានឬលាក់កំបាំងខ្លាំង។</td>
+                <td>ដូចជាការដើររុករកកន្លែងលក់ម្ហូបឆ្ងាញ់ៗដោយខ្លួនឯងនៅក្នុងទីក្រុងថ្មីមួយដែលអ្នកមិនធ្លាប់ស្គាល់ទាល់តែសោះ ដោយសុខចិត្តដើរចូលផ្លូវតូចៗដែលមិនស្គាល់ដើម្បីសាកល្បងសំណាង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Offline+reinforcement+learning+with+decision+transformers" target="_blank" rel="noopener"><span class="en">Offline reinforcement learning with decision transformers</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Behavioural+cloning+vs+reinforcement+learning+in+complex+environments" target="_blank" rel="noopener"><span class="en">Behavioural cloning vs reinforcement learning in complex environments</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Sequence+modeling+for+reinforcement+learning" target="_blank" rel="noopener"><span class="en">Sequence modeling for reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Exploration+challenges+in+general+video+game+playing" target="_blank" rel="noopener"><span class="en">Exploration challenges in general video game playing</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

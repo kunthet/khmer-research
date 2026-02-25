@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM (HTS) កំណែ 2.0 | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះបង្ហាញពីកំណែទី 2.0 នៃប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល Hidden Markov (HTS) ដោយរៀបរាប់ពីមុខងារថ្មីៗដើម្បីដោះស្រាយការលំបាកក្នុងការកត់ត្រាទិន្នន័យសំឡេងទំហ...">
+    
+    <meta name="keywords" content="speech synthesis, HMM, HTS, statistical parametric speech synthesis, speaker adaptation, parameter generation algorithm, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/hmm-based-speech-synthesis-system-hts-v2-2007.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/hmm-based-speech-synthesis-system-hts-v2-2007.html">
+    <meta property="og:title" content="ប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM (HTS) កំណែ 2.0 | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះបង្ហាញពីកំណែទី 2.0 នៃប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល Hidden Markov (HTS) ដោយរៀបរាប់ពីមុខងារថ្មីៗដើម្បីដោះស្រាយការលំបាកក្នុងការកត់ត្រាទិន្នន័យសំឡេងទំហំធំ និងកែលម្អគុណភាពនៃការសំយោគសំឡេង។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2007 6th ISCA Workshop on Speech Synthesis">
+    
+    <meta property="article:tag" content="speech synthesis">
+    
+    <meta property="article:tag" content="HMM">
+    
+    <meta property="article:tag" content="HTS">
+    
+    <meta property="article:tag" content="statistical parametric speech synthesis">
+    
+    <meta property="article:tag" content="speaker adaptation">
+    
+    <meta property="article:tag" content="parameter generation algorithm">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM (HTS) កំណែ 2.0">
+    <meta name="twitter:description" content="ឯកសារនេះបង្ហាញពីកំណែទី 2.0 នៃប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល Hidden Markov (HTS) ដោយរៀបរាប់ពីមុខងារថ្មីៗដើម្បីដោះស្រាយការលំបាកក្នុងការកត់ត្រាទិន្នន័យសំឡេងទំហំធំ និងកែលម្អគុណភាពនៃការសំយោគសំឡេង។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b HMM (HTS) \u1780\u17c6\u178e\u17c2 2.0",
+      "name": "The HMM-based Speech Synthesis System (HTS) Version 2.0",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1796\u17b8\u1780\u17c6\u178e\u17c2\u1791\u17b8 2.0 \u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov (HTS) \u178a\u17c4\u1799\u179a\u17c0\u1794\u179a\u17b6\u1794\u17cb\u1796\u17b8\u1798\u17bb\u1781\u1784\u17b6\u179a\u1790\u17d2\u1798\u17b8\u17d7\u178a\u17be\u1798\u17d2\u1794\u17b8\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1780\u178f\u17cb\u178f\u17d2\u179a\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17c6\u17a1\u17c1\u1784\u1791\u17c6\u17a0\u17c6\u1792\u17c6 \u1793\u17b7\u1784\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1782\u17bb\u178e\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/hmm-based-speech-synthesis-system-hts-v2-2007.html",
+      "author": [{"@type": "Person", "name": "Heiga Zen (Nagoya Institute of Technology)"},{"@type": "Person", "name": "Takashi Nose (Tokyo Institute of Technology)"},{"@type": "Person", "name": "Junichi Yamagishi (Tokyo Institute of Technology, University of Edinburgh)"},{"@type": "Person", "name": "Shinji Sako (Nagoya Institute of Technology, Tokyo University)"},{"@type": "Person", "name": "Takashi Masuko (Tokyo Institute of Technology)"},{"@type": "Person", "name": "Alan W. Black (Carnegie Mellon University)"},{"@type": "Person", "name": "Keiichi Tokuda (Nagoya Institute of Technology)"}],
+      "datePublished": "2007 6th ISCA Workshop on Speech Synthesis",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "The HMM-based Speech Synthesis System (HTS) Version 2.0",
+        "url": "http://hts.sp.nitech.ac.jp/"
+      },
+      "keywords": ["speech synthesis", "HMM", "HTS", "statistical parametric speech synthesis", "speaker adaptation", "parameter generation algorithm"],
+      "about": "Speech Synthesis"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b HMM (HTS) \u1780\u17c6\u178e\u17c2 2.0",
+          "item": "https://khmerresearch.com/papers/technology/hmm-based-speech-synthesis-system-hts-v2-2007.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM (HTS) កំណែ 2.0</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> The HMM-based Speech Synthesis System (HTS) Version 2.0<br>
+        
+        <strong>Source:</strong> <a href="http://hts.sp.nitech.ac.jp/" target="_blank">hts.sp.nitech.ac.jp</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM (HTS) កំណែ 2.0</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> The HMM-based Speech Synthesis System (HTS) Version 2.0</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Heiga Zen (Nagoya Institute of Technology), Takashi Nose (Tokyo Institute of Technology), Junichi Yamagishi (Tokyo Institute of Technology, University of Edinburgh), Shinji Sako (Nagoya Institute of Technology, Tokyo University), Takashi Masuko (Tokyo Institute of Technology), Alan W. Black (Carnegie Mellon University), Keiichi Tokuda (Nagoya Institute of Technology)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2007 6th ISCA Workshop on Speech Synthesis</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Speech Synthesis</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះបង្ហាញពីកំណែទី 2.0 នៃប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល Hidden Markov (HTS) ដោយរៀបរាប់ពីមុខងារថ្មីៗដើម្បីដោះស្រាយការលំបាកក្នុងការកត់ត្រាទិន្នន័យសំឡេងទំហំធំ និងកែលម្អគុណភាពនៃការសំយោគសំឡេង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ប្រព័ន្ធ HTS នេះធ្វើការម៉ូដែលវិសាលគម (Spectrum) រលកសំឡេង (Excitation) និងថិរវេលា (Duration) ដោយប្រើប្រាស់ម៉ូដែល HMM អាស្រ័យលើបរិបទដើម្បីបង្កើតរលកសំឡេងដោយផ្ទាល់ពីម៉ូដែល។
+        
+        <ul>
+            
+            <li>ការបង្កើតប៉ារ៉ាម៉ែត្រសំឡេងដោយផ្អែកលើក្បួនដោះស្រាយ EM (EM-based speech parameter generation algorithm)</li>
+            
+            <li>ការបន្សាំអ្នកនិយាយដោយផ្អែកលើ MLLR និង MAP សម្រាប់ MSD-HMMs (Speaker adaptation for MSD-HMMs)</li>
+            
+            <li>ការបណ្តុះបណ្តាលដែលអាចបន្សាំបាន (Adaptive training)</li>
+            
+            <li>ការគណនាមធ្យមភាគ និងវ៉ារ្យង់សកល (Global mean and variance calculation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>កំណែ HTS 2.0 ត្រូវបានដាក់ឱ្យប្រើប្រាស់ដោយជោគជ័យជាមួយនឹងមុខងារថ្មីៗសំខាន់ៗដូចជាការបន្សាំអ្នកនិយាយ (Speaker adaptation) សម្រាប់ MSD-HMMs ច្រើនស្ទ្រីម។</li>
+            
+            <li>ការដាក់បញ្ចូលក្បួនដោះស្រាយ EM (Expectation-Maximization) សម្រាប់ការបង្កើតប៉ារ៉ាម៉ែត្រសំឡេង ផ្តល់នូវភាពបត់បែន និងការធ្វើឱ្យប្រសើរឡើងក្នុងការស្វែងរកប្រសិទ្ធភាពសម្រាប់លំដាប់ស្ថានភាពដែលលាក់ (Hidden state sequences)។</li>
+            
+            <li>កញ្ចប់ឧបករណ៍នេះត្រូវបានបញ្ជាក់ថាជាថ្នាលស្រាវជ្រាវដ៏មានភាពបត់បែនខ្ពស់ ដែលត្រូវបានយកទៅប្រើប្រាស់ក្នុងវិស័យផ្សេងៗដូចជា ការសំយោគចលនាមនុស្ស (Human motion synthesis) ការទទួលស្គាល់សំឡេងនិងរូបភាព និងការសរសេរកូដសំឡេងកម្រិតទាប (Low-bitrate speech coding)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Unit Selection Speech Synthesis</span></strong><br>ការសំយោគសំឡេងដោយការជ្រើសរើសឯកតា</td>
+                <td>អាចបង្កើតសំឡេងបានគុណភាពខ្ពស់ និងស្តាប់ទៅមានលក្ខណៈធម្មជាតិបំផុត ដោយសារការប្រើប្រាស់ទិន្នន័យសំឡេងពិតៗ។</td>
+                <td>ត្រូវការមូលដ្ឋានទិន្នន័យធំខ្លាំងណាស់សម្រាប់ការផ្លាស់ប្តូរស្ទីល ឬអារម្មណ៍ ហើយមានការលំបាកខ្លាំងក្នុងការកែប្រែលក្ខណៈសំឡេងឱ្យបត់បែន។</td>
+                <td>ជាបច្ចេកទេសដ៏មានប្រជាប្រិយភាព ប៉ុន្តែត្រូវបានកម្រិតដោយទំហំទិន្នន័យ និងមិនងាយស្រួលក្នុងការបង្កើតទម្រង់សំឡេងថ្មីៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">HMM-based Speech Synthesis (HTS)</span></strong><br>ការសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM</td>
+                <td>មានភាពបត់បែនខ្ពស់ ងាយស្រួលកែប្រែលក្ខណៈសំឡេង ស្ទីលនិយាយ និងអារម្មណ៍ ដោយប្រើប្រាស់បច្ចេកទេសផ្លាស់ប្តូរប៉ារ៉ាម៉ែត្រ (Adaptation/Interpolation)។</td>
+                <td>គុណភាពនៃសំឡេងដើមដែលបានសំយោគអាចមិនទាន់ស្មើនឹងគុណភាពដ៏ល្អឥតខ្ចោះនៃវិធីសាស្ត្រ Unit Selection នោះទេ។</td>
+                <td>អាចបង្កើតសំឡេងដែលមានលក្ខណៈចម្រុះបានយ៉ាងងាយស្រួល និងម៉ូដែលវិសាលគម (Spectrum) និងរលកសំឡេង (Excitation) ក្នុងពេលតែមួយដោយមិនត្រូវការទិន្នន័យធំពេក។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">EM-based Speech Parameter Generation (Case 3)</span></strong><br>ការបង្កើតប៉ារ៉ាម៉ែត្រសំឡេងផ្អែកលើ EM Algorithm</td>
+                <td>អនុញ្ញាតឱ្យប្រើប្រាស់ Gaussian mixtures សម្រាប់ការធ្វើម៉ូដែលកាន់តែសុក្រឹតនៅពេលដែលលំដាប់ស្ថានភាព (state sequences) ត្រូវបានលាក់។</td>
+                <td>ទាមទារការគណនាច្រើន (Computationally expensive) ស្មុគស្មាញ និងស៊ីពេលជាងក្បួនដោះស្រាយ Case 1 ដែលប្រើត្រឹមសមីការលីនេអ៊ែរ។</td>
+                <td>ផ្តល់នូវភាពបត់បែនក្នុងការស្វែងរកតម្លៃអតិបរមា និងការដោះស្រាយម៉ូដែលស្មុគស្មាញនៅក្នុងមុខងារ HMGenS។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ប្រព័ន្ធនេះទាមទារធនធានកុំព្យូទ័រល្មមសម្រាប់ការបង្កើតម៉ូដែល ប៉ុន្តែម៉ាស៊ីនសំយោគពេលដំណើរការ (hts_engine) ត្រូវបានរចនាឡើងឱ្យមានទំហំតូច និងប្រើប្រាស់ធនធានតិចបំផុត។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ទាមទារការដំឡើងឧបករណ៍បណ្តុះបណ្តាល HTK (Hidden Markov Model Toolkit), កម្មវិធីវិភាគអត្ថបទ (Text Analyzer) ដូចជា Festival ឬ Galatea និងត្រូវការ GCC-4 សម្រាប់ការសរសេរកូដ (Compilation)។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារកុំព្យូទ័រដែលមានសមត្ថភាពមធ្យមសម្រាប់ការគណនា Double Precision ក្នុងពេលបង្ហាត់ម៉ូដែលធំៗ (HCompV) ប៉ុន្តែត្រូវការ CPU និង RAM តិចតួចបំផុតសម្រាប់ប្រតិបត្តិការ hts_engine។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យសំឡេងដែលបានកត់ត្រាទុកជាមុន (ឧ. CMU ARCTIC សម្រាប់ភាសាអង់គ្លេស ឬ Nitech សម្រាប់ភាសាជប៉ុន) ព្រមទាំងមានការកត់ត្រាអត្ថបទ និងព្រំដែនសូរសព្ទ (Phoneme boundaries) ច្បាស់លាស់។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅលើផ្នែកដំណើរការសញ្ញាសំឡេង (Speech Processing), ក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine Learning) ជាពិសេស Hidden Markov Models និងការសរសេរស៊គ្រីប (Scripting)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើតេស្ត និងប្រើប្រាស់ទិន្នន័យភាសាអង់គ្លេស (CMU ARCTIC) និងភាសាជប៉ុន (Nitech) ជាចម្បង។ វាមិនមានការធ្វើតេស្តលើភាសាដែលមានសូរសៀងស្មុគស្មាញ (Tonal languages) ឬភាសាដែលមានការបំបែកព្យាង្គពិបាកដូចជាភាសាខ្មែរឡើយ។ សម្រាប់ប្រទេសកម្ពុជា នេះមានន័យថាយើងត្រូវប្រឈមមុខនឹងការប្រមូលទិន្នន័យសំឡេងភាសាខ្មែរ និងការបង្កើតប្រព័ន្ធវិភាគអត្ថបទ (Text Analysis) ដោយខ្លួនឯង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ប្រព័ន្ធ HTS នេះមានសក្តានុពលខ្ពស់ខ្លាំងណាស់សម្រាប់ប្រទេសកម្ពុជាក្នុងការបង្កើតប្រព័ន្ធអានអត្ថបទជាសំឡេង (Text-to-Speech) ជាភាសាខ្មែរដែលមានតម្លៃដើមទាប។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យអប់រំពិសេស និងសៀវភៅសូរសព្ទ (Special Education & Audiobooks):</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យានេះដើម្បីបង្កើតសំឡេងអានសៀវភៅដោយស្វ័យប្រវត្តិសម្រាប់សិស្សានុសិស្សពិការភ្នែកនៅតាមសាលារៀននានាក្នុងប្រទេសកម្ពុជា ដូចជាសាលាកុមារពិការភ្នែកនិងគថ្លង់នៃអង្គការគ្រួសារថ្មី។</li>
+            
+            <li><strong>សេវាកម្មអតិថិជន (Call Centers & IVR Systems):</strong> ធនាគារ (ឧ. ABA, ACLEDA) ឬក្រុមហ៊ុនទូរគមនាគមន៍ (ឧ. Cellcard, Smart) អាចប្រើប្រព័ន្ធនេះដើម្បីបង្កើតសំឡេងឆ្លើយតបដោយស្វ័យប្រវត្តិ (IVR) ដែលមានលក្ខណៈធម្មជាតិ និងអាចប្តូរស្ទីលនិយាយឱ្យស្របតាមសេវាកម្មផ្សេងៗ។</li>
+            
+            <li><strong>ការអភិរក្សភាសាជនជាតិដើមភាគតិច (Minority Language Preservation):</strong> ដោយសារប្រព័ន្ធនេះមានមុខងារ Speaker Adaptation ដែលអាចប្រើប្រាស់ទិន្នន័យតិចតួច អ្នកស្រាវជ្រាវនៅកម្ពុជាអាចប្រើវាដើម្បីសំយោគសំឡេងភាសាជនជាតិដើមភាគតិចនៅខេត្តរតនគិរី ឬមណ្ឌលគិរីបានងាយស្រួល។</li>
+            
+        </ul>
+        
+        
+        <p>ការទាញយកប្រយោជន៍ពី HTS ជំនាន់ទី២ នេះនឹងជួយពន្លឿនការអភិវឌ្ឍប្រព័ន្ធអន្តរកម្មដោយសំឡេងជាភាសាខ្មែរ ដោយដោះស្រាយបញ្ហាកង្វះខាតមូលដ្ឋានទិន្នន័យសំឡេងខ្នាតធំនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃម៉ូដែល HMM និង HTK:</strong> និស្សិតត្រូវចាប់ផ្តើមដោយការអានសៀវភៅណែនាំរបស់ <span class='en'>HTK (Hidden Markov Model Toolkit)</span> ដើម្បីយល់ច្បាស់ពីការបណ្តុះបណ្តាលម៉ូដែលសូរសព្ទ និងសាកល្បងដំណើរការកូដសាមញ្ញៗដើម្បីចាប់យកគោលគំនិតនៃការតម្រឹមសញ្ញា (Alignment)។</li>
+            
+            <li><strong>រៀបចំទិន្នន័យសំឡេងភាសាខ្មែរខ្នាតតូច:</strong> ប្រមូលទិន្នន័យសំឡេងអានជាភាសាខ្មែររបស់មនុស្សម្នាក់ (ប្រមាណ ២ ទៅ ៥ ម៉ោង) រួចធ្វើការកាត់ត និងកំណត់ព្រំដែនសូរសព្ទ (Phoneme segmentation) ដោយប្រើឧបករណ៍ដូចជា <span class='en'>Praat</span> ឬក្បួនដោះស្រាយ Forced Alignment។</li>
+            
+            <li><strong>ដំណើរការសាកល្បង HTS Demo Scripts:</strong> ទាញយក <span class='en'>HTS Version 2.0</span> រួចដំណើរការស៊គ្រីបសាកល្បង (Demo scripts) ជាមួយនឹងមូលដ្ឋានទិន្នន័យ <span class='en'>CMU ARCTIC</span> ដើម្បីយល់ពីលំហូរការងារទាំងមូល តាំងពីការទាញយកទិន្នន័យ រហូតដល់ការសំយោគចេញជាសំឡេង។</li>
+            
+            <li><strong>អភិវឌ្ឍប្រព័ន្ធ Text Analyzer សម្រាប់ភាសាខ្មែរ:</strong> អភិវឌ្ឍកូដ Python ឬប្រើប្រាស់ក្របខណ្ឌ <span class='en'>Festival</span> ដើម្បីបំប្លែងអត្ថបទភាសាខ្មែរទៅជាសូរសព្ទ (Phonemes) ដោយគិតគូរពីបរិបទ (Context-dependent labels) ដូចជាទីតាំងស្រៈ ព្យញ្ជនៈ និងការសង្កត់សំឡេង។</li>
+            
+            <li><strong>បណ្តុះបណ្តាល និងកែសម្រួលម៉ូដែលសំឡេងខ្មែរ:</strong> បញ្ចូលទិន្នន័យភាសាខ្មែរដែលបានរៀបចំរួចទៅក្នុង HTS ដើម្បីបណ្តុះបណ្តាលម៉ូដែល ដោយសាកល្បងប្រើមុខងារ <span class='en'>Speaker Adaptation (MLLR/MAP)</span> ដើម្បីកែលម្អគុណភាព រួចទាញយកម៉ូដែលទៅដំណើរការលើ <span class='en'>hts_engine</span>។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Models (HMMs)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិគណិតវិទ្យាដែលប្រើសម្រាប់ទស្សន៍ទាយនិងតំណាងឱ្យលំដាប់លំដោយនៃទិន្នន័យដែលផ្លាស់ប្តូរតាមពេលវេលា (ដូចជាការប្រែប្រួលនៃសូរសព្ទ) ដោយផ្អែកលើប្រូបាប៊ីលីតេនៃស្ថានភាពដែលយើងមើលមិនឃើញផ្ទាល់ (Hidden states) ដើម្បីយកមកគណនារកសញ្ញាដែលយើងចង់បាន។</td>
+                <td>ដូចជាការទស្សន៍ទាយអាកាសធាតុថ្ងៃស្អែកថានឹងភ្លៀងឬរាំង ដោយគ្រាន់តែផ្អែកលើការសង្កេតមើលថាតើមនុស្សពាក់អាវភ្លៀងឬកាន់ឆ័ត្រដើរតាមផ្លូវក្នុងថ្ងៃនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Unit selection</span></td>
+                <td>ជាបច្ចេកទេសសំយោគសំឡេងម៉្យាងដែលដំណើរការដោយការស្វែងរក និងជ្រើសរើសកាត់តបំណែកសំឡេងខ្លីៗ (Units) ពីមូលដ្ឋានទិន្នន័យសំឡេងមនុស្សពិតដែលបានថតទុក យកមកផ្ដុំតភ្ជាប់គ្នាបង្កើតជាប្រយោគនិយាយថ្មី។</td>
+                <td>ដូចជាការកាត់តអក្សរឬពាក្យនីមួយៗពីទស្សនាវដ្តីចាស់ៗ យកមកតម្រៀបបិទភ្ជាប់គ្នាបង្កើតជាសំបុត្រ ឬអត្ថបទថ្មីមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Statistical parametric speech synthesis</span></td>
+                <td>ជាវិធីសាស្ត្របង្កើតសំឡេងដោយប្រើប្រាស់ទិន្នន័យដើម្បីបង្រៀនកុំព្យូទ័រឱ្យចងចាំនូវលក្ខណៈរូបវន្តនៃសំឡេង (ប៉ារ៉ាម៉ែត្រដូចជា រំញ័រ ឬកម្រិតសំឡេង) រួចប្រើគំរូស្ថិតិទាំងនោះដើម្បីគណនា និងផលិតចេញជារលកសំឡេងថ្មីដោយខ្លួនឯង ដោយមិនបាច់ថតចម្លងសំឡេងដើម។</td>
+                <td>ដូចជាការរៀនគូររូបមុខមនុស្សដោយចងចាំពីទំហំភ្នែក ច្រមុះ និងមាត់ (ប៉ារ៉ាម៉ែត្រ) រួចគូររូបថ្មីដោយខ្លួនឯង ជាជាងការកាត់តរូបថតមនុស្សពិតយកមកបិទភ្ជាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mel-cepstral coefficients</span></td>
+                <td>ជាស៊េរីនៃតួលេខប៉ារ៉ាម៉ែត្រដែលតំណាងឱ្យទម្រង់វិសាលគមនៃរលកសំឡេង (Spectrum) ដែលត្រូវបានគណនាដើម្បីត្រាប់តាមរបៀបដែលត្រចៀករបស់មនុស្សស្តាប់ និងចាប់យកកម្រិតប្រេកង់ (Frequencies) សំឡេងផ្សេងៗគ្នា។</td>
+                <td>ដូចជាលេខកូដរូបមន្តលាយពណ៌ដែលប្រាប់ម៉ាស៊ីនបោះពុម្ពឱ្យបញ្ចេញកម្រិតពណ៌នីមួយៗឱ្យបានត្រឹមត្រូវតាមដែលភ្នែកមនុស្សអាចមើលឃើញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Speaker adaptation</span></td>
+                <td>ជាដំណើរការកែតម្រូវម៉ូដែលសំឡេងដើមដែលម៉ាស៊ីនមានស្រាប់ ដោយប្រើប្រាស់ទិន្នន័យសំឡេងបន្តិចបន្តួចរបស់អ្នកនិយាយគោលដៅ ដើម្បីផ្លាស់ប្តូរលក្ខណៈសំឡេងបញ្ចេញឱ្យស្រដៀងទៅនឹងសំឡេងអ្នកនិយាយគោលដៅនោះ។</td>
+                <td>ដូចជាអ្នកដែលចេះលេងហ្គីតាយ៉ាងស្ទាត់ជំនាញស្រាប់ គ្រាន់តែចំណាយពេលស្តាប់បទភ្លេងថ្មីមួយភ្លែត ក៏អាចកែសម្រួលរបៀបលេងរបស់ខ្លួនឱ្យត្រូវនឹងស្តាយ (Style) នៃអ្នកតែងបទថ្មីនោះបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision tree-based context clustering</span></td>
+                <td>ជាបច្ចេកទេសរៀបចំចង្កោមទិន្នន័យដោយប្រើគំនូសតារាងមែកធាង (Decision Tree) ដើម្បីស្វែងរកនិងចាត់ថ្នាក់សូរសព្ទដែលមានបរិបទបញ្ចេញសំឡេងស្រដៀងគ្នា ដែលជួយដោះស្រាយបញ្ហានៅពេលប្រព័ន្ធជួបប្រទះពាក្យថ្មីដែលមិនធ្លាប់មានក្នុងទិន្នន័យបណ្តុះបណ្តាល។</td>
+                <td>ដូចជាការចាត់ថ្នាក់សិស្សទៅតាមចំណង់ចំណូលចិត្តអានសៀវភៅរបស់ពួកគេ ដើម្បីងាយស្រួលទាយថាតើសិស្សថ្មីម្នាក់គួរតែចូលចិត្តអានសៀវភៅប្រភេទណា ទោះបីយើងមិនដែលស្គាល់គេពីមុនមកក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Expectation-Maximization (EM) algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយគណិតវិទ្យាដែលធ្វើការប៉ាន់ស្មាន និងកែលម្អតម្លៃរបស់ប៉ារ៉ាម៉ែត្រម្តងហើយម្តងទៀតជាវដ្ត (Iterative) ដើម្បីស្វែងរកលទ្ធផលដែលមានភាពសុក្រឹតនិងត្រឹមត្រូវបំផុត សម្រាប់ទិន្នន័យដែលយើងមិនអាចមើលឃើញផ្ទាល់ (Unobserved latent variables)។</td>
+                <td>ដូចជាការបាញ់ព្រួញទៅកាន់ផ្ទាំងស៊ីបក្នុងទីងងឹត ដោយរាល់ពេលបាញ់រួច មានគេប្រាប់ថាកៀកចំណុចកណ្តាលប៉ុណ្ណា រួចយើងកែតម្រូវទិសដៅបាញ់ម្តងបន្តិចៗរហូតដល់ចំគោលដៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fundamental frequencies (log F0)</span></td>
+                <td>ជារង្វាស់នៃកម្រិតប្រេកង់រំញ័រទាបបំផុតរបស់រលកសំឡេង (Pitch) ដែលកំណត់ថាសំឡេងមនុស្សម្នាក់ធ្ងន់ឬស្រួច ហើយវាត្រូវបានគណនាជាទម្រង់លោការីត (Logarithmic) ដើម្បីងាយស្រួលក្នុងការធ្វើម៉ូដែលឱ្យស្របនឹងការស្តាប់របស់មនុស្ស។</td>
+                <td>ដូចជាការមួលប៉ូតុងកែតម្រូវសម្លេងបាស (Bass ធ្ងន់) ឬសម្លេងស្រួច (Treble) នៅលើម៉ាស៊ីនចាក់ភ្លេងដើម្បីធ្វើឱ្យសម្លេងអ្នកចម្រៀងស្តាប់ទៅពីរោះ និងមានទម្ងន់ខុសៗគ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=hidden+markov+model+speech+synthesis+techniques" target="_blank" rel="noopener"><span class="en">hidden markov model speech synthesis techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=statistical+parametric+speech+synthesis+speaker+adaptation" target="_blank" rel="noopener"><span class="en">statistical parametric speech synthesis speaker adaptation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=expectation-maximization+algorithm+in+speech+parameter+generation" target="_blank" rel="noopener"><span class="en">expectation-maximization algorithm in speech parameter generation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=trajectory+HMMs+and+hidden+semi-Markov+models+for+speech" target="_blank" rel="noopener"><span class="en">trajectory HMMs and hidden semi-Markov models for speech</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

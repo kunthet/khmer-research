@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះពិនិត្យមើលការវិវឌ្ឍដ៏សំខាន់នៃបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត ជាពិសេសការរៀនសូត្រពង្រឹងស៊ីជម្រៅ (Deep Reinforcement Learning - DRL) ដោយផ្តោតលើការវិភាគប្រ...">
+    
+    <meta name="keywords" content="Deep Reinforcement Learning, AlphaGo Zero, Deep Learning, Artificial Intelligence, Neural Networks, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html">
+    <meta property="og:title" content="វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះពិនិត្យមើលការវិវឌ្ឍដ៏សំខាន់នៃបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត ជាពិសេសការរៀនសូត្រពង្រឹងស៊ីជម្រៅ (Deep Reinforcement Learning - DRL) ដោយផ្តោតលើការវិភាគប្រៀបធៀបពី AlphaGo ទៅ AlphaGo Zero ដែលអាចរៀ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2017 Control Theory & Applications">
+    
+    <meta property="article:tag" content="Deep Reinforcement Learning">
+    
+    <meta property="article:tag" content="AlphaGo Zero">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Artificial Intelligence">
+    
+    <meta property="article:tag" content="Neural Networks">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero">
+    <meta name="twitter:description" content="ឯកសារនេះពិនិត្យមើលការវិវឌ្ឍដ៏សំខាន់នៃបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត ជាពិសេសការរៀនសូត្រពង្រឹងស៊ីជម្រៅ (Deep Reinforcement Learning - DRL) ដោយផ្តោតលើការវិភាគប្រៀបធៀបពី AlphaGo ទៅ AlphaGo Zero ដែលអាចរៀ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u178c\u17d2\u178d\u1793\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u17d6 \u1796\u17b8 AlphaGo \u178a\u179b\u17cb AlphaGo Zero",
+      "name": "\u6df1\u5ea6\u5f3a\u5316\u5b66\u4e60\u8fdb\u5c55: \u4eceAlphaGo\u5230AlphaGo Zero",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u1798\u17be\u179b\u1780\u17b6\u179a\u179c\u17b7\u179c\u178c\u17d2\u178d\u178a\u17cf\u179f\u17c6\u1781\u17b6\u1793\u17cb\u1793\u17c3\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (Deep Reinforcement Learning - DRL) \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1796\u17b8 AlphaGo \u1791\u17c5 AlphaGo Zero \u178a\u17c2\u179b\u17a2\u17b6\u1785\u179a\u17c0\u1793\u179b\u17c1\u1784\u17a2\u17bb\u1780 Go \u178a\u17c4\u1799\u1781\u17d2\u179b\u17bd\u1793\u17af\u1784\u178a\u17c4\u1799\u1798\u17b7\u1793\u1794\u17b6\u1785\u17cb\u1798\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1796\u17b8\u1798\u1793\u17bb\u179f\u17d2\u179f\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html",
+      "author": [{"@type": "Person", "name": "TANG Zhen-tao"},{"@type": "Person", "name": "SHAO Kun"},{"@type": "Person", "name": "ZHAO Dong-bin (The State Key Laboratory of Management and Control for Complex Systems, Institute of Automation, Chinese Academy of Sciences)"},{"@type": "Person", "name": "ZHU Yuan-heng"}],
+      "datePublished": "2017 Control Theory \u0026 Applications",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "\u6df1\u5ea6\u5f3a\u5316\u5b66\u4e60\u8fdb\u5c55: \u4eceAlphaGo\u5230AlphaGo Zero",
+        "url": "https://doi.org/10.7641/CTA.2017.70808"
+      },
+      "keywords": ["Deep Reinforcement Learning", "AlphaGo Zero", "Deep Learning", "Artificial Intelligence", "Neural Networks"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u178c\u17d2\u178d\u1793\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u17d6 \u1796\u17b8 AlphaGo \u178a\u179b\u17cb AlphaGo Zero",
+          "item": "https://khmerresearch.com/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 深度强化学习进展: 从AlphaGo到AlphaGo Zero<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.7641/CTA.2017.70808" target="_blank">doi.org/10.7641/CTA.2017.70808</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 深度强化学习进展: 从AlphaGo到AlphaGo Zero</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> TANG Zhen-tao, SHAO Kun, ZHAO Dong-bin (The State Key Laboratory of Management and Control for Complex Systems, Institute of Automation, Chinese Academy of Sciences), ZHU Yuan-heng</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2017 Control Theory & Applications</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះពិនិត្យមើលការវិវឌ្ឍដ៏សំខាន់នៃបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត ជាពិសេសការរៀនសូត្រពង្រឹងស៊ីជម្រៅ (Deep Reinforcement Learning - DRL) ដោយផ្តោតលើការវិភាគប្រៀបធៀបពី AlphaGo ទៅ AlphaGo Zero ដែលអាចរៀនលេងអុក Go ដោយខ្លួនឯងដោយមិនបាច់មានទិន្នន័យពីមនុស្ស។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការពិនិត្យឡើងវិញ (Review) នូវក្បួនដោះស្រាយ (Algorithms) សំខាន់ៗនៃ DRL និងវិភាគស៊ីជម្រៅលើបច្ចេកទេស និងស្ថាបត្យកម្មរបស់ AlphaGo Zero ព្រមទាំងការអនុវត្តរបស់វាក្នុងវិស័យផ្សេងៗ។
+        
+        <ul>
+            
+            <li>ការវាយតម្លៃក្បួនដោះស្រាយតាមផ្អែកលើតម្លៃ និងគោលនយោបាយ (Value-based and Policy-based algorithms) ដូចជា DQN, A3C, DDPG និង TRPO។</li>
+            
+            <li>ការវិភាគស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទស៊ីជម្រៅ (Deep Neural Network Architecture) របស់ AlphaGo Zero ដោយប្រើប្រាស់បណ្តាញ Residual Networks (ResNet)។</li>
+            
+            <li>ការសិក្សាពីដំណើរការស្វែងរកមែកធាង (Monte Carlo Tree Search - MCTS) ដែលរួមបញ្ចូលជាមួយ DRL សម្រាប់ការវាយតម្លៃ និងការសម្រេចចិត្ត។</li>
+            
+            <li>ការវាយតម្លៃលើកម្មវិធីអនុវត្តន៍ជាក់ស្តែងរបស់ DRL ដូចជា ហ្គេម (Games) មនុស្សយន្ត (Robotics) ការយល់ដឹងភាសាធម្មជាតិ (NLP) ការបើកបរស្វ័យប្រវត្តិ (Smart Driving) និងការថែទាំសុខភាពឆ្លាតវៃ (Intelligent Healthcare)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ DRL បានវិវឌ្ឍយ៉ាងលឿន ដោយប្តូរពីការប្រើប្រាស់ទិន្នន័យមនុស្ស (Supervised Learning) ទៅជាការរៀនសូត្រដោយខ្លួនឯងទាំងស្រុង (Self-play reinforcement learning) ដូចដែលបានឃើញក្នុងលទ្ធផលដ៏អស្ចារ្យរបស់ AlphaGo Zero (ឈ្នះ ១០០ ទល់នឹង ០ លើ AlphaGo ចាស់)។</li>
+            
+            <li>AlphaGo Zero ប្រើប្រាស់បណ្តាញសរសៃប្រសាទតែមួយ (Single Neural Network) រួមបញ្ចូលគ្នាទាំងគោលនយោបាយ និងតម្លៃ (Policy and Value) ដែលធ្វើឱ្យវាមានប្រសិទ្ធភាពខ្ពស់ និងប្រើប្រាស់ធនធានកុំព្យូទ័រ (TPU ចំនួន ៤) តិចជាងកំណែមុនៗ។</li>
+            
+            <li>បច្ចេកវិទ្យា DRL មានសក្តានុពលខ្លាំងក្នុងការដោះស្រាយបញ្ហាស្មុគស្មាញក្នុងវិស័យផ្សេងៗក្រៅពីហ្គេម ដូចជាការគ្រប់គ្រងមនុស្សយន្ត ការបកប្រែភាសា និងប្រព័ន្ធវេជ្ជសាស្ត្រឆ្លាតវៃ ដែលបង្ហាញពីជំហានយ៉ាងសំខាន់ឆ្ពោះទៅរកបញ្ញាសិប្បនិម្មិតទូទៅ (Artificial General Intelligence - AGI)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">DQN (Deep Q-Network)</span></strong><br>ក្បួនដោះស្រាយ DQN</td>
+                <td>អាចរៀនដោយផ្ទាល់ពីទិន្នន័យរូបភាព (End-to-end) និងប្រើប្រាស់ទិន្នន័យចាស់ៗឡើងវិញតាមរយៈ Experience Replay ដើម្បីបង្កើនប្រសិទ្ធភាព។</td>
+                <td>មានដែនកំណត់ ដោយស័ក្តិសមតែជាមួយសកម្មភាពដាច់ដោយឡែក (Discrete actions) និងប្រឈមនឹងបញ្ហាវាយតម្លៃតម្លៃលើស (Overestimation)។</td>
+                <td>កំណត់ជាគោលស្តង់ដារ (១០០%) សម្រាប់ការវាយតម្លៃលើលទ្ធផលហ្គេម Atari ផ្សេងៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">A3C (Asynchronous Advantage Actor-Critic)</span></strong><br>ក្បួនដោះស្រាយ A3C</td>
+                <td>មានល្បឿនលឿនដោយប្រើដំណើរការស្របគ្នាច្រើន (Asynchronous multi-threading) និងសន្សំសំចៃអង្គចងចាំបានល្អ។</td>
+                <td>ស្ថិរភាពនៃការហ្វឹកហាត់មិនទាន់អាចធានាបានទាំងស្រុងនោះទេ ដោយសារការធ្វើបច្ចុប្បន្នភាពទិន្នន័យមានភាពមិនសមកាលកម្ម។</td>
+                <td>ទទួលបានពិន្ទុ ១៦៣.០៧% ប្រៀបធៀបនឹងក្បួនដោះស្រាយ DQN នៅលើហ្គេម Atari។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">PPO (Proximal Policy Optimization)</span></strong><br>ក្បួនដោះស្រាយ PPO</td>
+                <td>មានស្ថិរភាពខ្ពស់ ភាពស្មុគស្មាញទាបក្នុងការគណនា និងមានភាពងាយស្រួលក្នុងការកំណត់ប៉ារ៉ាម៉ែត្រ។</td>
+                <td>បើទោះបីជាមានស្ថិរភាព ប៉ុន្តែលទ្ធផល និងប្រសិទ្ធភាពទូទៅនៅទាបជាងក្បួនដោះស្រាយ ACKTR បន្តិច។</td>
+                <td>ទទួលបានពិន្ទុ ៤៦.២៦% ដែលបង្ហាញពីស្ថិរភាពនៃការអនុវត្តជាជាងការពង្រីកពិន្ទុខ្ពស់ខុសធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">AlphaGo Zero (Self-play DRL)</span></strong><br>ប្រព័ន្ធ AlphaGo Zero</td>
+                <td>មិនត្រូវការទិន្នន័យណែនាំពីមនុស្សទាល់តែសោះ (រៀនដោយខ្លួនឯងទាំងស្រុង) ប្រើពេលហ្វឹកហាត់ខ្លី និងស៊ីធនធាន Hardware តិចជាងជំនាន់មុន។</td>
+                <td>ទោះបីស៊ីធនធានពេលដំណើរការតិច ប៉ុន្តែនៅតែត្រូវការកម្លាំងម៉ាស៊ីនមហាអស្ចារ្យ (TPU រាប់ពាន់) សម្រាប់ការហ្វឹកហាត់ដំបូង។</td>
+                <td>ឈ្នះ AlphaGo Lee ក្នុងលទ្ធផល ១០០ ទល់នឹង ០ ដោយប្រើពេលហ្វឹកហាត់ត្រឹម ៣ ថ្ងៃ និងប្រើប្រាស់ TPU តែ ៤ គ្រឿងប៉ុណ្ណោះពេលប្រកួត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអភិវឌ្ឍប្រព័ន្ធ DRL កម្រិតខ្ពស់ដូចជា AlphaGo Zero ទាមទារថាមពលកុំព្យូទ័រ (Compute Power) យ៉ាងធំធេងសម្រាប់ការហ្វឹកហាត់ដំបូង បើទោះបីជាតម្រូវការទិន្នន័យ និងកម្លាំងម៉ាស៊ីនពេលដំណើរការ (Inference) ត្រូវបានកាត់បន្ថយយ៉ាងច្រើនក៏ដោយ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារឧបករណ៍កម្រិតខ្ពស់ដូចជា GPU ច្រើន ឬ TPU។ AlphaGo Zero ប្រើប្រាស់ TPU ជំនាន់ទី១ ចំនួន ៥០០០ គ្រឿងសម្រាប់ការហ្វឹកហាត់ និង ៤ គ្រឿងសម្រាប់ពេលដំណើរការ។</li>
+        
+        <li><strong>Software:</strong> ត្រូវការបរិស្ថានក្លែងធ្វើ (Simulation environments) ដូចជា <span class='en'>OpenAI Gym</span> ឬ <span class='en'>DeepMind Lab</span> ដើម្បីអនុញ្ញាតឱ្យ AI រៀនសូត្រតាមរយៈការសាកល្បង។</li>
+        
+        <li><strong>Dataset:</strong> កាត់បន្ថយការពឹងផ្អែកលើទិន្នន័យមនុស្ស ដោយផ្តោតលើការបង្កើតទិន្នន័យដោយខ្លួនឯងតាមរយៈ Self-play (ដូចករណី AlphaGo Zero) ប៉ុន្តែទាមទារនូវច្បាប់នៃបរិស្ថាន (Rules) ច្បាស់លាស់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះភាគច្រើនផ្អែកលើបរិស្ថានក្លែងធ្វើ និងហ្គេមអុកដែលមិនមានភាពរញ៉េរញ៉ៃ (Zero noise data) ដែលខុសពីពិភពពិត។ សម្រាប់ប្រទេសកម្ពុជា ការខ្វះខាតទិន្នន័យជាក់ស្តែង (Real-world data) អាចជាឧបសគ្គដ៏ធំនៅពេលចង់យក DRL មកដោះស្រាយបញ្ហាសង្គម ប៉ុន្តែបច្ចេកទេសរៀនដោយខ្លួនឯង (Self-play) អាចជាច្រកចេញដ៏ល្អ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យា DRL មានសក្តានុពលខ្ពស់ក្នុងការយកមកប្រើប្រាស់ដោះស្រាយបញ្ហាស្មុគស្មាញនៅកម្ពុជា ជាពិសេសក្នុងស្ថានភាពដែលខ្វះទិន្នន័យពីអតីតកាល។</p>
+        
+        <ul>
+            
+            <li><strong>ការគ្រប់គ្រងចរាចរណ៍នៅរាជធានីភ្នំពេញ (Smart Traffic Control):</strong> អាចប្រើប្រាស់ DRL ដើម្បីរៀនពីលំហូរចរាចរណ៍ និងប្តូរភ្លើងស្តុបស្វ័យប្រវត្តិទូទាំងទីក្រុង ជំនួសឱ្យការប្រើម៉ោងកំណត់ទុកជាមុន ដែលជួយកាត់បន្ថយការកកស្ទះបានយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture Robotics):</strong> ការប្រើប្រាស់ DRL លើដ្រូន ឬមនុស្សយន្តកសិកម្មសម្រាប់ការរុករកទិសដៅ (Navigation) បាញ់ថ្នាំ និងស្រោចស្រពដំណាំដោយស្វ័យប្រវត្តិនៅតាមបណ្តាខេត្តនានា ដោយមិនពឹងផ្អែកលើកម្លាំងមនុស្ស។</li>
+            
+            <li><strong>ប្រព័ន្ធសុខាភិបាលឆ្លាតវៃ (Intelligent Healthcare Diagnostics):</strong> អាចយកគំរូ DRL (ឧទាហរណ៍ការវិភាគជំងឺទឹកនោមផ្អែមលើភ្នែក ឬការកំណត់កម្រិតថ្នាំ) មកប្រើនៅតាមមណ្ឌលសុខភាពជនបទដែលខ្វះខាតគ្រូពេទ្យឯកទេស ដើម្បីផ្តល់យោបល់បឋមប្រកបដោយភាពត្រឹមត្រូវ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បើទោះបីជា DRL ទាមទារការយល់ដឹងស៊ីជម្រៅ និងធនធានគណនាខ្ពស់ ប៉ុន្តែវាផ្តល់នូវអនាគតដ៏ភ្លឺស្វាងសម្រាប់ការបង្កើតប្រព័ន្ធស្វ័យប្រវត្តិដែលអាចរៀននិងសម្របខ្លួនបាន ក្នុងការជំរុញការអភិវឌ្ឍនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃម៉ាស៊ីនរៀនសូត្រ (Master the Fundamentals):</strong> និស្សិតត្រូវចាប់ផ្តើមស្វែងយល់ពីភាសាសរសេរកូដ Python ក៏ដូចជាបណ្ណាល័យ <span class='en'>PyTorch</span> ឬ <span class='en'>TensorFlow</span> រួមទាំងទ្រឹស្តី Markov Decision Process (MDP) ដែលជាគ្រឹះនៃ Reinforcement Learning។</li>
+            
+            <li><strong>អនុវត្តលើបរិស្ថានក្លែងធ្វើខ្នាតតូច (Build Toy Models):</strong> ប្រើប្រាស់ <span class='en'>OpenAI Gym</span> ដើម្បីសរសេរកូដបង្កើតក្បួនដោះស្រាយ DQN សាមញ្ញដោយខ្លួនឯង ឧទាហរណ៍ដូចជាការបង្រៀន AI ឱ្យរៀនរក្សាតុល្យភាពក្នុងគម្រោង CartPole ។</li>
+            
+            <li><strong>ឈានចូលក្បួនដោះស្រាយផ្អែកលើគោលនយោបាយ (Explore Policy Gradients):</strong> បន្ទាប់ពីយល់ DQN ត្រូវអនុវត្តសរសេរកូដសម្រាប់ក្បួនដោះស្រាយទំនើបៗដូចជា PPO និង A3C ព្រោះវាមានប្រសិទ្ធភាពខ្ពស់ក្នុងការគ្រប់គ្រងសកម្មភាពបន្តបន្ទាប់ (Continuous actions) ដូចជាការបញ្ជាមនុស្សយន្ត។</li>
+            
+            <li><strong>ចូលរួមការប្រកួតប្រជែង ឬផ្តួចផ្តើមគម្រោងជាក់ស្តែង (Project Implementation):</strong> សាកល្បងយក DRL ទៅដោះស្រាយបញ្ហាក្នុងស្រុក ដូចជាការធ្វើគំរូក្លែងធ្វើ (Simulation) នៃចរាចរណ៍តំបន់ណាមួយនៅភ្នំពេញ ឬចូលរួមប្រកួតលើប្រព័ន្ធ <span class='en'>Kaggle</span> ដើម្បីទទួលបានបទពិសោធន៍វិភាគទិន្នន័យជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Reinforcement Learning (DRL)</span></td>
+                <td>ជាការរួមបញ្ចូលគ្នារវាងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Deep Learning) ដើម្បីអាននិងយល់ពីស្ថានភាពបរិស្ថាន និងការរៀនសូត្រពង្រឹង (Reinforcement Learning) ដើម្បីធ្វើការសម្រេចចិត្ត ដោយប្រព័ន្ធរៀនតាមរយៈការសាកល្បងខុសត្រូវ និងស្វែងរកផ្លូវណាដែលទទួលបានរង្វាន់ច្រើនជាងគេ។</td>
+                <td>ដូចជាការបង្រៀនសត្វឆ្កែឱ្យចេះចាប់បាល់ ដោយយើងឱ្យចំណីវានៅពេលវាចាប់បាន (រង្វាន់) និងមិនឱ្យអ្វីទាំងអស់ពេលវាធ្វើខុស រហូតដល់វាចេះចាប់បាល់យ៉ាងស្ទាត់ជំនាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Monte Carlo Tree Search (MCTS)</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ស្វែងរកជម្រើសដ៏ល្អបំផុតក្នុងការសម្រេចចិត្ត ដោយវាធ្វើការក្លែងធ្វើ (Simulate) លទ្ធផលដែលអាចកើតឡើងរាប់ពាន់ដងទៅអនាគតយ៉ាងលឿន ហើយរើសយកផ្លូវណាដែលមានភាគរយជោគជ័យខ្ពស់ជាងគេបំផុតដើម្បីអនុវត្តជាក់ស្តែង។</td>
+                <td>ដូចជាអ្នកលេងអុកដែលគិតស្រមៃមើលសេណារីយ៉ូនៃការដើរអុកជាច្រើនជំហានទៅមុខនៅក្នុងខួរក្បាល និងវាយតម្លៃចាញ់ឈ្នះ មុននឹងសម្រេចចិត្តទម្លាក់កូនអុកពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Residual Network (ResNet)</span></td>
+                <td>ជាបណ្តាញសរសៃប្រសាទស៊ីជម្រៅដែលមានរចនាសម្ព័ន្ធពិសេសហៅថា "Skip connections" ដែលអនុញ្ញាតឱ្យទិន្នន័យលោតរំលងស្រទាប់មួយចំនួនដើម្បីដោះស្រាយបញ្ហាបាត់បង់ព័ត៌មាន (Vanishing Gradient) ដែលជួយឱ្យ AI អាចវិភាគទិន្នន័យស្មុគស្មាញ (ដូចជាក្តារអុក) បានកាន់តែច្បាស់និងមានប្រសិទ្ធភាព។</td>
+                <td>ដូចជាការសាងសង់ស្ពានអាកាសល្បឿនលឿនកាត់ពីលើទីក្រុង ដែលអនុញ្ញាតឱ្យរថយន្តធ្វើដំណើរពីចុងម្ខាងទៅចុងម្ខាងទៀតបានលឿន ដោយមិនចាំបាច់ឆ្លងកាត់ភ្លើងស្តុបតូចៗជាច្រើនតាមផ្លូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Experience Replay</span></td>
+                <td>ជាបច្ចេកទេសមួយដែលប្រព័ន្ធ AI ធ្វើការចងចាំនូវរាល់សកម្មភាពនិងលទ្ធផលដែលវាធ្លាប់បានធ្វើពីមុនមក រួចទាញយកទិន្នន័យទាំងនោះមកចាក់រៀនឡើងវិញម្តងហើយម្តងទៀតដោយចៃដន្យ (Random sampling) ដើម្បីកែលម្អការសម្រេចចិត្តរបស់វានាពេលអនាគត។</td>
+                <td>ដូចជាសិស្សដែលកត់ត្រាកំហុសរបស់ខ្លួនពេលធ្វើលំហាត់ចូលក្នុងសៀវភៅ រួចយកសៀវភៅនោះមកអានរំលឹកឡើងវិញនៅថ្ងៃក្រោយ ដើម្បីកុំឱ្យធ្វើខុសដដែល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Actor-Critic</span></td>
+                <td>ជាទម្រង់នៃម៉ាស៊ីនរៀនសូត្រដែលបែងចែកភារកិច្ចជាពីរផ្នែកសំខាន់៖ ផ្នែក "Actor" ជាអ្នកសម្រេចចិត្តជ្រើសរើសសកម្មភាព ចំណែកផ្នែក "Critic" ជាអ្នកវាយតម្លៃថាតើសកម្មភាពនោះទទួលបានលទ្ធផលល្អកម្រិតណា រួចផ្តល់មតិកែលម្អត្រឡប់ទៅ Actor វិញដើម្បីកែប្រែសកម្មភាពបន្ទាប់។</td>
+                <td>ដូចជាតួសម្តែង (Actor) ដែលកំពុងសម្តែងនៅលើឆាក និងអ្នកដឹកនាំរឿង (Critic) ដែលអង្គុយមើលពីក្រោមឆាករួចប្រាប់ថាកន្លែងណាគួរកែតម្រូវដើម្បីឱ្យការសម្តែងកាន់តែល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Self-play</span></td>
+                <td>ជាយន្តការហ្វឹកហាត់ដែលប្រព័ន្ធ AI រៀនសូត្រដោយការប្រកួតលេងជាមួយខ្លួនឯងរាប់លានដង ដោយមិនពឹងផ្អែកលើទិន្នន័យគំរូឬចំណេះដឹងពីមនុស្សឡើយ ដែលជួយឱ្យវាអាចរកឃើញយុទ្ធសាស្ត្រថ្មីៗប្លែកៗដែលមនុស្សមិនធ្លាប់បានដឹង។</td>
+                <td>ដូចជាអ្នកហាត់ក្បាច់គុនដែលតាំងកញ្ចក់នៅពីមុខខ្លួនឯង រួចស្រមៃប្រយុទ្ធជាមួយរូបរាងរបស់ខ្លួនក្នុងកញ្ចក់រហូតដល់ខ្លួនក្លាយជាកំពូលអ្នកចម្បាំងដែលគ្មានគូប្រៀប។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+reinforcement+learning+algorithms+review" target="_blank" rel="noopener"><span class="en">Deep reinforcement learning algorithms review</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Monte+Carlo+Tree+Search+in+AI" target="_blank" rel="noopener"><span class="en">Monte Carlo Tree Search in AI</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Applications+of+DRL+in+robotics+and+continuous+control" target="_blank" rel="noopener"><span class="en">Applications of DRL in robotics and continuous control</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Evolution+of+AlphaGo+architectures+and+self-play" target="_blank" rel="noopener"><span class="en">Evolution of AlphaGo architectures and self-play</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើឱ្យប្រសើរនូវគោលការណ៍សន្ទនាជាមួយលំហសកម្មភាពធំៗដោយប្រើប្រាស់ការរៀនពង្រឹងស៊ីជម្រៅ | KhmerResearch.com</title>
+    <meta name="description" content="ប្រព័ន្ធសន្ទនាផ្ដោតលើកិច្ចការ (Task-Oriented Dialogue Systems) ភាគច្រើនប្រើប្រាស់វិធានកំណត់ទុកជាមុនដែលពិបាកក្នុងការពង្រីក ខណៈការប្រើប្រាស់ការរៀនពង្រឹងស៊ីជម្រ...">
+    
+    <meta name="keywords" content="Dialogue policy, Deep reinforcement learning, Proximal policy optimization, Imitation learning, Task-oriented dialogue system, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/optimizing-dialog-policy-deep-reinforcement-learning-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/optimizing-dialog-policy-deep-reinforcement-learning-2024.html">
+    <meta property="og:title" content="ការធ្វើឱ្យប្រសើរនូវគោលការណ៍សន្ទនាជាមួយលំហសកម្មភាពធំៗដោយប្រើប្រាស់ការរៀនពង្រឹងស៊ីជម្រៅ | KhmerResearch.com">
+    <meta property="og:description" content="ប្រព័ន្ធសន្ទនាផ្ដោតលើកិច្ចការ (Task-Oriented Dialogue Systems) ភាគច្រើនប្រើប្រាស់វិធានកំណត់ទុកជាមុនដែលពិបាកក្នុងការពង្រីក ខណៈការប្រើប្រាស់ការរៀនពង្រឹងស៊ីជម្រៅ (DRL) ទាមទារថាមពលកុំព្យូទ័រខ្ពស់ និងកម...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024 Indonesian Journal of Electrical Engineering and Computer Science">
+    
+    <meta property="article:tag" content="Dialogue policy">
+    
+    <meta property="article:tag" content="Deep reinforcement learning">
+    
+    <meta property="article:tag" content="Proximal policy optimization">
+    
+    <meta property="article:tag" content="Imitation learning">
+    
+    <meta property="article:tag" content="Task-oriented dialogue system">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើឱ្យប្រសើរនូវគោលការណ៍សន្ទនាជាមួយលំហសកម្មភាពធំៗដោយប្រើប្រាស់ការរៀនពង្រឹងស៊ីជម្រៅ">
+    <meta name="twitter:description" content="ប្រព័ន្ធសន្ទនាផ្ដោតលើកិច្ចការ (Task-Oriented Dialogue Systems) ភាគច្រើនប្រើប្រាស់វិធានកំណត់ទុកជាមុនដែលពិបាកក្នុងការពង្រីក ខណៈការប្រើប្រាស់ការរៀនពង្រឹងស៊ីជម្រៅ (DRL) ទាមទារថាមពលកុំព្យូទ័រខ្ពស់ និងកម...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u1793\u17bc\u179c\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd\u179f\u1793\u17d2\u1791\u1793\u17b6\u1787\u17b6\u1798\u17bd\u1799\u179b\u17c6\u17a0\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1792\u17c6\u17d7\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5",
+      "name": "Optimizing dialog policy with large action spaces using deep reinforcement learning",
+      "description": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u1795\u17d2\u178a\u17c4\u178f\u179b\u17be\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a (Task-Oriented Dialogue Systems) \u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179c\u17b7\u1792\u17b6\u1793\u1780\u17c6\u178e\u178f\u17cb\u1791\u17bb\u1780\u1787\u17b6\u1798\u17bb\u1793\u178a\u17c2\u179b\u1796\u17b7\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780 \u1781\u178e\u17c8\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5 (DRL) \u1791\u17b6\u1798\u1791\u17b6\u179a\u1790\u17b6\u1798\u1796\u179b\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1781\u17d2\u1796\u179f\u17cb \u1793\u17b7\u1784\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1780\u17d2\u179b\u17c2\u1784\u1792\u17d2\u179c\u17be\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u178a\u17c2\u179b\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/optimizing-dialog-policy-deep-reinforcement-learning-2024.html",
+      "author": [{"@type": "Person", "name": "Manisha Thakkar (MIT World Peace University)"},{"@type": "Person", "name": "Nitin Pise (MIT World Peace University)"}],
+      "datePublished": "2024 Indonesian Journal of Electrical Engineering and Computer Science",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Optimizing dialog policy with large action spaces using deep reinforcement learning",
+        "url": "https://doi.org/10.11591/ijeecs.v36.i1.pp428-440"
+      },
+      "keywords": ["Dialogue policy", "Deep reinforcement learning", "Proximal policy optimization", "Imitation learning", "Task-oriented dialogue system"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u1793\u17bc\u179c\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd\u179f\u1793\u17d2\u1791\u1793\u17b6\u1787\u17b6\u1798\u17bd\u1799\u179b\u17c6\u17a0\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1792\u17c6\u17d7\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5",
+          "item": "https://khmerresearch.com/papers/technology/optimizing-dialog-policy-deep-reinforcement-learning-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើឱ្យប្រសើរនូវគោលការណ៍សន្ទនាជាមួយលំហសកម្មភាពធំៗដោយប្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Optimizing dialog policy with large action spaces using deep reinforcement learning<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.11591/ijeecs.v36.i1.pp428-440" target="_blank">doi.org/10.11591/ijeecs.v36.i1.pp428-440</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើឱ្យប្រសើរនូវគោលការណ៍សន្ទនាជាមួយលំហសកម្មភាពធំៗដោយប្រើប្រាស់ការរៀនពង្រឹងស៊ីជម្រៅ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Optimizing dialog policy with large action spaces using deep reinforcement learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Manisha Thakkar (MIT World Peace University), Nitin Pise (MIT World Peace University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 Indonesian Journal of Electrical Engineering and Computer Science</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ប្រព័ន្ធសន្ទនាផ្ដោតលើកិច្ចការ (Task-Oriented Dialogue Systems) ភាគច្រើនប្រើប្រាស់វិធានកំណត់ទុកជាមុនដែលពិបាកក្នុងការពង្រីក ខណៈការប្រើប្រាស់ការរៀនពង្រឹងស៊ីជម្រៅ (DRL) ទាមទារថាមពលកុំព្យូទ័រខ្ពស់ និងកម្មវិធីក្លែងធ្វើអ្នកប្រើប្រាស់ដែលស្មុគស្មាញ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្ត្រពីរជំហានដោយរួមបញ្ចូលការរៀនត្រាប់តាម (Imitation Learning) និងក្បួនដោះស្រាយការរៀនពង្រឹង (Reinforcement Learning) ដើម្បីបង្កើនល្បឿននៃការបង្វឹកម៉ូដែលសន្ទនា។
+        
+        <ul>
+            
+            <li>ការរៀនត្រាប់តាមដោយចម្លងអាកប្បកិរិយា (Behavior Cloning) ក្នុងដំណាក់កាលដំបូងដើម្បីកាត់បន្ថយការពឹងផ្អែកលើកម្មវិធីក្លែងធ្វើ។</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយ Proximal Policy Optimization (PPO) សម្រាប់ការសម្រេចចិត្តជ្រើសរើសសកម្មភាព។</li>
+            
+            <li>ការធ្វើតេស្តលើសំណុំទិន្នន័យអ្នកទេសចរពហុវិស័យខ្នាតធំ (MultiWOZ2.1 Dataset) តាមរយៈឧបករណ៍ ConvLab-3។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រដែលបានស្នើឡើងសម្រេចបានអត្រាជោគជ័យកិច្ចការ (Task success rate) រហូតដល់ ៩១,៨% នៅក្នុងបរិស្ថានពហុវិស័យ។</li>
+            
+            <li>កាត់បន្ថយចំនួនវេនសន្ទនាជាមធ្យមប្រមាណ ៥០% ដែលជួយឱ្យប្រព័ន្ធបញ្ចប់កិច្ចការបានលឿននិងមានប្រសិទ្ធភាព។</li>
+            
+            <li>វិធីសាស្ត្រនេះជួយកាត់បន្ថយពេលវេលាបង្វឹកប្រព័ន្ធសន្ទនាបានយ៉ាងច្រើន ដោយបញ្ចៀសការបង្វឹកពីចំណុចសូន្យ (Training from scratch) និងកាត់បន្ថយបន្ទុកកុំព្យូទ័រ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Supervised Learning (MLE)</span></strong><br>ការរៀនតាមបែបមានការគ្រប់គ្រង (Supervised Learning - MLE)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងដើរតួជាមូលដ្ឋានគ្រឹះ (Warm-up) ដ៏ល្អសម្រាប់ការបង្វឹកបន្ត។</td>
+                <td>មានអត្រាជោគជ័យទាបបំផុតក្នុងការបញ្ចប់កិច្ចការ និងមិនសូវមានភាពបត់បែនក្នុងបរិស្ថានថ្មី។</td>
+                <td>អត្រាជោគជ័យ ៤៨,៤% និងអត្រាបញ្ចប់កិច្ចការ ៥២,៦% ក្នងស្ថាបត្យកម្ម Pipeline។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Policy Gradient (PG)</span></strong><br>ក្បួនដោះស្រាយ Policy Gradient (PG)</td>
+                <td>អាចរៀនពីបទពិសោធន៍ផ្ទាល់តាមរយៈយន្តការវាយតម្លៃ និងផ្តល់រង្វាន់។</td>
+                <td>បង្ហាញលទ្ធផលខ្សោយជាងគេក្នុងការធ្វើឱ្យសម្រេចគោលដៅសន្ទនា ដោយមានវេនសន្ទនាច្រើន។</td>
+                <td>អត្រាជោគជ័យត្រឹមតែ ៤៤,៣% និងប្រើវេនសន្ទនាជាមធ្យម ១៤,៦៩។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Guided dialogue policy learning (GDPL)</span></strong><br>ការរៀនគោលការណ៍សន្ទនាដោយប្រើ Adversarial Inverse RL (GDPL)</td>
+                <td>មានល្បឿននៃការធ្វើសមាហរណកម្ម (Convergence speed) លឿនជាងក្បួនដោះស្រាយ PPO។</td>
+                <td>អត្រាជោគជ័យនៅតែទាប (មិនដល់ ៥០%) ដែលមិនទាន់អាចប្រើប្រាស់ជាផ្លូវការបានល្អ។</td>
+                <td>អត្រាជោគជ័យ ៤៨,៥% និងប្រើវេនសន្ទនាជាមធ្យម ១១,៤៧។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Proximal Policy Optimization (PPO) with Behavior Cloning</span></strong><br>ក្បួនដោះស្រាយ PPO រួមបញ្ចូលជាមួយការរៀនត្រាប់តាម (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>កាត់បន្ថយពេលវេលាបង្វឹកពីចំណុចសូន្យ និងមានប្រសិទ្ធភាពខ្ពស់ក្នុងការសន្ទនាពហុវិស័យ ដោយប្រើប៉ារ៉ាម៉ែត្រតិច។</td>
+                <td>ទាមទារទិន្នន័យគំរូអ្នកជំនាញដែលគ្មានកំហុស ដើម្បីជៀសវាងការចម្លងកំហុស (Error replication) ទៅក្នុងប្រព័ន្ធ។</td>
+                <td>អត្រាជោគជ័យ ៧៦,៤% (ដល់ទៅ ៩១,៨% ក្នុងការសាកល្បងខ្លះ) និងកាត់បន្ថយវេនសន្ទនាបានប្រមាណ ៥០%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រមធ្យមសម្រាប់ការបង្វឹកម៉ូដែល ការរៀនពង្រឹង (RL) ប៉ុន្តែវិធីសាស្ត្រដែលបានស្នើឡើងជួយកាត់បន្ថយបន្ទុកកុំព្យូទ័រ និងទំហំប៉ារ៉ាម៉ែត្របានយ៉ាងច្រើនបើធៀបនឹងម៉ូដែល End-to-End។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ការប្រើប្រាស់ឧបករណ៍ ConvLab-3 framework ដែលជាប្រភពកូដចំហ (Open-source) រួមជាមួយភាសា Python។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យសន្ទនាពហុវិស័យខ្នាតធំ MultiWOZ 2.1 ដែលមានការសន្ទនាជាង ១ម៉ឺន។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារម៉ាស៊ីនកុំព្យូទ័រដែលមានសមត្ថភាព CPU/GPU ល្អបង្គួរ ដើម្បីដំណើរការកម្មវិធីក្លែងធ្វើអ្នកប្រើប្រាស់ (User Simulator) និងធ្វើការអាប់ដេត Policy របស់ RL។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងផ្នែក Deep Reinforcement Learning (DRL), ការរៀបចំស្ថាបត្យកម្ម Pipeline នៃប្រព័ន្ធសន្ទនា និងការធ្វើសមាហរណកម្មក្បួនដោះស្រាយតាមគណិតវិទ្យា។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើសំណុំទិន្នន័យ MultiWOZ2.1 ដែលជាការសន្ទនាជាភាសាអង់គ្លេសផ្តោតលើវិស័យទេសចរណ៍នៅប៉ែកអឺរ៉ុប។ សម្រាប់បរិបទប្រទេសកម្ពុជា អាកប្បកិរិយានៃការសន្ទនា ការប្រើប្រាស់ពាក្យពេចន៍ និងរចនាសម្ព័ន្ធទិន្នន័យទេសចរណ៍អាចមានទម្រង់ខុសប្លែកពីនេះទាំងស្រុង។ ដូចនេះ វាចាំបាច់ត្រូវមានការប្រមូលនិងរៀបចំទិន្នន័យជាភាសាខ្មែរដែលមានគុណភាពខ្ពស់ ដើម្បីឱ្យប្រព័ន្ធនេះអាចដំណើរការបានពិតប្រាកដ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ក្នុងការអភិវឌ្ឍជំនួយការឆ្លាតវៃ (Chatbots) នៅកម្ពុជា ដោយសារវាត្រូវការកម្លាំងកុំព្យូទ័រតិចជាងការប្រើប្រាស់ម៉ូដែលភាសាខ្នាតធំ (LLMs)។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទេសចរណ៍ និងបដិសណ្ឋារកិច្ច (Tourism and Hospitality):</strong> អាចប្រើប្រាស់ដើម្បីបង្កើត AI ភ្នាក់ងារកក់សណ្ឋាគារ ទិញសំបុត្រឡានក្រុង ឬណែនាំតំបន់ទេសចរណ៍នៅខេត្តសៀមរាប ឬតំបន់ឆ្នេរ ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>សេវាកម្មអតិថិជនតាមធនាគារ (Banking Customer Service):</strong> ធនាគារនៅកម្ពុជាអាចយកទៅអនុវត្តក្នុងប្រព័ន្ធសួរ-ឆ្លើយបញ្ហាគណនី ឬសេវាកម្មផ្ទេរប្រាក់ ដែលទាមទារការសន្ទនាឆ្លងកាត់ច្រើនជំហាន (Multi-turn dialogues) ប្រកបដោយសុវត្ថិភាព។</li>
+            
+            <li><strong>សេវាសាធារណៈរបស់រដ្ឋាភិបាល (E-Government Services):</strong> ជួយសម្រួលដល់ការឆ្លើយតបសំណួររបស់ប្រជាពលរដ្ឋអំពីសេវាកម្មរដ្ឋបាល ដូចជាការធ្វើអត្តសញ្ញាណប័ណ្ណ សំបុត្រកំណើត ឬលិខិតឆ្លងដែន តាមរយៈប្រព័ន្ធតេឡេក្រាមជំនួយការរដ្ឋាភិបាលឌីជីថល។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់វិធីសាស្ត្របំពង់ក (Pipeline) រួមជាមួយការរៀនពង្រឹងនេះ គឺជាជម្រើសដ៏ស័ក្តិសមសម្រាប់ស្ថាប័នកម្ពុជាក្នុងការកសាងប្រព័ន្ធ AI ផ្ទាល់ខ្លួន ដោយមិនចាំបាច់ពឹងផ្អែកទាំងស្រុងលើសេវាកម្មបរទេសដែលមានតម្លៃថ្លៃ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាស្វែងយល់ពីប្រព័ន្ធសន្ទនាបែប Pipeline:</strong> និស្សិតគប្បីចាប់ផ្តើមជាមួយនឹងការស្វែងយល់អំពីសមាសធាតុចម្បងៗដូចជា NLU, DST, POL និង NLG ដោយប្រើប្រាស់ <span class="en">ConvLab-3 framework</span> ដើម្បីសាកល្បងដំណើរការប្រព័ន្ធសន្ទនាគំរូ។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យសន្ទនាភាសាខ្មែរ:</strong> ផ្តោតលើវិស័យជាក់លាក់ណាមួយ (ឧទាហរណ៍៖ ការកក់សំបុត្រឡានក្រុងភ្នំពេញ-សៀមរាប) ហើយប្រមូលទិន្នន័យសន្ទនាពិតប្រាកដ រួចធ្វើចំណារទិន្នន័យ (Annotation) តាមទម្រង់ស្តង់ដារ <span class="en">MultiWOZ format</span>។</li>
+            
+            <li><strong>អនុវត្តការរៀនត្រាប់តាម (Imitation Learning):</strong> សរសេរកូដដើម្បីបង្វឹកម៉ូដែលគោលការណ៍សន្ទនា (Dialogue Policy) កម្រិតដំបូងដោយប្រើប្រាស់បច្ចេកទេស <span class="en">Behavior Cloning</span> តាមរយៈ <span class="en">Supervised Learning</span> លើទិន្នន័យដែលបានរៀបចំ។</li>
+            
+            <li><strong>ពង្រឹងភាពឆ្លាតវៃជាមួយក្បួនដោះស្រាយ PPO:</strong> ប្រើប្រាស់ទម្ងន់ម៉ូដែលពីជំហានមុន (Pre-trained weights) មកធ្វើការបង្វឹកបន្តដោយប្រើក្បួនដោះស្រាយ <span class="en">Proximal Policy Optimization (PPO)</span> រួមជាមួយនឹងកម្មវិធីក្លែងធ្វើអ្នកប្រើប្រាស់ (User Simulator) ដើម្បីបង្រៀន AI ឱ្យចេះដោះស្រាយកាលៈទេសៈស្មុគស្មាញ។</li>
+            
+            <li><strong>វាយតម្លៃ និងធ្វើសមាហរណកម្មទៅកាន់កម្មវិធីប្រើប្រាស់:</strong> សាកល្បងវាស់ស្ទង់អត្រាជោគជ័យ និងចំនួនវេនសន្ទនា (Turns) រួចអភិវឌ្ឍចំណុចប្រទាក់ (API) ភ្ជាប់ប្រព័ន្ធនេះទៅកាន់បណ្ដាញទំនាក់ទំនងពេញនិយមនៅកម្ពុជា ដូចជា <span class="en">Telegram Bot</span> ឬ Facebook Messenger។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Dialogue policy</span></td>
+                <td>ជាសមាសភាគស្នូលមួយនៃប្រព័ន្ធសន្ទនាដែលមានតួនាទីសម្រេចចិត្តជ្រើសរើសសកម្មភាពបន្ទាប់ (ដូចជាការសួរសំណួរបន្ថែម ឬផ្តល់ចម្លើយ) ដោយផ្អែកលើស្ថានភាពសន្ទនាបច្ចុប្បន្ន ដើម្បីជួយសម្រេចគោលដៅរបស់អ្នកប្រើប្រាស់ឱ្យបានលឿននិងត្រឹមត្រូវ។</td>
+                <td>ដូចជាអ្នករត់តុក្នុងភោជនីយដ្ឋានដែលដឹងថាពេលណាត្រូវសួរភ្ញៀវពីការកុម្ម៉ង់ម្ហូប និងពេលណាត្រូវយកវិក្កយបត្រមកគិតប្រាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep reinforcement learning</span></td>
+                <td>ជាបច្ចេកទេសបញ្ញាសិប្បនិម្មិតកម្រិតខ្ពស់ដែលរួមបញ្ចូលបណ្ដាញសរសៃប្រសាទ (Neural Networks) ជាមួយនឹងការរៀនពង្រឹង (Reinforcement Learning) ដែលអនុញ្ញាតឱ្យកុំព្យូទ័ររៀនធ្វើការសម្រេចចិត្តក្នុងស្ថានភាពស្មុគស្មាញ និងទិន្នន័យធំៗ តាមរយៈការសាកល្បងនិងកំហុស ដោយប្រព័ន្ធទទួលបានរង្វាន់ឬពិន័យ។</td>
+                <td>ដូចជាការបង្វឹកសត្វឆ្កែឱ្យចេះចាប់បាល់ ដោយយើងផ្តល់នំចំណីជារង្វាន់នៅពេលវាធ្វើបានល្អ និងដកហូតរង្វាន់ពេលវាធ្វើខុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Proximal policy optimization</span></td>
+                <td>ជាក្បួនដោះស្រាយដ៏ពេញនិយមមួយនៃការរៀនពង្រឹង (Reinforcement Learning) ដែលធានាថាការអាប់ដេតចំណេះដឹងថ្មីៗរបស់ម៉ូដែលមិនផ្លាស់ប្តូរទំហំធំពេកពីចំណេះដឹងចាស់ ដើម្បីរក្សាស្ថិរភាពកុំឱ្យវាបាត់បង់សមត្ថភាពមុនៗ។</td>
+                <td>ដូចជាការរៀនជិះកង់ដោយកែតម្រូវចលនាខ្លួនបន្តិចម្តងៗ ដើម្បីកុំឱ្យដួល ជាជាងការប្តូររបៀបជិះភ្លាមៗ ១៨០ ដឺក្រេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Imitation learning</span></td>
+                <td>ជាវិធីសាស្ត្របង្វឹកប្រព័ន្ធបញ្ញាសិប្បនិម្មិតដោយឱ្យវាសង្កេតនិងចម្លងតាមអាកប្បកិរិយា ឬការសម្រេចចិត្តរបស់អ្នកជំនាញ (មនុស្ស) ដោយផ្ទាល់ ជាជាងការឱ្យវារាវរកវិធីដោយខ្លួនឯងពីចំណុចសូន្យ ដែលជួយចំណេញពេលវេលាយ៉ាងច្រើន។</td>
+                <td>ដូចជាកូនក្មេងរៀនចងខ្សែស្បែកជើងដោយការសម្លឹងមើល និងធ្វើតាមសកម្មភាពរបស់ឪពុកម្តាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Task-oriented dialogue system</span></td>
+                <td>ជាប្រព័ន្ធកុំព្យូទ័រសន្ទនា (Chatbot) ដែលត្រូវបានរចនាឡើងយ៉ាងច្បាស់លាស់ដើម្បីជួយអ្នកប្រើប្រាស់បញ្ចប់កិច្ចការជាក់លាក់ណាមួយ ដូចជាការកក់សំបុត្រយន្តហោះ ស្វែងរកភោជនីយដ្ឋាន ឬហៅតាក់ស៊ី ក្នុងចំនួនវេនសន្ទនាដ៏ខ្លីបំផុត។</td>
+                <td>ដូចជាភ្នាក់ងារបម្រើសេវាកម្មអតិថិជនតាមទូរសព្ទដែលសួររកព័ត៌មានចាំបាច់តែប៉ុន្មានម៉ាត់ ដើម្បីដោះស្រាយបញ្ហាជូនយើង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">User Simulator</span></td>
+                <td>ជាកម្មវិធីកុំព្យូទ័រដែលដើរតួជាមនុស្ស (អ្នកប្រើប្រាស់) ជាមួយអាកប្បកិរិយាចៃដន្យ ដើម្បីធ្វើការសន្ទនាសាកល្បងរាប់ពាន់ដងជាមួយប្រព័ន្ធសន្ទនា (Dialogue Agent) ក្នុងគោលបំណងបង្វឹកវាឱ្យឆ្លាតវៃដោយមិនចាំបាច់រំខានប្រើមនុស្សពិតប្រាកដ។</td>
+                <td>ដូចជាកីឡាករប្រដាល់ដែលហ្វឹកហាត់វាយជាមួយបាវខ្សាច់ ឬម៉ាស៊ីន មុននឹងឡើងសង្វៀនប្រកួតជាមួយមនុស្សពិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov decision process</span></td>
+                <td>ជាក្របខ័ណ្ឌគណិតវិទ្យាសម្រាប់ធ្វើគំរូនៃដំណើរការសម្រេចចិត្តតាមដំណាក់កាល ដែលលទ្ធផលនៃសកម្មភាពនីមួយៗពឹងផ្អែកតែលើស្ថានភាពបច្ចុប្បន្នប៉ុណ្ណោះ (មិនខ្វល់ពីអតីតកាលដ៏យូរលង់) ដោយគិតបញ្ចូលទាំងប្រូបាប៊ីលីតេ និងរង្វាន់រំពឹងទុក។</td>
+                <td>ដូចជាការលេងអុក ដែលការដើរកូនបន្ទាប់គឺពឹងផ្អែកតែលើទីតាំងកូនអុកបច្ចុប្បន្ននៅលើក្តារប៉ុណ្ណោះ មិនមែនពឹងផ្អែកថាតើកូនអុកនោះដើរមកដល់ទីនេះតាមផ្លូវណានោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-domain environment</span></td>
+                <td>ជាបរិបទសន្ទនាទូលំទូលាយដែលអ្នកប្រើប្រាស់អាចប្តូរប្រធានបទ ឬមានគោលដៅលើសពីមួយ (ឆ្លងកាត់ច្រើនវិស័យ) នៅក្នុងវគ្គសន្ទនាតែមួយ ឧទាហរណ៍៖ កក់សណ្ឋាគាររួច ហើយសួររកភោជនីយដ្ឋានក្បែរនោះ ព្រមទាំងហៅតាក់ស៊ីបន្តទៀត។</td>
+                <td>ដូចជាផ្សារទំនើបធំមួយ ដែលអ្នកអាចទិញម្ហូបផង ទិញសម្លៀកបំពាក់ផង និងមើលកុនផង ដោយមិនចាំបាច់ចេញទៅកន្លែងផ្សេង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+reinforcement+learning%22+%22dialogue+policy%22+%22task-oriented+dialogue+systems" target="_blank" rel="noopener"><span class="en">Deep reinforcement learning" "dialogue policy" "task-oriented dialogue systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Proximal+Policy+Optimization%22+OR+PPO+%22Imitation+Learning%22+%22dialogue+management" target="_blank" rel="noopener"><span class="en">Proximal Policy Optimization" OR PPO "Imitation Learning" "dialogue management</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=MultiWOZ+dataset%22+%22multi-domain+dialogue%22+evaluation+metrics+reinforcement+learning" target="_blank" rel="noopener"><span class="en">MultiWOZ dataset" "multi-domain dialogue" evaluation metrics reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Large+Language+Models%22+%22prompt-based+adaptation%22+%22task-oriented+dialogue+systems" target="_blank" rel="noopener"><span class="en">Large Language Models" "prompt-based adaptation" "task-oriented dialogue systems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
