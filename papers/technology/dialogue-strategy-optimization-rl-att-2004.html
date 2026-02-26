@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើឲ្យប្រសើរនូវយុទ្ធសាស្ត្រសន្ទនាជាមួយនឹងការរៀនពង្រឹង (Reinforcement Learning) នៅក្នុងកម្មវិធីបញ្ជូនការហៅទូរស័ព្ទរបស់ AT&T | KhmerResearch.com</title>
+    <meta name="description" content="ប្រព័ន្ធសន្ទនាតាមសំឡេង (Spoken Dialogue Systems) ទាមទារការកែសម្រួលដោយផ្ទាល់ពីមនុស្ស និងចំណាយពេលវេលាច្រើនក្នុងការជ្រើសរើសជម្រើសសន្ទនា (Prompts) ដែលសមស្របនៅពេល...">
+    
+    <meta name="keywords" content="Reinforcement Learning, Spoken Dialogue Systems, Call Routing, Monte Carlo approach, epsilon-greedy, Prompt Optimization, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/dialogue-strategy-optimization-rl-att-2004.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/dialogue-strategy-optimization-rl-att-2004.html">
+    <meta property="og:title" content="ការធ្វើឲ្យប្រសើរនូវយុទ្ធសាស្ត្រសន្ទនាជាមួយនឹងការរៀនពង្រឹង (Reinforcement Learning) នៅក្នុងកម្មវិធីបញ្ជូនការហៅទូរស័ព្ទរបស់ AT&T | KhmerResearch.com">
+    <meta property="og:description" content="ប្រព័ន្ធសន្ទនាតាមសំឡេង (Spoken Dialogue Systems) ទាមទារការកែសម្រួលដោយផ្ទាល់ពីមនុស្ស និងចំណាយពេលវេលាច្រើនក្នុងការជ្រើសរើសជម្រើសសន្ទនា (Prompts) ដែលសមស្របនៅពេលបរិយាកាសនៃការប្រើប្រាស់ផ្លាស់ប្តូរ។ ឯកសា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2004">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Spoken Dialogue Systems">
+    
+    <meta property="article:tag" content="Call Routing">
+    
+    <meta property="article:tag" content="Monte Carlo approach">
+    
+    <meta property="article:tag" content="epsilon-greedy">
+    
+    <meta property="article:tag" content="Prompt Optimization">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើឲ្យប្រសើរនូវយុទ្ធសាស្ត្រសន្ទនាជាមួយនឹងការរៀនពង្រឹង (Reinforcement Learning) នៅក្នុងកម្មវិធីបញ្ជូនការហៅទូរស័ព្ទរបស់ AT&T">
+    <meta name="twitter:description" content="ប្រព័ន្ធសន្ទនាតាមសំឡេង (Spoken Dialogue Systems) ទាមទារការកែសម្រួលដោយផ្ទាល់ពីមនុស្ស និងចំណាយពេលវេលាច្រើនក្នុងការជ្រើសរើសជម្រើសសន្ទនា (Prompts) ដែលសមស្របនៅពេលបរិយាកាសនៃការប្រើប្រាស់ផ្លាស់ប្តូរ។ ឯកសា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b2\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u1793\u17bc\u179c\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u1793\u17d2\u1791\u1793\u17b6\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement Learning) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1794\u1789\u17d2\u1787\u17bc\u1793\u1780\u17b6\u179a\u17a0\u17c5\u1791\u17bc\u179a\u179f\u17d0\u1796\u17d2\u1791\u179a\u1794\u179f\u17cb AT\u0026T",
+      "name": "Dialogue Strategy Optimization with Reinforcement Learning in an AT\u0026T Call Routing Application",
+      "description": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178f\u17b6\u1798\u179f\u17c6\u17a1\u17c1\u1784 (Spoken Dialogue Systems) \u1791\u17b6\u1798\u1791\u17b6\u179a\u1780\u17b6\u179a\u1780\u17c2\u179f\u1798\u17d2\u179a\u17bd\u179b\u178a\u17c4\u1799\u1795\u17d2\u1791\u17b6\u179b\u17cb\u1796\u17b8\u1798\u1793\u17bb\u179f\u17d2\u179f \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u1799\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1785\u17d2\u179a\u17be\u1793\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u1787\u1798\u17d2\u179a\u17be\u179f\u179f\u1793\u17d2\u1791\u1793\u17b6 (Prompts) \u178a\u17c2\u179b\u179f\u1798\u179f\u17d2\u179a\u1794\u1793\u17c5\u1796\u17c1\u179b\u1794\u179a\u17b7\u1799\u17b6\u1780\u17b6\u179f\u1793\u17c3\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u17d4 \u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u178a\u17c6\u178e\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1780\u17b6\u179a\u1796\u17b9\u1784\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u17a2\u17d2\u1793\u1780\u1787\u17c6\u1793\u17b6\u1789\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u17a1\u17be\u1784\u179c\u17b7\u1789\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/dialogue-strategy-optimization-rl-att-2004.html",
+      "author": [{"@type": "Person", "name": "Charles Lewis (AT\u0026T - Labs Research)"},{"@type": "Person", "name": "Giuseppe Di Fabbrizio (AT\u0026T - Labs Research)"}],
+      "datePublished": "2004",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Dialogue Strategy Optimization with Reinforcement Learning in an AT\u0026T Call Routing Application",
+        "url": "N/A"
+      },
+      "keywords": ["Reinforcement Learning", "Spoken Dialogue Systems", "Call Routing", "Monte Carlo approach", "epsilon-greedy", "Prompt Optimization"],
+      "about": "Computer Science / Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b2\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u1793\u17bc\u179c\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u1793\u17d2\u1791\u1793\u17b6\u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784 (Reinforcement Learning) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1794\u1789\u17d2\u1787\u17bc\u1793\u1780\u17b6\u179a\u17a0\u17c5\u1791\u17bc\u179a\u179f\u17d0\u1796\u17d2\u1791\u179a\u1794\u179f\u17cb AT\u0026T",
+          "item": "https://khmerresearch.com/papers/technology/dialogue-strategy-optimization-rl-att-2004.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើឲ្យប្រសើរនូវយុទ្ធសាស្ត្រសន្ទនាជាមួយនឹងការរៀនពង្រឹង...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Dialogue Strategy Optimization with Reinforcement Learning in an AT&T Call Routing Application<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើឲ្យប្រសើរនូវយុទ្ធសាស្ត្រសន្ទនាជាមួយនឹងការរៀនពង្រឹង (Reinforcement Learning) នៅក្នុងកម្មវិធីបញ្ជូនការហៅទូរស័ព្ទរបស់ AT&T</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Dialogue Strategy Optimization with Reinforcement Learning in an AT&T Call Routing Application</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Charles Lewis (AT&T - Labs Research), Giuseppe Di Fabbrizio (AT&T - Labs Research)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2004</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ប្រព័ន្ធសន្ទនាតាមសំឡេង (Spoken Dialogue Systems) ទាមទារការកែសម្រួលដោយផ្ទាល់ពីមនុស្ស និងចំណាយពេលវេលាច្រើនក្នុងការជ្រើសរើសជម្រើសសន្ទនា (Prompts) ដែលសមស្របនៅពេលបរិយាកាសនៃការប្រើប្រាស់ផ្លាស់ប្តូរ។ ឯកសារនេះស្វែងរកដំណោះស្រាយដោយស្វ័យប្រវត្តិដើម្បីកាត់បន្ថយការពឹងផ្អែកលើអ្នកជំនាញក្នុងការកំណត់ប្រព័ន្ធឡើងវិញ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានអនុវត្តក្បួនដោះស្រាយការរៀនពង្រឹង (Reinforcement Learning) ដើម្បីជ្រើសរើសជម្រើសសន្ទនាដ៏ល្អបំផុតដោយស្វ័យប្រវត្តិនៅក្នុងកម្មវិធីបញ្ជូនការហៅទូរស័ព្ទ (Call Routing Application) របស់ AT&T ដោយធ្វើត្រាប់តាមទិន្នន័យជាក់ស្តែង។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យសន្ទនាជាក់ស្តែងចំនួន ៩,៧៨៦ សម្រាប់ការបង្កើតគំរូប្រូបាប៊ីលីតេ (Probability distributions of outcomes)</li>
+            
+            <li>ការប្រើប្រាស់វិធីសាស្ត្ររៀនពង្រឹងបែប Monte Carlo ជាមួយនឹងយុទ្ធសាស្ត្រ ε-greedy (Exploration vs. Exploitation)</li>
+            
+            <li>ការធ្វើត្រាប់តាម (Simulation) នៅក្នុងបរិយាកាសដែលមានស្ថិរភាព និងបរិយាកាសផ្លាស់ប្តូរដើម្បីវាស់ស្ទង់ការសម្របខ្លួនរបស់ប្រព័ន្ធ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធ RL អាចសម្របខ្លួនទៅនឹងការផ្លាស់ប្តូរបរិយាកាសបានយ៉ាងរហ័ស ដោយកាត់បន្ថយចំនួននៃការហៅទូរស័ព្ទដែលបរាជ័យ ឬត្រូវបញ្ជូនទៅកាន់ភ្នាក់ងារលំនាំដើម។</li>
+            
+            <li>ការកែសម្រួលតម្លៃ ε ពី 0.0 (ការរុករក) ទៅ 1.0 (ការទាញយកប្រយោជន៍) បានបង្កើនល្បឿននៃការរៀនសូត្រ ដោយប្រើត្រឹមតែ ២៦០ ការសន្ទនាដើម្បីឈានដល់ចំណុចដំណើរការប្រសើរបំផុត។</li>
+            
+            <li>បន្ទាប់ពីប្រព័ន្ធបានសម្របខ្លួន និងរៀនសូត្រពេញលេញ អត្រានៃការបញ្ជូនការហៅទូរស័ព្ទទៅកាន់មជ្ឈមណ្ឌលភ្នាក់ងារទូទៅ (Default call center) ត្រូវបានកាត់បន្ថយមកត្រឹម ២១.៦ ក្នុង ១០០ ការសន្ទនា។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Prompt Selection (Baseline)</span></strong><br>ការជ្រើសរើសជម្រើសសន្ទនាដោយចៃដន្យ (ចំណុចគោល)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងល្អសម្រាប់ការប្រមូលទិន្នន័យដំបូងដោយគ្មានភាពលម្អៀង។</td>
+                <td>មិនមានការរៀនសូត្រដើម្បីកែលម្អប្រព័ន្ធ ដែលបណ្តាលឲ្យមានអត្រាបរាជ័យខ្ពស់ (ការហៅចូលត្រូវបញ្ជូនទៅភ្នាក់ងារទូទៅច្រើន)។</td>
+                <td>ត្រូវបានប្រើដើម្បីប្រមូលទិន្នន័យពី ៩,៧៨៦ ការសន្ទនា សម្រាប់ការធ្វើត្រាប់តាម (Simulation)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Reinforcement Learning with Constant Epsilon (ε=0.8, α=0.01)</span></strong><br>ការរៀនពង្រឹងជាមួយនឹងតម្លៃ Epsilon ថេរ</td>
+                <td>អាចធ្វើឲ្យប្រព័ន្ធមានស្ថិរភាព និងអាចសម្របខ្លួនបានល្អទៅនឹងការផ្លាស់ប្តូរបរិយាកាស (Dynamic Environment) តាមរយៈការបន្តរុករក។</td>
+                <td>ចំណាយពេលយូរក្នុងការរៀនសូត្រនៅដំណាក់កាលដំបូង ព្រោះវាត្រូវធ្វើការរុករកច្រើន។</td>
+                <td>អត្រាបញ្ជូនការហៅទូរស័ព្ទទៅភ្នាក់ងារទូទៅ (Default routing) ធ្លាក់ចុះយ៉ាងខ្លាំងបន្ទាប់ពីប្រហែល ២៥០០ ការសន្ទនា។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Reinforcement Learning with Dynamic Epsilon (ε=0.0 to 1.0)</span></strong><br>ការរៀនពង្រឹងជាមួយនឹងតម្លៃ Epsilon ផ្លាស់ប្តូរ</td>
+                <td>ជំរុញល្បឿននៃការរៀនសូត្របានយ៉ាងលឿនបំផុត និងផ្តល់នូវដំណើរការល្អប្រសើរភ្លាមៗបន្ទាប់ពីប្តូរទៅដំណាក់កាលទាញយកប្រយោជន៍ (Exploitation)។</td>
+                <td>ធ្វើឲ្យប្រព័ន្ធងាយរងគ្រោះ (Brittle) ព្រោះវាបញ្ឈប់ការរុករក (Exploration) ទាំងស្រុង ដែលធ្វើឲ្យពិបាកក្នុងការស្តារឡើងវិញប្រសិនបើបរិយាកាសផ្លាស់ប្តូរ។</td>
+                <td>ឈានដល់ចំណុចដំណើរការល្អបំផុតយ៉ាងរហ័សត្រឹម ២៦០ ការសន្ទនា ដោយកាត់បន្ថយអត្រាបញ្ជូនទៅភ្នាក់ងារទូទៅមកត្រឹម ២១.៦%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធនេះទាមទារទិន្នន័យជាក់ស្តែងដ៏ធំសម្រាប់ការធ្វើត្រាប់តាម និងការពឹងផ្អែកលើអ្នកជំនាញក្នុងការរចនាទម្រង់សន្ទនាដំបូង។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យសន្ទនាជាក់ស្តែងចំនួន ៩,៧៨៦ ដែលប្រមូលបានរយៈពេល ៣ខែ ពីអតិថិជនអាជីវកម្មខ្នាតតូចរបស់ AT&T សម្រាប់បង្កើតគំរូប្រូបាប៊ីលីតេ។</li>
+        
+        <li><strong>Software Framework:</strong> ប្រព័ន្ធគ្រប់គ្រងការសន្ទនា Florence របស់ AT&T VoiceTone សម្រាប់ការប្រមូលទិន្នន័យ និងដាក់ឲ្យដំណើរការកម្មវិធី។</li>
+        
+        <li><strong>Expertise:</strong> អ្នកជំនាញបទពិសោធន៍អ្នកប្រើប្រាស់ (UX/UE Expert) ដើម្បីរចនាលំហូរនៃការសន្ទនា និងសរសេរពាក្យពេចន៍សន្ទនា (Prompts) ជាច្រើនជម្រើស។</li>
+        
+        <li><strong>Compute:</strong> សមត្ថភាពកុំព្យូទ័រសម្រាប់ការធ្វើត្រាប់តាម (Simulation) រាប់ពាន់វដ្តនៃការសន្ទនាដើម្បីវាស់ស្ទង់ក្បួនដោះស្រាយ RL។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យអតិថិជនអាជីវកម្មខ្នាតតូចរបស់ក្រុមហ៊ុន AT&T នៅក្នុងសហរដ្ឋអាមេរិក ដែលប្រើប្រាស់ភាសាអង់គ្លេសជាគោល។ អាកប្បកិរិយារបស់អ្នកហៅទូរស័ព្ទ (ឧទាហរណ៍ ការបិទទូរស័ព្ទមុនការរំពឹងទុក ឬការឆ្លើយតបទៅនឹងម៉ាស៊ីន) អាចមានភាពខុសគ្នាខ្លាំងពីបរិបទវប្បធម៌ និងការអត់ធ្មត់របស់ប្រជាជនកម្ពុជាចំពោះប្រព័ន្ធស្វ័យប្រវត្តិ។ ហេតុនេះ ការយកមកអនុវត្តផ្ទាល់ទាមទារការប្រមូលទិន្នន័យ និងសាកល្បងជាមួយអ្នកប្រើប្រាស់ក្នុងស្រុកជាមុនសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការប្រើប្រាស់ Reinforcement Learning នេះមានសក្តានុពលខ្ពស់សម្រាប់ស្វ័យប្រវត្តិកម្មប្រព័ន្ធបម្រើសេវាអតិថិជននៅប្រទេសកម្ពុជា ជាពិសេសស្ថាប័នដែលមានទំហំហៅចូលច្រើន។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ (ឧទាហរណ៍៖ Smart, Cellcard, Metfone):</strong> អាចប្រើប្រាស់ដើម្បីកាត់បន្ថយការបញ្ជូនការហៅទូរស័ព្ទទៅកាន់ភ្នាក់ងារ (Call Center Agents) ដោយស្វ័យប្រវត្តិកម្មការឆ្លើយតប និងស្វែងរកជម្រើសសន្ទនា (Prompts) ដែលអតិថិជនខ្មែរងាយយល់ និងធ្វើតាមបំផុត។</li>
+            
+            <li><strong>វិស័យធនាគារ (ឧទាហរណ៍៖ ABA, ACLEDA):</strong> អាចជួយដល់ប្រព័ន្ធទូរស័ព្ទឆ្លាតវៃ (IVR) របស់ធនាគារ ដើម្បីណែនាំអតិថិជនទៅកាន់ផ្នែកត្រឹមត្រូវ (ដូចជា កាត បាត់ទូរស័ព្ទ ឬកម្ចី) ប្រកបដោយប្រសិទ្ធភាព និងកាត់បន្ថយការរង់ចាំ។</li>
+            
+            <li><strong>សេវាសាធារណៈ (ឧទាហរណ៍៖ លេខសង្គ្រោះបន្ទាន់ ឬប្រព័ន្ធសួរព័ត៌មាន):</strong> ធ្វើឲ្យប្រសើរឡើងនូវការឆ្លើយតបជាសំឡេងនៅពេលមានការហៅចូលច្រើនក្នុងពេលតែមួយ ដោយប្រព័ន្ធអាចរៀនពីជម្រើសសន្ទនាដែលផ្តល់ព័ត៌មានបានលឿន និងច្បាស់លាស់។</li>
+            
+        </ul>
+        
+        
+        <p>ការចាប់ផ្តើមប្រព័ន្ធសន្ទនាឆ្លាតវៃដែលអាចរៀនសូត្រដោយខ្លួនឯង នឹងជួយសន្សំសំចៃពេលវេលា ធនធានមនុស្ស និងថវិកាយ៉ាងច្រើនសម្រាប់ក្រុមហ៊ុន និងស្ថាប័ននានានៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាអំពីមូលដ្ឋានគ្រឹះនៃ Reinforcement Learning:</strong> ចាប់ផ្តើមសិក្សាអំពីក្បួនដោះស្រាយ RL ជាពិសេស <span class="en">Monte Carlo methods</span> និង <span class="en">Epsilon-greedy strategy</span> តាមរយៈវគ្គសិក្សានៅលើ <span class="en">Coursera</span> ឬសៀវភៅ <span class="en">Reinforcement Learning: An Introduction (Sutton and Barto)</span>។</li>
+            
+            <li><strong>ប្រមូលទិន្នន័យសន្ទនាក្នុងស្រុក:</strong> សហការជាមួយក្រុមហ៊ុនផ្តល់សេវាកម្មទូរស័ព្ទ ឬធនាគារ ដើម្បីប្រមូលទិន្នន័យ (Logs) ពីប្រព័ន្ធ <span class="en">IVR (Interactive Voice Response)</span> ដែលមានស្រាប់ ដើម្បីយល់ពីអាកប្បកិរិយារបស់អ្នកប្រើប្រាស់កម្ពុជា (តើពួកគេឧស្សាហ៍ចុចបិទនៅពេលណា?)។</li>
+            
+            <li><strong>កសាងបរិស្ថានធ្វើត្រាប់តាម (Simulation Environment):</strong> ប្រើប្រាស់ភាសា <span class="en">Python</span> រួមជាមួយបណ្ណាល័យដូចជា <span class="en">NumPy</span> ឬ <span class="en">Gymnasium</span> ដើម្បីបង្កើតគំរូប្រូបាប៊ីលីតេនៃការសន្ទនា ដោយផ្អែកលើទិន្នន័យដែលបានប្រមូល ដើម្បីធ្វើតេស្តក្បួនដោះស្រាយដោយមិនប៉ះពាល់ដល់អតិថិជនផ្ទាល់។</li>
+            
+            <li><strong>រចនាជម្រើសសន្ទនា (Prompt Engineering) ជាភាសាខ្មែរ:</strong> បង្កើតជម្រើសនៃការឆ្លើយតបជាសំឡេង (Prompts) ច្រើនទម្រង់ ទាំងបែបបើកទូលាយ (Open prompt) និងបែបបិទ (Closed prompt) ជាភាសាខ្មែរដែលស្តាប់ទៅធម្មជាតិ ដើម្បីឲ្យប្រព័ន្ធ RL យកទៅធ្វើការជ្រើសរើស។</li>
+            
+            <li><strong>អនុវត្ត និងកែសម្រួលប៉ារ៉ាម៉ែត្រ (Deploy and Fine-tune):</strong> សាកល្បងដំណើរការក្បួនដោះស្រាយ RL នៅក្នុង Simulation របស់អ្នក ដោយធ្វើការកែសម្រួលប៉ារ៉ាម៉ែត្រ <span class="en">Alpha (α)</span> (ទំហំនៃការរៀន) និង <span class="en">Epsilon (ε)</span> (ការរុករកទល់នឹងការទាញយកប្រយោជន៍) ដើម្បីស្វែងរកតុល្យភាពរវាងល្បឿននៃការរៀនសូត្រ និងស្ថិរភាពរយៈពេលវែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Reinforcement Learning (RL)</span></td>
+                <td>ផ្នែកមួយនៃបញ្ញាសិប្បនិម្មិត (AI) ដែលប្រព័ន្ធកុំព្យូទ័ររៀនធ្វើការសម្រេចចិត្តដោយស្វ័យប្រវត្តិតាមរយៈការសាកល្បងផ្ទាល់ និងទទួលបានរង្វាន់ (Reward) ឬការពិន័យ ដោយផ្អែកលើប្រសិទ្ធភាពនៃសកម្មភាពរបស់វា។</td>
+                <td>ដូចជាការបង្វឹកសត្វឆ្កែ ដោយឲ្យចំណីពេលវាធ្វើតាមបញ្ជា និងមិនឲ្យពេលវាធ្វើខុស ដើម្បីឲ្យវារៀនពីទម្លាប់ល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spoken Dialogue Systems (SDS)</span></td>
+                <td>ប្រព័ន្ធកុំព្យូទ័រដែលអាចសន្ទនាជាមួយមនុស្សតាមរយៈសំឡេង ដោយមានសមត្ថភាពស្តាប់យល់ពីអ្វីដែលមនុស្សនិយាយ ធ្វើការវិភាគ និងឆ្លើយតបទៅវិញជាសំឡេង ឬអនុវត្តសកម្មភាពណាមួយ។</td>
+                <td>ដូចជាកម្មវិធី Siri ឬ Google Assistant ដែលអ្នកអាចនិយាយសួរសំណួរ ហើយវាឆ្លើយតបមកវិញជាសំឡេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Explore vs. exploit</span></td>
+                <td>បញ្ហានៃការសម្រេចចិត្តរវាងការប្រើប្រាស់ចំណេះដឹងដែលមានស្រាប់ដើម្បីទទួលបានលទ្ធផលល្អបំផុតភ្លាមៗ (Exploit) ឬការសាកល្បងជម្រើសថ្មីដែលមិនធ្លាប់ដឹងដើម្បីស្វែងរកលទ្ធផលដែលអាចល្អជាងនេះនៅថ្ងៃអនាគត (Explore)។</td>
+                <td>ដូចជាការសម្រេចចិត្តថាតើត្រូវបន្តញ៉ាំបាយនៅហាងដែលធ្លាប់ឆ្ងាញ់ (Exploit) ឬសាកល្បងហាងថ្មីក្រែងលោមានម្ហូបឆ្ងាញ់ជាង (Explore)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Epsilon-greedy (ε-greedy)</span></td>
+                <td>យុទ្ធសាស្ត្រនៅក្នុង RL ដែលប្រព័ន្ធជ្រើសរើសយកសកម្មភាពដែលវាគិតថាល្អបំផុតភាគច្រើននៃពេលវេលា ប៉ុន្តែនៅសល់ភាគរយតូចមួយ (Epsilon) វាធ្វើការជ្រើសរើសសកម្មភាពដោយចៃដន្យដើម្បីធ្វើការរុករកជម្រើសថ្មីៗ។</td>
+                <td>ដូចជាសិស្សដែលតែងតែរៀនតាមវិធីចាស់ដែលធ្លាប់បានពិន្ទុល្អ ប៉ុន្តែម្ដងម្កាលគេលៃទុកពេលបន្តិចបន្តួចដើម្បីសាកល្បងតិចនិករៀនសូត្រថ្មីៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Value function</span></td>
+                <td>អនុគមន៍គណិតវិទ្យានៅក្នុង RL ដែលប្រើសម្រាប់ប៉ាន់ស្មានថាតើសកម្មភាព ឬស្ថានភាពណាមួយនឹងផ្តល់រង្វាន់ (Reward) សរុបប៉ុន្មាននៅថ្ងៃអនាគត ដើម្បីជួយដល់ការសម្រេចចិត្ត។</td>
+                <td>ដូចជាការគិតទុកជាមុនពីផលចំណេញសរុបនៃការវិនិយោគទិញដីនៅតំបន់ណាមួយសម្រាប់រយៈពេល ៥ ឆ្នាំខាងមុខ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Reward function</span></td>
+                <td>សញ្ញា ឬពិន្ទុត្រឡប់ពីបរិស្ថានដែលប្រាប់ប្រព័ន្ធ RL ថាតើសកម្មភាពដែលវាទើបតែធ្វើនោះជោគជ័យ ឬបរាជ័យកម្រិតណា ដើម្បីឲ្យវាយកទៅកែតម្រូវការសម្រេចចិត្តនៅវគ្គក្រោយៗទៀត។</td>
+                <td>ដូចជាពិន្ទុដែលគ្រូឲ្យសិស្សពេលប្រឡង ដែលប្រាប់ថាសិស្សធ្វើបានល្អ ឬត្រូវប្រឹងប្រែងបន្ថែមទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Monte Carlo approach</span></td>
+                <td>វិធីសាស្ត្ររៀនសូត្រក្នុង RL ដែលប្រព័ន្ធមិនធ្វើការសន្និដ្ឋានភ្លាមៗទេ តែវារង់ចាំរហូតដល់ចប់មួយវដ្តនៃការសន្ទនាទាំងមូល (Episode) ទើបធ្វើការបូកសរុបរង្វាន់ និងកែតម្រូវយុទ្ធសាស្ត្រដោយផ្អែកលើបទពិសោធន៍ជាក់ស្តែង។</td>
+                <td>ដូចជាការរង់ចាំមើលរហូតដល់ចប់ការប្រកួតបាល់ទាត់ ទើបវាយតម្លៃថាតើយុទ្ធសាស្ត្ររបស់គ្រូបង្វឹកនោះពិតជាមានប្រសិទ្ធភាពឬអត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Iterative Policy Generation (IPG)</span></td>
+                <td>ដំណើរការអភិវឌ្ឍយុទ្ធសាស្ត្រថ្មីជាបន្តបន្ទាប់ ដោយយកលទ្ធផល និងរង្វាន់ពីការសាកល្បងកន្លងមក មកធ្វើបច្ចុប្បន្នភាពវិធីសាស្ត្រធ្វើការសម្រេចចិត្តឲ្យកាន់តែប្រសើរឡើងពីមួយជំហានទៅមួយជំហាន។</td>
+                <td>ដូចជាការសរសេរសៀវភៅ ដែលអ្នកតែងតែសរសេរព្រាង កែតម្រូវ ហើយសរសេរឡើងវិញជាច្រើនដងរហូតទទួលបានសៀវភៅដ៏ល្អឥតខ្ចោះមួយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=reinforcement+learning+spoken+dialogue+systems+optimization" target="_blank" rel="noopener"><span class="en">reinforcement learning spoken dialogue systems optimization</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=epsilon-greedy+vs+softmax+exploration+conversational+AI" target="_blank" rel="noopener"><span class="en">epsilon-greedy vs softmax exploration conversational AI</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Monte+Carlo+methods+for+policy+generation+in+call+routing" target="_blank" rel="noopener"><span class="en">Monte Carlo methods for policy generation in call routing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=user+simulation+techniques+for+dialogue+system+evaluation" target="_blank" rel="noopener"><span class="en">user simulation techniques for dialogue system evaluation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=dynamic+environment+adaptation+reinforcement+learning+NLP" target="_blank" rel="noopener"><span class="en">dynamic environment adaptation reinforcement learning NLP</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

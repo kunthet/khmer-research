@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវិភាគជំងឺរបេង (TB) លើរូបភាពកាំរស្មីអ៊ិច ដោយប្រើការទាញយកលក្ខណៈពិសេស SURF និងវិធីសាស្ត្រចំណាត់ថ្នាក់ K-Nearest Neighbor (KNN) | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការធ្វើរោគវិនិច្ឆ័យជំងឺរបេង (TB) ដោយប្រើប្រាស់បច្ចេកវិទ្យាសិក្សារបស់ម៉ាស៊ីន (Machine Learning) លើរូបភាពកាំរស្មីអ៊ិច ដើម្បីជួយកាត់បន្ថយ...">
+    
+    <meta name="keywords" content="Tuberculosis, X-ray Image, SURF Feature Extraction, K-Nearest Neighbor, Machine Learning, Medical Diagnostics, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/health/tb-xray-surf-knn-classification-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/health/tb-xray-surf-knn-classification-2020.html">
+    <meta property="og:title" content="ការវិភាគជំងឺរបេង (TB) លើរូបភាពកាំរស្មីអ៊ិច ដោយប្រើការទាញយកលក្ខណៈពិសេស SURF និងវិធីសាស្ត្រចំណាត់ថ្នាក់ K-Nearest Neighbor (KNN) | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការធ្វើរោគវិនិច្ឆ័យជំងឺរបេង (TB) ដោយប្រើប្រាស់បច្ចេកវិទ្យាសិក្សារបស់ម៉ាស៊ីន (Machine Learning) លើរូបភាពកាំរស្មីអ៊ិច ដើម្បីជួយកាត់បន្ថយកំហុសឆ្គងក្នុងការធ្វើរោគវិនិច្ឆ័យដោយគ្រូពេទ្យ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020 JAICT, Journal of Applied Information and Communication Technologies">
+    
+    <meta property="article:tag" content="Tuberculosis">
+    
+    <meta property="article:tag" content="X-ray Image">
+    
+    <meta property="article:tag" content="SURF Feature Extraction">
+    
+    <meta property="article:tag" content="K-Nearest Neighbor">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Medical Diagnostics">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវិភាគជំងឺរបេង (TB) លើរូបភាពកាំរស្មីអ៊ិច ដោយប្រើការទាញយកលក្ខណៈពិសេស SURF និងវិធីសាស្ត្រចំណាត់ថ្នាក់ K-Nearest Neighbor (KNN)">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការធ្វើរោគវិនិច្ឆ័យជំងឺរបេង (TB) ដោយប្រើប្រាស់បច្ចេកវិទ្យាសិក្សារបស់ម៉ាស៊ីន (Machine Learning) លើរូបភាពកាំរស្មីអ៊ិច ដើម្បីជួយកាត់បន្ថយកំហុសឆ្គងក្នុងការធ្វើរោគវិនិច្ឆ័យដោយគ្រូពេទ្យ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1787\u17c6\u1784\u17ba\u179a\u1794\u17c1\u1784 (TB) \u179b\u17be\u179a\u17bc\u1794\u1797\u17b6\u1796\u1780\u17b6\u17c6\u179a\u179f\u17d2\u1798\u17b8\u17a2\u17ca\u17b7\u1785 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f SURF \u1793\u17b7\u1784\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb K-Nearest Neighbor (KNN)",
+      "name": "Analysis of Tuberculosis (TB) on X-ray Image Using SURF Feature Extraction and the K-Nearest Neighbor (KNN) Classification Method",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179a\u17c4\u1782\u179c\u17b7\u1793\u17b7\u1785\u17d2\u1786\u17d0\u1799\u1787\u17c6\u1784\u17ba\u179a\u1794\u17c1\u1784 (TB) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u179f\u17b7\u1780\u17d2\u179f\u17b6\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u179b\u17be\u179a\u17bc\u1794\u1797\u17b6\u1796\u1780\u17b6\u17c6\u179a\u179f\u17d2\u1798\u17b8\u17a2\u17ca\u17b7\u1785 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1787\u17bd\u1799\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1780\u17c6\u17a0\u17bb\u179f\u1786\u17d2\u1782\u1784\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179a\u17c4\u1782\u179c\u17b7\u1793\u17b7\u1785\u17d2\u1786\u17d0\u1799\u178a\u17c4\u1799\u1782\u17d2\u179a\u17bc\u1796\u17c1\u1791\u17d2\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/health/tb-xray-surf-knn-classification-2020.html",
+      "author": [{"@type": "Person", "name": "Reyhan Achmad Rizal (Universitas Prima Indonesia)"},{"@type": "Person", "name": "Nurlela Octavia Purba (Universitas Prima Indonesia)"},{"@type": "Person", "name": "Lidya Aprilla Siregar (Universitas Prima Indonesia)"},{"@type": "Person", "name": "Kristina Sinaga (Universitas Prima Indonesia)"},{"@type": "Person", "name": "Nur Azizah (Universitas Prima Indonesia)"}],
+      "datePublished": "2020 JAICT, Journal of Applied Information and Communication Technologies",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Analysis of Tuberculosis (TB) on X-ray Image Using SURF Feature Extraction and the K-Nearest Neighbor (KNN) Classification Method",
+        "url": "N/A"
+      },
+      "keywords": ["Tuberculosis", "X-ray Image", "SURF Feature Extraction", "K-Nearest Neighbor", "Machine Learning", "Medical Diagnostics"],
+      "about": "Machine Learning / Medical Imaging"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health",
+          "item": "https://khmerresearch.com/papers/health/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1787\u17c6\u1784\u17ba\u179a\u1794\u17c1\u1784 (TB) \u179b\u17be\u179a\u17bc\u1794\u1797\u17b6\u1796\u1780\u17b6\u17c6\u179a\u179f\u17d2\u1798\u17b8\u17a2\u17ca\u17b7\u1785 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f SURF \u1793\u17b7\u1784\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb K-Nearest Neighbor (KNN)",
+          "item": "https://khmerresearch.com/papers/health/tb-xray-surf-knn-classification-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/health/">Health</a> &rsaquo;
+        <span>ការវិភាគជំងឺរបេង (TB) លើរូបភាពកាំរស្មីអ៊ិច ដោយប្រើការទាញយ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Analysis of Tuberculosis (TB) on X-ray Image Using SURF Feature Extraction and the K-Nearest Neighbor (KNN) Classification Method<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវិភាគជំងឺរបេង (TB) លើរូបភាពកាំរស្មីអ៊ិច ដោយប្រើការទាញយកលក្ខណៈពិសេស SURF និងវិធីសាស្ត្រចំណាត់ថ្នាក់ K-Nearest Neighbor (KNN)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Analysis of Tuberculosis (TB) on X-ray Image Using SURF Feature Extraction and the K-Nearest Neighbor (KNN) Classification Method</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Reyhan Achmad Rizal (Universitas Prima Indonesia), Nurlela Octavia Purba (Universitas Prima Indonesia), Lidya Aprilla Siregar (Universitas Prima Indonesia), Kristina Sinaga (Universitas Prima Indonesia), Nur Azizah (Universitas Prima Indonesia)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 JAICT, Journal of Applied Information and Communication Technologies</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Medical Imaging</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការធ្វើរោគវិនិច្ឆ័យជំងឺរបេង (TB) ដោយប្រើប្រាស់បច្ចេកវិទ្យាសិក្សារបស់ម៉ាស៊ីន (Machine Learning) លើរូបភាពកាំរស្មីអ៊ិច ដើម្បីជួយកាត់បន្ថយកំហុសឆ្គងក្នុងការធ្វើរោគវិនិច្ឆ័យដោយគ្រូពេទ្យ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យរូបភាពកាំរស្មីអ៊ិចចំនួន ៦២២ សន្លឹក (ហ្វឹកហាត់ ៦០% និងសាកល្បង ៤០%) ដោយឆ្លងកាត់ដំណើរការវិភាគជាបន្តបន្ទាប់៖
+        
+        <ul>
+            
+            <li>ការបំប្លែងរូបភាពពណ៌ទៅជារូបភាពសខ្មៅ (Grayscale Conversion)</li>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសនៃរូបភាពដោយប្រើក្បួន (SURF Feature Extraction)</li>
+            
+            <li>ការចាត់ថ្នាក់ទិន្នន័យរូបភាពដោយប្រើវិធីសាស្ត្រក្បែរខាងបំផុត (K-Nearest Neighbor Classification)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ភាពត្រឹមត្រូវក្នុងការកំណត់អត្តសញ្ញាណរូបភាពកាំរស្មីអ៊ិចដែលគ្មានជំងឺរបេង (Negative TB) គឺសម្រេចបាន ៦៩,៧% ។</li>
+            
+            <li>ភាពត្រឹមត្រូវក្នុងការកំណត់អត្តសញ្ញាណរូបភាពកាំរស្មីអ៊ិចដែលមានជំងឺរបេង (Positive TB) គឺសម្រេចបានខ្ពស់រហូតដល់ ៧៦,៦៧% ។</li>
+            
+            <li>វិធីសាស្ត្រចំណាត់ថ្នាក់ KNN ជាមួយនឹងការទាញយកលក្ខណៈពិសេស SURF ទទួលបានភាពត្រឹមត្រូវជាមធ្យម ៧៣,១៨% ដែលមានភាពប្រសើរជាងការប្រើប្រាស់ HOG ចំនួន ២% ក្នុងការចាត់ថ្នាក់រូបភាពជំងឺរបេង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">SURF Feature Extraction + KNN</span></strong><br>ការទាញយកលក្ខណៈពិសេស SURF រួមជាមួយចំណាត់ថ្នាក់ KNN</td>
+                <td>មានសមត្ថភាពក្នុងការចាប់យកចំណុចលម្អិតនៃរូបភាពបានល្អ និងមានភាពត្រឹមត្រូវខ្ពស់ជាងបច្ចេកទេស HOG បន្តិច។ សន្សំសំចៃពេលវេលាគណនាដោយបំប្លែងរូបភាពទៅជាសខ្មៅ (Grayscale) ជាមុន។</td>
+                <td>ភាពត្រឹមត្រូវក្នុងការកំណត់អត្តសញ្ញាណរូបភាពអវិជ្ជមានជំងឺរបេង (Negative TB) នៅមានកម្រិតទាប (៦៩,៧%) នៅឡើយ ដែលអាចបណ្តាលឱ្យមានការសន្និដ្ឋានខុស។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវជាមធ្យម ៧៣,១៨% ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">HOG Feature Extraction + KNN (Reference [21])</span></strong><br>ការទាញយកលក្ខណៈពិសេស HOG រួមជាមួយចំណាត់ថ្នាក់ KNN (ឯកសារយោង [21])</td>
+                <td>មានភាពរឹងមាំក្នុងការកំណត់ទិសដៅនៃគែម (Edge orientation) និងទម្រង់ជារូបរាងនៅក្នុងរូបភាពវិភាគវេជ្ជសាស្ត្រ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទាបជាងការប្រើប្រាស់បច្ចេកទេស SURF ប្រមាណ ២% ក្នុងការសាកល្បងលើទិន្នន័យស្រដៀងគ្នា។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវជាមធ្យម ៧១,៨១% ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ទោះបីជាឯកសារមិនបានបញ្ជាក់លម្អិតពីតម្រូវការផ្នែករឹង (Hardware) ក៏ដោយ ប៉ុន្តែការបំប្លែងរូបភាពទៅជាសខ្មៅ (Grayscale) ត្រូវបានប្រើដើម្បីសន្សំសំចៃពេលវេលាគណនា ដែលបង្ហាញថាម៉ូដែលនេះមិនទាមទារធនធានកុំព្យូទ័រខ្ពស់ខ្លាំងដូចម៉ូដែល Deep Learning នោះទេ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យរូបភាពកាំរស្មីអ៊ិច (X-ray) ចំនួន ៦២២ សន្លឹក ដែលមានទំហំ 256x256 យកពីមូលដ្ឋានទិន្នន័យសាធារណៈ OpenI (ChinaSet_AllFiles.zip) ។</li>
+        
+        <li><strong>Hardware:</strong> ដោយសារតែប្រើប្រាស់ត្រឹមបច្ចេកទេស KNN និង SURF ម៉ាស៊ីនកុំព្យូទ័រធម្មតាដែលមានស៊ីភីយូ (Standard CPU) គឺគ្រប់គ្រាន់សម្រាប់ដំណើរការវគ្គបណ្តុះបណ្តាល និងសាកល្បង។</li>
+        
+        <li><strong>Software & Expertise:</strong> ទាមទារអ្នកជំនាញដែលមានចំណេះដឹងផ្នែកកែច្នៃរូបភាព (Image Processing) និងការប្រើប្រាស់ភាសាសរសេរកូដសម្រាប់ Machine Learning ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>សំណុំទិន្នន័យដែលប្រើក្នុងការសិក្សានេះត្រូវបានទាញយកពីមូលដ្ឋានទិន្នន័យសាធារណៈ (ChinaSet) ដែលភាគច្រើនជារូបភាពពីអ្នកជំងឺនៅប្រទេសចិន។ នេះមានសារៈសំខាន់សម្រាប់ប្រទេសកម្ពុជា ព្រោះគុណភាពម៉ាស៊ីនថតកាំរស្មីអ៊ិច និងលក្ខណៈរូបសាស្ត្ររបស់អ្នកជំងឺនៅតាមមន្ទីរពេទ្យកម្ពុជាអាចមានភាពខុសគ្នា ដែលទាមទារឱ្យមានការសាកល្បងម៉ូដែលនេះឡើងវិញជាមួយទិន្នន័យក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ក្នុងការយកមកអនុវត្តជាប្រព័ន្ធជំនួយក្នុងវិស័យសុខាភិបាលនៅប្រទេសកម្ពុជា ជាពិសេសក្នុងការជួយពន្លឿនការស្វែងរកជំងឺរបេង។</p>
+        
+        <ul>
+            
+            <li><strong>មជ្ឈមណ្ឌលជាតិកំចាត់រោគរបេង និងហង់សិន (CENAT):</strong> អាចប្រើប្រាស់ជាឧបករណ៍ជំនួយ (Computer-Aided Diagnosis) ដើម្បីផ្ទៀងផ្ទាត់លទ្ធផលពិនិត្យរបស់គ្រូពេទ្យ កាត់បន្ថយកំហុសឆ្គង និងបង្កើនល្បឿនក្នុងការធ្វើរោគវិនិច្ឆ័យ។</li>
+            
+            <li><strong>មន្ទីរពេទ្យបង្អែក និងមណ្ឌលសុខភាពជនបទ:</strong> អាចជួយគាំទ្រដល់ការធ្វើរោគវិនិច្ឆ័យបឋមនៅតាមតំបន់ដាច់ស្រយាលដែលខ្វះខាតគ្រូពេទ្យឯកទេសខាងកាំរស្មីអ៊ិច ដោយគ្រាន់តែបញ្ចូលរូបភាពទៅក្នុងប្រព័ន្ធកុំព្យូទ័រ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តម៉ូដែលចំណាត់ថ្នាក់នេះនឹងជួយកាត់បន្ថយបន្ទុកការងាររបស់គ្រូពេទ្យនៅកម្ពុជា ប៉ុន្តែគប្បីត្រូវអភិវឌ្ឍបន្ថែមដោយប្រើទិន្នន័យក្នុងស្រុក ដើម្បីបង្កើនភាពត្រឹមត្រូវឱ្យបានខ្ពស់ជាង ៧៣% មុននឹងដាក់ឱ្យប្រើប្រាស់ជាក់ស្តែង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃដំណើរការរូបភាព (Image Processing):</strong> និស្សិតគួរចាប់ផ្តើមសិក្សាអំពីការកែច្នៃរូបភាពវេជ្ជសាស្ត្រ ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">OpenCV</span> នៅក្នុង <span class="en">Python</span> ដើម្បីអនុវត្តការបំប្លែងរូបភាពពណ៌ទៅជាសខ្មៅ (Grayscale Conversion) និងកាត់បន្ថយទំហំរូបភាព (Resizing)។</li>
+            
+            <li><strong>អនុវត្តការទាញយកលក្ខណៈពិសេសដោយប្រើ SURF:</strong> ស្វែងយល់ស៊ីជម្រៅពីក្បួនគណិតវិទ្យានៅពីក្រោយ <span class="en">SURF feature extraction</span> និងសាកល្បងសរសេរកូដទាញយកចំណុចសំខាន់ៗ (Interest Points) ពីរូបភាព X-ray ដោយប្រើប្រាស់មុខងារមានស្រាប់នៅក្នុង <span class="en">OpenCV</span> ។</li>
+            
+            <li><strong>សាងសង់ម៉ូដែល Machine Learning ជាមួយ KNN:</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">Scikit-Learn</span> ដើម្បីសាងសង់និងហ្វឹកហាត់ម៉ូដែល <span class="en">K-Nearest Neighbor (KNN)</span> ដោយយកលទ្ធផលលក្ខណៈពិសេសដែលទាញបានពី SURF មកធ្វើជាទិន្នន័យបញ្ចូល (Input Features)។</li>
+            
+            <li><strong>ប្រមូលទិន្នន័យ និងធ្វើតេស្តក្នុងស្រុក:</strong> សហការជាមួយស្ថាប័នស្រាវជ្រាវ ឬមន្ទីរពេទ្យនៅកម្ពុជា (ឧទាហរណ៍៖ មន្ទីរពេទ្យមិត្តភាពខ្មែរ-សូវៀត) ដើម្បីសុំការអនុញ្ញាតប្រើប្រាស់រូបភាព X-ray ជំងឺរបេងក្នុងស្រុក (Anonymized Data) ដើម្បីយកមកវាយតម្លៃម៉ូដែលឡើងវិញ។</li>
+            
+            <li><strong>ប្រៀបធៀបជាមួយបច្ចេកវិទ្យា Deep Learning:</strong> បន្ទាប់ពីយល់ច្បាស់ពី KNN សូមសាកល្បងប្រៀបធៀបលទ្ធផលជាមួយបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតទំនើបៗដូចជា <span class="en">Convolutional Neural Networks (CNN)</span> ដោយប្រើ <span class="en">TensorFlow</span> ឬ <span class="en">PyTorch</span> ដើម្បីបង្កើនភាពត្រឹមត្រូវឱ្យបានលើសពី ៩០%។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (KNN)</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ចាត់ថ្នាក់ទិន្នន័យ (Machine Learning Classification) ដោយវាធ្វើការប្រៀបធៀបទិន្នន័យថ្មី ទៅនឹងទិន្នន័យចាស់ៗដែលនៅក្បែរវាបំផុតចំនួន K ដើម្បីកំណត់ថាតើទិន្នន័យថ្មីនោះគួរស្ថិតក្នុងក្រុមណា។</td>
+                <td>ដូចជាការទាយអត្តចរិតរបស់មនុស្សម្នាក់ ដោយមើលទៅលើមិត្តភក្តិជិតស្និទ្ធបំផុតទាំង ៥ នាក់របស់គាត់ (បើមិត្តភក្តិភាគច្រើនជាសិស្សពូកែ គាត់ក៏ប្រហែលជាសិស្សពូកែដែរ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SURF Feature Extraction</span></td>
+                <td>ជាក្បួនសម្រាប់រុករកនិងទាញយកចំណុចពិសេសៗ (Keypoints ឬ Features) ពីរូបភាព ដែលមានលក្ខណៈរហ័ស និងមិនប្រែប្រួលទោះបីជារូបភាពនោះត្រូវបង្រួម ពង្រីក ឬបង្វិលក៏ដោយ។</td>
+                <td>ដូចជាការកត់ចំណាំលក្ខណៈពិសេសៗនៅលើមុខរបស់មនុស្សម្នាក់ (ដូចជាទីតាំងប្រជ្រុយ ឬទម្រង់ភ្នែក) ដើម្បីចំណាំគាត់នៅពេលក្រោយ ទោះបីជាគាត់ពាក់មួក ឬថតរូបពីចម្ងាយក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Supervised machine learning</span></td>
+                <td>ជាវិធីសាស្ត្រមួយនៃបញ្ញាសិប្បនិម្មិត ដែលម៉ូដែលកុំព្យូទ័រត្រូវបានបណ្តុះបណ្តាលដោយប្រើសំណុំទិន្នន័យដែលមានភ្ជាប់មកជាមួយនូវចម្លើយ ឬស្លាកសញ្ញាត្រឹមត្រូវរួចជាស្រេច ដើម្បីឱ្យវាអាចទស្សន៍ទាយលទ្ធផលសម្រាប់ទិន្នន័យថ្មីៗ។</td>
+                <td>ដូចជាសិស្សរៀនធ្វើលំហាត់គណិតវិទ្យា ដោយមានចម្លើយត្រឹមត្រូវនៅខាងក្រោយសៀវភៅសម្រាប់ផ្ទៀងផ្ទាត់ និងកែតម្រូវកំហុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Extraction</span></td>
+                <td>ជាដំណើរការបំប្លែងទិន្នន័យឆៅ (ដូចជារូបភាព ឬសំឡេង) ទៅជាសំណុំនៃលក្ខណៈសម្បត្តិគណិតវិទ្យាដែលតំណាងឱ្យទិន្នន័យនោះ ដើម្បីកាត់បន្ថយទំហំផ្ទុក និងជួយឱ្យម៉ូដែលម៉ាស៊ីនរៀនយល់បានលឿន។</td>
+                <td>ដូចជាការសង្ខេបសៀវភៅមួយក្បាលធំ ឱ្យនៅសល់តែចំណុចសំខាន់ៗ ដើម្បីឱ្យអ្នកអានយល់ពីអត្ថន័យបានលឿន និងចំណាយពេលតិច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">HOG feature extraction</span></td>
+                <td>ជាបច្ចេកទេសទាញយកលក្ខណៈពិសេសពីរូបភាព ដោយផ្តោតលើការរាប់ចំនួនទិសដៅនៃបន្ទាត់គែម (Gradients/Edges) នៅក្នុងផ្នែកតូចៗនៃរូបភាព ដែលជារឿយៗត្រូវបានប្រើសម្រាប់ស្វែងរកវត្ថុឬរូបរាងគែម។</td>
+                <td>ដូចជាការគូរគំនូរព្រាងដែលផ្តោតតែលើគែម និងទិសដៅនៃវណ្ឌវង្ករបស់វត្ថុ ជំនួសឱ្យការផាត់ពណ៌លម្អិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Grayscale</span></td>
+                <td>ជារូបភាពដែលមានតែទម្រង់ពណ៌ស និងខ្មៅ (គ្មានពណ៌ធម្មជាតិដូចជា ក្រហម បៃតង ខៀវ) ដែលការបំប្លែងរូបភាពពណ៌ទៅជា Grayscale ជួយកាត់បន្ថយទិន្នន័យដែលម៉ាស៊ីនត្រូវគណនាពី ៣ ស្រទាប់ពណ៌ មកត្រឹម ១ ស្រទាប់ពណ៌។</td>
+                <td>ដូចជាការបោះពុម្ពរូបភាពពណ៌ទៅជាសខ្មៅ ដើម្បីសន្សំសំចៃទឹកថ្នាំ និងសន្សំពេលវេលា ប៉ុន្តែនៅតែអាចមើលដឹងពីរូបរាងវត្ថុច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Machine learning</span></td>
+                <td>ជាផ្នែកមួយនៃបញ្ញាសិប្បនិម្មិត (AI) ដែលផ្តោតលើការបង្កើតប្រព័ន្ធដែលអាចរៀនសូត្រពីទិន្នន័យ ស្វែងរកទម្រង់នៃបញ្ហា និងធ្វើការសម្រេចចិត្តដោយខ្លួនឯង ដោយមិនចាំបាច់មានការសរសេរកូដបញ្ជាគ្រប់ជំហានពីមនុស្ស។</td>
+                <td>ដូចជាការបង្រៀនក្មេងឱ្យស្គាល់សត្វឆ្កែ ដោយគ្រាន់តែបង្ហាញរូបសត្វឆ្កែជាច្រើនសន្លឹក រហូតដល់ក្មេងអាចចំណាំវាបានដោយខ្លួនឯងនៅពេលឃើញឆ្កែនៅខាងក្រៅ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Machine+learning+approaches+for+Tuberculosis+detection+using+chest+X-ray+images" target="_blank" rel="noopener"><span class="en">Machine learning approaches for Tuberculosis detection using chest X-ray images</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SURF+vs+SIFT+feature+extraction+performance+in+medical+image+analysis" target="_blank" rel="noopener"><span class="en">SURF vs SIFT feature extraction performance in medical image analysis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=K-Nearest+Neighbor+algorithm+optimization+for+high-dimensional+image+data" target="_blank" rel="noopener"><span class="en">K-Nearest Neighbor algorithm optimization for high-dimensional image data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+of+traditional+feature+extraction+%28HOG%2C+SURF%29+and+Convolutional+Neural+Networks+for+chest+X-rays" target="_blank" rel="noopener"><span class="en">Comparison of traditional feature extraction (HOG, SURF) and Convolutional Neural Networks for chest X-rays</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Computer-aided+diagnosis+%28CAD%29+systems+for+pulmonary+diseases+in+resource-limited+settings" target="_blank" rel="noopener"><span class="en">Computer-aided diagnosis (CAD) systems for pulmonary diseases in resource-limited settings</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

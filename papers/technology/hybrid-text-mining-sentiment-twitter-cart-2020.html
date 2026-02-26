@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបង្ហាញនូវវិធីសាស្ត្រចម្រុះថ្មីនៃការវិភាគមនោសញ្ចេតនាតាមរយៈការជីកកកាយអត្ថបទនៅលើ Twitter ដោយប្រើប្រាស់មែកធាងសេចក្តីសម្រេច CART | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគមនោសញ្ចេតនា និងទស្សនៈរបស់អ្នកប្រើប្រាស់នៅលើបណ្តាញសង្គម Twitter ដែលប្រឈមនឹងភាពស្មុគស្មាញដោយសារការប្រើប្រាស់ភាសាមិនផ្លូវការ និងក...">
+    
+    <meta name="keywords" content="Sentiment Analysis, Twitter, CART Decision Tree, SentiStrength, Text Mining, Machine Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/hybrid-text-mining-sentiment-twitter-cart-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/hybrid-text-mining-sentiment-twitter-cart-2020.html">
+    <meta property="og:title" content="ការបង្ហាញនូវវិធីសាស្ត្រចម្រុះថ្មីនៃការវិភាគមនោសញ្ចេតនាតាមរយៈការជីកកកាយអត្ថបទនៅលើ Twitter ដោយប្រើប្រាស់មែកធាងសេចក្តីសម្រេច CART | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគមនោសញ្ចេតនា និងទស្សនៈរបស់អ្នកប្រើប្រាស់នៅលើបណ្តាញសង្គម Twitter ដែលប្រឈមនឹងភាពស្មុគស្មាញដោយសារការប្រើប្រាស់ភាសាមិនផ្លូវការ និងការកំណត់ចំនួនតួអក្សរ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020 (Biannual Journal of Engineering Management and Soft Computing)">
+    
+    <meta property="article:tag" content="Sentiment Analysis">
+    
+    <meta property="article:tag" content="Twitter">
+    
+    <meta property="article:tag" content="CART Decision Tree">
+    
+    <meta property="article:tag" content="SentiStrength">
+    
+    <meta property="article:tag" content="Text Mining">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបង្ហាញនូវវិធីសាស្ត្រចម្រុះថ្មីនៃការវិភាគមនោសញ្ចេតនាតាមរយៈការជីកកកាយអត្ថបទនៅលើ Twitter ដោយប្រើប្រាស់មែកធាងសេចក្តីសម្រេច CART">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគមនោសញ្ចេតនា និងទស្សនៈរបស់អ្នកប្រើប្រាស់នៅលើបណ្តាញសង្គម Twitter ដែលប្រឈមនឹងភាពស្មុគស្មាញដោយសារការប្រើប្រាស់ភាសាមិនផ្លូវការ និងការកំណត់ចំនួនតួអក្សរ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1793\u17bc\u179c\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1785\u1798\u17d2\u179a\u17bb\u17c7\u1790\u17d2\u1798\u17b8\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1787\u17b8\u1780\u1780\u1780\u17b6\u1799\u17a2\u178f\u17d2\u1790\u1794\u1791\u1793\u17c5\u179b\u17be Twitter \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c2\u1780\u1792\u17b6\u1784\u179f\u17c1\u1785\u1780\u17d2\u178f\u17b8\u179f\u1798\u17d2\u179a\u17c1\u1785 CART",
+      "name": "\u0627\u0631\u0627\u0626\u0647 \u0631\u0648\u06cc\u06a9\u0631\u062f \u062a\u0631\u06a9\u06cc\u0628\u06cc \u0646\u0648\u06cc\u0646 \u062c\u0647\u062a \u0645\u062a\u0646 \u06a9\u0627\u0648\u06cc \u062a\u062d\u0644\u06cc\u0644 \u0627\u062d\u0633\u0627\u0633\u0627\u062a \u062f\u0631 \u062a\u0648\u06cc\u06cc\u062a\u0631 \u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u062f\u0631\u062e\u062a \u062a\u0635\u0645\u06cc\u0645 CART",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6 \u1793\u17b7\u1784\u1791\u179f\u17d2\u179f\u1793\u17c8\u179a\u1794\u179f\u17cb\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1793\u17c5\u179b\u17be\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u1784\u17d2\u1782\u1798 Twitter \u178a\u17c2\u179b\u1794\u17d2\u179a\u1788\u1798\u1793\u17b9\u1784\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1797\u17b6\u179f\u17b6\u1798\u17b7\u1793\u1795\u17d2\u179b\u17bc\u179c\u1780\u17b6\u179a \u1793\u17b7\u1784\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u1785\u17c6\u1793\u17bd\u1793\u178f\u17bd\u17a2\u1780\u17d2\u179f\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/hybrid-text-mining-sentiment-twitter-cart-2020.html",
+      "author": [{"@type": "Person", "name": "Nasir Tayarani Najaran (Islamic Azad University, Mashhad)"},{"@type": "Person", "name": "Mehrdad Jalali (Islamic Azad University, Mashhad)"}],
+      "datePublished": "2020 (Biannual Journal of Engineering Management and Soft Computing)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "\u0627\u0631\u0627\u0626\u0647 \u0631\u0648\u06cc\u06a9\u0631\u062f \u062a\u0631\u06a9\u06cc\u0628\u06cc \u0646\u0648\u06cc\u0646 \u062c\u0647\u062a \u0645\u062a\u0646 \u06a9\u0627\u0648\u06cc \u062a\u062d\u0644\u06cc\u0644 \u0627\u062d\u0633\u0627\u0633\u0627\u062a \u062f\u0631 \u062a\u0648\u06cc\u06cc\u062a\u0631 \u0628\u0627 \u0627\u0633\u062a\u0641\u0627\u062f\u0647 \u0627\u0632 \u062f\u0631\u062e\u062a \u062a\u0635\u0645\u06cc\u0645 CART",
+        "url": "https://doi.org/10.22091/JEMSC.2018.1272"
+      },
+      "keywords": ["Sentiment Analysis", "Twitter", "CART Decision Tree", "SentiStrength", "Text Mining", "Machine Learning"],
+      "about": "Computer Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1793\u17bc\u179c\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1785\u1798\u17d2\u179a\u17bb\u17c7\u1790\u17d2\u1798\u17b8\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1787\u17b8\u1780\u1780\u1780\u17b6\u1799\u17a2\u178f\u17d2\u1790\u1794\u1791\u1793\u17c5\u179b\u17be Twitter \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c2\u1780\u1792\u17b6\u1784\u179f\u17c1\u1785\u1780\u17d2\u178f\u17b8\u179f\u1798\u17d2\u179a\u17c1\u1785 CART",
+          "item": "https://khmerresearch.com/papers/technology/hybrid-text-mining-sentiment-twitter-cart-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបង្ហាញនូវវិធីសាស្ត្រចម្រុះថ្មីនៃការវិភាគមនោសញ្ចេតនាតាម...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> ارائه رویکرد ترکیبی نوین جهت متن کاوی تحلیل احساسات در توییتر با استفاده از درخت تصمیم CART<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.22091/JEMSC.2018.1272" target="_blank">doi.org/10.22091/JEMSC.2018.1272</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបង្ហាញនូវវិធីសាស្ត្រចម្រុះថ្មីនៃការវិភាគមនោសញ្ចេតនាតាមរយៈការជីកកកាយអត្ថបទនៅលើ Twitter ដោយប្រើប្រាស់មែកធាងសេចក្តីសម្រេច CART</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> ارائه رویکرد ترکیبی نوین جهت متن کاوی تحلیل احساسات در توییتر با استفاده از درخت تصمیم CART</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Nasir Tayarani Najaran (Islamic Azad University, Mashhad), Mehrdad Jalali (Islamic Azad University, Mashhad)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 (Biannual Journal of Engineering Management and Soft Computing)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគមនោសញ្ចេតនា និងទស្សនៈរបស់អ្នកប្រើប្រាស់នៅលើបណ្តាញសង្គម Twitter ដែលប្រឈមនឹងភាពស្មុគស្មាញដោយសារការប្រើប្រាស់ភាសាមិនផ្លូវការ និងការកំណត់ចំនួនតួអក្សរ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្រចម្រុះថ្មីមួយដោយប្រើប្រាស់ម៉ាស៊ីនរៀន (Machine Learning) និងវិធីសាស្ត្រផ្អែកលើវាក្យសព្ទ (Lexicon-based) ក្នុងពេលតែមួយដើម្បីធ្វើការវិភាគអត្ថបទ។
+        
+        <ul>
+            
+            <li>ការចាត់ថ្នាក់តាមមែកធាងសេចក្តីសម្រេច (CART Decision Tree)</li>
+            
+            <li>ការទាញយកកម្រិតមនោសញ្ចេតនាតាមរយៈក្បួនដោះស្រាយផ្អែកលើវាក្យសព្ទ (SentiStrength Algorithm)</li>
+            
+            <li>ការរៀបចំទិន្នន័យជាមុន ដើម្បីលុបទិន្នន័យរំខាន (Data Preprocessing)</li>
+            
+            <li>ការវាយតម្លៃដោយប្រើសំណុំទិន្នន័យខ្នាតគំរូ (STS-Gold Dataset)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រចម្រុះថ្មីនេះទទួលបានអត្រាភាពត្រឹមត្រូវ (Accuracy) រហូតដល់ ៨០% ក្នុងការចាត់ថ្នាក់មនោសញ្ចេតនាធៀបនឹងវិធីសាស្ត្រមុនៗ។</li>
+            
+            <li>កម្រិតពិន្ទុ F1-Score ត្រូវបានកែលម្អរហូតដល់ ៧៩,៩៩% ដែលបង្ហាញពីដំណើរការដ៏ល្អប្រសើរនិងភាពជឿជាក់ខ្ពស់លើលទ្ធផល។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នារវាង CART និង SentiStrength ផ្តល់នូវសមត្ថភាពខ្ពស់ក្នុងការវិភាគអត្ថបទខ្លីៗ និងវាក្យសព្ទកាត់ៗនៅលើ Twitter យ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">CART TSA (Proposed Hybrid Method)</span></strong><br>វិធីសាស្ត្រចម្រុះស្នើឡើង (មែកធាងសេចក្តីសម្រេច CART ជាមួយ SentiStrength)</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុត និងកែលម្អការចាត់ថ្នាក់បានយ៉ាងល្អដោយសារការរួមបញ្ចូលគ្នានៃម៉ាស៊ីនរៀន និងក្បួនដោះស្រាយផ្អែកលើវាក្យសព្ទ។</td>
+                <td>ត្រូវការដំណើរការរៀបចំទិន្នន័យជាមុនច្រើន (Data Preprocessing) និងប្រើប្រាស់ធនធានគណនាសម្រាប់ការវិភាគទិន្នន័យធំៗរហូតដល់រាប់ជីហ្គាបៃ។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy): ៨០%, ពិន្ទុ F1-Score: ៧៩.៩៩%</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Seif et al. (SentiCircles and SVM)</span></strong><br>វិធីសាស្ត្ររបស់ Seif និងសហការី (ប្រើ SentiCircles និង SVM)</td>
+                <td>អាចចាប់យកអត្ថន័យលាក់កំបាំងនៃពាក្យដោយផ្អែកលើលំនាំនៃការកើតឡើងរបស់វានៅក្នុងបរិបទប្រយោគ។</td>
+                <td>ភាពត្រឹមត្រូវនៅមានកម្រិតទាបជាងវិធីសាស្ត្រចម្រុះដែលបានស្នើឡើងបន្តិចបន្តួចក្នុងការសិក្សានេះ។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy): ៧៩%, ពិន្ទុ F1-Score: ៧៨.៥០%</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Thelwall (SentiStrength Lexicon)</span></strong><br>វិធីសាស្ត្ររបស់ Thelwall (ផ្អែកលើវាក្យសព្ទ SentiStrength តែមួយមុខ)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងមានប្រសិទ្ធភាពសម្រាប់អត្ថបទខ្លីៗក្រៅផ្លូវការ ដោយពឹងផ្អែកលើវចនានុក្រមអារម្មណ៍។</td>
+                <td>មិនសូវមានភាពបត់បែន និងមានភាពត្រឹមត្រូវទាបបំផុតបើប្រៀបធៀបទៅនឹងការប្រើប្រាស់ម៉ាស៊ីនរៀន។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy): ៦២%, ពិន្ទុ F1-Score: ៥០.៩៨%</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះបានបង្ហាញពីការវាយតម្លៃលើពេលវេលាដំណើរការ (Execution Time) ដែលកើនឡើងជាលំដាប់ទៅតាមទំហំទិន្នន័យ (ពី 15MB ដល់ 1060MB) ប៉ុន្តែមិនបានបញ្ជាក់លម្អិតអំពីផ្នែករឹងកុំព្យូទ័រនោះទេ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យស្តង់ដារ STS-Gold (ទិន្នន័យ Twitter ជាភាសាអង់គ្លេស) សម្រាប់ធ្វើការបណ្តុះបណ្តាល និងសាកល្បងម៉ូដែល។</li>
+        
+        <li><strong>Software & Algorithms:</strong> ក្បួនដោះស្រាយ CART Decision Tree និងវចនានុក្រមវិភាគអារម្មណ៍ SentiStrength។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានសមត្ថភាពអង្គចងចាំ (RAM) គ្រប់គ្រាន់ដើម្បីដំណើរការទិន្នន័យអត្ថបទធំៗ (Big Data) ក្នុងកម្រិតលើសពី 1GB។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកវិទ្យាសាស្ត្រទិន្នន័យ (Data Science) ម៉ាស៊ីនរៀន (Machine Learning) និងការកែច្នៃភាសាធម្មជាតិ (NLP) សម្រាប់ធ្វើ Preprocessing។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យស្តង់ដារ STS-Gold ដែលភាគច្រើនជាភាសាអង់គ្លេស។ វាមិនមានទិន្នន័យជាភាសាខ្មែរ ឬបរិបទសង្គមក្នុងតំបន់អាស៊ីអាគ្នេយ៍នោះទេ។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តវិធីសាស្ត្រនេះតម្រូវឱ្យមានការបង្កើតសំណុំទិន្នន័យភាសាខ្មែរ (Khmer Text Dataset) និងវចនានុក្រមអារម្មណ៍ផ្ទាល់ខ្លួនដើម្បីធានាបាននូវភាពត្រឹមត្រូវ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រចម្រុះនេះមានសក្តានុពលខ្ពស់សម្រាប់ស្ថាប័ននិងក្រុមហ៊ុននៅកម្ពុជា ក្នុងការស្វែងយល់ពីមតិយោបល់របស់សាធារណជននៅលើបណ្តាញសង្គមផ្សេងៗ មិនត្រឹមតែ Twitter ប៉ុណ្ណោះទេ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ (Telecommunications):</strong> ក្រុមហ៊ុនដូចជា Smart Axiata ឬ Cellcard អាចប្រើប្រាស់វាដើម្បីវិភាគមតិយោបល់អតិថិជននៅលើ Facebook ទាក់ទងនឹងគុណភាពសេវាអ៊ីនធឺណិត។</li>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (Banking & Finance):</strong> ធនាគារ ABA ឬស្ថាប័នមីក្រូហិរញ្ញវត្ថុនានា អាចតាមដានការឆ្លើយតបរបស់អតិថិជនចំពោះសេវាកម្ម Mobile App ថ្មីៗ ដើម្បីកែលម្អបទពិសោធន៍អ្នកប្រើប្រាស់។</li>
+            
+            <li><strong>រដ្ឋាភិបាល និងស្ថាប័នសារព័ត៌មាន (Government & Media):</strong> ស្ថាប័នរដ្ឋអាចវាស់ស្ទង់ប្រតិកម្មរបស់ប្រជាពលរដ្ឋចំពោះគោលនយោបាយសេដ្ឋកិច្ច ឬព្រឹត្តិការណ៍សង្គម ដើម្បីឆ្លើយតបឲ្យបានទាន់ពេលវេលា។</li>
+            
+        </ul>
+        
+        
+        <p>ការរួមបញ្ចូលគ្នានៃម៉ាស៊ីនរៀន (CART) និងក្បួនដោះស្រាយផ្អែកលើវាក្យសព្ទ គឺជាដំណោះស្រាយដ៏រឹងមាំមួយដែលអាចយកមកបំប្លែងប្រើជាមួយអត្ថបទភាសាខ្មែរ ដើម្បីលើកកម្ពស់សេវាកម្មសាធារណៈ និងពាណិជ្ជកម្មនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាអំពីការកែច្នៃភាសាធម្មជាតិ (Learn NLP Basics):</strong> ចាប់ផ្តើមរៀនពីមូលដ្ឋានគ្រឹះនៃការរៀបចំទិន្នន័យអត្ថបទ (Text Preprocessing) ដូចជា Tokenization និង Stopword removal ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">NLTK</span> ឬ <span class="en">spaCy</span> នៅក្នុងភាសា <span class="en">Python</span>។</li>
+            
+            <li><strong>ជំហានទី២៖ ស្វែងយល់ពីក្បួនដោះស្រាយផ្អែកលើវាក្យសព្ទ (Understand Lexicon-based methods):</strong> សិក្សាពីរបៀបបង្កើតវចនានុក្រមពាក្យវិជ្ជមាន/អវិជ្ជមាន និងសាកល្បងប្រើប្រាស់ឧបករណ៍ដូចជា <span class="en">SentiStrength</span> ដើម្បីវាយតម្លៃអត្ថបទខ្លីៗ និងរៀនពីរបៀបចាត់ចែងពាក្យបដិសេធ (Negation)។</li>
+            
+            <li><strong>ជំហានទី៣៖ អនុវត្តគំរូម៉ាស៊ីនរៀនជាមួយ CART (Implement CART Decision Tree):</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">Scikit-Learn</span> ដើម្បីសរសេរកូដបង្កើតគំរូចាត់ថ្នាក់ <span class="en">DecisionTreeClassifier</span> លើទិន្នន័យអត្ថបទដែលបានរៀបចំរួច រួចវាយតម្លៃភាពត្រឹមត្រូវ។</li>
+            
+            <li><strong>ជំហានទី៤៖ បង្កើតគម្រោងសាកល្បងផ្ទាល់ខ្លួន (Build a Mini Project):</strong> ប្រមូលទិន្នន័យមតិយោបល់ជាក់ស្តែងពីបណ្តាញសង្គម (ឧទាហរណ៍ យកមតិយោបល់ពី <span class="en">Facebook Pages</span> ក្នុងស្រុក) យកមកវិភាគមនោសញ្ចេតនា រួចប្រៀបធៀបលទ្ធផលរវាងវិធីសាស្ត្រធម្មតា និងវិធីសាស្ត្រចម្រុះ (Hybrid Approach)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">CART Decision Tree</span></td>
+                <td>ជាក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine Learning Algorithm) មួយប្រភេទដែលប្រើរចនាសម្ព័ន្ធដូចមែកធាង ដើម្បីធ្វើការសម្រេចចិត្តដោយបំបែកទិន្នន័យជាផ្នែកតូចៗតាមលក្ខខណ្ឌច្បាស់លាស់ រហូតដល់វាអាចទស្សន៍ទាយលទ្ធផល (ដូចជាចំណាត់ថ្នាក់មនោសញ្ចេតនាវិជ្ជមានឬអវិជ្ជមាន)។</td>
+                <td>ដូចជាការលេងហ្គេមសួរសំណួរ "បាទ/ទេ" បន្តបន្ទាប់គ្នា ដើម្បីទាយឲ្យដឹងថាតើវត្ថុនោះជាអ្វី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SentiStrength Algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយផ្អែកលើវាក្យសព្ទ (Lexicon-based) ដែលផ្តល់ពិន្ទុវិជ្ជមានឬអវិជ្ជមានដល់ពាក្យនីមួយៗក្នុងអត្ថបទខ្លីៗ (ដូចជា Twitter) ដើម្បីវាយតម្លៃកម្រិតមនោសញ្ចេតនាសរុបនៃប្រយោគនោះ ដោយពិចារណាលើវណ្ណយុត្តិ និងពាក្យស្លែង។</td>
+                <td>ដូចជាគ្រូបង្រៀនម្នាក់ដែលឲ្យពិន្ទុ +១ សម្រាប់ពាក្យល្អៗ និង -១ សម្រាប់ពាក្យអាក្រក់ៗ រួចបូកសរុបដើម្បីដឹងថាអត្ថបទនោះមានន័យល្អឬអាក្រក់សរុបកម្រិតណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Text Mining</span></td>
+                <td>គឺជាដំណើរការទាញយកព័ត៌មាននិងចំណេះដឹងដែលមានតម្លៃចេញពីទិន្នន័យអត្ថបទដែលមិនមានរចនាសម្ព័ន្ធច្បាស់លាស់ តាមរយៈការប្រើប្រាស់បច្ចេកវិទ្យាកុំព្យូទ័រ និងការវិភាគស្ថិតិ ដើម្បីស្វែងរកលំនាំនិងអត្ថន័យលាក់កំបាំង។</td>
+                <td>ដូចជាការរែងរកគ្រាប់មាសដ៏មានតម្លៃចេញពីគំនរខ្សាច់ដ៏ធំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sentiment Analysis</span></td>
+                <td>ជាការប្រើប្រាស់បច្ចេកវិទ្យាកែច្នៃភាសាធម្មជាតិ (NLP) និងម៉ាស៊ីនរៀន ដើម្បីកំណត់និងចាត់ថ្នាក់ថាតើទិន្នន័យអត្ថបទមួយ (ឧទាហរណ៍ មតិយោបល់អតិថិជន) មានលក្ខណៈវិជ្ជមាន អវិជ្ជមាន ឬអព្យាក្រឹត្យចំពោះប្រធានបទអ្វីមួយ។</td>
+                <td>ដូចជាការស្កេនមើលទឹកមុខនិងកាយវិការរបស់មិត្តភក្តិដើម្បីដឹងថាគេកំពុងសប្បាយចិត្ត ខឹង ឬធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Preprocessing</span></td>
+                <td>គឺជាជំហានដំបូងក្នុងការសម្អាតនិងរៀបចំទិន្នន័យដើម (ឧទាហរណ៍ ការលុបពាក្យមិនចាំបាច់ តំណភ្ជាប់ សញ្ញា ឬកែអក្ខរាវិរុទ្ធ) មុនពេលបញ្ចូលវាទៅក្នុងគំរូម៉ាស៊ីនរៀន ដើម្បីកាត់បន្ថយទិន្នន័យរំខាននិងបង្កើនភាពត្រឹមត្រូវនៃការវិភាគ។</td>
+                <td>ដូចជាការលាងសម្អាត និងហាន់បន្លែសាច់ជាមុន មុននឹងចាប់ផ្តើមចម្អិនម្ហូប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">F-Score</span></td>
+                <td>ជារង្វាស់វាយតម្លៃភាពត្រឹមត្រូវនៃម៉ូដែលចំណាត់ថ្នាក់ ដែលជាមធ្យមភាគសុខដុម (Harmonic Mean) រវាងភាពជាក់លាក់ (Precision) និងការរំលឹក (Recall) ដើម្បីបង្ហាញពីតុល្យភាពនៃកំហុសរបស់ម៉ូដែល ជាពិសេសនៅពេលដែលទិន្នន័យមិនមានតុល្យភាព។</td>
+                <td>ដូចជាពិន្ទុសរុបរបស់សិស្សម្នាក់ដែលបង្ហាញថាគាត់ពូកែទាំងការចងចាំមេរៀនផង និងការអនុវត្តជាក់ស្តែងផង មិនមែនពូកែតែម្ខាងៗនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Machine Learning</span></td>
+                <td>ជាអនុវិស័យនៃបញ្ញាសិប្បនិម្មិត (AI) ដែលអនុញ្ញាតឱ្យប្រព័ន្ធកុំព្យូទ័ររៀនពីទិន្នន័យ និងកែលម្អដំណើរការរបស់វាដោយស្វ័យប្រវត្តិ ក្នុងការទស្សន៍ទាយឬធ្វើចំណាត់ថ្នាក់ ដោយមិនចាំបាច់សរសេរកូដបញ្ជាជាក់លាក់សម្រាប់រាល់សកម្មភាពនោះទេ។</td>
+                <td>ដូចជាការបង្រៀនកូនក្មេងឱ្យស្គាល់សត្វឆ្កែដោយបង្ហាញរូបថតសត្វឆ្កែច្រើនសន្លឹក ជាជាងការពន្យល់ប្រាប់ពីលក្ខណៈលម្អិតរបស់វាម្តងមួយៗ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+approach+sentiment+analysis+Twitter+lexicon+machine+learning" target="_blank" rel="noopener"><span class="en">hybrid approach sentiment analysis Twitter lexicon machine learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=CART+decision+tree+algorithm+social+media+text+mining" target="_blank" rel="noopener"><span class="en">CART decision tree algorithm social media text mining</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SentiStrength+sentiment+lexicon+short+informal+text+evaluation" target="_blank" rel="noopener"><span class="en">SentiStrength sentiment lexicon short informal text evaluation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=improving+accuracy+in+Twitter+sentiment+analysis+using+ensemble+methods" target="_blank" rel="noopener"><span class="en">improving accuracy in Twitter sentiment analysis using ensemble methods</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=challenges+in+multilingual+and+informal+text+sentiment+analysis" target="_blank" rel="noopener"><span class="en">challenges in multilingual and informal text sentiment analysis</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

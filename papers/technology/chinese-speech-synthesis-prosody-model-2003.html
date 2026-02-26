@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសិក្សាអំពីម៉ូដែលចង្វាក់សំឡេងក្នុងការសំយោគសំឡេងភាសាចិន ដោយផ្អែកលើការចាត់ថ្នាក់លក្ខណៈចង្វាក់នៃព្យាង្គ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតម៉ូដែលចង្វាក់សំឡេង (Prosody modeling) នៅក្នុងប្រព័ន្ធសំយោគសំឡេងភាសាចិន ដែលជារឿយៗខ្វះភាពរលូន និងលក្ខណៈធម្មជាតិដោយសារកង្វះការគិ...">
+    
+    <meta name="keywords" content="Speech synthesis, Prosody model, Chinese language, Prosody templates, Cost function, Viterbi search, Acoustic modeling, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/chinese-speech-synthesis-prosody-model-2003.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/chinese-speech-synthesis-prosody-model-2003.html">
+    <meta property="og:title" content="ការសិក្សាអំពីម៉ូដែលចង្វាក់សំឡេងក្នុងការសំយោគសំឡេងភាសាចិន ដោយផ្អែកលើការចាត់ថ្នាក់លក្ខណៈចង្វាក់នៃព្យាង្គ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតម៉ូដែលចង្វាក់សំឡេង (Prosody modeling) នៅក្នុងប្រព័ន្ធសំយោគសំឡេងភាសាចិន ដែលជារឿយៗខ្វះភាពរលូន និងលក្ខណៈធម្មជាតិដោយសារកង្វះការគិតគូរពីឥទ្ធិពលនៃបរិបទ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2003 ACTA ACUSTICA">
+    
+    <meta property="article:tag" content="Speech synthesis">
+    
+    <meta property="article:tag" content="Prosody model">
+    
+    <meta property="article:tag" content="Chinese language">
+    
+    <meta property="article:tag" content="Prosody templates">
+    
+    <meta property="article:tag" content="Cost function">
+    
+    <meta property="article:tag" content="Viterbi search">
+    
+    <meta property="article:tag" content="Acoustic modeling">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសិក្សាអំពីម៉ូដែលចង្វាក់សំឡេងក្នុងការសំយោគសំឡេងភាសាចិន ដោយផ្អែកលើការចាត់ថ្នាក់លក្ខណៈចង្វាក់នៃព្យាង្គ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតម៉ូដែលចង្វាក់សំឡេង (Prosody modeling) នៅក្នុងប្រព័ន្ធសំយោគសំឡេងភាសាចិន ដែលជារឿយៗខ្វះភាពរលូន និងលក្ខណៈធម្មជាតិដោយសារកង្វះការគិតគូរពីឥទ្ធិពលនៃបរិបទ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u17a2\u17c6\u1796\u17b8\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u1797\u17b6\u179f\u17b6\u1785\u17b7\u1793 \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179b\u1780\u17d2\u1781\u178e\u17c8\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u1793\u17c3\u1796\u17d2\u1799\u17b6\u1784\u17d2\u1782",
+      "name": "\u57fa\u4e8e\u97f3\u8282\u97f5\u5f8b\u7279\u5f81\u5206\u7c7b\u7684\u6c49\u8bed\u8bed\u97f3\u5408\u6210\u4e2d\u97f5\u5f8b\u6a21\u578b\u7684\u7814\u7a76",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u179f\u17c6\u17a1\u17c1\u1784 (Prosody modeling) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u1797\u17b6\u179f\u17b6\u1785\u17b7\u1793 \u178a\u17c2\u179b\u1787\u17b6\u179a\u17bf\u1799\u17d7\u1781\u17d2\u179c\u17c7\u1797\u17b6\u1796\u179a\u179b\u17bc\u1793 \u1793\u17b7\u1784\u179b\u1780\u17d2\u1781\u178e\u17c8\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u1784\u17d2\u179c\u17c7\u1780\u17b6\u179a\u1782\u17b7\u178f\u1782\u17bc\u179a\u1796\u17b8\u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u1793\u17c3\u1794\u179a\u17b7\u1794\u1791\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/chinese-speech-synthesis-prosody-model-2003.html",
+      "author": [{"@type": "Person", "name": "TAO Jianhua (Tsinghua University)"},{"@type": "Person", "name": "CAI Lianhong (Tsinghua University)"}],
+      "datePublished": "2003 ACTA ACUSTICA",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "\u57fa\u4e8e\u97f3\u8282\u97f5\u5f8b\u7279\u5f81\u5206\u7c7b\u7684\u6c49\u8bed\u8bed\u97f3\u5408\u6210\u4e2d\u97f5\u5f8b\u6a21\u578b\u7684\u7814\u7a76",
+        "url": "https://doi.org/10.15949/j.cnki.0371-0025.2003.05.003"
+      },
+      "keywords": ["Speech synthesis", "Prosody model", "Chinese language", "Prosody templates", "Cost function", "Viterbi search", "Acoustic modeling"],
+      "about": "Speech Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u17a2\u17c6\u1796\u17b8\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u1797\u17b6\u179f\u17b6\u1785\u17b7\u1793 \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179b\u1780\u17d2\u1781\u178e\u17c8\u1785\u1784\u17d2\u179c\u17b6\u1780\u17cb\u1793\u17c3\u1796\u17d2\u1799\u17b6\u1784\u17d2\u1782",
+          "item": "https://khmerresearch.com/papers/technology/chinese-speech-synthesis-prosody-model-2003.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការសិក្សាអំពីម៉ូដែលចង្វាក់សំឡេងក្នុងការសំយោគសំឡេងភាសាចិន ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 基于音节韵律特征分类的汉语语音合成中韵律模型的研究<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.15949/j.cnki.0371-0025.2003.05.003" target="_blank">doi.org/10.15949/j.cnki.0371-0025.2003.05.003</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសិក្សាអំពីម៉ូដែលចង្វាក់សំឡេងក្នុងការសំយោគសំឡេងភាសាចិន ដោយផ្អែកលើការចាត់ថ្នាក់លក្ខណៈចង្វាក់នៃព្យាង្គ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 基于音节韵律特征分类的汉语语音合成中韵律模型的研究</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> TAO Jianhua (Tsinghua University), CAI Lianhong (Tsinghua University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2003 ACTA ACUSTICA</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Speech Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតម៉ូដែលចង្វាក់សំឡេង (Prosody modeling) នៅក្នុងប្រព័ន្ធសំយោគសំឡេងភាសាចិន ដែលជារឿយៗខ្វះភាពរលូន និងលក្ខណៈធម្មជាតិដោយសារកង្វះការគិតគូរពីឥទ្ធិពលនៃបរិបទ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានស្នើឡើងនូវវិធីសាស្រ្តផ្អែកលើទិន្នន័យ ដោយប្រើប្រាស់ម៉ូដែលស្ថិតិ និងយន្តការបណ្តុះបណ្តាលដោយស្វ័យប្រវត្តិ។
+        
+        <ul>
+            
+            <li>ការចង្កោមខ្សែកោងកម្រិតសំឡេងព្យាង្គ (Syllabic pitch curve clustering) តាមរយៈវិធីសាស្ត្រ Max-Tree</li>
+            
+            <li>ការបង្កើតពុម្ពចង្វាក់សំឡេង (Prosody templates)</li>
+            
+            <li>ការប្រើប្រាស់អនុគមន៍តម្លៃចង្វាក់ (Prosody cost function) សម្រាប់ការជ្រើសរើសពុម្ព</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយការស្វែងរក (Viterbi search) ដើម្បីទស្សន៍ទាយចង្វាក់សំឡេងដោយផ្អែកលើបរិបទប្រយោគ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការធ្វើតេស្តលើទិន្នន័យប្រយោគចំនួន ១.០០០ ដែលមានតួអក្សរចិនចំនួន ១៦.៤៤៦ បង្ហាញថាម៉ូដែលថ្មីនេះមានកំហុសទាបក្នុងការទស្សន៍ទាយកម្រិតសំឡេង។</li>
+            
+            <li>ការគិតគូរពីអន្តរកម្មរវាងលក្ខណៈចង្វាក់នៃព្យាង្គនីមួយៗ បានកាត់បន្ថយអត្រាកំហុសយ៉ាងមានប្រសិទ្ធភាព និងបង្ហាញពីព្រំដែនប្រយោគបានច្បាស់លាស់។</li>
+            
+            <li>វិធីសាស្ត្រនេះជួយឱ្យប្រព័ន្ធសំយោគសំឡេងមានលក្ខណៈធម្មជាតិខ្ពស់ មានភាពបត់បែន និងកាត់បន្ថយការពឹងផ្អែកទៅលើការកំណត់ច្បាប់ដោយដៃរបស់អ្នកជំនាញ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Statistical Prosody Model with Transition Probabilities (Eq 22)</span></strong><br>ម៉ូដែលចង្វាក់សំឡេងតាមបែបស្ថិតិដែលមានអន្តរកម្មលក្ខណៈចង្វាក់</td>
+                <td>កំហុសទាបក្នុងការទស្សន៍ទាយកម្រិតសំឡេង (F0) និងបង្កើតសំឡេងបានរលូនតាមបែបធម្មជាតិ។ កាន់តែមានប្រសិទ្ធភាពខ្ពស់ក្នុងការទស្សន៍ទាយចង្វាក់សម្រាប់ប្រយោគវែងៗ។</td>
+                <td>ទាមទារការគណនាស្មុគស្មាញជាងមុន ដោយសារត្រូវគិតគូរពីប្រូបាប៊ីលីតេនៃការផ្លាស់ប្តូរចង្វាក់ (Transition probabilities) ឆ្លងកាត់ប្រយោគទាំងមូល។</td>
+                <td>អត្រាកំហុសនៃការទស្សន៍ទាយកម្រិតសំឡេង (F0) មានការថយចុះជាលំដាប់នៅពេលចំនួនព្យាង្គក្នុងប្រយោគកើនឡើង (បង្ហាញក្នុងរូបភាពទី ៣)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Baseline Prosody Prediction without Correlation (Eq 12)</span></strong><br>ការទស្សន៍ទាយចង្វាក់សំឡេងដែលមិនគិតពីអន្តរកម្មលក្ខណៈ</td>
+                <td>ការគណនាងាយស្រួល និងដំណើរការបានរហ័ស ដោយគ្រាន់តែពឹងផ្អែកលើអនុគមន៍តម្លៃ (Cost function) នៃបរិបទព្យាង្គនីមួយៗតែប៉ុណ្ណោះ។</td>
+                <td>អត្រាកំហុសខ្ពស់ជាង ហើយមិនសូវមានលក្ខណៈធម្មជាតិ និងខ្វះចង្វាក់រលូនក្នុងការអានប្រយោគវែងៗ។</td>
+                <td>អត្រាកំហុសខ្ពស់ជាងម៉ូដែលស្នើឡើងប្រមាណ ១០-២០ ហឺត (Hz) ហើយអត្រាកំហុសនេះមិនមានការប្រែប្រួលទោះបីជាប្រវែងប្រយោគប្រែប្រួលក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីទំហំកុំព្យូទ័រ (Hardware) ដែលត្រូវប្រើប្រាស់នោះទេ ប៉ុន្តែវាទាមទារទិន្នន័យជាក់លាក់ និងការប្រឹងប្រែងពីមនុស្សក្នុងការរៀបចំទិន្នន័យ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យអត្ថបទនិងសំឡេងចំនួន ១.០០០ ប្រយោគ (តួអក្សរចិន ១៦.៤៤៦) ដកស្រង់ចេញពីកាសែត People's Daily និងអានដោយអ្នកប្រកាសព័ត៌មាន។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារកម្លាំងមនុស្សក្នុងការកត់ត្រា និងដាក់ស្លាកសម្គាល់ចង្វាក់សំឡេង (Prosody annotation) ដោយដៃសម្រាប់បង្វឹកទិន្នន័យ។</li>
+        
+        <li><strong>Algorithm:</strong> ទាមទារការសរសេរកូដសម្រាប់ក្បួនដោះស្រាយការស្វែងរកផ្លូវ Viterbi និងការបង្វឹកទម្ងន់នៃអនុគមន៍តម្លៃ (Cost function weights)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យសំឡេងភាសាចិនកុកងឺ (Mandarin) ដែលអានដោយអ្នកប្រកាសព័ត៌មានផ្លូវការ ដែលមានលក្ខណៈស្តង់ដារបំផុត។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តវិធីសាស្រ្តនេះទាមទារការប្រមូលទិន្នន័យសំឡេងភាសាខ្មែរដែលមានគ្រាមភាសាខុសៗគ្នា និងសូរសព្ទខុសពីភាសាចិន ដើម្បីធានាថាម៉ូដែលមិនលម្អៀង និងអាចប្រើប្រាស់បានទូលំទូលាយ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការបង្កើតម៉ូដែលចង្វាក់សំឡេងនេះ អាចយកមកអនុវត្ត និងកែច្នៃសម្រាប់អភិវឌ្ឍប្រព័ន្ធសំយោគសំឡេង (Text-to-Speech) ជាភាសាខ្មែរបានយ៉ាងមានសក្តានុពល។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធបច្ចេកវិទ្យាជំនួយ (Assistive Technology):</strong> អាចយកទៅអភិវឌ្ឍប្រព័ន្ធអានអត្ថបទជាសំឡេង សម្រាប់ជួយដល់ជនពិការភ្នែកនៅកម្ពុជា ឱ្យទទួលបានបទពិសោធន៍ស្តាប់ព័ត៌មានដែលរលូនដូចមនុស្សអានពិតៗ។</li>
+            
+            <li><strong>វិស័យសេវាកម្មអតិថិជន (Customer Service):</strong> ធនាគារ ឬក្រុមហ៊ុនទូរគមនាគមន៍ (ដូចជា Cellcard ឬ Smart) អាចប្រើប្រាស់វាដើម្បីបង្កើតសំឡេងឆ្លើយតបស្វ័យប្រវត្តិ (IVR) ដែលមិនសូវរឹងត្អឹង។</li>
+            
+            <li><strong>ការស្រាវជ្រាវភាសាខ្មែរតាមប្រព័ន្ធកុំព្យូទ័រនៅ ITC:</strong> ផ្តល់ជាមូលដ្ឋានគ្រឹះដល់អ្នកស្រាវជ្រាវកម្ពុជាក្នុងការសិក្សាពីលក្ខណៈសូរសព្ទ ចង្វាក់សំឡេង និងទម្រង់ប្រយោគនៃភាសាខ្មែរ ដើម្បីលើកកម្ពស់បច្ចេកវិទ្យាភាសាជាតិ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បើទោះបីជាវិធីសាស្រ្តនេះត្រូវបានរចនាសម្រាប់ភាសាចិន ដែលជាភាសាមានសំនៀង (Tonal language) ក៏ដោយ គោលគំនិតនៃម៉ូដែលស្ថិតិ និងការប្រើប្រាស់បរិបទ គឺជាគំរូដ៏ល្អសម្រាប់ប្រព័ន្ធ TTS ភាសាខ្មែរនាពេលអនាគត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃម៉ូដែលសូរសព្ទ:</strong> អ្នកស្រាវជ្រាវត្រូវសិក្សាអំពីទ្រឹស្តីនៃការទស្សន៍ទាយចង្វាក់សំឡេង និងការរៀបចំក្បួនដោះស្រាយតាមរយៈការប្រើប្រាស់ <span class="en">Hidden Markov Model (HMM)</span> និងក្បួនដោះស្រាយស្វែងរក <span class="en">Viterbi Algorithm</span>។</li>
+            
+            <li><strong>ប្រមូលនិងដាក់ស្លាកទិន្នន័យសំឡេងភាសាខ្មែរ:</strong> ចាប់ផ្តើមថតនិងប្រមូលទិន្នន័យសំឡេងភាសាខ្មែរដែលអានដោយអ្នកប្រកាសព័ត៌មានអាជីព ហើយប្រើប្រាស់កម្មវិធីដូចជា <span class="en">Praat</span> ដើម្បីកត់ត្រានិងដាក់ស្លាកសម្គាល់ចង្វាក់សំឡេង (<span class="en">Prosodic Annotation</span>) ដោយដៃ។</li>
+            
+            <li><strong>អភិវឌ្ឍន៍ម៉ូដែលទស្សន៍ទាយចង្វាក់សំឡេង:</strong> សាកល្បងសរសេរកូដបង្កើតម៉ូដែលតម្លៃចង្វាក់ (Cost Function Model) ដោយប្រើប្រាស់បណ្ណាល័យភាសា Python ដូចជា <span class="en">PyTorch</span> ឬ <span class="en">SciPy</span> ដើម្បីគណនាទម្ងន់និងប្រូបាប៊ីលីតេនៃលក្ខណៈសូរសព្ទ។</li>
+            
+            <li><strong>បង្វឹកម៉ូដែលនិងវាយតម្លៃកំហុស:</strong> ធ្វើការហ្វឹកហាត់ម៉ូដែល និងវាយតម្លៃលទ្ធផលដោយការវាស់ស្ទង់អត្រាកំហុសនៃការទស្សន៍ទាយកម្រិតសំឡេង (<span class="en">F0 Prediction Error</span>) ដោយប្រៀបធៀបវាទៅនឹងសំឡេងពិតប្រាកដរបស់មនុស្ស។</li>
+            
+            <li><strong>ធ្វើសមាហរណកម្មជាមួយប្រព័ន្ធសំយោគសំឡេង:</strong> យកម៉ូដែលចង្វាក់ដែលបានហ្វឹកហាត់រួច ទៅបញ្ចូលភ្ជាប់ជាមួយនឹងប្រព័ន្ធសំយោគសំឡេងបើកចំហរដូចជា <span class="en">Festival Speech Synthesis System</span> ឬឧបករណ៍ <span class="en">Kaldi</span> ដើម្បីផលិតជាសំឡេងខ្មែរពេញលេញ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Prosody Model</span></td>
+                <td>ម៉ូដែលគណិតវិទ្យាដែលប្រើសម្រាប់ទស្សន៍ទាយ និងបង្កើតចង្វាក់ ការលើកដាក់កម្ពស់សំឡេង និងល្បឿននៃការនិយាយនៅក្នុងប្រព័ន្ធសំយោគសំឡេង (Text-to-Speech) ដើម្បីឱ្យវាស្តាប់ទៅរលូនដូចជាមនុស្សពិត។</td>
+                <td>ដូចជាមេភ្លេងដែលប្រាប់អ្នកចម្រៀងថាពេលណាត្រូវឡើងសំឡេង ពេលណាត្រូវចុះសំឡេង ឬអូសបន្លាយសំឡេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Syllabic prosody features</span></td>
+                <td>លក្ខណៈនៃចង្វាក់ដែលភ្ជាប់ទៅនឹងព្យាង្គនីមួយៗ រួមមានកម្រិតសំឡេង (Pitch) រយៈពេលនៃការបញ្ចេញសំឡេង (Duration) និងថាមពលឬកម្រិតខ្លាំងខ្សោយនៃសំឡេង (Energy) ក្នុងបរិបទប្រយោគជុំវិញវា។</td>
+                <td>ដូចជាទម្រង់នៃការបញ្ចេញសំឡេងសម្រាប់ពាក្យមួយម៉ាត់ៗ ថាតើត្រូវនិយាយខ្លាំង ខ្សោយ ខ្លី ឬវែងក្នុងកាលៈទេសៈផ្សេងៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pitch curve clustering</span></td>
+                <td>ដំណើរការនៃការប្រមូលផ្តុំទម្រង់ខ្សែកោងនៃកម្រិតសំឡេង (F0 contours) ដែលមានលក្ខណៈស្រដៀងគ្នាទៅជាក្រុមតែមួយ ដើម្បីបង្កើតជាពុម្ពគំរូ (Templates) សម្រាប់ប្រើប្រាស់ឡើងវិញក្នុងការទស្សន៍ទាយសំឡេង។</td>
+                <td>ដូចជាការតម្រៀបនិងបែងចែកផ្លែឈើតាមទំហំនិងរូបរាងជាក្រុមៗ ដើម្បីងាយស្រួលយកទៅវេចខ្ចប់តាមប្រភេទតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cost function</span></td>
+                <td>រូបមន្តគណិតវិទ្យាដែលប្រើសម្រាប់គណនាពីកម្រិតនៃកំហុស ឬភាពខុសគ្នារវាងលក្ខណៈចង្វាក់ដែលប្រព័ន្ធបានជ្រើសរើស ជាមួយនឹងលក្ខណៈចង្វាក់គោលដៅក្នុងន័យស្វែងរកជម្រើសដែលល្អបំផុត (មានតម្លៃ Cost ទាបបំផុត)។</td>
+                <td>ដូចជាការគណនាប្រៀបធៀបតម្លៃទំនិញនៅតាមហាងផ្សេងៗ ដើម្បីរកទិញទំនិញដែលល្អហើយមានតម្លៃថោកបំផុត (ខាតបង់តិចបំផុត)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi search</span></td>
+                <td>ក្បួនដោះស្រាយ (Algorithm) តាមបែបស្ថិតិ ដែលប្រើសម្រាប់ស្វែងរកផ្លូវ ឬជម្រើសដែលល្អបំផុតក្នុងចំណោមជម្រើសជាច្រើនបន្តបន្ទាប់គ្នា ដោយផ្អែកលើប្រូបាប៊ីលីតេ ដើម្បីធានាថាការភ្ជាប់សំឡេងពេញមួយប្រយោគមានភាពរលូនបំផុត។</td>
+                <td>ដូចជាកម្មវិធី Google Maps ដែលរៀបចំគណនាស្វែងរកផ្លូវធ្វើដំណើរពីចំណុច A ទៅចំណុច B តាមរយៈផ្លូវដែលលឿន និងជៀសវាងការកកស្ទះចរាចរណ៍បានល្អបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Coarticulation</span></td>
+                <td>បាតុភូតផ្នែកសូរសព្ទដែលការបញ្ចេញសំឡេងនៃព្យាង្គ ឬសូរមួយ ត្រូវបានជះឥទ្ធិពលដោយសូរដែលនៅពីមុខ ឬពីក្រោយវា ធ្វើឱ្យមានការផ្លាស់ប្តូរកម្រិតសំឡេង ឬលក្ខណៈសូរសព្ទដើម។</td>
+                <td>ដូចជាការលាយពណ៌រវាងពណ៌ក្រហម និងពណ៌លឿងនៅលើផ្ទាំងគំនូរ ដែលធ្វើឱ្យតំបន់ព្រំដែនក្លាយជាពណ៌ទឹកក្រូចដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transition probability</span></td>
+                <td>ប្រូបាប៊ីលីតេនៃការផ្លាស់ប្តូរពីស្ថានភាពមួយ (ឧទាហរណ៍៖ ចង្វាក់នៃព្យាង្គទី១) ទៅស្ថានភាពមួយទៀត (ឧទាហរណ៍៖ ចង្វាក់នៃព្យាង្គទី២) ដែលជួយឱ្យម៉ូដែលដឹងថាទម្រង់សំឡេងណាដែលច្រើនកើតមានបន្តបន្ទាប់គ្នាក្នុងភាសាធម្មជាតិ។</td>
+                <td>ដូចជាការទស្សន៍ទាយថា បើមេឃងងឹត (ស្ថានភាពទី១) នោះប្រូបាប៊ីលីតេដែលនឹងមានភ្លៀងធ្លាក់ (ស្ថានភាពទី២) បន្តបន្ទាប់គឺមានកម្រិតខ្ពស់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model+continuous+speech+synthesis+prosody" target="_blank" rel="noopener"><span class="en">Hidden Markov Model continuous speech synthesis prosody</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=syllable+pitch+contour+clustering+algorithms+Mandarin+TTS" target="_blank" rel="noopener"><span class="en">syllable pitch contour clustering algorithms Mandarin TTS</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=data-driven+prosody+generation+unit+selection+text+to+speech" target="_blank" rel="noopener"><span class="en">data-driven prosody generation unit selection text to speech</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+neural+network+prosody+modeling+expressive+speech" target="_blank" rel="noopener"><span class="en">deep learning neural network prosody modeling expressive speech</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=coarticulation+tone+sandhi+modeling+Chinese+text+to+speech" target="_blank" rel="noopener"><span class="en">coarticulation tone sandhi modeling Chinese text to speech</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសំយោគសំឡេងនិយាយប្រកបដោយភាពស៊ីសង្វាក់ទៅនឹងបរិបទសន្ទនា ដោយប្រើប្រាស់មែកធាងការសម្រេចចិត្តបែបបំបែកកត្តា | KhmerResearch.com</title>
+    <meta name="description" content="ប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ជាទូទៅប្រើប្រាស់សំឡេងសំយោគដែលខ្វះភាពរលូនតាមបរិបទ ហើយការប្រើប្រាស់មែកធាងសម្រេចចិត្តធម្មតាច្រើនតែជួបបញ្ហាទិន្ន...">
+    
+    <meta name="keywords" content="Speech Synthesis, HMM, Factorized Decision Trees, Spoken Dialogue Systems, Context Adaptive Training, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/dialogue-context-speech-synthesis-fd-cat-2014.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/dialogue-context-speech-synthesis-fd-cat-2014.html">
+    <meta property="og:title" content="ការសំយោគសំឡេងនិយាយប្រកបដោយភាពស៊ីសង្វាក់ទៅនឹងបរិបទសន្ទនា ដោយប្រើប្រាស់មែកធាងការសម្រេចចិត្តបែបបំបែកកត្តា | KhmerResearch.com">
+    <meta property="og:description" content="ប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ជាទូទៅប្រើប្រាស់សំឡេងសំយោគដែលខ្វះភាពរលូនតាមបរិបទ ហើយការប្រើប្រាស់មែកធាងសម្រេចចិត្តធម្មតាច្រើនតែជួបបញ្ហាទិន្នន័យមិនមានតុល្យភាពនៅពេលអនុវត្តលើដែនកំណត់ ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2014 INTERSPEECH">
+    
+    <meta property="article:tag" content="Speech Synthesis">
+    
+    <meta property="article:tag" content="HMM">
+    
+    <meta property="article:tag" content="Factorized Decision Trees">
+    
+    <meta property="article:tag" content="Spoken Dialogue Systems">
+    
+    <meta property="article:tag" content="Context Adaptive Training">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសំយោគសំឡេងនិយាយប្រកបដោយភាពស៊ីសង្វាក់ទៅនឹងបរិបទសន្ទនា ដោយប្រើប្រាស់មែកធាងការសម្រេចចិត្តបែបបំបែកកត្តា">
+    <meta name="twitter:description" content="ប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ជាទូទៅប្រើប្រាស់សំឡេងសំយោគដែលខ្វះភាពរលូនតាមបរិបទ ហើយការប្រើប្រាស់មែកធាងសម្រេចចិត្តធម្មតាច្រើនតែជួបបញ្ហាទិន្នន័យមិនមានតុល្យភាពនៅពេលអនុវត្តលើដែនកំណត់ ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1797\u17b6\u1796\u179f\u17ca\u17b8\u179f\u1784\u17d2\u179c\u17b6\u1780\u17cb\u1791\u17c5\u1793\u17b9\u1784\u1794\u179a\u17b7\u1794\u1791\u179f\u1793\u17d2\u1791\u1793\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c2\u1780\u1792\u17b6\u1784\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u1794\u17c2\u1794\u1794\u17c6\u1794\u17c2\u1780\u1780\u178f\u17d2\u178f\u17b6",
+      "name": "Dialogue Context Sensitive Speech Synthesis using Factorized Decision Trees",
+      "description": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178a\u17c4\u1799\u179f\u17c6\u17a1\u17c1\u1784 (Spoken Dialogue Systems) \u1787\u17b6\u1791\u17bc\u1791\u17c5\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u179f\u17c6\u1799\u17c4\u1782\u178a\u17c2\u179b\u1781\u17d2\u179c\u17c7\u1797\u17b6\u1796\u179a\u179b\u17bc\u1793\u178f\u17b6\u1798\u1794\u179a\u17b7\u1794\u1791 \u17a0\u17be\u1799\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c2\u1780\u1792\u17b6\u1784\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u1792\u1798\u17d2\u1798\u178f\u17b6\u1785\u17d2\u179a\u17be\u1793\u178f\u17c2\u1787\u17bd\u1794\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1793\u17c5\u1796\u17c1\u179b\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179b\u17be\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb (domain) \u1790\u17d2\u1798\u17b8\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/dialogue-context-speech-synthesis-fd-cat-2014.html",
+      "author": [{"@type": "Person", "name": "Pirros Tsiakoulis (University of Cambridge)"},{"@type": "Person", "name": "Catherine Breslin (University of Cambridge)"},{"@type": "Person", "name": "Milica Ga\u0161i\u0107 (University of Cambridge)"},{"@type": "Person", "name": "Matthew Henderson (University of Cambridge)"},{"@type": "Person", "name": "Dongho Kim (University of Cambridge)"},{"@type": "Person", "name": "Steve Young (University of Cambridge)"}],
+      "datePublished": "2014 INTERSPEECH",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Dialogue Context Sensitive Speech Synthesis using Factorized Decision Trees",
+        "url": "https://doi.org/10.21437/Interspeech.2014-200"
+      },
+      "keywords": ["Speech Synthesis", "HMM", "Factorized Decision Trees", "Spoken Dialogue Systems", "Context Adaptive Training"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1797\u17b6\u1796\u179f\u17ca\u17b8\u179f\u1784\u17d2\u179c\u17b6\u1780\u17cb\u1791\u17c5\u1793\u17b9\u1784\u1794\u179a\u17b7\u1794\u1791\u179f\u1793\u17d2\u1791\u1793\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c2\u1780\u1792\u17b6\u1784\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u1794\u17c2\u1794\u1794\u17c6\u1794\u17c2\u1780\u1780\u178f\u17d2\u178f\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/dialogue-context-speech-synthesis-fd-cat-2014.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការសំយោគសំឡេងនិយាយប្រកបដោយភាពស៊ីសង្វាក់ទៅនឹងបរិបទសន្ទនា ដ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Dialogue Context Sensitive Speech Synthesis using Factorized Decision Trees<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.21437/Interspeech.2014-200" target="_blank">doi.org/10.21437/Interspeech.2014-200</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសំយោគសំឡេងនិយាយប្រកបដោយភាពស៊ីសង្វាក់ទៅនឹងបរិបទសន្ទនា ដោយប្រើប្រាស់មែកធាងការសម្រេចចិត្តបែបបំបែកកត្តា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Dialogue Context Sensitive Speech Synthesis using Factorized Decision Trees</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Pirros Tsiakoulis (University of Cambridge), Catherine Breslin (University of Cambridge), Milica Gašić (University of Cambridge), Matthew Henderson (University of Cambridge), Dongho Kim (University of Cambridge), Steve Young (University of Cambridge)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2014 INTERSPEECH</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ជាទូទៅប្រើប្រាស់សំឡេងសំយោគដែលខ្វះភាពរលូនតាមបរិបទ ហើយការប្រើប្រាស់មែកធាងសម្រេចចិត្តធម្មតាច្រើនតែជួបបញ្ហាទិន្នន័យមិនមានតុល្យភាពនៅពេលអនុវត្តលើដែនកំណត់ (domain) ថ្មី។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្ត្របណ្តុះបណ្តាលសម្របតាមបរិបទជាមួយមែកធាងសម្រេចចិត្តបែបបំបែកកត្តា ហើយធ្វើតេស្តវាយតម្លៃប្រៀបធៀបទៅនឹងប្រព័ន្ធគោលធម្មតា។
+        
+        <ul>
+            
+            <li>ការបណ្តុះបណ្តាលសម្របតាមបរិបទដោយប្រើមែកធាងការសម្រេចចិត្តបែបបំបែកកត្តា (Context Adaptive Training with Factorized Decision trees - FD-CAT)</li>
+            
+            <li>ការធ្វើតេស្តវាយតម្លៃដោយអ្នកស្តាប់ (Preference-based listening tests) លើដែនព័ត៌មានភោជនីយដ្ឋាន និងដែនកក់ការណាត់ជួប</li>
+            
+            <li>ការប្រៀបធៀបរវាងសំឡេងប្រព័ន្ធគោល (Baseline voice) និងសំឡេងអព្យាក្រឹត (Neutral voice)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>សម្រាប់ដែនដែលមានស្រាប់ក្នុងទិន្នន័យ (In-domain) មិនមានការពេញចិត្តដាច់ខាតរវាងប្រព័ន្ធ FD-CAT និងប្រព័ន្ធគោលនោះទេ ដោយសារមានទិន្នន័យគ្រប់គ្រាន់។</li>
+            
+            <li>សម្រាប់ដែនថ្មីដែលកម្រមានក្នុងទិន្នន័យ (Out-of-domain) អ្នកស្តាប់ពេញចិត្តប្រព័ន្ធ FD-CAT យ៉ាងខ្លាំងក្នុងកម្រិត ៤៦,៥% ធៀបនឹង ៣៣,៦% នៃប្រព័ន្ធគោល (p=0.007)។</li>
+            
+            <li>សំឡេងនិយាយពីប្រព័ន្ធ FD-CAT ត្រូវបានអ្នកស្តាប់ពេញចិត្តជាងសំឡេងអព្យាក្រឹតយ៉ាងច្បាស់លាស់ ក្នុងកម្រិត ៥៨,៦% សម្រាប់ដែនភោជនីយដ្ឋាន និង ៥៤,៩% សម្រាប់ដែនកក់ការណាត់ជួប។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Standard Decision Trees (Baseline)</span></strong><br>ការប្រើប្រាស់មែកធាងការសម្រេចចិត្តស្តង់ដារ</td>
+                <td>ងាយស្រួលក្នុងការអភិវឌ្ឍដោយបញ្ចូលលក្ខណៈបរិបទទាំងអស់ទៅក្នុងម៉ូដែលតែមួយ។ ដំណើរការបានល្អសម្រាប់ប្រធានបទដែលមានទិន្នន័យហ្វឹកហាត់គ្រប់គ្រាន់ (In-domain)។</td>
+                <td>មិនមានតុល្យភាពក្នុងការរៀនពីទិន្នន័យ ធ្វើឱ្យគុណភាពសំឡេងធ្លាក់ចុះនៅពេលយកទៅអនុវត្តលើប្រធានបទថ្មីដែលមិនសូវមានទិន្នន័យ (Out-of-domain)។</td>
+                <td>ទទួលបានការពេញចិត្តត្រឹមតែ ៣៣,៦% ប៉ុណ្ណោះ សម្រាប់ការសន្ទនាក្រៅដែនកំណត់ (Appointment Booking)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Context Adaptive Training with Factorized Decision trees (FD-CAT)</span></strong><br>ការបណ្តុះបណ្តាលសម្របតាមបរិបទដោយប្រើមែកធាងបំបែកកត្តា</td>
+                <td>អាចបំបែកកត្តាខ្លាំង (សូរសព្ទ) និងកត្តាខ្សោយ (បរិបទសន្ទនា/ការសង្កត់សំឡេង) ដាច់ពីគ្នា។ រក្សាបាននូវគុណភាពសំឡេង និងភាពរលូន សូម្បីតែក្នុងដែនថ្មីដែលខ្វះទិន្នន័យក៏ដោយ។</td>
+                <td>ទាមទារការរៀបចំទិន្នន័យលម្អិត និងបច្ចេកទេសបណ្តុះបណ្តាលម៉ូដែលស្មុគស្មាញជាងមុន (ប្រើប្រាស់ MLLR)។</td>
+                <td>ទទួលបានការពេញចិត្ត ៤៦,៥% សម្រាប់ប្រធានបទក្រៅដែនកំណត់ ដោយឈ្នះប្រព័ន្ធគោលយ៉ាងច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Neutral Voice</span></strong><br>សំឡេងអព្យាក្រឹត (មិនមានបរិបទសន្ទនា)</td>
+                <td>ងាយស្រួលបំផុតក្នុងការបង្កើត ព្រោះមិនត្រូវការទិន្នន័យស្តីពីអារម្មណ៍ ឬប្រភេទនៃការសន្ទនា។</td>
+                <td>ស្តាប់ទៅរឹង និងមិនមានលក្ខណៈធម្មជាតិនៅពេលប្រើប្រាស់ក្នុងប្រព័ន្ធសន្ទនាឆ្លើយឆ្លងពិតប្រាកដ។</td>
+                <td>ចាញ់ប្រព័ន្ធ FD-CAT យ៉ាងខ្លាំង (ទទួលបានការពេញចិត្តត្រឹម ៣៤,៥% ធៀបនឹង ៥៤,៩% របស់ FD-CAT)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារមិនបានបញ្ជាក់លម្អិតពីទំហំកុំព្យូទ័រដែលត្រូវប្រើទេ ប៉ុន្តែផ្អែកលើវិធីសាស្ត្រ HMM ទាមទារធនធានកម្រិតមធ្យម និងទិន្នន័យសំឡេងដែលមានការរៀបចំច្បាស់លាស់។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យសំឡេងអានទូទៅ និងទិន្នន័យប្រយោគសន្ទនា (Expressive dialogue corpus) ប្រហែល ៥ ម៉ោង (៣១៥៨ ឯកសារសំឡេង) ថតដោយអ្នកនិយាយតែម្នាក់។</li>
+        
+        <li><strong>Software:</strong> ប្រព័ន្ធ <span class='en'>HTS (HMM-based Speech Synthesis System)</span> និងកូដគណនា <span class='en'>MLLR</span> សម្រាប់ការបន្សំកត្តា (Factorization)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញដែលមានចំណេះដឹងផ្នែកដំណើរការភាសាធម្មជាតិ (NLP) សទ្ទវិទ្យា (Phonetics) និងម៉ាស៊ីនរៀន ជាពិសេស <span class='en'>Hidden Markov Models</span>។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យសំឡេងភាសាអង់គ្លេសដែលថតដោយអ្នកនិយាយតែម្នាក់ (RJS voice) សម្រាប់វិស័យព័ត៌មានភោជនីយដ្ឋាន។ ទិន្នន័យនេះមិនតំណាងឱ្យភាពចម្រុះនៃគ្រាមភាសា ភេទ ឬភាសាដទៃទៀតឡើយ។ សម្រាប់ប្រទេសកម្ពុជា ការយកមកអនុវត្តតម្រូវឱ្យមានការប្រមូលទិន្នន័យសំឡេងសន្ទនាភាសាខ្មែរដែលមានការសង្កត់សំឡេងនិងបរិបទច្បាស់លាស់ ដែលបច្ចុប្បន្ននៅខ្វះខាតខ្លាំង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់សម្រាប់អភិវឌ្ឍប្រព័ន្ធឆ្លើយតបអូតូម៉ាត (Voicebots) នៅកម្ពុជា ដោយសារវាជួយឱ្យសំឡេងស្តាប់ទៅធម្មជាតិ និងអាចប្រើឆ្លងវិស័យបាន។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធបម្រើសេវាកម្មអតិថិជនទូរគមនាគមន៍ (Telecom Call Centers):</strong> អាចយកទៅបង្កើត AI របស់ក្រុមហ៊ុនទូរស័ព្ទ (ឧទាហរណ៍ Smart ឬ Cellcard) ដែលអាចសន្ទនាពន្យល់ពីកញ្ចប់សេវាកម្ម ដោយមានការសង្កត់សំឡេងត្រឹមត្រូវ និងទាក់ទាញ។</li>
+            
+            <li><strong>ប្រព័ន្ធផ្តល់ព័ត៌មានទេសចរណ៍ (ខេត្តសៀមរាប):</strong> អាចបំប្លែងប្រព័ន្ធពីការណែនាំសណ្ឋាគារ ទៅកាន់ការកក់សំបុត្រទស្សនាប្រាសាទ (Out-of-domain) ដោយរក្សាបានភាពរលូននៃសម្លេងដោយមិនបាច់ថតទិន្នន័យមនុស្សសារជាថ្មី។</li>
+            
+            <li><strong>វិស័យធនាគារ (Banking Voice Assistants):</strong> ប្រើប្រាស់សម្រាប់ការអានបញ្ជាក់ពីប្រតិបត្តិការផ្ទេរប្រាក់ (Confirmation acts ដូចជាប្រព័ន្ធរបស់ ABA) ប្រកបដោយទំនុកចិត្ត និងច្បាស់លាស់ទៅកាន់អតិថិជន។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការប្រើប្រាស់បច្ចេកទេស FD-CAT អាចជួយឱ្យស្ថាប័នរដ្ឋ និងឯកជននៅកម្ពុជាអភិវឌ្ឍប្រព័ន្ធសន្ទនាឆ្លាតវៃ (SDS) ដែលមានសម្លេងប្រាកដនិយម ចំណាយតិចលើការថតសំឡេង និងអាចពង្រីកទៅកាន់វិស័យផ្សេងៗបានងាយស្រួល។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះផ្នែក Speech Synthesis:</strong> និស្សិតគួរសិក្សាពីទ្រឹស្តីនៃម៉ូដែល Parametric Text-to-Speech (TTS) ជាពិសេស <span class='en'>Hidden Markov Models (HMM)</span> ដោយសាកល្បងប្រើប្រាស់ <span class='en'>HTS Toolkit</span> ឬ <span class='en'>Merlin</span> ដើម្បីស្វែងយល់ពីរបៀបដំណើរការ។</li>
+            
+            <li><strong>ប្រមូលនិងរៀបចំទិន្នន័យសំឡេងសន្ទនាភាសាខ្មែរ:</strong> ចាប់ផ្តើមថតសំឡេងសន្ទនាជាភាសាខ្មែរ និងរៀបចំអត្ថបទកត់ត្រាដោយភ្ជាប់ជាមួយ <span class='en'>Dialogue Acts</span> (ឧទាហរណ៍៖ ការសួរ ការយល់ព្រម) និងរំលេចពាក្យដែលមាន <span class='en'>Emphasis</span> (ការសង្កត់សំឡេង)។</li>
+            
+            <li><strong>បង្កើតប្រព័ន្ធគោល (Baseline Model):</strong> អនុវត្តការបណ្តុះបណ្តាលម៉ូដែលសំឡេងដោយប្រើមែកធាងការសម្រេចចិត្តធម្មតា (<span class='en'>Standard Decision Trees</span>) ដើម្បីធ្វើជាគោលសម្រាប់ប្រៀបធៀប ដោយបញ្ចូលកត្តាសូរសព្ទ និងកត្តាបរិបទចូលគ្នា។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេស Factorized Decision Trees:</strong> សរសេរកូដអនុវត្តការបំបែកកត្តា (Factorization) ដោយបំបែកកត្តាសូរសព្ទ និងកត្តាសន្ទនាដាច់ពីគ្នា រួចប្រើប្រាស់បច្ចេកទេស <span class='en'>MLLR (Maximum Likelihood Linear Regression)</span> ដើម្បីបន្សំប៉ារ៉ាម៉ែត្រទាំងពីរឡើងវិញ។</li>
+            
+            <li><strong>ធ្វើតេស្តវាយតម្លៃលើប្រធានបទក្រៅដែន (Out-of-Domain):</strong> រៀបចំការធ្វើតេស្ត <span class='en'>Preference-based listening test</span> ជាមួយអ្នកប្រើប្រាស់ខ្មែរ ដើម្បីប្រៀបធៀបសំឡេងដែលបានមកពីម៉ូដែល FD-CAT និង Baseline ទៅលើប្រធានបទថ្មី (ឧទាហរណ៍៖ យកទិន្នន័យហ្វឹកហាត់ពីការកក់សណ្ឋាគារ ទៅសាកល្បងសួរពីការកក់សំបុត្រកុន)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Factorized Decision Trees</span></td>
+                <td>ជាបច្ចេកទេសប្រើប្រាស់មែកធាងការសម្រេចចិត្តដោយបំបែកកត្តាផ្សេងៗគ្នា (ដូចជាកត្តាសូរសព្ទ និងកត្តាបរិបទ/ការសង្កត់សំឡេង) ដាច់ពីគ្នា ហើយទើបច្របាច់បញ្ចូលគ្នាវិញ ដើម្បីចៀសវាងបញ្ហាទិន្នន័យមិនមានតុល្យភាពក្នុងការបង្ហាត់ម៉ូដែល។</td>
+                <td>ដូចជាការបំបែកការរៀនធ្វើម្ហូបជាពីរផ្នែកដាច់ពីគ្នា គឺរៀនពីរបៀបធ្វើគ្រឿងផ្សំគោល និងរៀនពីរបៀបថែមថយរសជាតិ ដើម្បីងាយស្រួលយកចំណេះដឹងទាំងពីរទៅច្នៃប្រឌិតមុខម្ហូបថ្មីៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Context Adaptive Training</span></td>
+                <td>ជាការបណ្តុះបណ្តាលម៉ូដែលកុំព្យូទ័រឱ្យចេះបត់បែន និងផ្លាស់ប្តូរលក្ខណៈសំឡេងរបស់វាដោយស្វ័យប្រវត្តិ ទៅតាមបរិបទនៃការសន្ទនា ឬកត្តាខ្សោយៗផ្សេងទៀត (Weak context factors)។</td>
+                <td>ដូចជាមនុស្សដែលចេះផ្លាស់ប្តូរសម្លេង និងទឹកមុខទៅតាមស្ថានភាពជាក់ស្តែង ដូចជាពេលនិយាយលេងសើច និងពេលនិយាយការងារផ្លូវការ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Models (HMM)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិដែលគេប្រើជាទូទៅក្នុងការសំយោគ និងចាប់សញ្ញាសំឡេង ដែលវាធ្វើការផ្លាស់ប្តូរ និងព្យាករណ៍ពីសូរសព្ទបន្តបន្ទាប់គ្នាដោយផ្អែកលើទ្រឹស្តីប្រូបាប៊ីលីតេ។</td>
+                <td>ដូចជាការទាយអាកាសធាតុថ្ងៃស្អែក ដោយពឹងផ្អែកលើទិន្នន័យអាកាសធាតុថ្ងៃនេះ និងច្បាប់នៃការព្យាករណ៍ដែលធ្លាប់កើតមានកន្លងមក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spoken Dialogue Systems (SDS)</span></td>
+                <td>ជាប្រព័ន្ធកុំព្យូទ័រដែលអនុញ្ញាតឱ្យមនុស្សធ្វើអន្តរកម្ម ឬបញ្ជាម៉ាស៊ីនតាមរយៈការនិយាយឆ្លើយឆ្លងគ្នាដោយផ្ទាល់ ឧទាហរណ៍ដូចជាប្រព័ន្ធសេវាកម្មអតិថិជនស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាការខលទូរស័ព្ទទៅនិយាយជាមួយភ្នាក់ងារបម្រើអតិថិជន ប៉ុន្តែជាក់ស្តែងអ្នកកំពុងនិយាយឆ្លើយឆ្លងជាមួយប្រព័ន្ធបញ្ញាសិប្បនិម្មិត (AI)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept-To-Speech (CTS)</span></td>
+                <td>ជាវិធីសាស្ត្រនៃការសំយោគសំឡេងដោយមិនត្រឹមតែបំប្លែងអត្ថបទទៅជាសំឡេងប៉ុណ្ណោះទេ ប៉ុន្តែថែមទាំងយកព័ត៌មានអត្ថន័យ និងបរិបទប្រយោគ (Semantic information) មកជួយកំណត់ការលើកដាក់សំឡេងឱ្យកាន់តែសមរម្យ។</td>
+                <td>ដូចជាអ្នកអានរឿងនិទានដែលយល់ពីសាច់រឿង និងអារម្មណ៍តួអង្គ រួចបញ្ចេញសម្លេងបានយ៉ាងរស់រវើក មិនមែនគ្រាន់តែអានអក្សរស្ងួតៗនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">F0 contours</span></td>
+                <td>គឺជាខ្សែខ្សែកោងដែលតំណាងឱ្យបំរែបំរួលនៃប្រេកង់មូលដ្ឋាន (Fundamental Frequency) របស់សំឡេង ដែលជាទូទៅវាឆ្លុះបញ្ចាំងពីការលើកដាក់សំឡេងខ្ពស់ទាប (Pitch) នៅក្នុងការនិយាយ។</td>
+                <td>ដូចជាគំនូសរលកតន្ត្រីនៅលើអេក្រង់ ដែលលោតឡើងចុះៗ បង្ហាញពីកម្រិតសម្លេងធ្ងន់ស្រាល ពេលអ្នកកំពុងច្រៀង ឬនិយាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Out-of-domain</span></td>
+                <td>សំដៅលើការយកម៉ូដែលកុំព្យូទ័រដែលបានបង្ហាត់លើទិន្នន័យប្រធានបទមួយរួចហើយ (ឧទាហរណ៍៖ ការកក់ភោជនីយដ្ឋាន) ទៅសាកល្បងប្រើប្រាស់ជាមួយប្រធានបទមួយទៀតដែលវាមិនធ្លាប់ជួប ឬមានទិន្នន័យហ្វឹកហាត់តិចតួច (ឧទាហរណ៍៖ ការកក់ការណាត់ជួបពេទ្យ)។</td>
+                <td>ដូចជាសិស្សដែលរៀនពូកែតែមុខវិជ្ជាគណិតវិទ្យា តែត្រូវគេតម្រូវឱ្យទៅប្រឡងមុខវិជ្ជាប្រវត្តិវិទ្យាដែលខ្លួនមិនសូវបានរៀនសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">MLLR adaptive training</span></td>
+                <td>Maximum Likelihood Linear Regression (MLLR) គឺជាបច្ចេកទេសគណិតវិទ្យាក្នុងការកែប្រែប៉ារ៉ាម៉ែត្រនៃម៉ូដែលសំឡេង (Mean និង Covariance) ឱ្យស៊ីសង្វាក់ទៅនឹងលក្ខណៈសំឡេងថ្មី ដោយប្រើប្រាស់សមីការលីនេអ៊ែរ ដើម្បីសន្សំសំចៃទិន្នន័យបណ្តុះបណ្តាល។</td>
+                <td>ដូចជាការសារ៉េបង្វិលប៊ូតុងអង់តែនវិទ្យុបន្តិចម្តងៗ ដើម្បីចាប់ប៉ុស្តិ៍ថ្មីមួយទៀតឱ្យបានច្បាស់ល្អ ដោយមិនបាច់ដោះដូរម៉ាស៊ីនវិទ្យុថ្មី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model+based+speech+synthesis+HTS+techniques+and+limitations" target="_blank" rel="noopener"><span class="en">Hidden Markov Model based speech synthesis HTS techniques and limitations</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Context+Adaptive+Training+using+Factorized+Decision+Trees+in+speech+synthesis" target="_blank" rel="noopener"><span class="en">Context Adaptive Training using Factorized Decision Trees in speech synthesis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Spoken+Dialogue+Systems+concept-to-speech+generation+prosody+and+naturalness" target="_blank" rel="noopener"><span class="en">Spoken Dialogue Systems concept-to-speech generation prosody and naturalness</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=MLLR+adaptation+for+acoustic+modeling+in+text-to-speech" target="_blank" rel="noopener"><span class="en">MLLR adaptation for acoustic modeling in text-to-speech</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Dialogue+context+modeling+for+expressive+and+emotional+speech+synthesis" target="_blank" rel="noopener"><span class="en">Dialogue context modeling for expressive and emotional speech synthesis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Neural+text-to-speech+cross-domain+adaptation+approaches" target="_blank" rel="noopener"><span class="en">Neural text-to-speech cross-domain adaptation approaches</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

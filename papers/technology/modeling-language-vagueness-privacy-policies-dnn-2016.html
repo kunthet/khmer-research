@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើម៉ូដែលភាពស្រពេចស្រពិលនៃភាសានៅក្នុងគោលការណ៍ឯកជនភាពដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ | KhmerResearch.com</title>
+    <meta name="description" content="គោលការណ៍ឯកជនភាពនៃគេហទំព័រមានប្រវែងវែង និងប្រើប្រាស់ភាសាស្មុគស្មាញ (Vagueness) ដែលធ្វើឱ្យអ្នកប្រើប្រាស់ពិបាកយល់ និងកាត់បន្ថយប្រសិទ្ធភាពនៃការការពារព័ត៌មានផ្ទាល...">
+    
+    <meta name="keywords" content="Natural Language Processing, Deep Neural Networks, Privacy Policies, Language Vagueness, Word Embeddings, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/modeling-language-vagueness-privacy-policies-dnn-2016.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/modeling-language-vagueness-privacy-policies-dnn-2016.html">
+    <meta property="og:title" content="ការធ្វើម៉ូដែលភាពស្រពេចស្រពិលនៃភាសានៅក្នុងគោលការណ៍ឯកជនភាពដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ | KhmerResearch.com">
+    <meta property="og:description" content="គោលការណ៍ឯកជនភាពនៃគេហទំព័រមានប្រវែងវែង និងប្រើប្រាស់ភាសាស្មុគស្មាញ (Vagueness) ដែលធ្វើឱ្យអ្នកប្រើប្រាស់ពិបាកយល់ និងកាត់បន្ថយប្រសិទ្ធភាពនៃការការពារព័ត៌មានផ្ទាល់ខ្លួន។ ការសិក្សានេះដោះស្រាយបញ្ហានេះដោយប...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2016 AAAI Fall Symposium Series">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+    <meta property="article:tag" content="Deep Neural Networks">
+    
+    <meta property="article:tag" content="Privacy Policies">
+    
+    <meta property="article:tag" content="Language Vagueness">
+    
+    <meta property="article:tag" content="Word Embeddings">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើម៉ូដែលភាពស្រពេចស្រពិលនៃភាសានៅក្នុងគោលការណ៍ឯកជនភាពដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ">
+    <meta name="twitter:description" content="គោលការណ៍ឯកជនភាពនៃគេហទំព័រមានប្រវែងវែង និងប្រើប្រាស់ភាសាស្មុគស្មាញ (Vagueness) ដែលធ្វើឱ្យអ្នកប្រើប្រាស់ពិបាកយល់ និងកាត់បន្ថយប្រសិទ្ធភាពនៃការការពារព័ត៌មានផ្ទាល់ខ្លួន។ ការសិក្សានេះដោះស្រាយបញ្ហានេះដោយប...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1797\u17b6\u1796\u179f\u17d2\u179a\u1796\u17c1\u1785\u179f\u17d2\u179a\u1796\u17b7\u179b\u1793\u17c3\u1797\u17b6\u179f\u17b6\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd\u17af\u1780\u1787\u1793\u1797\u17b6\u1796\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u1780\u1798\u17d2\u179a\u17b7\u178f\u1787\u17d2\u179a\u17c5",
+      "name": "Modeling Language Vagueness in Privacy Policies Using Deep Neural Networks",
+      "description": "\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd\u17af\u1780\u1787\u1793\u1797\u17b6\u1796\u1793\u17c3\u1782\u17c1\u17a0\u1791\u17c6\u1796\u17d0\u179a\u1798\u17b6\u1793\u1794\u17d2\u179a\u179c\u17c2\u1784\u179c\u17c2\u1784 \u1793\u17b7\u1784\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1797\u17b6\u179f\u17b6\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789 (Vagueness) \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1796\u17b7\u1794\u17b6\u1780\u1799\u179b\u17cb \u1793\u17b7\u1784\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17b6\u179a\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1795\u17d2\u1791\u17b6\u179b\u17cb\u1781\u17d2\u179b\u17bd\u1793\u17d4 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u1799\u1794\u17c9\u17bb\u1793\u1794\u17c9\u1784\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1797\u17b6\u1796\u179f\u17d2\u179a\u1796\u17c1\u1785\u179f\u17d2\u179a\u1796\u17b7\u179b\u1793\u17c3\u1797\u17b6\u179f\u17b6\u178f\u17b6\u1798\u179a\u1799\u17c8\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1797\u17b6\u179f\u17b6\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7 (NLP)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/modeling-language-vagueness-privacy-policies-dnn-2016.html",
+      "author": [{"@type": "Person", "name": "Fei Liu (University of Central Florida)"},{"@type": "Person", "name": "Nicole Lee Fella (Manhattan College)"},{"@type": "Person", "name": "Kexin Liao (University of Central Florida)"}],
+      "datePublished": "2016 AAAI Fall Symposium Series",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Modeling Language Vagueness in Privacy Policies Using Deep Neural Networks",
+        "url": "N/A"
+      },
+      "keywords": ["Natural Language Processing", "Deep Neural Networks", "Privacy Policies", "Language Vagueness", "Word Embeddings"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1797\u17b6\u1796\u179f\u17d2\u179a\u1796\u17c1\u1785\u179f\u17d2\u179a\u1796\u17b7\u179b\u1793\u17c3\u1797\u17b6\u179f\u17b6\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd\u17af\u1780\u1787\u1793\u1797\u17b6\u1796\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u1780\u1798\u17d2\u179a\u17b7\u178f\u1787\u17d2\u179a\u17c5",
+          "item": "https://khmerresearch.com/papers/technology/modeling-language-vagueness-privacy-policies-dnn-2016.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើម៉ូដែលភាពស្រពេចស្រពិលនៃភាសានៅក្នុងគោលការណ៍ឯកជនភាពដ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Modeling Language Vagueness in Privacy Policies Using Deep Neural Networks<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើម៉ូដែលភាពស្រពេចស្រពិលនៃភាសានៅក្នុងគោលការណ៍ឯកជនភាពដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Modeling Language Vagueness in Privacy Policies Using Deep Neural Networks</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Fei Liu (University of Central Florida), Nicole Lee Fella (Manhattan College), Kexin Liao (University of Central Florida)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2016 AAAI Fall Symposium Series</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> គោលការណ៍ឯកជនភាពនៃគេហទំព័រមានប្រវែងវែង និងប្រើប្រាស់ភាសាស្មុគស្មាញ (Vagueness) ដែលធ្វើឱ្យអ្នកប្រើប្រាស់ពិបាកយល់ និងកាត់បន្ថយប្រសិទ្ធភាពនៃការការពារព័ត៌មានផ្ទាល់ខ្លួន។ ការសិក្សានេះដោះស្រាយបញ្ហានេះដោយប៉ុនប៉ងបកស្រាយភាពស្រពេចស្រពិលនៃភាសាតាមរយៈបច្ចេកវិទ្យាដំណើរការភាសាធម្មជាតិ (NLP)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះប្រើប្រាស់ទិន្នន័យគោលការណ៍ឯកជនភាពចំនួន ១.០១០ ដើម្បីបង្វឹកបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតក្នុងការរៀន និងស្វែងយល់ពីលក្ខណៈនៃពាក្យនីមួយៗ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់បណ្ដាញសរសៃប្រសាទកម្រិតជ្រៅប្រភេទ GRU (Gated Recurrent Unit Networks) សម្រាប់រៀនតំណាងវ៉ិចទ័រនៃពាក្យ (Word Embeddings)</li>
+            
+            <li>ការរៀនបែបពហុភារកិច្ច (Multi-task Learning) ដើម្បីទស្សន៍ទាយពាក្យបន្ទាប់ និងកំណត់ភាពស្រពេចស្រពិលនៃពាក្យ ដោយផ្អែកលើពាក្យស្រពេចស្រពិលគោលចំនួន ៤០</li>
+            
+            <li>ការប្រើប្រាស់ឧបករណ៍វិភាគរូបភាព LSTMVis ដើម្បីស្វែងរកពាក្យ និងឃ្លាដែលមានន័យស្រដៀងគ្នា</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធបណ្ដាញសរសៃប្រសាទអាចបង្កើតវ៉ិចទ័រតំណាងពាក្យចំនួន ៥១២ វិមាត្រ ដែលមានសមត្ថភាពផ្ទុកអត្ថន័យ និងភាពស្រពេចស្រពិលនៃពាក្យក្នុងបរិបទគោលការណ៍ឯកជនភាព។</li>
+            
+            <li>ការធ្វើតេស្តជាមួយឧបករណ៍ LSTMVis បានបង្ហាញថា ម៉ូដែលនេះអាចរកឃើញឃ្លាដែលមានន័យស្រដៀងគ្នាជាច្រើន (ឧទាហរណ៍ 'as needed' និង 'as appropriate') ដែលបញ្ជាក់ពីការប្រើប្រាស់ភាសាមិនច្បាស់លាស់ខុសៗគ្នាក្នុងអត្ថបទច្បាប់។</li>
+            
+            <li>វិធីសាស្ត្រផ្អែកលើទិន្នន័យ (Data-driven approach) នេះផ្ដល់លទ្ធភាពខ្ពស់ក្នុងការជួយអ្នកស្រាវជ្រាវ និងអ្នកច្បាប់ក្នុងការកំណត់ទីតាំង និងធ្វើឱ្យប្រសើរឡើងនូវភាពច្បាស់លាស់នៃគោលការណ៍ឯកជនភាពនាពេលអនាគត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Multi-task Recurrent Neural Network (GRU)</span></strong><br>បណ្ដាញសរសៃប្រសាទប្រភេទ GRU រៀនបែបពហុភារកិច្ច</td>
+                <td>មានសមត្ថភាពអាចរៀនអត្ថន័យបរិបទនៃពាក្យ និងអាចទស្សន៍ទាយពាក្យបន្ទាប់ព្រមទាំងវាយតម្លៃភាពស្រពេចស្រពិលរបស់ពាក្យក្នុងពេលតែមួយ។ វាអាចចាប់យកទំនាក់ទំនងអត្ថន័យនៃពាក្យបានស៊ីជម្រៅ។</td>
+                <td>ទាមទារទិន្នន័យយ៉ាងច្រើនដើម្បីបង្វឹកឱ្យមានប្រសិទ្ធភាព ហើយលទ្ធផលផ្ដោតលើកម្រិតពាក្យនីមួយៗច្រើនជាងកម្រិតប្រយោគ ឬអត្ថន័យទាំងមូល។</td>
+                <td>អាចទាញយកវ៉ិចទ័រតំណាងពាក្យចំនួន ៥១២ វិមាត្រ និងអាចចាប់យកឃ្លាស្រពេចស្រពិលដែលមានន័យស្រដៀងគ្នាបានយ៉ាងល្អតាមរយៈឧបករណ៍វិភាគរូបភាព (LSTMVis)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Manual Feature Extraction / Prespecified Keyword List</span></strong><br>ការស្រង់លក្ខណៈពិសេសដោយដៃ ឬការប្រើប្រាស់បញ្ជីពាក្យកំណត់ទុកជាមុន</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងមិនត្រូវការធនធានកុំព្យូទ័រ ឬទិន្នន័យច្រើនដើម្បីដំណើរការឡើយ។</td>
+                <td>មិនអាចចាប់យកភាពស្មុគស្មាញ និងទម្រង់ប្រែប្រួលនៃភាសាធម្មជាតិបានគ្រប់ជ្រុងជ្រោយនោះទេ ព្រោះពាក្យមួយអាចផ្លាស់ប្តូរអត្ថន័យទៅតាមបរិបទ។</td>
+                <td>ឯកសារបានបញ្ជាក់ថាការបង្កើតបញ្ជីពាក្យស្រពេចស្រពិលឱ្យបានពេញលេញគឺស្ទើរតែមិនអាចទៅរួចទេ ដោយសារភាពសម្បូរបែបនៃភាសាច្បាប់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រមធ្យមទៅខ្ពស់ សម្រាប់ការបង្វឹកម៉ូដែលបណ្ដាញសរសៃប្រសាទកម្រិតជ្រៅ និងត្រូវការទិន្នន័យអត្ថបទច្បាប់ចំនួនច្រើនដើម្បីដំណើរការ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> តម្រូវឱ្យមាន GPU សម្រាប់ការបង្វឹកបណ្ដាញសរសៃប្រសាទ RNN/GRU ដែលមាន ៥១២ វិមាត្រ ក្នុងរយៈពេល ៣០ ជុំ (epochs)។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការសំណុំទិន្នន័យគោលការណ៍ឯកជនភាពគេហទំព័រចំនួន ១.០១០ ឯកសារ (ប្រមាណ ២,៥ លានពាក្យ) និងពាក្យស្រពេចស្រពិលគោលចំនួន ៤០ ដែលកំណត់ដោយអ្នកជំនាញ។</li>
+        
+        <li><strong>Software:</strong> ទាមទារបណ្ណាល័យ Deep Learning, ឧបករណ៍វិភាគរូបភាព LSTMVis និងវ៉ិចទ័រពាក្យ Word2Vec ចំនួន ៣០០ វិមាត្រដែលបានបង្វឹកជាមុនពី Google News។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការអ្នកជំនាញផ្នែកដំណើរការភាសាធម្មជាតិ (NLP) វិទ្យាសាស្ត្រទិន្នន័យ និងអ្នកជំនាញផ្នែកច្បាប់ដើម្បីផ្ទៀងផ្ទាត់ពាក្យមិនច្បាស់លាស់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យគោលការណ៍ឯកជនភាពគេហទំព័រជាភាសាអង់គ្លេសដែលទទួលបានពីគេហទំព័រពេញនិយមនៅលោកខាងលិច (តាមរយៈ Amazon Mechanical Turk) និងវ៉ិចទ័រពាក្យពី Google News។ ដោយសារទិន្នន័យទាំងនេះផ្តោតលើភាសាអង់គ្លេស និងបរិបទច្បាប់លោកខាងលិច វាមិនអាចយកមកអនុវត្តផ្ទាល់ជាមួយគោលការណ៍ឯកជនភាពជាភាសាខ្មែរ ឬច្បាប់កម្ពុជាដោយមិនមានការកែសម្រួល ឬបង្វឹកឡើងវិញនោះទេ។ យ៉ាងណាមិញ វាជាគំរូដ៏ល្អសម្រាប់ការស្រាវជ្រាវNLPនៅកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់សម្រាប់ស្ថាប័នរដ្ឋ និងឯកជននៅកម្ពុជាក្នុងការត្រួតពិនិត្យ និងកែលម្អភាពច្បាស់លាស់នៃកិច្ចសន្យាឌីជីថល និងគោលការណ៍ឯកជនភាព។</p>
+        
+        <ul>
+            
+            <li><strong>Telecom and Banking Sector (វិស័យទូរគមនាគមន៍ និងធនាគារ):</strong> អាចប្រើដើម្បីវិភាគរកពាក្យពេចន៍មិនច្បាស់លាស់ក្នុងគោលការណ៍ឯកជនភាពនៃកម្មវិធីធនាគារ (Mobile Banking) និងក្រុមហ៊ុនទូរស័ព្ទ (Smart, Cellcard) ដើម្បីធានាបាននូវតម្លាភាពក្នុងការប្រមូលទិន្នន័យអតិថិជន។</li>
+            
+            <li><strong>Ministry of Post and Telecommunications (ក្រសួងប្រៃសណីយ៍ និងទូរគមនាគមន៍ - MPTC):</strong> អាចប្រើជាឧបករណ៍ជំនួយផ្នែកបច្ចេកទេសក្នុងការវាយតម្លៃ ឬតាក់តែងសេចក្តីព្រាងច្បាប់ការពារទិន្នន័យផ្ទាល់ខ្លួន និងសន្តិសុខសាយប័រនៅកម្ពុជាឱ្យកាន់តែមានភាពច្បាស់លាស់និងរឹងមាំ។</li>
+            
+            <li><strong>E-commerce Platforms (ថ្នាលពាណិជ្ជកម្មអេឡិចត្រូនិក):</strong> ជួយឱ្យក្រុមហ៊ុនក្នុងស្រុកដូចជា Nham24, Foodpanda ឬ Khmer24 អាចតាក់តែងគោលការណ៍ប្រើប្រាស់ដែលងាយយល់និងមិនមានភាពស្រពេចស្រពិលសម្រាប់អ្នកប្រើប្រាស់ទូទៅ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតនេះនឹងជួយពង្រឹងតម្លាភាពផ្លូវច្បាប់ និងបង្កើនទំនុកចិត្តរបស់អ្នកប្រើប្រាស់ឌីជីថលទូទាំងប្រទេសកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យច្បាប់ (Data Collection & Preprocessing):</strong> ប្រមូលឯកសារគោលការណ៍ឯកជនភាពពីស្ថាប័នហិរញ្ញវត្ថុ និងក្រុមហ៊ុនធំៗនៅកម្ពុជា (ទាំងអង់គ្លេស និងខ្មែរ) រួចធ្វើការសម្អាតទិន្នន័យដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">NLTK</span>, <span class="en">spaCy</span> ឬឧបករណ៍កាត់ពាក្យខ្មែរដូចជា <span class="en">Khmer Word Segmentation</span>។</li>
+            
+            <li><strong>កំណត់ពាក្យស្រពេចស្រពិលគោល (Define Vague Terms Baseline):</strong> សហការជាមួយអ្នកជំនាញច្បាប់ដើម្បីបង្កើតបញ្ជីពាក្យពេចន៍មិនច្បាស់លាស់ចំនួន ៤០ ទៅ ៥០ ពាក្យ ដែលត្រូវបានប្រើប្រាស់ញឹកញាប់ក្នុងកិច្ចសន្យានិងគោលការណ៍ឯកជនភាពក្នុងបរិបទប្រទេសកម្ពុជា។</li>
+            
+            <li><strong>បង្វឹកម៉ូដែលបណ្ដាញសរសៃប្រសាទ (Train Word Embeddings):</strong> ប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> ដើម្បីសាងសង់និងបង្វឹកម៉ូដែល <span class="en">Multi-task GRU/LSTM</span> សម្រាប់វាយតម្លៃភាពស្រពេចស្រពិលនិងទស្សន៍ទាយពាក្យបន្ទាប់ ដូចដែលបានបង្ហាញក្នុងការស្រាវជ្រាវនេះ។</li>
+            
+            <li><strong>វិភាគលទ្ធផលជាទម្រង់រូបភាព (Visualization and Analysis):</strong> បញ្ចូលលទ្ធផលវ៉ិចទ័រដែលទទួលបានទៅក្នុងឧបករណ៍ <span class="en">LSTMVis</span> ឬប្រើប្រាស់បច្ចេកទេស <span class="en">t-SNE / PCA</span> តាមរយៈ <span class="en">Python</span> ដើម្បីវិភាគ និងស្វែងរកក្រុមពាក្យឬឃ្លាដែលមានន័យមិនច្បាស់លាស់ស្រដៀងគ្នា។</li>
+            
+            <li><strong>ពង្រីកសមត្ថភាពទៅវាយតម្លៃកម្រិតប្រយោគ (Develop Sentence-Level Evaluation):</strong> ធ្វើឱ្យម៉ូដែលកាន់តែមានភាពជឿនលឿនដោយប្តូរពីការវិភាគត្រឹមពាក្យ ទៅការប្រើប្រាស់ម៉ូដែល <span class="en">Transformers</span> ទំនើបៗដូចជា <span class="en">BERT</span> ឬ <span class="en">mBERT</span> សម្រាប់វាស់ស្ទង់កម្រិតភាពមិនច្បាស់លាស់នៃកថាខណ្ឌនីមួយៗក្នុងអត្ថបទច្បាប់ទាំងមូល។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Embeddings</span></td>
+                <td>ដំណើរការបំប្លែងពាក្យទៅជាវ៉ិចទ័រលេខ ដែលកុំព្យូទ័រអាចយល់ពីអត្ថន័យ និងទំនាក់ទំនងរវាងពាក្យទាំងនោះបានតាមរយៈគណិតវិទ្យា។</td>
+                <td>ដូចជាការដាក់ពិន្ទុលើលក្ខណៈផ្សេងៗរបស់មនុស្ស (កម្ពស់ ទម្ងន់ អាយុ) ដើម្បីរកមើលថាតើនរណាខ្លះមានរូបរាង ឬលក្ខណៈស្រដៀងគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Recurrent Neural Network (RNN)</span></td>
+                <td>ប្រភេទនៃបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដែលត្រូវបានរចនាឡើងសម្រាប់ដំណើរការទិន្នន័យជាបន្តបន្ទាប់ (ដូចជាអត្ថបទ ឬសំឡេង) ដោយប្រើប្រាស់ព័ត៌មានពីមុនដើម្បីទស្សន៍ទាយលទ្ធផលបន្ទាប់។</td>
+                <td>ដូចជាពេលយើងអានសៀវភៅ យើងអាចយល់ន័យពាក្យខាងចុងបាន ដោយផ្អែកលើការចងចាំនូវពាក្យដែលយើងទើបតែអានពីមុន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gated Recurrent Unit (GRU)</span></td>
+                <td>កំណែទម្រង់មួយរបស់ RNN ដែលមានសមត្ថភាពខ្ពស់ក្នុងការសម្រេចចិត្តថា តើព័ត៌មានចាស់ណាមួយគួរតែចងចាំ និងព័ត៌មានណាគួរតែបំភ្លេចចោល ដើម្បីជៀសវាងការបាត់បង់ព័ត៌មានសំខាន់ៗពេលដំណើរការអត្ថបទវែងៗ។</td>
+                <td>ដូចជាតម្រងទឹកដែលឆ្លាតវៃ វាចេះរើសយកតែរ៉ែមានប្រយោជន៍ទុក និងច្រោះចោលនូវកាកសំណល់មិនចាំបាច់ចេញពីទឹកហូរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-task Learning</span></td>
+                <td>បច្ចេកទេសបង្វឹកម៉ូដែលបញ្ញាសិប្បនិម្មិតឱ្យធ្វើកិច្ចការពីរឬច្រើនក្នុងពេលតែមួយ ដើម្បីឱ្យវាអាចរៀនពីទំនាក់ទំនងរវាងកិច្ចការទាំងនោះ និងបង្កើនប្រសិទ្ធភាពរួមនៃការគិត។</td>
+                <td>ដូចជាការរៀនលេងហ្គីតា និងច្រៀងក្នុងពេលតែមួយ ដែលជួយឱ្យអ្នកយល់ពីចង្វាក់ភ្លេងបានកាន់តែជ្រាលជ្រៅជាងការរៀនតែមួយមុខៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden State Representation</span></td>
+                <td>ទម្រង់ទិន្នន័យខាងក្នុងរបស់ម៉ូដែល ដែលរក្សាទុកការចងចាំអំពីបរិបទ និងអត្ថន័យនៃពាក្យដែលវាបានអានកន្លងមក មុននឹងសម្រេចចិត្តទស្សន៍ទាយពាក្យបន្ទាប់ក្នុងប្រយោគ។</td>
+                <td>ដូចជាការសង្ខេបរឿងទុកក្នុងខួរក្បាលរបស់យើង បន្ទាប់ពីអានចប់មួយទំព័រ មុននឹងបន្តអានទំព័របន្ទាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Language Vagueness</span></td>
+                <td>លក្ខណៈនៃភាសាដែលខ្វះភាពច្បាស់លាស់ ឬមានព្រំដែនអត្ថន័យមិនច្បាស់លាស់ (ឧទាហរណ៍៖ ពាក្យថា "ពេលខ្លះ" ឬ "ជាទូទៅ") ដែលធ្វើឱ្យកុំព្យូទ័រពិបាកក្នុងការកំណត់អត្ថន័យ និងបកស្រាយផ្នែកច្បាប់។</td>
+                <td>ដូចជាការប្រាប់មិត្តភក្តិថា "ចាំជួបគ្នាបន្តិចទៀត" ដែលការកំណត់ពេលវេលា "បន្តិចទៀត" នេះមិនច្បាស់ថា ៥នាទី ឬ ១ម៉ោងនោះទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=language+vagueness%22+OR+%22ambiguity+detection%22+natural+language+processing+legal+text" target="_blank" rel="noopener"><span class="en">language vagueness" OR "ambiguity detection" natural language processing legal text</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+%22word+embeddings%22+%22privacy+policies" target="_blank" rel="noopener"><span class="en">deep learning "word embeddings" "privacy policies</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-task+learning+%22recurrent+neural+networks%22+OR+GRU+sequence+prediction" target="_blank" rel="noopener"><span class="en">multi-task learning "recurrent neural networks" OR GRU sequence prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=LSTMVis%22+visualizing+hidden+state+dynamics+recurrent+neural+networks" target="_blank" rel="noopener"><span class="en">LSTMVis" visualizing hidden state dynamics recurrent neural networks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=automated+analysis+of+GDPR+and+privacy+policy+compliance+using+NLP" target="_blank" rel="noopener"><span class="en">automated analysis of GDPR and privacy policy compliance using NLP</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
