@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>បង្ហាត់ខ្ញុំប្រសិនបើអ្នកអាច៖ ការរៀនតាមបែបវិមជ្ឈការនៅលើ Deep Edge | KhmerResearch.com</title>
+    <meta name="description" content="ការបណ្តុះបណ្តាលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) នៅលើឧបករណ៍ផ្ទាល់ (Edge devices) ដែលមានធនធានផ្ទុកនិងកម្លាំងគណនាមានកម្រិត ជួបប្រទះនូវបញ្ហាទំហំអង្គចងចាំនិ...">
+    
+    <meta name="keywords" content="Federated Learning, Edge Computing, Arm Cortex-M, Stochastic Gradient Descent, Quantization, Artificial Neural Networks, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/train-me-if-you-can-decentralized-learning-edge-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/train-me-if-you-can-decentralized-learning-edge-2022.html">
+    <meta property="og:title" content="បង្ហាត់ខ្ញុំប្រសិនបើអ្នកអាច៖ ការរៀនតាមបែបវិមជ្ឈការនៅលើ Deep Edge | KhmerResearch.com">
+    <meta property="og:description" content="ការបណ្តុះបណ្តាលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) នៅលើឧបករណ៍ផ្ទាល់ (Edge devices) ដែលមានធនធានផ្ទុកនិងកម្លាំងគណនាមានកម្រិត ជួបប្រទះនូវបញ្ហាទំហំអង្គចងចាំនិងភាពយឺតយ៉ាវ ដែលធ្វើឱ្យក្បួនដោះស្រាយស្តង់...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2022, Applied Sciences">
+    
+    <meta property="article:tag" content="Federated Learning">
+    
+    <meta property="article:tag" content="Edge Computing">
+    
+    <meta property="article:tag" content="Arm Cortex-M">
+    
+    <meta property="article:tag" content="Stochastic Gradient Descent">
+    
+    <meta property="article:tag" content="Quantization">
+    
+    <meta property="article:tag" content="Artificial Neural Networks">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="បង្ហាត់ខ្ញុំប្រសិនបើអ្នកអាច៖ ការរៀនតាមបែបវិមជ្ឈការនៅលើ Deep Edge">
+    <meta name="twitter:description" content="ការបណ្តុះបណ្តាលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) នៅលើឧបករណ៍ផ្ទាល់ (Edge devices) ដែលមានធនធានផ្ទុកនិងកម្លាំងគណនាមានកម្រិត ជួបប្រទះនូវបញ្ហាទំហំអង្គចងចាំនិងភាពយឺតយ៉ាវ ដែលធ្វើឱ្យក្បួនដោះស្រាយស្តង់...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u1784\u17d2\u17a0\u17b6\u178f\u17cb\u1781\u17d2\u1789\u17bb\u17c6\u1794\u17d2\u179a\u179f\u17b7\u1793\u1794\u17be\u17a2\u17d2\u1793\u1780\u17a2\u17b6\u1785\u17d6 \u1780\u17b6\u179a\u179a\u17c0\u1793\u178f\u17b6\u1798\u1794\u17c2\u1794\u179c\u17b7\u1798\u1787\u17d2\u1788\u1780\u17b6\u179a\u1793\u17c5\u179b\u17be Deep Edge",
+      "name": "Train Me If You Can: Decentralized Learning on the Deep Edge",
+      "description": "\u1780\u17b6\u179a\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning) \u1793\u17c5\u179b\u17be\u17a7\u1794\u1780\u179a\u178e\u17cd\u1795\u17d2\u1791\u17b6\u179b\u17cb (Edge devices) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1792\u1793\u1792\u17b6\u1793\u1795\u17d2\u1791\u17bb\u1780\u1793\u17b7\u1784\u1780\u1798\u17d2\u179b\u17b6\u17c6\u1784\u1782\u178e\u1793\u17b6\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f \u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1793\u17bc\u179c\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17c6\u17a0\u17c6\u17a2\u1784\u17d2\u1782\u1785\u1784\u1785\u17b6\u17c6\u1793\u17b7\u1784\u1797\u17b6\u1796\u1799\u17ba\u178f\u1799\u17c9\u17b6\u179c \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u179f\u17d2\u178f\u1784\u17cb\u178a\u17b6\u179a\u178a\u17bc\u1785\u1787\u17b6 SGD \u1798\u17b7\u1793\u17a2\u17b6\u1785\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1794\u17b6\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/train-me-if-you-can-decentralized-learning-edge-2022.html",
+      "author": [{"@type": "Person", "name": "Diogo Costa (Centro Algoritmi, Universidade do Minho)"},{"@type": "Person", "name": "Miguel Costa (Centro Algoritmi, Universidade do Minho)"},{"@type": "Person", "name": "Sandro Pinto (Centro Algoritmi, Universidade do Minho)"}],
+      "datePublished": "2022, Applied Sciences",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Train Me If You Can: Decentralized Learning on the Deep Edge",
+        "url": "https://doi.org/10.3390/app12094653"
+      },
+      "keywords": ["Federated Learning", "Edge Computing", "Arm Cortex-M", "Stochastic Gradient Descent", "Quantization", "Artificial Neural Networks"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u1784\u17d2\u17a0\u17b6\u178f\u17cb\u1781\u17d2\u1789\u17bb\u17c6\u1794\u17d2\u179a\u179f\u17b7\u1793\u1794\u17be\u17a2\u17d2\u1793\u1780\u17a2\u17b6\u1785\u17d6 \u1780\u17b6\u179a\u179a\u17c0\u1793\u178f\u17b6\u1798\u1794\u17c2\u1794\u179c\u17b7\u1798\u1787\u17d2\u1788\u1780\u17b6\u179a\u1793\u17c5\u179b\u17be Deep Edge",
+          "item": "https://khmerresearch.com/papers/technology/train-me-if-you-can-decentralized-learning-edge-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>បង្ហាត់ខ្ញុំប្រសិនបើអ្នកអាច៖ ការរៀនតាមបែបវិមជ្ឈការនៅលើ Deep Edge</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Train Me If You Can: Decentralized Learning on the Deep Edge<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3390/app12094653" target="_blank">doi.org/10.3390/app12094653</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>បង្ហាត់ខ្ញុំប្រសិនបើអ្នកអាច៖ ការរៀនតាមបែបវិមជ្ឈការនៅលើ Deep Edge</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Train Me If You Can: Decentralized Learning on the Deep Edge</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Diogo Costa (Centro Algoritmi, Universidade do Minho), Miguel Costa (Centro Algoritmi, Universidade do Minho), Sandro Pinto (Centro Algoritmi, Universidade do Minho)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022, Applied Sciences</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការបណ្តុះបណ្តាលម៉ូដែលរៀនដោយម៉ាស៊ីន (Machine Learning) នៅលើឧបករណ៍ផ្ទាល់ (Edge devices) ដែលមានធនធានផ្ទុកនិងកម្លាំងគណនាមានកម្រិត ជួបប្រទះនូវបញ្ហាទំហំអង្គចងចាំនិងភាពយឺតយ៉ាវ ដែលធ្វើឱ្យក្បួនដោះស្រាយស្តង់ដារដូចជា SGD មិនអាចដំណើរការបាន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតក្បួនដោះស្រាយថ្មីមួយឈ្មោះថា Lightweight SGD (L-SGD) ដោយធ្វើបច្ចុប្បន្នភាពលើប្រព័ន្ធគណនា (Chain-rule) ដើម្បីកាត់បន្ថយការប្រើប្រាស់អង្គចងចាំ និងបានបែងចែកវាជាពីរប្រភេទសម្រាប់ធ្វើការវាយតម្លៃ។
+        
+        <ul>
+            
+            <li>ការបង្កើតក្បួនដោះស្រាយ L-SGD ជាប្រភេទចំនុចអណ្តែត (Float-32) និងចំនួនគត់បែបកង់ទីហ្សង់ (Quantized Int-8)</li>
+            
+            <li>ការធ្វើតេស្តលើបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (ANNs) ដោយប្រើទិន្នន័យ MNIST និង CogDist</li>
+            
+            <li>ការដាក់ឱ្យដំណើរការសាកល្បងនៅលើមីក្រូកុងត្រូល័រ STM32L4R5ZIT6 (Cortex-M4)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>សម្រាប់ទិន្នន័យ MNIST ក្បួនដោះស្រាយ L-SGD (Float-32) ដំណើរការលឿនជាង SGD ស្តង់ដាររហូតដល់ ៤,២០ ដង និងទាមទារអង្គចងចាំត្រឹមតែ ២,៨០% ប៉ុណ្ណោះ ដោយមិនធ្វើឱ្យបាត់បង់ភាពសុក្រឹតនោះទេ។</li>
+            
+            <li>កំណែក្បួនដោះស្រាយបែប Quantized (Int-8) អាចកាត់បន្ថយការប្រើប្រាស់អង្គចងចាំបន្ថែមបាន ៧២,៨២% និងបង្កើនល្បឿន ២,៤៨ ដងធៀបនឹងកំណែ Float-32 នៅពេលប្រើសម្រាប់កែសម្រួលម៉ូដែល (Model tweaking) ដំណាក់កាលចុងក្រោយ។</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយ L-SGD នេះ ជួយដោះស្រាយបញ្ហាអយុត្តិធម៌នៅក្នុងប្រព័ន្ធ Federated Learning (FL) និងអនុញ្ញាតឱ្យមានការបណ្តុះបណ្តាលម៉ូដែលដោយផ្ទាល់នៅលើឧបករណ៍ Deep Edge ប្រកបដោយប្រសិទ្ធភាព។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Standard SGD (Float-32)</span></strong><br>ក្បួនដោះស្រាយ SGD ស្តង់ដារ (Float-32)</td>
+                <td>ជាវិធីសាស្រ្តមូលដ្ឋានដែលមានស្ថេរភាពក្នុងការបង្ហាត់ម៉ូដែល និងធានាបាននូវភាពសុក្រឹតខ្ពស់។ វាងាយស្រួលក្នុងការអនុវត្តលើប្រព័ន្ធកុំព្យូទ័រធំៗដែលមានថាមពលគណនាខ្លាំង។</td>
+                <td>ប្រើប្រាស់អង្គចងចាំ (Memory footprint) ច្រើនទ្វេដងនៃទំហំម៉ូដែល និងមានភាពយឺតយ៉ាវ ដែលមិនស័ក្តិសមទាល់តែសោះសម្រាប់ឧបករណ៍ខ្នាតតូច (Edge devices)។</td>
+                <td>ទាមទារអង្គចងចាំ ១35,៦៣២ Bytes និងប្រើពេល ៧៥,០៩ មីលីវិនាទី/គំរូ (លើទិន្នន័យ MNIST)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">L-SGD (Float-32)</span></strong><br>ក្បួនដោះស្រាយ L-SGD ប្រភេទ Float-32</td>
+                <td>កាត់បន្ថយការប្រើប្រាស់អង្គចងចាំបានយ៉ាងច្រើន និងបង្កើនល្បឿនក្នុងការបង្ហាត់បានលឿនជាងមុន ដោយរក្សាបាននូវកម្រិតភាពសុក្រឹតប្រហាក់ប្រហែលនឹង SGD ស្តង់ដារ។</td>
+                <td>នៅតែត្រូវការប្រព័ន្ធ Floating-Point Unit (FPU) នៅលើបន្ទះឈីបដើម្បីទទួលបានល្បឿនលឿនបំផុត។</td>
+                <td>លឿនជាង SGD ស្តង់ដារ ៤,២០ ដង និងប្រើប្រាស់អង្គចងចាំត្រឹមតែ ២,៨០% ប៉ុណ្ណោះ (៣,៧៨៤ Bytes)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">L-SGD (Int-8)</span></strong><br>ក្បួនដោះស្រាយ L-SGD ប្រភេទ Quantized (Int-8)</td>
+                <td>សន្សំសំចៃទំហំអង្គចងចាំបានកម្រិតអតិបរមា និងមានដំណើរការលឿនបំផុត ដែលស័ក្តិសមបំផុតសម្រាប់ការកែសម្រួលម៉ូដែល (Model tweaking) ក្នុងប្រព័ន្ធ Federated Learning។</td>
+                <td>មិនអាចប្រើសម្រាប់បង្ហាត់ម៉ូដែលពីចំណុចដំបូង (Training from scratch) បានទេ ដោយសារបញ្ហា Saturation នៃទិន្នន័យនៅពេលតម្លៃ Loss មានទំហំធំ។</td>
+                <td>សន្សំសំចៃអង្គចងចាំបាន ៧២,៨២% បន្ថែមទៀត និងលឿនជាង L-SGD (Float-32) ចំនួន ២,៤៨ ដង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តក្បួនដោះស្រាយនេះតម្រូវឱ្យមានឧបករណ៍ផ្នែករឹងខ្នាតតូចដែលមានតម្លៃសមរម្យ ប៉ុន្តែទាមទារចំណេះដឹងផ្នែកកម្មវិធីកម្រិតទាប (Low-level programming) ស៊ីជម្រៅ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> មីក្រូកុងត្រូល័រត្រកូល Arm Cortex-M4 (ឧទាហរណ៍ STM32L4R5ZIT6 ដំណើរការក្នុងល្បឿន 120 MHz) ដែលមានអង្គចងចាំ (SRAM) ត្រឹមតែប៉ុន្មាន KBs ឬ MBs ប៉ុណ្ណោះ។</li>
+        
+        <li><strong>Software:</strong> ការសរសេរកូដដោយប្រើភាសា C សុទ្ធ និងការប្រើប្រាស់គំនិតចេញពីបណ្ណាល័យ CMSIS-NN របស់ Arm ព្រមទាំង TensorFlow សម្រាប់ការធ្វើ Quantization ម៉ូដែលបឋម។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យតេស្តខ្នាតតូចស្តង់ដាររួមមាន MNIST (សម្រាប់សម្គាល់រូបភាពលេខ) និង CogDist (ទិន្នន័យរង្វាស់ការផ្ចង់អារម្មណ៍របស់អ្នកបើកបរ)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងស៊ីជម្រៅលើការធ្វើបរិមាណកម្ម (Quantization), គណិតវិទ្យានៃ Neural Networks, និងការគ្រប់គ្រងអង្គចងចាំលើ Embedded Systems។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យស្តង់ដារអន្តរជាតិ (MNIST និង CogDist) ដើម្បីធ្វើតេស្តល្បឿន និងអង្គចងចាំលើផ្នែករឹង STM32L4R5ZIT6។ ទោះបីជាមិនបានផ្តោតលើទិន្នន័យប្រជាសាស្ត្រកម្ពុជាផ្ទាល់ក៏ដោយ ការរកឃើញនេះមានតម្លៃខ្លាំងណាស់ ព្រោះវាបង្ហាញថាការបង្ហាត់ម៉ូដែល ML អាចធ្វើទៅបានលើឧបករណ៍តម្លៃថោក ដែលអនុញ្ញាតឱ្យប្រទេសកំពុងអភិវឌ្ឍន៍ប្រើប្រាស់បច្ចេកវិទ្យា AI ដោយមិនពឹងផ្អែកលើអ៊ីនធឺណិតល្បឿនលឿន ឬកុំព្យូទ័រខ្នាតធំ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្រ្តនេះមានសក្តានុពលខ្ពស់ណាស់សម្រាប់ប្រទេសកម្ពុជា ពិសេសក្នុងការបង្កើតប្រព័ន្ធ IoT ឆ្លាតវៃដែលមានតម្លៃថោក ឯករាជ្យពីអ៊ីនធឺណិត និងរក្សាភាពឯកជនបានល្អ។</p>
+        
+        <ul>
+            
+            <li><strong>កសិកម្មឆ្លាតវៃ (Smart Agriculture) នៅតាមបណ្តាខេត្ត:</strong> អាចបំពាក់សេនស័រតម្លៃថោកៗនៅលើដីចម្ការនៅខេត្តបាត់ដំបង ដើម្បីវិភាគ និងព្យាករណ៍សំណើមដីផ្ទាល់ៗនៅលើឧបករណ៍ ដោយមិនចាំបាច់មានសេវាអ៊ីនធឺណិតខ្លាំងដើម្បីបញ្ជូនទិន្នន័យទៅ Cloud នោះទេ។</li>
+            
+            <li><strong>ការថែទាំសុខភាពតាមតំបន់ដាច់ស្រយាល (Remote Healthcare):</strong> អាចអភិវឌ្ឍឧបករណ៍ពាក់លើខ្លួន (Wearables) ដែលរៀនតាមដានចង្វាក់បេះដូង និងស្ថានភាពសុខភាពអ្នកជំងឺនៅតាមភូមិដាច់ស្រយាល ដោយទិន្នន័យមិនត្រូវបានបញ្ជូនចេញក្រៅឧបករណ៍ឡើយ ដែលជួយការពារឯកជនភាពយ៉ាងពេញលេញ។</li>
+            
+            <li><strong>ការត្រួតពិនិត្យចរាចរណ៍នៅរាជធានីភ្នំពេញ (Traffic Monitoring):</strong> បំពាក់មីក្រូកុងត្រូល័រតម្លៃថោកលើកាមេរ៉ាសុវត្ថិភាពតាមស្តុប ដើម្បីសម្គាល់ប្រភេទយានយន្ត និងរៀនពីលំហូរចរាចរណ៍ដោយខ្លួនឯង ដែលជួយកាត់បន្ថយការចំណាយលើ Server និងកាត់បន្ថយការកកស្ទះទិន្នន័យក្នុងបណ្តាញ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការរៀនតាមបែបវិមជ្ឈការ (Federated Learning) លើឧបករណ៍ Deep Edge អាចជួយកម្ពុជាអភិវឌ្ឍប្រព័ន្ធ AI ខ្នាតតូចប្រកបដោយសុវត្ថិភាព សន្សំសំចៃ និងអាចពង្រីកវិសាលភាពបានយ៉ាងទូលំទូលាយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>១. ស្វែងយល់ពីមូលដ្ឋានគ្រឹះ Embedded Systems និងភាសា C:</strong> និស្សិតគប្បីចាប់ផ្តើមរៀនសរសេរកូដដោយប្រើភាសា <span class="en">C/C++</span> សម្រាប់គ្រប់គ្រងមីក្រូកុងត្រូល័រ ពិសេសស្ថាបត្យកម្ម <span class="en">Arm Cortex-M</span> តាមរយៈការអនុវត្តផ្ទាល់នៅលើ <span class="en">STM32 Nucleo Boards</span>។</li>
+            
+            <li><strong>២. សិក្សាពី Edge AI និងបណ្ណាល័យគណនាកម្រិតទាប:</strong> ត្រូវស្វែងយល់ពីរបៀបដំណើរការម៉ូដែល ML លើឧបករណ៍តូចៗ ដោយប្រើប្រាស់ឧបករណ៍ដូចជា <span class="en">TensorFlow Lite for Microcontrollers</span> និង <span class="en">CMSIS-NN</span> ដើម្បីយល់ពីការអនុវត្តវគ្គ Inference និងរចនាសម្ព័ន្ធទិន្នន័យ។</li>
+            
+            <li><strong>៣. ស្វែងយល់ពីការធ្វើ Quantization និង Optimization:</strong> សិក្សាស៊ីជម្រៅលើរូបមន្តគណិតវិទ្យានៃ <span class="en">Stochastic Gradient Descent (SGD)</span> និងយន្តការ <span class="en">Backpropagation</span> រួមទាំងការអនុវត្ត <span class="en">Int-8 Quantization</span> ដើម្បីដឹងពីរបៀបកាត់បន្ថយទំហំម៉ូដែលមិនឱ្យបាត់បង់ភាពសុក្រឹត។</li>
+            
+            <li><strong>៤. អនុវត្តការសាកល្បង Federated Learning ខ្នាតតូច:</strong> សាកល្បងតភ្ជាប់ <span class="en">Microcontrollers</span> ពីរ ឬបីបញ្ជូលគ្នា រួចបង្ហាត់ម៉ូដែលសាមញ្ញ (ឧ. ការបែងចែកប្រភេទសីតុណ្ហភាព) ហើយបញ្ជូនតែប៉ារ៉ាម៉ែត្រ (Weights) ទៅកាន់កុំព្យូទ័រមេតាមរយ: <span class="en">FedAvg Algorithm</span> តាមបណ្តាញ Wi-Fi ឬ Bluetooth មូលដ្ឋាន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Federated Learning</span></td>
+                <td>ជាវិធីសាស្ត្រនៃការបណ្តុះបណ្តាលម៉ូដែលបញ្ញាសិប្បនិម្មិត (AI) ដោយមិនចាំបាច់បញ្ជូនទិន្នន័យឆៅទៅកាន់ម៉ាស៊ីនមេ (Cloud Server) នោះទេ ពោលគឺឧបករណ៍នីមួយៗរៀនពីទិន្នន័យរបស់ខ្លួនផ្ទាល់ ហើយបញ្ជូនតែចំណេះដឹង (Parameters) ដែលរៀនរួចទៅកាន់ម៉ាស៊ីនមេដើម្បីចងក្រងជាម៉ូដែលរួមមួយ។</td>
+                <td>ប្រៀបដូចជាសិស្សរៀនមេរៀនរៀងៗខ្លួននៅផ្ទះ ហើយយកតែចំណេះដឹងដែលយល់ច្បាស់មកប្រាប់គ្រូ ដើម្បីសង្ខេបចែករំលែកទៅសិស្សដទៃ ដោយមិនចាំបាច់យកសៀវភៅកំណត់ហេតុផ្ទាល់ខ្លួនមកបង្ហាញឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stochastic Gradient Descent (SGD)</span></td>
+                <td>ជាក្បួនដោះស្រាយគណិតវិទ្យាដែលប្រើសម្រាប់ស្វែងរកតម្លៃល្អបំផុត (កាត់បន្ថយកំហុសឱ្យនៅទាបបំផុត) ក្នុងការបណ្តុះបណ្តាលបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត ដោយធ្វើការកែតម្រូវទម្ងន់ (Weights) នៃម៉ូដែលបន្តិចម្តងៗតាមទិសដៅនៃកំហុសដែលបានគណនា។</td>
+                <td>ប្រៀបដូចជាមនុស្សដែលត្រូវបិទភ្នែកដើរចុះពីកំពូលភ្នំ ដោយប្រើជើងស្ទាបរកទិសដៅដែលចំណោតចុះក្រោមខ្លាំងបំផុត ដើម្បីឆាប់ទៅដល់ជើងភ្នំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Quantization</span></td>
+                <td>គឺជាដំណើរការបំប្លែងទិន្នន័យពីទម្រង់ចំនួនទសភាគ (Floating-point) ដែលស៊ីទំហំអង្គចងចាំធំ ទៅជាទម្រង់ចំនួនគត់ (Integer) តូចៗដូចជា 8-bit ដើម្បីកាត់បន្ថយទំហំផ្ទុក និងបង្កើនល្បឿនគណនាដោយមិនសូវធ្វើឱ្យបាត់បង់ភាពសុក្រឹតរបស់ម៉ូដែលឡើយ។</td>
+                <td>ដូចជាការបង្រួមរូបថតដែលមានទំហំធំ (ច្បាស់ខ្លាំងពេកដែលមិនចាំបាច់) ឱ្យមកតូចល្មម ដើម្បីងាយស្រួលផ្ញើ ឬរក្សាទុកក្នុងទូរស័ព្ទដៃ ប៉ុន្តែយើងនៅតែអាចមើលស្គាល់ថារូបនោះជារូបអ្វី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Edge</span></td>
+                <td>សំដៅលើឧបករណ៍អេឡិចត្រូនិកខ្នាតតូចបំផុត (ដូចជាសេនស័រ មីក្រូកុងត្រូល័រ ឧបករណ៍ពាក់លើខ្លួន) ដែលស្ថិតនៅជិតប្រភពទិន្នន័យបំផុត និងមានសមត្ថភាពគណនាផ្ទាល់ខ្លួនតិចតួចបំផុត ដោយមិនពឹងផ្អែកទាំងស្រុងលើប្រព័ន្ធ Cloud ឡើយ។</td>
+                <td>ដូចជាមេភូមិដែលប្រចាំការនៅមូលដ្ឋានផ្ទាល់ ហើយអាចសម្រេចចិត្តលើបញ្ហាតូចតាចបានភ្លាមៗ ដោយមិនបាច់រង់ចាំសួរយោបល់ពីថ្នាក់ខេត្ត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Memory footprint</span></td>
+                <td>ជាទំហំសរុបនៃអង្គចងចាំ (RAM ឬ Storage) ដែលកម្មវិធី ឬក្បួនដោះស្រាយមួយត្រូវការប្រើប្រាស់ ដើម្បីដំណើរការប្រតិបត្តិការរបស់ខ្លួនឱ្យបានជោគជ័យ។</td>
+                <td>ដូចជាទំហំផ្ទៃតុដែលអ្នកត្រូវការសម្រាប់ដាក់សៀវភៅ និងឧបករណ៍សិក្សានៅពេលកំពុងធ្វើលំហាត់ ប្រសិនបើកិច្ចការកាន់តែស្មុគស្មាញ អ្នកត្រូវការទំហំតុរឹតតែធំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Microcontroller Unit (MCU)</span></td>
+                <td>ជាកុំព្យូទ័រខ្នាតតូចបំផុតដែលរួមបញ្ចូលប្រព័ន្ធដំណើរការ (CPU) អង្គចងចាំ (Memory) និងរន្ធតភ្ជាប់ (I/O) នៅលើបន្ទះឈីបតែមួយ ដែលភាគច្រើនប្រើសម្រាប់បញ្ជាឧបករណ៍អេឡិចត្រូនិកជាក់លាក់ណាមួយ (Embedded systems)។</td>
+                <td>ដូចជាខួរក្បាលតូចមួយដែលមានមុខងារចងចាំនិងបញ្ជា ដែលគេបង្កប់នៅក្នុងម៉ាស៊ីនបោកគក់ ឬទូរទឹកកកឆ្លាតវៃ ដើម្បីឱ្យវាដំណើរការដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Node Delta</span></td>
+                <td>នៅក្នុងក្បួនដោះស្រាយ L-SGD ថ្មីនេះ វាគឺជាប៉ារ៉ាម៉ែត្ររួមបញ្ចូលគ្នាតែមួយដែលតំណាងឱ្យការសាយភាយកំហុស (Error propagation) សម្រាប់ណឺរ៉ូននីមួយៗ ដែលជួយកាត់បន្ថយការគណនាស្ទួន និងសន្សំសំចៃការប្រើប្រាស់អង្គចងចាំបានយ៉ាងច្រើន។</td>
+                <td>ដូចជាការសរសេរសរុបវិក្កយបត្រថ្លៃម្ហូបតែមួយសន្លឹកសម្រាប់តុមួយ ជំនួសឱ្យការកត់វិក្កយបត្រដាច់ដោយឡែកៗសម្រាប់មនុស្សម្នាក់ៗក្នុងតុនោះ ដែលជួយសន្សំសំចៃក្រដាសនិងពេលវេលា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Backpropagation</span></td>
+                <td>ជាយន្តការមួយនៅក្នុងការបង្ហាត់ម៉ូដែល AI ដែលបញ្ជូនទិន្នន័យកំហុស (Error) ពីលទ្ធផលចុងក្រោយ ត្រឡប់ថយក្រោយទៅគ្រប់ស្រទាប់នៃបណ្តាញសរសៃប្រសាទវិញ ដើម្បីកែតម្រូវទម្ងន់ (Weights) នៃណឺរ៉ូននីមួយៗឱ្យកាន់តែសុក្រឹតនៅពេលក្រោយ។</td>
+                <td>ដូចជាការផ្ដល់មតិកែលម្អ (Feedback) ពីអ្នកគ្រប់គ្រងទៅកាន់បុគ្គលិកគ្រប់ផ្នែក បន្ទាប់ពីគម្រោងមួយមានការខ្វះខាត ដើម្បីឱ្យបុគ្គលិកកែប្រែចំណុចខ្សោយរបស់ខ្លួនសម្រាប់គម្រោងបន្ទាប់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Federated+Learning+on+resource-constrained+edge+devices+and+microcontrollers" target="_blank" rel="noopener"><span class="en">Federated Learning on resource-constrained edge devices and microcontrollers</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Stochastic+Gradient+Descent+optimization+algorithms+memory+footprint+reduction" target="_blank" rel="noopener"><span class="en">Stochastic Gradient Descent optimization algorithms memory footprint reduction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Post-training+quantization+int-8+for+microcontrollers+CMSIS-NN" target="_blank" rel="noopener"><span class="en">Post-training quantization int-8 for microcontrollers CMSIS-NN</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=On-device+training+neural+networks+Arm+Cortex-M+RISC-V" target="_blank" rel="noopener"><span class="en">On-device training neural networks Arm Cortex-M RISC-V</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Lightweight+SGD+algorithms+for+IoT+and+deep+edge+computing" target="_blank" rel="noopener"><span class="en">Lightweight SGD algorithms for IoT and deep edge computing</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

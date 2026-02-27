@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសម្គាល់សំឡេង និងម៉ូដែល Hidden Markov | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយលើបញ្ហានៃការបំប្លែងសញ្ញាសំឡេងអូឌីយ៉ូទៅជាអត្ថបទ (Text) តាមរយៈប្រព័ន្ធសម្គាល់សំឡេងស្វ័យប្រវត្តិ (ASR) ដោយផ្តោតលើភាពស្មុគស្មាញនៃបច្ចេកវិទ្យានេះ។">
+    
+    <meta name="keywords" content="Automatic Speech Recognition, Hidden Markov Model, Natural Language Processing, Dynamic Time Warping, Cepstral Vectors, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/speech-recognition-hidden-markov-model-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/speech-recognition-hidden-markov-model-2018.html">
+    <meta property="og:title" content="ការសម្គាល់សំឡេង និងម៉ូដែល Hidden Markov | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយលើបញ្ហានៃការបំប្លែងសញ្ញាសំឡេងអូឌីយ៉ូទៅជាអត្ថបទ (Text) តាមរយៈប្រព័ន្ធសម្គាល់សំឡេងស្វ័យប្រវត្តិ (ASR) ដោយផ្តោតលើភាពស្មុគស្មាញនៃបច្ចេកវិទ្យានេះ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2018 International Journal of Management, IT & Engineering">
+    
+    <meta property="article:tag" content="Automatic Speech Recognition">
+    
+    <meta property="article:tag" content="Hidden Markov Model">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+    <meta property="article:tag" content="Dynamic Time Warping">
+    
+    <meta property="article:tag" content="Cepstral Vectors">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសម្គាល់សំឡេង និងម៉ូដែល Hidden Markov">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយលើបញ្ហានៃការបំប្លែងសញ្ញាសំឡេងអូឌីយ៉ូទៅជាអត្ថបទ (Text) តាមរយៈប្រព័ន្ធសម្គាល់សំឡេងស្វ័យប្រវត្តិ (ASR) ដោយផ្តោតលើភាពស្មុគស្មាញនៃបច្ចេកវិទ្យានេះ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784 \u1793\u17b7\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+      "name": "Speech Recognition and Hidden Markov Model",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u179b\u17be\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u17c6\u1794\u17d2\u179b\u17c2\u1784\u179f\u1789\u17d2\u1789\u17b6\u179f\u17c6\u17a1\u17c1\u1784\u17a2\u17bc\u178c\u17b8\u1799\u17c9\u17bc\u1791\u17c5\u1787\u17b6\u17a2\u178f\u17d2\u1790\u1794\u1791 (Text) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 (ASR) \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1793\u17c3\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1793\u17c1\u17c7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/speech-recognition-hidden-markov-model-2018.html",
+      "author": [{"@type": "Person", "name": "Dr. Anuradha Kanade (Udayana University Denpasar)"}],
+      "datePublished": "2018 International Journal of Management, IT \u0026 Engineering",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Speech Recognition and Hidden Markov Model",
+        "url": "http://www.ijmra.us"
+      },
+      "keywords": ["Automatic Speech Recognition", "Hidden Markov Model", "Natural Language Processing", "Dynamic Time Warping", "Cepstral Vectors"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784 \u1793\u17b7\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+          "item": "https://khmerresearch.com/papers/technology/speech-recognition-hidden-markov-model-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការសម្គាល់សំឡេង និងម៉ូដែល Hidden Markov</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Speech Recognition and Hidden Markov Model<br>
+        
+        <strong>Source:</strong> <a href="http://www.ijmra.us" target="_blank">ijmra.us</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសម្គាល់សំឡេង និងម៉ូដែល Hidden Markov</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Speech Recognition and Hidden Markov Model</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Dr. Anuradha Kanade (Udayana University Denpasar)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018 International Journal of Management, IT & Engineering</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយលើបញ្ហានៃការបំប្លែងសញ្ញាសំឡេងអូឌីយ៉ូទៅជាអត្ថបទ (Text) តាមរយៈប្រព័ន្ធសម្គាល់សំឡេងស្វ័យប្រវត្តិ (ASR) ដោយផ្តោតលើភាពស្មុគស្មាញនៃបច្ចេកវិទ្យានេះ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការពិនិត្យឡើងវិញ (Review) ទៅលើវិធីសាស្ត្រ និងឧបករណ៍ផ្សេងៗដែលត្រូវបានប្រើប្រាស់ក្នុងដំណើរការសម្គាល់សំឡេង ជាពិសេសការយកគំរូតាមលក្ខណៈស្ថិតិរបស់ម៉ូដែល Hidden Markov (HMM)។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសនៃសញ្ញាសំឡេង (Feature Extraction) និងការប្រើប្រាស់វ៉ិចទ័រ (Cepstral Vectors)</li>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេសតម្រៀបពេលវេលាថាមវន្ត (Dynamic Time Warping - DTW)</li>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែលស្ថិតិដើម្បីវាយតម្លៃប្រូបាប៊ីលីតេនៃការផ្លាស់ប្តូរស្ថានភាព (Hidden Markov Model - HMM)</li>
+            
+            <li>ការច្របាច់បញ្ចូលគ្នាជាមួយបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Artificial Neural Networks - ANN)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល HMM គឺជាបច្ចេកទេសស្ថិតិដ៏មានប្រជាប្រិយភាពបំផុតសម្រាប់ការសម្គាល់សំឡេង ដោយសារវាមានមូលដ្ឋានស្ថិតិរឹងមាំ និងមានក្បួនដោះស្រាយការរៀនសូត្រ (Learning Algorithms) ប្រកបដោយប្រសិទ្ធភាពខ្ពស់។</li>
+            
+            <li>ការសម្គាល់សំឡេងដែលនិយាយជាប់ៗគ្នា (Continuous Speech Recognition) មានភាពស្មុគស្មាញខ្លាំងជាងការសម្គាល់ពាក្យដាច់ដោយឡែក (Isolated Recognition) ដោយសារប្រព័ន្ធមិនដឹងពីចំណុចបញ្ចប់ និងចំនួនឯកតាសំឡេងសរុបនៅក្នុងប្រយោគ។</li>
+            
+            <li>ទោះបីជា HMM មានភាពពេញនិយមក៏ពិតមែន ប៉ុន្តែប្រព័ន្ធកូនកាត់ដែលរួមបញ្ចូល HMM ជាមួយបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Hybrid HMM/ANN) អាចផ្តល់នូវអត្រានៃការសម្គាល់និងភាពសុក្រឹតខ្ពស់ជាងការប្រើម៉ូដែល HMM តែមួយមុខ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Hidden Markov Model (HMM)</span></strong><br>ម៉ូដែលម៉ាកូវលាក់កំបាំង</td>
+                <td>មានមូលដ្ឋានស្ថិតិរឹងមាំ អាចហ្វឹកហាត់ដោយស្វ័យប្រវត្តិ និងចាត់ចែងទិន្នន័យដែលមានប្រវែងប្រែប្រួលបានល្អ។</td>
+                <td>ទាមទារទិន្នន័យហ្វឹកហាត់ដែលមានចំណារពន្យល់ច្រេីន ហើយមានភាពស្មុគស្មាញខ្ពស់ក្នុងការសម្គាល់សំឡេងនិយាយជាប់ៗគ្នា (Continuous speech)។</td>
+                <td>ក្លាយជាបច្ចេកទេសស្ថិតិស្នូលដ៏ជោគជ័យនិងពេញនិយមបំផុតសម្រាប់ការសម្គាល់សំឡេងទូទៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Artificial Neural Networks (ANN)</span></strong><br>បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត</td>
+                <td>អាចដោះស្រាយកិច្ចការសម្គាល់សំឡេងស្មុគស្មាញ ទិន្នន័យមានសំឡេងរំខាន និងមិនពឹងផ្អែកលើអ្នកនិយាយ (Speaker independence)។</td>
+                <td>មិនអាចពង្រីកទំហំបានល្អសម្រាប់វាក្យសព្ទធំៗ (Large vocabularies) បើធៀបនឹងម៉ូដែល HMM នោះទេ។</td>
+                <td>ផ្តល់ភាពសុក្រឹតខ្ពស់ជាង HMM សម្រាប់ការសម្គាល់សូរសព្ទ (Phoneme) និងវាក្យសព្ទដែលមានទំហំកំណត់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hybrid HMM-ANN</span></strong><br>ប្រព័ន្ធកូនកាត់ HMM និង ANN</td>
+                <td>ទាញយកអត្ថប្រយោជន៍ពីសមត្ថភាពសម្គាល់សូរសព្ទរបស់ ANN និងសមត្ថភាពគ្រប់គ្រងលំដាប់ភាសារបស់ HMM ចូលគ្នា។</td>
+                <td>ទាមទារធនធានគណនា និងភាពស្មុគស្មាញក្នុងការតំឡើងប្រព័ន្ធច្រើនជាងការប្រើម៉ូដែលទោល។</td>
+                <td>ជួយបង្កើនអត្រានៃការសម្គាល់ពាក្យបានយ៉ាងពិតប្រាកដ ជាពិសេសសម្រាប់ពាក្យដាច់ដោយឡែក (Isolated words)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារមិនបានបញ្ជាក់ពីតម្លៃជាទឹកប្រាក់ ឬទំហំផ្នែករឹងជាក់លាក់នាពេលបច្ចុប្បន្ននោះទេ ប៉ុន្តែបានសង្កត់ធ្ងន់យ៉ាងច្បាស់លើតម្រូវការទិន្នន័យសម្រាប់ការហ្វឹកហាត់។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទាមទារទិន្នន័យសំឡេងដែលត្រូវបានកត់ត្រា និងមានចំណារពន្យល់ដោយដៃ (Annotated data/Manual markup) ក្នុងបរិមាណច្រើន និងមានគុណភាពខ្ពស់។</li>
+        
+        <li><strong>Software/Algorithm:</strong> ត្រូវការក្បួនដោះស្រាយសម្រាប់ដំណើរការលក្ខណៈពិសេសដូចជា Viterbi algorithm, Fourier transform, និងបច្ចេកទេស Discriminative training។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារម៉ាស៊ីនកុំព្យូទ័រដែលមានសមត្ថភាពដំណើរការខ្ពស់ (CPU/GPU) ជាពិសេសនៅពេលប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (ANN) និងវាក្យសព្ទខ្នាតធំ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ឯកសារនេះគឺជាការពិនិត្យឡើងវិញនូវប្រវត្តិ និងទ្រឹស្តីទូទៅ ដោយផ្អែកលើការស្រាវជ្រាវនៅបស្ចិមប្រទេស (ដូចជាគម្រោងរបស់ DARPA និង IBM)។ វាមិនមានការបញ្ជាក់ពីការសាកល្បងលើភាសាដែលមានធនធានតិចតួចឡើយ ដែលនេះជាបញ្ហាប្រឈមសម្រាប់កម្ពុជាដែលត្រូវការសំណុំទិន្នន័យភាសាខ្មែរ (Khmer Corpus) ធំៗដើម្បីឲ្យម៉ូដែលទាំងនេះដំណើរការបានល្អ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសនៅក្នុងឯកសារនេះ គឺជាមូលដ្ឋានគ្រឹះដ៏សំខាន់សម្រាប់អ្នកស្រាវជ្រាវនៅកម្ពុជាដើម្បីអភិវឌ្ឍប្រព័ន្ធសម្គាល់សំឡេងភាសាខ្មែរ (Khmer ASR) ឲ្យមានភាពច្បាស់លាស់។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ និងសេវាកម្មអតិថិជន:</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យានេះដើម្បីបង្កើតប្រព័ន្ធឆ្លើយតបស្វ័យប្រវត្តិ (Voicebots/IVR) ជាភាសាខ្មែរ សម្រាប់ក្រុមហ៊ុនទូរស័ព្ទដូចជា Cellcard ឬ Smart ដើម្បីសម្រួលដល់ការផ្តល់ព័ត៌មាន។</li>
+            
+            <li><strong>ប្រព័ន្ធរដ្ឋបាល និងតុលាការនៅកម្ពុជា:</strong> ជួយសម្រួលដល់ការកត់ត្រាកំណត់ហេតុប្រជុំ ឬការសួរចម្លើយ ដោយបំប្លែងសំឡេងនិយាយទៅជាអត្ថបទ (Speech-to-Text) ដោយស្វ័យប្រវត្តិ ចំណេញពេលវេលា។</li>
+            
+            <li><strong>បច្ចេកវិទ្យាអប់រំ និងជំនួយជនពិការ:</strong> ជួយសិស្សានុសិស្ស ឬជនពិការភ្នែកនៅកម្ពុជាក្នុងការប្រើប្រាស់កុំព្យូទ័រ ឬទូរស័ព្ទដៃតាមរយៈការបញ្ជាដោយសំឡេងជាភាសាជាតិដោយមិនចាំបាច់វាយអត្ថបទ។</li>
+            
+        </ul>
+        
+        
+        <p>ការយល់ដឹងពីការប្រើប្រាស់ម៉ូដែលកូនកាត់ HMM/ANN នឹងបើកផ្លូវដល់ការបង្កើតកម្មវិធី AI ឆ្លាតវៃដែលអាចស្តាប់និងយល់ភាសាខ្មែរបានយ៉ាងរលូនក្នុងបរិបទអាជីវកម្មនិងសង្គមជាក់ស្តែង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីដំណើរការសញ្ញាសំឡេង (Speech Signal Processing):</strong> ផ្តើមពីការរៀនបំប្លែងសញ្ញាសំឡេងអូឌីយ៉ូទៅជាទិន្នន័យឌីជីថល ដោយប្រើបច្ចេកទេសទាញយកលក្ខណៈពិសេសដូចជា <span class="en">MFCC (Mel-frequency cepstral coefficients)</span> តាមរយៈភាសាកម្មវិធី <span class="en">Python</span> និងបណ្ណាល័យ <span class="en">Librosa</span>។</li>
+            
+            <li><strong>ស្វែងយល់ពីម៉ូដែល HMM និងស្ថិតិ:</strong> សិក្សាអំពីការកសាងម៉ូដែល <span class="en">Hidden Markov Model</span> និងការប្រើប្រាស់ <span class="en">Viterbi Algorithm</span> ដើម្បីយល់ពីរបៀបដែលប្រព័ន្ធគណនាប្រូបាប៊ីលីតេ និងស្វែងរកពាក្យដែលត្រឹមត្រូវបំផុតពីសញ្ញាសំឡេង។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យភាសាខ្មែរ (Data Annotation):</strong> ចាប់ផ្តើមប្រមូលទិន្នន័យសំឡេងភាសាខ្មែរ និងធ្វើចំណារពន្យល់អត្ថបទ (Annotate) ដោយប្រើប្រាស់ឧបករណ៍ដូចជា <span class="en">Praat</span> សម្រាប់ស្រាវជ្រាវសូរសព្ទ ដើម្បីបង្កើតសំណុំទិន្នន័យដែលមានគុណភាពសម្រាប់ការហ្វឹកហាត់។</li>
+            
+            <li><strong>អភិវឌ្ឍប្រព័ន្ធកូនកាត់ (Hybrid HMM/ANN Development):</strong> អនុវត្តការកសាងប្រព័ន្ធសម្គាល់សំឡេងកម្រិតខ្ពស់ ដោយប្រើប្រាស់ឧបករណ៍ <span class="en">Kaldi Speech Recognition Toolkit</span> ឬ <span class="en">PyTorch</span> ដើម្បីរួមបញ្ចូល HMM ជាមួយ Neural Networks សម្រាប់បង្កើនភាពសុក្រឹតនៃម៉ូដែល។</li>
+            
+            <li><strong>វាយតម្លៃ និងកែលម្អម៉ូដែល (Model Evaluation):</strong> ធ្វើតេស្តម៉ូដែលរបស់អ្នកក្នុងបរិស្ថានពិតប្រាកដ (ឧទាហរណ៍៖ កន្លែងមានសំឡេងរំខាន) និងវាស់វែងប្រសិទ្ធភាពដោយប្រើប្រាស់រង្វាស់ <span class="en">Word Error Rate (WER)</span> រួចធ្វើការកែសម្រួលលក្ខណៈពិសេស (Feature optimization) ជាបន្តបន្ទាប់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model (HMM)</span></td>
+                <td>ម៉ូដែលស្ថិតិដែលប្រើដើម្បីទស្សន៍ទាយលំដាប់លំដោយនៃស្ថានភាពដែលយើងមិនអាចមើលឃើញដោយផ្ទាល់ (Hidden states) ដោយធ្វើការវិភាគទៅលើទិន្នន័យដែលយើងអាចសង្កេតនិងវាស់វែងបាន (Observations) ដូចជាសញ្ញាសំឡេងជាដើម។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាអាកាសធាតុថ្ងៃនេះមានភ្លៀងឬអត់ ដោយគ្រាន់តែសង្កេតមើលថាតើមនុស្សដើរតាមផ្លូវកាន់ឆ័ត្រឬពាក់អាវភ្លៀងដែរឬទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Automatic Speech Recognition (ASR)</span></td>
+                <td>បច្ចេកវិទ្យាដែលអនុញ្ញាតឱ្យប្រព័ន្ធកុំព្យូទ័រអាចស្តាប់ វិភាគ និងបំប្លែងរលកសំឡេងនិយាយរបស់មនុស្សទៅជាទម្រង់អត្ថបទ (Text) ដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាលេខាធិការម្នាក់ដែលអង្គុយស្តាប់អ្នកនិយាយ រួចវាយអត្ថបទតាមពាក្យដែលអ្នកបាននិយាយនោះចូលទៅក្នុងកុំព្យូទ័រភ្លាមៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dynamic Time Warping (DTW)</span></td>
+                <td>ក្បួនដោះស្រាយសម្រាប់វាស់ស្ទង់ភាពស្រដៀងគ្នារវាងសញ្ញាសំឡេងពីរ ដែលមានល្បឿន ឬប្រវែងពេលវេលាខុសគ្នា (ឧទាហរណ៍៖ មនុស្សពីរនាក់និយាយពាក្យដដែល តែម្នាក់និយាយលឿន ម្នាក់ទៀតនិយាយយឺត)។</td>
+                <td>ដូចជាការយកខ្សែយឺតពីរខ្សែមកទាញពន្លូតឲ្យមានប្រវែងស្មើគ្នា ដើម្បីប្រៀបធៀបមើលថាតើវាមានពណ៌និងក្បាច់ដូចគ្នាដែរឬទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cepstral coefficients</span></td>
+                <td>តម្លៃលេខដែលតំណាងឱ្យលក្ខណៈពិសេសនៃរលកសំឡេង (Acoustic features) ដែលត្រូវបានទាញយកតាមរយៈការបំប្លែងគណិតវិទ្យា ដើម្បីឱ្យកុំព្យូទ័រងាយស្រួលប្រៀបធៀបនិងចំណាំទម្រង់នៃសំឡេងនោះ។</td>
+                <td>ដូចជាការដកស្រង់យកតែលក្ខណៈពិសេសនៃស្នាមម្រាមដៃរបស់មនុស្សម្នាក់ៗ ដើម្បីងាយស្រួលក្នុងការផ្ទៀងផ្ទាត់និងស្វែងរកអត្តសញ្ញាណ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi algorithm</span></td>
+                <td>ក្បួនដោះស្រាយគណិតវិទ្យាដែលត្រូវបានប្រើយ៉ាងទូលំទូលាយក្នុងម៉ូដែល HMM សម្រាប់គណនា និងស្វែងរកផ្លូវ ឬលំដាប់លំដោយនៃស្ថានភាពដែលត្រឹមត្រូវនិងមានប្រូបាប៊ីលីតេខ្ពស់បំផុត ពីទិន្នន័យសំឡេង។</td>
+                <td>ដូចជាការប្រើប្រាស់កម្មវិធីផែនទី (Google Maps) ដើម្បីគណនា និងស្វែងរកផ្លូវដែលលឿន និងមានប្រសិទ្ធភាពបំផុតក្នុងការធ្វើដំណើរពីចំណុចមួយទៅចំណុចមួយទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Artificial Neural Networks (ANN)</span></td>
+                <td>ប្រព័ន្ធកុំព្យូទ័រដែលត្រូវបានបង្កើតឡើងដោយយកគំរូតាមបណ្ដាញសរសៃប្រសាទខួរក្បាលរបស់មនុស្ស ដើម្បីរៀនចំណាំទម្រង់ទិន្នន័យ និងដោះស្រាយបញ្ហាស្មុគស្មាញដូចជាការសម្គាល់សំឡេងដែលមិនច្បាស់។</td>
+                <td>ដូចជាការបង្រៀនកូនក្មេងឲ្យស្គាល់សត្វឆ្កែ ដោយបង្ហាញរូបភាពសត្វឆ្កែជាច្រើនដងរហូតដល់ក្មេងនោះចំណាំលក្ខណៈរបស់វាបានដោយខ្លួនឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian distributions</span></td>
+                <td>ការចែកចាយទិន្នន័យតាមបែបស្ថិតិដែលមានរាងដូចជួង (Bell curve) ដែលក្នុងបច្ចេកវិទ្យាសម្គាល់សំឡេង វាត្រូវបានប្រើដើម្បីគណនាប្រូបាប៊ីលីតេនៃលក្ខណៈពិសេសរបស់សំឡេងនៅក្នុងស្ថានភាពនីមួយៗរបស់ម៉ូដែល។</td>
+                <td>ដូចជាការវាស់កម្ពស់សិស្សក្នុងថ្នាក់ ដែលសិស្សភាគច្រើនមានកម្ពស់មធ្យម (នៅកណ្តាលជួង) ហើយសិស្សខ្ពស់ពេកឬទាបពេកមានចំនួនតិចតួចនៅសងខាង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model+theory+and+mathematics+for+speech+recognition" target="_blank" rel="noopener"><span class="en">Hidden Markov Model theory and mathematics for speech recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Feature+extraction+techniques+in+ASR%3A+MFCC+vs+PLP+performance" target="_blank" rel="noopener"><span class="en">Feature extraction techniques in ASR: MFCC vs PLP performance</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Dynamic+Time+Warping+algorithm+applications+in+isolated+word+recognition" target="_blank" rel="noopener"><span class="en">Dynamic Time Warping algorithm applications in isolated word recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hybrid+HMM-ANN+architectures+for+continuous+large+vocabulary+speech+recognition" target="_blank" rel="noopener"><span class="en">Hybrid HMM-ANN architectures for continuous large vocabulary speech recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Viterbi+decoding+algorithm+optimization+in+real-time+speech+processing" target="_blank" rel="noopener"><span class="en">Viterbi decoding algorithm optimization in real-time speech processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=End-to-end+deep+learning+architectures+vs+traditional+HMM+for+automatic+speech+recognition" target="_blank" rel="noopener"><span class="en">End-to-end deep learning architectures vs traditional HMM for automatic speech recognition</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

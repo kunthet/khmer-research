@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ខ្ញុំរៀនពីកំហុស ខ្ញុំអាចជួសជុលវាបាន!៖ រចនាសម្ព័ន្ធ Detector-Corrector សម្រាប់ការកែតម្រូវកំហុស ASR | KhmerResearch.com</title>
+    <meta name="description" content="កំហុសនៃការសម្គាល់សំឡេងដោយស្វ័យប្រវត្តិ (ASR) បណ្តាលឱ្យមានការធ្លាក់ចុះយ៉ាងខ្លាំងនូវដំណើរការយល់ដឹងភាសានិយាយ (SLU) នៅក្នុងប្រព័ន្ធសន្ទនា ខណៈវិធីសាស្ត្រកែតម្រូវប...">
+    
+    <meta name="keywords" content="Automatic Speech Recognition (ASR), Spoken Language Understanding (SLU), Error Correction, Detector-Corrector, Collaborative Training, Word Error Rate (WER), ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/detector-corrector-asr-error-calibration-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/detector-corrector-asr-error-calibration-2023.html">
+    <meta property="og:title" content="ខ្ញុំរៀនពីកំហុស ខ្ញុំអាចជួសជុលវាបាន!៖ រចនាសម្ព័ន្ធ Detector-Corrector សម្រាប់ការកែតម្រូវកំហុស ASR | KhmerResearch.com">
+    <meta property="og:description" content="កំហុសនៃការសម្គាល់សំឡេងដោយស្វ័យប្រវត្តិ (ASR) បណ្តាលឱ្យមានការធ្លាក់ចុះយ៉ាងខ្លាំងនូវដំណើរការយល់ដឹងភាសានិយាយ (SLU) នៅក្នុងប្រព័ន្ធសន្ទនា ខណៈវិធីសាស្ត្រកែតម្រូវបច្ចុប្បន្នមានភាពយឺតយ៉ាវ និងងាយនឹងកំហុស (...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023 INTERSPEECH">
+    
+    <meta property="article:tag" content="Automatic Speech Recognition (ASR)">
+    
+    <meta property="article:tag" content="Spoken Language Understanding (SLU)">
+    
+    <meta property="article:tag" content="Error Correction">
+    
+    <meta property="article:tag" content="Detector-Corrector">
+    
+    <meta property="article:tag" content="Collaborative Training">
+    
+    <meta property="article:tag" content="Word Error Rate (WER)">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ខ្ញុំរៀនពីកំហុស ខ្ញុំអាចជួសជុលវាបាន!៖ រចនាសម្ព័ន្ធ Detector-Corrector សម្រាប់ការកែតម្រូវកំហុស ASR">
+    <meta name="twitter:description" content="កំហុសនៃការសម្គាល់សំឡេងដោយស្វ័យប្រវត្តិ (ASR) បណ្តាលឱ្យមានការធ្លាក់ចុះយ៉ាងខ្លាំងនូវដំណើរការយល់ដឹងភាសានិយាយ (SLU) នៅក្នុងប្រព័ន្ធសន្ទនា ខណៈវិធីសាស្ត្រកែតម្រូវបច្ចុប្បន្នមានភាពយឺតយ៉ាវ និងងាយនឹងកំហុស (...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1781\u17d2\u1789\u17bb\u17c6\u179a\u17c0\u1793\u1796\u17b8\u1780\u17c6\u17a0\u17bb\u179f \u1781\u17d2\u1789\u17bb\u17c6\u17a2\u17b6\u1785\u1787\u17bd\u179f\u1787\u17bb\u179b\u179c\u17b6\u1794\u17b6\u1793!\u17d6 \u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792 Detector-Corrector \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17c2\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17c6\u17a0\u17bb\u179f ASR",
+      "name": "I Learned Error, I Can Fix It! : A Detector-Corrector Structure for ASR Error Calibration",
+      "description": "\u1780\u17c6\u17a0\u17bb\u179f\u1793\u17c3\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 (ASR) \u1794\u178e\u17d2\u178f\u17b6\u179b\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1792\u17d2\u179b\u17b6\u1780\u17cb\u1785\u17bb\u17c7\u1799\u17c9\u17b6\u1784\u1781\u17d2\u179b\u17b6\u17c6\u1784\u1793\u17bc\u179c\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u1797\u17b6\u179f\u17b6\u1793\u17b7\u1799\u17b6\u1799 (SLU) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6 \u1781\u178e\u17c8\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1780\u17c2\u178f\u1798\u17d2\u179a\u17bc\u179c\u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793\u1798\u17b6\u1793\u1797\u17b6\u1796\u1799\u17ba\u178f\u1799\u17c9\u17b6\u179c \u1793\u17b7\u1784\u1784\u17b6\u1799\u1793\u17b9\u1784\u1780\u17c6\u17a0\u17bb\u179f (Overfit) \u1785\u17c6\u1796\u17c4\u17c7\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1787\u17b6\u1780\u17cb\u179b\u17b6\u1780\u17cb\u178e\u17b6\u1798\u17bd\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/detector-corrector-asr-error-calibration-2023.html",
+      "author": [{"@type": "Person", "name": "Heui-Yeen Yeen (Sogang University, Korea)"},{"@type": "Person", "name": "Min-Ju Kim (Sogang University, Korea)"},{"@type": "Person", "name": "Myoung-Wan Koo (Sogang University, Korea)"}],
+      "datePublished": "2023 INTERSPEECH",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "I Learned Error, I Can Fix It! : A Detector-Corrector Structure for ASR Error Calibration",
+        "url": "https://doi.org/10.21437/Interspeech.2023-2475"
+      },
+      "keywords": ["Automatic Speech Recognition (ASR)", "Spoken Language Understanding (SLU)", "Error Correction", "Detector-Corrector", "Collaborative Training", "Word Error Rate (WER)"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1781\u17d2\u1789\u17bb\u17c6\u179a\u17c0\u1793\u1796\u17b8\u1780\u17c6\u17a0\u17bb\u179f \u1781\u17d2\u1789\u17bb\u17c6\u17a2\u17b6\u1785\u1787\u17bd\u179f\u1787\u17bb\u179b\u179c\u17b6\u1794\u17b6\u1793!\u17d6 \u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792 Detector-Corrector \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17c2\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17c6\u17a0\u17bb\u179f ASR",
+          "item": "https://khmerresearch.com/papers/technology/detector-corrector-asr-error-calibration-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ខ្ញុំរៀនពីកំហុស ខ្ញុំអាចជួសជុលវាបាន!៖ រចនាសម្ព័ន្ធ Detect...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> I Learned Error, I Can Fix It! : A Detector-Corrector Structure for ASR Error Calibration<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.21437/Interspeech.2023-2475" target="_blank">doi.org/10.21437/Interspeech.2023-2475</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ខ្ញុំរៀនពីកំហុស ខ្ញុំអាចជួសជុលវាបាន!៖ រចនាសម្ព័ន្ធ Detector-Corrector សម្រាប់ការកែតម្រូវកំហុស ASR</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> I Learned Error, I Can Fix It! : A Detector-Corrector Structure for ASR Error Calibration</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Heui-Yeen Yeen (Sogang University, Korea), Min-Ju Kim (Sogang University, Korea), Myoung-Wan Koo (Sogang University, Korea)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 INTERSPEECH</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> កំហុសនៃការសម្គាល់សំឡេងដោយស្វ័យប្រវត្តិ (ASR) បណ្តាលឱ្យមានការធ្លាក់ចុះយ៉ាងខ្លាំងនូវដំណើរការយល់ដឹងភាសានិយាយ (SLU) នៅក្នុងប្រព័ន្ធសន្ទនា ខណៈវិធីសាស្ត្រកែតម្រូវបច្ចុប្បន្នមានភាពយឺតយ៉ាវ និងងាយនឹងកំហុស (Overfit) ចំពោះម៉ូដែលជាក់លាក់ណាមួយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើឡើងនូវរចនាសម្ព័ន្ធ Detector-Corrector ថ្មីមួយដែលរួមបញ្ចូលគ្នានូវការក្លែងធ្វើកំហុស និងការកែតម្រូវកំហុសដោយជ្រើសរើសទីតាំងដើម្បីកាត់បន្ថយរយៈពេលដំណើរការ និងបង្កើនភាពត្រឹមត្រូវ។
+        
+        <ul>
+            
+            <li>ការរកឃើញកំហុសដោយការបណ្តុះបណ្តាលរួមគ្នា (Collaborative Training Detector) ដែលមានកម្មវិធីបង្កើត (Generator) និងកម្មវិធីរើសអើង (Discriminator) ដោយប្រើទម្រង់ដូចគំរូ ELECTRA។</li>
+            
+            <li>ការកែតម្រូវចន្លោះកំហុសតាមលក្ខខណ្ឌ (Conditional Decoding Corrector) ដោយប្រើគំរូ T5 ដើម្បីជួសជុលតែផ្នែកដែលមានកំហុសដែលត្រូវបានរកឃើញដោយ Detector ប៉ុណ្ណោះ។</li>
+            
+            <li>ការប្រើប្រាស់សំណុំទិន្នន័យ SLURP និង IEMOCAP សម្រាប់ការវាយតម្លៃការចាត់ថ្នាក់អារម្មណ៍ និងគោលបំណង (Intent Classification) នៃប្រព័ន្ធ SLU។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធនេះបានកាត់បន្ថយពេលវេលាអនុវត្ត (Inference Time) មកត្រឹម 0.11 វិនាទី បើប្រៀបធៀបទៅនឹងគំរូ T5 ធម្មតាដែលប្រើពេល 0.15 វិនាទី ដោយកែតម្រូវតែទីតាំងដែលមានកំហុស។</li>
+            
+            <li>ប្រព័ន្ធនេះបានបង្ហាញពីការធ្វើឱ្យប្រសើរឡើងនូវដំណើរការចាត់ថ្នាក់គោលបំណង (Intent Classification) ដោយទទួលបានភាពត្រឹមត្រូវ 77.9% ធៀបនឹង 74.9% នៃលទ្ធផល ASR ដើម។</li>
+            
+            <li>ម៉ូដែលនេះមានភាពរឹងមាំ និងអាចទូទាត់ទូទៅបានយ៉ាងល្អចំពោះទិន្នន័យគំរូ ASR ដែលមិនធ្លាប់បានឃើញពីមុន (Out-of-domain) ដោយរក្សាបាននូវកម្រិត F1 Score ជាមធ្យម 80 សម្រាប់ការរកឃើញកំហុស។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">ASR result (Baseline)</span></strong><br>លទ្ធផលពីកម្មវិធីស្គាល់សំឡេង (Baseline)</td>
+                <td>មិនមានការចំណាយពេលវេលាគណនាបន្ថែម (Inference Time) សម្រាប់ដំណើរការកែតម្រូវកំហុសនោះទេ។</td>
+                <td>មានអត្រាកំហុសខ្ពស់ (WER) ដែលធ្វើឱ្យប៉ះពាល់យ៉ាងខ្លាំងដល់ដំណើរការយល់ដឹងភាសានិយាយ (SLU) នៅផ្នែកខាងចុង។</td>
+                <td>កម្រិតភាពត្រឹមត្រូវ (ACC) ត្រឹមតែ 74.9% សម្រាប់ការចាត់ថ្នាក់គោលបំណង (IC)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">T5 (Seq2Seq)</span></strong><br>គំរូ T5 សម្រាប់ការបកប្រែជាបន្តបន្ទាប់ (Seq2Seq)</td>
+                <td>អាចកាត់បន្ថយអត្រាកំហុសពាក្យ (WER) បានល្អបំផុតធៀបនឹងវិធីសាស្ត្រផ្សេងៗ។</td>
+                <td>ទាមទារពេលវេលាដំណើរការយូរ (0.15s) និងធ្វើឱ្យធ្លាក់ចុះនូវកម្រិតភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់ ដោយសារវាបង្កើតអត្ថបទថ្មីទាំងស្រុងដែលអូសទាញឱ្យបាត់បង់បរិបទដើម។</td>
+                <td>កម្រិត WER ទាបបំផុត 24.5 ប៉ុន្តែកម្រិតភាពត្រឹមត្រូវ (ACC) សម្រាប់ការចាត់ថ្នាក់គោលបំណង (IC) ធ្លាក់មកនៅត្រឹម 73.5%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">ConstDecoder</span></strong><br>គំរូ ConstDecoder ផ្អែកលើការដាក់កម្រិតការឌិកូដ</td>
+                <td>មានល្បឿននៃការអនុវត្ត (Inference Time) លឿនបំផុតត្រឹមតែ 0.01 វិនាទីប៉ុណ្ណោះ។</td>
+                <td>មានដំណើរការធ្លាក់ចុះយ៉ាងខ្លាំង (Overfitting) ជាពិសេសនៅពេលជួបទិន្នន័យ ឬប្រភេទ ASR ដែលវាមិនធ្លាប់បានរៀនពីមុនមក។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) កើនឡើងខ្ពស់ដល់ 48.2 សម្រាប់ការចាត់ថ្នាក់គោលបំណង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Ours (Detector-Corrector)</span></strong><br>គំរូដែលបានស្នើឡើង (Detector-Corrector)</td>
+                <td>ជួយកែតម្រូវបានយ៉ាងល្អនូវកំហុសដែលប៉ះពាល់ដល់អត្ថន័យ ដោយកែប្រែតែផ្នែកដែលខុស ទើបរក្សាបាននូវបរិបទដើម និងប្រើពេលលឿនជាងគំរូ T5 ធម្មតា។</td>
+                <td>អត្រា WER រួមមានការកើនឡើងបន្តិចបើប្រៀបធៀបទៅនឹងគំរូ T5 (Seq2Seq) ប៉ុន្តែមិនប៉ះពាល់ដល់លទ្ធផលចុងក្រោយនោះទេ។</td>
+                <td>ទទួលបានកម្រិតភាពត្រឹមត្រូវ (ACC) ខ្ពស់ជាងគេគឺ 77.9% សម្រាប់ការចាត់ថ្នាក់គោលបំណង និងចាយពេលត្រឹម 0.11s/ទិន្នន័យ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រ (GPU) កម្រិតខ្ពស់ និងទិន្នន័យអត្ថបទ/សំឡេងដែលមានទំហំធំដើម្បីបណ្តុះបណ្តាលម៉ូដែលពីរផ្សេងគ្នា។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារក្រាហ្វិកកាត NVIDIA RTX A5000 24G សម្រាប់ការបណ្តុះបណ្តាលម៉ូដែល (Training)។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យសម្រាប់ធ្វើការបណ្តុះបណ្តាលចំនួន 97,218 ឯកសារ (រួមមាន LibriSpeech, ATIS, SLURP និង IEMOCAP) ។</li>
+        
+        <li><strong>Software & Models:</strong> ប្រើប្រាស់ស្ថាបត្យកម្ម ELECTRA-base សម្រាប់ Detector, T5-base សម្រាប់ Corrector, និងកម្មវិធីស្គាល់សំឡេងផ្សេងៗ (Conformer, Google, Whisper) ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់សំណុំទិន្នន័យភាសាអង់គ្លេស (LibriSpeech, ATIS) ដែលមានរចនាសម្ព័ន្ធវេយ្យាករណ៍ច្បាស់លាស់។ វាមិនបានគិតគូរពីភាសាដែលមានធនធានតិចតួច (Low-resource languages) ឬភាសាដែលមានទម្រង់សូរសព្ទស្មុគស្មាញដូចជាភាសាខ្មែរនោះទេ។ នេះជារឿងសំខាន់សម្រាប់កម្ពុជា ព្រោះការបំប្លែងសំឡេងជាអត្ថបទ (ASR) ជាភាសាខ្មែរនៅមានកម្រិត និងមានកំហុសច្រើន ដែលទាមទារការកែសម្រួលបន្ថែមឱ្យត្រូវនឹងបរិបទក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រកែតម្រូវកំហុស ASR នេះមានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធបញ្ជាដោយសំឡេង និង Chatbot នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (Banking & Finance):</strong> អាចប្រើប្រាស់ដើម្បីកែតម្រូវកំហុស ASR នៅក្នុងកម្មវិធី Mobile Banking ពេលអតិថិជនប្រើសំឡេងបញ្ជាផ្ទេរប្រាក់ ដែលជួយឱ្យប្រព័ន្ធយល់ពីគោលបំណង (Intent Classification) បានត្រឹមត្រូវ ទោះបីជាការបញ្ចេញសំឡេងមិនសូវច្បាស់ក៏ដោយ។</li>
+            
+            <li><strong>សេវាកម្មបម្រើអតិថិជន (Telecom / Call Centers):</strong> ក្រុមហ៊ុនទូរស័ព្ទ ឬក្រុមហ៊ុនផ្តល់សេវាកម្មអ៊ីនធឺណិតអាចប្រើបច្ចេកវិទ្យានេះដើម្បីទាញយកអត្ថន័យ និងការកត់សម្គាល់អារម្មណ៍ (Emotion Recognition) ពីការហៅចូលរបស់អតិថិជន ទោះបីជាប្រព័ន្ធ ASR ចាប់ពាក្យខុសខ្លះក៏ដោយ។</li>
+            
+            <li><strong>ប្រព័ន្ធរដ្ឋាភិបាលឌីជីថល (Digital Government):</strong> ជួយសម្រួលដល់ការបញ្ចូលទិន្នន័យដោយសំឡេងសម្រាប់មន្ត្រីមូលដ្ឋាន ឬប្រជាពលរដ្ឋដែលមិនសូវស្ទាត់ជំនាញវាយអក្សរ ដោយធានាថាប្រព័ន្ធរដ្ឋបាលយល់ពាក្យបញ្ជា ឬព័ត៌មានបានត្រឹមត្រូវតាមរយៈការកែតម្រូវដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអនុវត្តរចនាសម្ព័ន្ធ Detector-Corrector នេះអាចដោះស្រាយចំណុចខ្សោយនៃប្រព័ន្ធ ASR ភាសាខ្មែរនាពេលបច្ចុប្បន្ន ដោយផ្តោតលើការកែតែចំណុចខុស ដើម្បីរក្សាន័យដើមឱ្យបានល្អសម្រាប់ការប្រើប្រាស់ជាក់ស្តែង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃគំរូភាសា (Language Models):</strong> សិក្សាពីស្ថាបត្យកម្ម Transformer ដោយផ្តោតលើគំរូ ELECTRA សម្រាប់ការចាប់កំហុស (Discriminator) និងគំរូ T5 សម្រាប់ការបង្កើតអត្ថបទ (Text Generation) ។</li>
+            
+            <li><strong>រៀបចំទិន្នន័យ ASR ជាភាសាខ្មែរ (Khmer ASR Dataset):</strong> ប្រមូលសំណុំទិន្នន័យសំឡេងខ្មែរ រួចបង្កើតលទ្ធផល ASR ដោយប្រើប្រព័ន្ធដូចជា Google ASR ឬ Whisper ។ បន្ទាប់មក ប្រើក្បួន Levenshtein distance តាមរយៈបណ្ណាល័យ python-Levenshtein ដើម្បីប្រៀបធៀបជាមួយអត្ថបទដើម និងបង្កើតស្លាកកំហុស (Error Labels: 0 សម្រាប់ត្រូវ និង 1 សម្រាប់ខុស)។</li>
+            
+            <li><strong>បណ្តុះបណ្តាលម៉ូដែល Detector-Corrector:</strong> អនុវត្តការបណ្តុះបណ្តាលរួមគ្នា (Collaborative Training) ទៅលើម៉ូដែល Detector ដើម្បីក្លែងធ្វើកំហុស និងចាប់កំហុស រួចប្រើប្រាស់ Corrector ដើម្បីកែតម្រូវតែផ្នែកដែលខុស ដោយប្រើ Hugging Face Transformers និង PyTorch ។</li>
+            
+            <li><strong>វាយតម្លៃប្រព័ន្ធលើការងារជាក់ស្តែង (Downstream Evaluation):</strong> ធ្វើតេស្តម៉ូដែលដោយបញ្ចូលវាទៅក្នុងប្រព័ន្ធកាត់ន័យគោលបំណង (Intent Classification) ឧទាហរណ៍ដូចជាប្រព័ន្ធ Rasa ចំពោះ Chatbot ដើម្បីវាស់ស្ទង់ភាពត្រឹមត្រូវនៃកម្រិតភាសា (Accuracy) ធៀបនឹងលទ្ធផល ASR ដើម។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Automatic Speech Recognition (ASR)</span></td>
+                <td>ប្រព័ន្ធកុំព្យូទ័រដែលបំប្លែងសំឡេងនិយាយរបស់មនុស្សទៅជាអត្ថបទដោយស្វ័យប្រវត្តិ ដើម្បីឱ្យម៉ាស៊ីនអាចយកទៅដំណើរការបន្តបាន ដូចជាការបកប្រែ ឬវិភាគអត្ថន័យ។</td>
+                <td>ដូចជាលេខាធិការដែលអង្គុយស្តាប់ចៅហ្វាយនិយាយ រួចវាយអត្ថបទចូលកុំព្យូទ័រតាមពាក្យនីមួយៗអញ្ចឹងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spoken language understanding (SLU)</span></td>
+                <td>ដំណើរការដែលប្រព័ន្ធកុំព្យូទ័រព្យាយាមយល់ពីអត្ថន័យ និងគោលបំណងពិតប្រាកដនៃពាក្យសម្តីដែលមនុស្សនិយាយ បន្ទាប់ពីវាត្រូវបានបំប្លែងទៅជាអត្ថបទរួចរាល់។</td>
+                <td>ដូចជាការស្តាប់មិត្តភក្តិប្រាប់រឿងរ៉ាវ រួចយើងចាប់បានថាតើគេចង់បានអ្វី ឬមានអារម្មណ៍បែបណាពិតប្រាកដចេញពីពាក្យសម្តីនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Collaborative training</span></td>
+                <td>វិធីសាស្ត្របណ្តុះបណ្តាលម៉ូដែលបញ្ញាសិប្បនិម្មិតពីរក្នុងពេលតែមួយ ដោយមួយមានតួនាទីបង្កើតកំហុស (Generator) និងមួយទៀតមានតួនាទីចាប់កំហុសនោះ (Discriminator) ដើម្បីឱ្យពួកវាទាំងពីរកាន់តែមានសមត្ថភាពខ្ពស់។</td>
+                <td>ដូចជាកូនសិស្សម្នាក់ព្យាយាមលាក់កំហុសក្នុងលំហាត់ ឯគ្រូបង្រៀនម្នាក់ទៀតព្យាយាមរកកំហុសនោះ ដែលធ្វើឱ្យពួកគេទាំងពីរពូកែរៀងៗខ្លួន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Error Rate (WER)</span></td>
+                <td>រង្វាស់សម្រាប់វាស់ស្ទង់ភាពត្រឹមត្រូវនៃប្រព័ន្ធបំប្លែងសំឡេងទៅជាអត្ថបទ ដោយគណនាភាគរយនៃពាក្យដែលប្រព័ន្ធស្តាប់ខុស បាត់ ឬបន្ថែមលើសធៀបនឹងអត្ថបទពិតប្រាកដ។</td>
+                <td>ដូចជាការកាត់ពិន្ទុសិស្សនៅក្នុងការប្រឡងសរសេរតាមអាន ដោយរាប់ចំនួនពាក្យដែលសរសេរខុស បាត់ ឬលើសធៀបនឹងអត្ថបទដើម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Conditional decoding</span></td>
+                <td>វិធីសាស្ត្រក្នុងការបង្កើតអត្ថបទថ្មីដោយម៉ូដែល AI ដែលវាត្រូវផ្អែកលើលក្ខខណ្ឌ ឬផ្នែកខ្លះនៃអត្ថបទចាស់ ដើម្បីកែប្រែតែចំណុចដែលតម្រូវឱ្យកែដោយមិនប៉ះពាល់ផ្នែកផ្សេងទៀតដែលត្រឹមត្រូវស្រាប់។</td>
+                <td>ដូចជាជាងជួសជុលសម្លៀកបំពាក់ដែលកាត់ និងដេរតែត្រង់កន្លែងរហែក ដោយមិនប៉ះពាល់ដល់សាច់ក្រណាត់ដែលនៅល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Masked language modeling (MLM)</span></td>
+                <td>បច្ចេកទេសបង្រៀន AI ឱ្យយល់ពីបរិបទភាសា ដោយលាក់ពាក្យមួយចំនួននៅក្នុងប្រយោគ ហើយតម្រូវឱ្យ AI ទាយរកពាក្យដែលបាត់នោះដោយផ្អែកលើពាក្យនៅជុំវិញវា។</td>
+                <td>ដូចជាល្បែងបំពេញចន្លោះនៅក្នុងប្រយោគ ដែលយើងត្រូវទាយពាក្យដែលត្រឹមត្រូវយកមកបំពេញតាមន័យនៃប្រយោគទាំងមូល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Levenshtein distance</span></td>
+                <td>រូបមន្តគណិតវិទ្យាសម្រាប់វាស់ភាពខុសគ្នារវាងពាក្យ ឬប្រយោគពីរ ដោយរាប់ចំនួនជំហានអប្បបរមាដែលត្រូវលុប បន្ថែម ឬជំនួសអក្សរ ដើម្បីបំប្លែងពាក្យមួយទៅជាពាក្យមួយទៀត។</td>
+                <td>ដូចជាការរាប់ចំនួនជំហាននៃការរុះរើ និងផ្គុំតួអក្សរឡេហ្គោ (Lego) ដើម្បីប្តូរពីរូបរាងមួយទៅជារូបរាងមួយទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Intent classification</span></td>
+                <td>ដំណើរការដែលប្រព័ន្ធ AI វិភាគអត្ថបទ ឬសំឡេងបញ្ជា ដើម្បីចាត់ថ្នាក់ថាតើអ្នកប្រើប្រាស់មានគោលបំណងចង់ឱ្យប្រព័ន្ធធ្វើអ្វីឱ្យប្រាកដ (ឧទាហរណ៍៖ សួរម៉ោង, បញ្ជាបិទភ្លើង ឬកក់សំបុត្រ)។</td>
+                <td>ដូចជាអ្នករត់តុក្នុងភោជនីយដ្ឋានស្តាប់ការរៀបរាប់របស់ភ្ញៀវ រួចកត់ត្រាចូលក្នុងបញ្ជីយ៉ាងខ្លីថាភ្ញៀវចង់កម្ម៉ង់ម្ហូបអ្វីពិតប្រាកដ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=automatic+speech+recognition%22+%22error+correction%22+%22collaborative+training" target="_blank" rel="noopener"><span class="en">automatic speech recognition" "error correction" "collaborative training</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=spoken+language+understanding%22+%22ASR+robustness%22+pipeline" target="_blank" rel="noopener"><span class="en">spoken language understanding" "ASR robustness" pipeline</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=conditional+decoding%22+%22text+editing%22+seq2seq" target="_blank" rel="noopener"><span class="en">conditional decoding" "text editing" seq2seq</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ELECTRA+architecture%22+%22generator+discriminator%22+%22error+simulation" target="_blank" rel="noopener"><span class="en">ELECTRA architecture" "generator discriminator" "error simulation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=span+masked+language+modeling%22+T5+%22error+calibration" target="_blank" rel="noopener"><span class="en">span masked language modeling" T5 "error calibration</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=intent+classification%22+%22emotion+recognition%22+%22ASR+hypotheses" target="_blank" rel="noopener"><span class="en">intent classification" "emotion recognition" "ASR hypotheses</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

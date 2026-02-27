@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវាស់ស្ទង់ទម្រង់ដីរដិបរដុប | KhmerResearch.com</title>
+    <meta name="description" content="ការសិក្សានេះផ្តោតលើការវាស់ស្ទង់ទម្រង់ផ្លូវរដិបរដុប និងការវិភាគថាមវន្តរបស់យានយន្ត ដើម្បីធានាបាននូវភាពត្រឹមត្រូវនៃម៉ូដែលក្លែងធ្វើ (Simulation) ធៀបនឹងការបើកបរជាក់ស្តែង។">
+    
+    <meta name="keywords" content="Rough Road Profiling, Vehicle Dynamics, Vertical Acceleration, Fast Fourier Transform (FFT), International Roughness Index (IRI), MSC ADAMS Simulation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/profiling-of-rough-terrain-2008.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/profiling-of-rough-terrain-2008.html">
+    <meta property="og:title" content="ការវាស់ស្ទង់ទម្រង់ដីរដិបរដុប | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះផ្តោតលើការវាស់ស្ទង់ទម្រង់ផ្លូវរដិបរដុប និងការវិភាគថាមវន្តរបស់យានយន្ត ដើម្បីធានាបាននូវភាពត្រឹមត្រូវនៃម៉ូដែលក្លែងធ្វើ (Simulation) ធៀបនឹងការបើកបរជាក់ស្តែង។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2008">
+    
+    <meta property="article:tag" content="Rough Road Profiling">
+    
+    <meta property="article:tag" content="Vehicle Dynamics">
+    
+    <meta property="article:tag" content="Vertical Acceleration">
+    
+    <meta property="article:tag" content="Fast Fourier Transform (FFT)">
+    
+    <meta property="article:tag" content="International Roughness Index (IRI)">
+    
+    <meta property="article:tag" content="MSC ADAMS Simulation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវាស់ស្ទង់ទម្រង់ដីរដិបរដុប">
+    <meta name="twitter:description" content="ការសិក្សានេះផ្តោតលើការវាស់ស្ទង់ទម្រង់ផ្លូវរដិបរដុប និងការវិភាគថាមវន្តរបស់យានយន្ត ដើម្បីធានាបាននូវភាពត្រឹមត្រូវនៃម៉ូដែលក្លែងធ្វើ (Simulation) ធៀបនឹងការបើកបរជាក់ស្តែង។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179f\u17d2\u1791\u1784\u17cb\u1791\u1798\u17d2\u179a\u1784\u17cb\u178a\u17b8\u179a\u178a\u17b7\u1794\u179a\u178a\u17bb\u1794",
+      "name": "Profiling of rough terrain",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179f\u17d2\u1791\u1784\u17cb\u1791\u1798\u17d2\u179a\u1784\u17cb\u1795\u17d2\u179b\u17bc\u179c\u179a\u178a\u17b7\u1794\u179a\u178a\u17bb\u1794 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1790\u17b6\u1798\u179c\u1793\u17d2\u178f\u179a\u1794\u179f\u17cb\u1799\u17b6\u1793\u1799\u1793\u17d2\u178f \u178a\u17be\u1798\u17d2\u1794\u17b8\u1792\u17b6\u1793\u17b6\u1794\u17b6\u1793\u1793\u17bc\u179c\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1780\u17d2\u179b\u17c2\u1784\u1792\u17d2\u179c\u17be (Simulation) \u1792\u17c0\u1794\u1793\u17b9\u1784\u1780\u17b6\u179a\u1794\u17be\u1780\u1794\u179a\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/profiling-of-rough-terrain-2008.html",
+      "author": [{"@type": "Person", "name": "Unknown (University of Pretoria)"}],
+      "datePublished": "2008",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Profiling of rough terrain",
+        "url": "N/A"
+      },
+      "keywords": ["Rough Road Profiling", "Vehicle Dynamics", "Vertical Acceleration", "Fast Fourier Transform (FFT)", "International Roughness Index (IRI)", "MSC ADAMS Simulation"],
+      "about": "Automotive Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179f\u17d2\u1791\u1784\u17cb\u1791\u1798\u17d2\u179a\u1784\u17cb\u178a\u17b8\u179a\u178a\u17b7\u1794\u179a\u178a\u17bb\u1794",
+          "item": "https://khmerresearch.com/papers/technology/profiling-of-rough-terrain-2008.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការវាស់ស្ទង់ទម្រង់ដីរដិបរដុប</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Profiling of rough terrain<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវាស់ស្ទង់ទម្រង់ដីរដិបរដុប</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Profiling of rough terrain</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Unknown (University of Pretoria)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2008</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Automotive Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះផ្តោតលើការវាស់ស្ទង់ទម្រង់ផ្លូវរដិបរដុប និងការវិភាគថាមវន្តរបស់យានយន្ត ដើម្បីធានាបាននូវភាពត្រឹមត្រូវនៃម៉ូដែលក្លែងធ្វើ (Simulation) ធៀបនឹងការបើកបរជាក់ស្តែង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះប្រើប្រាស់ការប្រមូលទិន្នន័យពីឧបករណ៍ចាប់សញ្ញា និងម៉ាស៊ីនថត រួមផ្សំជាមួយនឹងការក្លែងធ្វើកុំព្យូទ័រ ដើម្បីប្រៀបធៀបលទ្ធផល។
+        
+        <ul>
+            
+            <li>ការវាស់ស្ទង់សន្ទស្សន៍ភាពរដិបរដុបអន្តរជាតិ (International Roughness Index - IRI) លើប្រភេទផ្លូវផ្សេងៗ។</li>
+            
+            <li>ការប្រៀបធៀបការបង្កើនល្បឿនបញ្ឈរ (Vertical Accelerations) រវាងម៉ូដែលក្លែងធ្វើ និងរថយន្ត Land Rover ជាក់ស្តែងក្នុងល្បឿនពី ១៥ ទៅ ៧៣ គ.ម/ម៉។</li>
+            
+            <li>ការវិភាគបំប្លែងហ្វូរីយ៉េលឿន (Fast Fourier Transforms - FFT) និងការប្រើប្រាស់តម្រងកម្រិតទាប 8 Hz លើយោលលំយោលយានយន្ត។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ទិន្នន័យបង្ហាញពីទំនាក់ទំនងយ៉ាងជិតស្និទ្ធរវាងលទ្ធផលក្លែងធ្វើ (Simulation) និងទិន្នន័យតេស្តជាក់ស្តែងរបស់ Land Rover នៅគ្រប់កម្រិតល្បឿន។</li>
+            
+            <li>ក្រាហ្វិកសន្ទស្សន៍ IRI បង្ហាញយ៉ាងច្បាស់ពីភាពខុសគ្នានៃកម្រិតរដិបរដុបលើផ្លូវសាកល្បងនីមួយៗ ដូចជាផ្លូវក្រាលថ្ម (Belgian paving) និងផ្លូវជង្ហុក (Pothole Track)។</li>
+            
+            <li>ការប្រើប្រាស់តម្រង Low Pass 8 Hz ជួយកាត់បន្ថយរំញ័ររំខាន ដែលធ្វើឱ្យការប្រៀបធៀបទិន្នន័យ FFT សម្រាប់រំញ័រតួខាងក្រោយរថយន្តកាន់តែមានភាពច្បាស់លាស់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Physical Vehicle Testing (Land Rover Data)</span></strong><br>ការធ្វើតេស្តយានយន្តជាក់ស្តែង (ទិន្នន័យ Land Rover)</td>
+                <td>ផ្តល់ទិន្នន័យពិតប្រាកដ និងជាក់ស្តែងពីប្រតិកម្មរបស់យានយន្តចំពោះស្ថានភាពផ្លូវរដិបរដុប។</td>
+                <td>ចំណាយថវិកាច្រើន ត្រូវការពេលវេលាយូរក្នុងការរៀបចំឧបករណ៍ និងមានហានិភ័យនៅពេលបើកបរក្នុងល្បឿនលឿនលើផ្លូវលំបាក។</td>
+                <td>ប្រមូលបានទិន្នន័យសន្ទុះបញ្ឈរ (Vertical Accelerations) និងលំយោលរំញ័រជាក់ស្តែងក្នុងល្បឿនពី 15 ដល់ 73 km/h។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Computer Simulation (MSC ADAMS)</span></strong><br>ការក្លែងធ្វើតាមកុំព្យូទ័រ (ប្រើកម្មវិធី MSC ADAMS)</td>
+                <td>ចំណាយតិច មានសុវត្ថិភាពខ្ពស់ និងងាយស្រួលផ្លាស់ប្តូរប៉ារ៉ាម៉ែត្រម៉ាស៊ីន ឬស្ថានភាពផ្លូវដើម្បីធ្វើតេស្តសេណារីយ៉ូផ្សេងៗ។</td>
+                <td>ភាពត្រឹមត្រូវនៃលទ្ធផលគឺពឹងផ្អែកទាំងស្រុងទៅលើការបញ្ចូលទិន្នន័យទម្រង់ផ្លូវ (Road Definition File) និងការកំណត់ម៉ូដែលយានយន្តឱ្យបានច្បាស់លាស់។</td>
+                <td>ផ្តល់លទ្ធផលក្លែងធ្វើ (FFT និងសន្ទុះ) ដែលមានទំនាក់ទំនងយ៉ាងជិតស្និទ្ធជាមួយទិន្នន័យជាក់ស្តែង ក្រោយពេលឆ្លងកាត់តម្រង 8 Hz Low Pass Filter។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារការវិនិយោគខ្ពស់លើឧបករណ៍វាស់ស្ទង់ជាក់ស្តែង កម្មវិធីកុំព្យូទ័រកម្រិតខ្ពស់ និងអ្នកជំនាញដើម្បីប្រមូលទិន្នន័យប្រកបដោយភាពសុក្រឹត។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> យានយន្តសាកល្បង (Land Rover), ឧបករណ៍ចាប់សញ្ញា Crossbow Tilt Sensor, S80-MH-5 Laser Distance Sensor និងកាមេរ៉ាឌីជីថល (Sony, Pentax K10D)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី PhotoModeler សម្រាប់កាមេរ៉ា និង MSC ADAMS សម្រាប់ការបង្កើតម៉ូដែលក្លែងធ្វើថាមវន្តយានយន្ត (Vehicle Dynamics Simulation)។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យទម្រង់ផ្លូវ 3D (Road Mesh) និងទិន្នន័យសន្ទស្សន៍ភាពរដិបរដុបអន្តរជាតិ (IRI) នៃប្រភេទផ្លូវផ្សេងៗគ្នា។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកវិស្វកម្មមេកានិក ថាមវន្តយានយន្ត ការវិភាគរំញ័រ (FFT) និងការសរសេរកូដសម្រាប់តម្រងសញ្ញា (Signal Filtering)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានអនុវត្តនៅទីតាំងសាកល្បង Gerotek ក្នុងប្រទេសអាហ្រ្វិកខាងត្បូង ដោយប្រើប្រាស់រថយន្ត Land Rover និងប្រភេទផ្លូវជាក់លាក់ (ដូចជា Belgian paving ជាដើម)។ លក្ខខណ្ឌផ្លូវនៅប្រទេសកម្ពុជាអាចមានលក្ខណៈដីក្រហម ល្បាយថ្ម និងជង្ហុកដែលខុសប្លែកពីនេះ ដែលទាមទារឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែមដើម្បីកែសម្រួលម៉ូដែលក្លែងធ្វើឱ្យបានត្រឹមត្រូវ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យដើមធ្វើឡើងនៅបរទេសក៏ដោយ វិធីសាស្ត្រនៃការវាស់ស្ទង់ទម្រង់ផ្លូវ និងការក្លែងធ្វើនេះមានសារៈសំខាន់ និងអាចអនុវត្តបានយ៉ាងល្អសម្រាប់ប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ក្រសួងសាធារណការ និងដឹកជញ្ជូន (MPWT):</strong> អាចប្រើប្រាស់សន្ទស្សន៍ IRI ដើម្បីវាយតម្លៃគុណភាពផ្លូវជាតិ និងផ្លូវលំនៅតាមបណ្តាខេត្ត ដើម្បីរៀបចំអាទិភាពក្នុងគម្រោងជួសជុល និងថែទាំហេដ្ឋារចនាសម្ព័ន្ធ។</li>
+            
+            <li><strong>រោងចក្រដំឡើងយានយន្តក្នុងស្រុក (ឧ. រោងចក្រ Ford នៅខេត្តពោធិ៍សាត់):</strong> អាចប្រើប្រាស់ការក្លែងធ្វើ (Simulation) នេះដើម្បីធ្វើតេស្ត និងកែសម្រួលប្រព័ន្ធបូមឡាន (Suspension) ឱ្យកាន់តែស័ក្តិសម និងធន់នឹងស្ថានភាពផ្លូវនៅកម្ពុជា។</li>
+            
+            <li><strong>វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា (ITC):</strong> ផ្តល់ជាមូលដ្ឋានស្រាវជ្រាវដ៏ល្អសម្រាប់និស្សិតវិស្វកម្មមេកានិក ក្នុងការសិក្សាអំពីថាមវន្តយានយន្ត និងការវិភាគរំញ័រដោយប្រើប្រាស់កុំព្យូទ័រ។</li>
+            
+        </ul>
+        
+        
+        <p>ការរួមបញ្ចូលគ្នារវាងការវាស់ស្ទង់ជាក់ស្តែងដោយប្រើសេនស័រ និងការក្លែងធ្វើតាមកុំព្យូទ័រ នឹងជួយលើកកម្ពស់ស្តង់ដារហេដ្ឋារចនាសម្ព័ន្ធផ្លូវថ្នល់ និងការរចនាយានយន្តនៅកម្ពុជាប្រកបដោយប្រសិទ្ធភាពខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃថាមវន្តយានយន្ត:</strong> ស្វែងយល់ពីរបៀបដែលយានយន្តឆ្លើយតបនឹងស្ថានភាពផ្លូវ ដោយផ្តោតលើ Vehicle Suspension, Dynamics និងរំញ័រម៉េកានិក (Mechanical Vibrations)។</li>
+            
+            <li><strong>ស្វែងយល់ពីការវាស់ស្ទង់ទម្រង់ផ្លូវ (Road Profiling):</strong> សិក្សាអំពីស្តង់ដារ International Roughness Index (IRI) និងរបៀបប្រើប្រាស់សេនស័រ (ដូចជា Laser Distance Sensor ឬ Accelerometer) ដើម្បីប្រមូលទិន្នន័យផ្លូវ។</li>
+            
+            <li><strong>អនុវត្តកម្មវិធីក្លែងធ្វើកុំព្យូទ័រ:</strong> ចាប់ផ្តើមរៀនប្រើប្រាស់កម្មវិធីកុំព្យូទ័រដូចជា MSC ADAMS ឬ MATLAB/Simulink ដើម្បីបង្កើតម៉ូដែលយានយន្តសាមញ្ញ 3D និងចេះបញ្ចូលឯកសារ Road Definition File។</li>
+            
+            <li><strong>អនុវត្តការវិភាគទិន្នន័យ និងតម្រងសញ្ញា (Signal Processing):</strong> រៀនសរសេរកូដនៅក្នុង MATLAB ឬ Python (ប្រើប្រាស់បណ្ណាល័យ SciPy) ដើម្បីធ្វើការវិភាគ Fast Fourier Transform (FFT) និងអនុវត្ត Low Pass Filter (ឧទាហរណ៍ 8 Hz) លើទិន្នន័យឆៅ។</li>
+            
+            <li><strong>អនុវត្តគម្រោងស្រាវជ្រាវខ្នាតតូចជាក់ស្តែង:</strong> ចុះវាស់ស្ទង់សន្ទុះរំញ័រ (Vertical Acceleration) លើផ្លូវរដិបរដុបណាមួយនៅកម្ពុជាដោយប្រើ Smartphone Sensors (កម្មវិធីវាស់ Accelerometer) រួចយកទិន្នន័យនោះមកវិភាគប្រៀបធៀបជាមួយម៉ូដែលក្លែងធ្វើក្នុងកុំព្យូទ័រ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Fast Fourier Transform (FFT)</span></td>
+                <td>ជាក្បួនគណិតវិទ្យាដែលប្រើសម្រាប់បំប្លែងសញ្ញា (ដូចជារំញ័រយានយន្ត) ពីដែនពេលវេលា (Time Domain) ទៅជាដែនប្រេកង់ (Frequency Domain) ដើម្បីងាយស្រួលវិភាគថាតើរំញ័រខ្លាំងបំផុតស្ថិតនៅកម្រិតប្រេកង់ណា។</td>
+                <td>ដូចជាការបំបែកសំឡេងភ្លេងចម្រុះគ្នា ទៅជាសំឡេងឧបករណ៍តន្ត្រីនីមួយៗដាច់ដោយឡែកពីគ្នា ដើម្បីងាយស្រួលស្តាប់ថាតើឧបករណ៍ណាលេងខ្លាំងជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">International Roughness Index (IRI)</span></td>
+                <td>ជាសន្ទស្សន៍ស្តង់ដារអន្តរជាតិដែលប្រើសម្រាប់វាស់ស្ទង់កម្រិតរដិបរដុបនៃផ្ទៃថ្នល់ ដោយគិតជាម៉ែត្រក្នុងមួយគីឡូម៉ែត្រ (m/km) ផ្អែកលើការក្លែងធ្វើប្រតិកម្មរបស់រថយន្តនៅពេលបើកបរលើផ្លូវនោះ។</td>
+                <td>ជាពិន្ទុដែលប្រាប់យើងថាផ្លូវមួយមានសភាពលំបាក ឬរលាក់ប៉ុនណា ដូចជាការដាក់ពិន្ទុពី ១ ដល់ ១០ លើគុណភាពផ្លូវជាតិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Low Pass Filter</span></td>
+                <td>ជាតម្រងសញ្ញាឌីជីថលដែលអនុញ្ញាតឱ្យតែប្រេកង់ទាប (ឧទាហរណ៍ ក្រោម 8 Hz) ឆ្លងកាត់បាន ខណៈពេលដែលវាកាត់ចោលនូវប្រេកង់ខ្ពស់ៗ ដែលច្រើនតែជាសញ្ញារំខាន (Noise) កើតចេញពីម៉ាស៊ីន ឬបរិស្ថានខាងក្រៅ។</td>
+                <td>ដូចជាការប្រើតម្រងកាហ្វេដែលអនុញ្ញាតឱ្យតែទឹកកាហ្វេហូរឆ្លងកាត់ តែទប់កាកកាហ្វេ (សញ្ញារំខាន) មិនឱ្យធ្លាក់ចូលទៅក្នុងកែវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Power spectral density</span></td>
+                <td>ជារង្វាស់ដែលបង្ហាញពីរបៀបដែលថាមពលនៃសញ្ញាមួយ (ឧទាហរណ៍ ទម្រង់ផ្លូវ) ត្រូវបានចែកចាយទៅតាមប្រេកង់ផ្សេងៗគ្នា ដែលជួយវិស្វករក្នុងការវិភាគពីលក្ខណៈនៃភាពរដិបរដុបរបស់ផ្លូវទៅលើគ្រឿងយន្ត។</td>
+                <td>ដូចជាការមើលក្រាហ្វដែលបង្ហាញយ៉ាងច្បាស់ថា តើកម្រិតរលាក់ធំៗ ឬរលាក់តូចៗណាខ្លះដែលផ្តល់កម្លាំងរង្គើខ្លាំងជាងគេទៅលើឡាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vertical acceleration</span></td>
+                <td>គឺជារង្វាស់នៃសន្ទុះ ឬការផ្លាស់ប្តូរល្បឿនក្នុងទិសដៅបញ្ឈរ (ឡើងលើនិងចុះក្រោម ឬអ័ក្ស Z) របស់តួឡាននៅពេលវាបើកបរឆ្លងកាត់ផ្លូវរដិបរដុប។</td>
+                <td>គឺជាទំហំនៃកម្លាំងដែលធ្វើឱ្យយើងលោតប្រទាញឡើងលើនិងធ្លាក់ចុះមកវិញ នៅពេលអង្គុយក្នុងឡានហើយជិះកាត់ជង្ហុក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Profilometer</span></td>
+                <td>ជាឧបករណ៍បច្ចេកទេស (ដូចជាឡាស៊ែរ ឬកាមេរ៉ាស្កេន) ដែលប្រើប្រាស់សម្រាប់វាស់វែង និងកត់ត្រាពីកម្ពស់ ទម្រង់ និងភាពរដិបរដុបនៃផ្ទៃផ្លូវយ៉ាងសុក្រឹតនៅពេលរថយន្តកំពុងបើកបរ។</td>
+                <td>ដូចជាបន្ទាត់វៃឆ្លាតមួយដែលអូសកាត់តាមដងផ្លូវ ដើម្បីគូសចម្លងរូបរាងលម្អិតនៃជង្ហុកនិងរលាក់ទាំងអស់មកបង្ហាញលើផ្ទៃកុំព្យូទ័រ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=International+Roughness+Index%22+measurement+calculation+methodology+vehicle+response" target="_blank" rel="noopener"><span class="en">International Roughness Index" measurement calculation methodology vehicle response</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=vehicle+dynamics+simulation+%22MSC+ADAMS%22+suspension+optimization+rough+terrain" target="_blank" rel="noopener"><span class="en">vehicle dynamics simulation "MSC ADAMS" suspension optimization rough terrain</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Fast+Fourier+Transform%22+vibration+analysis+vehicle+body+vertical+acceleration" target="_blank" rel="noopener"><span class="en">Fast Fourier Transform" vibration analysis vehicle body vertical acceleration</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+road+profile+estimation+from+vehicle+response+sensors" target="_blank" rel="noopener"><span class="en">machine learning road profile estimation from vehicle response sensors</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=3D+road+surface+scanning+%22stereo+vision%22+OR+LiDAR+terrain+modeling" target="_blank" rel="noopener"><span class="en">3D road surface scanning "stereo vision" OR LiDAR terrain modeling</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

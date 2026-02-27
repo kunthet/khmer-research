@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការអភិវឌ្ឍប្រព័ន្ធសម្គាល់សំឡេង (Speech Recognition) សម្រាប់គ្រាមភាសាក្នុងស្រុករបស់ប្រទេសនីហ្សេរីយ៉ា ជាពិសេសការបកប្រែពាក្យនិយាយ...">
+    
+    <meta name="keywords" content="Deep Reinforcement Learning, Hidden Markov Model, Speech Recognition, LSTM, MFCC, Natural Language Processing, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+    <meta property="og:title" content="ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការអភិវឌ្ឍប្រព័ន្ធសម្គាល់សំឡេង (Speech Recognition) សម្រាប់គ្រាមភាសាក្នុងស្រុករបស់ប្រទេសនីហ្សេរីយ៉ា ជាពិសេសការបកប្រែពាក្យនិយាយជាភាសា Hausa, Igbo និង Yoruba ទៅជាអត្ថបទ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023, Journal of Technology & Innovation (JTIN)">
+    
+    <meta property="article:tag" content="Deep Reinforcement Learning">
+    
+    <meta property="article:tag" content="Hidden Markov Model">
+    
+    <meta property="article:tag" content="Speech Recognition">
+    
+    <meta property="article:tag" content="LSTM">
+    
+    <meta property="article:tag" content="MFCC">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការអភិវឌ្ឍប្រព័ន្ធសម្គាល់សំឡេង (Speech Recognition) សម្រាប់គ្រាមភាសាក្នុងស្រុករបស់ប្រទេសនីហ្សេរីយ៉ា ជាពិសេសការបកប្រែពាក្យនិយាយជាភាសា Hausa, Igbo និង Yoruba ទៅជាអត្ថបទ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u1787\u17b6\u1798\u17bd\u1799\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784",
+      "name": "DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784 (Speech Recognition) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1782\u17d2\u179a\u17b6\u1798\u1797\u17b6\u179f\u17b6\u1780\u17d2\u1793\u17bb\u1784\u179f\u17d2\u179a\u17bb\u1780\u179a\u1794\u179f\u17cb\u1794\u17d2\u179a\u1791\u17c1\u179f\u1793\u17b8\u17a0\u17d2\u179f\u17c1\u179a\u17b8\u1799\u17c9\u17b6 \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1780\u17b6\u179a\u1794\u1780\u1794\u17d2\u179a\u17c2\u1796\u17b6\u1780\u17d2\u1799\u1793\u17b7\u1799\u17b6\u1799\u1787\u17b6\u1797\u17b6\u179f\u17b6 Hausa, Igbo \u1793\u17b7\u1784 Yoruba \u1791\u17c5\u1787\u17b6\u17a2\u178f\u17d2\u1790\u1794\u1791\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/deep-rl-hmm-speech-recognition-2023.html",
+      "author": [{"@type": "Person", "name": "Samson Isaac, Department of Computer Science, Kaduna State University, Kaduna, Nigeria"},{"@type": "Person", "name": "Khalid Haruna, Department of Computer Science, Kaduna State University, Kaduna, Nigeria"},{"@type": "Person", "name": "Muhammad Aminu Ahmad, Department of Computer Science, Kaduna State University, Kaduna, Nigeria"},{"@type": "Person", "name": "Rabi Mustapha, Department of Computer Science, Kaduna State University, Kaduna, Nigeria"}],
+      "datePublished": "2023, Journal of Technology \u0026 Innovation (JTIN)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION",
+        "url": "http://doi.org/10.26480/jtin.01.2023.01.05"
+      },
+      "keywords": ["Deep Reinforcement Learning", "Hidden Markov Model", "Speech Recognition", "LSTM", "MFCC", "Natural Language Processing"],
+      "about": "Computer Science, Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u1787\u17b6\u1798\u17bd\u1799\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784",
+          "item": "https://khmerresearch.com/papers/technology/deep-rl-hmm-speech-recognition-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការស...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION<br>
+        
+        <strong>Source:</strong> <a href="http://doi.org/10.26480/jtin.01.2023.01.05" target="_blank">doi.org/10.26480/jtin.01.2023.01.05</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Samson Isaac, Department of Computer Science, Kaduna State University, Kaduna, Nigeria, Khalid Haruna, Department of Computer Science, Kaduna State University, Kaduna, Nigeria, Muhammad Aminu Ahmad, Department of Computer Science, Kaduna State University, Kaduna, Nigeria, Rabi Mustapha, Department of Computer Science, Kaduna State University, Kaduna, Nigeria</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, Journal of Technology & Innovation (JTIN)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science, Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការអភិវឌ្ឍប្រព័ន្ធសម្គាល់សំឡេង (Speech Recognition) សម្រាប់គ្រាមភាសាក្នុងស្រុករបស់ប្រទេសនីហ្សេរីយ៉ា ជាពិសេសការបកប្រែពាក្យនិយាយជាភាសា Hausa, Igbo និង Yoruba ទៅជាអត្ថបទ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រើប្រាស់បច្ចេកទេសស្រង់លក្ខណៈពិសេសនៃសំឡេងរួមបញ្ចូលគ្នាជាមួយបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដើម្បីបង្កើតម៉ូដែលសម្គាល់សំឡេងប្រកបដោយប្រសិទ្ធភាពខ្ពស់។
+        
+        <ul>
+            
+            <li>ការស្រង់យកលក្ខណៈពិសេសនៃរលកសំឡេងដោយប្រើ MFCC (Mel-Frequency Cepstral-Coefficient)</li>
+            
+            <li>ការសិក្សាពីការពឹងផ្អែករយៈពេលវែងនៃទិន្នន័យជាស៊េរីដោយប្រើប្រាស់បណ្តាញ LSTM (Long-Short-Time-Memory)</li>
+            
+            <li>ការបណ្តុះបណ្តាល និងការទស្សន៍ទាយលំដាប់ពាក្យដោយប្រើម៉ូដែល HMM (Hidden Markov Model)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធកូនកាត់ដែលបានស្នើឡើង (LSTM-HMM) សម្រេចបានអត្រាភាពត្រឹមត្រូវរហូតដល់ ៩៦,៦២% លើសំណុំទិន្នន័យសំឡេងភាសា Hausa, Igbo និង Yoruba ។</li>
+            
+            <li>ម៉ូដែលថ្មីនេះបង្ហាញពីអត្រាបរាជ័យទាប (Low miss rate) និងមានភាពត្រឹមត្រូវខ្ពស់ក្នុងការទស្សន៍ទាយវាក្យសព្ទនៃក្រុមផ្លែឈើផ្សេងៗ។</li>
+            
+            <li>លទ្ធផលនៃការស្រាវជ្រាវនេះនឹងជួយជំរុញការអភិវឌ្ឍកម្មវិធីសំឡេងស្វ័យប្រវត្តិឲ្យកាន់តែប្រសើរ និងផ្តល់អត្ថប្រយោជន៍យ៉ាងធំធេងដល់ការសិក្សាស្រាវជ្រាវក្នុងវិស័យដំណើរការភាសាធម្មជាតិ (NLP)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">MAP-GD-HMM (Samr & Nizar, 2021)</span></strong><br>ម៉ូដែល MAP-GD-HMM</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់គួរសមសម្រាប់ការសម្គាល់សំឡេង។ ម៉ូដែលនេះប្រើប្រាស់វិធីសាស្ត្រស្ថិតិដែលងាយស្រួលយល់ និងបកស្រាយបាន។</td>
+                <td>មិនមានសមត្ថភាពរៀនពីទំនាក់ទំនងទិន្នន័យដែលមានរយៈពេលវែង (Long-term dependencies) បានល្អដូចបច្ចេកវិទ្យា Deep Learning នោះទេ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៣,៣៣% លើសំណុំទិន្នន័យ TIMIT។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">LSTM-CTC (Graves & Jaitly, 2014)</span></strong><br>ម៉ូដែល LSTM-CTC</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការរៀនពីទិន្នន័យជាស៊េរី និងដំណើរការលំដាប់សំឡេងបានយ៉ាងល្អដោយប្រើប្រាស់បណ្តាញ LSTM។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) នៅតែមានកម្រិតខ្ពស់ ប្រសិនបើមិនមានការរួមបញ្ចូលជាមួយទម្រង់ភាសា (Language Model) ត្រឹមត្រូវ។</td>
+                <td>មានអត្រាកំហុសពាក្យ (WER) ៨,២% នៅពេលប្រើទម្រង់ភាសា និង ២៧,៣% នៅពេលមិនប្រើទម្រង់ភាសា។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Ours (LSTM-HMM)</span></strong><br>ម៉ូដែលស្នើឡើង (LSTM-HMM) ផ្សំជាមួយ MFCC</td>
+                <td>រួមបញ្ចូលចំណុចខ្លាំងរបស់ MFCC សម្រាប់ការទាញយកលក្ខណៈសំឡេងរួមជាមួយប្រព័ន្ធ LSTM និង HMM ធ្វើឲ្យមានអត្រាបរាជ័យទាប (Low miss rate) និងភាពត្រឹមត្រូវខ្ពស់ក្នុងការទស្សន៍ទាយវាក្យសព្ទឯកោ។</td>
+                <td>ការអភិវឌ្ឍប្រព័ន្ធទាំងមូលមានទំហំធំ ហើយអាចទាមទារការព្យាយាមច្រើនក្នុងការកំណត់ប៉ារ៉ាម៉ែត្ររវាង LSTM និង HMM ឲ្យស៊ីសង្វាក់គ្នា។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៦,៦២% លើសំណុំទិន្នន័យសូរសព្ទភាសា Hausa, Igbo និង Yoruba សម្រាប់វាក្យសព្ទផ្លែឈើ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីតម្លៃ ឬធនធានកុំព្យូទ័រដែលបានប្រើប្រាស់នោះទេ ប៉ុន្តែផ្អែកលើវិធីសាស្ត្រ Deep Learning យើងអាចសន្និដ្ឋានពីតម្រូវការទូទៅបានដូចខាងក្រោម។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការកុំព្យូទ័រដែលមានអង្គគណនាក្រាហ្វិក (GPU) ខ្លាំង ដើម្បីកាត់បន្ថយពេលវេលាក្នុងការហ្វឹកហាត់ម៉ូដែល LSTM ព្រមទាំងត្រូវការម៉ៃក្រូហ្វូនសម្រាប់ថតទិន្នន័យសំឡេង។</li>
+        
+        <li><strong>Software:</strong> ឧបករណ៍ដំណើរការកូដ និងបណ្ណាល័យ AI (ឧទាហរណ៍៖ Python, TensorFlow ឬ PyTorch) សម្រាប់រៀបចំបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យសំឡេងដែលថតច្បាស់លាស់ (ជាទម្រង់ WAV, MP4, ឬ WMA) ដែលមានអត្ថបទកត់ត្រាត្រឹមត្រូវ (Transcriptions) សម្រាប់បណ្តុះបណ្តាលម៉ូដែល។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យសំឡេងគ្រាមភាសាក្នុងស្រុករបស់ប្រទេសនីហ្សេរីយ៉ា (Hausa, Igbo និង Yoruba) ដោយផ្តោតលើពាក្យឯកោតំណាងឲ្យឈ្មោះផ្លែឈើ។ ចំណុចនេះមានសារៈសំខាន់សម្រាប់ប្រទេសកម្ពុជា ព្រោះភាសាខ្មែរក៏ជាភាសាដែលមានធនធានទិន្នន័យឌីជីថលតិចតួច (Low-resource language) ដូចគ្នា ដែលទាមទារការប្រមូលទិន្នន័យដោយផ្ទាល់ និងតម្រូវតាមបរិបទភាសាក្នុងស្រុកដើម្បីឲ្យម៉ូដែលស្គាល់ច្បាស់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រស្រាវជ្រាវនេះមានសក្តានុពល និងអត្ថប្រយោជន៍យ៉ាងធំធេងសម្រាប់ការអភិវឌ្ឍបច្ចេកវិទ្យាសម្គាល់សំឡេង (Speech Recognition) សម្រាប់ភាសាខ្មែរ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្ម (Agricultural Sector):</strong> អាចយកទៅបង្កើតកម្មវិធីទូរស័ព្ទដៃដែលអនុញ្ញាតឲ្យកសិករខ្មែរនិយាយឈ្មោះដំណាំ ឬសត្វល្អិតជាភាសាខ្មែរ ដើម្បីស្វែងរកព័ត៌មានពីការដាំដុះដោយមិនចាំបាច់វាយអក្សរ។</li>
+            
+            <li><strong>សេវាកម្មបម្រើអតិថិជន (Customer Service Data Analytics):</strong> ការបង្កើតប្រព័ន្ធឆ្លើយតបសំឡេងស្វ័យប្រវត្តិ (Voice Bot) សម្រាប់ក្រុមហ៊ុនទូរគមនាគមន៍ (ឧ. Smart, Cellcard) ឬធនាគារក្នុងស្រុក ដើម្បីឆ្លើយតបសំនួរទូទៅជាភាសាខ្មែរ។</li>
+            
+            <li><strong>ឧបករណ៍ឆ្លាតវៃ (Smart Home/IoT):</strong> អាចប្រើប្រាស់បច្ចេកទេសនេះដើម្បីអភិវឌ្ឍឧបករណ៍វៃឆ្លាតដែលអាចស្តាប់ និងអនុវត្តតាមការបញ្ជាជាសូរសព្ទខ្មែរ សម្រួលដល់ជីវភាពរស់នៅប្រចាំថ្ងៃ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអនុវត្តម៉ូដែលកូនកាត់ LSTM-HMM នេះនឹងជួយជំរុញការប្រើប្រាស់ភាសាខ្មែរនៅក្នុងប្រព័ន្ធឌីជីថល និងជួយសម្រួលដល់ប្រជាជនដែលមិនសូវមានជំនាញក្នុងការវាយអក្សរ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះការកែច្នៃសំឡេង (Audio Processing Fundamentals):</strong> រៀនអំពីរបៀបទាញយកលក្ខណៈពិសេសពីសំឡេងដោយប្រើ <span class="en">MFCC</span> (Mel-Frequency Cepstral Coefficients) និងការអនុវត្តជាក់ស្តែងតាមរយៈបណ្ណាល័យ <span class="en">Librosa</span> នៅក្នុង <span class="en">Python</span> ដើម្បីបំប្លែងរលកសំឡេងទៅជាទិន្នន័យលេខ។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យសំឡេងភាសាខ្មែរ (Khmer Voice Data Collection):</strong> រៀបចំយុទ្ធនាការប្រមូលទិន្នន័យសំឡេងពាក្យខ្លីៗជាភាសាខ្មែរ (ឧទាហរណ៍៖ លេខ ឈ្មោះខេត្ត ឬឈ្មោះផ្លែឈើ) ថតជាទម្រង់ <span class="en">.wav</span> និងប្រើប្រាស់កម្មវិធីដូចជា <span class="en">Audacity</span> ឬ <span class="en">Praat</span> ដើម្បីកាត់ត និងធ្វើចំណារពន្យល់ (Labeling) ឲ្យបានច្បាស់លាស់។</li>
+            
+            <li><strong>កសាង និងហ្វឹកហាត់ម៉ូដែលកូនកាត់ (Build and Train Hybrid Model):</strong> សរសេរកូដកសាងម៉ូដែលដោយប្រើប្រាស់ <span class="en">LSTM</span> សម្រាប់រៀនពីលំដាប់ទិន្នន័យ និងបញ្ចូលវាជាមួយ <span class="en">HMM</span> ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> ព្រមទាំងបណ្ណាល័យ <span class="en">hmmlearn</span>។</li>
+            
+            <li><strong>វាយតម្លៃ និងធ្វើឲ្យប្រសើរឡើង (Model Evaluation & Optimization):</strong> វាស់ស្ទង់ប្រសិទ្ធភាពម៉ូដែលរបស់អ្នកដោយផ្អែកលើអត្រាភាពត្រឹមត្រូវ (Accuracy) និងអត្រាកំហុសពាក្យ (<span class="en">WER</span>) ព្រមទាំងសាកល្បងកែតម្រូវទំហំ <span class="en">Hyperparameters</span> (ដូចជាចំនួន Hidden Layers ក្នុង LSTM) ដើម្បីទទួលបានលទ្ធផលកម្រិតខ្ពស់បំផុត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Reinforcement Learning</span></td>
+                <td>ជាសាខាមួយនៃបញ្ញាសិប្បនិម្មិតដែលរួមបញ្ចូលគ្នារវាង Deep Learning និង Reinforcement Learning ដោយបង្រៀនកុំព្យូទ័រឲ្យចេះរៀនពីកំហុស និងទទួលបានរង្វាន់ (Reward) ជាពិន្ទុនៅពេលវាធ្វើសកម្មភាព ឬធ្វើការសម្រេចចិត្តបានត្រឹមត្រូវនៅក្នុងបរិស្ថានណាមួយ។</td>
+                <td>ដូចជាការបង្រៀនសត្វសុនខឲ្យចេះធ្វើតាមបញ្ជាដោយផ្តល់នំចំណីនៅពេលវាធ្វើត្រូវ និងមិនឲ្យនំនៅពេលវាធ្វើខុស ដើម្បីឲ្យវារៀនកែប្រែកំហុសខ្លួនឯងបន្តិចម្តងៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model</span></td>
+                <td>ជាម៉ូដែលស្ថិតិដែលប្រើសម្រាប់ទស្សន៍ទាយស្ថានភាពអនាគតដោយពឹងផ្អែកតែលើស្ថានភាពបច្ចុប្បន្ន មិនមែនប្រវត្តិអតីតកាលទាំងមូលនោះទេ។ នៅក្នុងប្រព័ន្ធ ASR វាត្រូវបានគេប្រើដើម្បីស្វែងរកលំដាប់ពាក្យដែលលាក់កំបាំងដោយវិភាគលើទិន្នន័យសំឡេងដែលវាទទួលបាន។</td>
+                <td>ដូចជាការទាយថាថ្ងៃស្អែកនឹងមានភ្លៀងធ្លាក់ឬអត់ ដោយមើលតែលើអាកាសធាតុថ្ងៃនេះ ជំនួសឲ្យការមើលរបាយការណ៍អាកាសធាតុពេញមួយខែកន្លងមក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Long-Short-Time-Memory</span></td>
+                <td>ជាប្រភេទមួយនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (RNN) ដែលមានសមត្ថភាពចងចាំព័ត៌មានពីអតីតកាលក្នុងរយៈពេលវែង និងអាចរៀនពីទំនាក់ទំនងរវាងទិន្នន័យដែលមានលក្ខណៈជាស៊េរី ឬលំដាប់លំដោយ ដូចជាលំដាប់នៃពាក្យនៅក្នុងប្រយោគ។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលកំពុងអានសៀវភៅរឿង ហើយអាចចងចាំតួអង្គ និងសាច់រឿងតាំងពីទំព័រដំបូងៗ ដើម្បីយល់ន័យនៃសាច់រឿងនៅក្នុងទំព័របច្ចុប្បន្ន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mel-Frequency Cepstral-Coefficient</span></td>
+                <td>ជាបច្ចេកទេសទាញយកលក្ខណៈពិសេស (Feature extraction) ពីរលកសំឡេង ដែលបំប្លែងសំឡេងទៅជាទិន្នន័យលេខដោយផ្អែកលើរបៀបដែលត្រចៀកមនុស្សស្តាប់ឮប្រេកង់ផ្សេងៗគ្នា ដើម្បីឲ្យកុំព្យូទ័រអាចស្គាល់លក្ខណៈសម្គាល់នៃសំឡេងនីមួយៗ។</td>
+                <td>ដូចជាការចម្រាញ់យកតែចំណុចពិសេសៗនៃស្នាមម្រាមដៃរបស់មនុស្សម្នាក់ៗ ដើម្បីងាយស្រួលចំណាំថានរណាជានរណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Error Rate</span></td>
+                <td>ជារង្វាស់ស្តង់ដារមួយដែលប្រើសម្រាប់វាស់ស្ទង់ភាពត្រឹមត្រូវនៃប្រព័ន្ធសម្គាល់សំឡេង ដោយគណនាពីភាគរយនៃពាក្យដែលប្រព័ន្ធទាយខុស (ដូចជាបាត់ពាក្យ ពាក្យលើស ឬបកប្រែពាក្យខុស) ធៀបនឹងពាក្យដែលត្រូវបាននិយាយពិតប្រាកដ។</td>
+                <td>ដូចជាការដាក់ពិន្ទុក្នុងការប្រឡងសរសេរតាមអាន ប្រសិនបើសិស្សសរសេរខុសកាន់តែតិច នោះពិន្ទុ (ឬប្រព័ន្ធ) គឺកាន់តែល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Natural Language Processing</span></td>
+                <td>ជាបច្ចេកវិទ្យាមួយដែលអនុញ្ញាតឱ្យកុំព្យូទ័រអាចយល់ បកស្រាយ និងឆ្លើយតបទៅនឹងភាសារបស់មនុស្ស ទាំងជាទម្រង់អត្ថបទ និងទម្រង់សំឡេង។</td>
+                <td>ដូចជាការបណ្តុះបណ្តាលកុំព្យូទ័រឲ្យធ្វើជាអ្នកបកប្រែភាសា ដើម្បីជួយឲ្យមនុស្ស និងម៉ាស៊ីនអាចទំនាក់ទំនងគ្នាបានយល់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Automatic Speech Recognition</span></td>
+                <td>ជាដំណើរការនៃការបំប្លែងរលកសំឡេងនៃការនិយាយរបស់មនុស្ស ទៅជាអត្ថបទ (Text) ដោយស្វ័យប្រវត្តិ ដោយប្រើប្រាស់ក្បួនដោះស្រាយ និងម៉ូដែលកុំព្យូទ័រ។</td>
+                <td>ដូចជាអ្នកលេខាដែលអង្គុយស្តាប់ចៅហ្វាយនិយាយ ហើយវាយអត្ថបទបញ្ចូលក្នុងកុំព្យូទ័រភ្លាមៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian Mixture Models</span></td>
+                <td>ជាម៉ូដែលប្រូបាប៊ីលីតេដែលសន្មតថាទិន្នន័យទាំងអស់ត្រូវបានបង្កើតឡើងចេញពីការបូកបញ្ចូលគ្នានៃរបាយ Gaussian (Normal distributions) មួយចំនួន។ នៅក្នុងប្រព័ន្ធសម្គាល់សំឡេងជំនាន់ចាស់ វាត្រូវបានប្រើប្រាស់ជាទូទៅសម្រាប់ធ្វើការចំណាត់ថ្នាក់ទិន្នន័យសំឡេង មុនពេលមានវត្តមាន Deep Learning។</td>
+                <td>ដូចជាការញែកក្រុមមនុស្សរាប់រយនាក់នៅក្នុងបន្ទប់មួយទៅជាក្រុមតូចៗតាមកម្ពស់និងទម្ងន់របស់ពួកគេ ដើម្បីងាយស្រួលរៀបចំកន្លែងអង្គុយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model+%28HMM%29+mathematical+foundations+for+speech+recognition" target="_blank" rel="noopener"><span class="en">Hidden Markov Model (HMM) mathematical foundations for speech recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=LSTM+network+architecture+and+vanishing+gradient+problem+in+NLP" target="_blank" rel="noopener"><span class="en">LSTM network architecture and vanishing gradient problem in NLP</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Mel-Frequency+Cepstral+Coefficients+%28MFCC%29+audio+feature+extraction+techniques" target="_blank" rel="noopener"><span class="en">Mel-Frequency Cepstral Coefficients (MFCC) audio feature extraction techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+Reinforcement+Learning+algorithms+for+Automatic+Speech+Recognition+optimization" target="_blank" rel="noopener"><span class="en">Deep Reinforcement Learning algorithms for Automatic Speech Recognition optimization</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Evaluating+Speech+Recognition+systems%3A+Word+Error+Rate+%28WER%29+and+beyond" target="_blank" rel="noopener"><span class="en">Evaluating Speech Recognition systems: Word Error Rate (WER) and beyond</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=End-to-end+Deep+Learning+approaches+for+low-resource+language+ASR" target="_blank" rel="noopener"><span class="en">End-to-end Deep Learning approaches for low-resource language ASR</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

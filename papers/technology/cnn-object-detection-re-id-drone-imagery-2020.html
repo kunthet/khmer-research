@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការអនុវត្តបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកុងវ៉ុលលូហ្សិន (CNNs) ក្នុងការរកឃើញវត្ថុ ការកំណត់អត្តសញ្ញាណឡើងវិញ និងការសម្គាល់ | KhmerResearch.com</title>
+    <meta name="description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរកឃើញវត្ថុតាមរយៈដ្រូន (Drone imagery) ដែលមានគុណភាពបង្ហាញទាប និងការកំណត់អត្តសញ្ញាណមនុស្សឡើងវិញ (Person re-ID) ឆ្លងកាត់កា...">
+    
+    <meta name="keywords" content="Deep Learning, Convolutional Neural Networks, Object Detection, Person Re-identification, YOLO-V3, Drone Surveillance, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/cnn-object-detection-re-id-drone-imagery-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/cnn-object-detection-re-id-drone-imagery-2020.html">
+    <meta property="og:title" content="ការអនុវត្តបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកុងវ៉ុលលូហ្សិន (CNNs) ក្នុងការរកឃើញវត្ថុ ការកំណត់អត្តសញ្ញាណឡើងវិញ និងការសម្គាល់ | KhmerResearch.com">
+    <meta property="og:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរកឃើញវត្ថុតាមរយៈដ្រូន (Drone imagery) ដែលមានគុណភាពបង្ហាញទាប និងការកំណត់អត្តសញ្ញាណមនុស្សឡើងវិញ (Person re-ID) ឆ្លងកាត់កាមេរ៉ា CCTV ដែលមានមុំមើល និងពន្លឺខុសៗគ្នា។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020 Loughborough University">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Convolutional Neural Networks">
+    
+    <meta property="article:tag" content="Object Detection">
+    
+    <meta property="article:tag" content="Person Re-identification">
+    
+    <meta property="article:tag" content="YOLO-V3">
+    
+    <meta property="article:tag" content="Drone Surveillance">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការអនុវត្តបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកុងវ៉ុលលូហ្សិន (CNNs) ក្នុងការរកឃើញវត្ថុ ការកំណត់អត្តសញ្ញាណឡើងវិញ និងការសម្គាល់">
+    <meta name="twitter:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរកឃើញវត្ថុតាមរយៈដ្រូន (Drone imagery) ដែលមានគុណភាពបង្ហាញទាប និងការកំណត់អត្តសញ្ញាណមនុស្សឡើងវិញ (Person re-ID) ឆ្លងកាត់កាមេរ៉ា CCTV ដែលមានមុំមើល និងពន្លឺខុសៗគ្នា។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u1780\u17bb\u1784\u179c\u17c9\u17bb\u179b\u179b\u17bc\u17a0\u17d2\u179f\u17b7\u1793 (CNNs) \u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u179c\u178f\u17d2\u1790\u17bb \u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u17a1\u17be\u1784\u179c\u17b7\u1789 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb",
+      "name": "Application of Convolutional Neural Networks in Object Detection, Re-identification, and Recognition",
+      "description": "\u1793\u17b7\u1780\u17d2\u1781\u17c1\u1794\u1794\u1791\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u179c\u178f\u17d2\u1790\u17bb\u178f\u17b6\u1798\u179a\u1799\u17c8\u178a\u17d2\u179a\u17bc\u1793 (Drone imagery) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1782\u17bb\u178e\u1797\u17b6\u1796\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1791\u17b6\u1794 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u1798\u1793\u17bb\u179f\u17d2\u179f\u17a1\u17be\u1784\u179c\u17b7\u1789 (Person re-ID) \u1786\u17d2\u179b\u1784\u1780\u17b6\u178f\u17cb\u1780\u17b6\u1798\u17c1\u179a\u17c9\u17b6 CCTV \u178a\u17c2\u179b\u1798\u17b6\u1793\u1798\u17bb\u17c6\u1798\u17be\u179b \u1793\u17b7\u1784\u1796\u1793\u17d2\u179b\u17ba\u1781\u17bb\u179f\u17d7\u1782\u17d2\u1793\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/cnn-object-detection-re-id-drone-imagery-2020.html",
+      "author": [{"@type": "Person", "name": "Rua Yahya Aburasain (Loughborough University)"}],
+      "datePublished": "2020 Loughborough University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Application of Convolutional Neural Networks in Object Detection, Re-identification, and Recognition",
+        "url": "N/A"
+      },
+      "keywords": ["Deep Learning", "Convolutional Neural Networks", "Object Detection", "Person Re-identification", "YOLO-V3", "Drone Surveillance"],
+      "about": "Computer Vision"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u1780\u17bb\u1784\u179c\u17c9\u17bb\u179b\u179b\u17bc\u17a0\u17d2\u179f\u17b7\u1793 (CNNs) \u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u179c\u178f\u17d2\u1790\u17bb \u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u17a1\u17be\u1784\u179c\u17b7\u1789 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb",
+          "item": "https://khmerresearch.com/papers/technology/cnn-object-detection-re-id-drone-imagery-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការអនុវត្តបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកុងវ៉ុលលូហ្សិន (CNN...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Application of Convolutional Neural Networks in Object Detection, Re-identification, and Recognition<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការអនុវត្តបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកុងវ៉ុលលូហ្សិន (CNNs) ក្នុងការរកឃើញវត្ថុ ការកំណត់អត្តសញ្ញាណឡើងវិញ និងការសម្គាល់</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Application of Convolutional Neural Networks in Object Detection, Re-identification, and Recognition</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Rua Yahya Aburasain (Loughborough University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 Loughborough University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Vision</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> និក្ខេបបទនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការរកឃើញវត្ថុតាមរយៈដ្រូន (Drone imagery) ដែលមានគុណភាពបង្ហាញទាប និងការកំណត់អត្តសញ្ញាណមនុស្សឡើងវិញ (Person re-ID) ឆ្លងកាត់កាមេរ៉ា CCTV ដែលមានមុំមើល និងពន្លឺខុសៗគ្នា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះប្រើប្រាស់ការរៀនផ្ទេរចំណេះដឹង និងការកែសម្រួលប៉ារ៉ាម៉ែត្រកម្រិតខ្ពស់ ដើម្បីបង្កើនប្រសិទ្ធភាពបណ្តាញសរសៃប្រសាទ។
+        
+        <ul>
+            
+            <li>ការវាយតម្លៃស្ថាបត្យកម្ម (Architecture Evaluation): ការប្រៀបធៀបដំណើរការរបស់ AlexNet, VGGNet-16, ResNet និង Inception V4 សម្រាប់ការកំណត់អត្តសញ្ញាណមនុស្សឡើងវិញ។</li>
+            
+            <li>ការធ្វើឱ្យប្រសើរនូវប៉ារ៉ាម៉ែត្រ (Hyper-parameter Tuning): ការប្រើប្រាស់អត្រារៀន (Learning rate) ការបញ្ឈប់មុន (Early stopping) និងក្បួនដោះស្រាយសុទិដ្ឋិកម្ម (Adam, RMSProp)។</li>
+            
+            <li>ការរកឃើញវត្ថុតាមដ្រូន (Drone-based Object Detection): ការកែសម្រួលម៉ូដែល YOLO-V3 និង SSD-500 ដើម្បីរកឃើញដើមត្នោត ហ្វូងសត្វ និងរោងចិញ្ចឹមសត្វ។</li>
+            
+            <li>ការបង្កើនទិន្នន័យ និងតុល្យភាព (Data Augmentation & Balancing): ការប្រើប្រាស់រូបភាពទំហំខុសៗគ្នាដើម្បីកាត់បន្ថយបញ្ហាទិន្នន័យលម្អៀង (Data bias)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល ResNet បានផ្តល់លទ្ធផលល្អបំផុតក្នុងការកំណត់អត្តសញ្ញាណមនុស្សឡើងវិញ ដោយសម្រេចបានអត្រាត្រឹមត្រូវចំណាត់ថ្នាក់ទី1 (Rank-1 accuracy) 59.1% លើសំណុំទិន្នន័យ Market1501។</li>
+            
+            <li>សម្រាប់ការរកឃើញដើមត្នោតតាមរយៈដ្រូន ម៉ូដែល YOLO-V3 ទទួលបានភាពត្រឹមត្រូវជាមធ្យម 0.96 ដោយប្រើប្រាស់យុទ្ធសាស្ត្រ Early stopping និងការបង្កើនទិន្នន័យ (Data augmentation)។</li>
+            
+            <li>ប្រព័ន្ធរកឃើញវត្ថុច្រើនប្រភេទ (Multi-class object detector) តាមដ្រូនដោយប្រើប្រាស់ YOLO-V3 ទទួលបានពិន្ទុ F1-score 0.96, Recall 0.94 និង Precision 0.99 បន្ទាប់ពីកែសម្រួលអត្រារៀន និងប្រើប្រាស់ Adam optimizer។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">ResNet-50</span></strong><br>បណ្តាញសរសៃប្រសាទកុងវ៉ុលលូហ្សិនមានជម្រៅជ្រៅដែលមានការរំលងការតភ្ជាប់ (Residual blocks) សម្រាប់ការកំណត់អត្តសញ្ញាណមនុស្ស (Person Re-ID)</td>
+                <td>អាចដោះស្រាយបញ្ហា Vanishing gradient នៅក្នុងបណ្តាញជ្រៅៗ និងផ្តល់ភាពត្រឹមត្រូវខ្ពស់បំផុតក្នុងការចាប់យកលក្ខណៈពិសេសរបស់មនុស្ស។</td>
+                <td>ត្រូវការធនធានកុំព្យូទ័រនិងទិន្នន័យច្រើនជាងម៉ូដែលរាក់ៗដូចជា AlexNet ឬ VGGNet។</td>
+                <td>សម្រេចបានអត្រាអត្តសញ្ញាណ Rank-1 ខ្ពស់បំផុតរហូតដល់ 59.1% លើសំណុំទិន្នន័យ Market1501 ដែលខ្ពស់ជាងដៃគូប្រកួតប្រជែង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">YOLO-V3</span></strong><br>ប្រព័ន្ធរកឃើញវត្ថុផ្ទាល់ (Single-shot Object Detector) ប្រើប្រាស់ Darknet-53 សម្រាប់ការរកឃើញរូបភាពតាមដ្រូន</td>
+                <td>មានសមត្ថភាពរកឃើញវត្ថុក្នុង៣ទំហំផ្សេងគ្នា (3 scales) ដែលស័ក្តិសមបំផុតសម្រាប់ចាប់យករូបភាពតូចៗពីដ្រូនក្នុងល្បឿនលឿន។</td>
+                <td>ទាមទារឱ្យមានការរៀបចំទិន្នន័យតុល្យភាព (Data balancing) និងការបិទការបង្ហាត់ទាន់ពេល (Early stopping) ដើម្បីចៀសវាងការវង្វេងទិន្នន័យ (Overfitting)។</td>
+                <td>សម្រេចបានពិន្ទុ F1-score 0.96 សម្រាប់ការរកឃើញវត្ថុច្រើនប្រភេទ (ដើមត្នោត គោក្របី រោង) ជាមួយនឹងអត្រា Precision 0.99។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SSD-500 (VGG-16 backbone)</span></strong><br>ប្រព័ន្ធរកឃើញវត្ថុរហ័សដោយប្រើប្រាស់ VGG-16 ជាមូលដ្ឋានសម្រាប់ទាញយកមុខងារ (Feature extraction)</td>
+                <td>ដំណើរការបានលឿន និងទាញយកមុខងារបានល្អពីរូបភាពទំហំមធ្យម។</td>
+                <td>មានភាពខ្សោយក្នុងការរកឃើញវត្ថុតូចៗ ឬវត្ថុដែលថតពីលើអាកាសជ្រៅ (Drone altitude) បើប្រៀបធៀបជាមួយ YOLO-V3។</td>
+                <td>ទទួលបានពិន្ទុ F1-score ទាបជាង YOLO-V3 ជាទូទៅ និងមានកម្រិតរំលងការរកឃើញ (False Negative) ច្រើនជាង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រដែលមានក្រាហ្វិកកាត (GPU) កម្រិតខ្ពស់ និងការរៀបចំទិន្នន័យយ៉ាងម៉ត់ចត់ដើម្បីបង្ហាត់ម៉ូដែលរាប់សែនជុំ (Iterations)។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនកុំព្យូទ័រដែលបំពាក់ដោយក្រាហ្វិកកាត Nvidia GTX-1070 GPU ឬខ្ពស់ជាងនេះសម្រាប់ដំណើរការការគណនាដ៏ស្មុគស្មាញ។</li>
+        
+        <li><strong>Software:</strong> ប្រព័ន្ធប្រតិបត្តិការ Ubuntu 18.04 រួមជាមួយនឹង Caffe Deep Learning framework (សម្រាប់ SSD) និង Darknet framework (សម្រាប់ YOLO)។</li>
+        
+        <li><strong>Dataset:</strong> រូបភាពពីដ្រូនក្នុងកម្រិតបង្ហាញខ្ពស់ (5472 x 3648 pixels) និងសំណុំទិន្នន័យកាមេរ៉ាសុវត្ថិភាពសាធារណៈ (ឧ. Market1501, CUHK-03) ដោយត្រូវការការគូសចំណាំ (Bounding boxes annotation) ជាមុន។</li>
+        
+        <li><strong>Expertise:</strong> អ្នកជំនាញផ្នែក Computer Vision ដើម្បីកំណត់តម្លៃ Hyper-parameters ដូចជា Learning rate, Batch size, នីតិវិធី Optimization (Adam, RMSProp) ជាដើម។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យដ្រូនពីតំបន់វាលខ្សាច់នៃប្រទេសអេមីរ៉ាតអារ៉ាប់រួម (UAE) ដែលមានសណ្ឋានដី ទម្រង់អគារ និងប្រភេទរុក្ខជាតិខុសប្លែកពីកម្ពុជា។ ចំណែកឯទិន្នន័យមនុស្ស (Person Re-ID) គឺប្រមូលពីប្រទេសចិន និងលោកខាងលិច ដែលអាចមានលក្ខណៈរូបរាងកាយ ការស្លៀកពាក់ ខុសពីប្រជាជនកម្ពុជាយើង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានភាពខុសគ្នានៃភូមិសាស្ត្រក៏ដោយ បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់ក្នុងការអភិវឌ្ឍវិស័យកសិកម្ម និងសន្តិសុខនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>កសិកម្មឆ្លាតវៃ និងការគ្រប់គ្រងធនធាន (Smart Agriculture & Resource Management):</strong> អាចប្រើប្រាស់ដ្រូនដើម្បីរាប់ និងធ្វើផែនទីទីតាំងដើមត្នោតនៅខេត្តកំពង់ស្ពឺ ឬខេត្តតាកែវ ដើម្បីគ្រប់គ្រងធនធានធម្មជាតិ និងទិន្នផលដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ការត្រួតពិនិត្យកសិដ្ឋានចិញ្ចឹមសត្វ (Livestock Monitoring):</strong> អនុញ្ញាតឱ្យកសិដ្ឋានធំៗ ឬតំបន់អភិរក្សនៅខេត្តមណ្ឌលគិរី អាចតាមដានហ្វូងគោ ក្របី ឬសត្វព្រៃ ពីចម្ងាយដោយប្រើម៉ូដែលរកឃើញវត្ថុតាមដ្រូន។</li>
+            
+            <li><strong>សន្តិសុខទីក្រុង និងអាកាសយានដ្ឋាន (Smart City & Airport Security):</strong> ប្រព័ន្ធកំណត់អត្តសញ្ញាណមនុស្សឡើងវិញ (Re-ID) ដោយប្រើម៉ូដែល ResNet អាចជួយតាមដានមុខសញ្ញាជនសង្ស័យឆ្លងកាត់កាមេរ៉ា CCTV ជាច្រើន នៅព្រលានយន្តហោះ ឬតាមតំបន់ពាណិជ្ជកម្មនានាក្នុងរាជធានីភ្នំពេញ។</li>
+            
+        </ul>
+        
+        
+        <p>ដើម្បីឱ្យប្រព័ន្ធនេះដំណើរការប្រកបដោយប្រសិទ្ធភាពនៅកម្ពុជា យើងចាំបាច់ត្រូវប្រមូលទិន្នន័យរូបភាពដ្រូនពីចម្ការ ឬទីក្រុងក្នុងស្រុក ដើម្បីបង្ហាត់ម៉ូដែលឡើងវិញ (Transfer Learning) ឱ្យស៊ាំនឹងបរិស្ថានតំបន់ត្រូពិច។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះ Deep Learning និង Computer Vision:</strong> និស្សិតគួរសិក្សាពីទ្រឹស្តីបណ្តាញសរសៃប្រសាទ CNNs និងអនុវត្តសរសេរកូដតាមរយៈភាសា <span class="en">Python</span> ដោយប្រើយន្តការទំនើបៗដូចជា <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span>។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យរូបភាពពីដ្រូន (Data Collection & Annotation):</strong> ហោះហើរដ្រូននៅកម្ពស់ថេរលើតំបន់កសិកម្ម រួចប្រើប្រាស់កម្មវិធីដូចជា <span class="en">LabelImg</span> ដើម្បីគូសប្រអប់ (Bounding boxes) ចំណាំវត្ថុគោលដៅដូចជា ដើមត្នោត គោ ឬ រោង។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសរៀនផ្ទេរចំណេះដឹង (Transfer Learning) ជាមួយ YOLO-V3:</strong> ទាញយកកូដ និងទម្ងន់បណ្តាញដែលបានបង្ហាត់រួច (<span class="en">Pre-trained weights</span>) របស់ <span class="en">YOLO-V3</span> ពីប្រព័ន្ធ <span class="en">Darknet</span> មកបង្ហាត់បន្តលើទិន្នន័យរូបភាពកម្ពុជា។</li>
+            
+            <li><strong>កែសម្រួលប៉ារ៉ាម៉ែត្រកម្រិតខ្ពស់ (Hyper-parameter Tuning):</strong> ធ្វើការសាកល្បងផ្លាស់ប្តូរតម្លៃ <span class="en">Learning Rate</span> (ឧ. ០.០០០១), ប្តូរវិធីសាស្ត្រគណនា <span class="en">Adam Optimizer</span> និងប្រើ <span class="en">Early Stopping</span> ដើម្បីបង្ការបញ្ហា <span class="en">Overfitting</span>។</li>
+            
+            <li><strong>វាយតម្លៃប្រសិទ្ធភាព និងដាក់ឱ្យដំណើរការ (Evaluation & Deployment):</strong> វាស់ស្ទង់ភាពត្រឹមត្រូវនៃម៉ូដែលដោយប្រើរង្វាស់ <span class="en">F1-Score</span> និង <span class="en">Precision-Recall</span> រួចអាចសរសេរកម្មវិធីតូចមួយដើម្បីដំណើរការវាសម្រាប់ការប្រើប្រាស់ជាក់ស្តែងក្នុងការវិភាគវីដេអូដ្រូន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Networks</span></td>
+                <td>បណ្តាញនេះដំណើរការដោយប្រើតម្រង (Filters) រំកិលកាត់លើរូបភាព ដើម្បីទាញយកលក្ខណៈពិសេសៗ ដូចជាគែម ទម្រង់ ឬពណ៌ សម្រាប់សម្គាល់និងបែងចែកប្រភេទវត្ថុក្នុងកិច្ចការចក្ខុវិស័យកុំព្យូទ័រដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលប្រើកែវពង្រីកដើរឆ្លុះមើលគ្រប់ជ្រុងនៃផ្ទាំងគំនូរ ដើម្បីស្វែងរកចំណុចសំខាន់ៗដែលបញ្ជាក់ថាគំនូរនោះជារូបអ្វីពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>គឺជាយន្តការយកទម្ងន់ប៉ារ៉ាម៉ែត្រពីម៉ូដែលដែលបានហ្វឹកហាត់រួចលើទិន្នន័យដ៏ធំ (ឧ. ImageNet) មកបន្តហ្វឹកហាត់លើសំណុំទិន្នន័យថ្មីតូចជាង ដើម្បីបង្កើនភាពត្រឹមត្រូវ ចំណេញពេលវេលា និងកាត់បន្ថយបញ្ហាវង្វេងទិន្នន័យ។</td>
+                <td>ដូចជាការយកចុងភៅដែលចេះធ្វើម្ហូបអឺរ៉ុបស្រាប់ មកបង្រៀនបន្ថែមបន្តិចបន្តួចឱ្យចេះធ្វើម្ហូបខ្មែរ ជាជាងបង្រៀនមនុស្សដែលមិនចេះធ្វើម្ហូបទាល់តែសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Person re-identification</span></td>
+                <td>ជាបច្ចេកវិទ្យាកុំព្យូទ័រក្នុងការតាមដាន និងកំណត់អត្តសញ្ញាណមនុស្សម្នាក់ៗឡើងវិញ ពេលដែលពួកគេដើរឆ្លងកាត់កាមេរ៉ាសុវត្ថិភាពច្រើនគ្រាប់ ដែលដាក់នៅទីតាំងផ្សេងៗគ្នា និងមានពន្លឺខុសៗគ្នា។</td>
+                <td>ដូចជាសន្តិសុខម្នាក់ចំណាំមុខនិងសម្លៀកបំពាក់ភ្ញៀវ ហើយដឹងថាជាភ្ញៀវដដែលទោះបីភ្ញៀវនោះដើរទៅដល់ជាន់ផ្សេងនៃផ្សារទំនើបក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Overfitting</span></td>
+                <td>ស្ថានភាពដែលម៉ូដែលរៀនទន្ទេញចាំទិន្នន័យហ្វឹកហាត់ច្បាស់ពេក (High variance) រហូតដល់វាបាត់បង់សមត្ថភាពក្នុងការទស្សន៍ទាយ ឬសម្គាល់រូបភាពថ្មីៗដែលវាមិនធ្លាប់ឃើញពីមុនមក។</td>
+                <td>ដូចជាសិស្សដែលខំទន្ទេញចាំមាត់តែវិញ្ញាសាចាស់ៗពេលរៀនគួរ តែប្រឡងធ្លាក់ពេលគ្រូចេញលំហាត់ថ្មីដែលប្លែកពីមុនបន្តិច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Augmentation</span></td>
+                <td>ជាបច្ចេកទេសបង្កើនទំហំនិងភាពចម្រុះនៃសំណុំទិន្នន័យហ្វឹកហាត់ ដោយការកែច្នៃរូបភាពដើម ដូចជាបង្វិល ប្តូរទំហំ ឬកាត់ ដើម្បីឱ្យម៉ូដែលរៀនសម្គាល់វត្ថុបានកាន់តែច្រើនជ្រុងជ្រោយ។</td>
+                <td>ដូចជាការថតរូបសត្វតែមួយក្បាលពីមុំ និងពន្លឺខុសៗគ្នា ដើម្បីឱ្យប្រព័ន្ធកុំព្យូទ័រងាយស្រួលចំណាំទោះបីស្ថិតក្នុងស្ថានភាពបែបណាក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Early stopping</span></td>
+                <td>ជាយុទ្ធសាស្ត្របញ្ឈប់ការហ្វឹកហាត់ម៉ូដែលភ្លាមៗនៅពេលដែលកម្រិតភាពត្រឹមត្រូវលើទិន្នន័យផ្ទៀងផ្ទាត់ (Validation set) ចាប់ផ្តើមធ្លាក់ចុះ ដើម្បីការពារម៉ូដែលពីការរៀនទន្ទេញទិន្នន័យចាស់ៗហួសកម្រិត។</td>
+                <td>ដូចជាការដកនំខេកចេញពីឡភ្លាមៗពេលដែលវាឆ្អិនល្មម ដើម្បីកុំឱ្យវាខ្លោចខូចជាតិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Backpropagation</span></td>
+                <td>គឺជាយន្តការគណនាបញ្ច្រាសពីកំហុសនៃលទ្ធផលចុងក្រោយ ត្រលប់ទៅកាន់បណ្តាញស្រទាប់នីមួយៗវិញ ដើម្បីកែតម្រូវទម្ងន់ប៉ារ៉ាម៉ែត្រ (Weights) ជួយឱ្យម៉ូដែលធ្វើការទស្សន៍ទាយបានកាន់តែត្រឹមត្រូវនៅជុំក្រោយ។</td>
+                <td>ដូចជាអ្នកលេងបោះព្រួញដែលសង្កេតមើលកំហុសរបស់ខ្លួនពេលបោះខុសគោលដៅ រួចកែតម្រូវកម្លាំងនិងមុំដៃវិញសម្រាប់ការបោះលើកក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperparameter</span></td>
+                <td>ជាតម្លៃ ឬការកំណត់ផ្សេងៗ (ដូចជា អត្រារៀនសូត្រ ចំនួនជុំ ឬទំហំកញ្ចប់ទិន្នន័យ) ដែលវិស្វករត្រូវរៀបចំទុកជាមុន មុននឹងចាប់ផ្តើមហ្វឹកហាត់ម៉ូដែល ដើម្បីគ្រប់គ្រងដំណើរការនៃការរៀនសូត្ររបស់វា។</td>
+                <td>ដូចជាការសារេកម្រិតកម្តៅ និងពេលវេលានៅលើឆ្នាំងអ៊ុតអគ្គិសនី មុននឹងចាប់ផ្តើមអ៊ុតខោអាវ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=YOLO-v3+optimization+techniques+for+small+object+detection+in+drone+imagery" target="_blank" rel="noopener"><span class="en">YOLO-v3 optimization techniques for small object detection in drone imagery</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Cross-camera+variation+challenges+in+deep+learning+person+re-identification" target="_blank" rel="noopener"><span class="en">Cross-camera variation challenges in deep learning person re-identification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Transfer+learning+strategies+for+agricultural+object+detection+with+limited+datasets" target="_blank" rel="noopener"><span class="en">Transfer learning strategies for agricultural object detection with limited datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparative+analysis+of+optimization+algorithms+Adam+vs+RMSProp+in+Convolutional+Neural+Networks" target="_blank" rel="noopener"><span class="en">Comparative analysis of optimization algorithms Adam vs RMSProp in Convolutional Neural Networks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Lightweight+Convolutional+Neural+Networks+for+real-time+edge+computing+on+UAVs" target="_blank" rel="noopener"><span class="en">Lightweight Convolutional Neural Networks for real-time edge computing on UAVs</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ (Automatic Speech Recognition) ដែលជាបញ្ហាស្មុគស្មាញដោយសារភាពខុសគ្នានៃសំឡេង ល្បឿន...">
+    
+    <meta name="keywords" content="Speech Recognition, Hidden Markov Models, HTK Toolkit, Viterbi Algorithm, Acoustic Modeling, Language Modeling, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/automatic-speech-recognition-hmm-htk-2003.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/automatic-speech-recognition-hmm-htk-2003.html">
+    <meta property="og:title" content="ការទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ (Automatic Speech Recognition) ដែលជាបញ្ហាស្មុគស្មាញដោយសារភាពខុសគ្នានៃសំឡេង ល្បឿន បរិបទ និងលក្ខណៈរបស់អ្នកនិយាយ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="September 2003, TU Delft">
+    
+    <meta property="article:tag" content="Speech Recognition">
+    
+    <meta property="article:tag" content="Hidden Markov Models">
+    
+    <meta property="article:tag" content="HTK Toolkit">
+    
+    <meta property="article:tag" content="Viterbi Algorithm">
+    
+    <meta property="article:tag" content="Acoustic Modeling">
+    
+    <meta property="article:tag" content="Language Modeling">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ (Automatic Speech Recognition) ដែលជាបញ្ហាស្មុគស្មាញដោយសារភាពខុសគ្នានៃសំឡេង ល្បឿន បរិបទ និងលក្ខណៈរបស់អ្នកនិយាយ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: Book Chapter (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Chapter",
+      "headline": "\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+      "name": "Automatic Speech Recognition USING Hidden Markov Models",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 (Automatic Speech Recognition) \u178a\u17c2\u179b\u1787\u17b6\u1794\u1789\u17d2\u17a0\u17b6\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u178a\u17c4\u1799\u179f\u17b6\u179a\u1797\u17b6\u1796\u1781\u17bb\u179f\u1782\u17d2\u1793\u17b6\u1793\u17c3\u179f\u17c6\u17a1\u17c1\u1784 \u179b\u17d2\u1794\u17bf\u1793 \u1794\u179a\u17b7\u1794\u1791 \u1793\u17b7\u1784\u179b\u1780\u17d2\u1781\u178e\u17c8\u179a\u1794\u179f\u17cb\u17a2\u17d2\u1793\u1780\u1793\u17b7\u1799\u17b6\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/automatic-speech-recognition-hmm-htk-2003.html",
+      "author": [{"@type": "Person", "name": "Ir. P. Wiggers"},{"@type": "Person", "name": "Dr. drs. L.J.M. Rothkrantz (Data and Knowledge Systems Group, TU Delft)"}],
+      "datePublished": "September 2003, TU Delft",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "Book",
+        "name": "Automatic Speech Recognition USING Hidden Markov Models",
+        "url": "N/A"
+      },
+      "keywords": ["Speech Recognition", "Hidden Markov Models", "HTK Toolkit", "Viterbi Algorithm", "Acoustic Modeling", "Language Modeling"],
+      "about": "Artificial Intelligence / Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+          "item": "https://khmerresearch.com/papers/technology/automatic-speech-recognition-hmm-htk-2003.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ ដោយប្រើប្រាស់ម៉ូដ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Automatic Speech Recognition USING Hidden Markov Models<br>
+        
+        <strong>Document Type:</strong> Textbook / Educational Material<br>
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original material for complete content.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Automatic Speech Recognition USING Hidden Markov Models</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ir. P. Wiggers, Dr. drs. L.J.M. Rothkrantz (Data and Knowledge Systems Group, TU Delft)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> September 2003, TU Delft</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence / Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេប (Overview)</h2>
+
+    <div class="executive-summary">
+        <p><strong>ប្រធានបទ (Topic)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ (Automatic Speech Recognition) ដែលជាបញ្ហាស្មុគស្មាញដោយសារភាពខុសគ្នានៃសំឡេង ល្បឿន បរិបទ និងលក្ខណៈរបស់អ្នកនិយាយ។</p>
+
+        <p><strong>រចនាសម្ព័ន្ធ (Structure)៖</strong> ឯកសារនេះបង្ហាញពីទ្រឹស្តីទូទៅ វិធីសាស្ត្រគណនា និងការអនុវត្តជាក់ស្តែងក្នុងការបង្កើតប្រព័ន្ធទទួលស្គាល់សំឡេង ដោយប្រើប្រាស់ប្រព័ន្ធឧបករណ៍ HTK និងទិន្នន័យសំឡេងភាសាហូឡង់ Polyphone។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសនៃសំឡេង (Acoustic Processing & Feature Extraction) ដូចជា LPC និង MFCC</li>
+            
+            <li>ការបង្កើតម៉ូដែលភាសា (Language Modeling) ដោយប្រើប្រាស់ N-gram</li>
+            
+            <li>ការបណ្តុះបណ្តាលម៉ូដែល Hidden Markov (HMMs) ដោយរួមបញ្ចូលក្បួនដោះស្រាយ Forward, Viterbi និង Baum-Welch</li>
+            
+            <li>ការប្រើប្រាស់ឧបករណ៍ HTK (Hidden Markov Toolkit) សម្រាប់ការរៀបចំទិន្នន័យ ការហ្វឹកហាត់ និងការវាយតម្លៃម៉ូដែល</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>ចំណុចសំខាន់ៗ (Key Takeaways)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែល HMM ជាមួយនឹងប្រព័ន្ធឧបករណ៍ HTK អាចផ្តល់នូវក្របខ័ណ្ឌដ៏រឹងមាំមួយសម្រាប់ការកសាងប្រព័ន្ធទទួលស្គាល់សំឡេងប្រកបដោយប្រសិទ្ធភាព។</li>
+            
+            <li>នៅក្នុងការសាកល្បងជាក់ស្តែងជាមួយភាសាហូឡង់ ប្រព័ន្ធដែលប្រើប្រាស់ 17-mixture generalized triphone សម្រេចបានភាពត្រឹមត្រូវនៃពាក្យរហូតដល់ ៨៩,៥៩% លើទិន្នន័យសាកល្បង ១០០០ ពាក្យ។</li>
+            
+            <li>ប្រសិទ្ធភាពនៃប្រព័ន្ធអាចមានការថយចុះគួរឱ្យកត់សម្គាល់ (នៅសល់ប្រហែល ៣២,១៦% នៃពាក្យត្រឹមត្រូវ) នៅពេលយកទៅប្រើប្រាស់ក្នុងបរិយាកាស ឬលក្ខខណ្ឌសំឡេងរំខានខុសពីទិន្នន័យដើម លុះត្រាតែមានការធ្វើការបន្សាំម៉ូដែល (Adaptive Training) បន្ថែម។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Chapter Overview & Learning Objectives -->
+    <h2>២. គោលបំណងសិក្សា (Learning Objectives)</h2>
+
+    
+    <div class="roadmap">
+        <p>បន្ទាប់ពីអានឯកសារនេះ អ្នកគួរអាច៖</p>
+        <ol>
+            
+            <li>យល់ដឹងពីមូលដ្ឋានទ្រឹស្តីនៃការទទួលស្គាល់សំឡេងដោយស្ថិតិ (Statistical Speech Recognition) ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov (HMM)។","សិក្សាពីការតំឡើង និងការប្រើប្រាស់ឧបករណ៍ HTK (Hidden Markov Toolkit) សម្រាប់ការរៀបចំទិន្នន័យ ការហ្វឹកហាត់ (Training) និងការវាយតម្លៃប្រព័ន្ធ។","អនុវត្តទ្រឹស្តីដើម្បីបង្កើត និងធ្វើឱ្យប្រសើរឡើងនូវប្រព័ន្ធទទួលស្គាល់សំឡេងនិយាយបន្តបន្ទាប់ដែលមានវាក្យសព្ទច្រើន (Large Vocabulary Continuous Speech Recognition) តាមរយៈករណីសិក្សាជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <p>ឯកសារនេះផ្តល់នូវមគ្គុទ្ទេសក៍ដ៏ទូលំទូលាយស្តីពីការបង្កើតប្រព័ន្ធទទួលស្គាល់សំឡេងដោយស្វ័យប្រវត្តិ។ វាគ្របដណ្តប់លើក្បួនដោះស្រាយគណិតវិទ្យាស្នូល (ដូចជា Viterbi និង Baum-Welch) ការណែនាំអំពីការប្រើប្រាស់កញ្ចប់កម្មវិធី HTK និងបង្ហាញពីករណីសិក្សាជាក់ស្តែងមួយជំហានម្តងៗក្នុងការបង្កើតប្រព័ន្ធទទួលស្គាល់សំឡេងសម្រាប់ភាសាហូឡង់។</p>
+    
+    
+
+    
+    <!-- 5. Key Concepts -->
+    <h2>៣. គោលគំនិតសំខាន់ៗ (Key Concepts)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>គោលគំនិត (Concept)</th>
+                <th>ការពន្យល់ (Explanation)</th>
+                <th>ឧទាហរណ៍ (Example)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Hidden Markov Models (HMM)</span></strong><br>ម៉ូដែល Hidden Markov</td>
+                <td>គឺជាឧបករណ៍គណិតវិទ្យាដ៏មានឥទ្ធិពលសម្រាប់ធ្វើម៉ូដែលទិន្នន័យស៊េរីពេលវេលា។ ក្នុងបរិបទនៃការទទួលស្គាល់សំឡេង វាត្រូវបានប្រើដើម្បីតំណាងឱ្យសូរស័ព្ទ (phonemes) ដោយគណនាប្រូបាប៊ីលីតេនៃការផ្លាស់ប្តូរពីស្ថានភាពមួយទៅស្ថានភាពមួយទៀត (Transition probabilities) និងការបង្កើតសញ្ញាសំឡេង។</td>
+                <td>ការប្រើប្រាស់ HMM ដែលមាន ៣ ស្ថានភាព (3-state left-to-right model) ដើម្បីតំណាងឱ្យសូរស័ព្ទ /a/ ដោយមានស្ថានភាពចាប់ផ្តើម កណ្តាល និងបញ្ចប់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Viterbi Algorithm</span></strong><br>ក្បួនដោះស្រាយ Viterbi</td>
+                <td>គឺជាក្បួនដោះស្រាយកម្មវិធីឌីណាមិក (Dynamic Programming) ដែលត្រូវបានប្រើដើម្បីស្វែងរកលំដាប់ស្ថានភាព (state sequence) ដែលទំនងបំផុតលាក់នៅពីក្រោយសញ្ញាសំឡេងដែលត្រូវបានអង្កេតឃើញ។ វាជួយសម្រួលការគណនាដោយកាត់បន្ថយភាពស្មុគស្មាញនៃប្រូបាប៊ីលីតេនៃការស្វែងរកពាក្យដែលបាននិយាយ។</td>
+                <td>កម្មវិធីប្រើក្បួននេះ (តាមរយៈឧបករណ៍ HVite របស់ HTK) ដើម្បីទាយថាតើពាក្យ "មួយ" ឬ "ពីរ" ត្រូវបាននិយាយ ដោយស្វែងរកផ្លូវដែលមានប្រូបាប៊ីលីតេខ្ពស់បំផុតក្នុងបណ្តាញពាក្យដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Language Modeling (N-grams)</span></strong><br>ការបង្កើតម៉ូដែលភាសាដោយប្រើ N-grams</td>
+                <td>ម៉ូដែលភាសាផ្តល់នូវប្រូបាប៊ីលីតេនៃលំដាប់ពាក្យដែលទំនងជានឹងត្រូវបាននិយាយ ដោយផ្អែកលើវេយ្យាករណ៍ ឬស្ថិតិនៃពាក្យដែលធ្លាប់កើតឡើង (ឧទាហរណ៍៖ Bigram ឬ Trigram)។ វាជួយប្រព័ន្ធឱ្យដឹងថាពាក្យមួយណាគួរកើតឡើងបន្ទាប់ពីពាក្យមួយទៀត។</td>
+                <td>ប្រព័ន្ធនឹងឱ្យតម្លៃប្រូបាប៊ីលីតេខ្ពស់ចំពោះឃ្លា "ខ្ញុំចង់ញ៉ាំបាយ" ជាជាង "ខ្ញុំចង់ញ៉ាំឡាន" ផ្អែកលើទិន្នន័យអត្ថបទធំៗ (Corpus) ដែលវាបានរៀន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Acoustic Feature Extraction (MFCC)</span></strong><br>ការទាញយកលក្ខណៈពិសេសនៃសំឡេង (MFCC)</td>
+                <td>គឺជាការបំប្លែងរលកសំឡេងដើម (Raw audio waveform) ទៅជាវ៉ិចទ័រទិន្នន័យ ដែលតំណាងឱ្យលក្ខណៈសំខាន់ៗនៃសំឡេងដោយកាត់បន្ថយសំឡេងរំខាន។ បច្ចេកទេសទូទៅបំផុតគឺ MFCC (Mel-frequency cepstral coefficients) ដែលយកគំរូតាមការស្តាប់របស់មនុស្ស។</td>
+                <td>ការបំប្លែងឯកសារសំឡេងរៀងរាល់ ១០ មីលីវិនាទី ទៅជាវ៉ិចទ័រដែលមាន ៣៩ វិមាត្រ (39-dimensional feature vectors) មុនពេលបញ្ចូលទៅក្នុងម៉ូដែល HMM ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Context Dependent Models (Triphones)</span></strong><br>ម៉ូដែលអាស្រ័យលើបរិបទ (Triphones)</td>
+                <td>នៅក្នុងការនិយាយធម្មតា ការបញ្ចេញសំឡេងនៃសូរស័ព្ទមួយតែងតែរងឥទ្ធិពលពីសូរស័ព្ទខាងមុខ និងខាងក្រោយវា (Coarticulation)។ Triphones គឺជាការបង្កើតម៉ូដែលដាច់ដោយឡែកសម្រាប់សូរស័ព្ទមួយដោយផ្អែកលើបរិបទជុំវិញរបស់វា ដើម្បីបង្កើនភាពត្រឹមត្រូវ។</td>
+                <td>ជំនួសឱ្យការប្រើម៉ូដែល /e/ តែមួយទូទៅ ប្រព័ន្ធបង្កើតម៉ូដែល h-e+t (សំឡេង e ដែលនៅចន្លោះ h និង t) សម្រាប់ពាក្យ "het" ដើម្បីឱ្យការចាប់សំឡេងកាន់តែច្បាស់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 6. Cambodia Relevance -->
+    <h2>៤. ភាពពាក់ព័ន្ធសម្រាប់កម្ពុជា (Cambodia Relevance)</h2>
+
+    <div class="critical-review">
+        
+        <p>បច្ចេកវិទ្យាទទួលស្គាល់សំឡេង (ASR) មានសារៈសំខាន់ណាស់សម្រាប់ប្រទេសកម្ពុជា ក្នុងការធ្វើឱ្យការប្រាស្រ័យទាក់ទងរវាងមនុស្ស និងកុំព្យូទ័រកាន់តែងាយស្រួល ជាពិសេសសម្រាប់ជួយសម្រួលដល់ប្រជាជនដែលមានកម្រិតអក្ខរកម្មបច្ចេកវិទ្យាទាប។</p>
+        
+
+        
+        <h3>ការអនុវត្ត (Applications)៖</h3>
+        <ul>
+            
+            <li><strong>វិស័យសេវាកម្មអតិថិជន និងធនាគារ (Customer Service & Banking):</strong> ការបង្កើតប្រព័ន្ធឆ្លើយតបស្វ័យប្រវត្តិ (IVR) ជាភាសាខ្មែរ ដែលអាចឱ្យអតិថិជនសាកសួរសមតុល្យគណនី ឬធ្វើប្រតិបត្តិការផ្ទេរប្រាក់តាមរយៈការនិយាយដោយផ្ទាល់ (Voice commands) ដូចដែលបានបង្ហាញក្នុង Telebanking Grammar ។</li>
+            
+            <li><strong>វិស័យអប់រំ និងភាពងាយស្រួល (Education & Accessibility):</strong> ការអភិវឌ្ឍកម្មវិធីបំប្លែងសំឡេងនិយាយទៅជាអក្សរខ្មែរ (Speech-to-Text) ដើម្បីជួយសិស្សានុសិស្សកត់ត្រាមេរៀនលឿនជាងមុន ឬជួយជនពិការភ្នែក និងអ្នកដែលមានបញ្ហាក្នុងការមើល អាចប្រើប្រាស់ស្មាតហ្វូនបានយ៉ាងងាយស្រួល។</li>
+            
+            <li><strong>រដ្ឋាភិបាលឌីជីថល (Digital Government):</strong> ការរៀបចំប្រព័ន្ធស្វែងរកព័ត៌មានរដ្ឋបាលដោយប្រើសំឡេង ដើម្បីជួយប្រជាពលរដ្ឋនៅតាមទីជនបទដែលមិនសូវចេះវាយអត្ថបទខ្មែរនៅលើទូរសព្ទ អាចទទួលបានសេវាសាធារណៈងាយស្រួលជាងមុន។</li>
+            
+        </ul>
+        
+
+        
+        <p>ការយល់ដឹងពីទ្រឹស្តី HMM និងការអនុវត្តដោយប្រើ HTK Toolkit នេះ គឺជាមូលដ្ឋានគ្រឹះដ៏រឹងមាំសម្រាប់និស្សិតកម្ពុជាក្នុងការចូលរួមស្រាវជ្រាវ និងអភិវឌ្ឍបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតសម្រាប់ភាសាខ្មែរ (Khmer NLP) ដែលនៅមានតម្រូវការខ្ពស់ និងការខ្វះខាតធនធាន។</p>
+        
+    </div>
+    
+
+    
+    <!-- 7. Study Guide -->
+    <h2>៥. មគ្គុទ្ទេសក៍សិក្សា (Study Guide)</h2>
+    <div class="roadmap">
+        <p>លំហាត់ និងសកម្មភាពសិក្សាដើម្បីពង្រឹងការយល់ដឹង៖</p>
+        <ol>
+            
+            <li><strong>ការរៀបចំទិន្នន័យសំឡេង (Audio Data Preparation):</strong> សិស្សគួរសាកល្បងថតសំឡេងខ្លួនឯងអានឃ្លាខ្លីៗជាភាសាខ្មែរ (ឧទាហរណ៍៖ ប្រយោគចំនួន ៥០) រួចប្រើប្រាស់កម្មវិធី Praat ដើម្បីវិភាគរលកសំឡេង និងទាញយកលក្ខណៈពិសេស (Feature Extraction) ដើម្បីយល់ពីទម្រង់ MFCC ។</li>
+            
+            <li><strong>ការប្រើប្រាស់ឧបករណ៍ HTK ជាមូលដ្ឋាន (Basic HTK Usage):</strong> ដំឡើងកញ្ចប់កម្មវិធី HTK (Hidden Markov Toolkit) នៅលើប្រព័ន្ធប្រតិបត្តិការ Windows ឬ Linux រួចសាកល្បងដំណើរការបញ្ជា HCopy ដើម្បីបំប្លែងឯកសារសំឡេង (.wav) ទៅជាឯកសារវ៉ិចទ័រលក្ខណៈ (Feature vectors) ដែលប្រព័ន្ធអាចយល់បាន។</li>
+            
+            <li><strong>ការបង្កើតម៉ូដែលភាសា (Building a Language Model):</strong> ប្រមូលអត្ថបទព័ត៌មានភាសាខ្មែរខ្លីៗ ដើម្បីបង្កើតវចនានុក្រម (Dictionary) និងបង្កើតម៉ូដែលភាសា Bigram ដោយប្រើប្រាស់ឧបករណ៍ HBuild ឬសរសេរកូដ Python ផ្ទាល់ខ្លួនដើម្បីគណនាប្រូបាប៊ីលីតេ N-gram នៃពាក្យខ្មែរ។</li>
+            
+            <li><strong>ការហ្វឹកហាត់ម៉ូដែល HMM (Training Monophone Models):</strong> អនុវត្តការហ្វឹកហាត់ម៉ូដែល HMM ដំណាក់កាលដំបូង (Flat Start) ដោយប្រើប្រាស់បញ្ជា HCompV និង HERest របស់ HTK លើសំណុំទិន្នន័យសំឡេងដែលបានរៀបចំ ដើម្បីសង្កេតមើលការផ្លាស់ប្តូរនៃមធ្យមភាគ (Mean) និងវ៉ារ្យ៉ង់ (Variance) របស់ម៉ូដែលនីមួយៗបន្ទាប់ពីការហ្វឹកហាត់ (Embedded re-estimation)។</li>
+            
+            <li><strong>ការវាយតម្លៃភាពត្រឹមត្រូវនៃប្រព័ន្ធ (System Evaluation):</strong> ប្រើប្រាស់ឧបករណ៍ HResults ដើម្បីប្រៀបធៀបរវាងលទ្ធផលដែលម៉ូដែលទាយបាន (Recognized transcriptions) ជាមួយនឹងអត្ថបទដើមពិតប្រាកដ ដោយធ្វើការគណនាភាគរយនៃភាពត្រឹមត្រូវនៃពាក្យ (Word Accuracy) និងកំណត់រកចំនួនកំហុស Insertions, Deletions និង Substitutions។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 8. Technical Glossary -->
+    <h2>៦. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model (HMM)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិគណិតវិទ្យាដែលត្រូវបានប្រើដើម្បីកត់ត្រា និងទស្សន៍ទាយលំដាប់នៃទិន្នន័យ (ដូចជាសញ្ញាសំឡេងបន្តបន្ទាប់គ្នា) ដែលមានស្ថានភាពលាក់បាំង (Hidden states) និងប្រូបាប៊ីលីតេនៃការបញ្ចេញសញ្ញា (Observation probabilities)។ ក្នុងបរិបទនេះ វាត្រូវបានប្រើដើម្បីក្លែងធ្វើពីរបៀបដែលសំឡេងនិយាយរបស់មនុស្សប្រែប្រួលតាមពេលវេលា។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាតើមិត្តភក្តិរបស់អ្នកកំពុងញ៉ាំអីដោយមើលតែរូបភាពសំរាមដែលគាត់ចោល (សញ្ញាដែលបានបញ្ចេញ) ដោយមិនបានឃើញសកម្មភាពផ្ទាល់ (ស្ថានភាពលាក់បាំង)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយប្រភេទកម្មវិធីឌីណាមិក (Dynamic Programming) ដែលប្រើសម្រាប់ស្វែងរកផ្លូវ ឬលំដាប់នៃស្ថានភាពដែលទំនងបំផុត (Most likely state sequence)។ នៅក្នុងការទទួលស្គាល់សំឡេង វាជួយប្រព័ន្ធស្វែងរកលំដាប់ពាក្យដែលត្រឹមត្រូវបំផុតពីសំឡេងដែលបានថត ដោយមិនចាំបាច់គណនាគ្រប់ជម្រើសទាំងអស់។</td>
+                <td>ដូចជាការប្រើប្រាស់ Google Maps ដើម្បីស្វែងរកផ្លូវដែលលឿនបំផុតពីផ្ទះទៅសាលារៀន ក្នុងចំណោមផ្លូវរាប់រយដែលខ្វែងគ្នា ដោយជ្រើសរើសតែផ្លូវណាដែលចំណាយពេលតិចបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Baum-Welch algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ហ្វឹកហាត់ (Training) ម៉ូដែល HMM ដែលត្រូវបានស្គាល់ម្យ៉ាងទៀតថាជា Forward-Backward algorithm។ វាធ្វើបច្ចុប្បន្នភាពប៉ារ៉ាម៉ែត្ររបស់ម៉ូដែលដោយស្វ័យប្រវត្តិ (ដូចជាមធ្យមភាគ និងវ៉ារ្យ៉ង់) តាមរយៈការរៀនពីទិន្នន័យសំឡេងគំរូ ដើម្បីឱ្យម៉ូដែលតំណាងឱ្យទិន្នន័យពិតប្រាកដបានល្អបំផុត (Maximum likelihood)។</td>
+                <td>ដូចជាគ្រូបង្រៀនម្នាក់ដែលតែងតែកែសម្រួលវិធីសាស្ត្របង្រៀនរបស់ខ្លួនបន្តិចម្តងៗបន្ទាប់ពីឃើញលទ្ធផលប្រឡងរបស់សិស្សរាល់ខែ ដើម្បីឱ្យសិស្សងាយយល់ជាងមុននៅពេលក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mel-frequency cepstral coefficients (MFCC)</span></td>
+                <td>គឺជាវ៉ិចទ័រទិន្នន័យដែលតំណាងឱ្យលក្ខណៈសំខាន់ៗនៃសញ្ញាសំឡេង ដោយពង្រីក និងបង្រួមប្រេកង់ (Frequency) ផ្អែកលើមាត្រដ្ឋាន Mel scale ដែលស្រដៀងទៅនឹងរបៀបដែលត្រចៀកមនុស្សស្តាប់ឮ។ វាគឺជាជំហានដំបូងនៃការរៀបចំទិន្នន័យសំឡេង (Feature extraction) មុនពេលបញ្ចូលទៅក្នុងម៉ូដែលដើម្បីវែកញែកសូរស័ព្ទ។</td>
+                <td>ដូចជាម៉ាស៊ីនចម្រោះកាហ្វេដែលច្រោះយកតែក្លិន និងរសជាតិកាហ្វេដ៏ឈ្ងុយ (លក្ខណៈពិសេសនៃសំឡេង) ដើម្បីយកទៅឆុង ដោយបោះចោលកាក និងសំបកដែលមិនចាំបាច់ (សំឡេងរំខាន)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bigram language model</span></td>
+                <td>ជាម៉ូដែលភាសាដែលគណនាប្រូបាប៊ីលីតេនៃការកើតឡើងនៃពាក្យមួយ ដោយផ្អែកទៅលើពាក្យ១ដែលនៅខាងមុខវា។ វាជួយបង្កើតក្រិត្យក្រមវេយ្យាករណ៍ឱ្យប្រព័ន្ធ ដើម្បីកុំឱ្យប្រព័ន្ធស្តាប់ច្រឡំទៅជាពាក្យដែលមិនទំនងនឹងប្រើជាប់គ្នាក្នុងការនិយាយជាក់ស្តែង។</td>
+                <td>ដូចជាមុខងារទាយពាក្យបន្ទាប់ (Auto-predict) នៅលើក្តារចុចទូរសព្ទរបស់អ្នក ដែលដឹងថាបើអ្នកវាយពាក្យ "សួស្តី" វានឹងលោតពាក្យ "ឆ្នាំថ្មី" មកឱ្យជ្រើសរើសដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Triphone</span></td>
+                <td>ជាម៉ូដែលសូរស័ព្ទ (Phoneme model) ដែលត្រូវបានបង្កើតឡើងដោយគិតគូរពីបរិបទ ឬឥទ្ធិពលនៃសូរស័ព្ទដែលនៅខាងឆ្វេង និងខាងស្តាំរបស់វា។ វិធីនេះជួយឱ្យការសម្គាល់សំឡេងកាន់តែមានភាពត្រឹមត្រូវខ្ពស់ ព្រោះសំឡេងមនុស្សនិយាយរមែងរងឥទ្ធិពលពីតួអក្សរដែលនៅជាប់វា (Coarticulation)។</td>
+                <td>ដូចជារសជាតិនៃសាច់ជ្រូកដែលប្រែប្រួលបន្តិចបន្តួចទៅតាមគ្រឿងទេសដែលអ្នកដាក់នៅពីមុខ និងពីក្រោយវាពេលចម្អិន វាមិនមានរសជាតិដូចសាច់ជ្រូកសុទ្ធដែលស្ងោរទឹកធម្មតានោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Beam search</span></td>
+                <td>ជាបច្ចេកទេសកាត់បន្ថយជម្រើសក្នុងការស្វែងរកពាក្យ (Pruning) នៅក្នុងការសម្គាល់សំឡេង។ វាដំណើរការដោយកាត់ចោលផ្លូវ ឬសម្មតិកម្មណាដែលមានប្រូបាប៊ីលីតេទាបជាងកម្រិតកំណត់ (Threshold) ដើម្បីកាត់បន្ថយបន្ទុកគណនា ធ្វើឱ្យប្រព័ន្ធដើរបានលឿន និងមិនស៊ីទំហំផ្ទុកច្រើន។</td>
+                <td>ដូចជាអ្នកកាត់មែកឈើដែលស្វិត ឬមិនសូវមានផ្លែចោល ដើម្បីឱ្យដើមឈើផ្តោតជីវជាតិទៅចិញ្ចឹមតែមែកដែលកំពុងលូតលាស់ល្អនិងផ្តល់ផ្លែផ្កាច្រើន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian mixture densities</span></td>
+                <td>គឺជាការរួមបញ្ចូលគ្នានៃខ្សែកោងប្រូបាប៊ីលីតេ Gaussian ជាច្រើន (Mixture components) ក្នុងម៉ូដែលតែមួយ ដើម្បីតំណាងឱ្យទម្រង់បំណែងចែកសំឡេងដែលស្មុគស្មាញ (ឧទាហរណ៍៖ ការប្រែប្រួលកម្រិតសំឡេងរវាងមនុស្សប្រុស និងមនុស្សស្រី) ដែលមិនអាចតំណាងបានដោយខ្សែកោងតែមួយបានល្អ។</td>
+                <td>ដូចជាការលាយពណ៌គោល (ក្រហម លឿង ខៀវ) ក្នុងបរិមាណផ្សេងៗគ្នា ដើម្បីបង្កើតបានជាពណ៌ចម្រុះថ្មីៗដ៏ស្រស់ស្អាតនិងស្មុគស្មាញដែលមិនមានពីធម្មជាតិ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 9. Further Reading -->
+    <h2>៧. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=introduction+to+Hidden+Markov+Models+speech+recognition+tutorial" target="_blank" rel="noopener"><span class="en">introduction to Hidden Markov Models speech recognition tutorial</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Mel-frequency+cepstral+coefficients+MFCC+feature+extraction+process" target="_blank" rel="noopener"><span class="en">Mel-frequency cepstral coefficients MFCC feature extraction process</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Viterbi+algorithm+token+passing+speech+recognition+continuous" target="_blank" rel="noopener"><span class="en">Viterbi algorithm token passing speech recognition continuous</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gaussian+mixture+models+Baum-Welch+re-estimation+HTK+toolkit" target="_blank" rel="noopener"><span class="en">Gaussian mixture models Baum-Welch re-estimation HTK toolkit</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=context+dependent+acoustic+modeling+triphones+vs+monophones" target="_blank" rel="noopener"><span class="en">context dependent acoustic modeling triphones vs monophones</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=N-gram+language+models+back-off+smoothing+techniques" target="_blank" rel="noopener"><span class="en">N-gram language models back-off smoothing techniques</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

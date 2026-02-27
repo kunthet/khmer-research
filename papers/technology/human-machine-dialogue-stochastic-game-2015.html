@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសន្ទនារវាងមនុស្សនិងម៉ាស៊ីនក្នុងទម្រង់ជាហ្គេមស្តូកាស្ទិច (Stochastic Game) | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្របខ្លួនរួមគ្នា (co-adaptation) រវាងអ្នកប្រើប្រាស់ និងប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ក្នុងកិច្ចការដែលមិនមានសហប្...">
+    
+    <meta name="keywords" content="Spoken Dialogue Systems, Stochastic Games, Reinforcement Learning, Nash Equilibrium, AGPI-Q, Co-adaptation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/human-machine-dialogue-stochastic-game-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/human-machine-dialogue-stochastic-game-2015.html">
+    <meta property="og:title" content="ការសន្ទនារវាងមនុស្សនិងម៉ាស៊ីនក្នុងទម្រង់ជាហ្គេមស្តូកាស្ទិច (Stochastic Game) | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្របខ្លួនរួមគ្នា (co-adaptation) រវាងអ្នកប្រើប្រាស់ និងប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ក្នុងកិច្ចការដែលមិនមានសហប្រតិបត្តិការ ដែលទាមទារឱ្យមានការផ្លាស់ប្តូ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015 Proceedings of the SIGDIAL Conference">
+    
+    <meta property="article:tag" content="Spoken Dialogue Systems">
+    
+    <meta property="article:tag" content="Stochastic Games">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Nash Equilibrium">
+    
+    <meta property="article:tag" content="AGPI-Q">
+    
+    <meta property="article:tag" content="Co-adaptation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសន្ទនារវាងមនុស្សនិងម៉ាស៊ីនក្នុងទម្រង់ជាហ្គេមស្តូកាស្ទិច (Stochastic Game)">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្របខ្លួនរួមគ្នា (co-adaptation) រវាងអ្នកប្រើប្រាស់ និងប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ក្នុងកិច្ចការដែលមិនមានសហប្រតិបត្តិការ ដែលទាមទារឱ្យមានការផ្លាស់ប្តូ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u1793\u17d2\u1791\u1793\u17b6\u179a\u179c\u17b6\u1784\u1798\u1793\u17bb\u179f\u17d2\u179f\u1793\u17b7\u1784\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1780\u17d2\u1793\u17bb\u1784\u1791\u1798\u17d2\u179a\u1784\u17cb\u1787\u17b6\u17a0\u17d2\u1782\u17c1\u1798\u179f\u17d2\u178f\u17bc\u1780\u17b6\u179f\u17d2\u1791\u17b7\u1785 (Stochastic Game)",
+      "name": "Human-Machine Dialogue as a Stochastic Game",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u1794\u1781\u17d2\u179b\u17bd\u1793\u179a\u17bd\u1798\u1782\u17d2\u1793\u17b6 (co-adaptation) \u179a\u179c\u17b6\u1784\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb \u1793\u17b7\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178a\u17c4\u1799\u179f\u17c6\u17a1\u17c1\u1784 (Spoken Dialogue Systems) \u1780\u17d2\u1793\u17bb\u1784\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u178a\u17c2\u179b\u1798\u17b7\u1793\u1798\u17b6\u1793\u179f\u17a0\u1794\u17d2\u179a\u178f\u17b7\u1794\u178f\u17d2\u178f\u17b7\u1780\u17b6\u179a \u178a\u17c2\u179b\u1791\u17b6\u1798\u1791\u17b6\u179a\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1796\u17b8\u1782\u17c6\u179a\u17bc MDP (Markov Decision Process) \u1794\u17c2\u1794\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/human-machine-dialogue-stochastic-game-2015.html",
+      "author": [{"@type": "Person", "name": "Merwan Barlier (Orange Labs)"},{"@type": "Person", "name": "Julien Perolat (Univ. Lille - CRIStAL lab)"},{"@type": "Person", "name": "Romain Laroche (Orange Labs)"},{"@type": "Person", "name": "Olivier Pietquin (Institut Universitaire de France)"}],
+      "datePublished": "2015 Proceedings of the SIGDIAL Conference",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Human-Machine Dialogue as a Stochastic Game",
+        "url": "N/A"
+      },
+      "keywords": ["Spoken Dialogue Systems", "Stochastic Games", "Reinforcement Learning", "Nash Equilibrium", "AGPI-Q", "Co-adaptation"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u1793\u17d2\u1791\u1793\u17b6\u179a\u179c\u17b6\u1784\u1798\u1793\u17bb\u179f\u17d2\u179f\u1793\u17b7\u1784\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1780\u17d2\u1793\u17bb\u1784\u1791\u1798\u17d2\u179a\u1784\u17cb\u1787\u17b6\u17a0\u17d2\u1782\u17c1\u1798\u179f\u17d2\u178f\u17bc\u1780\u17b6\u179f\u17d2\u1791\u17b7\u1785 (Stochastic Game)",
+          "item": "https://khmerresearch.com/papers/technology/human-machine-dialogue-stochastic-game-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការសន្ទនារវាងមនុស្សនិងម៉ាស៊ីនក្នុងទម្រង់ជាហ្គេមស្តូកាស្ទិ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Human-Machine Dialogue as a Stochastic Game<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសន្ទនារវាងមនុស្សនិងម៉ាស៊ីនក្នុងទម្រង់ជាហ្គេមស្តូកាស្ទិច (Stochastic Game)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Human-Machine Dialogue as a Stochastic Game</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Merwan Barlier (Orange Labs), Julien Perolat (Univ. Lille - CRIStAL lab), Romain Laroche (Orange Labs), Olivier Pietquin (Institut Universitaire de France)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015 Proceedings of the SIGDIAL Conference</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្របខ្លួនរួមគ្នា (co-adaptation) រវាងអ្នកប្រើប្រាស់ និងប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ក្នុងកិច្ចការដែលមិនមានសហប្រតិបត្តិការ ដែលទាមទារឱ្យមានការផ្លាស់ប្តូរពីគំរូ MDP (Markov Decision Process) បែបប្រពៃណី។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើក្របខ័ណ្ឌហ្គេមស្តូកាស្ទិច (Stochastic Game) ដើម្បីធ្វើម៉ូដែលការសន្ទនា ដោយប្រើប្រាស់ភ្នាក់ងាររៀនពង្រឹង (RL agents) ដែលប្រកួតប្រជែងគ្នាក្នុងល្បែងសូន្យ-បូក (Zero-Sum game) ក្រោមលក្ខខណ្ឌក្លែងធ្វើដែលមានសម្លេងរំខាន។
+        
+        <ul>
+            
+            <li>ការធ្វើម៉ូដែលការសន្ទនាជាហ្គេមស្តូកាស្ទិច (Stochastic Game Modeling)</li>
+            
+            <li>ការវាយតម្លៃនិងប្រៀបធៀបក្បួនដោះស្រាយ (Q-Learning, WoLF-PHC, និង AGPI-Q)</li>
+            
+            <li>ការក្លែងធ្វើកំហុសនៃការទទួលស្គាល់សំឡេងនិងការយល់ភាសា (ASR and NLU Error Simulation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ AGPI-Q គឺជាក្បួនដោះស្រាយតែមួយគត់ដែលផ្តល់នូវភាពរឹងមាំប្រឆាំងនឹងសម្លេងរំខាន និងអាចឈានដល់ចំណុចតុល្យភាព Nash (Nash Equilibrium)។</li>
+            
+            <li>ភ្នាក់ងារ AGPI-Q បានរៀនពីយុទ្ធសាស្ត្រមិនធម្មតា (non-trivial strategies) ដូចជាការប្រើប្រាស់សកម្មភាពបញ្ជាក់ (CONFIRM action) នៅពេលដែលមានភាពមិនប្រាកដប្រជាខ្ពស់ដែលបណ្តាលមកពី ASR ឬ NLU។</li>
+            
+            <li>ការរៀនសូត្ររួមគ្នា (Joint optimization) នៅក្នុងក្របខ័ណ្ឌហ្គេមស្តូកាស្ទិច ធានាថាយុទ្ធសាស្ត្ររបស់ទាំងអ្នកប្រើប្រាស់និងប្រព័ន្ធគឺមានប្រសិទ្ធភាពបំផុត ទោះបីជាស្ថិតក្នុងលក្ខខណ្ឌបរិស្ថានដែលមិនមានស្ថិរភាពក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Q-Learning</span></strong><br>ការរៀន Q-Learning តាមបែបប្រពៃណី</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងជានិមិត្តរូបនៃការរៀនពង្រឹង (Reinforcement Learning) ជាមូលដ្ឋាន។</td>
+                <td>មិនអាចសម្របខ្លួនទៅនឹងបរិស្ថានដែលភ្នាក់ងារផ្សេងទៀតកំពុងផ្លាស់ប្តូរ (Non-stationarities) និងមិនរៀនប្រើប្រាស់សកម្មភាព 'confirm' ដើម្បីដោះស្រាយភាពមិនប្រាកដប្រជា។</td>
+                <td>មិនអាចឈានដល់ចំណុចតុល្យភាព Nash Equilibrium ឡើយ ហើយរយៈពេលនៃការសន្ទនាបែរជាថយចុះនៅពេលដែលសម្លេងរំខាន (SER) កើនឡើង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">WoLF-PHC</span></strong><br>ក្បួនដោះស្រាយ WoLF-PHC</td>
+                <td>ព្យាយាមដោះស្រាយភាពមិនប្រាកដប្រជាដោយប្រើអត្រារៀនសូត្រអថេរ (Variable learning rate) ដើម្បីសម្របខ្លួនយឺតពេលឈ្នះ និងលឿនពេលចាញ់។</td>
+                <td>ប្រើប្រាស់សកម្មភាព 'confirm' ច្រើនហួសហេតុពេក ទោះបីជាមិនមានសម្លេងរំខានក៏ដោយ ដោយសារតែវាមានទំនោរចាត់ទុកខ្លួនឯងថាជាអ្នកចាញ់ជានិច្ច។</td>
+                <td>មិនអាចធានាការឈានដល់ចំណុចតុល្យភាព (Convergence) ក្នុងការសន្ទនានេះទេ ហើយចំនួននៃការសួរទាមទារការបញ្ជាក់គឺថេរជានិច្ច ទោះ SER ប្រែប្រួលក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">AGPI-Q (Approximate Generalized Policy Iteration-Q)</span></strong><br>ការអនុវត្តក្បួនដោះស្រាយ AGPI-Q</td>
+                <td>អាចធានាបាននូវការឈានដល់ចំណុចតុល្យភាព Nash Equilibrium និងមានភាពរឹងមាំក្នុងការគ្រប់គ្រងសម្លេងរំខាន (Noise)។</td>
+                <td>ទាមទារការបង្កើតទិន្នន័យក្លែងធ្វើ (Simulated data) ចំនួនច្រើនជាមុនសិន ដើម្បីដំណើរការជាទម្រង់ Batch RL។</td>
+                <td>រយៈពេលនៃការសន្ទនា និងចំនួនសកម្មភាព 'confirm' កើនឡើងសមាមាត្រទៅនឹងកម្រិតនៃសម្លេងរំខាន (SER) ដែលបង្ហាញពីយុទ្ធសាស្ត្រដោះស្រាយបញ្ហាដ៏ឆ្លាតវៃ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះពឹងផ្អែកលើការក្លែងធ្វើទិន្នន័យ (Simulation) ដូច្នេះធនធានចម្បងគឺថាមពលកុំព្យូទ័រសម្រាប់ការហ្វឹកហាត់ម៉ូដែលកម្រិតខ្ពស់ និងចំណេះដឹងផ្នែកគណិតវិទ្យា។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទាមទារការបង្កើតទិន្នន័យក្លែងធ្វើចំនួន ៧៥,០០០ ការសន្ទនា ដែលទទួលបានពីការអនុវត្តគោលនយោបាយ ε-random។</li>
+        
+        <li><strong>Software/Algorithms:</strong> ការប្រើប្រាស់ CART trees (Classification and Regression Trees) សម្រាប់ធ្វើ Regression នៅក្នុងក្បួនដោះស្រាយ AGPI-Q។</li>
+        
+        <li><strong>Expertise:</strong> អ្នកជំនាញកម្រិតខ្ពស់ផ្នែកទ្រឹស្តីហ្គេម (Game Theory) ដំណើរការម៉ាកូវ (Markov Decision Processes) និង Multi-Agent Reinforcement Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ត្រឹមតែទិន្នន័យក្លែងធ្វើ (Simulated interactions) នៅក្នុងហ្គេមទាយលេខ (Zero-Sum Dialogue Game) ដោយមិនមានការប្រើប្រាស់ទិន្នន័យសន្ទនាពិតប្រាកដរបស់មនុស្សឡើយ។ សម្រាប់ប្រទេសកម្ពុជា នេះមានន័យថាម៉ូដែលត្រូវតែយកមកសាកល្បងនិងកែសម្រួលជាមួយនឹងទិន្នន័យសន្ទនាភាសាខ្មែរពិតប្រាកដ (Real conversational logs) ព្រោះអាកប្បកិរិយារបស់មនុស្សមានភាពស្មុគស្មាញ និងមិនដើរតាមក្បួនតក្កវិទ្យាទាំងស្រុងដូចភ្នាក់ងារ AI នោះទេ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រក្នុងការចាត់ទុកការសន្ទនាជាហ្គេមស្តូកាស្ទិចនេះ មានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធ AI សន្ទនាឆ្លាតវៃ (Spoken Dialogue Systems) នៅកម្ពុជា ដែលជារឿយៗជួបបញ្ហាកំហុសក្នុងការចាប់សំឡេង (ASR errors)។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ (Telecom Customer Service):</strong> អាចប្រើប្រាស់សម្រាប់ប្រព័ន្ធឆ្លើយតបអតិថិជនស្វ័យប្រវត្តិ (Chatbot/Voicebot) របស់ក្រុមហ៊ុនទូរស័ព្ទ (ឧទាហរណ៍៖ Smart ឫ Cellcard) ក្នុងការចរចាគម្រោងសេវាកម្ម ឬដោះស្រាយបញ្ហា ដោយប្រព័ន្ធអាចចេះសួរបញ្ជាក់ (Confirm) ពេលស្តាប់ភាសាខ្មែរមិនច្បាស់។</li>
+            
+            <li><strong>ប្រព័ន្ធកក់សេវាកម្មវេជ្ជសាស្ត្រ (Medical Appointment Scheduling):</strong> អាចអនុវត្តក្នុងទម្រង់ General-Sum Game ដើម្បីរៀបចំការកក់ម៉ោងជួបគ្រូពេទ្យនៅតាមមន្ទីរពេទ្យ ដោយភ្នាក់ងារ AI អាចចរចារកពេលវេលាដែលសមស្របទាំងសងខាង ក្នុងស្ថានភាពដែលប្រព័ន្ធចាប់សំឡេងមានកម្រិត (Noisy environment)។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការផ្លាស់ប្តូរពីគំរូ MDP ធម្មតា មកប្រើប្រាស់ក្បួនដោះស្រាយរួមគ្នា (Joint optimization) នេះ គឺជាគន្លឹះដ៏សំខាន់សម្រាប់បង្កើត AI សន្ទនាភាសាខ្មែរដែលអាចទប់ទល់នឹងកំហុស NLU/ASR នាពេលអនាគត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទ្រឹស្តីហ្គេម និងម៉ូដែល:</strong> ចាប់ផ្តើមដោយការយល់ដឹងអំពី Markov Decision Process (MDP) និង Nash Equilibrium ដោយអានសៀវភៅ ឬឯកសារណែនាំស្តីពី <span class="en">Reinforcement Learning</span> ។</li>
+            
+            <li><strong>ការរៀបចំបរិស្ថានក្លែងធ្វើ (Simulation Environment):</strong> បង្កើតបរិស្ថាននៃការសន្ទនាបែបសូន្យ-បូក (Zero-sum game) សម្រាប់ការទាយលេខ ឬការចរចាដោយប្រើប្រាស់ <span class="en">Python</span> រួមជាមួយបណ្ណាល័យ <span class="en">OpenAI Gym (Gymnasium)</span> ។</li>
+            
+            <li><strong>អនុវត្តក្បួនដោះស្រាយ AGPI-Q:</strong> សរសេរកូដសម្រាប់ក្បួនដោះស្រាយ <span class="en">AGPI-Q</span> ជាទម្រង់ Batch RL ដោយប្រើប្រាស់ <span class="en">scikit-learn</span> ដើម្បីទាញយកមុខងារ <span class="en">CART trees</span> ក្នុងការប៉ាន់ស្មានតម្លៃ Q-function ។</li>
+            
+            <li><strong>បញ្ចូលប្រព័ន្ធសម្គាល់សំឡេងភាសាខ្មែរ (Khmer ASR Integration):</strong> សាកល្បងភ្ជាប់ភ្នាក់ងារ AI នេះជាមួយ API របស់ <span class="en">Khmer ASR</span> ណាមួយ ដើម្បីបញ្ចូលកំហុសស្តាប់ជាក់ស្តែង (Sentence Error Rate) ទៅក្នុងបរិស្ថានហ្វឹកហាត់ ហើយតាមដានពីរបៀបដែលម៉ូដែលរៀនសួរទាមទារការបញ្ជាក់ (Confirm) ត្រលប់មកវិញ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Stochastic Game</span></td>
+                <td>ជាទម្រង់គណិតវិទ្យាដែលពង្រីកពីម៉ូដែល Markov Decision Process (MDP) សម្រាប់ប្រើប្រាស់ក្នុងស្ថានភាពដែលមានភ្នាក់ងារច្រើន (Multi-agent)។ នៅក្នុងការស្រាវជ្រាវនេះ វាមានន័យថាការផ្លាស់ប្តូរស្ថានភាពនៃការសន្ទនា និងរង្វាន់ដែលទទួលបាន គឺអាស្រ័យលើសកម្មភាពរួមគ្នារបស់ទាំងកុំព្យូទ័រ និងអ្នកប្រើប្រាស់ ដែលម្នាក់ៗមានគោលដៅផ្ទាល់ខ្លួន។</td>
+                <td>ដូចជាការលេងអុកដែលអ្នកលេងទាំងសងខាងត្រូវផ្លាស់ប្តូរយុទ្ធសាស្ត្ររបស់ខ្លួនជានិច្ចទៅតាមសកម្មភាពរបស់អ្នកម្ខាងទៀត មិនមែនលេងទល់នឹងកុំព្យូទ័រដែលដើរតាមក្បួនដដែលៗនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Nash Equilibrium</span></td>
+                <td>ជាចំណុចតុល្យភាពនៅក្នុងទ្រឹស្តីហ្គេម (Game Theory) ដែលភ្នាក់ងារនីមួយៗបានជ្រើសរើសយុទ្ធសាស្ត្រល្អបំផុតរបស់ខ្លួន ដោយផ្អែកលើយុទ្ធសាស្ត្ររបស់អ្នកដទៃ ហើយគ្មានអ្នកណាម្នាក់អាចទទួលបានផលចំណេញបន្ថែមដោយការផ្លាស់ប្តូរយុទ្ធសាស្ត្រតែឯកឯងនោះទេ។</td>
+                <td>ដូចជាពេលដែលក្រុមហ៊ុនពីរលក់ទំនិញដូចគ្នា ហើយពួកគេទាំងពីរបានកំណត់តម្លៃមួយដែលគ្មានអ្នកណាហ៊ានបញ្ចុះតម្លៃឬតម្លើងថ្លៃទៀត ព្រោះបើធ្វើដូច្នេះគេនឹងខាតបង់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Reinforcement Learning</span></td>
+                <td>ជាវិធីសាស្ត្រមួយនៃបញ្ញាសិប្បនិម្មិត (AI) ដែលភ្នាក់ងារ (Agent) រៀនធ្វើសេចក្តីសម្រេចចិត្តតាមរយៈការសាកល្បងធ្វើសកម្មភាពនៅក្នុងបរិស្ថានមួយ ហើយទទួលបានរង្វាន់ (Reward) ពេលធ្វើត្រូវ ឬការពិន័យ (Punishment) ពេលធ្វើខុសត្រលប់មកវិញ។</td>
+                <td>ដូចជាការបង្ហាត់សត្វឆ្កែឱ្យចេះអង្គុយ ដោយយើងឱ្យចំណីពេលវាធ្វើត្រូវ និងមិនឱ្យពេលវាធ្វើខុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Zero-Sum Game</span></td>
+                <td>ជាប្រភេទហ្គេមដែលផលចំណេញរបស់អ្នកលេងម្នាក់ គឺជាការខាតបង់របស់អ្នកលេងម្នាក់ទៀតក្នុងទំហំស្មើគ្នា។ នៅក្នុងការស្រាវជ្រាវនេះ គេប្រើវាដើម្បីក្លែងធ្វើការប្រកួតប្រជែងរវាងមនុស្សនិងម៉ាស៊ីនក្នុងការទាយលេខសម្ងាត់ ដែលមិនមានការសហការគ្នាឡើយ។</td>
+                <td>ដូចជាការចែកនំខេកមួយដុំ បើអ្នកម្ខាងយកចំណែកធំ អ្នកម្ខាងទៀតច្បាស់ជាទទួលបានចំណែកតូច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Co-adaptation</span></td>
+                <td>ដំណើរការដែលភ្នាក់ងារពីរ ឬច្រើនផ្លាស់ប្តូរអាកប្បកិរិយា និងសម្របយុទ្ធសាស្ត្ររបស់ពួកគេទៅវិញទៅមកជាបន្តបន្ទាប់ ស្របពេលដែលពួកគេកំពុងប្រាស្រ័យទាក់ទងគ្នា ឬប្រកួតប្រជែងគ្នា។</td>
+                <td>ដូចជាអ្នករត់ប្រណាំងពីរនាក់ដែលម្នាក់ៗខិតខំរត់លឿនជាងមុន ដោយសារតែឃើញដៃគូម្ខាងទៀតបង្កើនល្បឿន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spoken Dialogue System (SDS)</span></td>
+                <td>ជាប្រព័ន្ធកុំព្យូទ័រដែលត្រូវបានរចនាឡើងដើម្បីសន្ទនាជាមួយមនុស្សដោយប្រើភាសានិយាយ តាមរយៈការរួមបញ្ចូលនូវបច្ចេកវិទ្យាទទួលស្គាល់សំឡេង (ASR) និងការយល់ដឹងភាសា (NLU) សម្រាប់ធ្វើការសម្រេចចិត្តឆ្លើយតប។</td>
+                <td>ដូចជាកម្មវិធី Siri ឬ Google Assistant ដែលអ្នកអាចនិយាយបញ្ជា ឬសួរសំណួរដោយផ្ទាល់មាត់បាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Q-function</span></td>
+                <td>ជាអនុគមន៍គណិតវិទ្យាក្នុងម៉ូដែល Reinforcement Learning ដែលវាស់ស្ទង់តម្លៃ ឬគុណភាពនៃការរំពឹងទុក (Expected value) នៃសកម្មភាពណាមួយនៅពេលដែលភ្នាក់ងារស្ថិតក្នុងស្ថានភាពជាក់លាក់ ដើម្បីជួយសម្រេចចិត្តថាតើគួរជ្រើសរើសសកម្មភាពមួយណាទើបទទួលបានរង្វាន់ខ្ពស់បំផុតនៅទីបញ្ចប់។</td>
+                <td>ដូចជាត្រីវិស័យក្នុងខួរក្បាលដែលប្រាប់យើងថាតើការដើរទៅផ្លូវខាងឆ្វេង ឬខាងស្តាំ មួយណាដែលនឹងនាំយើងទៅដល់គោលដៅលឿនជាង និងទទួលបានប្រាក់រង្វាន់ច្រើនជាង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">AGPI-Q</span></td>
+                <td>ជាក្បួនដោះស្រាយមួយ (Approximate Generalized Policy Iteration-Q) ដែលអាចរកឃើញចំណុចតុល្យភាព Nash Equilibrium តាមរយៈការរៀនពីទិន្នន័យការសន្ទនាចាស់ៗ (Batch RL) ដោយមិនចាំបាច់មានទំនាក់ទំនងផ្ទាល់ជាមួយបរិស្ថានជាប្រចាំ ហើយវាមានប្រសិទ្ធភាពក្នុងការទប់ទល់នឹងសម្លេងរំខាននៃប្រព័ន្ធ ASR។</td>
+                <td>ដូចជាសិស្សដែលរៀនពូកែដោយគ្រាន់តែមើលកម្រងលំហាត់ចាស់ៗដែលគេធ្លាប់ធ្វើខុស ឬត្រូវ រួចអាចស្វែងរកក្បួនដោះស្រាយដ៏ល្អឥតខ្ចោះដោយខ្លួនឯង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Markov+Decision+Process+spoken+dialogue+system+reinforcement+learning" target="_blank" rel="noopener"><span class="en">Markov Decision Process spoken dialogue system reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Stochastic+games+multi-agent+reinforcement+learning+co-adaptation" target="_blank" rel="noopener"><span class="en">Stochastic games multi-agent reinforcement learning co-adaptation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Approximate+Generalized+Policy+Iteration-Q+AGPI-Q+zero-sum+Markov+games" target="_blank" rel="noopener"><span class="en">Approximate Generalized Policy Iteration-Q AGPI-Q zero-sum Markov games</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Nash+equilibrium+dialogue+management+negotiation+multi-agent" target="_blank" rel="noopener"><span class="en">Nash equilibrium dialogue management negotiation multi-agent</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=General-sum+stochastic+games+conversational+AI+user+simulation" target="_blank" rel="noopener"><span class="en">General-sum stochastic games conversational AI user simulation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

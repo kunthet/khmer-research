@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>គំរូនៃការរកឃើញលក្ខណៈចម្រុះនៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាលដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទ (Neural Network) | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយពីបញ្ហាប្រឈមក្នុងការធ្វើរោគវិនិច្ឆ័យទាន់ពេលវេលានៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាល (Mild Cognitive Impairment - MCI) ដែលជាដំណាក់កាលគន្ល...">
+    
+    <meta name="keywords" content="Mild Cognitive Impairment, Neural Network, Natural Speech, Multi-feature Detection, TextCNN, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/health/neural-network-mci-detection-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/health/neural-network-mci-detection-2023.html">
+    <meta property="og:title" content="គំរូនៃការរកឃើញលក្ខណៈចម្រុះនៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាលដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទ (Neural Network) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយពីបញ្ហាប្រឈមក្នុងការធ្វើរោគវិនិច្ឆ័យទាន់ពេលវេលានៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាល (Mild Cognitive Impairment - MCI) ដែលជាដំណាក់កាលគន្លឹះមុនការកើតជំងឺវង្វេង (Alzheimer's disease)។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023 Acta Scientiarum Naturalium Universitatis Sunyatseni">
+    
+    <meta property="article:tag" content="Mild Cognitive Impairment">
+    
+    <meta property="article:tag" content="Neural Network">
+    
+    <meta property="article:tag" content="Natural Speech">
+    
+    <meta property="article:tag" content="Multi-feature Detection">
+    
+    <meta property="article:tag" content="TextCNN">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="គំរូនៃការរកឃើញលក្ខណៈចម្រុះនៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាលដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទ (Neural Network)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយពីបញ្ហាប្រឈមក្នុងការធ្វើរោគវិនិច្ឆ័យទាន់ពេលវេលានៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាល (Mild Cognitive Impairment - MCI) ដែលជាដំណាក់កាលគន្លឹះមុនការកើតជំងឺវង្វេង (Alzheimer's disease)។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1782\u17c6\u179a\u17bc\u1793\u17c3\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u179b\u1780\u17d2\u1781\u178e\u17c8\u1785\u1798\u17d2\u179a\u17bb\u17c7\u1793\u17c3\u1797\u17b6\u1796\u1781\u17d2\u179f\u17c4\u1799\u1794\u1789\u17d2\u1789\u17b6\u179f\u17d2\u1798\u17b6\u179a\u178f\u17b8\u1780\u1798\u17d2\u179a\u17b7\u178f\u179f\u17d2\u179a\u17b6\u179b\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791 (Neural Network)",
+      "name": "\u57fa\u4e8e\u795e\u7ecf\u7f51\u7edc\u7684\u591a\u7279\u5f81\u8f7b\u5ea6\u8ba4\u77e5\u529f\u80fd\u969c\u788d\u68c0\u6d4b\u6a21\u578b",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1796\u17b8\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179a\u17c4\u1782\u179c\u17b7\u1793\u17b7\u1785\u17d2\u1786\u17d0\u1799\u1791\u17b6\u1793\u17cb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1793\u17c3\u1797\u17b6\u1796\u1781\u17d2\u179f\u17c4\u1799\u1794\u1789\u17d2\u1789\u17b6\u179f\u17d2\u1798\u17b6\u179a\u178f\u17b8\u1780\u1798\u17d2\u179a\u17b7\u178f\u179f\u17d2\u179a\u17b6\u179b (Mild Cognitive Impairment - MCI) \u178a\u17c2\u179b\u1787\u17b6\u178a\u17c6\u178e\u17b6\u1780\u17cb\u1780\u17b6\u179b\u1782\u1793\u17d2\u179b\u17b9\u17c7\u1798\u17bb\u1793\u1780\u17b6\u179a\u1780\u17be\u178f\u1787\u17c6\u1784\u17ba\u179c\u1784\u17d2\u179c\u17c1\u1784 (Alzheimer\u0027s disease)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/health/neural-network-mci-detection-2023.html",
+      "author": [{"@type": "Person", "name": "WANG Xin (Sun Yat-sen University)"},{"@type": "Person", "name": "CHEN Zesen (Sun Yat-sen University)"}],
+      "datePublished": "2023 Acta Scientiarum Naturalium Universitatis Sunyatseni",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "\u57fa\u4e8e\u795e\u7ecf\u7f51\u7edc\u7684\u591a\u7279\u5f81\u8f7b\u5ea6\u8ba4\u77e5\u529f\u80fd\u969c\u788d\u68c0\u6d4b\u6a21\u578b",
+        "url": "https://doi.org/10.13471/j.cnki.acta.snus.2023B049"
+      },
+      "keywords": ["Mild Cognitive Impairment", "Neural Network", "Natural Speech", "Multi-feature Detection", "TextCNN"],
+      "about": "Computational Linguistics / Medical Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health",
+          "item": "https://khmerresearch.com/papers/health/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1782\u17c6\u179a\u17bc\u1793\u17c3\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u179b\u1780\u17d2\u1781\u178e\u17c8\u1785\u1798\u17d2\u179a\u17bb\u17c7\u1793\u17c3\u1797\u17b6\u1796\u1781\u17d2\u179f\u17c4\u1799\u1794\u1789\u17d2\u1789\u17b6\u179f\u17d2\u1798\u17b6\u179a\u178f\u17b8\u1780\u1798\u17d2\u179a\u17b7\u178f\u179f\u17d2\u179a\u17b6\u179b\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791 (Neural Network)",
+          "item": "https://khmerresearch.com/papers/health/neural-network-mci-detection-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/health/">Health</a> &rsaquo;
+        <span>គំរូនៃការរកឃើញលក្ខណៈចម្រុះនៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 基于神经网络的多特征轻度认知功能障碍检测模型<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.13471/j.cnki.acta.snus.2023B049" target="_blank">doi.org/10.13471/j.cnki.acta.snus.2023B049</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>គំរូនៃការរកឃើញលក្ខណៈចម្រុះនៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាលដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទ (Neural Network)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 基于神经网络的多特征轻度认知功能障碍检测模型</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> WANG Xin (Sun Yat-sen University), CHEN Zesen (Sun Yat-sen University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 Acta Scientiarum Naturalium Universitatis Sunyatseni</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computational Linguistics / Medical Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយពីបញ្ហាប្រឈមក្នុងការធ្វើរោគវិនិច្ឆ័យទាន់ពេលវេលានៃភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាល (Mild Cognitive Impairment - MCI) ដែលជាដំណាក់កាលគន្លឹះមុនការកើតជំងឺវង្វេង (Alzheimer's disease)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតគំរូបណ្ដាញសរសៃប្រសាទដោយរួមបញ្ចូលការវិភាគភាសាវិទ្យា និងទិន្នន័យនៃការសន្ទនាធម្មជាតិរបស់អ្នកជំងឺចូលទៅក្នុងប្រព័ន្ធកុំព្យូទ័រ។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈភាសាវិទ្យា (Linguistic Feature Extraction) ពីកម្រងទិន្នន័យ DementiaBank</li>
+            
+            <li>ការប្រើប្រាស់គំរូប្រធានបទ (LDA Model) ដើម្បីបង្កើតម៉ាទ្រីសប្រធានបទ-ពាក្យ (T-W Matrix)</li>
+            
+            <li>ការកសាងគំរូបណ្ដាញសរសៃប្រសាទ (TextCNN Network) សម្រាប់ការចាត់ថ្នាក់ និងរកឃើញជំងឺ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>គំរូនេះទទួលបានភាពត្រឹមត្រូវ (Accuracy) រហូតដល់ ០.៩៣ ភាពរំញោច (Sensitivity) ១.០០ និងភាពជាក់លាក់ (Specificity) ០.៨ ក្នុងការរកឃើញជំងឺ MCI ។</li>
+            
+            <li>ការរួមបញ្ចូលលក្ខណៈភាសាវិទ្យានៃការនិយាយធម្មជាតិ ជាមួយនឹងព័ត៌មានពហុលក្ខណៈរបស់អ្នកជំងឺ ជួយបង្កើនប្រសិទ្ធភាពក្នុងការវាយតម្លៃបានយ៉ាងល្អប្រសើរ។</li>
+            
+            <li>ការវិភាគការសន្ទនាធម្មជាតិដោយស្វ័យប្រវត្តិបង្ហាញពីសក្តានុពលខ្ពស់ក្នុងការក្លាយជាឧបករណ៍ជំនួយវេជ្ជសាស្ត្រសម្រាប់ការធ្វើរោគវិនិច្ឆ័យជំងឺវង្វេងនៅដំណាក់កាលដំបូង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Clinical Methods (EEG, MRI, Neuropsychological Scales)</span></strong><br>វិធីសាស្ត្រវិនិច្ឆ័យតាមគ្លីនិកបែបប្រពៃណី (ការស្កេនខួរក្បាល EEG, MRI និងកម្រងសំណួរ)</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់នៅពេលដែលរោគសញ្ញាខ្សោយបញ្ញាបង្ហាញលក្ខណៈច្បាស់លាស់តាមរយៈរូបភាពវេជ្ជសាស្ត្រ។</td>
+                <td>មានតម្លៃថ្លៃ ត្រូវការគ្រូពេទ្យជំនាញ និងអាចផ្តល់ផលវិបាកដល់អ្នកជំងឺ (invasive) ហើយពិបាករកឃើញនៅដំណាក់កាលដំបូង។</td>
+                <td>អត្រាមិនឃើញជំងឺ (Missed diagnosis rate) ខ្ពស់រហូតដល់ ៧៦.៨% សម្រាប់ដំណាក់កាលដំបូង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Logistic Regression with Acoustic/Linguistic Features (Fraser et al., 2016)</span></strong><br>តម្រែតម្រង់ឡូជីស្ទិក (Logistic Regression) ផ្អែកលើលក្ខណៈសំឡេងនិងភាសា</td>
+                <td>អាចវិភាគសំឡេងដោយស្វ័យប្រវត្តិ ដែលជាឧបករណ៍ជំនួយវាយតម្លៃយ៉ាងមានប្រសិទ្ធភាព។</td>
+                <td>មិនបានផ្តោតស៊ីជម្រៅលើទម្រង់ភាសាវិទ្យា ដែលធ្វើឱ្យភាពត្រឹមត្រូវនៅមានកម្រិត និងជួបប្រទះបញ្ហាក្នុងការបង្កើនប្រសិទ្ធភាពបន្ថែម។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុតត្រឹមតែ ៨១.៩២% ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Multi-feature TextCNN Neural Network (Proposed Model)</span></strong><br>គំរូបណ្ដាញសរសៃប្រសាទ TextCNN ពហុលក្ខណៈ (សំណើក្នុងឯកសារស្រាវជ្រាវ)</td>
+                <td>មិនប៉ះពាល់ដល់រាងកាយអ្នកជំងឺ (non-invasive) ចំណាយតិច ងាយស្រួលពង្រីកទំហំស្រាវជ្រាវ និងអាចរកឃើញរោគសញ្ញានៅដំណាក់កាលដំបូងបានយ៉ាងល្អ។</td>
+                <td>ទាមទារទិន្នន័យនៃការសន្ទនាដែលត្រូវបានបំប្លែងទៅជាអត្ថបទ (transcripts) យ៉ាងច្បាស់លាស់ និងការសម្អាតទិន្នន័យយ៉ាងល្អិតល្អន់។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៣%, ភាពរំញោច (Sensitivity) ១.០០ និងភាពជាក់លាក់ (Specificity) ០.៨០ នៅលើកម្រងទិន្នន័យ DementiaBank។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះមិនតម្រូវឱ្យមានធនធានកុំព្យូទ័រធំដុំ (GPU) នោះទេ ប៉ុន្តែទាមទារទិន្នន័យភាសាវិទ្យាដែលមានគុណភាពខ្ពស់សម្រាប់ការបង្ហាត់គំរូ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនមេ (Server) ប្រភេទ CPU ជាធម្មតា (ឯកសារបានបញ្ជាក់ថា ការហ្វឹកហាត់ត្រូវបានធ្វើឡើងនៅលើម៉ាស៊ីនមេ CPU ព្រោះទិន្នន័យអត្ថបទមិនតម្រូវឱ្យមាន GPU ធំដុំឡើយ)។</li>
+        
+        <li><strong>Software:</strong> ភាសាការសរសេរកូដ Python និងកញ្ចប់ឧបករណ៍ដំណើរការភាសាធម្មជាតិ NLTK (Natural Language Toolkit) សម្រាប់ការសម្អាតអត្ថបទ។</li>
+        
+        <li><strong>Dataset:</strong> កម្រងទិន្នន័យ DementiaBank (ប្រភេទ English Protocol Delaware Corpus) ដែលមានអត្ថបទបំប្លែងពីសំឡេងអ្នកជំងឺជាង ៤៧៣ គំរូ។</li>
+        
+        <li><strong>Expertise:</strong> ជំនាញខាងភាសាវិទ្យាកុំព្យូទ័រ (Computational Linguistics) ដើម្បីទាញយកលក្ខណៈភាសា និងជំនាញខាងរៀនស៊ីជម្រៅ (Deep Learning) ដើម្បីរៀបចំគំរូ TextCNN។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់កម្រងទិន្នន័យ DementiaBank ដែលមានតែភាសាអង់គ្លេស និងផ្តោតលើអ្នកជំងឺវ័យចំណាស់នៅលោកខាងលិច។ សម្រាប់ប្រទេសកម្ពុជា នេះគឺជាគម្លាតទិន្នន័យដ៏ធំមួយ ពីព្រោះរចនាសម្ព័ន្ធវេយ្យាករណ៍ ការប្រើប្រាស់ពាក្យពេចន៍ និងវប្បធម៌នៃការសន្ទនាក្នុងភាសាខ្មែរ មានភាពខុសគ្នាស្រឡះពីភាសាអង់គ្លេស ដែលតម្រូវឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកជាមុនសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានឧបសគ្គខាងភាសាក៏ដោយ វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ខ្លាំងក្នុងការយកមកអនុវត្តនៅកម្ពុជា ដើម្បីធ្វើការពិនិត្យជំងឺវង្វេងក្នុងតម្លៃថោក។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យកាល់ម៉ែត និង មន្ទីរពេទ្យមិត្តភាពខ្មែរ-សូវៀត (Calmette & Khmer-Soviet Hospitals):</strong> អាចប្រើប្រាស់គំរូនេះជាឧបករណ៍វិភាគបឋម (Screening tool) នៅផ្នែកប្រព័ន្ធសរសៃប្រសាទ មុននឹងសម្រេចចិត្តឱ្យអ្នកជំងឺចំណាយថវិកាទៅថត MRI ដែលមានតម្លៃថ្លៃ។</li>
+            
+            <li><strong>មណ្ឌលសុខភាពជនបទ (Rural Health Centers):</strong> នៅតាមបណ្តាខេត្តដាច់ស្រយាលដែលខ្វះខាតគ្រូពេទ្យឯកទេស បុគ្គលិកពេទ្យអាចប្រើប្រាស់កម្មវិធីទូរស័ព្ទដៃដែលប្រើគំរូនេះ ដើម្បីថតសំឡេងសន្ទនារបស់ចាស់ជរា និងវាយតម្លៃហានិភ័យជំងឺ MCI ភ្លាមៗ។</li>
+            
+            <li><strong>ក្រសួងសង្គមកិច្ច អតីតយុទ្ធជន និងយុវនីតិសម្បទា (MoSVY):</strong> អាចបញ្ចូលបច្ចេកវិទ្យានេះទៅក្នុងកម្មវិធីថែទាំមនុស្សចាស់ក្នុងសហគមន៍ ដើម្បីតាមដានសុខភាពខួរក្បាលរបស់ពួកគាត់ជាប្រចាំដោយមិនមានការរំខាន។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការវិភាគការសន្ទនាធម្មជាតិដើម្បីរកឃើញជំងឺវង្វេងគឺជាដំណោះស្រាយឌីជីថលដ៏មានប្រសិទ្ធភាពសម្រាប់ប្រព័ន្ធសុខាភិបាលកម្ពុជា តែចាំបាច់ត្រូវមានគម្រោងស្រាវជ្រាវនិងប្រមូលទិន្នន័យសំឡេងភាសាខ្មែរជាបន្ទាន់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូលកម្រងទិន្នន័យសំឡេងភាសាខ្មែរតាមគ្លីនិក:</strong> និស្សិតត្រូវសហការជាមួយមន្ទីរពេទ្យ (ឧ. មន្ទីរពេទ្យកាល់ម៉ែត) ដោយសុំការអនុញ្ញាតពីគណៈកម្មាធិការជាតិក្រមសីលធម៌ស្រាវជ្រាវសុខាភិបាល (NECHR) ដើម្បីថតសំឡេងការសន្ទនាធម្មជាតិរបស់អ្នកជំងឺវ័យចំណាស់ខ្មែរដោយផ្អែកលើរូបភាព (ឧទាហរណ៍ ប្រើរូបភាព Cookie Theft ជំនាន់ខ្មែរ)។</li>
+            
+            <li><strong>ដំណើរការនិងបំប្លែងទិន្នន័យភាសា (Text Preprocessing):</strong> ប្រើប្រាស់ឧបករណ៍បំបែកពាក្យខ្មែរដូចជា <span class="en">Khmer NLTK</span> ឬ <span class="en">Seang</span> ដើម្បីបំប្លែងសំឡេងទៅជាអត្ថបទ (Speech-to-Text) និងសម្អាតទិន្នន័យដោយលុបពាក្យតភ្ជាប់ដែលមិនចាំបាច់ (Stopwords) ចេញពីអត្ថបទសន្ទនា។</li>
+            
+            <li><strong>ទាញយកម៉ាទ្រីស T-W និងលក្ខណៈភាសាវិទ្យា:</strong> អនុវត្តគំរូ <span class="en">LDA (Latent Dirichlet Allocation)</span> ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">Gensim</span> ក្នុង Python ដើម្បីបង្កើតម៉ាទ្រីសប្រធានបទ-ពាក្យ រួមទាំងរាប់ចំនួនពាក្យដដែលៗ ការទាក់ទែងនៃន័យ និងកម្រិតនៃការប្រើប្រាស់គុណនាម និងកិរិយាសព្ទក្នុងភាសាខ្មែរ។</li>
+            
+            <li><strong>កសាងនិងបង្ហាត់គំរូ TextCNN ជាមួយ PyTorch:</strong> ប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> ដើម្បីសរសេរកូដបង្កើតបណ្ដាញសរសៃប្រសាទ <span class="en">TextCNN</span>។ ផ្តើមចេញពីការដាក់ទំហំ Convolutional Kernel (ឧ. 3x3) និងសាកល្បងហ្វឹកហាត់ដោយប្រើប្រាស់ <span class="en">SGD Optimizer</span> នៅលើម៉ាស៊ីនកុំព្យូទ័រធម្មតា (CPU) ដោយតាមដានកម្រិត Accuracy និង Loss ឱ្យបានត្រឹមត្រូវ។</li>
+            
+            <li><strong>អភិវឌ្ឍកម្មវិធីសាកល្បង (Prototype Development):</strong> ខ្ចប់គំរូ (Deploy model) ដែលបានហ្វឹកហាត់រួចទៅក្នុងកម្មវិធី Web App ដោយប្រើ <span class="en">Streamlit</span> ដើម្បីអនុញ្ញាតឱ្យគ្រូពេទ្យសាកល្បងថតសំឡេង និងទទួលបានលទ្ធផលនៃការទស្សន៍ទាយរោគសញ្ញា MCI ភ្លាមៗនៅលើអេក្រង់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Mild cognitive impairment (MCI)</span></td>
+                <td>ភាពខ្សោយបញ្ញាស្មារតីកម្រិតស្រាល គឺជាដំណាក់កាលចន្លោះកណ្តាលរវាងការថយចុះការចងចាំតាមវ័យចំណាស់ធម្មតា និងការវិវត្តទៅជាជំងឺវង្វេង (Alzheimer's) ដែលអ្នកជំងឺចាប់ផ្តើមមានបញ្ហាភ្លេចភ្លាំង និងការប្រើប្រាស់ភាសា។</td>
+                <td>ដូចជារថយន្តដែលចាប់ផ្តើមស៊ីប្រេងខុសធម្មតា និងរលត់ញឹកញាប់ មុនពេលម៉ាស៊ីនខូចទាំងស្រុង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Latent Dirichlet Allocation (LDA)</span></td>
+                <td>ជាក្បួនអាល់កូរីតម៉ូដែលប្រធានបទ (Topic modeling) ដែលប្រើសម្រាប់ទាញយកប្រធានបទលាក់កំបាំង និងពាក្យគន្លឹះចេញពីសំណុំអត្ថបទធំៗ ដើម្បីស្វែងយល់ពីរចនាសម្ព័ន្ធអត្ថន័យនៃការសន្ទនា។</td>
+                <td>ដូចជាអ្នកបណ្ណារក្សដែលអានសៀវភៅរាប់ពាន់ក្បាល ហើយបែងចែកសៀវភៅទាំងនោះទៅតាមប្រធានបទ និងពាក្យគន្លឹះដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TextCNN</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Convolutional Neural Network) ដែលត្រូវបានកែច្នៃពិសេសសម្រាប់វិភាគ និងចាត់ថ្នាក់អត្ថបទ (Text Classification) ដោយវាពូកែក្នុងការចាប់យកទំនាក់ទំនងរវាងពាក្យដែលនៅក្បែរៗគ្នា (N-grams)។</td>
+                <td>ដូចជាអ្នកអានដែលប្រើវ៉ែនតាពង្រីក ដើម្បីអានកាត់ន័យសាច់រឿងម្ដងមួយឃ្លាៗ រហូតយល់ន័យរួមទាំងមូលថាតើអត្ថបទនេះចង់និយាយពីអ្វី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">T-W matrix (Topic-Word matrix)</span></td>
+                <td>ជាតារាងម៉ាទ្រីសដែលបង្កើតចេញពីម៉ូដែល LDA ដែលបង្ហាញពីទំនាក់ទំនងរវាងប្រធានបទ (Topics) និងពាក្យ (Words) ដោយផ្ទុកនូវតម្លៃប្រូបាប៊ីលីតេដែលពាក្យនីមួយៗនឹងត្រូវប្រើប្រាស់ក្នុងប្រធានបទណាមួយ។</td>
+                <td>ដូចជាតារាងបញ្ជីមុខម្ហូប និងគ្រឿងផ្សំ ដែលប្រាប់យើងថាមុខម្ហូបនេះ (ប្រធានបទ) ត្រូវប្រើគ្រឿងផ្សំអ្វីខ្លះ (ពាក្យ) និងក្នុងបរិមាណប៉ុន្មាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">anomia</span></td>
+                <td>រោគសញ្ញា 'មិនអាចហៅឈ្មោះបាន' គឺជាប្រភេទនៃការចុះខ្សោយផ្នែកភាសា ដែលអ្នកជំងឺចងចាំវត្ថុ និងដឹងពីមុខងាររបស់វា ប៉ុន្តែមិនអាចរកនឹកពាក្យ ឬឈ្មោះដើម្បីហៅវត្ថុនោះបាន (ឧទាហរណ៍ ភ្លេចពាក្យថា 'ប៊ិច' តែដឹងថាវាសម្រាប់សរសេរ)។</td>
+                <td>ដូចជាពេលយើងចង់ហៅឈ្មោះមិត្តភក្តិម្នាក់ដែលយើងស្គាល់មុខច្បាស់ តែស្រាប់តែទើសនៅចុងមាត់ នឹកឈ្មោះមិនឃើញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">idea density</span></td>
+                <td>ដង់ស៊ីតេនៃអត្ថន័យ គឺជារង្វាស់ទម្ងន់ភាសាវិទ្យាដែលវាស់ថាតើក្នុងមួយប្រយោគ ឬមួយឃ្លា មានផ្ទុកព័ត៌មាន ឬគំនិតសំខាន់ៗប៉ុន្មាន ដោយធៀបនឹងចំនួនពាក្យសរុបដែលបាននិយាយ។ អ្នកជំងឺ MCI ច្រើនមានដង់ស៊ីតេនេះទាបដោយសារនិយាយពាក្យឥតប្រយោជន៍ច្រើន។</td>
+                <td>ដូចជាការប្រៀបធៀបរវាងកាហ្វេខាប់ និងកាហ្វេរាវ; កាហ្វេខាប់ (Idea density ខ្ពស់) មានរសជាតិកាហ្វេខ្លាំងក្នុងទឹកមួយកែវតូច ចំណែកកាហ្វេរាវមានតែទឹកច្រើនតែគ្មានរសជាតិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">one-hot encoding</span></td>
+                <td>ជាវិធីសាស្ត្របំប្លែងទិន្នន័យចំណាត់ថ្នាក់ (Categorical data) ទៅជាវ៉ិចទ័រលេខ 0 និង 1 ដើម្បីឱ្យម៉ូដែល AI អាចយល់បាន ឧទាហរណ៍ បើជាអ្នកជំងឺ MCI លទ្ធផលចេញ [1, 0] បើជាមនុស្សធម្មតា លទ្ធផលចេញ [0, 1]។</td>
+                <td>ដូចជាកុងតាក់ភ្លើងក្នុងផ្ទះច្រើនបន្ទប់; បើចង់បើកភ្លើងបន្ទប់ទឹក គឺចុចកុងតាក់បន្ទប់ទឹកឱ្យបើក (1) ហើយកុងតាក់ផ្សេងទៀតត្រូវបិទទាំងអស់ (0)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SGD Optimizer</span></td>
+                <td>Stochastic Gradient Descent គឺជាក្បួនគណិតវិទ្យាក្នុងការហ្វឹកហាត់ម៉ូដែល AI ដើម្បីស្វែងរកកម្រិតអប្បបរមានៃកំហុស (Loss function) ដោយធ្វើការកែតម្រូវប៉ារ៉ាម៉ែត្របន្តិចម្តងៗនៅរាល់ពេលវាយតម្លៃទិន្នន័យ។</td>
+                <td>ដូចជាមនុស្សបិទភ្នែកដើរចុះពីកំពូលភ្នំ ដោយប្រើជើងស្ទាបរកផ្លូវដែលជម្រាលចុះក្រោមបំផុត ដើម្បីទៅដល់ជើងភ្នំឱ្យបានលឿននិងសុវត្ថិភាព។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+learning+architectures+for+Mild+Cognitive+Impairment+detection+from+spontaneous+speech" target="_blank" rel="noopener"><span class="en">Deep learning architectures for Mild Cognitive Impairment detection from spontaneous speech</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Latent+Dirichlet+Allocation+topic+modeling+for+clinical+linguistic+feature+extraction" target="_blank" rel="noopener"><span class="en">Latent Dirichlet Allocation topic modeling for clinical linguistic feature extraction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=TextCNN+applications+in+natural+language+processing+for+electronic+health+records" target="_blank" rel="noopener"><span class="en">TextCNN applications in natural language processing for electronic health records</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Acoustic+vs+linguistic+features+in+early+Alzheimer%27s+disease+diagnosis+via+machine+learning" target="_blank" rel="noopener"><span class="en">Acoustic vs linguistic features in early Alzheimer's disease diagnosis via machine learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=DementiaBank+English+Protocol+Delaware+Corpus+automated+speech+analysis+techniques" target="_blank" rel="noopener"><span class="en">DementiaBank English Protocol Delaware Corpus automated speech analysis techniques</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

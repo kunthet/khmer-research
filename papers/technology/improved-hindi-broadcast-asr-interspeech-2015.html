@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើឱ្យប្រសើរឡើងនូវប្រព័ន្ធសម្គាល់សំឡេងនិយាយព័ត៌មានផ្សាយជាភាសាហិណ្ឌី (Hindi Broadcast ASR) តាមរយៈការបន្សាំម៉ូដែលភាសានិងម៉ូដែលការបញ្ចេញសំឡេង ដោយប្រើប្រាស់ចំណេះដឹងផ្នែកវាក្យសម្ព័ន្ធ និងរូបវិទ្យាសូរសព្ទជាមុន | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធសម្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ (ASR) ដែលមានវាក្យសព្ទធំទូលាយសម្រាប់ភាសាហិណ្ឌី ជាពិសេសសម្រាប់ការផ្សាយព័ត៌មាន ដែលបច្ច...">
+    
+    <meta name="keywords" content="Automatic Speech Recognition, Hindi LVCSR, Graphemic Models, Language Model Adaptation, Broadcast News, Morphophonemic Knowledge, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/improved-hindi-broadcast-asr-interspeech-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/improved-hindi-broadcast-asr-interspeech-2015.html">
+    <meta property="og:title" content="ការធ្វើឱ្យប្រសើរឡើងនូវប្រព័ន្ធសម្គាល់សំឡេងនិយាយព័ត៌មានផ្សាយជាភាសាហិណ្ឌី (Hindi Broadcast ASR) តាមរយៈការបន្សាំម៉ូដែលភាសានិងម៉ូដែលការបញ្ចេញសំឡេង ដោយប្រើប្រាស់ចំណេះដឹងផ្នែកវាក្យសម្ព័ន្ធ និងរូបវិទ្យាសូរសព្ទជាមុន | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធសម្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ (ASR) ដែលមានវាក្យសព្ទធំទូលាយសម្រាប់ភាសាហិណ្ឌី ជាពិសេសសម្រាប់ការផ្សាយព័ត៌មាន ដែលបច្ចុប្បន្ននៅមានកម្រិតនៅឡើយ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015 (INTERSPEECH)">
+    
+    <meta property="article:tag" content="Automatic Speech Recognition">
+    
+    <meta property="article:tag" content="Hindi LVCSR">
+    
+    <meta property="article:tag" content="Graphemic Models">
+    
+    <meta property="article:tag" content="Language Model Adaptation">
+    
+    <meta property="article:tag" content="Broadcast News">
+    
+    <meta property="article:tag" content="Morphophonemic Knowledge">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើឱ្យប្រសើរឡើងនូវប្រព័ន្ធសម្គាល់សំឡេងនិយាយព័ត៌មានផ្សាយជាភាសាហិណ្ឌី (Hindi Broadcast ASR) តាមរយៈការបន្សាំម៉ូដែលភាសានិងម៉ូដែលការបញ្ចេញសំឡេង ដោយប្រើប្រាស់ចំណេះដឹងផ្នែកវាក្យសម្ព័ន្ធ និងរូបវិទ្យាសូរសព្ទជាមុន">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធសម្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ (ASR) ដែលមានវាក្យសព្ទធំទូលាយសម្រាប់ភាសាហិណ្ឌី ជាពិសេសសម្រាប់ការផ្សាយព័ត៌មាន ដែលបច្ចុប្បន្ននៅមានកម្រិតនៅឡើយ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u17a1\u17be\u1784\u1793\u17bc\u179c\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1795\u17d2\u179f\u17b6\u1799\u1787\u17b6\u1797\u17b6\u179f\u17b6\u17a0\u17b7\u178e\u17d2\u178c\u17b8 (Hindi Broadcast ASR) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1794\u1793\u17d2\u179f\u17b6\u17c6\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1797\u17b6\u179f\u17b6\u1793\u17b7\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1780\u17b6\u179a\u1794\u1789\u17d2\u1785\u17c1\u1789\u179f\u17c6\u17a1\u17c1\u1784 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1785\u17c6\u178e\u17c1\u17c7\u178a\u17b9\u1784\u1795\u17d2\u1793\u17c2\u1780\u179c\u17b6\u1780\u17d2\u1799\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792 \u1793\u17b7\u1784\u179a\u17bc\u1794\u179c\u17b7\u1791\u17d2\u1799\u17b6\u179f\u17bc\u179a\u179f\u1796\u17d2\u1791\u1787\u17b6\u1798\u17bb\u1793",
+      "name": "Improved Hindi Broadcast ASR by Adapting the Language Model and Pronunciation Model Using A Priori Syntactic and Morphophonemic Knowledge",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 (ASR) \u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b6\u1780\u17d2\u1799\u179f\u1796\u17d2\u1791\u1792\u17c6\u1791\u17bc\u179b\u17b6\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6\u17a0\u17b7\u178e\u17d2\u178c\u17b8 \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1795\u17d2\u179f\u17b6\u1799\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793 \u178a\u17c2\u179b\u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793\u1793\u17c5\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f\u1793\u17c5\u17a1\u17be\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/improved-hindi-broadcast-asr-interspeech-2015.html",
+      "author": [{"@type": "Person", "name": "Preethi Jyothi (Beckman Institute, University of Illinois at Urbana-Champaign)"},{"@type": "Person", "name": "Mark Hasegawa-Johnson (Department of ECE, University of Illinois at Urbana-Champaign)"}],
+      "datePublished": "2015 (INTERSPEECH)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Improved Hindi Broadcast ASR by Adapting the Language Model and Pronunciation Model Using A Priori Syntactic and Morphophonemic Knowledge",
+        "url": "https://doi.org/10.21437/Interspeech.2015-637"
+      },
+      "keywords": ["Automatic Speech Recognition", "Hindi LVCSR", "Graphemic Models", "Language Model Adaptation", "Broadcast News", "Morphophonemic Knowledge"],
+      "about": "Computer Science / Automatic Speech Recognition"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u17a1\u17be\u1784\u1793\u17bc\u179c\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1795\u17d2\u179f\u17b6\u1799\u1787\u17b6\u1797\u17b6\u179f\u17b6\u17a0\u17b7\u178e\u17d2\u178c\u17b8 (Hindi Broadcast ASR) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1794\u1793\u17d2\u179f\u17b6\u17c6\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1797\u17b6\u179f\u17b6\u1793\u17b7\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1780\u17b6\u179a\u1794\u1789\u17d2\u1785\u17c1\u1789\u179f\u17c6\u17a1\u17c1\u1784 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1785\u17c6\u178e\u17c1\u17c7\u178a\u17b9\u1784\u1795\u17d2\u1793\u17c2\u1780\u179c\u17b6\u1780\u17d2\u1799\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792 \u1793\u17b7\u1784\u179a\u17bc\u1794\u179c\u17b7\u1791\u17d2\u1799\u17b6\u179f\u17bc\u179a\u179f\u1796\u17d2\u1791\u1787\u17b6\u1798\u17bb\u1793",
+          "item": "https://khmerresearch.com/papers/technology/improved-hindi-broadcast-asr-interspeech-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើឱ្យប្រសើរឡើងនូវប្រព័ន្ធសម្គាល់សំឡេងនិយាយព័ត៌មានផ្ស...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Improved Hindi Broadcast ASR by Adapting the Language Model and Pronunciation Model Using A Priori Syntactic and Morphophonemic Knowledge<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.21437/Interspeech.2015-637" target="_blank">doi.org/10.21437/Interspeech.2015-637</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើឱ្យប្រសើរឡើងនូវប្រព័ន្ធសម្គាល់សំឡេងនិយាយព័ត៌មានផ្សាយជាភាសាហិណ្ឌី (Hindi Broadcast ASR) តាមរយៈការបន្សាំម៉ូដែលភាសានិងម៉ូដែលការបញ្ចេញសំឡេង ដោយប្រើប្រាស់ចំណេះដឹងផ្នែកវាក្យសម្ព័ន្ធ និងរូបវិទ្យាសូរសព្ទជាមុន</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Improved Hindi Broadcast ASR by Adapting the Language Model and Pronunciation Model Using A Priori Syntactic and Morphophonemic Knowledge</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Preethi Jyothi (Beckman Institute, University of Illinois at Urbana-Champaign), Mark Hasegawa-Johnson (Department of ECE, University of Illinois at Urbana-Champaign)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015 (INTERSPEECH)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Automatic Speech Recognition</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធសម្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ (ASR) ដែលមានវាក្យសព្ទធំទូលាយសម្រាប់ភាសាហិណ្ឌី ជាពិសេសសម្រាប់ការផ្សាយព័ត៌មាន ដែលបច្ចុប្បន្ននៅមានកម្រិតនៅឡើយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រមូលទិន្នន័យសំឡេងផ្សាយព័ត៌មាន រួចប្រើប្រាស់វិធីសាស្ត្របន្សាំម៉ូដែលសូរសព្ទ និងម៉ូដែលភាសាដោយស្វ័យប្រវត្តិដើម្បីបណ្តុះបណ្តាលប្រព័ន្ធ។
+        
+        <ul>
+            
+            <li>ការប្រៀបធៀបម៉ូដែលអក្សរ និងសូរសព្ទ (Graphemic and Phonemic Models)</li>
+            
+            <li>ការបែងចែកពាក្យដោយស្វ័យប្រវត្តិ (Unsupervised Word Segmentation)</li>
+            
+            <li>ការកំណត់ភាពស្របគ្នានៃវិភត្តិ (Inflectional Agreement)</li>
+            
+            <li>ការបូកបញ្ចូលគ្នានូវបណ្ដាញសរសៃប្រសាទជ្រៅ និង SGMM (DNN and SGMM Lattice Interpolation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលផ្អែកលើតួអក្សរ (Graphemic models) ដែលមានសញ្ញាសម្គាល់ព្រំដែនពាក្យ ដំណើរការបានល្អស្ទើរតែស្មើនឹងម៉ូដែលផ្អែកលើសូរសព្ទ (Phonemic models)។</li>
+            
+            <li>ការបន្សាំម៉ូដែលភាសាដោយផ្អែកលើចំណេះដឹងផ្នែកវាក្យសម្ព័ន្ធ និងរូបវិទ្យាសូរសព្ទ ជួយធ្វើឱ្យប្រសើរឡើងនូវអត្រាកំហុសពាក្យ (WER) ក្នុងកម្រិតតិចតួចប៉ុន្តែមានភាពថេរ។</li>
+            
+            <li>ប្រព័ន្ធល្អបំផុតដែលប្រើការបូកបញ្ចូលគ្នា (Lattice interpolation) នៃម៉ូដែល DNN និង SGMM ទទួលបានអត្រាកំហុសពាក្យ (WER) ១១.១២% លើសំណុំទិន្នន័យសាកល្បង (Dev set) និង ១១.៥០% លើសំណុំទិន្នន័យវាយតម្លៃ (Eval set)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Baseline Graphemic Model (G0)</span></strong><br>ម៉ូដែលតួអក្សរមូលដ្ឋានដោយគ្មានព្រំដែនពាក្យ</td>
+                <td>ងាយស្រួលក្នុងការបង្កើត ដោយគ្រាន់តែប្រើប្រព័ន្ធបំប្លែងតួអក្សរទៅជាសូរសព្ទដោយផ្ទាល់ (Deterministic mapping)។</td>
+                <td>មិនបានពិចារណាលើការប្រែប្រួលនៃការបញ្ចេញសំឡេង ដែលអាស្រ័យលើទីតាំងអក្សរនៅក្នុងពាក្យ។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ១៤.៣៦% លើសំណុំទិន្នន័យ Dev និង ១៤.២២% លើសំណុំ Eval។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Graphemic Model with Word Boundary (G1)</span></strong><br>ម៉ូដែលតួអក្សរមានកំណត់សញ្ញាព្រំដែនពាក្យ</td>
+                <td>អាចរៀនពីច្បាប់នៃការបញ្ចេញសំឡេងដោយប្រយោល តាមរយៈការកំណត់ទីតាំងអក្សរ (ដើម កណ្តាល ចុងពាក្យ)។</td>
+                <td>ទាមទារទិន្នន័យគ្រប់គ្រាន់ដើម្បីឲ្យម៉ូដែលអាចទាញយកបរិបទនៃការបញ្ចេញសំឡេងបានត្រឹមត្រូវ។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ធ្លាក់ចុះមកត្រឹម ១២.៩១% (Dev) និង ១៣.៣៦% (Eval)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Phonemic Model with rules (P1)</span></strong><br>ម៉ូដែលសូរសព្ទប្រើច្បាប់បំបាត់ស្រៈ និងសញ្ញាច្រមុះ</td>
+                <td>ដោះស្រាយបញ្ហាសូរសព្ទជាក់លាក់ក្នុងភាសាហិណ្ឌីបានល្អ ដូចជាការបំបាត់ស្រៈ (Schwa deletion) និងសំឡេងច្រមុះ។</td>
+                <td>ត្រូវការបង្កើតក្បួនច្បាប់ភាសាវិទ្យា (Rule-based algorithms) ដែលអាចមានភាពស្មុគស្មាញ និងចំណាយពេល។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ១២.៥៦% (Dev) និង ១៣.៤៤% (Eval)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Lattice Interpolation (DNN + SGMM) with LM Adaptations</span></strong><br>ការបូកបញ្ចូលគ្នា (DNN + SGMM) ជាមួយការបន្សាំម៉ូដែលភាសា</td>
+                <td>ផ្តល់លទ្ធផលល្អបំផុតដោយរួមបញ្ចូលចំណេះដឹងផ្នែកវាក្យសម្ព័ន្ធ រូបសព្ទ និងបច្ចេកវិទ្យាបណ្ដាញសរសៃប្រសាទជ្រៅ (DNN)។</td>
+                <td>ទាមទារថាមពលកុំព្យូទ័រខ្ពស់ ស៊ីធនធានច្រើន និងមានភាពស្មុគស្មាញក្នុងការរៀបចំប្រព័ន្ធពីររួមបញ្ចូលគ្នា។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ល្អបំផុតត្រឹម ១១.១២% (Dev) និង ១១.៥០% (Eval)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រមធ្យមទៅខ្ពស់ និងការរៀបចំទិន្នន័យសំឡេងដោយផ្ទាល់ដៃមួយចំនួន។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ Kaldi ASR toolkit សម្រាប់ការបណ្តុះបណ្តាលម៉ូដែល និង Praat សម្រាប់ការកាត់តម្រឹមសំឡេងនិងអត្ថបទ។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារកុំព្យូទ័រដែលមាន GPU កម្លាំងខ្លាំង សម្រាប់បណ្តុះបណ្តាលម៉ូដែល Deep Neural Network (DNN)។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យសំឡេងផ្សាយព័ត៌មានចំនួន ៥.៥ ម៉ោង និងសំណុំអត្ថបទធំៗ (EMILLE text corpus) សម្រាប់បណ្តុះបណ្តាលម៉ូដែលភាសា។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងផ្នែកដំណើរការភាសាធម្មជាតិ (NLP) ភាសាវិទ្យាកុំព្យូទ័រ និងការសរសេរកូដផ្នែកសូរសព្ទ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យសំឡេងផ្សាយព័ត៌មានពីវិទ្យុ All India Radio (Bhopal) ដែលមានទម្រង់សំឡេងស្តង់ដារ បរិយាកាសថតច្បាស់ល្អ និងមិនមានសំឡេងរំខាន។ វាមិនបានគ្របដណ្តប់លើគ្រាមភាសា ឬការសន្ទនាបែបក្រៅផ្លូវការក្នុងជីវភាពប្រចាំថ្ងៃនោះទេ។ សម្រាប់ប្រទេសកម្ពុជា ការពឹងផ្អែកតែលើទិន្នន័យព័ត៌មានផ្លូវការ អាចធ្វើឲ្យប្រព័ន្ធពិបាកសម្គាល់សំឡេងមនុស្សទូទៅដែលនិយាយលឿន ឬមានគ្រាមភាសាតំបន់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការបន្សាំម៉ូដែលភាសា និងការប្រើប្រាស់ម៉ូដែលអក្សរមានព្រំដែនពាក្យ មានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធ ASR ភាសាខ្មែរ។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធផ្សព្វផ្សាយព័ត៌មាន (Broadcasting & Media):</strong> អាចប្រើដើម្បីបង្កើតប្រព័ន្ធចំណងជើងរងស្វ័យប្រវត្តិ (Automatic Subtitling) សម្រាប់ទូរទស្សន៍ជាតិកម្ពុជា (TVK) ឬបណ្តាញព័ត៌មានដូចជា Fresh News ដោយប្រើទិន្នន័យអ្នកអានព័ត៌មានផ្លូវការ។</li>
+            
+            <li><strong>ដំណើរការភាសាធម្មជាតិខ្មែរ (Khmer NLP & Morphology):</strong> ដោយសារភាសាខ្មែរជាភាសាដែលមិនមានការដកឃ្លារវាងពាក្យ ការប្រើប្រាស់ក្បួន Unsupervised Word Segmentation ដូចក្នុងឯកសារនេះ នឹងជួយបង្កើនភាពត្រឹមត្រូវនៃម៉ូដែលភាសាខ្មែរ (N-gram Language Model) យ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li><strong>ការថែរក្សាឯកសារសំឡេងប្រវត្តិសាស្ត្រ (Historical Audio Archiving):</strong> អាចយកទៅអនុវត្តនៅបណ្ណាល័យជាតិ ឬមជ្ឈមណ្ឌលធនធានសោតទស្សន៍បុប្ផាណា ដើម្បីបំប្លែងឯកសារសំឡេងប្រវត្តិសាស្ត្រចាស់ៗ ទៅជាអត្ថបទ (Text) សម្រាប់ងាយស្រួលស្រាវជ្រាវ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់ម៉ូដែលអក្សររួមជាមួយព័ត៌មានព្រំដែនពាក្យ និងការកែសម្រួលម៉ូដែលភាសា គឺជាវិធីសាស្ត្រដ៏មានប្រសិទ្ធភាពដែលអាចយកមកអនុវត្តផ្ទាល់ក្នុងការកសាង ASR សម្រាប់ភាសាខ្មែរដែលស្ថិតក្នុងស្ថានភាពខ្វះខាតទិន្នន័យ (Low-resource language)។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យសំឡេង (Data Collection & Alignment):</strong> ទាញយកសំឡេងព័ត៌មាន និងអត្ថបទពីប្រភពផ្លូវការ រួចប្រើប្រាស់កម្មវិធី Praat (តាមរយៈមុខងារ To TextGrid) ដើម្បីកាត់ និងតម្រឹមសំឡេងជាមួយអត្ថបទដោយពាក់កណ្តាលស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>រៀបចំបរិស្ថានឧបករណ៍សូរសព្ទ (Kaldi Setup):</strong> ដំឡើងឧបករណ៍ Kaldi ASR toolkit ក្នុងប្រព័ន្ធប្រតិបត្តិការ Linux រួចសិក្សាពីរបៀបរៀបចំរចនាសម្ព័ន្ធទិន្នន័យ និងបង្កើតគំរូមូលដ្ឋាន (GMM-HMM) ដោយប្រើយន្តការ f-MLLR។</li>
+            
+            <li><strong>កសាងម៉ូដែលភាសាដោយបែងចែកពាក្យ (Word Segmentation LM):</strong> សរសេរកូដអនុវត្តក្បួនដោះស្រាយ Unsupervised Word Segmentation (ដូច Algorithm 1 ក្នុងឯកសារ) ទៅលើសំណុំអត្ថបទភាសាខ្មែរ ដើម្បីបំបែកពាក្យ និងបង្កើតម៉ូដែលភាសា N-gram។</li>
+            
+            <li><strong>បណ្តុះបណ្តាលម៉ូដែលសូរសព្ទកម្រិតខ្ពស់ (DNN Training):</strong> ប្តូរពីការប្រើ SGMM ធម្មតា ទៅប្រើប្រាស់ Deep Neural Networks (DNN) ជាមួយនឹងការហ្វឹកហាត់ជាមុន (RBM pre-training) នៅក្នុង Kaldi ដើម្បីបង្កើនភាពត្រឹមត្រូវក្នុងការសម្គាល់សំឡេង។</li>
+            
+            <li><strong>ការរួមបញ្ចូលគ្នានៃលទ្ធផល (Lattice Interpolation & Rescoring):</strong> អនុវត្ត Lattice interpolation ដើម្បីបូកបញ្ចូលលទ្ធផលរវាងម៉ូដែល SGMM និង DNN រួចយកទៅគណនាពិន្ទុឡើងវិញ (Rescoring) ជាមួយនឹងម៉ូដែលភាសាដែលបានបន្សាំផ្នែករូបសព្ទ (LWS & LIA FSTs) ដើម្បីទាញយកលទ្ធផលកំហុសទាបបំផុត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Error Rate (WER)</span></td>
+                <td>អត្រាកំហុសពាក្យ (WER) គឺជារង្វាស់ស្តង់ដារដែលប្រើដើម្បីវាយតម្លៃភាពត្រឹមត្រូវនៃប្រព័ន្ធសម្គាល់សំឡេង (ASR) ដោយរាប់បញ្ចូលចំនួនពាក្យដែលប្រព័ន្ធស្តាប់ខុស បាត់ ឬបន្ថែមលើស បើធៀបនឹងអត្ថបទដើមពិតប្រាកដ។</td>
+                <td>ដូចជាការបូកសរុបពិន្ទុខុសរបស់សិស្សក្នុងការសរសេរតាមអាន បើខុសច្រើន ពិន្ទុ WER នឹងកាន់តែខ្ពស់ (មានន័យថាប្រព័ន្ធមិនសូវពូកែ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Graphemic Model</span></td>
+                <td>ម៉ូដែលផ្អែកលើតួអក្សរ គឺជាវិធីសាស្ត្របង្រៀនកុំព្យូទ័រឱ្យស្គាល់សំឡេងដោយផ្ទាល់ពីអក្ខរាវិរុទ្ធ (តួអក្សរ) នៃពាក្យ ដោយមិនចាំបាច់ប្រើវចនានុក្រមបំប្លែងទៅជាសូរសព្ទអន្តរជាតិ (Phonemes) មុននោះទេ។</td>
+                <td>ដូចជាក្មេងរៀនអានពាក្យដោយគ្រាន់តែមើលអក្សរផ្ទាល់ដោយមិនបាច់រៀនពីក្បួនផ្សំសូរសព្ទលម្អិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Phonemic Model</span></td>
+                <td>ម៉ូដែលផ្អែកលើសូរសព្ទ គឺជាប្រព័ន្ធដែលប្រើប្រាស់ក្បួនច្បាប់បញ្ចេញសំឡេង (ដូចជាការកាត់សូរសព្ទស្រៈចោល) ដើម្បីប្រាប់ម៉ាស៊ីនពីរបៀបដែលមនុស្សពិតប្រាកដបញ្ចេញសំឡេងពាក្យនីមួយៗ ជំនួសឱ្យការអានតាមតួអក្សរត្រង់ៗ។</td>
+                <td>ដូចជាការប្រើសៀវភៅវចនានុក្រមដែលមានសរសេរពាក្យអាន (ឧទាហរណ៍៖ ភ្នំពេញ អានថា ភ្នុំ-ពេញ) ដើម្បីដឹងពីសំឡេងពិតប្រាកដរបស់ពាក្យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Unsupervised Word Segmentation</span></td>
+                <td>ការបែងចែកពាក្យដោយគ្មានការត្រួតពិនិត្យ គឺជាក្បួនដោះស្រាយ (Algorithm) ដែលអនុញ្ញាតឱ្យកុំព្យូទ័រស្វែងរកដោយខ្លួនឯងនូវរបៀបកាត់ពាក្យធំៗទៅជាឫសពាក្យ (Stem) និងបច្ច័យ (Suffix) ដោយផ្អែកលើភាពញឹកញាប់នៃអក្សរដែលមានក្នុងសំណុំទិន្នន័យ។</td>
+                <td>ដូចជាការឱ្យក្មេងលេងផ្គុំរូប ហើយឱ្យពួកគេសង្កេតមើលដោយខ្លួនឯងថាបំណែកណាដែលតែងតែនៅជាប់គ្នាជានិច្ច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Finite State Transducer (FST)</span></td>
+                <td>ប្រព័ន្ធបំប្លែង FST គឺជារចនាសម្ព័ន្ធទិន្នន័យគណិតវិទ្យាដែលប្រើក្នុងប្រព័ន្ធ ASR សម្រាប់ផ្ទុកនូវបណ្តុំពាក្យ និងច្បាប់វេយ្យាករណ៍ ដើម្បីបំប្លែងពីទម្រង់សំឡេងទៅជាទម្រង់អត្ថបទដោយរលូន និងមានល្បឿនលឿន។</td>
+                <td>ដូចជាផែនទីផ្លូវរថភ្លើងដែលប្រាប់កុំព្យូទ័រថា តើពាក្យមួយណាអាចធ្វើដំណើរតទល់នឹងពាក្យមួយណាបានខ្លះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Lattice interpolation</span></td>
+                <td>ការបូកបញ្ចូលក្រឡាពាក្យ (Lattice Interpolation) គឺជាបច្ចេកទេសមួយដែលយកលទ្ធផលនៃការទស្សន៍ទាយពីម៉ូដែលសម្គាល់សំឡេងពីរផ្សេងគ្នា (ដូចជាម៉ូដែល DNN និង SGMM) មកថ្លឹងថ្លែងបញ្ចូលគ្នា ដើម្បីគណនារកលទ្ធផលចុងក្រោយដែលត្រឹមត្រូវបំផុត។</td>
+                <td>ដូចជាការសួរមតិពីអ្នកជំនាញពីរនាក់ផ្សេងគ្នា ហើយយកចម្លើយទាំងពីរមកប្រៀបធៀបគ្នារកការពិតដែលជឿទុកចិត្តបានបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Morphophonemic Knowledge</span></td>
+                <td>ចំណេះដឹងផ្នែករូបវិទ្យាសូរសព្ទ គឺជាការយល់ដឹងអំពីច្បាប់ទម្លាប់ថាតើសំឡេងនៃពាក្យមួយមានការផ្លាស់ប្តូរយ៉ាងដូចម្តេច នៅពេលដែលវាត្រូវបានបំប្លែងទម្រង់វេយ្យាករណ៍ (ដូចជាការបន្ថែមបច្ច័យខាងចុងជាដើម)។</td>
+                <td>ដូចជាការដឹងថា ពាក្យដើម និងពាក្យដែលបានបំប្លែង អាចអានខុសគ្នា ទោះបីជាមានអក្សរស្រដៀងគ្នាក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Subspace Gaussian Mixture Model (SGMM)</span></td>
+                <td>ម៉ូដែល SGMM គឺជាបច្ចេកទេសបង្កើតម៉ូដែលសូរសព្ទបែបស្ថិតិ ដែលប្រើប្រាស់រូបមន្តគណិតវិទ្យាដើម្បីចាប់យកទម្រង់នៃការប្រែប្រួលសម្លេងនៅក្នុងភាសា។ វាជាម៉ូដែលជំនាន់មុន ដែលត្រូវការធនធានកុំព្យូទ័រតិចជាងម៉ូដែល AI ជំនាន់ថ្មី។</td>
+                <td>ដូចជាការគូសគំនូសព្រាងនៃទម្រង់សំឡេងនីមួយៗ ដោយប្រើប្រាស់គណិតវិទ្យាដើម្បីសន្និដ្ឋានថាតើសំឡេងនេះជាពាក្យអ្វី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=grapheme+vs+phoneme+acoustic+modeling+low+resource+languages" target="_blank" rel="noopener"><span class="en">grapheme vs phoneme acoustic modeling low resource languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=unsupervised+morphological+segmentation+for+morphologically+rich+languages+ASR" target="_blank" rel="noopener"><span class="en">unsupervised morphological segmentation for morphologically rich languages ASR</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=kaldi+toolkit+recipe+DNN+SGMM+lattice+interpolation" target="_blank" rel="noopener"><span class="en">kaldi toolkit recipe DNN SGMM lattice interpolation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=finite+state+transducer+language+model+adaptation+inflectional+agreement" target="_blank" rel="noopener"><span class="en">finite state transducer language model adaptation inflectional agreement</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hindi+broadcast+news+continuous+speech+recognition+corpus+development" target="_blank" rel="noopener"><span class="en">Hindi broadcast news continuous speech recognition corpus development</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
