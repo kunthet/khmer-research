@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវិភាគទិន្នន័យវេជ្ជសាស្ត្រមិនមានតុល្យភាព៖ ការអភិវឌ្ឍម៉ូដែលចំណាត់ថ្នាក់តំរែតំរង់ឡូជីស្ទីកពហុថ្នាក់ជាមួយវិធីសាស្ត្រ PCA | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់ (class imbalance) នៅក្នុងសំណុំទិន្នន័យវេជ្ជសាស្ត្រ ដែលជារឿយៗបណ្តាលឱ្យក្បួនដោះស្រាយម៉ាស៊ីនរៀនលម្អៀងទៅរកទិន្នន័យអ្...">
+    
+    <meta name="keywords" content="Multiclass Logistic Regression, Principal Component Analysis, Imbalanced Data, Medical Diagnosis, Gradient Descent, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/imbalanced-medical-data-logistic-regression-pca-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/imbalanced-medical-data-logistic-regression-pca-2024.html">
+    <meta property="og:title" content="ការវិភាគទិន្នន័យវេជ្ជសាស្ត្រមិនមានតុល្យភាព៖ ការអភិវឌ្ឍម៉ូដែលចំណាត់ថ្នាក់តំរែតំរង់ឡូជីស្ទីកពហុថ្នាក់ជាមួយវិធីសាស្ត្រ PCA | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់ (class imbalance) នៅក្នុងសំណុំទិន្នន័យវេជ្ជសាស្ត្រ ដែលជារឿយៗបណ្តាលឱ្យក្បួនដោះស្រាយម៉ាស៊ីនរៀនលម្អៀងទៅរកទិន្នន័យអ្នកជំងឺមានសុខភាពល្អ និងព្រងើយកន្តើយចំពោះក...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024 ICIC Express Letters">
+    
+    <meta property="article:tag" content="Multiclass Logistic Regression">
+    
+    <meta property="article:tag" content="Principal Component Analysis">
+    
+    <meta property="article:tag" content="Imbalanced Data">
+    
+    <meta property="article:tag" content="Medical Diagnosis">
+    
+    <meta property="article:tag" content="Gradient Descent">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវិភាគទិន្នន័យវេជ្ជសាស្ត្រមិនមានតុល្យភាព៖ ការអភិវឌ្ឍម៉ូដែលចំណាត់ថ្នាក់តំរែតំរង់ឡូជីស្ទីកពហុថ្នាក់ជាមួយវិធីសាស្ត្រ PCA">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់ (class imbalance) នៅក្នុងសំណុំទិន្នន័យវេជ្ជសាស្ត្រ ដែលជារឿយៗបណ្តាលឱ្យក្បួនដោះស្រាយម៉ាស៊ីនរៀនលម្អៀងទៅរកទិន្នន័យអ្នកជំងឺមានសុខភាពល្អ និងព្រងើយកន្តើយចំពោះក...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u17d6 \u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178f\u17c6\u179a\u17c2\u178f\u17c6\u179a\u1784\u17cb\u17a1\u17bc\u1787\u17b8\u179f\u17d2\u1791\u17b8\u1780\u1796\u17a0\u17bb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17b6\u1798\u17bd\u1799\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a PCA",
+      "name": "IMBALANCED MEDICAL DATA ANALYSIS: DEVELOPING A MULTICLASS LOGISTIC REGRESSION CLASSIFICATION MODEL WITH PCA APPROACH",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1790\u17d2\u1793\u17b6\u1780\u17cb (class imbalance) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a \u178a\u17c2\u179b\u1787\u17b6\u179a\u17bf\u1799\u17d7\u1794\u178e\u17d2\u178f\u17b6\u179b\u17b1\u17d2\u1799\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179a\u17c0\u1793\u179b\u1798\u17d2\u17a2\u17c0\u1784\u1791\u17c5\u179a\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a2\u17d2\u1793\u1780\u1787\u17c6\u1784\u17ba\u1798\u17b6\u1793\u179f\u17bb\u1781\u1797\u17b6\u1796\u179b\u17d2\u17a2 \u1793\u17b7\u1784\u1796\u17d2\u179a\u1784\u17be\u1799\u1780\u1793\u17d2\u178f\u17be\u1799\u1785\u17c6\u1796\u17c4\u17c7\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u179a\u17c4\u1782\u179f\u1789\u17d2\u1789\u17b6\u17a2\u17d2\u1793\u1780\u1787\u17c6\u1784\u17ba\u178a\u17c2\u179b\u1787\u17b6\u1780\u17d2\u179a\u17bb\u1798\u1797\u17b6\u1782\u178f\u17b7\u1785\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/imbalanced-medical-data-logistic-regression-pca-2024.html",
+      "author": [{"@type": "Person", "name": "Adli Abdillah Nababan (Universitas Sumatera Utara)"},{"@type": "Person", "name": "Sutarman (Universitas Sumatera Utara)"},{"@type": "Person", "name": "Muhammad Zarlis (Bina Nusantara University)"},{"@type": "Person", "name": "Erna Budhiarti Nababan (Universitas Sumatera Utara)"}],
+      "datePublished": "2024 ICIC Express Letters",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "IMBALANCED MEDICAL DATA ANALYSIS: DEVELOPING A MULTICLASS LOGISTIC REGRESSION CLASSIFICATION MODEL WITH PCA APPROACH",
+        "url": "https://doi.org/10.24507/icicel.18.06.575"
+      },
+      "keywords": ["Multiclass Logistic Regression", "Principal Component Analysis", "Imbalanced Data", "Medical Diagnosis", "Gradient Descent"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u17d6 \u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178f\u17c6\u179a\u17c2\u178f\u17c6\u179a\u1784\u17cb\u17a1\u17bc\u1787\u17b8\u179f\u17d2\u1791\u17b8\u1780\u1796\u17a0\u17bb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17b6\u1798\u17bd\u1799\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a PCA",
+          "item": "https://khmerresearch.com/papers/technology/imbalanced-medical-data-logistic-regression-pca-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការវិភាគទិន្នន័យវេជ្ជសាស្ត្រមិនមានតុល្យភាព៖ ការអភិវឌ្ឍម៉ូ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> IMBALANCED MEDICAL DATA ANALYSIS: DEVELOPING A MULTICLASS LOGISTIC REGRESSION CLASSIFICATION MODEL WITH PCA APPROACH<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.24507/icicel.18.06.575" target="_blank">doi.org/10.24507/icicel.18.06.575</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវិភាគទិន្នន័យវេជ្ជសាស្ត្រមិនមានតុល្យភាព៖ ការអភិវឌ្ឍម៉ូដែលចំណាត់ថ្នាក់តំរែតំរង់ឡូជីស្ទីកពហុថ្នាក់ជាមួយវិធីសាស្ត្រ PCA</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> IMBALANCED MEDICAL DATA ANALYSIS: DEVELOPING A MULTICLASS LOGISTIC REGRESSION CLASSIFICATION MODEL WITH PCA APPROACH</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Adli Abdillah Nababan (Universitas Sumatera Utara), Sutarman (Universitas Sumatera Utara), Muhammad Zarlis (Bina Nusantara University), Erna Budhiarti Nababan (Universitas Sumatera Utara)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 ICIC Express Letters</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់ (class imbalance) នៅក្នុងសំណុំទិន្នន័យវេជ្ជសាស្ត្រ ដែលជារឿយៗបណ្តាលឱ្យក្បួនដោះស្រាយម៉ាស៊ីនរៀនលម្អៀងទៅរកទិន្នន័យអ្នកជំងឺមានសុខភាពល្អ និងព្រងើយកន្តើយចំពោះការព្យាករណ៍រោគសញ្ញាអ្នកជំងឺដែលជាក្រុមភាគតិច។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតម៉ូដែលចំណាត់ថ្នាក់តំរែតំរង់ឡូជីស្ទីកពហុថ្នាក់ (Multiclass Logistic Regression) ដោយរួមបញ្ចូលវិធីសាស្ត្រ PCA ដើម្បីកាត់បន្ថយវិមាត្រទិន្នន័យ និងរក្សាភាពត្រឹមត្រូវដោយមិនប្រើបច្ចេកទេសបំប្លែងទិន្នន័យ (Resampling) ឡើយ។
+        
+        <ul>
+            
+            <li>ការកាត់បន្ថយវិមាត្រទិន្នន័យដោយប្រើការវិភាគសមាសភាគចម្បង (Principal Component Analysis - PCA)</li>
+            
+            <li>ចំណាត់ថ្នាក់ទិន្នន័យដោយប្រើតំរែតំរង់ឡូជីស្ទីកពហុថ្នាក់ (Multiclass Logistic Regression) និងអនុគមន៍ Softmax</li>
+            
+            <li>ការធ្វើឱ្យប្រសើរឡើងនូវប៉ារ៉ាម៉ែត្រម៉ូដែលដោយប្រើវិធីសាស្ត្រ Gradient Descent</li>
+            
+            <li>ការធ្វើតេស្តលើសំណុំទិន្នន័យវេជ្ជសាស្ត្រចំនួន ៤ គឺ៖ ក្រពេញទីរ៉ូអ៊ីត (thyroid), កូនកណ្តុរ (lymphography), រោគសើស្បែក (dermatology), និង Ecoli</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល M-LR ទទួលបានភាពត្រឹមត្រូវខ្ពស់រហូតដល់ ៩៨,៤៦% សម្រាប់ទិន្នន័យក្រពេញទីរ៉ូអ៊ីត និង ៨៦,៦៦% សម្រាប់ទិន្នន័យកូនកណ្តុរ ដោយការប្រើប្រាស់ PCA មិនបានបន្ថែមប្រសិទ្ធភាពគួរឱ្យកត់សម្គាល់នោះទេ។</li>
+            
+            <li>សម្រាប់ការវិភាគទិន្នន័យរោគសើស្បែក ការបន្ថែមវិធីសាស្ត្រ PCA (M-LR+PCA) បានបង្កើនភាពត្រឹមត្រូវពី ៩៧,២២% ទៅដល់ ៩៩,០៧%។</li>
+            
+            <li>លទ្ធផលបង្ហាញថាវិធីសាស្ត្រដែលបានស្នើឡើងអាចវាយតម្លៃរោគវិនិច្ឆ័យបានយ៉ាងមានប្រសិទ្ធភាពលើទិន្នន័យវេជ្ជសាស្ត្រដែលមានអតុល្យភាព ដោយមិនចាំបាច់ពឹងផ្អែកលើបច្ចេកទេស Over-sampling ឬ Under-sampling ឡើយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Multiclass Logistic Regression (M-LR)</span></strong><br>ចំណាត់ថ្នាក់តំរែតំរង់ឡូជីស្ទីកពហុថ្នាក់</td>
+                <td>មិនតម្រូវឱ្យមានការបំប្លែងឬថ្លឹងថ្លែងទិន្នន័យ (Resampling/SMOTE) ឡើយ តែនៅតែអាចរក្សាប្រសិទ្ធភាពខ្ពស់។ ងាយស្រួលយល់ និងប្រើប្រាស់ថាមពលគណនាតិច។</td>
+                <td>អាចមិនសូវមានប្រសិទ្ធភាពខ្ពស់បំផុត ប្រសិនបើទិន្នន័យមានលក្ខណៈស្មុគស្មាញខ្លាំង ឬមានទំហំធំមហិមា ដែលទាមទារទំនាក់ទំនងមិនលីនេអ៊ែរ (Non-linear)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៨,៤៦% លើទិន្នន័យក្រពេញទីរ៉ូអ៊ីត (Thyroid) និង ៨៦,៦៦% លើទិន្នន័យកូនកណ្តុរ (Lymphography) ដោយមិនប្រើ PCA។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Multiclass Logistic Regression + PCA (M-LR+PCA)</span></strong><br>តំរែតំរង់ឡូជីស្ទីកពហុថ្នាក់ រួមផ្សំជាមួយវិធីសាស្ត្រកាត់បន្ថយវិមាត្រ PCA</td>
+                <td>ជួយកាត់បន្ថយវិមាត្រទិន្នន័យ លុបបំបាត់ព័ត៌មានមិនចាំបាច់ និងការពារបញ្ហា Overfitting ដែលជួយបង្កើនភាពត្រឹមត្រូវលើទិន្នន័យជាក់លាក់មួយចំនួន។</td>
+                <td>ការបង្រួមទិន្នន័យជាមួយ PCA អាចធ្វើឱ្យបាត់បង់ព័ត៌មានលម្អិតមួយចំនួន ដែលបណ្តាលឱ្យធ្លាក់ចុះភាពត្រឹមត្រូវបន្តិចបន្តួចលើសំណុំទិន្នន័យខ្លះ (ដូចជាទិន្នន័យកូនកណ្តុរ)។</td>
+                <td>បង្កើនភាពត្រឹមត្រូវយ៉ាងគួរឱ្យកត់សម្គាល់ដល់ ៩៩,០៧% លើទិន្នន័យរោគសើស្បែក (Dermatology) និង ៩៩,០៩% លើទិន្នន័យ Ecoli។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Baselines (Random Forest, XGBoost, ANN, C5.0, k-NN)</span></strong><br>ក្បួនដោះស្រាយទូទៅពីការសិក្សាមុនៗ</td>
+                <td>ជាក្បួនដោះស្រាយដែលមានភាពពេញនិយម និងមានសមត្ថភាពខ្ពស់ក្នុងការរៀនសូត្រពីទិន្នន័យស្មុគស្មាញ។</td>
+                <td>ជាទូទៅទាមទារឱ្យមានការថ្លឹងថ្លែងទិន្នន័យ (Balancing Strategy) ជាមុនទើបអាចដំណើរការបានល្អលើទិន្នន័យមិនមានតុល្យភាព ដែលអាចប្រឈមនឹងបញ្ហា Overfitting។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទាបជាងវិធីសាស្ត្រ M-LR/M-LR+PCA ជាទូទៅ (ឧទាហរណ៍ Random Forest ទទួលបាន ៩៧,០១% និង k-NN ទទួលបាន ៧៥,៩៤%)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះមិនទាមទារធនធានកុំព្យូទ័រធំដុំនោះទេ ដោយវាអាចដំណើរការបានយ៉ាងរលូននៅលើកុំព្យូទ័រយួរដៃផ្ទាល់ខ្លួនកម្រិតមធ្យម។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានប្រព័ន្ធដំណើរការ Intel Core i5, អង្គចងចាំ (RAM) ទំហំ 4GB និងប្រព័ន្ធប្រតិបត្តិការ Windows 10។</li>
+        
+        <li><strong>Software:</strong> ភាសាប្រូក្រាម Python ដំណើរការតាមរយៈកម្មវិធី Jupyter Notebook សម្រាប់ការវិភាគ និងកសាងម៉ូដែល។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យវេជ្ជសាស្ត្របើកទូលាយចំនួន ៤ ពីប្រភព UCI Machine Learning Repository (Thyroid, Lymphography, Dermatology, Ecoli)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យវេជ្ជសាស្ត្រស្តង់ដារពីឃ្លាំងទិន្នន័យសកល (UCI) ដែលមិនបានឆ្លុះបញ្ចាំងពីលក្ខណៈប្រជាសាស្ត្រជាក់លាក់ណាមួយឡើយ។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកប្រើប្រាស់ទាមទារឱ្យមានការបង្ហាត់បន្ថែមជាមួយទិន្នន័យអ្នកជំងឺក្នុងស្រុក ដើម្បីជៀសវាងភាពលម្អៀង (Bias) ដែលបណ្តាលមកពីភាពខុសគ្នានៃហ្សែន របបអាហារ និងកត្តាបរិស្ថាន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ និងស័ក្តិសមខ្លាំងសម្រាប់ប្រព័ន្ធសុខាភិបាលនៅកម្ពុជា ដោយសារវាចំណាយធនធានតិច តែអាចដោះស្រាយបញ្ហាទិន្នន័យជំងឺកម្របានល្អ។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យថ្នាក់ជាតិ (ឧទាហរណ៍៖ មន្ទីរពេទ្យកាល់ម៉ែត ឬមន្ទីរពេទ្យមិត្តភាពខ្មែរ-សូវៀត):</strong> អាចប្រើប្រាស់ម៉ូដែលនេះដើម្បីជួយគ្រូពេទ្យក្នុងការវិនិច្ឆ័យរោគសញ្ញាជំងឺកម្រ ឬជំងឺស្មុគស្មាញ (ដូចជាជំងឺមហារីកស្បែក) ដោយមិនបារម្ភពីបញ្ហាខ្វះខាតទិន្នន័យអ្នកជំងឺភាគតិចធៀបនឹងអ្នកជំងឺទូទៅឡើយ។</li>
+            
+            <li><strong>ប្រព័ន្ធទិន្នន័យសុខាភិបាលថ្នាក់ជាតិ (Ministry of Health):</strong> បច្ចេកទេស PCA អាចត្រូវបានប្រើដើម្បីបង្រួមទំហំទិន្នន័យអ្នកជំងឺរាប់លាននាក់នៅទូទាំងប្រទេស ដែលជួយសម្រួលដល់ការវិភាគរកនិន្នាការនៃជំងឺរ៉ាំរ៉ៃផ្សេងៗបានលឿន និងចំណាយថវិកាគណនាតិច។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក នេះគឺជាដំណោះស្រាយផ្នែកបញ្ញាសិប្បនិម្មិតកម្រិតស្រាល (Lightweight AI) ដែលសមស្របសម្រាប់ការធ្វើទំនើបកម្មផ្នែករោគវិនិច្ឆ័យនៅតាមមន្ទីរពេទ្យនានាក្នុងប្រទេសកម្ពុជា ដែលមិនទាន់មានហេដ្ឋារចនាសម្ព័ន្ធកុំព្យូទ័រទំនើបខ្លាំង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាពីមូលដ្ឋានគ្រឹះ និងការរៀបចំទិន្នន័យវេជ្ជសាស្ត្រ:</strong> ស្វែងយល់ពីរបៀបរៀបចំ សម្អាត និងធ្វើស្តង់ដារទិន្នន័យ (Z-score normalization) ដោយប្រើបណ្ណាល័យ <span class="en">Pandas</span> និង <span class="en">Scikit-Learn</span> នៅក្នុង <span class="en">Python</span> ដើម្បីដោះស្រាយជាមួយទិន្នន័យបាត់បង់ (Missing values)។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តបច្ចេកទេសកាត់បន្ថយវិមាត្រទិន្នន័យ:</strong> សិក្សា និងអនុវត្តការប្រើប្រាស់ <span class="en">Principal Component Analysis (PCA)</span> នៅក្នុង <span class="en">Scikit-Learn</span> ដើម្បីទាញយកលក្ខណៈសំខាន់ៗនៃទិន្នន័យ (Feature extraction) ដោយធានាថារក្សាបានយ៉ាងហោចណាស់ ៩៨% នៃព័ត៌មានដើម (Variance)។</li>
+            
+            <li><strong>ជំហានទី៣៖ កសាងម៉ូដែលចំណាត់ថ្នាក់ពហុថ្នាក់:</strong> សាកល្បងសរសេរកូដបង្កើតម៉ូដែល <span class="en">Multiclass Logistic Regression</span> ដោយផ្តោតលើការយល់ដឹងពីអនុគមន៍ <span class="en">Softmax</span> និងការប្រើប្រាស់វិធីសាស្ត្រ <span class="en">Gradient Descent</span> ក្នុងការស្វែងរកតម្លៃ Parameter ដ៏ប្រសើរបំផុត។</li>
+            
+            <li><strong>ជំហានទី៤៖ វាយតម្លៃសមត្ថភាពម៉ូដែលលើទិន្នន័យអតុល្យភាព:</strong> ធ្វើការវាស់ស្ទង់ភាពត្រឹមត្រូវនៃម៉ូដែលដោយផ្តោតលើ <span class="en">Precision, Recall, F1-score</span> និង <span class="en">ROC AUC Score</span> ជាជាងការមើលតែលើ <span class="en">Accuracy</span> តែមួយមុខ ដើម្បីធានាថាម៉ូដែលមិនមើលរំលងក្រុមជំងឺកម្រ (Minority class)។</li>
+            
+            <li><strong>ជំហានទី៥៖ សាកល្បងផ្ទាល់ជាមួយទិន្នន័យសុខាភិបាលកម្ពុជា:</strong> ទាក់ទងស្នើសុំទិន្នន័យវេជ្ជសាស្ត្របែបអនាមិក (Anonymized data) ពីគ្លីនិក ឬមន្ទីរពេទ្យក្នុងស្រុក (ឧទាហរណ៍ទិន្នន័យជំងឺរោគសើស្បែក) ដើម្បីយកមកធ្វើតេស្ត និងកែសម្រួលម៉ូដែលឱ្យស្របនឹងបរិបទជាក់ស្តែងនៅកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Principal Component Analysis (PCA)</span></td>
+                <td>វិធីសាស្ត្រស្ថិតិដែលត្រូវបានប្រើដើម្បីកាត់បន្ថយចំនួនអថេរ (វិមាត្រ) នៅក្នុងសំណុំទិន្នន័យធំៗ ដោយរក្សាទុកតែព័ត៌មានដែលសំខាន់បំផុត ដើម្បីធ្វើឱ្យម៉ូដែលរៀនបានលឿន និងចៀសវាងភាពស្មុគស្មាញជ្រុល (Overfitting)។</td>
+                <td>ដូចជាការសង្ខេបសៀវភៅក្រាស់មួយក្បាលឱ្យនៅត្រឹមមួយទំព័រ ដែលនៅតែរក្សាអត្ថន័យសំខាន់ៗទាំងស្រុង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multiclass logistic regression</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ចាត់ថ្នាក់ទិន្នន័យដែលអាចព្យាករណ៍ និងបែងចែកវត្ថុ ឬករណីទៅជាក្រុមច្រើនជាងពីរ (ឧទាហរណ៍៖ ប្រភេទជំងឺទី១ ទី២ និងទី៣) ដោយផ្អែកលើប្រូបាប៊ីលីតេ។</td>
+                <td>ដូចជាគ្រូពេទ្យដែលអាចធ្វើរោគវិនិច្ឆ័យប្រាប់អ្នកថាអ្នកមានជំងឺកម្រិតស្រាល មធ្យម ឬធ្ងន់ ដោយមិនមែនប្រាប់ត្រឹមតែថាមានជំងឺ ឬគ្មានជំងឺនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gradient descent</span></td>
+                <td>វិធីសាស្ត្រគណនាដើម្បីស្វែងរកចំណុចទាបបំផុតនៃអនុគមន៍ (Loss function) ដែលជួយឱ្យម៉ូដែលកែតម្រូវកំហុសរបស់ខ្លួនជាបន្តបន្ទាប់រហូតដល់វាអាចធ្វើការទស្សន៍ទាយបានត្រឹមត្រូវបំផុត។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលបិទភ្នែកដើរចុះពីលើភ្នំ ដោយប្រើជើងស្ទាបរកផ្លូវដែលជម្រាលចុះក្រោមរហូតដល់បានទៅដល់បាតជ្រលងភ្នំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Softmax function</span></td>
+                <td>អនុគមន៍គណិតវិទ្យាដែលបំប្លែងលទ្ធផលនៃម៉ូដែលទៅជាតម្លៃប្រូបាប៊ីលីតេចន្លោះពី ០ ទៅ ១ សម្រាប់ក្រុមនីមួយៗ ដោយធានាថាផលបូកនៃប្រូបាប៊ីលីតេទាំងអស់ស្មើនឹង ១។ វាជួយសម្រេចថាទិន្នន័យគួរធ្លាក់ទៅក្នុងក្រុមណាដែលមានភាគរយខ្ពស់ជាងគេ។</td>
+                <td>ដូចជាការបែងចែកនំមួយដុំទៅឱ្យមនុស្សច្រើននាក់ ដោយអ្នកដែលស័ក្តិសមបំផុតទទួលបានចំណែកធំជាងគេ ហើយបូកបញ្ចូលចំណែកទាំងអស់គ្នាគឺស្មើនឹងនំមួយពេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Class imbalance</span></td>
+                <td>បញ្ហានៅក្នុងសំណុំទិន្នន័យដែលចំនួនទិន្នន័យនៅក្នុងក្រុមមួយ (ឧទាហរណ៍៖ អ្នកជំងឺមានសុខភាពល្អ) មានចំនួនច្រើនលើសលប់ធៀបនឹងក្រុមមួយទៀត (ឧទាហរណ៍៖ អ្នកមានជំងឺកម្រ) ដែលធ្វើឱ្យម៉ូដែលពិបាករៀនស្គាល់ក្រុមភាគតិច។</td>
+                <td>ដូចជាការរាវរកម្ជុលក្នុងបាតសមុទ្រ ដែលមានទឹកច្រើនមហិមា (ក្រុមភាគច្រើន) តែមានម្ជុលតែមួយ (ក្រុមភាគតិច)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Z-score normalization</span></td>
+                <td>បច្ចេកទេសធ្វើស្តង់ដារទិន្នន័យមុនពេលបញ្ចូលទៅក្នុងម៉ូដែល ដើម្បីកែប្រែទិន្នន័យដែលមានខ្នាតរង្វាស់ខុសៗគ្នា (ឧទាហរណ៍៖ គីឡូក្រាម និងសង់ទីម៉ែត្រ) ឱ្យមកនៅកម្រិតប្រហាក់ប្រហែលគ្នា (មធ្យម ០ និងរង្វាស់ងាករេច្បាស់លាស់ ១)។</td>
+                <td>ដូចជាការប្តូររូបិយប័ណ្ណពីប្រទេសផ្សេងៗគ្នាឱ្យទៅជាប្រាក់ដុល្លារទាំងអស់ ដើម្បីងាយស្រួលប្រៀបធៀបទំហំទឹកប្រាក់ពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Synthetic Minority Oversampling Technique (SMOTE)</span></td>
+                <td>បច្ចេកទេសបង្កើតទិន្នន័យសិប្បនិម្មិតបន្ថែមសម្រាប់ក្រុមទិន្នន័យភាគតិច (Minority class) ដើម្បីឱ្យចំនួនរបស់វាមានតុល្យភាពជាមួយក្រុមភាគច្រើន (Majority class)។</td>
+                <td>ដូចជាការថតចម្លងឯកសារសំខាន់មួយសន្លឹកឱ្យបានច្រើនច្បាប់ ដើម្បីកុំឱ្យវាបាត់ ឬត្រូវគេមើលរំលងនៅពេលយកទៅប្រើប្រាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Loss function</span></td>
+                <td>រូបមន្តដែលវាស់ស្ទង់ថាតើម៉ូដែលទស្សន៍ទាយខុសពីលទ្ធផលពិតប្រាកដកម្រិតណា។ គោលបំណងចម្បងនៃម៉ាស៊ីនរៀនគឺដើម្បីបង្រួមតម្លៃនៃកំហុសនេះឱ្យតូចបំផុតតាមដែលអាចធ្វើទៅបាន។</td>
+                <td>ដូចជាពិន្ទុដកក្នុងពេលប្រឡង ដែលអ្នកត្រូវខិតខំកាត់បន្ថយកំហុសដើម្បីទទួលបានពិន្ទុដកតិចបំផុតទើបអាចប្រឡងជាប់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=multiclass+logistic+regression+for+imbalanced+medical+datasets" target="_blank" rel="noopener"><span class="en">multiclass logistic regression for imbalanced medical datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Principal+Component+Analysis+feature+reduction+in+healthcare+machine+learning" target="_blank" rel="noopener"><span class="en">Principal Component Analysis feature reduction in healthcare machine learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SMOTE+versus+cost-sensitive+learning+for+class+imbalance+in+medical+diagnosis" target="_blank" rel="noopener"><span class="en">SMOTE versus cost-sensitive learning for class imbalance in medical diagnosis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=gradient+descent+optimization+for+softmax+multiclass+classification" target="_blank" rel="noopener"><span class="en">gradient descent optimization for softmax multiclass classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+feature+selection+and+resampling+techniques+for+clinical+disease+prediction" target="_blank" rel="noopener"><span class="en">hybrid feature selection and resampling techniques for clinical disease prediction</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
