@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ពន្យល់ពីខ្លួនអ្នក៖ ការពង្រីក និងការធ្វើឱ្យប្រសើរម៉ូដែលដើម្បីអនុញ្ញាតឱ្យមានការប៉ាន់ស្មានតម្លៃ Shapley យ៉ាងរហ័ស - Explain Yourself: Expanding and optimizing models to enable fast Shapley valu... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ពន្យល់ពីខ្លួនអ្នក៖ ការពង្រីក និងការធ្វើឱ្យប្រសើរម៉ូដែលដើម្បី។ ការគណនាតម្លៃ Shapley ច្បាស់លាស់សម្រាប់បណ្តាញសរសៃប្រសាទប្រើប្រាស់ថាមពលកុំព្យូទ័រខ្លាំង ដែលធ្វើឱ្យវ...">
+    
+    <meta name="keywords" content="Explainable AI, Machine Learning, Neural Networks, Shapley values, Feature attribution, Loss function optimization, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/explain-yourself-fast-shapley-approximations-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/explain-yourself-fast-shapley-approximations-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/explain-yourself-fast-shapley-approximations-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/explain-yourself-fast-shapley-approximations-2024.html">
+    <meta property="og:title" content="ពន្យល់ពីខ្លួនអ្នក៖ ការពង្រីក និងការធ្វើឱ្យប្រសើរម៉ូដែលដើម្បីអនុញ្ញាតឱ្យមានការប៉ាន់ស្មានតម្លៃ Shapley យ៉ាងរហ័ស | KhmerResearch.com">
+    <meta property="og:description" content="ការគណនាតម្លៃ Shapley ច្បាស់លាស់សម្រាប់បណ្តាញសរសៃប្រសាទប្រើប្រាស់ថាមពលកុំព្យូទ័រខ្លាំង ដែលធ្វើឱ្យវាមិនស័ក្តិសមសម្រាប់កម្មវិធីខ្នាតធំដែលមានទិន្នន័យច្រើនវិមាត្រ។ ការស្រាវជ្រាវនេះមានគោលបំណងដោះស្រាយបញ្ហ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024, EXPLAINABILITY 2024: The First International Conference on Systems Explainability (IARIA)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Explainable AI">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Neural Networks">
+    
+    <meta property="article:tag" content="Shapley values">
+    
+    <meta property="article:tag" content="Feature attribution">
+    
+    <meta property="article:tag" content="Loss function optimization">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ពន្យល់ពីខ្លួនអ្នក៖ ការពង្រីក និងការធ្វើឱ្យប្រសើរម៉ូដែលដើម្បីអនុញ្ញាតឱ្យមានការប៉ាន់ស្មានតម្លៃ Shapley យ៉ាងរហ័ស">
+    <meta name="twitter:description" content="ការគណនាតម្លៃ Shapley ច្បាស់លាស់សម្រាប់បណ្តាញសរសៃប្រសាទប្រើប្រាស់ថាមពលកុំព្យូទ័រខ្លាំង ដែលធ្វើឱ្យវាមិនស័ក្តិសមសម្រាប់កម្មវិធីខ្នាតធំដែលមានទិន្នន័យច្រើនវិមាត្រ។ ការស្រាវជ្រាវនេះមានគោលបំណងដោះស្រាយបញ្ហ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1796\u1793\u17d2\u1799\u179b\u17cb\u1796\u17b8\u1781\u17d2\u179b\u17bd\u1793\u17a2\u17d2\u1793\u1780\u17d6 \u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u1798\u17c9\u17bc\u178a\u17c2\u179b\u178a\u17be\u1798\u17d2\u1794\u17b8\u17a2\u1793\u17bb\u1789\u17d2\u1789\u17b6\u178f\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u178f\u1798\u17d2\u179b\u17c3 Shapley \u1799\u17c9\u17b6\u1784\u179a\u17a0\u17d0\u179f",
+      "name": "Explain Yourself: Expanding and optimizing models to enable fast Shapley value approximations",
+      "description": "\u1780\u17b6\u179a\u1782\u178e\u1793\u17b6\u178f\u1798\u17d2\u179b\u17c3 Shapley \u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1790\u17b6\u1798\u1796\u179b\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1781\u17d2\u179b\u17b6\u17c6\u1784 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u179c\u17b6\u1798\u17b7\u1793\u179f\u17d0\u1780\u17d2\u178f\u17b7\u179f\u1798\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1781\u17d2\u1793\u17b6\u178f\u1792\u17c6\u178a\u17c2\u179b\u1798\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u17d2\u179a\u17be\u1793\u179c\u17b7\u1798\u17b6\u178f\u17d2\u179a\u17d4 \u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u1798\u17b6\u1793\u1782\u17c4\u179b\u1794\u17c6\u178e\u1784\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u1799\u1795\u17d2\u178f\u179b\u17cb\u1793\u17bc\u179c\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u178f\u1798\u17d2\u179b\u17c3 Shapley \u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u179a\u17a0\u17d0\u179f \u1793\u17b7\u1784\u179f\u17bb\u1780\u17d2\u179a\u17b9\u178f\u1787\u17b6\u1784\u1798\u17bb\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/explain-yourself-fast-shapley-approximations-2024.html",
+      "author": [{"@type": "Person", "name": "Holger Ziekow (Furtwangen University)"},{"@type": "Person", "name": "Peter Schanbacher (Furtwangen University)"},{"@type": "Person", "name": "Valentin G\u00f6ttisheim (Furtwangen University)"}],
+      "datePublished": "2024, EXPLAINABILITY 2024: The First International Conference on Systems Explainability (IARIA)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Explain Yourself: Expanding and optimizing models to enable fast Shapley value approximations",
+        "url": "https://www.thinkmind.org"
+      },
+      "keywords": ["Explainable AI", "Machine Learning", "Neural Networks", "Shapley values", "Feature attribution", "Loss function optimization"],
+      "about": "Explainable AI (Machine Learning)"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1796\u1793\u17d2\u1799\u179b\u17cb\u1796\u17b8\u1781\u17d2\u179b\u17bd\u1793\u17a2\u17d2\u1793\u1780\u17d6 \u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u1798\u17c9\u17bc\u178a\u17c2\u179b\u178a\u17be\u1798\u17d2\u1794\u17b8\u17a2\u1793\u17bb\u1789\u17d2\u1789\u17b6\u178f\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u178f\u1798\u17d2\u179b\u17c3 Shapley \u1799\u17c9\u17b6\u1784\u179a\u17a0\u17d0\u179f",
+          "item": "https://khmerresearch.com/papers/technology/explain-yourself-fast-shapley-approximations-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ពន្យល់ពីខ្លួនអ្នក៖ ការពង្រីក និងការធ្វើឱ្យប្រសើរម៉ូដែលដើម...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Explain Yourself: Expanding and optimizing models to enable fast Shapley value approximations<br>
+        
+        <strong>Source:</strong> <a href="https://www.thinkmind.org" target="_blank" rel="noopener">www.thinkmind.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ពន្យល់ពីខ្លួនអ្នក៖ ការពង្រីក និងការធ្វើឱ្យប្រសើរម៉ូដែលដើម្បីអនុញ្ញាតឱ្យមានការប៉ាន់ស្មានតម្លៃ Shapley យ៉ាងរហ័ស</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Explain Yourself: Expanding and optimizing models to enable fast Shapley value approximations</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Holger Ziekow (Furtwangen University), Peter Schanbacher (Furtwangen University), Valentin Göttisheim (Furtwangen University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, EXPLAINABILITY 2024: The First International Conference on Systems Explainability (IARIA)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Explainable AI (Machine Learning)</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការគណនាតម្លៃ Shapley ច្បាស់លាស់សម្រាប់បណ្តាញសរសៃប្រសាទប្រើប្រាស់ថាមពលកុំព្យូទ័រខ្លាំង ដែលធ្វើឱ្យវាមិនស័ក្តិសមសម្រាប់កម្មវិធីខ្នាតធំដែលមានទិន្នន័យច្រើនវិមាត្រ។ ការស្រាវជ្រាវនេះមានគោលបំណងដោះស្រាយបញ្ហានេះដោយផ្តល់នូវវិធីសាស្ត្រប៉ាន់ស្មានតម្លៃ Shapley ដែលមានភាពរហ័ស និងសុក្រឹតជាងមុន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានធ្វើការបញ្ចូលការប៉ាន់ស្មានតម្លៃ Shapley ទៅក្នុងដំណើរការហ្វឹកហាត់របស់ម៉ូដែលដោយផ្ទាល់ តាមរយៈការកែសម្រួលអនុគមន៍បាត់បង់ (loss function)។
+        
+        <ul>
+            
+            <li>ការកែប្រែស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទ (Neural Network Architecture Modification)</li>
+            
+            <li>ការប្រើប្រាស់អនុគមន៍បាត់បង់រួមបញ្ចូលគ្នាជាមួយប៉ារ៉ាម៉ែត្រ λ សម្រាប់ធ្វើតុល្យភាព (Combined Loss Function)</li>
+            
+            <li>ការធ្វើតេស្តលើទិន្នន័យសិប្បនិម្មិត (Synthetic Data Testing)</li>
+            
+            <li>ការធ្វើតេស្តលើទិន្នន័យជាក់ស្តែងពីកម្រិតគុណភាពស្រា (Real-world Data Testing - Wine Quality Dataset)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការរួមបញ្ចូលតម្លៃ Shapley ទៅក្នុងការហ្វឹកហាត់ម៉ូដែលអនុញ្ញាតឱ្យមានការធ្វើតុល្យភាព (Trade-off) ដោយផ្ទាល់រវាងភាពត្រឹមត្រូវនៃការទស្សន៍ទាយ និងការពន្យល់បាន (Explainability)។</li>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្រនេះធ្វើឱ្យការឆ្លើយតបរបស់ម៉ូដែលចំពោះការផ្លាស់ប្តូរលក្ខណៈទិន្នន័យបញ្ចូលកាន់តែមានស្ថិរភាព និងងាយស្រួលយល់។</li>
+            
+            <li>ការសាកល្បងលើទិន្នន័យជាក់ស្តែងបង្ហាញថាការបង្កើនកម្រិតពន្យល់ (λ=1000) ធ្វើឱ្យកំហុស MSE កើនឡើងតិចតួចពី ០.៤៦០ ទៅ ០.៥៤ ប៉ុន្តែផ្តល់នូវការពន្យល់ភ្លាមៗនិងមានតម្លាភាពសម្រាប់រាល់ការទស្សន៍ទាយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Standard Neural Network (Baseline, λ=0)</span></strong><br>បណ្តាញសរសៃប្រសាទស្តង់ដារ (ផ្តោតលើភាពត្រឹមត្រូវនៃការទស្សន៍ទាយ, λ=0)</td>
+                <td>ផ្តល់នូវកម្រិតភាពត្រឹមត្រូវនៃការទស្សន៍ទាយខ្ពស់បំផុត។ ងាយស្រួលក្នុងការហ្វឹកហាត់ដោយមិនទាមទារការគណនាស្មុគស្មាញបន្ថែមក្នុងអនុគមន៍បាត់បង់ (Loss Function)។</td>
+                <td>ខ្វះការពន្យល់ (Explainability) ភ្លាមៗ និងមានស្ថិរភាព។ ត្រូវការគណនាតម្លៃ Shapley ដាច់ដោយឡែកដែលចំណាយពេលយូរខ្លាំងនៅពេលយកទៅប្រើប្រាស់។</td>
+                <td>មានតម្លៃ MSE ទាបបំផុត (០.៤៦០ លើទិន្នន័យគុណភាពស្រា និង ០.០០០៣ លើទិន្នន័យសិប្បនិម្មិត)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Integrated Shapley Approximation (Proposed, λ=100 or λ=1000)</span></strong><br>ម៉ូដែលរួមបញ្ចូលការប៉ាន់ស្មាន Shapley ជាមួយកម្រិតពិន័យខ្ពស់ (λ=100 ឬ λ=1000)</td>
+                <td>ផ្តល់ការពន្យល់ (Shapley values) បានភ្លាមៗជាមួយរាល់ការទស្សន៍ទាយ។ ធ្វើឱ្យម៉ូដែលមានស្ថិរភាព ងាយស្រួលយល់ និងតម្លាភាពខ្ពស់សម្រាប់អ្នកប្រើប្រាស់។</td>
+                <td>កាត់បន្ថយភាពត្រឹមត្រូវនៃការទស្សន៍ទាយបន្តិចបន្តួច (Trade-off) និងទាមទារធនធានកុំព្យូទ័រខ្ពស់កំឡុងពេលហ្វឹកហាត់ម៉ូដែល។</td>
+                <td>តម្លៃ MSE កើនឡើងបន្តិច (០.៥៤០ លើទិន្នន័យគុណភាពស្រា សម្រាប់ λ=1000) ប៉ុន្តែទទួលបានរចនាសម្ព័ន្ធពន្យល់ដ៏សាមញ្ញនិងច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">KernelSHAP</span></strong><br>វិធីសាស្ត្រប៉ាន់ស្មាន KernelSHAP (ប្រើជាតម្លៃគោលក្នុងការសិក្សា)</td>
+                <td>អាចប្រើបានជាមួយគ្រប់ប្រភេទម៉ូដែល (Model-agnostic) ដោយមិនចាំបាច់កែប្រែរចនាសម្ព័ន្ធបណ្តាញសរសៃប្រសាទឡើយ។</td>
+                <td>ប្រើប្រាស់ថាមពលកុំព្យូទ័រខ្លាំង មានភាពប្រែប្រួលខ្ពស់ (High variance) និងយឺតក្នុងការគណនាសម្រាប់ទិន្នន័យធំៗ។</td>
+                <td>ត្រូវបានប្រើប្រាស់ជាតម្លៃគោល (Target Shapley values) ដើម្បីគណនាកំហុសក្នុងអំឡុងពេលហ្វឹកហាត់នៃវិធីសាស្ត្រថ្មីនេះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តវិធីសាស្ត្រនេះទាមទារធនធានកុំព្យូទ័រខ្ពស់កំឡុងពេលហ្វឹកហាត់ ប៉ុន្តែចំណេញពេលវេលានិងធនធានយ៉ាងច្រើនពេលយកម៉ូដែលទៅប្រើប្រាស់ជាក់ស្តែង (Inference time)។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនកុំព្យូទ័រមាន GPU ខ្លាំង (ដូចជា NVIDIA ជំនាន់ថ្មី) ព្រោះម៉ូដែលត្រូវគណនាតម្លៃ Shapley គោល ក្នុងរាល់វដ្តនៃការហ្វឹកហាត់ ដែលនៅក្នុងការសិក្សានេះត្រូវកំណត់ Batch size ត្រឹម ១ ដើម្បីកាត់បន្ថយភាពស្មុគស្មាញ។</li>
+        
+        <li><strong>Software:</strong> ទាមទារការប្រើប្រាស់បណ្ណាល័យ SHAP សម្រាប់ Python និង Framework សម្រាប់អភិវឌ្ឍន៍បណ្តាញសរសៃប្រសាទ (ឧ. PyTorch ឬ TensorFlow) ព្រមទាំងកម្មវិធីធ្វើឱ្យប្រសើរ (ADAM Optimizer)។</li>
+        
+        <li><strong>Dataset:</strong> តម្រូវឱ្យមានសំណុំទិន្នន័យដែលមានលក្ខណៈ (Features) ច្បាស់លាស់ ដូចជាទិន្នន័យ Wine Quality ដែលត្រូវបានប្រើក្នុងការសិក្សា ដើម្បីងាយស្រួលក្នុងការទាញយកទំនាក់ទំនងនិងការពន្យល់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យសិប្បនិម្មិត និងទិន្នន័យគុណភាពស្រា (Wine-quality-red) ពី OpenML ដែលមិនមានផ្ទុកភាពលំអៀងផ្នែកប្រជាសាស្ត្រ (Demographic bias) នោះទេ។ ទោះជាយ៉ាងណា នេះជាវិធីសាស្ត្រទូទៅក្នុងវិស័យ Machine Learning ដែលមានសារៈសំខាន់ខ្លាំងសម្រាប់ប្រទេសកម្ពុជា ពិសេសក្នុងការធានាថាម៉ូដែលបញ្ញាសិប្បនិម្មិត (AI) ដែលយកមកប្រើប្រាស់ក្នុងវិស័យហិរញ្ញវត្ថុ ឬសុខាភិបាលក្នុងស្រុក មិនធ្វើការសម្រេចចិត្តដោយលំអៀងនិងអាចបកស្រាយបានត្រឹមត្រូវ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់ក្នុងការយកមកអនុវត្តនៅកម្ពុជា ពិសេសក្នុងវិស័យដែលទាមទារការពន្យល់ច្បាស់លាស់ និងតម្លាភាពខ្ពស់ចំពោះការសម្រេចចិត្តរបស់ AI។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (ឧ. ធនាគារអេស៊ីលីដា ឬ ធនាគារជាតិកម្ពុជា - NBC):</strong> ស្ថាប័នហិរញ្ញវត្ថុអាចប្រើប្រាស់ម៉ូដែលនេះសម្រាប់ការវាយតម្លៃឥណទាន (Credit Scoring) ដោយអាចពន្យល់អតិថិជន និងនិយតករបានច្បាស់លាស់ពីមូលហេតុដែលកម្ចីត្រូវបានអនុម័ត ឬបដិសេធ (ឧទាហរណ៍ កត្តាប្រាក់ចំណូល ឬប្រវត្តិសងប្រាក់) ដោយមិនបាត់បង់ល្បឿនប្រតិបត្តិការ។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល (ឧ. មន្ទីរពេទ្យកាល់ម៉ែត):</strong> ប្រព័ន្ធ AI សម្រាប់រោគវិនិច្ឆ័យអាចតម្រូវឱ្យមានការបញ្ជាក់ហេតុផលភ្លាមៗ។ គ្រូពេទ្យអាចឃើញការពន្យល់ពីកត្តាដែលនាំឱ្យម៉ូដែលសន្និដ្ឋានថាមានជំងឺ (ឧទាហរណ៍ កម្រិតជាតិស្ករ ឬសម្ពាធឈាម) ដែលជួយបង្កើនទំនុកចិត្តលើប្រព័ន្ធជួយសម្រេចចិត្តព្យាបាល។</li>
+            
+            <li><strong>ពាណិជ្ជកម្មអេឡិចត្រូនិក និងប្រព័ន្ធតាមដានការក្លែងបន្លំ (Fraud Detection):</strong> ក្រុមហ៊ុនបច្ចេកវិទ្យាហិរញ្ញវត្ថុក្នុងស្រុកអាចប្រើប្រាស់វាដើម្បីចាប់យកប្រតិបត្តិការខុសប្រក្រតីបានលឿន ព្រមទាំងបង្ហាញមូលហេតុជាក់លាក់នៃប្រតិបត្តិការគួរឱ្យសង្ស័យនោះភ្លាមៗ ដើម្បីចាត់វិធានការទាន់ពេលវេលា។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុញ្ញាតឱ្យមានការប្តូរ (Trade-off) ភាពត្រឹមត្រូវតិចតួចជាថ្នូរនឹងការពន្យល់ដ៏មានតម្លាភាពនិងរហ័ស គឺជាយុទ្ធសាស្ត្រដ៏ស័ក្តិសម និងចាំបាច់សម្រាប់ស្ថាប័នកម្ពុជាដែលកំពុងចាប់ផ្តើមដាក់ពង្រាយ AI ក្នុងប្រតិបត្តិការស្នូលរបស់ខ្លួន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាពី Explainable AI និង Shapley Values:</strong> ចាប់ផ្តើមដោយការស្វែងយល់ពីគោលគំនិតពន្យល់ម៉ូដែល និងរៀនប្រើប្រាស់បណ្ណាល័យអក្សរកូដ <span class='en'>SHAP (SHapley Additive exPlanations)</span> នៅក្នុង <span class='en'>Python</span> ដើម្បីយល់ពីរបៀបដែលលក្ខណៈនីមួយៗជះឥទ្ធិពលដល់លទ្ធផលម៉ូដែល។</li>
+            
+            <li><strong>ជំហានទី២៖ ស្ថាបនាម៉ូដែល Neural Network ជាមូលដ្ឋាន:</strong> ប្រើប្រាស់ <span class='en'>PyTorch</span> ឬ <span class='en'>TensorFlow</span> ដើម្បីសាងសង់និងហ្វឹកហាត់បណ្តាញសរសៃប្រសាទ <span class='en'>Multilayer Perceptron (MLP)</span> សាមញ្ញមួយ ជាមួយទិន្នន័យជាក់ស្តែងពីកន្លែងការងារ (ឧ. ទិន្នន័យឥណទាន) រួចវាស់ស្ទង់កម្រិតភាពត្រឹមត្រូវដោយប្រើ <span class='en'>MSE (Mean Squared Error)</span>។</li>
+            
+            <li><strong>ជំហានទី៣៖ កែសម្រួលស្ថាបត្យកម្ម និងបង្កើត Custom Loss Function:</strong> ពង្រីក <span class='en'>Output Layer</span> នៃម៉ូដែលឱ្យរួមបញ្ចូលទាំងលទ្ធផលទស្សន៍ទាយ និងកម្រិត Shapley។ បន្ទាប់មក សរសេរកូដសម្រាប់ <span class='en'>Custom Loss Function</span> ដែលបូកបញ្ចូល <span class='en'>MSE Loss</span> ស្តង់ដារ ជាមួយកំហុសប្រហែល Shapley ដោយប្រើប្រាស់ប៉ារ៉ាម៉ែត្រ <span class='en'>Lambda (λ)</span> ដើម្បីគ្រប់គ្រងទម្ងន់នៃការពន្យល់។</li>
+            
+            <li><strong>ជំហានទី៤៖ អនុវត្តការហ្វឹកហាត់រួមគ្នា (Joint Training):</strong> ហ្វឹកហាត់ម៉ូដែលឡើងវិញជាមួយ <span class='en'>Custom Loss Function</span> ដែលទើបបង្កើត។ ប្រើប្រាស់ <span class='en'>ADAM Optimizer</span> និងតាមដាន <span class='en'>Learning Curves</span> យ៉ាងយកចិត្តទុកដាក់ ដើម្បីចៀសវាងបញ្ហាកើនឡើងកំហុសភ្លាមៗ (Sudden error spikes) និងអាចសារ៉េ <span class='en'>Batch size</span> តាមភាពជាក់ស្តែង។</li>
+            
+            <li><strong>ជំហានទី៥៖ វាយតម្លៃតុល្យភាព (Trade-off) និងដាក់ពង្រាយ:</strong> សាកល្បងម៉ូដែលជាមួយតម្លៃ <span class='en'>Lambda</span> ផ្សេងៗគ្នា (ឧទាហរណ៍ ០, ១០, និង ១០០០)។ ជ្រើសរើសម៉ូដែលដែលផ្តល់តុល្យភាពល្អបំផុតរវាងភាពត្រឹមត្រូវ និងភាពងាយស្រួលយល់ មុននឹងដាក់ឱ្យដំណើរការជា <span class='en'>API</span> សម្រាប់ការអនុវត្តជាក់ស្តែងនៅកន្លែងធ្វើការ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Shapley values</span></td>
+                <td>ជាវិធីសាស្ត្រក្នុងទ្រឹស្តីល្បែង (Game Theory) ដែលត្រូវបានប្រើក្នុងបញ្ញាសិប្បនិម្មិត (AI) ដើម្បីបែងចែកនិងវាស់ស្ទង់កម្រិតនៃការចូលរួមចំណែក (ឥទ្ធិពល) របស់លក្ខណៈទិន្នន័យ (Features) នីមួយៗទៅលើលទ្ធផលទស្សន៍ទាយសរុបរបស់ម៉ូដែលដោយយុត្តិធម៌។</td>
+                <td>ដូចជាការបែងចែកប្រាក់រង្វាន់ដល់សមាជិកក្រុមបាល់ទាត់ម្នាក់ៗ ដោយផ្អែកលើទំហំនៃការប្រឹងប្រែងពិតប្រាកដរបស់ពួកគេក្នុងការធ្វើឱ្យក្រុមទទួលបានជ័យជម្នះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature attribution</span></td>
+                <td>ដំណើរការនៃការវាស់ស្ទង់ និងកំណត់ថាហេតុអ្វីបានជាម៉ូដែល AI ធ្វើការសម្រេចចិត្តបែបនេះ ដោយបង្ហាញពីទម្ងន់ ឬកម្រិតសារៈសំខាន់នៃទិន្នន័យបញ្ចូលនីមួយៗក្នុងការបង្កើតលទ្ធផលចុងក្រោយ។</td>
+                <td>ដូចជាការភ្លក់ម្ហូបហើយអាចប្រាប់បានថា គ្រឿងផ្សំមួយណា (អំបិល ស្ករ ឬម្ទេស) ដែលមានឥទ្ធិពលជាងគេក្នុងការធ្វើឱ្យសម្លមួយចាននោះមានរសជាតិឆ្ងាញ់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Loss function</span></td>
+                <td>ជាអនុគមន៍គណិតវិទ្យាដែលវាស់ស្ទង់កម្រិតកំហុសរវាងលទ្ធផលដែលម៉ូដែលទស្សន៍ទាយ និងលទ្ធផលជាក់ស្តែង។ ក្នុងអំឡុងពេលហ្វឹកហាត់ ម៉ូដែលរៀនដោយការព្យាយាមកែតម្រូវខ្លួនឯងដើម្បីកាត់បន្ថយតម្លៃកំហុសនេះឱ្យនៅទាបបំផុត។</td>
+                <td>ដូចជាពិន្ទុដកក្នុងវិញ្ញាសាប្រឡង បើយើងឆ្លើយខុសពីចម្លើយកែតម្រូវកាន់តែច្រើន ពិន្ទុដកកាន់តែធំ ដូច្នេះយើងត្រូវខំរៀនកែតម្រូវដើម្បីកាត់បន្ថយកំហុសនេះនៅពេលប្រឡងលើកក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">hyperparameter λ</span></td>
+                <td>ជាតម្លៃថេរដែលអ្នកបង្កើតម៉ូដែលកំណត់មុនពេលចាប់ផ្តើមហ្វឹកហាត់ ដើម្បីធ្វើតុល្យភាព (Trade-off) រវាងគោលដៅពីរផ្សេងគ្នា។ នៅក្នុងការស្រាវជ្រាវនេះ វាទាញតុល្យភាពរវាងភាពត្រឹមត្រូវនៃការទស្សន៍ទាយម៉ូដែល និងភាពងាយស្រួលយល់នៃម៉ូដែល។</td>
+                <td>ដូចជាប៊ូតុងសារ៉េសំឡេង (Equalizer) នៅលើធុងបាស បើយើងចង់សារ៉េយកបាស (Bass) ខ្លាំង យើងអាចត្រូវលះបង់ភាពស្រួយច្បាស់នៃសំឡេងអ្នកច្រៀងបន្តិច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Partial dependency plots</span></td>
+                <td>ជាក្រាហ្វិកដែលបង្ហាញពីឥទ្ធិពលជាមធ្យមរបស់លក្ខណៈទិន្នន័យមួយ ឬពីរ ទៅលើលទ្ធផលទស្សន៍ទាយរបស់ម៉ូដែល នៅពេលដែលលក្ខណៈផ្សេងៗទៀតទាំងអស់ត្រូវបានរក្សាឱ្យនៅថេរដដែល។</td>
+                <td>ដូចជាការគូសគំនូសតាងមើលថាតើការបន្ថែមម៉ោងរៀនជះឥទ្ធិពលយ៉ាងណាដល់ពិន្ទុប្រឡងសរុប ដោយសន្មតថាកត្តាផ្សេងទៀតដូចជាម៉ោងគេង និងការហូបចុក គឺមិនមានការប្រែប្រួល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Model-agnostic</span></td>
+                <td>សំដៅលើវិធីសាស្ត្រ ឬបច្ចេកទេស (ពិសេសក្នុងការពន្យល់ AI) ដែលអាចយកទៅអនុវត្តបានជាមួយម៉ូដែល Machine Learning ប្រភេទណាក៏បាន ដោយមិនចាំបាច់ខ្វល់ ឬពឹងផ្អែកលើរចនាសម្ព័ន្ធកូដខាងក្នុងរបស់វានោះឡើយ។</td>
+                <td>ដូចជាឧបករណ៍វាស់កម្តៅដែលយើងអាចប្រើដើម្បីវាស់កម្តៅមនុស្ស សត្វ ឬទឹកក្តៅ ដោយមិនខ្វល់ថាវាជារបស់អ្វី និងមានដំណើរការខាងក្នុងយ៉ាងណានោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">KernelSHAP</span></td>
+                <td>ជាវិធីសាស្ត្រ Model-agnostic មួយសម្រាប់ប៉ាន់ស្មានតម្លៃ Shapley ដោយប្រើប្រាស់ការគំរូទិន្នន័យ (Sampling) រួចប្រើប្រាស់តម្រែតម្រង់លីនេអ៊ែរ (Linear Regression) ដើម្បីបង្កើតការពន្យល់ពីឥទ្ធិពលរបស់ទិន្នន័យបញ្ចូល។</td>
+                <td>ដូចជាការសាកល្បងដកគ្រឿងបន្លាស់រថយន្តម្តងមួយៗចេញ ហើយវាស់ល្បឿនឡើងវិញ ដើម្បីចង់ដឹងថាគ្រឿងបន្លាស់មួយណាធ្វើឱ្យឡានរត់លឿនជាងគេបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean Squared Error</span></td>
+                <td>ជារង្វាស់នៃកំហុស (MSE) ដែលគណនាដោយការយកផលសងរវាងតម្លៃដែលម៉ូដែលទស្សន៍ទាយ និងតម្លៃពិតជាក់ស្តែង មកលើកជាការ៉េ ហើយចែកនឹងចំនួនទិន្នន័យសរុប។ វាផ្តល់ទណ្ឌកម្មធ្ងន់ធ្ងរជាងមុនចំពោះកំហុសណាដែលមានទំហំធំ។</td>
+                <td>ដូចជាការបាញ់ធ្នូ បើយើងបាញ់ខុសគោលដៅកាន់តែឆ្ងាយ ពិន្ទុពិន័យនឹងកើនឡើងយ៉ាងលឿន (ជាទម្រង់ការ៉េ) មិនមែនកើនឡើងមួយៗតាមចម្ងាយធម្មតានោះទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=joint+optimization%22+AND+%22prediction+accuracy%22+AND+%22explainability%22+%22neural+networks" target="_blank" rel="noopener"><span class="en">joint optimization" AND "prediction accuracy" AND "explainability" "neural networks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=fast+Shapley+value+approximation+methods+%22deep+learning%22+OR+%22neural+networks" target="_blank" rel="noopener"><span class="en">fast Shapley value approximation methods "deep learning" OR "neural networks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=embedding+%22feature+attribution%22+OR+%22Shapley+values%22+into+%22loss+function" target="_blank" rel="noopener"><span class="en">embedding "feature attribution" OR "Shapley values" into "loss function</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=inherent+interpretability%22+OR+%22self-explaining%22+neural+network+architectures" target="_blank" rel="noopener"><span class="en">inherent interpretability" OR "self-explaining" neural network architectures</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=computational+efficiency+%22KernelSHAP%22+vs+%22TreeSHAP%22+vs+specific+architecture+approximations" target="_blank" rel="noopener"><span class="en">computational efficiency "KernelSHAP" vs "TreeSHAP" vs specific architecture approximations</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=trade-off+between+model+performance+and+explainability+%22XAI" target="_blank" rel="noopener"><span class="en">trade-off between model performance and explainability "XAI</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

@@ -77,6 +77,8 @@
         .nav-links a:hover { color: #2563eb; }
         .nav-browse { background: #2563eb; color: #fff !important; padding: 8px 18px; border-radius: 6px; font-weight: 600; }
         .nav-browse:hover { background: #1d4ed8; color: #fff !important; }
+        .nav-search { color: #2563eb !important; font-weight: 600; }
+        .nav-search:hover { color: #1d4ed8 !important; }
 
         /* Hero */
         .hero { text-align: center; padding: 60px 20px 40px; max-width: 800px; margin: 0 auto; }
@@ -85,6 +87,20 @@
         .hero p { font-size: 1.05rem; color: #475569; max-width: 640px; margin: 0 auto 30px; }
         .hero-cta { display: inline-block; background: #2563eb; color: #fff; padding: 14px 32px; border-radius: 8px; font-weight: 600; font-size: 16px; text-decoration: none; transition: background 0.2s; }
         .hero-cta:hover { background: #1d4ed8; }
+        .hero-cta-secondary { display: inline-block; color: #64748b; padding: 10px 24px; font-weight: 500; font-size: 14px; text-decoration: none; transition: color 0.2s; border: 1px solid #e2e8f0; border-radius: 8px; margin-top: 8px; }
+        .hero-cta-secondary:hover { color: #2563eb; border-color: #2563eb; }
+
+        /* Hero Search */
+        .hero-search { max-width: 600px; margin: 0 auto 20px; }
+        .hero-search-box { display: flex; background: #fff; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); overflow: hidden; border: 2px solid #e2e8f0; transition: border-color 0.2s, box-shadow 0.2s; position: relative; }
+        .hero-search-box:focus-within { border-color: #2563eb; box-shadow: 0 4px 20px rgba(37,99,235,0.15); }
+        .hero-search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+        .hero-search-input { flex: 1; border: none; padding: 15px 16px 15px 44px; font-size: 15px; font-family: 'Battambang', 'Inter', sans-serif; color: #1e293b; outline: none; background: transparent; min-width: 0; }
+        .hero-search-input::placeholder { color: #94a3b8; font-size: 14px; }
+        .hero-search-btn { background: #2563eb; color: #fff; border: none; padding: 15px 24px; font-size: 15px; font-family: 'Inter', sans-serif; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; }
+        .hero-search-btn:hover { background: #1d4ed8; }
+        .hero-search-hint { font-size: 13px; color: #94a3b8; margin-top: 10px; }
+        .hero-search-hint strong { color: #64748b; }
 
         /* Stats bar */
         .stats-bar { display: flex; justify-content: center; gap: 40px; padding: 20px; flex-wrap: wrap; }
@@ -122,6 +138,9 @@
             .hero h1 { font-size: 1.75rem; }
             .stats-bar { gap: 20px; }
             .nav-links { gap: 12px; }
+            .hero-search-box { flex-direction: column; border-radius: 10px; }
+            .hero-search-btn { border-radius: 0 0 10px 10px; }
+            .hero-search-icon { top: 24px; }
         }
     </style>
 
@@ -148,6 +167,9 @@
                 <a href="/papers/health/">សុខភាព</a>
                 <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
                 <a href="/papers/education/">អប់រំ</a>
+                <a href="/search.html" class="nav-search">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:3px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>AI Search
+                </a>
                 <a href="/papers/" class="nav-browse">Browse All</a>
             </nav>
         </div>
@@ -164,15 +186,25 @@
                 Unlocking global knowledge by using <strong>Artificial Intelligence</strong> to translate and summarize 
                 academic papers, scientific journals, and open-access research from English into <strong>Khmer</strong>.
             </p>
-            <a href="/papers/" class="hero-cta">
-                <span lang="km" class="khmer-text">រុករកឯកសារ</span> &mdash; Browse Research Papers
+            <!-- Search Bar -->
+            <div class="hero-search">
+                <form action="/search.html" method="GET" class="hero-search-box">
+                    <svg class="hero-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                    <input type="text" name="q" class="hero-search-input" placeholder="ស្វែងរក... e.g. machine learning, quantum computing, climate change" autocomplete="off">
+                    <button type="submit" class="hero-search-btn">Search</button>
+                </form>
+                <p class="hero-search-hint">AI-powered semantic search across <strong>2,300+</strong> research papers</p>
+            </div>
+
+            <a href="/papers/" class="hero-cta-secondary">
+                <span lang="km" class="khmer-text">រុករកឯកសារ</span> &mdash; Browse All Papers
             </a>
         </section>
 
         <!-- Stats -->
         <div class="stats-bar">
             <div class="stat">
-                <span class="stat-number">2,200+</span>
+                <span class="stat-number">2,300+</span>
                 <span class="stat-label">Research Papers</span>
             </div>
             <div class="stat">
@@ -262,16 +294,16 @@
             <p class="section-subtitle"><span lang="km" class="khmer-text">យើងធ្វើឱ្យស្រាវជ្រាវសកលអាចចូលប្រើបានសម្រាប់កម្ពុជា។</span></p>
             <div class="features">
                 <div class="feature">
-                    <h3>Centralized Database</h3>
-                    <p>Crawling thousands of <strong>Open Access papers</strong> from Thailand, Vietnam, China, and Western universities.</p>
+                    <h3>AI Semantic Search</h3>
+                    <p>Find papers by meaning, not just keywords. Our <strong>AI-powered search</strong> understands your questions in English or Khmer and finds the most relevant research.</p>
                 </div>
                 <div class="feature">
                     <h3>AI Summarization</h3>
                     <p>Advanced LLMs synthesize complex studies into easy-to-read <strong>Khmer summaries</strong> with technical glossaries.</p>
                 </div>
                 <div class="feature">
-                    <h3>Wide Field Research</h3>
-                    <p>Covering diverse topics: Agriculture, History, Technology, Economics, Law, Medicine, Environment, and more.</p>
+                    <h3>2,300+ Open Access Papers</h3>
+                    <p>Covering diverse topics: Agriculture, History, Technology, Economics, Law, Medicine, Environment, and more &mdash; all translated into Khmer.</p>
                 </div>
             </div>
         </section>
@@ -305,6 +337,7 @@
             </div>
             <div class="footer-col">
                 <h4>About</h4>
+                <a href="/search.html">AI Search</a>
                 <a href="/papers/">Browse All Papers</a>
                 <a href="mailto:ai.kunthet@gmail.com">Contact Us</a>
                 <p style="margin-top:10px;">Promoting Open Access Knowledge in Southeast Asia.</p>
