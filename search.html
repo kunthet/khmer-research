@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="km">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ស្វែងរកអត្ថបទ - Search Articles | KhmerResearch.com</title>
+    <meta name="description" content="Semantic search across thousands of research articles on KhmerResearch.com. Find papers by topic, keyword, or natural language query.">
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="canonical" href="https://khmerresearch.com/search.html">
+
+    <style>
+        :root {
+            --primary: #1a5276;
+            --primary-light: #2980b9;
+            --accent: #e67e22;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --text: #2c3e50;
+            --text-light: #7f8c8d;
+            --border: #e0e0e0;
+            --success: #27ae60;
+            --radius: 8px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', 'Noto Sans Khmer', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* Navigation */
+        .site-nav {
+            background: var(--primary);
+            color: #fff;
+            padding: 0.8rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+        .site-nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .site-nav-logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #fff;
+            text-decoration: none;
+        }
+        .site-nav-links { display: flex; gap: 1.2rem; }
+        .site-nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.2s;
+        }
+        .site-nav-links a:hover { color: #fff; }
+
+        /* Main Container */
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem;
+        }
+
+        /* Header */
+        .search-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .search-header h1 {
+            font-size: 1.8rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .search-header p {
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        /* Search Box */
+        .search-box {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .search-input {
+            flex: 1;
+            padding: 0.85rem 1.2rem;
+            border: 2px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            outline: none;
+            font-family: inherit;
+        }
+        .search-input:focus {
+            border-color: var(--primary-light);
+        }
+        .search-input::placeholder {
+            color: #bbb;
+        }
+        .search-btn {
+            padding: 0.85rem 1.8rem;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius);
+            font-size: 1rem;
+            cursor: pointer;
+            font-weight: 600;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .search-btn:hover { background: var(--primary-light); }
+        .search-btn:disabled {
+            background: #bbb;
+            cursor: not-allowed;
+        }
+
+        /* Filters */
+        .search-filters {
+            display: flex;
+            gap: 0.8rem;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .search-filters label {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        .search-filters select {
+            padding: 0.4rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            font-size: 0.85rem;
+            outline: none;
+            background: #fff;
+        }
+
+        /* Status */
+        .search-status {
+            text-align: center;
+            padding: 1rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .search-status.error {
+            color: #e74c3c;
+            background: #fdf0ef;
+            border-radius: var(--radius);
+        }
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2.5px solid var(--border);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.7s linear infinite;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Results */
+        .results-count {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .result-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 1rem;
+            transition: box-shadow 0.2s;
+        }
+        .result-card:hover {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .result-card .result-title {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        .result-card .result-title:hover {
+            color: var(--primary-light);
+            text-decoration: underline;
+        }
+        .result-card .result-khmer-title {
+            font-size: 0.95rem;
+            color: var(--text);
+            margin-bottom: 0.5rem;
+        }
+        .result-card .result-meta {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .result-card .result-meta span {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        .result-card .result-claim {
+            font-size: 0.88rem;
+            color: var(--text);
+            margin-top: 0.5rem;
+            padding: 0.6rem 0.8rem;
+            background: #f0f7ff;
+            border-left: 3px solid var(--primary-light);
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+        .result-card .result-claim-km {
+            font-size: 0.88rem;
+            color: var(--text);
+            margin-top: 0.4rem;
+            padding: 0.6rem 0.8rem;
+            background: #fff8f0;
+            border-left: 3px solid var(--accent);
+            border-radius: 0 var(--radius) var(--radius) 0;
+        }
+        .result-score {
+            display: inline-block;
+            padding: 0.15rem 0.5rem;
+            background: var(--success);
+            color: #fff;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        .tag {
+            display: inline-block;
+            padding: 0.1rem 0.5rem;
+            background: #eef2f7;
+            color: var(--primary);
+            border-radius: 10px;
+            font-size: 0.75rem;
+            margin-right: 0.3rem;
+        }
+
+        /* Footer */
+        .site-footer {
+            background: var(--primary);
+            color: rgba(255,255,255,0.7);
+            padding: 1.5rem 0;
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.85rem;
+        }
+        .site-footer a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .search-box { flex-direction: column; }
+            .search-btn { width: 100%; }
+            .site-nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="site-nav">
+        <div class="site-nav-inner">
+            <a href="/" class="site-nav-logo">KhmerResearch</a>
+            <div class="site-nav-links">
+                <a href="/papers/">Papers</a>
+                <a href="/papers/technology/">Technology</a>
+                <a href="/papers/health/">Health</a>
+                <a href="/papers/economics/">Economics</a>
+                <a href="/search.html" style="color:#fff;font-weight:600;">Search</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="search-container">
+        <!-- Header -->
+        <div class="search-header">
+            <h1>🔍 ស្វែងរកអត្ថបទស្រាវជ្រាវ</h1>
+            <p>Search across thousands of research articles using AI-powered semantic search</p>
+        </div>
+
+        <!-- Search Box -->
+        <div class="search-box">
+            <input type="text" id="searchInput" class="search-input"
+                   placeholder="Search by topic, question, or keywords..."
+                   autocomplete="off" maxlength="500">
+            <button id="searchBtn" class="search-btn">Search</button>
+        </div>
+
+        <!-- Filters -->
+        <div class="search-filters">
+            <label>Category:</label>
+            <select id="categoryFilter">
+                <option value="">All Categories</option>
+                <option value="agriculture">Agriculture</option>
+                <option value="technology">Technology</option>
+                <option value="health">Health</option>
+                <option value="economics">Economics</option>
+                <option value="history">History</option>
+                <option value="law">Law</option>
+                <option value="education">Education</option>
+                <option value="science">Science</option>
+                <option value="architecture">Architecture</option>
+                <option value="environment">Environment</option>
+                <option value="data">Data</option>
+            </select>
+            <label>Results:</label>
+            <select id="topKFilter">
+                <option value="5">5</option>
+                <option value="10" selected>10</option>
+                <option value="20">20</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+
+        <!-- Results Area -->
+        <div id="searchStatus" class="search-status" style="display:none;"></div>
+        <div id="resultsCount" class="results-count" style="display:none;"></div>
+        <div id="resultsList"></div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="site-footer">
+        <p>&copy; 2026 <a href="/">KhmerResearch.com</a> | Powered by BigQuery Semantic Search</p>
+    </footer>
+
+    <!-- Firebase SDKs (modular, loaded as ES modules from CDN) -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { initializeAppCheck, ReCaptchaV3Provider } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app-check.js";
+        import { getFunctions, httpsCallable } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-functions.js";
+
+        // =====================================================================
+        // Firebase Configuration
+        // =====================================================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyCJLYCrlStvZRTy9311G9Xa1BabDlpwFsc",
+            authDomain: "khmer-research-fb.firebaseapp.com",
+            projectId: "khmer-research-fb",
+            storageBucket: "khmer-research-fb.firebasestorage.app",
+            messagingSenderId: "444625530720",
+            appId: "1:444625530720:web:bcf3114ad1d1033ab4f805"
+        };
+
+        const RECAPTCHA_SITE_KEY = "6Le-L3wsAAAAAF1AAbkCEQBVGOnZFwUfigT40cIi";
+
+        // =====================================================================
+        // Initialize Firebase + App Check
+        // =====================================================================
+        const app = initializeApp(firebaseConfig);
+
+        const appCheck = initializeAppCheck(app, {
+            provider: new ReCaptchaV3Provider(RECAPTCHA_SITE_KEY),
+            isTokenAutoRefreshEnabled: true
+        });
+
+        const functions = getFunctions(app, "us-central1");
+        const searchArticlesAPI = httpsCallable(functions, "searchArticles");
+
+        // =====================================================================
+        // DOM Elements
+        // =====================================================================
+        const searchInput = document.getElementById("searchInput");
+        const searchBtn = document.getElementById("searchBtn");
+        const categoryFilter = document.getElementById("categoryFilter");
+        const topKFilter = document.getElementById("topKFilter");
+        const searchStatus = document.getElementById("searchStatus");
+        const resultsCount = document.getElementById("resultsCount");
+        const resultsList = document.getElementById("resultsList");
+
+        // =====================================================================
+        // Rate Limiting (client-side)
+        // =====================================================================
+        let lastSearchTime = 0;
+        const MIN_SEARCH_INTERVAL_MS = 1500;
+
+        // =====================================================================
+        // Search Handler
+        // =====================================================================
+        async function performSearch() {
+            const query = searchInput.value.trim();
+            if (!query) {
+                showStatus("Please enter a search query.", false);
+                return;
+            }
+            if (query.length > 500) {
+                showStatus("Query is too long (max 500 characters).", true);
+                return;
+            }
+
+            // Rate limiting
+            const now = Date.now();
+            if (now - lastSearchTime < MIN_SEARCH_INTERVAL_MS) {
+                showStatus("Please wait a moment before searching again.", false);
+                return;
+            }
+            lastSearchTime = now;
+
+            // UI: loading state
+            searchBtn.disabled = true;
+            resultsList.innerHTML = "";
+            resultsCount.style.display = "none";
+            showStatus('<span class="spinner"></span> Searching...', false);
+
+            try {
+                const response = await searchArticlesAPI({
+                    query: query,
+                    category: categoryFilter.value || null,
+                    top_k: parseInt(topKFilter.value) || 10,
+                });
+
+                const data = response.data;
+                const results = data.results || [];
+
+                searchStatus.style.display = "none";
+
+                if (results.length === 0) {
+                    showStatus("No results found. Try a different query.", false);
+                    return;
+                }
+
+                resultsCount.style.display = "block";
+                resultsCount.textContent = `Found ${results.length} result${results.length !== 1 ? "s" : ""} for "${query}"`;
+
+                renderResults(results);
+
+            } catch (error) {
+                console.error("Search error:", error);
+                let msg = "An error occurred while searching. Please try again.";
+                if (error.code === "unauthenticated" || error.code === "permission-denied") {
+                    msg = "Security verification failed. Please refresh the page and try again.";
+                } else if (error.code === "unavailable") {
+                    msg = "Search service is temporarily unavailable. Please try again later.";
+                } else if (error.code === "not-found") {
+                    msg = "Search index is being set up. Please try again later.";
+                }
+                showStatus(msg, true);
+            } finally {
+                searchBtn.disabled = false;
+            }
+        }
+
+        // =====================================================================
+        // Render Results
+        // =====================================================================
+        function renderResults(results) {
+            resultsList.innerHTML = "";
+
+            results.forEach((result, index) => {
+                const card = document.createElement("div");
+                card.className = "result-card";
+
+                const url = result.url || "#";
+                const fullUrl = url.startsWith("/") ? `https://khmerresearch.com${url}` : url;
+
+                // Build meta tags
+                const metaParts = [];
+                if (result.category) {
+                    metaParts.push(`<span class="tag">${escapeHtml(result.category)}</span>`);
+                }
+                if (result.doc_type && result.doc_type !== "research_paper") {
+                    metaParts.push(`<span class="tag">${escapeHtml(result.doc_type)}</span>`);
+                }
+                if (result.publication_year) {
+                    metaParts.push(`<span>${escapeHtml(result.publication_year)}</span>`);
+                }
+                if (result.language && result.language !== "English") {
+                    metaParts.push(`<span>${escapeHtml(result.language)}</span>`);
+                }
+                if (result.relevance_score) {
+                    metaParts.push(`<span class="result-score">${(parseFloat(result.relevance_score) * 100).toFixed(1)}% match</span>`);
+                }
+
+                // Keywords
+                let keywordsHtml = "";
+                if (result.keywords && result.keywords.length > 0) {
+                    const kws = result.keywords.slice(0, 5);
+                    keywordsHtml = `<div style="margin-top:0.4rem;">${kws.map(k => `<span class="tag">${escapeHtml(k)}</span>`).join("")}</div>`;
+                }
+
+                // Atomic claims
+                let claimHtml = "";
+                if (result.atomic_claim_english) {
+                    claimHtml += `<div class="result-claim">${escapeHtml(result.atomic_claim_english)}</div>`;
+                }
+                if (result.atomic_claim_khmer) {
+                    claimHtml += `<div class="result-claim-km">${escapeHtml(result.atomic_claim_khmer)}</div>`;
+                }
+
+                card.innerHTML = `
+                    <a href="${escapeHtml(fullUrl)}" class="result-title" target="_blank" rel="noopener">${escapeHtml(result.title || "Untitled")}</a>
+                    ${result.khmer_title ? `<div class="result-khmer-title">${escapeHtml(result.khmer_title)}</div>` : ""}
+                    <div class="result-meta">${metaParts.join("")}</div>
+                    ${keywordsHtml}
+                    ${claimHtml}
+                `;
+
+                resultsList.appendChild(card);
+            });
+        }
+
+        // =====================================================================
+        // Utilities
+        // =====================================================================
+        function showStatus(message, isError) {
+            searchStatus.style.display = "block";
+            searchStatus.className = isError ? "search-status error" : "search-status";
+            searchStatus.innerHTML = message;
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement("div");
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // =====================================================================
+        // Event Listeners
+        // =====================================================================
+        searchBtn.addEventListener("click", performSearch);
+        searchInput.addEventListener("keydown", (e) => {
+            if (e.key === "Enter") performSearch();
+        });
+
+        // Focus search input on page load
+        searchInput.focus();
+    </script>
+</body>
+</html>
