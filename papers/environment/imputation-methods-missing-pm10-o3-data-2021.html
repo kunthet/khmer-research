@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការអនុវត្តវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យបាត់បង់សម្រាប់តម្លៃ PM10 និង O3៖ វិធីសាស្ត្រ Interpolation, Moving Average និង K-Nearest Neighbor - Application of imputation methods for missing values of PM10 and O3 data: Int... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការអនុវត្តវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យបាត់បង់សម្រាប់តម្លៃ P។ ការសិក្សានេះដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់នៅក្នុងការវាស់ស្ទង់គុណភាពខ្យល់ (កំហាប់ PM10 និង O3) ដែលតែ...">
+    
+    <meta name="keywords" content="Air pollution, Data imputation, Missing values, Interpolation, K-nearest neighbor, Moving average, Spatio-temporal analysis, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/environment/imputation-methods-missing-pm10-o3-data-2021.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/environment/imputation-methods-missing-pm10-o3-data-2021.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/environment/imputation-methods-missing-pm10-o3-data-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/environment/imputation-methods-missing-pm10-o3-data-2021.html">
+    <meta property="og:title" content="ការអនុវត្តវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យបាត់បង់សម្រាប់តម្លៃ PM10 និង O3៖ វិធីសាស្ត្រ Interpolation, Moving Average និង K-Nearest Neighbor | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់នៅក្នុងការវាស់ស្ទង់គុណភាពខ្យល់ (កំហាប់ PM10 និង O3) ដែលតែងតែកើតមានដោយសារការខូចម៉ាស៊ីន ឬកំហុសបច្ចេកទេស ដែលអាចប៉ះពាល់ដល់ភាពត្រឹមត្រូវនៃការវិភាគទិន្នន័យបរិស្ថាន។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2021 Environmental Health Engineering and Management Journal">
+    
+    <meta property="article:tag" content="Air pollution">
+    
+    <meta property="article:tag" content="Data imputation">
+    
+    <meta property="article:tag" content="Missing values">
+    
+    <meta property="article:tag" content="Interpolation">
+    
+    <meta property="article:tag" content="K-nearest neighbor">
+    
+    <meta property="article:tag" content="Moving average">
+    
+    <meta property="article:tag" content="Spatio-temporal analysis">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការអនុវត្តវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យបាត់បង់សម្រាប់តម្លៃ PM10 និង O3៖ វិធីសាស្ត្រ Interpolation, Moving Average និង K-Nearest Neighbor">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់នៅក្នុងការវាស់ស្ទង់គុណភាពខ្យល់ (កំហាប់ PM10 និង O3) ដែលតែងតែកើតមានដោយសារការខូចម៉ាស៊ីន ឬកំហុសបច្ចេកទេស ដែលអាចប៉ះពាល់ដល់ភាពត្រឹមត្រូវនៃការវិភាគទិន្នន័យបរិស្ថាន។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178f\u1798\u17d2\u179b\u17c3 PM10 \u1793\u17b7\u1784 O3\u17d6 \u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Interpolation, Moving Average \u1793\u17b7\u1784 K-Nearest Neighbor",
+      "name": "Application of imputation methods for missing values of PM10 and O3 data: Interpolation, moving average and K-nearest neighbor methods",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b6\u179f\u17cb\u179f\u17d2\u1791\u1784\u17cb\u1782\u17bb\u178e\u1797\u17b6\u1796\u1781\u17d2\u1799\u179b\u17cb (\u1780\u17c6\u17a0\u17b6\u1794\u17cb PM10 \u1793\u17b7\u1784 O3) \u178a\u17c2\u179b\u178f\u17c2\u1784\u178f\u17c2\u1780\u17be\u178f\u1798\u17b6\u1793\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u1781\u17bc\u1785\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 \u17ac\u1780\u17c6\u17a0\u17bb\u179f\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f \u178a\u17c2\u179b\u17a2\u17b6\u1785\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u178a\u179b\u17cb\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/environment/imputation-methods-missing-pm10-o3-data-2021.html",
+      "author": [{"@type": "Person", "name": "Parisa Saeipourdizaj (Tabriz University of Medical Sciences, Iran)"},{"@type": "Person", "name": "Parvin Sarbakhsh (Tabriz University of Medical Sciences, Iran)"},{"@type": "Person", "name": "Akbar Gholampour (Tabriz University of Medical Sciences, Iran)"}],
+      "datePublished": "2021 Environmental Health Engineering and Management Journal",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Application of imputation methods for missing values of PM10 and O3 data: Interpolation, moving average and K-nearest neighbor methods",
+        "url": "https://doi.org/10.34172/EHEM.2021.25"
+      },
+      "keywords": ["Air pollution", "Data imputation", "Missing values", "Interpolation", "K-nearest neighbor", "Moving average", "Spatio-temporal analysis"],
+      "about": "Environmental Health / Statistics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Environment",
+          "item": "https://khmerresearch.com/papers/environment/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178f\u1798\u17d2\u179b\u17c3 PM10 \u1793\u17b7\u1784 O3\u17d6 \u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Interpolation, Moving Average \u1793\u17b7\u1784 K-Nearest Neighbor",
+          "item": "https://khmerresearch.com/papers/environment/imputation-methods-missing-pm10-o3-data-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/environment/">Environment</a> &rsaquo;
+        <span>ការអនុវត្តវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យបាត់បង់សម្រាប់តម្ល...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Application of imputation methods for missing values of PM10 and O3 data: Interpolation, moving average and K-nearest neighbor methods<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.34172/EHEM.2021.25" target="_blank">doi.org/10.34172/EHEM.2021.25</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការអនុវត្តវិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យបាត់បង់សម្រាប់តម្លៃ PM10 និង O3៖ វិធីសាស្ត្រ Interpolation, Moving Average និង K-Nearest Neighbor</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Application of imputation methods for missing values of PM10 and O3 data: Interpolation, moving average and K-nearest neighbor methods</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Parisa Saeipourdizaj (Tabriz University of Medical Sciences, Iran), Parvin Sarbakhsh (Tabriz University of Medical Sciences, Iran), Akbar Gholampour (Tabriz University of Medical Sciences, Iran)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021 Environmental Health Engineering and Management Journal</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Environmental Health / Statistics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហាទិន្នន័យបាត់បង់នៅក្នុងការវាស់ស្ទង់គុណភាពខ្យល់ (កំហាប់ PM10 និង O3) ដែលតែងតែកើតមានដោយសារការខូចម៉ាស៊ីន ឬកំហុសបច្ចេកទេស ដែលអាចប៉ះពាល់ដល់ភាពត្រឹមត្រូវនៃការវិភាគទិន្នន័យបរិស្ថាន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានធ្វើការក្លែងបន្លំទិន្នន័យបាត់បង់ក្នុងអត្រា ១០%, ២០% និង ៣០% រួចសាកល្បងវិធីសាស្ត្រប៉ាន់ស្មាន (Imputation) ចំនួន ៨ ផ្សេងគ្នា ដើម្បីប្រៀបធៀបប្រសិទ្ធភាពរបស់វាដោយប្រើសូចនាករស្ដង់ដារ។
+        
+        <ul>
+            
+            <li>វិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យ (Imputation Methods) រួមមាន Mean, EM algorithm, Regression, CART, PMM, Interpolation, Moving Average, និង KNN</li>
+            
+            <li>ការវាយតម្លៃប្រសិទ្ធភាពដោយប្រើប្រាស់សូចនាករ (Performance Indicators) ដូចជា R2, MAE, និង RMSE</li>
+            
+            <li>ការធ្វើគំរូទិន្នន័យគុណភាពខ្យល់តាមពេលវេលា និងលំហ (Spatio-temporal analysis)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រ Interpolation, Moving Average (ជាពិសេស EWMA), និង K-Nearest Neighbor (KNN) បង្ហាញលទ្ធផលល្អបំផុតក្នុងការប៉ាន់ស្មានទិន្នន័យបាត់បង់សម្រាប់សារធាតុបំពុលទាំងពីរប្រភេទ។</li>
+            
+            <li>ក្បួនដោះស្រាយស្មុគស្មាញដូចជា Predictive Mean Matching (PMM) មិនមានប្រសិទ្ធភាពល្អនោះទេ ទោះបីជាបានបញ្ចូលព័ត៌មានអវកាស និងពេលវេលាក៏ដោយ។</li>
+            
+            <li>វិធីសាស្ត្រដែលផ្អែកលើព័ត៌មានមុននិងក្រោយ (Before-and-after information) មានភាពស័ក្តិសមបំផុតសម្រាប់បំពេញទិន្នន័យកំហាប់ខ្យល់បំពុលដែលជាប្រភេទស៊េរីពេលវេលា (Time series)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Linear Interpolation (LINT)</span></strong><br>វិធីសាស្ត្រ Linear Interpolation</td>
+                <td>មានភាពសាមញ្ញ និងស័ក្តិសមបំផុតសម្រាប់ទិន្នន័យប្រភេទស៊េរីពេលវេលា (Time Series) ដែលការពឹងផ្អែកលើទិន្នន័យមុននិងក្រោយមានកម្រិតខ្ពស់។</td>
+                <td>អាចមានភាពលំអៀង ឬមិនសុក្រឹត ប្រសិនបើមានចន្លោះនៃការបាត់បង់ទិន្នន័យធំ ឬវែងពេកដោយគ្មានទិន្នន័យយោងនៅក្បែរនោះ។</td>
+                <td>ផ្តល់លទ្ធផលល្អដាច់គេបំផុត (ឧ. R2=0.822, RMSE=15.14, MAE=8.33 សម្រាប់ការបាត់បង់ទិន្នន័យ PM10 ចំនួន ២០%)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Exponential Weighted Moving Average (EWMA)</span></strong><br>វិធីសាស្ត្រមធ្យមភាគផ្លាស់ទីផ្តល់ទម្ងន់អិចស្ប៉ូណង់ស្យែល</td>
+                <td>ផ្តល់ទម្ងន់ទៅលើទិន្នន័យសង្កេតដែលនៅក្បែរចន្លោះបាត់បង់ច្រើនជាងទិន្នន័យនៅឆ្ងាយ ដែលធ្វើឱ្យការប៉ាន់ស្មានកាន់តែមានភាពប្រាកដនិយម។</td>
+                <td>ទាមទារការកំណត់ទំហំផ្ទាំងវីនដូ (Window Size) និងកត្តាផ្តល់ទម្ងន់ឱ្យបានត្រឹមត្រូវ ដើម្បីទទួលបានប្រសិទ្ធភាពខ្ពស់។</td>
+                <td>ជាប់ចំណាត់ថ្នាក់ទី២ ក្នុងការផ្តល់លទ្ធផលត្រឹមត្រូវ (ឧ. R2=0.808, RMSE=15.64 សម្រាប់ការបាត់បង់ទិន្នន័យ PM10 ចំនួន ២០%)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbor (KNN)</span></strong><br>វិធីសាស្ត្រ K-Nearest Neighbor</td>
+                <td>ងាយស្រួលយល់ និងប្រើប្រាស់ចំណុចចុងសងខាងនៃចន្លោះទិន្នន័យដែលបាត់ ដើម្បីទាញយកតម្លៃប៉ាន់ស្មានបានយ៉ាងរហ័ស។</td>
+                <td>ប្រសិទ្ធភាពអាចធ្លាក់ចុះ ប្រសិនបើទិន្នន័យជិតខាងមានការប្រែប្រួលឡើងចុះខ្លាំងមិនប្រក្រតី។</td>
+                <td>មានដំណើរការល្អគួរជាទីគាប់ចិត្ត និងស្ថិតក្នុងលំដាប់ទី៣ (ឧ. R2=0.777, RMSE=16.85 សម្រាប់ការបាត់បង់ទិន្នន័យ PM10 ចំនួន ២០%)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Predictive Mean Matching (PMM)</span></strong><br>វិធីសាស្ត្រ Predictive Mean Matching</td>
+                <td>ធានាថាតម្លៃដែលប៉ាន់ស្មានបាននឹងស្ថិតក្នុងចន្លោះទិន្នន័យជាក់ស្តែងជានិច្ច ដោយមិនបង្កើតតម្លៃដែលមិនអាចកើតមានឡើយ។</td>
+                <td>មិនស័ក្តិសមសោះសម្រាប់ទិន្នន័យជាស៊េរីពេលវេលា (Time Series) ទោះបីជាមានការបន្ថែមអថេរពេលវេលា និងទីតាំងភូមិសាស្ត្រក៏ដោយ។</td>
+                <td>ផ្តល់លទ្ធផលខ្សោយបំផុតក្នុងការសាកល្បងទាំងអស់ (ឧ. R2=0.052, RMSE=37.71 សម្រាប់ការបាត់បង់ទិន្នន័យ PM10 ចំនួន ២០%)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនទាមទារធនធានកុំព្យូទ័រ (Supercomputer) ធំដុំនោះទេ ប៉ុន្តែត្រូវការកម្មវិធីស្ថិតិ និងកញ្ចប់កូដជាក់លាក់។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កម្មវិធី R (ជំនាន់ 4.0.2) ជាមួយកញ្ចប់ 'mice' (3.9.0), 'imputeTS' (3.1), 'VIM' (6.0.0), កម្មវិធី SPSS ជំនាន់ 25, និង Microsoft Excel។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រផ្ទាល់ខ្លួនកម្រិតមធ្យម (Standard PC) គឺគ្រប់គ្រាន់សម្រាប់ការដំណើរការ និងគណនាទិន្នន័យប្រមាណ ២៤,០០០ ជួរ។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យកំហាប់គុណភាពខ្យល់វាស់ម៉ោងនីមួយៗ (Hourly mean concentrations) រយៈពេលច្រើនខែ។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកវិទ្យាសាស្ត្រទិន្នន័យ និងស្ថិតិ (Time-series analysis និង Missing Data Mechanisms)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យកំហាប់ PM10 និង O3 ពីស្ថានីយត្រួតពិនិត្យនៅទីក្រុង Tabriz ប្រទេសអ៊ីរ៉ង់ ក្នុងឆ្នាំ២០១៧ ដោយមានការដកចេញនូវទិន្នន័យរដូវក្តៅ និងរដូវរងា។ ទោះបីជាអាកាសធាតុអ៊ីរ៉ង់ខុសពីកម្ពុជាក៏ដោយ ប៉ុន្តែលក្ខណៈគណិតវិទ្យានៃទិន្នន័យខ្យល់បំពុលជា 'ស៊េរីពេលវេលា (Time Series)' គឺដូចគ្នា ដែលធ្វើឱ្យស្ថាប័នកម្ពុជាអាចយកវិធីសាស្ត្រទាំងនេះមកអនុវត្តបានយ៉ាងមានប្រសិទ្ធភាពខ្ពស់ដោយមិនបារម្ភពីភាពលម្អៀង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រប៉ាន់ស្មានទិន្នន័យ (Imputation methods) ទាំងនេះពិតជាមានភាពចាំបាច់ និងមានប្រយោជន៍ខ្លាំងណាស់សម្រាប់ស្ថាប័នគ្រប់គ្រងបរិស្ថាននៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ស្ថានីយត្រួតពិនិត្យគុណភាពខ្យល់របស់ក្រសួងបរិស្ថាន (MoE):</strong> អាចប្រើប្រាស់វិធីសាស្ត្រ Interpolation ឬ EWMA ដើម្បីបំពេញចន្លោះទិន្នន័យដោយស្វ័យប្រវត្តិ នៅពេលម៉ាស៊ីនវាស់គុណភាពខ្យល់នៅរាជធានីភ្នំពេញ ឬខេត្តព្រះសីហនុជួបបញ្ហាបច្ចេកទេស ឬដាច់ភ្លើង។</li>
+            
+            <li><strong>ការស្រាវជ្រាវសុខភាពសាធារណៈ (Public Health Research):</strong> ជួយឱ្យសាកលវិទ្យាល័យ ឬវិទ្យាស្ថានស្រាវជ្រាវ (ដូចជា NIPH) មានទិន្នន័យ PM10 ពេញលេញសម្រាប់យកទៅវិភាគស្វែងរកទំនាក់ទំនងរវាងការបំពុលខ្យល់ និងជំងឺផ្លូវដង្ហើមនៅកម្ពុជាបានត្រឹមត្រូវ។</li>
+            
+            <li><strong>ប្រព័ន្ធប្រកាសអាសន្នគុណភាពខ្យល់ (Air Quality Early Warning Systems):</strong> ធ្វើឱ្យប្រព័ន្ធព្យាករណ៍សន្ទស្សន៍គុណភាពខ្យល់ (AQI) ដំណើរការបានរលូនជាប្រចាំ ទោះបីជាមានការបាត់បង់ទិន្នន័យពីសេនស័រ (Sensors) មួយចំនួនក្នុងកម្រិតពី ១០% ទៅ ៣០% ក៏ដោយ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម សម្រាប់ទិន្នន័យបរិស្ថានកម្ពុជា ការជ្រើសរើសវិធីសាស្ត្រសាមញ្ញដែលពឹងផ្អែកលើព័ត៌មាន 'មុននិងក្រោយ' (ដូចជា Linear Interpolation និង Moving Average) គឺជាជម្រើសដ៏ល្អបំផុត និងចំណាយធនធានតិចជាងការប្រើក្បួន Machine Learning ស្មុគស្មាញ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងសម្អាតទិន្នន័យបឋម (Data Collection & Pre-processing):</strong> ប្រមូលទិន្នន័យគុណភាពខ្យល់ (PM10, O3, ឬ PM2.5) ជាម៉ោងពីស្ថានីយវាស់វែង ហើយប្រើប្រាស់មុខងារ Z-score នៅក្នុងកម្មវិធី <span class="en">Excel</span> ឬ <span class="en">SPSS</span> ដើម្បីកំណត់ និងលុបតម្លៃទិន្នន័យដែលខុសប្រក្រតីខ្លាំង (Outliers)។</li>
+            
+            <li><strong>កំណត់អត្តសញ្ញាណយន្តការនៃការបាត់បង់ទិន្នន័យ (Identify Missing Mechanism):</strong> ត្រូវវិភាគថាតើទិន្នន័យដែលបាត់នោះស្ថិតក្នុងទម្រង់ MCAR, MAR, ឬ MNAR ដោយផ្អែកលើទ្រឹស្តី Rubin's Theory។ សម្រាប់ទិន្នន័យគុណភាពខ្យល់ ជាទូទៅវាស្ថិតក្នុងទម្រង់ MAR (Missing At Random) ដែលងាយស្រួលក្នុងការធ្វើ Imputation។</li>
+            
+            <li><strong>អនុវត្តវិធីសាស្ត្រប៉ាន់ស្មាន (Implement Imputation Methods):</strong> ប្រើប្រាស់កម្មវិធី <span class="en">R</span> រួមជាមួយកញ្ចប់កូដ <span class="en">imputeTS</span> និង <span class="en">VIM</span> ដើម្បីដំណើរការក្បួនដោះស្រាយ <span class="en">Linear Interpolation</span>, <span class="en">KNN</span>, និង <span class="en">EWMA</span> ទៅលើចន្លោះទិន្នន័យដែលបានបាត់បង់។</li>
+            
+            <li><strong>វាយតម្លៃ និងប្រៀបធៀបប្រសិទ្ធភាព (Evaluate and Validate Performance):</strong> ប្រើប្រាស់វិធីសាស្ត្រ Training-Testing លើទិន្នន័យពេញលេញ (ដោយសាកល្បងលុបទិន្នន័យ ១០%, ២០%, ៣០%) បន្ទាប់មកគណនាសូចនាករ <span class="en">R-squared (R2)</span>, <span class="en">RMSE</span>, និង <span class="en">MAE</span> ដើម្បីបញ្ជាក់ថាវិធីសាស្ត្រណាដែលផ្តល់កំហុសតិចបំផុតមុននឹងយកទៅប្រើជាផ្លូវការ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Imputation</span></td>
+                <td>ការប៉ាន់ស្មាន ឬការបំពេញតម្លៃទិន្នន័យដែលបាត់បង់ដោយប្រើប្រាស់វិធីសាស្ត្រស្ថិតិ ឬក្បួនដោះស្រាយផ្សេងៗ ដោយផ្អែកលើទិន្នន័យដែលនៅសេសសល់ ដើម្បីកុំឱ្យខូចខាតដល់ការវិភាគទាំងមូល។</td>
+                <td>ដូចជាការទាយពាក្យដែលបាត់នៅក្នុងប្រយោគមួយដោយមើលអត្ថន័យនៃពាក្យនៅខាងមុខ និងខាងក្រោយវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Interpolation</span></td>
+                <td>វិធីសាស្ត្រគណិតវិទ្យាក្នុងការបង្កើតចំណុចទិន្នន័យថ្មីនៅចន្លោះចំណុចទិន្នន័យដែលគេស្គាល់មុននិងក្រោយ ជាពិសេសមានប្រសិទ្ធភាពខ្ពស់ក្នុងការប្រើប្រាស់សម្រាប់ទិន្នន័យស៊េរីពេលវេលា។</td>
+                <td>ដូចជាការគូសបន្ទាត់ត្រង់ភ្ជាប់ពីចុងម្ខាងនៃស្ពានដែលបាក់ទៅចុងម្ខាងទៀត ដើម្បីប៉ាន់ស្មានថាតើស្ពាននោះមានរាងយ៉ាងម៉េចនៅកន្លែងដែលបាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Moving average</span></td>
+                <td>ការគណនាមធ្យមភាគនៃសំណុំទិន្នន័យរងតាមលំដាប់លំដោយពេលវេលា ដើម្បីរំលេចនិន្នាការទិន្នន័យ និងបំពេញទិន្នន័យដែលបាត់ដោយផ្អែកលើតម្លៃដែលនៅក្បែរៗនោះបំផុត។</td>
+                <td>ដូចជាការសួរមិត្តភក្តិ ២ ឬ ៣ នាក់ដែលអង្គុយជិតអ្នកបំផុតពីពិន្ទុប្រឡងរបស់ពួកគេ ដើម្បីយកមកទាយពីពិន្ទុប្រឡងរបស់អ្នកដែលគ្រូមិនទាន់ប្រាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor (KNN)</span></td>
+                <td>ក្បួនដោះស្រាយទស្សន៍ទាយតម្លៃដោយផ្អែកលើចំណុចទិន្នន័យដែលនៅជិតវា ឬស្រដៀងវាបំផុតចំនួន K ដែលជាទូទៅវាប្រើចំណុចចុងសងខាងនៃចន្លោះទិន្នន័យដែលបាត់។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាបុគ្គលម្នាក់ចូលចិត្តញ៉ាំអ្វី ដោយមើលទៅលើចំណូលចិត្តរបស់មិត្តភក្តិជិតស្និទ្ធបំផុតរបស់គាត់ចំនួន ៣ ទៅ ៥ នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Predictive mean matching (PMM)</span></td>
+                <td>វិធីសាស្ត្របំពេញទិន្នន័យដែលដំណើរការដោយការស្វែងរកតម្លៃប៉ាន់ស្មានតាមរយៈម៉ូដែល តែកាលណាទាយបានហើយ វានឹងទៅចាប់យកតម្លៃពិតប្រាកដណាមួយពីទិន្នន័យសង្កេតដែលមានតម្លៃស្រដៀងគ្នាមកជំនួសវិញ។</td>
+                <td>ដូចជាការរកអ្នកជំនួសតួសម្តែងដែលឈឺ ដោយជ្រើសរើសយកតួផ្សេងទៀតក្នុងក្រុមដែលមានកម្ពស់និងមុខមាត់ស្រដៀងគាត់បំផុតមកលេងជំនួស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Missing at random (MAR)</span></td>
+                <td>យន្តការដែលប្រូបាប៊ីលីតេនៃការបាត់បង់ទិន្នន័យអាស្រ័យតែលើអថេរដែលបានសង្កេតឃើញរួចហើយ (ដូចជាពេលវេលា ឬទីតាំង) ប៉ុន្តែមិនអាស្រ័យលើតម្លៃនៃទិន្នន័យដែលបាត់នោះទេ។</td>
+                <td>ដូចជាសិស្សអវត្តមានប្រឡងដោយសារតែថ្ងៃនោះមានភ្លៀងធ្លាក់ខ្លាំង (ជាកត្តាខាងក្រៅដែលយើងដឹង) មិនមែនអវត្តមានដោយសារតែគាត់រៀនខ្សោយហើយខ្លាចធ្លាក់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Root mean square error (RMSE)</span></td>
+                <td>រង្វាស់ស្ថិតិសម្រាប់វាយតម្លៃកម្រិតនៃកំហុសរវាងតម្លៃដែលម៉ូដែលទស្សន៍ទាយបាន និងតម្លៃជាក់ស្តែង ដោយតម្លៃកំហុសកាន់តែតូចបញ្ជាក់ថាម៉ូដែលកាន់តែមានភាពត្រឹមត្រូវខ្ពស់។</td>
+                <td>ដូចជាការវាស់ចម្ងាយសរុបនៃព្រួញទាំងអស់ដែលអ្នកបាញ់ខុសពីចំណុចកណ្តាលនៃផ្ទាំងស៊ីប កាលណាចម្ងាយសរុបកាន់តែខ្លី មានន័យថាអ្នកបាញ់កាន់តែចំគោលដៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">EM algorithm</span></td>
+                <td>ក្បួនដោះស្រាយ Expectation-Maximization គឺជាវិធីសាស្ត្រគណនាដែលធ្វើការប៉ាន់ស្មានតម្លៃប៉ារ៉ាម៉ែត្រម្តងហើយម្តងទៀតជាវដ្ត ដើម្បីរកតម្លៃអតិបរមានៃលទ្ធភាពទិន្នន័យដែលបាត់ ដោយពឹងផ្អែកលើការចែកចាយស្ថិតិ។</td>
+                <td>ដូចជាការលៃតម្រូវប៊ូតុងរលកវិទ្យុចុះឡើងៗបន្តិចម្តងៗ រហូតទាល់តែអ្នកស្តាប់លឺសំឡេងចម្រៀងបានច្បាស់បំផុតដោយគ្មានសម្លេងរំខាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/knn-classification-machine-learning-review-2022.html">
+                    <span class="km">ការពិនិត្យឡើងវិញលើការវិភាគនៃក្បួនដោះស្រាយការរៀនដោយម៉ាស៊ីនចំណាត់ថ្នាក់ K-Nearest Neighbor ដោយផ្អែកលើការរៀនដោយមានការត្រួតពិនិត្យ</span><br>
+                    <span class="en article-original-title">A Review on Analysis of K-Nearest Neighbor Classification Machine Learning Algorithms based on Supervised Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/feature-extraction-text-classification-knn-2018.html">
+                    <span class="km">ចំណាត់ថ្នាក់អត្ថបទផ្អែកលើការទាញយកលក្ខណៈពិសេស ដោយប្រើក្បួនដោះស្រាយ K-Nearest Neighbor</span><br>
+                    <span class="en article-original-title">Feature Extraction based Text Classification using K-Nearest Neighbor Algorithm</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/imputing-missing-data-hydrology-ml-2021.html">
+                    <span class="km">ការបំពេញទិន្នន័យដែលបាត់បង់ក្នុងវិស័យជលសាស្ត្រ ដោយប្រើប្រាស់គំរូនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning Models)</span><br>
+                    <span class="en article-original-title">Imputing Missing Data in Hydrology using Machine Learning Models</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/missing-value-imputation-review-2019.html">
+                    <span class="km">ការបំពេញតម្លៃដែលបាត់បង់៖ ការពិនិត្យឡើងវិញ</span><br>
+                    <span class="en article-original-title">Missing Value Imputation-A Review</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/bird-voice-classification-knn-2022.html">
+                    <span class="km">ការចាត់ថ្នាក់សំឡេងសត្វស្លាបដោយផ្អែកលើការរួមបញ្ចូលគ្នានៃការទាញយកលក្ខណៈពិសេស និងការកាត់បន្ថយវិមាត្រជាមួយ K-Nearest Neighbor</span><br>
+                    <span class="en article-original-title">Bird Voice Classification Based on Combination Feature Extraction and Reduction Dimension with the K-Nearest Neighbor</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=imputation+methods+for+univariate+time+series+environmental+data" target="_blank" rel="noopener"><span class="en">imputation methods for univariate time series environmental data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparison+of+interpolation+and+machine+learning+for+missing+air+quality+data" target="_blank" rel="noopener"><span class="en">comparison of interpolation and machine learning for missing air quality data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=spatio-temporal+predictive+mean+matching+for+missing+data+in+meteorology" target="_blank" rel="noopener"><span class="en">spatio-temporal predictive mean matching for missing data in meteorology</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=handling+missing+at+random+%28MAR%29+data+in+longitudinal+epidemiological+studies" target="_blank" rel="noopener"><span class="en">handling missing at random (MAR) data in longitudinal epidemiological studies</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=effects+of+missing+data+imputation+on+PM10+and+O3+prediction+models" target="_blank" rel="noopener"><span class="en">effects of missing data imputation on PM10 and O3 prediction models</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

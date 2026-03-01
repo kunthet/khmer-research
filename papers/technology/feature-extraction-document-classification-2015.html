@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទាញយកលក្ខណៈពិសេសសម្រាប់ការចាត់ថ្នាក់ឯកសារ - Feature Extraction for Document Classification | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការទាញយកលក្ខណៈពិសេសសម្រាប់ការចាត់ថ្នាក់ឯកសារ។ ឯកសារនេះដោះស្រាយបញ្ហាទិន្នន័យដែលមានវិមាត្រខ្ពស់ (High-dimensionality) នៅក្នុងការចាត់ថ្នាក់ឯកសារអត...">
+    
+    <meta name="keywords" content="Document classification, Text mining, Feature extraction, Term frequency, J48 decision tree, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/feature-extraction-document-classification-2015.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/feature-extraction-document-classification-2015.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/feature-extraction-document-classification-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/feature-extraction-document-classification-2015.html">
+    <meta property="og:title" content="ការទាញយកលក្ខណៈពិសេសសម្រាប់ការចាត់ថ្នាក់ឯកសារ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាទិន្នន័យដែលមានវិមាត្រខ្ពស់ (High-dimensionality) នៅក្នុងការចាត់ថ្នាក់ឯកសារអត្ថបទ ដែលធ្វើឱ្យថយចុះល្បឿននៃការទាញយកព័ត៌មាន និងភាពត្រឹមត្រូវនៃក្បួនដោះស្រាយ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015, International Journal of Innovative Research in Science, Engineering and Technology">
+    
+    <meta property="article:tag" content="Document classification">
+    
+    <meta property="article:tag" content="Text mining">
+    
+    <meta property="article:tag" content="Feature extraction">
+    
+    <meta property="article:tag" content="Term frequency">
+    
+    <meta property="article:tag" content="J48 decision tree">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទាញយកលក្ខណៈពិសេសសម្រាប់ការចាត់ថ្នាក់ឯកសារ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាទិន្នន័យដែលមានវិមាត្រខ្ពស់ (High-dimensionality) នៅក្នុងការចាត់ថ្នាក់ឯកសារអត្ថបទ ដែលធ្វើឱ្យថយចុះល្បឿននៃការទាញយកព័ត៌មាន និងភាពត្រឹមត្រូវនៃក្បួនដោះស្រាយ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17af\u1780\u179f\u17b6\u179a",
+      "name": "Feature Extraction for Document Classification",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u1798\u17b6\u178f\u17d2\u179a\u1781\u17d2\u1796\u179f\u17cb (High-dimensionality) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17af\u1780\u179f\u17b6\u179a\u17a2\u178f\u17d2\u1790\u1794\u1791 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1790\u1799\u1785\u17bb\u17c7\u179b\u17d2\u1794\u17bf\u1793\u1793\u17c3\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793 \u1793\u17b7\u1784\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/feature-extraction-document-classification-2015.html",
+      "author": [{"@type": "Person", "name": "S.Vidhya"},{"@type": "Person", "name": "D.Asir Antony Gnana Singh"},{"@type": "Person", "name": "E.Jebamalar Leavline"}],
+      "datePublished": "2015, International Journal of Innovative Research in Science, Engineering and Technology",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Feature Extraction for Document Classification",
+        "url": "www.ijirset.com"
+      },
+      "keywords": ["Document classification", "Text mining", "Feature extraction", "Term frequency", "J48 decision tree"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17af\u1780\u179f\u17b6\u179a",
+          "item": "https://khmerresearch.com/papers/technology/feature-extraction-document-classification-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការទាញយកលក្ខណៈពិសេសសម្រាប់ការចាត់ថ្នាក់ឯកសារ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Feature Extraction for Document Classification<br>
+        
+        <strong>Source:</strong> <a href="www.ijirset.com" target="_blank">www.ijirset.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទាញយកលក្ខណៈពិសេសសម្រាប់ការចាត់ថ្នាក់ឯកសារ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Feature Extraction for Document Classification</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> S.Vidhya, D.Asir Antony Gnana Singh, E.Jebamalar Leavline</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015, International Journal of Innovative Research in Science, Engineering and Technology</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាទិន្នន័យដែលមានវិមាត្រខ្ពស់ (High-dimensionality) នៅក្នុងការចាត់ថ្នាក់ឯកសារអត្ថបទ ដែលធ្វើឱ្យថយចុះល្បឿននៃការទាញយកព័ត៌មាន និងភាពត្រឹមត្រូវនៃក្បួនដោះស្រាយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្រទាញយកលក្ខណៈពិសេសដើម្បីកាត់បន្ថយវិមាត្រទិន្នន័យ ដោយប្រើប្រេកង់ពាក្យនិងប្រេកង់ឯកសារច្រាស រួមបញ្ចូលជាមួយការកាត់ឫសគល់ពាក្យ និងវាយតម្លៃដោយក្បួនដោះស្រាយ J48។
+        
+        <ul>
+            
+            <li>ការគណនាប្រេកង់ពាក្យ និងប្រេកង់ឯកសារច្រាស (Term Frequency and Inverse Document Frequency - TF-IDF)</li>
+            
+            <li>ការលុបពាក្យដែលមិនចាំបាច់ និងការកាត់ឫសគល់ពាក្យ (Stop Words Removal and Stemming Analysis)</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយចំណាត់ថ្នាក់ឈើសម្រេចចិត្ត J48 (J48 Decision Tree Algorithm)</li>
+            
+            <li>ការសាកល្បងលើសំណុំទិន្នន័យ Reuters (Reuters Dataset Evaluation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយដែលបានស្នើឡើងអាចកាត់បន្ថយចំនួនលក្ខណៈពិសេស (Features) យ៉ាងមានប្រសិទ្ធភាពពី ២០២៣ មកត្រឹម ១១៨៣ សម្រាប់ការចាត់ថ្នាក់។</li>
+            
+            <li>វិធីសាស្ត្រនេះទទួលបានភាពត្រឹមត្រូវក្នុងការចាត់ថ្នាក់ខ្ពស់រហូតដល់ ៩៨.៥% ធៀបនឹង ៩៣% របស់វិធីសាស្ត្រ Null Stemmer ចាស់។</li>
+            
+            <li>ពេលវេលាក្នុងការកសាងម៉ូដែល (Processing time) ត្រូវបានកាត់បន្ថយមកត្រឹម ៣.២៩ វិនាទី ដែលលឿនជាងវិធីសាស្ត្រមុនដែលចំណាយពេល ៤.២១៧ វិនាទី។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">TFT and IDFT with stemmer</span></strong><br>វិធីសាស្ត្រប្រើ TF-IDF រួមជាមួយការកាត់ឫសគល់ពាក្យ (Stemmer)</td>
+                <td>កាត់បន្ថយចំនួនលក្ខណៈពិសេស (Features) ដែលមិនចាំបាច់បានច្រើន និងជួយបង្កើនភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់បានខ្ពស់។ វាក៏ជួយកាត់បន្ថយពេលវេលាក្នុងការដំណើរការទិន្នន័យផងដែរ។</td>
+                <td>ទាមទារឱ្យមានការបង្កើតក្បួនកាត់ឫសគល់ពាក្យ (Stemming rules) ជាក់លាក់ទៅតាមភាសានីមួយៗ ដែលមានភាពលំបាកសម្រាប់ភាសាដែលស្មុគស្មាញដូចជាភាសាខ្មែរ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៨.៥% ប្រើពេលវេលាត្រឹមតែ ៣.២៩ វិនាទី និងកាត់បន្ថយលក្ខណៈពិសេសមកត្រឹម ១១៨៣ សម្រាប់ការចាត់ថ្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Null stemmer</span></strong><br>វិធីសាស្ត្រមិនកាត់ឫសគល់ពាក្យ (Null stemmer baseline)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត ព្រោះមិនចាំបាច់បង្កើតក្បួនដោះស្រាយសម្រាប់បំប្លែងពាក្យទៅជាទម្រង់ដើម (Root format)។</td>
+                <td>រក្សាទុកពាក្យនិងលក្ខណៈពិសេសច្រើនលើសលប់ ធ្វើឱ្យម៉ូដែលដំណើរការយឺត និងប៉ះពាល់ដល់ភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់ឯកសារ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវត្រឹមតែ ៩៣% ប្រើពេលវេលារហូតដល់ ៤.២១៧ វិនាទី និងមានលក្ខណៈពិសេសរហូតដល់ទៅ ២០២៣ ក្នងទិន្នន័យ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនតម្រូវឱ្យមានធនធានកុំព្យូទ័រខ្នាតធំនោះទេ ដោយការសាកល្បងត្រូវបានធ្វើឡើងនៅលើកុំព្យូទ័រផ្ទាល់ខ្លួនកម្រិតមធ្យមជាទូទៅធម្មតា។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់កម្មវិធី MATLAB (ជំនាន់ R2013a) សម្រាប់ការសរសេរកូដ និងឧបករណ៍រុករកទិន្នន័យ WEKA សម្រាប់ដំណើរការក្បួនដោះស្រាយចំណាត់ថ្នាក់ J48 (Decision Tree)។</li>
+        
+        <li><strong>Hardware:</strong> ដំណើរការលើកុំព្យូទ័រផ្ទាល់ខ្លួនដោយប្រព័ន្ធប្រតិបត្តិការ Windows 7 និងប្រើប្រាស់ស៊ីភីយូកម្រិតមធ្យម (Core i5 processor)។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់សំណុំទិន្នន័យព័ត៌មានភាសាអង់គ្លេស Reuters (ReutersCorn) ដែលមានចំនួន ១៥៥៤ ឯកសារ (ចែកចេញជា២ចំណាត់ថ្នាក់)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើសំណុំទិន្នន័យកាសែតអង់គ្លេស Reuters។ នេះជាបញ្ហាប្រឈមធំមួយនៅពេលយកមកអនុវត្តនៅប្រទេសកម្ពុជា ដោយសារភាសាខ្មែរគ្មានការដកឃ្លារវាងពាក្យ និងមិនមានការកាត់ឫសគល់ពាក្យ (Stemming) ដូចភាសាអង់គ្លេស (ឧទាហរណ៍ការបន្ថែម -ing, -ed) ដែលតម្រូវឱ្យមានការស្រាវជ្រាវបន្ថែមលើការកាត់ពាក្យ (Word Segmentation) ជាភាសាខ្មែរជាមុនសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានឧបសគ្គផ្នែកភាសាក៏ពិតមែន ប៉ុន្តែបច្ចេកទេសទាញយកលក្ខណៈពិសេស (TF-IDF) នេះនៅតែមានសក្តានុពលខ្លាំងក្នុងការដោះស្រាយបញ្ហាទិន្នន័យនៅកម្ពុជាប្រសិនបើត្រូវបានសម្របតាមភាសាជាតិ។</p>
+        
+        <ul>
+            
+            <li><strong>ក្រសួងព័ត៌មាន និងបណ្ណាល័យជាតិកម្ពុជា:</strong> អាចប្រើប្រាស់វិធីសាស្ត្រនេះដើម្បីរៀបចំ និងចាត់ថ្នាក់ឯកសារព័ត៌មាន កាសែត ឬសៀវភៅរាប់ម៉ឺនក្បាលទៅតាមប្រធានបទ (កីឡា នយោបាយ សេដ្ឋកិច្ច) ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>វិស័យច្បាប់ និងតុលាការ:</strong> អាចជួយឱ្យមេធាវី មន្ត្រីតុលាការ ឬនិស្សិតច្បាប់ អាចស្វែងរកសំណុំរឿងចាស់ៗ ឬឯកសារផ្លូវច្បាប់ដែលពាក់ព័ន្ធបានលឿន តាមរយៈការវាយតម្លៃពាក្យគន្លឹះសំខាន់ៗ (TF-IDF)។</li>
+            
+            <li><strong>វិស័យពាណិជ្ជកម្ម និងព័ត៌មានវិទ្យា (ឧ. Sabay, Fresh News):</strong> ក្រុមហ៊ុនសារព័ត៌មានអាចប្រើវាដើម្បីណែនាំអត្ថបទ (Article Recommendation) ទៅកាន់អ្នកអាន ដោយស្វែងរកអត្ថបទដែលមានលក្ខណៈ (Features) និងប្រធានបទស្រដៀងគ្នា។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម វិធីសាស្ត្រនេះគឺជាមូលដ្ឋានគ្រឹះដ៏សំខាន់មួយដែលអាចជួយជំរុញការធ្វើបរិវត្តកម្មឌីជីថល (Digital Transformation) លើការគ្រប់គ្រងឯកសារអេឡិចត្រូនិកនៅក្នុងស្ថាប័នរដ្ឋនិងឯកជននៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីមូលដ្ឋានគ្រឹះនៃការរៀបចំអត្ថបទខ្មែរ (Khmer Text Preprocessing):</strong> និស្សិតត្រូវចាប់ផ្តើមសិក្សាពីបញ្ហាកាត់ពាក្យ (Word Segmentation) ជាមុនសិន ដោយសាកល្បងប្រើប្រាស់បណ្ណាល័យកូដដែលមានស្រាប់ដូចជា <span class="en">KhmerNLP</span> ឬ <span class="en">Khmer-NLTK</span> ព្រមទាំងរៀបចំបញ្ជីពាក្យមិនចាំបាច់ (Khmer Stop-words) ដើម្បីលុបវាចេញពីឯកសារ។</li>
+            
+            <li><strong>អនុវត្តការគណនាប្រេកង់ពាក្យ TF-IDF ជាទម្រង់កូដ:</strong> ជំនួសឱ្យការប្រើប្រាស់ <span class="en">MATLAB</span> និស្សិតគួរអនុវត្តការសរសេរកូដនៅក្នុង <span class="en">Python</span> ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">Scikit-learn (TfidfVectorizer)</span> ដើម្បីបំប្លែងអត្ថបទខ្មែរទៅជាទិន្នន័យលេខ (Numerical Vectors) ដែលកុំព្យូទ័រអាចយល់បាន។</li>
+            
+            <li><strong>ប្រមូលនិងរៀបចំសំណុំទិន្នន័យ (Dataset Collection):</strong> អនុវត្តការសរសេរកូដទាញយកទិន្នន័យ (<span class="en">Web Scraping</span>) ពីគេហទំព័រព័ត៌មានក្នុងស្រុក (ឧទាហរណ៍ យកអត្ថបទកីឡា និងនយោបាយពីថ្មីៗ ឬ VOA) ដោយប្រើប្រាស់ឧបករណ៍ដូចជា <span class="en">BeautifulSoup</span> ដើម្បីបង្កើតជាសំណុំទិន្នន័យហ្វឹកហាត់ផ្ទាល់ខ្លួន (Training Dataset)។</li>
+            
+            <li><strong>សាកល្បងជាមួយក្បួនដោះស្រាយ Machine Learning:</strong> យកទិន្នន័យដែលបានឆ្លងកាត់ដំណើរការ TF-IDF មកហ្វឹកហាត់ជាមួយម៉ូដែល <span class="en">J48 Decision Tree</span> (ដោយប្រើ <span class="en">DecisionTreeClassifier</span> ក្នុង <span class="en">Python</span>) ឬសាកល្បងក្បួនដោះស្រាយផ្សេងទៀតដូចជា <span class="en">Naïve Bayes</span> ដើម្បីចាត់ថ្នាក់អត្ថបទព័ត៌មានទាំងនោះដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>វាស់ស្ទង់និងបង្កើនប្រសិទ្ធភាពម៉ូដែល (Model Optimization):</strong> ប្រៀបធៀបលទ្ធផលភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់ (Accuracy) រវាងការប្រើ TF-IDF ធម្មតា និងការប្រើបច្ចេកទេសតំណាងពាក្យកម្រិតខ្ពស់ទំនើបៗដូចជា <span class="en">Word2Vec</span> ឬ <span class="en">FastText</span> ដើម្បីស្វែងរកវិធីសាស្ត្រដែលស័ក្តិសមបំផុតសម្រាប់ទិន្នន័យភាសាខ្មែរ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature extraction</span></td>
+                <td>គឺជាដំណើរការនៃការទាញយកតែលក្ខណៈឬពាក្យសំខាន់ៗបំផុតពីក្នុងទិន្នន័យអត្ថបទដ៏ច្រើនសន្ធឹកសន្ធាប់ ហើយលុបចោលនូវទិន្នន័យដែលស្ទួនគ្នាឬមិនចាំបាច់ ដើម្បីជួយឱ្យកុំព្យូទ័រអាចធ្វើការវិភាគនិងចាត់ថ្នាក់ឯកសារបានលឿននិងមានភាពត្រឹមត្រូវខ្ពស់ជាងមុន។</td>
+                <td>ដូចជាការអានសៀវភៅមួយក្បាល ហើយយើងកត់ត្រាយកតែចំណុចសំខាន់ៗខ្លីៗចេញមកក្រៅ ដើម្បីងាយស្រួលចងចាំនិងប្រាប់អ្នកដទៃបន្ត ដោយមិនបាច់និយាយរៀបរាប់ពាក្យទាំងអស់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">High-dimensionality</span></td>
+                <td>ទាក់ទងនឹងបញ្ហានៅពេលដែលសំណុំទិន្នន័យមួយមានលក្ខណៈពិសេស (ដូចជាចំនួនពាក្យប្លែកៗគ្នា) ច្រើនលើសលប់ពេក ដែលធ្វើឱ្យប្រព័ន្ធកុំព្យូទ័រត្រូវចំណាយពេលយូរក្នុងការគណនា និងអាចធ្វើឱ្យភាពត្រឹមត្រូវនៃក្បួនដោះស្រាយធ្លាក់ចុះ។</td>
+                <td>ដូចជាការដើរចូលទៅក្នុងផ្សារដ៏ធំមួយដែលមានផ្លូវខ្វាត់ខ្វែងនិងទំនិញច្រើនរាប់ម៉ឺនមុខ ដែលធ្វើឱ្យយើងវិលមុខនិងពិបាករកទិញរបស់ដែលយើងចង់បានឱ្យបានលឿន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Term frequency (TF)</span></td>
+                <td>គឺជារង្វាស់គណិតវិទ្យាដែលរាប់ចំនួនដងដែលពាក្យណាមួយបង្ហាញខ្លួននៅក្នុងឯកសារមួយ។ បើពាក្យនោះលេចឡើងកាន់តែច្រើនដង វាបញ្ជាក់ថាពាក្យនោះមានសារៈសំខាន់ខ្លាំងក្នុងការកំណត់អត្តសញ្ញាណនៃឯកសារនោះ។</td>
+                <td>ដូចជាការរាប់ចំនួនដងដែលឈ្មោះមិត្តភក្តិម្នាក់ត្រូវបានគេនិយាយដល់នៅក្នុងសាច់រឿងមួយ បើគេនិយាយឈ្មោះគាត់ច្រើនដង មានន័យថាគាត់ជាតួអង្គសំខាន់ក្នុងរឿងនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Inverse Document Frequency</span></td>
+                <td>គឺជារង្វាស់ដែលវាយតម្លៃថាតើពាក្យមួយជារឿងទូទៅ ឬកម្រមាននៅក្នុងបណ្តុំឯកសារទាំងអស់។ ពាក្យដែលមានញឹកញាប់ពេកនៅគ្រប់ឯកសារទាំងអស់ នឹងមានតម្លៃ IDF ទាប ខណៈពាក្យកម្រនិងមានលក្ខណៈជាក់លាក់មានតម្លៃ IDF ខ្ពស់។</td>
+                <td>ដូចជារបស់របរប្រើប្រាស់ប្រចាំថ្ងៃ អំបិលមាននៅគ្រប់ផ្ទះបាយ (តម្លៃទាបមិនសូវពិសេស) ប៉ុន្តែគ្រឿងទេសកម្រមានតែនៅភោជនីយដ្ឋានធំៗប៉ុណ្ណោះ (តម្លៃខ្ពស់និងបង្ហាញពីលក្ខណៈពិសេសរបស់ហាងនោះ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stemming</span></td>
+                <td>គឺជាដំណើរការកាត់ចុងពាក្យ ឬបំប្លែងពាក្យភាសាអង់គ្លេសដែលមានទម្រង់វេយ្យាករណ៍ផ្សេងៗគ្នា (ឧទាហរណ៍ការបន្ថែម -ing, -ed, -s) ឱ្យទៅជាទម្រង់ដើម ឬឫសគល់តែមួយរបស់វាវិញ ដើម្បីកាត់បន្ថយទំហំវាក្យសព្ទនិងភាពស្មុគស្មាញនៃទិន្នន័យ។</td>
+                <td>ដូចជាការបេះស្លឹកនិងមែកតូចៗចេញពីដើមឈើ ដោយទុកតែគល់ឈើស្នូល ដើម្បីឱ្យវាងាយស្រួលរៀបចំនិងដឹកជញ្ជូន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stop words</span></td>
+                <td>គឺជាពាក្យទូទៅដែលគេតែងតែប្រើជាញឹកញាប់នៅក្នុងភាសា (ដូចជាពាក្យ "is", "the", "on") ប៉ុន្តែវាមិនមានអត្ថន័យសំខាន់ក្នុងការកំណត់ប្រធានបទនៃឯកសារនោះទេ ហើយជាទូទៅត្រូវបានគេលុបចោលតាំងពីដំបូងមុនពេលកុំព្យូទ័រចាប់ផ្តើមវិភាគទិន្នន័យអត្ថបទ។</td>
+                <td>ដូចជាកម្ទេចដីខ្សាច់ដែលជាប់មកជាមួយគ្រាប់មាស យើងត្រូវរែងយកដីខ្សាច់ចេញ ដើម្បីទទួលបានតែគ្រាប់មាសសុទ្ធដែលយើងត្រូវការយកទៅប្រើប្រាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">J48</span></td>
+                <td>គឺជាក្បួនដោះស្រាយចំណាត់ថ្នាក់តាមបែបដើមឈើសម្រេចចិត្ត (Decision Tree) ដែលប្រើសម្រាប់ទស្សន៍ទាយឬចាត់ថ្នាក់ទិន្នន័យ ដោយផ្អែកលើការបង្កើតច្បាប់លក្ខខណ្ឌដែលវាបានរៀនពីសំណុំទិន្នន័យហ្វឹកហាត់មុនៗ។</td>
+                <td>ដូចជាការលេងហ្គេមសួរសំណួរ "បាទ/ទេ" បន្តបន្ទាប់គ្នាតាមលំដាប់លំដោយ រហូតដល់ចុងបញ្ចប់យើងអាចទាយដឹងប្រាកដថាវត្ថុនោះជាអ្វី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/feature-extraction-text-classification-knn-2018.html">
+                    <span class="km">ចំណាត់ថ្នាក់អត្ថបទផ្អែកលើការទាញយកលក្ខណៈពិសេស ដោយប្រើក្បួនដោះស្រាយ K-Nearest Neighbor</span><br>
+                    <span class="en article-original-title">Feature Extraction based Text Classification using K-Nearest Neighbor Algorithm</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/feature-engineering-acoustic-uav-payload-detection-2022.html">
+                    <span class="km">ប្រព័ន្ធផ្តោតលើវិស្វកម្មលក្ខណៈពិសេស (Feature Engineering) សម្រាប់ការរកឃើញការផ្ទុកទម្ងន់របស់ឧបករណ៍ហោះហើរគ្មានមនុស្សបើក (UAV) តាមរយៈសំឡេង</span><br>
+                    <span class="en article-original-title">A Feature Engineering Focused System for Acoustic UAV Payload Detection</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/feature-extraction-classification-plant-diseases-2020.html">
+                    <span class="km">វិធីសាស្ត្រប្រកបដោយប្រសិទ្ធភាពក្នុងការទាញយកលក្ខណៈសម្បត្តិសម្រាប់ចំណាត់ថ្នាក់ជំងឺរុក្ខជាតិដោយប្រើប្រាស់ម៉ាស៊ីនរៀនសូត្រ (Machine Learning)</span><br>
+                    <span class="en article-original-title">An effective approach to feature extraction for classification of plant diseases using machine learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/bird-voice-classification-knn-2022.html">
+                    <span class="km">ការចាត់ថ្នាក់សំឡេងសត្វស្លាបដោយផ្អែកលើការរួមបញ្ចូលគ្នានៃការទាញយកលក្ខណៈពិសេស និងការកាត់បន្ថយវិមាត្រជាមួយ K-Nearest Neighbor</span><br>
+                    <span class="en article-original-title">Bird Voice Classification Based on Combination Feature Extraction and Reduction Dimension with the K-Nearest Neighbor</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/leaf-classification-feature-extraction-knn.html">
+                    <span class="km">ការធ្វើចំណាត់ថ្នាក់ដោយប្រើការទាញយកលក្ខណៈពិសេសនៃស្លឹកឈើផ្អែកលើក្បួនដោះស្រាយបណ្តាញសរសៃប្រសាទជាមួយ K-Nearest Neighbor និង Supervised Learning</span><br>
+                    <span class="en article-original-title">Classification using Feature Extraction of Leaf Based on Neural Network Algorithm with K-Nearest Neighbor and Supervised Learning</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%22TF-IDF%22+feature+extraction+techniques+for+high-dimensional+document+classification" target="_blank" rel="noopener"><span class="en">"TF-IDF" feature extraction techniques for high-dimensional document classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparative+analysis+of+stemming+algorithms+in+natural+language+processing+and+text+mining" target="_blank" rel="noopener"><span class="en">comparative analysis of stemming algorithms in natural language processing and text mining</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=J48+decision+tree+classifier+vs+SVM+for+text+categorization+performance" target="_blank" rel="noopener"><span class="en">J48 decision tree classifier vs SVM for text categorization performance</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=dimensionality+reduction+methods+in+text+mining+for+unstructured+data" target="_blank" rel="noopener"><span class="en">dimensionality reduction methods in text mining for unstructured data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=impact+of+stop+word+removal+and+text+preprocessing+on+machine+learning+classification+accuracy" target="_blank" rel="noopener"><span class="en">impact of stop word removal and text preprocessing on machine learning classification accuracy</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

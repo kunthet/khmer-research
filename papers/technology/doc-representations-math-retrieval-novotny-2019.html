@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>តំណាងឯកសារសម្រាប់ការទាញយកព័ត៌មានគណិតវិទ្យាប្រកបដោយភាពរហ័ស និងត្រឹមត្រូវ - Document Representations for Fast and Accurate Retrieval of Mathematical Information | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី តំណាងឯកសារសម្រាប់ការទាញយកព័ត៌មានគណិតវិទ្យាប្រកបដោយភាពរហ័ស និ។ ឯកសារនេះដោះស្រាយភាពគ្មានប្រសិទ្ធភាព និងភាពស្មុគស្មាញនៃប្រព័ន្ធទាញយកព័ត៌មានគណិតវិទ្យា (MIR) បច្ចុប...">
+    
+    <meta name="keywords" content="Math Information Retrieval (MIR), Soft Cosine Measure, Word Embeddings, Inverted Index, Vector Space Model, Text Classification, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/doc-representations-math-retrieval-novotny-2019.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/doc-representations-math-retrieval-novotny-2019.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/doc-representations-math-retrieval-novotny-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/doc-representations-math-retrieval-novotny-2019.html">
+    <meta property="og:title" content="តំណាងឯកសារសម្រាប់ការទាញយកព័ត៌មានគណិតវិទ្យាប្រកបដោយភាពរហ័ស និងត្រឹមត្រូវ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយភាពគ្មានប្រសិទ្ធភាព និងភាពស្មុគស្មាញនៃប្រព័ន្ធទាញយកព័ត៌មានគណិតវិទ្យា (MIR) បច្ចុប្បន្ន ដោយស្វែងរកការបង្កើតតំណាងឯកសារដែលមានភាពរហ័ស ត្រឹមត្រូវ និងអាចបកស្រាយបាន ដែលធ្វើគំរូទាំងអត្ថបទ ន...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2019 Masaryk University">
+    
+    <meta property="article:tag" content="Math Information Retrieval (MIR)">
+    
+    <meta property="article:tag" content="Soft Cosine Measure">
+    
+    <meta property="article:tag" content="Word Embeddings">
+    
+    <meta property="article:tag" content="Inverted Index">
+    
+    <meta property="article:tag" content="Vector Space Model">
+    
+    <meta property="article:tag" content="Text Classification">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="តំណាងឯកសារសម្រាប់ការទាញយកព័ត៌មានគណិតវិទ្យាប្រកបដោយភាពរហ័ស និងត្រឹមត្រូវ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយភាពគ្មានប្រសិទ្ធភាព និងភាពស្មុគស្មាញនៃប្រព័ន្ធទាញយកព័ត៌មានគណិតវិទ្យា (MIR) បច្ចុប្បន្ន ដោយស្វែងរកការបង្កើតតំណាងឯកសារដែលមានភាពរហ័ស ត្រឹមត្រូវ និងអាចបកស្រាយបាន ដែលធ្វើគំរូទាំងអត្ថបទ ន...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u178f\u17c6\u178e\u17b6\u1784\u17af\u1780\u179f\u17b6\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1782\u178e\u17b7\u178f\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1797\u17b6\u1796\u179a\u17a0\u17d0\u179f \u1793\u17b7\u1784\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c",
+      "name": "Document Representations for Fast and Accurate Retrieval of Mathematical Information",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1797\u17b6\u1796\u1782\u17d2\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796 \u1793\u17b7\u1784\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u17b6\u1789\u1799\u1780\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1782\u178e\u17b7\u178f\u179c\u17b7\u1791\u17d2\u1799\u17b6 (MIR) \u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793 \u178a\u17c4\u1799\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u178f\u17c6\u178e\u17b6\u1784\u17af\u1780\u179f\u17b6\u179a\u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u179a\u17a0\u17d0\u179f \u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c \u1793\u17b7\u1784\u17a2\u17b6\u1785\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1794\u17b6\u1793 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc\u1791\u17b6\u17c6\u1784\u17a2\u178f\u17d2\u1790\u1794\u1791 \u1793\u17b7\u1784\u179a\u17bc\u1794\u1798\u1793\u17d2\u178f\u1782\u178e\u17b7\u178f\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/doc-representations-math-retrieval-novotny-2019.html",
+      "author": [{"@type": "Person", "name": "V\u00edt Novotn\u00fd (Masaryk University)"}],
+      "datePublished": "2019 Masaryk University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Document Representations for Fast and Accurate Retrieval of Mathematical Information",
+        "url": "https://is.muni.cz/th/fuaps/"
+      },
+      "keywords": ["Math Information Retrieval (MIR)", "Soft Cosine Measure", "Word Embeddings", "Inverted Index", "Vector Space Model", "Text Classification"],
+      "about": "Information Retrieval"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u178f\u17c6\u178e\u17b6\u1784\u17af\u1780\u179f\u17b6\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1782\u178e\u17b7\u178f\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1797\u17b6\u1796\u179a\u17a0\u17d0\u179f \u1793\u17b7\u1784\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c",
+          "item": "https://khmerresearch.com/papers/technology/doc-representations-math-retrieval-novotny-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>តំណាងឯកសារសម្រាប់ការទាញយកព័ត៌មានគណិតវិទ្យាប្រកបដោយភាពរហ័ស...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Document Representations for Fast and Accurate Retrieval of Mathematical Information<br>
+        
+        <strong>Source:</strong> <a href="https://is.muni.cz/th/fuaps/" target="_blank">is.muni.cz</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>តំណាងឯកសារសម្រាប់ការទាញយកព័ត៌មានគណិតវិទ្យាប្រកបដោយភាពរហ័ស និងត្រឹមត្រូវ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Document Representations for Fast and Accurate Retrieval of Mathematical Information</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Vít Novotný (Masaryk University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2019 Masaryk University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Information Retrieval</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយភាពគ្មានប្រសិទ្ធភាព និងភាពស្មុគស្មាញនៃប្រព័ន្ធទាញយកព័ត៌មានគណិតវិទ្យា (MIR) បច្ចុប្បន្ន ដោយស្វែងរកការបង្កើតតំណាងឯកសារដែលមានភាពរហ័ស ត្រឹមត្រូវ និងអាចបកស្រាយបាន ដែលធ្វើគំរូទាំងអត្ថបទ និងរូបមន្តគណិតវិទ្យាបញ្ចូលគ្នា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះវាយតម្លៃរង្វាស់ភាពស្រដៀងគ្នានៃឯកសារកម្រិតខ្ពស់ (SOTA) និងណែនាំបច្ចេកទេសថ្មីៗដើម្បីបំប្លែង និងធ្វើនិយតកម្មវ៉ិចទ័រន័យវិទ្យាទៅក្នុងប្រព័ន្ធស្វែងរកលិបិក្រមបញ្ច្រាស។
+        
+        <ul>
+            
+            <li>ការបំប្លែងវ៉ិចទ័រន័យវិទ្យាទៅជាខ្សែអក្សរសម្រាប់លិបិក្រមបញ្ច្រាស (Encoding semantic vectors into strings for Inverted Indices)</li>
+            
+            <li>ការអនុវត្តរង្វាស់ភាពស្រដៀងគ្នា (Soft Cosine Measure) ជាមួយនឹងការបង្កប់ពាក្យដែលបានធ្វើនិយតកម្ម (Regularized word embeddings)</li>
+            
+            <li>ការប្រើប្រាស់ការបំបែក (Cholesky factorization) សម្រាប់ការធ្វើឱ្យការបង្កប់ពាក្យមានលក្ខណៈអ័រតូហ្គោណាល់ (Orthogonalization)</li>
+            
+            <li>ការវាយតម្លៃប្រព័ន្ធស្វែងរកគណិតវិទ្យាដូចជា MIaS និងប្រព័ន្ធពាក់ព័ន្ធ (Math-Aware search systems)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការធ្វើឱ្យមានលក្ខណៈអ័រតូហ្គោណាល់កាត់បន្ថយភាពស្មុគស្មាញនៃពេលវេលាអាក្រក់បំផុតរបស់ Soft Cosine Measure ពីកម្រិត quadratic ទៅជាកម្រិតលីនេអ៊ែរ (Linear time complexity)។</li>
+            
+            <li>ការប្រើប្រាស់ការបង្កប់ពាក្យដែលបានធ្វើនិយតកម្មផ្តល់នូវការកាត់បន្ថយ 39% នៃកំហុសតេស្ត kNN ជាមធ្យម បើប្រៀបធៀបទៅនឹងវិធីសាស្ត្រធម្មតា។</li>
+            
+            <li>វិធីសាស្ត្រ SCM ដែលបានស្នើឡើងដំណើរការល្អជាង Word Mover's Distance (WMD) យ៉ាងខ្លាំងលើកិច្ចការចាត់ថ្នាក់អត្ថបទ ខណៈពេលដែលវាដំណើរការលឿនជាង 10,000 ដង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Bag-of-Words (BoW) / TF-IDF</span></strong><br>ការតំណាងឯកសារតាមរលកប្រេកង់ពាក្យ (Bag-of-Words/TF-IDF)</td>
+                <td>មានភាពសាមញ្ញ ដំណើរការលឿន និងងាយស្រួលធ្វើសមាហរណកម្មជាមួយប្រព័ន្ធស្វែងរកដែលមានស្រាប់ដូចជា Elasticsearch។</td>
+                <td>មិនអាចយល់ពីអត្ថន័យនៃពាក្យ (Semantic meaning) ពោលគឺវាចាត់ទុកពាក្យដែលមានន័យដូចគ្នា (Synonyms) ថាជាពាក្យខុសគ្នាស្រឡះ។</td>
+                <td>ត្រូវបានប្រើប្រាស់ជាវិធីសាស្ត្រគោល (Baseline) ដែលមានអត្រាកំហុសខ្ពស់ជាងវិធីសាស្ត្រន័យវិទ្យាក្នុងការចាត់ថ្នាក់អត្ថបទ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Word Mover's Distance (WMD)</span></strong><br>រង្វាស់ចម្ងាយនៃការផ្លាស់ទីពាក្យ (Word Mover's Distance)</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់ក្នុងការវាស់វែងភាពស្រដៀងគ្នានៃអត្ថបទ ដោយពឹងផ្អែកលើចម្ងាយអប្បបរមានៃការបំប្លែងពាក្យ។</td>
+                <td>មានភាពស្មុគស្មាញផ្នែកពេលវេលាខ្ពស់ខ្លាំង (Super-cubic time complexity) ដែលធ្វើឱ្យវាមិនអាចប្រើប្រាស់បានសម្រាប់ទិន្នន័យធំៗកម្រិតជាក់ស្តែង។</td>
+                <td>ដំណើរការយឺតជាង Soft Cosine Measure ដល់ទៅ ១០,០០០ ដង និងមិនទទួលបានអត្ថប្រយោជន៍ពីការធ្វើបរិមាណ (Quantization) ទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Soft Cosine Measure (SCM) with Regularized Word Embeddings</span></strong><br>រង្វាស់ Soft Cosine Measure រួមបញ្ចូលជាមួយការបង្កប់ពាក្យដែលបានធ្វើនិយតកម្ម</td>
+                <td>អាចចាប់យកអត្ថន័យពិតនៃពាក្យបានល្អ ហើយមានដំណើរការលឿនខ្លាំង (Linear time) តាមរយៈការប្រើប្រាស់ការធ្វើឱ្យមានលក្ខណៈអ័រតូហ្គោណាល់ (Orthogonalization)។</td>
+                <td>ទាមទារឱ្យមានការគណនាទុកជាមុននូវម៉ាទ្រីសភាពស្រដៀងគ្នានៃពាក្យ (Word similarity matrix) និងការធ្វើ Cholesky factorization។</td>
+                <td>កាត់បន្ថយកំហុសតេស្ត kNN ជាមធ្យម ៣៩% ធៀបនឹងម៉ូដែលធម្មតា និងដំណើរការលឿនជាង WMD យ៉ាងហោចណាស់ ១០,០០០ ដង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធនេះទាមទារធនធានកុំព្យូទ័រធុនមធ្យមទៅខ្ពស់ ជាពិសេសអង្គចងចាំ (RAM) និងស៊ីភីយូពហុស្នូលសម្រាប់ការគណនាម៉ាទ្រីសធំៗ និងប្រព័ន្ធលិបិក្រម (Inverted Index)។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ម៉ាស៊ីនស្វែងរកអត្ថបទពេញលេញដូចជា Elasticsearch, បណ្ណាល័យ Gensim សម្រាប់ Word Embeddings, និងបណ្ណាល័យគណិតវិទ្យាដូចជា NumPy/SciPy សម្រាប់ Cholesky factorization។</li>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនមេ (Servers) ដែលមាន RAM ធំ (ឧទាហរណ៍ Cluster ដែលមាន 192GB RAM និង 48 Cores ត្រូវបានប្រើប្រាស់សម្រាប់ការពិសោធន៍លើ Wikipedia)។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យអត្ថបទធំៗសម្រាប់ហ្វឹកហាត់ Word Embeddings និងឯកសារគណិតវិទ្យាដែលមានទម្រង់ MathML ឬ LaTeX (ឧទាហរណ៍ arXiv, NTCIR datasets)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែក Information Retrieval, គណិតវិទ្យា Linear Algebra, ទម្រង់ Vector Space Models, និង Machine Learning (Word2Vec, FastText)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការស្រាវជ្រាវនេះពឹងផ្អែកទាំងស្រុងលើទិន្នន័យជាភាសាអង់គ្លេស និងរូបមន្តគណិតវិទ្យាស្តង់ដារ (Wikipedia, arXiv,វេទិកាពិភាក្សា)។ សម្រាប់បរិបទប្រទេសកម្ពុជា ការអនុវត្តបច្ចេកទេសទាំងនេះនឹងប្រឈមមុខនឹងបញ្ហាកង្វះខាតឯកសារវិទ្យាសាស្ត្រជាទម្រង់ឌីជីថល (Math/STEM) និងបញ្ហាស្មុគស្មាញនៃការកាត់ពាក្យជាភាសាខ្មែរ (Khmer Word Segmentation) ដើម្បីបង្កើត Word Embeddings ដែលមានគុណភាពខ្ពស់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ SCM រួមជាមួយនឹងលិបិក្រមបញ្ច្រាស (Inverted Indices) មានសក្តានុពលយ៉ាងខ្លាំងក្នុងការផ្លាស់ប្តូរប្រព័ន្ធស្វែងរកទិន្នន័យនៅកម្ពុជាពីការស្វែងរកតាមពាក្យគន្លឹះ ទៅជាការស្វែងរកតាមអត្ថន័យ (Semantic Search)។</p>
+        
+        <ul>
+            
+            <li><strong>បណ្ណាល័យសាកលវិទ្យាល័យ និងការស្រាវជ្រាវ (Academic Libraries like RUPP/ITC):</strong> អាចប្រើប្រាស់ដើម្បីបង្កើតប្រព័ន្ធស្វែងរកសារណា និងឯកសារស្រាវជ្រាវផ្នែក STEM (Science, Technology, Engineering, Mathematics) ដែលអនុញ្ញាតឱ្យនិស្សិតស្វែងរកឯកសារដែលមានអត្ថន័យប្រហាក់ប្រហែល ទោះបីជាប្រើប្រាស់ពាក្យពេចន៍ ឬរូបមន្តខុសគ្នាក៏ដោយ។</li>
+            
+            <li><strong>ប្រព័ន្ធគ្រប់គ្រងឯកសារច្បាប់ ឬរដ្ឋបាល (Legal/Government Document Retrieval):</strong> បច្ចេកទេសនេះអាចយកទៅអនុវត្តលើប្រព័ន្ធស្វែងរកទិន្នន័យច្បាប់ ដែលជារឿយៗមានការប្រើប្រាស់ពាក្យបច្ចេកទេសច្រើន ជួយអ្នកច្បាប់ ឬប្រជាជនស្វែងរកមាត្រាដែលពាក់ព័ន្ធតាមរយៈន័យវិទ្យា ជំនួសឱ្យការទន្ទេញពាក្យគន្លឹះជាក់លាក់។</li>
+            
+            <li><strong>ការអភិវឌ្ឍបញ្ញាសិប្បនិម្មិតភាសាខ្មែរ (Khmer NLP Development):</strong> ការប្រើប្រាស់បច្ចេកទេសធ្វើនិយតកម្ម (Regularization និង Quantization) អាចជួយកាត់បន្ថយទំហំផ្ទុកម៉ូដែល Word Embeddings ភាសាខ្មែរ ធ្វើឱ្យមានភាពងាយស្រួលក្នុងការដាក់ឱ្យដំណើរការលើកម្មវិធីទូរស័ព្ទចល័ត (Mobile apps) ឬប្រព័ន្ធដែលមានធនធានមានកំណត់នៅកម្ពុជា។</li>
+            
+        </ul>
+        
+        
+        <p>ទោះបីជាខ្វះខាតទិន្នន័យគណិតវិទ្យាក្នុងស្រុកក៏ដោយ គោលការណ៍នៃ Soft Cosine Measure អាចត្រូវបានកែច្នៃដើម្បីបង្កើតប្រព័ន្ធស្វែងរកឯកសារភាសាខ្មែរឆ្លាតវៃ ដែលពង្រឹងគុណភាពសេវាកម្មរដ្ឋបាល និងអប់រំតាមបែបឌីជីថល។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Information Retrieval និង VSM:</strong> និស្សិតត្រូវស្វែងយល់ពីរបៀបដែលម៉ាស៊ីនស្វែងរកដំណើរការ ដោយចាប់ផ្តើមពីរូបមន្ត TF-IDF ធម្មតា និងរចនាសម្ព័ន្ធលិបិក្រមបញ្ច្រាស (Inverted Index)។ គួរសាកល្បងតំឡើង <span class="en">Elasticsearch</span> ឬប្រើប្រាស់ <span class="en">Apache Lucene</span> ដើម្បីអនុវត្តការស្វែងរកអត្ថបទជាមូលដ្ឋាន។</li>
+            
+            <li><strong>បង្កើត និងស្វែងយល់ពី Word Embeddings:</strong> សិក្សាពីរបៀបបំប្លែងពាក្យទៅជាវ៉ិចទ័រ។ ប្រើប្រាស់បណ្ណាល័យ <span class="en">Gensim</span> នៅក្នុង <span class="en">Python</span> ដើម្បីហ្វឹកហាត់ម៉ូដែល <span class="en">Word2Vec</span> ឬ <span class="en">FastText</span> ដោយប្រើប្រាស់ទិន្នន័យអត្ថបទភាសាខ្មែរ (ឧទាហរណ៍ ព័ត៌មានតាមវែបសាយ) រួចរៀនប្រើ Soft Cosine Measure (SCM) សម្រាប់ការវាស់ស្ទង់ភាពស្រដៀងគ្នានៃប្រយោគពីរ។</li>
+            
+            <li><strong>អនុវត្តគណិតវិទ្យា Linear Algebra សម្រាប់ការធ្វើឱ្យប្រសើរឡើង:</strong> ដើម្បីដោះស្រាយបញ្ហាដំណើរការយឺតនៃ SCM សូមសិក្សាពីការធ្វើ <span class="en">Cholesky factorization</span> និងម៉ាទ្រីស Orthogonalization។ អនុវត្តកូដដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">NumPy</span> ឬ <span class="en">SciPy</span> ដើម្បីបំប្លែងម៉ាទ្រីសភាពស្រដៀងគ្នានៃពាក្យ ទៅជាទម្រង់ដែលអាចដំណើរការក្នុងល្បឿន Linear time។</li>
+            
+            <li><strong>ដំណើរការអភិវឌ្ឍប្រព័ន្ធស្វែងរកគំរូភាសាខ្មែរឆ្លាតវៃ:</strong> ចាប់ផ្តើមគម្រោងតូចមួយដោយប្រមូលឯកសារស្រាវជ្រាវខ្មែរ ធ្វើការកាត់ពាក្យដោយប្រើប្រាស់ឧបករណ៍ដូចជា <span class="en">sekhmer</span> រួចអនុវត្តវិធីសាស្ត្រ Regularized Word Embeddings ដើម្បីបញ្ចូលទិន្នន័យវ៉ិចទ័រនោះចូលទៅក្នុង <span class="en">Elasticsearch</span> សម្រាប់បង្កើតប្រព័ន្ធស្វែងរក (Semantic Search System)។</li>
+            
+            <li><strong>វាស់ស្ទង់និងវាយតម្លៃប្រសិទ្ធភាពប្រព័ន្ធ (System Evaluation):</strong> សាកល្បងប្រព័ន្ធដែលបានបង្កើតដោយប្រើប្រាស់រង្វាស់ស្តង់ដារនៃ Information Retrieval ដូចជា Precision, Recall និង Mean Average Precision (MAP) ដើម្បីបញ្ជាក់ថាការស្វែងរកតាមន័យវិទ្យាពិតជាមានភាពប្រសើរជាងការស្វែងរកតាមពាក្យគន្លឹះធម្មតា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Math Information Retrieval (MIR)</span></td>
+                <td>ប្រព័ន្ធស្វែងរកទិន្នន័យដែលត្រូវបានរចនាឡើងយ៉ាងពិសេសដើម្បីស្វែងរកឯកសារតាមរយៈរូបមន្តគណិតវិទ្យា និងទម្រង់សមីការ ជំនួសឱ្យការស្វែងរកត្រឹមតែពាក្យពេចន៍អក្សរធម្មតា។</td>
+                <td>ដូចជាការប្រាប់ Google ឱ្យស្វែងរករូបមន្ត E=mc² ផ្ទាល់ ជាជាងវាយពាក្យថា «ថាមពលស្មើម៉ាសគុណនឹងល្បឿនពន្លឺ»។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Soft Cosine Measure (SCM)</span></td>
+                <td>រង្វាស់គណិតវិទ្យាសម្រាប់វាស់ភាពស្រដៀងគ្នានៃឯកសារពីរ ដោយពិចារណាលើអត្ថន័យស្រដៀងគ្នានៃពាក្យ (synonyms) ទោះបីជាពាក្យទាំងនោះសរសេរខុសគ្នាក៏ដោយ តាមរយៈការប្រៀបធៀបវ៉ិចទ័ររបស់វា។</td>
+                <td>ដូចជាមនុស្សពីរនាក់និយាយពីប្រធានបទតែមួយ តែម្នាក់ប្រើពាក្យ «រថយន្ត» ហើយម្នាក់ទៀតប្រើពាក្យ «ឡាន» ប្រព័ន្ធនៅតែអាចដឹងថាពួកគេនិយាយពីវត្ថុតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Embeddings</span></td>
+                <td>ការបំប្លែងពាក្យនីមួយៗទៅជាវ៉ិចទ័រលេខ (ចំនុចនៅក្នុងលំហគណិតវិទ្យា) ដើម្បីឱ្យកុំព្យូទ័រអាចយល់ពីអត្ថន័យ និងទំនាក់ទំនងរវាងពាក្យទាំងនោះ ដោយវាស់ស្ទង់គម្លាតចម្ងាយរបស់វានៅក្នុងលំហ។</td>
+                <td>ដូចជាការគូសផែនទីបង្ហាញពីទំនាក់ទំនងរវាងទីក្រុងនានា ដោយទីក្រុងដែលមានវប្បធម៌ឬអាកាសធាតុស្រដៀងគ្នានឹងត្រូវបានដាក់ឱ្យស្ថិតនៅជិតគ្នាលើផែនទី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Inverted Index</span></td>
+                <td>រចនាសម្ព័ន្ធទិន្នន័យដែលផ្ទុកបញ្ជីពាក្យនីមួយៗ ហើយចង្អុលបង្ហាញថាពាក្យនោះស្ថិតនៅក្នុងឯកសារមួយណាខ្លះ ដើម្បីជួយឱ្យការទាញយកទិន្នន័យ (Search Engine) មានដំណើរការរហ័ស។</td>
+                <td>ដូចជាលិបិក្រមនៅខាងក្រោយសៀវភៅ ដែលជួយអ្នកស្វែងរកពាក្យគន្លឹះណាមួយថានៅទំព័រណាបានយ៉ាងឆាប់រហ័ស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cholesky Factorization</span></td>
+                <td>វិធីសាស្ត្រគណិតវិទ្យាក្នុងការបំបែកម៉ាទ្រីសធំៗ ដែលមានលក្ខណៈស្មុគស្មាញ ទៅជាទម្រង់ម៉ាទ្រីសត្រីកោណតូចជាង ដែលជួយឱ្យការគណនារង្វាស់ភាពស្រដៀងគ្នាមានល្បឿនលឿនជាងមុន។</td>
+                <td>ដូចជាការបំបែកវិក្កយបត្រតម្លៃធំមួយទៅជាក្រដាសប្រាក់តូចៗ ដើម្បីងាយស្រួលក្នុងការចាយវាយនិងទូទាត់លុយអាប់បានលឿនជាងមុន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TF-IDF</span></td>
+                <td>រូបមន្តសម្រាប់វាយតម្លៃសារៈសំខាន់នៃពាក្យមួយនៅក្នុងឯកសារ ដោយវាស់ស្ទង់ថាតើពាក្យនោះលេចឡើងញឹកញាប់ប៉ុណ្ណានៅក្នុងឯកសារមួយ ធៀបនឹងភាពកម្ររបស់វានៅក្នុងបណ្តុំឯកសារទាំងអស់។</td>
+                <td>ដូចជាការកំណត់អត្តសញ្ញាណមនុស្សម្នាក់តាមរយៈលក្ខណៈពិសេសរបស់គាត់ (ឧទាហរណ៍ ស្លាកស្នាម) ជាជាងលក្ខណៈទូទៅដែលអ្នកណាក៏មាន (ឧទាហរណ៍ មានសក់ខ្មៅ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vector Space Model (VSM)</span></td>
+                <td>គំរូគណិតវិទ្យាដែលតំណាងឱ្យឯកសារនីមួយៗជាចំណុចវ៉ិចទ័រក្នុងលំហ ដែលអនុញ្ញាតឱ្យកុំព្យូទ័រគណនាភាពស្រដៀងគ្នារវាងសំណួរនិងឯកសារ តាមរយៈការវាស់មុំ (Cosine) រវាងវ៉ិចទ័រទាំងពីរ។</td>
+                <td>ដូចជាការដាក់តម្រៀបសៀវភៅតាមប្រភេទនៅតាមធ្នើរ ប្រសិនបើសៀវភៅពីរនៅធ្នើរជាប់គ្នា នោះមានន័យថាវាមានអត្ថន័យឬប្រធានបទស្រដៀងគ្នាខ្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Orthogonalization</span></td>
+                <td>ដំណើរការគណិតវិទ្យាក្នុងការបំប្លែងវ៉ិចទ័រដែលជាន់គ្នា ឬទាក់ទងគ្នា ឱ្យទៅជាវ៉ិចទ័រដែលកែងគ្នា (ឯករាជ្យពីគ្នា) ដើម្បីបង្កើនល្បឿនដំណើរការស្វែងរក និងសន្សំសំចៃអង្គចងចាំ។</td>
+                <td>ដូចជាការរៀបចំសម្ភារៈរាយប៉ាយច្របូកច្របល់ ចូលទៅក្នុងប្រអប់ថតដាច់ដោយឡែកពីគ្នា ដែលធ្វើឱ្យយើងងាយស្រួលទាញយកវាមកប្រើប្រាស់ដោយមិនច្រឡំ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/text-classification-authorship-attribution-naive-bayes-2014.html">
+                    <span class="km">ការចាត់ថ្នាក់អត្ថបទសម្រាប់ការកំណត់អត្តសញ្ញាណអ្នកនិពន្ធដោយប្រើម៉ាស៊ីនចំណាត់ថ្នាក់ Naive Bayes ជាមួយទិន្នន័យបណ្តុះបណ្តាលមានកំណត់</span><br>
+                    <span class="en article-original-title">Text Classification for Authorship Attribution Using Naive Bayes Classifier with Limited Training Data</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/text-classification-naive-bayes-sentiment-lexicon-2019.html">
+                    <span class="km">ការចាត់ថ្នាក់អត្ថបទ៖ ក្បួនដោះស្រាយ Naïve Bayes ជាមួយវចនានុក្រមមនោសញ្ចេតនា</span><br>
+                    <span class="en article-original-title">Text Classification: Naïve Bayes Classifier with Sentiment Lexicon</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/feature-extraction-text-classification-knn-2018.html">
+                    <span class="km">ចំណាត់ថ្នាក់អត្ថបទផ្អែកលើការទាញយកលក្ខណៈពិសេស ដោយប្រើក្បួនដោះស្រាយ K-Nearest Neighbor</span><br>
+                    <span class="en article-original-title">Feature Extraction based Text Classification using K-Nearest Neighbor Algorithm</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/modeling-language-vagueness-privacy-policies-dnn-2016.html">
+                    <span class="km">ការធ្វើម៉ូដែលភាពស្រពេចស្រពិលនៃភាសានៅក្នុងគោលការណ៍ឯកជនភាពដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ</span><br>
+                    <span class="en article-original-title">Modeling Language Vagueness in Privacy Policies Using Deep Neural Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/document-retrieval-tf-isf-weighting-scheme-2023.html">
+                    <span class="km">ការទាញយកឯកសារដោយប្រើប្រាស់ប្រព័ន្ធថ្លឹងទម្ងន់ប្រេកង់ពាក្យ និងប្រេកង់ប្រយោគបញ្ច្រាស</span><br>
+                    <span class="en article-original-title">Document retrieval using term term frequency inverse sentence frequency weighting scheme</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Soft+Cosine+Measure%22+AND+%22word+embeddings%22+AND+%22semantic+text+similarity" target="_blank" rel="noopener"><span class="en">Soft Cosine Measure" AND "word embeddings" AND "semantic text similarity</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Vector+Space+Model%22+AND+%22inverted+index%22+retrieval+performance+optimization" target="_blank" rel="noopener"><span class="en">Vector Space Model" AND "inverted index" retrieval performance optimization</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Math+Information+Retrieval%22+OR+MIR+AND+%22symbol+layout+tree" target="_blank" rel="noopener"><span class="en">Math Information Retrieval" OR MIR AND "symbol layout tree</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Joint+embeddings+for+text+and+math+representations+AND+%22information+retrieval" target="_blank" rel="noopener"><span class="en">Joint embeddings for text and math representations AND "information retrieval</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Cholesky+factorization%22+AND+%22word+embedding+regularization%22+text+classification" target="_blank" rel="noopener"><span class="en">Cholesky factorization" AND "word embedding regularization" text classification</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទាញយកឯកសារដោយប្រើប្រាស់ប្រព័ន្ធថ្លឹងទម្ងន់ប្រេកង់ពាក្យ និងប្រេកង់ប្រយោគបញ្ច្រាស - Document retrieval using term term frequency inverse sentence frequency weigh... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការទាញយកឯកសារដោយប្រើប្រាស់ប្រព័ន្ធថ្លឹងទម្ងន់ប្រេកង់ពាក្យ និ។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកឯកសារដែលពាក់ព័ន្ធបំផុតទៅនឹងសំណួររបស់អ្នកប្រើប្រាស់ ក្នុង...">
+    
+    <meta name="keywords" content="Document retrieval, Vector space model, TF-ISF, TF-IDF, Cosine similarity, MS MARCO dataset, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/document-retrieval-tf-isf-weighting-scheme-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/document-retrieval-tf-isf-weighting-scheme-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/document-retrieval-tf-isf-weighting-scheme-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/document-retrieval-tf-isf-weighting-scheme-2023.html">
+    <meta property="og:title" content="ការទាញយកឯកសារដោយប្រើប្រាស់ប្រព័ន្ធថ្លឹងទម្ងន់ប្រេកង់ពាក្យ និងប្រេកង់ប្រយោគបញ្ច្រាស | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកឯកសារដែលពាក់ព័ន្ធបំផុតទៅនឹងសំណួររបស់អ្នកប្រើប្រាស់ ក្នុងចំណោមឯកសារដ៏ច្រើនសន្ធឹកសន្ធាប់នៅលើបណ្តាញអ៊ីនធឺណិត ដោយផ្តោតលើការកែលម្អប្រព័ន្ធថ្លឹងទម្ងន់ (Weighting ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023, Indonesian Journal of Electrical Engineering and Computer Science">
+    
+    <meta property="article:tag" content="Document retrieval">
+    
+    <meta property="article:tag" content="Vector space model">
+    
+    <meta property="article:tag" content="TF-ISF">
+    
+    <meta property="article:tag" content="TF-IDF">
+    
+    <meta property="article:tag" content="Cosine similarity">
+    
+    <meta property="article:tag" content="MS MARCO dataset">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទាញយកឯកសារដោយប្រើប្រាស់ប្រព័ន្ធថ្លឹងទម្ងន់ប្រេកង់ពាក្យ និងប្រេកង់ប្រយោគបញ្ច្រាស">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកឯកសារដែលពាក់ព័ន្ធបំផុតទៅនឹងសំណួររបស់អ្នកប្រើប្រាស់ ក្នុងចំណោមឯកសារដ៏ច្រើនសន្ធឹកសន្ធាប់នៅលើបណ្តាញអ៊ីនធឺណិត ដោយផ្តោតលើការកែលម្អប្រព័ន្ធថ្លឹងទម្ងន់ (Weighting ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u17af\u1780\u179f\u17b6\u179a\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1790\u17d2\u179b\u17b9\u1784\u1791\u1798\u17d2\u1784\u1793\u17cb\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u1796\u17b6\u1780\u17d2\u1799 \u1793\u17b7\u1784\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u1794\u17d2\u179a\u1799\u17c4\u1782\u1794\u1789\u17d2\u1785\u17d2\u179a\u17b6\u179f",
+      "name": "Document retrieval using term term frequency inverse sentence frequency weighting scheme",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u17af\u1780\u179f\u17b6\u179a\u178a\u17c2\u179b\u1796\u17b6\u1780\u17cb\u1796\u17d0\u1793\u17d2\u1792\u1794\u17c6\u1795\u17bb\u178f\u1791\u17c5\u1793\u17b9\u1784\u179f\u17c6\u178e\u17bd\u179a\u179a\u1794\u179f\u17cb\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb \u1780\u17d2\u1793\u17bb\u1784\u1785\u17c6\u178e\u17c4\u1798\u17af\u1780\u179f\u17b6\u179a\u178a\u17cf\u1785\u17d2\u179a\u17be\u1793\u179f\u1793\u17d2\u1792\u17b9\u1780\u179f\u1793\u17d2\u1792\u17b6\u1794\u17cb\u1793\u17c5\u179b\u17be\u1794\u178e\u17d2\u178f\u17b6\u1789\u17a2\u17ca\u17b8\u1793\u1792\u17ba\u178e\u17b7\u178f \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1790\u17d2\u179b\u17b9\u1784\u1791\u1798\u17d2\u1784\u1793\u17cb (Weighting scheme) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u1784\u17d2\u1780\u17be\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1791\u17b6\u1789\u1799\u1780\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/document-retrieval-tf-isf-weighting-scheme-2023.html",
+      "author": [{"@type": "Person", "name": "Mohannad T. Mohammed (Middle Technical University)"},{"@type": "Person", "name": "Omar Fitian Rashid (University of Baghdad)"}],
+      "datePublished": "2023, Indonesian Journal of Electrical Engineering and Computer Science",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Document retrieval using term term frequency inverse sentence frequency weighting scheme",
+        "url": "https://doi.org/10.11591/ijeecs.v31.i3.pp1478-1485"
+      },
+      "keywords": ["Document retrieval", "Vector space model", "TF-ISF", "TF-IDF", "Cosine similarity", "MS MARCO dataset"],
+      "about": "Computer Science / Information Retrieval"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u17af\u1780\u179f\u17b6\u179a\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1790\u17d2\u179b\u17b9\u1784\u1791\u1798\u17d2\u1784\u1793\u17cb\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u1796\u17b6\u1780\u17d2\u1799 \u1793\u17b7\u1784\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u1794\u17d2\u179a\u1799\u17c4\u1782\u1794\u1789\u17d2\u1785\u17d2\u179a\u17b6\u179f",
+          "item": "https://khmerresearch.com/papers/technology/document-retrieval-tf-isf-weighting-scheme-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការទាញយកឯកសារដោយប្រើប្រាស់ប្រព័ន្ធថ្លឹងទម្ងន់ប្រេកង់ពាក្យ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Document retrieval using term term frequency inverse sentence frequency weighting scheme<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.11591/ijeecs.v31.i3.pp1478-1485" target="_blank">doi.org/10.11591/ijeecs.v31.i3.pp1478-1485</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទាញយកឯកសារដោយប្រើប្រាស់ប្រព័ន្ធថ្លឹងទម្ងន់ប្រេកង់ពាក្យ និងប្រេកង់ប្រយោគបញ្ច្រាស</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Document retrieval using term term frequency inverse sentence frequency weighting scheme</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Mohannad T. Mohammed (Middle Technical University), Omar Fitian Rashid (University of Baghdad)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, Indonesian Journal of Electrical Engineering and Computer Science</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Information Retrieval</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃការស្វែងរកឯកសារដែលពាក់ព័ន្ធបំផុតទៅនឹងសំណួររបស់អ្នកប្រើប្រាស់ ក្នុងចំណោមឯកសារដ៏ច្រើនសន្ធឹកសន្ធាប់នៅលើបណ្តាញអ៊ីនធឺណិត ដោយផ្តោតលើការកែលម្អប្រព័ន្ធថ្លឹងទម្ងន់ (Weighting scheme) សម្រាប់បង្កើនប្រសិទ្ធភាពទាញយកព័ត៌មាន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើឡើងនូវម៉ូដែលវ៉ិចទ័រលំហ (Vector Space Model) ថ្មីមួយ ដោយប្រើប្រព័ន្ធថ្លឹងទម្ងន់ផ្អែកលើកម្រិតប្រយោគ ជំនួសឱ្យកម្រិតឯកសារ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ប្រព័ន្ធថ្លឹងទម្ងន់ប្រេកង់ពាក្យនិងប្រេកង់ប្រយោគបញ្ច្រាស (TF-ISF Weighting Scheme)</li>
+            
+            <li>ការវាស់ស្ទង់ភាពស្រដៀងគ្នាដោយប្រើ Cosine និង Jaccard (Cosine and Jaccard Similarity Measures)</li>
+            
+            <li>ការវាយតម្លៃកម្រិតសុក្រឹតភាពដោយប្រើប្រាស់សំណុំទិន្នន័យ MS MARCO (MS MARCO Dataset Evaluation)</li>
+            
+            <li>ការដំណើរការទិន្នន័យអត្ថបទបឋមដោយប្រើបណ្ណាល័យ NLTK (Text Preprocessing using NLTK Library)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលប្រព័ន្ធថ្លឹងទម្ងន់ TF-ISF ដែលដំណើរការជាមួយរង្វាស់ភាពស្រដៀងគ្នា Cosine ទទួលបានលទ្ធផលល្អជាងគេក្នុងការទាញយកឯកសារដែលពាក់ព័ន្ធពិតប្រាកដ។</li>
+            
+            <li>ប្រព័ន្ធដែលបានស្នើឡើងនេះ (TF-ISF-Co) បានបង្ហាញពីភាពប្រសើរឡើងធៀបនឹងប្រព័ន្ធគោល TF-IDF ចំនួន 4.74% សម្រាប់ MAP(k=3), 3.88% សម្រាប់ MAP(k=5), និង 3.14% សម្រាប់ MAP(k=10)។</li>
+            
+            <li>រង្វាស់ភាពស្រដៀងគ្នា Cosine បង្ហាញពីប្រសិទ្ធភាពនិងភាពត្រឹមត្រូវខ្ពស់ជាងរង្វាស់ Jaccard ទាំងនៅក្នុងបរិបទប្រព័ន្ធថ្លឹងទម្ងន់ TF-IDF និង TF-ISF។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">TF-IDF-Co (Baseline)</span></strong><br>ប្រព័ន្ធ TF-IDF ជាមួយរង្វាស់ភាពស្រដៀង Cosine</td>
+                <td>ជាម៉ូដែលស្តង់ដារ និងងាយស្រួលយល់សម្រាប់ការទាញយកឯកសារ ដោយប្រើប្រាស់គំរូវ៉ិចទ័រលំហ (Vector Space Model)។</td>
+                <td>មានកម្រិតភាពសុក្រឹតទាបជាងប្រព័ន្ធស្នើឡើង ដោយសារវាគណនាទម្ងន់ពាក្យផ្អែកលើកម្រិតឯកសារទាំងមូល មិនមែនកម្រិតប្រយោគ។</td>
+                <td>ទទួលបានតម្លៃ MAP(k=3) = 0.781, MAP(k=5) = 0.774 និង MAP(k=10) = 0.732។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">TF-IDF-Ja (Baseline)</span></strong><br>ប្រព័ន្ធ TF-IDF ជាមួយរង្វាស់ភាពស្រដៀង Jaccard</td>
+                <td>ងាយស្រួលក្នុងការគណនាដោយផ្អែកលើការរាប់ចំនួនពាក្យដែលជាន់គ្នា (Intersection) រវាងសំណួរ និងឯកសារ។</td>
+                <td>ទទួលបានលទ្ធផលខ្សោយជាងគេបំផុតក្នុងការធ្វើតេស្ត ដោយសាររង្វាស់ Jaccard មិនសូវឆ្លើយតបល្អជាមួយទម្ងន់វ៉ិចទ័រស្មុគស្មាញ។</td>
+                <td>ទទួលបានតម្លៃ MAP(k=3) = 0.752, MAP(k=5) = 0.743 និង MAP(k=10) = 0.691។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">TF-ISF-Co (Proposed)</span></strong><br>ប្រព័ន្ធ TF-ISF ជាមួយរង្វាស់ភាពស្រដៀង Cosine</td>
+                <td>ផ្តល់ភាពសុក្រឹតខ្ពស់បំផុត ដោយផ្តោតលើការផ្តល់ទម្ងន់ពាក្យក្នុងកម្រិតប្រយោគ (Sentence Level) ធ្វើឱ្យការចាប់យកអត្ថន័យកាន់តែជាក់លាក់។</td>
+                <td>ទាមទារការពុះបំបែកអត្ថបទជាប្រយោគតូចៗជាមុន ដែលអាចបន្ថែមភាពស្មុគស្មាញក្នុងការរៀបចំទិន្នន័យ។</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់បំផុតដោយទទួលបានតម្លៃ MAP(k=3) = 0.818 ពោលគឺកើនឡើង 4.74% ធៀបនឹងប្រព័ន្ធគោល។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">TF-ISF-Ja (Proposed)</span></strong><br>ប្រព័ន្ធ TF-ISF ជាមួយរង្វាស់ភាពស្រដៀង Jaccard</td>
+                <td>មានភាពប្រសើរជាងប្រព័ន្ធ Jaccard ចាស់ ដោយសារការប្តូរមកប្រើប្រព័ន្ធថ្លឹងទម្ងន់កម្រិតប្រយោគ។</td>
+                <td>ទោះបីជាប្រសើរជាងមុខបន្តិច ប៉ុន្តែនៅតែមានកម្រិតទាបបើប្រៀបធៀបជាមួយការប្រើប្រាស់រង្វាស់ Cosine។</td>
+                <td>ទទួលបានតម្លៃ MAP(k=3) = 0.761 ពោលគឺកើនឡើង 1.20% ធៀបនឹងប្រព័ន្ធគោល Jaccard។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះមិនតម្រូវឱ្យមានធនធានផ្នែករឹងធំដុំនោះទេសម្រាប់ការសាកល្បងលើសំណុំទិន្នន័យតូច ប៉ុន្តែទាមទារចំណេះដឹងផ្នែកសរសេរកូដ និងការរៀបចំទិន្នន័យភាសា (NLP)។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា Python និងបណ្ណាល័យ NLTK សម្រាប់ដំណើរការអត្ថបទបឋម (Tokenization, Stemming, Stop-words removal)។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យ MS MARCO (Microsoft-curated data) ដោយប្រើប្រាស់សំណាកត្រឹម 500 សំណួរ និងឯកសារចំនួន 20,000 ច្បាប់។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រលំដាប់មធ្យមអាចដំណើរការបានសម្រាប់ទិន្នន័យ 20,000 ឯកសារនេះ ប៉ុន្តែអាចតម្រូវឱ្យមាន CPU និង RAM ទំហំធំ ប្រសិនបើអនុវត្តលើឯកសាររាប់លាន (Full MS MARCO dataset)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើសំណុំទិន្នន័យ MS MARCO ដែលជាទិន្នន័យស្វែងរកតាមរយៈ Bing ជាភាសាអង់គ្លេស។ សម្រាប់បរិបទប្រទេសកម្ពុជា នេះគឺជាបញ្ហាប្រឈមដ៏ធំមួយ ពីព្រោះភាសាខ្មែរមិនមានចន្លោះ (Spaces) រវាងពាក្យ ហើយទាមទារវិធីសាស្ត្រកាត់ពាក្យ (Word Segmentation) ដាច់ដោយឡែក ព្រមទាំងមិនទាន់មានបញ្ជីពាក្យអសារបង់ (Stop-words list) ស្តង់ដារដែលត្រូវបានទទួលស្គាល់ទូលំទូលាយនៅឡើយទេ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានបញ្ហាប្រឈមខាងភាសាក៏ដោយ វិធីសាស្ត្រ TF-ISF នេះមានសក្តានុពលខ្ពស់ក្នុងការអភិវឌ្ឍប្រព័ន្ធស្វែងរកឯកសារក្នុងស្រុកឱ្យកាន់តែឆ្លាតវៃ។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធរដ្ឋាភិបាលអេឡិចត្រូនិក (e-Government):</strong> អាចប្រើប្រាស់នៅតាមក្រសួងនានា (ឧទាហរណ៍ ក្រសួងយុត្តិធម៌ ទីស្តីការគណៈរដ្ឋមន្ត្រី) ដើម្បីបង្កើតប្រព័ន្ធស្វែងរក ច្បាប់ អនុក្រឹត្យ ឬប្រកាសពាក់ព័ន្ធបានលឿន ដោយវាស់ស្ទង់ភាពពាក់ព័ន្ធក្នុងកម្រិតប្រយោគ។</li>
+            
+            <li><strong>ឃ្លាំងឯកសារសាកលវិទ្យាល័យ (Academic Repositories):</strong> ជួយនិស្សិតនៅតាមសាកលវិទ្យាល័យធំៗ (ដូចជា RUPP, ITC) ក្នុងការទាញយកឯកសារស្រាវជ្រាវ ឬសារណា ដោយស្វែងរកភាពស្រដៀងគ្នានៃអត្ថន័យ (Semantic similarity) ជំនួសឱ្យការស្វែងរកតែពាក្យគន្លឹះ។</li>
+            
+            <li><strong>ស្ថាប័នស្រាវជ្រាវ និងសារព័ត៌មាន (Research & Media):</strong> អាចជួយដល់អ្នកសារព័ត៌មាន ឬអ្នកស្រាវជ្រាវក្នុងការស្វែងរកអត្ថបទចាស់ៗ ឬឯកសារយោងពីបណ្តុំទិន្នន័យរាប់ម៉ឺនអត្ថបទបានលឿន និងចំគោលដៅជាងប្រព័ន្ធចាស់។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តម៉ូដែលនេះនឹងជួយសន្សំសំចៃពេលវេលា និងបង្កើនភាពត្រឹមត្រូវក្នុងការទាញយកព័ត៌មានពីបណ្តុំទិន្នន័យខ្នាតធំនៅកម្ពុជា ប្រសិនបើបញ្ហាដំណើរការភាសាខ្មែរ (Khmer NLP) ត្រូវបានដោះស្រាយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>រៀបចំឧបករណ៍កាត់ពាក្យភាសាខ្មែរ (Khmer Tokenization):</strong> ជំនួសឱ្យការប្រើប្រាស់ NLTK ដែលកាត់ពាក្យតាមចន្លោះ ត្រូវផ្តើមដំបូងដោយការតំឡើងបណ្ណាល័យភាសាខ្មែរដូចជា khmer-nltk ឬ seang នៅក្នុង Python ដើម្បីបំបែកប្រយោគ និងពាក្យឱ្យបានត្រឹមត្រូវ។</li>
+            
+            <li><strong>បង្កើតបញ្ជីពាក្យអសារបង់ (Khmer Stop-words List):</strong> ប្រមូល និងបង្កើតបញ្ជីពាក្យដែលប្រើញឹកញាប់តែគ្មានអត្ថន័យសំខាន់ (ឧទាហរណ៍៖ នូវ, នៃ, ដោយ, ដែល) ដើម្បីចម្រាញ់ទិន្នន័យមុននឹងធ្វើការគណនាទម្ងន់ ដើម្បីសន្សំទំហំអង្គចងចាំ។</li>
+            
+            <li><strong>អភិវឌ្ឍក្បួនដោះស្រាយ TF-ISF និង Cosine Similarity:</strong> សរសេរកូដ Python ដោយប្រើប្រាស់ NumPy និង scikit-learn ដើម្បីបំប្លែងអត្ថបទទៅជាវ៉ិចទ័រ គណនារូបមន្តប្រេកង់ប្រយោគបញ្ច្រាស (Inverse Sentence Frequency) ជំនួសឱ្យឯកសារបញ្ច្រាស និងវាស់ស្ទង់មុំរវាងវ៉ិចទ័រ (Cosine)។</li>
+            
+            <li><strong>វាយតម្លៃប្រព័ន្ធដោយប្រើម៉ាទ្រីក MAP (Mean Average Precision):</strong> សាកល្បងប្រព័ន្ធដែលបានបង្កើតជាមួយសំណុំទិន្នន័យខ្នាតតូច (ឧទាហរណ៍៖ ឯកសារសារណារបស់និស្សិត ៥០០ ច្បាប់) រួចគណនាតម្លៃ MAP(k=3, 5, 10) ដើម្បីប្រៀបធៀបប្រសិទ្ធភាពធៀបនឹងប្រព័ន្ធចាស់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Term frequency inverse document frequency (TF-IDF)</span></td>
+                <td>វិធីសាស្ត្រគណនាទម្ងន់ពាក្យនៅក្នុងឯកសារដោយផ្អែកលើភាពញឹកញាប់នៃពាក្យនោះក្នុងឯកសារ (TF) និងភាពកម្ររបស់វានៅក្នុងបណ្តុំឯកសារទាំងមូល (IDF) ដើម្បីកំណត់ថាពាក្យមួយណាមានសារៈសំខាន់ និងអាចតំណាងឱ្យឯកសារនោះបាន។</td>
+                <td>ដូចជាការវាយតម្លៃភាពលេចធ្លោរបស់សិស្សម្នាក់៖ បើគេពូកែមុខវិជ្ជាមួយយ៉ាងខ្លាំង ហើយមុខវិជ្ជានោះកម្រមានអ្នកចេះ នោះសិស្សនោះនឹងមានភាពលេចធ្លោជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Term frequency inverse sentence frequency (TF-ISF)</span></td>
+                <td>វិធីសាស្ត្រថ្មីដែលយកលំនាំតាម TF-IDF ប៉ុន្តែវាវាស់ស្ទង់ភាពញឹកញាប់ និងភាពកម្ររបស់ពាក្យនៅក្នុងកម្រិត "ប្រយោគ" (Sentence) ជំនួសឱ្យកម្រិត "ឯកសារ" (Document) ទាំងមូល ដើម្បីចាប់យកអត្ថន័យកាន់តែលម្អិត និងស៊ីជម្រៅ។</td>
+                <td>ដូចជាការស្វែងរកចំណុចសំខាន់ក្នុងសៀវភៅមួយក្បាលដោយអាន និងវាយតម្លៃរើសយកឃ្លាសំខាន់ៗក្នុងបន្ទាត់នីមួយៗ ជំនួសឱ្យការវាយតម្លៃជារួមទាំងទំព័រ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vector space model (VSM)</span></td>
+                <td>ម៉ូដែលគណិតវិទ្យាដែលតំណាងឱ្យអត្ថបទ (សំណួរ ឬ ឯកសារ) ជាវ៉ិចទ័រនៅក្នុងលំហពហុវិមាត្រ (Multi-dimensional space) ដែលវិមាត្រនីមួយៗតំណាងឱ្យពាក្យនីមួយៗ ដើម្បីងាយស្រួលឱ្យកុំព្យូទ័រគណនាភាពស្រដៀងគ្នា។</td>
+                <td>ដូចជាការដាក់ទីតាំងផ្ទះនៅលើផែនទី ដែលផ្ទះណាមានលក្ខណៈស្រដៀងគ្នា (ឧ. មានអាងហែលទឹក មានសួនច្បារដូចគ្នា) នឹងត្រូវដាក់ឱ្យនៅជិតគ្នាតាមកូអរដោនេលើផែនទីនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cosine similarity</span></td>
+                <td>ការវាស់ស្ទង់ភាពស្រដៀងគ្នារវាងវ៉ិចទ័រពីរ (ឯកសារ និងសំណួរ) ដោយគណនាមុំកូស៊ីនុស (Cosine of the angle) រវាងពួកវា។ បើមុំកាន់តែតូច ឬខិតជិតសូន្យ មានន័យថាឯកសារទាំងពីរកាន់តែស្រដៀងគ្នា។</td>
+                <td>ដូចជាមនុស្សពីរនាក់កំពុងចង្អុលដៃទៅកាន់ទិសដៅតែមួយ ទោះបីជាដៃម្នាក់វែងជាងម្នាក់ទៀត (ឯកសារវែងជាង) ក៏ដោយ សំខាន់គឺទិសដៅនៃគោលគំនិតគឺដូចគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Jaccard similarity</span></td>
+                <td>ការគណនាភាពស្រដៀងគ្នាដោយយកចំនួនពាក្យដែលជាន់គ្នា (Intersection) រវាងឯកសារពីរ ចែកជាមួយចំនួនពាក្យសរុបបញ្ចូលគ្នា (Union) នៃឯកសារទាំងពីរនោះ។</td>
+                <td>ដូចជាការប្រៀបធៀបគ្រឿងផ្សំម្ហូបពីរមុខ៖ យកគ្រឿងផ្សំដែលដូចគ្នាមកចែកនឹងមុខគ្រឿងផ្សំសរុបទាំងអស់ដែលម្ហូបទាំងពីរមាន ដើម្បីមើលថាវាស្រដៀងគ្នាប៉ុនណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tokenization</span></td>
+                <td>ដំណើរការកាត់បំបែកអត្ថបទ ឬប្រយោគវែងៗ ទៅជាកង់ៗ ឬពាក្យតូចៗ (Tokens) ដាច់ដោយឡែកពីគ្នា ដែលជាទូទៅកាត់តាមចន្លោះ (Space) ឬសញ្ញាខណ្ឌ ដើម្បីឱ្យម៉ាស៊ីនងាយស្រួលវិភាគ។</td>
+                <td>ដូចជាការកាត់នំប៉័ងមួយដើមធំ ទៅជាចំណិតស្តើងៗ ដើម្បីងាយស្រួលញ៉ាំ ឬយកទៅចម្អិនបន្តតាមចំណែកតូចៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stemming</span></td>
+                <td>ដំណើរការកាត់ចោលរាល់ផ្នត់ដើមឬផ្នត់ចុងនៃពាក្យ (Suffixes/Prefixes) ដើម្បីរក្សាទុកតែឫសគល់នៃពាក្យ (Root word) ក្នុងបំណងកាត់បន្ថយការភាន់ច្រឡំរបស់កុំព្យូទ័រ (ឧទាហរណ៍ការបំប្លែង "reading" និង "reads" ទៅជា "read")។</td>
+                <td>ដូចជាការបកសំបកនិងកាត់មែកដើមឈើចេញ រក្សាទុកតែគល់ឈើសុទ្ធ ដើម្បីងាយស្រួលចាត់ថ្នាក់ថាវាជាប្រភេទឈើអ្វីតែមួយមុខ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean average precision (MAP)</span></td>
+                <td>រង្វាស់សម្រាប់វាយតម្លៃគុណភាពនៃប្រព័ន្ធទាញយកព័ត៌មាន (Information Retrieval) ដោយវាស់ស្ទង់ភាពសុក្រឹតជាមធ្យម (Precision) នៃឯកសារពាក់ព័ន្ធដែលប្រព័ន្ធបានទាញយកមកបង្ហាញក្នុងចំណាត់ថ្នាក់កំពូលៗ។</td>
+                <td>ដូចជាការវាយតម្លៃអ្នកបាញ់ធ្នូ ដោយមិនត្រឹមតែមើលថាតើគាត់បាញ់ចំគោលដៅប៉ុន្មានព្រួញទេ តែមើលថាតើព្រួញដែលចំគោលដៅនោះនៅកៀកចំណុចកណ្តាលស៊ីបប៉ុនណាជាមធ្យម។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/text-classification-naive-bayes-sentiment-lexicon-2019.html">
+                    <span class="km">ការចាត់ថ្នាក់អត្ថបទ៖ ក្បួនដោះស្រាយ Naïve Bayes ជាមួយវចនានុក្រមមនោសញ្ចេតនា</span><br>
+                    <span class="en article-original-title">Text Classification: Naïve Bayes Classifier with Sentiment Lexicon</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/evaluation-naive-bayes-arabic-text-classification-2021.html">
+                    <span class="km">ការវាយតម្លៃនៃការចាត់ថ្នាក់តាមបែប Naïve Bayes នៅក្នុងការចាត់ថ្នាក់អត្ថបទខ្លីជាភាសាអារ៉ាប់</span><br>
+                    <span class="en article-original-title">Evaluation of Naïve Bayes Classification in Arabic Short Text Classification</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/doc-representations-math-retrieval-novotny-2019.html">
+                    <span class="km">តំណាងឯកសារសម្រាប់ការទាញយកព័ត៌មានគណិតវិទ្យាប្រកបដោយភាពរហ័ស និងត្រឹមត្រូវ</span><br>
+                    <span class="en article-original-title">Document Representations for Fast and Accurate Retrieval of Mathematical Information</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/answer-sheet-evaluation-nlp-2024.html">
+                    <span class="km">ប្រព័ន្ធវាយតម្លៃសន្លឹកកិច្ចការប្រឡងដោយប្រើប្រាស់ NLP</span><br>
+                    <span class="en article-original-title">Answer Sheet Evalution System using NLP</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-ensemble-fake-news-detection-2022.html">
+                    <span class="km">ម៉ូដែលការរកឃើញព័ត៌មានក្លែងក្លាយរួមគ្នាស៊ីជម្រៅដោយប្រើប្រាស់បច្ចេកទេសសិក្សាស៊ីជម្រៅតាមលំដាប់លំដោយ</span><br>
+                    <span class="en article-original-title">Deep Ensemble Fake News Detection Model Using Sequential Deep Learning Technique</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Term+Frequency-Inverse+Document+Frequency%22+OR+%22TF-IDF%22+%22Information+Retrieval%22+%22vector+space+model" target="_blank" rel="noopener"><span class="en">Term Frequency-Inverse Document Frequency" OR "TF-IDF" "Information Retrieval" "vector space model</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Term+Frequency+Inverse+Sentence+Frequency%22+OR+%22TF-ISF%22+weighting+scheme+document+retrieval" target="_blank" rel="noopener"><span class="en">Term Frequency Inverse Sentence Frequency" OR "TF-ISF" weighting scheme document retrieval</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=MS+MARCO+dataset%22+document+re-ranking+%22Mean+Average+Precision%22+evaluation" target="_blank" rel="noopener"><span class="en">MS MARCO dataset" document re-ranking "Mean Average Precision" evaluation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Cosine+similarity%22+vs+%22Jaccard+similarity%22+text+document+clustering+retrieval" target="_blank" rel="noopener"><span class="en">Cosine similarity" vs "Jaccard similarity" text document clustering retrieval</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=dense+representations+%22Information+Retrieval%22+semantic+similarity+NLP+comparison" target="_blank" rel="noopener"><span class="en">dense representations "Information Retrieval" semantic similarity NLP comparison</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

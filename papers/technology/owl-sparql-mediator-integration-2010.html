@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>កម្មវិធីសម្របសម្រួលផ្អែកលើ OWL & SPARQL សម្រាប់ការធ្វើសមាហរណកម្មប្រភពព័ត៌មាន OWL/RDF - OWL & SPARQL based Mediator for Integration of OWL/RDF Information Sources | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី កម្មវិធីសម្របសម្រួលផ្អែកលើ OWL & SPARQL សម្រាប់ការធ្វើសមាហរណ។ ការទទួលបានទិន្នន័យរួមគ្នានៅក្នុងប្រព័ន្ធបណ្ណាល័យឌីជីថល និងប្រភពព័ត៌មានចម្រុះ ជួបប្រទះបញ្ហាប្រឈមនៃ...">
+    
+    <meta name="keywords" content="SPARQL, OWL/RDF, Mediator, Ontology Mapping, Semantic Interoperability, Query Rewriting, Data Integration, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/owl-sparql-mediator-integration-2010.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/owl-sparql-mediator-integration-2010.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/owl-sparql-mediator-integration-2010.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/owl-sparql-mediator-integration-2010.html">
+    <meta property="og:title" content="កម្មវិធីសម្របសម្រួលផ្អែកលើ OWL & SPARQL សម្រាប់ការធ្វើសមាហរណកម្មប្រភពព័ត៌មាន OWL/RDF | KhmerResearch.com">
+    <meta property="og:description" content="ការទទួលបានទិន្នន័យរួមគ្នានៅក្នុងប្រព័ន្ធបណ្ណាល័យឌីជីថល និងប្រភពព័ត៌មានចម្រុះ ជួបប្រទះបញ្ហាប្រឈមនៃភាពមិនស៊ីគ្នានៃរចនាសម្ព័ន្ធនិងអត្ថន័យ (Semantic Interoperability) រវាងអនតូឡូស៊ី (Ontologies) ផ្សេងៗគ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2010">
+    
+    <meta property="article:tag" content="SPARQL">
+    
+    <meta property="article:tag" content="OWL/RDF">
+    
+    <meta property="article:tag" content="Mediator">
+    
+    <meta property="article:tag" content="Ontology Mapping">
+    
+    <meta property="article:tag" content="Semantic Interoperability">
+    
+    <meta property="article:tag" content="Query Rewriting">
+    
+    <meta property="article:tag" content="Data Integration">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="កម្មវិធីសម្របសម្រួលផ្អែកលើ OWL & SPARQL សម្រាប់ការធ្វើសមាហរណកម្មប្រភពព័ត៌មាន OWL/RDF">
+    <meta name="twitter:description" content="ការទទួលបានទិន្នន័យរួមគ្នានៅក្នុងប្រព័ន្ធបណ្ណាល័យឌីជីថល និងប្រភពព័ត៌មានចម្រុះ ជួបប្រទះបញ្ហាប្រឈមនៃភាពមិនស៊ីគ្នានៃរចនាសម្ព័ន្ធនិងអត្ថន័យ (Semantic Interoperability) រវាងអនតូឡូស៊ី (Ontologies) ផ្សេងៗគ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179f\u1798\u17d2\u179a\u1794\u179f\u1798\u17d2\u179a\u17bd\u179b\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be OWL \u0026 SPARQL \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179f\u1798\u17b6\u17a0\u179a\u178e\u1780\u1798\u17d2\u1798\u1794\u17d2\u179a\u1797\u1796\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793 OWL/RDF",
+      "name": "OWL \u0026 SPARQL based Mediator for Integration of OWL/RDF Information Sources",
+      "description": "\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u1794\u17b6\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179a\u17bd\u1798\u1782\u17d2\u1793\u17b6\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1794\u178e\u17d2\u178e\u17b6\u179b\u17d0\u1799\u178c\u17b8\u1787\u17b8\u1790\u179b \u1793\u17b7\u1784\u1794\u17d2\u179a\u1797\u1796\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1785\u1798\u17d2\u179a\u17bb\u17c7 \u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1793\u17c3\u1797\u17b6\u1796\u1798\u17b7\u1793\u179f\u17ca\u17b8\u1782\u17d2\u1793\u17b6\u1793\u17c3\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1793\u17b7\u1784\u17a2\u178f\u17d2\u1790\u1793\u17d0\u1799 (Semantic Interoperability) \u179a\u179c\u17b6\u1784\u17a2\u1793\u178f\u17bc\u17a1\u17bc\u179f\u17ca\u17b8 (Ontologies) \u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6\u178a\u17c2\u179b\u178f\u17d2\u179a\u17bc\u179c\u1794\u17b6\u1793\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/owl-sparql-mediator-integration-2010.html",
+      "author": [{"@type": "Person", "name": "Antonia Georgaraki (Technical University of Crete)"}],
+      "datePublished": "2010",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "OWL \u0026 SPARQL based Mediator for Integration of OWL/RDF Information Sources",
+        "url": "N/A"
+      },
+      "keywords": ["SPARQL", "OWL/RDF", "Mediator", "Ontology Mapping", "Semantic Interoperability", "Query Rewriting", "Data Integration"],
+      "about": "Computer Science / Semantic Web"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179f\u1798\u17d2\u179a\u1794\u179f\u1798\u17d2\u179a\u17bd\u179b\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be OWL \u0026 SPARQL \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179f\u1798\u17b6\u17a0\u179a\u178e\u1780\u1798\u17d2\u1798\u1794\u17d2\u179a\u1797\u1796\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793 OWL/RDF",
+          "item": "https://khmerresearch.com/papers/technology/owl-sparql-mediator-integration-2010.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>កម្មវិធីសម្របសម្រួលផ្អែកលើ OWL & SPARQL សម្រាប់ការធ្វើសមា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> OWL & SPARQL based Mediator for Integration of OWL/RDF Information Sources<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>កម្មវិធីសម្របសម្រួលផ្អែកលើ OWL & SPARQL សម្រាប់ការធ្វើសមាហរណកម្មប្រភពព័ត៌មាន OWL/RDF</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> OWL & SPARQL based Mediator for Integration of OWL/RDF Information Sources</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Antonia Georgaraki (Technical University of Crete)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2010</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Semantic Web</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការទទួលបានទិន្នន័យរួមគ្នានៅក្នុងប្រព័ន្ធបណ្ណាល័យឌីជីថល និងប្រភពព័ត៌មានចម្រុះ ជួបប្រទះបញ្ហាប្រឈមនៃភាពមិនស៊ីគ្នានៃរចនាសម្ព័ន្ធនិងអត្ថន័យ (Semantic Interoperability) រវាងអនតូឡូស៊ី (Ontologies) ផ្សេងៗគ្នាដែលត្រូវបានប្រើប្រាស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានរចនានិងអភិវឌ្ឍកម្មវិធីសម្របសម្រួល (Mediator) ផ្អែកលើអនតូឡូស៊ី ដើម្បីបំប្លែងសំណួរ SPARQL ពីកម្រិតសកលទៅកាន់ប្រភពទិន្នន័យមូលដ្ឋានផ្សេងៗ។
+        
+        <ul>
+            
+            <li>ការបង្កើតផែនទីអនតូឡូស៊ី (Ontology Mapping) រវាងប្រភពព័ត៌មានសកលនិងមូលដ្ឋាន</li>
+            
+            <li>ការធ្វើប្រក្រតីកម្មសំណួរ (Query Normalization) ទៅជាទម្រង់គំរូក្រាហ្វដែលគ្មានសហជីព (UNION-free well-designed graph patterns)</li>
+            
+            <li>ការអនុវត្តការបន្ធូរបន្ថយសំណួរ (Query Relaxation) ចំនួន ៤ កម្រិត សម្រាប់ដោះស្រាយការបាត់បង់ទិន្នន័យនៅពេលគ្មានការផ្គូផ្គងពេញលេញ</li>
+            
+            <li>ការសរសេរទម្រង់សំណួរឡើងវិញ (Query Reformulation) និងការប្រតិបត្តិ (Execution) តាមរយៈ Jena Framework ដោយប្រើប្រាស់ Java 2SE</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធសម្របសម្រួលអាចធ្វើសមាហរណកម្មប្រភពទិន្នន័យ OWL/RDF ចម្រុះបានយ៉ាងមានប្រសិទ្ធភាពតាមរយៈយន្តការបំប្លែងសំណួរ SPARQL។</li>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្រ Query Relaxation ចំនួន ៤ កម្រិត ជួយឲ្យអ្នកប្រើប្រាស់អាចទទួលបានចម្លើយតាមតម្រូវការជាក់លាក់ ទោះបីជាប្រភពព័ត៌មាននោះមិនមានការផ្គូផ្គង (Mappings) ពេញលេញក៏ដោយ។</li>
+            
+            <li>ក្បួនដោះស្រាយការកែទម្រង់សំណួរ (Query Reformulation algorithms) អាចធានាបាននូវការរក្សាអត្ថន័យដើមនៃសំណួរ ខណៈពេលបំបែកនិងទាញយកទិន្នន័យពីប្រព័ន្ធស្វយ័តដាច់ដោយឡែកពីគ្នា។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Proposed OWL/SPARQL Mediator</span></strong><br>កម្មវិធីសម្របសម្រួលផ្អែកលើ OWL & SPARQL ជាមួយនឹងយន្តការបន្ធូរបន្ថយ ៤ កម្រិត</td>
+                <td>មានភាពបត់បែនខ្ពស់ដោយអនុញ្ញាតឱ្យអ្នកប្រើប្រាស់ជ្រើសរើសកម្រិតនៃការបន្ធូរបន្ថយសំណួរ (Relaxation Levels) និងអាចដោះស្រាយអថេរប្រភេទ OPTIONAL បានយ៉ាងល្អ។</td>
+                <td>ទាមទារការកំណត់ផែនទី (Mappings) និង Articulations រវាងអនតូឡូស៊ីដោយដៃឬពាក់កណ្តាលស្វ័យប្រវត្តិនៅពេលចាប់ផ្តើមប្រព័ន្ធ។</td>
+                <td>អាចធ្វើការបំប្លែងសំណួរ ទាញយក និងចងក្រងទិន្នន័យពីប្រភពផ្សេងៗគ្នាបានជោគជ័យ ទោះបីជាមានភាពមិនស៊ីគ្នានៃរចនាសម្ព័ន្ធទិន្នន័យមួយចំនួនក៏ដោយ (Exact ដល់ Incomplete answers)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">MOMIS System (Mediator envirOnment for Multiple Information Sources)</span></strong><br>ប្រព័ន្ធ MOMIS ប្រើប្រាស់ ODL-I3 និង WordNet សម្រាប់សមាហរណកម្ម</td>
+                <td>ប្រើប្រាស់ WordNet និង Clustering ដើម្បីបង្កើត Global Virtual View ដោយស្វ័យប្រវត្តិពាក់កណ្តាល។</td>
+                <td>ប្រើប្រាស់ចំណេះដឹងខាងក្រៅ (Extensional knowledge) ជាជាងផ្តោតលើការកែសម្រួលសំណួរ SPARQL ផ្ទាល់។</td>
+                <td>អាចផ្តល់នូវទិដ្ឋភាពទិន្នន័យរួម (Global Virtual View) ប៉ុន្តែខ្វះយន្តការបន្ធូរបន្ថយសំណួរ SPARQL តាមតម្រូវការជាក់លាក់របស់អ្នកប្រើប្រាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SWIM (Semantic Web Integration Middleware)</span></strong><br>ប្រព័ន្ធកណ្តាល SWIM សម្រាប់បំប្លែង XML/RDB ទៅជាទិន្នន័យ RDF</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការធ្វើសមាហរណកម្មទិន្នន័យប្រពៃណី (Relational Databases និង XML) ទៅក្នុងទម្រង់ Semantic Web។</td>
+                <td>ប្រើប្រាស់ភាសាសំណួរ RQL/RVL ជំនួសឱ្យស្តង់ដារ SPARQL ដែលធ្វើឱ្យវាមានកម្រិតក្នុងការប្រើប្រាស់ជាមួយប្រព័ន្ធថ្មីៗ។</td>
+                <td>អាចមើលឃើញប្រភពទិន្នន័យដើមជាឃ្លាំងផ្ទុកទិន្នន័យ RDF និម្មិត ប៉ុន្តែមិនប្រើប្រាស់ SPARQL សម្រាប់ការទាញយកទិន្នន័យឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SemWIQ</span></strong><br>ស្ថាបត្យកម្ម Mediator-Wrapper ស្តង់ដារ</td>
+                <td>ដំណើរការបានលឿនដោយប្រើប្រាស់ប្រព័ន្ធកាតាឡុក (Catalogs) ដើម្បីតាមដាន និងជ្រើសរើសប្រភពទិន្នន័យ។</td>
+                <td>មានការរឹតត្បិតច្រើនលើការសរសេរសំណួរ SPARQL ស្តង់ដារ (ឧ. តម្រូវឱ្យ Subject ទាំងអស់ត្រូវតែជាអថេរ)។</td>
+                <td>អាចបំបែកសំណួរទៅកាន់ប្រភពផ្សេងៗ ប៉ុន្តែនៅមានកម្រិតក្នុងការគាំទ្រមុខងារចាំបាច់មួយចំនួននៃសំណួរ SPARQL ដូចជា DESCRIBE ជាដើម។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនបានបញ្ជាក់លម្អិតពីតម្លៃធនធានកុំព្យូទ័រ (Hardware) ធំដុំនោះទេ ប៉ុន្តែទាមទារនូវប្រព័ន្ធសូហ្វវែរជាក់លាក់ និងចំណេះដឹងផ្នែក Semantic Web ច្បាស់លាស់ដើម្បីដំណើរការ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ត្រូវការប្រើប្រាស់ Java 2SE Platform ព្រមទាំង Jena Framework សម្រាប់ដំណើរការ និងបំប្លែងសំណួរ SPARQL។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រ ឬម៉ាស៊ីនមេ (Server) ធម្មតាដែលគាំទ្រការរត់កម្មវិធី Java និងការផ្ទុកទិន្នន័យក្នុងអង្គចងចាំ (In-memory storage)។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យត្រូវតែមានទម្រង់ជា OWL/RDF ក៏ដូចជាត្រូវការឯកសារគូសផែនទី (Alignment/Mapping rules) ដែលសរសេរជាទម្រង់ EDOAL3។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅលើ SPARQL, RDF/XML, ការសរសេរ Ontology និងបច្ចេកទេស Database Query Optimization។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្អែកលើការធ្វើគំរូសាកល្បង (Proof-of-concept) ដោយប្រើប្រាស់សំណុំទិន្នន័យបណ្ណាល័យនិងបណ្ណាគារ (Bookstores)។ ភាពលំអៀងនៅក្នុងប្រព័ន្ធនេះមិនស្ថិតលើទិន្នន័យប្រជាសាស្ត្រទេ ប៉ុន្តែវាស្ថិតលើ 'រចនាសម្ព័ន្ធអនតូឡូស៊ី' (Schema bias) ពោលគឺប្រព័ន្ធអាចផ្តល់ចម្លើយបានល្អ លុះត្រាតែអនតូឡូស៊ីគោល (Main Ontology) ត្រូវបានរចនាឡើងគ្របដណ្តប់គ្រប់ជ្រុងជ្រោយនៃប្រភពទិន្នន័យមូលដ្ឋាន។ ប្រសិនបើអនុវត្តនៅកម្ពុជា ការរចនាអនតូឡូស៊ីគោលនេះត្រូវតែឆ្លុះបញ្ចាំងពីបរិបទស្ថាប័នក្នុងស្រុកឱ្យបានច្បាស់លាស់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ប្រព័ន្ធកម្មវិធីសម្របសម្រួល (Mediator System) នេះមានសក្តានុពលខ្ពស់សម្រាប់ការដោះស្រាយបញ្ហាសមាហរណកម្មទិន្នន័យរវាងស្ថាប័នរដ្ឋ ឬឯកជននៅក្នុងប្រទេសកម្ពុជា ដែលបច្ចុប្បន្នភាគច្រើនដំណើរការជាលក្ខណៈដាច់ដោយឡែកពីគ្នា (Siloed systems)។</p>
+        
+        <ul>
+            
+            <li><strong>E-Government / ក្រសួងស្ថាប័នរដ្ឋ:</strong> អាចប្រើដើម្បីទាញយកទិន្នន័យរួមពីរចនាសម្ព័ន្ធផ្ទុកទិន្នន័យផ្សេងគ្នារបស់ក្រសួងនានា (ឧ. ក្រសួងសុខាភិបាល និងក្រសួងមហាផ្ទៃ) ដោយមិនចាំបាច់ផ្លាស់ប្តូរប្រព័ន្ធ Database ដើមរបស់ពួកគេ។</li>
+            
+            <li><strong>បណ្តាញបណ្ណាល័យសាកលវិទ្យាល័យ (University Libraries):</strong> អាចបង្កើតជាប្រព័ន្ធស្វែងរកឯកសាររួម (Unified Search Portal) សម្រាប់សាកលវិទ្យាល័យផ្សេងៗ (ដូចជា RUPP, ITC, RULE) ដែលកំពុងប្រើប្រាស់ប្រព័ន្ធគ្រប់គ្រងបណ្ណាល័យខុសៗគ្នា។</li>
+            
+            <li><strong>វិស័យកសិកម្ម និងការផ្គត់ផ្គង់ (Agricultural Supply Chain):</strong> អាចរួមបញ្ចូលទិន្នន័យពីអង្គការក្រៅរដ្ឋាភិបាល និងស្ថាប័នរដ្ឋពាក់ព័ន្ធនឹងតម្លៃកសិផល អាកាសធាតុ និងបច្ចេកទេសដាំដុះ ដែលមានទម្រង់ទិន្នន័យខុសៗគ្នា ឱ្យទៅជាប្រភពចំណេះដឹងតែមួយ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបសេចក្តីមក វាផ្តល់នូវមូលដ្ឋានគ្រឹះបច្ចេកទេសដ៏រឹងមាំ និងសន្សំសំចៃមួយ ក្នុងការកសាងប្រព័ន្ធទិន្នន័យជាតិ ឬប្រព័ន្ធចែករំលែកព័ត៌មានអន្តរស្ថាប័ននៅកម្ពុជា ដោយប្រើប្រាស់បច្ចេកវិទ្យា Semantic Web។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Semantic Web:</strong> ចាប់ផ្តើមរៀនអំពី RDF, RDFS, និង OWL ដើម្បីយល់ពីរបៀបរៀបចំរចនាសម្ព័ន្ធទិន្នន័យ។ និស្សិតគួរតែប្រើប្រាស់កម្មវិធី <span class="en">Protégé</span> ដើម្បីសាកល្បងបង្កើត Ontology ផ្ទាល់ខ្លួនជាទម្រង់ OWL សម្រាប់ករណីសិក្សាតូចមួយ (ឧ. ការគ្រប់គ្រងទិន្នន័យនិស្សិត)។</li>
+            
+            <li><strong>អនុវត្តការសរសេរសំណួរ SPARQL និងរៀនប្រើ Jena:</strong> រៀនសរសេរសំណួរ <span class="en">SPARQL</span> កម្រិតមូលដ្ឋានដល់កម្រិតខ្ពស់។ ដំឡើង <span class="en">Java</span> និង <span class="en">Apache Jena Framework</span> នៅក្នុងម៉ាស៊ីនកុំព្យូទ័រ ដើម្បីសាកល្បង Load ទិន្នន័យ RDF និងរត់សំណួរ SPARQL តាមរយៈកូដ Java ដោយប្រើ <span class="en">Jena ARQ</span>។</li>
+            
+            <li><strong>សិក្សាពីការធ្វើប្រក្រតីកម្មសំណួរ (Query Normalization):</strong> អាននិងយល់ពីក្បួនគណិតវិទ្យា (Algebraic rules) ដែលប្រើក្នុងឯកសារនេះ ដើម្បីបំប្លែងសំណួរ SPARQL ស្មុគស្មាញឱ្យទៅជាទម្រង់ធម្មតា (UNION-free well-designed graph patterns) ដើម្បីងាយស្រួលក្នុងការទាញយកទិន្នន័យពីប្រភពច្រើន។</li>
+            
+            <li><strong>សាកល្បងបង្កើតប្រព័ន្ធ Mediator ខ្នាតតូច:</strong> សរសេរកូដបង្កើត Mediator សាមញ្ញមួយ ដោយប្រើប្រាស់ <span class="en">Java</span> ដែលអាចទទួលសំណួរ SPARQL ពីអ្នកប្រើប្រាស់ រួចធ្វើការបំបែក (Decompose) និងបញ្ជូនទៅកាន់ប្រភពទិន្នន័យ RDF និម្មិតចំនួនពីរផ្សេងគ្នា។</li>
+            
+            <li><strong>អនុវត្តយន្តការបន្ធូរបន្ថយសំណួរ (Query Relaxation):</strong> បន្ថែមមុខងារ ៤ កម្រិតនៃការបន្ធូរបន្ថយសំណួរទៅក្នុងប្រព័ន្ធ Mediator របស់អ្នក ដើម្បីដោះស្រាយបញ្ហាអថេរ (Variables) ដែលមិនមានទិន្នន័យពេញលេញនៅតាមប្រភពនីមួយៗ និងរៀបចំបង្កើតចំណុចប្រទាក់ (GUI) សាមញ្ញមួយដើម្បីបង្ហាញលទ្ធផលដែលបានចងក្រងនិងដាក់ពិន្ទុ (Ranking) រួចរាល់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Mediator</span></td>
+                <td>កម្មវិធីឬប្រព័ន្ធកណ្តាលដែលទទួលសំណួរពីអ្នកប្រើប្រាស់ រួចធ្វើការបកប្រែនិងបញ្ជូនសំណួរនោះទៅកាន់ប្រភពទិន្នន័យផ្សេងៗគ្នា បន្ទាប់មកប្រមូលនិងចងក្រងចម្លើយយកមកបង្ហាញអ្នកប្រើប្រាស់វិញជាទម្រង់តែមួយរួមគ្នា។</td>
+                <td>ដូចជាអ្នកបកប្រែភាសាដែលជួយសម្រួលការទាក់ទងរវាងមនុស្សច្រើននាក់ដែលនិយាយភាសាខុសៗគ្នាឱ្យយល់គ្នាបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ontology</span></td>
+                <td>ការរៀបចំនិងចាត់ថ្នាក់ពាក្យបច្ចេកទេស (Concepts) និងទំនាក់ទំនងរវាងពាក្យទាំងនោះនៅក្នុងវិស័យណាមួយ ដើម្បីឱ្យកុំព្យូទ័រអាចយល់ពីអត្ថន័យនិងរចនាសម្ព័ន្ធនៃទិន្នន័យតំណាងឱ្យពិភពពិត។</td>
+                <td>ដូចជាប្លង់មេនៃបណ្ណាល័យដែលបែងចែកសៀវភៅតាមប្រភេទ និងបង្ហាញពីរបៀបដែលប្រធានបទនីមួយៗទាក់ទងគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SPARQL</span></td>
+                <td>ភាសាកម្មវិធីពិសេសមួយដែលគេប្រើសម្រាប់ទាញយក កែប្រែ និងវិភាគទិន្នន័យ ដែលត្រូវបានរក្សាទុកក្នុងទម្រង់ RDF នៅលើប្រព័ន្ធបណ្តាញអ៊ីនធឺណិតសេមែនទិក (Semantic Web)។</td>
+                <td>ដូចជាការសរសេរប្រយោគបញ្ជាអ្នកបណ្ណារក្សឱ្យដើររកសៀវភៅតាមលក្ខខណ្ឌជាក់លាក់ណាមួយដែលយើងចង់បាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">RDF (Resource Description Framework)</span></td>
+                <td>ទម្រង់ស្តង់ដារសម្រាប់ការរក្សាទុកទិន្នន័យ ដោយភ្ជាប់ព័ត៌មានជាទម្រង់ ៣ ផ្នែក (ប្រធានបទ កិរិយា កម្មវត្ថុ) ដើម្បីបញ្ជាក់ពីទំនាក់ទំនងរវាងធនធាននានានៅលើប្រព័ន្ធអ៊ីនធឺណិត។</td>
+                <td>ដូចជាការសរសេរប្រយោគខ្លីៗថា "សុខ (ប្រធានបទ) ស្គាល់ (កិរិយា) សៅ (កម្មវត្ថុ)" ដើម្បីភ្ជាប់ព័ត៌មានពីមនុស្សម្នាក់ទៅមនុស្សម្នាក់ទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Query Normalization</span></td>
+                <td>ដំណើរការកែសម្រួល និងរៀបចំទម្រង់សំណួរដ៏ស្មុគស្មាញរបស់អ្នកប្រើប្រាស់ ឱ្យទៅជាទម្រង់ស្តង់ដារសាមញ្ញ (ឧ. លុបបំបាត់ប្រតិបត្តិការ UNION ដែលស្មុគស្មាញ) ដើម្បីងាយស្រួលក្នុងការបញ្ជូនទៅស្វែងរកទិន្នន័យ។</td>
+                <td>ដូចជាការរៀបចំសម្លៀកបំពាក់ដែលញាត់ចូលគ្នាញ៉េចញ៉ាច ឱ្យមានសណ្តាប់ធ្នាប់ងាយស្រួលក្នុងការទាញយកមកស្លៀកពាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Query Relaxation</span></td>
+                <td>ការបន្ធូរបន្ថយលក្ខខណ្ឌតឹងរ៉ឹងនៅក្នុងសំណួរ ដើម្បីអនុញ្ញាតឱ្យប្រព័ន្ធអាចទាញយកចម្លើយដែលប្រហាក់ប្រហែលមកបន្ថែម ក្នុងករណីដែលប្រភពទិន្នន័យគ្មានចម្លើយដែលផ្គូផ្គងត្រូវគ្នាទាំងស្រុង ១០០%។</td>
+                <td>ដូចជាការសុំទិញអាវពណ៌ក្រហមម៉ាកល្បី តែបើគ្មានស្តុក អ្នកលក់អាចដកលក្ខខណ្ឌម៉ាកល្បីចេញ ហើយយកអាវពណ៌ក្រហមម៉ាកផ្សេងមកលក់ជំនួសវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Articulations</span></td>
+                <td>សំណុំនៃចំណងទំនាក់ទំនងដែលត្រូវបានកំណត់ទុកជាមុន ដើម្បីតភ្ជាប់ពាក្យបច្ចេកទេសនៅក្នុងអនតូឡូស៊ីគោល (Global Ontology) ទៅនឹងពាក្យដែលប្រើប្រាស់នៅក្នុងប្រភពទិន្នន័យមូលដ្ឋាននីមួយៗ (Local Ontology)។</td>
+                <td>ដូចជាវចនានុក្រមដែលជួយប្រាប់ថាពាក្យ "ឡាន" ក្នុងតំបន់មួយ មានន័យដូចគ្នានឹងពាក្យ "រថយន្ត" នៅតំបន់មួយទៀតអញ្ចឹងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Query Reformulation</span></td>
+                <td>ការសរសេរសំណួរឡើងវិញ ដោយបំប្លែងពាក្យពេចន៍ពីសំណួរក្នុងប្រព័ន្ធគោល ទៅជាពាក្យពេចន៍ដែលប្រព័ន្ធផ្ទុកទិន្នន័យមូលដ្ឋានអាចយល់បាន ដើម្បីអាចធ្វើការស្វែងរកនិងទាញយកទិន្នន័យបានត្រឹមត្រូវ។</td>
+                <td>ដូចជាការប្តូរពាក្យពេចន៍សាមញ្ញដែលកូនក្មេងសួរ ទៅជាពាក្យពេចន៍ផ្លូវការនៅពេលយកសំណួរនោះទៅសួរគ្រូពេទ្យ ដើម្បីឱ្យគ្រូពេទ្យងាយឆ្លើយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ontology-based-semantic-search-quran-2013.html">
+                    <span class="km">ការស្វែងរកតាមន័យដោយផ្អែកលើអុនតូឡូស៊ី (Ontology) នៅក្នុងគម្ពីរអាល់គួរអាន</span><br>
+                    <span class="en article-original-title">Ontology Based Semantic Search in Holy Quran</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/geological-models-rock-properties-3d-inversion-2007.html">
+                    <span class="km">គំរូភូគព្ភសាស្ត្រ លក្ខណៈសម្បត្តិថ្ម និងការប្រែត្រឡប់ទិន្នន័យភូមិសាស្ត្ររូបវិទ្យាជាទម្រង់ត្រីមាត្រ (3D)</span><br>
+                    <span class="en article-original-title">Geological Models, Rock Properties, and the 3D Inversion of Geophysical Data</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/natural-language-sparql-query-builder-2021.html">
+                    <span class="km">កម្មវិធីកសាងសំណួរ SPARQL ពីភាសាធម្មជាតិសម្រាប់កម្មវិធីវិបសេម៉ង់ទិច (Semantic Web)</span><br>
+                    <span class="en article-original-title">Natural Language to SPARQL Query Builder for Semantic Web Applications</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/2d-inversion-magnetic-gravity-golgohar-2023.html">
+                    <span class="km">ការប្រែត្រឡប់ទិន្នន័យម៉ាញ៉េទិច និងទំនាញផែនដី ២ វិមាត្រ៖ ករណីសិក្សានៅអណ្តូងរ៉ែ Golgohar</span><br>
+                    <span class="en article-original-title">2D inversion of magnetic and gravity data: a case study on Golgohar mine</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Ontology+mapping+and+alignment+techniques+in+Semantic+Web" target="_blank" rel="noopener"><span class="en">Ontology mapping and alignment techniques in Semantic Web</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SPARQL+query+rewriting+algorithms+for+heterogeneous+data+sources" target="_blank" rel="noopener"><span class="en">SPARQL query rewriting algorithms for heterogeneous data sources</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Mediator-wrapper+architectures+for+semantic+data+integration" target="_blank" rel="noopener"><span class="en">Mediator-wrapper architectures for semantic data integration</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Query+optimization+and+normal+forms+in+SPARQL" target="_blank" rel="noopener"><span class="en">Query optimization and normal forms in SPARQL</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Query+relaxation+techniques+for+RDF+graph+databases" target="_blank" rel="noopener"><span class="en">Query relaxation techniques for RDF graph databases</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការចាត់ចែងឯកសារសំឡេងធំៗក្នុងសៀវភៅសំឡេងសម្រាប់ការបង្កើតសំឡេងសំយោគ - Handling Large Audio Files in Audio Books for Building Synthetic Voices | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការចាត់ចែងឯកសារសំឡេងធំៗក្នុងសៀវភៅសំឡេងសម្រាប់ការបង្កើតសំឡេងសំយោគ។ ការបំបែកឯកសារសំឡេងធំៗ (Audio books) សម្រាប់សាងសង់ប្រព័ន្ធសំឡេងសំយោគ (Synthetic voices) តែងតែជួបប្...">
+    
+    <meta name="keywords" content="Forced-alignment, Audio books, Synthetic voices, Text-to-speech, Speech segmentation, Acoustic models, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/handling-large-audio-files-synthetic-voices.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/handling-large-audio-files-synthetic-voices.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/handling-large-audio-files-synthetic-voices.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/handling-large-audio-files-synthetic-voices.html">
+    <meta property="og:title" content="ការចាត់ចែងឯកសារសំឡេងធំៗក្នុងសៀវភៅសំឡេងសម្រាប់ការបង្កើតសំឡេងសំយោគ | KhmerResearch.com">
+    <meta property="og:description" content="ការបំបែកឯកសារសំឡេងធំៗ (Audio books) សម្រាប់សាងសង់ប្រព័ន្ធសំឡេងសំយោគ (Synthetic voices) តែងតែជួបប្រទះបញ្ហាកង្វះអង្គចងចាំ និងតម្រូវឱ្យមានប្រព័ន្ធសម្គាល់សំឡេងកម្រិតខ្ពស់ដែលពិបាករកសម្រាប់ភាសាមួយចំនួន។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="circa 2009-2010">
+    
+    <meta property="article:tag" content="Forced-alignment">
+    
+    <meta property="article:tag" content="Audio books">
+    
+    <meta property="article:tag" content="Synthetic voices">
+    
+    <meta property="article:tag" content="Text-to-speech">
+    
+    <meta property="article:tag" content="Speech segmentation">
+    
+    <meta property="article:tag" content="Acoustic models">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការចាត់ចែងឯកសារសំឡេងធំៗក្នុងសៀវភៅសំឡេងសម្រាប់ការបង្កើតសំឡេងសំយោគ">
+    <meta name="twitter:description" content="ការបំបែកឯកសារសំឡេងធំៗ (Audio books) សម្រាប់សាងសង់ប្រព័ន្ធសំឡេងសំយោគ (Synthetic voices) តែងតែជួបប្រទះបញ្ហាកង្វះអង្គចងចាំ និងតម្រូវឱ្យមានប្រព័ន្ធសម្គាល់សំឡេងកម្រិតខ្ពស់ដែលពិបាករកសម្រាប់ភាសាមួយចំនួន។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1785\u17c2\u1784\u17af\u1780\u179f\u17b6\u179a\u179f\u17c6\u17a1\u17c1\u1784\u1792\u17c6\u17d7\u1780\u17d2\u1793\u17bb\u1784\u179f\u17c0\u179c\u1797\u17c5\u179f\u17c6\u17a1\u17c1\u1784\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u179f\u17c6\u17a1\u17c1\u1784\u179f\u17c6\u1799\u17c4\u1782",
+      "name": "Handling Large Audio Files in Audio Books for Building Synthetic Voices",
+      "description": "\u1780\u17b6\u179a\u1794\u17c6\u1794\u17c2\u1780\u17af\u1780\u179f\u17b6\u179a\u179f\u17c6\u17a1\u17c1\u1784\u1792\u17c6\u17d7 (Audio books) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179f\u17b6\u1784\u179f\u1784\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17c6\u17a1\u17c1\u1784\u179f\u17c6\u1799\u17c4\u1782 (Synthetic voices) \u178f\u17c2\u1784\u178f\u17c2\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1794\u1789\u17d2\u17a0\u17b6\u1780\u1784\u17d2\u179c\u17c7\u17a2\u1784\u17d2\u1782\u1785\u1784\u1785\u17b6\u17c6 \u1793\u17b7\u1784\u178f\u1798\u17d2\u179a\u17bc\u179c\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1781\u17d2\u1796\u179f\u17cb\u178a\u17c2\u179b\u1796\u17b7\u1794\u17b6\u1780\u179a\u1780\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6\u1798\u17bd\u1799\u1785\u17c6\u1793\u17bd\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/handling-large-audio-files-synthetic-voices.html",
+      "author": [{"@type": "Person", "name": "Kishore Prahallad (International Institute of Information Technology, Hyderabad, India / Carnegie Mellon University, USA)"},{"@type": "Person", "name": "Alan W Black (Carnegie Mellon University, USA)"}],
+      "datePublished": "circa 2009-2010",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Handling Large Audio Files in Audio Books for Building Synthetic Voices",
+        "url": "N/A"
+      },
+      "keywords": ["Forced-alignment", "Audio books", "Synthetic voices", "Text-to-speech", "Speech segmentation", "Acoustic models"],
+      "about": "Speech Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1785\u17c2\u1784\u17af\u1780\u179f\u17b6\u179a\u179f\u17c6\u17a1\u17c1\u1784\u1792\u17c6\u17d7\u1780\u17d2\u1793\u17bb\u1784\u179f\u17c0\u179c\u1797\u17c5\u179f\u17c6\u17a1\u17c1\u1784\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u179f\u17c6\u17a1\u17c1\u1784\u179f\u17c6\u1799\u17c4\u1782",
+          "item": "https://khmerresearch.com/papers/technology/handling-large-audio-files-synthetic-voices.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការចាត់ចែងឯកសារសំឡេងធំៗក្នុងសៀវភៅសំឡេងសម្រាប់ការបង្កើតសំឡេងសំយោគ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Handling Large Audio Files in Audio Books for Building Synthetic Voices<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការចាត់ចែងឯកសារសំឡេងធំៗក្នុងសៀវភៅសំឡេងសម្រាប់ការបង្កើតសំឡេងសំយោគ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Handling Large Audio Files in Audio Books for Building Synthetic Voices</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Kishore Prahallad (International Institute of Information Technology, Hyderabad, India / Carnegie Mellon University, USA), Alan W Black (Carnegie Mellon University, USA)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> circa 2009-2010</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Speech Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការបំបែកឯកសារសំឡេងធំៗ (Audio books) សម្រាប់សាងសង់ប្រព័ន្ធសំឡេងសំយោគ (Synthetic voices) តែងតែជួបប្រទះបញ្ហាកង្វះអង្គចងចាំ និងតម្រូវឱ្យមានប្រព័ន្ធសម្គាល់សំឡេងកម្រិតខ្ពស់ដែលពិបាករកសម្រាប់ភាសាមួយចំនួន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើងនូវការកែប្រែក្បួនដោះស្រាយ Forced-alignment ស្តង់ដារចំនួនពីរប្រភេទ (SFA-1 និង SFA-2) ដើម្បីបំបែកឯកសារសំឡេងដោយស្វ័យប្រវត្តិ។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសនៃសញ្ញាសំឡេង (Feature Extraction) និងការកសាងគំរូសូរស័ព្ទ (Acoustic models)</li>
+            
+            <li>ការកែប្រែក្បួនដោះស្រាយ Forced-alignment ដើម្បីអនុញ្ញាតឱ្យមានការបំបែកសេក្វង់កម្រិតខ្លីៗ (SFA-1 សម្រាប់បំណែក ១-៣០ វិនាទី និង SFA-2 សម្រាប់កម្រិតកថាខណ្ឌ)</li>
+            
+            <li>ការវាយតម្លៃដោយប្រើឯកសារសំឡេងសិប្បនិម្មិតរយៈពេល ៦៦ នាទី និងសំណុំទិន្នន័យ EMMA ទំហំ ១៧,៥ ម៉ោង ព្រមទាំងតេស្តគុណភាពសំឡេង (TTS evaluation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រ SFA-2 អាចចាប់យកចំណុចចាប់ផ្តើម និងបញ្ចប់នៃល្បះសំឡេងដោយមានភាពខុសគ្នាជាមធ្យមត្រឹមតែ ២៣ មិល្លីវិនាទី បើធៀបនឹងឯកសារដើម។</li>
+            
+            <li>សំឡេងសំយោគ (TTS) ដែលបង្កើតឡើងពីឯកសារបំបែកដោយ SFA-2 ទទួលបានពិន្ទុ Mel Cepstral Distortion (MCD) កម្រិត 5.04 ដែលល្អប្រហាក់ប្រហែលនឹងការប្រើប្រាស់ឯកសារដើម (5.27)។</li>
+            
+            <li>ការធ្វើតេស្តស្តាប់វាយតម្លៃ (DND listening test) បានបង្ហាញថា អ្នកស្តាប់ភាគច្រើនមិនអាចបែងចែកភាពខុសគ្នារវាងសំឡេងសំយោគដែលបង្កើតពីឯកសារ SFA-1/SFA-2 និងឯកសារដែលកាត់ដោយដៃឡើយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Standard Forced-Alignment (FA-0)</span></strong><br>ការតម្រឹមដោយបង្ខំតាមស្តង់ដារ</td>
+                <td>ផ្តល់ភាពត្រឹមត្រូវខ្ពស់ក្នុងការកំណត់ព្រំដែនសូរស័ព្ទ (Phone boundaries) សម្រាប់ឯកសារសំឡេងខ្លីៗ។</td>
+                <td>ទាមទារអង្គចងចាំធំខ្លាំង (ត្រូវការ RAM រហូតដល់ ៣៦GB សម្រាប់សំឡេង ៣០នាទី) ដែលធ្វើឱ្យបរាជ័យក្នុងការប្រើលើឯកសារសៀវភៅសំឡេងវែងៗ។</td>
+                <td>ទទួលបានពិន្ទុ MCD គោល (Baseline) 5.27 លើទិន្នន័យ RMS។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Segmentation using FA-1 (SFA-1)</span></strong><br>ការបំបែកឯកសារដោយប្រើ FA-1</td>
+                <td>អាចបំបែកឯកសារសំឡេងធំៗទៅជាបំណែកខ្លីៗ (៥-៣០ វិនាទី) ដោយមិនតម្រូវឱ្យមានប្រព័ន្ធសម្គាល់សំឡេងខ្នាតធំ (ASR)។</td>
+                <td>កាត់ផ្តាច់សំឡេងដោយមិនខ្វល់ពីរចនាសម្ព័ន្ធប្រយោគ ឬកថាខណ្ឌ ដែលធ្វើឱ្យបាត់បង់លក្ខណៈ Prosody ដើមនៃល្បះ។</td>
+                <td>ទទួលបានពិន្ទុ MCD 5.27 លើទិន្នន័យ RMS និង 5.09 លើទិន្នន័យ EMMA ព្រមទាំងបំបែកសំឡេងបានដោយជោគជ័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Segmentation using FA-2 (SFA-2)</span></strong><br>ការបំបែកឯកសារដោយប្រើ FA-2</td>
+                <td>អាចបំបែកឯកសារវែងៗទៅជាល្បះឬកថាខណ្ឌពេញលេញ ដែលរក្សាបាននូវចង្វាក់សំឡេង (Prosody) យ៉ាងល្អសម្រាប់ការកសាងប្រព័ន្ធ TTS។</td>
+                <td>ទាមទារឱ្យមានអត្ថបទ (Text transcription) ដែលត្រូវគ្នាតាមលំដាប់លំដោយជាមួយនឹងសៀវភៅសំឡេង។</td>
+                <td>មានភាពល្អៀងជាមធ្យមត្រឹមតែ ២៣ មិល្លីវិនាទីពីឯកសារដើម និងទទួលបានពិន្ទុ MCD 5.04 (EMMA) ព្រមទាំងផ្តល់លទ្ធផលស្តាប់មិនខុសពីឯកសារដើមឡើយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> វិធីសាស្ត្រថ្មីនេះកាត់បន្ថយការប្រើប្រាស់ធនធានកុំព្យូទ័រយ៉ាងច្រើន ដោយជៀសវាងការបម្រុងទុកអង្គចងចាំទំហំធំ (Memory Allocation) សម្រាប់ឯកសារសំឡេងវែងៗ។
+    
+    <ul>
+        
+        <li><strong>Hardware Memory (RAM):</strong> ដោះស្រាយបញ្ហាខ្វះអង្គចងចាំ ដោយមិនតម្រូវឱ្យមាន RAM ទំហំ ៣៦GB សម្រាប់ឯកសារសំឡេង ៣០នាទី ដូចក្បួនស្តង់ដារឡើយ។</li>
+        
+        <li><strong>Software & Algorithms:</strong> មិនត្រូវការប្រព័ន្ធសម្គាល់សំឡេងខ្នាតធំ (Large Vocabulary Speech Recognizer) ដែលសន្សំសំចៃពេលវេលានិងការស្រាវជ្រាវសម្រាប់ភាសាខ្វះខាតទិន្នន័យ។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការឯកសារសៀវភៅសំឡេងដែលថតដោយមនុស្សម្នាក់ក្នុងបរិយាកាសស្ងាត់ និងអត្ថបទសាច់រឿងដែលស៊ីគ្នា (ដូចជាប្រភពពី LibriVox)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យភាសាអង់គ្លេស (CMU ARCTIC និងសៀវភៅ EMMA ពី LibriVox) ដែលថតក្នុងស្ទូឌីយោគ្មានសំឡេងរំខាន។ សម្រាប់ប្រទេសកម្ពុជា នេះជាគំរូដ៏ល្អមួយ ព្រោះយើងអាចប្រមូលទិន្នន័យសំឡេងស្រដៀងគ្នានេះពីកម្មវិធីវិទ្យុ សៀវភៅធម៌ ឬរឿងនិទានខ្មែរ ដែលមានអ្នកអានច្បាស់លាស់ ដោយមិនបាច់បង្កើតទិន្នន័យថ្មីទាំងស្រុង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់និងស័ក្តិសមបំផុតសម្រាប់កម្ពុជា ពិសេសក្នុងការអភិវឌ្ឍប្រព័ន្ធបញ្ចេញសំឡេងភាសាខ្មែរ (Khmer Text-to-Speech) ក្នុងបរិបទខ្វះខាតធនធាន។</p>
+        
+        <ul>
+            
+            <li><strong>Khmer Audiobook Processing (បណ្ណាល័យជាតិ ឬសៀវភៅធម៌អូឌីយ៉ូ):</strong> អាចយកសៀវភៅសំឡេងអប់រំ ឬធម៌ទេសនាដែលមានស្រាប់រាប់រយម៉ោង មកបំបែកជាទិន្នន័យបណ្តុះបណ្តាល AI ដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>Low-Resource Language Research (វិទ្យាស្ថានស្រាវជ្រាវ CADT):</strong> អ្នកស្រាវជ្រាវមិនចាំបាច់រង់ចាំដល់ពេលមានប្រព័ន្ធទទួលស្គាល់សំឡេងខ្មែរ (Khmer ASR) ខ្នាតធំទើបអាចបំបែកឯកសារបាននោះទេ ដោយគ្រាន់តែកែប្រែក្បួន Forced-alignment នេះជាការស្រេច។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកទេសបំបែកសំឡេងតាមរយៈ SFA-2 គឺជាច្រកផ្លូវដ៏មានប្រសិទ្ធភាព និងចំណាយតិច ក្នុងការទាញយកប្រយោជន៍ពីឯកសារសំឡេងធំៗ ដើម្បីពន្លឿនការបង្កើតសំឡេង AI ភាសាខ្មែរ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Acoustic Modeling:</strong> និស្សិតត្រូវស្វែងយល់ពីរបៀបដំណើរការនៃការតម្រឹមដោយបង្ខំ (Forced-alignment) និង Hidden Markov Models (HMM) ដោយសាកល្បងប្រើប្រាស់ <span class="en">CMU Sphinx</span> ឬ <span class="en">Kaldi</span>។</li>
+            
+            <li><strong>ប្រមូលនិងរៀបចំទិន្នន័យសៀវភៅសំឡេងខ្មែរ:</strong> ស្វែងរកសៀវភៅសំឡេងភាសាខ្មែរដែលមានរយៈពេលវែង (ឧ. រឿងមហាភារតៈ ឬរឿងទុំទាវ) ព្រមទាំងទាញយកអត្ថបទជា text រួចសម្អាតទិន្នន័យទាំងនោះ។</li>
+            
+            <li><strong>អនុវត្តក្បួនដោះស្រាយ SFA-2:</strong> សរសេរកូដកែប្រែក្បួន <span class="en">Viterbi backtracking</span> ដោយកំណត់លក្ខខណ្ឌបញ្ឈប់នៅចុងបញ្ចប់នៃកថាខណ្ឌ (ដូចរៀបរាប់ក្នុងសមីការទី ៨ និង ៩ នៃឯកសារ) ដោយប្រើប្រាស់ភាសា <span class="en">Python</span> រួមជាមួយបណ្ណាល័យសំឡេង។</li>
+            
+            <li><strong>កសាងប្រព័ន្ធសំឡេងសំយោគភាសាខ្មែរ (Khmer TTS):</strong> ប្រើប្រាស់ទិន្នន័យដែលបានបំបែករួច បញ្ចូលទៅក្នុងឧបករណ៍កសាង TTS ដូចជា <span class="en">Festvox</span> ឬ <span class="en">CLUSTERGEN</span> ដើម្បីបង្កើតជាសំឡេង AI សាកល្បង។</li>
+            
+            <li><strong>វាយតម្លៃគុណភាពសំឡេង:</strong> ធ្វើការប្រៀបធៀបគុណភាពសំឡេងដែលទទួលបានដោយប្រើរង្វាស់គោលបំណង <span class="en">Mel Cepstral Distortion (MCD)</span> និងធ្វើតេស្តស្តាប់ផ្ទាល់ (Perceptual listening test) ជាមួយអ្នកនិយាយភាសាខ្មែរ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Forced-Alignment</span></td>
+                <td>វាជាដំណើរការកុំព្យូទ័រក្នុងការផ្គូផ្គងសញ្ញាសំឡេងទៅនឹងអត្ថបទដែលបានសរសេរ (Text Transcriptions) ដោយស្វ័យប្រវត្តិ ដើម្បីកំណត់ព្រំដែនពេលវេលាចាប់ផ្តើមនិងបញ្ចប់នៃសូរស័ព្ទ (Phonemes) ឬពាក្យនីមួយៗនៅក្នុងឯកសារសំឡេង។</td>
+                <td>ដូចជាការយកអក្សររត់ (Subtitles) ទៅតម្រឹមឱ្យចំវិនាទីនៃពាក្យដែលតួអង្គកំពុងនិយាយក្នុងវីដេអូយ៉ាងសុក្រឹត ដើម្បីឱ្យដឹងថាពាក្យមួយណានិយាយនៅវិនាទីទីប៉ុន្មាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Models (HMM)</span></td>
+                <td>វាជាម៉ូដែលស្ថិតិគណិតវិទ្យាដែលប្រើសម្រាប់ទស្សន៍ទាយលំដាប់លំដោយនៃព្រឹត្តិការណ៍ដែលយើងមើលមិនឃើញ (Hidden states, ឧ. សូរស័ព្ទ) ដោយផ្អែកលើទិន្នន័យដែលយើងអាចសង្កេតបាន (Observations, ឧ. រលកសំឡេងកាត់ជាកង់ៗ) ដែលវាដើរតួជាឆ្អឹងខ្នងក្នុងការសម្គាល់សម្លេង។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាអាកាសធាតុម្សិលមិញភ្លៀងឬអត់ ដោយគ្រាន់តែសង្កេតមើលថាតើមនុស្សពាក់អាវភ្លៀងឬអត់នៅថ្ងៃនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mel Cepstral Distortion (MCD)</span></td>
+                <td>វាជារង្វាស់គោលបំណង (Objective measure) សម្រាប់វាយតម្លៃគុណភាពនៃសំឡេងសំយោគ (AI Voice) ដោយគណនាគម្លាតខុសគ្នារវាងរលកសំឡេងដែលបង្កើតដោយកុំព្យូទ័រ និងរលកសំឡេងដើមរបស់មនុស្សពិតប្រាកដ។ តួលេខកាន់តែតូច បង្ហាញថាសំឡេងកាន់តែមានគុណភាពល្អ។</td>
+                <td>ដូចជាការដាក់ពិន្ទុថាគំនូរចម្លងមួយផ្ទាំងដូចទៅនឹងរូបថតដើមប៉ុនណា ដោយប្រើប្រាស់ម៉ាស៊ីនស្កេនពណ៌ និងរង្វាស់ប្រវែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi backtracking</span></td>
+                <td>វាក្បួនដោះស្រាយគណិតវិទ្យាក្នុងការតាមដានត្រឡប់ថយក្រោយ ដើម្បីស្វែងរកផ្លូវ ឬលំដាប់លំដោយនៃសូរស័ព្ទដែលមានប្រូបាប៊ីលីតេខ្ពស់បំផុត (Most likely sequence) បន្ទាប់ពីកុំព្យូទ័របានគណនា និងប្រមូលទិន្នន័យពីដើមដល់ចប់។</td>
+                <td>ដូចជាកម្មវិធី Google Maps ដែលគណនា និងរើសយកផ្លូវដែលលឿនបំផុតនិងល្អបំផុតដើម្បីទៅដល់គោលដៅ ក្នុងចំណោមជម្រើសផ្លូវរាប់ពាន់ដែលវាបានមើលទុក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Prosody</span></td>
+                <td>វាគឺជាលក្ខណៈនៃចង្វាក់ ការលើកដាក់សំឡេង (Intonation) កម្រិតខ្លាំងខ្សោយ និងសង្កត់ន័យនៅក្នុងការនិយាយ ដែលធ្វើឱ្យការបញ្ចេញសំឡេងរបស់ប្រព័ន្ធកុំព្យូទ័រមានលក្ខណៈធម្មជាតិដូចមនុស្ស និងមានមនោសញ្ចេតនា មិនស្តាប់ទៅរឹងៗដូចរ៉ូបូត។</td>
+                <td>ដូចជាការឡើងចុះនៃសម្លេងពេលយើងសួរថា "ទៅណា?" (សម្លេងឡើងចុងប្រយោគ) ធៀបនឹងការឆ្លើយថា "ទៅទីនោះ" (សម្លេងរាបស្មើ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Acoustic models</span></td>
+                <td>វាគឺជាឯកសារទិន្នន័យដែលកុំព្យូទ័របានរៀន និងផ្ទុកនូវលក្ខណៈស្តង់ដារនៃសូរស័ព្ទនីមួយៗ (Phones) ដើម្បីយកទៅប្រើប្រាស់ជាគោលក្នុងការប្រៀបធៀប ទទួលស្គាល់ ឬបង្កើតសំឡេងថ្មីៗ។</td>
+                <td>ដូចជាវចនានុក្រមសំឡេងនៅក្នុងខួរក្បាលកុំព្យូទ័រ ដែលប្រាប់វាថាអក្សរ "ក" ត្រូវបញ្ចេញសំឡេងរំញ័រយ៉ាងដូចម្តេចតាមលក្ខណៈរូបវិទ្យា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mel-Frequency filters</span></td>
+                <td>វាជាតម្រងកែច្នៃរលកសញ្ញាដែលយកមកត្រងសញ្ញាសំឡេង ដើម្បីទាញយកលក្ខណៈពិសេស (Feature extraction) ដោយវាត្រាប់តាមរបៀបដែលត្រចៀកមនុស្សទទួលដឹង (ស្រូបយកញឹកញាប់នៃប្រេកង់ទាបៗបានល្អជាងប្រេកង់ខ្ពស់) ដើម្បីឱ្យកុំព្យូទ័រអាចវិភាគសំឡេងបានងាយស្រួល។</td>
+                <td>ដូចជាការបំពាក់វ៉ែនតាចម្រោះពន្លឺ ដើម្បីឱ្យកុំព្យូទ័រអាចមើលឃើញពណ៌ផ្សេងៗក្នុងកម្រិតពន្លឺដូចគ្នាទៅនឹងភ្នែករបស់មនុស្សដែរ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-selection-adaptation-hmm-speech-synthesis-2016.html">
+                    <span class="km">ការជ្រើសរើស និងបន្សាំទិន្នន័យដើម្បីភាពធម្មជាតិក្នុងការសំយោគសំឡេងផ្អែកលើ HMM</span><br>
+                    <span class="en article-original-title">Data Selection and Adaptation for Naturalness in HMM-based Speech Synthesis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-selection-naturalness-hmm-speech-synthesis-2016.html">
+                    <span class="km">ការជ្រើសរើសទិន្នន័យសម្រាប់ភាពធម្មជាតិនៃការសំយោគសំឡេងដោយផ្អែកលើ HMM</span><br>
+                    <span class="en article-original-title">Data Selection for Naturalness in HMM-based Speech Synthesis</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=forced+alignment%22+%22long+audio+files%22+memory+optimization+speech+recognition" target="_blank" rel="noopener"><span class="en">forced alignment" "long audio files" memory optimization speech recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=text-to-speech%22+OR+TTS+paragraph+level+prosody+modeling" target="_blank" rel="noopener"><span class="en">text-to-speech" OR TTS paragraph level prosody modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Viterbi+backtracking+algorithm+modification+sequence+alignment" target="_blank" rel="noopener"><span class="en">Viterbi backtracking algorithm modification sequence alignment</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Mel+Cepstral+Distortion+%28MCD%29+objective+evaluation+metric+synthetic+speech" target="_blank" rel="noopener"><span class="en">Mel Cepstral Distortion (MCD) objective evaluation metric synthetic speech</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=building+acoustic+models+low+resource+languages+audiobooks" target="_blank" rel="noopener"><span class="en">building acoustic models low resource languages audiobooks</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

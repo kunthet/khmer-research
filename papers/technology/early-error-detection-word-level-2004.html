@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរកឃើញកំហុសពីដំបូងនៅកម្រិតពាក្យ - Early error detection on word level | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការរកឃើញកំហុសពីដំបូងនៅកម្រិតពាក្យ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការរកឃើញកំហុសពីដំបូងនៅក្នុងប្រព័ន្ធសម្គាល់សំឡេងដោយស្វ័យប្រវត្តិ (ASR) នៅកម...">
+    
+    <meta name="keywords" content="Speech recognition, Error detection, Machine learning, Spoken dialogue systems, Word confidence scores, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/early-error-detection-word-level-2004.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/early-error-detection-word-level-2004.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/early-error-detection-word-level-2004.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/early-error-detection-word-level-2004.html">
+    <meta property="og:title" content="ការរកឃើញកំហុសពីដំបូងនៅកម្រិតពាក្យ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរកឃើញកំហុសពីដំបូងនៅក្នុងប្រព័ន្ធសម្គាល់សំឡេងដោយស្វ័យប្រវត្តិ (ASR) នៅកម្រិតពាក្យ ដើម្បីការពារការយល់ច្រឡំ និងកែលម្អប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2004 ISCA Tutorial and Research Workshop on Robustness Issues in Conversational Interaction">
+    
+    <meta property="article:tag" content="Speech recognition">
+    
+    <meta property="article:tag" content="Error detection">
+    
+    <meta property="article:tag" content="Machine learning">
+    
+    <meta property="article:tag" content="Spoken dialogue systems">
+    
+    <meta property="article:tag" content="Word confidence scores">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរកឃើញកំហុសពីដំបូងនៅកម្រិតពាក្យ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរកឃើញកំហុសពីដំបូងនៅក្នុងប្រព័ន្ធសម្គាល់សំឡេងដោយស្វ័យប្រវត្តិ (ASR) នៅកម្រិតពាក្យ ដើម្បីការពារការយល់ច្រឡំ និងកែលម្អប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17c6\u17a0\u17bb\u179f\u1796\u17b8\u178a\u17c6\u1794\u17bc\u1784\u1793\u17c5\u1780\u1798\u17d2\u179a\u17b7\u178f\u1796\u17b6\u1780\u17d2\u1799",
+      "name": "Early error detection on word level",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17c6\u17a0\u17bb\u179f\u1796\u17b8\u178a\u17c6\u1794\u17bc\u1784\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 (ASR) \u1793\u17c5\u1780\u1798\u17d2\u179a\u17b7\u178f\u1796\u17b6\u1780\u17d2\u1799 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17b6\u179a\u1796\u17b6\u179a\u1780\u17b6\u179a\u1799\u179b\u17cb\u1785\u17d2\u179a\u17a1\u17c6 \u1793\u17b7\u1784\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178a\u17c4\u1799\u179f\u17c6\u17a1\u17c1\u1784 (Spoken Dialogue Systems) \u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/early-error-detection-word-level-2004.html",
+      "author": [{"@type": "Person", "name": "Gabriel Skantze (CTT, KTH, Sweden)"},{"@type": "Person", "name": "Jens Edlund (CTT, KTH, Sweden)"}],
+      "datePublished": "2004 ISCA Tutorial and Research Workshop on Robustness Issues in Conversational Interaction",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Early error detection on word level",
+        "url": "http://www.isca-speech.org/archive"
+      },
+      "keywords": ["Speech recognition", "Error detection", "Machine learning", "Spoken dialogue systems", "Word confidence scores"],
+      "about": "Computer Science / Speech Recognition"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17c6\u17a0\u17bb\u179f\u1796\u17b8\u178a\u17c6\u1794\u17bc\u1784\u1793\u17c5\u1780\u1798\u17d2\u179a\u17b7\u178f\u1796\u17b6\u1780\u17d2\u1799",
+          "item": "https://khmerresearch.com/papers/technology/early-error-detection-word-level-2004.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរកឃើញកំហុសពីដំបូងនៅកម្រិតពាក្យ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Early error detection on word level<br>
+        
+        <strong>Source:</strong> <a href="http://www.isca-speech.org/archive" target="_blank">www.isca-speech.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរកឃើញកំហុសពីដំបូងនៅកម្រិតពាក្យ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Early error detection on word level</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Gabriel Skantze (CTT, KTH, Sweden), Jens Edlund (CTT, KTH, Sweden)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2004 ISCA Tutorial and Research Workshop on Robustness Issues in Conversational Interaction</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Speech Recognition</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការរកឃើញកំហុសពីដំបូងនៅក្នុងប្រព័ន្ធសម្គាល់សំឡេងដោយស្វ័យប្រវត្តិ (ASR) នៅកម្រិតពាក្យ ដើម្បីការពារការយល់ច្រឡំ និងកែលម្អប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះត្រូវបានបែងចែកជាពីរការសិក្សា ដោយរួមបញ្ចូលការប្រើប្រាស់បច្ចេកវិទ្យារៀនរបស់ម៉ាស៊ីន (Machine Learning) និងការធ្វើតេស្តលើមនុស្សផ្ទាល់ដើម្បីវាយតម្លៃកត្តាដែលជួយក្នុងការរកឃើញកំហុស។
+        
+        <ul>
+            
+            <li>ការរៀនរបស់ម៉ាស៊ីន (Machine Learning): ប្រើប្រាស់ក្បួនដោះស្រាយ µ-TBL និង TiMBL ដើម្បីស្វែងរកកំហុស ដោយផ្អែកលើពិន្ទុទំនុកចិត្ត វាក្យសព្ទ និងបរិបទសន្ទនា។</li>
+            
+            <li>ការរកឃើញកំហុសដោយមនុស្ស (Human Error Detection): ពិសោធន៍ជាមួយមនុស្សដោយផ្តល់នូវព័ត៌មានពី ASR ដូចជាបញ្ជីពាក្យដែលល្អបំផុតទាំង៥ (N-best lists) និងពិន្ទុទំនុកចិត្ត (Confidence scores) ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលរៀនរបស់ម៉ាស៊ីន µ-TBL ដំណើរការបានល្អបំផុតក្នុងអត្រា ៨៥.១% ដែលប្រសើរជាងកម្រិតគោល (Baseline) ចំនួន ១១.៩% នៅពេលប្រើប្រាស់លក្ខណៈពិសេសទាំងអស់រួមបញ្ចូលគ្នា។</li>
+            
+            <li>ពិន្ទុទំនុកចិត្តលើពាក្យ (Word confidence scores) គឺជាកត្តាដ៏មានប្រយោជន៍បំផុតសម្រាប់ការរកឃើញកំហុសពីដំបូង ខណៈដែលព័ត៌មានវាក្យសព្ទ និងបរិបទជួយបង្កើនប្រសិទ្ធភាពបន្ថែមទៀត។</li>
+            
+            <li>សម្រាប់មនុស្ស ការប្រើប្រាស់បញ្ជី N-best ផ្តល់លទ្ធផលល្អជាងការពឹងផ្អែកលើពិន្ទុទំនុកចិត្តតែមួយមុខ ហើយបរិបទសន្ទនាភ្លាមៗ (Immediate context) គឺគ្រប់គ្រាន់សម្រាប់ការរកឃើញកំហុសដោយមិនត្រូវការបរិបទសន្ទនាទាំងមូលឡើយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Transformation-Based Learning (µ-TBL)</span></strong><br>ការរៀនរបស់ម៉ាស៊ីនដោយផ្អែកលើការបំប្លែង</td>
+                <td>អាចបង្កើតវិធាន (Rules) ដែលងាយស្រួលយល់ និងអាចជួយអ្នកអភិវឌ្ឍន៍ស្វែងរកប្រភពនៃកំហុសនៅក្នុងម៉ូដែលភាសា និងសំឡេងបានច្បាស់លាស់។ ផ្តល់លទ្ធផលល្អបំផុតក្នុងការធ្វើតេស្តជាមួយលក្ខណៈពិសេសទាំងអស់។</td>
+                <td>មិនអាចស្វែងរកកម្រិតកំណត់ (Thresholds) ដោយស្វ័យប្រវត្តិសម្រាប់តម្លៃលេខបានទេ (ឧទាហរណ៍ ពិន្ទុទំនុកចិត្ត) ដែលតម្រូវឱ្យមានការបែងចែកជាចន្លោះៗដោយដៃ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៨៥.១% ក្នុងការរកឃើញកំហុសកម្រិតពាក្យ (ខ្ពស់ជាងកម្រិតគោល ១១.៩%)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Memory-Based Learning (TiMBL)</span></strong><br>ការរៀនរបស់ម៉ាស៊ីនដោយផ្អែកលើអង្គចងចាំ</td>
+                <td>មានសមត្ថភាពគណនាចម្ងាយសម្រាប់តម្លៃលេខបានល្អប្រសើរ និងផ្តល់លទ្ធផលប្រកៀកប្រកិតទៅនឹង µ-TBL ដែរ។</td>
+                <td>ទាមទារការកំណត់តម្លៃ k ផ្សេងៗគ្នាអាស្រ័យលើសំណុំលក្ខណៈពិសេស (Feature sets) ហើយមិនផ្តល់ជាវិធានងាយស្រួលអានដូច µ-TBL នោះទេ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៨៤.១% ជាមួយនឹងការប្រើប្រាស់លក្ខណៈពិសេសទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Baseline (All tags TRUE)</span></strong><br>កម្រិតគោល (ចាត់ទុកពាក្យទាំងអស់ថាត្រឹមត្រូវ)</td>
+                <td>ងាយស្រួលបំផុត មិនតម្រូវឱ្យមានការគណនាស្មុគស្មាញ ឬការបង្វឹកម៉ូដែលឡើយ។</td>
+                <td>មិនអាចរកឃើញកំហុសទាល់តែសោះ វាគ្រាន់តែជាបន្ទាត់គោលសម្រាប់វាស់ស្ទង់ប្រសិទ្ធភាពនៃវិធីសាស្ត្រផ្សេងទៀតប៉ុណ្ណោះ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៧៣.២% ផ្អែកលើអត្រានៃពាក្យដែលត្រឹមត្រូវពិតប្រាកដក្នុងទិន្នន័យ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីទំហំធនធានកុំព្យូទ័រទេ ប៉ុន្តែផ្អែកលើក្បួនដោះស្រាយ វិធីសាស្ត្រនេះតម្រូវឱ្យមានការរៀបចំទិន្នន័យច្បាស់លាស់ និងធនធានកុំព្យូទ័រកម្រិតមធ្យមសម្រាប់ការបង្វឹកម៉ូដែល។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យសន្ទនាដែលមានកម្រិតកំហុសការសម្គាល់សំឡេងខ្ពស់ (Word Error Rate ប្រហែល ៤២%) រួមទាំងអត្ថបទប្រតិចារឹកពិតប្រាកដ (Transcriptions)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី ឬកញ្ចប់កូដសម្រាប់ដំណើរការម៉ូដែល µ-TBL និង TiMBL ព្រមទាំងកម្មវិធីសម្រាប់តម្រឹមអត្ថបទ (Alignment tools ដូចជាអប្បបរមាចម្ងាយកែសម្រួល ឬ Minimum edit distance)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកភាសាវិទ្យាកុំព្យូទ័រ (Computational Linguistics) ដើម្បីទាញយកលក្ខណៈពិសេសដូចជា ប្រភេទពាក្យ (Part-of-speech) ចំនួនព្យាង្គ និងការវិភាគបរិបទសន្ទនា។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងប្រទេសស៊ុយអែត ដោយប្រើប្រាស់អ្នកចូលរួមចំនួន ១៦ នាក់ និងទិន្នន័យជាភាសាស៊ុយអែតក្នុងបរិបទនៃការណែនាំផែនទី (Map-Task corpus)។ សម្រាប់ប្រទេសកម្ពុជា នេះជាបញ្ហាប្រឈមមួយ ដោយសារភាសាខ្មែរមានទម្រង់វេយ្យាករណ៍ វាក្យសព្ទ និងបរិបទខុសគ្នាស្រឡះ ដែលទាមទារឱ្យមានការប្រមូលទិន្នន័យសន្ទនាជាភាសាខ្មែរដែលមានលក្ខណៈតំណាង និងចម្រុះជាមុនសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការរកឃើញកំហុសពីដំបូងនេះមានសារៈសំខាន់ និងអាចយកមកអនុវត្តបានយ៉ាងល្អសម្រាប់ការអភិវឌ្ឍប្រព័ន្ធ AI ស្គាល់សំឡេងភាសាខ្មែរ។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធបម្រើសេវាអតិថិជនស្វ័យប្រវត្តិ (Call Center AI) នៅធនាគារក្នុងកម្ពុជា:</strong> អាចប្រើប្រាស់បច្ចេកទេសនេះដើម្បីដឹងថាពាក្យគន្លឹះណាដែលប្រព័ន្ធស្តាប់ខុស ជួយឱ្យ AI អាចសួរបញ្ជាក់អតិថិជនវិញ ជំនួសឱ្យការធ្វើប្រតិបត្តិការខុសឆ្គង។</li>
+            
+            <li><strong>កម្មវិធីបំប្លែងសំឡេងទៅជាអត្ថបទ (Voice-to-Text Transcription) សម្រាប់ស្ថាប័នរដ្ឋ:</strong> ការប្រើប្រាស់ពិន្ទុទំនុកចិត្ត (Confidence scores) អាចជួយរំលេចពាក្យដែលមិនច្បាស់លាស់ ឱ្យមន្ត្រីងាយស្រួលក្នុងការផ្ទៀងផ្ទាត់ និងកែសម្រួលឯកសារផ្លូវការ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់បន្សំនៃពិន្ទុទំនុកចិត្ត និងបរិបទវាក្យសព្ទ នឹងជួយកាត់បន្ថយការយល់ច្រឡំ និងបង្កើនទំនុកចិត្តក្នុងការប្រើប្រាស់ប្រព័ន្ធសន្ទនាដោយសំឡេងនៅក្នុងប្រទេសកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាអំពីបច្ចេកវិទ្យាសម្គាល់សំឡេង (Understand ASR Outputs):</strong> ស្វែងយល់ពីរបៀបដែលប្រព័ន្ធ ASR បញ្ចេញទិន្នន័យ ដោយសាកល្បងទាញយក Word Confidence Scores និង N-best lists ពីប្រព័ន្ធកូដបើកចំហដូចជា <span class="en">Kaldi</span> ឬ <span class="en">Wav2Vec2</span>។</li>
+            
+            <li><strong>ប្រមូល និងតម្រឹមទិន្នន័យភាសាខ្មែរ (Collect & Align Data):</strong> ប្រមូលទិន្នន័យសំឡេងសន្ទនាភាសាខ្មែរ និងអត្ថបទប្រតិចារឹកពិតប្រាកដ រួចប្រើប្រាស់ក្បួន <span class="en">Minimum Edit Distance</span> ដើម្បីតម្រឹម (Align) និងចាត់ថ្នាក់ពាក្យនីមួយៗថា ត្រឹមត្រូវ (TRUE) ឬ ខុស (FALSE)។</li>
+            
+            <li><strong>រៀបចំលក្ខណៈពិសេសនៃទិន្នន័យ (Feature Engineering):</strong> បង្កើតសំណុំលក្ខណៈពិសេសសម្រាប់ពាក្យនីមួយៗ ដោយប្រើប្រាស់ឧបករណ៍វិភាគភាសាខ្មែរដើម្បីទាញយក <span class="en">Part-of-Speech (POS) tags</span> កំណត់ថាតើវាជាពាក្យខ្លឹមសារ (Content word) និងទាញយកបរិបទនៃពាក្យមុនៗ។</li>
+            
+            <li><strong>បង្វឹកម៉ូដែល Machine Learning (Train ML Models):</strong> ប្រើប្រាស់បណ្ណាល័យដូចជា <span class="en">Scikit-learn</span> ដើម្បីបង្វឹកម៉ូដែលចំណាត់ថ្នាក់ដូចជា k-NN (ស្រដៀងនឹង TiMBL) ឬ Decision Trees ដើម្បីព្យាករណ៍រកពាក្យដែលមានកំហុស ដោយផ្អែកលើលក្ខណៈពិសេសដែលបានរៀបចំរួច។</li>
+            
+            <li><strong>វាយតម្លៃ និងស្វែងរកចំណុចខ្សោយ (Evaluate & Pinpoint Errors):</strong> ប្រៀបធៀបលទ្ធផលជាមួយកម្រិតគោល (Baseline) និងទាញយកវិធាន (Rules) ពីម៉ូដែល ដើម្បីស្វែងយល់ថាប្រភេទពាក្យខ្មែរណាខ្លះដែល ASR ឧស្សាហ៍ស្តាប់ខុស ដើម្បីយកទៅកែលម្អ <span class="en">Language Model</span> ដើមវិញ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Automatic speech recognition (ASR)</span></td>
+                <td>បច្ចេកវិទ្យាដែលអនុញ្ញាតឱ្យកុំព្យូទ័រស្តាប់ និងបំប្លែងភាសានិយាយរបស់មនុស្សទៅជាអត្ថបទ (Text) ដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាលេខាដែលអង្គុយស្តាប់ចៅហ្វាយនិយាយ រួចសរសេររាល់ពាក្យសម្តីនោះចូលក្នុងក្រដាស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word confidence score</span></td>
+                <td>ពិន្ទុដែលប្រព័ន្ធសម្គាល់សំឡេង (ASR) ផ្តល់ឱ្យពាក្យនីមួយៗ ដើម្បីបង្ហាញពីកម្រិតភាគរយនៃភាពប្រាកដប្រជាថាវាពិតជាស្តាប់បានត្រឹមត្រូវ។</td>
+                <td>ដូចជាពេលយើងប្រាប់មិត្តភក្តិថា "ខ្ញុំជឿជាក់ ៩០% ថាគាត់និយាយពាក្យនេះ" អញ្ចឹងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">N-best lists</span></td>
+                <td>បញ្ជីនៃជម្រើសពាក្យ ឬប្រយោគកំពូលៗទាំង N (ឧទាហរណ៍ ៥ ជម្រើស) ដែលប្រព័ន្ធសម្គាល់សំឡេងបញ្ចេញមក ដោយសន្មតថាជាចម្លើយដែលអាចត្រឹមត្រូវបំផុតបន្ទាប់ពីវិភាគរួច។</td>
+                <td>ដូចជាវិញ្ញាសាប្រឡងពហុជ្រើសរើស (Multiple choice) ដែលម៉ាស៊ីនរាយជម្រើសចម្លើយ A, B, C, D, E ដែលវាគិតថាសមស្របបំផុតមកឱ្យយើងជ្រើសរើស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transformation-based learning</span></td>
+                <td>វិធីសាស្ត្ររៀនរបស់ម៉ាស៊ីន (Machine Learning) ដែលរៀនបង្កើតវិធាន (Rules) ជាបន្តបន្ទាប់ ដើម្បីកែប្រែទិន្នន័យពីស្ថានភាពដើមទៅរកលទ្ធផលដែលត្រឹមត្រូវបំផុត។</td>
+                <td>ដូចជាជាងកាត់ដេរដែលកែសម្លៀកបំពាក់បន្តិចម្តងៗ (កាត់ទីនេះបន្តិច ដេរទីនោះបន្តិច) រហូតដល់វាស័ក្តិសមឥតខ្ចោះជាមួយរាងកាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Memory-based learning</span></td>
+                <td>វិធីសាស្ត្ររៀនរបស់ម៉ាស៊ីនដោយផ្អែកលើអង្គចងចាំ ដែលរក្សាទុកទិន្នន័យចាស់ៗទាំងអស់ រួចប្រៀបធៀបទិន្នន័យថ្មីទៅនឹងអ្វីដែលវាធ្លាប់ជួបពីមុនដើម្បីធ្វើការសម្រេចចិត្ត (ស្គាល់ថាជា Instance-based learning)។</td>
+                <td>ដូចជាគ្រូពេទ្យដែលវិនិច្ឆ័យជំងឺរបស់អ្នកជំងឺថ្មីម្នាក់ ដោយប្រៀបធៀបរោគសញ្ញារបស់គាត់ទៅនឹងអ្នកជំងឺមុនៗដែលលោកគ្រូពេទ្យធ្លាប់បានព្យាបាលកន្លងមក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Wizard of Oz set-up</span></td>
+                <td>ទម្រង់នៃការពិសោធន៍ដែលអ្នកប្រើប្រាស់ជឿថាពួកគេកំពុងធ្វើអន្តរកម្មជាមួយប្រព័ន្ធកុំព្យូទ័រស្វ័យប្រវត្តិ ប៉ុន្តែការពិតគឺមានមនុស្សជាអ្នកលាក់ខ្លួនបញ្ជាប្រព័ន្ធនោះនៅពីក្រោយ។</td>
+                <td>ដូចជាការលេងអាយ៉ង ដែលទស្សនិកជនមើលឃើញតែតុក្កតានិយាយនិងធ្វើចលនា តែមិនឃើញមនុស្សដែលជាអ្នកទាញខ្សែនៅពីក្រោយវាំងននឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Minimum edit distance</span></td>
+                <td>ក្បួនគណនាគណិតវិទ្យាដើម្បីរកមើលថាតើត្រូវធ្វើប្រតិបត្តិការកែប្រែ លុប ឬបន្ថែមអក្សរប៉ុន្មានដង ដើម្បីបំប្លែងខ្សែអក្សរមួយទៅជាខ្សែអក្សរមួយទៀត (ជាទូទៅប្រើដើម្បីវាស់កម្រិតកំហុស)។</td>
+                <td>ដូចជារាប់ចំនួនដងដែលអ្នកត្រូវប្រើជ័រលុបនិងខ្មៅដៃ ដើម្បីកែពាក្យដែលសរសេរខុស ឱ្យទៅជាពាក្យត្រឹមត្រូវវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bigram language model</span></td>
+                <td>ម៉ូដែលភាសាដែលព្យាករណ៍ប្រូបាប៊ីលីតេនៃពាក្យបន្ទាប់ ដោយពឹងផ្អែកតែលើការវិភាគពាក្យមួយម៉ាត់គត់ដែលនៅជាប់ពីមុខវាដោយផ្ទាល់។</td>
+                <td>ដូចជាការទាយពាក្យដែលមិត្តភក្តិនឹងនិយាយបន្ទាប់ ដោយផ្អែកលើពាក្យចុងក្រោយបង្អស់ដែលគេទើបនឹងនិយាយចេញពីមាត់ប៉ុណ្ណោះ ដោយមិនខ្វល់ពីសាច់រឿងមុនៗ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/speech-recognition-confidence-scores-dialogue-2003.html">
+                    <span class="km">ការប្រើប្រាស់ពិន្ទុទំនុកចិត្តនៃការសម្គាល់សំឡេងនៅក្នុងប្រព័ន្ធសន្ទនា</span><br>
+                    <span class="en article-original-title">The use of speech recognition confidence scores in dialogue systems</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/designing-confirmation-mechanisms-railway-spanish.html">
+                    <span class="km">ការរចនាយន្តការបញ្ជាក់ និងបច្ចេកទេសសង្គ្រោះកំហុសនៅក្នុងប្រព័ន្ធព័ត៌មានផ្លូវដែកសម្រាប់ភាសាអេស្ប៉ាញ</span><br>
+                    <span class="en article-original-title">Designing Confirmation Mechanisms and Error Recover Techniques in a Railway Information System for Spanish</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/new-word-confidence-threshold-technique-1998.html">
+                    <span class="km">បច្ចេកទេសកម្រិតទំនុកចិត្តពាក្យថ្មី ដើម្បីលើកកម្ពស់ដំណើរការនៃប្រព័ន្ធសន្ទនាដោយសំឡេង</span><br>
+                    <span class="en article-original-title">A NEW WORD-CONFIDENCE THRESHOLD TECHNIQUE TO ENHANCE THE PERFORMANCE OF SPOKEN DIALOGUE SYSTEMS</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/probabilistic-model-human-computer-dialogue-pomdp-2003.html">
+                    <span class="km">គំរូប្រូបាប៊ីលីតេនៃកិច្ចសន្ទនារវាងមនុស្ស/កុំព្យូទ័រ ជាមួយនឹងការអនុវត្តទៅលើដំណើរការសម្រេចចិត្តម៉ាកូវដែលអាចសង្កេតបានដោយផ្នែក</span><br>
+                    <span class="en article-original-title">A Probabilistic Model of Human/Computer Dialogue with Application to a Partially Observable Markov Decision Process</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/human-speech-processing-pedestrian-assistance-2014.html">
+                    <span class="km">ដំណើរការនិយាយរបស់មនុស្សសម្រាប់ជំនួយដល់អ្នកថ្មើរជើង៖ ឆ្ពោះទៅរកការដោះស្រាយកំហុសនៃការយល់ដឹងនៅក្នុងប្រព័ន្ធសន្ទនាតាមការនិយាយ</span><br>
+                    <span class="en article-original-title">Human Speech Processing for Pedestrian Assistance: Towards Cognitive Error Handling in Spoken Dialogue Systems</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=early+error+detection%22+%22automatic+speech+recognition%22+machine+learning" target="_blank" rel="noopener"><span class="en">early error detection" "automatic speech recognition" machine learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=word+confidence+scores%22+ASR+post-processing+NLP" target="_blank" rel="noopener"><span class="en">word confidence scores" ASR post-processing NLP</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=transformation-based+learning%22+OR+%22memory-based+learning%22+speech+error+detection" target="_blank" rel="noopener"><span class="en">transformation-based learning" OR "memory-based learning" speech error detection</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=error+recovery+strategies+%22spoken+dialogue+systems" target="_blank" rel="noopener"><span class="en">error recovery strategies "spoken dialogue systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=incorporating+discourse+context+into+ASR+%22N-best+lists" target="_blank" rel="noopener"><span class="en">incorporating discourse context into ASR "N-best lists</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

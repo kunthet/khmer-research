@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>SIEL: ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាពនៅក្នុងការវាយតម្លៃ - SIEL: Aspect Based Sentiment Analysis in Reviews | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី SIEL: ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាពនៅក្នុងការវាយតម្លៃ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព (Aspect-based Sentiment Analysis) ដើម្ប...">
+    
+    <meta name="keywords" content="Aspect Based Sentiment Analysis, SemEval-2015, Machine Learning, Ensemble Learning, Opinion Target Expression, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/siel-aspect-based-sentiment-analysis-2015.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/siel-aspect-based-sentiment-analysis-2015.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/siel-aspect-based-sentiment-analysis-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/siel-aspect-based-sentiment-analysis-2015.html">
+    <meta property="og:title" content="SIEL: ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាពនៅក្នុងការវាយតម្លៃ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព (Aspect-based Sentiment Analysis) ដើម្បីកំណត់ប្រភេទនៃទិដ្ឋភាព និងកម្រិតមនោសញ្ចេតនាដែលបានបញ្ចេញនៅក្នុងអត្ថបទវាយតម្លៃរបស់អតិថិជនលើភោជនីយដ្ឋាន។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015 SemEval">
+    
+    <meta property="article:tag" content="Aspect Based Sentiment Analysis">
+    
+    <meta property="article:tag" content="SemEval-2015">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Ensemble Learning">
+    
+    <meta property="article:tag" content="Opinion Target Expression">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="SIEL: ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាពនៅក្នុងការវាយតម្លៃ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព (Aspect-based Sentiment Analysis) ដើម្បីកំណត់ប្រភេទនៃទិដ្ឋភាព និងកម្រិតមនោសញ្ចេតនាដែលបានបញ្ចេញនៅក្នុងអត្ថបទវាយតម្លៃរបស់អតិថិជនលើភោជនីយដ្ឋាន។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "SIEL: \u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3",
+      "name": "SIEL: Aspect Based Sentiment Analysis in Reviews",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796 (Aspect-based Sentiment Analysis) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17c6\u178e\u178f\u17cb\u1794\u17d2\u179a\u1797\u17c1\u1791\u1793\u17c3\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796 \u1793\u17b7\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u178a\u17c2\u179b\u1794\u17b6\u1793\u1794\u1789\u17d2\u1785\u17c1\u1789\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u17a2\u178f\u17d2\u1790\u1794\u1791\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179a\u1794\u179f\u17cb\u17a2\u178f\u17b7\u1790\u17b7\u1787\u1793\u179b\u17be\u1797\u17c4\u1787\u1793\u17b8\u1799\u178a\u17d2\u178b\u17b6\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/siel-aspect-based-sentiment-analysis-2015.html",
+      "author": [{"@type": "Person", "name": "Satarupa Guha, International Institute of Information Technology, Hyderabad"},{"@type": "Person", "name": "Aditya Joshi, International Institute of Information Technology, Hyderabad"},{"@type": "Person", "name": "Vasudeva Varma, International Institute of Information Technology, Hyderabad"}],
+      "datePublished": "2015 SemEval",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "SIEL: Aspect Based Sentiment Analysis in Reviews",
+        "url": "N/A"
+      },
+      "keywords": ["Aspect Based Sentiment Analysis", "SemEval-2015", "Machine Learning", "Ensemble Learning", "Opinion Target Expression"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "SIEL: \u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3",
+          "item": "https://khmerresearch.com/papers/technology/siel-aspect-based-sentiment-analysis-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>SIEL: ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាពនៅក្នុងការវាយតម្លៃ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> SIEL: Aspect Based Sentiment Analysis in Reviews<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>SIEL: ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាពនៅក្នុងការវាយតម្លៃ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> SIEL: Aspect Based Sentiment Analysis in Reviews</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Satarupa Guha, International Institute of Information Technology, Hyderabad, Aditya Joshi, International Institute of Information Technology, Hyderabad, Vasudeva Varma, International Institute of Information Technology, Hyderabad</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015 SemEval</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព (Aspect-based Sentiment Analysis) ដើម្បីកំណត់ប្រភេទនៃទិដ្ឋភាព និងកម្រិតមនោសញ្ចេតនាដែលបានបញ្ចេញនៅក្នុងអត្ថបទវាយតម្លៃរបស់អតិថិជនលើភោជនីយដ្ឋាន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់វិធីសាស្ត្ររៀនដោយម៉ាស៊ីន (Machine Learning) ផ្សេងៗគ្នាសម្រាប់កិច្ចការរងទាំងបីនៃកម្មវិធី SemEval-2015 រួមមាន ការចាត់ថ្នាក់ឯករាជ្យ ការកំណត់ស្លាកតាមលំដាប់ និងការរៀនតាមបែបបណ្តុំ។
+        
+        <ul>
+            
+            <li>ចំណាត់ថ្នាក់ព្រៃចៃដន្យ (Random Forest Classifiers) សម្រាប់ការរកឃើញប្រភេទនៃទិដ្ឋភាព (Aspect Category Detection)</li>
+            
+            <li>វាលចៃដន្យតាមលក្ខខណ្ឌ (Conditional Random Fields - CRFs) សម្រាប់ការកំណត់កន្សោមគោលដៅមតិ (Opinion Target Expression)</li>
+            
+            <li>ការរៀនតាមបែបបណ្តុំដោយប្រើម៉ាស៊ីនវ៉ិចទ័រគាំទ្របន្ទាត់ត្រង់ (Stacking Classifiers with Linear SVM) សម្រាប់ការចាត់ថ្នាក់ប៉ូលមនោសញ្ចេតនា (Sentiment Polarity)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធនេះទទួលបានចំណាត់ថ្នាក់ទី៤ ក្នុងការរកឃើញប្រភេទនៃទិដ្ឋភាព (Aspect Category) ជាមួយនឹងពិន្ទុ F1 ស្មើនឹង ០,៥៧។</li>
+            
+            <li>សម្រាប់កិច្ចការរងកំណត់កន្សោមគោលដៅមតិ (Opinion Target Expression) ប្រព័ន្ធទទួលបានចំណាត់ថ្នាក់ទី៧ ជាមួយនឹងពិន្ទុ F1 ស្មើនឹង ០,៥៣។</li>
+            
+            <li>ប្រព័ន្ធរៀនតាមបែបបណ្តុំ (Ensemble system) ទទួលបានចំណាត់ថ្នាក់ទី៨ សម្រាប់ការចាត់ថ្នាក់មនោសញ្ចេតនា (Sentiment Polarity) ដោយទទួលបានពិន្ទុ F1 ០,៧១។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest Classifiers (One-vs-all with Unigrams)</span></strong><br>ចំណាត់ថ្នាក់ព្រៃចៃដន្យ (ប្រើ Unigrams សម្រាប់កិច្ចការទី១)</td>
+                <td>មានភាពសាមញ្ញ លឿន និងមានប្រសិទ្ធភាពខ្ពស់ក្នុងការចាត់ថ្នាក់ទិន្នន័យអត្ថបទដែលមានទំហំតូច ដោយប្រើត្រឹមកញ្ចប់ពាក្យ (Bag of Words)។</td>
+                <td>មិនអាចចាប់យកអត្ថន័យស៊ីជម្រៅនៃពាក្យ ឬបរិបទបានល្អដូចវិធីសាស្ត្រវ៉ិចទ័រពាក្យ (Word2Vec) នោះទេ។</td>
+                <td>ទទួលបានពិន្ទុ F1 ០,៥៧ សម្រាប់កិច្ចការរកឃើញប្រភេទនៃទិដ្ឋភាព (ចំណាត់ថ្នាក់ទី៤)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Conditional Random Fields (CRF) using Mallet</span></strong><br>វាលចៃដន្យតាមលក្ខខណ្ឌ (CRF) សម្រាប់កិច្ចការទី២</td>
+                <td>ស័ក្តិសមបំផុតសម្រាប់ការចាត់ថ្នាក់តាមលំដាប់ (Sequence Labelling) និងការទាញយកកន្សោមពាក្យគោលដៅមតិ។</td>
+                <td>ទាមទារការកំណត់លក្ខណៈពិសេសដោយដៃច្រើន (Hand-crafted features) ដូចជា POS, Dependency និងការបង្កើតបញ្ជីពាក្យ Seed lists។</td>
+                <td>ទទួលបានពិន្ទុ F1 ០,៥៣ សម្រាប់កិច្ចការរកឃើញកន្សោមគោលដៅមតិ (ចំណាត់ថ្នាក់ទី៧)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Stacking Classifiers (Ensemble Learning)</span></strong><br>ការរៀនតាមបែបបណ្តុំចាត់ថ្នាក់ (Stacking សម្រាប់កិច្ចការទី៣)</td>
+                <td>បង្កើនភាពត្រឹមត្រូវដោយរួមបញ្ចូលលទ្ធផលពីម៉ូដែលជាច្រើនបញ្ជូលគ្នា (SVM, SGD, AdaBoost) រួមជាមួយនឹងលក្ខណៈ Lexicon។</td>
+                <td>ចំណាយពេលយូរជាងមុនក្នុងការបង្ហាត់ម៉ូដែល និងមានភាពស្មុគស្មាញក្នុងការរៀបចំលំហូរបណ្តុះបណ្តាលទិន្នន័យ។</td>
+                <td>ទទួលបានពិន្ទុ F1 ០,៧១ សម្រាប់កិច្ចការចាត់ថ្នាក់មនោសញ្ចេតនា (ចំណាត់ថ្នាក់ទី៨)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Linear SVM with only lexicon features (Baseline)</span></strong><br>ម៉ាស៊ីនវ៉ិចទ័រគាំទ្របន្ទាត់ត្រង់ (ម៉ូដែលគោល/Baseline)</td>
+                <td>លឿនជាង និងងាយស្រួលក្នុងការអនុវត្តដោយប្រើតែលក្ខណៈពិសេសពីវចនានុក្រម (Lexicon features) ប៉ុណ្ណោះ។</td>
+                <td>ផ្តល់លទ្ធផលទាបជាងម៉ូដែលបែបបណ្តុំ (Ensemble) ដោយសារខ្វះការរៀនពីម៉ូដែលចាត់ថ្នាក់ផ្សេងៗទៀត។</td>
+                <td>ទទួលបានពិន្ទុ Accuracy ត្រឹមតែ ០,៦៨ ដែលទាបជាងម៉ូដែល Stacking ចំនួន ០,០៣។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធនេះទាមទារធនធានកុំព្យូទ័រមធ្យម និងពេលវេលាច្រើនក្នុងការរៀបចំលក្ខណៈពិសេសនៃភាសា (Feature Engineering) និងបញ្ជីវចនានុក្រម។
+    
+    <ul>
+        
+        <li><strong>Software Frameworks:</strong> ត្រូវការបណ្ណាល័យ Python ដូចជា Scikit-Learn សម្រាប់ Machine Learning, NLTK សម្រាប់ដំណើរការភាសា និង Mallet Toolkit សម្រាប់ CRF។</li>
+        
+        <li><strong>Datasets:</strong> ប្រើប្រាស់ទិន្នន័យវាយតម្លៃភោជនីយដ្ឋានពី SemEval 2014 & 2015 ព្រមទាំងទិន្នន័យបន្ថែមពី Yelp Reviews សម្រាប់បង្ហាត់ Word2Vec និង Brown Clustering។</li>
+        
+        <li><strong>External Lexicons:</strong> ទាមទារវចនានុក្រមមនោសញ្ចេតនា (Sentiment Lexicons) ចំនួនច្រើនដូចជា SentiWordNet, Bing Liu, MPQA, Sentiment140 និង WordNet សម្រាប់ទាញយកលក្ខណៈពាក្យ។</li>
+        
+        <li><strong>Hardware:</strong> អាចដំណើរការបានយ៉ាងរលូនលើកុំព្យូទ័រធម្មតា (CPU) ដោយសារវាមិនប្រើប្រាស់ម៉ូដែល Deep Learning ខ្នាតធំ ប៉ុន្តែទាមទារ RAM គ្រប់គ្រាន់សម្រាប់ Ensemble Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្អែកទាំងស្រុងលើទិន្នន័យវាយតម្លៃភោជនីយដ្ឋានជាភាសាអង់គ្លេសពីកម្មវិធី SemEval (ភាគច្រើនជាទិន្នន័យបស្ចិមប្រទេស)។ វាមានសារៈសំខាន់សម្រាប់ប្រទេសកម្ពុជា ដោយសារភាសាខ្មែរមានទម្រង់វេយ្យាករណ៍ និងការបញ្ចេញមតិខុសគ្នា ដែលតម្រូវឱ្យមានការបង្កើតវចនានុក្រមមនោសញ្ចេតនា (Lexicons) និងទិន្នន័យស្រាវជ្រាវជាភាសាខ្មែរផ្ទាល់ ទើបអាចអនុវត្តបានប្រកបដោយប្រសិទ្ធភាព។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាប្រព័ន្ធនេះត្រូវបានបង្កើតឡើងសម្រាប់ភាសាអង់គ្លេសក៏ដោយ វិធីសាស្ត្រ Aspect-Based Sentiment Analysis មានអត្ថប្រយោជន៍យ៉ាងខ្លាំងក្នុងការយកមកកែច្នៃប្រើប្រាស់សម្រាប់វិស័យពាណិជ្ជកម្ម និងសេវាកម្មនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>Tourism and Hospitality (ទេសចរណ៍ និងបដិសណ្ឋារកិច្ច):</strong> អាចអនុវត្តដើម្បីវិភាគការវាយតម្លៃរបស់ភ្ញៀវទេសចរលើភោជនីយដ្ឋាន និងសណ្ឋាគារនៅខេត្តសៀមរាប និងភ្នំពេញ ដើម្បីដឹងឱ្យច្បាស់ថាភ្ញៀវចូលចិត្ត ឬមិនពេញចិត្តលើទិដ្ឋភាពណាខ្លះ (ឧ. រសជាតិម្ហូប ឬសេវាកម្មបម្រើ)។</li>
+            
+            <li><strong>E-commerce & Delivery Platforms (Nham24, Foodpanda):</strong> ជួយដល់កម្មវិធីដឹកជញ្ជូនអាហារក្នុងការស្វែងយល់ពីមតិរបស់អតិថិជនលើទិដ្ឋភាពជាក់លាក់ ជំនួសឱ្យការមើលត្រឹមតែពិន្ទុផ្កាយរួម ដែលជួយម្ចាស់ហាងឱ្យកែលម្អគុណភាពបានចំគោលដៅ។</li>
+            
+            <li><strong>Banking and Telecom (ធនាគារ និងទូរគមនាគមន៍):</strong> ប្រើប្រាស់ដើម្បីត្រួតពិនិត្យមតិយោបល់របស់អតិថិជននៅលើបណ្តាញសង្គម ទាក់ទងនឹងសេវាកម្មអ៊ីនធឺណិត សេវាកម្មអតិថិជន ឬកម្មវិធីទូរស័ព្ទ (Mobile App) របស់ធនាគារនានានៅកម្ពុជា។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអនុវត្តម៉ូដែលនេះនឹងជួយឱ្យអាជីវកម្មនៅកម្ពុជាអាចយល់ច្បាស់ពីចំណុចខ្លាំងនិងចំណុចខ្សោយរបស់ខ្លួន តាមរយៈការវិភាគមតិអតិថិជនយ៉ាងលម្អិតតាមផ្នែកនីមួយៗ (Aspect-level) ជាជាងការវាយតម្លៃជារួម។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ ប្រមូល និងរៀបចំទិន្នន័យភាសាខ្មែរ:</strong> ប្រមូលទិន្នន័យវាយតម្លៃជាភាសាខ្មែរពីបណ្តាញសង្គម ឬកម្មវិធីដូចជា <span class="en">Nham24</span> និង <span class="en">TripAdvisor</span> រួចធ្វើចំណារ (Annotation) កំណត់ប្រភេទពាក្យ និងមនោសញ្ចេតនាតាមបរិបទនីមួយៗ។</li>
+            
+            <li><strong>ជំហានទី២៖ កសាងវចនានុក្រមមនោសញ្ចេតនា:</strong> បង្កើតបញ្ជីវចនានុក្រមមនោសញ្ចេតនា (Sentiment Lexicon) សម្រាប់ភាសាខ្មែរ ដោយបកប្រែ ឬផ្អែកតាមគំរូនៃ <span class="en">SentiWordNet</span> និង <span class="en">Bing Liu Lexicon</span> ដើម្បីកំណត់ពាក្យវិជ្ជមាន និងអវិជ្ជមាន។</li>
+            
+            <li><strong>ជំហានទី៣៖ អនុវត្តម៉ូដែលចំណាត់ថ្នាក់មូលដ្ឋាន:</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">Scikit-Learn</span> ជាមួយក្បួនដោះស្រាយ <span class="en">Random Forest</span> និង <span class="en">Linear SVM</span> ដើម្បីសាកល្បងចាត់ថ្នាក់ប្រភេទអត្ថបទ ដោយទាញយកលក្ខណៈសម្បត្តិ <span class="en">Bag of Words (BoW)</span> និង <span class="en">TF-IDF</span>។</li>
+            
+            <li><strong>ជំហានទី៤៖ ទាញយកគោលដៅមតិដោយប្រើលំដាប់ពាក្យ:</strong> សិក្សាពីការប្រើប្រាស់បណ្ណាល័យ <span class="en">CRFsuite</span> ឬ <span class="en">Mallet Toolkit</span> ដើម្បីទាញយកពាក្យគោលដៅមតិ (Opinion Target Expressions) ពីប្រយោគ ដោយផ្អែកលើ <span class="en">POS tags</span> របស់ភាសាខ្មែរ។</li>
+            
+            <li><strong>ជំហានទី៥៖ បង្កើនប្រសិទ្ធភាពតាមរយៈការរៀនបែបបណ្តុំ:</strong> អភិវឌ្ឍម៉ូដែលកម្រិតខ្ពស់ដោយរួមបញ្ចូលលទ្ធផលពីម៉ូដែលច្រើនបញ្ជូលគ្នា <span class="en">(Stacking Classifiers)</span> ដើម្បីទទួលបានការទស្សន៍ទាយមនោសញ្ចេតនាកាន់តែមានភាពជាក់លាក់ និងត្រឹមត្រូវខ្ពស់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Aspect Based Sentiment Analysis</span></td>
+                <td>ការវិភាគមនោសញ្ចេតនាដោយបំបែកតាមផ្នែក ឬលក្ខណៈពិសេសរបស់ផលិតផល/សេវាកម្ម ជាជាងការវាយតម្លៃជារួម ដើម្បីដឹងថាអតិថិជនពេញចិត្ត ឬមិនពេញចិត្តលើចំណុចណាខ្លះដោយឡែកពីគ្នា។</td>
+                <td>ដូចជាការផ្តល់ពិន្ទុដាច់ដោយឡែកសម្រាប់ "រសជាតិម្ហូប" និង "សេវាកម្ម" នៅក្នុងភោជនីយដ្ឋានតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Opinion Target Expression</span></td>
+                <td>កន្សោមពាក្យ ឬគោលដៅជាក់លាក់នៅក្នុងប្រយោគដែលអ្នកសរសេរចង់បញ្ចេញមតិយោបល់ទៅលើ (ឧទាហរណ៍ ពាក្យថា "fajitas" ក្នុងប្រយោគ "I loved the fajitas")។</td>
+                <td>ជាពាក្យឬឈ្មោះវត្ថុដែលគេកំពុងនិយាយដើម ឬសរសើរ នៅក្នុងប្រយោគមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Conditional Random Fields</span></td>
+                <td>ម៉ូដែលស្ថិតិនិងរៀនដោយម៉ាស៊ីន (Machine Learning) ដែលប្រើសម្រាប់ទស្សន៍ទាយ និងចាត់ថ្នាក់ទិន្នន័យដែលមានលំដាប់លំដោយ ដូចជាការស្វែងរកពាក្យគោលដៅមតិនៅក្នុងលំដាប់នៃប្រយោគអត្ថបទដោយផ្អែកលើបរិបទជុំវិញ។</td>
+                <td>ដូចជាអ្នកស៊ើបអង្កេតដែលទស្សន៍ទាយសកម្មភាពបន្ទាប់របស់ជនសង្ស័យ ដោយផ្អែកលើលំដាប់នៃសកម្មភាពមុនៗរបស់គេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stacking Classifiers</span></td>
+                <td>បច្ចេកទេសរៀនបែបបណ្តុំ (Ensemble Learning) ដែលប្រមូលផ្តុំលទ្ធផលទស្សន៍ទាយពីម៉ូដែលរៀនម៉ាស៊ីនជាច្រើន (Base models) រួចប្រើម៉ូដែលមួយទៀត (Meta-model) មកបូកសរុបដើម្បីសម្រេចចិត្តចុងក្រោយក្នុងការទស្សន៍ទាយ ដើម្បីបង្កើនភាពត្រឹមត្រូវ។</td>
+                <td>ដូចជាការសួរយោបល់ពីគ្រូពេទ្យឯកទេស៣នាក់ រួចយកចម្លើយទាំង៣នោះទៅឱ្យប្រធានមន្ទីរពេទ្យសម្រេចចិត្តធ្វើរោគវិនិច្ឆ័យចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word2Vec</span></td>
+                <td>ក្បួនដោះស្រាយបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត ដែលបំប្លែងពាក្យទៅជាវ៉ិចទ័រលេខ ដើម្បីឱ្យកុំព្យូទ័រអាចយល់ពីអត្ថន័យ និងទំនាក់ទំនងរវាងពាក្យ ធ្វើឱ្យពាក្យដែលមានន័យស្រដៀងគ្នានឹងមានតម្លៃវ៉ិចទ័រក្បែរគ្នាក្នុងលំហទិន្នន័យ។</td>
+                <td>ដូចជាការដាក់ទីតាំងនៅលើផែនទី ដែលទីតាំងឬពាក្យដែលមានលក្ខណៈស្រដៀងគ្នានឹងត្រូវដាក់នៅជិតគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TF-IDF</span></td>
+                <td>រូបមន្តគណនាទម្ងន់ ឬសារៈសំខាន់នៃពាក្យមួយនៅក្នុងឯកសារ ដោយវាផ្តល់ពិន្ទុខ្ពស់ដល់ពាក្យដែលលេចឡើងញឹកញាប់ក្នុងឯកសារនោះ ប៉ុន្តែកម្រមានក្នុងឯកសារផ្សេងទៀត ដើម្បីជួយញែកប្រធានបទ។</td>
+                <td>ដូចជាការពាក់អាវពណ៌ក្រហមក្នុងចំណោមមនុស្សពាក់អាវសរាប់ពាន់នាក់ ធ្វើឱ្យអ្នកលេចធ្លោ និងងាយចំណាំជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest Classifiers</span></td>
+                <td>ក្បួនដោះស្រាយនៃការរៀនម៉ាស៊ីន ដែលបង្កើត "ដើមឈើការសម្រេចចិត្ត" (Decision Trees) ជាច្រើន ហើយរួមបញ្ចូលលទ្ធផលរបស់វាចូលគ្នា ដើម្បីធ្វើការទស្សន៍ទាយប្រកបដោយភាពត្រឹមត្រូវ និងកាត់បន្ថយការទន្ទេញទិន្នន័យចាំ (Overfitting)។</td>
+                <td>ដូចជាការបោះឆ្នោតជ្រើសរើសចម្លើយពីគណៈកម្មការរាប់សិបនាក់ ដើម្បីទទួលបានលទ្ធផលរួមដែលត្រឹមត្រូវបំផុត ជំនួសឱ្យការជឿលើមនុស្សតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machines</span></td>
+                <td>ម៉ូដែលរៀនម៉ាស៊ីន ដែលព្យាយាមគូសបន្ទាត់ ឬព្រំដែន (Hyperplane) ដ៏ល្អបំផុត ដើម្បីបំបែកក្រុមទិន្នន័យ (ឧទាហរណ៍ បំបែកប្រយោគវិជ្ជមាន និងអវិជ្ជមាន) ឱ្យនៅដាច់ពីគ្នាបានច្បាស់លាស់បំផុត។</td>
+                <td>ដូចជាការគូសបន្ទាត់ព្រំដែននៅលើវាលស្មៅ ដើម្បីបំបែកហ្វូងចៀម និងហ្វូងពពែឱ្យនៅឆ្ងាយពីគ្នាតាមដែលអាចធ្វើទៅបាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/classification-class-imbalance-review-2013.html">
+                    <span class="km">ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ</span><br>
+                    <span class="en article-original-title">Classification with class imbalance problem: a review</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/imputation-missing-data-ml-techniques-1996.html">
+                    <span class="km">ការបំពេញទិន្នន័យដែលបាត់ដោយប្រើបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Machine Learning)</span><br>
+                    <span class="en article-original-title">Imputation of missing data using machine learning techniques</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/knn-classification-machine-learning-review-2022.html">
+                    <span class="km">ការពិនិត្យឡើងវិញលើការវិភាគនៃក្បួនដោះស្រាយការរៀនដោយម៉ាស៊ីនចំណាត់ថ្នាក់ K-Nearest Neighbor ដោយផ្អែកលើការរៀនដោយមានការត្រួតពិនិត្យ</span><br>
+                    <span class="en article-original-title">A Review on Analysis of K-Nearest Neighbor Classification Machine Learning Algorithms based on Supervised Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ai-predictive-analytics-edge-cloud-2021.html">
+                    <span class="km">ការវិភាគព្យាករណ៍ដែលជំរុញដោយ AI សម្រាប់បង្កើនប្រសិទ្ធភាពការប្រើប្រាស់ធនធាននៅក្នុងមជ្ឈមណ្ឌលទិន្នន័យ Edge-Cloud</span><br>
+                    <span class="en article-original-title">AI-Driven Predictive Analytics for Optimizing Resource Utilization in Edge-Cloud Data Centers</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/machine-learning-text-categorization-2004.html">
+                    <span class="km">បច្ចេកទេសរៀនដោយម៉ាស៊ីនមានការត្រួតពិនិត្យ និងគ្មានការត្រួតពិនិត្យសម្រាប់ការចាត់ថ្នាក់ឯកសារអត្ថបទ</span><br>
+                    <span class="en article-original-title">SUPERVISED AND UNSUPERVISED MACHINE LEARNING TECHNIQUES FOR TEXT DOCUMENT CATEGORIZATION</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Aspect-based+sentiment+analysis+SemEval+restaurant+reviews" target="_blank" rel="noopener"><span class="en">Aspect-based sentiment analysis SemEval restaurant reviews</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Opinion+target+expression+extraction+using+Conditional+Random+Fields" target="_blank" rel="noopener"><span class="en">Opinion target expression extraction using Conditional Random Fields</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Ensemble+learning+stacking+classifiers+for+sentiment+polarity" target="_blank" rel="noopener"><span class="en">Ensemble learning stacking classifiers for sentiment polarity</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Cross-domain+aspect+category+detection+in+consumer+reviews" target="_blank" rel="noopener"><span class="en">Cross-domain aspect category detection in consumer reviews</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Integrating+sentiment+lexicons+with+machine+learning+for+polarity+classification" target="_blank" rel="noopener"><span class="en">Integrating sentiment lexicons with machine learning for polarity classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Word+embeddings+vs+TF-IDF+for+short+text+sentiment+analysis" target="_blank" rel="noopener"><span class="en">Word embeddings vs TF-IDF for short text sentiment analysis</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>

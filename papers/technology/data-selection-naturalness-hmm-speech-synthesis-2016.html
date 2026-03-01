@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការជ្រើសរើសទិន្នន័យសម្រាប់ភាពធម្មជាតិនៃការសំយោគសំឡេងដោយផ្អែកលើ HMM - Data Selection for Naturalness in HMM-based Speech Synthesis | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការជ្រើសរើសទិន្នន័យសម្រាប់ភាពធម្មជាតិនៃការសំយោគសំឡេងដោយផ្អែក។ ឯកសារនេះស្វែងរកវិធីសាស្ត្រក្នុងការបង្កើតសំឡេងសំយោគ Text-to-Speech (TTS) ដែលស្តាប់ទៅមានលក្ខណៈធម្មជ...">
+    
+    <meta name="keywords" content="speech synthesis, HMM, text-to-speech, data selection, naturalness, broadcast news, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/data-selection-naturalness-hmm-speech-synthesis-2016.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/data-selection-naturalness-hmm-speech-synthesis-2016.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/data-selection-naturalness-hmm-speech-synthesis-2016.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/data-selection-naturalness-hmm-speech-synthesis-2016.html">
+    <meta property="og:title" content="ការជ្រើសរើសទិន្នន័យសម្រាប់ភាពធម្មជាតិនៃការសំយោគសំឡេងដោយផ្អែកលើ HMM | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះស្វែងរកវិធីសាស្ត្រក្នុងការបង្កើតសំឡេងសំយោគ Text-to-Speech (TTS) ដែលស្តាប់ទៅមានលក្ខណៈធម្មជាតិសម្រាប់ភាសាដែលខ្វះខាតធនធាន ដោយប្រើប្រាស់ទិន្នន័យដែលមានស្រាប់ (ដូចជាព័ត៌មានវិទ្យុដែលមានអ្នកនិយាយច្...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2016, Speech Prosody">
+    
+    <meta property="article:tag" content="speech synthesis">
+    
+    <meta property="article:tag" content="HMM">
+    
+    <meta property="article:tag" content="text-to-speech">
+    
+    <meta property="article:tag" content="data selection">
+    
+    <meta property="article:tag" content="naturalness">
+    
+    <meta property="article:tag" content="broadcast news">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការជ្រើសរើសទិន្នន័យសម្រាប់ភាពធម្មជាតិនៃការសំយោគសំឡេងដោយផ្អែកលើ HMM">
+    <meta name="twitter:description" content="ឯកសារនេះស្វែងរកវិធីសាស្ត្រក្នុងការបង្កើតសំឡេងសំយោគ Text-to-Speech (TTS) ដែលស្តាប់ទៅមានលក្ខណៈធម្មជាតិសម្រាប់ភាសាដែលខ្វះខាតធនធាន ដោយប្រើប្រាស់ទិន្នន័យដែលមានស្រាប់ (ដូចជាព័ត៌មានវិទ្យុដែលមានអ្នកនិយាយច្...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u1796\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7\u1793\u17c3\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be HMM",
+      "name": "Data Selection for Naturalness in HMM-based Speech Synthesis",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u179f\u17c6\u17a1\u17c1\u1784\u179f\u17c6\u1799\u17c4\u1782 Text-to-Speech (TTS) \u178a\u17c2\u179b\u179f\u17d2\u178f\u17b6\u1794\u17cb\u1791\u17c5\u1798\u17b6\u1793\u179b\u1780\u17d2\u1781\u178e\u17c8\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6\u178a\u17c2\u179b\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1792\u1793\u1792\u17b6\u1793 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17d2\u179a\u17b6\u1794\u17cb (\u178a\u17bc\u1785\u1787\u17b6\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u179c\u17b7\u1791\u17d2\u1799\u17bb\u178a\u17c2\u179b\u1798\u17b6\u1793\u17a2\u17d2\u1793\u1780\u1793\u17b7\u1799\u17b6\u1799\u1785\u17d2\u179a\u17be\u1793\u1793\u17b6\u1780\u17cb)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/data-selection-naturalness-hmm-speech-synthesis-2016.html",
+      "author": [{"@type": "Person", "name": "Erica Cooper"},{"@type": "Person", "name": "Yocheved Levitan"},{"@type": "Person", "name": "Julia Hirschberg"}],
+      "datePublished": "2016, Speech Prosody",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Data Selection for Naturalness in HMM-based Speech Synthesis",
+        "url": "https://doi.org/10.21437/SpeechProsody.2016-162"
+      },
+      "keywords": ["speech synthesis", "HMM", "text-to-speech", "data selection", "naturalness", "broadcast news"],
+      "about": "Speech Synthesis"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u1796\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7\u1793\u17c3\u1780\u17b6\u179a\u179f\u17c6\u1799\u17c4\u1782\u179f\u17c6\u17a1\u17c1\u1784\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be HMM",
+          "item": "https://khmerresearch.com/papers/technology/data-selection-naturalness-hmm-speech-synthesis-2016.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការជ្រើសរើសទិន្នន័យសម្រាប់ភាពធម្មជាតិនៃការសំយោគសំឡេងដោយផ្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Data Selection for Naturalness in HMM-based Speech Synthesis<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.21437/SpeechProsody.2016-162" target="_blank">doi.org/10.21437/SpeechProsody.2016-162</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការជ្រើសរើសទិន្នន័យសម្រាប់ភាពធម្មជាតិនៃការសំយោគសំឡេងដោយផ្អែកលើ HMM</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Data Selection for Naturalness in HMM-based Speech Synthesis</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Erica Cooper, Yocheved Levitan, Julia Hirschberg</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2016, Speech Prosody</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Speech Synthesis</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះស្វែងរកវិធីសាស្ត្រក្នុងការបង្កើតសំឡេងសំយោគ Text-to-Speech (TTS) ដែលស្តាប់ទៅមានលក្ខណៈធម្មជាតិសម្រាប់ភាសាដែលខ្វះខាតធនធាន ដោយប្រើប្រាស់ទិន្នន័យដែលមានស្រាប់ (ដូចជាព័ត៌មានវិទ្យុដែលមានអ្នកនិយាយច្រើននាក់)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានប្រើប្រាស់ទិន្នន័យសំឡេងព័ត៌មានវិទ្យុ (BURNC) ដើម្បីហ្វឹកហាត់ម៉ូដែលសំយោគសំឡេងដោយផ្អែកលើ HMM និងធ្វើការវាយតម្លៃតាមរយៈការធ្វើតេស្តស្តាប់។
+        
+        <ul>
+            
+            <li>ការជ្រើសរើសសំណុំទិន្នន័យតាមលក្ខណៈពិសេស (Data selection by features): ការបែងចែកទិន្នន័យតាមរយៈកម្រិតសំឡេង (f0), ថាមពល, ល្បឿននៃការនិយាយ និងប្រវែងល្បះ។</li>
+            
+            <li>ការហ្វឹកហាត់ម៉ូដែលសំឡេង (Voice training): ការប្រើប្រាស់ប្រព័ន្ធ HMM-based Speech Synthesis System (HTS) និងការបង្កើតម៉ូដែលបូកបញ្ចូលសំឡេងថេរ (Monotone voice interpolation)។</li>
+            
+            <li>ការវាយតម្លៃដោយមនុស្ស (Crowdsourced listening tests): ការប្រើប្រាស់ Amazon Mechanical Turk ដើម្បីធ្វើតេស្ត Mean Opinion Score (MOS) និងការប្រៀបធៀបជាគូ (Pairwise comparisons)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>គ្មានវិធីសាស្ត្រជ្រើសរើសសំណុំទិន្នន័យរងណាមួយដែលទទួលបានលទ្ធផលល្អប្រសើរជាងការប្រើប្រាស់ទិន្នន័យមូលដ្ឋានរួមបញ្ចូលគ្នានោះទេ។</li>
+            
+            <li>ការបូកបញ្ចូលម៉ូដែលសំឡេងមូលដ្ឋានជាមួយនឹងម៉ូដែលសំឡេងថេរ (Monotone voice) គឺជាវិធីសាស្ត្រតែមួយគត់ដែលទទួលបានការពេញចិត្ត និងមានភាពប្រសើរឡើងគួរឱ្យកត់សម្គាល់ (p < 0.05) កាត់បន្ថយភាពដាច់ៗនៃសំឡេងសម្រាប់អ្នកនិយាយស្ត្រី។</li>
+            
+            <li>ការហ្វឹកហាត់ម៉ូដែលសំឡេងដោយប្រើប្រាស់ទិន្នន័យពីអ្នកនិយាយតែម្នាក់មិនទទួលបានលទ្ធផលល្អដូចការហ្វឹកហាត់លើអ្នកនិយាយច្រើននាក់ទេ ដោយសារការខ្វះខាតទំហំទិន្នន័យគ្រប់គ្រាន់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Baseline Voice (All Data)</span></strong><br>ម៉ូដែលសំឡេងគោល (ប្រើទិន្នន័យទាំងអស់)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត ដោយប្រើប្រាស់ទិន្នន័យទាំងអស់ដែលមានដើម្បីផ្តល់នូវសំឡេងដែលមានស្ថិរភាពជាទូទៅ។</td>
+                <td>រួមបញ្ចូលទិន្នន័យដែលមានសំឡេងរំខាន ឬទម្រង់នៃការនិយាយដែលមិនសូវស័ក្តិសមសម្រាប់ការសំយោគសំឡេង (TTS)។</td>
+                <td>ទទួលបានពិន្ទុ MOS ២.៦៨ (សម្រាប់សំឡេងស្ត្រី) និងត្រូវបានប្រើជាគោលសម្រាប់ប្រៀបធៀប។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Feature-based Data Selection</span></strong><br>ការជ្រើសរើសទិន្នន័យតាមលក្ខណៈពិសេស (ឧ. f0, ថាមពល, ល្បឿន)</td>
+                <td>ព្យាយាមចម្រាញ់យកទិន្នន័យមិនល្អចេញ និងស្វែងរកល្បះដែលមានលក្ខណៈធម្មជាតិបំផុតដោយស្វ័យប្រវត្តិ។</td>
+                <td>មិនទទួលបានលទ្ធផលល្អជាងការប្រើទិន្នន័យទាំងអស់នោះទេ ហើយសំណុំខ្លះ (ឧ. និយាយយឺត) ទទួលបានលទ្ធផលអន់មែនទែន។</td>
+                <td>ទទួលបានការពេញចិត្តច្រើនជាងម៉ូដែលគោលបន្តិចបន្តួចក្នុងករណីខ្លះ ប៉ុន្តែមិនមានលក្ខណៈសំខាន់តាមស្ថិតិ (Not statistically significant)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Monotone Interpolation</span></strong><br>ការបូកបញ្ចូលជាមួយម៉ូដែលសំឡេងថេរ</td>
+                <td>ជួយកាត់បន្ថយភាពដាច់ៗ (choppiness) នៃកម្រិតសំឡេង (f0 contour) ធ្វើឱ្យការស្តាប់ទៅមានភាពរលូនជាងមុន។</td>
+                <td>អាចធ្វើឱ្យសំឡេងបាត់បង់ការបញ្ចេញមនោសញ្ចេតនាខ្លះដោយសារការលាយបញ្ចូលគ្នាជាមួយសំឡេងដែលមានកម្រិតថេរ។</td>
+                <td>ជាវិធីសាស្ត្រតែមួយគត់ដែលត្រូវបានអ្នកស្តាប់ពេញចិត្តច្រើនជាងម៉ូដែលគោលយ៉ាងពិតប្រាកដ (៦៣.៣%, p=0.04) សម្រាប់អ្នកនិយាយស្ត្រី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Speaker Adaptive Training (SAT) AVM</span></strong><br>ម៉ូដែល SAT ហ្វឹកហាត់លើអ្នកនិយាយច្រើននាក់</td>
+                <td>ត្រូវបានរចនាឡើងដើម្បីបង្កើតម៉ូដែលសំឡេងដែលមានស្ថិរភាពពីទិន្នន័យរបស់អ្នកនិយាយចម្រុះគ្នា។</td>
+                <td>ទាមទារកម្លាំងកុំព្យូទ័រខ្លាំងក្នុងការហ្វឹកហាត់ និងមិនបានផ្តល់នូវសំឡេងល្អជាងម៉ូដែលគោលគួរឱ្យកត់សម្គាល់នោះទេ។</td>
+                <td>ទទួលបានការពេញចិត្ត ៥៦.៧% សម្រាប់ស្ត្រី និង ៤៨.៣% សម្រាប់បុរស បើធៀបនឹងម៉ូដែលគោល (មិនមានលក្ខណៈសំខាន់តាមស្ថិតិ)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រ កម្មវិធីជំនាញសម្រាប់ការវិភាគ និងទិន្នន័យសំឡេងដែលត្រូវបានកត់ត្រាអត្ថបទរួចជាស្រេចសម្រាប់ការហ្វឹកហាត់ម៉ូដែល HMM។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ទាមទារកម្មវិធី Praat សម្រាប់ការវិភាគសូរសព្ទ, ប្រព័ន្ធ Festival Speech Synthesis System សម្រាប់បង្កើត Phonetic labels និង HTS សម្រាប់ហ្វឹកហាត់ម៉ូដែល HMM។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់សំណុំទិន្នន័យ Boston University Radio News Corpus (BURNC) ដែលមានទំហំប្រហែល ៤ ទៅ ៥ ម៉ោងសម្រាប់អ្នកនិយាយបុរសនិងស្ត្រី។</li>
+        
+        <li><strong>Evaluation Platform:</strong> ត្រូវការវេទិកា Amazon Mechanical Turk សម្រាប់ជួលមនុស្សពិតប្រាកដមកស្តាប់ និងវាយតម្លៃគុណភាពសំឡេង (Crowdsourced listening tests)។</li>
+        
+        <li><strong>Hardware:</strong> ទាមទារកុំព្យូទ័រដែលមានកម្លាំង CPU/GPU គ្រប់គ្រាន់សម្រាប់ដំណើរការ Speaker Adaptive Training (SAT) និងការបណ្តុះបណ្តាលម៉ូដែល Machine Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យសំឡេងពីអ្នកអានព័ត៌មានវិទ្យុនៅទីក្រុង Boston សហរដ្ឋអាមេរិក (BURNC) ដែលជាទិន្នន័យភាសាអង់គ្លេសសុទ្ធ។ ទោះបីជាគោលដៅនៃឯកសារគឺចង់ជួយដល់ភាសាដែលខ្វះខាតធនធាន (LRLs) ក៏ដោយ ការធ្វើតេស្តបឋមនេះមានភាពលម្អៀងទៅលើទម្រង់សំឡេងនៃភាសាអង់គ្លេស។ នេះជារឿងសំខាន់សម្រាប់ប្រទេសកម្ពុជា ព្រោះភាសាខ្មែរមានទម្រង់នៃការបញ្ចេញសំឡេង និងសូរសព្ទខុសគ្នាស្រឡះ ដែលទាមទារឱ្យមានការសាកល្បងដោយផ្ទាល់លើទិន្នន័យភាសាខ្មែរទើបដឹងលទ្ធផលច្បាស់លាស់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រក្នុងការទាញយកទិន្នន័យ "Found data" នេះមានសក្តានុពលខ្ពស់សម្រាប់ប្រទេសកម្ពុជា ក្នុងការអភិវឌ្ឍប្រព័ន្ធ Text-to-Speech (TTS) ដោយសន្សំសំចៃការចំណាយ។</p>
+        
+        <ul>
+            
+            <li><strong>ការអភិវឌ្ឍប្រព័ន្ធ TTS ភាសាខ្មែរពីការផ្សាយព័ត៌មាន:</strong> ស្ថាប័នស្រាវជ្រាវអាចប្រើប្រាស់ទិន្នន័យពីការផ្សាយព័ត៌មានរបស់ស្ថានីយ៍វិទ្យុ និងទូរទស្សន៍ក្នុងស្រុក (ឧ. វិទ្យុជាតិកម្ពុជា) ដើម្បីបង្កើតម៉ូដែលសំឡេងនិយាយភាសាខ្មែរ ដោយមិនចាំបាច់ចំណាយថវិកាច្រើនក្នុងការថតសំឡេងក្នុងស្ទូឌីយោ។</li>
+            
+            <li><strong>ការកែលម្អគុណភាពប្រព័ន្ធសៀវភៅសំឡេង (Audiobooks):</strong> វិធីសាស្ត្របូកបញ្ចូលម៉ូដែលសំឡេងថេរ (Monotone interpolation) អាចត្រូវបានប្រើដើម្បីកាត់បន្ថយភាពដាច់ៗនៃសំឡេង (choppiness) សម្រាប់កម្មវិធីអានអត្ថបទជាសំឡេង ជួយសម្រួលដល់ជនពិការភ្នែកនៅកម្ពុជា។</li>
+            
+            <li><strong>គម្រោងស្រាវជ្រាវនៅសាកលវិទ្យាល័យ (ឧ. RUPP, ITC):</strong> និស្សិតផ្នែកវិទ្យាសាស្ត្រកុំព្យូទ័រអាចអនុវត្តវិធីសាស្ត្រជ្រើសរើសទិន្នន័យនេះ ដើម្បីចម្រាញ់យកល្បះដែលមានគុណភាពខ្ពស់ពីប្រភពវីដេអូ YouTube ឬ Podcast ជាភាសាខ្មែរ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការប្រើប្រាស់វិធីសាស្ត្រកាត់បន្ថយភាពដាច់ៗនៃសំឡេង និងការទាញយកប្រយោជន៍ពីទិន្នន័យព័ត៌មានដែលមានស្រាប់ គឺជាផ្លូវកាត់ដ៏មានប្រសិទ្ធភាពសម្រាប់អភិវឌ្ឍបច្ចេកវិទ្យាសំឡេង (Speech Tech) នៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ HMM និង Speech Synthesis:</strong> ចាប់ផ្តើមដោយការសិក្សាពីទ្រឹស្តីនៃ Hidden Markov Model និងសាកល្បងដំឡើងកម្មវិធី HTS នៅលើប្រព័ន្ធ Linux របស់អ្នកដើម្បីស្វែងយល់ពីដំណើរការបណ្តុះបណ្តាលម៉ូដែលសំឡេង (Acoustic modeling)។</li>
+            
+            <li><strong>ប្រមូល និងចម្រាញ់ទិន្នន័យព័ត៌មានជាភាសាខ្មែរ:</strong> ប្រមូលទិន្នន័យសំឡេងព័ត៌មានវិទ្យុឬទូរទស្សន៍ខ្មែរឱ្យបានយ៉ាងតិច ៤ ទៅ ៥ ម៉ោង។ បន្ទាប់មក ប្រើប្រាស់កម្មវិធី Praat ដើម្បីកាត់ផ្នែកសំឡេងស្ងាត់ចោល ព្រមទាំងវិភាគនិងទាញយកកម្រិតសំឡេង (f0) និងថាមពល (Energy) របស់ល្បះនីមួយៗ។</li>
+            
+            <li><strong>បង្កើត Phonetic Labels សម្រាប់ភាសាខ្មែរ:</strong> ប្រើប្រាស់ឧបករណ៍ដូចជា Festival Speech Synthesis System ឬសរសេរកូដ Python (G2P - Grapheme to Phoneme) ដើម្បីបំប្លែងអត្ថបទភាសាខ្មែរទៅជាសូរសព្ទ (Phonetic sequence) ដែលត្រៀមរួចជាស្រេចសម្រាប់ការហ្វឹកហាត់។</li>
+            
+            <li><strong>អនុវត្តវិធីសាស្ត្រ Monotone Interpolation:</strong> ហ្វឹកហាត់ម៉ូដែលសំឡេងគោលដោយប្រើទិន្នន័យទាំងអស់ រួចបង្កើតម៉ូដែលមួយទៀតដែលកំណត់តម្លៃ f0 ឱ្យនៅថេរ (Monotone)។ បន្ទាប់មក ប្រើប្រាស់មុខងារ Interpolation ក្នុង HTS ដើម្បីបូកបញ្ចូលម៉ូដែលទាំងពីរក្នុងសមាមាត្រស្មើគ្នា ដើម្បីកាត់បន្ថយភាពដាច់ៗនៃសំឡេង។</li>
+            
+            <li><strong>វាយតម្លៃគុណភាពសំឡេងជាមួយអ្នកស្តាប់ជនជាតិខ្មែរ:</strong> រៀបចំការធ្វើតេស្តស្តាប់ (MOS និង Pairwise Comparison) តាមរយៈ Google Forms ដោយឱ្យអ្នកនិយាយភាសាខ្មែរដើមចំនួន ២០-៣០ នាក់ ស្តាប់និងវាយតម្លៃភាពធម្មជាតិនៃសំឡេងដែលបានសំយោគ ដើម្បីវាស់ស្ទង់ប្រសិទ្ធភាពនៃម៉ូដែលរបស់អ្នក។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Text-to-Speech (TTS)</span></td>
+                <td>បច្ចេកវិទ្យាក្នុងការបំប្លែងអត្ថបទសរសេរទៅជាសំឡេងនិយាយដោយប្រើប្រាស់ប្រព័ន្ធកុំព្យូទ័រ ដើម្បីបង្កើតការសន្ទនាដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាការឱ្យមនុស្សយន្តអានសៀវភៅ ឬអត្ថបទព័ត៌មានឱ្យយើងស្តាប់ដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model (HMM)</span></td>
+                <td>ម៉ូដែលស្ថិតិមួយប្រភេទដែលត្រូវបានប្រើប្រាស់យ៉ាងទូលំទូលាយក្នុងការសំយោគសំឡេង ដោយវាធ្វើការទស្សន៍ទាយនិងបង្កើតលក្ខណៈសូរសព្ទបន្តបន្ទាប់គ្នាដោយផ្អែកលើទិន្នន័យដែលបានហ្វឹកហាត់។</td>
+                <td>ដូចជាការទស្សន៍ទាយពាក្យបន្ទាប់ដែលមិត្តភក្តិអ្នកនឹងនិយាយ ដោយផ្អែកលើការសង្កេតទម្លាប់នៃការនិយាយរបស់ពួកគេកន្លងមក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Speaker Adaptive Training (SAT)</span></td>
+                <td>ដំណើរការហ្វឹកហាត់ម៉ូដែលសំឡេងដែលទាញយក និងសម្របតាមលក្ខណៈពិសេសរបស់អ្នកនិយាយច្រើននាក់ ដើម្បីបង្កើតបានជាម៉ូដែលមូលដ្ឋានមួយដ៏រឹងមាំ និងមានស្ថិរភាព។</td>
+                <td>ដូចជាការស្តាប់មនុស្ស១០នាក់ផ្សេងគ្នានិយាយពាក្យតែមួយ ដើម្បីទាញយកទម្រង់ស្តង់ដារនៃការបញ្ចេញសំឡេងពាក្យនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Average Voice Model (AVM)</span></td>
+                <td>ម៉ូដែលសំឡេងជាមធ្យមដែលត្រូវបានបង្កើតឡើងដោយការរួមបញ្ចូលទិន្នន័យសំឡេងពីអ្នកនិយាយច្រើននាក់ចូលគ្នា ដើម្បីប្រើប្រាស់ជាគ្រោងឆ្អឹងសម្រាប់បង្កើតសំឡេងថ្មី។</td>
+                <td>ដូចជាការយកទឹកដមសំឡេងរបស់មនុស្សជាច្រើននាក់មកក្រឡុកចូលគ្នា ដើម្បីបង្កើតជាសំឡេងថ្មីមួយដែលតំណាងឱ្យសំឡេងជាមធ្យមរបស់ពួកគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fundamental frequency (f0)</span></td>
+                <td>រលកប្រេកង់គោលនៃសំឡេង ដែលជាទូទៅវាស់កម្រិតសម្លេង (Pitch) របស់អ្នកនិយាយ ថាតើវាជាសំឡេងស្រួច ឬសំឡេងធ្ងន់។</td>
+                <td>ដូចជាកម្រិតរឹតបន្តឹងនៃខ្សែហ្គីតា បើខ្សែតឹងខ្លាំង សំឡេងនឹងលាន់ចេញមកស្រួចខ្ពស់ (f0 ខ្ពស់)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Monotone Interpolation</span></td>
+                <td>ការបូកបញ្ចូលម៉ូដែលសំឡេងធម្មតាជាមួយនឹងម៉ូដែលសំឡេងដែលមានកម្រិតរលកសំឡេងថេរ (គ្មានការឡើងចុះ) ក្នុងគោលបំណងកាត់បន្ថយភាពរអាក់រអួល ឬភាពដាច់ៗនៃសំឡេងសំយោគ។</td>
+                <td>ដូចជាការលាយថ្នាំពណ៌ដែលឆើតខ្លាំងជាមួយនឹងពណ៌ស ដើម្បីឱ្យពណ៌ចេញមកទន់ស្រទន់ និងរលូនសាច់ជាងមុន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Low Resource Languages (LRLs)</span></td>
+                <td>ភាសាដែលមិនសូវមានការស្រាវជ្រាវ និងខ្វះខាតទិន្នន័យឌីជីថល (ដូចជា វចនានុក្រម អត្ថបទ សម្លេង) គ្រប់គ្រាន់សម្រាប់បណ្តុះបណ្តាលប្រព័ន្ធបញ្ញាសិប្បនិម្មិត។</td>
+                <td>ដូចជាសៀវភៅកម្រដែលមានលក់តែក្នុងបណ្ណាល័យតូចមួយ ដែលពិបាករកឯកសារយោង និងព័ត៌មានលម្អិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean Opinion Score (MOS)</span></td>
+                <td>ប្រព័ន្ធរង្វាស់ស្តង់ដារសម្រាប់វាយតម្លៃគុណភាព និងភាពធម្មជាតិនៃសំឡេង ដោយតម្រូវឱ្យអ្នកស្តាប់ជាមនុស្សផ្តល់ពិន្ទុពី ១ (អន់បំផុត) ដល់ ៥ (ល្អបំផុត)។</td>
+                <td>ដូចជាការផ្តល់ចំណាត់ថ្នាក់ផ្កាយ ១ ដល់ ៥ ទៅលើសេវាកម្មភោជនីយដ្ឋានណាមួយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-selection-adaptation-hmm-speech-synthesis-2016.html">
+                    <span class="km">ការជ្រើសរើស និងបន្សាំទិន្នន័យដើម្បីភាពធម្មជាតិក្នុងការសំយោគសំឡេងផ្អែកលើ HMM</span><br>
+                    <span class="en article-original-title">Data Selection and Adaptation for Naturalness in HMM-based Speech Synthesis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/hmm-based-speech-synthesis-system-hts-v2-2007.html">
+                    <span class="km">ប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM (HTS) កំណែ 2.0</span><br>
+                    <span class="en article-original-title">The HMM-based Speech Synthesis System (HTS) Version 2.0</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/dialogue-context-speech-synthesis-fd-cat-2014.html">
+                    <span class="km">ការសំយោគសំឡេងនិយាយប្រកបដោយភាពស៊ីសង្វាក់ទៅនឹងបរិបទសន្ទនា ដោយប្រើប្រាស់មែកធាងការសម្រេចចិត្តបែបបំបែកកត្តា</span><br>
+                    <span class="en article-original-title">Dialogue Context Sensitive Speech Synthesis using Factorized Decision Trees</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/chinese-speech-synthesis-prosody-model-2003.html">
+                    <span class="km">ការសិក្សាអំពីម៉ូដែលចង្វាក់សំឡេងក្នុងការសំយោគសំឡេងភាសាចិន ដោយផ្អែកលើការចាត់ថ្នាក់លក្ខណៈចង្វាក់នៃព្យាង្គ</span><br>
+                    <span class="en article-original-title">基于音节韵律特征分类的汉语语音合成中韵律模型的研究</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/improved-hindi-broadcast-asr-interspeech-2015.html">
+                    <span class="km">ការធ្វើឱ្យប្រសើរឡើងនូវប្រព័ន្ធសម្គាល់សំឡេងនិយាយព័ត៌មានផ្សាយជាភាសាហិណ្ឌី (Hindi Broadcast ASR) តាមរយៈការបន្សាំម៉ូដែលភាសានិងម៉ូដែលការបញ្ចេញសំឡេង ដោយប្រើប្រាស់ចំណេះដឹងផ្នែកវាក្យសម្ព័ន្ធ និងរូបវិទ្យាសូរសព្ទជាមុន</span><br>
+                    <span class="en article-original-title">Improved Hindi Broadcast ASR by Adapting the Language Model and Pronunciation Model Using A Priori Syntactic and Morphophonemic Knowledge</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model+parametric+text-to-speech+synthesis+techniques" target="_blank" rel="noopener"><span class="en">Hidden Markov Model parametric text-to-speech synthesis techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Speaker+adaptive+training+Average+Voice+Model+HTS+TTS" target="_blank" rel="noopener"><span class="en">Speaker adaptive training Average Voice Model HTS TTS</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Utterance+data+selection+acoustic+features+text-to-speech+corpus" target="_blank" rel="noopener"><span class="en">Utterance data selection acoustic features text-to-speech corpus</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Building+text-to-speech+systems+for+low+resource+languages+using+found+data" target="_blank" rel="noopener"><span class="en">Building text-to-speech systems for low resource languages using found data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Evaluating+TTS+naturalness+via+crowdsourced+Mean+Opinion+Score" target="_blank" rel="noopener"><span class="en">Evaluating TTS naturalness via crowdsourced Mean Opinion Score</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Monotone+interpolation+f0+contour+smoothing+speech+synthesis" target="_blank" rel="noopener"><span class="en">Monotone interpolation f0 contour smoothing speech synthesis</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+</body>
+</html>
