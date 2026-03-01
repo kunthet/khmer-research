@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ឆ្ពោះទៅរកការរៀនពីដើមដល់ចប់សម្រាប់ការតាមដាន និងការគ្រប់គ្រងស្ថានភាពសន្ទនា ដោយប្រើប្រាស់ការរៀនពង្រឹងបែបស៊ីជម្រៅ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រព័ន្ធសន្ទនាតម្រង់ទិសគោលដៅ (Task-oriented dialog systems) បែបប្រពៃណី ដែលជួបការលំបាកក្នុងការកែតម្រូវកំហុស និងភាពអាស្រ័យគ្នារវាងម៉ូឌុលនី...">
+    
+    <meta name="keywords" content="Dialog State Tracking, Deep Reinforcement Learning, End-to-End Framework, Task-oriented Dialog Systems, Partially Observable Markov Decision Process, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/end-to-end-dialog-state-reinforcement-learning-2016.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/end-to-end-dialog-state-reinforcement-learning-2016.html">
+    <meta property="og:title" content="ឆ្ពោះទៅរកការរៀនពីដើមដល់ចប់សម្រាប់ការតាមដាន និងការគ្រប់គ្រងស្ថានភាពសន្ទនា ដោយប្រើប្រាស់ការរៀនពង្រឹងបែបស៊ីជម្រៅ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រព័ន្ធសន្ទនាតម្រង់ទិសគោលដៅ (Task-oriented dialog systems) បែបប្រពៃណី ដែលជួបការលំបាកក្នុងការកែតម្រូវកំហុស និងភាពអាស្រ័យគ្នារវាងម៉ូឌុលនីមួយៗនៃប្រព័ន្ធ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2016 (Proceedings of the SIGDIAL 2016 Conference)">
+    
+    <meta property="article:tag" content="Dialog State Tracking">
+    
+    <meta property="article:tag" content="Deep Reinforcement Learning">
+    
+    <meta property="article:tag" content="End-to-End Framework">
+    
+    <meta property="article:tag" content="Task-oriented Dialog Systems">
+    
+    <meta property="article:tag" content="Partially Observable Markov Decision Process">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ឆ្ពោះទៅរកការរៀនពីដើមដល់ចប់សម្រាប់ការតាមដាន និងការគ្រប់គ្រងស្ថានភាពសន្ទនា ដោយប្រើប្រាស់ការរៀនពង្រឹងបែបស៊ីជម្រៅ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រព័ន្ធសន្ទនាតម្រង់ទិសគោលដៅ (Task-oriented dialog systems) បែបប្រពៃណី ដែលជួបការលំបាកក្នុងការកែតម្រូវកំហុស និងភាពអាស្រ័យគ្នារវាងម៉ូឌុលនីមួយៗនៃប្រព័ន្ធ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1786\u17d2\u1796\u17c4\u17c7\u1791\u17c5\u179a\u1780\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u178a\u17be\u1798\u178a\u179b\u17cb\u1785\u1794\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178f\u17b6\u1798\u178a\u17b6\u1793 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796\u179f\u1793\u17d2\u1791\u1793\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1794\u17c2\u1794\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5",
+      "name": "Towards End-to-End Learning for Dialog State Tracking and Management using Deep Reinforcement Learning",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178f\u1798\u17d2\u179a\u1784\u17cb\u1791\u17b7\u179f\u1782\u17c4\u179b\u178a\u17c5 (Task-oriented dialog systems) \u1794\u17c2\u1794\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8 \u178a\u17c2\u179b\u1787\u17bd\u1794\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1780\u17c2\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17c6\u17a0\u17bb\u179f \u1793\u17b7\u1784\u1797\u17b6\u1796\u17a2\u17b6\u179f\u17d2\u179a\u17d0\u1799\u1782\u17d2\u1793\u17b6\u179a\u179c\u17b6\u1784\u1798\u17c9\u17bc\u178c\u17bb\u179b\u1793\u17b8\u1798\u17bd\u1799\u17d7\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/end-to-end-dialog-state-reinforcement-learning-2016.html",
+      "author": [{"@type": "Person", "name": "Tiancheng Zhao (Carnegie Mellon University)"},{"@type": "Person", "name": "Maxine Eskenazi (Carnegie Mellon University)"}],
+      "datePublished": "2016 (Proceedings of the SIGDIAL 2016 Conference)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Towards End-to-End Learning for Dialog State Tracking and Management using Deep Reinforcement Learning",
+        "url": "N/A"
+      },
+      "keywords": ["Dialog State Tracking", "Deep Reinforcement Learning", "End-to-End Framework", "Task-oriented Dialog Systems", "Partially Observable Markov Decision Process"],
+      "about": "Machine Learning / Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1786\u17d2\u1796\u17c4\u17c7\u1791\u17c5\u179a\u1780\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u178a\u17be\u1798\u178a\u179b\u17cb\u1785\u1794\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178f\u17b6\u1798\u178a\u17b6\u1793 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796\u179f\u1793\u17d2\u1791\u1793\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1794\u17c2\u1794\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5",
+          "item": "https://khmerresearch.com/papers/technology/end-to-end-dialog-state-reinforcement-learning-2016.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ឆ្ពោះទៅរកការរៀនពីដើមដល់ចប់សម្រាប់ការតាមដាន និងការគ្រប់គ្រ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Towards End-to-End Learning for Dialog State Tracking and Management using Deep Reinforcement Learning<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ឆ្ពោះទៅរកការរៀនពីដើមដល់ចប់សម្រាប់ការតាមដាន និងការគ្រប់គ្រងស្ថានភាពសន្ទនា ដោយប្រើប្រាស់ការរៀនពង្រឹងបែបស៊ីជម្រៅ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Towards End-to-End Learning for Dialog State Tracking and Management using Deep Reinforcement Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Tiancheng Zhao (Carnegie Mellon University), Maxine Eskenazi (Carnegie Mellon University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2016 (Proceedings of the SIGDIAL 2016 Conference)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាប្រព័ន្ធសន្ទនាតម្រង់ទិសគោលដៅ (Task-oriented dialog systems) បែបប្រពៃណី ដែលជួបការលំបាកក្នុងការកែតម្រូវកំហុស និងភាពអាស្រ័យគ្នារវាងម៉ូឌុលនីមួយៗនៃប្រព័ន្ធ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើឡើងនូវក្របខ័ណ្ឌប្រព័ន្ធពីដើមដល់ចប់ (End-to-end framework) តែមួយដោយប្រើប្រាស់បណ្តាញ Deep Recurrent Q-Networks (DRQN) រួមជាមួយក្បួនដោះស្រាយបែបកូនកាត់។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់បណ្តាញត្រឡប់រំលឹកឡើងវិញបែបស៊ីជម្រៅ (Deep Recurrent Q-Network - DRQN)</li>
+            
+            <li>ការរៀនពង្រឹងបែបកូនកាត់រួមបញ្ចូលគ្នានូវការរៀនមានការត្រួតពិនិត្យ (Hybrid Reinforcement Learning & Supervised Learning)</li>
+            
+            <li>ការវាយតម្លៃលើកម្មវិធីក្លែងធ្វើហ្គេមសំណួរចំនួន ២០ (20 Question Game conversational game simulator)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធកូនកាត់ Hybrid-RL ទទួលបានអត្រាឈ្នះ ៩០,៥% ខ្ពស់ជាងប្រព័ន្ធគោល (Baseline) ដែលទទួលបានត្រឹមតែ ៦៨,៥% និងប្រព័ន្ធ RL សុទ្ធទទួលបាន ៨៥,៦%។</li>
+            
+            <li>ម៉ូដែលថ្មីនេះអាចទាញយកអត្ថប្រយោជន៍ពីការរៀនមានការត្រួតពិនិត្យ ដែលធ្វើឱ្យវាមានល្បឿននៃការរៀនសូត្រលឿនជាងវិធីសាស្ត្រ RL សុទ្ធ។</li>
+            
+            <li>ការវិភាគបង្ហាញថាប្រព័ន្ធនេះអាចចាប់យកព័ត៌មានសំខាន់ៗដោយស្វ័យប្រវត្តិទៅក្នុងទម្រង់តំណាងស្ថានភាពសន្ទនាដែលលាក់កំបាំង (Latent dialog state) ប្រកបដោយប្រសិទ្ធភាព។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Baseline (Modular Baseline)</span></strong><br>ប្រព័ន្ធគោល (ម៉ូឌុលដាច់ដោយឡែក)</td>
+                <td>មានល្បឿននៃការរៀនសូត្រលឿននៅដំណាក់កាលដំបូង។</td>
+                <td>ដំណើរការឆាប់ដល់កម្រិតកំណត់ និងមិនអាចឈានដល់កម្រិតល្អប្រសើរបំផុត ព្រោះវាមិនត្រូវបានបណ្តុះបណ្តាលរួមគ្នា (Not jointly trained) ដែលធ្វើឱ្យមានកំហុសក្នុងការកត់ត្រាស្ថានភាព។</td>
+                <td>ទទួលបានអត្រាឈ្នះ ៦៨,៥% និងប្រើចំនួនជុំមធ្យម ១២,២។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">RL (Pure Deep Reinforcement Learning)</span></strong><br>ការរៀនពង្រឹងបែបស៊ីជម្រៅសុទ្ធ</td>
+                <td>អាចឈានដល់ដំណើរការខ្ពស់នៅពេលបញ្ចប់ការបណ្តុះបណ្តាល និងមានភាពប្រុងប្រយ័ត្នខ្ពស់ក្នុងការឆ្លើយ។</td>
+                <td>ជួបការលំបាកនៅដំណាក់កាលដំបូង និងមានភាពយឺតយ៉ាវក្នុងការរៀន (Slow convergence) ដោយសាររង្វាន់ (Reward) មានភាពយឺតយ៉ាវ។</td>
+                <td>ទទួលបានអត្រាឈ្នះ ៨៥,៦% និងប្រើចំនួនជុំមធ្យម ២១,៦។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hybrid-RL</span></strong><br>ការរៀនពង្រឹងបែបកូនកាត់ (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>ឈានដល់ដំណោះស្រាយល្អបំផុតបានលឿនជាង RL សុទ្ធ ដោយទាញយកប្រយោជន៍ពីស្លាកទិន្នន័យនៃការតាមដានស្ថានភាព (State tracking labels)។</td>
+                <td>ទាមទារឱ្យមានទិន្នន័យដែលមានការបិទស្លាក (Labelled data) មួយចំនួនសម្រាប់ការហ្វឹកហាត់រួមគ្នា។</td>
+                <td>ទទួលបានអត្រាឈ្នះខ្ពស់បំផុត ៩០,៥% និងប្រើចំនួនជុំមធ្យម ១៩,២២។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីតម្លៃធនធាននោះទេ ប៉ុន្តែផ្អែកលើទំហំនៃម៉ូដែល វាទាមទារធនធានកុំព្យូទ័រធន់មធ្យមទៅខ្ពស់ និងបរិស្ថានក្លែងធ្វើសម្រាប់ការហ្វឹកហាត់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនដែលមានកាតក្រាហ្វិក (GPU) សម្រាប់ការហ្វឹកហាត់ម៉ូដែល Deep Learning ដែលមានប៉ារ៉ាម៉ែត្រជាង ៤៧ម៉ឺន រហូតដល់ ១២០.០០០ ជំហាន។</li>
+        
+        <li><strong>Dataset & Environment:</strong> ទាមទារទិន្នន័យសម្រាប់បង្កើតកម្មវិធីក្លែងធ្វើ (Simulator) ដូចជាមូលដ្ឋានទិន្នន័យ (Database) និងកម្រងអត្ថបទសន្ទនាពិតប្រាកដ។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅលើ Deep Reinforcement Learning (DQN, DRQN), POMDP និងដំណើរការភាសាធម្មជាតិ (NLP)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើតេស្តលើកម្មវិធីក្លែងធ្វើហ្គេមសំណួរចំនួន ២០ (20Q Game) ដោយពឹងផ្អែកលើទិន្នន័យមនុស្សល្បីៗពី Freebase និងទិន្នន័យសន្ទនាពី Switchboard Dialog Act (SWDA) Corpus ដែលជាភាសាអង់គ្លេស។ សម្រាប់ប្រទេសកម្ពុជា នេះមានន័យថាការអនុវត្តជាក់ស្តែងតម្រូវឱ្យមានការប្រមូលទិន្នន័យសន្ទនាជាភាសាខ្មែរ (Khmer Dialog Corpus) និងការរៀបចំមូលដ្ឋានទិន្នន័យដែលមានរចនាសម្ព័ន្ធច្បាស់លាស់ជាមុនសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ End-to-End នេះមានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធសន្ទនាស្វ័យប្រវត្តិឆ្លាតវៃ (Task-oriented Chatbots) នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (Banking & Finance):</strong> អាចប្រើដើម្បីបង្កើត Chatbot ឆ្លាតវៃសម្រាប់ធនាគារ (ឧទាហរណ៍៖ ABA, ACLEDA) ដើម្បីជួយអតិថិជនសាកសួរសមតុល្យគណនី ឬធ្វើប្រតិបត្តិការផ្ទេរប្រាក់ដោយប្រើភាសាធម្មជាតិ (Natural Language)។</li>
+            
+            <li><strong>សេវាកម្មទូរគមនាគមន៍ (Telecommunications):</strong> ក្រុមហ៊ុនដូចជា Cellcard ឬ Smart អាចប្រើប្រព័ន្ធនេះដើម្បីបង្កើតភ្នាក់ងារនិម្មិតដែលអាចដោះស្រាយបញ្ហាអតិថិជន និងណែនាំគម្រោងអ៊ិនធឺណិតផ្សេងៗដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>សេវាកម្មសាធារណៈរបស់រដ្ឋ (Public Services):</strong> អាចអនុវត្តនៅក្នុងប្រព័ន្ធរបស់ក្រសួងនានាដើម្បីជួយប្រជាពលរដ្ឋស្វែងរកព័ត៌មានអំពីឯកសារផ្លូវច្បាប់ នីតិវិធីរដ្ឋបាល ឬការចុះបញ្ជីអាជីវកម្ម។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះអាចជួយស្វ័យប្រវត្តិកម្មអន្តរកម្មស្មុគស្មាញ ដែលនឹងកាត់បន្ថយថ្លៃដើមប្រតិបត្តិការ និងបង្កើនប្រសិទ្ធភាពសេវាកម្មបម្រើអតិថិជននៅទូទាំងស្ថាប័នរដ្ឋ និងឯកជន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Deep Learning និង NLP:</strong> ចាប់ផ្តើមសិក្សាអំពីបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត ជាពិសេសម៉ូដែល <span class="en">LSTM (Long Short-Term Memory)</span> សម្រាប់ការអានប្រយោគ ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span>។</li>
+            
+            <li><strong>ស្វែងយល់ពីប្រព័ន្ធ Reinforcement Learning (RL):</strong> សិក្សាទ្រឹស្តីអំពី <span class="en">Markov Decision Process (MDP)</span> និងក្បួនដោះស្រាយ <span class="en">Q-Learning</span> ដោយផ្តោតលើការអនុវត្តជាក់ស្តែងនៃ <span class="en">Deep Q-Network (DQN)</span> តាមរយៈឯកសារ <span class="en">Sutton & Barto</span> ឬវគ្គសិក្សាតាមអ៊ីនធឺណិត។</li>
+            
+            <li><strong>រៀបចំទិន្នន័យ និងបង្កើតបរិស្ថានក្លែងធ្វើ (Simulator):</strong> បង្កើតបរិស្ថានក្លែងធ្វើសាមញ្ញមួយ (ឧ. ហ្គេមសាកសួររកឈ្មោះខេត្តនៅកម្ពុជា) ដោយប្រើប្រាស់ <span class="en">Python (OpenAI Gym / Gymnasium)</span> និងរៀបចំមូលដ្ឋានទិន្នន័យខ្នាតតូចដែលមានលក្ខណៈសម្បត្តិខេត្តនីមួយៗ។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែលកូនកាត់ (Hybrid-RL Agent):</strong> សរសេរកូដដើម្បីភ្ជាប់បណ្តាញ <span class="en">LSTM</span> ជាមួយ <span class="en">RL agent</span> ដើម្បីបង្កើតជា <span class="en">DRQN</span> ហើយសាកល្បងបណ្តុះបណ្តាលវាជាមួយបរិស្ថានក្លែងធ្វើដែលបានបង្កើតនៅជំហានទី៣ ដោយបញ្ចូលការរៀនមានការត្រួតពិនិត្យ (Supervised learning)។</li>
+            
+            <li><strong>ធ្វើសមាហរណកម្មជាមួយភាសាខ្មែរ:</strong> ប្រើប្រាស់ឧបករណ៍បំបែកពាក្យខ្មែរដូចជា <span class="en">Khmer Word Segmentation</span> (ឧទាហរណ៍៖ <span class="en">KhmerNLP</span>) ដើម្បីបំប្លែងអត្ថបទខ្មែរទៅជាវ៉ិចទ័រ (<span class="en">Word Embeddings</span>) សម្រាប់បញ្ជូលទៅក្នុងប្រព័ន្ធតាមដានស្ថានភាពសន្ទនា (State Tracker)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Task-oriented dialog systems</span></td>
+                <td>ជាប្រព័ន្ធកុំព្យូទ័រដែលត្រូវបានបង្កើតឡើងដើម្បីធ្វើអន្តរកម្មជាមួយមនុស្សតាមរយៈភាសា ដើម្បីសម្រេចកិច្ចការជាក់លាក់ណាមួយ ដូចជាការកក់សំបុត្រយន្តហោះ កក់សណ្ឋាគារ ឬស្វែងរកព័ត៌មាន ជាជាងគ្រាន់តែជជែកលេងកម្សាន្តទូទៅ។</td>
+                <td>ដូចជាភ្នាក់ងារបម្រើអតិថិជនតាមទូរស័ព្ទ ដែលសួរនាំយើងរហូតដល់អាចជួយដោះស្រាយបញ្ហា ឬតម្រូវការរបស់យើងបានចប់សព្វគ្រប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Reinforcement Learning</span></td>
+                <td>ជាបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតដែលរួមបញ្ចូលគ្នារវាងការរៀនកម្រិតជ្រៅ (Deep Learning) និងការរៀនតាមរយៈការសាកល្បងនិងទទួលរង្វាន់ (Reinforcement Learning) ដែលអនុញ្ញាតឱ្យប្រព័ន្ធរៀនធ្វើការសម្រេចចិត្តក្នុងស្ថានភាពស្មុគស្មាញដោយខ្លួនឯង។</td>
+                <td>ដូចជាការបង្ហាត់សត្វឆ្កែឱ្យចេះធ្វើតាមបញ្ជា ដោយឲ្យចំណីនៅពេលវាធ្វើត្រូវ និងដាក់ទោសនៅពេលវាធ្វើខុស រហូតដល់វាចងចាំទម្លាប់ល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dialog State Tracking</span></td>
+                <td>ជាដំណើរការនៃការកត់ត្រា និងធ្វើបច្ចុប្បន្នភាពព័ត៌មាននិងគោលបំណងរបស់អ្នកប្រើប្រាស់ជាបន្តបន្ទាប់ពីមួយប្រយោគទៅមួយប្រយោគ ដើម្បីឲ្យប្រព័ន្ធដឹងថាការសន្ទនាកំពុងស្ថិតនៅត្រង់ណា និងត្រូវការអ្វីបន្តទៀត។</td>
+                <td>ដូចជាអ្នករត់តុដែលកត់ត្រាការកម្ម៉ង់ម្ហូបរបស់យើងចូលក្នុងសៀវភៅចំណាំ និងកែប្រែវានៅពេលយើងប្តូរចិត្តពីញ៉ាំសាច់គោទៅសាច់ជ្រូក ដើម្បីកុំឲ្យធ្វើម្ហូបខុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Partially Observable Markov Decision Process</span></td>
+                <td>ជាទម្រង់គណិតវិទ្យាដែលប្រើសម្រាប់ធ្វើការសម្រេចចិត្តជាបន្តបន្ទាប់ ក្នុងស្ថានភាពដែលប្រព័ន្ធ (Agent) មិនអាចដឹង ឬមើលឃើញព័ត៌មានទាំងអស់ពីបរិស្ថានជុំវិញខ្លួនបានច្បាស់លាស់ (មានភាពមិនប្រាកដប្រជាខ្ពស់)។</td>
+                <td>ដូចជាការដើរក្នុងបន្ទប់ងងឹត ដែលយើងត្រូវស្ទាបរកផ្លូវដោយពឹងផ្អែកលើការស្មាននិងអារម្មណ៍ ព្រោះយើងមិនអាចមើលឃើញពាសពេញបន្ទប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Recurrent Q-Network</span></td>
+                <td>ជាប្រភេទនៃម៉ូដែលសរសៃប្រសាទសិប្បនិម្មិតដែលប្រើប្រាស់មុខងារចងចាំ (LSTM) ដើម្បីរក្សាទុកព័ត៌មានពីអតីតកាល ជួយឲ្យប្រព័ន្ធអាចសម្រេចចិត្តបានត្រឹមត្រូវក្នុងករណីដែលសកម្មភាពបច្ចុប្បន្នត្រូវពឹងផ្អែកលើប្រវត្តិសកម្មភាពមុនៗ។</td>
+                <td>ដូចជាមនុស្សដែលពូកែចងចាំសាច់រឿងតាំងពីដើមរហូតដល់ចប់ ធ្វើឲ្យពួកគេអាចទាយដឹងពីអ្វីដែលនឹងកើតឡើងបន្ទាប់បានយ៉ាងត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">End-to-end framework</span></td>
+                <td>ជាទម្រង់នៃការអភិវឌ្ឍប្រព័ន្ធដែលទទួលទិន្នន័យបញ្ចូល និងបញ្ចេញលទ្ធផលក្នុងតំណាក់កាលតែមួយនិងរួមគ្នា (Jointly optimized) ដោយមិនចាំបាច់បំបែកជាម៉ូឌុលតូចៗដាច់ដោយឡែកពីគ្នា ដែលជួយកាត់បន្ថយកំហុសរវាងផ្នែកនីមួយៗ។</td>
+                <td>ដូចជារោងចក្រដែលយកវត្ថុធាតុដើមចូលម៉ាស៊ីនតែមួយ ហើយចេញមកក្លាយជាផលិតផលសម្រេចតែម្តង ដោយមិនចាំបាច់ឆ្លងកាត់ម៉ាស៊ីនច្រើនដំណាក់កាល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Credit assignment problem</span></td>
+                <td>ជាបញ្ហាប្រឈមក្នុងការកំណត់ថាតើសកម្មភាព ឬផ្នែកណាមួយពិតប្រាកដ (ក្នុងចំណោមជំហានជាច្រើន) ដែលជាមូលហេតុធ្វើឲ្យប្រព័ន្ធទទួលបានភាពជោគជ័យ ឬបរាជ័យនៅទីបញ្ចប់។</td>
+                <td>ដូចជាពេលក្រុមបាល់ទាត់មួយចាញ់ការប្រកួត វាពិបាកក្នុងការចង្អុលចំៗថាតើកំហុសនេះមកពីអ្នកចាំទី ខ្សែការពារ ឬខ្សែប្រយុទ្ធឲ្យប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Experience replay</span></td>
+                <td>ជាបច្ចេកទេសបណ្តុះបណ្តាលដែលប្រព័ន្ធឆ្លាតវៃរក្សាទុកនូវបទពិសោធន៍ចាស់ៗរបស់វា រួចទាញយកវាមកហ្វឹកហាត់សារជាថ្មីម្តងហើយម្តងទៀតដោយចៃដន្យ ដើម្បីបង្កើនល្បឿន និងប្រសិទ្ធភាពនៃការរៀនសូត្រ។</td>
+                <td>ដូចជាសិស្សដែលរំលឹកមេរៀន និងមើលលំហាត់ចាស់ៗឡើងវិញជាច្រើនដងមុនពេលប្រឡង ដើម្បីឲ្យចាំស្ទាត់ និងកុំឲ្យភ្លេចក្បួន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cooling-optimization-data-center-drl-2018.html">
+                    <span class="km">ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់មជ្ឈមណ្ឌលទិន្នន័យបៃតង តាមរយៈការរៀនសូត្របែបពង្រឹងកម្លាំងយ៉ាងស៊ីជម្រៅ (Deep Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Transforming Cooling Optimization for Green Data Center via Deep Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/pomdp-continuous-observation-dialogue-management-2005.html">
+                    <span class="km">ដំណើរការសម្រេចចិត្តម៉ាកូវដែលអាចសង្កេតបានដោយផ្នែក ជាមួយនឹងការសង្កេតជាបន្តបន្ទាប់សម្រាប់ការគ្រប់គ្រងកិច្ចសន្ទនា</span><br>
+                    <span class="en article-original-title">Partially Observable Markov Decision Processes with Continuous Observations for Dialogue Management</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html">
+                    <span class="km">វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero</span><br>
+                    <span class="en article-original-title">深度强化学习进展: 从AlphaGo到AlphaGo Zero</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/modeling-spoken-decision-dialogue-strategy-2010.html">
+                    <span class="km">ការបង្កើតគំរូនៃការសន្ទនាសម្រាប់ការសម្រេចចិត្តដោយការនិយាយ និងការធ្វើឲ្យប្រសើរឡើងនូវយុទ្ធសាស្ត្រសន្ទនារបស់វា</span><br>
+                    <span class="en article-original-title">Modeling Spoken Decision Making Dialogue and Optimization of its Dialogue Strategy</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/wireless-power-mec-offloading-drl-2024.html">
+                    <span class="km">ការបញ្ជូនការគណនាដោយមានជំនួយពីថាមពលឥតខ្សែនៅក្នុងការគណនាចល័តនៅគែមបណ្តាញ៖ វិធីសាស្ត្រសិក្សាបំប៉នស៊ីជម្រៅ (Deep Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Wireless Power Assisted Computation Offloading in Mobile Edge Computing: A Deep Reinforcement Learning Approach</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+reinforcement+learning+for+task-oriented+dialog+systems" target="_blank" rel="noopener"><span class="en">Deep reinforcement learning for task-oriented dialog systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=End-to-end+dialog+state+tracking+and+dialogue+management" target="_blank" rel="noopener"><span class="en">End-to-end dialog state tracking and dialogue management</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Partially+Observable+Markov+Decision+Process+POMDP+in+conversational+AI" target="_blank" rel="noopener"><span class="en">Partially Observable Markov Decision Process POMDP in conversational AI</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+Recurrent+Q-Networks+DRQN+for+text-based+games+and+NLP" target="_blank" rel="noopener"><span class="en">Deep Recurrent Q-Networks DRQN for text-based games and NLP</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Joint+optimization+of+natural+language+understanding+and+dialog+policy" target="_blank" rel="noopener"><span class="en">Joint optimization of natural language understanding and dialog policy</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

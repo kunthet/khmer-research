@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS) សម្រាប់អត្ថបទភាសាហូសា (Hausa) ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាកង្វះខាតធនធានផ្នែកដំណើរការភាសាធម្មជាតិ (NLP) សម្រាប់ភាសាហូសា (Hausa) ជាពិសេសគឺការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS Tagging) ដែលនៅមានកម្រិត។">
+    
+    <meta name="keywords" content="Part-of-Speech Tagging, Hidden Markov Model, Hausa Language, Natural Language Processing, Corpus Annotation, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/pos-tagging-hausa-texts-hmm-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/pos-tagging-hausa-texts-hmm-2020.html">
+    <meta property="og:title" content="ការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS) សម្រាប់អត្ថបទភាសាហូសា (Hausa) ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាកង្វះខាតធនធានផ្នែកដំណើរការភាសាធម្មជាតិ (NLP) សម្រាប់ភាសាហូសា (Hausa) ជាពិសេសគឺការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS Tagging) ដែលនៅមានកម្រិត។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020 Dutse Journal of Pure and Applied Sciences (DUJOPAS)">
+    
+    <meta property="article:tag" content="Part-of-Speech Tagging">
+    
+    <meta property="article:tag" content="Hidden Markov Model">
+    
+    <meta property="article:tag" content="Hausa Language">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+    <meta property="article:tag" content="Corpus Annotation">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS) សម្រាប់អត្ថបទភាសាហូសា (Hausa) ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាកង្វះខាតធនធានផ្នែកដំណើរការភាសាធម្មជាតិ (NLP) សម្រាប់ភាសាហូសា (Hausa) ជាពិសេសគឺការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS Tagging) ដែលនៅមានកម្រិត។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17b7\u1791\u179f\u17d2\u179b\u17b6\u1780\u1795\u17d2\u1793\u17c2\u1780\u1793\u17c3\u179f\u1793\u17d2\u1791\u179a\u1780\u1790\u17b6 (POS) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u1797\u17b6\u179f\u17b6\u17a0\u17bc\u179f\u17b6 (Hausa) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+      "name": "Parts-of-Speech Tagging of Hausa-Based Texts Using Hidden Markov Model",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1780\u1784\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1792\u1793\u1792\u17b6\u1793\u1795\u17d2\u1793\u17c2\u1780\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1797\u17b6\u179f\u17b6\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7 (NLP) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6\u17a0\u17bc\u179f\u17b6 (Hausa) \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1782\u17ba\u1780\u17b6\u179a\u1794\u17b7\u1791\u179f\u17d2\u179b\u17b6\u1780\u1795\u17d2\u1793\u17c2\u1780\u1793\u17c3\u179f\u1793\u17d2\u1791\u179a\u1780\u1790\u17b6 (POS Tagging) \u178a\u17c2\u179b\u1793\u17c5\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/pos-tagging-hausa-texts-hmm-2020.html",
+      "author": [{"@type": "Person", "name": "Aminu Tukur (Bayero University, Kano)"},{"@type": "Person", "name": "Kabir Umar (Bayero University, Kano)"},{"@type": "Person", "name": "Anas Sa\u2019idu Muhammad (Bayero University, Kano)"}],
+      "datePublished": "2020 Dutse Journal of Pure and Applied Sciences (DUJOPAS)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Parts-of-Speech Tagging of Hausa-Based Texts Using Hidden Markov Model",
+        "url": "N/A"
+      },
+      "keywords": ["Part-of-Speech Tagging", "Hidden Markov Model", "Hausa Language", "Natural Language Processing", "Corpus Annotation"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17b7\u1791\u179f\u17d2\u179b\u17b6\u1780\u1795\u17d2\u1793\u17c2\u1780\u1793\u17c3\u179f\u1793\u17d2\u1791\u179a\u1780\u1790\u17b6 (POS) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u1797\u17b6\u179f\u17b6\u17a0\u17bc\u179f\u17b6 (Hausa) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+          "item": "https://khmerresearch.com/papers/technology/pos-tagging-hausa-texts-hmm-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS) សម្រាប់អត្ថបទភាសាហូសា (H...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Parts-of-Speech Tagging of Hausa-Based Texts Using Hidden Markov Model<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS) សម្រាប់អត្ថបទភាសាហូសា (Hausa) ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Parts-of-Speech Tagging of Hausa-Based Texts Using Hidden Markov Model</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Aminu Tukur (Bayero University, Kano), Kabir Umar (Bayero University, Kano), Anas Sa’idu Muhammad (Bayero University, Kano)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 Dutse Journal of Pure and Applied Sciences (DUJOPAS)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាកង្វះខាតធនធានផ្នែកដំណើរការភាសាធម្មជាតិ (NLP) សម្រាប់ភាសាហូសា (Hausa) ជាពិសេសគឺការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS Tagging) ដែលនៅមានកម្រិត។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រមូលសំណុំទិន្នន័យអត្ថបទ និងបង្ហាត់ម៉ូដែលស្ថិតិដើម្បីធ្វើការបិទស្លាកនិងចំណាត់ថ្នាក់ប្រភេទពាក្យដោយស្វ័យប្រវត្តិ។
+        
+        <ul>
+            
+            <li>ការប្រមូលសំណុំទិន្នន័យអត្ថបទ (Text Corpus Collection) ចំនួនជាង ៣០០០ពាក្យ ពីប្រភពវិទ្យុ Freedomradio និង AfriHausa</li>
+            
+            <li>ការបិទស្លាកដោយដៃ (Manual Annotation) ជាមួយផ្នែកនៃសន្ទរកថាចំនួន ៨ ប្រភេទ បូករួមទាំងសញ្ញាសម្គាល់កាល (Tense Maker) និងចំនួន (Number)</li>
+            
+            <li>ការបង្ហាត់ម៉ូដែល Hidden Markov (Hidden Markov Model Training) ដោយប្រើប្រាស់បច្ចេកទេសចែករំលែកទិន្នន័យ ២៥/៧៥ សម្រាប់ការធ្វើតេស្តនិងការហ្វឹកហាត់</li>
+            
+            <li>ការផ្ទៀងផ្ទាត់ដោយអ្នកជំនាញ (Expert Verification) លើសំណាកទិន្នន័យចំនួន ១៨៧ពាក្យ ដើម្បីវាយតម្លៃភាពត្រឹមត្រូវ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលប្រព័ន្ធទទួលបានភាពត្រឹមត្រូវជាមធ្យម ៧៩,១៤% ក្នុងការបិទស្លាក POS (ឬ ៧៦,៧៩% ជាក់ស្តែងលើការផ្ទៀងផ្ទាត់សំណាក ១៨៧ពាក្យ ដោយអ្នកជំនាញ)។</li>
+            
+            <li>ការបិទស្លាកសម្រាប់គុណនាម (Adjectives) សម្រេចបានភាពត្រឹមត្រូវខ្ពស់បំផុតរហូតដល់ ១០០% ស្របតាមរចនាសម្ព័ន្ធវេយ្យាករណ៍ហូសា។</li>
+            
+            <li>ការបិទស្លាកសម្រាប់ឈ្នាប់ (Conjunctions) ទទួលបានភាពត្រឹមត្រូវទាបជាងគេត្រឹមតែ ៥០% ដែលបង្ហាញពីតម្រូវការក្នុងការបង្កើនទំហំទិន្នន័យហ្វឹកហាត់បន្ថែមទៀតនាពេលអនាគត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Hidden Markov Model (HMM)</span></strong><br>ម៉ូដែល Hidden Markov (ការបិទស្លាកផ្អែកលើស្ថិតិ)</td>
+                <td>ងាយស្រួលប្រើប្រាស់សម្រាប់សំណុំទិន្នន័យតូច (Friendly for small datasets) និងអាចវិភាគបរិបទនៃពាក្យនៅក្នុងប្រយោគបានល្អដើម្បីកំណត់ប្រភេទពាក្យ។</td>
+                <td>អាចមានភាពត្រឹមត្រូវទាបលើប្រភេទពាក្យមួយចំនួន (ឧទាហរណ៍៖ ឈ្នាប់/Conjunctions) ប្រសិនបើមិនមានទិន្នន័យហ្វឹកហាត់គ្រប់គ្រាន់។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវជាមធ្យម ៧៩,១៤% និងសម្រេចបាន ៧៦,៧៥% លើការផ្ទៀងផ្ទាត់សំណាកដោយអ្នកជំនាញ (គុណនាមទទួលបាន ១០០%)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Rule-Based POS Tagger</span></strong><br>ការបិទស្លាកផ្អែកលើវិធាន (Rule-Based)</td>
+                <td>អាចផ្តល់ភាពត្រឹមត្រូវខ្ពស់ប្រសិនបើច្បាប់និងវិធានវេយ្យាករណ៍ត្រូវបានសរសេរយ៉ាងច្បាស់លាស់និងហ្មត់ចត់ដោយអ្នកជំនាញភាសា។</td>
+                <td>ទាមទារការសរសេរវិធានដោយដៃស្មុគស្មាញ ចំណាយពេលយូរ និងពិបាកអនុវត្តសម្រាប់ភាសាដែលមានទម្រង់រូបសាស្ត្រ (Morphology) ស្មុគស្មាញច្រើន។</td>
+                <td>មិនមានលទ្ធផលជាក់លាក់ពីការធ្វើតេស្តក្នុងឯកសារនេះទេ ប៉ុន្តែត្រូវបានលើកឡើងថាជាវិធីសាស្ត្រប្រពៃណីដែលទាមទារកម្លាំងពលកម្មខ្ពស់ពីអ្នកជំនាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Maximum Entropy (MaxEnt)</span></strong><br>អង់ត្រូវពីអតិបរមា (Maximum Entropy)</td>
+                <td>រួមបញ្ចូលគុណសម្បត្តិនៃវិធីសាស្ត្រផ្សេងៗ (TBL, SDT) និងអាចបង្កើតរបាយប្រូបាប៊ីលីតេស្លាកសម្រាប់ពាក្យនីមួយៗបានយ៉ាងល្អ។</td>
+                <td>មិនស័ក្តិសមសម្រាប់ការបណ្តុះបណ្តាលដែលប្រើប្រាស់សំណុំទិន្នន័យតូចនោះទេ (Not suitable for small dataset)។</td>
+                <td>ត្រូវបានពិភាក្សាក្នុងរំលឹកទ្រឹស្តី (Literature Review) ថាមិនស័ក្តិសមនឹងបរិបទភាសាដែលមានទិន្នន័យតិចតួចដូចជា Hausa ឡើយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់ពីការចំណាយលើផ្នែករឹង (Hardware) នោះទេ ប៉ុន្តែបានសង្កត់ធ្ងន់លើតម្រូវការទិន្នន័យអត្ថបទនិងកម្លាំងពលកម្មពីអ្នកជំនាញភាសា។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទាមទារការប្រមូលសំណុំទិន្នន័យអត្ថបទ (Corpus) យ៉ាងហោចណាស់ ៣០០០ពាក្យ ពីប្រភពផ្សេងៗ (ដូចជាអត្ថបទវិទ្យុ) និងវចនានុក្រម។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការអ្នកជំនាញភាសាវិទ្យា (Linguistics Expert) ដើម្បីធ្វើការបិទស្លាកដោយដៃ (Manual Annotation) ជាមូលដ្ឋាន និងដើម្បីផ្ទៀងផ្ទាត់លទ្ធផល។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រធម្មតាដែលមានសមត្ថភាពដំណើរការម៉ូដែលស្ថិតិ (Statistical Models) ដោយមិនទាមទារកម្លាំងម៉ាស៊ីន (GPU) ធំដុំដូចម៉ូដែល Deep Learning ឡើយ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងលើភាសាហូសា (Hausa) ដែលជាភាសាមានធនធានតិចតួច (Low-resource language) នៅទ្វីបអាហ្រ្វិក ដោយប្រើប្រាស់ទិន្នន័យពីអត្ថបទវិទ្យុផ្សាយសំឡេង។ នេះមានសារៈសំខាន់សម្រាប់កម្ពុជា ព្រោះភាសាខ្មែរក៏ប្រឈមនឹងបញ្ហាកង្វះទិន្នន័យស្រដៀងគ្នា ដែលទាមទារវិធីសាស្ត្រងាយស្រួលនិងប្រើប្រាស់ទិន្នន័យតិចដើម្បីបង្ហាត់ម៉ូដែលអក្សរសាស្ត្រ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ Hidden Markov Model នេះមានអត្ថប្រយោជន៍ និងភាពជាក់ស្តែងខ្ពស់ណាស់សម្រាប់ការចាប់ផ្តើមអភិវឌ្ឍឧបករណ៍ NLP សម្រាប់ភាសាខ្មែរនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិទ្យាស្ថានជាតិភាសាជាតិ (National Language Institute):</strong> អាចប្រើប្រាស់គំរូ HMM ដើម្បីកសាងប្រព័ន្ធបិទស្លាកប្រភេទពាក្យ (POS Tagging) ស្តង់ដារសម្រាប់ភាសាខ្មែរ ដោយចាប់ផ្តើមពីសំណុំទិន្នន័យតូចៗដែលរៀបចំដោយអ្នកជំនាញភាសា។</li>
+            
+            <li><strong>វិស័យសារព័ត៌មាន និងប្រព័ន្ធផ្សព្វផ្សាយ (Media & Journalism):</strong> ស្ថាប័នព័ត៌មានក្នុងស្រុកអាចប្រើប្រាស់បច្ចេកវិទ្យានេះជាជំហានដំបូងដើម្បីទាញយកព័ត៌មាន (Information Extraction) និងវិភាគអត្ថបទព័ត៌មានប្រចាំថ្ងៃដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ការអភិវឌ្ឍបច្ចេកវិទ្យាអប់រំ (EdTech Development):</strong> សហគ្រិនឬអ្នកស្រាវជ្រាវកម្ពុជាអាចបង្កើតកម្មវិធីត្រួតពិនិត្យវេយ្យាករណ៍ (Grammar checker) ឬកម្មវិធីបកប្រែដែលត្រូវការការស្គាល់ប្រភេទពាក្យជាមុន។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់ម៉ូដែលស្ថិតិដូចជា HMM ផ្តល់នូវផ្លូវដ៏មានប្រសិទ្ធភាពមួយក្នុងការធ្វើឌីជីថលនីយកម្ម និងដំណើរការអត្ថបទភាសាខ្មែរ ទោះបីជាមានទិន្នន័យដំបូងតិចតួចក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>រៀបចំប្រភេទពាក្យស្តង់ដារ (Define POS Tags):</strong> កំណត់ប្រភេទពាក្យ (POS tags) ភាសាខ្មែរឱ្យបានច្បាស់លាស់ (ឧទាហរណ៍៖ នាម កិរិយាសព្ទ គុណនាម ឈ្នាប់) ដោយសហការជាមួយសាស្ត្រាចារ្យភាសាវិទ្យានៅសាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ (RUPP)។</li>
+            
+            <li><strong>ប្រមូលនិងបិទស្លាកទិន្នន័យ (Corpus Annotation):</strong> ប្រមូលអត្ថបទភាសាខ្មែរពីគេហទំព័រព័ត៌មាន ឬឯកសារផ្លូវការប្រមាណ ៣០០០ ទៅ ៥០០០ពាក្យ រួចធ្វើការបិទស្លាកប្រភេទពាក្យដោយដៃ (Manual Annotation) ដើម្បីធ្វើជាទិន្នន័យហ្វឹកហាត់។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែលមូលដ្ឋាន (Develop Baseline Model):</strong> សិក្សាពីការសរសេរកូដដោយប្រើប្រាស់ <span class="en">Python</span> និងបណ្ណាល័យ <span class="en">NLTK (Natural Language Toolkit)</span> ដើម្បីបង្កើតម៉ូដែល <span class="en">Hidden Markov Model</span> សម្រាប់ដំណើរការទិន្នន័យដែលបានបិទស្លាក។</li>
+            
+            <li><strong>ហ្វឹកហាត់និងវាស់ស្ទង់ (Train and Evaluate):</strong> បែងចែកទិន្នន័យជាពីរផ្នែក (៧៥% សម្រាប់ហ្វឹកហាត់ និង ២៥% សម្រាប់ធ្វើតេស្ត) រួចដំណើរការម៉ូដែលដើម្បីគណនាភាពត្រឹមត្រូវ (Accuracy) ដូចដែលបានអនុវត្តក្នុងឯកសារស្រាវជ្រាវនេះ។</li>
+            
+            <li><strong>វិភាគកំហុសនិងកែលម្អ (Error Analysis & Refinement):</strong> ពិនិត្យមើលលទ្ធផលដែលម៉ូដែលទាយខុស (ឧទាហរណ៍៖ ពាក្យដែលមានថ្នាក់ពាក្យច្រើនអាស្រ័យលើបរិបទ) ហើយបន្ថែមទិន្នន័យហ្វឹកហាត់ថ្មីៗទៅលើចំណុចខ្សោយទាំងនោះដើម្បីបង្កើនភាពត្រឹមត្រូវ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Part-of-Speech (POS) Tagging</span></td>
+                <td>ដំណើរការក្នុងកុំព្យូទ័រដើម្បីកំណត់ប្រភេទពាក្យនីមួយៗក្នុងប្រយោគ (ដូចជានាម កិរិយាសព្ទ គុណនាម) ដោយផ្អែកលើអត្ថន័យ និងបរិបទរបស់វានៅក្នុងអត្ថបទ ដើម្បីឲ្យម៉ាស៊ីនអាចយល់ពីវេយ្យាករណ៍។</td>
+                <td>ដូចជាការបិទស្លាកឈ្មោះតួនាទីឲ្យកីឡាករម្នាក់ៗក្នុងក្រុមបាល់ទាត់ (អ្នកចាំទី ខ្សែប្រយុទ្ធ) ដើម្បីរៀបចំយុទ្ធសាស្ត្រលេងឲ្យត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model</span></td>
+                <td>ម៉ូដែលស្ថិតិមួយដែលត្រូវបានប្រើដើម្បីទស្សន៍ទាយស្ថានភាពដែលយើងមើលមិនឃើញ (ឧទាហរណ៍៖ ប្រភេទពាក្យ) ដោយផ្អែកលើទិន្នន័យដែលយើងអាចសង្កេតឃើញជាបន្តបន្ទាប់ (ឧទាហរណ៍៖ ស៊េរីនៃពាក្យក្នុងប្រយោគ) តាមរយៈការគណនាប្រូបាប៊ីលីតេ។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាអាកាសធាតុថ្ងៃស្អែកភ្លៀងឬអត់ ដោយគ្រាន់តែសង្កេតមើលថាតើមនុស្សពាក់អាវភ្លៀងដើរតាមផ្លូវឬអត់ ដោយមិនបាច់មើលមេឃដោយផ្ទាល់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Corpus</span></td>
+                <td>បណ្តុំអត្ថបទ ឬទិន្នន័យភាសាដ៏ធំមួយដែលត្រូវបានប្រមូលផ្តុំនិងរៀបចំយ៉ាងមានប្រព័ន្ធ ដើម្បីប្រើប្រាស់សម្រាប់ការស្រាវជ្រាវភាសាវិទ្យា ឬបណ្តុះបណ្តាលម៉ូដែលបញ្ញាសិប្បនិម្មិត។</td>
+                <td>ដូចជាបណ្ណាល័យឌីជីថលដ៏ធំមួយដែលផ្ទុកសៀវភៅ និងឯកសាររាប់ពាន់ក្បាលសម្រាប់ឲ្យកុំព្យូទ័រអាននិងរៀនសូត្រពីរបៀបដែលមនុស្សប្រើប្រាស់ភាសា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stemming</span></td>
+                <td>ដំណើរការកាត់ចោលនូវផ្នត់ដើម ផ្នត់កណ្តាល ឬផ្នត់ចុងនៃពាក្យមួយ ដើម្បីស្វែងរកឫសគល់ដើមរបស់ពាក្យនោះ (ឧទាហរណ៍ កាត់ពាក្យ "connecting" ឬ "connected" ទៅជាទម្រង់ដើម "connect")។</td>
+                <td>ដូចជាការបកសំបកនិងកាត់មែកឈើចេញ ដើម្បីយកតែដើមទំហំស្នូលរបស់វាសម្រាប់យកទៅប្រើប្រាស់បន្ត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Lemmatization</span></td>
+                <td>ដំណើរការស្រដៀងនឹង Stemming ដែរ ប៉ុន្តែវាមានភាពឆ្លាតវៃជាងដោយវាបំប្លែងពាក្យទៅជាទម្រង់ដើមពិតប្រាកដរបស់វាក្នុងវចនានុក្រម ដោយផ្អែកលើវិធានវេយ្យាករណ៍ (ឧទាហរណ៍ បំប្លែង "better" ទៅជា "good")។</td>
+                <td>ដូចជាការមើលរូបថតមនុស្សចាស់ ហើយអាចស្រមៃដឹងច្បាស់ថាមនុស្សនោះមានមុខមាត់យ៉ាងណានៅពេលគេនៅក្មេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Morphology</span></td>
+                <td>ការសិក្សាអំពីរចនាសម្ព័ន្ធ និងការកកើតនៃពាក្យនៅក្នុងភាសាមួយ ដែលរួមមានការបំបែក ឬផ្សំពាក្យដោយប្រើផ្នត់ផ្សេងៗដើម្បីបង្កើតអត្ថន័យថ្មី។</td>
+                <td>ដូចជាការសិក្សាពីរបៀបយករូបតុក្កតាឡេហ្គោ (Lego) តូចៗមកតម្រៀបចូលគ្នាដើម្បីបង្កើតជារូបរាងយានយន្តឬផ្ទះថ្មីមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bigram</span></td>
+                <td>ការចាប់គូពាក្យពីរដែលនៅជាប់គ្នាជាបន្តបន្ទាប់នៅក្នុងអត្ថបទមួយ ដើម្បីសិក្សាពីទំនាក់ទំនងនិងប្រូបាប៊ីលីតេដែលពាក្យទាំងពីរនេះលេចឡើងជាមួយគ្នា ដែលជាជំនួយក្នុងការទស្សន៍ទាយប្រភេទពាក្យបន្ទាប់។</td>
+                <td>ដូចជាការតាមដានមិត្តភក្តិពីរនាក់ដែលតែងតែដើរលេងជាមួយគ្នាជានិច្ច ធ្វើឲ្យយើងអាចទាយដឹងថាបើឃើញម្នាក់ នោះប្រាកដជាឃើញម្នាក់ទៀតដើរតាមក្រោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+                    <span class="km">ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង</span><br>
+                    <span class="en article-original-title">DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/voice-identification-python-hmm-2020.html">
+                    <span class="km">ការកំណត់អត្តសញ្ញាណសំឡេងនៅក្នុង Python ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Voice Identification in Python Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/speech-recognition-hidden-markov-model-2018.html">
+                    <span class="km">ការសម្គាល់សំឡេង និងម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Speech Recognition and Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-network-methods-nlp-review-2017.html">
+                    <span class="km">វិធីសាស្ត្របណ្ដាញសរសៃប្រសាទសម្រាប់ការដំណើរការភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Network Methods for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-transfer-learning-nlp-ruder-2019.html">
+                    <span class="km">ការរៀនផ្ទេរចំណេះដឹងតាមបណ្ដាញសរសៃប្រសាទសម្រាប់ការកែច្នៃភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Transfer Learning for Natural Language Processing</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Part-of-speech+tagging+techniques+for+low-resource+African+languages" target="_blank" rel="noopener"><span class="en">Part-of-speech tagging techniques for low-resource African languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model+vs+Maximum+Entropy+for+statistical+POS+tagging" target="_blank" rel="noopener"><span class="en">Hidden Markov Model vs Maximum Entropy for statistical POS tagging</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Building+and+manually+annotating+text+corpora+for+under-represented+languages" target="_blank" rel="noopener"><span class="en">Building and manually annotating text corpora for under-represented languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Morphological+analysis+and+stemming+algorithms+for+Hausa+and+Chadic+languages" target="_blank" rel="noopener"><span class="en">Morphological analysis and stemming algorithms for Hausa and Chadic languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=NLP+techniques+for+resolving+morphological+ambiguity+in+Semitic+and+Afroasiatic+texts" target="_blank" rel="noopener"><span class="en">NLP techniques for resolving morphological ambiguity in Semitic and Afroasiatic texts</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

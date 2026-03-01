@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ក្របខ័ណ្ឌអនុមានសម្រាប់ការទទួលស្គាល់សកម្មភាពផ្អែកលើស្រទាប់ន័យវិទ្យាច្រើនកម្រិត | KhmerResearch.com</title>
+    <meta name="description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃគម្លាតន័យវិទ្យារវាងសកម្មភាពដែលអាចសង្កេតបាន និងសកម្មភាពពិតប្រាកដរបស់មនុស្ស នៅក្នុងប្រព័ន្ធទទួលស្គាល់សកម្មភាព (Activity Recognition)។">
+    
+    <meta name="keywords" content="Human Activity Recognition, Semantic Layer, Environment Context, Hidden Markov Model, Logistic Regression, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/inference-framework-activity-recognition-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/inference-framework-activity-recognition-2015.html">
+    <meta property="og:title" content="ក្របខ័ណ្ឌអនុមានសម្រាប់ការទទួលស្គាល់សកម្មភាពផ្អែកលើស្រទាប់ន័យវិទ្យាច្រើនកម្រិត | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃគម្លាតន័យវិទ្យារវាងសកម្មភាពដែលអាចសង្កេតបាន និងសកម្មភាពពិតប្រាកដរបស់មនុស្ស នៅក្នុងប្រព័ន្ធទទួលស្គាល់សកម្មភាព (Activity Recognition)។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015 CAAI Transactions on Intelligent Systems">
+    
+    <meta property="article:tag" content="Human Activity Recognition">
+    
+    <meta property="article:tag" content="Semantic Layer">
+    
+    <meta property="article:tag" content="Environment Context">
+    
+    <meta property="article:tag" content="Hidden Markov Model">
+    
+    <meta property="article:tag" content="Logistic Regression">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ក្របខ័ណ្ឌអនុមានសម្រាប់ការទទួលស្គាល់សកម្មភាពផ្អែកលើស្រទាប់ន័យវិទ្យាច្រើនកម្រិត">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃគម្លាតន័យវិទ្យារវាងសកម្មភាពដែលអាចសង្កេតបាន និងសកម្មភាពពិតប្រាកដរបស់មនុស្ស នៅក្នុងប្រព័ន្ធទទួលស្គាល់សកម្មភាព (Activity Recognition)។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17d2\u179a\u1794\u1781\u17d0\u178e\u17d2\u178c\u17a2\u1793\u17bb\u1798\u17b6\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179f\u17d2\u179a\u1791\u17b6\u1794\u17cb\u1793\u17d0\u1799\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1785\u17d2\u179a\u17be\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f",
+      "name": "\u57fa\u4e8e\u8bed\u4e49\u5206\u5c42\u7684\u884c\u4e3a\u63a8\u7406\u6846\u67b6",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1782\u1798\u17d2\u179b\u17b6\u178f\u1793\u17d0\u1799\u179c\u17b7\u1791\u17d2\u1799\u17b6\u179a\u179c\u17b6\u1784\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u178a\u17c2\u179b\u17a2\u17b6\u1785\u179f\u1784\u17d2\u1780\u17c1\u178f\u1794\u17b6\u1793 \u1793\u17b7\u1784\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1796\u17b7\u178f\u1794\u17d2\u179a\u17b6\u1780\u178a\u179a\u1794\u179f\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796 (Activity Recognition)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/inference-framework-activity-recognition-2015.html",
+      "author": [{"@type": "Person", "name": "NIE Huirao (Tsinghua University)"},{"@type": "Person", "name": "TAO Linmi (Tsinghua University)"}],
+      "datePublished": "2015 CAAI Transactions on Intelligent Systems",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "\u57fa\u4e8e\u8bed\u4e49\u5206\u5c42\u7684\u884c\u4e3a\u63a8\u7406\u6846\u67b6",
+        "url": "http://www.cnki.net/kcms/detail/23.1538.TP.20150302.1106.008.html"
+      },
+      "keywords": ["Human Activity Recognition", "Semantic Layer", "Environment Context", "Hidden Markov Model", "Logistic Regression"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17d2\u179a\u1794\u1781\u17d0\u178e\u17d2\u178c\u17a2\u1793\u17bb\u1798\u17b6\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179f\u17d2\u179a\u1791\u17b6\u1794\u17cb\u1793\u17d0\u1799\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1785\u17d2\u179a\u17be\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f",
+          "item": "https://khmerresearch.com/papers/technology/inference-framework-activity-recognition-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ក្របខ័ណ្ឌអនុមានសម្រាប់ការទទួលស្គាល់សកម្មភាពផ្អែកលើស្រទាប់...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 基于语义分层的行为推理框架<br>
+        
+        <strong>Source:</strong> <a href="http://www.cnki.net/kcms/detail/23.1538.TP.20150302.1106.008.html" target="_blank">www.cnki.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ក្របខ័ណ្ឌអនុមានសម្រាប់ការទទួលស្គាល់សកម្មភាពផ្អែកលើស្រទាប់ន័យវិទ្យាច្រើនកម្រិត</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 基于语义分层的行为推理框架</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> NIE Huirao (Tsinghua University), TAO Linmi (Tsinghua University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015 CAAI Transactions on Intelligent Systems</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហានៃគម្លាតន័យវិទ្យារវាងសកម្មភាពដែលអាចសង្កេតបាន និងសកម្មភាពពិតប្រាកដរបស់មនុស្ស នៅក្នុងប្រព័ន្ធទទួលស្គាល់សកម្មភាព (Activity Recognition)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើឡើងនូវវិធីសាស្ត្រធ្វើគំរូបរិបទបរិស្ថានដោយប្រយោល និងក្របខ័ណ្ឌអនុមានសកម្មភាពន័យវិទ្យាច្រើនស្រទាប់ដែលបែងចែកដំណើរការជា ២ ដំណាក់កាល។
+        
+        <ul>
+            
+            <li>ការធ្វើគំរូបរិបទបរិស្ថានដោយប្រយោល (Implicit Environment Context Modeling)</li>
+            
+            <li>ការបែងចែកលក្ខណៈពិសេសជាសាធារណៈ និងឯកជន (Public and Private Features Classification)</li>
+            
+            <li>ការអនុមានតាមរយៈតក្កវិទ្យាតំរែតំរង់ (Logistic Regression Inference)</li>
+            
+            <li>ការអនុមានផ្អែកលើគំរូម៉ាកូវលាក់កំបាំង (Hidden Markov Model - HMM)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការដាក់បញ្ចូលរិបទបរិស្ថានទៅក្នុងគំរូ បានបង្កើនភាពត្រឹមត្រូវនៃការទទួលស្គាល់សកម្មភាពពី ៨៣,៤% ទៅ ៨៥,២០%។</li>
+            
+            <li>ក្របខ័ណ្ឌអនុមាន ២ ស្រទាប់ (2-layer inference) សម្រេចបានភាពត្រឹមត្រូវ ៨៥,៦១% ដែលខ្ពស់ជាងគំរូអនុមាន ១ ស្រទាប់ ហើយជួយកាត់បន្ថយហានិភ័យនៃការរៀនលើស (Overfitting)។</li>
+            
+            <li>ក្របខ័ណ្ឌអនុមានជាដំណាក់កាលនេះ ជួយបង្កើនប្រសិទ្ធភាពប្រព័ន្ធយ៉ាងខ្លាំង ដោយជៀសវាងការទាញយករាល់លក្ខណៈពិសេសទាំងអស់ពីបរិស្ថានដោយគ្មានការរើសអើង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Single-layer Inference (Logistic Regression/HMM)</span></strong><br>គំរូអនុមាន១ស្រទាប់ (ប្រើប្រាស់ភ័ស្តុតាងទាំងអស់ក្នុងពេលតែមួយ)</td>
+                <td>មានភាពសាមញ្ញក្នុងការរៀបចំ និងត្រូវការចំនួនប៉ារ៉ាម៉ែត្រសរុបតិចតួចជាងគំរូច្រើនស្រទាប់។</td>
+                <td>ងាយប្រឈមនឹងបញ្ហា Overfitting លើគំរូនីមួយៗ ហើយមិនអាចទាញយកអត្ថប្រយោជន៍ពីការបែងចែកប្រភេទលក្ខណៈពិសេស (Features) ឡើយ ដែលធ្វើឱ្យរងការរំខានពីទិន្នន័យមិនចាំបាច់។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ ៨៥,២០% ជាមួយនឹងគំរូចំនួន១ និងប៉ារ៉ាម៉ែត្រសរុប ៣១៥ (សម្រាប់ការធ្វើតេស្តដោយប្រើ Logistic Regression)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Two-layer Semantic Inference (Proposed Method)</span></strong><br>គំរូអនុមានន័យវិទ្យា២ស្រទាប់ (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>កាត់បន្ថយប៉ារ៉ាម៉ែត្រក្នុងគំរូនីមួយៗ (ជៀសវាងហានិភ័យ Overfitting) និងបង្កើនប្រសិទ្ធភាពប្រព័ន្ធដោយទាញយកលក្ខណៈពិសេសតាមលំដាប់លំដោយ ពីព្រិលៗទៅច្បាស់លាស់។</td>
+                <td>ទាមទារការបែងចែកលក្ខណៈពិសេសជាសាធារណៈ និងឯកជន (Public/Private Features) ជាមុនដោយប្រើប្រាស់ចំណេះដឹងពីអ្នកជំនាញ ព្រមទាំងមានការកើនឡើងនូវចំនួនប៉ារ៉ាម៉ែត្រសរុបនៃប្រព័ន្ធទាំងមូល។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវកើនឡើងដល់ ៨៥,៦១% ជាមួយនឹងគំរូចំនួន៨ និងប៉ារ៉ាម៉ែត្រសរុប ៥៣៩ (សម្រាប់ការធ្វើតេស្តដោយប្រើ Logistic Regression)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារឧបករណ៍ចាប់យករូបភាពវីដេអូច្រើនជ្រុង (Multi-camera hardware) និងសមត្ថភាពកុំព្យូទ័រក្នុងការគណនាម៉ូដែល Machine Learning។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កាមេរ៉ា CCD ចំនួន ៤ គ្រាប់ និងកាតចាប់យករូបភាពវីដេអូ AV800 ដើម្បីថតសកម្មភាពក្នុងបន្ទប់ពីជ្រុងផ្សេងៗគ្នាក្នុងពេលតែមួយ។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យវីដេអូចំនួន ២២៥.៥៥១ ហ្វ្រេម ដែលថតពីសកម្មភាពប្រចាំថ្ងៃចំនួន ៧ ប្រភេទនៅក្នុងបរិស្ថានដែលបានរៀបចំទុក។</li>
+        
+        <li><strong>Software:</strong> កុំព្យូទ័រដែលមានសមត្ថភាពដំណើរការក្បួនដោះស្រាយ Logistic Regression និង Hidden Markov Model (HMM) ដើម្បីធ្វើការអនុមាន។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការចំណេះដឹងក្នុងការកត់ត្រាលក្ខណៈពិសេសពីវីដេអូដោយដៃ (Manual Annotation) និងជំនាញផ្នែកកុំព្យូទ័រចក្ខុ (Computer Vision)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រមូលទិន្នន័យនៅក្នុងបរិស្ថានមន្ទីរពិសោធន៍ក្នុងផ្ទះដែលបានរៀបចំទុកជាមុន ដោយផ្តោតលើសកម្មភាពតែ ៧ ប្រភេទប៉ុណ្ណោះ។ នេះមានន័យថា វានឹងជួបប្រទះបញ្ហានៅពេលយកមកប្រើប្រាស់ក្នុងបរិបទជាក់ស្តែងនៅប្រទេសកម្ពុជា ដែលមានការរៀបចំផ្ទះ ពន្លឺ វត្ថុប្រើប្រាស់ និងទម្លាប់នៃការរស់នៅខុសប្លែកពីទិន្នន័យពិសោធន៍មួយនេះទាំងស្រុង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានកម្រិតទិន្នន័យក្តី ប៉ុន្តែក្របខ័ណ្ឌអនុមាននេះមានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធឆ្លាតវៃ (Smart Systems) នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>Smart Healthcare (ការថែទាំសុខភាពឆ្លាតវៃ):</strong> អាចប្រើប្រាស់នៅមន្ទីរពេទ្យធំៗក្នុងរាជធានីភ្នំពេញ (ឧទាហរណ៍ មន្ទីរពេទ្យកាល់ម៉ែត) ឬមណ្ឌលថែទាំមនុស្សចាស់ ដើម្បីតាមដានសកម្មភាពអ្នកជំងឺ និងផ្តល់ជំនួយសង្គ្រោះទាន់ពេលវេលានៅពេលមានករណីដួល ឬគ្រោះថ្នាក់ ដោយមិនបំពានឯកជនភាពខ្លាំងពេក។</li>
+            
+            <li><strong>Smart Home & Borey Security (សន្តិសុខបុរី និងផ្ទះឆ្លាតវៃ):</strong> អាចដាក់បញ្ចូលក្នុងប្រព័ន្ធកាមេរ៉ាសុវត្ថិភាពតាមគម្រោងអភិវឌ្ឍន៍បុរីនានា ដើម្បីបែងចែករវាងសកម្មភាពប្រចាំថ្ងៃធម្មតា និងសកម្មភាពគួរឱ្យសង្ស័យ ដោយផ្អែកលើបរិបទនៃបរិស្ថានជុំវិញ (ឧទាហរណ៍៖ ការឈរនៅជិតរបងផ្ទះយូរជាងធម្មតា)។</li>
+            
+        </ul>
+        
+        
+        <p>ដើម្បីឱ្យប្រព័ន្ធនេះដំណើរការល្អនៅកម្ពុជា គេចាំបាច់ត្រូវប្រមូលទិន្នន័យវីដេអូបន្ថែមពីបរិស្ថានជាក់ស្តែងនៅក្នុងប្រទេស ដើម្បីបង្វឹកម៉ូដែលនេះឡើងវិញឱ្យស៊ីគ្នានឹងបរិបទក្នុងស្រុក។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Computer Vision:</strong> ចាប់ផ្តើមដោយការរៀនប្រើប្រាស់ភាសាកូដ Python ជាមួយនឹងបណ្ណាល័យ OpenCV និង Scikit-learn ដើម្បីយល់ពីរបៀបដំណើរការរូបភាព ទាញយកលក្ខណៈពិសេស និងសាងសង់ម៉ូដែលមូលដ្ឋាន។</li>
+            
+            <li><strong>អនុវត្តការទាញយកលក្ខណៈពិសេស (Feature Extraction):</strong> សិក្សាប្រើប្រាស់ម៉ូដែលស្វែងរកទីតាំងមនុស្ស និងវត្ថុ (ឧទាហរណ៍ YOLO ឬ MediaPipe) ដើម្បីទាញយកទិន្នន័យទីតាំង ឥរិយាបថមនុស្ស និងការប្រាស្រ័យទាក់ទងជាមួយវត្ថុផ្សេងៗចេញពីវីដេអូដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>សាងសង់ម៉ូដែលអនុមានសាមញ្ញ:</strong> សាកល្បងសាងសង់គំរូ Logistic Regression និង Hidden Markov Model (HMM) ជាមុនសិន ដោយប្រើទិន្នន័យសកម្មភាពសាមញ្ញ (ឧទាហរណ៍៖ ការអង្គុយ និងការដើរ) ដើម្បីស្វែងយល់ពីរបៀបដែលម៉ូដែលធ្វើការទស្សន៍ទាយ។</li>
+            
+            <li><strong>បង្កើតក្របខ័ណ្ឌអនុមាន២ស្រទាប់ (2-Layer Inference Framework):</strong> រៀបចំកូដបែងចែកលក្ខណៈពិសេសជាសាធារណៈ (Public - មានរួមគ្នាច្រើនសកម្មភាព) និងឯកជន (Private - មានជាក់លាក់សម្រាប់សកម្មភាពមួយ) រួចសរសេរ Logic សម្រាប់ធ្វើការអនុមានជា ២ ដំណាក់កាលដូចដែលបានរៀបរាប់ក្នុងឯកសារស្រាវជ្រាវនេះ។</li>
+            
+            <li><strong>ប្រមូលទិន្នន័យក្នុងស្រុក និងធ្វើតេស្តម៉ូដែល:</strong> ដំឡើងកាមេរ៉ាក្នុងបន្ទប់ពិសោធន៍ ឬផ្ទះពិតប្រាកដរបស់អ្នក ដើម្បីថតវីដេអូសកម្មភាពប្រចាំថ្ងៃ បន្ទាប់មកយកទិន្នន័យទាំងនោះមកបង្វឹកម៉ូដែល (Train) និងវាយតម្លៃប្រសិទ្ធភាពឡើងវិញដើម្បីកែតម្រូវចំណុចខ្វះខាត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Human-Centered Computing</span></td>
+                <td>ជាគំរូនៃប្រព័ន្ធកុំព្យូទ័រដែលផ្តោតលើការយល់ដឹងពីអាកប្បកិរិយា តម្រូវការ និងអារម្មណ៍របស់មនុស្ស ជាជាងការឱ្យមនុស្សសម្របតាមម៉ាស៊ីន (ដូចជាការវាយអក្សរលើក្ដារចុច) ដោយប្រើការប្រាស្រ័យទាក់ទងតាមបែបធម្មជាតិ។</td>
+                <td>ដូចជាការបង្រៀនកុំព្យូទ័រឱ្យចេះមើលទឹកមុខ និងកាយវិការរបស់យើង ដើម្បីដឹងថាយើងចង់បានអ្វី ដោយមិនបាច់បញ្ជាវាផ្ទាល់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Semantic Gap</span></td>
+                <td>គឺជាភាពខុសគ្នារវាងទិន្នន័យកម្រិតទាបដែលម៉ាស៊ីនចាប់យកបាន (ឧទាហរណ៍៖ ចលនាដៃ ឬភីកសែលក្នុងវីដេអូ) និងអត្ថន័យពិតប្រាកដដែលមនុស្សអាចយល់បាន (ឧទាហរណ៍៖ សកម្មភាព "ផឹកទឹក") នៅក្នុងប្រព័ន្ធចក្ខុកុំព្យូទ័រ។</td>
+                <td>ដូចជាការឃើញមនុស្សម្នាក់លើកដៃឡើង ប៉ុន្តែយើងមិនដឹងច្បាស់ថាគាត់ចង់សួរសំណួរ ឬគ្រាន់តែពត់ខ្លួននោះទេ ទាល់តែមានបរិបទដើម្បីបញ្ជាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Environment Context</span></td>
+                <td>ជាព័ត៌មានអំពីបរិយាកាសជុំវិញខ្លួនមនុស្ស ដូចជាទីតាំង វត្ថុប្រើប្រាស់ (កៅអី តុ ទូរទស្សន៍) ដែលត្រូវបានប្រើដើម្បីជួយគណនាប្រូបាប៊ីលីតេថាតើសកម្មភាពអ្វីមួយងាយនឹងកើតឡើងនៅទីនោះឬអត់។</td>
+                <td>ដូចជាការសន្និដ្ឋានថា បើមនុស្សម្នាក់នៅក្នុងផ្ទះបាយ គាត់ទំនងជាកំពុងធ្វើម្ហូបជាជាងការដេក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model</span></td>
+                <td>ជាម៉ូដែលស្ថិតិប្រើសម្រាប់ទស្សន៍ទាយស្ថានភាពដែលលាក់កំបាំង (ដូចជាអត្ថន័យនៃសកម្មភាព) ដោយផ្អែកលើការសង្កេតមើលព្រឹត្តិការណ៍ជាបន្តបន្ទាប់តាមពេលវេលា (Time-series data)។</td>
+                <td>ដូចជាការទាយថាអាកាសធាតុថ្ងៃនេះភ្លៀងឬអត់ ដោយគ្រាន់តែសង្កេតមើលថាតើមនុស្សនៅខាងក្រៅកាន់ឆ័ត្រឬអត់ជាច្រើនថ្ងៃជាប់ៗគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Logistic Regression</span></td>
+                <td>ជាក្បួនដោះស្រាយផ្នែក Machine Learning ដែលប្រើសម្រាប់គណនាឱកាស (Probability) ដែលព្រឹត្តិការណ៍មួយនឹងកើតឡើង ឬសម្រាប់បែងចែកចំណាត់ថ្នាក់ទិន្នន័យជាក្រុមៗ ដោយផ្អែកលើលក្ខណៈពិសេសដែលបានសង្កេតឃើញ។</td>
+                <td>ដូចជាការថ្លឹងទម្ងន់នៃភស្តុតាងផ្សេងៗ ដើម្បីសម្រេចចិត្តចុងក្រោយថា "មែន" ឬ "មិនមែន" (ឧទាហរណ៍៖ តើគាត់កំពុងញ៉ាំបាយមែនទេ?)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Public and Private Features</span></td>
+                <td>នៅក្នុងក្របខ័ណ្ឌនេះ លក្ខណៈពិសេសសាធារណៈ (Public) គឺជាចំណុចរួមដែលមាននៅក្នុងសកម្មភាពច្រើន (ឧ. ការកាន់វត្ថុក្នុងដៃ) ចំណែកលក្ខណៈពិសេសឯកជន (Private) គឺជាចំណុចជាក់លាក់ដែលមានតែក្នុងសកម្មភាពណាមួយប៉ុណ្ណោះ (ឧ. វត្ថុនោះជាកែវទឹក)។</td>
+                <td>ដូចជាសត្វស្លាបទាំងអស់មានស្លាប (Public Feature) ប៉ុន្តែមានតែសត្វសេកទេដែលអាចនិយាយបាន (Private Feature)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multilayer Inference</span></td>
+                <td>ជាដំណើរការនៃការទាញសេចក្តីសន្និដ្ឋានជាដំណាក់កាលៗ ដោយកាត់បន្ថយភាពស្មុគស្មាញ។ វាចាប់ផ្តើមពីការយល់ដឹងជារួម (ព្រិលៗ) ដោយប្រើប្រាស់ Public Features បន្ទាប់មកទើបស្វែងរក Private Features បន្ថែម ដើម្បីកំណត់អត្ថន័យឱ្យបានច្បាស់លាស់។</td>
+                <td>ដូចជាការលេងល្បែងទាយពាក្យ ដោយផ្ដើមពីការទាយថាវាជា "សត្វ" រួចទើបសួររកតម្រុយបន្តបន្ទាប់រហូតដឹងថាវាជា "សត្វឆ្កែ"។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/statistical-methods-speech-recognition-2004.html">
+                    <span class="km">វិធីសាស្ត្រស្ថិតិសម្រាប់ការសម្គាល់ និងការយល់ដឹងអំពីសំឡេងនិយាយ</span><br>
+                    <span class="en article-original-title">Statistical Methods for the Recognition and Understanding of Speech</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/performance-eval-ml-algorithms-mcdm-2019.html">
+                    <span class="km">ការវាយតម្លៃដំណើរការនៃក្បួនដោះស្រាយការរៀនម៉ាស៊ីនដែលមានការត្រួតពិនិត្យដោយប្រើបច្ចេកទេសធ្វើសេចក្តីសម្រេចចិត្តពហុលក្ខណៈវិនិច្ឆ័យ</span><br>
+                    <span class="en article-original-title">Performance Evaluation of Supervised Machine Learning Algorithms Using Multi-Criteria Decision Making Techniques</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+                    <span class="km">ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង</span><br>
+                    <span class="en article-original-title">DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/pos-tagging-hausa-texts-hmm-2020.html">
+                    <span class="km">ការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS) សម្រាប់អត្ថបទភាសាហូសា (Hausa) ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Parts-of-Speech Tagging of Hausa-Based Texts Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/voice-identification-python-hmm-2020.html">
+                    <span class="km">ការកំណត់អត្តសញ្ញាណសំឡេងនៅក្នុង Python ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Voice Identification in Python Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Human+Activity+Recognition%22+AND+%22Environment+Context%22+AND+%22Inference+Framework" target="_blank" rel="noopener"><span class="en">Human Activity Recognition" AND "Environment Context" AND "Inference Framework</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Semantic+Gap%22+AND+%22Video+Activity+Recognition%22+AND+%22Context-aware+computing" target="_blank" rel="noopener"><span class="en">Semantic Gap" AND "Video Activity Recognition" AND "Context-aware computing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model%22+OR+%22HMM%22+AND+%22Human+Behavior+Understanding%22+AND+%22Multilayer" target="_blank" rel="noopener"><span class="en">Hidden Markov Model" OR "HMM" AND "Human Behavior Understanding" AND "Multilayer</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Human-Centered+Computing%22+AND+%22Pervasive+Computing%22+AND+%22Action+Recognition" target="_blank" rel="noopener"><span class="en">Human-Centered Computing" AND "Pervasive Computing" AND "Action Recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Logistic+Regression%22+AND+%22Feature+Classification%22+AND+%22Activity+Inference" target="_blank" rel="noopener"><span class="en">Logistic Regression" AND "Feature Classification" AND "Activity Inference</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

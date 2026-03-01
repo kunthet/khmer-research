@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការតាមដានតំបន់ឆ្នេរសម្រាប់ការរកឃើញការផ្លាស់ប្តូរដោយប្រើប្រាស់ទិន្នន័យ LiDAR ពហុពេលវេលា | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយតម្រូវការក្នុងការតាមដានការផ្លាស់ប្តូរផ្ទៃដីឆ្នេរសមុទ្រសកម្ម និងការរអិលបាក់ដីតាមពេលវេលា ដោយប្រើប្រាស់ទិន្នន័យចំណុចពពក (Point Cloud) ត្រីមាត្រព...">
+    
+    <meta name="keywords" content="LiDAR, Change Detection, Optical Flow, Heightmap, Point Cloud, Coastal Monitoring, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/coastal-monitoring-change-detection-lidar-2014.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/coastal-monitoring-change-detection-lidar-2014.html">
+    <meta property="og:title" content="ការតាមដានតំបន់ឆ្នេរសម្រាប់ការរកឃើញការផ្លាស់ប្តូរដោយប្រើប្រាស់ទិន្នន័យ LiDAR ពហុពេលវេលា | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយតម្រូវការក្នុងការតាមដានការផ្លាស់ប្តូរផ្ទៃដីឆ្នេរសមុទ្រសកម្ម និងការរអិលបាក់ដីតាមពេលវេលា ដោយប្រើប្រាស់ទិន្នន័យចំណុចពពក (Point Cloud) ត្រីមាត្រពហុពេលវេលា។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2014 Proceedings of CESCG">
+    
+    <meta property="article:tag" content="LiDAR">
+    
+    <meta property="article:tag" content="Change Detection">
+    
+    <meta property="article:tag" content="Optical Flow">
+    
+    <meta property="article:tag" content="Heightmap">
+    
+    <meta property="article:tag" content="Point Cloud">
+    
+    <meta property="article:tag" content="Coastal Monitoring">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការតាមដានតំបន់ឆ្នេរសម្រាប់ការរកឃើញការផ្លាស់ប្តូរដោយប្រើប្រាស់ទិន្នន័យ LiDAR ពហុពេលវេលា">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយតម្រូវការក្នុងការតាមដានការផ្លាស់ប្តូរផ្ទៃដីឆ្នេរសមុទ្រសកម្ម និងការរអិលបាក់ដីតាមពេលវេលា ដោយប្រើប្រាស់ទិន្នន័យចំណុចពពក (Point Cloud) ត្រីមាត្រពហុពេលវេលា។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u178f\u17b6\u1798\u178a\u17b6\u1793\u178f\u17c6\u1794\u1793\u17cb\u1786\u17d2\u1793\u17c1\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 LiDAR \u1796\u17a0\u17bb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6",
+      "name": "Coastal Monitoring for Change Detection Using Multi-temporal LiDAR Data",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u178f\u17b6\u1798\u178a\u17b6\u1793\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1795\u17d2\u1791\u17c3\u178a\u17b8\u1786\u17d2\u1793\u17c1\u179a\u179f\u1798\u17bb\u1791\u17d2\u179a\u179f\u1780\u1798\u17d2\u1798 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u17a2\u17b7\u179b\u1794\u17b6\u1780\u17cb\u178a\u17b8\u178f\u17b6\u1798\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1785\u17c6\u178e\u17bb\u1785\u1796\u1796\u1780 (Point Cloud) \u178f\u17d2\u179a\u17b8\u1798\u17b6\u178f\u17d2\u179a\u1796\u17a0\u17bb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/coastal-monitoring-change-detection-lidar-2014.html",
+      "author": [{"@type": "Person", "name": "Denis Kolednik (University of Maribor)"},{"@type": "Person", "name": "Domen Mongus (University of Maribor)"}],
+      "datePublished": "2014 Proceedings of CESCG",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Coastal Monitoring for Change Detection Using Multi-temporal LiDAR Data",
+        "url": "N/A"
+      },
+      "keywords": ["LiDAR", "Change Detection", "Optical Flow", "Heightmap", "Point Cloud", "Coastal Monitoring"],
+      "about": "Computer Graphics and Remote Sensing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u178f\u17b6\u1798\u178a\u17b6\u1793\u178f\u17c6\u1794\u1793\u17cb\u1786\u17d2\u1793\u17c1\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 LiDAR \u1796\u17a0\u17bb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/coastal-monitoring-change-detection-lidar-2014.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការតាមដានតំបន់ឆ្នេរសម្រាប់ការរកឃើញការផ្លាស់ប្តូរដោយប្រើប្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Coastal Monitoring for Change Detection Using Multi-temporal LiDAR Data<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការតាមដានតំបន់ឆ្នេរសម្រាប់ការរកឃើញការផ្លាស់ប្តូរដោយប្រើប្រាស់ទិន្នន័យ LiDAR ពហុពេលវេលា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Coastal Monitoring for Change Detection Using Multi-temporal LiDAR Data</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Denis Kolednik (University of Maribor), Domen Mongus (University of Maribor)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2014 Proceedings of CESCG</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Graphics and Remote Sensing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយតម្រូវការក្នុងការតាមដានការផ្លាស់ប្តូរផ្ទៃដីឆ្នេរសមុទ្រសកម្ម និងការរអិលបាក់ដីតាមពេលវេលា ដោយប្រើប្រាស់ទិន្នន័យចំណុចពពក (Point Cloud) ត្រីមាត្រពហុពេលវេលា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្រគណនាលើកុំព្យូទ័រដែលមាន៤ជំហាន ដើម្បីទាញយក និងវាស់ស្ទង់ការផ្លាស់ទីរបស់ដីពីទិន្នន័យស្កេនឡាស៊ែរតាមអាកាស។
+        
+        <ul>
+            
+            <li>ការបង្កើតផែនទីកម្ពស់ (Heightmap Generation) ពីទិន្នន័យ LiDAR ដោយប្រើវិធីសាស្ត្រ Inverse Distance Weighting (IDW)</li>
+            
+            <li>ការគណនាលំហូរអុបទិក (Dense Optical Flow Computation) តាមក្បួន Farnebäck ដើម្បីស្វែងរកវ៉ិចទ័រចលនារបស់ចំណុចនីមួយៗ</li>
+            
+            <li>ការចង្កោមចំណុច (Point Clustering) ដែលមានវ៉ិចទ័រចលនាស្រដៀងគ្នាដោយប្រើក្បួនដោះស្រាយ kd-tree</li>
+            
+            <li>ការប៉ាន់ស្មានទំហំនៃការផ្លាស់ទី (Displacement Estimation) សម្រាប់ទីតាំងចង្កោមនីមួយៗ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រដែលបានស្នើឡើងសម្រេចបាននូវភាពត្រឹមត្រូវជាមធ្យម ៩៣,៧១០% ក្នុងការរកឃើញតំបន់ឆ្នេរដែលបានផ្លាស់ទី។</li>
+            
+            <li>ចំពោះការប៉ាន់ស្មានទំហំនៃការផ្លាស់ទី វិធីសាស្ត្រនេះមានកម្រិតលម្អៀងជាមធ្យម ៨,១០៣% (ស្មើនឹងភាពត្រឹមត្រូវ ៩១,៨៩៧%) នៅពេលធ្វើតេស្តលើទិន្នន័យនៃតំបន់ផលិតអំបិល Seovlje ក្នុងប្រទេសស្លូវេនី។</li>
+            
+            <li>បើទោះបីជាវិធីសាស្ត្រនេះមានភាពត្រឹមត្រូវទាបជាងវិធីសាស្ត្រវាយតម្លៃខ្សែបន្ទាត់កោងឆ្នេរ (Coastline Curvature Approach) ចំនួន ១,៧២០% ដោយសារបញ្ហាទិន្នន័យរំខាន (Noise) ក៏ដោយ វាមានសមត្ថភាពអាចចាប់យកការផ្លាស់ប្តូរផ្ទៃដីក្នុងបរិវេណធំទូលាយបានប្រសើរជាងការវាស់វែងត្រឹមតែខ្សែបន្ទាត់ឆ្នេរមួយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Proposed 4-step Optical Flow</span></strong><br>វិធីសាស្ត្រលំហូរអុបទិក៤ជំហានដែលបានស្នើឡើងនៅក្នុងឯកសារ</td>
+                <td>អាចគណនាបម្រែបម្រួលផ្ទៃដីបានធំទូលាយ (មិនត្រឹមតែខ្សែបន្ទាត់ឆ្នេរ) និងអាចចាប់យកចលនាបម្រែបម្រួលបន្តិចម្តងៗបានល្អប្រសើរ។</td>
+                <td>ងាយរងឥទ្ធិពលពីទិន្នន័យរំខាន (Noise) និងទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រ (Parameters) យ៉ាងច្បាស់លាស់សម្រាប់លំហូរអុបទិក។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩៣,៧១% ក្នុងការរកឃើញតំបន់ផ្លាស់ទី និងកម្រិតលម្អៀងជាមធ្យម ៨,១០៣% ក្នុងការប៉ាន់ស្មានទំហំនៃការផ្លាស់ទី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Coastline Curvature Approach</span></strong><br>វិធីសាស្ត្រវាយតម្លៃខ្សែបន្ទាត់កោងឆ្នេរ (របស់ Ali)</td>
+                <td>មិនសូវរងឥទ្ធិពលពីទិន្នន័យរំខាន (Noise) និងមានភាពត្រឹមត្រូវខ្ពស់ជាងបន្តិចក្នុងការប៉ាន់ស្មានទំហំនៃការផ្លាស់ទី។</td>
+                <td>គណនា និងចាប់យកការផ្លាស់ប្តូរបានតែលើខ្សែបន្ទាត់ឆ្នេរប៉ុណ្ណោះ មិនអាចផ្តល់ព័ត៌មានពីការផ្លាស់ប្តូរផ្ទៃដី ឬបរិមាណដីរួមបានទេ។</td>
+                <td>មានកម្រិតលម្អៀងជាមធ្យម ៦,៣៨៣% (មានភាពត្រឹមត្រូវខ្ពស់ជាងវិធីសាស្ត្រថ្មី ១,៧២០% ក្នុងការវាស់ទំហំផ្លាស់ទី)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់កុំព្យូទ័រលើតុធម្មតាសម្រាប់ការដំណើរការកម្មវិធី និងទាមទារទិន្នន័យចំណុចពពក (Point Cloud) ពីបច្ចេកវិទ្យា LiDAR។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រលើតុ (Desktop Workstation) ដែលមាន CPU Intel i5-3570K និង RAM 16GB DDR3 ដំណើរការជា Single-threaded។</li>
+        
+        <li><strong>Software:</strong> សរសេរកូដដោយប្រើប្រាស់ភាសា C++ ជាមួយ Qt 5 Framework និងកម្មវិធី LIDARLiVE សម្រាប់ផ្ទៀងផ្ទាត់ទិន្នន័យយោង។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យ LiDAR ចំណុចពពកទម្រង់ LAS File ពីឆ្នាំ ២០០៨ និង ២០១០ (ប្រមាណ ១០០.០០០ ចំណុចក្នុងមួយសំណុំ) និងបម្លែងជា Grid ទំហំ 0.5m។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងកម្រិតខ្ពស់ផ្នែកដំណើរការរូបភាពពីចម្ងាយ (Remote Sensing Processing) កុំព្យូទ័រក្រាហ្វិក និងក្បួនដោះស្រាយលំហូរអុបទិក (Optical Flow Algorithms)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យនៅតំបន់ផលិតអំបិល Seovlje ប្រទេសស្លូវេនី ដោយផ្តោតតែលើចំណុចផ្ទៃដីទទេ និងបានច្រានចោលចំណុចអគារ ឬរុក្ខជាតិ។ នេះជាចំណុចខ្វះខាតសម្រាប់បរិបទប្រទេសកម្ពុជា ដោយសារតំបន់ឆ្នេររបស់យើងសម្បូរទៅដោយព្រៃកោងកាង និងការអភិវឌ្ឍន៍សំណង់ ដែលទាមទារឱ្យមានយន្តការចម្រាញ់ទិន្នន័យ (Data Filtering) ច្បាស់លាស់ និងស្មុគស្មាញជាងមុន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពល និងអត្ថប្រយោជន៍ខ្ពស់សម្រាប់ស្ថាប័នរដ្ឋ និងអ្នកស្រាវជ្រាវនៅកម្ពុជា ក្នុងការតាមដានការប្រែប្រួលសណ្ឋានដីតំបន់ឆ្នេរ។</p>
+        
+        <ul>
+            
+            <li><strong>ខេត្តកំពត និងកែប (តំបន់ស្រែអំបិល និងសំណឹកឆ្នេរ):</strong> ដោយសារភូមិសាស្ត្រសិក្សាក្នុងឯកសារជាតំបន់ស្រែអំបិល វិធីសាស្ត្រនេះអាចយកមកអនុវត្តដោយផ្ទាល់នៅខេត្តកំពត និងកែប ដើម្បីតាមដានសំណឹកឆ្នេរ និងបម្រែបម្រួលផ្ទៃដី។</li>
+            
+            <li><strong>ខេត្តព្រះសីហនុ និងកោះកុង (ការអភិវឌ្ឍន៍ និងតំបន់ព្រៃកោងកាង):</strong> អាចតាមដានផលប៉ះពាល់នៃការចាក់លុបឆ្នេរសមុទ្រ ឬការប្រែប្រួលព្រៃកោងកាង ប្រសិនបើមានការកែច្នៃបន្ថែមនូវយន្តការ Optical Flow ដើម្បីរួមបញ្ចូលទិន្នន័យដែលគ្របដណ្តប់ដោយរុក្ខជាតិ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះផ្តល់នូវយន្តការស្វ័យប្រវត្តិដ៏មានប្រសិទ្ធភាព ដើម្បីជំនួសការវាស់វែងឆ្នេរដោយដៃ ដែលជួយដល់ការធ្វើផែនការទប់ស្កាត់គ្រោះមហន្តរាយ និងការគ្រប់គ្រងតំបន់ឆ្នេរនៅកម្ពុជាបានទាន់ពេលវេលា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីការរៀបចំទិន្នន័យ LiDAR (LiDAR Data Processing):</strong> ស្វែងយល់ពីរបៀបបើក មើល និងចម្រាញ់ទិន្នន័យ Point Cloud ទម្រង់ LAS ដោយប្រើប្រាស់កម្មវិធីឥតគិតថ្លៃដូចជា <span class='en'>CloudCompare</span> ឬបណ្ណាល័យ <span class='en'>PDAL</span> ដើម្បីត្រងយកតែទិន្នន័យផ្ទៃដី (Ground Points)។</li>
+            
+            <li><strong>ការបង្កើតផែនទីកម្ពស់ (Heightmap Generation):</strong> រៀនសរសេរកូដ <span class='en'>Python</span> និងប្រើប្រាស់បណ្ណាល័យ <span class='en'>SciPy</span> ដើម្បីបំប្លែងទិន្នន័យ Point Cloud ត្រីមាត្រទៅជា Heightmap ទ្វេមាត្រ តាមរយៈក្បួនដោះស្រាយ <span class='en'>Inverse Distance Weighting (IDW)</span>។</li>
+            
+            <li><strong>សិក្សាពីក្បួនដោះស្រាយលំហូរអុបទិក (Optical Flow Algorithms):</strong> សិក្សាស្វែងយល់ពីក្បួន <span class='en'>Farnebäck Dense Optical Flow</span> ដើម្បីស្វែងរកវ៉ិចទ័រចលនារបស់ផ្ទៃដី ដោយអនុវត្តផ្ទាល់លើបណ្ណាល័យ <span class='en'>OpenCV</span> នៅក្នុង <span class='en'>Python</span> ឬ <span class='en'>C++</span>។</li>
+            
+            <li><strong>ការចង្កោមទិន្នន័យចលនា (Motion Vector Clustering):</strong> អនុវត្តការប្រើប្រាស់ <span class='en'>kd-tree</span> នៅក្នុងបណ្ណាល័យ <span class='en'>scikit-learn</span> ឬ <span class='en'>PCL (Point Cloud Library)</span> ដើម្បីចង្កោមចំណុចដីដែលមានទិសដៅផ្លាស់ទីស្រដៀងគ្នា។</li>
+            
+            <li><strong>សាកល្បងលើទិន្នន័យក្នុងស្រុក (Local Data Testing):</strong> ប្រមូលទិន្នន័យពីដ្រូន (<span class='en'>Drone Photogrammetry</span>) ដែលបញ្ចេញជា Point Cloud ឬទិន្នន័យ LiDAR បើកទូលាយនៅកម្ពុជា មកធ្វើតេស្តសាកល្បង និងកែតម្រូវប៉ារ៉ាម៉ែត្រនានា ដើម្បីកាត់បន្ថយការរំខានពីទិន្នន័យអគារ និងដើមឈើ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">LiDAR</span></td>
+                <td>បច្ចេកវិទ្យាបញ្ជូនពន្លឺឡាស៊ែរទៅកាន់ផ្ទៃដី និងវាស់ពេលវេលាដែលចំណាំងផ្លាតត្រឡប់មកវិញ ដើម្បីគណនាចម្ងាយ និងបង្កើតជារូបភាពត្រីមាត្រនៃផ្ទៃដី។</td>
+                <td>ដូចជាសត្វប្រចៀវប្រើសំឡេងដើម្បីដឹងពីទីតាំងវត្ថុនៅទីងងឹត ប៉ុន្តែ LiDAR ប្រើពន្លឺឡាស៊ែរជំនួសវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Point-cloud</span></td>
+                <td>សំណុំនៃទិន្នន័យចំណុចរាប់លាននៅក្នុងលំហត្រីមាត្រ (3D) ដែលតំណាងឱ្យរូបរាងខាងក្រៅនៃវត្ថុ ឬផ្ទៃដីដែលបានស្កេនដោយឧបករណ៍ដូចជា LiDAR។</td>
+                <td>ដូចជាការយកគ្រាប់ខ្សាច់តូចៗមករៀបជាទម្រង់វត្ថុអ្វីមួយ ដែលគ្រាប់ខ្សាច់នីមួយៗតំណាងឱ្យចំណុចមួយកូអរដោណេ (x,y,z) ក្នុងលំហ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Heightmap</span></td>
+                <td>រូបភាពទ្វេមាត្រ (2D) ដែលភីកសែល (Pixel) នីមួយៗផ្ទុកនូវតម្លៃកម្ពស់ (Elevation) នៃផ្ទៃដីជំនួសឱ្យពណ៌ធម្មតា ដែលវាត្រូវបានបំប្លែងចេញពីទិន្នន័យ Point-cloud។</td>
+                <td>ដូចជាការមើលផែនទីពីលើអាកាស ដែលពណ៌ដិតតំណាងឱ្យទីតាំងទាប ហើយពណ៌ស្រាលតំណាងឱ្យទីតាំងខ្ពស់ (ភ្នំ ឬទួល)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Optical flow</span></td>
+                <td>វិធីសាស្ត្រគណនាដើម្បីប៉ាន់ស្មានទិសដៅ និងល្បឿននៃចលនារបស់វត្ថុ ឬផ្ទៃដី ដោយប្រៀបធៀបរូបភាពពីរដែលថតនៅពេលវេលាខុសគ្នា (ដូចជា Heightmap ពីរ)។</td>
+                <td>ដូចជាការមើលរូបថតពីរផ្ទួនគ្នា ហើយគូសសញ្ញាព្រួញដើម្បីបង្ហាញថាវត្ថុក្នុងរូបទីមួយ បានរំកិលទៅទីតាំងណាខ្លះនៅក្នុងរូបទីពីរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Inverse distance weighting (IDW)</span></td>
+                <td>ក្បួនគណនាអន្តរប៉ូល (Interpolation) ដើម្បីស្មានតម្លៃនៅទីតាំងមួយដែលគ្មានទិន្នន័យ ដោយផ្អែកលើទិន្នន័យនៅជុំវិញវា។ ចំណុចដែលនៅជិតមានឥទ្ធិពលខ្លាំងជាងចំណុចដែលនៅឆ្ងាយ។</td>
+                <td>ដូចជាការស្មានកម្តៅនៅកណ្តាលបន្ទប់ដោយពឹងផ្អែកលើកម្តៅម៉ាស៊ីនត្រជាក់នៅជុំវិញ បើម៉ាស៊ីនត្រជាក់នៅជិត នោះឥទ្ធិពលត្រជាក់នឹងមានកាន់តែខ្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">kd-tree</span></td>
+                <td>រចនាសម្ព័ន្ធទិន្នន័យ (Data Structure) ក្នុងប្រព័ន្ធកុំព្យូទ័រ ដែលរៀបចំចំណុចក្នុងលំហត្រីមាត្រឱ្យមានសណ្តាប់ធ្នាប់ ដើម្បីងាយស្រួល និងពន្លឿនការស្វែងរកចំណុចដែលនៅជិតគ្នាបំផុត (Nearest-neighbor search)។</td>
+                <td>ដូចជាការរៀបចំសៀវភៅក្នុងបណ្ណាល័យតាមផ្នែកនិងអក្ខរក្រម ដែលជួយឱ្យអ្នករកសៀវភៅដែលចង់បានលឿនជាងការដើររកម្តងមួយក្បាលៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Polynomial expansion</span></td>
+                <td>បច្ចេកទេសគណិតវិទ្យាដែលប្រើក្នុងក្បួន Optical flow ដើម្បីតំណាងឱ្យទម្រង់នៃចំណុចជុំវិញភីកសែលនីមួយៗជាសមីការដឺក្រេទីពីរ ដែលជួយឱ្យការប្រៀបធៀបរកចលនាកាន់តែមានភាពជាក់លាក់ និងរលូនល្អ។</td>
+                <td>ដូចជាការគូសបន្ទាត់កោងក្របលើរូបរាងភ្នំដើម្បីរកមើលចំណុចកំពូល ឬជម្រាលរបស់វាឱ្យបានច្បាស់ ងាយស្រួលយកទៅប្រៀបធៀបជាមួយភ្នំផ្សេងទៀត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/change-detection-forests-als-data-2015.html">
+                    <span class="km">ការស្វែងរកបំរែបំរួលនៅក្នុងព្រៃឈើដោយប្រើប្រាស់ទិន្នន័យស្កែនឡាស៊ែរតាមអាកាសដែលមានដង់ស៊ីតេខ្ពស់និងពហុពេលវេលា</span><br>
+                    <span class="en article-original-title">Change Detection in Forests Using Multi-Temporal High Density Airborne Laser Scanning Data</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/measurement-forest-inventory-ipad-lidar-2021.html">
+                    <span class="km">ការវាស់វែងប៉ារ៉ាម៉ែត្រនៃសារពើភ័ណ្ឌព្រៃឈើដោយប្រើប្រាស់ Apple iPad Pro និងបច្ចេកវិទ្យា LiDAR រួមបញ្ចូលគ្នា</span><br>
+                    <span class="en article-original-title">Measurement of Forest Inventory Parameters with Apple iPad Pro and Integrated LiDAR Technology</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/terrestrial-laser-scanners-forest-inventory-2006.html">
+                    <span class="km">ការអនុវត្តម៉ាស៊ីនស្កេនឡាស៊ែរលើដីសម្រាប់ការកំណត់ប៉ារ៉ាម៉ែត្របញ្ជីសារពើភណ្ឌព្រៃឈើ</span><br>
+                    <span class="en article-original-title">APPLICATION OF TERRESTRIAL LASER SCANNERS FOR THE DETERMINATION OF FOREST INVENTORY PARAMETERS</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/digital-terrain-models-2015.html">
+                    <span class="km">គំរូផ្ទៃដីឌីជីថល</span><br>
+                    <span class="en article-original-title">Digital Terrain Models</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/remote-sensing-forest-carbon-monitoring-2022.html">
+                    <span class="km">ការវាស់ស្ទង់ពីចម្ងាយ និងការត្រួតពិនិត្យកាបូនព្រៃឈើ៖ ការពិនិត្យឡើងវិញនូវវឌ្ឍនភាព បញ្ហាប្រឈម និងឱកាសថ្មីៗ</span><br>
+                    <span class="en article-original-title">Remote Sensing and Forest Carbon Monitoring—a Review of Recent Progress, Challenges and Opportunities</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-temporal+LiDAR+coastal+change+detection+morphology" target="_blank" rel="noopener"><span class="en">multi-temporal LiDAR coastal change detection morphology</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=dense+optical+flow+Farneb%C3%A4ck+elevation+map+terrain+change" target="_blank" rel="noopener"><span class="en">dense optical flow Farnebäck elevation map terrain change</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=point+cloud+motion+vector+clustering+kd-tree" target="_blank" rel="noopener"><span class="en">point cloud motion vector clustering kd-tree</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SAR+coastal+change+detection+coastline+extraction+comparison" target="_blank" rel="noopener"><span class="en">SAR coastal change detection coastline extraction comparison</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=inverse+distance+weighting+point+cloud+to+heightmap+DEM+interpolation" target="_blank" rel="noopener"><span class="en">inverse distance weighting point cloud to heightmap DEM interpolation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

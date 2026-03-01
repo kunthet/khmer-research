@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការស្វែងរកតាមអត្ថន័យ (Semantic Search) | KhmerResearch.com</title>
+    <meta name="description" content="អត្ថបទនេះពិភាក្សាអំពីដែនកំណត់នៃម៉ាស៊ីនស្វែងរកប្រពៃណីដែលពឹងផ្អែកតែលើការផ្គូផ្គងពាក្យគន្លឹះ និងបង្ហាញពីតម្រូវការក្នុងការយល់ដឹងពីអត្ថន័យ និងបរិបទពិតប្រាកដនៃសំណួ...">
+    
+    <meta name="keywords" content="Semantic Search, Knowledge Base, Natural Language Processing, Ontology, Information Retrieval, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/semantic-search-cudre-mauroux.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/semantic-search-cudre-mauroux.html">
+    <meta property="og:title" content="ការស្វែងរកតាមអត្ថន័យ (Semantic Search) | KhmerResearch.com">
+    <meta property="og:description" content="អត្ថបទនេះពិភាក្សាអំពីដែនកំណត់នៃម៉ាស៊ីនស្វែងរកប្រពៃណីដែលពឹងផ្អែកតែលើការផ្គូផ្គងពាក្យគន្លឹះ និងបង្ហាញពីតម្រូវការក្នុងការយល់ដឹងពីអត្ថន័យ និងបរិបទពិតប្រាកដនៃសំណួររបស់អ្នកប្រើប្រាស់។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="Unknown (c. 2018 based on references)">
+    
+    <meta property="article:tag" content="Semantic Search">
+    
+    <meta property="article:tag" content="Knowledge Base">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+    <meta property="article:tag" content="Ontology">
+    
+    <meta property="article:tag" content="Information Retrieval">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការស្វែងរកតាមអត្ថន័យ (Semantic Search)">
+    <meta name="twitter:description" content="អត្ថបទនេះពិភាក្សាអំពីដែនកំណត់នៃម៉ាស៊ីនស្វែងរកប្រពៃណីដែលពឹងផ្អែកតែលើការផ្គូផ្គងពាក្យគន្លឹះ និងបង្ហាញពីតម្រូវការក្នុងការយល់ដឹងពីអត្ថន័យ និងបរិបទពិតប្រាកដនៃសំណួររបស់អ្នកប្រើប្រាស់។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u178f\u17b6\u1798\u17a2\u178f\u17d2\u1790\u1793\u17d0\u1799 (Semantic Search)",
+      "name": "Semantic Search",
+      "description": "\u17a2\u178f\u17d2\u1790\u1794\u1791\u1793\u17c1\u17c7\u1796\u17b7\u1797\u17b6\u1780\u17d2\u179f\u17b6\u17a2\u17c6\u1796\u17b8\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb\u1793\u17c3\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8\u178a\u17c2\u179b\u1796\u17b9\u1784\u1795\u17d2\u17a2\u17c2\u1780\u178f\u17c2\u179b\u17be\u1780\u17b6\u179a\u1795\u17d2\u1782\u17bc\u1795\u17d2\u1782\u1784\u1796\u17b6\u1780\u17d2\u1799\u1782\u1793\u17d2\u179b\u17b9\u17c7 \u1793\u17b7\u1784\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1796\u17b8\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u1796\u17b8\u17a2\u178f\u17d2\u1790\u1793\u17d0\u1799 \u1793\u17b7\u1784\u1794\u179a\u17b7\u1794\u1791\u1796\u17b7\u178f\u1794\u17d2\u179a\u17b6\u1780\u178a\u1793\u17c3\u179f\u17c6\u178e\u17bd\u179a\u179a\u1794\u179f\u17cb\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/semantic-search-cudre-mauroux.html",
+      "author": [{"@type": "Person", "name": "Philippe Cudre-Mauroux"}],
+      "datePublished": "Unknown (c. 2018 based on references)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Semantic Search",
+        "url": "N/A"
+      },
+      "keywords": ["Semantic Search", "Knowledge Base", "Natural Language Processing", "Ontology", "Information Retrieval"],
+      "about": "Information Retrieval / Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u178f\u17b6\u1798\u17a2\u178f\u17d2\u1790\u1793\u17d0\u1799 (Semantic Search)",
+          "item": "https://khmerresearch.com/papers/technology/semantic-search-cudre-mauroux.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការស្វែងរកតាមអត្ថន័យ (Semantic Search)</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Semantic Search<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការស្វែងរកតាមអត្ថន័យ (Semantic Search)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Semantic Search</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Philippe Cudre-Mauroux</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> Unknown (c. 2018 based on references)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Information Retrieval / Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> អត្ថបទនេះពិភាក្សាអំពីដែនកំណត់នៃម៉ាស៊ីនស្វែងរកប្រពៃណីដែលពឹងផ្អែកតែលើការផ្គូផ្គងពាក្យគន្លឹះ និងបង្ហាញពីតម្រូវការក្នុងការយល់ដឹងពីអត្ថន័យ និងបរិបទពិតប្រាកដនៃសំណួររបស់អ្នកប្រើប្រាស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានធ្វើការបែងចែកបច្ចេកទេសស្វែងរកតាមអត្ថន័យជាពីរប្រភេទចម្បង គឺការស្វែងរកឯកសារទូទៅ និងការស្វែងរកក្នុងមូលដ្ឋានចំណេះដឹង ដោយផ្អែកលើអត្ថបទស្រាវជ្រាវ និងប្រព័ន្ធមានស្រាប់នានា។
+        
+        <ul>
+            
+            <li>ការស្វែងរកឯកសារ (Document Search) ដោយប្រើបច្ចេកទេសដំណើរការភាសាធម្មជាតិ (NLP) ដូចជាការកំណត់អត្តសញ្ញាណអង្គភាព (NER)</li>
+            
+            <li>ការស្វែងរកក្នុងមូលដ្ឋានចំណេះដឹង (Knowledge Base Search) ដោយប្រើក្រាហ្វចំណេះដឹង (Knowledge Graphs) និងភាសាសំណួរ SPARQL</li>
+            
+            <li>ការប្រើប្រាស់ម៉ាស៊ីនរៀន (Machine Learning) និងការបង្កប់ពាក្យ (Word Embeddings) ដូចជា RDF2Vec</li>
+            
+            <li>ការវិភាគប្រព័ន្ធស្វែងរកមានស្រាប់ដូចជា TAP, Swoogle, SWSE និងការប្រើប្រាស់ Schema.org</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>បច្ចេកទេសដំណើរការភាសាធម្មជាតិ (NLP) ជួយកំណត់អត្តសញ្ញាណអង្គភាព (Named-Entity Recognition) ក្នុងសំណួរបានយ៉ាងត្រឹមត្រូវ និងដោះស្រាយការបញ្ជាក់ពាក្យមានន័យច្រើន។</li>
+            
+            <li>ការប្រើប្រាស់ Machine Learning ដូចជា Word Embeddings ជួយបង្កើតទម្រង់វ៉ិចទ័រដើម្បីចាប់យកបរិបទ និងអត្ថន័យនៃពាក្យ ក៏ដូចជាទំនាក់ទំនងក្នុងក្រាហ្វចំណេះដឹងបានកាន់តែស៊ីជម្រៅ។</li>
+            
+            <li>វិធីសាស្ត្រចម្រុះ (Hybrid approaches) ដែលរួមបញ្ចូលគ្នារវាងទិន្នន័យអត្ថបទ និងទិន្នន័យមានរចនាសម្ព័ន្ធ ផ្តល់នូវលទ្ធផលស្វែងរកដែលពាក់ព័ន្ធ និងមានអត្ថន័យច្បាស់លាស់ជាងមុន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Keyword Search</span></strong><br>ការស្វែងរកតាមពាក្យគន្លឹះប្រពៃណី</td>
+                <td>ងាយស្រួលយល់ និងងាយស្រួលក្នុងការអនុវត្តសម្រាប់ប្រព័ន្ធស្វែងរកឯកសារទូទៅ។</td>
+                <td>មិនអាចយល់ពីបរិបទ ឬអត្ថន័យពិតប្រាកដនៃពាក្យ និងងាយផ្តល់លទ្ធផលដែលមិនពាក់ព័ន្ធ ប្រសិនបើពាក្យសរសេរខុសគ្នា។</td>
+                <td>ប្រើជាមូលដ្ឋានប្រៀបធៀប (Baseline) ដើម្បីបង្ហាញពីភាពចាំបាច់នៃការយល់ដឹងពីអត្ថន័យ (Semantics)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">NLP & Lexical Resources (e.g., WordNet, Wikipedia)</span></strong><br>ការប្រើប្រាស់ដំណើរការភាសាធម្មជាតិ និងធនធានវចនានុក្រម</td>
+                <td>ជួយកំណត់អត្តសញ្ញាណអង្គភាព (Named-Entity Recognition) និងដោះស្រាយបញ្ហាពាក្យមានន័យច្រើន (Disambiguation) បានយ៉ាងល្អ។</td>
+                <td>ត្រូវការធនធានទិន្នន័យវចនានុក្រមធំៗ និងមានភាពស្មុគស្មាញក្នុងការវិភាគរចនាសម្ព័ន្ធអត្ថបទខ្លីៗដូចជាសំណួរ។</td>
+                <td>បង្កើនភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់ឯកសារ (Document ranking) និងស្វែងរកអង្គភាពបានកាន់តែច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Word Embeddings / Neural Models (e.g., Word2Vec, RDF2Vec)</span></strong><br>ការបង្កប់ពាក្យ និងម៉ូដែលបណ្តាញសរសៃប្រសាទ</td>
+                <td>អាចចាប់យកបរិបទនិងអត្ថន័យស៊ីជម្រៅដោយស្វ័យប្រវត្តិ តាមរយៈការតំណាងជាវ៉ិចទ័រ (Dense vectors)។</td>
+                <td>ទាមទារទិន្នន័យសម្រាប់ហ្វឹកហាត់ក្នុងបរិមាណច្រើនខ្លាំង (Large corpora) និងត្រូវការកម្លាំងម៉ាស៊ីនខ្ពស់។</td>
+                <td>បង្កើតទម្រង់វ៉ិចទ័រប្រកបដោយប្រសិទ្ធភាព ដែលជួយពង្រីកសំណួរ (Query expansion) និងចាត់ថ្នាក់ទិន្នន័យដោយជោគជ័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Knowledge Base & Ontology Search (SPARQL)</span></strong><br>ការស្វែងរកក្នុងមូលដ្ឋានចំណេះដឹង និង Ontology</td>
+                <td>ផ្តល់ចម្លើយមានភាពជាក់លាក់ខ្ពស់ និងមានរចនាសម្ព័ន្ធច្បាស់លាស់ ដោយផ្អែកលើតក្កវិទ្យា (Logical inference)។</td>
+                <td>ទាមទារឱ្យអ្នកប្រើប្រាស់ចេះភាសាសំណួរ (ដូចជា SPARQL) ឬទាមទារប្រព័ន្ធបំប្លែងសំណួរពីភាសាធម្មជាតិទៅជាកូដស្មុគស្មាញ។</td>
+                <td>អនុញ្ញាតឱ្យមានការទាញយកទិន្នន័យពាក់កណ្តាលរចនាសម្ព័ន្ធ (Semi-structured data) បានយ៉ាងសុក្រឹតពី Knowledge Graphs។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ទោះបីជាឯកសារមិនបានបញ្ជាក់អំពីតម្លៃធនធានជាក់លាក់ក៏ដោយ វិធីសាស្ត្រទាំងនេះទាមទារទិន្នន័យធំៗ និងកម្លាំងកុំព្យូទ័រកម្រិតខ្ពស់សម្រាប់ការហ្វឹកហាត់ម៉ូដែល។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទាមទារទិន្នន័យអត្ថបទធំៗ (Large text corpora) និងមូលដ្ឋានចំណេះដឹង (Knowledge Bases ដូចជា DBpedia, Wikidata, Yago)។</li>
+        
+        <li><strong>Hardware:</strong> ត្រូវការកម្លាំងម៉ាស៊ីនកុំព្យូទ័រខ្ពស់ (ជាពិសេស GPU) សម្រាប់ការហ្វឹកហាត់ម៉ូដែល Machine Learning និង Neural Networks (ដូចជា Word2Vec)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញដែលមានចំណេះដឹងផ្នែក NLP, Machine Learning និងស្តង់ដារ Semantic Web (RDF, OWL, SPARQL)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការស្រាវជ្រាវ និងប្រព័ន្ធដែលបានរៀបរាប់ក្នុងឯកសារនេះ ភាគច្រើនផ្អែកលើបច្ចេកទេស និងធនធានជាភាសាអង់គ្លេស និងភាសាធំៗ (ឧទាហរណ៍ WordNet, DBpedia, Wikipedia)។ នេះជាបញ្ហាប្រឈមធំសម្រាប់ប្រទេសកម្ពុជា ដោយសារធនធានទិន្នន័យ (Corpora, Ontologies) ជាភាសាខ្មែរនៅមានកម្រិតខ្លាំង ឬមិនទាន់មានស្តង់ដារពេញលេញនៅឡើយ។ ម៉ូដែលដែលហ្វឹកហាត់លើទិន្នន័យបរទេស មិនអាចយល់ពីបរិបទ វេយ្យាករណ៍ និងអត្ថន័យនៃភាសាខ្មែរបានត្រឹមត្រូវនោះទេ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានបញ្ហាប្រឈមផ្នែកទិន្នន័យភាសាខ្មែរក៏ដោយ បច្ចេកទេសស្វែងរកតាមអត្ថន័យនេះមានសារៈសំខាន់ និងអាចកែប្រែប្រព័ន្ធព័ត៌មាននៅកម្ពុជាឱ្យកាន់តែទំនើប។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធច្បាប់ និងរដ្ឋាភិបាលអេឡិចត្រូនិក (E-Government / Legal Tech):</strong> ក្រសួងយុត្តិធម៌ ឬស្ថាប័នរដ្ឋអាចប្រើប្រាស់ Semantic Search និង Knowledge Base ដើម្បីបង្កើតប្រព័ន្ធស្វែងរកឯកសារច្បាប់ ដែលជួយមេធាវី ឬប្រជាជនស្វែងរកមាត្រាច្បាប់បានត្រឹមត្រូវតាមអត្ថន័យ និងបរិបទ ជាជាងការស្វែងរកតែពាក្យគន្លឹះដែលងាយនឹងខកខានព័ត៌មានសំខាន់។</li>
+            
+            <li><strong>បណ្ណាល័យជាតិ និងសាកលវិទ្យាល័យ (Academic Systems):</strong> អាចអនុវត្ត Ontology និងការស្វែងរកបែប Semantic ដើម្បីរៀបចំប្រព័ន្ធកាតាឡុកសៀវភៅ និងឯកសារស្រាវជ្រាវ (ដូចជា និក្ខេបបទ) ឱ្យសិស្ស-និស្សិតងាយស្រួលស្វែងរកឯកសារពាក់ព័ន្ធ ទោះបីជាពួកគេប្រើពាក្យសួរខុសគ្នាបន្តិចបន្តួចក៏ដោយ។</li>
+            
+            <li><strong>វិស័យពាណិជ្ជកម្មអេឡិចត្រូនិក (E-Commerce Startups):</strong> ក្រុមហ៊ុនបច្ចេកវិទ្យា និង E-Commerce ក្នុងស្រុកអាចប្រើប្រាស់ NLP និង Word Embeddings ដើម្បីកែលម្អប្រព័ន្ធស្វែងរក និងណែនាំផលិតផល (Product Recommendation) ឱ្យយល់ពីការស្វែងរករបស់អតិថិជនជាភាសាខ្មែរបានកាន់តែឆ្លាតវៃ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការចាប់ផ្តើមកសាងក្រាហ្វចំណេះដឹង (Knowledge Graph) និងសំណុំទិន្នន័យស្តង់ដារជាភាសាខ្មែរ គឺជាជំហានចាំបាច់ដំបូងដើម្បីអាចទាញយកអត្ថប្រយោជន៍ពេញលេញពីបច្ចេកវិទ្យា Semantic Search នេះសម្រាប់ការអភិវឌ្ឍប្រព័ន្ធឌីជីថលនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាមូលដ្ឋានគ្រឹះនៃ Semantic Web និងចំណេះដឹងពាក់ព័ន្ធ:</strong> និស្សិតគួរសិក្សាស្វែងយល់ពីស្តង់ដារទិន្នន័យរបស់ Semantic Web ដូចជា RDF, OWL និងរបៀបសរសេរសំណួរដោយប្រើភាសា SPARQL តាមរយៈធនធានឥតគិតថ្លៃរបស់ W3C (World Wide Web Consortium) ដើម្បីយល់ពីរបៀបរៀបចំទិន្នន័យឱ្យមានអត្ថន័យ។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តការកសាងក្រាហ្វចំណេះដឹងតូចមួយ (Mini Knowledge Graph):</strong> ចាប់ផ្តើមបង្កើត Ontology ផ្ទាល់ខ្លួនទាក់ទងនឹងបរិបទប្រទេសកម្ពុជា (ឧទាហរណ៍៖ ក្រាហ្វចំណេះដឹងអំពីប្រាសាទបុរាណខ្មែរ ឬសាកលវិទ្យាល័យ) ដោយប្រើប្រាស់កម្មវិធីកូដបើកចំហ <span class="en">Protégé</span> និងសាកល្បងដំណើរការសំណួរ SPARQL នៅលើវាដោយប្រើ <span class="en">Apache Jena</span>។</li>
+            
+            <li><strong>ជំហានទី៣៖ ហ្វឹកហាត់បច្ចេកទេស NLP និង Word Embeddings លើអត្ថបទភាសាខ្មែរ:</strong> ប្រើប្រាស់បណ្ណាល័យ Python ដូចជា <span class="en">Gensim</span> ឬ <span class="en">spaCy</span> ដើម្បីអនុវត្តម៉ូដែល <span class="en">Word2Vec</span> ទៅលើសំណុំទិន្នន័យភាសាខ្មែរតូចមួយ (ឧទាហរណ៍៖ អត្ថបទព័ត៌មាន) ដើម្បីស្វែងយល់ពីរបៀបដែលកុំព្យូទ័ររៀនពីទំនាក់ទំនង និងអត្ថន័យនៃពាក្យខ្មែរ។</li>
+            
+            <li><strong>ជំហានទី៤៖ សាកល្បងបញ្ចូលគ្នាទៅក្នុងប្រព័ន្ធស្វែងរកជាក់ស្តែង (Search Engine Prototype):</strong> សិក្សាពីការប្រើប្រាស់ <span class="en">Elasticsearch</span> ដោយប្រើ Plugins ពាក់ព័ន្ធនឹង Vector Search ដើម្បីបង្កើតម៉ាស៊ីនស្វែងរកគំរូមួយ ដែលអាចទទួលយកសំណួរជាភាសាធម្មជាតិ និងផ្តល់លទ្ធផលដោយពឹងផ្អែកលើការយល់ន័យ (Semantic Search) ជាជាងការផ្គូផ្គងអក្សរ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Semantic Search</span></td>
+                <td>ដំណើរការស្វែងរកព័ត៌មានដែលម៉ាស៊ីនព្យាយាមយល់ពីអត្ថន័យ (Semantics) និងបរិបទនៃពាក្យសួររបស់អ្នកប្រើប្រាស់ ជាជាងគ្រាន់តែផ្ទៀងផ្ទាត់អក្ខរាវិរុទ្ធនៃពាក្យគន្លឹះ។</td>
+                <td>ដូចជាការសួរបណ្ណារក្សដែលយល់ពីអ្វីដែលអ្នកចង់បាន ទោះបីជាអ្នកប្រើពាក្យខុសគ្នាបន្តិចបន្តួចក៏ដោយ ជាជាងការរកមើលតែចំណងជើងសៀវភៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Natural Language Processing (NLP)</span></td>
+                <td>បច្ចេកវិទ្យាក្រោមឆ័ត្របញ្ញាសិប្បនិម្មិត (AI) ដែលអនុញ្ញាតឱ្យកុំព្យូទ័រយល់ បកស្រាយ និងទាញយកអត្ថន័យពីភាសាមនុស្សតាមរយៈក្បួនវេយ្យាករណ៍ និងបរិបទ។</td>
+                <td>ដូចជាកម្មវិធីបកប្រែភាសាដែលរៀនស្តាប់ និងយល់ពីអត្ថន័យជ្រៅជ្រះនៃភាសាមនុស្ស មិនមែនគ្រាន់តែបកប្រែតាមពាក្យមួយៗនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Knowledge Base</span></td>
+                <td>មូលដ្ឋានទិន្នន័យដែលផ្ទុកព័ត៌មានមានរចនាសម្ព័ន្ធច្បាស់លាស់ (ដូចជាការពិត និងទំនាក់ទំនងរវាងវត្ថុផ្សេងៗ) ដែលកុំព្យូទ័រអាចទាញយកមកវិភាគ និងទាញសេចក្តីសន្និដ្ឋានបាន។</td>
+                <td>ដូចជាខួរក្បាលសព្វវចនាធិប្បាយដែលចងក្រងពីការពិត និងដឹងថា "ឆ្កែ" គឺជា "សត្វ" ហើយមានទំនាក់ទំនងយ៉ាងណាចំពោះបរិស្ថាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ontology</span></td>
+                <td>ការរៀបចំចំណាត់ថ្នាក់ និងទំនាក់ទំនងនៃពាក្យ ឬគោលគំនិតនៅក្នុងវិស័យណាមួយ ដើម្បីឱ្យកុំព្យូទ័រយល់ពីឋានានុក្រម និងលក្ខណៈពិតប្រាកដនៃទិន្នន័យទាំងនោះ។</td>
+                <td>ដូចជាតារាងមែកធាងគ្រួសារដែលប្រាប់កុំព្យូទ័រថាអ្នកណាជាជីតា អ្នកណាជាឪពុក និងអ្នកណាជាកូន ដើម្បីឱ្យវាស្គាល់សាច់ញាតិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Embeddings</span></td>
+                <td>បច្ចេកទេសក្នុង Machine Learning ដែលបំប្លែងពាក្យពេចន៍ទៅជាលេខវ៉ិចទ័រ (Vectors) នៅក្នុងលំហគណិតវិទ្យា ដោយពាក្យមានន័យស្រដៀងគ្នានឹងមានលេខកូដនៅក្បែរគ្នា។</td>
+                <td>ដូចជាការរៀបចំដាក់សៀវភៅប្រភេទដូចគ្នា (ឧ. សៀវភៅប្រវត្តិសាស្ត្រ) នៅលើធ្នើរតែមួយ ដើម្បីងាយស្រួលរកសៀវភៅដែលមានអត្ថន័យពាក់ព័ន្ធគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Named-Entity Recognition (NER)</span></td>
+                <td>បច្ចេកទេសមួយនៃ NLP សម្រាប់ស្កេនអត្ថបទដោយស្វ័យប្រវត្តិ និងកំណត់អត្តសញ្ញាណពាក្យដែលតំណាងឱ្យឈ្មោះមនុស្ស ទីកន្លែង អង្គការ ឬកាលបរិច្ឆេទ។</td>
+                <td>ដូចជាការប្រើហ្វឺតពណ៌ (Highlighter) គូសចំណាំស្វែងរកតែឈ្មោះមនុស្ស ឬឈ្មោះខេត្តក្រុង នៅក្នុងសៀវភៅអានដ៏ក្រាស់មួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SPARQL</span></td>
+                <td>ភាសាកូដស្តង់ដារ (Query Language) ដែលគេប្រើសម្រាប់សួរសំណួរ និងទាញយកទិន្នន័យដែលមានរចនាសម្ព័ន្ធពី Knowledge Base (ជាពិសេសទិន្នន័យទម្រង់ RDF)។</td>
+                <td>ដូចជាការប្រើទម្រង់ពាក្យបញ្ជាពិសេសមួយ ដើម្បីប្រាប់កុំព្យូទ័រឱ្យទាញយកឯកសារជាក់លាក់ពីទូដែកផ្ទុកទិន្នន័យដ៏ធំ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ontology-based-semantic-search-quran-2013.html">
+                    <span class="km">ការស្វែងរកតាមន័យដោយផ្អែកលើអុនតូឡូស៊ី (Ontology) នៅក្នុងគម្ពីរអាល់គួរអាន</span><br>
+                    <span class="en article-original-title">Ontology Based Semantic Search in Holy Quran</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/semantic-search-engines-technologies-study-2016.html">
+                    <span class="km">ការសិក្សាអំពីការស្វែងរកតាមន័យ ម៉ាស៊ីនស្វែងរកតាមន័យ និងបច្ចេកវិទ្យាដែលប្រើសម្រាប់ម៉ាស៊ីនស្វែងរកតាមន័យ</span><br>
+                    <span class="en article-original-title">A Study on Semantic Searching, Semantic Search Engines and Technologies Used for Semantic Search Engines</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/semantic-search-leactivemath-2006.html">
+                    <span class="km">ការស្វែងរកតាមសេម៉ង់ទិចនៅក្នុងប្រព័ន្ធ LeActiveMath</span><br>
+                    <span class="en article-original-title">Semantic Search in LeActiveMath</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/overview-approaches-semantic-web-search-2011.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃវិធីសាស្ត្រសម្រាប់ការស្វែងរកគេហទំព័រតាមបែបសេម៉ែនទិក</span><br>
+                    <span class="en article-original-title">OVERVIEW OF APPROACHES TO SEMANTIC WEB SEARCH</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/prisma-s-extension-literature-search-reporting-2021.html">
+                    <span class="km">PRISMA-S៖ ការពង្រីកសេចក្តីថ្លែងការណ៍ PRISMA សម្រាប់ការរាយការណ៍អំពីការស្វែងរកឯកសារក្នុងការត្រួតពិនិត្យជាប្រព័ន្ធ</span><br>
+                    <span class="en article-original-title">PRISMA-S: an extension to the PRISMA Statement for Reporting Literature Searches in Systematic Reviews</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Natural+Language+Processing+algorithms+for+Semantic+Search" target="_blank" rel="noopener"><span class="en">Natural Language Processing algorithms for Semantic Search</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Knowledge+Graph+embeddings+word2vec+RDF2Vec+comparison" target="_blank" rel="noopener"><span class="en">Knowledge Graph embeddings word2vec RDF2Vec comparison</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Ontology-based+query+expansion+and+information+retrieval" target="_blank" rel="noopener"><span class="en">Ontology-based query expansion and information retrieval</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Neural+machine+learning+approaches+for+document+ranking+in+Semantic+Web" target="_blank" rel="noopener"><span class="en">Neural machine learning approaches for document ranking in Semantic Web</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Evaluating+SPARQL+query+performance+over+large+scale+RDF+knowledge+bases" target="_blank" rel="noopener"><span class="en">Evaluating SPARQL query performance over large scale RDF knowledge bases</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់ភាសាសញ្ញា៖ ការពិនិត្យឡើងវិញ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះពិនិត្យមើលបញ្ហានៃការបង្កើតប្រព័ន្ធបកប្រែភាសាសញ្ញាស្វ័យប្រវត្តិសម្រាប់អ្នកមានពិការភាពផ្នែកការស្តាប់ ដោយប្រើប្រាស់បច្ចេកវិទ្យាសម្គាល់លំនាំនិងកាយវិការ។">
+    
+    <meta name="keywords" content="Hidden Markov Models, Sign Language Recognition, Gesture Recognition, Computer Vision, Datagloves, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/hidden-markov-models-sign-language-recognition-review-2002.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/hidden-markov-models-sign-language-recognition-review-2002.html">
+    <meta property="og:title" content="ម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់ភាសាសញ្ញា៖ ការពិនិត្យឡើងវិញ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះពិនិត្យមើលបញ្ហានៃការបង្កើតប្រព័ន្ធបកប្រែភាសាសញ្ញាស្វ័យប្រវត្តិសម្រាប់អ្នកមានពិការភាពផ្នែកការស្តាប់ ដោយប្រើប្រាស់បច្ចេកវិទ្យាសម្គាល់លំនាំនិងកាយវិការ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2002, 2nd Hellenic Conf. on AI (SETN-2002)">
+    
+    <meta property="article:tag" content="Hidden Markov Models">
+    
+    <meta property="article:tag" content="Sign Language Recognition">
+    
+    <meta property="article:tag" content="Gesture Recognition">
+    
+    <meta property="article:tag" content="Computer Vision">
+    
+    <meta property="article:tag" content="Datagloves">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់ភាសាសញ្ញា៖ ការពិនិត្យឡើងវិញ">
+    <meta name="twitter:description" content="ឯកសារនេះពិនិត្យមើលបញ្ហានៃការបង្កើតប្រព័ន្ធបកប្រែភាសាសញ្ញាស្វ័យប្រវត្តិសម្រាប់អ្នកមានពិការភាពផ្នែកការស្តាប់ ដោយប្រើប្រាស់បច្ចេកវិទ្យាសម្គាល់លំនាំនិងកាយវិការ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u1797\u17b6\u179f\u17b6\u179f\u1789\u17d2\u1789\u17b6\u17d6 \u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789",
+      "name": "Hidden Marcov Models for Sign Language Recognition: a Review",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u1798\u17be\u179b\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1794\u1780\u1794\u17d2\u179a\u17c2\u1797\u17b6\u179f\u17b6\u179f\u1789\u17d2\u1789\u17b6\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u17d2\u1793\u1780\u1798\u17b6\u1793\u1796\u17b7\u1780\u17b6\u179a\u1797\u17b6\u1796\u1795\u17d2\u1793\u17c2\u1780\u1780\u17b6\u179a\u179f\u17d2\u178f\u17b6\u1794\u17cb \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179b\u17c6\u1793\u17b6\u17c6\u1793\u17b7\u1784\u1780\u17b6\u1799\u179c\u17b7\u1780\u17b6\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/hidden-markov-models-sign-language-recognition-review-2002.html",
+      "author": [{"@type": "Person", "name": "V.N. Pashaloudi (University of Macedonia)"},{"@type": "Person", "name": "K.G. Margaritis (University of Macedonia)"}],
+      "datePublished": "2002, 2nd Hellenic Conf. on AI (SETN-2002)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Hidden Marcov Models for Sign Language Recognition: a Review",
+        "url": "N/A"
+      },
+      "keywords": ["Hidden Markov Models", "Sign Language Recognition", "Gesture Recognition", "Computer Vision", "Datagloves"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u1797\u17b6\u179f\u17b6\u179f\u1789\u17d2\u1789\u17b6\u17d6 \u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789",
+          "item": "https://khmerresearch.com/papers/technology/hidden-markov-models-sign-language-recognition-review-2002.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់ភាសាសញ្ញា៖ ការពិនិត្យឡើងវិញ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Hidden Marcov Models for Sign Language Recognition: a Review<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់ភាសាសញ្ញា៖ ការពិនិត្យឡើងវិញ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Hidden Marcov Models for Sign Language Recognition: a Review</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> V.N. Pashaloudi (University of Macedonia), K.G. Margaritis (University of Macedonia)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2002, 2nd Hellenic Conf. on AI (SETN-2002)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះពិនិត្យមើលបញ្ហានៃការបង្កើតប្រព័ន្ធបកប្រែភាសាសញ្ញាស្វ័យប្រវត្តិសម្រាប់អ្នកមានពិការភាពផ្នែកការស្តាប់ ដោយប្រើប្រាស់បច្ចេកវិទ្យាសម្គាល់លំនាំនិងកាយវិការ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានធ្វើការពិនិត្យឡើងវិញនូវការស្រាវជ្រាវនានាដែលប្រើប្រាស់ម៉ូដែលទិន្នន័យស្ថិតិ Hidden Markov (HMMs) សម្រាប់ការសម្គាល់ភាសាសញ្ញា និងកាយវិការចលនា។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសតាមរយៈកាមេរ៉ាវីដេអូ និងស្រោមដៃទិន្នន័យ (Vision-based and Dataglove Feature Extraction)</li>
+            
+            <li>ការសម្គាល់កាយវិការដាច់ដោយឡែក និងបន្តបន្ទាប់ (Isolated and Continuous Gesture Recognition)</li>
+            
+            <li>ការបណ្តុះបណ្តាលបណ្តាញ HMM តាមរយៈក្បួនដោះស្រាយ (Baum-Welch Algorithm)</li>
+            
+            <li>ការធ្វើម៉ូដែលភាសាដោយប្រើប្រាស់ក្រាម (Language Modeling using N-grams)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធដែលប្រើប្រាស់ HMM អាចសម្រេចបានអត្រាភាពត្រឹមត្រូវពី ៨០% ទៅ ៩៩% អាស្រ័យលើទំហំវាក្យសព្ទ និងវិធីសាស្ត្រនៃការបញ្ចូលទិន្នន័យ។</li>
+            
+            <li>ការប្រើប្រាស់កាមេរ៉ាវីដេអូជាមធ្យោបាយបញ្ចូលទិន្នន័យមានភាពងាយស្រួល និងមិនសូវរំខានដល់អ្នកប្រើប្រាស់ បើប្រៀបធៀបទៅនឹងការប្រើប្រាស់ស្រោមដៃទិន្នន័យ (Datagloves) ដែលមានតម្លៃថ្លៃ។</li>
+            
+            <li>ការស្រាវជ្រាវភាគច្រើនប្រើប្រាស់ HMMs ដើម្បីធ្វើម៉ូដែលតំណាងឱ្យពាក្យទាំងមូល ទោះបីជាមានការសិក្សាថ្មីៗមួយចំនួនបានចាប់ផ្តើមប្រើវាសម្រាប់តំណាងឱ្យសូរសព្ទ (Phonemes) ដើម្បីកាត់បន្ថយភាពស្មុគស្មាញនៃប្រព័ន្ធវាក្យសព្ទធំក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Vision-based HMM with Colored Gloves</span></strong><br>ម៉ូដែល HMM ផ្អែកលើកាមេរ៉ាដោយប្រើស្រោមដៃពណ៌</td>
+                <td>ងាយស្រួលក្នុងការទាញយកលក្ខណៈពិសេស និងតាមដានចលនាដៃបានច្បាស់លាស់ ដោយកាត់បន្ថយបញ្ហារំខានពីផ្ទៃខាងក្រោយ។</td>
+                <td>ទាមទារឱ្យអ្នកប្រើប្រាស់ពាក់ស្រោមដៃពណ៌ពិសេស ដែលមិនមានភាពងាយស្រួល ឬធម្មជាតិសម្រាប់ការប្រើប្រាស់ប្រចាំថ្ងៃនោះទេ។</td>
+                <td>សម្រេចបានអត្រាភាពត្រឹមត្រូវ ៩៩% ក្នុងការសម្គាល់ពាក្យ (Starner & Pentland) និង ៩៤% សម្រាប់ប្រព័ន្ធវាក្យសព្ទ ២៦២ ពាក្យ (Assam & Grobel)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Vision-based HMM with Skin-Tone Tracking</span></strong><br>ម៉ូដែល HMM ផ្អែកលើកាមេរ៉ាដោយតាមដានពណ៌ស្បែក</td>
+                <td>ផ្តល់ភាពងាយស្រួលដល់អ្នកប្រើប្រាស់ ដោយមិនចាំបាច់ពាក់ឧបករណ៍បន្ថែម (Intrusive devices) ធ្វើឱ្យចលនាមានភាពធម្មជាតិ។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការបំបែករូបភាពដៃចេញពីផ្ទៃមុខ ឬផ្ទៃខាងក្រោយ ជាពិសេសនៅពេលមានពន្លឺប្រែប្រួល។</td>
+                <td>សម្រេចបានអត្រាភាពត្រឹមត្រូវ ៩២% សម្រាប់ការសម្គាល់ដោយមិនប្រើស្រោមដៃ (Starner & Pentland)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Dataglove-based HMM</span></strong><br>ម៉ូដែល HMM ដោយប្រើស្រោមដៃទិន្នន័យ (Datagloves)</td>
+                <td>អាចចាប់យកទីតាំងកម្រិត 3D និងមុំនៃសន្លាក់ម្រាមដៃបានយ៉ាងជាក់លាក់បំផុត។</td>
+                <td>ឧបករណ៍មានតម្លៃថ្លៃខ្លាំង និងកំណត់សេរីភាពនៃការផ្លាស់ទីរបស់អ្នកប្រើប្រាស់។</td>
+                <td>សម្រេចបានអត្រាសម្គាល់ ៨០% សម្រាប់កាយវិការ 3D (Nam & Wohn) និងអាចសម្គាល់ទិន្នន័យជាបន្តបន្ទាប់ក្នុងពេលជាក់ស្តែង (Liang & Ouhyoung)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Phoneme-based Parallel HMMs</span></strong><br>ម៉ូដែល HMM ស្របគ្នាផ្អែកលើសូរសព្ទកាយវិការ (Phonemes)</td>
+                <td>ដោះស្រាយបញ្ហានៃការកើនឡើងទំហំវាក្យសព្ទ ដោយបំបែកកាយវិការធំៗទៅជាឯកតាតូចៗ (Phonemes) ដែលជួយកាត់បន្ថយទំហំទិន្នន័យហ្វឹកហាត់។</td>
+                <td>មានភាពស្មុគស្មាញខ្ពស់ក្នុងការរៀបចំម៉ូដែល ដោយទាមទារដំណើរការ HMM ច្រើនស្របគ្នាសម្រាប់ដៃឆ្វេងនិងស្តាំ។</td>
+                <td>សម្រេចបានអត្រាភាពត្រឹមត្រូវ ៩១% សម្រាប់វាក្យសព្ទ ២២ ពាក្យដោយប្រើប្រាស់សូរសព្ទ (Vogler & Metaxas)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការចំណាយលើធនធានអាស្រ័យយ៉ាងខ្លាំងលើវិធីសាស្ត្របញ្ចូលទិន្នន័យ ដែលការប្រើប្រាស់កាមេរ៉ាមានតម្លៃថោក ប៉ុន្តែទាមទារសមត្ថភាពកុំព្យូទ័រខ្ពស់ ខណៈស្រោមដៃទិន្នន័យមានតម្លៃថ្លៃខ្លាំង។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កាមេរ៉ាវីដេអូស្តង់ដារ (សម្រាប់ Vision-based) ឬឧបករណ៍ស្រោមដៃទិន្នន័យ (Datagloves) ដែលមានតម្លៃថ្លៃសម្រាប់ការចាប់យកចលនា 3D ជាក់លាក់។</li>
+        
+        <li><strong>Computing Power:</strong> កុំព្យូទ័រដែលមានសមត្ថភាពមធ្យមទៅខ្ពស់ សម្រាប់ការគណនាក្បួនដោះស្រាយ Viterbi និង Baum-Welch ពិសេសសម្រាប់ការសម្គាល់ភ្លាមៗ (Real-time Continuous Recognition)។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យវីដេអូ ឬទិន្នន័យ 3D នៃភាសាសញ្ញាដែលត្រូវបានកាត់បំបែក (Segmented) និងបំពាក់ស្លាកសញ្ញា (Labeled) យ៉ាងត្រឹមត្រូវ។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកស្ថិតិ (Parameter Estimation), ដំណើរការសញ្ញា (Signal Processing), និងចក្ខុវិស័យកុំព្យូទ័រ (Computer Vision)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សាដែលបានលើកឡើងនៅក្នុងឯកសារនេះ ផ្តោតជាចម្បងលើភាសាសញ្ញាអាមេរិក (ASL), តៃវ៉ាន់ (TSL), និងអាល្លឺម៉ង់ ជាមួយនឹងសំណុំទិន្នន័យតូចៗ និងអ្នកចូលរួមធ្វើកាយវិការមានកំណត់។ នេះមានន័យថា ម៉ូដែលដែលបានបណ្តុះបណ្តាលរួចហើយទាំងនេះ មិនអាចយកមកប្រើប្រាស់ដោយផ្ទាល់សម្រាប់កម្ពុជាបានទេ លុះត្រាតែមានការបង្កើតសំណុំទិន្នន័យភាសាសញ្ញាកម្ពុជា (Cambodian Sign Language - CSL) ជាមុនសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ HMM ផ្អែកលើកាមេរ៉ា គឺមានសក្តានុពលខ្ពស់និងស័ក្តិសមបំផុតសម្រាប់ការអភិវឌ្ឍនៅកម្ពុជា ដោយសារវាមានតម្លៃថោក និងងាយស្រួលអនុវត្ត។</p>
+        
+        <ul>
+            
+            <li><strong>សាលារៀនអប់រំពិសេស (ឧទាហរណ៍៖ អង្គការគ្រួសារថ្មី - Krousar Thmey):</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យានេះដើម្បីបង្កើតកម្មវិធីសិក្សា និងវចនានុក្រមឌីជីថល ជួយដល់កុមារគ-ថ្លង់ក្នុងការរៀនភាសាសញ្ញាកម្ពុជា។</li>
+            
+            <li><strong>មន្ទីរពេទ្យ និងសេវាសាធារណៈ:</strong> អាចដាក់ពង្រាយប្រព័ន្ធកាមេរ៉ាសម្គាល់កាយវិការបឋម (Kiosks) ដើម្បីជួយបកប្រែភាសាសញ្ញាទៅជាអត្ថបទ បង្កើនលទ្ធភាពទទួលបានសេវាថែទាំសុខភាពសម្រាប់ជនពិការ។</li>
+            
+            <li><strong>វិទ្យាស្ថានស្រាវជ្រាវបច្ចេកវិទ្យា (ឧទាហរណ៍៖ CADT, RUPP):</strong> សិស្សនិងអ្នកស្រាវជ្រាវអាចយកគំរូ HMM នេះធ្វើជាគម្រោងមូលដ្ឋាន ក្នុងការអភិវឌ្ឍប្រព័ន្ធ AI បកប្រែភាសាសញ្ញាកម្ពុជា ដោយមិនចាំបាច់ប្រើឧបករណ៍ថ្លៃៗ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តប្រព័ន្ធចំណាំភាសាសញ្ញាផ្អែកលើ HMM ដោយប្រើកាមេរ៉ាធម្មតា នឹងជួយកាត់បន្ថយគម្លាតនៃការប្រាស្រ័យទាក់ទង និងលើកកម្ពស់បរិយាបន្នសង្គមសម្រាប់សហគមន៍គ-ថ្លង់នៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាមូលដ្ឋានគ្រឹះនៃ HMM និង Computer Vision:</strong> និស្សិតត្រូវស្វែងយល់ពីទ្រឹស្តីស្ថិតិរបស់ HMM ជាពិសេសក្បួនដោះស្រាយ Viterbi សម្រាប់ការឌិកូដ និង Baum-Welch សម្រាប់ការហ្វឹកហាត់។ ព្រមទាំងសិក្សាពីបណ្ណាល័យ <span class="en">OpenCV</span> សម្រាប់ដំណើរការរូបភាពបឋម។</li>
+            
+            <li><strong>ជំហានទី២៖ ប្រមូលសំណុំទិន្នន័យភាសាសញ្ញាកម្ពុជា (CSL Dataset):</strong> សហការជាមួយសាលាគ-ថ្លង់ ដើម្បីថតវីដេអូកាយវិការភាសាសញ្ញាកម្ពុជា (ពាក្យដាច់ដោយឡែក) ដោយប្រើកាមេរ៉ាធម្មតា និងផ្ទៃខាងក្រោយពណ៌រាបស្មើ ដើម្បីងាយស្រួលក្នុងការទាញយកទិន្នន័យ។</li>
+            
+            <li><strong>ជំហានទី៣៖ ទាញយកលក្ខណៈពិសេសនៃចលនា (Feature Extraction):</strong> ជំនួសឱ្យការតាមដានពណ៌ស្បែក (Skin-tone) ដែលហួសសម័យ គួរប្រើប្រាស់ឧបករណ៍ទំនើបដូចជា <span class="en">MediaPipe</span> ដើម្បីទាញយកចំណុចសំខាន់ៗនៃដៃ (Hand Landmarks) និងរាងកាយ បំប្លែងទៅជាវ៉ិចទ័រទិន្នន័យ (Feature Vectors)។</li>
+            
+            <li><strong>ជំហានទី៤៖ បណ្តុះបណ្តាល និងវាយតម្លៃម៉ូដែល HMM:</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">hmmlearn</span> នៅក្នុង Python ឬ <span class="en">HTK (Hidden Markov Model Toolkit)</span> ដើម្បីបណ្តុះបណ្តាលទិន្នន័យវ៉ិចទ័រដែលទទួលបានទៅជាម៉ូដែលសម្គាល់ពាក្យនីមួយៗ និងវាស់ស្ទង់អត្រាភាពត្រឹមត្រូវ។</li>
+            
+            <li><strong>ជំហានទី៥៖ បង្កើតកម្មវិធីសាកល្បង (Real-time Prototype):</strong> អភិវឌ្ឍកម្មវិធីកុំព្យូទ័រតូចមួយដែលតភ្ជាប់ជាមួយ Webcam ដើម្បីចាប់យកចលនាដៃក្នុងពេលជាក់ស្តែង បញ្ចូលទៅក្នុងម៉ូដែល HMM និងបង្ហាញអត្ថបទបកប្រែជាភាសាខ្មែរនៅលើអេក្រង់។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Marcov Models</span></td>
+                <td>ម៉ូដែលស្ថិតិដែលប្រើសម្រាប់វិភាគទិន្នន័យដែលប្រែប្រួលតាមពេលវេលា (ដូចជាចលនា ឬសំឡេង) ដោយវាធ្វើការទស្សន៍ទាយស្ថានភាពពិតប្រាកដដែលលាក់កំបាំង (Hidden States) តាមរយៈលទ្ធផលដែលយើងអាចសង្កេតឃើញពីខាងក្រៅ។</td>
+                <td>ដូចជាការព្យាយាមទាយថាអាកាសធាតុថ្ងៃនេះជាអ្វី ដោយគ្រាន់តែសង្កេតមើលសម្លៀកបំពាក់ដែលមនុស្សពាក់ដើរតាមផ្លូវ (យើងឃើញសម្លៀកបំពាក់ តែយើងមិនឃើញមេឃ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Isolated recognition</span></td>
+                <td>ប្រព័ន្ធសម្គាល់កាយវិការដែលតម្រូវឱ្យអ្នកប្រើប្រាស់ធ្វើកាយវិការម្តងមួយៗ ដោយមានការផ្អាក ឬទម្លាក់ដៃចុះ (Silence) រវាងពាក្យនីមួយៗ ដើម្បីឱ្យកុំព្យូទ័រងាយស្រួលកាត់យកទិន្នន័យ។</td>
+                <td>ដូចជាការនិយាយពាក្យមួយម៉ាត់ៗ ហើយឈប់ដកដង្ហើមសិនមុននឹងនិយាយពាក្យបន្ទាប់ ដើម្បីកុំឱ្យអ្នកស្តាប់ស្តាប់ច្រឡំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Continuous recognition</span></td>
+                <td>ការសម្គាល់ភាសាសញ្ញាដែលប្រព្រឹត្តទៅជាបន្តបន្ទាប់ដោយគ្មានការឈប់សម្រាករវាងពាក្យ ដែលទាមទារឱ្យប្រព័ន្ធមានសមត្ថភាពខ្ពស់ក្នុងការកាត់បំបែកព្រំដែននៃពាក្យនីមួយៗដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាការស្តាប់មនុស្សនិយាយលឿនៗជារបារ ហើយយើងត្រូវប្រើខួរក្បាលដើម្បីចាប់យកពាក្យនីមួយៗក្នុងប្រយោគនោះដោយខ្លួនឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature extraction</span></td>
+                <td>ដំណើរការកាត់យកតែព័ត៌មាន ឬទិន្នន័យសំខាន់ៗ (ដូចជាទីតាំងកូអរដោនេនៃដៃ មុំនៃម្រាមដៃ ឬពណ៌) ពីរូបភាពនិងវីដេអូដើម ដើម្បីបំប្លែងជាលេខកូដកុំព្យូទ័រសម្រាប់យកទៅវិភាគបន្ត។</td>
+                <td>ដូចជាការសរសេរស្រង់យកតែចំណុចសំខាន់ៗ (សង្ខេប) ចេញពីសៀវភៅមួយក្បាល ដើម្បីឱ្យអ្នកអានងាយយល់និងចំណាយពេលតិចបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi algorithm</span></td>
+                <td>ក្បួនដោះស្រាយគណិតវិទ្យាដែលប្រើសម្រាប់ដោះស្រាយបញ្ហាក្នុង HMM ដើម្បីស្វែងរកផ្លូវ ឬលំដាប់នៃស្ថានភាពដែលលាក់បាំង (Hidden States) ដែលមានប្រូបាប៊ីលីតេខ្ពស់បំផុត ក្នុងការបង្កើតចេញជាទិន្នន័យដែលយើងបានសង្កេតឃើញ។</td>
+                <td>ដូចជាការប្រើប្រាស់ Google Maps ដើម្បីស្វែងរកផ្លូវដែលលឿននិងងាយស្រួលបំផុត ឆ្លងកាត់ចំណុចកកស្ទះជាច្រើន ដើម្បីទៅដល់គោលដៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Baum-Welch procedure</span></td>
+                <td>ក្បួនដោះស្រាយសម្រាប់បណ្តុះបណ្តាល (Train) ម៉ូដែល HMM ដោយវាធ្វើការកែតម្រូវប៉ារ៉ាម៉ែត្រនិងប្រូបាប៊ីលីតេរបស់ម៉ូដែលម្តងបន្តិចៗរហូតដល់វាអាចតំណាងឱ្យទិន្នន័យហ្វឹកហាត់បានល្អបំផុត។</td>
+                <td>ដូចជាការរឹតបន្តឹងខ្សែហ្គីតាឡើងចុះៗ រហូតទាល់តែទទួលបានសំឡេងពិរោះត្រឹមត្រូវតាមកម្រិតដែលយើងចង់បាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Datagloves</span></td>
+                <td>ឧបករណ៍ស្រោមដៃដែលបំពាក់ដោយសេនស័រអគ្គិសនី (Sensors) ជាច្រើន សម្រាប់ចាប់យកមុំ ទិសដៅ និងកាយវិការនៃសន្លាក់ម្រាមដៃនិងបាតដៃក្នុងទម្រង់ 3D យ៉ាងជាក់លាក់ ដើម្បីបញ្ជូនទៅកុំព្យូទ័រ។</td>
+                <td>ដូចជាប្រដាប់បញ្ជាហ្គេម (Controller) ដែលយើងពាក់ជាប់នឹងដៃទាំងសងខាង ដើម្បីឱ្យតួអង្គក្នុងហ្គេមធ្វើចលនាម្រាមដៃតាមយើងបេះបិទ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Phonemes</span></td>
+                <td>នៅក្នុងបរិបទភាសាសញ្ញា វាសំដៅលើឯកតាតូចៗនៃកាយវិការ (ដូចជារូបរាងដៃ ទិសដៅ និងទីតាំង) ដែលត្រូវបានគេយកមកផ្គុំចូលគ្នាដើម្បីបង្កើតជាសញ្ញាឬពាក្យពេញលេញមួយ។</td>
+                <td>ដូចជាតួអក្សរ ក ខ គ និងស្រៈ ដែលត្រូវផ្សំចូលគ្នាទើបបង្កើតបានជាពាក្យមួយម៉ាត់មានន័យ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/complex-dynamic-gesture-hmm-fnn-2008.html">
+                    <span class="km">ការទទួលស្គាល់កាយវិការថាមវន្តស្មុគស្មាញដោយផ្អែកលើម៉ូដែល HMM-FNN</span><br>
+                    <span class="en article-original-title">基于 HMM-FNN 模型的复杂动态手势识别</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-and-its-architectures-2021.html">
+                    <span class="km">បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតបែបខុនវ៉ូលូសិន និងស្ថាបត្យកម្មរបស់វា</span><br>
+                    <span class="en article-original-title">Convolutional Neural Network and its Architectures</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/markov-models-nlp-survey-2022.html">
+                    <span class="km">ការអនុវត្តម៉ូដែល Markov នៅក្នុងដំណើរការភាសាធម្មជាតិ៖ ការសិក្សាស្រាវជ្រាវ</span><br>
+                    <span class="en article-original-title">Markov Models Applications in Natural Language Processing: A Survey</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/modeling-cognitive-affective-dynamics-hmm-2010.html">
+                    <span class="km">ការធ្វើម៉ូដែលថាមវន្តនៃការយល់ដឹងនិងអារម្មណ៍ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Modeling Cognitive-Affective Dynamics with Hidden Markov Models</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/visual-resolution-linguistic-ambiguities-2015.html">
+                    <span class="km">តើអ្នកយល់ពីអ្វីដែលខ្ញុំចង់មានន័យទេ? ការដោះស្រាយភាពស្រពិចស្រពិលនៃភាសាតាមរយៈរូបភាព</span><br>
+                    <span class="en article-original-title">Do You See What I Mean? Visual Resolution of Linguistic Ambiguities</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Models+foundation+for+gesture+and+speech+recognition" target="_blank" rel="noopener"><span class="en">Hidden Markov Models foundation for gesture and speech recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=real-time+computer+vision+hand+tracking+and+skin+color+segmentation+techniques" target="_blank" rel="noopener"><span class="en">real-time computer vision hand tracking and skin color segmentation techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=parallel+Hidden+Markov+Models+for+sign+language+phoneme+recognition" target="_blank" rel="noopener"><span class="en">parallel Hidden Markov Models for sign language phoneme recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparing+Deep+Learning+and+Hidden+Markov+Models+for+continuous+sign+language+recognition" target="_blank" rel="noopener"><span class="en">comparing Deep Learning and Hidden Markov Models for continuous sign language recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=dataglove+versus+vision-based+feature+extraction+in+gesture+recognition+systems" target="_blank" rel="noopener"><span class="en">dataglove versus vision-based feature extraction in gesture recognition systems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រព័ន្ធរកឃើញការឈ្លានពាន៖ ការសិក្សាឡើងវិញ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយពីបញ្ហានៃការកើនឡើងនៃការវាយប្រហារតាមប្រព័ន្ធអ៊ីនធឺណិត និងតម្រូវការចាំបាច់សម្រាប់ប្រព័ន្ធរកឃើញការឈ្លានពាន (Intrusion Detection Systems) ដើម្បីក...">
+    
+    <meta name="keywords" content="Intrusion Detection System, Snort, Bro, Network Security, Cyber Attacks, Multiagent Technology, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/intrusion-detection-systems-review-2013.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/intrusion-detection-systems-review-2013.html">
+    <meta property="og:title" content="ប្រព័ន្ធរកឃើញការឈ្លានពាន៖ ការសិក្សាឡើងវិញ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយពីបញ្ហានៃការកើនឡើងនៃការវាយប្រហារតាមប្រព័ន្ធអ៊ីនធឺណិត និងតម្រូវការចាំបាច់សម្រាប់ប្រព័ន្ធរកឃើញការឈ្លានពាន (Intrusion Detection Systems) ដើម្បីការពារធនធានបណ្តាញដែលជញ្ជាំងភ្លើង (Firewal...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="Journal of Network and Information Security, 2013">
+    
+    <meta property="article:tag" content="Intrusion Detection System">
+    
+    <meta property="article:tag" content="Snort">
+    
+    <meta property="article:tag" content="Bro">
+    
+    <meta property="article:tag" content="Network Security">
+    
+    <meta property="article:tag" content="Cyber Attacks">
+    
+    <meta property="article:tag" content="Multiagent Technology">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រព័ន្ធរកឃើញការឈ្លានពាន៖ ការសិក្សាឡើងវិញ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយពីបញ្ហានៃការកើនឡើងនៃការវាយប្រហារតាមប្រព័ន្ធអ៊ីនធឺណិត និងតម្រូវការចាំបាច់សម្រាប់ប្រព័ន្ធរកឃើញការឈ្លានពាន (Intrusion Detection Systems) ដើម្បីការពារធនធានបណ្តាញដែលជញ្ជាំងភ្លើង (Firewal...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u1788\u17d2\u179b\u17b6\u1793\u1796\u17b6\u1793\u17d6 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u17a1\u17be\u1784\u179c\u17b7\u1789",
+      "name": "Intrusion Detection Systems: A Review",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1796\u17b8\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1780\u17be\u1793\u17a1\u17be\u1784\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b6\u1799\u1794\u17d2\u179a\u17a0\u17b6\u179a\u178f\u17b6\u1798\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u17a2\u17ca\u17b8\u1793\u1792\u17ba\u178e\u17b7\u178f \u1793\u17b7\u1784\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1785\u17b6\u17c6\u1794\u17b6\u1785\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u1788\u17d2\u179b\u17b6\u1793\u1796\u17b6\u1793 (Intrusion Detection Systems) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17b6\u179a\u1796\u17b6\u179a\u1792\u1793\u1792\u17b6\u1793\u1794\u178e\u17d2\u178f\u17b6\u1789\u178a\u17c2\u179b\u1787\u1789\u17d2\u1787\u17b6\u17c6\u1784\u1797\u17d2\u179b\u17be\u1784 (Firewalls) \u1798\u17b7\u1793\u17a2\u17b6\u1785\u1780\u17b6\u179a\u1796\u17b6\u179a\u1794\u17b6\u1793\u1791\u17b6\u17c6\u1784\u179f\u17d2\u179a\u17bb\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/intrusion-detection-systems-review-2013.html",
+      "author": [{"@type": "Person", "name": "Kajal Rai (Panjab University)"},{"@type": "Person", "name": "M. Shyamala Devi (Panjab University)"}],
+      "datePublished": "Journal of Network and Information Security, 2013",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Intrusion Detection Systems: A Review",
+        "url": "http://www.publishingindia.com"
+      },
+      "keywords": ["Intrusion Detection System", "Snort", "Bro", "Network Security", "Cyber Attacks", "Multiagent Technology"],
+      "about": "Cybersecurity"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179a\u1780\u1783\u17be\u1789\u1780\u17b6\u179a\u1788\u17d2\u179b\u17b6\u1793\u1796\u17b6\u1793\u17d6 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u17a1\u17be\u1784\u179c\u17b7\u1789",
+          "item": "https://khmerresearch.com/papers/technology/intrusion-detection-systems-review-2013.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រព័ន្ធរកឃើញការឈ្លានពាន៖ ការសិក្សាឡើងវិញ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Intrusion Detection Systems: A Review<br>
+        
+        <strong>Source:</strong> <a href="http://www.publishingindia.com" target="_blank">www.publishingindia.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រព័ន្ធរកឃើញការឈ្លានពាន៖ ការសិក្សាឡើងវិញ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Intrusion Detection Systems: A Review</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Kajal Rai (Panjab University), M. Shyamala Devi (Panjab University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> Journal of Network and Information Security, 2013</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Cybersecurity</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយពីបញ្ហានៃការកើនឡើងនៃការវាយប្រហារតាមប្រព័ន្ធអ៊ីនធឺណិត និងតម្រូវការចាំបាច់សម្រាប់ប្រព័ន្ធរកឃើញការឈ្លានពាន (Intrusion Detection Systems) ដើម្បីការពារធនធានបណ្តាញដែលជញ្ជាំងភ្លើង (Firewalls) មិនអាចការពារបានទាំងស្រុង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការពិនិត្យឡើងវិញ (Review) លើប្រភេទនៃប្រព័ន្ធរកឃើញការឈ្លានពាន និងវិភាគលើបច្ចេកវិទ្យាស្រាវជ្រាវថ្មីៗដើម្បីប្រៀបធៀបប្រសិទ្ធភាពរបស់វា។
+        
+        <ul>
+            
+            <li>ការវិភាគលើប្រព័ន្ធរកឃើញការឈ្លានពានប្រភេទកូដចំហ (Open Source IDS) ដូចជា Snort និង Bro</li>
+            
+            <li>ការវាយតម្លៃលើការវាយប្រហារតាមស្រទាប់បណ្តាញ (TCP/IP Layer Attacks) រួមមាន IP Spoofing, SYN-Floods និង SQL Injection</li>
+            
+            <li>ការសិក្សាប្រៀបធៀបប្រព័ន្ធរកឃើញផ្អែកលើកំហុស (Misuse based IDS) និងផ្អែកលើភាពមិនប្រក្រតី (Anomaly based IDS)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធកូដចំហ Bro មានសមត្ថភាពដំណើរការលើតំណភ្ជាប់ល្បឿនលឿន ខណៈដែល Snort ផ្តោតសំខាន់លើភាពសាមញ្ញ និងប្រសិទ្ធភាពនៃដំណើរការ (Performance)។</li>
+            
+            <li>ប្រព័ន្ធកូនកាត់ (Hybrid IDS) ផ្តល់នូវភាពបត់បែននិងភាពរឹងមាំក្នុងការរកឃើញការឈ្លានពាន ទោះបីជាវាទាមទារការប្រើប្រាស់ធនធានប្រព័ន្ធច្រើនក៏ដោយ។</li>
+            
+            <li>បច្ចេកវិទ្យាភ្នាក់ងារច្រើន (Multiagent technology) ត្រូវបានសន្និដ្ឋានថាជាបច្ចេកវិទ្យាអនាគតដ៏មានសក្តានុពលបំផុត ដោយសារវាមានភាពរឹងមាំ (Robust) ងាយស្រួលពង្រីកមាត្រដ្ឋាន និងអាចកាត់បន្ថយចរាចរណ៍បណ្តាញ (Network traffic) សម្រាប់ការរកឃើញការវាយប្រហារយ៉ាងឆាប់រហ័ស។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Misuse based IDS</span></strong><br>ប្រព័ន្ធរកឃើញផ្អែកលើការប្រើប្រាស់ខុស (Signature-based)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការរកឃើញការវាយប្រហារដោយមិនបញ្ចេញសញ្ញាព្រមានខុស (Low false positive) និងងាយស្រួលប្រើប្រាស់។</td>
+                <td>មិនអាចរកឃើញការវាយប្រហារប្រភេទថ្មីៗ (Zero-day attacks) ឡើយ ហើយប្រព័ន្ធត្រូវតែធ្វើបច្ចុប្បន្នភាពទិន្នន័យហត្ថលេខាជានិច្ច។</td>
+                <td>អាចស្គាល់ និងទប់ស្កាត់រាល់ទម្រង់នៃការវាយប្រហារដែលបានកត់ត្រាទុកក្នុងមូលដ្ឋានទិន្នន័យបានយ៉ាងរហ័ស។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Anomaly based IDS</span></strong><br>ប្រព័ន្ធរកឃើញផ្អែកលើភាពមិនប្រក្រតី</td>
+                <td>អាចរកឃើញការវាយប្រហារថ្មីៗដែលមិនធ្លាប់ស្គាល់ពីមុនមក ទោះបីជាគ្មានព័ត៌មានលម្អិតពីការវាយប្រហារក៏ដោយ។</td>
+                <td>បញ្ចេញសញ្ញាព្រមានខុស (False positives) ច្រើន ដោយសារអាកប្បកិរិយាអ្នកប្រើប្រាស់តែងតែប្រែប្រួល និងទាមទារទិន្នន័យបណ្តុះបណ្តាលច្រើន។</td>
+                <td>រកឃើញការគំរាមកំហែងថ្មីៗតាមរយៈការប្រៀបធៀបទិន្នន័យចរាចរណ៍បណ្តាញថ្មីទៅនឹងទម្រង់ធម្មតារបស់ប្រព័ន្ធ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hybrid IDS</span></strong><br>ប្រព័ន្ធរកឃើញកូនកាត់ (Misuse + Anomaly)</td>
+                <td>អាចបង្កើតហត្ថលេខាថ្មីដោយស្វ័យប្រវត្តិពីលំនាំដែលប្រមូលបាន កាត់បន្ថយការអន្តរាគមន៍ពីអ្នកគ្រប់គ្រង និងមានភាពបត់បែនខ្ពស់។</td>
+                <td>ទាមទារធនធានប្រព័ន្ធកុំព្យូទ័រច្រើន (Excessive system resources) និងនៅតែពិបាកក្នុងការទប់ស្កាត់ការរីករាលដាលដង្កូវកុំព្យូទ័រ (Polymorphic worms)។</td>
+                <td>ផ្តល់នូវការរកឃើញការឈ្លានពានដែលរឹងមាំ ដោយរួមបញ្ចូលចំណុចខ្លាំងនៃប្រព័ន្ធទាំងពីរ ប៉ុន្តែប្រើប្រាស់ធនធានខ្ពស់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Multiagent Technology</span></strong><br>បច្ចេកវិទ្យាភ្នាក់ងារច្រើន (Multiagent Technology)</td>
+                <td>មានភាពរឹងមាំ មិនពឹងផ្អែកលើប្រព័ន្ធប្រតិបត្តិការតែមួយ ងាយស្រួលពង្រីកមាត្រដ្ឋាន (Scalable) និងកាត់បន្ថយការពន្យាពេលឆ្លើយតប។</td>
+                <td>ទាមទារការរៀបចំស្ថាបត្យកម្មបណ្តាញស្មុគស្មាញ និងការគ្រប់គ្រងភ្នាក់ងារចល័ត (Mobile agents) ឱ្យបានត្រឹមត្រូវ។</td>
+                <td>ជាបច្ចេកវិទ្យាអនាគតដ៏មានសក្តានុពលបំផុតសម្រាប់ការកាត់បន្ថយចរាចរណ៍បណ្តាញ និងការឆ្លើយតបរហ័សប្រឆាំងនឹងការវាយប្រហារ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ប្រព័ន្ធផ្សេងៗទាមទារធនធាន និងចំណេះដឹងខុសៗគ្នា ឧទាហរណ៍ ប្រព័ន្ធកូនកាត់ត្រូវការធនធានកុំព្យូទ័រច្រើន ចំណែកឯប្រព័ន្ធខ្លះទាមទារជំនាញកូដកម្រិតខ្ពស់។
+    
+    <ul>
+        
+        <li><strong>Software/OS:</strong> ប្រព័ន្ធ <span class="en">Bro IDS</span> តម្រូវឱ្យដំណើរការលើប្រព័ន្ធប្រតិបត្តិការ <span class="en">UNIX/Linux</span> និងមានការរៀបចំកូដចំហ (Open Source) ជាក់លាក់។</li>
+        
+        <li><strong>Hardware:</strong> ប្រព័ន្ធ <span class="en">Anomaly based</span> និង <span class="en">Hybrid IDS</span> ត្រូវការកម្លាំងដំណើរការ (Processing power) ខ្ពស់សម្រាប់ការវិភាគទិន្នន័យទំហំធំ។</li>
+        
+        <li><strong>Expertise:</strong> ការប្រើប្រាស់ <span class="en">Bro</span> ទាមទារឱ្យអ្នកគ្រប់គ្រងមានចំណេះដឹងជ្រៅជ្រះផ្នែក <span class="en">UNIX</span> ខណៈដែល <span class="en">Snort</span> មានភាពងាយស្រួលជាង និងស័ក្តិសមសម្រាប់អ្នកចាប់ផ្តើមដំបូង។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះគឺជាការពិនិត្យឡើងវិញ (Review Paper) ទៅលើប្រព័ន្ធនិងការស្រាវជ្រាវដែលមានស្រាប់ មិនមានការផ្តោតលើទិន្នន័យប្រជាសាស្ត្រ ឬតំបន់ជាក់លាក់ណាមួយឡើយ។ ទោះយ៉ាងណាក៏ដោយ គោលការណ៍សុវត្ថិភាពបណ្តាញ (Network Security) ទាំងនេះមានសារៈសំខាន់ខ្លាំងសម្រាប់ប្រទេសកម្ពុជាដែលកំពុងធ្វើបរិវត្តកម្មឌីជីថល ព្រោះការវាយប្រហារតាមអ៊ីនធឺណិតកើតឡើងជាសកល និងមិនរើសមុខតំបន់ឬប្រទេសនោះទេ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យាទាំងនេះមានសារៈសំខាន់ និងអាចអនុវត្តបានយ៉ាងល្អនៅក្នុងហេដ្ឋារចនាសម្ព័ន្ធបណ្តាញរបស់ប្រទេសកម្ពុជា ជាពិសេសដោយសារតែឧបករណ៍ដូចជា <span class="en">Snort</span> និង <span class="en">Bro</span> គឺជាប្រព័ន្ធកូដចំហដែលឥតគិតថ្លៃ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យហិរញ្ញវត្ថុ និងធនាគារនៅកម្ពុជា (Financial Institutions):</strong> អាចប្រើប្រាស់ <span class="en">NIDS</span> ដូចជា <span class="en">Snort</span> ដើម្បីតាមដាន និងទប់ស្កាត់ការវាយប្រហារ <span class="en">SQL Injection</span> និងការពារទិន្នន័យសម្ងាត់របស់អតិថិជនពីការលួចចូល (Hacking)។</li>
+            
+            <li><strong>គ្រឹះស្ថានឧត្តមសិក្សា (Universities in Cambodia):</strong> អាចប្រើប្រាស់ <span class="en">Bro IDS</span> សម្រាប់ការស្រាវជ្រាវ និងការបង្រៀននិស្សិតផ្នែកសន្តិសុខបណ្តាញ (Cybersecurity) ដោយសារវាមានភាពបត់បែនខ្ពស់ក្នុងការធ្វើពិសោធន៍។</li>
+            
+            <li><strong>រដ្ឋាភិបាលឌីជីថល (e-Government Data Centers):</strong> អាចអនុវត្តបច្ចេកវិទ្យា <span class="en">Multiagent Technology</span> ដើម្បីការពារមជ្ឈមណ្ឌលទិន្នន័យជាតិ ឱ្យមានសុវត្ថិភាពខ្ពស់ និងកាត់បន្ថយការកកស្ទះចរាចរណ៍បណ្តាញក្នុងប្រតិបត្តិការឆ្លើយតប។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការចាប់ផ្តើមអនុវត្តប្រព័ន្ធរកឃើញការឈ្លានពានប្រភេទកូដចំហ គឺជាជំហានដ៏ចាំបាច់ និងសន្សំសំចៃបំផុតសម្រាប់ស្ថាប័ននានានៅកម្ពុជា ដើម្បីពង្រឹងសន្តិសុខតាមប្រព័ន្ធអ៊ីនធឺណិតរបស់ខ្លួន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃបណ្តាញ (Network Fundamentals):</strong> និស្សិតគួរសិក្សាស៊ីជម្រៅលើគំរូ <span class="en">TCP/IP</span> និងស្វែងយល់ពីរបៀបដែលការវាយប្រហារដូចជា <span class="en">SYN-Floods</span> និង <span class="en">IP Spoofing</span> ប្រតិបត្តិការក្នុងស្រទាប់នីមួយៗ (Network Layer និង Transport Layer)។</li>
+            
+            <li><strong>ដំឡើង និងអនុវត្តលើប្រព័ន្ធកូដចំហ (Deploy Open Source IDS):</strong> ចាប់ផ្តើមដំឡើង <span class="en">Snort</span> លើប្រព័ន្ធប្រតិបត្តិការម៉ាស៊ីននិម្មិត (Virtual Machine) និងប្រើប្រាស់ <span class="en">BASE (Basic Analysis and Security Engine)</span> ដើម្បីរៀនវិភាគលទ្ធផលនៃការវាយប្រហារជារូបភាពក្រាហ្វិក។</li>
+            
+            <li><strong>អភិវឌ្ឍជំនាញប្រព័ន្ធប្រតិបត្តិការ (Develop OS Skills):</strong> សម្រាប់ការស្រាវជ្រាវកម្រិតខ្ពស់ ត្រូវពង្រឹងចំណេះដឹងផ្នែក <span class="en">UNIX/Linux</span> ដើម្បីអាចប្រើប្រាស់ និងកែច្នៃប្រព័ន្ធ <span class="en">Bro IDS</span> ឱ្យដំណើរការលើបណ្តាញតភ្ជាប់ល្បឿនលឿន (High-speed links) បានយ៉ាងរលូន។</li>
+            
+            <li><strong>សិក្សាពីការរកឃើញភាពមិនប្រក្រតី (Study ML/Anomaly Detection):</strong> រៀនពីក្បួនដោះស្រាយ <span class="en">Machine Learning</span> ដូចជា <span class="en">Support Vector Machine (SVM)</span> និងក្បួនតក្កវិទ្យា <span class="en">Fuzzy Logic</span> ដើម្បីយកមកសរសេរកូដរកឃើញភាពមិនប្រក្រតី (Anomaly based IDS)។</li>
+            
+            <li><strong>ស្រាវជ្រាវបច្ចេកវិទ្យាភ្នាក់ងារច្រើន (Research Multiagent Systems):</strong> បង្កើតគម្រោងសារណានៅសាកលវិទ្យាល័យដោយផ្តោតលើការប្រើប្រាស់ <span class="en">Mobile Agents</span> នៅក្នុង <span class="en">MANETs (Mobile Adhoc Networks)</span> ដើម្បីបង្កើតប្រព័ន្ធរាវរកដែលរឹងមាំ និងអាចពង្រីកបានសម្រាប់ប្រព័ន្ធអនាគត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Intrusion Detection System (IDS)</span></td>
+                <td>ប្រព័ន្ធកម្មវិធីឬឧបករណ៍ដែលតាមដានចរាចរណ៍បណ្តាញកុំព្យូទ័រ ដើម្បីស្វែងរកសកម្មភាពគួរឱ្យសង្ស័យ ការវាយប្រហារ ឬការបំពានគោលការណ៍សុវត្ថិភាព រួចបញ្ជូនសញ្ញាព្រមានដល់អ្នកគ្រប់គ្រងបណ្តាញ។</td>
+                <td>ដូចជាកាមេរ៉ាសុវត្ថិភាពនិងឆ្មាំយាមច្រកទ្វារ ដែលចាំពិនិត្យមើលរាល់អ្នកចេញចូល និងរាយការណ៍ពេលមានជនសង្ស័យលួចចូលក្នុងអគារ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Anomaly based IDS</span></td>
+                <td>ប្រព័ន្ធរកឃើញការឈ្លានពានដែលកត់ត្រានូវទម្រង់សកម្មភាពធម្មតារបស់ប្រព័ន្ធជាមុន (Baseline) ហើយនឹងបញ្ចេញសញ្ញាព្រមានរាល់ពេលមានសកម្មភាពថ្មីណាដែលខុសប្លែកពីទម្រង់ធម្មតាទាំងនោះ ទោះបីជាវាមិនស្គាល់ប្រភេទនៃការវាយប្រហារនោះក៏ដោយ។</td>
+                <td>ដូចជាម្ចាស់ផ្ទះដែលដឹងពីទម្លាប់ធម្មតារបស់សមាជិកគ្រួសារ ហើយមានការសង្ស័យភ្លាមៗនៅពេលមាននរណាម្នាក់បើកទ្វារដើរចូលផ្ទះនៅម៉ោង ៣ ទៀបភ្លឺ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Signature-based approach</span></td>
+                <td>វិធីសាស្ត្ររកឃើញការវាយប្រហារដែលដំណើរការដោយការប្រៀបធៀបចរាចរណ៍បណ្តាញកុំព្យូទ័រ ទៅនឹងទម្រង់កូដនៃការវាយប្រហារចាស់ៗ (Signatures) ដែលត្រូវបានកត់ត្រាទុកក្នុងមូលដ្ឋានទិន្នន័យរបស់វា។</td>
+                <td>ដូចជាប៉ូលីសដែលផ្ទៀងផ្ទាត់ស្នាមម្រាមដៃរបស់ជនសង្ស័យ ទៅនឹងបញ្ជីស្នាមម្រាមដៃរបស់ឧក្រិដ្ឋជនដែលធ្លាប់មានកំណត់ត្រាក្នុងប្រព័ន្ធ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">False positive</span></td>
+                <td>គឺជាករណីដែលប្រព័ន្ធសុវត្ថិភាព ឬ IDS ចេញសញ្ញាព្រមានខុស ដោយចាត់ទុកសកម្មភាពធម្មតារបស់អ្នកប្រើប្រាស់ ថាជាការវាយប្រហារឬជាការគំរាមកំហែងដល់ប្រព័ន្ធ។</td>
+                <td>ដូចជាម៉ាស៊ីនរាវរកលោហៈនៅព្រលានយន្តហោះលោតសំឡេងរោទ៍ ដោយសារតែកាក់ក្នុងហោប៉ៅរបស់អ្នកដំណើរ មិនមែនដោយសារមានអាវុធគ្រោះថ្នាក់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">IP Spoofing</span></td>
+                <td>បច្ចេកទេសដែលអ្នកវាយប្រហារប្រើប្រាស់អាសយដ្ឋាន IP ក្លែងក្លាយដើម្បីបន្លំខ្លួនថាជាកុំព្យូទ័រឬប្រភពដែលគួរឱ្យទុកចិត្ត ក្នុងគោលបំណងឆ្លងកាត់ប្រព័ន្ធការពារ និងចូលទៅប្រើប្រាស់ធនធានបណ្តាញដោយខុសច្បាប់។</td>
+                <td>ដូចជាចោរដែលពាក់ឯកសណ្ឋាន និងប្រើកាតសម្គាល់ខ្លួនក្លែងក្លាយជានិយោជិតក្រុមហ៊ុន ដើម្បីដើរចូលក្នុងទីស្នាក់ការដោយមិនឱ្យគេសង្ស័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Denial-of-Service attack (DoS)</span></td>
+                <td>ការវាយប្រហារដែលគោលដៅធ្វើឱ្យប្រព័ន្ធកុំព្យូទ័រ ឬម៉ាស៊ីនមេ (Server) មិនអាចដំណើរការបាន ដោយការផ្ញើសំណើចូលជាច្រើនលើសលប់រហូតដល់ប្រព័ន្ធអស់ធនធានគាំង និងមិនអាចបម្រើអ្នកប្រើប្រាស់ស្របច្បាប់បាន។</td>
+                <td>ដូចជាការបញ្ជូនមនុស្សរាប់ពាន់នាក់ឱ្យតេទៅលេខទូរស័ព្ទហាងមួយក្នុងពេលតែមួយ ដែលធ្វើឱ្យអតិថិជនពិតប្រាកដមិនអាចតេចូលទិញអីវ៉ាន់បានដោយសារទូរស័ព្ទរវល់រហូត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SQL Injection attack</span></td>
+                <td>ការវាយប្រហារលើកម្មវិធីវេបសាយ ដែលជនខិលខូចបញ្ចូលកូដបញ្ជា SQL ទៅក្នុងប្រអប់វាយបញ្ចូលទិន្នន័យ ដើម្បីបញ្ជាឱ្យមូលដ្ឋានទិន្នន័យ (Database) លាតត្រដាង កែប្រែ ឬលុបទិន្នន័យសម្ងាត់ដោយគ្មានការអនុញ្ញាត។</td>
+                <td>ដូចជាការដែលអ្នកសរសេរពាក្យបញ្ជាបន្ថែមដោយលួចលាក់នៅលើមូលប្បទានប័ត្រ (សែកធនាគារ) ដែលធ្វើឱ្យបុគ្គលិកច្រឡំប្រគល់ប្រាក់ទាំងអស់ក្នុងទូដែកមកឱ្យអ្នក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multiagent Technology</span></td>
+                <td>បច្ចេកវិទ្យាដែលប្រើប្រាស់កម្មវិធីកុំព្យូទ័រតូចៗជាច្រើនដែលហៅថាភ្នាក់ងារ (Agents) ដែលអាចធ្វើការវិភាគទិន្នន័យដោយឯករាជ្យ និងអាចផ្លាស់ទីទាក់ទងគ្នាទៅវិញទៅមកក្នុងបណ្តាញ ដើម្បីសហការគ្នារកឃើញការវាយប្រហារយ៉ាងឆាប់រហ័ស។</td>
+                <td>ដូចជាការប្រើប្រាស់ឆ្កែហិតក្លិនជាច្រើនក្បាលដែលដើរល្បាតតាមតំបន់ផ្សេងៗគ្នា ហើយព្រុសប្រាប់គ្នាទៅវិញទៅមកពេលរកឃើញគ្រឿងញៀន ជំនួសឱ្យការប្រើប៉ូលីសតែម្នាក់ដើររកសព្វកន្លែង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/network-monitoring-system-provincial-hospital-2022.html">
+                    <span class="km">ការស្ថាបនាប្រព័ន្ធត្រួតពិនិត្យបណ្តាញសម្រាប់មន្ទីរពេទ្យទូទៅកម្រិតខេត្តដោយប្រើប្រាស់កូដប្រភពបើកចំហ (Open Source)</span><br>
+                    <span class="en article-original-title">XÂY DỰNG HỆ THỐNG GIÁM SÁT MẠNG DÀNH CHO BỆNH VIỆN ĐA KHOA CẤP TỈNH VỚI MÃ NGUỒN MỞ</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/role-of-idps-modern-computer-networks.html">
+                    <span class="km">តួនាទីនៃប្រព័ន្ធរកឃើញ/ទប់ស្កាត់ការឈ្លានពាននៅក្នុងបណ្តាញកុំព្យូទ័រទំនើប៖ ការពិនិត្យឡើងវិញ</span><br>
+                    <span class="en article-original-title">THE ROLE OF INTRUSION DETECTION/PREVENTION SYSTEMS IN MODERN COMPUTER NETWORKS: A REVIEW</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/gramian-angular-field-intrusion-detection-2022.html">
+                    <span class="km">ការរកឃើញការលុកលុយដោយផ្អែកលើការបំប្លែង Gramian Angular Field</span><br>
+                    <span class="en article-original-title">GRAMIAN ANGULAR FIELD TRANSFORMATION-BASED INTRUSION DETECTION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/edge-computing-network-systems-latency-2024.html">
+                    <span class="km">ការគណនានៅគែមបណ្តាញ (Edge Computing) ក្នុងប្រព័ន្ធបណ្តាញ៖ ការលើកកម្ពស់កម្មវិធីដែលទាមទារភាពរហ័សទាន់ចិត្ត</span><br>
+                    <span class="en article-original-title">Edge Computing in Network-based Systems: Enhancing Latency-sensitive Applications</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/feature-engineering-intrusion-detection-system-2023.html">
+                    <span class="km">វិធីសាស្ត្រវិស្វកម្មលក្ខណៈពិសេសនៅក្នុងប្រព័ន្ធរកឃើញការឈ្លានពាន៖ ការវាយតម្លៃដំណើរការ</span><br>
+                    <span class="en article-original-title">Feature Engineering Methods in Intrusion Detection System: A Performance Evaluation</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=evaluation+and+performance+comparison+of+open+source+NIDS+Snort+Bro+Suricata" target="_blank" rel="noopener"><span class="en">evaluation and performance comparison of open source NIDS Snort Bro Suricata</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+techniques+for+false+positive+reduction+in+anomaly+based+intrusion+detection+systems" target="_blank" rel="noopener"><span class="en">machine learning techniques for false positive reduction in anomaly based intrusion detection systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-agent+based+intrusion+detection+systems+in+Mobile+Adhoc+Networks+MANETs" target="_blank" rel="noopener"><span class="en">multi-agent based intrusion detection systems in Mobile Adhoc Networks MANETs</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=detecting+application+layer+attacks+SQL+injection+and+XSS+using+network+intrusion+detection" target="_blank" rel="noopener"><span class="en">detecting application layer attacks SQL injection and XSS using network intrusion detection</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=mitigation+of+TCP+SYN+flood+attacks+using+connection+state+analysis+in+open+source+IDS" target="_blank" rel="noopener"><span class="en">mitigation of TCP SYN flood attacks using connection state analysis in open source IDS</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

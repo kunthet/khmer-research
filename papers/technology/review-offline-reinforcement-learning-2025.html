@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការពិនិត្យឡើងវិញលើការស្រាវជ្រាវអំពីការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះពិភាក្សាអំពីបញ្ហាប្រឈមក្នុងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ជាពិសេសបញ្ហា "បម្រែបម្រួលរបាយ (Distribution Shift)" ដែលបណ្តាលមកពីក...">
+    
+    <meta name="keywords" content="Offline Reinforcement Learning, Batch Reinforcement Learning, Deep Reinforcement Learning, Distribution Shift, Transformer Models, Model-based RL, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/review-offline-reinforcement-learning-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/review-offline-reinforcement-learning-2025.html">
+    <meta property="og:title" content="ការពិនិត្យឡើងវិញលើការស្រាវជ្រាវអំពីការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះពិភាក្សាអំពីបញ្ហាប្រឈមក្នុងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ជាពិសេសបញ្ហា "បម្រែបម្រួលរបាយ (Distribution Shift)" ដែលបណ្តាលមកពីការរៀនពីសំណុំទិន្នន័យឋិតិវន្តដោយគ្មានការប...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2025 Chinese Journal of Computers">
+    
+    <meta property="article:tag" content="Offline Reinforcement Learning">
+    
+    <meta property="article:tag" content="Batch Reinforcement Learning">
+    
+    <meta property="article:tag" content="Deep Reinforcement Learning">
+    
+    <meta property="article:tag" content="Distribution Shift">
+    
+    <meta property="article:tag" content="Transformer Models">
+    
+    <meta property="article:tag" content="Model-based RL">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការពិនិត្យឡើងវិញលើការស្រាវជ្រាវអំពីការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning)">
+    <meta name="twitter:description" content="ឯកសារនេះពិភាក្សាអំពីបញ្ហាប្រឈមក្នុងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ជាពិសេសបញ្ហា "បម្រែបម្រួលរបាយ (Distribution Shift)" ដែលបណ្តាលមកពីការរៀនពីសំណុំទិន្នន័យឋិតិវន្តដោយគ្មានការប...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789\u179b\u17be\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u17a2\u17c6\u1796\u17b8\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789 (Offline Reinforcement Learning)",
+      "name": "\u79bb\u7ebf\u5f3a\u5316\u5b66\u4e60\u7814\u7a76\u7efc\u8ff0",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1796\u17b7\u1797\u17b6\u1780\u17d2\u179f\u17b6\u17a2\u17c6\u1796\u17b8\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789 (Offline Reinforcement Learning) \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1794\u1789\u17d2\u17a0\u17b6 \"\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u179a\u1794\u17b6\u1799 (Distribution Shift)\" \u178a\u17c2\u179b\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u1780\u1796\u17b8\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178b\u17b7\u178f\u17b7\u179c\u1793\u17d2\u178f\u178a\u17c4\u1799\u1782\u17d2\u1798\u17b6\u1793\u1780\u17b6\u179a\u1794\u17d2\u179a\u17b6\u179f\u17d2\u179a\u17d0\u1799\u1791\u17b6\u1780\u17cb\u1791\u1784\u1787\u17b6\u1798\u17bd\u1799\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/review-offline-reinforcement-learning-2025.html",
+      "author": [{"@type": "Person", "name": "WU Lan (Soochow University)"},{"@type": "Person", "name": "LIU Quan (Soochow University)"},{"@type": "Person", "name": "HUANG Zhi-Gang (Soochow University)"},{"@type": "Person", "name": "ZHANG Li-Hua (Soochow University)"}],
+      "datePublished": "2025 Chinese Journal of Computers",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "\u79bb\u7ebf\u5f3a\u5316\u5b66\u4e60\u7814\u7a76\u7efc\u8ff0",
+        "url": "https://doi.org/10.11897/SP.J.1016.2025.00156"
+      },
+      "keywords": ["Offline Reinforcement Learning", "Batch Reinforcement Learning", "Deep Reinforcement Learning", "Distribution Shift", "Transformer Models", "Model-based RL"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u17a1\u17be\u1784\u179c\u17b7\u1789\u179b\u17be\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u17a2\u17c6\u1796\u17b8\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789 (Offline Reinforcement Learning)",
+          "item": "https://khmerresearch.com/papers/technology/review-offline-reinforcement-learning-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការពិនិត្យឡើងវិញលើការស្រាវជ្រាវអំពីការរៀនពង្រឹងក្រៅបណ្តាញ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 离线强化学习研究综述<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.11897/SP.J.1016.2025.00156" target="_blank">doi.org/10.11897/SP.J.1016.2025.00156</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការពិនិត្យឡើងវិញលើការស្រាវជ្រាវអំពីការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 离线强化学习研究综述</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> WU Lan (Soochow University), LIU Quan (Soochow University), HUANG Zhi-Gang (Soochow University), ZHANG Li-Hua (Soochow University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025 Chinese Journal of Computers</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះពិភាក្សាអំពីបញ្ហាប្រឈមក្នុងការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning) ជាពិសេសបញ្ហា "បម្រែបម្រួលរបាយ (Distribution Shift)" ដែលបណ្តាលមកពីការរៀនពីសំណុំទិន្នន័យឋិតិវន្តដោយគ្មានការប្រាស្រ័យទាក់ទងជាមួយបរិស្ថានជាក់ស្តែង។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានធ្វើការពិនិត្យឡើងវិញ និងចាត់ថ្នាក់វិធីសាស្ត្រ Offline RL បរិយាកាសពិសោធន៍គោល និងកម្មវិធីអនុវត្តក្នុងពិភពពិតដែលមានស្រាប់នាពេលបច្ចុប្បន្ន។
+        
+        <ul>
+            
+            <li>ការចាត់ថ្នាក់ក្បួនដោះស្រាយ (Algorithm Categorization)៖ ការបែងចែកជាវិធីសាស្ត្រ Model-free, Model-based និងផ្អែកលើ Transformer (Transformer-based)</li>
+            
+            <li>ការប្រៀបធៀបបរិយាកាសពិសោធន៍ (Experimental Environment Comparison)៖ ការវិភាគ និងប្រៀបធៀបលើសំណុំទិន្នន័យ D4RL, RL Unplugged និង NeoRL</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រ Model-free និង Model-based ជួយកែលម្អស្ថិរភាពប្រឆាំងនឹងបម្រែបម្រួលរបាយ ខណៈដែលវិធីសាស្ត្រផ្អែកលើ Transformer (Transformer-based methods) លេចធ្លោក្នុងការធ្វើគំរូលំដាប់រយៈពេលយូរ។</li>
+            
+            <li>សំណុំទិន្នន័យគោល D4RL (D4RL benchmark) នៅតែជាបរិយាកាសពិសោធន៍ដែលត្រូវបានប្រើប្រាស់ច្រើនជាងគេ ដោយសារវាមានលក្ខណៈសម្បត្តិទិន្នន័យសម្បូរបែប និងមានការប្រៀបធៀបច្បាស់លាស់។</li>
+            
+            <li>Offline RL មានសក្តានុពលខ្ពស់សម្រាប់ការអនុវត្តក្នុងពិភពលោកពិត ដូចជាប្រព័ន្ធណែនាំ (Recommendation systems) ការបើកបរស្វ័យប្រវត្តិ និងមនុស្សយន្ត ដែលការសាកល្បងផ្ទាល់មានតម្លៃថ្លៃ និងគ្រោះថ្នាក់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Model-free Offline RL (e.g., BCQ, CQL, IQL)</span></strong><br>ការរៀនពង្រឹងក្រៅបណ្តាញដោយមិនប្រើគំរូ (Model-free Offline RL)</td>
+                <td>ងាយស្រួលក្នុងការយល់ និងអនុវត្ត។ ស៊ីធនធានគណនាតិច និងមិនចាំបាច់រៀនពីច្បាប់ផ្លាស់ប្តូរស្ថានភាពបរិស្ថាន (State-transition models) ឡើយ។</td>
+                <td>មានភាពអភិរក្សខ្ពស់ពេក (Conservative) ក្នុងការរៀនសូត្រ និងច្រើនតែវាយតម្លៃលើស (Overestimate) ទៅលើសកម្មភាពដែលស្ថិតនៅក្រៅរបាយទិន្នន័យ (Out-of-Distribution / OOD)។</td>
+                <td>ជាវិធីសាស្ត្រដែលត្រូវបានស្រាវជ្រាវច្រើនជាងគេ (ប្រមាណ 48.4% ដល់ 35.5%) តែសមត្ថភាពមានដែនកំណត់ក្នុងទិន្នន័យសកម្មភាពទាបៗ (Suboptimal data)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Model-based Offline RL (e.g., MOPO, MOReL, COMBO)</span></strong><br>ការរៀនពង្រឹងក្រៅបណ្តាញដោយផ្អែកលើគំរូ (Model-based Offline RL)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការប្រើប្រាស់ទិន្នន័យ (Sample efficiency) និងមានសមត្ថភាពធ្វើការប៉ាន់ស្មានទូទៅ (Generalization) បានល្អ ទោះស្ថិតក្នុងបរិស្ថានថ្មីក៏ដោយ។</td>
+                <td>ការទស្សន៍ទាយរបស់គំរូច្រើនតែមានកំហុសបូកស្ទួន (Compounding errors) ហើយទាមទារការពិន័យលើភាពមិនប្រាកដប្រជា (Uncertainty penalization) យ៉ាងស្មុគស្មាញ។</td>
+                <td>បង្ហាញពីដំណើរការល្អលើសលប់នៅក្នុងបរិស្ថានសាកល្បង D4RL ដូចជា ភារកិច្ច Gym-MuJoCo បើប្រៀបធៀបទៅនឹងវិធីសាស្ត្រ Model-free។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Transformer-based Offline RL (e.g., Decision Transformer, StARformer)</span></strong><br>ការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើស្ថាបត្យកម្ម Transformer</td>
+                <td>ដោះស្រាយបញ្ហាសកម្មភាពអូសបន្លាយពេលយូរ (Long-horizon) និងបញ្ហារង្វាន់កម្រ (Sparse rewards) បានយ៉ាងមានប្រសិទ្ធភាពដោយចាត់ទុក RL ជាបញ្ហា Sequence modeling។</td>
+                <td>ទាមទារការកំណត់រចនាសម្ព័ន្ធកុំព្យូទ័រខ្ពស់ ស៊ីធនធានគណនាសម្បើម និងត្រូវការចំណាយពេលបង្ហាត់យូរជាងវិធីសាស្ត្រផ្សេងៗ។</td>
+                <td>សម្រេចបានលទ្ធផលគួរឱ្យកត់សម្គាល់ក្នុងកិច្ចការស្មុគស្មាញ (ឧ. Maze2D, Atari) និងដោះស្រាយបញ្ហា Distribution Shift បានស្ទើរតែទាំងស្រុង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការបង្ហាត់គំរូ Offline RL ជាពិសេសវិធីសាស្ត្រ Model-based និង Transformer-based ទាមទារថាមពលគណនាធំធេង និងការប្រមូលសំណុំទិន្នន័យប្រវត្តិសកម្មភាពដែលមានទំហំធំសន្ធឹកសន្ធាប់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការ GPUs កម្រិតខ្ពស់ និងមានអង្គចងចាំធំ ដើម្បីដំណើរការស្ថាបត្យកម្ម Transformer និងធ្វើការ Simulation លើបរិយាកាសស្មុគស្មាញ។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យឋិតិវន្តស្តង់ដារធំៗ ដូចជា D4RL, RL Unplugged ឫ NeoRL ដែលផ្ទុកទិន្នន័យសកម្មភាព និងរង្វាន់រាប់លាន។</li>
+        
+        <li><strong>Software:</strong> ការប្រើប្រាស់បណ្ណាល័យ Deep Learning ដូចជា PyTorch ឬ TensorFlow ព្រមទាំងកម្មវិធីក្លែងធ្វើបរិស្ថាន (Simulation engines) ដូចជា MuJoCo ឫ CARLA។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងជ្រៅជ្រះផ្នែក Deep Learning, Reinforcement Learning ក៏ដូចជាការវាយតម្លៃភាពមិនប្រាកដប្រជា (Uncertainty estimation) ក្នុងគណិតវិទ្យា។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះភាគច្រើនផ្អែកលើសំណុំទិន្នន័យពីបរិស្ថានក្លែងធ្វើ (Simulation environments) ដូចជាកន្លែងពិសោធន៍របស់ OpenAI ហ្គេម Atari និងប្រព័ន្ធបើកបរស្វ័យប្រវត្តិ CARLA។ សម្រាប់ប្រទេសកម្ពុជា ការពឹងផ្អែកទាំងស្រុងលើទិន្នន័យក្លែងធ្វើទាំងនេះអាចបណ្តាលឱ្យមានគម្លាតពីពិភពពិត (Sim-to-real gap) ព្រោះហេដ្ឋារចនាសម្ព័ន្ធផ្លូវថ្នល់ និងអាកប្បកិរិយារបស់មនុស្សក្នុងស្រុកមានភាពខុសប្លែក និងស្មុគស្មាញជាងនៅក្នុង Simulation ឆ្ងាយ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ថ្វីត្បិតតែ Offline RL ជាបច្ចេកវិទ្យាទំនើបកម្រិតខ្ពស់ក៏ដោយ វានៅតែមានសក្តានុពលខ្ពស់ក្នុងការអនុវត្តនៅប្រទេសកម្ពុជា ពិសេសលើវិស័យដែលអាចប្រមូលទិន្នន័យបានច្រើន តែមិនអាចយកប្រព័ន្ធទៅសាកល្បងព្រាវៗ (Online interaction) បាន ដោយសារហានិភ័យ ឬតម្លៃថ្លៃ។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធណែនាំ (Recommendation Systems) សម្រាប់ E-commerce ក្នុងស្រុក:</strong> អាចប្រើប្រាស់ Offline RL ដើម្បីកែលម្អការណែនាំផលិតផលលើផ្លាតហ្វមទិញលក់ និងដឹកជញ្ជូន (ដូចជា Nham24 ឬ Foodpanda) ដោយរៀនពីទិន្នន័យប្រវត្តិអតិថិជនផ្ទាល់ ដោយមិនចាំបាច់សាកល្បង Algorithms ថ្មីដោយផ្ទាល់ដែលអាចប៉ះពាល់ដល់បទពិសោធន៍អ្នកប្រើប្រាស់។</li>
+            
+            <li><strong>ការគ្រប់គ្រងចរាចរណ៍នៅរាជធានីភ្នំពេញ (Smart Traffic Control):</strong> អាចយកទៅអភិវឌ្ឍប្រព័ន្ធបញ្ជាភ្លើងស្តុបឆ្លាតវៃ ដោយរៀនពីទិន្នន័យលំហូរចរាចរណ៍ប្រវត្តិសាស្ត្រ ដើម្បីកាត់បន្ថយការកកស្ទះ ដោយប្រើគោលគំនិតពីភារកិច្ច 'Flow' ក្នុងបរិស្ថាន D4RL ដែលបានរៀបរាប់ក្នុងឯកសារ។</li>
+            
+            <li><strong>ការគ្រប់គ្រងថាមពល និងបណ្តាញអគ្គិសនី (Smart Energy Management):</strong> អាចសហការជាមួយស្ថាប័នអគ្គិសនីកម្ពុជា (EDC) ដើម្បីធ្វើការបែងចែកថាមពលឆ្លាតវៃ ដោយរៀនពីទិន្នន័យប្រវត្តិសាស្ត្រនៃការប្រើប្រាស់ថាមពលតាមតំបន់នីមួយៗ (ស្រដៀងនឹងបរិស្ថាន NeoRL / CityLearn)។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តបច្ចេកវិទ្យា Offline RL នៅកម្ពុជាទាមទារការពង្រឹងការប្រមូល និងរក្សាទុកទិន្នន័យជាមុនសិន ប៉ុន្តែវាពិតជាអាចប្រែក្លាយទិន្នន័យទាំងនោះទៅជាម៉ាស៊ីនសម្រេចចិត្តដ៏មានឥទ្ធិពល ដែលអាចដោះស្រាយបញ្ហាធំៗដោយសុវត្ថិភាពខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ RL និង Deep Learning:</strong> និស្សិតគួរចាប់ផ្តើមរៀនពីមូលដ្ឋាន Reinforcement Learning (MDP, Q-Learning, Policy Gradients) និង Deep Learning ដោយប្រើប្រាស់វគ្គសិក្សាអនឡាញឥតគិតថ្លៃដូចជា <span class='en'>David Silver's RL Course (UCL)</span> ឬវគ្គសិក្សារបស់ <span class='en'>DeepLearning.AI</span>។</li>
+            
+            <li><strong>អនុវត្តកូដជាមួយបណ្ណាល័យស្តង់ដារ (Standard Libraries):</strong> ចាប់ផ្តើមសរសេរកូដក្បួនដោះស្រាយ Offline RL សាមញ្ញៗ (ដូចជា BCQ ឬ CQL) ដោយប្រើប្រាស់បណ្ណាល័យ <span class='en'>PyTorch</span> ឬ <span class='en'>TensorFlow</span> និងសាកល្បងពួកវាជាមួយបរិស្ថាន <span class='en'>OpenAI Gym</span>។</li>
+            
+            <li><strong>ស្រាវជ្រាវ និងពិសោធន៍លើ Benchmark Datasets:</strong> ទាញយក និងពិសោធន៍ផ្ទាល់ជាមួយសំណុំទិន្នន័យស្តង់ដារ <span class='en'>D4RL (Datasets for Deep Data-Driven Reinforcement Learning)</span> ដើម្បីយល់ច្បាស់ពីបញ្ហា 'បម្រែបម្រួលរបាយ (Distribution Shift)' និងរបៀបដែលក្បួនដោះស្រាយផ្សេងៗដោះស្រាយវា។</li>
+            
+            <li><strong>ស្វែងយល់ពី Transformer-based RL:</strong> ដោយសារ Transformer កំពុងជាទីចាប់អារម្មណ៍ខ្លាំង និស្សិតគួរតែសិក្សាពីស្ថាបត្យកម្ម <span class='en'>Decision Transformer</span> ដោយអាចស្វែងរក និងសាកល្បងប្រើប្រាស់កូដគំរូពី <span class='en'>Hugging Face</span>។</li>
+            
+            <li><strong>កសាងគម្រោងជាក់ស្តែងខ្នាតតូច (Mini Real-World Project):</strong> ប្រមូលទិន្នន័យប្រវត្តិសាស្ត្រសាមញ្ញមួយពិតប្រាកដ (ឧ. ទិន្នន័យទិញទំនិញអនឡាញ ឬទិន្នន័យអាកាសធាតុ) រួចសាកល្បងប្រើឧបករណ៍បំពាក់ស្រាប់ដូចជា <span class='en'>NeoRL</span> ទីបណ្ណាល័យផ្សេងៗ ដើម្បីកសាងប្រព័ន្ធផ្តល់យោបល់ (Recommendation) ខ្នាតតូចមួយ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline Reinforcement Learning</span></td>
+                <td>ការរៀនពង្រឹងក្រៅបណ្តាញ គឺជាវិធីសាស្ត្រនៃបញ្ញាសិប្បនិម្មិតដែលអនុញ្ញាតឱ្យកុំព្យូទ័ររៀនធ្វើការសម្រេចចិត្តពីសំណុំទិន្នន័យប្រវត្តិសាស្ត្រដែលបានប្រមូលទុកជាមុន ដោយមិនចាំបាច់ធ្វើអន្តរកម្មសាកល្បងផ្ទាល់ជាមួយបរិស្ថានជាក់ស្តែងនោះទេ។ វាជួយកាត់បន្ថយហានិភ័យ និងចំណាយខ្ពស់ក្នុងការសាកល្បងលើប្រព័ន្ធពិត។</td>
+                <td>ដូចជាការរៀនជិះកង់ដោយអង្គុយមើលវីដេអូអ្នកដទៃជិះ ជាជាងការឡើងជិះសាកល្បងដួលដោយខ្លួនឯងលើថ្នល់ពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Distribution Shift</span></td>
+                <td>បម្រែបម្រួលរបាយទិន្នន័យ គឺជាបញ្ហាដែលកើតឡើងនៅពេលដែលស្ថានភាពទិន្នន័យដែលម៉ាស៊ីនជួបប្រទះពេលដំណើរការជាក់ស្តែង (Testing/Deployment) មានលក្ខណៈខុសប្លែកពីទិន្នន័យដែលវាធ្លាប់បានរៀន (Training data) ដែលធ្វើឱ្យប្រព័ន្ធបាត់បង់ភាពជាក់លាក់ និងសម្រេចចិត្តខុសឆ្គង។</td>
+                <td>ដូចជាសិស្សដែលរៀនតែលំហាត់ងាយៗ និងទន្ទេញមេរៀនក្នុងថ្នាក់ តែពេលប្រឡងចេញលំហាត់ពិបាកដែលមិនធ្លាប់ជួបសោះ ធ្វើឱ្យសិស្សនោះគិតមិនចេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Out-of-Distribution (OOD) actions</span></td>
+                <td>សកម្មភាពក្រៅរបាយទិន្នន័យ សំដៅលើសកម្មភាព ឬស្ថានភាពទាំងឡាយណាដែលមិនមានវត្តមាននៅក្នុងសំណុំទិន្នន័យហ្វឹកហាត់។ នៅក្នុងម៉ូដែល Offline RL កម្មវិធីច្រើនតែវាយតម្លៃខ្ពស់ខុសការពិត (Overestimate) ទៅលើសកម្មភាពប្រភេទនេះ ដោយស្មានថាវាផ្តល់រង្វាន់ខ្ពស់ តែជាក់ស្តែងអាចបង្កគ្រោះថ្នាក់។</td>
+                <td>ដូចជាការដើរចូលទៅកាន់ផ្លូវងងឹតដែលយើងមិនធ្លាប់ស្គាល់ ឬធ្លាប់ដើរឆ្លងកាត់ ដោយស្មានថាវាមានសុវត្ថិភាព និងលឿនជាង តែតាមពិតវាមានគ្រោះថ្នាក់ខ្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Model-based RL</span></td>
+                <td>ការរៀនពង្រឹងផ្អែកលើគំរូ គឺជាវិធីសាស្ត្រដែលម៉ាស៊ីនព្យាយាមបង្កើត "គំរូក្លែងធ្វើ" (Simulator) ឬច្បាប់ផ្លាស់ប្តូរនៃបរិស្ថាន ដើម្បីទស្សន៍ទាយថាតើសកម្មភាពណាមួយនឹងផ្តល់លទ្ធផលអ្វីនៅពេលអនាគត មុននឹងសម្រេចចិត្តជ្រើសរើសសកម្មភាពដ៏ល្អបំផុតនោះ។</td>
+                <td>ដូចជាការលេងអុក ដែលអ្នកលេងគិតស្រមៃទុកជាមុននូវចលនារបស់គូប្រកួតរាប់សិបជំហានក្នុងខួរក្បាល ដើម្បីរកផ្លូវឈ្នះ មុននឹងសម្រេចចិត្តដើរកូនអុកពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Extrapolation Error</span></td>
+                <td>កំហុសពន្លាត ឬកំហុសប៉ាន់ស្មានក្រៅដែនកំណត់ គឺជាកំហុសរបស់គំរូ AI នៅពេលដែលវាព្យាយាមប៉ាន់ស្មានតម្លៃឬលទ្ធផលសម្រាប់ទិន្នន័យថ្មីដែលនៅឆ្ងាយពីទិន្នន័យដើមដែលវាធ្លាប់រៀន ដែលបណ្តាលឱ្យការវាយតម្លៃរបស់វាលម្អៀង ឬខុសស្រឡះ។</td>
+                <td>ដូចជាការទស្សន៍ទាយស្ថានភាពអាកាសធាតុសម្រាប់ខែក្រោយ ដោយពឹងផ្អែកតែលើទិន្នន័យអាកាសធាតុនៃថ្ងៃនេះតែមួយថ្ងៃប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Decision Transformer</span></td>
+                <td>ជាស្ថាបត្យកម្មបញ្ញាសិប្បនិម្មិតដែលយកទម្រង់ Transformer (ដូចប្រើក្នុង ChatGPT សម្រាប់ទស្សន៍ទាយពាក្យបន្ទាប់) មកដោះស្រាយបញ្ហាការរៀនពង្រឹង ដោយចាត់ទុកដំណើរការសម្រេចចិត្តដូចជាការទស្សន៍ទាយសកម្មភាពបន្ទាប់ដ៏ល្អបំផុត ផ្អែកលើលំដាប់លំដោយនៃស្ថានភាព សកម្មភាព និងរង្វាន់កន្លងមក។</td>
+                <td>ដូចជាមុខងារទស្សន៍ទាយពាក្យបន្ទាប់ (Auto-complete) នៅលើក្ដារចុចទូរសព្ទដៃ ដែលវាទស្សន៍ទាយសកម្មភាពបន្ទាប់ដ៏ត្រឹមត្រូវបំផុតដើម្បីឈានទៅរកគោលដៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Behavior Policy</span></td>
+                <td>គោលនយោបាយឥរិយាបថ សំដៅលើច្បាប់ យុទ្ធសាស្ត្រ ឬប្រព័ន្ធចាស់ដែលត្រូវបានប្រើប្រាស់កន្លងមកដើម្បីប្រមូលសំណុំទិន្នន័យប្រវត្តិសាស្ត្រ (Offline Data) មុនពេលដែលយើងយកទិន្នន័យនោះមកបង្ហាត់គំរូ Offline RL ថ្មីឱ្យឆ្លាតជាងមុន។</td>
+                <td>ដូចជាកំណត់ត្រាបញ្ជីមុខម្ហូប និងក្បួនធ្វើម្ហូបដែលមេចុងភៅចាស់ធ្លាប់ធ្វើប្រចាំថ្ងៃ ដែលចុងភៅថ្មីយកមកអានដើម្បីរៀនសូត្រពីរបៀបចម្អិនឱ្យកាន់តែឆ្ងាញ់ជាងមុន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/end-to-end-dialog-state-reinforcement-learning-2016.html">
+                    <span class="km">ឆ្ពោះទៅរកការរៀនពីដើមដល់ចប់សម្រាប់ការតាមដាន និងការគ្រប់គ្រងស្ថានភាពសន្ទនា ដោយប្រើប្រាស់ការរៀនពង្រឹងបែបស៊ីជម្រៅ</span><br>
+                    <span class="en article-original-title">Towards End-to-End Learning for Dialog State Tracking and Management using Deep Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cooling-optimization-data-center-drl-2018.html">
+                    <span class="km">ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់មជ្ឈមណ្ឌលទិន្នន័យបៃតង តាមរយៈការរៀនសូត្របែបពង្រឹងកម្លាំងយ៉ាងស៊ីជម្រៅ (Deep Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Transforming Cooling Optimization for Green Data Center via Deep Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html">
+                    <span class="km">វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero</span><br>
+                    <span class="en article-original-title">深度强化学习进展: 从AlphaGo到AlphaGo Zero</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-center-cooling-optimization-offline-rl-2025.html">
+                    <span class="km">ការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់មជ្ឈមណ្ឌលទិន្នន័យ ដោយប្រើបច្ចេកទេស Offline Reinforcement Learning</span><br>
+                    <span class="en article-original-title">Data Center Cooling System Optimization Using Offline Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/wireless-power-mec-offloading-drl-2024.html">
+                    <span class="km">ការបញ្ជូនការគណនាដោយមានជំនួយពីថាមពលឥតខ្សែនៅក្នុងការគណនាចល័តនៅគែមបណ្តាញ៖ វិធីសាស្ត្រសិក្សាបំប៉នស៊ីជម្រៅ (Deep Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Wireless Power Assisted Computation Offloading in Mobile Edge Computing: A Deep Reinforcement Learning Approach</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=offline+reinforcement+learning%22+AND+%22distribution+shift%22+OR+%22out-of-distribution" target="_blank" rel="noopener"><span class="en">offline reinforcement learning" AND "distribution shift" OR "out-of-distribution</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=model-based+offline+reinforcement+learning%22+AND+%22uncertainty+estimation" target="_blank" rel="noopener"><span class="en">model-based offline reinforcement learning" AND "uncertainty estimation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Decision+Transformer%22+AND+%22sequence+modeling%22+AND+%22offline+reinforcement+learning" target="_blank" rel="noopener"><span class="en">Decision Transformer" AND "sequence modeling" AND "offline reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=offline+reinforcement+learning%22+AND+%28%22autonomous+driving%22+OR+%22recommendation+systems%22%29" target="_blank" rel="noopener"><span class="en">offline reinforcement learning" AND ("autonomous driving" OR "recommendation systems")</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=D4RL+benchmark%22+AND+%22offline+reinforcement+learning+evaluation" target="_blank" rel="noopener"><span class="en">D4RL benchmark" AND "offline reinforcement learning evaluation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

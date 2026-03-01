@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរៀនគោលការណ៍សន្ទនាឯករាជ្យពីដែនកំណត់ តាមរយៈការធ្វើប៉ារ៉ាម៉ែត្រអុនតូឡូស៊ី | KhmerResearch.com</title>
+    <meta name="description" content="ការកសាងប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) សម្រាប់ដែនកម្មវិធីផ្សេងៗគ្នាត្រូវចំណាយពេលច្រើន ដោយសារសមាសធាតុនីមួយៗទាមទារទិន្នន័យជាក់លាក់សម្រាប់ដែននោ...">
+    
+    <meta name="keywords" content="Spoken Dialogue Systems, Ontology Parameterisation, Domain Transfer, POMDP, Reinforcement Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/learning-domain-independent-dialogue-policies-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/learning-domain-independent-dialogue-policies-2015.html">
+    <meta property="og:title" content="ការរៀនគោលការណ៍សន្ទនាឯករាជ្យពីដែនកំណត់ តាមរយៈការធ្វើប៉ារ៉ាម៉ែត្រអុនតូឡូស៊ី | KhmerResearch.com">
+    <meta property="og:description" content="ការកសាងប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) សម្រាប់ដែនកម្មវិធីផ្សេងៗគ្នាត្រូវចំណាយពេលច្រើន ដោយសារសមាសធាតុនីមួយៗទាមទារទិន្នន័យជាក់លាក់សម្រាប់ដែននោះដើម្បីយកមកធ្វើការបង្វឹក។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015 SIGDIAL Conference">
+    
+    <meta property="article:tag" content="Spoken Dialogue Systems">
+    
+    <meta property="article:tag" content="Ontology Parameterisation">
+    
+    <meta property="article:tag" content="Domain Transfer">
+    
+    <meta property="article:tag" content="POMDP">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរៀនគោលការណ៍សន្ទនាឯករាជ្យពីដែនកំណត់ តាមរយៈការធ្វើប៉ារ៉ាម៉ែត្រអុនតូឡូស៊ី">
+    <meta name="twitter:description" content="ការកសាងប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) សម្រាប់ដែនកម្មវិធីផ្សេងៗគ្នាត្រូវចំណាយពេលច្រើន ដោយសារសមាសធាតុនីមួយៗទាមទារទិន្នន័យជាក់លាក់សម្រាប់ដែននោះដើម្បីយកមកធ្វើការបង្វឹក។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd\u179f\u1793\u17d2\u1791\u1793\u17b6\u17af\u1780\u179a\u17b6\u1787\u17d2\u1799\u1796\u17b8\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u17a2\u17bb\u1793\u178f\u17bc\u17a1\u17bc\u179f\u17ca\u17b8",
+      "name": "Learning Domain-Independent Dialogue Policies via Ontology Parameterisation",
+      "description": "\u1780\u17b6\u179a\u1780\u179f\u17b6\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178a\u17c4\u1799\u179f\u17c6\u17a1\u17c1\u1784 (Spoken Dialogue Systems) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178a\u17c2\u1793\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6\u178f\u17d2\u179a\u17bc\u179c\u1785\u17c6\u178e\u17b6\u1799\u1796\u17c1\u179b\u1785\u17d2\u179a\u17be\u1793 \u178a\u17c4\u1799\u179f\u17b6\u179a\u179f\u1798\u17b6\u179f\u1792\u17b6\u178f\u17bb\u1793\u17b8\u1798\u17bd\u1799\u17d7\u1791\u17b6\u1798\u1791\u17b6\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b6\u1780\u17cb\u179b\u17b6\u1780\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178a\u17c2\u1793\u1793\u17c4\u17c7\u178a\u17be\u1798\u17d2\u1794\u17b8\u1799\u1780\u1798\u1780\u1792\u17d2\u179c\u17be\u1780\u17b6\u179a\u1794\u1784\u17d2\u179c\u17b9\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/learning-domain-independent-dialogue-policies-2015.html",
+      "author": [{"@type": "Person", "name": "Zhuoran Wang (Toshiba Research Europe Ltd., Cambridge, UK)"},{"@type": "Person", "name": "Tsung-Hsien Wen (Engineering Department, University of Cambridge, UK)"},{"@type": "Person", "name": "Pei-Hao Su (Engineering Department, University of Cambridge, UK)"},{"@type": "Person", "name": "Yannis Stylianou (Toshiba Research Europe Ltd., Cambridge, UK)"}],
+      "datePublished": "2015 SIGDIAL Conference",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Learning Domain-Independent Dialogue Policies via Ontology Parameterisation",
+        "url": "N/A"
+      },
+      "keywords": ["Spoken Dialogue Systems", "Ontology Parameterisation", "Domain Transfer", "POMDP", "Reinforcement Learning"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd\u179f\u1793\u17d2\u1791\u1793\u17b6\u17af\u1780\u179a\u17b6\u1787\u17d2\u1799\u1796\u17b8\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u17a2\u17bb\u1793\u178f\u17bc\u17a1\u17bc\u179f\u17ca\u17b8",
+          "item": "https://khmerresearch.com/papers/technology/learning-domain-independent-dialogue-policies-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរៀនគោលការណ៍សន្ទនាឯករាជ្យពីដែនកំណត់ តាមរយៈការធ្វើប៉ារ៉ា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Learning Domain-Independent Dialogue Policies via Ontology Parameterisation<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរៀនគោលការណ៍សន្ទនាឯករាជ្យពីដែនកំណត់ តាមរយៈការធ្វើប៉ារ៉ាម៉ែត្រអុនតូឡូស៊ី</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Learning Domain-Independent Dialogue Policies via Ontology Parameterisation</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Zhuoran Wang (Toshiba Research Europe Ltd., Cambridge, UK), Tsung-Hsien Wen (Engineering Department, University of Cambridge, UK), Pei-Hao Su (Engineering Department, University of Cambridge, UK), Yannis Stylianou (Toshiba Research Europe Ltd., Cambridge, UK)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015 SIGDIAL Conference</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការកសាងប្រព័ន្ធសន្ទនាដោយសំឡេង (Spoken Dialogue Systems) សម្រាប់ដែនកម្មវិធីផ្សេងៗគ្នាត្រូវចំណាយពេលច្រើន ដោយសារសមាសធាតុនីមួយៗទាមទារទិន្នន័យជាក់លាក់សម្រាប់ដែននោះដើម្បីយកមកធ្វើការបង្វឹក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្រថ្មីមួយដើម្បីលុបបំបាត់ការពឹងផ្អែកលើដែនកំណត់ ដោយប្រើប្រាស់ការធ្វើប៉ារ៉ាម៉ែត្រលើអុនតូឡូស៊ី (Ontology Parameterisation) និងដំណើរការបង្វឹកតាមរយៈការពង្រឹង (Reinforcement Learning)។
+        
+        <ul>
+            
+            <li>ការធ្វើប៉ារ៉ាម៉ែត្រអុនតូឡូស៊ីឯករាជ្យពីដែន (Domain-Independent Ontology Parameterisation - DIP)</li>
+            
+            <li>ដំណើរការសម្រេចចិត្តម៉ាកូវដែលអាចសង្កេតបានដោយផ្នែក (Partially Observable Markov Decision Processes - POMDPs)</li>
+            
+            <li>ការបង្វឹកគោលការណ៍តាមរយៈក្បួនដោះស្រាយ GP-SARSA (GP-SARSA Policy Training)</li>
+            
+            <li>ការក្លែងធ្វើអ្នកប្រើប្រាស់ និងការសាកល្បងលើមនុស្សពិត (User Simulation and Human Subject Experiments)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>គោលការណ៍ដែលបានបង្វឹកដោយប្រើតំណាង DIP អាចផ្ទេរពីដែនស្វែងរកភោជនីយដ្ឋាន ទៅកាន់ដែនលក់កុំព្យូទ័រយួរដៃ ដោយសម្រេចបានអត្រាជោគជ័យ ៩៧,៨% ធៀបនឹង ៩៨,៣% នៃគោលការណ៍ក្នុងដែនផ្ទាល់ (ផ្អែកលើការក្លែងធ្វើការសន្ទនា)។</li>
+            
+            <li>នៅក្នុងការសាកល្បងជាមួយមនុស្សពិត គោលការណ៍ដែលបានផ្ទេរទទួលបានអត្រាជោគជ័យ ៨១,៤% និងទទួលបានពិន្ទុវាយតម្លៃភាពធម្មជាតិ ៤,៨៣ ដែលខ្ពស់ជាងបន្តិចធៀបនឹងគោលការណ៍ក្នុងដែនដែលទទួលបាន ៤,៥១ ។</li>
+            
+            <li>វិធីសាស្ត្រនេះជួយពន្លឿនការបង្វឹកគោលការណ៍សន្ទនាសម្រាប់ដែនថ្មីៗ ដោយកាត់បន្ថយតម្រូវការក្នុងការប្រមូលទិន្នន័យជាក់លាក់យ៉ាងច្រើននៅដំណាក់កាលដំបូង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">DIP in-domain</span></strong><br>ការបង្វឹកគោលការណ៍ DIP ក្នុងដែនផ្ទាល់</td>
+                <td>ទទួលបានអត្រាជោគជ័យខ្ពស់បំផុត និងមានភាពសុក្រឹតល្អក្នុងការឆ្លើយតប។</td>
+                <td>ទាមទារពេលវេលា និងធនធានច្រើនក្នុងការប្រមូលទិន្នន័យបង្វឹកសម្រាប់ដែននីមួយៗពីដំបូង។</td>
+                <td>អត្រាជោគជ័យ ៩៨.៣% លើការក្លែងធ្វើសន្ទនា និង ៨៤.៤% លើការសាកល្បងជាមួយមនុស្សពិត ព្រមទាំងទទួលបានពិន្ទុភាពធម្មជាតិ ៤.៥១/៦។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">DIP transferred</span></strong><br>ការផ្ទេរគោលការណ៍ DIP ពីដែនផ្សេង</td>
+                <td>អាចយកទៅប្រើប្រាស់ក្នុងដែនថ្មីបានភ្លាមៗដោយមិនបាច់បង្វឹកឡើងវិញ ចំណេញពេលវេលា និងថវិកា។</td>
+                <td>អត្រាជោគជ័យធ្លាក់ចុះបន្តិចបន្តួច បើធៀបនឹងការបង្វឹកដោយប្រើទិន្នន័យក្នុងដែនផ្ទាល់។</td>
+                <td>អត្រាជោគជ័យ ៩៧.៨% លើការក្លែងធ្វើសន្ទនា និង ៨១.៤% លើមនុស្សពិត ប៉ុន្តែទទួលបានពិន្ទុភាពធម្មជាតិខ្ពស់ជាងបន្តិច (៤.៨៣/៦)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">BUDS GP-SARSA</span></strong><br>ប្រព័ន្ធ BUDS ប្រើប្រាស់ GP-SARSA</td>
+                <td>ជាប្រព័ន្ធគោលដែលមានប្រសិទ្ធភាព ដែលប្រើប្រាស់ស្ថានភាពជំនឿពេញលេញ (Full belief state) សម្រាប់ការសម្រេចចិត្ត។</td>
+                <td>ត្រូវការពេលវេលាយូរក្នុងការបង្វឹក (Converge យឺត) បើធៀបទៅនឹងវិធីសាស្ត្រ DIP ថ្មី។</td>
+                <td>ទទួលបានរង្វាន់មធ្យម (Average reward) ទាបជាងបន្តិច និងមានល្បឿនបង្វឹកយឺតជាង DIP (យោងតាមគំនូសតាងទី១)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះមិនបានបញ្ជាក់លម្អិតពីទំហំផ្នែករឹង (Hardware) នោះទេ ប៉ុន្តែវាទាមទារកម្លាំងម៉ាស៊ីនគណនាសមរម្យសម្រាប់ដំណើរការ Reinforcement Learning និងប្រព័ន្ធក្លែងធ្វើ។
+    
+    <ul>
+        
+        <li><strong>Algorithms / Software:</strong> ត្រូវការក្បួនដោះស្រាយ GP-SARSA និងប្រព័ន្ធក្លែងធ្វើអ្នកប្រើប្រាស់តាមរបៀបវារៈ (Agenda-based user simulator) ដើម្បីបង្វឹក។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការអុនតូឡូស៊ី (Ontologies) និងមូលដ្ឋានទិន្នន័យ (Database) ដាច់ដោយឡែកសម្រាប់ដែននីមួយៗ (ឧ. ភោជនីយដ្ឋាន និងកុំព្យូទ័រយួរដៃ)។</li>
+        
+        <li><strong>Human Evaluation:</strong> ទាមទារថវិកាសម្រាប់ជួលអ្នកវាយតម្លៃដែលជាមនុស្សពិតតាមរយៈប្រព័ន្ធ Amazon Mechanical Turk (MTurk)។</li>
+        
+        <li><strong>Expertise:</strong> អ្នកស្រាវជ្រាវត្រូវមានចំណេះដឹងស៊ីជម្រៅលើផ្នែក POMDP, ការរៀនតាមរយៈការពង្រឹង (Reinforcement Learning), និង Spoken Dialogue Systems។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកលើការក្លែងធ្វើសន្ទនា និងទិន្នន័យសាកល្បងពីអ្នកប្រើប្រាស់នៅលើប្រព័ន្ធ MTurk ដែលភាគច្រើនជាអ្នកនិយាយភាសាអង់គ្លេសនៅលោកខាងលិច។ ទម្រង់នៃការសន្ទនា និងអាកប្បកិរិយារបស់អ្នកប្រើប្រាស់ទាំងនេះអាចមានភាពខុសគ្នាស្រឡះពីបរិបទវប្បធម៌ និងភាសាខ្មែរ។ នេះជារឿងសំខាន់សម្រាប់កម្ពុជា ព្រោះការបង្កើតប្រព័ន្ធសន្ទនាឆ្លាតវៃជាភាសាខ្មែរ ទាមទារការយល់ដឹងពីរបៀបនិយាយកាត់ និយាយឆិត ឬការប្រើប្រាស់ពាក្យពេចន៍ក្នុងស្រុកពិតប្រាកដ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការផ្ទេរគោលការណ៍សន្ទនាដោយមិនពឹងផ្អែកលើដែនកំណត់នេះ គឺមានសក្តានុពលខ្ពស់សម្រាប់ប្រទេសកម្ពុជា ដែលជាប្រទេសកំពុងមានបញ្ហាខ្វះខាតទិន្នន័យ (Low-resource settings)។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ:</strong> ស្ថាប័នដូចជាធនាគារ ABA ឬ ACLEDA អាចបង្វឹក Chatbot ម្តងលើសេវាទូទៅ (ឧ. សួរគណនី) រួចផ្ទេរវាទៅកាន់ដែនសេវាកម្ចី ដោយមិនបាច់ប្រមូលទិន្នន័យសន្ទនារាប់ពាន់ថ្មីទៀតនោះទេ។</li>
+            
+            <li><strong>រដ្ឋាភិបាលអេឡិចត្រូនិក (E-Government):</strong> ក្រសួងស្ថាប័នអាចបង្កើតប្រព័ន្ធ AI សួរឆ្លើយសម្រាប់ពលរដ្ឋ ដូចជាការសាកសួរព័ត៌មានធ្វើអត្តសញ្ញាណប័ណ្ណ រួចពង្រីកទៅកាន់ការសួរព័ត៌មានចុះបញ្ជីយានយន្ត ដោយប្រើគោលការណ៍សន្ទនាតែមួយ។</li>
+            
+            <li><strong>វិស័យទេសចរណ៍នៅសៀមរាប ឬភ្នំពេញ:</strong> អាចយកទៅអភិវឌ្ឍប្រព័ន្ធ Voicebot ដែលជួយភ្ញៀវទេសចរស្វែងរកសណ្ឋាគារ រួចផ្ទេរប្រព័ន្ធនោះទៅជួយស្វែងរកភោជនីយដ្ឋាន ឬសេវាកម្មដឹកជញ្ជូន ដោយពឹងផ្អែកលើទិន្នន័យអុនតូឡូស៊ីដែលមានស្រាប់។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះផ្តល់នូវផ្លូវកាត់ដ៏មានប្រសិទ្ធភាពក្នុងការអភិវឌ្ឍប្រព័ន្ធ AI សន្ទនាឆ្លាតវៃនៅកម្ពុជា ដោយជួយកាត់បន្ថយពេលវេលា និងថ្លៃចំណាយក្នុងការប្រមូលទិន្នន័យយ៉ាងសន្ធឹកសន្ធាប់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ POMDP និង RL:</strong> និស្សិតត្រូវចាប់ផ្តើមស្វែងយល់ពីគណិតវិទ្យា និងទ្រឹស្តីនៅពីក្រោយម៉ូដែល POMDP ក្នុងការតាមដានស្ថានភាពសន្ទនា (Dialogue State Tracking) និងរៀនពីវិធីសាស្ត្រ <span class="en">Reinforcement Learning</span> កម្រិតខ្ពស់ដូចជា <span class="en">GP-SARSA</span> ជាដើម។</li>
+            
+            <li><strong>ស្វែងយល់ និងអនុវត្ត Ontology Parameterisation:</strong> រៀនបំប្លែងលក្ខណៈពិសេសរបស់រន្ធទិន្នន័យ (Slots) ដូចជា ចំនួនតម្លៃ សារៈសំខាន់របស់វា និងរបាយទិន្នន័យក្នុងមូលដ្ឋានទិន្នន័យ ឱ្យទៅជាទម្រង់វ៉ិចទ័រដែលមិនអាស្រ័យលើដែនកំណត់ (Domain-independent features) ដោយប្រើ <span class="en">Python</span> ឬ <span class="en">NumPy</span>។</li>
+            
+            <li><strong>សាកល្បងហ្វឹកហាត់ជាមួយប្រព័ន្ធ PyDial:</strong> ទាញយក និងប្រើប្រាស់ <span class="en">PyDial</span> (សូហ្វវែរបើកទូលាយសម្រាប់ Spoken Dialogue Systems) ដើម្បីសាកល្បងហ្វឹកហាត់គោលការណ៍សន្ទនា ជាមួយប្រព័ន្ធក្លែងធ្វើអ្នកប្រើប្រាស់ (User Simulator) ដោយប្រើប្រាស់គំរូទិន្នន័យភាសាអង់គ្លេសដែលមានស្រាប់សិន។</li>
+            
+            <li><strong>អភិវឌ្ឍប្រព័ន្ធគំរូជាភាសាខ្មែរខ្នាតតូច:</strong> បង្កើតទិន្នន័យអុនតូឡូស៊ីតូចមួយសម្រាប់សេវាកម្មក្នុងស្រុក (ឧ. ការកក់សំបុត្រឡានក្រុងវិរៈប៊ុនថាំ) រួចសាកល្បងផ្ទេរគោលការណ៍ដែលបានបង្វឹកនោះ ទៅកាន់សេវាកម្មថ្មីមួយទៀត (ឧ. ការកក់សណ្ឋាគារ) ដើម្បិវាស់ស្ទង់ប្រសិទ្ធភាពក្នុងបរិបទកម្ពុជាដោយប្រើប្រាស់សេវាកម្ម <span class="en">ChatGPT API</span> ជំនួសមុខងារយល់ភាសា (NLU) ក៏បាន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Partially Observable Markov Decision Processes (POMDPs)</span></td>
+                <td>ម៉ូដែលគណិតវិទ្យាសម្រាប់ធ្វើការសម្រេចចិត្តជាបន្តបន្ទាប់ ក្នុងស្ថានភាពដែលប្រព័ន្ធមិនមានព័ត៌មានគ្រប់ជ្រុងជ្រោយ ឬច្បាស់លាស់ (ឧ. សំឡេងអ្នកប្រើប្រាស់ស្តាប់មិនសូវបានដោយសារសំឡេងរំខាន) ដោយប្រព័ន្ធត្រូវប្រើប្រូបាប៊ីលីតេដើម្បីប៉ាន់ស្មានស្ថានភាពពិតប្រាកដ។</td>
+                <td>ដូចជាគ្រូពេទ្យវាយតម្លៃរោគសញ្ញាជំងឺដោយការស្មានផ្អែកលើព័ត៌មានមានកម្រិត រួចសម្រេចចិត្តថាតើត្រូវផ្តល់ថ្នាំប្រភេទណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dialogue Policy</span></td>
+                <td>ក្បួន ឬយុទ្ធសាស្ត្រដែលប្រព័ន្ធបញ្ញាសិប្បនិម្មិត (AI) ប្រើប្រាស់ដើម្បីសម្រេចថាតើវាគួរឆ្លើយតប ឬធ្វើសកម្មភាពអ្វីបន្តទៀតទៅកាន់អ្នកប្រើប្រាស់ ដោយផ្អែកលើស្ថានភាពបច្ចុប្បន្ននៃការសន្ទនា ដើម្បីឈានទៅសម្រេចគោលដៅ។</td>
+                <td>ដូចជាសៀវភៅណែនាំរបស់បុគ្គលិកបម្រើសេវាកម្មអតិថិជន ដែលប្រាប់ថាតើត្រូវឆ្លើយតបបែបណានៅពេលអតិថិជនសួរ ឬត្អូញត្អែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Domain Ontology</span></td>
+                <td>រចនាសម្ព័ន្ធព័ត៌មានដែលកំណត់ពីប្រភេទនៃទិន្នន័យ (Slots) និងតម្លៃរបស់វា (Values) នៅក្នុងប្រធានបទ ឬដែនកម្មវិធីជាក់លាក់ណាមួយ។ ឧទាហរណ៍ ក្នុងដែនភោជនីយដ្ឋាន អុនតូឡូស៊ីរួមមាន តម្លៃ ប្រភេទអាហារ និងទីតាំង។</td>
+                <td>ដូចជាតារាងម៉ឺនុយនៅក្នុងហាងកាហ្វេ ដែលបែងចែកប្រភេទភេសជ្ជៈ ទំហំកែវ និងកម្រិតជាតិស្ករយ៉ាងច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Reinforcement Learning (RL)</span></td>
+                <td>វិធីសាស្ត្រមួយនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning) ដែលប្រព័ន្ធរៀនធ្វើសកម្មភាពតាមរយៈការសាកល្បងនិងកំហុស ដោយទទួលបានរង្វាន់ (Reward) នៅពេលវាធ្វើសកម្មភាពត្រឹមត្រូវ និងការពិន័យ (Penalty) នៅពេលធ្វើខុស។</td>
+                <td>ដូចជាការបង្ហាត់សត្វឆ្កែ ដោយផ្តល់ចំណីនៅពេលវាស្តាប់បង្គាប់ និងស្តីបន្ទោសនៅពេលវាធ្វើខុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Belief State</span></td>
+                <td>ការចែកចាយប្រូបាប៊ីលីតេទៅលើអ្វីដែលអ្នកប្រើប្រាស់ចង់បាន (User Goal) នៅពេលណាមួយនៃការសន្ទនា ដោយសារប្រព័ន្ធមិនអាចដឹងប្រាកដ ១០០% ថាអ្នកប្រើប្រាស់ពិតជាចង់បានអ្វីនោះទេ ដោយសារកំហុសនៃការស្តាប់ (ASR errors)។</td>
+                <td>ដូចជាការស្មានរបស់អ្នកលក់ថាភ្ញៀវទំនងជាចង់ទិញអាវពណ៌ក្រហម ៨០% ឬពណ៌ខៀវ ២០% ផ្អែកលើការសម្លឹងមើលរបស់ភ្ញៀវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Domain-Independent Featurisation</span></td>
+                <td>ការបំប្លែងលក្ខណៈនៃទិន្នន័យ (Features) ឱ្យទៅជាទម្រង់រួមមួយដែលមិនអាស្រ័យលើប្រធានបទ ឬដែនកំណត់ណាមួយ ដើម្បីឱ្យម៉ូដែលដែលបានហ្វឹកហាត់រួចអាចយកទៅប្រើប្រាស់ជាមួយប្រធានបទថ្មីផ្សេងទៀតបានដោយមិនបាច់ហ្វឹកហាត់ពីដំបូងឡើយ។</td>
+                <td>ដូចជាការរៀនបើកបររថយន្តដោយយល់ពីគោលការណ៍ប្រើចង្កូតនិងហ្វ្រាំង ដែលអាចឱ្យអ្នកយកទៅបើកបររថយន្តម៉ាកអ្វីក៏បាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">GP-SARSA</span></td>
+                <td>ក្បួនដោះស្រាយមួយក្នុង Reinforcement Learning ដែលប្រើប្រាស់ Gaussian Processes (GP) ដើម្បីជួយឱ្យប្រព័ន្ធរៀនពីយុទ្ធសាស្ត្រសន្ទនាបានលឿន និងអាចទស្សន៍ទាយសកម្មភាពល្អបំផុតក្នុងស្ថានភាពដែលមិនធ្លាប់ជួបពីមុនមក។</td>
+                <td>ដូចជាសិស្សពូកែដែលចេះទាញបទពិសោធន៍ពីការដោះស្រាយលំហាត់ចាស់ៗ មកទាយដោះស្រាយលំហាត់ថ្មីបានយ៉ាងលឿន និងត្រឹមត្រូវ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/rl-spoken-dialogue-systems-deployment-2006.html">
+                    <span class="km">ការរៀនពង្រឹង (Reinforcement Learning) សម្រាប់ប្រព័ន្ធសន្ទនាជាសំឡេង៖ ការប្រៀបធៀបចំណុចខ្លាំង និងចំណុចខ្សោយសម្រាប់ការដាក់ពង្រាយក្នុងការអនុវត្តជាក់ស្តែង</span><br>
+                    <span class="en article-original-title">Reinforcement Learning for Spoken Dialogue Systems: Comparing Strengths and Weaknesses for Practical Deployment</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/statistical-dialogue-modelling-2011.html">
+                    <span class="km">ការធ្វើគំរូការសន្ទនាតាមបែបស្ថិតិ</span><br>
+                    <span class="en article-original-title">Statistical Dialogue Modelling</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/automatic-learning-dialogue-strategy-rl-2002.html">
+                    <span class="km">ការរៀនយុទ្ធសាស្ត្រសន្ទនាដោយស្វ័យប្រវត្តិដោយប្រើប្រាស់ការក្លែងធ្វើការសន្ទនានិងការរៀនពង្រឹង (Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Automatic learning of dialogue strategy using dialogue simulation and reinforcement learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/pomdp-continuous-observation-dialogue-management-2005.html">
+                    <span class="km">ដំណើរការសម្រេចចិត្តម៉ាកូវដែលអាចសង្កេតបានដោយផ្នែក ជាមួយនឹងការសង្កេតជាបន្តបន្ទាប់សម្រាប់ការគ្រប់គ្រងកិច្ចសន្ទនា</span><br>
+                    <span class="en article-original-title">Partially Observable Markov Decision Processes with Continuous Observations for Dialogue Management</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/gaussian-processes-pomdp-dialogue-managers-2010.html">
+                    <span class="km">ដំណើរការ Gaussian សម្រាប់ការធ្វើឲ្យប្រសើរលឿននៃគោលការណ៍សម្រាប់កម្មវិធីគ្រប់គ្រងការសន្ទនាផ្អែកលើ POMDP</span><br>
+                    <span class="en article-original-title">Gaussian Processes for Fast Policy Optimisation of POMDP-based Dialogue Managers</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=POMDP-based+spoken+dialogue+systems+domain+adaptation" target="_blank" rel="noopener"><span class="en">POMDP-based spoken dialogue systems domain adaptation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=reinforcement+learning+dialogue+policy+transfer+across+domains" target="_blank" rel="noopener"><span class="en">reinforcement learning dialogue policy transfer across domains</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ontology+parameterisation+in+dialogue+state+tracking" target="_blank" rel="noopener"><span class="en">ontology parameterisation in dialogue state tracking</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gaussian+Process+SARSA+%28GP-SARSA%29+dialogue+management" target="_blank" rel="noopener"><span class="en">Gaussian Process SARSA (GP-SARSA) dialogue management</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=zero-shot+domain+transfer+conversational+agents" target="_blank" rel="noopener"><span class="en">zero-shot domain transfer conversational agents</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=belief+state+tracking+algorithms+for+spoken+language+understanding" target="_blank" rel="noopener"><span class="en">belief state tracking algorithms for spoken language understanding</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

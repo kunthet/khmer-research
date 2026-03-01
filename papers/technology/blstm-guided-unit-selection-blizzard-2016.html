@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ប្រព័ន្ធសំយោគការជ្រើសរើសឯកតាដោយប្រើ BLSTM សម្រាប់ការប្រកួតប្រជែង Blizzard ឆ្នាំ 2016 | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះបង្ហាញពីការអភិវឌ្ឍប្រព័ន្ធបំប្លែងអត្ថបទទៅជាសំឡេង (Text-to-Speech) ដើម្បីបង្កើតសំឡេងអានសៀវភៅកុមារប្រកបដោយភាពរស់រវើក សម្រាប់ការប្រកួតប្រជែង Blizzard Ch...">
+    
+    <meta name="keywords" content="speech synthesis, phone duration modeling, BLSTM, unit selection, Blizzard Challenge 2016, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/blstm-guided-unit-selection-blizzard-2016.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/blstm-guided-unit-selection-blizzard-2016.html">
+    <meta property="og:title" content="ប្រព័ន្ធសំយោគការជ្រើសរើសឯកតាដោយប្រើ BLSTM សម្រាប់ការប្រកួតប្រជែង Blizzard ឆ្នាំ 2016 | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះបង្ហាញពីការអភិវឌ្ឍប្រព័ន្ធបំប្លែងអត្ថបទទៅជាសំឡេង (Text-to-Speech) ដើម្បីបង្កើតសំឡេងអានសៀវភៅកុមារប្រកបដោយភាពរស់រវើក សម្រាប់ការប្រកួតប្រជែង Blizzard Challenge ឆ្នាំ 2016។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2016 The Blizzard Challenge">
+    
+    <meta property="article:tag" content="speech synthesis">
+    
+    <meta property="article:tag" content="phone duration modeling">
+    
+    <meta property="article:tag" content="BLSTM">
+    
+    <meta property="article:tag" content="unit selection">
+    
+    <meta property="article:tag" content="Blizzard Challenge 2016">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ប្រព័ន្ធសំយោគការជ្រើសរើសឯកតាដោយប្រើ BLSTM សម្រាប់ការប្រកួតប្រជែង Blizzard ឆ្នាំ 2016">
+    <meta name="twitter:description" content="ឯកសារនេះបង្ហាញពីការអភិវឌ្ឍប្រព័ន្ធបំប្លែងអត្ថបទទៅជាសំឡេង (Text-to-Speech) ដើម្បីបង្កើតសំឡេងអានសៀវភៅកុមារប្រកបដោយភាពរស់រវើក សម្រាប់ការប្រកួតប្រជែង Blizzard Challenge ឆ្នាំ 2016។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17c6\u1799\u17c4\u1782\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u17af\u1780\u178f\u17b6\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be BLSTM \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17d2\u179a\u1780\u17bd\u178f\u1794\u17d2\u179a\u1787\u17c2\u1784 Blizzard \u1786\u17d2\u1793\u17b6\u17c6 2016",
+      "name": "A BLSTM Guided Unit Selection Synthesis System for Blizzard Challenge 2016",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1796\u17b8\u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1794\u17c6\u1794\u17d2\u179b\u17c2\u1784\u17a2\u178f\u17d2\u1790\u1794\u1791\u1791\u17c5\u1787\u17b6\u179f\u17c6\u17a1\u17c1\u1784 (Text-to-Speech) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u1784\u17d2\u1780\u17be\u178f\u179f\u17c6\u17a1\u17c1\u1784\u17a2\u17b6\u1793\u179f\u17c0\u179c\u1797\u17c5\u1780\u17bb\u1798\u17b6\u179a\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1797\u17b6\u1796\u179a\u179f\u17cb\u179a\u179c\u17be\u1780 \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17d2\u179a\u1780\u17bd\u178f\u1794\u17d2\u179a\u1787\u17c2\u1784 Blizzard Challenge \u1786\u17d2\u1793\u17b6\u17c6 2016\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/blstm-guided-unit-selection-blizzard-2016.html",
+      "author": [{"@type": "Person", "name": "Jianhua Tao (National Laboratory of Pattern Recognition, CASIA)"},{"@type": "Person", "name": "Yibin Zheng (National Laboratory of Pattern Recognition, CASIA)"},{"@type": "Person", "name": "Zhengqi Wen (National Laboratory of Pattern Recognition, CASIA)"},{"@type": "Person", "name": "Ya Li (National Laboratory of Pattern Recognition, CASIA)"},{"@type": "Person", "name": "Biu Liu (National Laboratory of Pattern Recognition, CASIA)"}],
+      "datePublished": "2016 The Blizzard Challenge",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A BLSTM Guided Unit Selection Synthesis System for Blizzard Challenge 2016",
+        "url": "https://doi.org/10.21437/Blizzard.2016-4"
+      },
+      "keywords": ["speech synthesis", "phone duration modeling", "BLSTM", "unit selection", "Blizzard Challenge 2016"],
+      "about": "Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17c6\u1799\u17c4\u1782\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u17af\u1780\u178f\u17b6\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be BLSTM \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17d2\u179a\u1780\u17bd\u178f\u1794\u17d2\u179a\u1787\u17c2\u1784 Blizzard \u1786\u17d2\u1793\u17b6\u17c6 2016",
+          "item": "https://khmerresearch.com/papers/technology/blstm-guided-unit-selection-blizzard-2016.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ប្រព័ន្ធសំយោគការជ្រើសរើសឯកតាដោយប្រើ BLSTM សម្រាប់ការប្រកួ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A BLSTM Guided Unit Selection Synthesis System for Blizzard Challenge 2016<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.21437/Blizzard.2016-4" target="_blank">doi.org/10.21437/Blizzard.2016-4</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ប្រព័ន្ធសំយោគការជ្រើសរើសឯកតាដោយប្រើ BLSTM សម្រាប់ការប្រកួតប្រជែង Blizzard ឆ្នាំ 2016</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A BLSTM Guided Unit Selection Synthesis System for Blizzard Challenge 2016</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Jianhua Tao (National Laboratory of Pattern Recognition, CASIA), Yibin Zheng (National Laboratory of Pattern Recognition, CASIA), Zhengqi Wen (National Laboratory of Pattern Recognition, CASIA), Ya Li (National Laboratory of Pattern Recognition, CASIA), Biu Liu (National Laboratory of Pattern Recognition, CASIA)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2016 The Blizzard Challenge</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះបង្ហាញពីការអភិវឌ្ឍប្រព័ន្ធបំប្លែងអត្ថបទទៅជាសំឡេង (Text-to-Speech) ដើម្បីបង្កើតសំឡេងអានសៀវភៅកុមារប្រកបដោយភាពរស់រវើក សម្រាប់ការប្រកួតប្រជែង Blizzard Challenge ឆ្នាំ 2016។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតប្រព័ន្ធកូនកាត់មួយ ដោយជំនួសម៉ូដែល HMM បែបប្រពៃណីជាមួយនឹងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត BLSTM សម្រាប់ការធ្វើម៉ូដែលសូរស័ព្ទ និងរយៈពេល។
+        
+        <ul>
+            
+            <li>ការធ្វើម៉ូដែលរយៈពេលដោយប្រើ BLSTM (BLSTM based duration model) និងការដកទិន្នន័យខុសប្រក្រតី (Outlier removal)</li>
+            
+            <li>ការធ្វើម៉ូដែលសូរស័ព្ទដោយប្រើ BLSTM (BLSTM based acoustic model)</li>
+            
+            <li>ការគណនាតម្លៃគោលដៅសម្រាប់ការជ្រើសរើសឯកតា (Target cost calculation) ដោយប្រើ KLD, LL, និង ED</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធទស្សន៍ទាយរយៈពេលបញ្ចេញសំឡេងផ្អែកលើ BLSTM បានកាត់បន្ថយកំហុស (RMSE) ចំនួន 10.90% បើធៀបនឹងវិធីសាស្ត្រដើម។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នានៃវិធីសាស្ត្រគណនា KLD និង LL ផ្តល់នូវលទ្ធផលល្អបំផុតសម្រាប់ការជ្រើសរើសតម្លៃគោលដៅ (Target cost) ក្នុងការវាយតម្លៃផ្ទៃក្នុង។</li>
+            
+            <li>ទោះជាយ៉ាងណាក៏ដោយ លទ្ធផលសរុបនៃការប្រកួតប្រជែងបង្ហាញថា ប្រព័ន្ធនេះស្ថិតក្នុងកម្រិតមធ្យម ដោយសារចំណុចខ្វះខាតនៅក្នុងឧបករណ៍វិភាគអត្ថបទ (Text analysis)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Decision tree based duration in HTS (Baseline)</span></strong><br>ការទស្សន៍ទាយរយៈពេលបញ្ចេញសំឡេងផ្អែកលើមែកធាងសេចក្តីសម្រេច (Decision Tree) ក្នុង HTS</td>
+                <td>ជាវិធីសាស្ត្រស្តង់ដារដែលត្រូវបានប្រើប្រាស់ទូទៅ មានភាពងាយស្រួលក្នុងការអនុវត្តសម្រាប់ប្រព័ន្ធកូនកាត់ (Hybrid Systems)។</td>
+                <td>មិនមានសមត្ថភាពគ្រប់គ្រាន់ក្នុងការចាប់យកទំនាក់ទំនងរយៈពេលវែង (Long-term dependencies) នៃទិន្នន័យភាសានោះទេ។</td>
+                <td>មានកម្រិតកំហុស RMSE ចំនួន 43.67 ms លើការទស្សន៍ទាយរយៈពេល។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">BLSTM based duration prediction with outlier removal</span></strong><br>ការទស្សន៍ទាយរយៈពេលដោយប្រើបណ្ដាញ BLSTM រួមជាមួយនឹងការដកចេញទិន្នន័យខុសប្រក្រតី</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការវិភាគលើទិន្នន័យបន្តបន្ទាប់គ្នា និងបង្កើនភាពត្រឹមត្រូវដោយការកាត់ចោលទិន្នន័យដែលលំអៀងខុសប្រក្រតី (Outliers)។</td>
+                <td>ត្រូវការរៀបចំទិន្នន័យដោយប្រុងប្រយ័ត្ន និងបំប្លែងទិន្នន័យប្រភេទ Nominal ទៅជាតម្លៃលេខទាំងអស់។</td>
+                <td>កាត់បន្ថយកំហុស RMSE មកត្រឹម 38.91 ms (ប្រសើរជាងមុន 10.90%)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Target cost: System 4 (KLD + LL)</span></strong><br>ការគណនាតម្លៃគោលដៅដោយផ្សំបញ្ចូលគ្នារវាង KLD និង LL</td>
+                <td>ជួយកំណត់ឯកតាសំឡេងបានយ៉ាងល្អ និងផ្តល់លទ្ធផលគុណភាពសំឡេងធម្មជាតិ (MOS) ល្អបំផុតក្នុងការវាយតម្លៃផ្ទៃក្នុង។</td>
+                <td>ទាមទារការគណនាស្មុគស្មាញ និងចំណាយពេលច្រើនក្នុងការស្វែងរក (Viterbi Search) ធៀបនឹងការប្រើ Euclidean Distance ធម្មតា។</td>
+                <td>ទទួលបានពិន្ទុខ្ពស់ជាងគេក្នុងការធ្វើតេស្តវាយតម្លៃពីអ្នកស្តាប់ជំនាញធៀបនឹងការប្រើវិធីសាស្ត្រនីមួយៗដាច់ដោយឡែក។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអភិវឌ្ឍប្រព័ន្ធនេះទាមទារធនធានកុំព្យូទ័រដែលមានកម្លាំងខ្លាំង និងការរៀបចំទិន្នន័យកម្រិតខ្ពស់ ព្រោះវាពាក់ព័ន្ធនឹងការបង្ហាត់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត BLSTM ច្រើនស្រទាប់។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យសំឡេងគុណភាពខ្ពស់ថតក្នុងស្ទូឌីយោរយៈពេល ៥ ម៉ោង ជាមួយនឹងការតម្រឹមអត្ថបទនិងសំឡេងកម្រិតប្រយោគ។</li>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនកុំព្យូទ័រដែលមាន GPU កម្លាំងខ្លាំង ដើម្បីបង្ហាត់ម៉ូដែល 3-layer neural network (BLSTM) ក្នុងល្បឿនលឿន។</li>
+        
+        <li><strong>Software:</strong> ឧបករណ៍វិភាគអត្ថបទ <span class="en">Festival</span> និងឧបករណ៍តម្រឹមសំឡេង <span class="en">HSMMAlign</span> (HTS toolkit)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញដែលមានចំណេះដឹងផ្នែកសូរស័ព្ទវិទ្យា (Phonetics) ការវិភាគអត្ថបទ (Text Analysis) និងការរៀនស៊ីជម្រៅ (Deep Learning)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការស្រាវជ្រាវនេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យសៀវភៅកុមារជាភាសាអង់គ្លេសបែបអង់គ្លេស (British English) ដែលថតដោយមនុស្សស្រីតែម្នាក់។ ហេតុនេះម៉ូដែលនេះមានភាពលម្អៀងទៅរកសំឡេងស្ត្រី និងទម្រង់ភាសាអង់គ្លេស។ សម្រាប់ប្រទេសកម្ពុជា ការយកប្រព័ន្ធនេះមកអនុវត្តទាមទារការបង្កើតទិន្នន័យសំឡេងភាសាខ្មែរ (Khmer Speech Corpus) ដែលមានគុណភាពខ្ពស់ និងការរៀបចំឧបករណ៍វិភាគអត្ថបទភាសាខ្មែរឲ្យបានសុក្រឹត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាត្រូវបានបង្កើតសម្រាប់ភាសាអង់គ្លេសក្តី វិធីសាស្ត្រផ្អែកលើ BLSTM នេះមានសក្តានុពលខ្ពស់សម្រាប់អភិវឌ្ឍប្រព័ន្ធសំយោគសំឡេងភាសាខ្មែរ (Khmer TTS) ប្រកបដោយភាពរស់រវើក។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យអប់រំ និងសៀវភៅសំឡេង (Audiobooks):</strong> អាចយកទៅអភិវឌ្ឍប្រព័ន្ធអានសៀវភៅរឿងកុមារ ឬសៀវភៅសិក្សាជាភាសាខ្មែរដោយស្វ័យប្រវត្តិ ដែលជួយសម្រួលដល់កុមារពិការភ្នែក ឬសិស្សនៅតំបន់ដាច់ស្រយាលក្នុងប្រទេសកម្ពុជា។</li>
+            
+            <li><strong>សេវាកម្មឆ្លើយតបអតិថិជនស្វ័យប្រវត្តិ (Call Centers):</strong> ធនាគារ ឬក្រុមហ៊ុនទូរគមនាគមន៍នៅកម្ពុជា (ឧ. ធនាគារ ABA ឬក្រុមហ៊ុន Smart) អាចប្រើបច្ចេកវិទ្យានេះដើម្បីបង្កើតសំឡេងឆ្លើយតប (Virtual Assistant) ដែលស្តាប់ទៅមានភាពធម្មជាតិជាងប្រព័ន្ធបច្ចុប្បន្ន។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការកែលម្អទៅលើឧបករណ៍វិភាគអត្ថបទភាសាខ្មែរ គឺជាគន្លឹះដ៏សំខាន់ដើម្បីអាចទាញយកអត្ថប្រយោជន៍ពេញលេញពីប្រព័ន្ធនេះសម្រាប់ទីផ្សារកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្រាវជ្រាវ និងអភិវឌ្ឍឧបករណ៍វិភាគអត្ថបទភាសាខ្មែរ (Khmer Text Analysis):</strong> និស្សិតត្រូវចាប់ផ្តើមពីការស្រាវជ្រាវលើការកាត់ពាក្យ (Word Segmentation) និងការកំណត់ថ្នាក់ពាក្យ (POS tagging) ជាភាសាខ្មែរ ដោយប្រើប្រាស់ឧបករណ៍ដូចជា <span class="en">Khmer Natural Language Processing Tools</span> ព្រោះឯកសារនេះបានបញ្ជាក់ថាភាពខ្សោយនៃការវិភាគអត្ថបទនឹងទាញទម្លាក់គុណភាពសំឡេងទាំងមូល។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យសំឡេងភាសាខ្មែរ (Khmer Speech Corpus):</strong> ជ្រើសរើសអ្នកអានម្នាក់ដែលមានសំឡេងច្បាស់ល្អ រួចថតសំឡេងអានអត្ថបទចម្រុះប្រមាណ ៥ ម៉ោងក្នុងបន្ទប់ស្ទូឌីយោ។ បន្ទាប់មក ប្រើប្រាស់កម្មវិធី <span class="en">HSMMAlign</span> ដើម្បីតម្រឹមអត្ថបទ (Text) ជាមួយនឹងរលកសំឡេង (Waveform) ក្នុងកម្រិតព្យាង្គ ឬសូរស័ព្ទ។</li>
+            
+            <li><strong>សាងសង់ និងបង្ហាត់ម៉ូដែល BLSTM សម្រាប់ការទស្សន៍ទាយរយៈពេល (Duration Modeling):</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> ដើម្បីសរសេរកូដបង្កើតបណ្តាញសរសៃប្រសាទ 3-layer BLSTM។ អនុវត្តបច្ចេកទេសកាត់ចោលទិន្នន័យដែលវែងខុសប្រក្រតី (<span class="en">Outlier Removal</span> ដោយលុបចោល 1% នៃទិន្នន័យខ្ពស់បំផុត) មុនពេលបង្ហាត់ម៉ូដែល។</li>
+            
+            <li><strong>អនុវត្តការជ្រើសរើសឯកតាសំឡេង (Unit Selection) ដោយគណនាតម្លៃគោលដៅ:</strong> សរសេរកូដដើម្បីគណនាតម្លៃ <span class="en">Target Cost</span> ដោយប្រើប្រាស់វិធីសាស្ត្រផ្សំរវាង <span class="en">Kullback Leibler divergence (KLD)</span> និង <span class="en">Maximum likelihood criterion (LL)</span> រួចប្រើប្រាស់ក្បួនដោះស្រាយ <span class="en">Viterbi Search</span> ដើម្បីស្វែងរកផ្លូវតភ្ជាប់សំឡេងដែលល្អបំផុត។</li>
+            
+            <li><strong>វាយតម្លៃគុណភាពសំឡេង (MOS Evaluation):</strong> បង្កើតកម្រងសំណួរស្ទង់មតិ (ឧ. តាមរយៈ Google Forms) ដោយឲ្យអ្នកនិយាយភាសាខ្មែរដើមចំនួនយ៉ាងតិច ៥ ទៅ ១០ នាក់ ស្តាប់ប្រយោគដែលបានសំយោគរួច ហើយផ្តល់ពិន្ទុពី ១ ដល់ ៥ លើភាពរស់រវើក (Naturalness) និងភាពងាយយល់ (Intelligibility)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">BLSTM</span></td>
+                <td>ជាប្រភេទនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដែលមានសមត្ថភាពចងចាំព័ត៌មានទាំងពីអតីតកាលនិងអនាគតកាល (ទិន្នន័យខាងមុខនិងខាងក្រោយ) នៅក្នុងលំដាប់ទិន្នន័យ ដើម្បីធ្វើការទស្សន៍ទាយលក្ខណៈសំឡេងបានកាន់តែសុក្រឹត។</td>
+                <td>ដូចជាការអានសៀវភៅដោយមើលទាំងពាក្យខាងមុខ និងពាក្យខាងក្រោយព្រមគ្នា ដើម្បីយល់ន័យរបស់ពាក្យកណ្តាលឲ្យបានច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Unit selection</span></td>
+                <td>ជាដំណើរការក្នុងប្រព័ន្ធសំយោគសំឡេង ដែលធ្វើការស្វែងរកនិងជ្រើសរើសបំណែកសំឡេងតូចៗ (ឯកតាសំឡេង) ពីមូលដ្ឋានទិន្នន័យសំឡេងដ៏ធំមួយ ដើម្បីយកមកតភ្ជាប់គ្នាបង្កើតជាប្រយោគថ្មី។</td>
+                <td>ដូចជាការរើសអក្សរ ឬពាក្យដែលគេកាត់ជាកង់ៗពីទស្សនាវដ្តីចាស់ៗ យកមកតម្រៀបភ្ជាប់គ្នាដើម្បីបង្កើតជាសារថ្មីមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Target cost</span></td>
+                <td>ជារង្វាស់គណិតវិទ្យាសម្រាប់វាយតម្លៃថាតើបំណែកសំឡេងដែលបានជ្រើសរើសពីឃ្លាំងទិន្នន័យ មានលក្ខណៈជិតស្និទ្ធ ឬស្រដៀងទៅនឹងលក្ខណៈសំឡេងគោលដៅដែលប្រព័ន្ធចង់បានកម្រិតណា។</td>
+                <td>ដូចជាការគណនាពិន្ទុពេលរកមើលអាវយឺតក្នុងទូខោអាវ ថាតើវាមានពណ៌ និងទំហំស្រដៀងនឹងអាវដែលអ្នកបានស្រមៃចង់ពាក់ប៉ុណ្ណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Concatenation cost</span></td>
+                <td>ជាតម្លៃវាយតម្លៃភាពរលូននៅពេលយកបំណែកសំឡេងពីរមកតភ្ជាប់គ្នា។ បើតម្លៃនេះតូច មានន័យថាសំឡេងទាំងពីរតភ្ជាប់គ្នាបានរលូនល្អ មិនមានការទាក់ ឬដាច់សំឡេងឡើយ។</td>
+                <td>ដូចជាការយកបំណែកល្បែងផ្គុំរូប (Jigsaw puzzle) ពីរមកតភ្ជាប់គ្នា បើវាស៊ីសង្វាក់គ្នាល្អ នោះស្នាមតភ្ជាប់នឹងមើលទៅរលូនស្អាតជាផ្ទាំងតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Kullback Leibler divergence (KLD)</span></td>
+                <td>ជារូបមន្តស្ថិតិសម្រាប់វាស់ស្ទង់ភាពខុសគ្នារវាងរបាយប្រូបាប៊ីលីតេពីរ ក្នុងបរិបទនេះវាប្រើដើម្បីប្រៀបធៀបភាពខុសគ្នារវាងលក្ខណៈសំឡេងគោលដៅ និងបំណែកសំឡេងបេក្ខជនដែលមានក្នុងឃ្លាំង។</td>
+                <td>ដូចជាឧបករណ៍សម្រាប់វាស់ប្រៀបធៀបរសជាតិមុខម្ហូបពីរមុខ ថាតើវាមានរសជាតិខុសគ្នាឆ្ងាយប៉ុនណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi search</span></td>
+                <td>ជាក្បួនដោះស្រាយ (Algorithm) ប្រើសម្រាប់ស្វែងរកផ្លូវ ឬជម្រើសបន្តបន្ទាប់គ្នាដែលល្អបំផុតនិងមានតម្លៃចំណាយ (Cost) ទាបបំផុត ក្នុងការតម្រៀបបំណែកសំឡេងបញ្ជូលគ្នា។</td>
+                <td>ដូចជាការប្រើកម្មវិធី Google Maps ដើម្បីស្វែងរកផ្លូវដែលលឿនបំផុតនិងមិនសូវមានស្ទះចរាចរណ៍ពីចំណុចមួយទៅចំណុចមួយទៀត ក្នុងចំណោមជម្រើសផ្លូវជាច្រើន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Force alignment</span></td>
+                <td>ជាដំណើរការនៃការផ្គូផ្គងអត្ថបទទៅនឹងរលកសំឡេងដែលបានថតរួចដោយស្វ័យប្រវត្តិ ដើម្បីកំណត់កាត់ចំណែកយ៉ាងច្បាស់ថាតើពាក្យ ឬព្យាង្គនីមួយៗចាប់ផ្តើមនិងបញ្ចប់នៅវិនាទីទីប៉ុន្មាន។</td>
+                <td>ដូចជាការធ្វើអក្សររត់ខារ៉ាអូខេ (Karaoke subtitles) ដែលប្រព័ន្ធត្រូវចាប់ឲ្យអក្សរលោតពណ៌ឲ្យចំពេលដែលអ្នកចម្រៀងកំពុងបញ្ចេញសំឡេងពាក្យនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Outlier removal</span></td>
+                <td>ជាការបំបាត់ចោលនូវទិន្នន័យដែលមានតម្លៃខុសប្រក្រតី ឬខុសឆ្ងាយពីទិន្នន័យភាគច្រើន (ឧទាហរណ៍ សំឡេងដែលមានរយៈពេលអូសបន្លាយវែងខុសពីធម្មតា) ដើម្បីកុំឲ្យម៉ូដែលបញ្ញាសិប្បនិម្មិតរៀនទន្ទេញនូវកំហុស។</td>
+                <td>ដូចជាការរើសគ្រាប់ក្រួស ឬអង្កាមចេញពីអង្ករមុនពេលយកទៅដាំបាយ ដើម្បីធានាថាបាយមានគុណភាពល្អ និងឆ្ងាញ់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/adaptive-database-reduction-text-to-speech-2007.html">
+                    <span class="km">វិធីសាស្ត្រសម្រាប់ការកាត់បន្ថយមូលដ្ឋានទិន្នន័យសម្របសម្រួលសម្រាប់ការសំយោគអត្ថបទទៅជាសំឡេង</span><br>
+                    <span class="en article-original-title">Approaches for adaptive database reduction for Text-To-Speech synthesis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/hmm-based-speech-synthesis-system-hts-v2-2007.html">
+                    <span class="km">ប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM (HTS) កំណែ 2.0</span><br>
+                    <span class="en article-original-title">The HMM-based Speech Synthesis System (HTS) Version 2.0</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-selection-adaptation-hmm-speech-synthesis-2016.html">
+                    <span class="km">ការជ្រើសរើស និងបន្សាំទិន្នន័យដើម្បីភាពធម្មជាតិក្នុងការសំយោគសំឡេងផ្អែកលើ HMM</span><br>
+                    <span class="en article-original-title">Data Selection and Adaptation for Naturalness in HMM-based Speech Synthesis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/chinese-speech-synthesis-prosody-model-2003.html">
+                    <span class="km">ការសិក្សាអំពីម៉ូដែលចង្វាក់សំឡេងក្នុងការសំយោគសំឡេងភាសាចិន ដោយផ្អែកលើការចាត់ថ្នាក់លក្ខណៈចង្វាក់នៃព្យាង្គ</span><br>
+                    <span class="en article-original-title">基于音节韵律特征分类的汉语语音合成中韵律模型的研究</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/dialogue-context-speech-synthesis-fd-cat-2014.html">
+                    <span class="km">ការសំយោគសំឡេងនិយាយប្រកបដោយភាពស៊ីសង្វាក់ទៅនឹងបរិបទសន្ទនា ដោយប្រើប្រាស់មែកធាងការសម្រេចចិត្តបែបបំបែកកត្តា</span><br>
+                    <span class="en article-original-title">Dialogue Context Sensitive Speech Synthesis using Factorized Decision Trees</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Bidirectional+Long+Short-Term+Memory+acoustic+modeling+for+speech+synthesis" target="_blank" rel="noopener"><span class="en">Bidirectional Long Short-Term Memory acoustic modeling for speech synthesis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Unit+selection+target+cost+calculation+Kullback-Leibler+divergence" target="_blank" rel="noopener"><span class="en">Unit selection target cost calculation Kullback-Leibler divergence</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Phone+duration+modeling+deep+neural+networks+outlier+removal" target="_blank" rel="noopener"><span class="en">Phone duration modeling deep neural networks outlier removal</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Statistical+parametric+speech+synthesis+hybrid+unit+selection" target="_blank" rel="noopener"><span class="en">Statistical parametric speech synthesis hybrid unit selection</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Viterbi+search+algorithm+in+concatenative+speech+synthesis" target="_blank" rel="noopener"><span class="en">Viterbi search algorithm in concatenative speech synthesis</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

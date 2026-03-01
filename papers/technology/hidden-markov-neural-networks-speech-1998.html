@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែលម៉ាកូវលាក់កំបាំង និងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតសម្រាប់ការសម្គាល់សំឡេងនិងអ្នកនិយាយ | KhmerResearch.com</title>
+    <meta name="description" content="បច្ចេកវិទ្យាសម្គាល់សំឡេង និងអ្នកនិយាយដោយស្វ័យប្រវត្តិ (Automatic Speech and Speaker Recognition) តាមរយៈប្រព័ន្ធទូរស័ព្ទជួបប្រទះបញ្ហាប្រឈមធំៗដោយសារការប្រែប្រួ...">
+    
+    <meta name="keywords" content="Hidden Markov Models (HMM), Artificial Neural Networks (ANN), Automatic Speech Recognition (ASR), Automatic Speaker Recognition (ASkR), Self-Organizing Maps (SOM), Multilayer Perceptron (MLP), Segmental Speaker Verification, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/hidden-markov-neural-networks-speech-1998.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/hidden-markov-neural-networks-speech-1998.html">
+    <meta property="og:title" content="ម៉ូដែលម៉ាកូវលាក់កំបាំង និងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតសម្រាប់ការសម្គាល់សំឡេងនិងអ្នកនិយាយ | KhmerResearch.com">
+    <meta property="og:description" content="បច្ចេកវិទ្យាសម្គាល់សំឡេង និងអ្នកនិយាយដោយស្វ័យប្រវត្តិ (Automatic Speech and Speaker Recognition) តាមរយៈប្រព័ន្ធទូរស័ព្ទជួបប្រទះបញ្ហាប្រឈមធំៗដោយសារការប្រែប្រួលនៃលក្ខណៈសូរស័ព្ទ សំឡេងរំខានខាងក្រៅ និងក...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="1998 (École Polytechnique Fédérale de Lausanne)">
+    
+    <meta property="article:tag" content="Hidden Markov Models (HMM)">
+    
+    <meta property="article:tag" content="Artificial Neural Networks (ANN)">
+    
+    <meta property="article:tag" content="Automatic Speech Recognition (ASR)">
+    
+    <meta property="article:tag" content="Automatic Speaker Recognition (ASkR)">
+    
+    <meta property="article:tag" content="Self-Organizing Maps (SOM)">
+    
+    <meta property="article:tag" content="Multilayer Perceptron (MLP)">
+    
+    <meta property="article:tag" content="Segmental Speaker Verification">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែលម៉ាកូវលាក់កំបាំង និងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតសម្រាប់ការសម្គាល់សំឡេងនិងអ្នកនិយាយ">
+    <meta name="twitter:description" content="បច្ចេកវិទ្យាសម្គាល់សំឡេង និងអ្នកនិយាយដោយស្វ័យប្រវត្តិ (Automatic Speech and Speaker Recognition) តាមរយៈប្រព័ន្ធទូរស័ព្ទជួបប្រទះបញ្ហាប្រឈមធំៗដោយសារការប្រែប្រួលនៃលក្ខណៈសូរស័ព្ទ សំឡេងរំខានខាងក្រៅ និងក...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17c9\u17b6\u1780\u17bc\u179c\u179b\u17b6\u1780\u17cb\u1780\u17c6\u1794\u17b6\u17c6\u1784 \u1793\u17b7\u1784\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1784\u17a2\u17d2\u1793\u1780\u1793\u17b7\u1799\u17b6\u1799",
+      "name": "Hidden Markov Models and Artificial Neural Networks for Speech and Speaker Recognition",
+      "description": "\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784 \u1793\u17b7\u1784\u17a2\u17d2\u1793\u1780\u1793\u17b7\u1799\u17b6\u1799\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 (Automatic Speech and Speaker Recognition) \u178f\u17b6\u1798\u179a\u1799\u17c8\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u17bc\u179a\u179f\u17d0\u1796\u17d2\u1791\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1792\u17c6\u17d7\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u1793\u17c3\u179b\u1780\u17d2\u1781\u178e\u17c8\u179f\u17bc\u179a\u179f\u17d0\u1796\u17d2\u1791 \u179f\u17c6\u17a1\u17c1\u1784\u179a\u17c6\u1781\u17b6\u1793\u1781\u17b6\u1784\u1780\u17d2\u179a\u17c5 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1780\u1798\u17d2\u179a\u17b7\u178f\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179f\u17d2\u1790\u17b7\u178f\u17b7\u1794\u17bb\u179a\u17b6\u178e\u178a\u17c2\u179b\u1798\u17b7\u1793\u179f\u17bc\u179c\u1798\u17b6\u1793\u1797\u17b6\u1796\u1794\u178f\u17cb\u1794\u17c2\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/hidden-markov-neural-networks-speech-1998.html",
+      "author": [{"@type": "Person", "name": "Jean Hennebert (\u00c9cole Polytechnique F\u00e9d\u00e9rale de Lausanne)"}],
+      "datePublished": "1998 (\u00c9cole Polytechnique F\u00e9d\u00e9rale de Lausanne)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Hidden Markov Models and Artificial Neural Networks for Speech and Speaker Recognition",
+        "url": "N/A"
+      },
+      "keywords": ["Hidden Markov Models (HMM)", "Artificial Neural Networks (ANN)", "Automatic Speech Recognition (ASR)", "Automatic Speaker Recognition (ASkR)", "Self-Organizing Maps (SOM)", "Multilayer Perceptron (MLP)", "Segmental Speaker Verification"],
+      "about": "Speech Processing and Artificial Intelligence"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17c9\u17b6\u1780\u17bc\u179c\u179b\u17b6\u1780\u17cb\u1780\u17c6\u1794\u17b6\u17c6\u1784 \u1793\u17b7\u1784\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784\u1793\u17b7\u1784\u17a2\u17d2\u1793\u1780\u1793\u17b7\u1799\u17b6\u1799",
+          "item": "https://khmerresearch.com/papers/technology/hidden-markov-neural-networks-speech-1998.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ម៉ូដែលម៉ាកូវលាក់កំបាំង និងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតសម្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Hidden Markov Models and Artificial Neural Networks for Speech and Speaker Recognition<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែលម៉ាកូវលាក់កំបាំង និងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតសម្រាប់ការសម្គាល់សំឡេងនិងអ្នកនិយាយ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Hidden Markov Models and Artificial Neural Networks for Speech and Speaker Recognition</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Jean Hennebert (École Polytechnique Fédérale de Lausanne)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 1998 (École Polytechnique Fédérale de Lausanne)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Speech Processing and Artificial Intelligence</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> បច្ចេកវិទ្យាសម្គាល់សំឡេង និងអ្នកនិយាយដោយស្វ័យប្រវត្តិ (Automatic Speech and Speaker Recognition) តាមរយៈប្រព័ន្ធទូរស័ព្ទជួបប្រទះបញ្ហាប្រឈមធំៗដោយសារការប្រែប្រួលនៃលក្ខណៈសូរស័ព្ទ សំឡេងរំខានខាងក្រៅ និងការកម្រិតនៃម៉ូដែលស្ថិតិបុរាណដែលមិនសូវមានភាពបត់បែន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវការជំនួសសមាសធាតុមួយចំនួននៃម៉ូដែលម៉ាកូវលាក់កំបាំង (HMMs) ដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (ANNs) តាមរយៈការតាក់តែងប្រព័ន្ធចំនួនបីផ្សេងគ្នា។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ផែនទីរៀបចំដោយខ្លួនឯង (Self-Organizing Maps - SOM) ជំនួសឲ្យក្បួនដោះស្រាយ k-means នៅក្នុងម៉ូដែល Discrete HMMs ដើម្បីសម្គាល់ពាក្យដាច់ដោយឡែក។</li>
+            
+            <li>ការអភិវឌ្ឍប្រព័ន្ធកូនកាត់ (Hybrid HMM/ANN) ដោយប្រើប្រាស់ Multilayer Perceptrons (MLPs) ជាមួយនឹងក្បួនដោះស្រាយការបណ្តុះបណ្តាល Forward-Backward ថ្មី។</li>
+            
+            <li>ការបង្កើតវិធីសាស្រ្តផ្អែកលើការបំបែកផ្នែក (Segmental Approach) សម្រាប់ការផ្ទៀងផ្ទាត់អ្នកនិយាយដោយមិនពឹងផ្អែកលើអត្ថបទ (Text-independent Speaker Verification) ដោយប្រើប្រាស់បច្ចេកទេសបំបែកតាមពេលវេលា (Temporal Decomposition) និងការចាត់ថ្នាក់វ៉ិចទ័រ (Vector Quantization)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្រ្តប្រើប្រាស់ SOM ផ្តល់លទ្ធផលល្អប្រសើរនិងមានស្ថិរភាពជាងក្បួនដោះស្រាយ k-means និង LBG បុរាណក្នុងការសម្គាល់ពាក្យដាច់ដោយឡែក។</li>
+            
+            <li>ប្រព័ន្ធកូនកាត់ HMM/ANN បង្ហាញពីប្រសិទ្ធភាពខ្ពស់ជាងម៉ូដែល Gaussian Mixtures ចំពោះអត្រាកំហុស និងល្បឿនដំណើរការ CPU ពិសេសនៅពេលដែលទិន្នន័យសម្រាប់បណ្តុះបណ្តាលមានកម្រិតតិចតួច។</li>
+            
+            <li>វិធីសាស្រ្តផ្អែកលើការបំបែកផ្នែក (Segmental Approach) ផ្តល់ភាពធន់និងដំណើរការល្អជាងប្រព័ន្ធសកល (Global Systems) ក្នុងការផ្ទៀងផ្ទាត់អ្នកនិយាយ នៅពេលដែលលក្ខខណ្ឌនៃការធ្វើតេស្តនិងការបណ្តុះបណ្តាលមានលក្ខណៈមិនស្របគ្នា (Mismatched Conditions)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">K-means and LBG Vector Quantization</span></strong><br>ក្បួនដោះស្រាយ k-means និង LBG សម្រាប់បែងចែកក្រុមវ៉ិចទ័រ (Vector Quantization)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងមានភាពរហ័សក្នុងការស្វែងរកទិន្នន័យសម្រាប់ការអនុវត្តជាក់ស្តែងនៅពេលដំណើរការប្រព័ន្ធសម្គាល់។</td>
+                <td>ងាយរងឥទ្ធិពលពីលក្ខខណ្ឌចាប់ផ្តើម (initial conditions) មិនសូវតំណាងឲ្យបំណែងចែកទិន្នន័យបានល្អ និងមានអត្រាកំហុសខ្ពស់ជាង។</td>
+                <td>ផ្តល់អត្រាកំហុសខ្ពស់ជាង (ឧទាហរណ៍ ២០.៧% សម្រាប់ k-means បើធៀបនឹង ១៨.៧% សម្រាប់ SOM លើទិន្នន័យ HIM)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Kohonen Self-Organizing Maps (SOM)</span></strong><br>ផែនទីរៀបចំដោយខ្លួនឯង Kohonen (បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតមិនមានការគ្រប់គ្រង)</td>
+                <td>មានសមត្ថភាពក្នុងការរក្សានូវទម្រង់ទិន្នន័យដើម (topology preserving) ដែលជួយសម្រួលដល់ការសម្គាល់បានល្អប្រសើរជាងក្បួនដោះស្រាយបុរាណ។</td>
+                <td>កម្រិត Distorsion ខ្ពស់ជាង k-means ដែលអាចធ្វើឲ្យមានការភាន់ច្រឡំក្នុងការបកស្រាយគុណភាពរបស់វាប្រសិនបើមិនវាស់វែងលើលទ្ធផលចុងក្រោយ។</td>
+                <td>ផ្តល់អត្រាកំហុសនៃការសម្គាល់សំឡេងទាបជាង k-means និង LBG យ៉ាងច្បាស់នៅពេលប្រើជាទម្រង់ Vector Quantizer ក្នុង Discrete HMM។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Gaussian Mixture Models (GMM)</span></strong><br>ម៉ូដែល Gaussian Mixtures សម្រាប់ការប៉ាន់ស្មានប្រូបាប៊ីលីតេ</td>
+                <td>ងាយស្រួលក្នុងការធ្វើមាត្រដ្ឋានឡើងវិញ (rescaling) និងមិនទាមទារការបណ្តុះបណ្តាលឡើងវិញទាំងស្រុងនៅពេលផ្លាស់ប្តូរស្តង់ដារ។</td>
+                <td>ទាមទារការសន្មត (assumptions) យ៉ាងតឹងរ៉ឹងទៅលើរបាយទិន្នន័យ និងខ្វះសមត្ថភាពបែងចែកដាច់ស្រឡះ (discriminative properties)។</td>
+                <td>មានអត្រាកំហុសខ្ពស់ជាងប្រព័ន្ធ Hybrid HMM/ANN នៅពេលប្រើចំនួនប៉ារ៉ាម៉ែត្រ (parameters) ប្រហាក់ប្រហែលគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hybrid HMM/ANN (MLP trained with Viterbi / Forward-Backward)</span></strong><br>ប្រព័ន្ធកូនកាត់ដែលប្រើ HMM រួមជាមួយ MLP (Multilayer Perceptrons)</td>
+                <td>មិនទាមទារសម្មតិកម្មតឹងរ៉ឹងលើទិន្នន័យ មានសមត្ថភាពបែងចែកចំណាត់ថ្នាក់ដាច់ស្រឡះល្អ និងផ្តល់ដំណើរការ CPU លឿននៅពេល Decoding។</td>
+                <td>ដំណើរការបណ្តុះបណ្តាល (Training) ទាមទារពេលវេលាយូរ និងអាចប្រឈមនឹងការស្ទះ (local minima) ឬការហួសកម្រិត (overtraining) ប្រសិនបើការគ្រប់គ្រងមិនបានល្អ។</td>
+                <td>កាត់បន្ថយអត្រាកំហុសបានយ៉ាងមានប្រសិទ្ធភាព និងស៊ី CPU តិចជាងនៅពេល Decode ធៀបនឹង GMM (ជាពិសេសលើមូលដ្ឋានទិន្នន័យ Phonebook)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Segmental Approach for Speaker Verification</span></strong><br>វិធីសាស្រ្តផ្អែកលើការបំបែកផ្នែកសម្រាប់ការផ្ទៀងផ្ទាត់អ្នកនិយាយ (ប្រើប្រាស់ Temporal Decomposition)</td>
+                <td>មានភាពធន់ខ្ពស់ក្នុងការផ្ទៀងផ្ទាត់អត្តសញ្ញាណអ្នកនិយាយ នៅពេលដែលលក្ខខណ្ឌសាកល្បងនិងការបណ្តុះបណ្តាលមិនស្របគ្នា។</td>
+                <td>ទាមទារប្រព័ន្ធរៀបចំបំបែកផ្នែក (Segmentation) និងកំណត់ចំណាត់ថ្នាក់ (Labelling) ដែលមានភាពស្មុគស្មាញ និងតម្រូវឲ្យកំណត់ប៉ារ៉ាម៉ែត្រដោយការសាកល្បងច្រើន។</td>
+                <td>ដំណើរការបានយ៉ាងល្អជាងប្រព័ន្ធ Global នៅក្នុងលក្ខខណ្ឌ Mismatched (ឧទាហរណ៍ប្រើប្រាស់ប្រភេទកាសទូរស័ព្ទខុសគ្នា)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអភិវឌ្ឍនិងការបណ្តុះបណ្តាលប្រព័ន្ធកូនកាត់ HMM/ANN ទាមទារនូវធនធានម៉ាស៊ីន (Hardware) និងទិន្នន័យយ៉ាងច្រើនសន្ធឹកសន្ធាប់ ប៉ុន្តែផ្តល់នូវប្រសិទ្ធភាព និងភាពរហ័សទាន់ចិត្តនៅពេលដាក់ឲ្យដំណើរការជាក់ស្តែង។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ការបណ្តុះបណ្តាល (Training) តម្រូវឲ្យមានម៉ាស៊ីនគណនាដែលមានសមត្ថភាពខ្ពស់ ដូចជាប្រព័ន្ធ SGI Origin2000 ដែលមាន 32 CPUs ក៏ដូចជាទំហំអង្គចងចាំ (RAM) គ្រប់គ្រាន់សម្រាប់ផ្ទុកប៉ារ៉ាម៉ែត្របណ្ដាញសរសៃប្រសាទ។</li>
+        
+        <li><strong>Software:</strong> ត្រូវការឧបករណ៍ផ្នែកទន់ដូចជា ALISP សម្រាប់ Temporal Decomposition និងក្បួនដោះស្រាយ Stochastic Backpropagation សម្រាប់បណ្តុះបណ្តាលប្រព័ន្ធ MLP។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារមូលដ្ឋានទិន្នន័យសំឡេងតាមប្រព័ន្ធទូរស័ព្ទដ៏ធំដែលមានការរចនាយ៉ាងល្អ ដូចជា Switchboard, Phonebook ឬ HER ដើម្បីបម្រើដល់ការរៀន (Machine Learning) ឲ្យមានប្រសិទ្ធភាព។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅលើផ្នែក Machine Learning, Signal Processing និងស្ថិតិសាស្ត្រសម្រាប់ការរចនាស៊ីមេទ្រីនៃ Hidden Markov Models និងទំហំ MLP។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានដំណើរការដោយប្រើប្រាស់ទិន្នន័យសំឡេងជាភាសាអង់គ្លេស និងស្វីស-អាល្លឺម៉ង់ (តាមរយៈគម្រោង Nynex, HIM, HER) ក្នុងប្រព័ន្ធទូរស័ព្ទបរទេស។ ទិន្នន័យទាំងនេះមិនតំណាងឲ្យសូរស័ព្ទ និងបែបបទនៃការបញ្ចេញសំឡេងនៃភាសាខ្មែរនោះទេ ដែលធ្វើឲ្យការអនុវត្តវិធីសាស្ត្រទាំងនេះនៅកម្ពុជា អាចនឹងប្រឈមនឹងការថយចុះប្រសិទ្ធភាពយ៉ាងខ្លាំងប្រសិនបើគ្មានការប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែម។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ថ្វីត្បិតតែការធ្វើតេស្តមានការកំណត់លើភាសាបរទេស វិធីសាស្ត្រប្រើប្រាស់ប្រព័ន្ធកូនកាត់ HMM/ANN នេះមានអត្ថប្រយោជន៍ និងសក្តានុពលខ្ពស់សម្រាប់បដិវត្តន៍បច្ចេកវិទ្យាបញ្ជាដោយសំឡេងនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (Banking & Finance):</strong> ធនាគារក្នុងស្រុកដូចជា ABA ឬ ACLEDA អាចប្រើប្រាស់បច្ចេកទេស Segmental Speaker Verification ដើម្បីបញ្ជាក់អត្តសញ្ញាណអតិថិជនតាមរយៈសំឡេង សម្រាប់ប្រព័ន្ធសុវត្ថិភាពការហៅចូល ដោយមិនពឹងផ្អែកលើការទន្ទេញលេខសម្ងាត់។</li>
+            
+            <li><strong>ប្រតិបត្តិករទូរគមនាគមន៍ (Telecom Operators):</strong> ក្រុមហ៊ុន Cellcard និង Smart អាចដាក់បញ្ចូលប្រព័ន្ធ HMM/ANN សម្រាប់ការផ្តល់សេវាកម្មឆ្លើយតបស្វ័យប្រវត្តិ (IVR) ដែលមានសមត្ថភាពចាប់យកពាក្យបញ្ជាជាភាសាខ្មែរទោះបីជាមានសំឡេងរំខាន ឬលក្ខខណ្ឌខ្សែទូរស័ព្ទមិនសូវល្អក៏ដោយ។</li>
+            
+            <li><strong>វិទ្យាស្ថានស្រាវជ្រាវ (Research Institutions - RUPP/ITC):</strong> បច្ចេកទេស Temporal Decomposition ជាឱកាសសម្រាប់អ្នកស្រាវជ្រាវនៅសាកលវិទ្យាល័យដើម្បីបង្កើត Acoustic Models សម្រាប់ភាសាខ្មែរ ដោយមិនតម្រូវឲ្យមានការពុះបំបែកអត្ថបទ (Transcription) ដោយដៃដែលស៊ីពេលយូរនោះទេ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការសាងសង់ប្រព័ន្ធកូនកាត់នេះ និងការអនុវត្ត Segmental Approach គឺជាគន្លឹះដ៏សំខាន់ឆ្ពោះទៅរកការបង្កើតបច្ចេកវិទ្យាសម្គាល់សំឡេងភាសាខ្មែរដែលអាចប្រើប្រាស់បានជាក់ស្តែងនៅក្នុងវិស័យពាណិជ្ជកម្មកម្ពុជាប្រកបដោយទំនុកចិត្តខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះទ្រឹស្តី និងកូដ:</strong> ផ្តើមសិក្សាពីទ្រឹស្តី Hidden Markov Models និង Multi-layer Perceptrons ដោយប្រើប្រាស់បណ្ណាល័យកូដស្រាប់ៗដូចជា PyTorch ឬ TensorFlow ដើម្បីរៀបចំរចនាសម្ព័ន្ធបណ្តាញសរសៃប្រសាទកូនកាត់។</li>
+            
+            <li><strong>ប្រមូលមូលដ្ឋានទិន្នន័យសំឡេងភាសាខ្មែរ (Khmer Speech Corpus):</strong> ផ្តួចផ្តើមយុទ្ធនាការប្រមូលទិន្នន័យសំឡេងនិយាយប្រចាំថ្ងៃ ឬតាមរយៈទូរស័ព្ទជាភាសាខ្មែរ ដោយធានាឲ្យមានបរិមាណគ្រប់គ្រាន់ និងភាពចម្រុះនៃអ្នកនិយាយ (ភេទ តំបន់រស់នៅ) ដើម្បីជៀសវាងភាពលម្អៀង។</li>
+            
+            <li><strong>ស្រង់យកលក្ខណៈពិសេសនៃសម្លេង (Feature Extraction):</strong> ប្រើប្រាស់កម្មវិធី Librosa ឬ Praat ដើម្បីទាញយកលក្ខណៈស្តង់ដារដូចជា MFCC (Mel-Frequency Cepstral Coefficients) ពីសំឡេងភាសាខ្មែរ និងអនុវត្ត Cepstral Mean Subtraction សម្រាប់កាត់បន្ថយផលប៉ះពាល់ពីម៉ៃក្រូហ្វូនខុសៗគ្នា។</li>
+            
+            <li><strong>កសាង និងសាកល្បងម៉ូដែល Segmental Speaker Verification:</strong> ប្រើប្រាស់ក្បួនដោះស្រាយ Temporal Decomposition រួមជាមួយ K-means Clustering ដើម្បីបង្កើតជាប្រព័ន្ធបែងចែកផ្នែកសំឡេងស្វ័យប្រវត្តិ មុននឹងបញ្ចូលទៅឲ្យ MLPs រៀនបែងចែកអត្តសញ្ញាណអ្នកនិយាយ។</li>
+            
+            <li><strong>វាយតម្លៃប្រសិទ្ធភាពដោយប្រើប្រាស់ DET Curves:</strong> វាស់វែងលទ្ធផលប្រព័ន្ធសាកល្បងដោយប្រើការគណនា Equal Error Rate (EER) និងសាងសង់គំនូសខ្សែកោង Detection Error Tradeoff (DET) ដើម្បីប្រៀបធៀបគុណភាពប្រព័ន្ធថ្មីធៀបនឹង GMM បុរាណ ក្នុងបរិបទភាសាខ្មែរ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Models</span></td>
+                <td>ជាម៉ូដែលស្ថិតិមួយដែលប្រើសម្រាប់ទស្សន៍ទាយពីលំដាប់លំដោយនៃព្រឹត្តិការណ៍ដែលយើងមិនអាចមើលឃើញផ្ទាល់ (Hidden States) ដោយផ្អែកលើទិន្នន័យដែលយើងអាចសង្កេតឃើញ (Observations)។ ក្នុងការសម្គាល់សំឡេង វាជួយទស្សន៍ទាយថាតើសំឡេងដែលយើងឮជារលកសូរស័ព្ទនោះ តំណាងឱ្យពាក្យ ឬព្យញ្ជនៈអ្វីខ្លះតាមលំដាប់លំដោយពេលវេលា។</td>
+                <td>វាដូចជាការសន្និដ្ឋានថាអាកាសធាតុថ្ងៃនេះជាអ្វី (អ្វីដែលលាក់កំបាំង) ដោយគ្រាន់តែមើលទៅលើសម្លៀកបំពាក់ដែលមនុស្សពាក់នៅតាមផ្លូវ (អ្វីដែលមើលឃើញ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Self-Organizing Maps</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដែលរៀនដោយខ្លួនឯង (Unsupervised Learning) ក្នុងការចាត់ថ្នាក់ទិន្នន័យ។ វាព្យាយាមរៀបចំទិន្នន័យដែលមានភាពស្មុគស្មាញច្រើនវិមាត្រ ឱ្យទៅជាទម្រង់ផែនទីតូចៗ ដោយរក្សានូវទម្រង់ប្រហាក់ប្រហែលគ្នានៃទិន្នន័យដើម ពោលគឺទិន្នន័យដែលស្រដៀងគ្នានឹងត្រូវស្ថិតនៅក្បែរគ្នាជានិច្ច។</td>
+                <td>វាដូចជាការបោះសៀវភៅរាប់ពាន់ក្បាលទៅលើឥដ្ឋ រួចសៀវភៅទាំងនោះចេះរត់ទៅតម្រៀបគ្នាជាក្រុមៗដោយស្វ័យប្រវត្តិ តាមប្រភេទសាច់រឿងដូចៗគ្នានៅក្បែរៗគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vector Quantization</span></td>
+                <td>ជាបច្ចេកទេសបង្រួមទិន្នន័យ ដែលយកក្រុមនៃចំណុចទិន្នន័យជាច្រើន (វ៉ិចទ័រ) ទៅចងក្រងជាក្រុមធំៗ រួចតំណាងក្រុមនីមួយៗដោយចំណុចកណ្តាលមួយ (Centroid)។ នៅក្នុងការសម្គាល់សំឡេង វាជួយបំប្លែងរលកសំឡេងបន្តបន្ទាប់គ្នាឱ្យទៅជានិមិត្តសញ្ញាដាច់ៗពីគ្នា ដើម្បីងាយស្រួលឱ្យកុំព្យូទ័រធ្វើការគណនាបានលឿន។</td>
+                <td>វាដូចជាការចាប់ក្រុមមនុស្សរាប់រយនាក់ដែលឈររាយប៉ាយ ឱ្យទៅឈរជា ៤ ឬ ៥ ក្រុមធំៗ រួចជ្រើសរើសមេក្រុមម្នាក់ជាតំណាងឱ្យក្រុមនីមួយៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi Algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយគណិតវិទ្យាដ៏មានប្រសិទ្ធភាពមួយសម្រាប់ស្វែងរក 'ផ្លូវដែលមានប្រូបាប៊ីលីតេខ្ពស់បំផុត' (most likely path) នៅក្នុង Hidden Markov Models។ នៅពេលកុំព្យូទ័រទទួលបានសញ្ញាសំឡេង វាប្រើក្បួននេះដើម្បីទាញយកលំដាប់ពាក្យដែលត្រឹមត្រូវបំផុត ដោយកាត់ចោលនូវជម្រើសផ្សេងៗដែលមិនសូវសមហេតុផល។</td>
+                <td>វាដូចជាការប្រើកម្មវិធី Google Maps ដើម្បីស្វែងរកផ្លូវដែលលឿន និងមានសុវត្ថិភាពបំផុតពីផ្ទះទៅសាលារៀន ដោយមិនបាច់សាកល្បងជិះគ្រប់ផ្លូវទាំងអស់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multilayer Perceptrons</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដែលមានស្រទាប់ច្រើន (Input, Hidden, Output) ដែលត្រូវបានបណ្តុះបណ្តាលដើម្បីរៀនសម្គាល់ទម្រង់ទិន្នន័យស្មុគស្មាញ (Non-linear)។ ក្នុងការសិក្សានេះ វាត្រូវបានប្រើដើម្បីប៉ាន់ស្មានថា តើសំឡេងមួយឃ្លាមានភាគរយប៉ុន្មានដែលជាសំឡេងរបស់អ្នកនិយាយពិតប្រាកដ (Posterior probabilities)។</td>
+                <td>វាដូចជារោងចក្រកែច្នៃមួយ ដែលមានកម្មករតម្រង់ជួរគ្នាជាច្រើនដំណាក់កាល ដោយអ្នកទីមួយទទួលវត្ថុធាតុដើម បញ្ជូនទៅអ្នកបន្ទាប់ដើម្បីកែច្នៃបន្ត រហូតដល់អ្នកចុងក្រោយសម្រេចបានជាផលិតផលសម្រេច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Detection Error Tradeoff</span></td>
+                <td>ជាក្រាហ្វិកសម្រាប់វាយតម្លៃប្រសិទ្ធភាពនៃប្រព័ន្ធផ្ទៀងផ្ទាត់អត្តសញ្ញាណ (ដូចជាការផ្ទៀងផ្ទាត់សំឡេងជាដើម)។ វាបង្ហាញពីទំនាក់ទំនងរវាងកំហុសពីរប្រភេទគឺ៖ ការបដិសេធមនុស្សពិតប្រាកដ (False Rejection) និងការអនុញ្ញាតឱ្យជនបន្លំចូល (False Acceptance) នៅពេលអ្នកផ្លាស់ប្តូរកម្រិតនៃការអនុញ្ញាត។</td>
+                <td>វាដូចជាការសារ៉េកម្រិតរោទិ៍នៃប្រព័ន្ធការពារផ្ទះ បើយើងដាក់ឱ្យវាឆាប់រោទិ៍ពេក វាអាចរោទិ៍ទោះបីជាសត្វឆ្មាដើរកាត់ ប៉ុន្តែបើយើងដាក់ឱ្យវាពិបាករោទិ៍ពេក ចោរចូលផ្ទះក៏វាមិនរោទិ៍ដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Temporal Decomposition</span></td>
+                <td>ជាបច្ចេកទេសវិភាគសញ្ញាសំឡេង ដោយពុះបំបែកបន្ទាត់សំឡេងដែលប្រែប្រួលជាបន្តបន្ទាប់ ឱ្យទៅជាបំណែកតូចៗដែលមានលក្ខណៈថេរបណ្តោះអាសន្ន (Quasi-stationary) ដែលតំណាងឱ្យព្រឹត្តិការណ៍សូរស័ព្ទ (Acoustic events) ដាច់ដោយឡែកពីគ្នា។ វាជួយឱ្យប្រព័ន្ធផ្ទៀងផ្ទាត់អ្នកនិយាយចាប់យកចំនុចសំខាន់ៗនៃទម្លាប់នៃការបញ្ចេញសំឡេង។</td>
+                <td>វាដូចជាការកាត់ខ្សែភាពយន្តវីដេអូដែលវែង ឱ្យទៅជាបំណែកឈុតឆាកខ្លីៗដាច់ពីគ្នា ដែលឈុតនីមួយៗបង្ហាញពីសកម្មភាពតែមួយប្រភេទ ដើម្បីងាយស្រួលយកទៅវិភាគ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/adaptive-training-lvcsr-speech-recognition-2006.html">
+                    <span class="km">ការបណ្តុះបណ្តាលសម្របតាមសម្រាប់ការសម្គាល់សំឡេងនិយាយបន្តបន្ទាប់ដែលមានវាក្យសព្ទធំ</span><br>
+                    <span class="en article-original-title">Adaptive Training for Large Vocabulary Continuous Speech Recognition</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/iot-ann-smart-agriculture-2017.html">
+                    <span class="km">កម្មវិធីអ៊ីនធឺណិតនៃវត្ថុ និងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតក្នុងកសិកម្មឆ្លាតវៃ</span><br>
+                    <span class="en article-original-title">Internet of Things Applications and Artificial Neural Networks in Smart Agriculture</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/detector-corrector-asr-error-calibration-2023.html">
+                    <span class="km">ខ្ញុំរៀនពីកំហុស ខ្ញុំអាចជួសជុលវាបាន!៖ រចនាសម្ព័ន្ធ Detector-Corrector សម្រាប់ការកែតម្រូវកំហុស ASR</span><br>
+                    <span class="en article-original-title">I Learned Error, I Can Fix It! : A Detector-Corrector Structure for ASR Error Calibration</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+HMM%2FANN+continuous+speech+recognition+forward-backward+training" target="_blank" rel="noopener"><span class="en">hybrid HMM/ANN continuous speech recognition forward-backward training</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=text-independent+speaker+verification+temporal+decomposition+segmentation" target="_blank" rel="noopener"><span class="en">text-independent speaker verification temporal decomposition segmentation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Self-Organizing+Maps+Kohonen+discrete+Hidden+Markov+Models+speech+recognition" target="_blank" rel="noopener"><span class="en">Self-Organizing Maps Kohonen discrete Hidden Markov Models speech recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gaussian+Mixture+Models+vs+Multilayer+Perceptrons+acoustic+modeling" target="_blank" rel="noopener"><span class="en">Gaussian Mixture Models vs Multilayer Perceptrons acoustic modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Detection+Error+Tradeoff+DET+curves+speaker+verification+biometric+authentication" target="_blank" rel="noopener"><span class="en">Detection Error Tradeoff DET curves speaker verification biometric authentication</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

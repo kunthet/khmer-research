@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើគំរូការសន្ទនាតាមបែបស្ថិតិ | KhmerResearch.com</title>
+    <meta name="description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមភាពស្មុគស្មាញក្នុងការធ្វើឱ្យប្រព័ន្ធសន្ទនាតាមសំឡេងដែលផ្អែកលើ POMDP អាចដំណើរការបានសម្រាប់ទិន្នន័យជាក់ស្តែងដ៏ធំ ដោយដោះស្រាយបញ្ហានៃការ...">
+    
+    <meta name="keywords" content="Spoken Dialogue Systems, POMDP, Gaussian Processes, Reinforcement Learning, Hidden Information State, Policy Optimization, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/statistical-dialogue-modelling-2011.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/statistical-dialogue-modelling-2011.html">
+    <meta property="og:title" content="ការធ្វើគំរូការសន្ទនាតាមបែបស្ថិតិ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមភាពស្មុគស្មាញក្នុងការធ្វើឱ្យប្រព័ន្ធសន្ទនាតាមសំឡេងដែលផ្អែកលើ POMDP អាចដំណើរការបានសម្រាប់ទិន្នន័យជាក់ស្តែងដ៏ធំ ដោយដោះស្រាយបញ្ហានៃការអាប់ដេតស្ថានភាព និងការរៀនកែលម្អគោលការណ៍ស...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2011">
+    
+    <meta property="article:tag" content="Spoken Dialogue Systems">
+    
+    <meta property="article:tag" content="POMDP">
+    
+    <meta property="article:tag" content="Gaussian Processes">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Hidden Information State">
+    
+    <meta property="article:tag" content="Policy Optimization">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើគំរូការសន្ទនាតាមបែបស្ថិតិ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមភាពស្មុគស្មាញក្នុងការធ្វើឱ្យប្រព័ន្ធសន្ទនាតាមសំឡេងដែលផ្អែកលើ POMDP អាចដំណើរការបានសម្រាប់ទិន្នន័យជាក់ស្តែងដ៏ធំ ដោយដោះស្រាយបញ្ហានៃការអាប់ដេតស្ថានភាព និងការរៀនកែលម្អគោលការណ៍ស...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc\u1780\u17b6\u179a\u179f\u1793\u17d2\u1791\u1793\u17b6\u178f\u17b6\u1798\u1794\u17c2\u1794\u179f\u17d2\u1790\u17b7\u178f\u17b7",
+      "name": "Statistical Dialogue Modelling",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1793\u17d2\u1791\u1793\u17b6\u178f\u17b6\u1798\u179f\u17c6\u17a1\u17c1\u1784\u178a\u17c2\u179b\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be POMDP \u17a2\u17b6\u1785\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1794\u17b6\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b6\u1780\u17cb\u179f\u17d2\u178f\u17c2\u1784\u178a\u17cf\u1792\u17c6 \u178a\u17c4\u1799\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u17a2\u17b6\u1794\u17cb\u178a\u17c1\u178f\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796 \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1782\u17c4\u179b\u1780\u17b6\u179a\u178e\u17cd\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796 (Policy optimization) \u178a\u17c2\u179b\u1799\u17ba\u178f\u1799\u17c9\u17b6\u179c\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/statistical-dialogue-modelling-2011.html",
+      "author": [{"@type": "Person", "name": "Milica Ga\u0161i\u0107 (University of Cambridge)"}],
+      "datePublished": "2011",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Statistical Dialogue Modelling",
+        "url": "N/A"
+      },
+      "keywords": ["Spoken Dialogue Systems", "POMDP", "Gaussian Processes", "Reinforcement Learning", "Hidden Information State", "Policy Optimization"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc\u1780\u17b6\u179a\u179f\u1793\u17d2\u1791\u1793\u17b6\u178f\u17b6\u1798\u1794\u17c2\u1794\u179f\u17d2\u1790\u17b7\u178f\u17b7",
+          "item": "https://khmerresearch.com/papers/technology/statistical-dialogue-modelling-2011.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើគំរូការសន្ទនាតាមបែបស្ថិតិ</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Statistical Dialogue Modelling<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើគំរូការសន្ទនាតាមបែបស្ថិតិ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Statistical Dialogue Modelling</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Milica Gašić (University of Cambridge)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2011</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមភាពស្មុគស្មាញក្នុងការធ្វើឱ្យប្រព័ន្ធសន្ទនាតាមសំឡេងដែលផ្អែកលើ POMDP អាចដំណើរការបានសម្រាប់ទិន្នន័យជាក់ស្តែងដ៏ធំ ដោយដោះស្រាយបញ្ហានៃការអាប់ដេតស្ថានភាព និងការរៀនកែលម្អគោលការណ៍សកម្មភាព (Policy optimization) ដែលយឺតយ៉ាវ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានពង្រីកក្របខ័ណ្ឌការតំណាងស្ថានភាពព័ត៌មានលាក់កំបាំង (Hidden Information State) និងអនុវត្តក្បួនដោះស្រាយការរៀនពង្រឹង (Reinforcement Learning) បែប Bayesian ដើម្បីគ្រប់គ្រងស្ថានភាពនៃការសន្ទនាប្រកបដោយប្រសិទ្ធភាព។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ទម្រង់តំណាងស្ថានភាពសន្ទនាដែលបានពង្រីក និងយន្តការកាត់ចោល (Extended state representation and pruning technique)</li>
+            
+            <li>ការរៀនពង្រឹងដោយប្រើប្រាស់ម៉ូដែលស្ថិតិ (Gaussian Process Reinforcement Learning - GP-Sarsa)</li>
+            
+            <li>ការប្រើប្រាស់កម្រិតនៃភាពមិនប្រាកដប្រជាដើម្បីបន្ស៊ាំទៅនឹងអ្នកប្រើប្រាស់ (Uncertainty-based User Adaptation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>យន្តការកាត់ចោល (Pruning) ថ្មីអនុញ្ញាតឱ្យប្រព័ន្ធអាចដំណើរការបញ្ជីជម្រើសអត្ថបទចូលដ៏ធំៗ និងការសន្ទនាវែងៗដោយមិនមានព្រំដែនកំណត់ ដោយនៅតែរក្សាបាននូវភាពត្រឹមត្រូវខ្ពស់។</li>
+            
+            <li>ការប្រើប្រាស់វិធីសាស្ត្រ GP-Sarsa ជួយបង្កើនល្បឿននៃការរៀនគោលការណ៍សន្ទនាយ៉ាងខ្លាំង ដោយសម្រេចបាននូវអត្រាជោគជ័យលើសពី ៨៥% ក្នុងការសន្ទនាសាកល្បងត្រឹមតែ ២០០ ដងប៉ុណ្ណោះ។</li>
+            
+            <li>ការគណនាកម្រិតភាពមិនប្រាកដប្រជា (Uncertainty estimate) ដែលបានមកពីម៉ូដែល Gaussian អាចយកមកប្រើប្រាស់ដើម្បីបន្ស៊ាំទៅនឹងកម្រិតបទពិសោធន៍របស់អ្នកប្រើប្រាស់ផ្សេងៗគ្នាក្នុងរយៈពេលដ៏ខ្លីដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Gaussian Process Reinforcement Learning (GP-Sarsa)</span></strong><br>ការរៀនពង្រឹងដោយប្រើប្រាស់គោលការណ៍ Gaussian Process (GP-Sarsa)</td>
+                <td>ទាមទារទិន្នន័យសន្ទនាតិចដើម្បីរៀនបានលឿន និងអាចប៉ាន់ស្មានកម្រិតភាពមិនប្រាកដប្រជាសម្រាប់ការបន្ស៊ាំខ្លួន (Adaptation)។</td>
+                <td>ទាមទារការគណនាស្មុគស្មាញ (Matrix inversion) ដែលតម្រូវឲ្យប្រើវិធីសាស្ត្រ Sparsification ដើម្បីកាត់បន្ថយបន្ទុកកុំព្យូទ័រ។</td>
+                <td>សម្រេចបានអត្រាជោគជ័យលើសពី ៨៥% ក្នុងទិន្នន័យសន្ទនាត្រឹមតែ ២០០ ដង បើធៀបនឹងវិធីសាស្ត្រធម្មតាដែលត្រូវការរាប់ពាន់ដង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Grid-based Monte Carlo Control (MCC)</span></strong><br>ការគ្រប់គ្រង Monte Carlo ផ្អែកលើបណ្ដាញចំនុច (Grid-based MCC)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងធានាបាននូវការស្វែងរកគោលការណ៍ល្អប្រសើរបំផុត ប្រសិនបើមានទិន្នន័យគ្រប់គ្រាន់។</td>
+                <td>រៀនយឺតខ្លាំង ត្រូវការទិន្នន័យសន្ទនារាប់សែនដង និងមិនអាចទាញយកប្រយោជន៍ពីភាពស្រដៀងគ្នានៃស្ថានភាពសន្ទនាបានល្អ។</td>
+                <td>ដំណើរការយឺត ដោយទាមទារការព្បាស្រ័យទាក់ទងជាតួលេខរហូតដល់ប្រហែល ១០០,០០០ ដងទើបគោលការណ៍មានស្ថិរភាព។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Attribute-value list Pruning</span></strong><br>ការកាត់ចោលបញ្ជីគុណលក្ខណៈនិងតម្លៃ (Pruning)</td>
+                <td>អនុញ្ញាតឱ្យប្រព័ន្ធរក្សាទុកនូវជម្រើសការសន្ទនាច្រើនពេលមានសំឡេងរំខាន និងអាចដំណើរការការសន្ទនាវែងៗដោយគ្មានដែនកំណត់។</td>
+                <td>អាចនឹងកាត់ចោលព័ត៌មានដែលត្រឹមត្រូវប្រសិនបើការវាយតម្លៃប្រូបាប៊ីលីតេនៃពាក្យសន្ទនាមានកំហុសឆ្គង។</td>
+                <td>ផ្តល់លទ្ធផលនិងរង្វាន់ (Reward) ខ្ពស់ជាងវិធីសាស្ត្រ Recombination ជាពិសេសក្នុងស្ថានភាពដែលមានកំហុសសំឡេងរំខានខ្ពស់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធសន្ទនាតាមបែប POMDP នេះទាមទារធនធានគណនាខ្ពស់សម្រាប់ដំណើរការអនុគមន៍ជំនួយកម្រិតខ្ពស់ និងអង្គចងចាំធំសម្រាប់រក្សាទុកស្ថានភាពសន្ទនា។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនមេដែលមានកម្លាំងគណនាខ្ពស់ (ឯកសារបានប្រើប្រាស់ CPU 8-core, 2.83GHz និង RAM 24GB) ដើម្បីធានាបានការឆ្លើយតបលឿនជាង ១ វិនាទី (Real-time update)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធីនិងបណ្ណាល័យសម្រាប់ Machine Learning ដូចជា ATK/HTK សម្រាប់បំប្លែងសំឡេងទៅជាអត្ថបទ (ASR) និងប្រព័ន្ធដោះស្រាយ POMDP Solver។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យសន្ទនាជាក់ស្តែង (Dialogue Corpus) សម្រាប់ហ្វឹកហាត់ប្រព័ន្ធ និងកម្មវិធីក្លែងធ្វើអ្នកប្រើប្រាស់ (Agenda-based User Simulator)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងស៊ីជម្រៅលើមុខវិជ្ជាសិប្បនិមិត្ត (AI) ពិសេស Reinforcement Learning, POMDP, និងការយល់ដឹងពី Gaussian Processes ព្រមទាំងការដំណើរការភាសាធម្មជាតិ (NLP)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សា និងការធ្វើតេស្តជាក់ស្តែងត្រូវបានធ្វើឡើងលើប្រធានបទទេសចរណ៍នៅទីក្រុង Cambridge (CamInfo) ដោយប្រើប្រាស់អ្នកនិយាយភាសាអង់គ្លេសជាភាសាកំណើតចំនួន ៣៦ នាក់ប៉ុណ្ណោះ។ សម្រាប់បរិបទប្រទេសកម្ពុជា អាកប្បកិរិយានៃការសន្ទនា វិធីសាស្ត្រនៃការចរចា និងភាសាខ្មែរមានភាពស្មុគស្មាញ និងទម្រង់ខុសគ្នាទាំងស្រុង ដែលទាមទារឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកដើម្បីជៀសវាងកំហុសប្រព័ន្ធ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាភាសាមានរចនាសម្ព័ន្ធខុសគ្នា ម៉ូដែលសន្ទនាតាមបែបស្ថិតិនេះមានសក្តានុពលខ្លាំងក្នុងការអភិវឌ្ឍប្រព័ន្ធសន្ទនាឆ្លាតវៃ (Spoken Dialogue Systems) សម្រាប់ស្ថាប័ននៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទេសចរណ៍ (ឧ. ខេត្តសៀមរាប):</strong> អាចប្រើប្រាស់គំរូ CamInfo ដើម្បីបង្កើតជាប្រព័ន្ធផ្តល់ព័ត៌មានដោយស្វ័យប្រវត្តិអំពីប្រាសាទ សណ្ឋាគារ និងភោជនីយដ្ឋាន សម្រាប់ជួយសម្រួលដល់ភ្ញៀវទេសចរជាតិនិងអន្តរជាតិ។</li>
+            
+            <li><strong>សេវាកម្មអតិថិជន (Call Centers សម្រាប់ក្រុមហ៊ុនទូរគមនាគមន៍):</strong> ក្រុមហ៊ុនទូរស័ព្ទចល័ត ឬធនាគារអាចប្រើបច្ចេកវិទ្យានេះដើម្បីកាត់បន្ថយបន្ទុកបុគ្គលិកដោយឱ្យប្រព័ន្ធជួយដោះស្រាយបញ្ហាបច្ចេកទេសបឋមតាមរយៈការសន្ទនាផ្ទាល់។</li>
+            
+            <li><strong>សេវាសាធារណៈឆ្លាតវៃរដ្ឋបាល:</strong> រាជរដ្ឋាភិបាលអាចរៀបចំប្រព័ន្ធសន្ទនាតាមសំឡេងសម្រាប់ប្រជាពលរដ្ឋ (ជាពិសេសអ្នកមិនសូវចេះអក្សរ) ក្នុងការសួររកព័ត៌មានអំពីឯកសារតម្រូវ ឬសេវាកម្មរដ្ឋបាលផ្សេងៗ។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់វិធីសាស្ត្រ GP-Sarsa រួមជាមួយ POMDP នឹងជួយឱ្យអ្នកស្រាវជ្រាវកម្ពុជាអាចអភិវឌ្ឍកម្មវិធីសន្ទនាដែលមានភាពបត់បែនខ្ពស់ និងធន់នឹងបញ្ហាសំឡេងរំខាននៅទីសាធារណៈបានយ៉ាងប្រសើរ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះទ្រឹស្តី:</strong> ចាប់ផ្តើមរៀនអំពីសញ្ញាណនៃមុខវិជ្ជា <span class="en">Markov Decision Processes (MDP)</span> និងការរៀនពង្រឹង <span class="en">Reinforcement Learning</span> តាមរយៈសៀវភៅ ឬវគ្គសិក្សាតាមអ៊ីនធឺណិត ដើម្បីយល់ពីរបៀបដែលម៉ាស៊ីនធ្វើការសម្រេចចិត្ត។</li>
+            
+            <li><strong>ស្វែងយល់អំពីលក្ខណៈគណិតវិទ្យា និងស្ថិតិជាន់ខ្ពស់:</strong> ត្រូវផ្តោតលើការសិក្សាពី <span class="en">Gaussian Processes</span> និងម៉ូដែល <span class="en">Partially Observable MDPs (POMDP)</span> ដែលជាស្នូលសម្រាប់ដោះស្រាយភាពមិនច្បាស់លាស់នៅក្នុងការសន្ទនា។</li>
+            
+            <li><strong>បង្កើតបរិស្ថានក្លែងធ្វើនិងប្រមូលទិន្នន័យ:</strong> ប្រមូលទិន្នន័យសន្ទនាពិតប្រាកដជាភាសាខ្មែរ ហើយរចនាកម្មវិធីក្លែងធ្វើអ្នកប្រើប្រាស់ <span class="en">Agenda-based User Simulator</span> មួយដើម្បីអាចហ្វឹកហាត់ប្រព័ន្ធសន្ទនាបានរាប់ម៉ឺនដងដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>អនុវត្តកូដ និងសាកល្បងម៉ូដែលបឋម:</strong> ប្រើប្រាស់ភាសាកម្មវិធី <span class="en">Python</span> រួមជាមួយបណ្ណាល័យ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> ដើម្បីសរសេរកូដអនុវត្តក្បួន <span class="en">GP-Sarsa Algorithm</span> ដោយធ្វើតេស្តជាមួយបញ្ហាតូចៗសិនមុននឹងបន្តទៅគម្រោងធំ។</li>
+            
+            <li><strong>អភិវឌ្ឍប្រព័ន្ធសន្ទនាពេញលេញ:</strong> យកម៉ូដែលដែលហ្វឹកហាត់រួចទៅភ្ជាប់ជាមួយប្រព័ន្ធស្គាល់សំឡេង <span class="en">ASR (Automatic Speech Recognition)</span> និងប្រព័ន្ធបង្កើតសំឡេង <span class="en">TTS (Text-to-Speech)</span> ភាសាខ្មែរ ដើម្បីបង្កើតប្រព័ន្ធជជែកកម្សាន្ត ឬផ្តល់ព័ត៌មានជាក់ស្តែងមួយ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Partially Observable Markov Decision Process (POMDP)</span></td>
+                <td>ជាក្របខ័ណ្ឌគណិតវិទ្យាដែលត្រូវបានប្រើប្រាស់ដើម្បីធ្វើការសម្រេចចិត្តក្នុងស្ថានភាពដែលប្រព័ន្ធកុំព្យូទ័រមិនអាចដឹងច្បាស់ពីស្ថានភាពពិតប្រាកដ ឬបំណងរបស់អ្នកប្រើប្រាស់ ប៉ុន្តែវាត្រូវរក្សាទុកភាគរយនៃភាពជាក់លាក់ (ប្រូបាប៊ីលីតេ) ផ្អែកលើព័ត៌មាននិងសម្លេងដែលវាទទួលបាន។</td>
+                <td>ដូចជាការដើរក្នុងបន្ទប់ងងឹតដែលអ្នកមិនអាចមើលឃើញអ្វីទាំងអស់ តែអ្នកត្រូវស្ទាបរកផ្លូវ ហើយទាយថាអ្នកកំពុងនៅត្រង់ណាដោយផ្អែកលើអ្វីដែលអ្នកបានស្ទាបប៉ះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Information State (HIS)</span></td>
+                <td>គឺជាប្រព័ន្ធមួយដែលជួយសម្រួលដល់ការចងចាំទិន្នន័យសន្ទនាដ៏ច្រើនសន្ធឹកសន្ធាប់ ដោយវាធ្វើការប្រមូលផ្ដុំគោលបំណងស្រដៀងគ្នារបស់អ្នកប្រើប្រាស់ទៅជាក្រុមៗ (Partitions) ដើម្បីកាត់បន្ថយភាពស្មុគស្មាញក្នុងការគណនារបស់ម៉ាស៊ីនទោះក្នុងស្ថានភាពមានជម្រើសច្រើនក៏ដោយ។</td>
+                <td>ដូចជាការចាត់ថ្នាក់សៀវភៅរាប់ពាន់ក្បាលក្នុងបណ្ណាល័យទៅតាមប្រភេទមុខវិជ្ជា ដើម្បីងាយស្រួលស្វែងរកជាជាងការចងចាំចំណងជើងសៀវភៅនីមួយៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian Process Reinforcement Learning (GP-Sarsa)</span></td>
+                <td>ជាវិធីសាស្ត្ររៀនរបស់ម៉ាស៊ីនដែលប្រើប្រាស់ម៉ូដែលស្ថិតិដើម្បីទស្សន៍ទាយលទ្ធផល (រង្វាន់) នៃសកម្មភាពនីមួយៗក្នុងការសន្ទនា ព្រមទាំងអាចប្រាប់ពីកម្រិតនៃភាពមិនប្រាកដប្រជារបស់វា ដែលជួយឱ្យប្រព័ន្ធដឹងថាខ្លួនគួរតែសាកល្បងជម្រើសថ្មី ឬជ្រើសយកជម្រើសដែលវាធ្លាប់ដឹង។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលមិនត្រឹមតែឆ្លើយសំណួរគ្រូទេ ថែមទាំងប្រាប់គ្រូថាគេមានទំនុកចិត្តប៉ុន្មានភាគរយលើចម្លើយនោះ ដើម្បីឱ្យគ្រូដឹងថាគួរពន្យល់បន្ថែមឬអត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Belief State</span></td>
+                <td>ជារង្វាស់ប្រូបាប៊ីលីតេ ឬភាគរយដែលកុំព្យូទ័រជឿជាក់ទៅលើព័ត៌មាននិងគោលបំណងដែលអ្នកប្រើប្រាស់ចង់បាន ដោយបូកបញ្ចូលរាល់ប្រវត្តិសន្ទនាដែលបានកន្លងផុតមកតាំងពីដើមរហូតដល់ពេលបច្ចុប្បន្ន។</td>
+                <td>ដូចជាអ្នកស៊ើបអង្កេតម្នាក់ដែលសន្និដ្ឋានថាបុគ្គលណាម្នាក់ជាជនសង្ស័យប៉ុន្មានភាគរយ ដោយវាយតម្លៃផ្អែកលើភស្តុតាងដែលប្រមូលបានបន្តបន្ទាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pruning</span></td>
+                <td>ជាយន្តការក្នុងការកាត់ចោលនូវជម្រើសទិន្នន័យ ឬទិសដៅសន្ទនាណាដែលមានភាគរយត្រឹមត្រូវទាបបំផុតចេញពីអង្គចងចាំរបស់ប្រព័ន្ធ ដើម្បីទុកកន្លែងទំនេរឱ្យកុំព្យូទ័រអាចដំណើរការគណនាជម្រើសដែលត្រឹមត្រូវជាងបានលឿននិងមិនគាំង។</td>
+                <td>ដូចជាការកាត់មែកឈើដែលងាប់ឬមិនចេញផ្លែចោល ដើម្បីឱ្យដើមឈើអាចផ្ដោតការចិញ្ចឹមតែទៅលើមែកណាដែលមានផ្លែច្រើន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Policy Optimization</span></td>
+                <td>ជាដំណើរការនៃការស្វែងរកជម្រើសសកម្មភាពដ៏ល្អបំផុត ដែលប្រព័ន្ធគួរឆ្លើយតបទៅកាន់អ្នកប្រើប្រាស់ក្នុងកាលៈទេសៈនីមួយៗ ដើម្បីធានាថាការសន្ទនានឹងប្រព្រឹត្តទៅបានលឿន និងសម្រេចជោគជ័យតាមការរំពឹងទុក។</td>
+                <td>ដូចជាគ្រូបង្វឹកកីឡាបាល់ទាត់ម្នាក់រៀបចំយុទ្ធសាស្ត្រលេងដ៏ល្អបំផុត ដោយផ្អែកលើស្ថានការណ៍នៃការប្រកួតជាក់ស្តែងលើទីលាន ដើម្បីដណ្តើមបានជ័យជម្នះនៅចុងម៉ោង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">User Simulator</span></td>
+                <td>កម្មវិធីកុំព្យូទ័រដែលត្រូវបានរចនាឡើងដើម្បីដើរតួជាមនុស្សក្នុងការសន្ទនា ដោយវាអាចបង្កើតសំណួរ បំណងប្រាថ្នា និងសូម្បីតែកំហុសសម្លេងដោយស្វ័យប្រវត្តិ ដើម្បីយកទៅបង្ហាត់ប្រព័ន្ធឆ្លើយតបឱ្យឆ្លាតវៃរាប់ម៉ឺនដងដោយមិនបាច់ប្រើមនុស្សពិតប្រាកដ។</td>
+                <td>ដូចជាការប្រើប្រាស់អាយ៉ងមនុស្សសម្រាប់ហ្វឹកហាត់ក្បាច់គុនមុននឹងទៅប្រយុទ្ធជាមួយមនុស្សពិតប្រាកដនៅលើសង្វៀន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/gaussian-processes-pomdp-dialogue-managers-2010.html">
+                    <span class="km">ដំណើរការ Gaussian សម្រាប់ការធ្វើឲ្យប្រសើរលឿននៃគោលការណ៍សម្រាប់កម្មវិធីគ្រប់គ្រងការសន្ទនាផ្អែកលើ POMDP</span><br>
+                    <span class="en article-original-title">Gaussian Processes for Fast Policy Optimisation of POMDP-based Dialogue Managers</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/rl-spoken-dialogue-systems-deployment-2006.html">
+                    <span class="km">ការរៀនពង្រឹង (Reinforcement Learning) សម្រាប់ប្រព័ន្ធសន្ទនាជាសំឡេង៖ ការប្រៀបធៀបចំណុចខ្លាំង និងចំណុចខ្សោយសម្រាប់ការដាក់ពង្រាយក្នុងការអនុវត្តជាក់ស្តែង</span><br>
+                    <span class="en article-original-title">Reinforcement Learning for Spoken Dialogue Systems: Comparing Strengths and Weaknesses for Practical Deployment</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/learning-domain-independent-dialogue-policies-2015.html">
+                    <span class="km">ការរៀនគោលការណ៍សន្ទនាឯករាជ្យពីដែនកំណត់ តាមរយៈការធ្វើប៉ារ៉ាម៉ែត្រអុនតូឡូស៊ី</span><br>
+                    <span class="en article-original-title">Learning Domain-Independent Dialogue Policies via Ontology Parameterisation</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/automatic-learning-dialogue-strategy-rl-2002.html">
+                    <span class="km">ការរៀនយុទ្ធសាស្ត្រសន្ទនាដោយស្វ័យប្រវត្តិដោយប្រើប្រាស់ការក្លែងធ្វើការសន្ទនានិងការរៀនពង្រឹង (Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Automatic learning of dialogue strategy using dialogue simulation and reinforcement learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/pomdp-continuous-observation-dialogue-management-2005.html">
+                    <span class="km">ដំណើរការសម្រេចចិត្តម៉ាកូវដែលអាចសង្កេតបានដោយផ្នែក ជាមួយនឹងការសង្កេតជាបន្តបន្ទាប់សម្រាប់ការគ្រប់គ្រងកិច្ចសន្ទនា</span><br>
+                    <span class="en article-original-title">Partially Observable Markov Decision Processes with Continuous Observations for Dialogue Management</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Partially+Observable+Markov+Decision+Processes+for+spoken+dialogue+management" target="_blank" rel="noopener"><span class="en">Partially Observable Markov Decision Processes for spoken dialogue management</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gaussian+process+reinforcement+learning+in+continuous+state+space" target="_blank" rel="noopener"><span class="en">Gaussian process reinforcement learning in continuous state space</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+information+state+dialogue+manager+architecture" target="_blank" rel="noopener"><span class="en">Hidden information state dialogue manager architecture</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Active+learning+for+POMDP+dialogue+policy+optimization" target="_blank" rel="noopener"><span class="en">Active learning for POMDP dialogue policy optimization</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Spoken+dialogue+system+user+simulation+and+unsupervised+adaptation" target="_blank" rel="noopener"><span class="en">Spoken dialogue system user simulation and unsupervised adaptation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Belief+state+tracking+and+pruning+techniques+in+natural+language+processing" target="_blank" rel="noopener"><span class="en">Belief state tracking and pruning techniques in natural language processing</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

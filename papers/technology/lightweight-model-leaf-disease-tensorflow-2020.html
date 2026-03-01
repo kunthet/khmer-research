@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែលស្រាលសម្រាប់ការចំណាត់ថ្នាក់ស្លឹកឈើ និងការរកឃើញជំងឺដោយប្រើ TensorFlow | KhmerResearch.com</title>
+    <meta name="description" content="ជំងឺរុក្ខជាតិបណ្តាលឱ្យមានការខាតបង់សេដ្ឋកិច្ចយ៉ាងធ្ងន់ធ្ងរក្នុងវិស័យកសិកម្ម ចំណែកឯការតាមដានដោយដៃមានការលំបាក ខណៈម៉ូដែលបច្ចេកវិទ្យាដែលមានស្រាប់ទាមទារថាមពលកុំព្យ...">
+    
+    <meta name="keywords" content="TensorFlow, Leaf disease detection, Machine Learning, Convolutional Neural Network, Transfer Learning, Inception model, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/lightweight-model-leaf-disease-tensorflow-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/lightweight-model-leaf-disease-tensorflow-2020.html">
+    <meta property="og:title" content="ម៉ូដែលស្រាលសម្រាប់ការចំណាត់ថ្នាក់ស្លឹកឈើ និងការរកឃើញជំងឺដោយប្រើ TensorFlow | KhmerResearch.com">
+    <meta property="og:description" content="ជំងឺរុក្ខជាតិបណ្តាលឱ្យមានការខាតបង់សេដ្ឋកិច្ចយ៉ាងធ្ងន់ធ្ងរក្នុងវិស័យកសិកម្ម ចំណែកឯការតាមដានដោយដៃមានការលំបាក ខណៈម៉ូដែលបច្ចេកវិទ្យាដែលមានស្រាប់ទាមទារថាមពលកុំព្យូទ័រខ្ពស់មិនស័ក្តិសមប្រើលើទូរស័ព្ទដៃ។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2020">
+    
+    <meta property="article:tag" content="TensorFlow">
+    
+    <meta property="article:tag" content="Leaf disease detection">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Convolutional Neural Network">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Inception model">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែលស្រាលសម្រាប់ការចំណាត់ថ្នាក់ស្លឹកឈើ និងការរកឃើញជំងឺដោយប្រើ TensorFlow">
+    <meta name="twitter:description" content="ជំងឺរុក្ខជាតិបណ្តាលឱ្យមានការខាតបង់សេដ្ឋកិច្ចយ៉ាងធ្ងន់ធ្ងរក្នុងវិស័យកសិកម្ម ចំណែកឯការតាមដានដោយដៃមានការលំបាក ខណៈម៉ូដែលបច្ចេកវិទ្យាដែលមានស្រាប់ទាមទារថាមពលកុំព្យូទ័រខ្ពស់មិនស័ក្តិសមប្រើលើទូរស័ព្ទដៃ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179f\u17d2\u179a\u17b6\u179b\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17d2\u179b\u17b9\u1780\u1788\u17be \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1787\u17c6\u1784\u17ba\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be TensorFlow",
+      "name": "Lightweight Model for Leaf Classification and Disease Detection using TensorFlow",
+      "description": "\u1787\u17c6\u1784\u17ba\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u1794\u178e\u17d2\u178f\u17b6\u179b\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1781\u17b6\u178f\u1794\u1784\u17cb\u179f\u17c1\u178a\u17d2\u178b\u1780\u17b7\u1785\u17d2\u1785\u1799\u17c9\u17b6\u1784\u1792\u17d2\u1784\u1793\u17cb\u1792\u17d2\u1784\u179a\u1780\u17d2\u1793\u17bb\u1784\u179c\u17b7\u179f\u17d0\u1799\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798 \u1785\u17c6\u178e\u17c2\u1780\u17af\u1780\u17b6\u179a\u178f\u17b6\u1798\u178a\u17b6\u1793\u178a\u17c4\u1799\u178a\u17c3\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780 \u1781\u178e\u17c8\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17d2\u179a\u17b6\u1794\u17cb\u1791\u17b6\u1798\u1791\u17b6\u179a\u1790\u17b6\u1798\u1796\u179b\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1781\u17d2\u1796\u179f\u17cb\u1798\u17b7\u1793\u179f\u17d0\u1780\u17d2\u178f\u17b7\u179f\u1798\u1794\u17d2\u179a\u17be\u179b\u17be\u1791\u17bc\u179a\u179f\u17d0\u1796\u17d2\u1791\u178a\u17c3\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/lightweight-model-leaf-disease-tensorflow-2020.html",
+      "author": [{"@type": "Person", "name": "Richard Hortizuela (Saint Louis University)"}],
+      "datePublished": "2020",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Lightweight Model for Leaf Classification and Disease Detection using TensorFlow",
+        "url": "N/A"
+      },
+      "keywords": ["TensorFlow", "Leaf disease detection", "Machine Learning", "Convolutional Neural Network", "Transfer Learning", "Inception model"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179f\u17d2\u179a\u17b6\u179b\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179f\u17d2\u179b\u17b9\u1780\u1788\u17be \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1787\u17c6\u1784\u17ba\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be TensorFlow",
+          "item": "https://khmerresearch.com/papers/technology/lightweight-model-leaf-disease-tensorflow-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ម៉ូដែលស្រាលសម្រាប់ការចំណាត់ថ្នាក់ស្លឹកឈើ និងការរកឃើញជំងឺដ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Lightweight Model for Leaf Classification and Disease Detection using TensorFlow<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែលស្រាលសម្រាប់ការចំណាត់ថ្នាក់ស្លឹកឈើ និងការរកឃើញជំងឺដោយប្រើ TensorFlow</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Lightweight Model for Leaf Classification and Disease Detection using TensorFlow</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Richard Hortizuela (Saint Louis University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ជំងឺរុក្ខជាតិបណ្តាលឱ្យមានការខាតបង់សេដ្ឋកិច្ចយ៉ាងធ្ងន់ធ្ងរក្នុងវិស័យកសិកម្ម ចំណែកឯការតាមដានដោយដៃមានការលំបាក ខណៈម៉ូដែលបច្ចេកវិទ្យាដែលមានស្រាប់ទាមទារថាមពលកុំព្យូទ័រខ្ពស់មិនស័ក្តិសមប្រើលើទូរស័ព្ទដៃ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវការបង្កើតកម្មវិធីទូរស័ព្ទដៃដោយប្រើប្រាស់បច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតដើម្បីចំណាត់ថ្នាក់ និងរកឃើញជំងឺរុក្ខជាតិ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់បណ្ណាល័យកូដបើកចំហសម្រាប់ការសិក្សាម៉ាស៊ីន (TensorFlow open-source library)</li>
+            
+            <li>ការបណ្តុះបណ្តាលម៉ូដែលឡើងវិញ (Transfer Learning) ដោយផ្អែកលើម៉ូដែល Inception</li>
+            
+            <li>ការប្រើប្រាស់សំណុំទិន្នន័យរូបភាពស្លឹកឈើចំនួន ៥០០ រូបភាពពី PlantVillage (Image Dataset)</li>
+            
+            <li>ការបង្កើត និងបង្រួមទំហំឯកសារក្រាហ្វិកកូដ (Retrained Graph & Bottlenecks)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>តាមរយៈដំណើរការធ្វើឱ្យប្រសើរ និងបណ្តុះបណ្តាលឡើងវិញ ម៉ូដែល Inception ដើមដែលមានទំហំ ១៧៦ MB ត្រូវបានកាត់បន្ថយទំហំរហូតដល់ ៥២.៦%។</li>
+            
+            <li>ម៉ូដែលថ្មីដែលទទួលបានមានទំហំត្រឹមតែ ៨៣.៣ MB ប៉ុណ្ណោះ ដែលធ្វើឱ្យវាមានល្បឿនលឿន និងស័ក្តិសមបំផុតសម្រាប់ប្រតិបត្តិការលើទូរស័ព្ទដៃឆ្លាតវៃ។</li>
+            
+            <li>ម៉ូដែលនេះត្រូវបានប្ដូរតាមបំណងដោយជោគជ័យដើម្បីសម្គាល់រូបភាពស្លឹកឈើដែលមានសុខភាពល្អ និងមានជំងឺចំនួន ៤ ប្រភេទ (ផ្លែប៉ោម ដំឡូង ពោត និងប៉េងប៉ោះ) ជួយសម្រួលដល់កសិករក្នុងការចុះពិនិត្យជំងឺរុក្ខជាតិផ្ទាល់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Original Inception Model</span></strong><br>ម៉ូដែល Inception ដើម</td>
+                <td>មានសមត្ថភាពអាចស្គាល់វត្ថុរហូតដល់ ១០០០ ប្រភេទ និងមានភាពសុក្រឹតខ្ពស់ដោយសារត្រូវបានហ្វឹកហាត់លើសំណុំទិន្នន័យដ៏ធំ (ImageNet)។</td>
+                <td>មានទំហំធំ (១៧៦ MB) ទាមទារថាមពលកុំព្យូទ័រខ្ពស់ និងមិនស័ក្តិសមក្នុងការដំឡើង ឬដំណើរការលើទូរស័ព្ទដៃឆ្លាតវៃកម្រិតមធ្យមឡើយ។</td>
+                <td>ទំហំឯកសារធំដល់ទៅ ១៧៦ MB ដែលដំណើរការយឺតលើឧបករណ៍ចល័ត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Retrained Lightweight Model (Proposed)</span></strong><br>ម៉ូដែលទំហំស្រាលដែលបានបណ្តុះបណ្តាលឡើងវិញ (ម៉ូដែលស្នើឡើង)</td>
+                <td>មានទំហំតូច ស៊ីមេម៉ូរី និងថាមពលថ្មតិច ដែលធ្វើឱ្យវាមានភាពងាយស្រួល និងរហ័សក្នុងការប្រតិបត្តិការផ្ទាល់នៅលើកម្មវិធីទូរស័ព្ទដៃ (Android)។</td>
+                <td>ត្រូវបានហ្វឹកហាត់លើរូបភាពមានកំណត់ (ត្រឹមតែ ៥០០ រូបភាព) ដែលអាចប៉ះពាល់ដល់ភាពសុក្រឹត ប្រសិនបើជួបរូបភាពរុក្ខជាតិប្លែកៗច្រើននៅខាងក្រៅ។</td>
+                <td>ទំហំម៉ូដែលត្រូវបានកាត់បន្ថយ ៥២.៦% (មកត្រឹម ៨៣.៣ MB) និងមានសមត្ថភាពស្គាល់ជំងឺលើរុក្ខជាតិ ៤ ប្រភេទ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Machine Learning (SVM/K-Means)</span></strong><br>ការសិក្សាម៉ាស៊ីនបែបប្រពៃណី (ឧ. SVM ឬ K-Means)</td>
+                <td>ប្រើប្រាស់ធនធានកុំព្យូទ័រតិចជាង Deep learning និងងាយស្រួលយល់អំពីដំណើរការនៃការវាយតម្លៃ។</td>
+                <td>ជួបប្រទះការលំបាកក្នុងការទាញយកលក្ខណៈពិសេស (Feature extraction) ជាពិសេសនៅពេលផ្ទៃខាងក្រោយនៃរូបភាពមានភាពរញ៉េរញ៉ៃ។</td>
+                <td>ទាមទារការកំណត់លក្ខណៈ និងកាត់ផ្ទៃខាងក្រោយពីរូបភាពដោយដៃ (Manual intervention)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារនូវធនធានផ្នែកទន់ កុំព្យូទ័រ និងទិន្នន័យជាមូលដ្ឋានមួយចំនួន ដើម្បីដំណើរការការបណ្តុះបណ្តាលម៉ូដែលឡើងវិញ (Transfer Learning) និងការធ្វើតេស្ត។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ទាមទារការប្រើប្រាស់បណ្ណាល័យកូដជំនាញដូចជា TensorFlow, កម្មវិធី Docker សម្រាប់ធ្វើតេស្ត (Simulation), ភាសា Python និង Notepad++ សម្រាប់កែសម្រួលក្រាហ្វិកកូដ (.pb) ។</li>
+        
+        <li><strong>Hardware:</strong> ត្រូវការកុំព្យូទ័រដែលមានសមត្ថភាពមធ្យមសម្រាប់ការហ្វឹកហាត់ម៉ូដែល និងទូរស័ព្ទដៃ Android ដែលមានកាមេរ៉ាសម្រាប់ថតរូបភាព និងដំណើរការម៉ូដែលជាក់ស្តែង។</li>
+        
+        <li><strong>Dataset:</strong> ពឹងផ្អែកលើសំណុំទិន្នន័យរូបភាព PlantVillage (ដោយជ្រើសរើសយករូបភាពចំនួន ៥០០ សន្លឹក ដែលទាក់ទងនឹងរុក្ខជាតិប៉ោម ដំឡូង ពោត និងប៉េងប៉ោះ)។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកដែលមានចំណេះដឹងផ្នែក AI (Deep Learning, Transfer Learning) និងជំនាញក្នុងការអភិវឌ្ឍន៍កម្មវិធីទូរស័ព្ទ (Mobile App Development)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ PlantVillage ដែលថតនៅក្នុងមន្ទីរពិសោធន៍ (Controlled environment) និងរួមបញ្ចូលរុក្ខជាតិដូចជាផ្លែប៉ោម ដែលមិនសូវដាំដុះនៅកម្ពុជា។ ការប្រើប្រាស់រូបភាពត្រឹមតែ ៥០០ សន្លឹក និងគ្មានពន្លឺ ឬផ្ទៃខាងក្រោយរញ៉េរញ៉ៃតាមចម្ការជាក់ស្តែង អាចធ្វើឱ្យម៉ូដែលនេះដំណើរការមិនបានល្អ (Low accuracy) នៅពេលកសិករខ្មែរយកទៅថតផ្ទាល់នៅតាមស្រែចម្ការ។ នេះជាចន្លោះប្រហោងទិន្នន័យដែលត្រូវបំពេញមុននឹងអាចយកមកប្រើជាផ្លូវការ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានដែនកំណត់ផ្នែកទិន្នន័យក៏ដោយ វិធីសាស្រ្តកាត់បន្ថយទំហំម៉ូដែល (Lightweight model) នេះមានសក្តានុពលខ្ពស់ខ្លាំងក្នុងការជួយដល់វិស័យកសិកម្មនៅប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ការដាំដុះដំឡូងមី និងស្រូវ (ខេត្តបាត់ដំបង និងបន្ទាយមានជ័យ):</strong> កសិករអាចប្រើប្រាស់កម្មវិធីបែបនេះដើម្បីពិនិត្យរកជំងឺដូចជា បាក់តេរីរលួយស្លឹកដំឡូងមី (Bacterial Blight) ដែលឯកសារនេះបានលើកឡើង ដើម្បីទប់ស្កាត់ការខូចខាតទាន់ពេលវេលា។</li>
+            
+            <li><strong>សហគមន៍កសិករខ្នាតតូច (Smallholder Farmers):</strong> កសិករភាគច្រើននៅតាមជនបទប្រទេសកម្ពុជាមានទូរស័ព្ទដៃឆ្លាតវៃ តែខ្វះខាតអ្នកជំនាញកសិកម្មចុះណែនាំ។ កម្មវិធីទំហំតូចដែលអាចដំណើរការដោយមិនបាច់មានអ៊ីនធឺណិត (Offline inference) គឺស័ក្តិសមបំផុតសម្រាប់ពួកគេ។</li>
+            
+            <li><strong>សាកលវិទ្យាល័យភូមិន្ទកសិកម្ម (RUA):</strong> គំនិតនេះអាចធ្វើជាមូលដ្ឋានសម្រាប់និស្សិត និងអ្នកស្រាវជ្រាវកម្ពុជា ក្នុងការចុះប្រមូលទិន្នន័យជំងឺរុក្ខជាតិក្នុងស្រុកពិតប្រាកដ រួចយកមកបណ្តុះបណ្តាលលើម៉ូដែលនេះ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអភិវឌ្ឍម៉ូដែល AI ដែលមានទំហំតូច និងអាចដំណើរការលើទូរស័ព្ទដៃបានដោយរលូន គឺជាដំណោះស្រាយដ៏ត្រឹមត្រូវ និងអាចអនុវត្តបានជាក់ស្តែងបំផុតសម្រាប់បរិបទកសិកម្មឌីជីថលនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Deep Learning សម្រាប់រូបភាព:</strong> ចាប់ផ្តើមរៀនអំពីការប្រើប្រាស់ភាសា <span class="en">Python</span> និងបណ្ណាល័យ <span class="en">TensorFlow</span> ឬ <span class="en">Keras</span> ដោយផ្តោតលើការសរសេរកូដសម្រាប់ <span class="en">Image Classification</span> (ចំណាត់ថ្នាក់រូបភាព)។</li>
+            
+            <li><strong>ប្រមូលសំណុំទិន្នន័យកសិកម្មក្នុងស្រុក:</strong> កុំពឹងផ្អែកតែលើ <span class="en">PlantVillage dataset</span> ទាំងស្រុង។ ត្រូវចុះទៅចម្ការផ្ទាល់ដើម្បីថតរូបភាពជំងឺស្លឹកដំឡូងមី ស្រូវ ឬស្វាយ (ទាំងមានជំងឺ និងមានសុខភាពល្អ) ក្រោមពន្លឺព្រះអាទិត្យធម្មជាតិ ដើម្បីយកមកធ្វើជាទិន្នន័យ។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេស Transfer Learning:</strong> ប្រើប្រាស់ម៉ូដែលដែលគេបានហ្វឹកហាត់រួចជាស្រេច (Pre-trained models) ដែលមានទំហំស្រាលស្រាប់ដូចជា <span class="en">MobileNetV2</span> ឬ <span class="en">EfficientNet Lite</span> (ជំនួសឱ្យ <span class="en">Inception</span> ដែលរាងចាស់បន្តិច) ហើយធ្វើការ <span class="en">Retrain</span> វាជាមួយទិន្នន័យក្នុងស្រុករបស់អ្នក។</li>
+            
+            <li><strong>បង្រួមទំហំម៉ូដែលសម្រាប់ទូរស័ព្ទ (Optimization):</strong> ក្រោយពេលហ្វឹកហាត់រួច ត្រូវប្រើប្រាស់ <span class="en">TensorFlow Lite (TFLite)</span> ដើម្បីបំប្លែង និងកាត់បន្ថយទំហំម៉ូដែល (តាមរយៈបច្ចេកទេស <span class="en">Quantization</span>) ធានាថាវាដើរលឿននៅលើទូរស័ព្ទដៃដោយមិនស៊ីថ្ម។</li>
+            
+            <li><strong>អភិវឌ្ឍន៍កម្មវិធីទូរស័ព្ទ និងចុះធ្វើតេស្ត:</strong> បង្កើតកម្មវិធីទូរស័ព្ទដៃដោយប្រើ <span class="en">Android Studio (Java/Kotlin)</span> ឬ <span class="en">Flutter</span> រួចបញ្ចូលម៉ូដែល <span class="en">TFLite</span> នោះ។ បន្ទាប់មក យកកម្មវិធីនេះទៅឱ្យកសិករសាកល្បងប្រើនៅតាមចម្ការ ដើម្បីទទួលយកមតិកែលម្អ (Feedback)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">TensorFlow</span></td>
+                <td>បណ្ណាល័យកូដបើកចំហ (Open-source library) បង្កើតដោយក្រុមហ៊ុន Google ដែលប្រើប្រាស់សម្រាប់សរសេរកម្មវិធីទាក់ទងនឹងការសិក្សាម៉ាស៊ីន (Machine Learning) និងបញ្ញាសិប្បនិម្មិត ជាពិសេសសម្រាប់ការគណនាទិន្នន័យធំៗតាមរយៈ Dataflow graphs។</td>
+                <td>ដូចជាប្រអប់ឧបករណ៍ជាងដ៏ធំមួយដែលមានឧបករណ៍ស្រាប់ៗសម្រាប់ឱ្យយើងយកទៅដំឡើង ឬបង្រៀនកុំព្យូទ័រឱ្យចេះគិតដោយខ្លួនឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Network (CNN)</span></td>
+                <td>ប្រភេទនៃក្បួនដោះស្រាយផ្នែក Deep Learning ដែលពូកែខាងវិភាគ និងសម្គាល់រូបភាព ដោយវាយកលក្ខណៈពិសេសនីមួយៗ (ដូចជា គែម ពណ៌ ទម្រង់) នៃរូបភាពមកពិនិត្យជាដំណាក់កាលៗ។</td>
+                <td>ដូចជាភ្នែក និងខួរក្បាលរបស់យើងដែលសម្លឹងមើលសន្លឹករុក្ខជាតិ រួចកត់សម្គាល់ឃើញចំណុចអុចៗ ឬពណ៌លឿង ដើម្បីដឹងថាវាមានជំងឺអ្វី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>បច្ចេកទេសក្នុងការយកម៉ូដែលបញ្ញាសិប្បនិម្មិតដែលគេបានហ្វឹកហាត់រួចហើយលើកិច្ចការមួយ (ឧ. ស្គាល់សត្វ ឡាន) មកហ្វឹកហាត់បន្តបន្តិចបន្តួចដើម្បីឱ្យវាចេះធ្វើកិច្ចការថ្មីមួយទៀត (ឧ. ស្គាល់ជំងឺស្លឹកឈើ) ដែលជួយសន្សំទាំងពេលវេលា និងទិន្នន័យ។</td>
+                <td>ដូចជាសិស្សដែលចេះជិះកង់រួចហើយ ពេលទៅរៀនជិះម៉ូតូ គឺគាត់រៀនឆាប់ចេះជាងអ្នកដែលមិនធ្លាប់ចេះជិះអ្វីសោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Inception model</span></td>
+                <td>ស្ថាបត្យកម្មម៉ូដែលបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network architecture) មួយប្រភេទដែលមានសមត្ថភាពខ្ពស់ក្នុងការសម្គាល់វត្ថុផ្សេងៗក្នុងរូបភាព ដោយប្រើប្រាស់រចនាសម្ព័ន្ធស្មុគស្មាញដើម្បីទាញយកលក្ខណៈលម្អិតនៃរូបភាពក្នុងទំហំខុសៗគ្នា។</td>
+                <td>ដូចជាក្រុមអ្នកស៊ើបអង្កេតជាច្រើននាក់ដែលសហការគ្នាពិនិត្យមើលរូបភាពមួយសន្លឹកក្នុងពេលតែមួយ តាំងពីស្នាមតូចបំផុតរហូតដល់ទម្រង់ធំ ដើម្បីសន្និដ្ឋានថាវាជារូបអ្វីឱ្យបានជាក់លាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">bottleneck</span></td>
+                <td>ជាដំណាក់កាលនៃស្រទាប់បណ្តាញ (Layer) ក្នុងម៉ូដែលមុននឹងឈានដល់ការសម្រេចចិត្តចុងក្រោយ ដែលវាធ្វើការបង្រួមទិន្នន័យរូបភាពទៅជាទម្រង់លេខតូចមួយ (Vector) ដើម្បីងាយស្រួលប្រៀបធៀប និងកាត់បន្ថយទំហំគណនា។</td>
+                <td>ដូចជាការសង្ខេបសៀវភៅមួយក្បាលក្រាស់ មកនៅត្រឹមក្រដាសមួយសន្លឹកដែលកត់ត្រាតែចំណុចសំខាន់ៗបំផុតសម្រាប់យកទៅប្រឡង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Protobuf (.pb)</span></td>
+                <td>ទម្រង់ឯកសារ (Protocol Buffers) ដែលផ្ទុកនូវទិន្នន័យរចនាសម្ព័ន្ធ និងទម្ងន់ (Weights) នៃម៉ូដែលដែលបានហ្វឹកហាត់រួច។ វាមានទំហំតូច និងដំណើរការលឿនជាងទម្រង់ឯកសារផ្សេងៗ ដែលស័ក្តិសមបំផុតសម្រាប់ប្រើប្រាស់លើកម្មវិធីទូរស័ព្ទ។</td>
+                <td>ដូចជាការបត់ខោអាវ និងវេចខ្ចប់វាចូលក្នុងវ៉ាលីយ៉ាងណែនល្អ ដើម្បីងាយស្រួលយួរយកទៅតាមខ្លួនពេលធ្វើដំណើរចម្ងាយឆ្ងាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">epoch</span></td>
+                <td>ជាចំនួនជុំ ឬដងនៃការបញ្ជូនទិន្នន័យហ្វឹកហាត់ទាំងអស់ (Training Dataset) ទៅកាន់ម៉ូដែលបញ្ញាសិប្បនិម្មិត ដើម្បីឱ្យវារៀន និងកែតម្រូវកំហុសម្តងហើយម្តងទៀតរហូតដល់វាចងចាំបានល្អ។</td>
+                <td>ដូចជាការអានសៀវភៅមេរៀនចប់មួយក្បាល ចាត់ទុកជាមួយជុំ (មួយ Epoch) ប្រសិនបើចង់ចាំច្បាស់ត្រូវអានសារចុះសារឡើងច្រើនជុំ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-and-its-architectures-2021.html">
+                    <span class="km">បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតបែបខុនវ៉ូលូសិន និងស្ថាបត្យកម្មរបស់វា</span><br>
+                    <span class="en article-original-title">Convolutional Neural Network and its Architectures</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/coffee-leaf-disease-transfer-learning-2023.html">
+                    <span class="km">ការកំណត់អត្តសញ្ញាណសត្វល្អិត និងជំងឺលើស្លឹកកាហ្វេ ដោយផ្អែកលើការរៀនបន្ត (Transfer Learning) និងការចម្រាញ់ចំណេះដឹង (Knowledge Distillation)</span><br>
+                    <span class="en article-original-title">Identification of Coffee Leaf Pests and Diseases based on Transfer Learning and Knowledge Distillation</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-transfer-learning-flood-forecast-2020.html">
+                    <span class="km">ការអនុវត្តការរៀនផ្ទេរចំណេះដឹងផ្អែកលើបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (CNN) សម្រាប់ការព្យាករណ៍ទឹកជំនន់តាមស៊េរីពេលវេលា</span><br>
+                    <span class="en article-original-title">CONVOLUTIONAL NEURAL NETWORK (CNN)-BASED TRANSFER LEARNING IMPLEMENTED TO TIME-SERIES FLOOD FORECAST</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html">
+                    <span class="km">ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ</span><br>
+                    <span class="en article-original-title">Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/disease-diagnosis-banana-leaves-ai-review-2025.html">
+                    <span class="km">ការធ្វើរោគវិនិច្ឆ័យជំងឺលើស្លឹកចេក៖ ការពិនិត្យឡើងវិញលើបច្ចេកទេសដែលប្រើប្រាស់បញ្ញាសិប្បនិម្មិត (AI)</span><br>
+                    <span class="en article-original-title">Disease diagnosis in banana leaves: a review on AI powered techniques</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=lightweight+CNN+architectures+for+mobile+plant+disease+detection" target="_blank" rel="noopener"><span class="en">lightweight CNN architectures for mobile plant disease detection</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=transfer+learning+MobileNet+vs+Inception+for+agricultural+image+classification" target="_blank" rel="noopener"><span class="en">transfer learning MobileNet vs Inception for agricultural image classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=TensorFlow+Lite+quantization+techniques+for+Android+deployment" target="_blank" rel="noopener"><span class="en">TensorFlow Lite quantization techniques for Android deployment</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=PlantVillage+dataset+deep+learning+limitations+and+real-world+evaluation" target="_blank" rel="noopener"><span class="en">PlantVillage dataset deep learning limitations and real-world evaluation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=offline+image+classification+mobile+application+agriculture" target="_blank" rel="noopener"><span class="en">offline image classification mobile application agriculture</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

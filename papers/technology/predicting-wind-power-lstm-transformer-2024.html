@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទស្សន៍ទាយថាមពលខ្យល់ដោយប្រើប្រាស់បច្ចេកទេស LSTM, Transformer និងបច្ចេកទេសផ្សេងៗទៀត | KhmerResearch.com</title>
+    <meta name="description" content="ការព្យាករណ៍ថាមពលទួរប៊ីនខ្យល់មានសារៈសំខាន់សម្រាប់ការធ្វើឱ្យប្រសើរឡើងនូវការប្រើប្រាស់ថាមពលកកើតឡើងវិញ និងធានាស្ថិរភាពបណ្តាញអគ្គិសនី ប៉ុន្តែភាពប្រែប្រួលនៃល្បឿនខ្...">
+    
+    <meta name="keywords" content="wind power prediction, LSTM, Transformer, ensemble methods, time-series forecasting, renewable energy, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/predicting-wind-power-lstm-transformer-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/predicting-wind-power-lstm-transformer-2024.html">
+    <meta property="og:title" content="ការទស្សន៍ទាយថាមពលខ្យល់ដោយប្រើប្រាស់បច្ចេកទេស LSTM, Transformer និងបច្ចេកទេសផ្សេងៗទៀត | KhmerResearch.com">
+    <meta property="og:description" content="ការព្យាករណ៍ថាមពលទួរប៊ីនខ្យល់មានសារៈសំខាន់សម្រាប់ការធ្វើឱ្យប្រសើរឡើងនូវការប្រើប្រាស់ថាមពលកកើតឡើងវិញ និងធានាស្ថិរភាពបណ្តាញអគ្គិសនី ប៉ុន្តែភាពប្រែប្រួលនៃល្បឿនខ្យល់ធ្វើឱ្យមានបញ្ហាប្រឈមក្នុងការព្យាករណ៍ឱ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024, Clean Technologies and Recycling">
+    
+    <meta property="article:tag" content="wind power prediction">
+    
+    <meta property="article:tag" content="LSTM">
+    
+    <meta property="article:tag" content="Transformer">
+    
+    <meta property="article:tag" content="ensemble methods">
+    
+    <meta property="article:tag" content="time-series forecasting">
+    
+    <meta property="article:tag" content="renewable energy">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទស្សន៍ទាយថាមពលខ្យល់ដោយប្រើប្រាស់បច្ចេកទេស LSTM, Transformer និងបច្ចេកទេសផ្សេងៗទៀត">
+    <meta name="twitter:description" content="ការព្យាករណ៍ថាមពលទួរប៊ីនខ្យល់មានសារៈសំខាន់សម្រាប់ការធ្វើឱ្យប្រសើរឡើងនូវការប្រើប្រាស់ថាមពលកកើតឡើងវិញ និងធានាស្ថិរភាពបណ្តាញអគ្គិសនី ប៉ុន្តែភាពប្រែប្រួលនៃល្បឿនខ្យល់ធ្វើឱ្យមានបញ្ហាប្រឈមក្នុងការព្យាករណ៍ឱ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1790\u17b6\u1798\u1796\u179b\u1781\u17d2\u1799\u179b\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f LSTM, Transformer \u1793\u17b7\u1784\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1791\u17c0\u178f",
+      "name": "Predicting wind power using LSTM, Transformer, and other techniques",
+      "description": "\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1790\u17b6\u1798\u1796\u179b\u1791\u17bd\u179a\u1794\u17ca\u17b8\u1793\u1781\u17d2\u1799\u179b\u17cb\u1798\u17b6\u1793\u179f\u17b6\u179a\u17c8\u179f\u17c6\u1781\u17b6\u1793\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u17a1\u17be\u1784\u1793\u17bc\u179c\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1790\u17b6\u1798\u1796\u179b\u1780\u1780\u17be\u178f\u17a1\u17be\u1784\u179c\u17b7\u1789 \u1793\u17b7\u1784\u1792\u17b6\u1793\u17b6\u179f\u17d2\u1790\u17b7\u179a\u1797\u17b6\u1796\u1794\u178e\u17d2\u178f\u17b6\u1789\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8 \u1794\u17c9\u17bb\u1793\u17d2\u178f\u17c2\u1797\u17b6\u1796\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u1793\u17c3\u179b\u17d2\u1794\u17bf\u1793\u1781\u17d2\u1799\u179b\u17cb\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u17b1\u17d2\u1799\u1794\u17b6\u1793\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/predicting-wind-power-lstm-transformer-2024.html",
+      "author": [{"@type": "Person", "name": "Arun Kumar M"},{"@type": "Person", "name": "Rithick Joshua K"},{"@type": "Person", "name": "Sahana Rajesh"},{"@type": "Person", "name": "Caroline Dorathy Esther J"},{"@type": "Person", "name": "Kavitha Devi MK"}],
+      "datePublished": "2024, Clean Technologies and Recycling",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Predicting wind power using LSTM, Transformer, and other techniques",
+        "url": "https://doi.org/10.3934/ctr.2024007"
+      },
+      "keywords": ["wind power prediction", "LSTM", "Transformer", "ensemble methods", "time-series forecasting", "renewable energy"],
+      "about": "Machine Learning / Renewable Energy"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1790\u17b6\u1798\u1796\u179b\u1781\u17d2\u1799\u179b\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f LSTM, Transformer \u1793\u17b7\u1784\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1791\u17c0\u178f",
+          "item": "https://khmerresearch.com/papers/technology/predicting-wind-power-lstm-transformer-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការទស្សន៍ទាយថាមពលខ្យល់ដោយប្រើប្រាស់បច្ចេកទេស LSTM, Transf...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Predicting wind power using LSTM, Transformer, and other techniques<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.3934/ctr.2024007" target="_blank">doi.org/10.3934/ctr.2024007</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទស្សន៍ទាយថាមពលខ្យល់ដោយប្រើប្រាស់បច្ចេកទេស LSTM, Transformer និងបច្ចេកទេសផ្សេងៗទៀត</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Predicting wind power using LSTM, Transformer, and other techniques</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Arun Kumar M, Rithick Joshua K, Sahana Rajesh, Caroline Dorathy Esther J, Kavitha Devi MK</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Clean Technologies and Recycling</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Renewable Energy</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការព្យាករណ៍ថាមពលទួរប៊ីនខ្យល់មានសារៈសំខាន់សម្រាប់ការធ្វើឱ្យប្រសើរឡើងនូវការប្រើប្រាស់ថាមពលកកើតឡើងវិញ និងធានាស្ថិរភាពបណ្តាញអគ្គិសនី ប៉ុន្តែភាពប្រែប្រួលនៃល្បឿនខ្យល់ធ្វើឱ្យមានបញ្ហាប្រឈមក្នុងការព្យាករណ៍ឱ្យបានច្បាស់លាស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រៀបធៀបម៉ូដែល Machine Learning (ML) និង Deep Learning (DL) ជាច្រើន ដើម្បីទស្សន៍ទាយទិន្នផលថាមពលខ្យល់សម្រាប់រយៈពេល 15 ថ្ងៃបន្ទាប់ ដោយផ្អែកលើសំណុំទិន្នន័យ SCADA Turkey និង Tata Power។
+        
+        <ul>
+            
+            <li>វិស្វកម្មលក្ខណៈពិសេស និងការរៀបចំទិន្នន័យ (Feature engineering and data processing)</li>
+            
+            <li>ការវាយតម្លៃម៉ូដែល Machine Learning ដូចជា Gradient Boosting, Random Forest, និង XGBoost</li>
+            
+            <li>ការវាយតម្លៃស្ថាបត្យកម្ម Deep Learning រួមមាន LSTM, CNN, RNN និង Transformer</li>
+            
+            <li>ការបង្កើតម៉ូដែលចម្រុះ (Ensemble model) រវាង LSTM និង Transformer</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្នុងចំណោមម៉ូដែល Machine Learning (ML) ម៉ូដែល XGB Regressor ទទួលបានលទ្ធផលល្អបំផុតជាមួយនឹងពិន្ទុ R2 ដល់ទៅ 97.96% ។</li>
+            
+            <li>ម៉ូដែល Transformer ឯកត្តជនបង្ហាញសមត្ថភាពខ្ពស់ជាង LSTM ជាមួយនឹងកម្រិតលំអៀង MAE ត្រឹមតែ 0.0074 និង RMSE 0.00083 ប៉ុណ្ណោះ។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នានូវម៉ូដែល LSTM និង Transformer ជាម៉ូដែលចម្រុះ (Ensemble) ផ្តល់នូវលទ្ធផលល្អដាច់គេ ជាមួយនឹងកម្រិតលំអៀងអប្បបរមា MAE ស្មើនឹង 0.00462 និង RMSE ស្មើនឹង 0.00075 ដែលបង្ហាញពីភាពសុក្រឹតខ្ពស់បំផុត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Ensemble (LSTM + Transformer)</span></strong><br>ម៉ូដែលចម្រុះរួមបញ្ចូលគ្នា (LSTM + Transformer)</td>
+                <td>ចាប់យកបានទាំងទំនាក់ទំនងទិន្នន័យតាមពេលវេលា (Temporal) និងទិន្នន័យដែលនៅឃ្លាតពីគ្នាឆ្ងាយ (Long-range spatial) ដែលផ្តល់ភាពសុក្រឹតខ្ពស់បំផុត។</td>
+                <td>មានភាពស្មុគស្មាញខ្លាំងក្នុងការកសាង និងទាមទារធនធានកុំព្យូទ័រ និងពេលវេលាខ្ពស់បំផុតក្នុងការបង្ហាត់។</td>
+                <td>MAE: 0.00462, RMSE: 0.00075</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Transformer</span></strong><br>ម៉ូដែល Transformer</td>
+                <td>ពូកែខាងចាប់យកទំនាក់ទំនងទិន្នន័យដែលមានគម្លាតពេលវេលាឆ្ងាយពីគ្នា និងគំរូលំហ (Spatial patterns)។</td>
+                <td>ត្រូវការទិន្នន័យច្រើនសន្ធឹកសន្ធាប់ និងស៊ីទំហំផ្ទុកព្រមទាំងកម្លាំងម៉ាស៊ីនគណនា (Compute resources) ច្រើនជាង LSTM។</td>
+                <td>MAE: 0.0074, RMSE: 0.00083</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">LSTM (Long Short-Term Memory)</span></strong><br>ម៉ូដែល LSTM</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការចងចាំព័ត៌មានអតីតកាល និងចាប់យកលំនាំប្រែប្រួលតាមពេលវេលា (Temporal dependencies) នៃល្បឿនខ្យល់។</td>
+                <td>មិនសូវមានសមត្ថភាពចាប់យកទំនាក់ទំនងទិន្នន័យក្នុងចន្លោះពេលឆ្ងាយៗ និងងាយរងផលប៉ះពាល់ពីបញ្ហាបាត់បង់ឥទ្ធិពលទិន្នន័យ (Vanishing gradient) បើធៀបនឹង Transformer។</td>
+                <td>MAE: 0.0632, RMSE: 0.0082</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">XGBoost Regressor</span></strong><br>ម៉ូដែល XGBoost Regressor</td>
+                <td>ងាយស្រួលបង្ហាត់ ស៊ីធនធានតិច និងមានប្រសិទ្ធភាពខ្ពស់ក្នុងការកាត់បន្ថយបញ្ហា Overfitting លើទិន្នន័យតារាង (Tabular data)។</td>
+                <td>មិនអាចចាប់យកទំនាក់ទំនងទិន្នន័យជាស៊េរីពេលវេលាដែលស្មុគស្មាញ (Time-series complex patterns) បានល្អដូចម៉ូដែល Deep Learning នោះទេ។</td>
+                <td>R2 Score: 97.96%, RMSE: 186.30</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Dense Model</span></strong><br>ម៉ូដែលបណ្តាញក្រាស់ (Dense Neural Network)</td>
+                <td>ប្រសើរជាងម៉ូដែលទូទៅ (Baseline) ក្នុងការទាញយកលក្ខណៈពិសេសដែលលាក់កំបាំងពីទិន្នន័យ។</td>
+                <td>លទ្ធផលនៃកម្រិតលំអៀងនៅខ្ពស់នៅឡើយ ដោយមិនអាចតាមដានប្រវត្តិពេលវេលាបានល្អ។</td>
+                <td>MAE: 1.1859, RMSE: 44.7766</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់ សម្រាប់ការបង្ហាត់ម៉ូដែល Deep Learning ដែលមានស្ថាបត្យកម្មស្មុគស្មាញ ព្រមទាំងទិន្នន័យប្រវត្តិថាមពលខ្យល់ច្រើនសន្ធឹកសន្ធាប់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការអង្គគណនាក្រាហ្វិក (GPU) ដែលមានល្បឿនលឿន ដើម្បីអាចដំណើរការបង្ហាត់ម៉ូដែល Transformer និង LSTM ដោយរលូន និងកាត់បន្ថយពេលវេលា។</li>
+        
+        <li><strong>Software:</strong> បរិស្ថានសម្រាប់សរសេរកូដ Python ដោយប្រើប្រាស់បណ្ណាល័យ (Libraries) សំខាន់ៗដូចជា TensorFlow/Keras, Scikit-learn, និង XGBoost ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យប្រវត្តិល្បឿនខ្យល់ ទិសដៅខ្យល់ សីតុណ្ហភាព និងទិន្នផលថាមពល (SCADA data) ដែលកត់ត្រាក្នុងកម្រិតប្រេកង់ខ្ពស់ (ឧ. រៀងរាល់ម៉ោង) ជាច្រើនឆ្នាំ។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងស៊ីជម្រៅលើការបង្កើតវិស្វកម្មលក្ខណៈពិសេស (Feature Engineering), ការសំយោគទិន្នន័យស៊េរីពេលវេលា (Time-series analysis) និងការស្វែងរកប៉ារ៉ាម៉ែត្រល្អបំផុត (Hyperparameter tuning) ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ SCADA ពីប្រទេសតួកគី និង Tata Power ពីប្រទេសឥណ្ឌា ដែលមានលក្ខណៈភូមិសាស្ត្រ និងល្បឿនខ្យល់ខុសពីប្រទេសកម្ពុជា។ ដោយសារកម្ពុជាទទួលរងឥទ្ធិពលពីខ្យល់មូសុង ដែលមានលក្ខណៈប្លែកពីតំបន់ទាំងនេះ ការយកម៉ូដែលនេះមកប្រើទាមទារឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុក និងបង្ហាត់ម៉ូដែលសារជាថ្មី (Retraining) ដើម្បីធានាបាននូវភាពសុក្រឹតដែលអាចជឿទុកចិត្តបាន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសទស្សន៍ទាយកម្រិតខ្ពស់នេះ មានសក្ដានុពលខ្លាំងក្នុងការជួយពន្លឿនការអភិវឌ្ឍវិស័យថាមពលកកើតឡើងវិញប្រកបដោយនិរន្តរភាពនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>កសិដ្ឋានថាមពលខ្យល់នៅតំបន់សមុទ្រ និងភ្នំ (ខេត្តកំពត កែប មណ្ឌលគិរី):</strong> អាចប្រើប្រាស់សម្រាប់វាយតម្លៃ និងព្យាករណ៍ទិន្នផលថាមពលអគ្គិសនីពីកសិដ្ឋានខ្យល់ (Wind Farms) ដែលគ្រោងនឹងអភិវឌ្ឍ ដែលជួយឱ្យអ្នកវិនិយោគកាត់បន្ថយហានិភ័យ និងរៀបចំផែនការអាជីវកម្មបានច្បាស់លាស់។</li>
+            
+            <li><strong>អគ្គិសនីកម្ពុជា (EDC) និងស្ថិរភាពបណ្តាញជាតិ:</strong> ជួយឱ្យអគ្គិសនីកម្ពុជាអាចធ្វើការសម្របសម្រួល និងរក្សាតុល្យភាពរវាងការផ្គត់ផ្គង់ និងតម្រូវការបានទាន់ពេលវេលា (Real-time) ដើម្បីកាត់បន្ថយការពឹងផ្អែកលើប្រភពថាមពលនាំចូល ឬកាត់បន្ថយការដាច់ភ្លើង។</li>
+            
+            <li><strong>វិទ្យាស្ថានស្រាវជ្រាវ និងសាកលវិទ្យាល័យជាតិ (ITC, RUPP):</strong> ផ្តល់ជាមូលដ្ឋានស្រាវជ្រាវសម្រាប់សិស្ស-និស្សិតកម្ពុជា ក្នុងការអនុវត្តបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត (AI) ទៅលើបញ្ហាប្រឈមក្នុងស្រុកពាក់ព័ន្ធនឹងបម្រែបម្រួលអាកាសធាតុ។</li>
+            
+        </ul>
+        
+        
+        <p>ការបំពាក់ប្រព័ន្ធព្យាករណ៍តាមបែប Deep Learning នេះ នឹងដើរតួជាកាតាលីករដ៏សំខាន់ ក្នុងការជំរុញឱ្យកម្ពុជាមានលទ្ធភាពគ្រប់គ្រងថាមពលស្អាតប្រកបដោយស្ថិរភាព និងភាពជឿជាក់ខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>១. សិក្សាមូលដ្ឋានគ្រឹះនៃទិន្នន័យស៊េរីពេលវេលា (Time-Series Data):</strong> ចាប់ផ្តើមដោយការរៀនប្រើប្រាស់បណ្ណាល័យ <span class="en">Pandas</span> និង <span class="en">NumPy</span> នៅក្នុង <span class="en">Python</span> ដើម្បីសម្អាតទិន្នន័យ (Data cleaning) និងដោះស្រាយបញ្ហាបាត់តម្លៃទិន្នន័យរបស់អាកាសធាតុ។</li>
+            
+            <li><strong>២. ស្វែងយល់ពីម៉ូដែល Machine Learning ប្រពៃណី:</strong> អនុវត្តការកសាងម៉ូដែលព្យាករណ៍សាមញ្ញដោយប្រើ <span class="en">Scikit-learn</span> និង <span class="en">XGBoost</span> ដើម្បីយល់ពីការវាយតម្លៃកំហុសដូចជា RMSE និង MAE មុននឹងឈានទៅកាន់ស្ថាបត្យកម្មស្មុគស្មាញ។</li>
+            
+            <li><strong>៣. អភិវឌ្ឍជំនាញ Deep Learning និងស្ថាបត្យកម្ម LSTM:</strong> សិក្សាពីរបៀបប្រើប្រាស់ <span class="en">TensorFlow</span> ឬ <span class="en">Keras</span> ដើម្បីបង្កើតម៉ូដែល <span class="en">LSTM</span> ដែលមានសមត្ថភាពអាចចាប់យកទំនាក់ទំនងទិន្នន័យតាមពេលវេលាពីប្រវត្តិល្បឿនខ្យល់។</li>
+            
+            <li><strong>៤. សិក្សាពីស្ថាបត្យកម្ម Transformer និងយន្តការ Attention:</strong> ស្វែងយល់ពីយន្តការ Multi-Head Attention របស់ម៉ូដែល <span class="en">Transformer</span> និងការអនុវត្តវាទៅលើទិន្នន័យស៊េរីពេលវេលា ដើម្បីចាប់យកលំនាំប្រែប្រួលរយៈពេលវែង។</li>
+            
+            <li><strong>៥. បង្កើតម៉ូដែលចម្រុះ (Ensemble Model) ដើម្បីបង្កើនភាពសុក្រឹត:</strong> រួមបញ្ចូលគ្នានូវការព្យាករណ៍ចុងក្រោយពី <span class="en">LSTM</span> និង <span class="en">Transformer</span> ដើម្បីបង្កើតជាម៉ូដែលចម្រុះតែមួយ ដែលផ្តល់នូវលទ្ធផលសុក្រឹតបំផុតសម្រាប់ការអនុវត្តក្នុងប្រព័ន្ធបណ្តាញអគ្គិសនីជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Long short-term memory (LSTM)</span></td>
+                <td>ជាប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (RNN) ដែលមានសមត្ថភាពផ្ទុកនិងចងចាំព័ត៌មានពីអតីតកាលក្នុងរយៈពេលយូរ ហើយប្រើប្រាស់វាដើម្បីស្វែងយល់ពីទំនាក់ទំនងនៃទិន្នន័យដែលប្រែប្រួលតាមពេលវេលា ដូចជាការប្រែប្រួលនៃល្បឿនខ្យល់ជាដើម។</td>
+                <td>ដូចជាមនុស្សដែលមានការចងចាំល្អ អាចចងចាំព្រឹត្តិការណ៍អាកាសធាតុពីសប្តាហ៍មុន ដើម្បីទាយថានឹងមានអ្វីកើតឡើងនៅថ្ងៃនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transformer</span></td>
+                <td>ជាស្ថាបត្យកម្ម Deep Learning ដែលពូកែខាងចាប់យកទំនាក់ទំនងរវាងទិន្នន័យដែលមានគម្លាតពេលវេលាឆ្ងាយពីគ្នា (Long-range dependencies) តាមរយៈយន្តការគិត (Attention mechanism) ដែលអនុញ្ញាតឱ្យវាផ្តោតលើចំណុចសំខាន់ៗនៃទិន្នន័យទាំងអស់បានក្នុងពេលតែមួយ។</td>
+                <td>ដូចជាអ្នកអានសៀវភៅដែលសម្លឹងមើលឃើញពាក្យសំខាន់ៗទាំងអស់ក្នុងមួយទំព័រព្រមៗគ្នា ដើម្បីយល់អត្ថន័យរួមភ្លាមៗ ជាជាងអានម្តងមួយពាក្យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ensemble learning</span></td>
+                <td>ជាបច្ចេកទេសដែលរួមបញ្ចូលគ្នានូវការព្យាករណ៍ពីម៉ូដែលកុំព្យូទ័រជាច្រើន (ដូចជា LSTM បូកជាមួយ Transformer) ទៅជាលទ្ធផលចុងក្រោយតែមួយ ដែលជួយបង្កើនភាពសុក្រឹត និងកាត់បន្ថយកំហុសឆ្គងបានប្រសើរជាងការប្រើម៉ូដែលតែមួយឯកឯង។</td>
+                <td>ដូចជាការសួរសុំយោបល់ពីអ្នកជំនាញ៥នាក់ផ្សេងគ្នា ហើយយកមតិទាំងអស់នោះមកថ្លឹងថ្លែងបញ្ចូលគ្នាដើម្បីធ្វើការសម្រេចចិត្តដ៏ត្រឹមត្រូវបំផុតមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature engineering</span></td>
+                <td>ដំណើរការនៃការជ្រើសរើស កែច្នៃ និងបង្កើតលក្ខណៈទិន្នន័យថ្មីៗពីទិន្នន័យដើម (ឧទាហរណ៍៖ ការបង្កើតទិន្នន័យរដូវ ម៉ោង ឬថ្ងៃ ពីកាលបរិច្ឆេទដើម) ដើម្បីជួយឱ្យម៉ូដែល Machine Learning ងាយស្រួលរៀន និងចាប់យកលំនាំបានច្បាស់លាស់ជាងមុន។</td>
+                <td>ដូចជាការចិតសំបក និងហាន់បន្លែជាដុំតូចៗជាមុន ដើម្បីជួយឱ្យចុងភៅ(ម៉ូដែល)ងាយស្រួលចម្អិនឆាប់ឆ្អិន និងមានរសជាតិឆ្ងាញ់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperparameter tuning</span></td>
+                <td>ការសាកល្បងនិងស្វែងរកតម្លៃល្អបំផុតសម្រាប់ការកំណត់រចនាសម្ព័ន្ធជាមុនរបស់ម៉ូដែល (ដូចជាការកំណត់ចំនួនស្រទាប់ ឬអត្រារៀនសូត្រ) ដើម្បីធានាថាម៉ូដែលនោះអាចយល់ពីទិន្នន័យ និងផ្តល់លទ្ធផលប្រកបដោយប្រសិទ្ធភាពបំផុត។</td>
+                <td>ដូចជាការសារ៉េកម្លាំងភ្លើង និងថែមថយគ្រឿងទេសម្តងបន្តិចៗ រហូតទាល់តែបានរសជាតិស៊ុបមួយដែលឆ្ងាញ់ឥតខ្ចោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Temporal dependencies</span></td>
+                <td>ឥទ្ធិពល ឬទំនាក់ទំនងនៃទិន្នន័យនៅពេលវេលាបច្ចុប្បន្ន ដែលពឹងផ្អែកនិងប្រែប្រួលទៅតាមលក្ខខណ្ឌនៃទិន្នន័យក្នុងអតីតកាលតាមលំដាប់លំដោយពេលវេលា។</td>
+                <td>ដូចជាការដែលដីសើមនៅព្រឹកនេះ គឺដោយសារតែវាមានទំនាក់ទំនងផ្ទាល់ទៅនឹងភ្លៀងដែលបានធ្លាក់កាលពីយប់មិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gradient boosting regressor</span></td>
+                <td>ជាក្បួនដោះស្រាយ Machine Learning ដែលបង្កើតម៉ូដែលទស្សន៍ទាយខ្សោយៗជាបន្តបន្ទាប់ ដោយម៉ូដែលក្រោយៗត្រូវមានភារកិច្ចកែតម្រូវកំហុសដែលម៉ូដែលមុនៗបានធ្វើ ដើម្បីទទួលបានការព្យាករណ៍រួមមួយដែលសុក្រឹតបំផុត។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលកត់ត្រានូវកំហុសរាល់ពេលប្រឡងសាកល្បងម្តងៗ ហើយខិតខំកែតម្រូវកំហុសនោះ ដើម្បីធ្វើឱ្យបានពិន្ទុល្អឥតខ្ចោះនៅថ្ងៃប្រឡងមែនទែន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-learning-predictive-maintenance-grid-stability-2024.html">
+                    <span class="km">ការប្រើប្រាស់ការរៀនស៊ីជម្រៅសម្រាប់ការថែទាំតាមបែបព្យាករណ៍ និងស្ថិរភាពបណ្តាញអគ្គិសនីនៅក្នុងប្រព័ន្ធថាមពលដែលរួមបញ្ចូលថាមពលកកើតឡើងវិញ</span><br>
+                    <span class="en article-original-title">Leveraging Deep Learning for Predictive Maintenance and Grid Stability in Renewable Energy-Integrated Power Systems</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/life-cycle-analysis-wind-turbine-2010.html">
+                    <span class="km">ការវិភាគវដ្តជីវិតរបស់ទួរប៊ីនខ្យល់</span><br>
+                    <span class="en article-original-title">Life Cycle Analysis of Wind Turbine</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/survey-renewable-energy-sustainable-development-2022.html">
+                    <span class="km">ការស្ទង់មតិស្តីពីប្រភពថាមពលកកើតឡើងវិញ និងការចូលរួមចំណែករបស់ពួកវាក្នុងការអភិវឌ្ឍប្រកបដោយចីរភាព</span><br>
+                    <span class="en article-original-title">A Survey of Renewable Energy Sources and their Contribution to Sustainable Development</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-learning-predictive-maintenance-grid-stability-2024-2.html">
+                    <span class="km">ការប្រើប្រាស់ការសិក្សាស៊ីជម្រៅសម្រាប់ការថែទាំតាមការព្យាករណ៍ និងស្ថិរភាពបណ្តាញអគ្គិសនីនៅក្នុងប្រព័ន្ធថាមពលដែលរួមបញ្ចូលថាមពលកកើតឡើងវិញ</span><br>
+                    <span class="en article-original-title">Leveraging Deep Learning for Predictive Maintenance and Grid Stability in Renewable Energy-Integrated Power Systems</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/soil-microbial-fuel-cell-varied-resistances-2016.html">
+                    <span class="km">ដំណើរការនៃកោសិកាឥន្ធនៈអតិសុខុមប្រាណក្នុងដីថតតែមួយនៅរេស៊ីស្តង់ខាងក្រៅផ្សេងៗគ្នាសម្រាប់ការបង្កើតថាមពលអគ្គិសនី</span><br>
+                    <span class="en article-original-title">Performance of a Single Chamber Soil Microbial Fuel Cell at Varied External Resistances for Electric Power Generation</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+LSTM+and+Transformer+architectures+for+renewable+energy+forecasting" target="_blank" rel="noopener"><span class="en">hybrid LSTM and Transformer architectures for renewable energy forecasting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SCADA+wind+turbine+data+multivariate+time-series+forecasting" target="_blank" rel="noopener"><span class="en">SCADA wind turbine data multivariate time-series forecasting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hyperparameter+optimization+techniques+in+deep+learning+for+wind+power" target="_blank" rel="noopener"><span class="en">hyperparameter optimization techniques in deep learning for wind power</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=feature+engineering+methods+for+meteorological+and+wind+speed+time-series+data" target="_blank" rel="noopener"><span class="en">feature engineering methods for meteorological and wind speed time-series data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=impact+of+self-attention+mechanism+in+transformer+models+for+energy+grid+stability" target="_blank" rel="noopener"><span class="en">impact of self-attention mechanism in transformer models for energy grid stability</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរកឃើញ និងចំណាត់ថ្នាក់វត្ថុជាទម្រង់ 3D ជាមួយឧបករណ៍ Microsoft Kinect និងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតជម្រៅជ្រៅ (Deep Neural Networks) | KhmerResearch.com</title>
+    <meta name="description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធចំណាត់ថ្នាក់ និងរកឃើញវត្ថុក្នុងទីតាំង 3D ដែលមានតម្លៃសមរម្យដោយប្រើឧបករណ៍សេនស័រលើទីផ្សារជាជាងប្រើប្រាស់ឧបករណ៍សេនស័រ...">
+    
+    <meta name="keywords" content="3D Object Detection, Microsoft Kinect, Deep Neural Networks, YOLO, Depth Estimation, Computer Vision, ROS, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/3d-object-detection-kinect-dnn-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/3d-object-detection-kinect-dnn-2019.html">
+    <meta property="og:title" content="ការរកឃើញ និងចំណាត់ថ្នាក់វត្ថុជាទម្រង់ 3D ជាមួយឧបករណ៍ Microsoft Kinect និងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតជម្រៅជ្រៅ (Deep Neural Networks) | KhmerResearch.com">
+    <meta property="og:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធចំណាត់ថ្នាក់ និងរកឃើញវត្ថុក្នុងទីតាំង 3D ដែលមានតម្លៃសមរម្យដោយប្រើឧបករណ៍សេនស័រលើទីផ្សារជាជាងប្រើប្រាស់ឧបករណ៍សេនស័រដែលមានតម្លៃថ្លៃដូចជា LiDAR។">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2019, Cairo University">
+    
+    <meta property="article:tag" content="3D Object Detection">
+    
+    <meta property="article:tag" content="Microsoft Kinect">
+    
+    <meta property="article:tag" content="Deep Neural Networks">
+    
+    <meta property="article:tag" content="YOLO">
+    
+    <meta property="article:tag" content="Depth Estimation">
+    
+    <meta property="article:tag" content="Computer Vision">
+    
+    <meta property="article:tag" content="ROS">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរកឃើញ និងចំណាត់ថ្នាក់វត្ថុជាទម្រង់ 3D ជាមួយឧបករណ៍ Microsoft Kinect និងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតជម្រៅជ្រៅ (Deep Neural Networks)">
+    <meta name="twitter:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធចំណាត់ថ្នាក់ និងរកឃើញវត្ថុក្នុងទីតាំង 3D ដែលមានតម្លៃសមរម្យដោយប្រើឧបករណ៍សេនស័រលើទីផ្សារជាជាងប្រើប្រាស់ឧបករណ៍សេនស័រដែលមានតម្លៃថ្លៃដូចជា LiDAR។">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789 \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179c\u178f\u17d2\u1790\u17bb\u1787\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb 3D \u1787\u17b6\u1798\u17bd\u1799\u17a7\u1794\u1780\u179a\u178e\u17cd Microsoft Kinect \u1793\u17b7\u1784\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u1787\u1798\u17d2\u179a\u17c5\u1787\u17d2\u179a\u17c5 (Deep Neural Networks)",
+      "name": "3D OBJECT DETECTION AND CLASSIFICATION WITH MICROSOFT KINECT AND DEEP NEURAL NETWORKS",
+      "description": "\u1793\u17b7\u1780\u17d2\u1781\u17c1\u1794\u1794\u1791\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb \u1793\u17b7\u1784\u179a\u1780\u1783\u17be\u1789\u179c\u178f\u17d2\u1790\u17bb\u1780\u17d2\u1793\u17bb\u1784\u1791\u17b8\u178f\u17b6\u17c6\u1784 3D \u178a\u17c2\u179b\u1798\u17b6\u1793\u178f\u1798\u17d2\u179b\u17c3\u179f\u1798\u179a\u1798\u17d2\u1799\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u17a7\u1794\u1780\u179a\u178e\u17cd\u179f\u17c1\u1793\u179f\u17d0\u179a\u179b\u17be\u1791\u17b8\u1795\u17d2\u179f\u17b6\u179a\u1787\u17b6\u1787\u17b6\u1784\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17a7\u1794\u1780\u179a\u178e\u17cd\u179f\u17c1\u1793\u179f\u17d0\u179a\u178a\u17c2\u179b\u1798\u17b6\u1793\u178f\u1798\u17d2\u179b\u17c3\u1790\u17d2\u179b\u17c3\u178a\u17bc\u1785\u1787\u17b6 LiDAR\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/3d-object-detection-kinect-dnn-2019.html",
+      "author": [{"@type": "Person", "name": "Ahmed Fawzy Elaraby (Cairo University)"}],
+      "datePublished": "2019, Cairo University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "3D OBJECT DETECTION AND CLASSIFICATION WITH MICROSOFT KINECT AND DEEP NEURAL NETWORKS",
+        "url": "N/A"
+      },
+      "keywords": ["3D Object Detection", "Microsoft Kinect", "Deep Neural Networks", "YOLO", "Depth Estimation", "Computer Vision", "ROS"],
+      "about": "Aerospace Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789 \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179c\u178f\u17d2\u1790\u17bb\u1787\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb 3D \u1787\u17b6\u1798\u17bd\u1799\u17a7\u1794\u1780\u179a\u178e\u17cd Microsoft Kinect \u1793\u17b7\u1784\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u1787\u1798\u17d2\u179a\u17c5\u1787\u17d2\u179a\u17c5 (Deep Neural Networks)",
+          "item": "https://khmerresearch.com/papers/technology/3d-object-detection-kinect-dnn-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរកឃើញ និងចំណាត់ថ្នាក់វត្ថុជាទម្រង់ 3D ជាមួយឧបករណ៍ Micr...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> 3D OBJECT DETECTION AND CLASSIFICATION WITH MICROSOFT KINECT AND DEEP NEURAL NETWORKS<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរកឃើញ និងចំណាត់ថ្នាក់វត្ថុជាទម្រង់ 3D ជាមួយឧបករណ៍ Microsoft Kinect និងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតជម្រៅជ្រៅ (Deep Neural Networks)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> 3D OBJECT DETECTION AND CLASSIFICATION WITH MICROSOFT KINECT AND DEEP NEURAL NETWORKS</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ahmed Fawzy Elaraby (Cairo University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2019, Cairo University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Aerospace Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> និក្ខេបបទនេះដោះស្រាយបញ្ហានៃការបង្កើតប្រព័ន្ធចំណាត់ថ្នាក់ និងរកឃើញវត្ថុក្នុងទីតាំង 3D ដែលមានតម្លៃសមរម្យដោយប្រើឧបករណ៍សេនស័រលើទីផ្សារជាជាងប្រើប្រាស់ឧបករណ៍សេនស័រដែលមានតម្លៃថ្លៃដូចជា LiDAR។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានបង្កើតប្រព័ន្ធតភ្ជាប់ពីចុងម្ខាងទៅចុងម្ខាង (End-to-End System) ដោយធ្វើសមកាលកម្មទិន្នន័យរូបភាពនិងជម្រៅ ដើម្បីស្វែងរកវត្ថុនិងកំណត់ទីតាំង។
+        
+        <ul>
+            
+            <li>ការចាប់យករូបភាពនិងទិន្នន័យពីឧបករណ៍ចាប់សញ្ញា Microsoft Kinect (Microsoft Kinect Sensor)</li>
+            
+            <li>ការប្រើប្រាស់បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត YOLO (YOLO Deep Neural Network) សម្រាប់ការរកឃើញរូបភាព 2D</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយការប៉ាន់ស្មានជម្រៅដែលបានស្នើឡើង (Proposed Depth Estimation Algorithm) ដើម្បីបន្សុទ្ធភីកសែល (Pixels)</li>
+            
+            <li>ការគ្រប់គ្រងនិងធ្វើសមកាលកម្មទិន្នន័យតាមរយៈប្រព័ន្ធប្រតិបត្តិការរ៉ូបូត (ROS Manager)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយការប៉ាន់ស្មានជម្រៅថ្មីនេះបានបង្កើនភាពត្រឹមត្រូវដល់ 87.749% បើធៀបនឹងក្បួនដោះស្រាយពីមុនដែលទទួលបានត្រឹមតែ 82.893%។</li>
+            
+            <li>ប្រព័ន្ធនេះអាចដំណើរការក្នុងល្បឿនប្រហែល 4 ហ្វ្រេមក្នុងមួយវិនាទី (fps) នៅលើកុំព្យូទ័រយួរដៃធម្មតា និងអាចឈានដល់ 69-70 fps នៅលើឧបករណ៍ GPU កម្រិតខ្ពស់។</li>
+            
+            <li>ការធ្វើតេស្តជាក់ស្តែងបានបង្ហាញថា ប្រព័ន្ធនេះមានសមត្ថភាពខ្ពស់ក្នុងការចាប់យកនិងចំណាត់ថ្នាក់វត្ថុទាំងនៅស្ងៀមនិងមានចលនាក្នុងបរិយាកាសក្នុងផ្ទះបានយ៉ាងល្អ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Middle Pixel Value</span></strong><br>ការប្រើប្រាស់តម្លៃភីកសែលនៅចំណុចកណ្តាល</td>
+                <td>មានដំណើរការលឿន (៥ ហ្វ្រេមក្នុងមួយវិនាទី) និងមានភាពងាយស្រួលបំផុតក្នុងការគណនាដោយពុំត្រូវការកម្លាំងម៉ាស៊ីនច្រើន។</td>
+                <td>ងាយរងឥទ្ធិពលយ៉ាងខ្លាំងពីភីកសែលដែលខូច (Faulty pixels) និងមិនមានភាពជាក់លាក់ទេប្រសិនបើវត្ថុមិននៅចំកណ្តាលប្រអប់។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវនៃការប៉ាន់ស្មានជម្រៅត្រឹមតែ ៥៧.៩៩% ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Bounding Box Mean Value</span></strong><br>ការគណនាតម្លៃមធ្យមនៃប្រអប់ព្រំដែនសរុប</td>
+                <td>អាចជួយកាត់បន្ថយបញ្ហាភីកសែលខូចបានប្រសើរជាងវិធីសាស្ត្រទីមួយ ដោយទាញយកមធ្យមភាគនៃភីកសែលទាំងអស់។</td>
+                <td>ដំណើរការយឺតជាងគេ (២.៥ ហ្វ្រេមក្នុងមួយវិនាទី) និងងាយរាប់បញ្ចូលភីកសែលផ្ទៃខាងក្រោយ ឬផ្ទៃខាងមុខដែលមិនពាក់ព័ន្ធចូលក្នុងការគណនា។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវនៃការប៉ាន់ស្មានជម្រៅប្រមាណ ៨២.៨៩%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Proposed Depth Estimation Algorithm (9-grid cells)</span></strong><br>ក្បួនដោះស្រាយការប៉ាន់ស្មានជម្រៅដែលបានស្នើឡើង (បែងចែកជា ៩ ក្រឡា)</td>
+                <td>អាចបំបាត់បញ្ហាភីកសែលខូច និងផាត់ចោលភីកសែលផ្ទៃខាងក្រោយបានយ៉ាងល្អ ព្រមទាំងរក្សាបាននូវល្បឿនមធ្យមដែលអាចទទួលយកបាន។</td>
+                <td>ត្រូវការការគណនាស្មុគស្មាញជាងវិធីសាស្ត្រធម្មតាបន្តិច ដោយតម្រូវឱ្យមានការតម្រៀបទិន្នន័យ (Sorting) និងទាញយកតម្លៃមេដ្យាន (Median)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់ជាងគេបំផុតក្នុងការប៉ាន់ស្មានជម្រៅ គឺរហូតដល់ ៨៧.៧៤% ជាមួយនឹងល្បឿន ៤ ហ្វ្រេមក្នុងមួយវិនាទី។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអភិវឌ្ឍប្រព័ន្ធនេះទាមទារការរួមបញ្ចូលគ្នារវាងផ្នែករឹងដែលមានតម្លៃសមរម្យ និងកុំព្យូទ័រដែលមានសមត្ថភាពដំណើរការក្រាហ្វិក (GPU) ខ្ពស់គួរសម ដើម្បីធានាបាននូវដំណើរការក្នុងពេលជាក់ស្តែង (Real-time)។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ឧបករណ៍ Microsoft Kinect v2, អាដាប់ទ័រភ្ជាប់កាមេរ៉ាទៅកុំព្យូទ័រ (USB 3.0 Adapter), និងកុំព្យូទ័រដែលមានក្រាហ្វិកកាត (GPU ដូចជា Nvidia Titan X សម្រាប់ដំណើរការលឿន ឬត្រឹម Nvidia Geforce 840M ក៏អាចធ្វើតេស្តបាន)។</li>
+        
+        <li><strong>Software:</strong> ប្រព័ន្ធប្រតិបត្តិការ Ubuntu (ជំនាន់ 14.04 ឡើងទៅ), ប្រព័ន្ធ ROS (Robot Operating System), បណ្ណាល័យជំនួយសរសេរកូដ OpenCV, CUDA, និង Darknet សម្រាប់ដំណើរការ YOLO។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងលើការសរសេរកូដ C++, ការយល់ដឹងអំពីស្ថាបត្យកម្មកូដរបស់ ROS (Nodes, Topics, Messages), និងមូលដ្ឋានគ្រឹះនៃ Computer Vision ព្រមទាំង Deep Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើតេស្តដោយផ្តោតសំខាន់តែលើបរិយាកាសក្នុងផ្ទះ (Indoor) ជាមួយនឹងទិន្នន័យវត្ថុចំនួន៦ប្រភេទប៉ុណ្ណោះ (មនុស្ស កៅអី ទូរទស្សន៍ ដប សាឡុង សៀវភៅ)។ វាមិនអាចដំណើរការបានល្អនៅទីវាល ឬក្រៅផ្ទះនោះទេ ដោយសារកាំរស្មីអ៊ុលត្រាវីយូឡេ (IR) របស់សេនស័រ Kinect នឹងរងការរំខានពីពន្លឺព្រះអាទិត្យដោយផ្ទាល់។ សម្រាប់បរិបទប្រទេសកម្ពុជា កត្តានេះបញ្ជាក់ថាវាស័ក្តិសមបំផុតសម្រាប់ការប្រើប្រាស់តែក្នុងអគារ ដូចជារោងចក្រ ឃ្លាំងទំនិញ ឬមន្ទីរពេទ្យប៉ុណ្ណោះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ប្រព័ន្ធនេះមានសក្តានុពល និងលទ្ធភាពខ្ពស់សម្រាប់ការអនុវត្តជាក់ស្តែងនៅប្រទេសកម្ពុជា ដោយសារវាផ្តោតលើការប្រើប្រាស់ឧបករណ៍សេនស័រដែលមានតម្លៃថោកជំនួសឱ្យ LiDAR ថ្លៃៗ។</p>
+        
+        <ul>
+            
+            <li><strong>Smart Warehousing & Logistics (ឃ្លាំងឆ្លាតវៃ និងភស្តុភារ):</strong> អាចប្រើប្រាស់សម្រាប់បំពាក់លើរ៉ូបូតដឹកជញ្ជូនទំនិញក្នុងឃ្លាំងនៅតំបន់សេដ្ឋកិច្ចពិសេស (SEZ) ភ្នំពេញ ព្រោះវាជាបរិយាកាសក្នុងផ្ទះដែលអាចគ្រប់គ្រងកម្រិតពន្លឺបានល្អ ដែលជួយដល់ការតាមដានរនាំងឧបសគ្គបានត្រឹមត្រូវ។</li>
+            
+            <li><strong>University Robotics Labs (មន្ទីរពិសោធន៍រ៉ូបូតនៅសាកលវិទ្យាល័យ):</strong> សាកលវិទ្យាល័យដូចជា វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា (ITC) ឬ បណ្ឌិត្យសភាបច្ចេកវិទ្យាឌីជីថលកម្ពុជា (CADT) អាចយកគំរូនេះទៅប្រើប្រាស់ក្នុងការបង្រៀននិស្សិត ដោយសារតម្លៃឧបករណ៍មានកម្រិតទាប សមស្របសម្រាប់ថវិកាស្រាវជ្រាវខ្នាតតូច។</li>
+            
+            <li><strong>Indoor Security Monitoring (ការតាមដានសន្តិសុខក្នុងអគារពាណិជ្ជកម្ម):</strong> អាចបំពាក់នៅតាមផ្សារទំនើបធំៗដូចជា Aeon Mall ដើម្បីតាមដានសកម្មភាពមនុស្ស ឬវត្ថុផ្សេងៗប្រកបដោយប្រសិទ្ធភាព ដោយដឹងពីចម្ងាយទីតាំងច្បាស់លាស់ក្នុងទម្រង់ 3D ជាជាងត្រឹមការថតរូបសំប៉ែត 2D។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះគឺជាជម្រើសដ៏ល្អ និងសន្សំសំចៃបំផុតសម្រាប់គម្រោងក្នុងស្រុកដែលត្រូវការប្រព័ន្ធ Computer Vision កម្រិត 3D ដែលមានភាពជាក់លាក់ខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធស្វ័យប្រវត្តិកម្មក្នុងបរិយាកាសបិទជិត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Linux និង ROS:</strong> ចាប់ផ្តើមដោយការដំឡើងប្រព័ន្ធប្រតិបត្តិការ <span class="en">Ubuntu</span> លើកុំព្យូទ័រ និងអនុវត្តការសរសេរកូដតាមរយៈ <span class="en">ROS (Robot Operating System)</span> ដើម្បីយល់ច្បាស់ពីរបៀបបង្កើត Nodes និងការផ្លាស់ប្តូរទិន្នន័យតាមរយៈ Topics។</li>
+            
+            <li><strong>ស្វែងយល់ពីបច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត YOLO:</strong> សិក្សាពីរចនាសម្ព័ន្ធរបស់បណ្តាញ <span class="en">YOLO DNN</span> និងសាកល្បងដំណើរការវាជាមួយបណ្ណាល័យ <span class="en">Darknet</span> ឬ <span class="en">OpenCV</span> ដើម្បីអនុវត្តការចាប់យករូបភាពវត្ថុ 2D (2D Object Detection) ជាមុនសិន។</li>
+            
+            <li><strong>រៀបចំឧបករណ៍និងការតភ្ជាប់ (Hardware Setup):</strong> ស្វែងរកទិញឧបករណ៍ <span class="en">Microsoft Kinect v2</span> និងដោតភ្ជាប់វាជាមួយកុំព្យូទ័រយួរដៃតាមរយៈ <span class="en">Kinect USB 3.0 Adapter</span> ព្រមទាំងកុំភ្លេចដំឡើងកម្មវិធីបញ្ជា <span class="en">CUDA Toolkit</span> ប្រសិនបើអ្នកមាន GPU ដើម្បីបង្កើនល្បឿនដំណើរការ។</li>
+            
+            <li><strong>អនុវត្តការតម្រូវសេនស័រកាមេរ៉ា (Camera Calibration):</strong> ប្រើប្រាស់កញ្ចប់កូដ <span class="en">iai_kinect2 calibration</span> នៅក្នុង ROS ធ្វើការតម្រូវកាមេរ៉ាពណ៌ (RGB Camera) និងកាមេរ៉ាជម្រៅ (IR Depth Camera) ឱ្យស៊ីសង្វាក់គ្នា (Intrinsic & Extrinsic Calibration) ដើម្បីធានាថាទីតាំងវត្ថុក្នុងរូបភាពត្រួតគ្នាល្អិតល្អន់។</li>
+            
+            <li><strong>អភិវឌ្ឍន៍ក្បួនដោះស្រាយជម្រៅ (Depth Estimation Implementation):</strong> សរសេរកូដជាភាសា <span class="en">C++</span> ដើម្បីបង្កើតក្បួនបែងចែក ៩ ក្រឡា (9-grid cells algorithm) ជាន់ពីលើប្រអប់ព្រំដែន (Bounding box) ដែលផ្តល់ដោយ YOLO រួចគណនាតម្លៃមធ្យមនៃក្រឡានីមួយៗ រហូតទាញបានតម្លៃជម្រៅ 3D ដ៏សុក្រឹតដូចដែលស្នើក្នុងនិក្ខេបបទ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Deep Neural Networks</span></td>
+                <td>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ គឺជាប្រព័ន្ធក្បួនដោះស្រាយរបស់កុំព្យូទ័រដែលត្រូវបានរចនាឡើងដោយត្រាប់តាមទម្រង់ខួរក្បាលរបស់មនុស្ស ដោយមានស្រទាប់វិភាគទិន្នន័យច្រើនជាន់តម្រួតគ្នា ដើម្បីរៀនស្គាល់ចំណុចពិសេស និងដោះស្រាយបញ្ហាស្មុគស្មាញ។</td>
+                <td>វាដូចជាសិស្សដែលរៀនសូត្រពីកំហុសរបស់ខ្លួនឯងម្តងហើយម្តងទៀត រហូតដល់អាចចំណាំ និងដោះស្រាយលំហាត់ស្មុគស្មាញបានយ៉ាងស្ទាត់ជំនាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">YOLO</span></td>
+                <td>YOLO (You Only Look Once) គឺជាក្បួនដោះស្រាយបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតមួយប្រភេទដែលប្រើសម្រាប់ចាប់យក និងចំណាត់ថ្នាក់វត្ថុក្នុងរូបភាពបានយ៉ាងលឿនក្នុងពេលជាក់ស្តែង ដោយវាដំណើរការទិន្នន័យរូបភាពទាំងមូលតែម្តងគត់ក្នុងពេលតែមួយ។</td>
+                <td>វាដូចជាមនុស្សម្នាក់ដែលក្រឡេកមើលរូបថតតែមួយភ្លែត ក៏អាចប្រាប់បានភ្លាមៗថានៅក្នុងរូបនោះមានអ្នកណាខ្លះនិងនៅទីតាំងណាខ្លះ ជាជាងការស្កេនមើលម្តងមួយជ្រុងៗយ៉ាងយឺតៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Robot Operating System (ROS)</span></td>
+                <td>គឺជាប្រព័ន្ធកណ្តាល ឬក្របខណ្ឌកម្មវិធីកុំព្យូទ័រសម្រាប់ជួយសម្រួលដល់ការសរសេរកូដបញ្ជារ៉ូបូត ដែលវាអនុញ្ញាតឱ្យកម្មវិធីផ្នែករឹងនិងផ្នែកទន់ផ្សេងៗអាចទាក់ទងគ្នា និងផ្លាស់ប្តូរទិន្នន័យគ្នាទៅវិញទៅមកបានដោយរលូនតាមរយៈ Nodes និង Topics។</td>
+                <td>វាដូចជាអ្នកបកប្រែភាសាកណ្តាលមួយនៅកន្លែងធ្វើការ ដែលជួយឱ្យបុគ្គលិកមកពីផ្នែកផ្សេងៗអាចប្រាស្រ័យទាក់ទង និងសហការគ្នាធ្វើការងារធំមួយបានជោគជ័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Depth Estimation</span></td>
+                <td>គឺជាដំណើរការនៃការគណនារកជម្រៅ ឬចម្ងាយពីឧបករណ៍កាមេរ៉ាទៅកាន់វត្ថុណាមួយក្នុងរូបភាព ដើម្បីកំណត់ទីតាំងពិតប្រាកដរបស់វត្ថុនោះក្នុងទម្រង់ជា 3D ជួយឱ្យកុំព្យូទ័រដឹងពីចម្ងាយពិតប្រាកដ។</td>
+                <td>វាដូចជាយើងប្រើយ៉ាន់ទ័រ ឬខ្សែម៉ែត្រដើម្បីវាស់ចម្ងាយពីកន្លែងដែលយើងឈរទៅកាន់វត្ថុមួយនៅខាងមុខ ដើម្បីដឹងថាវានៅឆ្ងាយប៉ុណ្ណាពីយើង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Camera Calibration</span></td>
+                <td>គឺជាដំណើរការតម្រូវ និងកែតម្រូវសេនស័រកាមេរ៉ា (ឧទាហរណ៍ កាមេរ៉ាពណ៌ និងកាមេរ៉ាជម្រៅ) ឱ្យធ្វើសមកាលកម្មនិងស៊ីចង្វាក់គ្នា ដើម្បីកាត់បន្ថយភាពវៀចទ្រង់ទ្រាយនៃរូបភាព និងធានាថាទិន្នន័យដែលចាប់យកបានមកពីកាមេរ៉ាទាំងពីរត្រូវត្រួតស៊ីគ្នាបានល្អឥតខ្ចោះ។</td>
+                <td>វាដូចជាការរឹតវីសកែសម្រួលកែវយឹតឱ្យច្បាស់ល្អ និងស្របគ្នា មុននឹងយើងយកវាទៅឆ្លុះមើលវត្ថុនៅឆ្ងាយ ដើម្បីកុំឱ្យមើលទៅព្រិល ឬឃើញខុសទីតាំងពិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bounding Box</span></td>
+                <td>គឺជាស៊ុមចតុកោណកែងដែលប្រព័ន្ធកុំព្យូទ័រគូសព័ទ្ធជុំវិញវត្ថុមួយនៅក្នុងរូបភាព ដើម្បីកំណត់ព្រំដែនតំបន់ និងទំហំដែលវត្ថុនោះស្ថិតនៅ សម្រាប់ការវិភាគបន្តនៅក្នុងប្រព័ន្ធ Computer Vision។</td>
+                <td>វាដូចជាការយកប៊ិចពណ៌ក្រហមទៅគូសរង្វង់ ឬគូសប្រអប់ព័ទ្ធជុំវិញមុខរបស់នរណាម្នាក់ក្នុងចំណោមមនុស្សជាច្រើននៅក្នុងរូបថតរួម ដើម្បីបញ្ជាក់ប្រាប់គេថាជាអ្នកណាមួយឱ្យប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Network</span></td>
+                <td>គឺជាប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតដែលពូកែខាងវិភាគទិន្នន័យជារូបភាព ដោយវាប្រើប្រាស់ស្រទាប់ច្រោះទិន្នន័យ (Filters) ជាច្រើនជាន់ដើម្បីទាញយកលក្ខណៈពិសេសៗរបស់វត្ថុ ដូចជា គែម ទម្រង់ជ្រុង ឬរាងមូលពីរូបភាពដើម។</td>
+                <td>វាដូចជាការប្រើប្រាស់កែវពង្រីកដែលរំកិលស្កេនមើលលើរូបភាពម្តងបន្តិចៗ ដើម្បីស្វែងរកលក្ខណៈពិសេសៗ មុននឹងសន្និដ្ឋានប្រមូលផ្តុំគ្នាថាវត្ថុនោះជារូបអ្វីឱ្យប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Faulty Pixels</span></td>
+                <td>ជាចំណុចភីកសែលតូចៗនៅក្នុងរូបភាពកាមេរ៉ាជម្រៅ (Depth Image) ដែលផ្តល់នូវតម្លៃ ឬទិន្នន័យខុសប្រក្រតី (ខ្ពស់ពេក ឬទាបពេកមិនស៊ីនឹងភីកសែលជុំវិញ) ដែលជាទូទៅបណ្តាលមកពីការរំខានរបស់ពន្លឺ ឬបញ្ហាបច្ចេកទេសរបស់ឧបករណ៍ចាប់សញ្ញា។</td>
+                <td>វាដូចជាចំណុចខ្មៅ ឬស្នាមប្រឡាក់តូចៗនៅលើកញ្ចក់វ៉ែនតារបស់យើង ដែលធ្វើឱ្យយើងមើលឃើញវត្ថុនៅត្រង់ចំណុចនោះខុសទម្រង់ដើម ឬគិតច្រឡំថាមានវត្ថុផ្សេងនៅទីនោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-and-its-architectures-2021.html">
+                    <span class="km">បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតបែបខុនវ៉ូលូសិន និងស្ថាបត្យកម្មរបស់វា</span><br>
+                    <span class="en article-original-title">Convolutional Neural Network and its Architectures</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/modeling-language-vagueness-privacy-policies-dnn-2016.html">
+                    <span class="km">ការធ្វើម៉ូដែលភាពស្រពេចស្រពិលនៃភាសានៅក្នុងគោលការណ៍ឯកជនភាពដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ</span><br>
+                    <span class="en article-original-title">Modeling Language Vagueness in Privacy Policies Using Deep Neural Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/complex-dynamic-gesture-hmm-fnn-2008.html">
+                    <span class="km">ការទទួលស្គាល់កាយវិការថាមវន្តស្មុគស្មាញដោយផ្អែកលើម៉ូដែល HMM-FNN</span><br>
+                    <span class="en article-original-title">基于 HMM-FNN 模型的复杂动态手势识别</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-based-object-detection-review-2020.html">
+                    <span class="km">ការរកឃើញវត្ថុផ្អែកលើបណ្ដាញសរសៃប្រសាទខុនវ៉ុលូសិន (CNN)៖ ការពិនិត្យឡើងវិញ</span><br>
+                    <span class="en article-original-title">CONVOLUTIONAL NEURAL NETWORK BASED OBJECT DETECTION: A REVIEW</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/explainable-ai-model-medical-data-analysis-2024.html">
+                    <span class="km">គំរូបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បានថ្មីមួយសម្រាប់ការវិភាគទិន្នន័យវេជ្ជសាស្ត្រ</span><br>
+                    <span class="en article-original-title">A NOVEL EXPLAINABLE AI MODEL FOR MEDICAL DATA ANALYSIS</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=real-time+3D+object+detection+algorithms+using+RGB-D+sensors+and+Deep+Learning" target="_blank" rel="noopener"><span class="en">real-time 3D object detection algorithms using RGB-D sensors and Deep Learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=depth+estimation+refinement+techniques+for+Microsoft+Kinect+and+structured+light+cameras" target="_blank" rel="noopener"><span class="en">depth estimation refinement techniques for Microsoft Kinect and structured light cameras</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=YOLO+object+detection+optimization+and+integration+in+Robot+Operating+System+%28ROS%29" target="_blank" rel="noopener"><span class="en">YOLO object detection optimization and integration in Robot Operating System (ROS)</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=camera-to-camera+intrinsic+and+extrinsic+calibration+methods+for+RGB+and+IR+sensors" target="_blank" rel="noopener"><span class="en">camera-to-camera intrinsic and extrinsic calibration methods for RGB and IR sensors</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=indoor+autonomous+navigation+using+low-cost+depth+cameras+and+computer+vision" target="_blank" rel="noopener"><span class="en">indoor autonomous navigation using low-cost depth cameras and computer vision</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+</body>
+</html>
