@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>អូតូអ៊ិនកូដឌ័រអថេរតាមលក្ខខណ្ឌសម្រាប់ឆាតបតដែលយល់ពីអារម្មណ៍ផ្អែកលើត្រេនស្វមម័រ - Conditional Variational Autoencoders for Emotionally-aware Chatbot Based on T... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី អូតូអ៊ិនកូដឌ័រអថេរតាមលក្ខខណ្ឌសម្រាប់ឆាតបតដែលយល់ពីអារម្មណ៍ផ្អ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតភ្នាក់ងារសន្ទនា (Chatbot) ដែលមានសមត្ថភាពយល់ និងឆ្លើយតបប្រកបដោយមនោ...">
+    
+    <meta name="keywords" content="Conditional Variational Autoencoder, Transformer, Emotionally-aware Chatbot, Natural Language Processing, Empathy Dialogue Generation, RoBERTa, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/cvae-transformer-emotion-chatbot.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/cvae-transformer-emotion-chatbot.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/cvae-transformer-emotion-chatbot.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/cvae-transformer-emotion-chatbot.html">
+    <meta property="og:title" content="អូតូអ៊ិនកូដឌ័រអថេរតាមលក្ខខណ្ឌសម្រាប់ឆាតបតដែលយល់ពីអារម្មណ៍ផ្អែកលើត្រេនស្វមម័រ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតភ្នាក់ងារសន្ទនា (Chatbot) ដែលមានសមត្ថភាពយល់ និងឆ្លើយតបប្រកបដោយមនោសញ្ចេតនា និងភាពចម្រុះ ខណៈដែលម៉ូដែលពីមុនៗជួបការលំបាកក្នុងការគ្រប់គ្រងអារម្មណ៍នៅក្នុងប្រយោគ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="N/A-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Conditional Variational Autoencoder">
+    
+    <meta property="article:tag" content="Transformer">
+    
+    <meta property="article:tag" content="Emotionally-aware Chatbot">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+    <meta property="article:tag" content="Empathy Dialogue Generation">
+    
+    <meta property="article:tag" content="RoBERTa">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="អូតូអ៊ិនកូដឌ័រអថេរតាមលក្ខខណ្ឌសម្រាប់ឆាតបតដែលយល់ពីអារម្មណ៍ផ្អែកលើត្រេនស្វមម័រ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតភ្នាក់ងារសន្ទនា (Chatbot) ដែលមានសមត្ថភាពយល់ និងឆ្លើយតបប្រកបដោយមនោសញ្ចេតនា និងភាពចម្រុះ ខណៈដែលម៉ូដែលពីមុនៗជួបការលំបាកក្នុងការគ្រប់គ្រងអារម្មណ៍នៅក្នុងប្រយោគ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u17a2\u17bc\u178f\u17bc\u17a2\u17ca\u17b7\u1793\u1780\u17bc\u178a\u178c\u17d0\u179a\u17a2\u1790\u17c1\u179a\u178f\u17b6\u1798\u179b\u1780\u17d2\u1781\u1781\u178e\u17d2\u178c\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1786\u17b6\u178f\u1794\u178f\u178a\u17c2\u179b\u1799\u179b\u17cb\u1796\u17b8\u17a2\u17b6\u179a\u1798\u17d2\u1798\u178e\u17cd\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u178f\u17d2\u179a\u17c1\u1793\u179f\u17d2\u179c\u1798\u1798\u17d0\u179a",
+      "name": "Conditional Variational Autoencoders for Emotionally-aware Chatbot Based on Transformer",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1797\u17d2\u1793\u17b6\u1780\u17cb\u1784\u17b6\u179a\u179f\u1793\u17d2\u1791\u1793\u17b6 (Chatbot) \u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796\u1799\u179b\u17cb \u1793\u17b7\u1784\u1786\u17d2\u179b\u17be\u1799\u178f\u1794\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6 \u1793\u17b7\u1784\u1797\u17b6\u1796\u1785\u1798\u17d2\u179a\u17bb\u17c7 \u1781\u178e\u17c8\u178a\u17c2\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1796\u17b8\u1798\u17bb\u1793\u17d7\u1787\u17bd\u1794\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u17a2\u17b6\u179a\u1798\u17d2\u1798\u178e\u17cd\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1799\u17c4\u1782\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/cvae-transformer-emotion-chatbot.html",
+      "author": [{"@type": "Person", "name": "Zhechen Su (\u00c9cole Polytechnique F\u00e9d\u00e9rale de Lausanne)"},{"@type": "Person", "name": "Yubo Xie (\u00c9cole Polytechnique F\u00e9d\u00e9rale de Lausanne)"}],
+      "datePublished": "N/A",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Conditional Variational Autoencoders for Emotionally-aware Chatbot Based on Transformer",
+        "url": "https://www.epfl.ch/labs/gr-pu/wp-content/uploads/2022/07/Conditional-Variational-Autoencoders-for-Emotionally-aware-Chatbot-Based-on-Transformer.pdf"
+      },
+      "keywords": ["Conditional Variational Autoencoder", "Transformer", "Emotionally-aware Chatbot", "Natural Language Processing", "Empathy Dialogue Generation", "RoBERTa"],
+      "about": "Natural Language Processing (NLP)"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u17a2\u17bc\u178f\u17bc\u17a2\u17ca\u17b7\u1793\u1780\u17bc\u178a\u178c\u17d0\u179a\u17a2\u1790\u17c1\u179a\u178f\u17b6\u1798\u179b\u1780\u17d2\u1781\u1781\u178e\u17d2\u178c\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1786\u17b6\u178f\u1794\u178f\u178a\u17c2\u179b\u1799\u179b\u17cb\u1796\u17b8\u17a2\u17b6\u179a\u1798\u17d2\u1798\u178e\u17cd\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u178f\u17d2\u179a\u17c1\u1793\u179f\u17d2\u179c\u1798\u1798\u17d0\u179a",
+          "item": "https://khmerresearch.com/papers/technology/cvae-transformer-emotion-chatbot.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>អូតូអ៊ិនកូដឌ័រអថេរតាមលក្ខខណ្ឌសម្រាប់ឆាតបតដែលយល់ពីអារម្មណ៍...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Conditional Variational Autoencoders for Emotionally-aware Chatbot Based on Transformer<br>
+        
+        <strong>Source:</strong> <a href="https://www.epfl.ch/labs/gr-pu/wp-content/uploads/2022/07/Conditional-Variational-Autoencoders-for-Emotionally-aware-Chatbot-Based-on-Transformer.pdf" target="_blank" rel="noopener">www.epfl.ch</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>អូតូអ៊ិនកូដឌ័រអថេរតាមលក្ខខណ្ឌសម្រាប់ឆាតបតដែលយល់ពីអារម្មណ៍ផ្អែកលើត្រេនស្វមម័រ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Conditional Variational Autoencoders for Emotionally-aware Chatbot Based on Transformer</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Zhechen Su (École Polytechnique Fédérale de Lausanne), Yubo Xie (École Polytechnique Fédérale de Lausanne)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> N/A</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing (NLP)</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការបង្កើតភ្នាក់ងារសន្ទនា (Chatbot) ដែលមានសមត្ថភាពយល់ និងឆ្លើយតបប្រកបដោយមនោសញ្ចេតនា និងភាពចម្រុះ ខណៈដែលម៉ូដែលពីមុនៗជួបការលំបាកក្នុងការគ្រប់គ្រងអារម្មណ៍នៅក្នុងប្រយោគ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវម៉ូដែលថ្មីមួយដោយរួមបញ្ចូលគ្នារវាងបច្ចេកវិទ្យា CVAE និង Transformer ដើម្បីបង្កើតការឆ្លើយតបប្រកបដោយអារម្មណ៍ និងភាពចម្រុះ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់អូតូអ៊ិនកូដឌ័រអថេរតាមលក្ខខណ្ឌ (Conditional Variational Autoencoders - CVAE) ដើម្បីបង្កើតភាពចម្រុះនៃការឆ្លើយតប។</li>
+            
+            <li>ការទាញយកទម្ងន់ដែលបានបង្ហាត់រួច (Pre-trained weights) ពីម៉ូដែល RoBERTa សម្រាប់ធ្វើជា អ៊ិនកូដឌ័រ (Encoder) និង ឌីកូដឌ័រ (Decoder) ដើម្បីចាប់យកព័ត៌មានភាសា។</li>
+            
+            <li>ការប្រើប្រាស់សំណុំទិន្នន័យ (Dataset) EMPATHETICDIALOGUES ដែលមាន ២៥,០០០ ការសន្ទនាដើម្បីបង្ហាត់ និងវាយតម្លៃម៉ូដែល។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល CVAE-Transformer សម្រេចបាននូវពិន្ទុភាពស្មុគស្មាញ (Perplexity) ល្អបំផុតត្រឹម ៦,១ បៀបធៀបនឹងម៉ូដែល Plain Transformer ដែលមានពិន្ទុ ៨,០។</li>
+            
+            <li>ភាពត្រឹមត្រូវនៃការកំណត់អារម្មណ៍ (Top-1 Emotion Accuracy) របស់ម៉ូដែលទទួលបានរហូតដល់ ៥៨,៨% ដែលខ្ពស់ជាងម៉ូដែលមូលដ្ឋានដែលទទួលបានត្រឹមតែប្រមាណ ១១% ទៅ ១២% ប៉ុណ្ណោះ។</li>
+            
+            <li>តាមរយៈការវាយតម្លៃដោយមនុស្ស (Human Evaluation) ម៉ូដែលថ្មីនេះទទួលបានពិន្ទុមធ្យម ១,២៥ ដែលខ្ពស់ជាងម៉ូដែល Plain Transformer (០,២៥) និង MEED (-១) ដែលបង្ហាញថាការឆ្លើយតបរបស់វាមានភាពសមហេតុផល និងដូចមនុស្សពិតៗជាង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Plain Transformer</span></strong><br>ម៉ូដែល Transformer ធម្មតា</td>
+                <td>អាចបង្កើតការឆ្លើយតបបានដោយសុវត្ថិភាព និងមានទម្រង់ប្រយោគអាចទស្សន៍ទាយបាន (Predictable Pattern)។ វាងាយស្រួលក្នុងការទាញយក និងប្រើប្រាស់ជាមូលដ្ឋាន។</td>
+                <td>ការឆ្លើយតបមានលក្ខណៈដដែលៗ ខ្វះភាពចម្រុះ និងមិនមានសមត្ថភាពបង្ហាញអារម្មណ៍បានត្រឹមត្រូវឡើយ (កម្រិតយល់ពីអារម្មណ៍ទាបបំផុត)។</td>
+                <td>ទទួលបានភាពស្មុគស្មាញ (Perplexity) ៨,០ និងភាពត្រឹមត្រូវនៃអារម្មណ៍ (Emotion Accuracy) ត្រឹមតែ ១២,៣%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">MEED</span></strong><br>ម៉ូដែល MEED (Multi-task learning)</td>
+                <td>មានរចនាសម្ព័ន្ធប្រសើរជាងម៉ូដែលមូលដ្ឋាន និងអាចបង្កើតប្រយោគបានចម្រុះជាងមុន។</td>
+                <td>ការឆ្លើយតបជារឿយៗមិនស៊ីសង្វាក់គ្នា (Embarrassing) និងមិនសូវប្រើប្រាស់ព័ត៌មានអារម្មណ៍ដែលបានបញ្ជូលប្រកបដោយប្រសិទ្ធភាពនោះទេ។</td>
+                <td>ទទួលបានភាពស្មុគស្មាញ ៦,២ និងពិន្ទុវាយតម្លៃពីមនុស្ស (Human Evaluation Average) ត្រឹម -១ គត់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CVAE-Transformer (Proposed)</span></strong><br>ម៉ូដែលអូតូអ៊ិនកូដឌ័រអថេរតាមលក្ខខណ្ឌផ្អែកលើត្រេនស្វមម័រ</td>
+                <td>មានសមត្ថភាពគ្រប់គ្រងអារម្មណ៍នៃការឆ្លើយតបបានយ៉ាងល្អ បង្កើតការសន្ទនាបានដូចមនុស្សពិតៗ និងមានភាពចម្រុះខ្ពស់ជាងម៉ូដែលមុនៗ។</td>
+                <td>ទោះបីឆ្លើយតបបានល្អ ប៉ុន្តែម៉ូដែលនេះនៅមានចំណុចខ្វះខាតក្នុងការចេះសួរនាំ ឬផ្តល់ព័ត៌មានថ្មីៗដើម្បីបន្តការសន្ទនាឱ្យបានយូរ។</td>
+                <td>ទទួលបានភាពស្មុគស្មាញល្អបំផុត ៦,១ ភាពត្រឹមត្រូវនៃអារម្មណ៍កើនដល់ ៥៨,៨% និងពិន្ទុវាយតម្លៃពីមនុស្សខ្ពស់ជាងគេគឺ ១,២៥។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ទោះបីជាឯកសារមិនបានបញ្ជាក់ច្បាស់លាស់ពីទំហំកុំព្យូទ័រ ប៉ុន្តែការបង្ហាត់ម៉ូដែលស្មុគស្មាញដូចជា CVAE-Transformer និង RoBERTa ទាមទារធនធានកុំព្យូទ័រ និងទិន្នន័យច្រើន។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការអង្គគណនាដែលមានក្រាហ្វិកកាត (GPU) ទំហំធំ និងកម្លាំងខ្លាំង ដើម្បីដំណើរការបង្ហាត់ម៉ូដែលរហូតដល់ ៤០,០០០ ជំហាន (steps) និងទំហំ batch ចំនួន ៣២។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារទិន្នន័យ EMPATHETICDIALOGUES ដែលមានចំនួន ២៥,០០០ ការសន្ទនា និងត្រូវបានកត់ត្រា និងបែងចែកអារម្មណ៍ដោយមនុស្សផ្ទាល់។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ម៉ូដែល RoBERTa ដែលបានបង្ហាត់រួច (Pre-trained weights) និងបណ្ណាល័យ Deep Learning នានា។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញដែលមានចំណេះដឹងជ្រៅជ្រះផ្នែក Natural Language Processing (NLP), Deep Learning និងការប្រើប្រាស់ Variational Autoencoders។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ EMPATHETICDIALOGUES ជាភាសាអង់គ្លេស ដែលត្រូវបានបង្កើតឡើងដោយអ្នកចូលរួមមកពីបស្ចិមប្រទេស។ វប្បធម៌ និងរបៀបនៃការបង្ហាញអារម្មណ៍របស់ពួកគេអាចមានភាពខុសគ្នាស្រឡះពីបរិបទសង្គម និងការនិយាយស្តីរបស់ប្រជាជនខ្មែរ។ ដូច្នេះ ប្រសិនបើចង់អនុវត្តប្រព័ន្ធនេះនៅកម្ពុជា គេចាំបាច់ត្រូវប្រមូលទិន្នន័យសន្ទនាជាភាសាខ្មែរដែលមានការបញ្ចេញអារម្មណ៍ស្របតាមវប្បធម៌ក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យា Chatbot ដែលយល់ពីអារម្មណ៍នេះមានសក្តានុពលខ្ពស់ក្នុងការយកមកអភិវឌ្ឍប្រព័ន្ធផ្តល់សេវាកម្មអតិថិជន និងការប្រឹក្សាយោបល់នៅប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ និងធនាគារ (Telecom & Banking):</strong> ក្រុមហ៊ុនដូចជា Cellcard, Smart ឬធនាគារ ABA អាចប្រើប្រាស់ Chatbot នេះដើម្បីឆ្លើយតបទៅកាន់អតិថិជនដែលកំពុងមានបញ្ហាប្រកបដោយការយល់ចិត្ត ដែលជួយកាត់បន្ថយភាពតានតឹង និងបង្កើនទំនុកចិត្តអតិថិជន។</li>
+            
+            <li><strong>សេវាកម្មប្រឹក្សាសុខភាពផ្លូវចិត្ត (Mental Health Counseling):</strong> អង្គការ ឬស្ថាប័នសុខាភិបាល (ឧទាហរណ៍ TPO Cambodia) អាចបង្កើត Chatbot ប្រភេទនេះដើម្បីជួយសន្ទនា និងផ្តល់កម្លាំងចិត្តបឋម ព្រមទាំងការយល់ចិត្តដល់យុវជនដែលកំពុងជួបប្រទះបញ្ហាស្ត្រេសឬធ្លាក់ទឹកចិត្ត។</li>
+            
+            <li><strong>វិស័យអប់រំកម្រិតឧត្តមសិក្សា (Higher Education):</strong> សាកលវិទ្យាល័យនានាអាចប្រើប្រាស់វាជាជំនួយការសិស្ស (Virtual Assistant) ដែលអាចយល់ពីអារម្មណ៍តានតឹងរបស់និស្សិតក្នុងរដូវប្រឡង និងជួយផ្តល់យោបល់លើកទឹកចិត្តប្រកបដោយភាពស្និទ្ធស្នាល។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះមិនត្រឹមតែជួយស្វ័យប្រវត្តិកម្មការងារប៉ុណ្ណោះទេ ថែមទាំងលើកកម្ពស់គុណភាពអន្តរកម្មរវាងមនុស្ស និងម៉ាស៊ីននៅក្នុងស្ថាប័នរដ្ឋ និងឯកជននៅកម្ពុជាឱ្យកាន់តែមានភាពមនុស្សធម៌។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ NLP និង Transformer:</strong> ត្រូវចាប់ផ្តើមពីការរៀនទ្រឹស្តីទូទៅអំពី Natural Language Processing និងស្ថាបត្យកម្ម Transformer តាមរយៈវគ្គសិក្សានៅលើ <span class="en">Coursera</span> ឬ <span class="en">Fast.ai</span> ដោយផ្តោតសំខាន់លើម៉ូដែល <span class="en">RoBERTa</span>។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យសន្ទនាភាសាខ្មែរ:</strong> រៀបចំក្រុមការងារដើម្បីប្រមូលទិន្នន័យសន្ទនាជាភាសាខ្មែរ រួចធ្វើការកត់ចំណាំ (Annotate) អារម្មណ៍លើប្រយោគទាំងនោះដោយដៃ ដោយប្រើប្រាស់ឧបករណ៍ដូចជា <span class="en">Doccano</span> ឬ <span class="en">Prodigy</span> ដើម្បីបង្កើតសំណុំទិន្នន័យស្រដៀងនឹង EMPATHETICDIALOGUES។</li>
+            
+            <li><strong>សាកល្បងបង្ហាត់ម៉ូដែលមូលដ្ឋាន:</strong> ប្រើប្រាស់ <span class="en">Hugging Face Transformers</span> ដើម្បីទាញយកម៉ូដែលភាសាដែលមានស្រាប់ (ដូចជា <span class="en">XLM-RoBERTa</span> សម្រាប់ពហុភាសា) មកសាកល្បង Fine-tune ជាមួយទិន្នន័យភាសាខ្មែរដែលទើបតែប្រមូលបាន។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែល CVAE-Transformer:</strong> សរសេរកូដបញ្ចូលរចនាសម្ព័ន្ធ Conditional Variational Autoencoder (CVAE) ទៅក្នុងម៉ូដែលរបស់អ្នកដោយប្រើប្រាស់ <span class="en">PyTorch</span> តាមរយៈការតភ្ជាប់ Prior Network និង Recognition Network ដូចមានបង្ហាញក្នុងឯកសារស្រាវជ្រាវ។</li>
+            
+            <li><strong>វាយតម្លៃ និងដាក់ឱ្យប្រើប្រាស់ជាក់ស្តែង (Deployment):</strong> ធ្វើការវាយតម្លៃម៉ូដែលដោយប្រើរង្វាស់ Perplexity រួមជាមួយនឹងការវាយតម្លៃដោយមនុស្សពិតប្រាកដ។ បន្ទាប់មក ដាក់ឱ្យដំណើរការជា API តាមរយៈ <span class="en">FastAPI</span> រួចភ្ជាប់វាទៅកាន់ <span class="en">Telegram Bot</span> ដើម្បីសាកល្បងជាមួយអ្នកប្រើប្រាស់ពិត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Conditional Variational Autoencoder (CVAE)</span></td>
+                <td>ជាប្រភេទម៉ូដែលបណ្តាញសរសៃប្រសាទ (Neural Network) ដែលរៀនពីរបៀបបង្កើតទិន្នន័យថ្មីៗ (ដូចជាប្រយោគ) ផ្អែកលើលក្ខខណ្ឌជាក់លាក់ណាមួយ (ឧទាហរណ៍៖ អារម្មណ៍សប្បាយ ឬខឹង) ដោយប្រើប្រាស់អថេរកំបាំង (Latent Variables) ដើម្បីបង្កើតភាពចម្រុះក្នុងការឆ្លើយតប។</td>
+                <td>ដូចជាការប្រាប់ចុងភៅម្នាក់ឱ្យធ្វើម្ហូប "សាច់មាន់" (ជាលក្ខខណ្ឌ) ប៉ុន្តែចុងភៅអាចច្នៃធ្វើមាន់ឆាខ្ញី ឬសម្លម្ជូរមាន់ (ជាភាពចម្រុះ) តាមគំនិតច្នៃប្រឌិតរបស់គាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transformer</span></td>
+                <td>ជាស្ថាបត្យកម្មដ៏មានឥទ្ធិពលមួយក្នុងបញ្ញាសិប្បនិម្មិត (AI) ដែលពូកែខាងចាប់យកទំនាក់ទំនងរវាងពាក្យនិមួយៗក្នុងប្រយោគវែងៗ តាមរយៈយន្តការយកចិត្តទុកដាក់ (Attention Mechanism) ដោយមិនចាំបាច់អានពាក្យតាមលំដាប់តួដូចម៉ូដែលជំនាន់មុនៗ (RNNs) ឡើយ។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលអានសៀវភៅមួយទំព័រ ហើយដឹងភ្លាមៗថាពាក្យណាខ្លះទាក់ទងគ្នា ទោះបីជាវានៅឆ្ងាយពីគ្នាក៏ដោយ ជាជាងការខំអានចាំម្តងមួយពាក្យៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-head Attention</span></td>
+                <td>ជាយន្តការមួយនៅក្នុងស្ថាបត្យកម្ម Transformer ដែលអនុញ្ញាតឱ្យម៉ូដែលផ្តោតការយកចិត្តទុកដាក់ទៅលើផ្នែកផ្សេងៗគ្នានៃប្រយោគក្នុងពេលតែមួយ ដើម្បីយល់ពីអត្ថន័យ និងបរិបទបានកាន់តែស៊ីជម្រៅ។</td>
+                <td>ដូចជាក្រុមអ្នកស៊ើបអង្កេតជាច្រើននាក់ពិនិត្យមើលរូបភាពតែមួយ ប៉ុន្តែម្នាក់ៗផ្តោតលើចំណុចផ្សេងៗគ្នា (ម្នាក់មើលមុខសញ្ញា ម្នាក់មើលទេសភាព ម្នាក់មើលអាវុធ) រួចយកព័ត៌មានមកផ្គុំគ្នាទើបយល់រឿងក្តីច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">KL-divergence</span></td>
+                <td>ជារង្វាស់គណិតវិទ្យាដែលប្រើសម្រាប់វាស់ស្ទង់ថាតើរបាយប្រូបាប៊ីលីតេ (Probability Distribution) មួយ មានភាពខុសគ្នាពីរបាយប្រូបាប៊ីលីតេមួយទៀតកម្រិតណា។ នៅក្នុងការបង្កើតអត្ថបទ វាជួយទប់ស្កាត់ម៉ូដែលកុំឱ្យបង្កើតទិន្នន័យដែលខុសឆ្ងាយពីទម្រង់ដើមពេក។</td>
+                <td>ដូចជាការប្រៀបធៀបរូបគំនូរដែលអ្នកគូរផ្តាំផ្ញើឱ្យកូនជាងចម្លងតាម បើកូនជាងគូរខុសពីរូបដើមកាន់តែខ្លាំង នោះតម្លៃនៃភាពខុសគ្នា (KL-divergence) គឺកាន់តែខ្ពស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Latent Variables</span></td>
+                <td>ជាអថេរលាក់កំបាំង ឬលក្ខណៈដែលម៉ូដែលទាញយកពីទិន្នន័យ ប៉ុន្តែមិនត្រូវបានបង្ហាញឱ្យឃើញច្បាស់នៅពេលបញ្ចូលទិន្នន័យនោះទេ វាជួយតំណាងឱ្យគំនិត ឬទម្រង់អរូបីនៃការឆ្លើយតបដើម្បីបង្កើតអត្ថបទ។</td>
+                <td>ដូចជា "ទេពកោសល្យសិល្បៈ" របស់មនុស្សម្នាក់ ដែលយើងមិនអាចវាស់វែងឬមើលឃើញផ្ទាល់ភ្នែក ប៉ុន្តែយើងដឹងថាវាមានវត្តមានតាមរយៈលទ្ធផលស្នាដៃដ៏ល្អរបស់ពួកគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Perplexity</span></td>
+                <td>ជារង្វាស់ស្តង់ដារសម្រាប់វាយតម្លៃម៉ូដែលភាសា (Language Model) ដែលបង្ហាញពីកម្រិតនៃភាពមិនប្រាកដប្រជា (Uncertainty) របស់ម៉ូដែលនៅពេលទស្សន៍ទាយពាក្យបន្ទាប់។ ពិន្ទុ Perplexity កាន់តែទាប មានន័យថាម៉ូដែលទស្សន៍ទាយកាន់តែត្រឹមត្រូវ និងពូកែ។</td>
+                <td>ដូចជាការឱ្យសិស្សទាយពាក្យចុងបួនក្នុងកំណាព្យ បើសិស្សនោះពូកែ គេនឹងមិនសូវស្ទាក់ស្ទើរទេ (Perplexity ទាប) តែបើគេរៀនខ្សោយ គេនឹងទាយទាំងស្រពេចស្រពិលមិនដឹងត្រូវឬខុស (Perplexity ខ្ពស់)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">RoBERTa</span></td>
+                <td>ជាម៉ូដែលបណ្តាញសរសៃប្រសាទកម្រិតខ្ពស់ផ្អែកលើ Transformer ដែលត្រូវបានបង្ហាត់ជាមុន (Pre-trained) លើទិន្នន័យអត្ថបទភាសាអង់គ្លេសយ៉ាងច្រើនសន្ធឹកសន្ធាប់ ដើម្បីឱ្យវាមានសមត្ថភាពយល់ដឹងពីវាក្យសម្ព័ន្ធ និងបរិបទភាសាបានយ៉ាងជ្រៅជ្រះ មុននឹងយកមកប្រើសម្រាប់កិច្ចការងារបន្តបន្ទាប់។</td>
+                <td>ដូចជាអ្នកប្រាជ្ញផ្នែកអក្សរសាស្ត្រម្នាក់ដែលបានអានសៀវភៅអស់រាប់លានក្បាលរួចមកហើយ ដូច្នេះនៅពេលយើងឱ្យគាត់រៀនធ្វើកិច្ចការថ្មី (ដូចជាឆាតឆ្លើយឆ្លង) គាត់អាចរៀនឆាប់ចេះ និងធ្វើបានល្អបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">seq2seq (Sequence-to-sequence)</span></td>
+                <td>ជាទម្រង់រចនាសម្ព័ន្ធម៉ូដែល AI ដែលទទួលយកសំណុំទិន្នន័យ ឬពាក្យមួយជួរ (Sequence) ជាធាតុបញ្ចូល (ឧ. សំណួរ) ហើយបង្កើតសំណុំទិន្នន័យមួយជួរទៀតជាលទ្ធផល (ឧ. ចម្លើយ) ដែលទម្រង់នេះមានការពេញនិយមខ្លាំងក្នុងការបកប្រែភាសា និងបង្កើត Chatbot។</td>
+                <td>ដូចជាអ្នកបកប្រែផ្ទាល់មាត់ម្នាក់ ដែលស្តាប់ឮប្រយោគមួយចប់ជាភាសាអង់គ្លេស រួចគិត រួចក៏និយាយបកប្រែប្រយោគនោះចេញមកវិញជាភាសាខ្មែរតាមលំដាប់លំដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-sequential-modeling-applications-2021.html">
+                    <span class="km">ការធ្វើម៉ូដែលតាមលំដាប់លំដោយដោយប្រើបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត និងកម្មវិធីប្រើប្រាស់</span><br>
+                    <span class="en article-original-title">Neural Sequential Modeling and Applications</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-network-methods-nlp-review-2017.html">
+                    <span class="km">វិធីសាស្ត្របណ្ដាញសរសៃប្រសាទសម្រាប់ការដំណើរការភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Network Methods for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-transfer-learning-nlp-ruder-2019.html">
+                    <span class="km">ការរៀនផ្ទេរចំណេះដឹងតាមបណ្ដាញសរសៃប្រសាទសម្រាប់ការកែច្នៃភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Transfer Learning for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/solving-number-word-problems-semantic-parsing-2015.html">
+                    <span class="km">ការដោះស្រាយចំណោទលេខដោយស្វ័យប្រវត្តិតាមរយៈការវិភាគអត្ថន័យ និងការគិតហេតុផល</span><br>
+                    <span class="en article-original-title">Automatically Solving Number Word Problems by Semantic Parsing and Reasoning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/foundation-models-nlp-paass-2023.html">
+                    <span class="km">ម៉ូដែលមូលដ្ឋានសម្រាប់ដំណើរការភាសាធម្មជាតិ៖ ម៉ូដែលភាសាដែលបានបង្វឹកជាមុនរួមបញ្ចូលជាមួយប្រព័ន្ធផ្សព្វផ្សាយ</span><br>
+                    <span class="en article-original-title">Foundation Models for Natural Language Processing: Pre-trained Language Models Integrating Media</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Conditional+Variational+Autoencoders+for+diverse+text+generation" target="_blank" rel="noopener"><span class="en">Conditional Variational Autoencoders for diverse text generation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=RoBERTa+fine-tuning+strategies+for+conversational+AI+and+chatbots" target="_blank" rel="noopener"><span class="en">RoBERTa fine-tuning strategies for conversational AI and chatbots</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=EmpatheticDialogues+dataset+emotion+classification+and+evaluation" target="_blank" rel="noopener"><span class="en">EmpatheticDialogues dataset emotion classification and evaluation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=KL+annealing+and+bag-of-words+loss+in+VAE+natural+language+processing" target="_blank" rel="noopener"><span class="en">KL annealing and bag-of-words loss in VAE natural language processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Reinforcement+learning+approaches+for+multi-turn+empathetic+dialog+systems" target="_blank" rel="noopener"><span class="en">Reinforcement learning approaches for multi-turn empathetic dialog systems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>
