@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការអនុវត្តការស្រង់ពាក្យគន្លឹះដោយប្រើប្រាស់ប្រេកង់ពាក្យ-ប្រេកង់ឯកសារច្រាស (TF-IDF) ក្នុងភាសា Python - Implementation of Keyword Extraction using Term Frequency-Inverse Document Fr... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការអនុវត្តការស្រង់ពាក្យគន្លឹះដោយប្រើប្រាស់ប្រេកង់ពាក្យ-ប្រេក។ ការស្រាវជ្រាវនេះដោះស្រាយពីតម្រូវការក្នុងការទាញយកព័ត៌មាន និងពាក្យគន្លឹះសំខាន់ៗចេញពីទិន្នន័យអត្ថបទដ...">
+    
+    <meta name="keywords" content="Keyword Extraction, TF-IDF, Python, Text Mining, Machine Learning, Natural Language Processing, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/keyword-extraction-tfidf-python-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/keyword-extraction-tfidf-python-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/keyword-extraction-tfidf-python-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/keyword-extraction-tfidf-python-2023.html">
+    <meta property="og:title" content="ការអនុវត្តការស្រង់ពាក្យគន្លឹះដោយប្រើប្រាស់ប្រេកង់ពាក្យ-ប្រេកង់ឯកសារច្រាស (TF-IDF) ក្នុងភាសា Python | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយពីតម្រូវការក្នុងការទាញយកព័ត៌មាន និងពាក្យគន្លឹះសំខាន់ៗចេញពីទិន្នន័យអត្ថបទដែលមានទំហំធំ ដោយប្រើប្រាស់បច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត។ វាផ្តោតលើការយកឈ្នះដែនកំណត់នៃការរាប់ប្រេកង់ពា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2023, International Journal of Computer Applications-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Keyword Extraction">
+    
+    <meta property="article:tag" content="TF-IDF">
+    
+    <meta property="article:tag" content="Python">
+    
+    <meta property="article:tag" content="Text Mining">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការអនុវត្តការស្រង់ពាក្យគន្លឹះដោយប្រើប្រាស់ប្រេកង់ពាក្យ-ប្រេកង់ឯកសារច្រាស (TF-IDF) ក្នុងភាសា Python">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយពីតម្រូវការក្នុងការទាញយកព័ត៌មាន និងពាក្យគន្លឹះសំខាន់ៗចេញពីទិន្នន័យអត្ថបទដែលមានទំហំធំ ដោយប្រើប្រាស់បច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត។ វាផ្តោតលើការយកឈ្នះដែនកំណត់នៃការរាប់ប្រេកង់ពា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1780\u17b6\u179a\u179f\u17d2\u179a\u1784\u17cb\u1796\u17b6\u1780\u17d2\u1799\u1782\u1793\u17d2\u179b\u17b9\u17c7\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u1796\u17b6\u1780\u17d2\u1799-\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u17af\u1780\u179f\u17b6\u179a\u1785\u17d2\u179a\u17b6\u179f (TF-IDF) \u1780\u17d2\u1793\u17bb\u1784\u1797\u17b6\u179f\u17b6 Python",
+      "name": "Implementation of Keyword Extraction using Term Frequency-Inverse Document Frequency (TF-IDF) in Python",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1796\u17b8\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793 \u1793\u17b7\u1784\u1796\u17b6\u1780\u17d2\u1799\u1782\u1793\u17d2\u179b\u17b9\u17c7\u179f\u17c6\u1781\u17b6\u1793\u17cb\u17d7\u1785\u17c1\u1789\u1796\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a2\u178f\u17d2\u1790\u1794\u1791\u178a\u17c2\u179b\u1798\u17b6\u1793\u1791\u17c6\u17a0\u17c6\u1792\u17c6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u17d4 \u179c\u17b6\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u1799\u1780\u1788\u17d2\u1793\u17c7\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb\u1793\u17c3\u1780\u17b6\u179a\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u1796\u17b6\u1780\u17d2\u1799\u1792\u1798\u17d2\u1798\u178f\u17b6 (Term Frequency) \u178a\u17c2\u179b\u178f\u17c2\u1784\u178f\u17c2\u1795\u17d2\u178f\u179b\u17cb\u178f\u1798\u17d2\u179b\u17c3\u1781\u17d2\u1796\u179f\u17cb\u178a\u179b\u17cb\u1796\u17b6\u1780\u17d2\u1799\u1791\u17bc\u1791\u17c5\u178a\u17c2\u179b\u1782\u17d2\u1798\u17b6\u1793\u17a2\u178f\u17d2\u1790\u1793\u17d0\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/keyword-extraction-tfidf-python-2023.html",
+      "author": [{"@type": "Person", "name": "Ahmad Farhan AlShammari (Department of Computer and Information Systems, College of Business Studies, PAAET, Kuwait)"}],
+      "datePublished": "2023, International Journal of Computer Applications",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Implementation of Keyword Extraction using Term Frequency-Inverse Document Frequency (TF-IDF) in Python",
+        "url": "https://www.ijcaonline.org"
+      },
+      "keywords": ["Keyword Extraction", "TF-IDF", "Python", "Text Mining", "Machine Learning", "Natural Language Processing"],
+      "about": "Artificial Intelligence / Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1780\u17b6\u179a\u179f\u17d2\u179a\u1784\u17cb\u1796\u17b6\u1780\u17d2\u1799\u1782\u1793\u17d2\u179b\u17b9\u17c7\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u1796\u17b6\u1780\u17d2\u1799-\u1794\u17d2\u179a\u17c1\u1780\u1784\u17cb\u17af\u1780\u179f\u17b6\u179a\u1785\u17d2\u179a\u17b6\u179f (TF-IDF) \u1780\u17d2\u1793\u17bb\u1784\u1797\u17b6\u179f\u17b6 Python",
+          "item": "https://khmerresearch.com/papers/technology/keyword-extraction-tfidf-python-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការអនុវត្តការស្រង់ពាក្យគន្លឹះដោយប្រើប្រាស់ប្រេកង់ពាក្យ-ប្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Implementation of Keyword Extraction using Term Frequency-Inverse Document Frequency (TF-IDF) in Python<br>
+        
+        <strong>Source:</strong> <a href="https://www.ijcaonline.org" target="_blank" rel="noopener">www.ijcaonline.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការអនុវត្តការស្រង់ពាក្យគន្លឹះដោយប្រើប្រាស់ប្រេកង់ពាក្យ-ប្រេកង់ឯកសារច្រាស (TF-IDF) ក្នុងភាសា Python</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Implementation of Keyword Extraction using Term Frequency-Inverse Document Frequency (TF-IDF) in Python</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ahmad Farhan AlShammari (Department of Computer and Information Systems, College of Business Studies, PAAET, Kuwait)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, International Journal of Computer Applications</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Artificial Intelligence / Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយពីតម្រូវការក្នុងការទាញយកព័ត៌មាន និងពាក្យគន្លឹះសំខាន់ៗចេញពីទិន្នន័យអត្ថបទដែលមានទំហំធំ ដោយប្រើប្រាស់បច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិត។ វាផ្តោតលើការយកឈ្នះដែនកំណត់នៃការរាប់ប្រេកង់ពាក្យធម្មតា (Term Frequency) ដែលតែងតែផ្តល់តម្លៃខ្ពស់ដល់ពាក្យទូទៅដែលគ្មានអត្ថន័យ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានអភិវឌ្ឍកម្មវិធីស្រង់ពាក្យគន្លឹះដោយប្រើវិធីសាស្ត្រផ្អែកលើប្រេកង់នៅក្នុងភាសាការសរសេរកូដ Python ដោយឆ្លងកាត់ការអនុវត្តចំនួន ៨ ជំហានចម្បង។
+        
+        <ul>
+            
+            <li>ការរៀបចំអត្ថបទជាមុន (Preprocessing Text): ការបំប្លែងអក្សរតូច ការលុបសញ្ញាវណ្ណយុត្តិ និងការលុបពាក្យដែលមិនចាំបាច់ (Stopwords)។</li>
+            
+            <li>ការបង្កើតកញ្ចប់ពាក្យ និងប្រេកង់ពាក្យ (Bag of Words & Term Frequency): ការបំបែកអត្ថបទជាពាក្យ និងការគណនាភាពញឹកញាប់នៃពាក្យនីមួយៗក្នុងឯកសារ។</li>
+            
+            <li>ការគណនាប្រេកង់ឯកសារច្រាស (Inverse Document Frequency - IDF): ការវាស់ស្ទង់សារៈសំខាន់នៃពាក្យធៀបនឹងសំណុំឯកសារទាំងមូលដោយប្រើរូបមន្តលោការីត (Logarithm)។</li>
+            
+            <li>ការថ្លឹងទម្ងន់ TF-IDF និងការតម្រៀប (TF-IDF Weighting & Sorting): ការគុណតម្លៃ TF និង IDF រួចតម្រៀបពាក្យគន្លឹះតាមលំដាប់ពីធំទៅតូចដើម្បីស្វែងរកពាក្យដែលលេចធ្លោជាងគេ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>កម្មវិធីដែលបានអភិវឌ្ឍដោយប្រើភាសា Python អាចដំណើរការជំហានមូលដ្ឋានទាំង ៨ នៃការស្រង់ពាក្យគន្លឹះបានយ៉ាងជោគជ័យដោយមិនចាំបាច់ប្រើប្រាស់បណ្ណាល័យបន្ថែម (Additional Libraries) ក្រៅពីអនុគមន៍ស្តង់ដាររបស់ Python ឡើយ។</li>
+            
+            <li>ការធ្វើតេស្តលើអត្ថបទពិសោធន៍ពី Wikipedia បានបង្ហាញថាប្រព័ន្ធនេះអាចកំណត់អត្តសញ្ញាណពាក្យគន្លឹះដែលពិពណ៌នាពីខ្លឹមសារអត្ថបទបានយ៉ាងត្រឹមត្រូវតាមរយៈការផ្តល់ទម្ងន់ TF-IDF ។</li>
+            
+            <li>វិធីសាស្ត្រ TF-IDF បានបង្ហាញពីប្រសិទ្ធភាពខ្ពស់ក្នុងការទាញយកលក្ខណៈតំណាងនៃអត្ថបទ ដែលជាមូលដ្ឋានគ្រឹះដ៏សំខាន់សម្រាប់កម្មវិធីរៀនម៉ាស៊ីន (Machine Learning) និងការជីកកកាយអត្ថបទ (Text Mining) ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Term Frequency (TF)</span></strong><br>ការគណនាប្រេកង់ពាក្យ</td>
+                <td>ងាយស្រួលក្នុងការគណនាដោយផ្អែកលើចំនួនដងដែលពាក្យមួយលេចឡើងក្នុងឯកសារ។ វាជាមូលដ្ឋានគ្រឹះដំបូងសម្រាប់ការវិភាគអត្ថបទ។</td>
+                <td>មានចំណុចខ្សោយដោយសារពាក្យទូទៅ (ឧទាហរណ៍៖ the, is, are) ទទួលបានតម្លៃខ្ពស់ ទោះបីជាគ្មានអត្ថន័យសំខាន់ក្នុងការពណ៌នាអត្ថបទក៏ដោយ។</td>
+                <td>បានលើកឡើងក្នុងឯកសារថាជាវិធីសាស្ត្រស្ថិតិដំបូង (បង្កើតនៅឆ្នាំ១៩៥៨ ដោយ Hans Luhn) តែត្រូវបានជំនួសដោយវិធីសាស្ត្រទំនើបជាងមុន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Term Frequency-Inverse Document Frequency (TF-IDF)</span></strong><br>ការគណនាប្រេកង់ពាក្យ និងប្រេកង់ឯកសារច្រាស</td>
+                <td>យកឈ្នះដែនកំណត់របស់ TF ដោយវាស់ស្ទង់សារៈសំខាន់នៃពាក្យធៀបនឹងសំណុំឯកសារទាំងមូល ធ្វើឱ្យពាក្យគន្លឹះពិតប្រាកដលេចធ្លោ។ វាមានប្រសិទ្ធភាពខ្ពស់ក្នុងការស្រង់ពាក្យគន្លឹះ។</td>
+                <td>មិនបានចាប់យកអត្ថន័យស៊ីជម្រៅ (Semantic Meaning) ឬបរិបទនៃពាក្យដូចវិធីសាស្ត្របណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Networks) ទំនើបនោះទេ។</td>
+                <td>កម្មវិធីដែលបានអភិវឌ្ឍអាចដំណើរការជំហានមូលដ្ឋានទាំង ៨ និងទាញយកពាក្យគន្លឹះ ព្រមទាំងតម្រៀបតាមតម្លៃទម្ងន់បានយ៉ាងត្រឹមត្រូវពីអត្ថបទ Wikipedia ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះប្រើប្រាស់ធនធានតិចតួចបំផុត ដោយសារវាពឹងផ្អែកតែលើអនុគមន៍ស្តង់ដាររបស់ភាសា Python ដោយមិនចាំបាច់ដំឡើងបណ្ណាល័យស្មុគស្មាញឡើយ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា <span class="en">Python</span> ស្តង់ដារ ដោយមិនប្រើប្រាស់បណ្ណាល័យបន្ថែមដូចជា <span class="en">NLTK</span>, <span class="en">Pandas</span> ឬ <span class="en">Scikit-Learn</span> នៅក្នុងកូដផ្ទាល់ឡើយ។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់អត្ថបទពិសោធន៍ខ្នាតតូច (Experimental Text) ដែលទាញយកពីគេហទំព័រ <span class="en">Wikipedia</span> ។</li>
+        
+        <li><strong>Hardware:</strong> មិនត្រូវការកុំព្យូទ័រដែលមានកម្លាំងខ្លាំង (No GPU required) ដោយសារទំហំទិន្នន័យតូច និងក្បួនដោះស្រាយមានភាពសាមញ្ញ។ អាចដំណើរការលើកុំព្យូទ័រយួរដៃធម្មតា។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងមូលដ្ឋានផ្នែកការសរសេរកូដ <span class="en">Python</span> និងការយល់ដឹងពីគណិតវិទ្យា (Logarithm) សម្រាប់ការគណនាទម្ងន់ពាក្យ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះបានធ្វើតេស្តទៅលើតែអត្ថបទពិសោធន៍ជាភាសាអង់គ្លេសដែលទាញយកពី Wikipedia ប៉ុណ្ណោះ ដែលមានទម្រង់វេយ្យាករណ៍ច្បាស់លាស់ និងមានការដកឃ្លារវាងពាក្យ។ សម្រាប់ប្រទេសកម្ពុជា ការប្រើប្រាស់វិធីសាស្ត្រនេះដោយផ្ទាល់នឹងជួបឧបសគ្គ ដោយសារភាសាខ្មែរមិនប្រើដកឃ្លាដើម្បីបំបែកពាក្យទេ ដូច្នេះទាមទារឱ្យមានការប្រើប្រាស់ឧបករណ៍បំបែកពាក្យ (Word Segmentation Tool) ជាមុនសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានភាពសាមញ្ញក៏ដោយ វិធីសាស្ត្រ TF-IDF នេះមានអត្ថប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់ការគ្រប់គ្រង និងស្វែងរកឯកសារឌីជីថលនៅក្នុងស្ថាប័ននានានៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>បណ្ណាល័យជាតិ និងបណ្ណាល័យសាកលវិទ្យាល័យ (Digital Libraries):</strong> អាចប្រើដើម្បីបង្កើតប្រព័ន្ធស្រង់ពាក្យគន្លឹះស្វ័យប្រវត្តិពីសារណា និក្ខេបបទ ឬសៀវភៅឌីជីថល ដើម្បីងាយស្រួលក្នុងការស្វែងរក (Search Indexing) ។</li>
+            
+            <li><strong>ស្ថាប័នព័ត៌មាន និងសារព័ត៌មានអនឡាញ (News Agencies):</strong> ជួយក្នុងការរៀបចំចំណាត់ថ្នាក់អត្ថបទព័ត៌មានស្វ័យប្រវត្តិ (Article Categorization) និងជួយណែនាំអត្ថបទពាក់ព័ន្ធទៅកាន់អ្នកអានដោយផ្អែកលើពាក្យគន្លឹះ។</li>
+            
+            <li><strong>ក្រសួង និងស្ថាប័នរដ្ឋាភិបាល (e-Government Sector):</strong> គាំទ្រដល់ប្រព័ន្ធរដ្ឋាភិបាលអេឡិចត្រូនិក ក្នុងការចាត់ថ្នាក់ឯកសារផ្លូវការ និងការទាញយកប្រធានបទសំខាន់ៗពីរបាយការណ៍កិច្ចប្រជុំវែងៗដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអនុវត្តក្បួនដោះស្រាយ TF-IDF គឺជាជំហានចាប់ផ្តើមដ៏ល្អមួយក្នុងការអភិវឌ្ឍប្រព័ន្ធស្រាវជ្រាវទិន្នន័យអត្ថបទនៅកម្ពុជា ប៉ុន្តែទាមទារយ៉ាងចាំបាច់នូវការសហការបញ្ចូលជាមួយឧបករណ៍បំបែកពាក្យភាសាខ្មែរ ដើម្បីអាចដំណើរការបានពេញលេញ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃភាសាការសរសេរកូដ:</strong> ចាប់ផ្តើមរៀនសរសេរកូដមូលដ្ឋានជាមួយ <span class="en">Python</span> ដោយផ្តោតលើការគ្រប់គ្រងទិន្នន័យប្រភេទ String និង Data Structures ដូចជា Lists, Sets, និង Dictionaries ដែលជាធាតុផ្សំសំខាន់ក្នុងអត្ថបទនេះ។</li>
+            
+            <li><strong>អនុវត្តការសម្អាតទិន្នន័យអត្ថបទ (Text Preprocessing):</strong> អនុវត្តការលុបសញ្ញាវណ្ណយុត្តិ និងពាក្យមិនចាំបាច់ (Stopwords) ដោយសាកល្បងសរសេរអនុគមន៍ដោយខ្លួនឯង ឬប្រើប្រាស់បណ្ណាល័យ <span class="en">NLTK</span> សម្រាប់អត្ថបទភាសាអង់គ្លេសដើម្បីស្វែងយល់ពីគំរូ។</li>
+            
+            <li><strong>រៀនគណនាដោយផ្ទាល់នូវក្បួនដោះស្រាយ TF-IDF:</strong> សរសេរកូដដើម្បីគណនា Term Frequency និង Inverse Document Frequency តាមរូបមន្តគណិតវិទ្យាដូចមានក្នុងឯកសារ មុននឹងប្តូរទៅប្រើប្រាស់បណ្ណាល័យសម្រួលការងារដូចជា <span class="en">Scikit-Learn (TfidfVectorizer)</span> ។</li>
+            
+            <li><strong>រួមបញ្ចូលជាមួយប្រព័ន្ធបំបែកពាក្យភាសាខ្មែរ:</strong> ដើម្បីអាចប្រើជាមួយអត្ថបទខ្មែរបាន និស្សិតត្រូវសិក្សាពីការប្រើប្រាស់ឧបករណ៍បំបែកពាក្យ (Word Segmenter) ដូចជាបណ្ណាល័យ <span class="en">khmer-nltk</span> ឬ <span class="en">SeamKhao</span> មុននឹងបញ្ចូលពាក្យទាំងនោះទៅក្នុងប្រព័ន្ធ TF-IDF ។</li>
+            
+            <li><strong>អភិវឌ្ឍគម្រោងតូចមួយ (Mini-Project) ដាក់ឱ្យដំណើរការ:</strong> បង្កើតកម្មវិធីស្រង់ពាក្យគន្លឹះពីអត្ថបទព័ត៌មានខ្មែរ និងបង្ហាញលទ្ធផលនៅលើគេហទំព័រ (Web Interface) ដោយប្រើប្រាស់ <span class="en">Streamlit</span> ឬ <span class="en">Flask</span> ដើម្បីបន្ថែមជាស្នាដៃក្នុងប្រវត្តិរូប (Portfolio) របស់អ្នក។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Term Frequency (TF)</span></td>
+                <td>ជារង្វាស់ដែលគណនាថាពាក្យមួយលេចឡើងប៉ុន្មានដងនៅក្នុងឯកសារតែមួយ ដោយធៀបនឹងចំនួនពាក្យសរុបក្នុងឯកសារនោះ។ វាមានគោលបំណងកំណត់ថាតើពាក្យនោះមានភាពសកម្ម ឬសំខាន់កម្រិតណានៅក្នុងអត្ថបទជាក់លាក់មួយ។</td>
+                <td>ដូចជាការរាប់ចំនួនដងដែលសិស្សម្នាក់លើកដៃឆ្លើយសំណួរក្នុងម៉ោងសិក្សា ដើម្បីដឹងថាគាត់សកម្មប៉ុណ្ណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Inverse Document Frequency (IDF)</span></td>
+                <td>ជារង្វាស់ដែលវាយតម្លៃភាពកម្ររបស់ពាក្យនៅក្នុងសំណុំឯកសារទាំងមូល (Corpus)។ វាមានតួនាទីកាត់បន្ថយទម្ងន់នៃពាក្យដែលលេចឡើងស្ទើរតែគ្រប់ឯកសារ (ដូចជា "the", "and") និងបង្កើនទម្ងន់ដល់ពាក្យដែលកម្រមាន។</td>
+                <td>ដូចជារបស់កម្រ (វត្ថុបុរាណ) តែងតែមានតម្លៃខ្ពស់ ចំណែករបស់ដែលមានលក់នៅគ្រប់ទីកន្លែងទូទៅមានតម្លៃថោក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TF-IDF</span></td>
+                <td>ជារូបមន្តគណិតវិទ្យាដែលគុណតម្លៃ TF និង IDF បញ្ចូលគ្នា ដើម្បីថ្លឹងទម្ងន់រកពាក្យគន្លឹះដែលលេចធ្លោខ្លាំងក្នុងឯកសារមួយ ប៉ុន្តែកម្រមានក្នុងឯកសារដទៃទៀត ដែលធ្វើឱ្យវាជាពាក្យតំណាងដ៏ល្អបំផុតសម្រាប់ឯកសារនោះ។</td>
+                <td>ដូចជាការស្វែងរកកីឡាករដែលមិនត្រឹមតែពូកែក្នុងក្រុមរបស់ខ្លួន (TF) ប៉ុន្តែក៏មានជំនាញពិសេសដែលកម្រមានកីឡាករណាក្នុងលីគអាចធ្វើបាន (IDF) ផងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bag of Words (BoW)</span></td>
+                <td>ជាទម្រង់តំណាងទិន្នន័យអត្ថបទដោយប្រមូលផ្តុំពាក្យទាំងអស់ដែលមានក្នុងអត្ថបទ ដោយមិនខ្វល់ពីលំដាប់លំដោយ វេយ្យាករណ៍ ឬបរិបទរបស់វាឡើយ ពោលគឺរាប់តែវត្តមាន និងចំនួនដងនៃពាក្យនីមួយៗប៉ុណ្ណោះ។</td>
+                <td>ដូចជាការយកគ្រឿងផ្សំទាំងអស់បោះចូលក្នុងថង់តែមួយ រួចក្រឡុកបញ្ចូលគ្នា ដោយមិនខ្វល់ថាគ្រឿងផ្សំណាដាក់មុន ឬដាក់ក្រោយឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stopwords</span></td>
+                <td>ជាពាក្យទូទៅដែលប្រើញឹកញាប់ក្នុងភាសា (ឧទាហរណ៍៖ "is", "am", "are", "the") ប៉ុន្តែមិនមានអត្ថន័យសំខាន់ក្នុងការពណ៌នាពីខ្លឹមសារចម្បងនៃអត្ថបទ ដែលជាទូទៅត្រូវលុបចោលមុនពេលឱ្យកុំព្យូទ័រធ្វើការវិភាគទិន្នន័យ។</td>
+                <td>ដូចជាសំបកស្ករគ្រាប់ដែលយើងត្រូវបកចោលមុននឹងញ៉ាំ ដោយសារវាមិនមានរសជាតិអ្វីនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tokenization</span></td>
+                <td>ជាដំណើរការបំបែកកញ្ចប់ទិន្នន័យអត្ថបទ ឬប្រយោគវែងៗ ទៅជាកង់តូចៗ (Tokens) ដែលជាទូទៅអាចជាពាក្យនីមួយៗ ឬកន្សោមពាក្យ ដើម្បីងាយស្រួលឱ្យក្បួនដោះស្រាយកុំព្យូទ័រធ្វើការគណនាបន្ត។</td>
+                <td>ដូចជាការហាន់សាច់គោមួយដុំធំទៅជាចំណិតតូចៗ ដើម្បីងាយស្រួលយកទៅចម្អិន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vector Space Model (VSM)</span></td>
+                <td>ជាទម្រង់គណិតវិទ្យាដែលបំប្លែងឯកសារអត្ថបទទៅជាវ៉ិចទ័រនៃតួលេខ (ម៉ាទ្រីស) ដើម្បីឱ្យកុំព្យូទ័រអាចគណនា វាស់ស្ទង់ភាពស្រដៀងគ្នា ឬចាត់ថ្នាក់ឯកសារទាំងនោះដោយប្រើរូបមន្តពីជគណិតបាន។</td>
+                <td>ដូចជាការបំប្លែងលក្ខណៈសម្បត្តិ និងចំណង់ចំណូលចិត្តរបស់មនុស្សម្នាក់ៗទៅជាតារាងពិន្ទុលេខ ដើម្បីងាយស្រួលប្រៀបធៀបរកអ្នកដែលមានចំណូលចិត្តស្រដៀងគ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/answer-sheet-evaluation-nlp-2024.html">
+                    <span class="km">ប្រព័ន្ធវាយតម្លៃសន្លឹកកិច្ចការប្រឡងដោយប្រើប្រាស់ NLP</span><br>
+                    <span class="en article-original-title">Answer Sheet Evalution System using NLP</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ai-methods-nlp-comprehensive-review-2024.html">
+                    <span class="km">វិធីសាស្ត្របញ្ញាសិប្បនិម្មិតក្នុងដំណើរការភាសាធម្មជាតិ៖ ការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយ</span><br>
+                    <span class="en article-original-title">Artificial Intelligence Methods in Natural Language Processing: A Comprehensive Review</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/smart-grid-cybersecurity-ml-nlp-2023.html">
+                    <span class="km">ការពង្រឹងសន្តិសុខតាមប្រព័ន្ធអ៊ីនធឺណិតសម្រាប់បណ្តាញអគ្គិសនីឆ្លាតវៃ៖ ការស៊ើបអង្កេតស៊ីជម្រៅស្តីពីការរួមបញ្ចូលគ្នារវាងការរៀនរបស់ម៉ាស៊ីន និងការកែច្នៃភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Strengthening Smart Grid Cybersecurity: An In-Depth Investigation into the Fusion of Machine Learning and Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/empirical-analysis-sentiment-machine-learning-2023.html">
+                    <span class="km">ការវិភាគតាមបែបពិសោធន៍នៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនដែលមាន និងគ្មានការត្រួតពិនិត្យ ជាមួយនឹងការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព</span><br>
+                    <span class="en article-original-title">Empirical Analysis of Supervised and Unsupervised Machine Learning Algorithms with Aspect-Based Sentiment Analysis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/artificial-intelligence-and-subfields.html">
+                    <span class="km">បញ្ញាសិប្បនិម្មិត និងអនុវិស័យ</span><br>
+                    <span class="en article-original-title">Artificial Intelligence and Subfields</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=TF-IDF+vs+Word2Vec+semantic+keyword+extraction+performance" target="_blank" rel="noopener"><span class="en">TF-IDF vs Word2Vec semantic keyword extraction performance</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Text+preprocessing+techniques+and+word+segmentation+for+non-Latin+languages" target="_blank" rel="noopener"><span class="en">Text preprocessing techniques and word segmentation for non-Latin languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Implementing+TF-IDF+vectorization+using+Scikit-Learn+Python" target="_blank" rel="noopener"><span class="en">Implementing TF-IDF vectorization using Scikit-Learn Python</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Graph-based+keyword+extraction+TextRank+algorithm+comparison" target="_blank" rel="noopener"><span class="en">Graph-based keyword extraction TextRank algorithm comparison</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+stopwords+and+tokenization+in+Natural+Language+Processing+pipelines" target="_blank" rel="noopener"><span class="en">Handling stopwords and tokenization in Natural Language Processing pipelines</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>

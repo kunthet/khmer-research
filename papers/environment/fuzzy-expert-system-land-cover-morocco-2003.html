@@ -398,6 +398,13 @@
         <ul class="internal-articles">
             
             <li class="internal-article-link">
+                <a href="/papers/environment/land-cover-mapping-remote-sensing-2020.html">
+                    <span class="km">ការធ្វើផែនទីគម្របដីដោយប្រើប្រាស់ទិន្នន័យទូរយាន (Remote Sensing)</span><br>
+                    <span class="en article-original-title">Land Cover Mapping Using Remote Sensing Data</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/technology/image-based-atmospheric-corrections-1996.html">
                     <span class="km">ការកែតម្រូវបរិយាកាសផ្អែកលើរូបភាព - ការពិនិត្យឡើងវិញ និងកែលម្អ</span><br>
                     <span class="en article-original-title">Image-Based Atmospheric Corrections - Revisited and Improved</span>
@@ -422,13 +429,6 @@
                 <a href="/papers/agriculture/remote-sensing-vegetation-indices-crop-management-2004.html">
                     <span class="km">សន្ទស្សន៍រុក្ខជាតិទទួលបានពីការសង្កេតពីចម្ងាយ៖ ទ្រឹស្តី និងការអនុវត្តសម្រាប់ការគ្រប់គ្រងដំណាំ</span><br>
                     <span class="en article-original-title">REMOTELY SENSED VEGETATION INDICES: THEORY AND APPLICATIONS FOR CROP MANAGEMENT</span>
-                </a>
-            </li>
-            
-            <li class="internal-article-link">
-                <a href="/papers/science/digital-terrain-models-2015.html">
-                    <span class="km">គំរូផ្ទៃដីឌីជីថល</span><br>
-                    <span class="en article-original-title">Digital Terrain Models</span>
                 </a>
             </li>
             
@@ -485,6 +485,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

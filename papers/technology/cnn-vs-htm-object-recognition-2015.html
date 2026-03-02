@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរៀនស៊ីជម្រៅសម្រាប់គំហើញកុំព្យូទ័រ៖ ការប្រៀបធៀបរវាងបណ្តាញសរសៃប្រសាទ Convolutional (CNN) និងអង្គចងចាំតាមលំដាប់លំដោយពេលវេលា (HTM) លើកិច្ចការស្គាល់វត្ថុ - Deep Learning for Computer Vision: A comparison between Convolutional Neural ... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការរៀនស៊ីជម្រៅសម្រាប់គំហើញកុំព្យូទ័រ៖ ការប្រៀបធៀបរវាងបណ្តាញស។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការខ្វះខាតទិន្នន័យក្នុងកិច្ចការស្គាល់វត្ថុ (Object Recognition) ដោយស...">
+    
+    <meta name="keywords" content="Deep Learning, Computer Vision, Convolutional Neural Networks, Hierarchical Temporal Memory, Object Recognition, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/cnn-vs-htm-object-recognition-2015.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/cnn-vs-htm-object-recognition-2015.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/cnn-vs-htm-object-recognition-2015.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/cnn-vs-htm-object-recognition-2015.html">
+    <meta property="og:title" content="ការរៀនស៊ីជម្រៅសម្រាប់គំហើញកុំព្យូទ័រ៖ ការប្រៀបធៀបរវាងបណ្តាញសរសៃប្រសាទ Convolutional (CNN) និងអង្គចងចាំតាមលំដាប់លំដោយពេលវេលា (HTM) លើកិច្ចការស្គាល់វត្ថុ | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការខ្វះខាតទិន្នន័យក្នុងកិច្ចការស្គាល់វត្ថុ (Object Recognition) ដោយស្វែងយល់ថាតើក្បួនដោះស្រាយដែលយកលំនាំតាមជីវសាស្ត្រ (HTM) អាចមានដំណើរការល្អជាងវិធីសាស្ត្រស្ថិតិដោយកម្លាំ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2015-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Computer Vision">
+    
+    <meta property="article:tag" content="Convolutional Neural Networks">
+    
+    <meta property="article:tag" content="Hierarchical Temporal Memory">
+    
+    <meta property="article:tag" content="Object Recognition">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរៀនស៊ីជម្រៅសម្រាប់គំហើញកុំព្យូទ័រ៖ ការប្រៀបធៀបរវាងបណ្តាញសរសៃប្រសាទ Convolutional (CNN) និងអង្គចងចាំតាមលំដាប់លំដោយពេលវេលា (HTM) លើកិច្ចការស្គាល់វត្ថុ">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការខ្វះខាតទិន្នន័យក្នុងកិច្ចការស្គាល់វត្ថុ (Object Recognition) ដោយស្វែងយល់ថាតើក្បួនដោះស្រាយដែលយកលំនាំតាមជីវសាស្ត្រ (HTM) អាចមានដំណើរការល្អជាងវិធីសាស្ត្រស្ថិតិដោយកម្លាំ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1782\u17c6\u17a0\u17be\u1789\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u17d6 \u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179a\u179c\u17b6\u1784\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791 Convolutional (CNN) \u1793\u17b7\u1784\u17a2\u1784\u17d2\u1782\u1785\u1784\u1785\u17b6\u17c6\u178f\u17b6\u1798\u179b\u17c6\u178a\u17b6\u1794\u17cb\u179b\u17c6\u178a\u17c4\u1799\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 (HTM) \u179b\u17be\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179c\u178f\u17d2\u1790\u17bb",
+      "name": "Deep Learning for Computer Vision: A comparison between Convolutional Neural Networks and Hierarchical Temporal Memories on object recognition tasks",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1780\u17b6\u179a\u1781\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179c\u178f\u17d2\u1790\u17bb (Object Recognition) \u178a\u17c4\u1799\u179f\u17d2\u179c\u17c2\u1784\u1799\u179b\u17cb\u1790\u17b6\u178f\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178a\u17c2\u179b\u1799\u1780\u179b\u17c6\u1793\u17b6\u17c6\u178f\u17b6\u1798\u1787\u17b8\u179c\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a (HTM) \u17a2\u17b6\u1785\u1798\u17b6\u1793\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u179b\u17d2\u17a2\u1787\u17b6\u1784\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179f\u17d2\u1790\u17b7\u178f\u17b7\u178a\u17c4\u1799\u1780\u1798\u17d2\u179b\u17b6\u17c6\u1784\u1794\u17b6\u1799 (CNN) \u178a\u17c2\u179a\u17ac\u1791\u17c1\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/cnn-vs-htm-object-recognition-2015.html",
+      "author": [{"@type": "Person", "name": "Vincenzo Lomonaco (University of Bologna)"},{"@type": "Person", "name": "Davide Maltoni (Supervisor)"}],
+      "datePublished": "2015",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Deep Learning for Computer Vision: A comparison between Convolutional Neural Networks and Hierarchical Temporal Memories on object recognition tasks",
+        "url": "N/A"
+      },
+      "keywords": ["Deep Learning", "Computer Vision", "Convolutional Neural Networks", "Hierarchical Temporal Memory", "Object Recognition"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1782\u17c6\u17a0\u17be\u1789\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u17d6 \u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179a\u179c\u17b6\u1784\u1794\u178e\u17d2\u178f\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791 Convolutional (CNN) \u1793\u17b7\u1784\u17a2\u1784\u17d2\u1782\u1785\u1784\u1785\u17b6\u17c6\u178f\u17b6\u1798\u179b\u17c6\u178a\u17b6\u1794\u17cb\u179b\u17c6\u178a\u17c4\u1799\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 (HTM) \u179b\u17be\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179c\u178f\u17d2\u1790\u17bb",
+          "item": "https://khmerresearch.com/papers/technology/cnn-vs-htm-object-recognition-2015.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរៀនស៊ីជម្រៅសម្រាប់គំហើញកុំព្យូទ័រ៖ ការប្រៀបធៀបរវាងបណ្ត...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Deep Learning for Computer Vision: A comparison between Convolutional Neural Networks and Hierarchical Temporal Memories on object recognition tasks<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរៀនស៊ីជម្រៅសម្រាប់គំហើញកុំព្យូទ័រ៖ ការប្រៀបធៀបរវាងបណ្តាញសរសៃប្រសាទ Convolutional (CNN) និងអង្គចងចាំតាមលំដាប់លំដោយពេលវេលា (HTM) លើកិច្ចការស្គាល់វត្ថុ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Deep Learning for Computer Vision: A comparison between Convolutional Neural Networks and Hierarchical Temporal Memories on object recognition tasks</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Vincenzo Lomonaco (University of Bologna), Davide Maltoni (Supervisor)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2015</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការខ្វះខាតទិន្នន័យក្នុងកិច្ចការស្គាល់វត្ថុ (Object Recognition) ដោយស្វែងយល់ថាតើក្បួនដោះស្រាយដែលយកលំនាំតាមជីវសាស្ត្រ (HTM) អាចមានដំណើរការល្អជាងវិធីសាស្ត្រស្ថិតិដោយកម្លាំងបាយ (CNN) ដែរឬទេ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់ការប្រៀបធៀបដោយផ្ទាល់រវាងម៉ូដែលសិក្សាស៊ីជម្រៅ (Deep Learning Models) ចំនួនពីរ ទៅលើសំណុំទិន្នន័យស្តង់ដារ និងសំណុំទិន្នន័យថ្មីដែលត្រូវបានបង្កើតឡើងជាពិសេស។
+        
+        <ul>
+            
+            <li>ការបង្កើតសំណុំទិន្នន័យគោលថ្មីសម្រាប់ស៊េរីរូបភាព (NORB-Sequences Benchmark)</li>
+            
+            <li>ការអនុវត្តបណ្តាញសរសៃប្រសាទ (Convolutional Neural Network - CNN) តាមរយៈ Theano Framework</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយអង្គចងចាំតាមលំដាប់ពេលវេលា (Hierarchical Temporal Memory - HTM)</li>
+            
+            <li>ការធ្វើតេស្តប្រៀបធៀបភាពត្រឹមត្រូវលើសំណុំទិន្នន័យ NORB (Cross-validation accuracy comparison)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ជាមួយនឹងទិន្នន័យបណ្តុះបណ្តាលតិចតួច (ក្រោម ២០០ គំរូក្នុងមួយថ្នាក់) វិធីសាស្ត្រ HTM ដំណើរការបានល្អជាង CNN ក្នុងការសម្គាល់វត្ថុ។</li>
+            
+            <li>នៅពេលទំហំទិន្នន័យកើនឡើងលើសពី ២០០ គំរូ ក្បួនដោះស្រាយទាំងពីរផ្តល់កម្រិតភាពត្រឹមត្រូវ (Accuracy) ប្រហាក់ប្រហែលគ្នា ដោយប្រើប្រាស់ពេលវេលាបណ្តុះបណ្តាលស្រដៀងគ្នា។</li>
+            
+            <li>នៅក្នុងបរិបទនៃការស្គាល់រូបភាពជាស៊េរីបន្តបន្ទាប់គ្នា ក្បួន HTM បង្ហាញពីសក្តានុពលខ្ពស់ជាងមុន ដោយសារវាអាចប្រើប្រាស់ពេលវេលាជាកត្តាណែនាំក្នុងការរៀនសូត្រដោយមិនមានការត្រួតពិនិត្យ (Unsupervised Learning)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Convolutional Neural Networks (CNN - LeNet7)</span></strong><br>បណ្តាញសរសៃប្រសាទ Convolutional (ម៉ូដែល LeNet7)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការសម្គាល់វត្ថុនៅពេលមានទិន្នន័យច្រើន និងមានការគាំទ្រល្អសម្រាប់ការដំណើរការលឿនលើ GPU។</td>
+                <td>ត្រូវការទិន្នន័យបណ្តុះបណ្តាលក្នុងបរិមាណច្រើនក្រាស់ក្រែល និងប្រើប្រាស់ថាមពលគណនា (Computing Power) ខ្ពស់។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ ៨៦% (សម្រាប់រូបភាព Monocular) និង ៩៤.៤០% (សម្រាប់រូបភាព Binocular) នៅពេលប្រើទិន្នន័យពេញលេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hierarchical Temporal Memory (HTM)</span></strong><br>អង្គចងចាំតាមលំដាប់លំដោយពេលវេលា (ក្បួនដោះស្រាយតាមលំនាំខួរក្បាល)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការរៀនសម្គាល់វត្ថុទោះបីជាមានទិន្នន័យបណ្តុះបណ្តាលតិចតួច និងពូកែក្នុងការទាញយកលក្ខណៈពិសេសតាមពេលវេលា (Temporal sequences)។</td>
+                <td>នៅខ្វះខាតការអភិវឌ្ឍកូដឱ្យមានប្រសិទ្ធភាពខ្ពស់លើ GPU ដែលធ្វើឱ្យការបណ្តុះបណ្តាលអាចមានភាពយឺតយ៉ាវសម្រាប់ទិន្នន័យធំៗ។</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ជាង CNN នៅពេលទិន្នន័យតូចជាង ២០០ គំរូក្នុងមួយថ្នាក់ និងទទួលបានភាពត្រឹមត្រូវប្រហាក់ប្រហែលគ្នានៅពេលទិន្នន័យធំ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbors (KNN Baseline)</span></strong><br>ចំណាត់ថ្នាក់តាមក្បួនជិតខាងក្បែរបំផុត (KNN Baseline)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្តដោយមិនតម្រូវឱ្យមានការបណ្តុះបណ្តាលស្មុគស្មាញ (Complex training) នោះទេ។</td>
+                <td>ភាពត្រឹមត្រូវពឹងផ្អែកខ្លាំងលើប្រវែងនៃស៊េរីរូបភាព និងមិនអាចរៀនពីលក្ខណៈស៊ីជម្រៅនៃទិន្នន័យ (Deep features) បានទេ។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវចន្លោះពី ៧៨% ទៅ ៩០% លើសំណុំទិន្នន័យគោល NORB-Sequences បែបសាមញ្ញ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រធុនមធ្យមទៅខ្ពស់ ជាពិសេសសម្រាប់ការបណ្តុះបណ្តាលម៉ូដែល CNN ដែលត្រូវការ GPU ដើម្បីដំណើរការរហ័ស។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមាន CPU ច្រើនគ្រាប់ (Intel Xeon E5-2650 សម្រាប់ CNN ទីតាំង និង Xeon W3550 សម្រាប់ HTM) និងកាតក្រាហ្វិក GPU កម្រិតខ្ពស់ (NVIDIA Tesla C2075) សម្រាប់ដំណើរការរហ័ស។</li>
+        
+        <li><strong>Software:</strong> បណ្ណាល័យ Theano (Python) សម្រាប់ CNN, កម្មវិធីភាសា C# សម្រាប់ HTM, និងភាសា Java សម្រាប់បង្កើតកម្មវិធីរៀបចំសំណុំទិន្នន័យ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យរូបភាព NORB (មានរូបភាពក្មេងលេង ៥ប្រភេទ) និងទិន្នន័យគោលថ្មី NORB-Sequences ដែលបង្កើតឡើងសម្រាប់ការស្រាវជ្រាវនេះ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់សំណុំទិន្នន័យ NORB ដែលជារូបភាពប្រដាប់ក្មេងលេងពណ៌បៃតងថតកម្រិតពណ៌សខ្មៅ (Grayscale) ក្នុងបរិស្ថានដែលបានគ្រប់គ្រងពន្លឺយ៉ាងច្បាស់លាស់។ វាមិនតំណាងឱ្យរូបភាពពិតប្រាកដ និងស្មុគស្មាញនៅក្នុងពិភពជាក់ស្តែង (Real-world images) នោះឡើយ ដែលទាមទារឱ្យមានការប្រមូលទិន្នន័យសាកល្បងបន្ថែមនៅក្នុងប្រទេសកម្ពុជា ដើម្បីធានាប្រសិទ្ធភាពក្នុងការអនុវត្តជាក់ស្តែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>លទ្ធផលនៃការសិក្សានេះផ្តល់អត្ថប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់ប្រទេសកម្ពុជា ជាពិសេសរបកគំហើញដែលថាបច្ចេកវិទ្យា HTM ដំណើរការបានយ៉ាងល្អនៅពេលទិន្នន័យបណ្តុះបណ្តាលនៅមានកម្រិត។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្ម (Agriculture):</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យា HTM ដើម្បីសម្គាល់ប្រភេទសត្វល្អិតចង្រៃ ឬជំងឺរុក្ខជាតិដោយប្រើរូបភាពជាវីដេអូបន្តបន្ទាប់គ្នា (Sequences) ដែលស័ក្តិសមសម្រាប់កម្ពុជាព្រោះទិន្នន័យរូបភាពកសិកម្មមានចំនួនតិចតួច។</li>
+            
+            <li><strong>ការត្រួតពិនិត្យចរាចរណ៍ (Traffic Monitoring):</strong> អាចចាប់យករូបភាពពីកាមេរ៉ាសុវត្ថិភាពតាមដងផ្លូវក្នុងរាជធានីភ្នំពេញដើម្បីសម្គាល់ និងរាប់ប្រភេទយានយន្តដោយប្រើប្រាស់លក្ខណៈពិសេសនៃចលនាជាស៊េរីតាមពេលវេលា។</li>
+            
+            <li><strong>វិស័យផលិតកម្មនិងឧស្សាហកម្ម (Manufacturing):</strong> អាចអនុវត្តម៉ូដែល AI ក្នុងការត្រួតពិនិត្យគុណភាពផលិតផលរោងចក្រ (Defect detection) ទោះបីជាគ្មានទិន្នន័យបញ្ហារាប់ម៉ឺនសន្លឹកដើម្បីបង្រៀនម៉ូដែលក៏ដោយ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់បច្ចេកទេសបណ្តុះបណ្តាលដែលមិនពឹងផ្អែកលើ Big Data ដូចជា HTM បើកឱកាសដល់អ្នកស្រាវជ្រាវកម្ពុជាក្នុងការបង្កើតប្រព័ន្ធ AI ទោះបីជាប្រឈមនឹងការខ្វះខាតទិន្នន័យក្នុងស្រុកក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>យល់ដឹងពីមូលដ្ឋានគ្រឹះនៃ Computer Vision:</strong> អ្នកសិក្សាត្រូវចាប់ផ្តើមពីការស្វែងយល់ទ្រឹស្តីមូលដ្ឋាននៃដំណើរការរូបភាព (Image Processing) និងចំណាត់ថ្នាក់របស់ Machine Learning មុននឹងឈានចូលដល់ Deep Learning។</li>
+            
+            <li><strong>អនុវត្តការកសាងម៉ូដែល CNN សម័យទំនើប:</strong> ទោះបីជាឯកសារស្រាវជ្រាវនេះប្រើប្រាស់ <span class="en">Theano</span> ក៏ដោយ អ្នកស្រាវជ្រាវកម្ពុជាគួរងាកមកសិក្សានិងអនុវត្តកសាងម៉ូដែល CNN ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> ព្រោះវាមានភាពងាយស្រួលនិងទាន់សម័យជាង។</li>
+            
+            <li><strong>សិក្សាស្វែងយល់ពីក្បួន HTM:</strong> សិក្សាពីដំណើរការនិងទ្រឹស្តីនៃ HTM តាមរយៈឯកសារនិងកូដកូដបើកចំហរបស់ស្ថាប័ន <span class="en">Numenta</span> ដើម្បីយល់ពីរបៀបដែលម៉ូដែលរៀនពីបម្រែបម្រួលរូបភាពតាមពេលវេលា (Temporal sequences)។</li>
+            
+            <li><strong>បង្កើតសំណុំទិន្នន័យខ្នាតតូចក្នុងស្រុក (Local Dataset):</strong> សាកល្បងថតរូបភាពវីដេអូខ្លីៗអំពីវត្ថុដែលចង់សម្គាល់ (ឧទាហរណ៍៖ ផ្លាកលេខម៉ូតូ ឬផ្លែស្វាយ) ក្នុងបរិមាណតិចតួច (ក្រោម ២០០ គំរូ) ដោយប្រើឧបករណ៍ប្រើប្រាស់ប្រចាំថ្ងៃ។</li>
+            
+            <li><strong>ប្រៀបធៀប និងវាយតម្លៃលើទិន្នន័យជាក់ស្តែង:</strong> សាកល្បងដំណើរការម៉ូដែល CNN និង HTM ដែលបានរៀន ទៅលើសំណុំទិន្នន័យដែលទើបតែប្រមូលបាន ដើម្បីបញ្ជាក់និងវាយតម្លៃថាតើក្បួនមួយណាមានប្រសិទ្ធភាពជាងសម្រាប់បរិបទការងាររបស់អ្នក។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Network</span></td>
+                <td>ជាប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតដែលពូកែខាងវិភាគរូបភាព ដោយប្រើប្រាស់រង្វាស់ (Filters) ឬម៉ាទ្រីសដើម្បីទាញយកលក្ខណៈពិសេសៗ (Features) ពីរូបភាព ដូចជាគែម ពណ៌ ឬទ្រង់ទ្រាយនៃវត្ថុ។</td>
+                <td>ដូចជាមនុស្សដែលកាន់កែវពង្រីកដើរពិនិត្យមើលរូបភាពម្តងមួយកន្លែងៗ ដើម្បីប្រមូលផ្តុំព័ត៌មានចំណាំថាវាជារូបអ្វី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hierarchical Temporal Memory</span></td>
+                <td>ជាក្បួនដោះស្រាយកុំព្យូទ័រដែលយកលំនាំតាមរចនាសម្ព័ន្ធខួរក្បាលមនុស្ស (Neocortex) ដោយវាមានសមត្ថភាពរៀនចងចាំពីលំដាប់លំដោយនៃពេលវេលា (Time sequences) និងបម្រែបម្រួលនៃទិន្នន័យ។</td>
+                <td>ដូចជាការដែលយើងអាចស្គាល់បទចម្រៀងមួយបទបាន តាមរយៈការស្តាប់សាច់ភ្លេងដែលលេងបន្តបន្ទាប់គ្នាជាលំដាប់លំដោយ មិនមែនស្តាប់តែមួយណោតនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Back-propagation</span></td>
+                <td>ជាដំណើរការគណនាកែតម្រូវកំហុសនៅក្នុងម៉ូដែល Deep Learning ដោយវាធ្វើការវាស់ស្ទង់កម្រិតកំហុសពីលទ្ធផលបញ្ចេញចុងក្រោយ រួចបញ្ជូនព័ត៌មានកំហុសនេះត្រឡប់ថយក្រោយវិញដើម្បីកែប្រែទម្ងន់ (Weights) នៃបណ្តាញសរសៃប្រសាទឱ្យកាន់តែសុក្រឹត។</td>
+                <td>ដូចជាសិស្សដែលធ្វើលំហាត់ខុស ហើយគ្រូប្រាប់ពីចម្លើយពិត ធ្វើឱ្យសិស្សនោះគិតត្រឡប់ថយក្រោយវិញថាតើខ្លួនឯងគិតខុសត្រង់ជំហានណា ដើម្បីកែតម្រូវកុំឱ្យខុសនៅពេលក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Unsupervised learning</span></td>
+                <td>ជាវិធីសាស្ត្របង្រៀនកុំព្យូទ័រឱ្យចេះស្វែងរកទម្រង់ (Patterns) ឬការចាត់ក្រុមទិន្នន័យដោយខ្លួនឯង ដោយមិនតម្រូវឱ្យមានមនុស្សផ្តល់ចម្លើយ ឬប្រាប់មុនថាទិន្នន័យនោះជាអ្វីឡើយ (គ្មាន Label)។</td>
+                <td>ដូចជាការឱ្យក្មេងម្នាក់រៀបចំគំនរប្រដាប់ក្មេងលេង ដោយក្មេងនោះរៀបចំផ្តុំរបស់មានពណ៌ ឬរូបរាងស្រដៀងគ្នាចូលគ្នាតាមការគិតរបស់គេផ្ទាល់ ដោយគ្មាននរណាប្រាប់វិធីរៀបចំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Subsampling</span></td>
+                <td>ជានីតិវិធីនៅក្នុងបណ្តាញ CNN សម្រាប់បង្រួមទំហំនៃរូបភាពឬទិន្នន័យ ដើម្បីកាត់បន្ថយចំនួនប៉ារ៉ាម៉ែត្រដែលត្រូវគណនា និងជួយឱ្យម៉ូដែលនៅតែអាចចំណាំវត្ថុបានទោះបីជាវត្ថុនោះផ្លាស់ទីទីតាំងបន្តិចបន្តួចក៏ដោយ។</td>
+                <td>ដូចជាការបង្រួមរូបថតផ្ទាំងធំមួយឱ្យតូចជាងមុន ប៉ុន្តែយើងនៅតែអាចមើលដឹងយ៉ាងច្បាស់ថាវត្ថុនៅក្នុងរូបនោះគឺជាអ្វីដដែល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">K-Nearest Neighbor</span></td>
+                <td>ជាក្បួនដោះស្រាយចំណាត់ថ្នាក់ទិន្នន័យ ដោយវាកំណត់ប្រភេទនៃទិន្នន័យថ្មីមួយ ផ្អែកទៅលើទិន្នន័យចាស់ៗចំនួន K ដែលមានលក្ខណៈស្រដៀងវា (នៅជិតវា) បំផុតនៅក្នុងលំហទិន្នន័យ។</td>
+                <td>ដូចជាពាក្យចាស់ពោលថា "សេពគប់ពាលគឺពាល សេពគប់ប្រាជ្ញគឺប្រាជ្ញ" ពោលគឺវាវិនិច្ឆ័យរបស់ថ្មីមួយតាមរយៈលក្ខណៈរបស់ដែលនៅក្បែរវាបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Receptive field</span></td>
+                <td>ជាផ្នែកតូចមួយនៃទំហំរូបភាពទាំងមូល ដែលណឺរ៉ូន (Neuron) នីមួយៗនៅក្នុងបណ្តាញសរសៃប្រសាទទទួលយកមកផ្តោតអារម្មណ៍ដើម្បីធ្វើការវិភាគរកលក្ខណៈពិសេសរបស់រូបភាព។</td>
+                <td>ដូចជាការមើលទេសភាពតាមប្រហោងគន្លឹះទ្វារ ដែលភ្នែកយើងអាចមើលឃើញតែមួយផ្នែកតូចនៃទេសភាពទាំងមូលប៉ុណ្ណោះក្នុងពេលតែមួយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-and-its-architectures-2021.html">
+                    <span class="km">បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតបែបខុនវ៉ូលូសិន និងស្ថាបត្យកម្មរបស់វា</span><br>
+                    <span class="en article-original-title">Convolutional Neural Network and its Architectures</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-based-object-detection-review-2020.html">
+                    <span class="km">ការរកឃើញវត្ថុផ្អែកលើបណ្ដាញសរសៃប្រសាទខុនវ៉ុលូសិន (CNN)៖ ការពិនិត្យឡើងវិញ</span><br>
+                    <span class="en article-original-title">CONVOLUTIONAL NEURAL NETWORK BASED OBJECT DETECTION: A REVIEW</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-machine-learning-neural-networks-overview-2016.html">
+                    <span class="km">ការសិក្សាស៊ីជម្រៅលើម៉ាស៊ីន និងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត៖ ទិដ្ឋភាពទូទៅ</span><br>
+                    <span class="en article-original-title">Deep Machine Learning and Neural Networks: An Overview</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/artificial-intelligence-and-subfields.html">
+                    <span class="km">បញ្ញាសិប្បនិម្មិត និងអនុវិស័យ</span><br>
+                    <span class="en article-original-title">Artificial Intelligence and Subfields</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-object-detection-re-id-drone-imagery-2020.html">
+                    <span class="km">ការអនុវត្តបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកុងវ៉ុលលូហ្សិន (CNNs) ក្នុងការរកឃើញវត្ថុ ការកំណត់អត្តសញ្ញាណឡើងវិញ និងការសម្គាល់</span><br>
+                    <span class="en article-original-title">Application of Convolutional Neural Networks in Object Detection, Re-identification, and Recognition</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hierarchical+Temporal+Memory+vs+Convolutional+Neural+Networks+for+object+recognition" target="_blank" rel="noopener"><span class="en">Hierarchical Temporal Memory vs Convolutional Neural Networks for object recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Biologically+inspired+deep+learning+algorithms+and+temporal+sequences" target="_blank" rel="noopener"><span class="en">Biologically inspired deep learning algorithms and temporal sequences</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Unsupervised+feature+learning+using+Hierarchical+Temporal+Memory" target="_blank" rel="noopener"><span class="en">Unsupervised feature learning using Hierarchical Temporal Memory</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Image+sequence+classification+using+machine+learning+benchmarks" target="_blank" rel="noopener"><span class="en">Image sequence classification using machine learning benchmarks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+learning+performance+on+limited+training+data+computer+vision" target="_blank" rel="noopener"><span class="en">Deep learning performance on limited training data computer vision</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>

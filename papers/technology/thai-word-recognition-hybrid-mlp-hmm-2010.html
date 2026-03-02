@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសម្គាល់ពាក្យភាសាថៃដោយប្រើប្រព័ន្ធកូនកាត់ MLP-HMM - Thai Word Recognition Using Hybrid MLP-HMM | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការសម្គាល់ពាក្យភាសាថៃដោយប្រើប្រព័ន្ធកូនកាត់ MLP-HMM។ ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការសម្គាល់សម្លេងនិយាយជាភាសាថៃ (Thai speech recognition) ដោយសារតែភា...">
+    
+    <meta name="keywords" content="Hidden Markov Model, Multi-Layer Perceptron, Speech Recognition, Thai Language, Tone Classification, Word Error Rate, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/thai-word-recognition-hybrid-mlp-hmm-2010.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/thai-word-recognition-hybrid-mlp-hmm-2010.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/thai-word-recognition-hybrid-mlp-hmm-2010.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/thai-word-recognition-hybrid-mlp-hmm-2010.html">
+    <meta property="og:title" content="ការសម្គាល់ពាក្យភាសាថៃដោយប្រើប្រព័ន្ធកូនកាត់ MLP-HMM | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការសម្គាល់សម្លេងនិយាយជាភាសាថៃ (Thai speech recognition) ដោយសារតែភាសាថៃជាភាសាដែលមានសំនៀង (tonal language) ដែលធ្វើឱ្យម៉ូដែល Hidden Markov Model (HMM) ធម្មតាពិបាកក្នុងកា...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2010, IJCSNS International Journal of Computer Science and Network Security-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Hidden Markov Model">
+    
+    <meta property="article:tag" content="Multi-Layer Perceptron">
+    
+    <meta property="article:tag" content="Speech Recognition">
+    
+    <meta property="article:tag" content="Thai Language">
+    
+    <meta property="article:tag" content="Tone Classification">
+    
+    <meta property="article:tag" content="Word Error Rate">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសម្គាល់ពាក្យភាសាថៃដោយប្រើប្រព័ន្ធកូនកាត់ MLP-HMM">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការសម្គាល់សម្លេងនិយាយជាភាសាថៃ (Thai speech recognition) ដោយសារតែភាសាថៃជាភាសាដែលមានសំនៀង (tonal language) ដែលធ្វើឱ្យម៉ូដែល Hidden Markov Model (HMM) ធម្មតាពិបាកក្នុងកា...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u1796\u17b6\u1780\u17d2\u1799\u1797\u17b6\u179f\u17b6\u1790\u17c3\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u17bc\u1793\u1780\u17b6\u178f\u17cb MLP-HMM",
+      "name": "Thai Word Recognition Using Hybrid MLP-HMM",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u1798\u17d2\u179b\u17c1\u1784\u1793\u17b7\u1799\u17b6\u1799\u1787\u17b6\u1797\u17b6\u179f\u17b6\u1790\u17c3 (Thai speech recognition) \u178a\u17c4\u1799\u179f\u17b6\u179a\u178f\u17c2\u1797\u17b6\u179f\u17b6\u1790\u17c3\u1787\u17b6\u1797\u17b6\u179f\u17b6\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17c6\u1793\u17c0\u1784 (tonal language) \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov Model (HMM) \u1792\u1798\u17d2\u1798\u178f\u17b6\u1796\u17b7\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1785\u17b6\u1794\u17cb\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u179f\u1798\u17d2\u179b\u17c1\u1784 \u1793\u17b7\u1784\u1795\u17d2\u178f\u179b\u17cb\u1793\u17bc\u179c\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u1794\u17d2\u179a\u17bc\u1794\u17b6\u1794\u17ca\u17b8\u179b\u17b8\u178f\u17c1\u1794\u17b6\u1793\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/thai-word-recognition-hybrid-mlp-hmm-2010.html",
+      "author": [{"@type": "Person", "name": "Maleerat Sodanil (King Mongkut\u2019s University of Technology North Bangkok)"},{"@type": "Person", "name": "Supot Nitsuwat (King Mongkut\u2019s University of Technology North Bangkok)"},{"@type": "Person", "name": "Choochart Haruechaiyasak (National Electronics and Computer Technology Center)"}],
+      "datePublished": "2010, IJCSNS International Journal of Computer Science and Network Security",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Thai Word Recognition Using Hybrid MLP-HMM",
+        "url": "N/A"
+      },
+      "keywords": ["Hidden Markov Model", "Multi-Layer Perceptron", "Speech Recognition", "Thai Language", "Tone Classification", "Word Error Rate"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u1796\u17b6\u1780\u17d2\u1799\u1797\u17b6\u179f\u17b6\u1790\u17c3\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u17bc\u1793\u1780\u17b6\u178f\u17cb MLP-HMM",
+          "item": "https://khmerresearch.com/papers/technology/thai-word-recognition-hybrid-mlp-hmm-2010.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការសម្គាល់ពាក្យភាសាថៃដោយប្រើប្រព័ន្ធកូនកាត់ MLP-HMM</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Thai Word Recognition Using Hybrid MLP-HMM<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសម្គាល់ពាក្យភាសាថៃដោយប្រើប្រព័ន្ធកូនកាត់ MLP-HMM</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Thai Word Recognition Using Hybrid MLP-HMM</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Maleerat Sodanil (King Mongkut’s University of Technology North Bangkok), Supot Nitsuwat (King Mongkut’s University of Technology North Bangkok), Choochart Haruechaiyasak (National Electronics and Computer Technology Center)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2010, IJCSNS International Journal of Computer Science and Network Security</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហាប្រឈមក្នុងការសម្គាល់សម្លេងនិយាយជាភាសាថៃ (Thai speech recognition) ដោយសារតែភាសាថៃជាភាសាដែលមានសំនៀង (tonal language) ដែលធ្វើឱ្យម៉ូដែល Hidden Markov Model (HMM) ធម្មតាពិបាកក្នុងការចាប់យកលក្ខណៈសម្លេង និងផ្តល់នូវការប៉ាន់ស្មានប្រូបាប៊ីលីតេបានច្បាស់លាស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានស្នើឡើងនូវក្របខណ្ឌកូនកាត់ថ្មីមួយដែលរួមបញ្ចូលបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (ANN) ប្រភេទ Multi-Layer Perceptrons (MLPs) ជាមួយនឹងម៉ូដែល HMM រួមទាំងការប្រើប្រាស់ព័ត៌មាននៃសំនៀងដើម្បីបង្កើនភាពត្រឹមត្រូវ។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសនៃសម្លេង ៣៩ វិមាត្រ (39-dimensional MFCC Feature Extraction)</li>
+            
+            <li>ចំណាត់ថ្នាក់សូរសព្ទដោយប្រើបណ្តាញ (MLP Phone Classification)</li>
+            
+            <li>ចំណាត់ថ្នាក់សំនៀងផ្អែកលើប្រេកង់មូលដ្ឋានទាញយកពីផ្នែកបញ្ចេញសម្លេង (F0 Tone Classification)</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយ Viterbi សម្រាប់ការកាត់កូដ (Viterbi Decoding Algorithm)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធកូនកាត់ MLP-HMM ដែលរួមបញ្ចូលជាមួយលក្ខណៈសំនៀង (Tone+MLP-HMM) ទទួលបានអត្រាកំហុសពាក្យ (Word Error Rate) ទាបបំផុតត្រឹមតែ 19.5% បើធៀបនឹងប្រព័ន្ធគោលដែលមានកំហុស 25.6% ។</li>
+            
+            <li>ការប្រើប្រាស់ចំណាត់ថ្នាក់សំនៀង (Tone Classifier) ទទួលបានភាពត្រឹមត្រូវខ្ពស់រហូតដល់ 97.45% សម្រាប់សំនៀងកណ្តាល (Mid tone) និង 97.35% សម្រាប់សំនៀងឡើង (Rising tone) ។</li>
+            
+            <li>ម៉ូដែល MLP ជួយបង្កើតគំរូសម្គាល់ដែលមានលក្ខណៈច្បាស់លាស់ជាងការប្រើប្រាស់ម៉ូដែល HMM គោល ដោយជួយបង្កើនអត្រានៃការសម្គាល់ព្យញ្ជនៈ និងស្រៈបានយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Baseline HMM (GMM-HMM)</span></strong><br>ប្រព័ន្ធគោល HMM ផ្អែកលើ GMM</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងជាវិធីសាស្ត្រស្តង់ដារដែលមានស្រាប់សម្រាប់ការសម្គាល់សម្លេងនិយាយ។</td>
+                <td>មានដែនកំណត់ដោយសារការសន្មត់លើការចែកចាយទិន្នន័យតាមបែប Gaussian និងមិនសូវពូកែចាប់យកលក្ខណៈសម្លេងស្មុគស្មាញ។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ស្មើនឹង 25.6%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">MLP-HMM</span></strong><br>ប្រព័ន្ធកូនកាត់ MLP-HMM (គ្មានចំណាត់ថ្នាក់សំនៀង)</td>
+                <td>បណ្តាញសរសៃប្រសាទ MLP អាចប៉ាន់ស្មានប្រូបាប៊ីលីតេនៃសូរសព្ទបានច្បាស់លាស់ជាង និងមិនពឹងផ្អែកខ្លាំងលើការសន្មត់នៃការចែកចាយទិន្នន័យ។</td>
+                <td>ទាមទារថាមពលគណនាក្នុងការបង្វឹកបណ្តាញសរសៃប្រសាទច្រើនជាងម៉ូដែល GMM ធម្មតា។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ថយចុះមកត្រឹម 21.2%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Tone + Baseline</span></strong><br>ប្រព័ន្ធគោលរួមបញ្ចូលជាមួយលក្ខណៈសំនៀង (Tone Features)</td>
+                <td>បង្កើនភាពត្រឹមត្រូវដោយប្រើព័ត៌មាននៃកម្រិតសំនៀងបន្ថែមទៅលើទិន្នន័យសូរសព្ទ MFCC ធម្មតា។</td>
+                <td>នៅតែបន្តទទួលរងនូវដែនកំណត់របស់ម៉ូដែល GMM ក្នុងការធ្វើចំណាត់ថ្នាក់មិនមែនលីនេអ៊ែរ (non-linear classification)។</td>
+                <td>អត្រាកំហុសពាក្យ (WER) ថយចុះមកត្រឹម 20.3%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Tone + MLP-HMM</span></strong><br>ប្រព័ន្ធកូនកាត់ MLP-HMM បូករួមនឹងចំណាត់ថ្នាក់សំនៀង</td>
+                <td>ផ្តល់លទ្ធផលល្អបំផុតដោយរួមបញ្ចូលទាំងភាពខ្លាំងរបស់បណ្តាញ MLP ក្នុងការប៉ាន់ស្មានសូរសព្ទ និងសមត្ថភាពក្នុងការវិភាគសំនៀង។</td>
+                <td>មានភាពស្មុគស្មាញបំផុតក្នុងការរៀបចំរចនាសម្ព័ន្ធ និងទាមទារការបង្វឹកម៉ូដែលច្រើនដំណាក់កាល។</td>
+                <td>ទទួលបានលទ្ធផលល្អបំផុត ដោយមានអត្រាកំហុសពាក្យ (WER) ទាបបំផុតត្រឹមតែ 19.5%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីតម្លៃធនធានកុំព្យូទ័រនោះទេ ប៉ុន្តែដោយផ្អែកលើការប្រើប្រាស់បណ្តាញសរសៃប្រសាទ វាទាមទារនូវកម្លាំងគណនានិងទិន្នន័យជាក់លាក់។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់កម្មវិធី Audacity សម្រាប់ថតសម្លេង និង HTK (Hidden Markov Model Toolkit) សម្រាប់ការបង្កើតម៉ូដែល។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានសមត្ថភាពកម្រិតមធ្យម ឬមាន GPU ដើម្បីដំណើរការការបង្វឹក Multi-Layer Perceptrons (MLPs) ប្រកបដោយប្រសិទ្ធភាព។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យសម្លេងដែលថតច្បាស់ល្អ ក្នុងកម្រិត 22 kHz, 16-bit A/D ដែលមានការកត់ត្រាអក្សរ (Transcription) ត្រឹមត្រូវ។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងផ្នែកកែច្នៃសញ្ញាសម្លេង (Speech Signal Processing), ស្ថិតិប្រូបាប៊ីលីតេ, និង Machine Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យពីអ្នកនិយាយជនជាតិថៃចំនួន ១០ នាក់ប៉ុណ្ណោះ (ប្រុស ៥ ស្រី ៥) នៅក្នុងមន្ទីរពិសោធន៍ ដែលចំនួននេះគឺតូច និងមិនតំណាងឱ្យភាពចម្រុះនៃគ្រាមភាសាទូលំទូលាយនោះទេ។ សម្រាប់ប្រទេសកម្ពុជា ការពឹងផ្អែកលើទំហំទិន្នន័យតូចតាចបែបនេះអាចបណ្តាលឱ្យប្រព័ន្ធមិនអាចស្គាល់សម្លេងជនជាតិខ្មែរនៅតាមតំបន់ផ្សេងៗបានល្អនោះទេ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាភាសាខ្មែរមិនមែនជាភាសាដែលមានសំនៀង (Tonal language) ដូចភាសាថៃក៏ដោយ ក៏វិធីសាស្ត្រ MLP-HMM នេះនៅតែមានសារៈប្រយោជន៍ខ្ពស់សម្រាប់ការសម្គាល់ពាក្យខ្មែរ។</p>
+        
+        <ul>
+            
+            <li><strong>ការសម្គាល់សំឡេងភាសាខ្មែរកម្រិតខ្ពស់ (Khmer Speech Recognition):</strong> ការប្រើប្រាស់រចនាសម្ព័ន្ធកូនកាត់ MLP-HMM អាចជួយក្នុងការចាប់យកលក្ខណៈពិសេសនៃស្រៈ (Vowels) និងព្យញ្ជនៈត្រួត (Cluster consonants) ដ៏ស្មុគស្មាញក្នុងភាសាខ្មែរបានល្អជាងវិធីសាស្ត្រចាស់ៗ។</li>
+            
+            <li><strong>ការស្រាវជ្រាវលើគ្រាមភាសា និងកម្រិតសម្លេង (Khmer Dialects and Registers):</strong> ទោះបីជាខ្មែរមិនមាន Tones ដូចថៃ ប៉ុន្តែបច្ចេកទេសទាញយកប្រេកង់ F0 អាចប្រើដើម្បីវិភាគភាពខុសគ្នានៃការបញ្ចេញសំឡេង (Registers/Pitch) របស់អ្នកខេត្តសៀមរាប ឬបាត់ដំបង។</li>
+            
+            <li><strong>វិស័យបម្រើសេវាកម្មអតិថិជន (Customer Service Voicebots):</strong> ស្ថាប័នហិរញ្ញវត្ថុដូចជាធនាគារ ABA ឬស្ថាប័នទូរគមនាគមន៍នៅកម្ពុជា អាចយកគំរូនេះទៅអភិវឌ្ឍប្រព័ន្ធ Voicebot ឆ្លើយតបស្វ័យប្រវត្តិជាភាសាខ្មែរ ដើម្បីកាត់បន្ថយបន្ទុកបុគ្គលិក។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ក្របខណ្ឌកូនកាត់ MLP-HMM នេះផ្តល់នូវគំរូដ៏រឹងមាំមួយសម្រាប់អ្នកស្រាវជ្រាវកម្ពុជា ក្នុងការបង្កើតប្រព័ន្ធ AI ដែលអាចស្តាប់ និងយល់ភាសាខ្មែរបានកាន់តែច្បាស់លាស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យសម្លេង (Data Collection & Preprocessing):</strong> ចាប់ផ្តើមដោយការថតសម្លេងពាក្យខ្មែរជាមូលដ្ឋាន (ពាក្យព្យាង្គទោល និងពហុព្យាង្គ) ដោយប្រើប្រាស់កម្មវិធី <span class='en'>Audacity</span> ក្នុងទម្រង់ 22kHz, 16-bit ដូចការសិក្សានេះ រួចធ្វើការកត់ត្រា (transcribe) អត្ថបទឱ្យបានត្រឹមត្រូវតាមស្តង់ដារ IPA សម្រាប់ភាសាខ្មែរ។</li>
+            
+            <li><strong>ទាញយកលក្ខណៈពិសេសនៃសម្លេង (Feature Extraction):</strong> សិក្សាប្រើប្រាស់កូដ <span class='en'>Python</span> ជាមួយបណ្ណាល័យ <span class='en'>Librosa</span> ដើម្បីទាញយកទិន្នន័យ <span class='en'>MFCCs 39-dimensional</span> ព្រមទាំងទាញយកប្រេកង់មូលដ្ឋាន (F0) និងថាមពលសម្លេង (Energy)។</li>
+            
+            <li><strong>បង្កើតប្រព័ន្ធគោលដោយប្រើ HMM (Build Baseline Model):</strong> អនុវត្តការប្រើប្រាស់ <span class='en'>HTK (Hidden Markov Model Toolkit)</span> ដើម្បីបង្កើតម៉ូដែលគោល (Baseline GMM-HMM) ដោយតំណាងសូរសព្ទនីមួយៗជា 5-state left-to-right model ដើម្បីយកមកធ្វើជាគោលវាស់ស្ទង់ (Benchmark)។</li>
+            
+            <li><strong>សាងសង់និងបង្វឹកបណ្តាញសរសៃប្រសាទ (Build & Train MLP Network):</strong> ប្រើប្រាស់ <span class='en'>PyTorch</span> ឬ <span class='en'>TensorFlow</span> ដើម្បីរចនាបណ្តាញ <span class='en'>Multi-Layer Perceptron (MLP)</span> ដែលយក Contextual frames (ឧ. ៩ ហ្វ្រេមជាប់គ្នា) ជា Input ដើម្បីទស្សន៍ទាយប្រូបាប៊ីលីតេសូរសព្ទ (Phoneme Posterior Probabilities)។</li>
+            
+            <li><strong>ធ្វើសមាហរណកម្មប្រព័ន្ធ និងកាត់កូដ (Integrate Hybrid Model & Decoding):</strong> រួមបញ្ចូលលទ្ធផល Scaled Likelihood ពីបណ្តាញ MLP ទៅក្នុងប្រព័ន្ធ HMM វិញ ដោយប្រើក្បួន <span class='en'>Viterbi Algorithm</span> ជា Decoder ដើម្បីស្វែងរកលំដាប់ពាក្យដែលត្រឹមត្រូវបំផុត រួចប្រៀបធៀបអត្រាកំហុស (WER) ជាមួយប្រព័ន្ធគោល។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model (HMM)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិដែលប្រើដើម្បីព្យាករណ៍ពីលំដាប់នៃព្រឹត្តិការណ៍ដែលយើងមិនអាចមើលឃើញ (hidden states) ដោយផ្អែកលើទិន្នន័យដែលយើងអាចសង្កេតបាន។ ក្នុងប្រព័ន្ធសម្គាល់សម្លេង វាត្រូវបានប្រើដើម្បីទាយថាតើសញ្ញាសម្លេងដែលបានបញ្ចេញមកនោះ គឺជាលំដាប់នៃពាក្យ ឬសូរសព្ទអ្វីខ្លះ។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាតើថ្ងៃនេះមិត្តភក្តិរបស់អ្នកមានអារម្មណ៍ល្អឬអត់ (លាក់កំបាំង) ដោយគ្រាន់តែសង្កេតមើលសកម្មភាពខាងក្រៅរបស់គាត់ដូចជាការញញឹម ឬការដើរ (អាចសង្កេតឃើញ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-Layer Perceptrons (MLPs)</span></td>
+                <td>ជាប្រភេទមួយនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Artificial Neural Network) ដែលមានស្រទាប់ច្រើន (input, hidden, និង output) ប្រើសម្រាប់រៀនធ្វើចំណាត់ថ្នាក់ទិន្នន័យដែលស្មុគស្មាញ។ ក្នុងឯកសារនេះ វាជួយគណនាប្រូបាប៊ីលីតេនៃសូរសព្ទ និងសំនៀងឱ្យបានច្បាស់លាស់។</td>
+                <td>ដូចជាក្រុមអ្នកវិភាគដែលមានច្រើនតំណែង ដោយម្នាក់ៗទទួលព័ត៌មាន បកស្រាយបន្តិច រួចបញ្ជូនទៅម្នាក់ទៀតជាបន្តបន្ទាប់ រហូតដល់បានការសន្និដ្ឋានចុងក្រោយដ៏ត្រឹមត្រូវមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">MFCC feature vectors</span></td>
+                <td>Mel-Frequency Cepstral Coefficients ជាបណ្តុំនៃទិន្នន័យលេខដែលតំណាងឱ្យលក្ខណៈពិសេសនៃសម្លេងរបស់មនុស្ស។ វាត្រូវបានគណនាដោយត្រាប់តាមរបៀបដែលត្រចៀកមនុស្សស្តាប់ឮប្រេកង់សម្លេង ដើម្បីឱ្យកុំព្យូទ័រអាចយល់ និងកត់សម្គាល់ពីសម្លេងនោះបាន។</td>
+                <td>ដូចជាការបម្លែងរូបរាងមុខរបស់មនុស្សទៅជារង្វាស់ប្រវែងចន្លោះភ្នែកនិងច្រមុះ ដើម្បីឱ្យម៉ាស៊ីនស្កេនអាចចំណាំមុខនោះបាន គ្រាន់តែ MFCC នេះប្រើសម្រាប់ការសម្គាល់សម្លេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយគណិតវិទ្យាដែលត្រូវបានប្រើប្រាស់នៅក្នុងម៉ូដែល HMM ដើម្បីស្វែងរកផ្លូវ ឬលំដាប់នៃសូរសព្ទ (states) ដែលមានប្រូបាប៊ីលីតេខ្ពស់បំផុត ឬសមហេតុផលបំផុត ផ្អែកលើបំណែកទិន្នន័យសម្លេងដែលម៉ាស៊ីនទទួលបាន។</td>
+                <td>ដូចជាការប្រើប្រាស់កម្មវិធី Google Maps ដើម្បីស្វែងរកផ្លូវដែលលឿនបំផុតនិងល្អបំផុតទៅកាន់គោលដៅ ដោយវាយតម្លៃលើគ្រប់ជម្រើសផ្លូវទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian Mixture Models (GMMs)</span></td>
+                <td>ជាម៉ូដែលប្រូបាប៊ីលីតេដែលសន្មត់ថាទិន្នន័យទាំងអស់កើតចេញពីការបូកបញ្ចូលគ្នានៃការចែកចាយបែប Gaussian (Normal distributions) ជាច្រើន។ វាតែងតែត្រូវបានប្រើជាប្រព័ន្ធគោលក្នុងប្រព័ន្ធ HMM ដើម្បីប៉ាន់ស្មានលក្ខណៈនៃការបញ្ចេញសម្លេង។</td>
+                <td>ដូចជាការសន្និដ្ឋានថា កម្ពស់របស់សិស្សក្នុងសាលាមួយ គឺជាការបូកបញ្ចូលគ្នានៃក្រុមសិស្សតូចៗជាច្រើនក្រុម (ក្រុមទាប ក្រុមកណ្តាល ក្រុមខ្ពស់) ជាជាងចាត់ទុកពួកគេជាក្រុមធំតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word Error Rate</span></td>
+                <td>ជារង្វាស់ស្តង់ដារដែលប្រើសម្រាប់វាយតម្លៃភាពត្រឹមត្រូវនៃប្រព័ន្ធសម្គាល់សម្លេង ដោយធ្វើការគណនាលើចំនួនពាក្យដែលម៉ាស៊ីនស្តាប់ខុស បាត់ ឬបន្ថែមលើស រួចបែងចែកនឹងចំនួនពាក្យសរុប។</td>
+                <td>ដូចជាការដាក់ពិន្ទុក្នុងការសរសេរតាមអាន (Dictation) ប្រសិនបើសិស្សសរសេរខុស២ពាក្យក្នុងចំណោម២០ពាក្យ នោះអត្រាកំហុសគឺ១០ភាគរយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fundamental frequency (F0)</span></td>
+                <td>ជាប្រេកង់ទាបបំផុតនៃរលកសម្លេងដែលបង្កើតឡើងដោយការញ័រនៃខ្សែសម្លេង (vocal cords) នៅពេលមនុស្សនិយាយ។ វាត្រូវបានប្រើប្រាស់ជាទិន្នន័យគោល ដើម្បីកំណត់ពីកម្រិតសំនៀង (Pitch/Tone) នៃពាក្យក្នុងភាសាដែលមានសំនៀងដូចជាភាសាថៃជាដើម។</td>
+                <td>ដូចជាកម្រិតសម្លេងក្រាស់ឬស្តើងនៅពេលអ្នកច្រៀង ដែលជួយឱ្យគេដឹងថាអ្នកកំពុងបញ្ចេញសម្លេងក្នុងកម្រិតខ្ពស់ឬទាប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Continuous Density Hidden Markov Model (CDHMM)</span></td>
+                <td>ជាប្រភេទមួយនៃ HMM ដែលប្រើប្រាស់អនុគមន៍ដង់ស៊ីតេប្រូបាប៊ីលីតេជាប់គ្នា (continuous probability density functions) ដើម្បីវាយតម្លៃប្រូបាប៊ីលីតេនៃសូរសព្ទ ជំនួសឱ្យការប្រើទិន្នន័យដាច់ៗពីគ្នា។ វាមានប្រសិទ្ធភាពខ្ពស់ក្នុងការពិពណ៌នាពីបម្រែបម្រួលនៃសម្លេង។</td>
+                <td>ដូចជាការវាស់សីតុណ្ហភាពដោយប្រើទែម៉ូម៉ែត្រដែលមានលេខលម្អិតជាប់គ្នារហូត (ឧ. 25.1, 25.2...) ជាជាងការគ្រាន់តែប្រាប់ជារួមថាក្តៅឬត្រជាក់ (ទិន្នន័យដាច់ៗ)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+                    <span class="km">ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង</span><br>
+                    <span class="en article-original-title">DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/voice-identification-python-hmm-2020.html">
+                    <span class="km">ការកំណត់អត្តសញ្ញាណសំឡេងនៅក្នុង Python ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Voice Identification in Python Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/spoken-dialogue-management-probabilistic-reasoning-2000.html">
+                    <span class="km">ការគ្រប់គ្រងការសន្ទនាតាមការនិយាយដោយប្រើប្រាស់ការវែកញែកតាមប្រូបាប៊ីលីតេ</span><br>
+                    <span class="en article-original-title">Spoken Dialogue Management Using Probabilistic Reasoning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/statistical-methods-speech-recognition-2004.html">
+                    <span class="km">វិធីសាស្ត្រស្ថិតិសម្រាប់ការសម្គាល់ និងការយល់ដឹងអំពីសំឡេងនិយាយ</span><br>
+                    <span class="en article-original-title">Statistical Methods for the Recognition and Understanding of Speech</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/early-error-detection-word-level-2004.html">
+                    <span class="km">ការរកឃើញកំហុសពីដំបូងនៅកម្រិតពាក្យ</span><br>
+                    <span class="en article-original-title">Early error detection on word level</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hybrid+MLP-HMM+acoustic+modeling+for+tonal+language+speech+recognition" target="_blank" rel="noopener"><span class="en">Hybrid MLP-HMM acoustic modeling for tonal language speech recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=MFCC+and+fundamental+frequency+%28F0%29+feature+extraction+for+Southeast+Asian+languages" target="_blank" rel="noopener"><span class="en">MFCC and fundamental frequency (F0) feature extraction for Southeast Asian languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+neural+networks+versus+MLP+for+Hidden+Markov+Model+emission+probabilities+estimation" target="_blank" rel="noopener"><span class="en">Deep neural networks versus MLP for Hidden Markov Model emission probabilities estimation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Context-dependent+versus+context-independent+acoustic+models+for+Thai+speech" target="_blank" rel="noopener"><span class="en">Context-dependent versus context-independent acoustic models for Thai speech</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Moving+average+smoothing+algorithms+for+F0+contour+interpolation+in+unvoiced+speech+segments" target="_blank" rel="noopener"><span class="en">Moving average smoothing algorithms for F0 contour interpolation in unvoiced speech segments</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>

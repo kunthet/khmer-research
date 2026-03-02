@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>តម្លៃ Shapley សម្រាប់ការបកស្រាយនៅក្នុងកម្មវិធីផ្គូផ្គងទ្វេភាគី - Shapley Values for Explanation in Two-sided Matching Applications | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី តម្លៃ Shapley សម្រាប់ការបកស្រាយនៅក្នុងកម្មវិធីផ្គូផ្គងទ្វេភាគី។ ប្រព័ន្ធផ្គូផ្គងទ្វេភាគីទំនើបៗ (ដូចជាកម្មវិធីស្វែងរកការងារ និងការណាត់ជួប) ផ្តល់ជូនបញ្ជីផ្គូផ្គងតា...">
+    
+    <meta name="keywords" content="Shapley values, two-sided matching, explainable AI, top-k recommendation, KernelSHAP, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/shapley-values-explanation-two-sided-matching-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/shapley-values-explanation-two-sided-matching-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/shapley-values-explanation-two-sided-matching-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/shapley-values-explanation-two-sided-matching-2024.html">
+    <meta property="og:title" content="តម្លៃ Shapley សម្រាប់ការបកស្រាយនៅក្នុងកម្មវិធីផ្គូផ្គងទ្វេភាគី | KhmerResearch.com">
+    <meta property="og:description" content="ប្រព័ន្ធផ្គូផ្គងទ្វេភាគីទំនើបៗ (ដូចជាកម្មវិធីស្វែងរកការងារ និងការណាត់ជួប) ផ្តល់ជូនបញ្ជីផ្គូផ្គងតាមចំណាត់ថ្នាក់កំពូល (top-k) ប៉ុន្តែខ្វះតម្លាភាពក្នុងការបកស្រាយប្រាប់អ្នកប្រើប្រាស់ថា ហេតុអ្វីបានជាពួក...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2024 Proceedings of the 27th International Conference on Extending Database Technology (EDBT)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Shapley values">
+    
+    <meta property="article:tag" content="two-sided matching">
+    
+    <meta property="article:tag" content="explainable AI">
+    
+    <meta property="article:tag" content="top-k recommendation">
+    
+    <meta property="article:tag" content="KernelSHAP">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="តម្លៃ Shapley សម្រាប់ការបកស្រាយនៅក្នុងកម្មវិធីផ្គូផ្គងទ្វេភាគី">
+    <meta name="twitter:description" content="ប្រព័ន្ធផ្គូផ្គងទ្វេភាគីទំនើបៗ (ដូចជាកម្មវិធីស្វែងរកការងារ និងការណាត់ជួប) ផ្តល់ជូនបញ្ជីផ្គូផ្គងតាមចំណាត់ថ្នាក់កំពូល (top-k) ប៉ុន្តែខ្វះតម្លាភាពក្នុងការបកស្រាយប្រាប់អ្នកប្រើប្រាស់ថា ហេតុអ្វីបានជាពួក...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u178f\u1798\u17d2\u179b\u17c3 Shapley \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1795\u17d2\u1782\u17bc\u1795\u17d2\u1782\u1784\u1791\u17d2\u179c\u17c1\u1797\u17b6\u1782\u17b8",
+      "name": "Shapley Values for Explanation in Two-sided Matching Applications",
+      "description": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1795\u17d2\u1782\u17bc\u1795\u17d2\u1782\u1784\u1791\u17d2\u179c\u17c1\u1797\u17b6\u1782\u17b8\u1791\u17c6\u1793\u17be\u1794\u17d7 (\u178a\u17bc\u1785\u1787\u17b6\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u1780\u17b6\u179a\u1784\u17b6\u179a \u1793\u17b7\u1784\u1780\u17b6\u179a\u178e\u17b6\u178f\u17cb\u1787\u17bd\u1794) \u1795\u17d2\u178f\u179b\u17cb\u1787\u17bc\u1793\u1794\u1789\u17d2\u1787\u17b8\u1795\u17d2\u1782\u17bc\u1795\u17d2\u1782\u1784\u178f\u17b6\u1798\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1780\u17c6\u1796\u17bc\u179b (top-k) \u1794\u17c9\u17bb\u1793\u17d2\u178f\u17c2\u1781\u17d2\u179c\u17c7\u178f\u1798\u17d2\u179b\u17b6\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1794\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1790\u17b6 \u17a0\u17c1\u178f\u17bb\u17a2\u17d2\u179c\u17b8\u1794\u17b6\u1793\u1787\u17b6\u1796\u17bd\u1780\u1782\u17c1\u1798\u17b6\u1793 \u17ac\u1798\u17b7\u1793\u1798\u17b6\u1793\u1788\u17d2\u1798\u17c4\u17c7\u1780\u17d2\u1793\u17bb\u1784\u1794\u1789\u17d2\u1787\u17b8\u1791\u17b6\u17c6\u1784\u1793\u17c4\u17c7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/shapley-values-explanation-two-sided-matching-2024.html",
+      "author": [{"@type": "Person", "name": "Suraj Shetiya"},{"@type": "Person", "name": "Ian P. Swift"},{"@type": "Person", "name": "Abolfazl Asudeh"},{"@type": "Person", "name": "Gautam Das"}],
+      "datePublished": "2024 Proceedings of the 27th International Conference on Extending Database Technology (EDBT)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Shapley Values for Explanation in Two-sided Matching Applications",
+        "url": "https://doi.org/10.48786/edbt.2024.50"
+      },
+      "keywords": ["Shapley values", "two-sided matching", "explainable AI", "top-k recommendation", "KernelSHAP"],
+      "about": "Computer Science / Explainable AI"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u178f\u1798\u17d2\u179b\u17c3 Shapley \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1795\u17d2\u1782\u17bc\u1795\u17d2\u1782\u1784\u1791\u17d2\u179c\u17c1\u1797\u17b6\u1782\u17b8",
+          "item": "https://khmerresearch.com/papers/technology/shapley-values-explanation-two-sided-matching-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>តម្លៃ Shapley សម្រាប់ការបកស្រាយនៅក្នុងកម្មវិធីផ្គូផ្គងទ្វេភាគី</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Shapley Values for Explanation in Two-sided Matching Applications<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.48786/edbt.2024.50" target="_blank" rel="noopener">doi.org/10.48786/edbt.2024.50</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>តម្លៃ Shapley សម្រាប់ការបកស្រាយនៅក្នុងកម្មវិធីផ្គូផ្គងទ្វេភាគី</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Shapley Values for Explanation in Two-sided Matching Applications</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Suraj Shetiya, Ian P. Swift, Abolfazl Asudeh, Gautam Das</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 Proceedings of the 27th International Conference on Extending Database Technology (EDBT)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Explainable AI</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ប្រព័ន្ធផ្គូផ្គងទ្វេភាគីទំនើបៗ (ដូចជាកម្មវិធីស្វែងរកការងារ និងការណាត់ជួប) ផ្តល់ជូនបញ្ជីផ្គូផ្គងតាមចំណាត់ថ្នាក់កំពូល (top-k) ប៉ុន្តែខ្វះតម្លាភាពក្នុងការបកស្រាយប្រាប់អ្នកប្រើប្រាស់ថា ហេតុអ្វីបានជាពួកគេមាន ឬមិនមានឈ្មោះក្នុងបញ្ជីទាំងនោះ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្រផ្អែកលើទ្រឹស្តីល្បែងកម្សាន្ត (Game Theory) ដើម្បីគណនាឥទ្ធិពលនៃលក្ខណៈសម្បត្តិនីមួយៗក្នុងការសម្រេចលទ្ធផលនៃការផ្គូផ្គង។
+        
+        <ul>
+            
+            <li>ការកំណត់ទម្រង់សំណួរពន្យល់ដោយប្រើប្រាស់តម្លៃ Shapley (Shapley Values) ដើម្បីវាស់ស្ទង់ការរួមចំណែកនៃលក្ខណៈសម្បត្តិនីមួយៗ</li>
+            
+            <li>ការបង្កើតក្បួនដោះស្រាយការគំរូដោយចៃដន្យ (Randomized Sampling Algorithm) ដែលមានដែនកំណត់កំហុសដើម្បីកាត់បន្ថយពេលវេលាគណនា</li>
+            
+            <li>ការកែសម្រួលនិងអនុវត្តវិធីសាស្ត្រ KernelSHAP សម្រាប់ធ្វើការប៉ាន់ស្មានតម្លៃ Shapley ក្នុងអនុវត្តន៍ជាក់ស្តែង</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រប៉ាន់ស្មានតាមរយៈការយកគំរូចៃដន្យ និង KernelSHAP អាចដោះស្រាយបញ្ហាពេលវេលាគណនាដែលកើនឡើងជាអិចស្ប៉ូណង់ស្យែល O(2^n) នៃក្បួនដោះស្រាយពិតប្រាកដ (Exact Shapley) បានយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li>លទ្ធផលពិសោធន៍បង្ហាញថា KernelSHAP មានអត្រានៃការទាញរកលទ្ធផលលឿនជាង និងមានកំហុសតិចជាងបើធៀបនឹងវិធីសាស្ត្រយកគំរូតាមបែបចៃដន្យសុទ្ធសាធ សម្រាប់ចំនួនគំរូដូចគ្នា។</li>
+            
+            <li>ការសិក្សាលើអ្នកប្រើប្រាស់ជាក់ស្តែងបង្ហាញថា អ្នកចូលរួមភាគច្រើន (១៨ លើ ២៨ នាក់) ពេញចិត្តនឹងការបកស្រាយដោយប្រើតម្លៃ Shapley ថាមានអត្ថប្រយោជន៍ និងងាយយល់ជាងវិធីសាស្ត្រ LIME។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Exact Shapley Value (Brute-force)</span></strong><br>ការគណនាតម្លៃ Shapley ពិតប្រាកដ (Brute-force)</td>
+                <td>ផ្តល់តម្លៃពិតប្រាកដ និងមានភាពត្រឹមត្រូវដាច់ខាតដោយមិនមានកំហុស។</td>
+                <td>ទាមទារពេលវេលាគណនាច្រើនជាអិចស្ប៉ូណង់ស្យែល (O(2^d)) ដែលមិនអាចអនុវត្តបានជាមួយទិន្នន័យដែលមានលក្ខណៈសម្បត្តិច្រើន (High dimensions)។</td>
+                <td>ត្រូវបានប្រើប្រាស់ជាទិន្នន័យគោល (Ground truth) សម្រាប់ធ្វើតេស្ត និងផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវនៃវិធីសាស្ត្រប៉ាន់ស្មានផ្សេងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Approximate Sampling-based Shapley</span></strong><br>ការប៉ាន់ស្មានតម្លៃ Shapley តាមរយៈការយកគំរូចៃដន្យ</td>
+                <td>កាត់បន្ថយពេលវេលាគណនាបានច្រើន និងមានការធានាលើដែនកំណត់កំហុសតាមបែបទ្រឹស្តី (Theoretical error bounds)។</td>
+                <td>នៅតែត្រូវការចំនួនគំរូច្រើនទើបទទួលបានភាពត្រឹមត្រូវខ្ពស់ បើប្រៀបធៀបជាមួយអត្រានៃការទាញរកលទ្ធផលរបស់ KernelSHAP។</td>
+                <td>ទទួលបានលទ្ធផលនៃការបកស្រាយដូចគ្នានឹងវិធីសាស្ត្រ Brute-force ក្នុង ១១៩ លើ ១២០ ករណីនៃការធ្វើតេស្ត (១១៩/១២០ trials)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">KernelSHAP</span></strong><br>វិធីសាស្ត្រប៉ាន់ស្មាន KernelSHAP</td>
+                <td>ដំណើរការបានលឿន និងមានកម្រិតលម្អៀង (Error) ទាបជាងវិធីសាស្ត្រយកគំរូចៃដន្យសម្រាប់ចំនួនគំរូដូចគ្នា។</td>
+                <td>មិនមានការធានាលើដែនកំណត់នៃកំហុសតាមបែបទ្រឹស្តី (Lacks theoretical guarantees) ដូចវិធីសាស្ត្រយកគំរូចៃដន្យនោះទេ។</td>
+                <td>បង្ហាញពីប្រសិទ្ធភាពនិងល្បឿនលឿនក្នុងការបកស្រាយលទ្ធផលផ្គូផ្គង ខណៈដែលកំហុសមានទំហំតូចបំផុតនៅពេលប្តូរចំនួនគំរូ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">LIME (Local Interpretable Model-agnostic Explanations)</span></strong><br>វិធីសាស្ត្របកស្រាយ LIME (ប្រើជា Baseline ក្នុងការសិក្សាលើអ្នកប្រើប្រាស់)</td>
+                <td>ងាយស្រួលអនុវត្ត លឿន និងមានប្រជាប្រិយភាពក្នុងការបកស្រាយម៉ូដែល Machine Learning ទូទៅ។</td>
+                <td>ការបកស្រាយមិនសូវស៊ីជម្រៅនិងមិនសូវត្រូវនឹងធម្មជាតិនៃការប្រកួតប្រជែងក្នុងបញ្ហាផ្គូផ្គង (Top-k ranking) បើធៀបនឹង Shapley។</td>
+                <td>ទទួលបានការគាំទ្រតិចជាង Shapley (១០ នាក់ ធៀបនឹង ១៨ នាក់) ក្នុងការសិក្សាវាយតម្លៃពីអ្នកប្រើប្រាស់ផ្ទាល់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់សម្រាប់ការគណនាបែប Exact Shapley ប៉ុន្តែត្រូវការធនធានកម្រិតមធ្យមសម្រាប់វិធីសាស្ត្រប៉ាន់ស្មាន KernelSHAP ដែលអាចដំណើរការបានលើកុំព្យូទ័រទូទៅ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនកុំព្យូទ័រដែលមានកម្លាំងខ្លាំង ដូចជា Core i9 Intel X-series 3.5 GHz និង RAM ទំហំ 128 GB DDR4 (ដំណើរការលើ Linux Ubuntu)។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា Python 3 រួមជាមួយបណ្ណាល័យ KernelSHAP (ពី GitHub) និងបណ្ណាល័យ auto-sklearn សម្រាប់ការបណ្តុះបណ្តាលម៉ូដែលកាត់សេចក្តី។</li>
+        
+        <li><strong>Datasets:</strong> ប្រើប្រាស់ទិន្នន័យជាក់ស្តែងចំនួន ២ (បេក្ខជនការងារ ៣៩០នាក់ និងនិស្សិតសុំចូលរៀន ៥០០នាក់) ព្រមទាំងសំណុំទិន្នន័យសិប្បនិម្មិតចំនួន ១២០ ដែលមានការបែងចែកលក្ខណៈចម្រុះ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យបេក្ខជនការងារ និងការចូលរៀនសាកលវិទ្យាល័យ ដែលមានប្រភពពី Kaggle ដែលអាចឆ្លុះបញ្ចាំងតែពីបរិបទប្រទេសលោកខាងលិចប៉ុណ្ណោះ។ លក្ខណៈវិនិច្ឆ័យ ទម្លាប់ និងតម្រូវការទីផ្សារការងារនៅកម្ពុជាមានភាពខុសគ្នា ដូចនេះការអនុវត្តជាក់ស្តែងនៅកម្ពុជាតម្រូវឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកដើម្បីចៀសវាងភាពលម្អៀង (Data Bias)។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្របកស្រាយលទ្ធផលនៃការផ្គូផ្គងនេះមានសក្តានុពលខ្ពស់ក្នុងការបង្កើនតម្លាភាពសម្រាប់ប្រព័ន្ធបច្ចេកវិទ្យានៅកម្ពុជា ជាពិសេសក្នុងការអប់រំ និងការងារ។</p>
+        
+        <ul>
+            
+            <li><strong>ទីភ្នាក់ងារជ្រើសរើសបុគ្គលិក និងវេទិកាការងារអនឡាញ (ឧ. BongThom, CamHR, រីងហ្គូ):</strong> អាចប្រើប្រាស់ប្រព័ន្ធនេះដើម្បីបកស្រាយប្រាប់បេក្ខជនថាមូលហេតុអ្វីបានជាពួកគេមិនជាប់ការវាយតម្លៃបឋម (Shortlist) របស់ក្រុមហ៊ុន និងបង្ហាញពីជំនាញជាក់លាក់ដែលពួកគេគួរអភិវឌ្ឍបន្ថែម។</li>
+            
+            <li><strong>ការប្រឡងអាហារូបករណ៍ និងការចូលរៀននៅគ្រឹះស្ថានឧត្តមសិក្សា:</strong> ផ្តល់តម្លាភាពដល់សិស្សានុសិស្សអំពីមូលហេតុនៃការធ្លាក់ ឬជាប់អាហារូបករណ៍ ដោយពន្យល់ពីទម្ងន់ពិន្ទុនៃមុខវិជ្ជានីមួយៗធៀបនឹងបេក្ខជនផ្សេងទៀត។</li>
+            
+            <li><strong>កម្មវិធីសេវាកម្មហិរញ្ញវត្ថុ និងប្រាក់កម្ចី (FinTech Platforms):</strong> ជួយពន្យល់អតិថិជនពីមូលហេតុដែលសំណើកម្ចីរបស់ពួកគេត្រូវបានបដិសេធ ដោយបង្ហាញពីកត្តាឥណទាន (Credit Score) ណាដែលទាញទម្លាក់ពិន្ទុរបស់ពួកគេ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការដាក់បញ្ចូលបច្ចេកវិទ្យាបកស្រាយ (Explainable AI) តាមរយៈ Shapley Values អាចជួយកាត់បន្ថយភាពមន្ទិលសង្ស័យ និងបង្កើនទំនុកចិត្តពីសាធារណជនមកលើប្រព័ន្ធសម្រេចចិត្តដោយស្វ័យប្រវត្តិនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទ្រឹស្តីល្បែង និងការផ្គូផ្គង (Game Theory & Top-k Matching):</strong> និស្សិតត្រូវចាប់ផ្តើមស្វែងយល់ពីគោលការណ៍ក្បួនគណនានៃ <span>Shapley Values</span> ព្រមទាំងយន្តការនៃការរៀបចំណាត់ថ្នាក់តាមលំដាប់ <span>Top-k ranking mechanisms</span>។</li>
+            
+            <li><strong>រៀបចំសំណុំទិន្នន័យសាកល្បងក្នុងស្រុក:</strong> ប្រមូលទិន្នន័យពីការជ្រើសរើសបុគ្គលិក ឬលទ្ធផលប្រឡងអាហារូបករណ៍ រួចធ្វើការសម្អាតទិន្នន័យ (Data Preprocessing) ដោយប្រើប្រាស់ <span>Python</span> និងបណ្ណាល័យ <span>Pandas</span>។</li>
+            
+            <li><strong>អនុវត្តក្បួនដោះស្រាយ KernelSHAP:</strong> សរសេរកូដដោយប្រើប្រាស់បណ្ណាល័យ <span>KernelSHAP</span> នៅក្នុង <span>Python</span> ដើម្បីវាយតម្លៃសំណុំទិន្នន័យ ជៀសវាងការប្រើ <span>Brute-force (Exact Shapley)</span> ដែលចំណាយពេលយូរ។</li>
+            
+            <li><strong>បង្កើតចំណុចប្រទាក់សម្រាប់អ្នកប្រើប្រាស់ (User Interface):</strong> រៀបចំផ្ទាំងបង្ហាញលទ្ធផល (Dashboard) ឧទាហរណ៍ដោយប្រើ <span>Streamlit</span> ដើម្បីបង្ហាញហេតុផលនៃការផ្គូផ្គងឱ្យងាយយល់ និងយកទៅធ្វើតេស្តសាកល្បងជាមួយអ្នកប្រើប្រាស់ពិតប្រាកដ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Shapley values</span></td>
+                <td>ជារង្វាស់ក្នុងទ្រឹស្តីល្បែងកម្សាន្តដែលប្រើសម្រាប់បែងចែកដោយយុត្តិធម៌នូវការរួមចំណែករបស់កត្តា (ឬអ្នកលេង) នីមួយៗទៅលើលទ្ធផលសរុប។ នៅក្នុងការស្រាវជ្រាវនេះ វាត្រូវបានប្រើដើម្បីគណនាថាតើលក្ខណៈសម្បត្តិណាមួយរបស់បេក្ខជនមានឥទ្ធិពលខ្លាំងជាងគេក្នុងការធ្វើឱ្យគេជាប់ ឬធ្លាក់ក្នុងការផ្គូផ្គង។</td>
+                <td>ដូចជាការបែងចែកប្រាក់រង្វាន់ដល់សមាជិកក្រុមបាល់ទាត់ ដោយវាយតម្លៃដោយយុត្តិធម៌លើការប្រឹងប្រែងជាក់ស្តែងរបស់អ្នកនីមួយៗក្នុងការនាំឱ្យក្រុមទទួលបានជ័យជម្នះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Two-sided matching</span></td>
+                <td>ជាដំណើរការផ្គូផ្គងរវាងភាគីពីរដែលមានតម្រូវការរៀងៗខ្លួន (ឧទាហរណ៍ ក្រុមហ៊ុនស្វែងរកបុគ្គលិក និងបុគ្គលិកស្វែងរកការងារ) ដែលភាគីនីមួយៗមានចំណូលចិត្ត ឬលក្ខណៈវិនិច្ឆ័យផ្ទាល់ខ្លួន ហើយប្រព័ន្ធត្រូវរកចំណុចកណ្តាលដែលភាគីទាំងសងខាងអាចទទួលយកបាន។</td>
+                <td>ដូចជាកម្មវិធីណាត់ជួប (Dating App) ដែលភាគីសងខាងត្រូវតែពេញចិត្តនឹងប្រវត្តិរូបគ្នាមុននឹងអាចចាប់គូ (Match) គ្នាបានដោយជោគជ័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Top-k matching model</span></td>
+                <td>ជាប្រព័ន្ធក្បួនដោះស្រាយដែលរៀបចំណាត់ថ្នាក់ទិន្នន័យ ហើយជ្រើសរើសយកជម្រើសល្អបំផុតចំនួន k (ឧ. ជម្រើសកំពូលទាំង ៥ ឬ ១០) ពីក្នុងបញ្ជីទិន្នន័យដ៏ធំមួយ ដើម្បីបង្ហាញជូនអ្នកប្រើប្រាស់ ដោយផ្អែកលើពិន្ទុភាពស័ក្តិសមខ្ពស់ជាងគេ។</td>
+                <td>ដូចជាការប្រកាសលទ្ធផលសិស្សពូកែប្រចាំថ្នាក់ ដោយមិនអានឈ្មោះសិស្សទាំង ៥០ នាក់ទេ គឺយកតែអ្នកមានពិន្ទុខ្ពស់ជាងគេ ៣ នាក់ (Top-3) ប៉ុណ្ណោះមកផ្តល់រង្វាន់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">KernelSHAP</span></td>
+                <td>ជាក្បួនដោះស្រាយប៉ាន់ស្មានតម្លៃ Shapley ដ៏មានប្រសិទ្ធភាពមួយនៅក្នុងម៉ូដែលបញ្ញាសិប្បនិម្មិត (AI) ដែលជួយពន្យល់ពីមូលហេតុនៃការសម្រេចចិត្តរបស់ប្រព័ន្ធម៉ាស៊ីន ដោយមិនចាំបាច់ប្រើពេលវេលាគណនាច្រំដែលច្រើនពេកដែលស៊ីពេលយូរ។</td>
+                <td>ដូចជាការសួរសាក្សីសំខាន់ៗចំនួន ៥ នាក់ដើម្បីសន្និដ្ឋានសាច់រឿងឱ្យបានលឿន ជាជាងការដើរសួរមនុស្សរាប់ពាន់នាក់ដែលអាចចំណាយពេលរាប់ខែ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bipartite graph</span></td>
+                <td>ជាទម្រង់ក្រាហ្វក្នុងគណិតវិទ្យាដែលបែងចែកចំណុច (Nodes) ជាពីរសំណុំដាច់ដោយឡែកពីគ្នា ហើយខ្សែភ្ជាប់ (Edges) អាចមានបានតែរវាងចំណុចពីសំណុំមួយទៅសំណុំមួយទៀតប៉ុណ្ណោះ មិនអាចភ្ជាប់គ្នាឯងក្នុងសំណុំតែមួយឡើយ។</td>
+                <td>ដូចជាការគូសបន្ទាត់ភ្ជាប់រវាងបញ្ជីឈ្មោះសិស្ស (ក្រុមទី១) និងបញ្ជីឈ្មោះមុខវិជ្ជា (ក្រុមទី២) ដោយសិស្សមិនអាចគូសបន្ទាត់ភ្ជាប់ទៅសិស្សគ្នាឯងបានទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Coalitional game</span></td>
+                <td>ជាទ្រឹស្តីល្បែងកម្សាន្តដែលសមាជិក ឬអ្នកលេងជ្រើសរើសសហការគ្នាជាក្រុមដើម្បីប្រកួតប្រជែងយកអត្ថប្រយោជន៍រួម ហើយត្រូវស្វែងរកវិធីបែងចែកតម្លៃនៃអត្ថប្រយោជន៍នោះទៅតាមកម្រិតនៃការចូលរួមរបស់សមាជិកម្នាក់ៗ។</td>
+                <td>ដូចជាក្រុមសិស្សរួមគ្នាធ្វើកិច្ចការស្រាវជ្រាវ (Group Work) ដើម្បីបានពិន្ទុខ្ពស់ រួចលោកគ្រូវាយតម្លៃថាអ្នកណាធ្វើការងារអ្វីខ្លះដើម្បីបែងចែកពិន្ទុរៀងៗខ្លួន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Jaccard similarity</span></td>
+                <td>ជារង្វាស់ស្ថិតិសម្រាប់ប្រៀបធៀបភាពស្រដៀងគ្នានៃសំណុំទិន្នន័យពីរ ដោយគណនាផលធៀបរវាងចំនួនធាតុដែលមានដូចគ្នាបេះបិទ (Intersection) ចែកជាមួយនឹងចំនួនធាតុសរុបបញ្ចូលគ្នា (Union)។</td>
+                <td>ដូចជាការប្រៀបធៀបគ្រឿងផ្សំនៃមុខម្ហូបពីរមុខ បើមានគ្រឿងផ្សំដូចគ្នាច្រើន នោះលទ្ធផលភាពស្រដៀងគ្នាកាន់តែខិតជិតទៅរកលេខ ១។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">LIME</span></td>
+                <td>LIME (Local Interpretable Model-agnostic Explanations) ជាវិធីសាស្ត្រមួយសម្រាប់ពន្យល់ពីការសម្រេចចិត្តរបស់ម៉ូដែល AI ដ៏ស្មុគស្មាញ ដោយបង្កើតម៉ូដែលសាមញ្ញមួយផ្សេងទៀតដើម្បីរៀនធ្វើត្រាប់តាមការសម្រេចចិត្តនោះក្នុងទំហំទិន្នន័យតូចចង្អៀត (Local scale)។</td>
+                <td>ដូចជាការព្យាយាមពន្យល់ពីរូបមន្តគណិតវិទ្យាដ៏ស្មុគស្មាញមួយ ដោយប្រើឧទាហរណ៍លេខតូចៗងាយៗឱ្យសិស្សងាយយល់ចំណុចជាក់លាក់ណាមួយសិន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/game-theory-xai-shapley-clustering-2025.html">
+                    <span class="km">ទ្រឹស្តីល្បែងជួបជាមួយបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន៖ អភិក្រមដែលត្រូវបានកែលម្អដើម្បីស្វែងយល់ពីម៉ូដែលប្រអប់ខ្មៅតាមរយៈតម្លៃ Shapley</span><br>
+                    <span class="en article-original-title">Game Theory Meets Explainable AI: An Enhanced Approach to Understanding Black Box Models Through Shapley Values</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ai-methods-nlp-comprehensive-review-2024.html">
+                    <span class="km">វិធីសាស្ត្របញ្ញាសិប្បនិម្មិតក្នុងដំណើរការភាសាធម្មជាតិ៖ ការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយ</span><br>
+                    <span class="en article-original-title">Artificial Intelligence Methods in Natural Language Processing: A Comprehensive Review</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/explainable-ai-model-medical-data-analysis-2024.html">
+                    <span class="km">គំរូបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បានថ្មីមួយសម្រាប់ការវិភាគទិន្នន័យវេជ្ជសាស្ត្រ</span><br>
+                    <span class="en article-original-title">A NOVEL EXPLAINABLE AI MODEL FOR MEDICAL DATA ANALYSIS</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/xai-model-cancer-image-classification-2024.html">
+                    <span class="km">គំរូបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (XAI) សម្រាប់ការចាត់ថ្នាក់រូបភាពជំងឺមហារីក</span><br>
+                    <span class="en article-original-title">Explainable Artificial Intelligence (XAI) Model for Cancer Image Classification</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/saliency-maps-xai-medical-imaging-brain-tumor-2023.html">
+                    <span class="km">ផែនទី Saliency ជាវិធីសាស្ត្របញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) ក្នុងការថតរូបភាពវេជ្ជសាស្ត្រ៖ ការសិក្សាស្រាវជ្រាវលើការចំណាត់ថ្នាក់ដុំសាច់ខួរក្បាល</span><br>
+                    <span class="en article-original-title">Saliency Maps as an Explainable AI Method in Medical Imaging: A Case Study on Brain Tumor Classification</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Shapley+values%22+explainable+AI+recommendation+systems" target="_blank" rel="noopener"><span class="en">Shapley values" explainable AI recommendation systems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=top-k+matching+algorithms+%22explainability%22+OR+%22interpretability" target="_blank" rel="noopener"><span class="en">top-k matching algorithms "explainability" OR "interpretability</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=two-sided+matching+markets+%22game+theory%22+%22bipartite+graph" target="_blank" rel="noopener"><span class="en">two-sided matching markets "game theory" "bipartite graph</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=KernelSHAP+approximation+methods+theoretical+guarantees" target="_blank" rel="noopener"><span class="en">KernelSHAP approximation methods theoretical guarantees</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=fairness+and+transparency+in+online+matching+platforms" target="_blank" rel="noopener"><span class="en">fairness and transparency in online matching platforms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=why-not+queries%22+database+matching+explanations" target="_blank" rel="noopener"><span class="en">why-not queries" database matching explanations</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>

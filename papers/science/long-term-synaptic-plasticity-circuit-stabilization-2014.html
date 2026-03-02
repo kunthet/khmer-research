@@ -378,6 +378,13 @@
         <ul class="internal-articles">
             
             <li class="internal-article-link">
+                <a href="/papers/science/synaptic-fundamentals-memory-performance-2015.html">
+                    <span class="km">មូលដ្ឋានគ្រឹះស៊ីណាប់នៃដំណើរការការចងចាំ</span><br>
+                    <span class="en article-original-title">Synaptic Fundamentals of Memory Performance</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/science/intro-neural-plasticity-mechanism-2017.html">
                     <span class="km">សេចក្តីផ្តើមអំពីយន្តការនៃភាពបត់បែននៃប្រព័ន្ធសរសៃប្រសាទ</span><br>
                     <span class="en article-original-title">Introduction to Neural Plasticity Mechanism</span>
@@ -442,6 +449,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

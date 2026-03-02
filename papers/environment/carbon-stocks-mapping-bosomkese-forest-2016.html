@@ -396,6 +396,13 @@
             </li>
             
             <li class="internal-article-link">
+                <a href="/papers/technology/automated-aboveground-carbon-remote-sensing-gordon-2012.html">
+                    <span class="km">ការប៉ាន់ប្រមាណកាបូនលើដីនៃព្រៃឈើដោយស្វ័យប្រវត្តិជាមួយការចាប់សញ្ញាពីចម្ងាយ</span><br>
+                    <span class="en article-original-title">Automated Aboveground Carbon Estimation of Forests with Remote Sensing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/environment/forest-change-monitoring-remote-sensing-mekong-2014.html">
                     <span class="km">ការសិក្សាអំពីវិធីសាស្ត្រត្រួតពិនិត្យការផ្លាស់ប្តូរព្រៃឈើ ដោយប្រើប្រាស់តេឡេដេតេចស្យុង (Remote Sensing) នៅក្នុងអាងទន្លេមេគង្គកណ្តាល និងក្រោម</span><br>
                     <span class="en article-original-title">メコン中下流域におけるリモートセンシングを用いた森林変動モニタリング手法に関する研究</span>
@@ -413,13 +420,6 @@
                 <a href="/papers/technology/remote-sensing-gis-integration-weng-2010.html">
                     <span class="km">ការធ្វើសមាហរណកម្មប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ និងតេឡេសិក្សា៖ ទ្រឹស្តី វិធីសាស្ត្រ និងការអនុវត្ត</span><br>
                     <span class="en article-original-title">Remote Sensing and GIS Integration: Theories, Methods, and Applications</span>
-                </a>
-            </li>
-            
-            <li class="internal-article-link">
-                <a href="/papers/agriculture/crop-yield-forecasting-early-warning-systems-2013.html">
-                    <span class="km">ការពិនិត្យឡើងវិញលើវិធីសាស្ត្រព្យាករណ៍ទិន្នផលដំណាំ និងប្រព័ន្ធប្រកាសអាសន្នជាមុន</span><br>
-                    <span class="en article-original-title">Review of Crop Yield Forecasting Methods and Early Warning Systems</span>
                 </a>
             </li>
             
@@ -476,6 +476,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

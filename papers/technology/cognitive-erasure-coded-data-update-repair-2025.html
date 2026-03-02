@@ -397,6 +397,13 @@
         <ul class="internal-articles">
             
             <li class="internal-article-link">
+                <a href="/papers/technology/overview-supervised-machine-learning-methods-2017-2.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃវិធីសាស្ត្ររៀនម៉ាស៊ីនមានការត្រួតពិនិត្យ</span><br>
+                    <span class="en article-original-title">An overview of the supervised machine learning methods</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/technology/classification-class-imbalance-review-2013.html">
                     <span class="km">ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ</span><br>
                     <span class="en article-original-title">Classification with class imbalance problem: a review</span>
@@ -421,13 +428,6 @@
                 <a href="/papers/technology/ai-predictive-analytics-edge-cloud-2021.html">
                     <span class="km">ការវិភាគព្យាករណ៍ដែលជំរុញដោយ AI សម្រាប់បង្កើនប្រសិទ្ធភាពការប្រើប្រាស់ធនធាននៅក្នុងមជ្ឈមណ្ឌលទិន្នន័យ Edge-Cloud</span><br>
                     <span class="en article-original-title">AI-Driven Predictive Analytics for Optimizing Resource Utilization in Edge-Cloud Data Centers</span>
-                </a>
-            </li>
-            
-            <li class="internal-article-link">
-                <a href="/papers/technology/machine-learning-text-categorization-2004.html">
-                    <span class="km">បច្ចេកទេសរៀនដោយម៉ាស៊ីនមានការត្រួតពិនិត្យ និងគ្មានការត្រួតពិនិត្យសម្រាប់ការចាត់ថ្នាក់ឯកសារអត្ថបទ</span><br>
-                    <span class="en article-original-title">SUPERVISED AND UNSUPERVISED MACHINE LEARNING TECHNIQUES FOR TEXT DOCUMENT CATEGORIZATION</span>
                 </a>
             </li>
             
@@ -482,6 +482,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

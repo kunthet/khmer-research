@@ -414,9 +414,9 @@
             </li>
             
             <li class="internal-article-link">
-                <a href="/papers/agriculture/crop-yield-forecasting-early-warning-systems-2013.html">
-                    <span class="km">ការពិនិត្យឡើងវិញលើវិធីសាស្ត្រព្យាករណ៍ទិន្នផលដំណាំ និងប្រព័ន្ធប្រកាសអាសន្នជាមុន</span><br>
-                    <span class="en article-original-title">Review of Crop Yield Forecasting Methods and Early Warning Systems</span>
+                <a href="/papers/economics/dam-bao-an-ninh-luong-thuc-vietnam-2021.html">
+                    <span class="km">ការធានាសន្តិសុខស្បៀងនៅក្នុងបរិបទថ្មី</span><br>
+                    <span class="en article-original-title">ĐẢM BẢO AN NINH LƯƠNG THỰC TRONG BỐI CẢNH MỚI</span>
                 </a>
             </li>
             
@@ -471,6 +471,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

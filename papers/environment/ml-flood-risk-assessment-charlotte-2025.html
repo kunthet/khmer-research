@@ -394,6 +394,13 @@
             </li>
             
             <li class="internal-article-link">
+                <a href="/papers/technology/overview-supervised-machine-learning-methods-2017-2.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃវិធីសាស្ត្ររៀនម៉ាស៊ីនមានការត្រួតពិនិត្យ</span><br>
+                    <span class="en article-original-title">An overview of the supervised machine learning methods</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/environment/forecasting-municipal-solid-waste-gso-xgboost-2023.html">
                     <span class="km">ការព្យាករណ៍សំណល់រឹងទីក្រុងដោយប្រើប្រាស់ម៉ូដែល GSO-XGBoost</span><br>
                     <span class="en article-original-title">Forecasting the Municipal Solid Waste Using GSO-XGBoost Model</span>
@@ -411,13 +418,6 @@
                 <a href="/papers/science/benchmarking-ml-satellite-precipitation-downscaling-2024.html">
                     <span class="km">ការវាស់វែងប្រៀបធៀបការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការកាត់បន្ថយមាត្រដ្ឋានទឹកភ្លៀងពីផ្កាយរណប៖ ការយល់ដឹងអំពីឧត្តមភាព គុណសម្បត្តិ និងលទ្ធភាពផ្ទេរ</span><br>
                     <span class="en article-original-title">Benchmarking Machine Learning for Satellite Precipitation Downscaling: Insights into Superiority, Advantages, and Transferability</span>
-                </a>
-            </li>
-            
-            <li class="internal-article-link">
-                <a href="/papers/technology/irregular-stock-data-prediction-sli-2025.html">
-                    <span class="km">ការបង្កើនប្រសិទ្ធភាពនៃការទស្សន៍ទាយទិន្នន័យភាគហ៊ុនមិនទៀងទាត់ដោយផ្អែកលើការប៉ាន់ស្មានលីនេអ៊ែរសាមញ្ញ (Simple Linear Interpolation)</span><br>
-                    <span class="en article-original-title">Irregular Stock Data Prediction Performance Optimisation Based on the Simple Linear Interpolation</span>
                 </a>
             </li>
             
@@ -472,6 +472,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

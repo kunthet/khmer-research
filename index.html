@@ -68,7 +68,9 @@
         .khmer-text { font-family: 'Battambang', cursive; }
 
         /* Header / Nav */
-        .site-header { background: #fff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; }
+        .site-header { background: #fff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 50; transition: transform 0.3s ease; }
+        .site-header.header-hidden { transform: translateY(-100%); }
+        .mobile-only { display: none; }
         .header-inner { max-width: 1200px; margin: 0 auto; padding: 14px 20px; display: flex; justify-content: space-between; align-items: center; gap: 14px; flex-wrap: wrap; }
 
         .site-logo { font-size: 22px; font-weight: 800; color: #0f172a; text-decoration: none; }
@@ -138,26 +140,64 @@
         .footer-bottom { max-width: 1200px; margin: 0 auto; padding-top: 20px; margin-top: 20px; border-top: 1px solid #1e293b; text-align: center; font-size: 13px; }
 
         @media (max-width: 900px) {
-            .header-inner { align-items: flex-start; }
             .nav-links {
-                width: 100%;
-                justify-content: flex-start;
                 flex-wrap: nowrap;
                 overflow-x: auto;
-                padding-bottom: 4px;
                 -webkit-overflow-scrolling: touch;
             }
             .nav-links a { flex: 0 0 auto; }
         }
 
         @media (max-width: 640px) {
-            .hero h1 { font-size: 1.75rem; }
-            .stats-bar { gap: 20px; }
-            .nav-links { gap: 12px; }
-            .nav-links a { font-size: 13px; }
+            /* Header: compact single row, hide Khmer category links */
+            .header-inner { padding: 10px 16px; gap: 10px; }
+            .site-logo { font-size: 18px; }
+            .nav-links { gap: 14px; }
+            .nav-links a[lang="km"] { display: none; }
+            .nav-browse { padding: 6px 14px; font-size: 13px; }
+            .mobile-only { display: inline; }
+
+            /* Hero: tighter, hide verbose text */
+            .hero { padding: 32px 16px 20px; }
+            .hero h1 { font-size: 1.6rem; margin-bottom: 8px; }
+            .hero h2 { font-size: 1rem; margin-bottom: 14px; }
+            .hero p { display: none; }
+            .hero-cta-secondary { display: none; }
+
+            /* Search: stack vertically */
+            .hero-search { margin: 0 auto 12px; }
             .hero-search-box { flex-direction: column; border-radius: 10px; }
-            .hero-search-btn { border-radius: 0 0 10px 10px; }
+            .hero-search-btn { border-radius: 0 0 10px 10px; padding: 12px 20px; }
             .hero-search-icon { top: 24px; }
+            .hero-search-input { padding: 13px 14px 13px 42px; font-size: 14px; }
+            .hero-search-hint { font-size: 12px; }
+
+            /* Stats: compact inline */
+            .stats-bar { gap: 16px; padding: 12px 16px; }
+            .stat-number { font-size: 1.4rem; }
+            .stat-label { font-size: 11px; }
+
+            /* Categories: show first 6 only, 2-col grid */
+            .section { padding: 24px 16px; }
+            .section-title { font-size: 1.15rem; }
+            .section-subtitle { font-size: 13px; margin-bottom: 14px; }
+            .category-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .cat-card { padding: 14px; }
+            .cat-card-name { font-size: 14px; }
+            .cat-card-en { font-size: 11px; }
+            .cat-card-count { display: none; }
+            .cat-card:nth-child(n+7) { display: none; }
+
+            /* Features: hide on mobile */
+            .section-features { display: none; }
+
+            /* Footer: single column, tighter */
+            .site-footer { padding: 28px 16px; margin-top: 20px; }
+            .footer-inner { grid-template-columns: 1fr 1fr; gap: 20px; }
+            .footer-col:first-child { grid-column: 1 / -1; }
+            .footer-col h4 { font-size: 12px; margin-bottom: 8px; }
+            .footer-col a { font-size: 13px; margin-bottom: 6px; }
+            .footer-bottom { font-size: 11px; margin-top: 14px; padding-top: 10px; }
         }
     </style>
 
@@ -306,7 +346,7 @@
         </section>
 
         <!-- Features -->
-        <section class="section" style="background:#fff; padding-top:40px; padding-bottom:40px;">
+        <section class="section section-features" style="background:#fff; padding-top:40px; padding-bottom:40px;">
             <h2 class="section-title">How It Works</h2>
             <p class="section-subtitle"><span lang="km" class="khmer-text">យើងធ្វើឱ្យស្រាវជ្រាវសកលអាចចូលប្រើបានសម្រាប់កម្ពុជា។</span></p>
             <div class="features">
@@ -364,6 +404,41 @@
             <p>&copy; 2026 KhmerResearch.com. All rights reserved.</p>
         </div>
     </footer>
+
+    <!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+    <script>
+    (function() {
+        var header = document.querySelector('.site-header');
+        var lastY = 0;
+        var ticking = false;
+        var MOBILE_BP = 900;
+        var SCROLL_THRESHOLD = 8;
+
+        function onScroll() {
+            if (ticking) return;
+            ticking = true;
+            requestAnimationFrame(function() {
+                var y = window.pageYOffset;
+                if (window.innerWidth <= MOBILE_BP) {
+                    if (y > lastY && y > 60 && (y - lastY) > SCROLL_THRESHOLD) {
+                        header.classList.add('header-hidden');
+                    } else if (lastY > y && (lastY - y) > SCROLL_THRESHOLD) {
+                        header.classList.remove('header-hidden');
+                    }
+                } else {
+                    header.classList.remove('header-hidden');
+                }
+                lastY = y < 0 ? 0 : y;
+                ticking = false;
+            });
+        }
+
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden');
+        });
+    })();
+    </script>
 
 </body>
 </html>

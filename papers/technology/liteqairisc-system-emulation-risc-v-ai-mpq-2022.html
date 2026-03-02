@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>LiteQAIRISC៖ ការក្លែងធ្វើកម្រិតប្រព័ន្ធនៃអង្គគណនា RISC-V ជាមួយ AI និងការពង្រីកបរិមាណកម្មកម្រិតច្បាស់លាយបញ្ចូលគ្នា - LiteQAIRISC: System-level Emulation of RISC-V Processor with AI and Mixed-pre... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី LiteQAIRISC៖ ការក្លែងធ្វើកម្រិតប្រព័ន្ធនៃអង្គគណនា RISC-V ជាម។ តម្រូវការកើនឡើងសម្រាប់ការទាញយកសេចក្តីសន្និដ្ឋាន AI នៅគែម (Edge AI) ដែលមានប្រសិទ្ធភាពខ្ពស់ និងសន្ស...">
+    
+    <meta name="keywords" content="RISC-V, Edge AI, Mixed-Precision Quantization, FPGA, System-on-Chip (SoC), Hardware Accelerators, ASIP Designer, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/liteqairisc-system-emulation-risc-v-ai-mpq-2022.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/liteqairisc-system-emulation-risc-v-ai-mpq-2022.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/liteqairisc-system-emulation-risc-v-ai-mpq-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/liteqairisc-system-emulation-risc-v-ai-mpq-2022.html">
+    <meta property="og:title" content="LiteQAIRISC៖ ការក្លែងធ្វើកម្រិតប្រព័ន្ធនៃអង្គគណនា RISC-V ជាមួយ AI និងការពង្រីកបរិមាណកម្មកម្រិតច្បាស់លាយបញ្ចូលគ្នា | KhmerResearch.com">
+    <meta property="og:description" content="តម្រូវការកើនឡើងសម្រាប់ការទាញយកសេចក្តីសន្និដ្ឋាន AI នៅគែម (Edge AI) ដែលមានប្រសិទ្ធភាពខ្ពស់ និងសន្សំសំចៃថាមពល បានបង្ហាញពីកង្វះខាតនៃការវាយតម្លៃកម្រិតប្រព័ន្ធក្នុងពិភពពិត និងការគាំទ្របរិមាណកម្មសម្រាប់ឧ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="December 2022, University of Virginia-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="RISC-V">
+    
+    <meta property="article:tag" content="Edge AI">
+    
+    <meta property="article:tag" content="Mixed-Precision Quantization">
+    
+    <meta property="article:tag" content="FPGA">
+    
+    <meta property="article:tag" content="System-on-Chip (SoC)">
+    
+    <meta property="article:tag" content="Hardware Accelerators">
+    
+    <meta property="article:tag" content="ASIP Designer">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="LiteQAIRISC៖ ការក្លែងធ្វើកម្រិតប្រព័ន្ធនៃអង្គគណនា RISC-V ជាមួយ AI និងការពង្រីកបរិមាណកម្មកម្រិតច្បាស់លាយបញ្ចូលគ្នា">
+    <meta name="twitter:description" content="តម្រូវការកើនឡើងសម្រាប់ការទាញយកសេចក្តីសន្និដ្ឋាន AI នៅគែម (Edge AI) ដែលមានប្រសិទ្ធភាពខ្ពស់ និងសន្សំសំចៃថាមពល បានបង្ហាញពីកង្វះខាតនៃការវាយតម្លៃកម្រិតប្រព័ន្ធក្នុងពិភពពិត និងការគាំទ្របរិមាណកម្មសម្រាប់ឧ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "LiteQAIRISC\u17d6 \u1780\u17b6\u179a\u1780\u17d2\u179b\u17c2\u1784\u1792\u17d2\u179c\u17be\u1780\u1798\u17d2\u179a\u17b7\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1793\u17c3\u17a2\u1784\u17d2\u1782\u1782\u178e\u1793\u17b6 RISC-V \u1787\u17b6\u1798\u17bd\u1799 AI \u1793\u17b7\u1784\u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780\u1794\u179a\u17b7\u1798\u17b6\u178e\u1780\u1798\u17d2\u1798\u1780\u1798\u17d2\u179a\u17b7\u178f\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u1799\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6",
+      "name": "LiteQAIRISC: System-level Emulation of RISC-V Processor with AI and Mixed-precision Quantization Extensions",
+      "description": "\u178f\u1798\u17d2\u179a\u17bc\u179c\u1780\u17b6\u179a\u1780\u17be\u1793\u17a1\u17be\u1784\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179f\u17c1\u1785\u1780\u17d2\u178f\u17b8\u179f\u1793\u17d2\u1793\u17b7\u178a\u17d2\u178b\u17b6\u1793 AI \u1793\u17c5\u1782\u17c2\u1798 (Edge AI) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1781\u17d2\u1796\u179f\u17cb \u1793\u17b7\u1784\u179f\u1793\u17d2\u179f\u17c6\u179f\u17c6\u1785\u17c3\u1790\u17b6\u1798\u1796\u179b \u1794\u17b6\u1793\u1794\u1784\u17d2\u17a0\u17b6\u1789\u1796\u17b8\u1780\u1784\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1780\u1798\u17d2\u179a\u17b7\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u17d2\u1793\u17bb\u1784\u1796\u17b7\u1797\u1796\u1796\u17b7\u178f \u1793\u17b7\u1784\u1780\u17b6\u179a\u1782\u17b6\u17c6\u1791\u17d2\u179a\u1794\u179a\u17b7\u1798\u17b6\u178e\u1780\u1798\u17d2\u1798\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u1784\u17d2\u1780\u17be\u1793\u179b\u17d2\u1794\u17bf\u1793 AI \u17af\u1780\u179a\u17b6\u1787\u17d2\u1799\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17d2\u179a\u17b6\u1794\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/liteqairisc-system-emulation-risc-v-ai-mpq-2022.html",
+      "author": [{"@type": "Person", "name": "Yimin Gao (University of Virginia)"}],
+      "datePublished": "December 2022, University of Virginia",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "LiteQAIRISC: System-level Emulation of RISC-V Processor with AI and Mixed-precision Quantization Extensions",
+        "url": "N/A"
+      },
+      "keywords": ["RISC-V", "Edge AI", "Mixed-Precision Quantization", "FPGA", "System-on-Chip (SoC)", "Hardware Accelerators", "ASIP Designer"],
+      "about": "Computer Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "LiteQAIRISC\u17d6 \u1780\u17b6\u179a\u1780\u17d2\u179b\u17c2\u1784\u1792\u17d2\u179c\u17be\u1780\u1798\u17d2\u179a\u17b7\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1793\u17c3\u17a2\u1784\u17d2\u1782\u1782\u178e\u1793\u17b6 RISC-V \u1787\u17b6\u1798\u17bd\u1799 AI \u1793\u17b7\u1784\u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780\u1794\u179a\u17b7\u1798\u17b6\u178e\u1780\u1798\u17d2\u1798\u1780\u1798\u17d2\u179a\u17b7\u178f\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u1799\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/liteqairisc-system-emulation-risc-v-ai-mpq-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>LiteQAIRISC៖ ការក្លែងធ្វើកម្រិតប្រព័ន្ធនៃអង្គគណនា RISC-V ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> LiteQAIRISC: System-level Emulation of RISC-V Processor with AI and Mixed-precision Quantization Extensions<br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>LiteQAIRISC៖ ការក្លែងធ្វើកម្រិតប្រព័ន្ធនៃអង្គគណនា RISC-V ជាមួយ AI និងការពង្រីកបរិមាណកម្មកម្រិតច្បាស់លាយបញ្ចូលគ្នា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> LiteQAIRISC: System-level Emulation of RISC-V Processor with AI and Mixed-precision Quantization Extensions</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Yimin Gao (University of Virginia)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> December 2022, University of Virginia</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> តម្រូវការកើនឡើងសម្រាប់ការទាញយកសេចក្តីសន្និដ្ឋាន AI នៅគែម (Edge AI) ដែលមានប្រសិទ្ធភាពខ្ពស់ និងសន្សំសំចៃថាមពល បានបង្ហាញពីកង្វះខាតនៃការវាយតម្លៃកម្រិតប្រព័ន្ធក្នុងពិភពពិត និងការគាំទ្របរិមាណកម្មសម្រាប់ឧបករណ៍បង្កើនល្បឿន AI ឯករាជ្យដែលមានស្រាប់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> និក្ខេបបទនេះអនុវត្តគម្រោង LiteAIRISC ដោយប្រើប្រាស់អង្គគណនា RISC-V ដែលអាចពង្រីកបាន ដោយរួមបញ្ចូលផ្នែកពង្រីក AI និងបរិមាណកម្មកម្រិតច្បាស់លាយបញ្ចូលគ្នា (MPQ) នៅក្នុងបរិស្ថាន FPGA System-on-Chip (SoC) ។
+        
+        <ul>
+            
+            <li>ការធ្វើសមាហរណកម្មប្រព័ន្ធពិតប្រាកដនៅលើបន្ទះសៀគ្វី (FPGA SoC Integration using LiteX)</li>
+            
+            <li>ការរចនាស្ថាបត្យកម្មមីក្រូ និងការពង្រីកបណ្តុំបញ្ជា (ISA and Microarchitecture Co-design)</li>
+            
+            <li>ការក្លែងធ្វើផ្នែករឹងនិងផ្នែកទន់ (Hardware/Software Co-simulation using ASIP Designer)</li>
+            
+            <li>យុទ្ធសាស្ត្របរិមាណកម្មកម្រិតច្បាស់លាយបញ្ចូលគ្នាតាមស្រទាប់ (Layer-wise Mixed-precision Quantization Policy)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការវាយតម្លៃកម្រិតប្រព័ន្ធលើ FPGA សម្រេចបានការបង្កើនល្បឿនដល់ទៅ 25,306 ដងធៀបនឹងការក្លែងធ្វើ (Simulation) លើ ModelSim សម្រាប់ម៉ូដែល TinyML Resnet-8 ។</li>
+            
+            <li>ក្បួនដោះស្រាយ MPQ ដែលបានស្នើឡើងផ្តល់នូវភាពត្រឹមត្រូវខ្ពស់ជាងមុនពី 3% ទៅ 11% ជាមួយនឹងទំហំផ្នែករឹងប្រហាក់ប្រហែលនឹងយុទ្ធសាស្ត្រមុនៗ។</li>
+            
+            <li>ការរួមបញ្ចូលអង្គភាពបរិមាណកម្ម INT4 ដោយផ្ទាល់ទៅក្នុងបំពង់ដំណើរការ (Processor Pipeline) សម្រេចបានល្បឿនកើនឡើង 29.65 ដងធៀបនឹងអង្គគណនា RISC-V ធម្មតា។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">FPGA Emulation (LiteAIRISC)</span></strong><br>ការក្លែងធ្វើលើបន្ទះ FPGA (LiteAIRISC)</td>
+                <td>មានល្បឿនលឿនខ្លាំងជាងការក្លែងធ្វើដោយសូហ្វវែរ និងអាចតេស្តជាមួយលក្ខខណ្ឌផ្នែករឹងពិតប្រាកដ (Real-world hardware)។</td>
+                <td>ទាមទារចំណេះដឹងផ្នែករឹងកម្រិតខ្ពស់ និងត្រូវរង់ចាំការបំប្លែងកូដ (Synthesis) ដើម្បីទាញយកទិន្នន័យ (Bitstream) ទៅដាក់លើបន្ទះ FPGA។</td>
+                <td>សម្រេចបានល្បឿនលឿនជាងកម្មវិធី ModelSim ដល់ទៅ 25,306 ដង និងលឿនជាងកម្មវិធី ASIP Designer 1,188 ដង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">MPQ INT4 (Tightly Integrated)</span></strong><br>បរិមាណកម្មកម្រិតច្បាស់ INT4 រួមបញ្ចូលក្នុងអង្គគណនា</td>
+                <td>កាត់បន្ថយទំហំផ្ទុកទិន្នន័យ និងសន្សំសំចៃថាមពលខ្ពស់បំផុត ធ្វើឱ្យវាស័ក្តិសមសម្រាប់ឧបករណ៍ Edge AI ខ្នាតតូច។</td>
+                <td>អាចធ្វើឱ្យបាត់បង់ភាពត្រឹមត្រូវខ្លះនៃការព្យាករណ៍ម៉ូដែល AI បើប្រៀបធៀបនឹងកម្រិត Floating-point (FP32) ដើម។</td>
+                <td>បង្កើនល្បឿនប្រតិបត្តិការបាន 29.65 ដង (គិតជា BOPs) ធៀបនឹងអង្គគណនា RISC-V ធម្មតាមូលដ្ឋាន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">LiteAIRISC vs VexRiscv vs SERV</span></strong><br>ការប្រៀបធៀបអង្គគណនា LiteAIRISC, VexRiscv និង SERV</td>
+                <td>LiteAIRISC មានការពង្រីកមុខងារពិសេសសម្រាប់ AI ដែល VexRiscv និង SERV មិនមាន។</td>
+                <td>LiteAIRISC ខ្វះអង្គចងចាំ L1 Cache ដែលធ្វើឱ្យការដំណើរការកម្មវិធីទូទៅ (Non-AI) យឺតជាង VexRiscv រហូតដល់ 100 ដង។</td>
+                <td>VexRiscv ចំណាយពេលត្រឹមតែ 14us រីឯ LiteAIRISC ចំណាយ 1561us សម្រាប់ដំណើរការកម្មវិធី Hello World ពី DRAM។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានផ្នែករឹងកម្រិតខ្ពស់សម្រាប់ការក្លែងធ្វើ និងកម្មវិធីរចនាស្ថាបត្យកម្មកុំព្យូទ័រពាណិជ្ជកម្មដែលមានតម្លៃថ្លៃ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> បន្ទះសៀគ្វី FPGA កម្រិតខ្ពស់សម្រាប់សហគ្រាស (ដូចជា Xilinx VC707, Alveo U280, ឬ Kintex 705) និងកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី Synopsys ASIP Designer (កម្មវិធីពាណិជ្ជកម្មបិទជិត), ក្របខ័ណ្ឌ LiteX, Xilinx Vivado, កម្មវិធីក្លែងធ្វើ (ModelSim, Verilator) និងកម្មវិធីកែសម្រួល AI (TVM)។</li>
+        
+        <li><strong>Expertise:</strong> ជំនាញស៊ីជម្រៅលើស្ថាបត្យកម្មកុំព្យូទ័រ RISC-V, ភាសា C/C++, Verilog, ការរចនាប្រព័ន្ធលើបន្ទះឈីប (SoC), និងបច្ចេកទេសបរិមាណកម្ម Neural Networks (Quantization)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្តោតសំខាន់ទៅលើការវាយតម្លៃផ្នែករឹងដោយប្រើប្រាស់ម៉ូដែលកុំព្យូទ័រចក្ខុ (Computer Vision models) ខ្នាតតូច ដូចជា TinyML Resnet-8 និង MobileNet-V2 សម្រាប់វាស់ស្ទង់។ ភាពលម្អៀងនៅទីនេះគឺប្រព័ន្ធនេះត្រូវបានធ្វើឱ្យប្រសើរឡើងជាពិសេសសម្រាប់តែប្រតិបត្តិការវិភាគរូបភាព (Vision Workloads) ដែលវាប្រហែលជាមិនផ្តល់ប្រសិទ្ធភាពខ្ពស់ដូចគ្នាសម្រាប់កម្មវិធី AI ផ្សេងទៀតដូចជាការវិភាគសំឡេង ឬអត្ថបទនោះទេ។ សម្រាប់កម្ពុជា ការយល់ដឹងនេះជួយឱ្យសាកលវិទ្យាល័យ ឬក្រុមហ៊ុនយកម៉ូដែលនេះទៅសាកល្បងបន្តឱ្យត្រូវនឹងតម្រូវការទិន្នន័យជាក់ស្តែងក្នុងស្រុក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ស្ថាបត្យកម្មរចនាបន្ទះឈីប AI (Edge AI) ដែលសន្សំសំចៃថាមពលនិងបើកទូលាយ (Open-source) នេះ មានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍន៍ហេដ្ឋារចនាសម្ព័ន្ធបច្ចេកវិទ្យានៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture) តាមបណ្តាខេត្ត:</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យា Edge AI នេះភ្ជាប់ជាមួយកាមេរ៉ា ឬសេនស័រ ដើម្បីវិភាគជំងឺរុក្ខជាតិ ឬការលូតលាស់ដំណាំផ្ទាល់នៅតាមទីវាល (ឧទាហរណ៍ តាមចម្ការនៅខេត្តបាត់ដំបង) ដោយមិនបាច់ពឹងផ្អែកលើការតភ្ជាប់អ៊ីនធឺណិតទៅកាន់ Cloud។</li>
+            
+            <li><strong>ការស្រាវជ្រាវ និងការរចនាបន្ទះឈីប (IC Design) ក្នុងសាកលវិទ្យាល័យ:</strong> វិទ្យាស្ថានបច្ចេកវិទ្យានៅកម្ពុជា (ITC ឬ NIPTICT) អាចប្រើប្រាស់ក្របខ័ណ្ឌ LiteX នេះ ដើម្បីបង្កើតកម្មវិធីសិក្សា និងឱ្យនិស្សិតរៀនរចនាស្ថាបត្យកម្ម RISC-V ដោយមិនចាំបាច់ចំណាយលុយរាប់លានដុល្លារផលិតបន្ទះឈីបពិតប្រាកដ (ASIC tape-out) ឡើយ ដោយគ្រាន់តែប្រើប្រាស់ FPGA តម្លៃថោក។</li>
+            
+            <li><strong>ប្រព័ន្ធអ៊ីនធឺណិតនៃសព្វវត្ថុ (IoT Devices) សន្សំសំចៃថាមពល:</strong> ក្រុមហ៊ុន Startups នៅកម្ពុជាអាចយកគំរូនៃប្រព័ន្ធបរិមាណកម្មកម្រិតច្បាស់ (Mixed-Precision Quantization) នេះ ដើម្បីផលិតឧបករណ៍តាមដានគុណភាពខ្យល់ ឬចរាចរណ៍ក្នុងទីក្រុងឆ្លាតវៃ (Smart City) ដែលប្រើប្រាស់ថាមពលថ្មបានយូរ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការរួមបញ្ចូលបច្ចេកវិទ្យា AI ទៅក្នុងបំពង់ដំណើរការនៃបន្ទះឈីប RISC-V ផ្តល់នូវដំណោះស្រាយបច្ចេកវិទ្យាដែលឯករាជ្យ សន្សំសំចៃថាមពល និងមានតម្លៃទាប ដែលស័ក្តិសមបំផុតសម្រាប់ការច្នៃប្រឌិតបច្ចេកវិទ្យាក្នុងប្រទេសកំពុងអភិវឌ្ឍ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>យល់ដឹងពីមូលដ្ឋានគ្រឹះនៃស្ថាបត្យកម្ម RISC-V:</strong> ចាប់ផ្តើមសិក្សាពីរបៀបដំណើរការរបស់អង្គគណនា (Processor Pipeline) ការរចនាបណ្តុំបញ្ជា (ISA) និងស្វែងយល់ពីប្រព័ន្ធអេកូឡូស៊ីបើកទូលាយតាមរយៈឯកសារផ្លូវការរបស់ <span class="en">RISC-V International</span>។</li>
+            
+            <li><strong>អនុវត្តការសរសេរកូដផ្នែករឹង (Hardware Description Language):</strong> រៀនសរសេរកូដផ្នែករឹងដោយប្រើប្រាស់ <span class="en">Verilog</span>, <span class="en">SystemVerilog</span> ឬ <span class="en">SpinalHDL</span> និងប្រើប្រាស់កម្មវិធីក្លែងធ្វើ <span class="en">Verilator</span> ដើម្បីពិនិត្យមើលដំណើរការនៃសៀគ្វីឌីជីថលដែលអ្នកបានរចនា។</li>
+            
+            <li><strong>អនុវត្តការប្រើប្រាស់ឧបករណ៍ LiteX SoC Builder:</strong> ដំឡើងនិងប្រើប្រាស់ <span class="en">LiteX Framework</span> ដើម្បីសាកល្បងបង្កើតប្រព័ន្ធលើបន្ទះឈីប (SoC) សាមញ្ញមួយ ដោយប្រើប្រាស់អង្គគណនាដែលមានស្រាប់ដូចជា <span class="en">VexRiscv</span> ជាការអនុវត្តមុននឹងឈានដល់ការបង្កើតស្នូលកុំព្យូទ័រផ្ទាល់ខ្លួន។</li>
+            
+            <li><strong>សិក្សាពីការបង្រួមទំហំម៉ូដែល AI (Model Quantization):</strong> ប្រើប្រាស់កម្មវិធីបកប្រែកូដ AI បើកទូលាយដូចជា <span class="en">Apache TVM</span> ឬ <span class="en">microTVM</span> ដើម្បីសិក្សាពីរបៀបបំប្លែងម៉ូដែល AI ធំៗ (FP32) ទៅជាកម្រិតទាប (INT8 ឬ INT4) សម្រាប់ដំណើរការលើឧបករណ៍តូចៗ (Edge Devices)។</li>
+            
+            <li><strong>សាកល្បងគម្រោងលើបន្ទះ FPGA តម្លៃសមរម្យ:</strong> ចាប់ផ្តើមអនុវត្តគម្រោងរបស់អ្នកនៅលើបន្ទះ <span class="en">FPGA</span> កម្រិតសិក្សា ដូចជា <span class="en">PYNQ-Z1</span> ឬ <span class="en">Arty-A7</span> ជំនួសឱ្យការប្រើប្រាស់បន្ទះ <span class="en">Xilinx VC707</span> ដ៏មានតម្លៃថ្លៃ ដើម្បីតេស្តដំណើរការនៃបច្ចេកវិទ្យា Edge AI ដោយផ្ទាល់ភ្នែក។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Mixed-precision Quantization (MPQ)</span></td>
+                <td>ដំណើរការកាត់បន្ថយទំហំទិន្នន័យនៃម៉ូដែល AI ដោយប្រើប្រាស់ចំនួនប៊ីត (bit-width) ផ្សេងៗគ្នាសម្រាប់ស្រទាប់នីមួយៗនៃម៉ូដែល (ឧទាហរណ៍ 4-bit ខ្លះ និង 8-bit ខ្លះ) ដើម្បីរក្សាតុល្យភាពរវាងភាពត្រឹមត្រូវនៃលទ្ធផល និងទំហំផ្ទុកផ្នែករឹង។</td>
+                <td>ប្រៀបដូចជាការខ្ចប់អីវ៉ាន់ដោយប្រើប្រអប់តូចសម្រាប់របស់តូច និងប្រអប់ធំសម្រាប់របស់ធំ ដើម្បីសន្សំទំហំផ្ទុក ជាជាងការប្រើប្រអប់ធំទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Field Programmable Gate Array (FPGA)</span></td>
+                <td>បន្ទះសៀគ្វីអេឡិចត្រូនិកដែលអាចត្រូវបានសរសេរកូដ ឬរៀបចំរចនាសម្ព័ន្ធផ្នែករឹងឡើងវិញដោយអ្នកប្រើប្រាស់ បន្ទាប់ពីវាត្រូវបានផលិតរួច ដើម្បីបង្កើតជាប្រព័ន្ធកុំព្យូទ័រ ឬឧបករណ៍បង្កើនល្បឿនផ្សេងៗ។</td>
+                <td>ប្រៀបដូចជាដុំឡេហ្គោ (Lego) ដែលអ្នកអាចដោះចេញ និងតម្រៀបសារជាថ្មីដើម្បីបង្កើតជារូបរាងម៉ាស៊ីន ឬឧបករណ៍អ្វីក៏បានតាមចិត្តចង់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">System-on-Chip (SoC)</span></td>
+                <td>ការរួមបញ្ចូលសមាសធាតុទាំងអស់នៃកុំព្យូទ័រ ឬប្រព័ន្ធអេឡិចត្រូនិក ដូចជាអង្គគណនា (CPU) អង្គចងចាំ (Memory) និងរន្ធតភ្ជាប់ (I/O ports) ទៅក្នុងបន្ទះឈីប (Microchip) តែមួយ។</td>
+                <td>ប្រៀបដូចជាផ្ទះមួយដែលមានបន្ទប់គេង ផ្ទះបាយ និងបន្ទប់ទឹក រៀបចំរួចជាស្រេចនៅក្នុងទីតាំងតែមួយ ដោយមិនបាច់ដើរទៅអគារផ្សេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Instruction Set Architecture (ISA)</span></td>
+                <td>វចនានុក្រម ឬបណ្តុំនៃកូដបញ្ជាដែលតភ្ជាប់រវាងផ្នែកទន់ (Software) និងផ្នែករឹង (Hardware) ដោយប្រាប់ពីរបៀបដែលអង្គគណនា (Processor) ត្រូវយល់ និងអនុវត្តតាមកូដកម្មវិធី។</td>
+                <td>ប្រៀបដូចជាសៀវភៅណែនាំ ឬភាសាបកប្រែដែលជួយឱ្យអ្នកបញ្ជា (កម្មវិធី) អាចនិយាយស្តី និងប្រាប់ឱ្យអ្នកធ្វើការ (ម៉ាស៊ីន) ធ្វើតាមបានយ៉ាងត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bit Operation Count (BOPs)</span></td>
+                <td>រង្វាស់សម្រាប់វាស់ស្ទង់ទំហំនៃប្រតិបត្តិការគណនាកម្រិតប៊ីត (Bit) នៅក្នុងម៉ូដែល AI ដែលត្រូវបានប្រើជាតំណាងដើម្បីវាយតម្លៃការស៊ីភ្លើង និងកម្លាំងម៉ាស៊ីនដែលត្រូវចំណាយ។</td>
+                <td>ប្រៀបដូចជាការរាប់ចំនួនជំហានដែលអ្នកត្រូវដើរដើម្បីបំពេញកិច្ចការមួយ ដើរចំនួនជំហានកាន់តែតិច ចំណាយកម្លាំង (ថាមពល) កាន់តែតិច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cycle-Accurate Simulator</span></td>
+                <td>កម្មវិធីក្លែងធ្វើកុំព្យូទ័រដែលអាចចម្លងដំណើរការរបស់បន្ទះឈីបបានយ៉ាងលម្អិត និងច្បាស់លាស់បំផុត ដោយគិតគូរពីគ្រប់វដ្តនាឡិកា (Clock cycle) របស់ប្រព័ន្ធផ្នែករឹងពិតប្រាកដ។</td>
+                <td>ប្រៀបដូចជាការមើលវីដេអូយឺតៗ (Slow-motion) ដែលអ្នកអាចឃើញចលនាលម្អិតនៃវិនាទីនីមួយៗ ដោយមិនរំលងសកម្មភាពណាមួយឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bare metal</span></td>
+                <td>ការដំណើរការកម្មវិធីកុំព្យូទ័រដោយផ្ទាល់នៅលើផ្នែករឹង (Hardware) ដោយមិនចាំបាច់មានប្រព័ន្ធប្រតិបត្តិការ (Operating System ដូចជា Windows ឬ Linux) ធ្វើជាអន្តរការីនៅកណ្តាលឡើយ។</td>
+                <td>ប្រៀបដូចជាការបើកបររថយន្តដោយប្រើប្រអប់លេខដៃផ្ទាល់ ដោយមិនពឹងផ្អែកលើប្រព័ន្ធបើកបរស្វ័យប្រវត្តិដើម្បីបញ្ជាជំនួសអ្នកឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vector-Matrix Multiply (VMM)</span></td>
+                <td>ប្រតិបត្តិការគណិតវិទ្យាដែលគុណវ៉ិចទ័រជាមួយម៉ាទ្រីស ដែលជាប្រតិបត្តិការចម្បង និងប្រើប្រាស់ច្រើនបំផុតសម្រាប់ការវិភាគ និងដំណើរការទិន្នន័យនៅក្នុងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Networks) របស់ AI។</td>
+                <td>ប្រៀបដូចជាការគណនាតម្លៃទំនិញច្រើនមុខក្នុងពេលតែមួយ ដោយយកបរិមាណទំនិញ (វ៉ិចទ័រ) ទៅគុណនឹងតារាងតម្លៃ (ម៉ាទ្រីស) ដើម្បីចេញលទ្ធផលសរុបលឿន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/advancing-microcontroller-technology-saarc-2024.html">
+                    <span class="km">របាយការណ៍ស្រាវជ្រាវស្តីពី៖ ការលើកកម្ពស់បច្ចេកវិទ្យាមីក្រូកុងត្រូល័រ៖ បញ្ហាប្រឈម នវានុវត្តន៍ និងការអនុវត្ត</span><br>
+                    <span class="en article-original-title">RESEARCH REPORT ON: ADVANCING MICROCONTROLLER TECHNOLOGY: CHALLENGES, INNOVATIONS, AND APPLICATIONS</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/litecs-iot-wsn-precision-agriculture-2026.html">
+                    <span class="km">ស្ថានីយសេនស័រ IoT/WSN ដែលមានសមត្ថភាពធ្វើការជាមួយគ្នា និងការរួមបញ្ចូលសេនស័រច្រើនប្រភេទដោយប្រើ Edge AI សម្រាប់កសិកម្មសុក្រិត</span><br>
+                    <span class="en article-original-title">Interoperable IoT/WSN Sensing Station with Edge AI-Enabled Multi-Sensor Integration for Precision Agriculture</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ai-applications-real-time-edge-processing-2024.html">
+                    <span class="km">ការអនុវត្ត AI ក្នុងការដំណើរការទិន្នន័យនៅគែមបណ្តាញ (Edge Processing) តាមពេលវេលាជាក់ស្តែង៖ ការប្រើប្រាស់បញ្ញាសិប្បនិម្មិតដើម្បីបង្កើនប្រសិទ្ធភាព ការសម្រេចចិត្តរហ័ស និងលទ្ធភាពពង្រីកប្រព័ន្ធ</span><br>
+                    <span class="en article-original-title">AI Applications in Real-Time Edge Processing: Leveraging Artificial Intelligence for Enhanced Efficiency, Low-Latency Decision Making, and Scalability in Distributed Systems</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/real-time-object-recognition-edge-computing-2025.html">
+                    <span class="km">ការពិចារណាសំខាន់ៗសម្រាប់ការសម្គាល់វត្ថុក្នុងពេលវេលាជាក់ស្តែងនៅលើឧបករណ៍ Edge Computing</span><br>
+                    <span class="en article-original-title">Key Considerations for Real-Time Object Recognition on Edge Computing Devices</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/quest-for-efficient-ascon-implementations-2025.html">
+                    <span class="km">ការស្វែងរកការអនុវត្ត ASCON ប្រកបដោយប្រសិទ្ធភាព៖ ការពិនិត្យឡើងវិញយ៉ាងទូលំទូលាយអំពីយុទ្ធសាស្រ្តអនុវត្ត និងបញ្ហាប្រឈមនានា</span><br>
+                    <span class="en article-original-title">The Quest for Efficient ASCON Implementations: A Comprehensive Review of Implementation Strategies and Challenges</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=RISC-V+custom+instruction+extensions+for+edge+AI+acceleration" target="_blank" rel="noopener"><span class="en">RISC-V custom instruction extensions for edge AI acceleration</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hardware-aware+mixed-precision+quantization+algorithms+post-training" target="_blank" rel="noopener"><span class="en">Hardware-aware mixed-precision quantization algorithms post-training</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=LiteX+SoC+builder+FPGA+system-level+emulation+RISC-V" target="_blank" rel="noopener"><span class="en">LiteX SoC builder FPGA system-level emulation RISC-V</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hardware%2Fsoftware+co-design+using+Synopsys+ASIP+Designer" target="_blank" rel="noopener"><span class="en">Hardware/software co-design using Synopsys ASIP Designer</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=microTVM+bare-metal+deployment+on+RISC-V+accelerators" target="_blank" rel="noopener"><span class="en">microTVM bare-metal deployment on RISC-V accelerators</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Bit+Operation+Count+%28BOPs%29+as+proxy+for+hardware+efficiency+in+TinyML" target="_blank" rel="noopener"><span class="en">Bit Operation Count (BOPs) as proxy for hardware efficiency in TinyML</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>

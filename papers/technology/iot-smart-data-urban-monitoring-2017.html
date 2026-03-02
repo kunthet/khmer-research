@@ -415,9 +415,9 @@
             </li>
             
             <li class="internal-article-link">
-                <a href="/papers/technology/ml-predictive-maintenance-vehicles-2022.html">
-                    <span class="km">កម្មវិធីនៃការរៀនដោយម៉ាស៊ីន (Machine Learning) ក្នុងការថែទាំបែបព្យាករណ៍សម្រាប់យានយន្ត៖ ការសិក្សាតាមករណី</span><br>
-                    <span class="en article-original-title">Machine Learning Applications in Predictive Maintenance for Vehicles: Case Studies</span>
+                <a href="/papers/technology/digital-twin-factory-system-simulation-2019.html">
+                    <span class="km">កូនភ្លោះឌីជីថល (Digital Twin) សម្រាប់ការក្លែងធ្វើប្រព័ន្ធរោងចក្រ</span><br>
+                    <span class="en article-original-title">Digital Twin for Factory System Simulation</span>
                 </a>
             </li>
             
@@ -470,6 +470,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

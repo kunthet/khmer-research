@@ -380,6 +380,13 @@
         <ul class="internal-articles">
             
             <li class="internal-article-link">
+                <a href="/papers/technology/overview-supervised-machine-learning-methods-2017-2.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃវិធីសាស្ត្ររៀនម៉ាស៊ីនមានការត្រួតពិនិត្យ</span><br>
+                    <span class="en article-original-title">An overview of the supervised machine learning methods</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/technology/imputation-missing-data-ml-techniques-1996.html">
                     <span class="km">ការបំពេញទិន្នន័យដែលបាត់ដោយប្រើបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Machine Learning)</span><br>
                     <span class="en article-original-title">Imputation of missing data using machine learning techniques</span>
@@ -404,13 +411,6 @@
                 <a href="/papers/health/cvd-prediction-big-data-smote-2020.html">
                     <span class="km">ផលវិបាកតាមបែបគ្លីនិកនៃទិន្នន័យធំ (Big Data) ក្នុងការទស្សន៍ទាយជំងឺសរសៃឈាមបេះដូង ដោយប្រើប្រាស់បច្ចេកទេស SMOTE សម្រាប់ការដោះស្រាយទិន្នន័យមិនមានតុល្យភាព</span><br>
                     <span class="en article-original-title">CLINICAL IMPLICATIONS OF BIG DATA IN PREDICTING CARDIOVASCULAR DISEASE USING SMOTE FOR HANDLING IMBALANCED DATA</span>
-                </a>
-            </li>
-            
-            <li class="internal-article-link">
-                <a href="/papers/technology/class-imbalance-learning-data-mining-survey-2015.html">
-                    <span class="km">ការរៀនពីអតុល្យភាពចំណាត់ថ្នាក់នៅក្នុងការជីកទិន្នន័យ – ការសិក្សាស្រាវជ្រាវ</span><br>
-                    <span class="en article-original-title">Class Imbalance Learning in Data Mining – A Survey</span>
                 </a>
             </li>
             
@@ -465,6 +465,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

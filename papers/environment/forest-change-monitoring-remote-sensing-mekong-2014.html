@@ -405,6 +405,13 @@
             </li>
             
             <li class="internal-article-link">
+                <a href="/papers/technology/automated-aboveground-carbon-remote-sensing-gordon-2012.html">
+                    <span class="km">ការប៉ាន់ប្រមាណកាបូនលើដីនៃព្រៃឈើដោយស្វ័យប្រវត្តិជាមួយការចាប់សញ្ញាពីចម្ងាយ</span><br>
+                    <span class="en article-original-title">Automated Aboveground Carbon Estimation of Forests with Remote Sensing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/environment/low-cost-forest-inventory-kieni-kenya-2024.html">
                     <span class="km">ការធ្វើបញ្ជីសារពើភណ្ឌព្រៃឈើដោយមិនប៉ះផ្ទាល់ក្នុងតម្លៃទាប៖ ការសិក្សាពីករណីព្រៃ Kieni ក្នុងប្រទេសកេនយ៉ា</span><br>
                     <span class="en article-original-title">Low-Cost Non-Contact Forest Inventory: A Case Study of Kieni Forest in Kenya</span>
@@ -415,13 +422,6 @@
                 <a href="/papers/technology/image-based-atmospheric-corrections-1996.html">
                     <span class="km">ការកែតម្រូវបរិយាកាសផ្អែកលើរូបភាព - ការពិនិត្យឡើងវិញ និងកែលម្អ</span><br>
                     <span class="en article-original-title">Image-Based Atmospheric Corrections - Revisited and Improved</span>
-                </a>
-            </li>
-            
-            <li class="internal-article-link">
-                <a href="/papers/technology/remote-sensing-gis-integration-weng-2010.html">
-                    <span class="km">ការធ្វើសមាហរណកម្មប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ និងតេឡេសិក្សា៖ ទ្រឹស្តី វិធីសាស្ត្រ និងការអនុវត្ត</span><br>
-                    <span class="en article-original-title">Remote Sensing and GIS Integration: Theories, Methods, and Applications</span>
                 </a>
             </li>
             
@@ -476,6 +476,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការប្រើប្រាស់ព័ត៌មានលំហ ដើម្បីគាំទ្រដល់ការសម្រេចចិត្តលើការការពារ និងអត្ថប្រយោជន៍ចម្រុះសម្រាប់ REDD+ ឯកសារបង្រៀនជាជំហានៗ កំណែទី២.០៖ ការយល់ដឹង និងការប្រៀបធៀបសំណុំទិន្នន័យកាបូន ដោយប្រើ QGIS 2.18 - Using spatial information to support decisions on safeguards and multiple ben... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការប្រើប្រាស់ព័ត៌មានលំហ ដើម្បីគាំទ្រដល់ការសម្រេចចិត្តលើការកា។ ប្រទេសកំពុងអភិវឌ្ឍន៍ជារឿយៗខ្វះទិន្នន័យជាតិច្បាស់លាស់អំពីស្តុកកាបូននៅក្នុងព្រៃឈើ ដែលធ្វើឱ្យមានការល...">
+    
+    <meta name="keywords" content="QGIS, carbon datasets, REDD+, biomass mapping, spatial analysis, above-ground biomass (AGB), ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/environment/qgis-carbon-datasets-comparison-tutorial-2019.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/environment/qgis-carbon-datasets-comparison-tutorial-2019.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/environment/qgis-carbon-datasets-comparison-tutorial-2019.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/environment/qgis-carbon-datasets-comparison-tutorial-2019.html">
+    <meta property="og:title" content="ការប្រើប្រាស់ព័ត៌មានលំហ ដើម្បីគាំទ្រដល់ការសម្រេចចិត្តលើការការពារ និងអត្ថប្រយោជន៍ចម្រុះសម្រាប់ REDD+ ឯកសារបង្រៀនជាជំហានៗ កំណែទី២.០៖ ការយល់ដឹង និងការប្រៀបធៀបសំណុំទិន្នន័យកាបូន ដោយប្រើ QGIS 2.18 | KhmerResearch.com">
+    <meta property="og:description" content="ប្រទេសកំពុងអភិវឌ្ឍន៍ជារឿយៗខ្វះទិន្នន័យជាតិច្បាស់លាស់អំពីស្តុកកាបូននៅក្នុងព្រៃឈើ ដែលធ្វើឱ្យមានការលំបាកក្នុងការរៀបចំផែនការ និងការអនុវត្តកម្មវិធីកាត់បន្ថយការបញ្ចេញឧស្ម័នផ្ទះកញ្ចក់ពីការកាប់បំផ្លាញព្រៃឈ...">
+    <meta property="og:image" content="https://khmerresearch.com/share-image.jpg">
+    <meta property="article:published_time" content="2019 UNEP World Conservation Monitoring Centre-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="QGIS">
+    
+    <meta property="article:tag" content="carbon datasets">
+    
+    <meta property="article:tag" content="REDD+">
+    
+    <meta property="article:tag" content="biomass mapping">
+    
+    <meta property="article:tag" content="spatial analysis">
+    
+    <meta property="article:tag" content="above-ground biomass (AGB)">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការប្រើប្រាស់ព័ត៌មានលំហ ដើម្បីគាំទ្រដល់ការសម្រេចចិត្តលើការការពារ និងអត្ថប្រយោជន៍ចម្រុះសម្រាប់ REDD+ ឯកសារបង្រៀនជាជំហានៗ កំណែទី២.០៖ ការយល់ដឹង និងការប្រៀបធៀបសំណុំទិន្នន័យកាបូន ដោយប្រើ QGIS 2.18">
+    <meta name="twitter:description" content="ប្រទេសកំពុងអភិវឌ្ឍន៍ជារឿយៗខ្វះទិន្នន័យជាតិច្បាស់លាស់អំពីស្តុកកាបូននៅក្នុងព្រៃឈើ ដែលធ្វើឱ្យមានការលំបាកក្នុងការរៀបចំផែនការ និងការអនុវត្តកម្មវិធីកាត់បន្ថយការបញ្ចេញឧស្ម័នផ្ទះកញ្ចក់ពីការកាប់បំផ្លាញព្រៃឈ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/share-image.jpg">
+
+    <!-- FAVICON -->
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: Book Chapter (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Chapter",
+      "headline": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u179b\u17c6\u17a0 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1782\u17b6\u17c6\u1791\u17d2\u179a\u178a\u179b\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u179b\u17be\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17b6\u179a \u1793\u17b7\u1784\u17a2\u178f\u17d2\u1790\u1794\u17d2\u179a\u1799\u17c4\u1787\u1793\u17cd\u1785\u1798\u17d2\u179a\u17bb\u17c7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb REDD+ \u17af\u1780\u179f\u17b6\u179a\u1794\u1784\u17d2\u179a\u17c0\u1793\u1787\u17b6\u1787\u17c6\u17a0\u17b6\u1793\u17d7 \u1780\u17c6\u178e\u17c2\u1791\u17b8\u17e2.\u17e0\u17d6 \u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1780\u17b6\u1794\u17bc\u1793 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be QGIS 2.18",
+      "name": "Using spatial information to support decisions on safeguards and multiple benefits for REDD+. Step-by-step tutorial v2.0: Understanding and comparing carbon datasets, using QGIS 2.18",
+      "description": "\u1794\u17d2\u179a\u1791\u17c1\u179f\u1780\u17c6\u1796\u17bb\u1784\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1793\u17cd\u1787\u17b6\u179a\u17bf\u1799\u17d7\u1781\u17d2\u179c\u17c7\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b6\u178f\u17b7\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u17a2\u17c6\u1796\u17b8\u179f\u17d2\u178f\u17bb\u1780\u1780\u17b6\u1794\u17bc\u1793\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1796\u17d2\u179a\u17c3\u1788\u17be \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1794\u1785\u17c6\u1795\u17c2\u1793\u1780\u17b6\u179a \u1793\u17b7\u1784\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1780\u17b6\u179a\u1794\u1789\u17d2\u1785\u17c1\u1789\u17a7\u179f\u17d2\u1798\u17d0\u1793\u1795\u17d2\u1791\u17c7\u1780\u1789\u17d2\u1785\u1780\u17cb\u1796\u17b8\u1780\u17b6\u179a\u1780\u17b6\u1794\u17cb\u1794\u17c6\u1795\u17d2\u179b\u17b6\u1789\u1796\u17d2\u179a\u17c3\u1788\u17be (REDD+) \u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/environment/qgis-carbon-datasets-comparison-tutorial-2019.html",
+      "author": [{"@type": "Person", "name": "Xavier DeLamo"},{"@type": "Person", "name": "Corinna Ravilious"},{"@type": "Person", "name": "Barbara Pollini"}],
+      "datePublished": "2019 UNEP World Conservation Monitoring Centre",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/logo.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "Book",
+        "name": "Using spatial information to support decisions on safeguards and multiple benefits for REDD+. Step-by-step tutorial v2.0: Understanding and comparing carbon datasets, using QGIS 2.18",
+        "url": "http://bit.ly/mbs-redd"
+      },
+      "keywords": ["QGIS", "carbon datasets", "REDD+", "biomass mapping", "spatial analysis", "above-ground biomass (AGB)"],
+      "about": "Geographic Information Systems (GIS) and Environmental Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Environment",
+          "item": "https://khmerresearch.com/papers/environment/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u179b\u17c6\u17a0 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1782\u17b6\u17c6\u1791\u17d2\u179a\u178a\u179b\u17cb\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u179b\u17be\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17b6\u179a \u1793\u17b7\u1784\u17a2\u178f\u17d2\u1790\u1794\u17d2\u179a\u1799\u17c4\u1787\u1793\u17cd\u1785\u1798\u17d2\u179a\u17bb\u17c7\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb REDD+ \u17af\u1780\u179f\u17b6\u179a\u1794\u1784\u17d2\u179a\u17c0\u1793\u1787\u17b6\u1787\u17c6\u17a0\u17b6\u1793\u17d7 \u1780\u17c6\u178e\u17c2\u1791\u17b8\u17e2.\u17e0\u17d6 \u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1780\u17b6\u1794\u17bc\u1793 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be QGIS 2.18",
+          "item": "https://khmerresearch.com/papers/environment/qgis-carbon-datasets-comparison-tutorial-2019.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><span class="en">Khmer</span><span style="color:#2563eb" class="en">Research</span><span class="en">.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/environment/">Environment</a> &rsaquo;
+        <span>ការប្រើប្រាស់ព័ត៌មានលំហ ដើម្បីគាំទ្រដល់ការសម្រេចចិត្តលើកា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> Using spatial information to support decisions on safeguards and multiple benefits for REDD+. Step-by-step tutorial v2.0: Understanding and comparing carbon datasets, using QGIS 2.18<br>
+        
+        <strong>Source:</strong> <a href="http://bit.ly/mbs-redd" target="_blank" rel="noopener">bit.ly</a><br>
+        
+        <strong>Document Type:</strong> Textbook / Educational Material<br>
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original material for complete content.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការប្រើប្រាស់ព័ត៌មានលំហ ដើម្បីគាំទ្រដល់ការសម្រេចចិត្តលើការការពារ និងអត្ថប្រយោជន៍ចម្រុះសម្រាប់ REDD+ ឯកសារបង្រៀនជាជំហានៗ កំណែទី២.០៖ ការយល់ដឹង និងការប្រៀបធៀបសំណុំទិន្នន័យកាបូន ដោយប្រើ QGIS 2.18</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Using spatial information to support decisions on safeguards and multiple benefits for REDD+. Step-by-step tutorial v2.0: Understanding and comparing carbon datasets, using QGIS 2.18</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Xavier DeLamo, Corinna Ravilious, Barbara Pollini</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2019 UNEP World Conservation Monitoring Centre</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Geographic Information Systems (GIS) and Environmental Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេប (Overview)</h2>
+
+    <div class="executive-summary">
+        <p><strong>ប្រធានបទ (Topic)៖</strong> ប្រទេសកំពុងអភិវឌ្ឍន៍ជារឿយៗខ្វះទិន្នន័យជាតិច្បាស់លាស់អំពីស្តុកកាបូននៅក្នុងព្រៃឈើ ដែលធ្វើឱ្យមានការលំបាកក្នុងការរៀបចំផែនការ និងការអនុវត្តកម្មវិធីកាត់បន្ថយការបញ្ចេញឧស្ម័នផ្ទះកញ្ចក់ពីការកាប់បំផ្លាញព្រៃឈើ (REDD+) ប្រកបដោយប្រសិទ្ធភាព។</p>
+
+        <p><strong>រចនាសម្ព័ន្ធ (Structure)៖</strong> ឯកសារនេះផ្តល់នូវការណែនាំជាជំហានៗក្នុងការប្រើប្រាស់កម្មវិធីប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ (QGIS) ដើម្បីវិភាគ និងប្រៀបធៀបសំណុំទិន្នន័យកាបូនសកល និងតំបន់ផ្សេងៗគ្នា។
+        
+        <ul>
+            
+            <li>ការកាត់តម្រឹមទិន្នន័យ (Clipping datasets) ទៅតាមតំបន់គោលដៅ និងការកំណត់និមិត្តសញ្ញា (Symbolising) ដើម្បីប្រៀបធៀបទិដ្ឋភាពផែនទី។</li>
+            
+            <li>ការធ្វើចំណោលប្រព័ន្ធកូអរដោណេឡើងវិញ (Re-projecting raster datasets) និងការគណនាផែនទីភាពខុសគ្នា (Difference map) ដោយប្រើឧបករណ៍ Raster Calculator។</li>
+            
+            <li>ការប្រៀបធៀបតម្លៃជីវម៉ាសលើដី (Above-ground biomass - AGB) ទៅតាមប្រភេទគម្របដី (Land cover type) ដោយប្រើប្រាស់តារាងស្ថិតិ (Univariate statistics)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>ចំណុចសំខាន់ៗ (Key Takeaways)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់កម្មវិធី QGIS អនុញ្ញាតឱ្យអ្នករៀបចំផែនការអាចកំណត់តំបន់ដែលមានការខ្វែងគំនិតគ្នារវាងសំណុំទិន្នន័យកាបូនសកល ដូចជាទិន្នន័យ Avitabile និង GlobBiomass។</li>
+            
+            <li>ការវិភាគតាមប្រភេទគម្របដីបង្ហាញថា សំណុំទិន្នន័យខ្លះ (ឧ. Avitabile) ផ្តល់តម្លៃប៉ាន់ស្មានខ្ពស់សម្រាប់ប្រព័ន្ធអេកូឡូស៊ីព្រៃឈើ ខណៈទិន្នន័យខ្លះទៀត (ឧ. GlobBiomass) ផ្តល់តម្លៃខ្ពស់សម្រាប់តំបន់វាលស្មៅ និងគុម្ពព្រៃ។</li>
+            
+            <li>ការវាយតម្លៃយ៉ាងប្រុងប្រយ័ត្នទៅលើវិធីសាស្ត្រនៃសំណុំទិន្នន័យនីមួយៗ រួមផ្សំជាមួយនឹងការវិភាគលំហ (Spatial overlay) គឺជារឿងចាំបាច់ដើម្បីជ្រើសរើសទិន្នន័យដែលសមស្របបំផុតសម្រាប់ការអនុវត្ត REDD+ នៅក្នុងប្រទេសនីមួយៗ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Chapter Overview & Learning Objectives -->
+    <h2>២. គោលបំណងសិក្សា (Learning Objectives)</h2>
+
+    
+    <div class="roadmap">
+        <p>បន្ទាប់ពីអានឯកសារនេះ អ្នកគួរអាច៖</p>
+        <ol>
+            
+            <li>យល់ដឹងពីរបៀបប្រើប្រាស់កម្មវិធី QGIS ដើម្បីវិភាគ និងប្រៀបធៀបសំណុំទិន្នន័យកាបូន (Carbon datasets) តាមបែបលំហអាកាស។</li>
+            
+            <li>ចេះអនុវត្តវិធីសាស្ត្រកាត់តម្រឹម (Clipping) ធ្វើចំណោលប្រព័ន្ធកូអរដោណេឡើងវិញ (Re-projecting) និងគណនាផែនទីភាពខុសគ្នា (Difference map) នៃទិន្នន័យទម្រង់ Raster។</li>
+            
+            <li>អាចទាញយក និងប្រៀបធៀបតម្លៃជីវម៉ាសលើដី (Above-Ground Biomass - AGB) ទៅតាមប្រភេទគម្របដី (Land cover types) ដោយប្រើប្រាស់ស្ថិតិ (Univariate statistics)។</li>
+            
+            <li>ស្វែងយល់ពីលក្ខណៈខុសគ្នានៃសំណុំទិន្នន័យកាបូនសកលផ្សេងៗគ្នា ដើម្បីរៀបចំផែនការ REDD+ ប្រកបដោយប្រសិទ្ធភាព និងសុក្រឹតភាព។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <p>ឯកសារបង្រៀននេះផ្តល់នូវការណែនាំជាជំហានៗក្នុងការប្រើប្រាស់កម្មវិធីប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រកូដបើកចំហរ (Open-source QGIS) ដើម្បីវាយតម្លៃ និងប្រៀបធៀបសំណុំទិន្នន័យកាបូនព្រៃឈើសកល។ វាគ្របដណ្តប់លើការរៀបចំទិន្នន័យទម្រង់ Raster ការគណនាផែនទីបង្ហាញភាពខុសគ្នា និងការទាញយកទិន្នន័យស្ថិតិជីវម៉ាសទៅតាមប្រភេទគម្របដី ព្រមទាំងផ្តល់ការពន្យល់ស៊ីជម្រៅអំពីចំណុចខ្លាំងនិងចំណុចខ្សោយនៃសំណុំទិន្នន័យកាបូនដែលមានស្រាប់។</p>
+    
+    
+
+    
+    <!-- 5. Key Concepts -->
+    <h2>៣. គោលគំនិតសំខាន់ៗ (Key Concepts)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>គោលគំនិត (Concept)</th>
+                <th>ការពន្យល់ (Explanation)</th>
+                <th>ឧទាហរណ៍ (Example)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Raster Data Clipping & Re-projecting</span></strong><br>ការកាត់តម្រឹម និងធ្វើចំណោលឡើងវិញនូវទិន្នន័យរ៉ាស្ទ័រ (Raster Data Clipping & Re-projecting)</td>
+                <td>គឺជាដំណើរការនៃការកាត់យកតែផ្នែកដែលយើងចង់សិក្សាពីសំណុំទិន្នន័យធំៗ និងការបំប្លែងប្រព័ន្ធកូអរដោណេ (Coordinate System) ឱ្យដូចគ្នាដើម្បីអាចធ្វើការវិភាគរួមគ្នាបាន។ ក្នុងឯកសារនេះ វាផ្តោតលើការបំប្លែងទៅជាប្រព័ន្ធធរណីមាត្រប្រភេទ UTM ដើម្បីងាយស្រួលក្នុងការគណនាក្រឡាផ្ទៃពិតប្រាកដ។</td>
+                <td>ការកាត់យកទិន្នន័យកាបូន Avitabile និង GlobBiomass ត្រឹមតែព្រំប្រទល់នៃតំបន់គោលដៅ (ឧ. ប្រទេសលីបេរីយ៉ា) រួចធ្វើចំណោលប្រព័ន្ធកូអរដោណេទាំងនោះទៅជាប្រព័ន្ធធរណីមាត្រ UTM បែប Equal-area projection។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Difference Map Calculation</span></strong><br>ការគណនាផែនទីបង្ហាញភាពខុសគ្នា (Difference Map Calculation)</td>
+                <td>ជាការប្រើប្រាស់ឧបករណ៍គណនារ៉ាស្ទ័រ (Raster Calculator) ដើម្បីដកតម្លៃនៃភីកសែល (Pixel) ពីផែនទីមួយទៅផែនទីមួយទៀត។ លទ្ធផលទទួលបានជួយឱ្យយើងមើលឃើញផ្ទាល់ភ្នែកនូវតំបន់ដែលមានការប៉ាន់ស្មានបរិមាណកាបូនលើស ខ្វះ ឬស្មើគ្នា រវាងប្រភពទិន្នន័យពីរខុសៗគ្នា។</td>
+                <td>ការដកទិន្នន័យ Avitabile ពីទិន្នន័យ GlobBiomass រួចប្រើប្រាស់ពណ៌តំណាង (ក្រហម លឿង ខៀវ តាមរយៈ Singleband pseudocolor) ដើម្បីបង្ហាញទីតាំងភូមិសាស្ត្រដែលមានការខ្វែងគំនិតគ្នាលើបរិមាណជីវម៉ាស។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Above-Ground Biomass (AGB)</span></strong><br>ជីវម៉ាសលើដី (Above-Ground Biomass - AGB)</td>
+                <td>សំដៅលើបរិមាណសរុបនៃរុក្ខជាតិរស់នៅខាងលើផ្ទៃដី ដែលរួមមាន ដើម មែក ស្លឹក និងសំបកឈើ។ ការប៉ាន់ស្មាន AGB គឺជារឿងចាំបាច់បំផុតសម្រាប់គណនាបរិមាណស្តុកកាបូននៅក្នុងតំបន់ព្រៃឈើ ដែលបម្រើដល់ការរៀបចំផែនការកាត់បន្ថយការបញ្ចេញឧស្ម័នផ្ទះកញ្ចក់ (REDD+)។</td>
+                <td>ការប្រើប្រាស់ទិន្នន័យ Avitabile ដែលបង្ហាញការប៉ាន់ស្មាន AGB ខ្ពស់ជាងនៅតំបន់ប្រព័ន្ធអេកូឡូស៊ីព្រៃឈើ បើប្រៀបធៀបទៅនឹងទិន្នន័យ GlobBiomass ដែលផ្តល់ការប៉ាន់ស្មានខ្ពស់ជាងនៅតំបន់វាលស្មៅ និងគុម្ពព្រៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Zonal Statistics by Land Cover</span></strong><br>ស្ថិតិតំបន់តាមប្រភេទគម្របដី (Zonal Statistics by Land Cover)</td>
+                <td>ជាបច្ចេកទេសទាញយកតម្លៃស្ថិតិ (ដូចជាមធ្យមភាគ អប្បបរមា អតិបរមា និងចំនួនសរុប) នៃទិន្នន័យមួយ (ឧ. ទិន្នន័យបរិមាណកាបូន) ដោយពឹងផ្អែកលើព្រំដែនកំណត់នៃទិន្នន័យមួយទៀត (ឧ. ផែនទីប្រភេទគម្របដី)។ វាអនុញ្ញាតឱ្យអ្នកស្រាវជ្រាវដឹងថាតើប្រភេទព្រៃឈើនីមួយៗមានស្តុកកាបូនជាមធ្យមប៉ុន្មាន។</td>
+                <td>ការប្រើប្រាស់ឧបករណ៍ 'r.univar' នៅក្នុង QGIS ដើម្បីគណនាតម្លៃមធ្យមនៃបរិមាណកាបូនគិតជាតោនក្នុងមួយហិកតា (tonnes/ha) សម្រាប់ប្រភេទដីនីមួយៗ រួចបញ្ចេញទិន្នន័យនោះជាឯកសារ Excel (.csv) ដើម្បីប្រៀបធៀប។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 6. Cambodia Relevance -->
+    <h2>៤. ភាពពាក់ព័ន្ធសម្រាប់កម្ពុជា (Cambodia Relevance)</h2>
+
+    <div class="critical-review">
+        
+        <p>ប្រធានបទនេះមានសារៈសំខាន់ខ្លាំងណាស់សម្រាប់ប្រទេសកម្ពុជា ក្នុងការវាយតម្លៃស្តុកកាបូនព្រៃឈើជាតិ ដើម្បីគាំទ្រដល់ការអនុវត្តគម្រោង REDD+ ការលក់ឥណទានកាបូននៅលើទីផ្សារអន្តរជាតិ និងការរៀបចំផែនការអភិរក្សជីវចម្រុះប្រកបដោយចីរភាព។</p>
+        
+
+        
+        <h3>ការអនុវត្ត (Applications)៖</h3>
+        <ul>
+            
+            <li><strong>វិស័យព្រៃឈើ និងការអនុវត្ត REDD+ (Forestry Sector and REDD+ Implementation):</strong> ក្រសួងបរិស្ថាន និងអង្គការដៃគូអភិរក្ស អាចប្រើប្រាស់បច្ចេកទេស QGIS នេះដើម្បីប្រៀបធៀបទិន្នន័យកាបូនសកល ជាមួយនឹងទិន្នន័យសារពើភ័ណ្ឌព្រៃឈើជាតិនៅតំបន់ការពារនានា (ដូចជាព្រៃឡង់ ឬជួរភ្នំក្រវាញ) ដើម្បីធានាបាននូវការគណនាឥណទានកាបូនដែលសុក្រឹត និងអាចជឿទុកចិត្តបាន។</li>
+            
+            <li><strong>ការធ្វើផែនការប្រើប្រាស់ដីធ្លីថ្នាក់ជាតិ និងថ្នាក់ក្រោមជាតិ (National and Sub-national Land Use Planning):</strong> អាជ្ញាធរអាចពឹងផ្អែកលើការរួមបញ្ចូលគ្នារវាងផែនទីស្តុកជីវម៉ាស និងផែនទីគម្របដី ដើម្បីកំណត់តំបន់ដែលមានតម្លៃអេកូឡូស៊ីខ្ពស់ក្នុងការថែរក្សាការពារ និងជៀសវាងការផ្តល់ដីសម្បទានសេដ្ឋកិច្ចដែលនាំឱ្យប៉ះពាល់ដល់ស្តុកកាបូនធំៗរបស់ជាតិ។</li>
+            
+            <li><strong>ការអប់រំ និងការស្រាវជ្រាវផ្នែកបរិស្ថាន (Environmental Education and Research):</strong> និស្សិត និងអ្នកស្រាវជ្រាវផ្នែកបរិស្ថានវិទ្យា ภูมิសាស្ត្រ ឬព្រៃឈើនៅតាមសាកលវិទ្យាល័យក្នុងស្រុក អាចប្រើប្រាស់ឯកសារបង្រៀននេះជាមូលដ្ឋានគ្រឹះក្នុងការធ្វើនិក្ខេបបទ ឬគម្រោងស្រាវជ្រាវពាក់ព័ន្ធនឹងការប្រែប្រួលអាកាសធាតុ។</li>
+            
+        </ul>
+        
+
+        
+        <p>ការចាប់យកចំណេះដឹងផ្នែកវិភាគទិន្នន័យលំហ (Spatial Analysis) តាមរយៈកម្មវិធីបើកចំហរដូចជា QGIS នឹងជួយពង្រឹងសមត្ថភាពយុវជន និងមន្ត្រីជំនាញកម្ពុជាឱ្យក្លាយជាកម្លាំងចលករដ៏សំខាន់ក្នុងការអភិវឌ្ឍប្រកបដោយចីរភាព និងកិច្ចការពារបរិស្ថាននៅកម្ពុជា។</p>
+        
+    </div>
+    
+
+    
+    <!-- 7. Study Guide -->
+    <h2>៥. មគ្គុទ្ទេសក៍សិក្សា (Study Guide)</h2>
+    <div class="roadmap">
+        <p>លំហាត់ និងសកម្មភាពសិក្សាដើម្បីពង្រឹងការយល់ដឹង៖</p>
+        <ol>
+            
+            <li><strong>ការទាញយកទិន្នន័យ និងរៀបចំគម្រោង QGIS (Downloading Data and Setting up QGIS Project):</strong> និស្សិតត្រូវទាញយកទិន្នន័យកាបូន Pan-Tropical Biomass Map (Avitabile) និង GlobBiomass សម្រាប់ភូមិសាស្ត្រប្រទេសកម្ពុជា។ បន្ទាប់មក បង្កើតគម្រោងថ្មីនៅក្នុង QGIS និងបន្ថែមស្រទាប់ទិន្នន័យ រួចត្រួតពិនិត្យមើលប្រព័ន្ធកូអរដោណេ (Coordinate System) នៃទិន្នន័យនីមួយៗឱ្យបានត្រឹមត្រូវ។</li>
+            
+            <li><strong>ការអនុវត្តកាត់តម្រឹមទិន្នន័យតាមខេត្តគោលដៅ (Clipping Data by Target Province):</strong> ប្រើប្រាស់ឯកសារ Shapefile ព្រំប្រទល់ខេត្តណាមួយនៃប្រទេសកម្ពុជាដែលមានផ្ទៃដីព្រៃឈើច្រើន (ឧទាហរណ៍ ខេត្តមណ្ឌលគិរី ក្រចេះ ឬកោះកុង) រួចប្រើប្រាស់ឧបករណ៍ 'Clip raster with polygon' នៅក្នុង Processing Toolbox ដើម្បីកាត់យកតែទិន្នន័យជីវម៉ាសដែលស្ថិតក្នុងខេត្តនោះមកធ្វើការវិភាគ។</li>
+            
+            <li><strong>ការបង្កើតផែនទីភាពខុសគ្នានៃស្តុកកាបូន (Creating Carbon Stock Difference Map):</strong> ប្រើប្រាស់មុខងារ Raster Calculator ដើម្បីដកតម្លៃនៃទិន្នន័យ Avitabile ចេញពី GlobBiomass សម្រាប់ខេត្តដែលបានកាត់តម្រឹមរួច។ បន្ទាប់មក ផ្លាស់ប្តូរពណ៌តំណាង (Symbology) នៃលទ្ធផលទៅជាពណ៌ក្រហម លឿង និងខៀវ ដោយប្រើការបែងចែកថ្នាក់បែប Equal Interval ដើម្បីកំណត់រកតំបន់ណាមានភាពខុសគ្នានៃការប៉ាន់ស្មានខ្លាំងជាងគេ។</li>
+            
+            <li><strong>ការទាញយកតម្លៃស្ថិតិជីវម៉ាសតាមប្រភេទព្រៃឈើជាតិ (Extracting Biomass Statistics by National Forest Type):</strong> ដាក់បញ្ចូលទិន្នន័យផែនទីគម្របដី (Land Cover Map) របស់កម្ពុជាទៅក្នុងគម្រោង។ ប្រើប្រាស់ឧបករណ៍ 'r.univar' ដើម្បីគណនាតម្លៃសរុប និងតម្លៃមធ្យមនៃស្តុកកាបូន (AGB) សម្រាប់ប្រភេទព្រៃស្រោង ព្រៃពាក់កណ្តាលស្រោង និងព្រៃរបោះ បន្ទាប់មកនាំចេញ (Export) លទ្ធផលជាឯកសារ Excel (.csv) និងប្រើប្រាស់រូបមន្តដើម្បីបម្លែងទិន្នន័យទៅជាចំនួនតោនក្នុងមួយហិកតា (tonnes/ha)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 8. Technical Glossary -->
+    <h2>៦. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Above-Ground Biomass (AGB)</span></td>
+                <td>សំដៅលើបរិមាណសរុបនៃរុក្ខជាតិរស់នៅ (ដើម មែក ស្លឹក និងសំបក) ដែលស្ថិតនៅពីលើផ្ទៃដី។ ក្នុងឯកសារនេះ វាត្រូវបានប្រើជាសូចនាករចម្បងដើម្បីប៉ាន់ស្មានស្តុកកាបូនក្នុងព្រៃឈើសម្រាប់ការរៀបចំគម្រោង REDD+។</td>
+                <td>ដូចជាការថ្លឹងទម្ងន់ផ្នែកខាងលើរបស់ដើមឈើទាំងអស់ក្នុងព្រៃ ដើម្បីដឹងថាវាមានទំហំប៉ុនណា និងអាចស្តុកទុកឧស្ម័នកាបូនិកបានប៉ុន្មាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Raster Calculator</span></td>
+                <td>ជាឧបករណ៍នៅក្នុងកម្មវិធី QGIS សម្រាប់ធ្វើប្រមាណវិធីគណិតវិទ្យា (បូក ដក គុណ ចែក) លើទិន្នន័យទម្រង់រ៉ាស្ទ័រ (Raster)។ ក្នុងមេរៀននេះ វាត្រូវបានប្រើដើម្បីដកតម្លៃទិន្នន័យកាបូនមួយចេញពីទិន្នន័យមួយទៀត ដើម្បីបង្កើតផែនទីបង្ហាញភាពខុសគ្នា (Difference map)។</td>
+                <td>ដូចជាការយកផ្ទាំងរូបភាពពីរដែលមានទំហំប៉ុនគ្នាមកត្រួតពីលើគ្នា រួចដកលេខនៅចំណុចនីមួយៗដើម្បីរកមើលថាតើកន្លែងណាខ្លះមានការប្រែប្រួល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Zonal Statistics (r.univar)</span></td>
+                <td>គឺជាដំណើរការបច្ចេកទេសនៃការទាញយកតម្លៃស្ថិតិ (ដូចជាមធ្យមភាគ អប្បបរមា អតិបរមា និងផលបូក) ពីទិន្នន័យមួយ (ឧ. ទិន្នន័យស្តុកកាបូន) ដោយផ្អែកលើព្រំដែនតំបន់ដែលបានកំណត់ដោយទិន្នន័យមួយទៀត (ឧ. ប្រភេទគម្របដី)។</td>
+                <td>ដូចជាការបែងចែកសិស្សក្នុងសាលាជាក្រុមៗតាមថ្នាក់រៀន រួចគណនារកពិន្ទុមធ្យមសរុបប្រចាំថ្នាក់នីមួយៗអញ្ចឹងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Difference map</span></td>
+                <td>ជាផែនទីដែលបង្ហាញពីកម្រិតភាពខុសគ្នារវាងសំណុំទិន្នន័យពីរ។ នៅក្នុងមេរៀន វាបង្ហាញពីតំបន់ណាដែលទិន្នន័យ GlobBiomass មានការប៉ាន់ស្មានតម្លៃកាបូនខ្ពស់ជាង ឬទាបជាងទិន្នន័យ Avitabile។</td>
+                <td>ដូចជាការគូសចំណាំពណ៌លើតារាងចំណូលចំណាយ ដើម្បីមើលថាតើខែនេះយើងចំណាយលើស ឬខ្វះបើធៀបនឹងខែមុននៅតាមចំណុចនីមួយៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Re-projecting (Warp)</span></td>
+                <td>គឺជាដំណើរការបំប្លែងទិន្នន័យលំហអាកាសពីប្រព័ន្ធកូអរដោណេមួយ ទៅប្រព័ន្ធមួយទៀត (ឧទាហរណ៍ ពី Geographic/WGS84 ទៅប៉ូចំណោលប្រភេទ Equal-area/UTM) ដើម្បីធានាថាទិន្នន័យអាចវាស់វែងផ្ទៃដីបានត្រឹមត្រូវនិងមានឯកតាដូចគ្នា។</td>
+                <td>ដូចជាការបម្លែងលុយពីដុល្លារទៅរៀលសិន ដើម្បីអាចបូកសរុបបញ្ចូលគ្នាជាមួយគណនីដែលកំពុងចាយប្រាក់រៀលបានយ៉ាងត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">REDD+</span></td>
+                <td>ជាយន្តការអន្តរជាតិដើម្បីកាត់បន្ថយការបញ្ចេញឧស្ម័នផ្ទះកញ្ចក់ពីការកាប់បំផ្លាញ និងការរិចរិលព្រៃឈើ ព្រមទាំងការអភិរក្ស និងការបង្កើនស្តុកកាបូនព្រៃឈើ។ ការប្រើប្រាស់ទិន្នន័យលំហអាកាសជួយធានាភាពសុក្រឹតនៃការរៀបចំផែនការអនុវត្តយន្តការនេះ។</td>
+                <td>ដូចជាកម្មវិធីផ្ដល់រង្វាន់លើកទឹកចិត្តដល់ប្រទេស ឬសហគមន៍ដែលជួយថែរក្សាព្រៃឈើមិនឱ្យគេកាប់បំផ្លាញ ដើម្បីរក្សាខ្យល់អាកាសបរិសុទ្ធសម្រាប់ភពផែនដីទាំងមូល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Singleband pseudocolor</span></td>
+                <td>ជាបច្ចេកទេសកំណត់ពណ៌ (Symbology) នៅក្នុង QGIS សម្រាប់ទិន្នន័យរ៉ាស្ទ័រដែលមានស្រទាប់តែមួយ (Singleband) ដោយផ្តល់ពណ៌ខុសៗគ្នាទៅតាមចន្លោះតម្លៃនៃភីកសែលនីមួយៗ ដើម្បីងាយស្រួលក្នុងការមើលចំណុចទាបនិងខ្ពស់។</td>
+                <td>ដូចជាការលាបពណ៌លើផែនទីអាកាសធាតុ ដោយប្រើពណ៌ក្រហមសម្រាប់តំបន់ដែលក្តៅខ្លាំង និងពណ៌ខៀវសម្រាប់តំបន់ដែលមានអាកាសធាតុត្រជាក់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 9. Further Reading -->
+    <h2>៧. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/measuring-carbon-stocks-across-land-use-systems-2010.html">
+                    <span class="km">ការវាស់វែងស្តុកកាបូនឆ្លងកាត់ប្រព័ន្ធប្រើប្រាស់ដី៖ សៀវភៅណែនាំ</span><br>
+                    <span class="en article-original-title">Measuring Carbon Stocks Across Land Use Systems: A Manual</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/forests-and-carbon-synthesis-science-management-policy-2009.html">
+                    <span class="km">ព្រៃឈើ និងកាបូន៖ ការសំយោគវិទ្យាសាស្ត្រ ការគ្រប់គ្រង និងគោលនយោបាយសម្រាប់ការស្រូបយកកាបូននៅក្នុងព្រៃ</span><br>
+                    <span class="en article-original-title">Forests and Carbon: A Synthesis of Science, Management, and Policy for Carbon Sequestration in Forests</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/remote-sensing-gis-forest-fire-cadastral-bulgaria-2024.html">
+                    <span class="km">ការគូសផែនទីលំហ និងការវិភាគផ្អែកលើប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ (GIS) និងតេឡេវាទកម្ម ពីផលប៉ះពាល់នៃភ្លើងឆេះព្រៃទៅលើប្រភេទអចលនទ្រព្យសុរិយោដីផ្សេងៗគ្នា</span><br>
+                    <span class="en article-original-title">REMOTE SENSING AND GIS-BASED SPATIAL MAPPING AND ANALYSIS OF FOREST FIRE IMPACT ON DIFFERENT CADASTRAL PROPERTY TYPES</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/low-cost-forest-inventory-kieni-kenya-2024.html">
+                    <span class="km">ការធ្វើបញ្ជីសារពើភណ្ឌព្រៃឈើដោយមិនប៉ះផ្ទាល់ក្នុងតម្លៃទាប៖ ការសិក្សាពីករណីព្រៃ Kieni ក្នុងប្រទេសកេនយ៉ា</span><br>
+                    <span class="en article-original-title">Low-Cost Non-Contact Forest Inventory: A Case Study of Kieni Forest in Kenya</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/architecture/companion-animal-spaces-beijing-covid19-2022.html">
+                    <span class="km">ការផ្លាស់ប្តូរការយល់ឃើញ និងការប្រើប្រាស់ទីធ្លាសាធារណៈ និងពាក់កណ្តាលសាធារណៈសម្រាប់ "សត្វចិញ្ចឹម" នៅក្នុងទីក្រុងកំឡុងពេលជំងឺរាតត្បាតកូវីដ-១៩៖ ករណីសិក្សានៅទីក្រុងប៉េកាំង</span><br>
+                    <span class="en article-original-title">Changing Perceptions and Uses of “Companion Animal” Public and Pseudo-Public Spaces in Cities during COVID-19 Pandemic: The Case of Beijing</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=QGIS+raster+analysis+and+map+algebra+techniques" target="_blank" rel="noopener"><span class="en">QGIS raster analysis and map algebra techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparing+above+ground+biomass+datasets+Avitabile+GlobBiomass" target="_blank" rel="noopener"><span class="en">comparing above ground biomass datasets Avitabile GlobBiomass</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=REDD%2B+spatial+planning+and+biodiversity+safeguards+mapping" target="_blank" rel="noopener"><span class="en">REDD+ spatial planning and biodiversity safeguards mapping</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=zonal+statistics+land+cover+biomass+carbon+estimation+QGIS" target="_blank" rel="noopener"><span class="en">zonal statistics land cover biomass carbon estimation QGIS</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=uncertainty+in+global+forest+carbon+mapping+using+remote+sensing" target="_blank" rel="noopener"><span class="en">uncertainty in global forest carbon mapping using remote sensing</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/engineering/">Engineering</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>

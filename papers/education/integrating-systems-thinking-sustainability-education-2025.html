@@ -388,6 +388,13 @@
         <ul class="internal-articles">
             
             <li class="internal-article-link">
+                <a href="/papers/education/system-dynamics-k12-teachers-1996.html">
+                    <span class="km">សក្ដានុពលប្រព័ន្ធ និងគ្រូបង្រៀនកម្រិត K-12</span><br>
+                    <span class="en article-original-title">System Dynamics and K-12 Teachers</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/education/ai-literacy-social-emotional-skills-education-2024.html">
                     <span class="km">អក្ខរកម្មបញ្ញាសិប្បនិម្មិត និងជំនាញសង្គម-ផ្លូវចិត្ត ជាសមត្ថភាពអន្តរវិស័យក្នុងការអប់រំ</span><br>
                     <span class="en article-original-title">Artificial Intelligence Literacy and Social-Emotional Skills as Transversal Competencies in Education</span>
@@ -412,13 +419,6 @@
                 <a href="/papers/education/framework-sensors-elementary-teacher-education-2024.html">
                     <span class="km">ក្របខ័ណ្ឌសម្រាប់ការប្រើប្រាស់សេនស័រផ្អែកលើការស្រាវជ្រាវ និងអន្តរវិស័យក្នុងការបណ្តុះបណ្តាលគ្រូបង្រៀនកម្រិតបឋមសិក្សា</span><br>
                     <span class="en article-original-title">Framework for a Research-Based and Interdisciplinary Use of Sensors in Elementary Teacher Education</span>
-                </a>
-            </li>
-            
-            <li class="internal-article-link">
-                <a href="/papers/education/transformation-educational-values-cultural-2024.html">
-                    <span class="km">ការផ្លាស់ប្តូរតម្លៃអប់រំតាមរយៈការផ្តល់ជូនផ្នែកវប្បធម៌ក្នុងបរិបទនៃការអប់រំគ្រូបង្រៀន</span><br>
-                    <span class="en article-original-title">The Transformation of Educational Values via Cultural Offerings in the Context of Teacher Education</span>
                 </a>
             </li>
             
@@ -473,6 +473,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>

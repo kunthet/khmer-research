@@ -367,6 +367,13 @@
             </li>
             
             <li class="internal-article-link">
+                <a href="/papers/economics/fdi-trade-openness-vietnam-2014.html">
+                    <span class="km">ទំនាក់ទំនងរវាងការវិនិយោគផ្ទាល់ពីបរទេស និងភាពបើកចំហពាណិជ្ជកម្មនៅប្រទេសវៀតណាម</span><br>
+                    <span class="en article-original-title">Mối quan hệ giữa vốn đầu tư trực tiếp nước ngoài và độ mở thương mại tại Việt Nam</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
                 <a href="/papers/economics/semiconductor-fdi-vietnam-2024.html">
                     <span class="km">ឥទ្ធិពលសាយភាយនៃឧស្សាហកម្មពាក់កណ្ដាលចំហាយ (Semiconductor) ទៅលើទុនវិនិយោគនៃវិស័យ FDI នៅប្រទេសវៀតណាម</span><br>
                     <span class="en article-original-title">Ảnh hưởng lan tỏa của ngành công nghiệp bán dẫn đến vốn đầu tư của khu vực FDI tại Việt Nam</span>
@@ -384,13 +391,6 @@
                 <a href="/papers/economics/vietnam-evfta-opportunities-challenges-2024.html">
                     <span class="km">ឱកាស និងបញ្ហាប្រឈមសម្រាប់ប្រទេសវៀតណាមនៅពេលចូលរួមក្នុង EVFTA</span><br>
                     <span class="en article-original-title">Cơ hội và thách thức cho Việt Nam khi tham gia EVFTA</span>
-                </a>
-            </li>
-            
-            <li class="internal-article-link">
-                <a href="/papers/economics/fdi-vietnam-covid19-context-2022.html">
-                    <span class="km">ការវិនិយោគផ្ទាល់ពីបរទេស (FDI) នៅប្រទេសវៀតណាមក្នុងបរិបទកូវីដ-១៩</span><br>
-                    <span class="en article-original-title">FDI TẠI VIỆT NAM TRONG BỐI CẢNH COVID 19</span>
                 </a>
             </li>
             
@@ -445,6 +445,29 @@
     </div>
     <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
 </footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
 
 </body>
 </html>
