@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>DRGNet៖ បណ្តាញចាត់ថ្នាក់កម្រិតជំងឺទឹកនោមផ្អែមឡើងភ្នែក ដោយប្រើប្រាស់ការធ្វើតុល្យភាពទិន្នន័យរួមបញ្ចូលជាមួយ Transfer Learning និងចំណាត់ថ្នាក់ Graph-based KNN - DRGNet: Diabetic Retinopathy Grading Network Using Data Balancing Integrated ... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី DRGNet៖ បណ្តាញចាត់ថ្នាក់កម្រិតជំងឺទឹកនោមផ្អែមឡើងភ្នែក ដោយប្រ។ ការធ្វើរោគវិនិច្ឆ័យជំងឺទឹកនោមផ្អែមឡើងភ្នែក (Diabetic Retinopathy - DR) តាមបែបប្រពៃណីគឺចំណាយពេលយូរ...">
+    
+    <meta name="keywords" content="Diabetic Retinopathy, SMOTE, ResNet50, Graph-based KNN, Transfer Learning, Medical Image Classification, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/health/drgnet-diabetic-retinopathy-grading-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/health/drgnet-diabetic-retinopathy-grading-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/health/drgnet-diabetic-retinopathy-grading-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/health/drgnet-diabetic-retinopathy-grading-2023.html">
+    <meta property="og:title" content="DRGNet៖ បណ្តាញចាត់ថ្នាក់កម្រិតជំងឺទឹកនោមផ្អែមឡើងភ្នែក ដោយប្រើប្រាស់ការធ្វើតុល្យភាពទិន្នន័យរួមបញ្ចូលជាមួយ Transfer Learning និងចំណាត់ថ្នាក់ Graph-based KNN | KhmerResearch.com">
+    <meta property="og:description" content="ការធ្វើរោគវិនិច្ឆ័យជំងឺទឹកនោមផ្អែមឡើងភ្នែក (Diabetic Retinopathy - DR) តាមបែបប្រពៃណីគឺចំណាយពេលយូរ មានភាពស្មុគស្មាញ និងមានបញ្ហាអតុល្យភាពទិន្នន័យ ដែលទាមទារឱ្យមានប្រព័ន្ធស្វ័យប្រវត្តិដែលមានភាពត្រឹមត្រូវខ្ពស់។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2023, International Journal of Intelligent Engineering and Systems-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Diabetic Retinopathy">
+    
+    <meta property="article:tag" content="SMOTE">
+    
+    <meta property="article:tag" content="ResNet50">
+    
+    <meta property="article:tag" content="Graph-based KNN">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="Medical Image Classification">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="DRGNet៖ បណ្តាញចាត់ថ្នាក់កម្រិតជំងឺទឹកនោមផ្អែមឡើងភ្នែក ដោយប្រើប្រាស់ការធ្វើតុល្យភាពទិន្នន័យរួមបញ្ចូលជាមួយ Transfer Learning និងចំណាត់ថ្នាក់ Graph-based KNN">
+    <meta name="twitter:description" content="ការធ្វើរោគវិនិច្ឆ័យជំងឺទឹកនោមផ្អែមឡើងភ្នែក (Diabetic Retinopathy - DR) តាមបែបប្រពៃណីគឺចំណាយពេលយូរ មានភាពស្មុគស្មាញ និងមានបញ្ហាអតុល្យភាពទិន្នន័យ ដែលទាមទារឱ្យមានប្រព័ន្ធស្វ័យប្រវត្តិដែលមានភាពត្រឹមត្រូវខ្ពស់។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "DRGNet\u17d6 \u1794\u178e\u17d2\u178f\u17b6\u1789\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1780\u1798\u17d2\u179a\u17b7\u178f\u1787\u17c6\u1784\u17ba\u1791\u17b9\u1780\u1793\u17c4\u1798\u1795\u17d2\u17a2\u17c2\u1798\u17a1\u17be\u1784\u1797\u17d2\u1793\u17c2\u1780 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1787\u17b6\u1798\u17bd\u1799 Transfer Learning \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb Graph-based KNN",
+      "name": "DRGNet: Diabetic Retinopathy Grading Network Using Data Balancing Integrated Transfer Learning with Graph-based KNN Classification",
+      "description": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179a\u17c4\u1782\u179c\u17b7\u1793\u17b7\u1785\u17d2\u1786\u17d0\u1799\u1787\u17c6\u1784\u17ba\u1791\u17b9\u1780\u1793\u17c4\u1798\u1795\u17d2\u17a2\u17c2\u1798\u17a1\u17be\u1784\u1797\u17d2\u1793\u17c2\u1780 (Diabetic Retinopathy - DR) \u178f\u17b6\u1798\u1794\u17c2\u1794\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8\u1782\u17ba\u1785\u17c6\u178e\u17b6\u1799\u1796\u17c1\u179b\u1799\u17bc\u179a \u1798\u17b6\u1793\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789 \u1793\u17b7\u1784\u1798\u17b6\u1793\u1794\u1789\u17d2\u17a0\u17b6\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u178a\u17c2\u179b\u1791\u17b6\u1798\u1791\u17b6\u179a\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u178a\u17c2\u179b\u1798\u17b6\u1793\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1781\u17d2\u1796\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/health/drgnet-diabetic-retinopathy-grading-2023.html",
+      "author": [{"@type": "Person", "name": "Swetha Pesaru (Jawaharlal Nehru Technological University Hyderabad)"},{"@type": "Person", "name": "Naresh K Mallenahalli (National Remote Sensing Center)"},{"@type": "Person", "name": "B. Vishnu Vardhan (Jawaharlal Nehru Technological University Hyderabad)"}],
+      "datePublished": "2023, International Journal of Intelligent Engineering and Systems",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "DRGNet: Diabetic Retinopathy Grading Network Using Data Balancing Integrated Transfer Learning with Graph-based KNN Classification",
+        "url": "https://doi.org/10.22266/ijies2023.1231.34"
+      },
+      "keywords": ["Diabetic Retinopathy", "SMOTE", "ResNet50", "Graph-based KNN", "Transfer Learning", "Medical Image Classification"],
+      "about": "Machine Learning in Healthcare"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health",
+          "item": "https://khmerresearch.com/papers/health/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DRGNet\u17d6 \u1794\u178e\u17d2\u178f\u17b6\u1789\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1780\u1798\u17d2\u179a\u17b7\u178f\u1787\u17c6\u1784\u17ba\u1791\u17b9\u1780\u1793\u17c4\u1798\u1795\u17d2\u17a2\u17c2\u1798\u17a1\u17be\u1784\u1797\u17d2\u1793\u17c2\u1780 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1787\u17b6\u1798\u17bd\u1799 Transfer Learning \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb Graph-based KNN",
+          "item": "https://khmerresearch.com/papers/health/drgnet-diabetic-retinopathy-grading-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/health/">Health</a> &rsaquo;
+        <span>DRGNet៖ បណ្តាញចាត់ថ្នាក់កម្រិតជំងឺទឹកនោមផ្អែមឡើងភ្នែក ដោយ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> DRGNet: Diabetic Retinopathy Grading Network Using Data Balancing Integrated Transfer Learning with Graph-based KNN Classification<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.22266/ijies2023.1231.34" target="_blank" rel="noopener">doi.org/10.22266/ijies2023.1231.34</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>DRGNet៖ បណ្តាញចាត់ថ្នាក់កម្រិតជំងឺទឹកនោមផ្អែមឡើងភ្នែក ដោយប្រើប្រាស់ការធ្វើតុល្យភាពទិន្នន័យរួមបញ្ចូលជាមួយ Transfer Learning និងចំណាត់ថ្នាក់ Graph-based KNN</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> DRGNet: Diabetic Retinopathy Grading Network Using Data Balancing Integrated Transfer Learning with Graph-based KNN Classification</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Swetha Pesaru (Jawaharlal Nehru Technological University Hyderabad), Naresh K Mallenahalli (National Remote Sensing Center), B. Vishnu Vardhan (Jawaharlal Nehru Technological University Hyderabad)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, International Journal of Intelligent Engineering and Systems</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning in Healthcare</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការធ្វើរោគវិនិច្ឆ័យជំងឺទឹកនោមផ្អែមឡើងភ្នែក (Diabetic Retinopathy - DR) តាមបែបប្រពៃណីគឺចំណាយពេលយូរ មានភាពស្មុគស្មាញ និងមានបញ្ហាអតុល្យភាពទិន្នន័យ ដែលទាមទារឱ្យមានប្រព័ន្ធស្វ័យប្រវត្តិដែលមានភាពត្រឹមត្រូវខ្ពស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានស្នើឡើងនូវម៉ូដែល DRG-Net ដែលរួមបញ្ចូលបច្ចេកទេស Deep Learning និង Graph-based ជឿនលឿន ដើម្បីដោះស្រាយបញ្ហាអតុល្យភាពទិន្នន័យ និងបង្កើនភាពត្រឹមត្រូវក្នុងការចាត់ថ្នាក់កម្រិតជំងឺ។
+        
+        <ul>
+            
+            <li>បច្ចេកទេសបង្កើតទិន្នន័យបន្ថែមដើម្បីធ្វើតុល្យភាពសំណាក (SMOTE Data Balancing)</li>
+            
+            <li>ការទាញយកលក្ខណៈពិសេសពីរូបភាពដោយប្រើប្រាស់បណ្តាញ (ResNet50 Feature Extraction)</li>
+            
+            <li>ក្បួនដោះស្រាយចំណាត់ថ្នាក់ផ្អែកលើក្រាហ្វ (Graph-based KNN Classification - GKNN)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល DRG-Net សម្រេចបាននូវភាពត្រឹមត្រូវរហូតដល់ 99.93% និងពិន្ទុ F1-score 99.85% លើសំណុំទិន្នន័យ IDRiD។</li>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេស SMOTE ជួយដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់ទិន្នន័យដោយជោគជ័យ ដែលធ្វើឱ្យម៉ូដែលរៀនបានកាន់តែច្បាស់ និងមិនលម្អៀង។</li>
+            
+            <li>ប្រព័ន្ធនេះបង្ហាញពីសមត្ថភាពល្អប្រសើរដាច់ខាត បើប្រៀបធៀបទៅនឹងវិធីសាស្ត្រមុនៗ (ដូចជា MSA-ResNetGB និង OHGCNet) ក្នុងការចាត់ថ្នាក់កម្រិតជំងឺបានលឿននិងត្រឹមត្រូវ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Proposed DRG-Net</span></strong><br>ម៉ូដែលដែលបានស្នើឡើង (DRG-Net ប្រើប្រាស់ SMOTE, ResNet50 និង GKNN)</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់បំផុត និងដោះស្រាយបញ្ហាអតុល្យភាពទិន្នន័យបានយ៉ាងល្អតាមរយៈបច្ចេកទេស SMOTE។ វាក៏អាចចាប់យកទំនាក់ទំនងនៃរូបភាពបានច្បាស់លាស់តាមរយៈ GKNN។</td>
+                <td>ការគណនាក្រាហ្វសម្រាប់ GKNN អាចទាមទារថាមពលកុំព្យូទ័រច្រើន និងពេលវេលាយូរ ប្រសិនបើអនុវត្តលើសំណុំទិន្នន័យធំមហិមា។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ 99.93% និង F1-Score 99.85% លើសំណុំទិន្នន័យ IDRiD។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">DLCNN-MGWO-VW</span></strong><br>បណ្តាញសរសៃប្រសាទវិលជុំជ្រៅ (DLCNN) ជាមួយក្បួន Grey-Wolf Optimizer</td>
+                <td>មានសមត្ថភាពទាញយកលក្ខណៈពិសេស និងចាត់ថ្នាក់ជំងឺ DR និង DME ក្នុងពេលតែមួយបានល្អ។</td>
+                <td>ដំណើរការរបស់វាពឹងផ្អែកខ្លាំងលើការជ្រើសរើស Optimizer និងការកំណត់ទម្ងន់ (Weights) ដែលប្រើពេលយូរ និងពិបាកក្នុងការកំណត់រចនាសម្ព័ន្ធឱ្យល្អបំផុត។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវត្រឹមតែ 92.23% និង F1-Score 94.63% (ទាបជាង DRG-Net)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">OHGCNet</span></strong><br>បណ្តាញ Hybrid Graph Convolutional (OHGCNet)</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់គួរសម ដោយប្រើប្រាស់រចនាសម្ព័ន្ធក្រាហ្វ (Graph) និងការជ្រើសរើសលក្ខណៈពិសេសល្អបំផុត។</td>
+                <td>ការកសាង និងដំណើរការរចនាសម្ព័ន្ធក្រាហ្វ មានភាពស្មុគស្មាញ និងចំណាយថាមពលកុំព្យូទ័រខ្ពស់ (Computationally expensive) សម្រាប់សំណុំទិន្នន័យធំៗ។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវ 98.67% និង F1-Score 98.88% (ចាញ់ DRG-Net បន្តិចបន្តួច)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ថ្វីត្បិតតែឯកសារមិនបានបញ្ជាក់តួលេខច្បាស់លាស់ពីផ្នែករឹងក៏ដោយ ប៉ុន្តែដោយសារការប្រើប្រាស់ Deep Learning (ResNet50) និង Graph-based algorithms វាទាមទារធនធានកុំព្យូទ័រកម្រិតខ្ពស់សម្រាប់ការហ្វឹកហាត់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនដែលមានអង្គគណនាដាច់ដោយឡែកល្បឿនលឿន (GPU) ដើម្បីដំណើរការបណ្តាញសរសៃប្រសាទ ResNet50 និងរចនាសម្ព័ន្ធក្រាហ្វ (Graph Construction) របស់ GKNN ឱ្យបានរហ័ស។</li>
+        
+        <li><strong>Software:</strong> ត្រូវការបណ្ណាល័យ Deep Learning (ឧ. <span class='en'>TensorFlow</span> ឬ <span class='en'>PyTorch</span>) និងបណ្ណាល័យសម្រាប់ធ្វើតុល្យភាពទិន្នន័យ (ឧ. <span class='en'>imbalanced-learn</span> សម្រាប់ <span class='en'>SMOTE</span>)។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យរូបភាពបាតភ្នែកដែលថតក្នុងកម្រិតច្បាស់ (High-resolution fundus images) ដូចជា <span class='en'>IDRiD</span> ឬ <span class='en'>Messidor</span> ដែលមានការដាក់ស្លាកកម្រិតជំងឺយ៉ាងត្រឹមត្រូវពីអ្នកជំនាញ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់សំណុំទិន្នន័យ <span class='en'>IDRiD</span> (របស់ប្រទេសឥណ្ឌា) និង <span class='en'>Messidor</span>។ ការប្រើប្រាស់ទិន្នន័យពីប្រទេសឥណ្ឌាអាចមានលក្ខណៈជីវសាស្ត្រមួយចំនួនស្រដៀងនឹងប្រជាជនកម្ពុជា ប៉ុន្តែការខ្វះខាតការធ្វើតេស្តលើទិន្នន័យរូបភាពបាតភ្នែករបស់ប្រជាជនកម្ពុជាផ្ទាល់ អាចធ្វើឱ្យម៉ូដែលដំណើរការខុសប្រក្រតីនៅពេលអនុវត្តជាក់ស្តែងក្នុងបរិបទមន្ទីរពេទ្យក្នុងស្រុក។ ការប្រមូលទិន្នន័យអ្នកជំងឺកម្ពុជាគឺជារឿងចាំបាច់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ខ្លាំងក្នុងការជួយប្រព័ន្ធសុខាភិបាលកម្ពុជា ជាពិសេសក្នុងការកាត់បន្ថយបន្ទុកគ្រូពេទ្យភ្នែកដែលកំពុងខ្វះខាត និងជួយរាវរកជំងឺឱ្យបានទាន់ពេលវេលា។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យជាតិ និងមជ្ឈមណ្ឌលទឹកនោមផ្អែម (National Hospitals & Diabetes Centers):</strong> ម៉ូដែលនេះអាចត្រូវបានដាក់ឱ្យប្រើប្រាស់នៅមន្ទីរពេទ្យកាល់ម៉ែត មន្ទីរពេទ្យព្រះកុសុមៈ ឬគ្លីនិកឯកទេស ដើម្បីជួយវេជ្ជបណ្ឌិតវិភាគរូបភាពភ្នែកអ្នកជំងឺទឹកនោមផ្អែមបានរហ័ស និងបែងចែកកម្រិតធ្ងន់ធ្ងរដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>សេវាសុខភាពផ្លូវឆ្ងាយសម្រាប់តំបន់ដាច់ស្រយាល (Telemedicine & IoMT in Remote Provinces):</strong> តាមរយៈការរួមបញ្ចូលប្រព័ន្ធ <span class='en'>IoMT</span> ដូចមានបញ្ជាក់ក្នុងឯកសារ មណ្ឌលសុខភាពនៅខេត្តឆ្ងាយៗ (ឧ. រតនគិរី ព្រះវិហារ) អាចថតរូបភាពបាតភ្នែក រួចបញ្ជូនតាមអ៊ីនធឺណិតមកឱ្យប្រព័ន្ធ <span class='en'>AI</span> នៅភ្នំពេញធ្វើការវិភាគភ្លាមៗ ដោយមិនចាំបាច់មានគ្រូពេទ្យឯកទេសនៅទីនោះផ្ទាល់ឡើយ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការអនុវត្តម៉ូដែល DRG-Net អាចធ្វើបដិវត្តន៍ការពិនិត្យជំងឺទឹកនោមផ្អែមឡើងភ្នែកនៅកម្ពុជា ប្រសិនបើក្រសួងសុខាភិបាល និងដៃគូអភិវឌ្ឍន៍វិនិយោគលើឧបករណ៍ថតរូបភាពភ្នែកឌីជីថល (Fundus cameras) និងប្រព័ន្ធពពក (Cloud Infrastructure)។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាពីការធ្វើតុល្យភាពទិន្នន័យ (Data Balancing):</strong> ស្វែងយល់ពីបញ្ហាអតុល្យភាពទិន្នន័យ (Class Imbalance) នៅក្នុងសំណុំទិន្នន័យវេជ្ជសាស្ត្រ និងអនុវត្តបច្ចេកទេស <span class='en'>SMOTE</span> ដោយប្រើប្រាស់បណ្ណាល័យ <span class='en'>imbalanced-learn</span> ក្នុងភាសា <span class='en'>Python</span> ដើម្បីបង្កើតទិន្នន័យបន្ថែមសម្រាប់ក្រុមអ្នកជំងឺដែលមានចំនួនតិចតួច។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្ត Transfer Learning ជាមួយ ResNet50:</strong> សិក្សាពីរបៀបប្រើប្រាស់ម៉ូដែលដែលបានហ្វឹកហាត់រួច (Pre-trained models) ដូចជា <span class='en'>ResNet50</span> តាមរយៈ <span class='en'>Keras/TensorFlow</span> ឬ <span class='en'>PyTorch</span>។ អនុវត្តការកាត់ស្រទាប់ខាងចុង (Fully Connected Layers) ចេញ ដើម្បីប្រើវាជាអ្នកទាញយកលក្ខណៈពិសេស (Feature Extractor) ពីរូបភាពបាតភ្នែក។</li>
+            
+            <li><strong>ជំហានទី៣៖ អនុវត្តចំណាត់ថ្នាក់ផ្អែកលើក្រាហ្វ (Graph-based KNN):</strong> ស្រាវជ្រាវពីរបៀបបង្កើតក្រាហ្វដើម្បីតំណាងឱ្យទំនាក់ទំនងរវាងលក្ខណៈពិសេសនៃរូបភាព (Graph Representation)។ សាកល្បងសរសេរកូដសម្រាប់ក្បួនដោះស្រាយ <span class='en'>GKNN</span> ដើម្បីជំនួសឱ្យចំណាត់ថ្នាក់ <span class='en'>Softmax</span> ឬ <span class='en'>SVM</span> ធម្មតា សម្រាប់ការធ្វើសេចក្តីសម្រេចចិត្តដែលផ្អែកលើភាពស្រដៀងគ្នានៃទិន្នន័យ។</li>
+            
+            <li><strong>ជំហានទី៤៖ សាកល្បងហ្វឹកហាត់ម៉ូដែលលើទិន្នន័យជាក់ស្តែង:</strong> ចូលទៅកាន់គេហទំព័រ <span class='en'>IEEE Dataport</span> ឬ Kaggle ដើម្បីទាញយកសំណុំទិន្នន័យ <span class='en'>IDRiD</span> ឬ <span class='en'>Messidor</span> រួចសាកល្បងដំណើរការម៉ូដែល <span class='en'>DRG-Net</span> ទាំងមូលដោយប្រើប្រាស់ <span class='en'>Google Colab Pro</span> ដើម្បីទទួលបាន <span class='en'>GPU</span> សម្រាប់គណនា។</li>
+            
+            <li><strong>ជំហានទី៥៖ វាយតម្លៃសមត្ថភាព និងវិភាគលទ្ធផល:</strong> ប្រើប្រាស់រង្វាស់ (Metrics) ដូចជា Accuracy, Precision, Recall, និង F1-Score ដើម្បីវាស់ស្ទង់ប្រសិទ្ធភាពម៉ូដែល។ បង្កើត និងវិភាគលើ <span class='en'>Confusion Matrix</span> ដើម្បីយល់ពីចំណុចខ្សោយរបស់ម៉ូដែលថាតើវាតែងតែទាយខុសនៅកម្រិតជំងឺមួយណា ដើម្បីស្វែងរកដំណោះស្រាយកែលម្អបន្ត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Diabetic retinopathy</span></td>
+                <td>ជាផលវិបាកមួយនៃជំងឺទឹកនោមផ្អែមដែលបំផ្លាញសរសៃឈាមនៅក្នុងរន្ធភ្នែក (retina) ដែលអាចបណ្តាលឱ្យងងឹតភ្នែកប្រសិនបើមិនបានធ្វើការកត់សម្គាល់និងព្យាបាលទាន់ពេល។ នៅក្នុងការសិក្សានេះ គេព្យាយាមប្រើ AI ដើម្បីចាត់ថ្នាក់កម្រិតធ្ងន់ធ្ងររបស់វាដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាទុយោទឹកចាស់ៗនៅក្នុងកាមេរ៉ាភ្នែករបស់យើងដែលធ្លាយដោយសារជាតិស្ករខ្ពស់ ធ្វើឱ្យខូចរូបភាពដែលយើងកំពុងមើលឃើញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTE</span></td>
+                <td>ជាបច្ចេកទេសបង្កើតទិន្នន័យថ្មីៗដោយស្វ័យប្រវត្តិ (សិប្បនិម្មិត) សម្រាប់ក្រុមទិន្នន័យដែលមានចំនួនតិចតួច ដើម្បីធ្វើឱ្យសំណុំទិន្នន័យទាំងមូលមានតុល្យភាព។ ការធ្វើបែបនេះជួយឱ្យម៉ូដែល AI រៀនបានស្មើភាពគ្នា និងមិនលម្អៀងទៅរកតែក្រុមដែលមានទិន្នន័យច្រើននោះទេ។</td>
+                <td>ដូចជាការថតចម្លងនិងកែច្នៃរូបភាពសត្វកម្របន្តិចបន្តួចឱ្យមានច្រើនសន្លឹក ដើម្បីឱ្យកូនក្មេងរៀនចំណាំវាបានស្មើនឹងសត្វដែលសំបូរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">ResNet50</span></td>
+                <td>ជាបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ (Deep Learning) ដែលមាន 50 ស្រទាប់។ វាប្រើបច្ចេកទេសតភ្ជាប់រំលង (skip connections) ដើម្បីជួយដោះស្រាយបញ្ហាបាត់បង់ព័ត៌មានពេលកំពុងហ្វឹកហាត់ ដែលធ្វើឱ្យវាពូកែខ្លាំងក្នុងការទាញយកលក្ខណៈពិសេសពីរូបភាពស្មុគស្មាញ។</td>
+                <td>ដូចជារោងចក្រកែច្នៃទិន្នន័យដែលមាន 50 ជាន់ ហើយមានជណ្តើរយន្តពិសេសអាចរំលងជាន់ខ្លះ ដើម្បីបញ្ជូនព័ត៌មានឱ្យបានលឿននិងមិនបាត់បង់តាមផ្លូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer learning</span></td>
+                <td>ជាបច្ចេកទេសយកម៉ូដែល AI ដែលត្រូវបានគេហ្វឹកហាត់រួចជាស្រេចលើទិន្នន័យរាប់លានរូបភាព មកបន្តហ្វឹកហាត់បន្ថែមបន្តិចបន្តួចដើម្បីធ្វើកិច្ចការថ្មីមួយទៀត (ឧទាហរណ៍៖ ការពិនិត្យជំងឺភ្នែក) ដែលជួយសន្សំពេលវេលា កម្លាំងម៉ាស៊ីន និងទិន្នន័យ។</td>
+                <td>ដូចជាការយកចុងភៅដែលពូកែធ្វើម្ហូបអឺរ៉ុបរួចហើយ មកបង្រៀនបន្ថែមបន្តិចបន្តួចឱ្យចេះធ្វើម្ហូបខ្មែរ ដោយមិនបាច់បង្រៀនពីរបៀបកាន់កាំបិតសារជាថ្មី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">GKNN</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ចាត់ថ្នាក់ទិន្នន័យ ដោយវាបង្កើតជាបណ្តាញក្រាហ្វភ្ជាប់ទិន្នន័យដែលស្រដៀងគ្នា ហើយធ្វើការវាយតម្លៃថារូបភាពថ្មីមួយជារបស់កម្រិតជំងឺណា ដោយផ្អែកលើភាពស្រដៀងគ្នាទៅនឹងអ្នកជិតខាង (ទិន្នន័យចាស់ៗ) របស់វាដែលនៅក្បែរបំផុត។</td>
+                <td>ដូចជាការវាយតម្លៃអត្តចរិតរបស់សិស្សថ្មីម្នាក់ ដោយមើលទៅលើក្រុមមិត្តភក្តិជិតស្និទ្ធបំផុតរបស់គេ (បើមិត្តគេរៀនពូកែ គេក៏ប្រហែលជារៀនពូកែដែរ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">IoMT</span></td>
+                <td>ការតភ្ជាប់ឧបករណ៍វេជ្ជសាស្ត្រ (ដូចជាម៉ាស៊ីនថតភ្នែក ឬឧបករណ៍វាស់សុខភាព) ទៅកាន់ប្រព័ន្ធអ៊ីនធឺណិត ដើម្បីអាចប្រមូល បញ្ជូន និងវិភាគទិន្នន័យអ្នកជំងឺពីចម្ងាយបានភ្លាមៗ (Real-time) តាមរយៈ Cloud។</td>
+                <td>ដូចជាការបំពាក់ Wi-Fi ទៅឱ្យឧបករណ៍ពេទ្យ ដើម្បីឱ្យវាអាចផ្ញើលទ្ធផលពិនិត្យទៅកាន់កុំព្យូទ័ររបស់គ្រូពេទ្យដោយស្វ័យប្រវត្តិទោះនៅឆ្ងាយគ្នាក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">feature extraction</span></td>
+                <td>ជាដំណើរការកាត់បន្ថយទំហំទិន្នន័យរូបភាពដ៏ធំ ដោយចាប់យកនិងរក្សាទុកតែចំណុចសំខាន់ៗបំផុត (ដូចជាស្នាមអុច ស្នាមដាច់សរសៃឈាម) ដើម្បីឱ្យកុំព្យូទ័រងាយស្រួលយកទៅធ្វើការវិភាគនិងចាត់ថ្នាក់បន្ត។</td>
+                <td>ដូចជាការគូររូបគំនូសព្រាងដែលចាប់យកតែទម្រង់មុខនិងភ្នែករបស់ជនសង្ស័យ ជាជាងការពិពណ៌នាពីរាល់សរសៃសក់ទាំងអស់រាប់ម៉ឺនសរសៃ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-transfer-learning-nlp-ruder-2019.html">
+                    <span class="km">ការរៀនផ្ទេរចំណេះដឹងតាមបណ្ដាញសរសៃប្រសាទសម្រាប់ការកែច្នៃភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Transfer Learning for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/balancing-class-classification-clinical-dataset-2014.html">
+                    <span class="km">ការធ្វើឱ្យមានតុល្យភាពចំណាត់ថ្នាក់សម្រាប់ប្រសិទ្ធភាពនៃការធ្វើចំណាត់ថ្នាក់ជាមួយនឹងសំណុំទិន្នន័យគ្លីនិក</span><br>
+                    <span class="en article-original-title">Balancing Class for Performance of Classification with a Clinical Dataset</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/cvd-prediction-big-data-smote-2020.html">
+                    <span class="km">ផលវិបាកតាមបែបគ្លីនិកនៃទិន្នន័យធំ (Big Data) ក្នុងការទស្សន៍ទាយជំងឺសរសៃឈាមបេះដូង ដោយប្រើប្រាស់បច្ចេកទេស SMOTE សម្រាប់ការដោះស្រាយទិន្នន័យមិនមានតុល្យភាព</span><br>
+                    <span class="en article-original-title">CLINICAL IMPLICATIONS OF BIG DATA IN PREDICTING CARDIOVASCULAR DISEASE USING SMOTE FOR HANDLING IMBALANCED DATA</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/optimization-transfer-learning-rice-disease-2022.html">
+                    <span class="km">ការវាយតម្លៃប្រសិទ្ធភាពនៃក្បួនដោះស្រាយអុបទិមម្កម្មសម្រាប់ការរៀនបញ្ជូន (Transfer Learning) លើសំណុំទិន្នន័យជំងឺស្លឹកស្រូវ</span><br>
+                    <span class="en article-original-title">Evaluation of the Efficiency of the Optimization Algorithms for Transfer Learning on the Rice Leaf Disease Dataset</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/sentiment-analysis-online-courses-bert-2021.html">
+                    <span class="km">ការវិភាគមនោសញ្ចេតនានៃការវាយតម្លៃរបស់សិស្សលើវគ្គសិក្សាតាមអ៊ីនធឺណិត៖ វិធីសាស្ត្រផ្ទេរការរៀន (Transfer Learning)</span><br>
+                    <span class="en article-original-title">Sentiment Analysis of Students’ Reviews on Online Courses: A Transfer Learning Method</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Diabetic+Retinopathy+grading+using+Deep+Learning+and+SMOTE+techniques" target="_blank" rel="noopener"><span class="en">Diabetic Retinopathy grading using Deep Learning and SMOTE techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Graph-based+K-Nearest+Neighbors+classification+algorithm+fundamentals" target="_blank" rel="noopener"><span class="en">Graph-based K-Nearest Neighbors classification algorithm fundamentals</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Internet+of+Medical+Things+IoMT+real-time+fundus+image+analysis" target="_blank" rel="noopener"><span class="en">Internet of Medical Things IoMT real-time fundus image analysis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Improving+ResNet50+feature+extraction+for+imbalanced+medical+image+datasets" target="_blank" rel="noopener"><span class="en">Improving ResNet50 feature extraction for imbalanced medical image datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=IDRiD+dataset+diabetic+retinopathy+severity+classification+benchmarks" target="_blank" rel="noopener"><span class="en">IDRiD dataset diabetic retinopathy severity classification benchmarks</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>

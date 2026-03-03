@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>វិធីសាស្ត្រមិនលីនេអ៊ែរដ៏សាមញ្ញនិងមានប្រសិទ្ធភាពសម្រាប់ការប្រែត្រឡប់ទិន្នន័យដែនម៉ាញ៉េទិច 2D ដោយផ្អែកលើក្បួនដោះស្រាយ Ridge-Regression - A simple but efficient non-linear method for 2D inversion of magnetic field d... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី វិធីសាស្ត្រមិនលីនេអ៊ែរដ៏សាមញ្ញនិងមានប្រសិទ្ធភាពសម្រាប់ការប្រ។ អត្ថបទស្រាវជ្រាវនេះដោះស្រាយបញ្ហាក្នុងការកំណត់ជម្រៅ និងរចនាសម្ព័ន្ធភូមិសាស្ត្រក្រោមដី តាមរយៈការបកស...">
+    
+    <meta name="keywords" content="Magnetic inversion, Ridge Regression, Total magnetic field, Sedimentary basin, Matlab, Geophysical exploration, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/2d-inversion-magnetic-field-ridge-regression-2021.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/science/2d-inversion-magnetic-field-ridge-regression-2021.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/science/2d-inversion-magnetic-field-ridge-regression-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/2d-inversion-magnetic-field-ridge-regression-2021.html">
+    <meta property="og:title" content="វិធីសាស្ត្រមិនលីនេអ៊ែរដ៏សាមញ្ញនិងមានប្រសិទ្ធភាពសម្រាប់ការប្រែត្រឡប់ទិន្នន័យដែនម៉ាញ៉េទិច 2D ដោយផ្អែកលើក្បួនដោះស្រាយ Ridge-Regression | KhmerResearch.com">
+    <meta property="og:description" content="អត្ថបទស្រាវជ្រាវនេះដោះស្រាយបញ្ហាក្នុងការកំណត់ជម្រៅ និងរចនាសម្ព័ន្ធភូមិសាស្ត្រក្រោមដី តាមរយៈការបកស្រាយទិន្នន័យដែនម៉ាញ៉េទិច (Magnetic field data) ដោយប្រើប្រាស់វិធីសាស្ត្រប្រែត្រឡប់មិនលីនេអ៊ែរ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2021 International Journal of Mining and Geo-Engineering-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Magnetic inversion">
+    
+    <meta property="article:tag" content="Ridge Regression">
+    
+    <meta property="article:tag" content="Total magnetic field">
+    
+    <meta property="article:tag" content="Sedimentary basin">
+    
+    <meta property="article:tag" content="Matlab">
+    
+    <meta property="article:tag" content="Geophysical exploration">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="វិធីសាស្ត្រមិនលីនេអ៊ែរដ៏សាមញ្ញនិងមានប្រសិទ្ធភាពសម្រាប់ការប្រែត្រឡប់ទិន្នន័យដែនម៉ាញ៉េទិច 2D ដោយផ្អែកលើក្បួនដោះស្រាយ Ridge-Regression">
+    <meta name="twitter:description" content="អត្ថបទស្រាវជ្រាវនេះដោះស្រាយបញ្ហាក្នុងការកំណត់ជម្រៅ និងរចនាសម្ព័ន្ធភូមិសាស្ត្រក្រោមដី តាមរយៈការបកស្រាយទិន្នន័យដែនម៉ាញ៉េទិច (Magnetic field data) ដោយប្រើប្រាស់វិធីសាស្ត្រប្រែត្រឡប់មិនលីនេអ៊ែរ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1798\u17b7\u1793\u179b\u17b8\u1793\u17c1\u17a2\u17ca\u17c2\u179a\u178a\u17cf\u179f\u17b6\u1798\u1789\u17d2\u1789\u1793\u17b7\u1784\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u178f\u17d2\u179a\u17a1\u1794\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u1793\u1798\u17c9\u17b6\u1789\u17c9\u17c1\u1791\u17b7\u1785 2D \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Ridge-Regression",
+      "name": "A simple but efficient non-linear method for 2D inversion of magnetic field data based on Ridge-Regression algorithm",
+      "description": "\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u1787\u1798\u17d2\u179a\u17c5 \u1793\u17b7\u1784\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1797\u17bc\u1798\u17b7\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1780\u17d2\u179a\u17c4\u1798\u178a\u17b8 \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u1793\u1798\u17c9\u17b6\u1789\u17c9\u17c1\u1791\u17b7\u1785 (Magnetic field data) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u17d2\u179a\u17c2\u178f\u17d2\u179a\u17a1\u1794\u17cb\u1798\u17b7\u1793\u179b\u17b8\u1793\u17c1\u17a2\u17ca\u17c2\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/2d-inversion-magnetic-field-ridge-regression-2021.html",
+      "author": [{"@type": "Person", "name": "Ali Moradzadeh (University of Tehran)"},{"@type": "Person", "name": "Ali Nejati Kalateh (Shahrood University of Technology)"},{"@type": "Person", "name": "Saeed Mojarad (Shahrood University of Technology)"},{"@type": "Person", "name": "Fuad Meysami (Shahrood University of Technology)"}],
+      "datePublished": "2021 International Journal of Mining and Geo-Engineering",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A simple but efficient non-linear method for 2D inversion of magnetic field data based on Ridge-Regression algorithm",
+        "url": "https://doi.org/10.22059/ijmge.2021.254258.594724"
+      },
+      "keywords": ["Magnetic inversion", "Ridge Regression", "Total magnetic field", "Sedimentary basin", "Matlab", "Geophysical exploration"],
+      "about": "Geophysics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1798\u17b7\u1793\u179b\u17b8\u1793\u17c1\u17a2\u17ca\u17c2\u179a\u178a\u17cf\u179f\u17b6\u1798\u1789\u17d2\u1789\u1793\u17b7\u1784\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u178f\u17d2\u179a\u17a1\u1794\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u1793\u1798\u17c9\u17b6\u1789\u17c9\u17c1\u1791\u17b7\u1785 2D \u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Ridge-Regression",
+          "item": "https://khmerresearch.com/papers/science/2d-inversion-magnetic-field-ridge-regression-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>វិធីសាស្ត្រមិនលីនេអ៊ែរដ៏សាមញ្ញនិងមានប្រសិទ្ធភាពសម្រាប់ការ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A simple but efficient non-linear method for 2D inversion of magnetic field data based on Ridge-Regression algorithm<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.22059/ijmge.2021.254258.594724" target="_blank" rel="noopener">doi.org/10.22059/ijmge.2021.254258.594724</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>វិធីសាស្ត្រមិនលីនេអ៊ែរដ៏សាមញ្ញនិងមានប្រសិទ្ធភាពសម្រាប់ការប្រែត្រឡប់ទិន្នន័យដែនម៉ាញ៉េទិច 2D ដោយផ្អែកលើក្បួនដោះស្រាយ Ridge-Regression</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A simple but efficient non-linear method for 2D inversion of magnetic field data based on Ridge-Regression algorithm</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ali Moradzadeh (University of Tehran), Ali Nejati Kalateh (Shahrood University of Technology), Saeed Mojarad (Shahrood University of Technology), Fuad Meysami (Shahrood University of Technology)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021 International Journal of Mining and Geo-Engineering</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Geophysics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> អត្ថបទស្រាវជ្រាវនេះដោះស្រាយបញ្ហាក្នុងការកំណត់ជម្រៅ និងរចនាសម្ព័ន្ធភូមិសាស្ត្រក្រោមដី តាមរយៈការបកស្រាយទិន្នន័យដែនម៉ាញ៉េទិច (Magnetic field data) ដោយប្រើប្រាស់វិធីសាស្ត្រប្រែត្រឡប់មិនលីនេអ៊ែរ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានបង្កើតកម្មវិធីកុំព្យូទ័រដោយប្រើប្រាស់កម្មវិធី Matlab ដើម្បីអនុវត្តក្បួនដោះស្រាយការប្រែត្រឡប់ទៅលើទិន្នន័យគំរូ និងទិន្នន័យជាក់ស្តែង។
+        
+        <ul>
+            
+            <li>ការធ្វើគំរូទិន្នន័យសំយោគដែលមានសំឡេងរំខាន (Synthetic data modeling with noise)</li>
+            
+            <li>ក្បួនដោះស្រាយការប្រែត្រឡប់ (Ridge Regression Inversion Algorithm)</li>
+            
+            <li>ការបកស្រាយទិន្នន័យដែនម៉ាញ៉េទិចសរុបជាក់ស្តែង (Real Total Magnetic Field data interpretation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រប្រែត្រឡប់ 2D នេះអាចបង្កើតគំរូក្រោមដីយ៉ាងច្បាស់លាស់ សូម្បីតែពេលបញ្ចូលសំឡេងរំខាន (Gaussian noise) រហូតដល់ ១០% និង ២០% ទៅក្នុងទិន្នន័យក៏ដោយ។</li>
+            
+            <li>ការអនុវត្តលើទិន្នន័យជាក់ស្តែងនៅអាងល្បាប់ Moghan បានប៉ាន់ស្មានជម្រៅបាតអាងពី ៨០០ ម៉ែត្រទៅជាង ៣៤០០ ម៉ែត្រ ដែលស្របគ្នាយ៉ាងល្អជាមួយនឹងទិន្នន័យរញ្ជួយដី (Seismic data)។</li>
+            
+            <li>វិធីសាស្ត្រនេះបង្ហាញពីភាពត្រឹមត្រូវ និងប្រសិទ្ធភាពខ្ពស់សម្រាប់ការរុករករ៉ែ និងប្រេងកាត បើប្រៀបធៀបទៅនឹងការបកស្រាយទិន្នន័យភូមិសាស្ត្ររូបវិទ្យាផ្សេងៗទៀត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">2D Ridge-Regression Inversion (Proposed)</span></strong><br>ការប្រែត្រឡប់ 2D ដោយប្រើក្បួនដោះស្រាយ Ridge-Regression (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>មានល្បឿនលឿន ចំណាយតិច និងអាចទប់ទល់នឹងសំឡេងរំខានទិន្នន័យ (Noise) រហូតដល់ 20% ដោយរក្សាបាននូវភាពត្រឹមត្រូវខ្ពស់។ វាដោះស្រាយបញ្ហាអស្ថិរភាពគណិតវិទ្យាបានល្អជាងវិធីសាស្ត្រ Least-Squares ធម្មតា។</td>
+                <td>ទាមទារឱ្យមានការកំណត់តម្លៃប៉ារ៉ាម៉ែត្រដំបូង (Initial guess) ឱ្យបានប្រហាក់ប្រហែល និងនៅមានកម្រិតត្រឹមការវិភាគជាទម្រង់ 2D ប៉ុណ្ណោះ។</td>
+                <td>បានកាត់បន្ថយកំហុស RMS error ពី 44.95 មកត្រឹម 13.67 nT និងប៉ាន់ស្មានជម្រៅបាតអាងល្បាប់យ៉ាងជោគជ័យពី 800m ដល់ជាង 3400m។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Seismic Exploration Method</span></strong><br>ការស្ទាបស្ទង់ដោយប្រើរលករញ្ជួយដី (វិធីសាស្ត្រប្រៀបធៀប)</td>
+                <td>ផ្តល់រូបភាពរចនាសម្ព័ន្ធក្រោមដីបានយ៉ាងលម្អិត ច្បាស់លាស់ និងមានភាពជឿជាក់ខ្ពស់បំផុត។</td>
+                <td>ទាមទារការចំណាយថវិកាច្រើនខ្លាំង ចំណាយពេលយូរក្នុងការវាស់វែងផ្ទាល់នៅទីវាល និងដំណើរការទិន្នន័យ។</td>
+                <td>ប្រើជាទិន្នន័យគោល (Benchmark) ដែលបញ្ជាក់ថាវិធីសាស្ត្រ Ridge-Regression ផ្តល់លទ្ធផលជម្រៅបាតអាងស្របគ្នាយ៉ាងល្អទៅនឹងទិន្នន័យរញ្ជួយដី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Standard/Linear Least-Squares Inversion</span></strong><br>ការប្រែត្រឡប់ Least-Squares លីនេអ៊ែរទូទៅ</td>
+                <td>ជាទ្រឹស្តីមូលដ្ឋានដែលងាយយល់ និងមានលក្ខណៈស្ថិតិល្អសម្រាប់ការវិភាគទិន្នន័យទូទៅ។</td>
+                <td>ងាយនឹងជួបបញ្ហាបែកចេញ (Divergence) ឬភាពមិនអាចដោះស្រាយបាន (Ill-posed problems) នៅពេលទិន្នន័យមានភាពស្មុគស្មាញឬខ្វះខាត។</td>
+                <td>មិនអាចផ្តល់ចម្លើយដែលមានស្ថិរភាពសម្រាប់បញ្ហាមិនលីនេអ៊ែរស្មុគស្មាញ (Non-linear problems) បើធៀបនឹងការបន្ថែម Damping factor ក្នុង Ridge-Regression។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តវិធីសាស្ត្រនេះទាមទារចំណេះដឹងកម្រិតខ្ពស់ផ្នែកសរសេរកូដ និងធនធានកុំព្យូទ័រជាមូលដ្ឋានសម្រាប់ដំណើរការក្បួនដោះស្រាយគណិតវិទ្យា។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ចាំបាច់ត្រូវមានកម្មវិធី Matlab សម្រាប់ដំណើរការកូដ (LMInvMag2D, ForwardMag2D, Dif) និងកម្មវិធី Mag2dc freeware សម្រាប់ផ្ទៀងផ្ទាត់។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រយួរដៃ ឬកុំព្យូទ័រលើតុដែលមានសមត្ថភាពមធ្យម គឺគ្រប់គ្រាន់សម្រាប់ការគណនាម៉ាទ្រីស (Matrix computation) ក្នុងកម្រិត 2D។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យដែនម៉ាញ៉េទិចសរុប (Total Magnetic Field anomalies data) និងផែនទី IGRF (International Geomagnetic Reference Field) ជាសាកល។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញដែលមានចំណេះដឹងផ្នែកភូមិសាស្ត្ររូបវិទ្យា (Geophysics) និងគណិតវិទ្យាអនុវត្ត (Numerical Optimization)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីអាងល្បាប់ Moghan នៅភាគពាយ័ព្យប្រទេសអ៊ីរ៉ង់ ដែលមានលក្ខណៈភូមិសាស្ត្រជាក់លាក់នៃតំបន់ប្រេងកាតជិតសមុទ្រកាសព្យែន។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកអនុវត្តត្រូវមានការប្រុងប្រយ័ត្ន ដោយសារទម្រង់សិលា និងកម្រាស់ដីល្បាប់នៅកម្ពុជា (ឧទាហរណ៍៖ ទន្លេសាប) មានលក្ខណៈខុសប្លែកគ្នា ដែលតម្រូវឱ្យមានការកែតម្រូវប៉ារ៉ាម៉ែត្រ (Parameters susceptibility) ជាថ្មី។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់និងស័ក្តិសមបំផុតសម្រាប់កម្ពុជា ពិសេសក្នុងដំណាក់កាលបឋមនៃការរុករកធនធានធម្មជាតិ។</p>
+        
+        <ul>
+            
+            <li><strong>Tonle Sap Basin & Offshore Blocks (ការរុករកប្រេងកាតនៅអាងទន្លេសាប និងប្លុកសមុទ្រ):</strong> វិធីសាស្ត្រនេះអាចប្រើដើម្បីប៉ាន់ស្មានជម្រៅបាតអាងល្បាប់ (Sedimentary basement depth) យ៉ាងលឿនមុននឹងសម្រេចចិត្តចំណាយលុយរាប់លានដុល្លារលើការវាស់វែងរញ្ជួយដី (Seismic surveys) ដែលជួយកាត់បន្ថយហានិភ័យសម្រាប់ក្រុមហ៊ុនរុករកប្រេងកាត។</li>
+            
+            <li><strong>Mineral Exploration in Preah Vihear, Kratie, Mondulkiri (ការរុករករ៉ែ):</strong> នៅតំបន់ដែលមានសក្តានុពលរ៉ែលោហៈ ដូចជាព្រះវិហារ ក្រចេះ និងមណ្ឌលគិរី ការប្រែត្រឡប់ទិន្នន័យម៉ាញ៉េទិច (Magnetic Inversion) អាចជួយកំណត់ទីតាំង និងជម្រៅនៃតួសិលាដែក ឬរ៉ែដែលមានលក្ខណៈម៉ាញ៉េទិចក្រោមដីបានយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li><strong>Academic Research at ITC or RUPP (ការស្រាវជ្រាវនៅសាកលវិទ្យាល័យ):</strong> សិស្ស-និស្សិតនៅវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា (ITC) ផ្នែកធនធានរ៉ែ អាចប្រើយន្តការនេះជាប្រធានបទសារណា ដោយសារវាចំណាយតិចលើផ្នែក Hardware តែផ្តល់លទ្ធផលវិភាគស៊ីជម្រៅ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ក្បួនដោះស្រាយ Ridge-Regression គឺជាឧបករណ៍ដ៏មានប្រសិទ្ធភាព ចំណាយតិច និងផ្តល់លទ្ធផលវិទ្យាសាស្ត្រគួរឱ្យទុកចិត្ត សម្រាប់ជំរុញវិស័យរុករករ៉ែ និងប្រេងកាតនៅប្រទេសកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះទ្រឹស្តី:</strong> ស្វែងយល់ពីសមីការគណិតវិទ្យា Forward Modeling សម្រាប់ទិន្នន័យម៉ាញ៉េទិច និងសិក្សាឱ្យស៊ីជម្រៅពីក្បួនដោះស្រាយ Levenberg-Marquardt (Ridge Regression) និងរបៀបកាត់បន្ថយបញ្ហា Ill-posed problems ក្នុង Geophysics។</li>
+            
+            <li><strong>អនុវត្តការសរសេរកូដ:</strong> ចាប់ផ្តើមអនុវត្តការសរសេរកូដជាមួយកម្មវិធី <span class="en">Matlab</span> ដោយសាកល្បងបង្កើតកូដសម្រាប់ទិន្នន័យសំយោគ (Synthetic data) និងសាកល្បងបញ្ចូលសំឡេងរំខាន (Gaussian noise 10% ដល់ 20%) ដើម្បីតេស្តភាពរឹងមាំនៃក្បួនដោះស្រាយ។</li>
+            
+            <li><strong>ប្រើប្រាស់កម្មវិធីជំនួយ للتأكد:</strong> ទាញយក និងប្រើប្រាស់កម្មវិធីឥតគិតថ្លៃ <span class="en">Mag2dc freeware</span> ដើម្បីប្រៀបធៀបជាមួយលទ្ធផលកូដ Matlab របស់អ្នក ធានាថាការគណនា Forward និង Inverse modeling ពិតជាត្រឹមត្រូវ។</li>
+            
+            <li><strong>អនុវត្តជាមួយទិន្នន័យជាក់ស្តែងរបស់កម្ពុជា:</strong> ស្នើសុំទិន្នន័យ Aeromagnetic ដែលមានស្រាប់ពីក្រសួងរ៉ែ និងថាមពលកម្ពុជា (ឧទាហរណ៍៖ ទិន្នន័យនៅតំបន់ទន្លេសាប ឬសមុទ្រ) យកមកកែតម្រូវតម្លៃ IGRF រួចបញ្ចូលក្នុងកម្មវិធី <span class="en">Matlab</span> របស់អ្នកដើម្បីស្វែងរកជម្រៅបាតអាង (Basement depth)។</li>
+            
+            <li><strong>ផ្ទៀងផ្ទាត់ និងបកស្រាយលទ្ធផល:</strong> យកលទ្ធផលជម្រៅបាតអាងដែលអ្នកទទួលបាន ទៅប្រៀបធៀបជាមួយរបាយការណ៍ទិន្នន័យរញ្ជួយដី (Seismic data) ឬទិន្នន័យខួងអណ្តូង (Well log data) កាលពីមុន ដើម្បីវាយតម្លៃកម្រិតភាពត្រឹមត្រូវ និងចងក្រងជារបាយការណ៍ស្រាវជ្រាវចុងក្រោយ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Inverse modeling</span></td>
+                <td>ដំណើរការគណិតវិទ្យាដែលប្រើប្រាស់ទិន្នន័យដែលបានវាស់វែងនៅលើផ្ទៃដី ដើម្បីបង្កើតរូបភាព ឬទស្សន៍ទាយពីរចនាសម្ព័ន្ធភូមិសាស្ត្រ និងជម្រៅនៃស្រទាប់ថ្មនៅក្រោមដី។</td>
+                <td>ដូចជាការមើលស្រមោលនៅលើជញ្ជាំង ដើម្បីទាយថាតើវត្ថុដែលបាំងពន្លឺនោះមានរូបរាង និងទំហំប៉ុនណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Forward modeling</span></td>
+                <td>ការប្រើប្រាស់រូបមន្តគណិតវិទ្យាដើម្បីគណនា និងប៉ាន់ស្មានលទ្ធផលទិន្នន័យដែនម៉ាញ៉េទិច ដោយផ្អែកលើទម្រង់គំរូនៃរចនាសម្ព័ន្ធក្រោមដីដែលយើងបានសន្មតទុកជាមុន។</td>
+                <td>ដូចជាការយកវត្ថុមួយទៅដាក់មុខពន្លឺ រួចគណនាទុកជាមុនថាវានឹងបង្កើតបានជាស្រមោលរាងបែបណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ridge Regression</span></td>
+                <td>ជាបច្ចេកទេសគណិតវិទ្យាក្នុងការកែតម្រូវតម្លៃប៉ារ៉ាម៉ែត្រ (Damping factor) ដើម្បីដោះស្រាយបញ្ហាអស្ថិរភាពនៅពេលប្រែត្រឡប់ទិន្នន័យ (Inversion) ដែលជួយឱ្យការទស្សន៍ទាយកាន់តែមានភាពត្រឹមត្រូវ ទោះបីជាមានទិន្នន័យរំខាន (Noise) ក៏ដោយ។</td>
+                <td>ដូចជាការបន្ថែមទម្ងន់ទៅលើជើងកាមេរ៉ាដើម្បីកុំឱ្យវាញ័រ ពេលយើងថតរូបក្នុងស្ថានភាពខ្យល់បក់ខ្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Total magnetic field (TMF)</span></td>
+                <td>ជាកម្លាំងម៉ាញ៉េទិចសរុបដែលបានវាស់វែងនៅទីតាំងមួយ ដោយរួមបញ្ចូលទាំងដែនម៉ាញ៉េទិចផែនដី និងដែនម៉ាញ៉េទិចដែលបង្កើតឡើងដោយលក្ខណៈសិលានៅក្រោមដីនៃតំបន់នោះ។</td>
+                <td>ដូចជាការស្តាប់សំឡេងសរុបនៅក្នុងបន្ទប់ ដែលមានទាំងសំឡេងកង្ហារ (ធម្មជាតិ) និងសំឡេងមនុស្សនិយាយ (វត្ថុគោលដៅ) បញ្ចូលគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sedimentary basin</span></td>
+                <td>ជាតំបន់ទំនាបនៅលើសំបកផែនដីដែលមានការកកកុញនៃដីល្បាប់ក្នុងរយៈពេលរាប់លានឆ្នាំ ដែលជាទូទៅជាទីតាំងមានសក្តានុពលសម្រាប់ផ្ទុកធនធានប្រេងកាត និងឧស្ម័នធម្មជាតិ។</td>
+                <td>ដូចជាចានគោមដ៏ធំមួយដែលផ្ទុកទៅដោយស្រទាប់ភក់ និងខ្សាច់ដែលហូរមកកកកុញត្រួតលើគ្នាអស់កាលដ៏យូរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Least-squares method</span></td>
+                <td>វិធីសាស្ត្រស្ថិតិដែលត្រូវបានប្រើដើម្បីរកបន្ទាត់ ឬទម្រង់គំរូដែលស័ក្តិសមបំផុតជាមួយទិន្នន័យ ដោយការព្យាយាមកាត់បន្ថយផលបូកនៃការ៉េនៃគម្លាតកំហុស (Residuals) រវាងទិន្នន័យជាក់ស្តែង និងទិន្នន័យគណនា។</td>
+                <td>ដូចជាការព្យាយាមគូសបន្ទាត់ត្រង់មួយនៅកណ្តាលហ្វូងចំណុចជាច្រើន ដោយធ្វើឱ្យគម្លាតពីបន្ទាត់ទៅចំណុចនីមួយៗមានកម្រិតទាបបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian noise</span></td>
+                <td>ជាប្រភេទនៃភាពមិនប្រក្រតី ឬសំឡេងរំខាននៅក្នុងទិន្នន័យ (Data variations) ដែលកើតឡើងដោយចៃដន្យ និងមានទម្រង់របាយជារាងកណ្តឹង (Normal distribution) ដែលអាចធ្វើឱ្យការបកស្រាយទិន្នន័យមានកំហុស។</td>
+                <td>ដូចជាស្នាមអុចៗ ឬភាពព្រាលៗនៅលើកញ្ចក់ទូរទស្សន៍ជំនាន់ចាស់ ដែលរំខានដល់ការមើលរូបភាពពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Jacobian matrix</span></td>
+                <td>ម៉ាទ្រីសនៅក្នុងគណិតវិទ្យាដែលប្រមូលផ្តុំនូវដេរីវេផ្នែក (Partial derivatives) ទាំងអស់នៃអនុគមន៍ ដែលវាស់ស្ទង់ថាតើលទ្ធផលទិន្នន័យនឹងផ្លាស់ប្តូរប៉ុនណា ប្រសិនបើយើងផ្លាស់ប្តូរតម្លៃប៉ារ៉ាម៉ែត្រនៃរចនាសម្ព័ន្ធក្រោមដីបន្តិចបន្តួច។</td>
+                <td>ដូចជាតារាងមួយដែលប្រាប់យើងថា បើយើងបង្វិលប៊ូតុងវ៉ូលីមនីមួយៗលើវិទ្យុបន្តិច តើសំឡេងនឹងប្រែប្រួលយ៉ាងដូចម្តេចខ្លះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/advances-3d-inversion-magnetic-data-2017.html">
+                    <span class="km">ពីភាពងាយទទួលដែកដែនទៅជាម៉ាញ៉េទិចកម្ម៖ វឌ្ឍនភាពក្នុងការប្រែត្រឡប់ទិន្នន័យម៉ាញ៉េទិច 3D ក្នុងវត្តមាននៃម៉ាញ៉េទិចកម្មសំណល់ដ៏សំខាន់</span><br>
+                    <span class="en article-original-title">From Susceptibility to Magnetization: Advances in the 3D Inversion of Magnetic Data in the Presence of Significant Remanent Magnetization</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/magnetic-inversion-methods-regional-sources-2019.html">
+                    <span class="km">វិធីសាស្ត្រនៃការប្រែត្រឡប់ទិន្នន័យម៉ាញ៉េទិចសម្រាប់ការប៉ាន់ប្រមាណប្រភពតំបន់</span><br>
+                    <span class="en article-original-title">MÉTODOS DE INVERSÃO DE DADOS MAGNÉTICOS PARA ESTIMAR FONTES REGIONAIS (MAGNETIC INVERSION METHODS FOR ESTIMATING REGIONAL SOURCES)</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=2D+magnetic+anomaly+inversion+Ridge-Regression+algorithm" target="_blank" rel="noopener"><span class="en">2D magnetic anomaly inversion Ridge-Regression algorithm</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=sedimentary+basement+depth+estimation+using+total+magnetic+field+data" target="_blank" rel="noopener"><span class="en">sedimentary basement depth estimation using total magnetic field data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Levenberg-Marquardt+optimization+in+geophysical+inverse+problems" target="_blank" rel="noopener"><span class="en">Levenberg-Marquardt optimization in geophysical inverse problems</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=forward+modeling+magnetic+dipping+dike+infinite+depth+Matlab" target="_blank" rel="noopener"><span class="en">forward modeling magnetic dipping dike infinite depth Matlab</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=non-linear+inversion+of+potential+field+data+least-squares+method" target="_blank" rel="noopener"><span class="en">non-linear inversion of potential field data least-squares method</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ទស្សនវិស័យនៃភាពទូទៅលើការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល - A Generalization Perspective on Model-Based Offline Reinforcement Learning | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ទស្សនវិស័យនៃភាពទូទៅលើការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល។ អវត្តមាននៃការកំណត់និយមន័យច្បាស់លាស់ និងស្តង់ដាររួមសម្រាប់ពាក្យថា "ភាពទូទៅ" (Generalization) នៅក្ន...">
+    
+    <meta name="keywords" content="Offline Reinforcement Learning, Model-Based RL, Generalization, Distributional Shift, Uncertainty Estimation, Algorithm Benchmarking, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/generalization-model-based-offline-rl-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/generalization-model-based-offline-rl-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/generalization-model-based-offline-rl-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/generalization-model-based-offline-rl-2023.html">
+    <meta property="og:title" content="ទស្សនវិស័យនៃភាពទូទៅលើការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល | KhmerResearch.com">
+    <meta property="og:description" content="អវត្តមាននៃការកំណត់និយមន័យច្បាស់លាស់ និងស្តង់ដាររួមសម្រាប់ពាក្យថា "ភាពទូទៅ" (Generalization) នៅក្នុងការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល (Model-based offline RL) ធ្វើឱ្យការប្រៀបធៀបក្បួនដោះស្រាយមានភាព...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2023 Eindhoven University of Technology / Tilburg University-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Offline Reinforcement Learning">
+    
+    <meta property="article:tag" content="Model-Based RL">
+    
+    <meta property="article:tag" content="Generalization">
+    
+    <meta property="article:tag" content="Distributional Shift">
+    
+    <meta property="article:tag" content="Uncertainty Estimation">
+    
+    <meta property="article:tag" content="Algorithm Benchmarking">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ទស្សនវិស័យនៃភាពទូទៅលើការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល">
+    <meta name="twitter:description" content="អវត្តមាននៃការកំណត់និយមន័យច្បាស់លាស់ និងស្តង់ដាររួមសម្រាប់ពាក្យថា "ភាពទូទៅ" (Generalization) នៅក្នុងការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល (Model-based offline RL) ធ្វើឱ្យការប្រៀបធៀបក្បួនដោះស្រាយមានភាព...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1791\u179f\u17d2\u179f\u1793\u179c\u17b7\u179f\u17d0\u1799\u1793\u17c3\u1797\u17b6\u1796\u1791\u17bc\u1791\u17c5\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b",
+      "name": "A Generalization Perspective on Model-Based Offline Reinforcement Learning",
+      "description": "\u17a2\u179c\u178f\u17d2\u178f\u1798\u17b6\u1793\u1793\u17c3\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u1793\u17b7\u1799\u1798\u1793\u17d0\u1799\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb \u1793\u17b7\u1784\u179f\u17d2\u178f\u1784\u17cb\u178a\u17b6\u179a\u179a\u17bd\u1798\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1796\u17b6\u1780\u17d2\u1799\u1790\u17b6 \"\u1797\u17b6\u1796\u1791\u17bc\u1791\u17c5\" (Generalization) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b (Model-based offline RL) \u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1798\u17b6\u1793\u1797\u17b6\u1796\u179b\u1798\u17d2\u17a2\u17c0\u1784 \u1793\u17b7\u1784\u1781\u17d2\u179c\u17c7\u178f\u1798\u17d2\u179b\u17b6\u1797\u17b6\u1796\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/generalization-model-based-offline-rl-2023.html",
+      "author": [{"@type": "Person", "name": "Pradyut Nair (Eindhoven University of Technology / Tilburg University)"}],
+      "datePublished": "2023 Eindhoven University of Technology / Tilburg University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A Generalization Perspective on Model-Based Offline Reinforcement Learning",
+        "url": "https://pure.tue.nl/ws/portalfiles/portal/341696597/Thesis_BDS_Pradyut_Nair.pdf"
+      },
+      "keywords": ["Offline Reinforcement Learning", "Model-Based RL", "Generalization", "Distributional Shift", "Uncertainty Estimation", "Algorithm Benchmarking"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1791\u179f\u17d2\u179f\u1793\u179c\u17b7\u179f\u17d0\u1799\u1793\u17c3\u1797\u17b6\u1796\u1791\u17bc\u1791\u17c5\u179b\u17be\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b",
+          "item": "https://khmerresearch.com/papers/technology/generalization-model-based-offline-rl-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ទស្សនវិស័យនៃភាពទូទៅលើការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A Generalization Perspective on Model-Based Offline Reinforcement Learning<br>
+        
+        <strong>Source:</strong> <a href="https://pure.tue.nl/ws/portalfiles/portal/341696597/Thesis_BDS_Pradyut_Nair.pdf" target="_blank" rel="noopener">pure.tue.nl</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ទស្សនវិស័យនៃភាពទូទៅលើការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A Generalization Perspective on Model-Based Offline Reinforcement Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Pradyut Nair (Eindhoven University of Technology / Tilburg University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 Eindhoven University of Technology / Tilburg University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> អវត្តមាននៃការកំណត់និយមន័យច្បាស់លាស់ និងស្តង់ដាររួមសម្រាប់ពាក្យថា "ភាពទូទៅ" (Generalization) នៅក្នុងការរៀនពង្រឹងក្រៅបណ្តាញផ្អែកលើម៉ូដែល (Model-based offline RL) ធ្វើឱ្យការប្រៀបធៀបក្បួនដោះស្រាយមានភាពលម្អៀង និងខ្វះតម្លាភាព។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានបង្កើតចំណាត់ថ្នាក់តាមលក្ខណៈវិនិច្ឆ័យដើម្បីធ្វើការវិភាគ និងប្រៀបធៀបរវាងវិធីសាស្រ្តផ្សេងៗដោយបែងចែកវាជាពីរប្រភេទធំៗ និងវាយតម្លៃលើកិច្ចការចំនួនបីប្រភេទ។
+        
+        <ul>
+            
+            <li>ការបែងចែកក្បួនដោះស្រាយជាពីរក្រុម៖ វិធីសាស្រ្តផ្អែកលើការប៉ាន់ស្មានភាពមិនប្រាកដប្រជា (Uncertainty-estimation methods) និងវិធីសាស្រ្តមិនប្រើភាពមិនប្រាកដប្រជា (Uncertainty-free methods)</li>
+            
+            <li>ការវាយតម្លៃលើប្រភេទកិច្ចការចំនួនបី៖ Singleton IID Task, Task-Transfer, និង Domain-Transfer</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្រ្តផ្អែកលើភាពមិនប្រាកដប្រជា (ឧទាហរណ៍ ក្បួន TATU) ទទួលបានលទ្ធផលល្អដាច់គេនៅក្នុងការអនុវត្តកិច្ចការបរិបទដើម (IID task)។</li>
+            
+            <li>វិធីសាស្រ្តមិនប្រើភាពមិនប្រាកដប្រជា (ឧទាហរណ៍ ក្បួន DOMAIN, BOSA, MABE) បង្ហាញសមត្ថភាពខ្ពស់ជាងក្នុងការផ្ទេរកិច្ចការ (Task-transfer) និងការផ្ទេរដែនកំណត់ (Domain-transfer) ទៅកាន់បរិបទដែលមិនធ្លាប់ជួបប្រទះ។</li>
+            
+            <li>ការស្រាវជ្រាវនេះបានផ្តល់អនុសាសន៍ឱ្យមានការបង្កើតស្តង់ដាររួមសម្រាប់ការធ្វើតេស្តវាយតម្លៃ (Standardized benchmarking tests) លើការផ្ទេរកិច្ចការនិងដែនកំណត់ ដើម្បីធានាបាននូវការប្រៀបធៀបប្រកបដោយតម្លាភាពនាពេលអនាគត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">TATU (Trajectory Augmentation with Uncertainty Estimation)</span></strong><br>ការពង្រីកគន្លងទិន្នន័យដោយប្រើការប៉ាន់ស្មានភាពមិនប្រាកដប្រជា</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់បំផុតក្នុងការដោះស្រាយបរិបទ IID ដោយកាត់បន្ថយបញ្ហាតម្លៃលើសលប់បានយ៉ាងល្អប្រសើរតាមរយៈការកាត់ចោលទិន្នន័យស្រមើស្រមៃ។</td>
+                <td>ទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រចាប់សញ្ញា (Threshold) យ៉ាងប្រុងប្រយ័ត្ន ហើយមិនទាន់មានការវាយតម្លៃគ្រប់គ្រាន់លើការផ្ទេរកិច្ចការ (Task-transfer)។</td>
+                <td>ទទួលបានពិន្ទុខ្ពស់ជាងគេក្នុងការធ្វើតេស្ត Singleton IID ចំនួន ៤ លើ ១២ នៃសំណុំទិន្នន័យ Gym-MuJoCo ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">DOMAIN (Mildly Conservative Model-Based Offline RL)</span></strong><br>ម៉ូដែលរៀនពង្រឹងក្រៅបណ្តាញដែលមានការអភិរក្សកម្រិតស្រាល</td>
+                <td>កាត់បន្ថយភាពតឹងរ៉ឹងពេកក្នុងការរៀន ផ្តល់ឱកាសឱ្យភ្នាក់ងារស្វែងយល់ពីតំបន់ថ្មីៗក្រៅបែងចែក (OOD) និងសម្របខ្លួនទៅនឹងកិច្ចការថ្មីបានល្អ។</td>
+                <td>ត្រូវពឹងផ្អែកលើការសម្រួលប៉ារ៉ាម៉ែត្រទម្ងន់ត្រឹមត្រូវ ដើម្បីរក្សាតុល្យភាពរវាងការរុករកទិន្នន័យថ្មីនិងសុវត្ថិភាព។</td>
+                <td>ទទួលបានពិន្ទុខ្ពស់ដាច់គេ (11346.6) ក្នុងការធ្វើតេស្តផ្ទេរកិច្ចការ (halfcheetah-jump)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">BOSA (Beyond OOD State Actions)</span></strong><br>ការបង្កើនប្រសិទ្ធភាពតម្លៃនិងគោលការណ៍ដែលគាំទ្រសម្រាប់ការផ្ទេរដែន</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការផ្ទេរចំណេះដឹងទៅបរិស្ថានថ្មី (Cross-domain) ដោយត្រងចោលនូវសកម្មភាពឬទិន្នន័យដែលមានសំលេងរំខាន (Noise)។</td>
+                <td>សន្មតថាដែនប្រភពនិងដែនគោលដៅត្រូវតែមានទំហំសកម្មភាពនិងរង្វាន់ដូចគ្នា ដែលជួបការលំបាកបើបរិស្ថានខុសគ្នាទាំងស្រុង។</td>
+                <td>អនុវត្តបានល្អបំផុតក្នុងកិច្ចការផ្ទេរដែន (Domain-Transfer) នៅពេលដែលបរិស្ថានក្លែងធ្វើត្រូវបានបន្ថែមរំញ័រ ឬប្តូរទម្ងន់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CQL (Conservative Q-Learning) - Baseline</span></strong><br>ក្បួនដោះស្រាយ Q-Learning បែបអភិរក្ស (ម៉ូដែលប្រភេទ Model-Free)</td>
+                <td>មិនតម្រូវឱ្យមានការសាងសង់ម៉ូដែលបរិស្ថាន (Dynamics Model) ដែលធ្វើឱ្យងាយស្រួលយល់ និងចំណាយពេលគណនាតិចជាង។</td>
+                <td>បរាជ័យខ្លាំងនៅពេលប្រឈមមុខនឹងការផ្លាស់ប្តូរទីតាំងកិច្ចការ ឬបរិស្ថានថ្មី ព្រោះវាមានសភាពអភិរក្ស (Conservative) ហួសហេតុពេក។</td>
+                <td>ពិន្ទុធ្លាក់ចុះយ៉ាងខ្លាំង និងចាញ់ក្បួនដោះស្រាយប្រភេទ Model-Based ស្ទើរតែទាំងអស់ក្នុងការធ្វើតេស្តទាក់ទងនឹង OOD ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះមិនបានបញ្ជាក់តួលេខច្បាស់លាស់ពីថ្លៃចំណាយ ឬពេលវេលានោះទេ ប៉ុន្តែផ្អែកលើធម្មជាតិនៃបច្ចេកទេស Model-Based Offline RL គឺវាទាមទារនូវថាមពលកុំព្យូទ័រ និងធនធានផ្នែកទន់កម្រិតខ្ពស់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការបន្ទះក្រាហ្វិក (GPU) ធុនធ្ងន់ និងអង្គចងចាំ (VRAM) ខ្ពស់ ដើម្បីដំណើរការបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតច្រើនស្រទាប់ (Neural Network Ensembles)។</li>
+        
+        <li><strong>Software:</strong> តម្រូវឱ្យប្រើប្រាស់កម្មវិធី និងបណ្ណាល័យ AI ដូចជា Python, PyTorch ឬ TensorFlow រួមផ្សំជាមួយបរិស្ថានក្លែងធ្វើ MuJoCo Simulator។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់សំណុំទិន្នន័យខ្នាតធំពី D4RL (Datasets for Deep Data-Driven Reinforcement Learning) ដែលស៊ីទំហំផ្ទុកច្រើន។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញកម្រិតខ្ពស់ដែលមានចំណេះដឹងផ្នែក Deep Learning, Markov Decision Processes, និង Probability Distributions។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ D4RL ទាំងស្រុង ដែលផ្តោតលើបរិស្ថានក្លែងធ្វើរូបវិទ្យារបស់ MuJoCo (ឧទាហរណ៍៖ ការបញ្ជាមនុស្សយន្តដើរឬរត់)។ វាមិនមានទិន្នន័យប្រជាសាស្ត្រ ឬទិន្នន័យពាក់ព័ន្ធនឹងមនុស្សលោកនោះទេ។ សម្រាប់កម្ពុជា ការពឹងផ្អែកលើទិន្នន័យក្លែងធ្វើនេះមានន័យថា មុននឹងយកទៅអនុវត្តលើបញ្ហាជាក់ស្តែង គេត្រូវប្រយ័ត្នចំពោះបញ្ហាគម្លាតរវាងការក្លែងធ្វើនិងការពិត (Sim-to-real gap)។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យា Offline RL នេះមានសក្តានុពលខ្លាំងសម្រាប់ស្ថាប័នកម្ពុជា ក្នុងការប្រើប្រាស់កំណត់ត្រាទិន្នន័យចាស់ៗ ដើម្បីអភិវឌ្ឍប្រព័ន្ធ AI ដោយមិនបាច់ធ្វើតេស្តសាកល្បងជាក់ស្តែងដែលមានហានិភ័យខ្ពស់។</p>
+        
+        <ul>
+            
+            <li><strong>ការគ្រប់គ្រងខ្សែសង្វាក់ផ្គត់ផ្គង់ និងដឹកជញ្ជូននៅតំបន់សេដ្ឋកិច្ចពិសេស (SEZs):</strong> អាចប្រើប្រាស់ Offline RL វិភាគទិន្នន័យប្រវត្តិ GPS និងចរាចរណ៍ចាស់ៗ ដើម្បីបង្កើតប្រព័ន្ធរៀបចំផ្លូវដឹកជញ្ជូនស្វ័យប្រវត្តិ ដែលមានប្រសិទ្ធភាពខ្ពស់និងអាចសម្របខ្លួននឹងការផ្លាស់ប្តូរ (Task-transfer)។</li>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃនៅតំបន់បឹងទន្លេសាប:</strong> ប្រើប្រាស់កំណត់ត្រាទិន្នន័យបរិមាណទឹកភ្លៀង កម្រិតសំណើម និងទិន្នផលពីមុន ដើម្បីរៀនពីគោលការណ៍គ្រប់គ្រងប្រព័ន្ធទឹកស្រោចស្រព និងជី ដោយមិនចាំបាច់ធ្វើតេស្តប្រថុយប្រថានលើដំណាំជាក់ស្តែង។</li>
+            
+            <li><strong>ស្វ័យប្រវត្តិកម្មមនុស្សយន្តក្នុងវិស័យឧស្សាហកម្មកាត់ដេរ:</strong> ជួយបង្រៀនដៃមនុស្សយន្ត (Robotic arms) ឱ្យរៀនយល់ពីទម្រង់កាត់ដេរផ្សេងៗពីគ្នា (Domain-transfer) តាមរយៈការវិភាគលើទិន្នន័យវីដេអូ ឬសេនស័រចាស់ៗដោយសុវត្ថិភាព។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការយល់ដឹងពីបច្ចេកទេស Generalization ក្នង Offline RL នឹងអនុញ្ញាតឱ្យកម្ពុជាបង្កើតប្រព័ន្ធស្វ័យប្រវត្តិកម្មឆ្លាតវៃដែលអាចសម្របខ្លួនបានខ្ពស់ ដោយប្រើប្រាស់ថវិកាតិច និងរក្សាសុវត្ថិភាពជាចម្បង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាមូលដ្ឋានគ្រឹះនៃបរិស្ថាននិងការរៀនពង្រឹង (RL Basics):</strong> និស្សិតត្រូវស្វែងយល់ពីទ្រឹស្តី Markov Decision Processes (MDP) រួចចាប់ផ្តើមអនុវត្តការសរសេរកូដភ្នាក់ងារ AI ងាយៗដោយប្រើបណ្ណាល័យ <span class="en">OpenAI Gym</span> និង <span class="en">Stable Baselines3</span> ឱ្យស្ទាត់ជំនាញសិន។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តការរៀនពង្រឹងក្រៅបណ្តាញ (Offline RL):</strong> ទាញយកសំណុំទិន្នន័យ <span class="en">D4RL</span> ដើម្បីស្វែងយល់ពីបញ្ហា Distributional Shift រួចសាកល្បងសរសេរកូដសាងសង់ម៉ូដែល Model-Free ដូចជា <span class="en">CQL (Conservative Q-Learning)</span>។</li>
+            
+            <li><strong>ជំហានទី៣៖ ស្ថាបនាម៉ូដែលទស្សន៍ទាយបរិស្ថាន (Model-Based & Uncertainty):</strong> រៀនបង្កើតបណ្តាញ <span class="en">Neural Network Ensembles</span> ដោយប្រើប្រាស់ <span class="en">PyTorch</span> សម្រាប់ធ្វើជា Dynamics Model និងអនុវត្តក្បួនវាយតម្លៃភាពមិនប្រាកដប្រជា (Uncertainty Estimation) ដូចជា <span class="en">MOPO</span>។</li>
+            
+            <li><strong>ជំហានទី៤៖ ធ្វើតេស្តលើកិច្ចការ OOD (Out-of-Distribution Testing):</strong> ផ្លាស់ប្តូរប៉ារ៉ាម៉ែត្ររូបវិទ្យានៅក្នុងបរិស្ថាន <span class="en">MuJoCo</span> (ឧទាហរណ៍ ប្តូរទម្ងន់ ឬបន្ថែម Noise) ដើម្បីតេស្តភាពធន់នៃម៉ូដែល (Domain-Transfer) ដោយប្រៀបធៀបជាមួយវិធីសាស្ត្រ <span class="en">DOMAIN</span> ឬ <span class="en">BOSA</span>។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Offline Reinforcement Learning</span></td>
+                <td>ជាវិធីសាស្ត្រមួយនៃបញ្ញាសិប្បនិម្មិតដែលភ្នាក់ងារ (Agent) រៀនធ្វើសេចក្តីសម្រេចចិត្តដោយប្រើប្រាស់តែសំណុំទិន្នន័យចាស់ៗដែលមានស្រាប់ (Static Dataset) ដោយមិនចាំបាច់ធ្វើអន្តរកម្ម ឬសាកល្បងដោយផ្ទាល់នៅក្នុងបរិស្ថានជាក់ស្តែងនោះទេ។</td>
+                <td>ដូចជាការរៀនបើកបរដោយគ្រាន់តែមើលវីដេអូដែលគេថតទុក ដោយមិនចាំបាច់កាន់ចង្កូតឡានបើកផ្ទាល់នៅលើដងផ្លូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Model-Based RL</span></td>
+                <td>ជាប្រភេទនៃការរៀនពង្រឹងដែលភ្នាក់ងារព្យាយាមបង្កើតម៉ូដែលគណិតវិទ្យាក្លែងធ្វើពីបរិស្ថាន (Dynamics Model) ដើម្បីទស្សន៍ទាយថាតើមានអ្វីកើតឡើងបន្ទាប់ពីវាធ្វើសកម្មភាពណាមួយ មុននឹងសម្រេចចិត្តជ្រើសរើសសកម្មភាពល្អបំផុតដើម្បីអនុវត្ត។</td>
+                <td>ដូចជាអ្នកលេងអុកដែលគិតស្រមៃទុកជាមុនពីជំហានដើររបស់គូប្រកួតនៅក្នុងខួរក្បាល មុននឹងសម្រេចចិត្តរំកិលកូនអុក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Distributional Shift</span></td>
+                <td>គឺជាបាតុភូតដែលកើតឡើងនៅពេលដែលទិន្នន័យដែលម៉ូដែលបានរៀន (Training Data) មានលក្ខណៈខុសប្លែកគ្នាពីស្ថានភាព ឬទិន្នន័យដែលវាជួបប្រទះនៅពេលយកទៅអនុវត្តជាក់ស្តែង (Testing/Deployment) ដែលធ្វើឱ្យការទស្សន៍ទាយរបស់វាមានកំហុស។</td>
+                <td>ដូចជាសិស្សដែលរៀនតែលំហាត់បូកដកលេខតូចៗនៅផ្ទះ តែពេលប្រឡងបែរជាចេញលំហាត់គុណចែកលេខធំៗ ដែលធ្វើឱ្យគាត់គិតលែងចេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Uncertainty Estimation</span></td>
+                <td>គឺជាបច្ចេកទេសវាយតម្លៃកម្រិតនៃភាពមិនច្បាស់លាស់ ឬការខ្វះទំនុកចិត្តរបស់ម៉ូដែលនៅពេលវាធ្វើការទស្សន៍ទាយលើទិន្នន័យដែលវាមិនធ្លាប់ជួបប្រទះពីមុនមក ដើម្បីបញ្ចៀសការសម្រេចចិត្តដែលអាចមានហានិភ័យខ្ពស់។</td>
+                <td>ដូចជាពេលយើងដើរក្នុងព្រៃងងឹត ហើយយើងប្រាប់ខ្លួនឯងថា "ខ្ញុំមិនច្បាស់ទេថាផ្លូវនេះមានសុវត្ថិភាពឬអត់ ដូច្នេះគួរតែដើរយឺតៗឬបកក្រោយវិញ"។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Out-of-Distribution (OOD)</span></td>
+                <td>សំដៅលើស្ថានភាព សកម្មភាព ឬទិន្នន័យទាំងឡាយណាដែលមិនធ្លាប់មានទាល់តែសោះនៅក្នុងសំណុំទិន្នន័យដើមដែលប្រព័ន្ធបានរៀន (Offline Dataset)។ ការប៉ះទង្គិចជាមួយទិន្នន័យ OOD ច្រើនតែធ្វើឱ្យប្រព័ន្ធរៀនពង្រឹងដំណើរការខុសប្រក្រតី។</td>
+                <td>ដូចជាចុងភៅដែលធ្លាប់តែចម្អិនម្ហូបខ្មែរ ស្រាប់តែថ្ងៃមួយត្រូវគេប្រាប់ឱ្យធ្វើម្ហូបអឺរ៉ុបដោយមិនមានសៀវភៅមគ្គុទ្ទេសក៍ណែនាំរូបមន្ត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Conservative Q-Learning (CQL)</span></td>
+                <td>ជាក្បួនដោះស្រាយមួយដែលរៀនប៉ាន់ស្មានតម្លៃអត្ថប្រយោជន៍ (Q-value) នៃសកម្មភាពណាមួយដោយប្រុងប្រយ័ត្នបំផុត ពោលគឺវាផ្តល់តម្លៃទាបឬពិន័យសម្រាប់សកម្មភាពដែលវាមិនធ្លាប់ស្គាល់ ដើម្បីការពារកុំឱ្យម៉ូដែលវាយតម្លៃសមត្ថភាពខ្លួនឯងខ្ពស់ហួសហេតុពេក (Overestimation)។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលមិនសូវហ៊ានអួតពីសមត្ថភាពខ្លួនឯង ទោះបីជាគាត់អាចធ្វើបានក៏ដោយ ដើម្បីការពារកុំឱ្យមានកំហុសដោយសារការជឿជាក់ជ្រុល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov Decision Process (MDP)</span></td>
+                <td>ជាក្របខ័ណ្ឌគណិតវិទ្យាប្រើសម្រាប់ធ្វើគំរូពីដំណើរការនៃការធ្វើសេចក្តីសម្រេចចិត្ត ដែលលទ្ធផលនៃស្ថានភាពបន្ទាប់គឺពឹងផ្អែកតែលើស្ថានភាពបច្ចុប្បន្ន និងសកម្មភាពដែលបានជ្រើសរើសប៉ុណ្ណោះ ដោយមិនខ្វល់ពីប្រវត្តិអតីតកាលដែលបានកន្លងផុតទៅយូរនោះទេ។</td>
+                <td>ដូចជាការលេងល្បែងបោះគ្រាប់ឡុកឡាក់ ដែលលទ្ធផលនៃការដើរបន្ទាប់អាស្រ័យលើទីតាំងក្រឡាដែលអ្នកកំពុងឈរ និងលេខឡុកឡាក់ដែលអ្នកទើបតែបោះបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Trajectory Truncation</span></td>
+                <td>ជាបច្ចេកទេសកាត់ផ្តាច់ ឬបញ្ឈប់ការបង្កើតទិន្នន័យគន្លងស្រមើស្រមៃ (Imagined Rollouts) នៅក្នុងម៉ូដែល នៅពេលដែលកម្រិតនៃភាពមិនប្រាកដប្រជា (Uncertainty) មានការកើនឡើងហួសកម្រិតកំណត់ ដើម្បីរក្សាបាននូវគុណភាពទិន្នន័យ។</td>
+                <td>ដូចជាពេលយើងកំពុងយល់សប្តិឃើញរឿងគួរឱ្យខ្លាច ហើយយើងបង្ខំចិត្តដាស់ខ្លួនឯងឱ្យភ្ញាក់ភ្លាមៗ ដើម្បីកុំឱ្យបន្តឃើញរឿងនោះទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Domain-Transfer</span></td>
+                <td>គឺជាសមត្ថភាពរបស់ភ្នាក់ងារ AI ក្នុងការយកជំនាញឬកិច្ចការដែលវាបានរៀននៅក្នុងបរិស្ថានមួយ ទៅអនុវត្តប្រកបដោយជោគជ័យនៅក្នុងបរិស្ថានមួយផ្សេងទៀត ដែលមានលក្ខណៈរូបវិទ្យា ឬច្បាប់ខុសពីមុនបន្តិចបន្តួច (ឧទាហរណ៍ ការផ្លាស់ប្តូរទម្ងន់ ឬកម្លាំងកកិត)។</td>
+                <td>ដូចជាអ្នកចេះជិះកង់លើផ្លូវកៅស៊ូ ដែលអាចយកជំនាញនេះទៅជិះកង់លើផ្លូវដីក្រហមបានដោយមិនដួល ទោះបីជាវាមានស្ថានភាពពិបាកជាងមុនបន្តិចក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/review-offline-reinforcement-learning-2025.html">
+                    <span class="km">ការពិនិត្យឡើងវិញលើការស្រាវជ្រាវអំពីការរៀនពង្រឹងក្រៅបណ្តាញ (Offline Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">离线强化学习研究综述</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-center-cooling-optimization-offline-rl-2025.html">
+                    <span class="km">ការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់មជ្ឈមណ្ឌលទិន្នន័យ ដោយប្រើបច្ចេកទេស Offline Reinforcement Learning</span><br>
+                    <span class="en article-original-title">Data Center Cooling System Optimization Using Offline Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/graph-decision-transformer-offline-rl-2024.html">
+                    <span class="km">ត្រង់ស្វ័រម័រធ្វើសេចក្តីសម្រេចចិត្តបែបក្រាហ្វសម្រាប់ការរៀនពង្រឹងក្រៅបណ្តាញ</span><br>
+                    <span class="en article-original-title">Graph decision transformer for offline reinforcement learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/offline-rl-decision-transformers-t1d-2025.html">
+                    <span class="km">ការរៀនពង្រឹងក្រៅបណ្តាញ (Offline RL) ជាមួយនឹង Decision Transformers សម្រាប់ការគ្រប់គ្រងជាតិស្ករនៃជំងឺទឹកនោមផ្អែមប្រភេទទី១ (T1D)</span><br>
+                    <span class="en article-original-title">Offline RL with Decision Transformers for T1D Glucose Control</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/decision-transformer-robot-imitation-learning-2022.html">
+                    <span class="km">ម៉ូដែល Decision Transformer សម្រាប់ការរៀនត្រាប់តាមរបស់មនុស្សយន្ត</span><br>
+                    <span class="en article-original-title">Decision Transformer for Robot Imitation Learning</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Markov+Decision+Processes+and+foundational+offline+deep+reinforcement+learning+algorithms" target="_blank" rel="noopener"><span class="en">Markov Decision Processes and foundational offline deep reinforcement learning algorithms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Model-based+offline+reinforcement+learning+uncertainty+estimation+techniques+and+methods" target="_blank" rel="noopener"><span class="en">Model-based offline reinforcement learning uncertainty estimation techniques and methods</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Conservative+Q-learning+%28CQL%29+for+mitigating+distributional+shift+in+offline+RL" target="_blank" rel="noopener"><span class="en">Conservative Q-learning (CQL) for mitigating distributional shift in offline RL</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Cross-domain+generalization+and+task-transfer+benchmarking+in+reinforcement+learning" target="_blank" rel="noopener"><span class="en">Cross-domain generalization and task-transfer benchmarking in reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Trajectory+truncation+and+data+augmentation+in+model-based+RL+rollouts" target="_blank" rel="noopener"><span class="en">Trajectory truncation and data augmentation in model-based RL rollouts</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=D4RL+benchmark+datasets+for+offline+deep+reinforcement+learning+evaluation" target="_blank" rel="noopener"><span class="en">D4RL benchmark datasets for offline deep reinforcement learning evaluation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+</body>
+</html>
