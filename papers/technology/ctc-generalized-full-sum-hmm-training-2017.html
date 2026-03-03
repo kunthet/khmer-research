@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>CTC ក្នុងបរិបទនៃការបណ្តុះបណ្តាលម៉ូដែល Generalized Full-Sum HMM - CTC in the Context of Generalized Full-Sum HMM Training | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី CTC ក្នុងបរិបទនៃការបណ្តុះបណ្តាលម៉ូដែល Generalized Full-Sum HMM។ ឯកសារនេះដោះស្រាយបញ្ហានៃការយល់ដឹងពីសកម្មភាពមិនប្រក្រតីឬ "peaky" (ការប្រមូលផ្តុំលទ្ធផលខ្លាំងក្នុងរយ...">
+    
+    <meta name="keywords" content="Connectionist Temporal Classification, Hidden Markov Model, Full-Sum Training, Baum-Welch, Speech Recognition, LSTM, Acoustic Modeling, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/ctc-generalized-full-sum-hmm-training-2017.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/ctc-generalized-full-sum-hmm-training-2017.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/ctc-generalized-full-sum-hmm-training-2017.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/ctc-generalized-full-sum-hmm-training-2017.html">
+    <meta property="og:title" content="CTC ក្នុងបរិបទនៃការបណ្តុះបណ្តាលម៉ូដែល Generalized Full-Sum HMM | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការយល់ដឹងពីសកម្មភាពមិនប្រក្រតីឬ "peaky" (ការប្រមូលផ្តុំលទ្ធផលខ្លាំងក្នុងរយៈពេលខ្លី) របស់ម៉ូដែល CTC នៅក្នុងប្រព័ន្ធសម្គាល់សំឡេង (Speech Recognition)។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2017 INTERSPEECH-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Connectionist Temporal Classification">
+    
+    <meta property="article:tag" content="Hidden Markov Model">
+    
+    <meta property="article:tag" content="Full-Sum Training">
+    
+    <meta property="article:tag" content="Baum-Welch">
+    
+    <meta property="article:tag" content="Speech Recognition">
+    
+    <meta property="article:tag" content="LSTM">
+    
+    <meta property="article:tag" content="Acoustic Modeling">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="CTC ក្នុងបរិបទនៃការបណ្តុះបណ្តាលម៉ូដែល Generalized Full-Sum HMM">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការយល់ដឹងពីសកម្មភាពមិនប្រក្រតីឬ "peaky" (ការប្រមូលផ្តុំលទ្ធផលខ្លាំងក្នុងរយៈពេលខ្លី) របស់ម៉ូដែល CTC នៅក្នុងប្រព័ន្ធសម្គាល់សំឡេង (Speech Recognition)។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "CTC \u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u1794\u1791\u1793\u17c3\u1780\u17b6\u179a\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b Generalized Full-Sum HMM",
+      "name": "CTC in the Context of Generalized Full-Sum HMM Training",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u1796\u17b8\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1798\u17b7\u1793\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u17ac \"peaky\" (\u1780\u17b6\u179a\u1794\u17d2\u179a\u1798\u17bc\u179b\u1795\u17d2\u178f\u17bb\u17c6\u179b\u1791\u17d2\u1792\u1795\u179b\u1781\u17d2\u179b\u17b6\u17c6\u1784\u1780\u17d2\u1793\u17bb\u1784\u179a\u1799\u17c8\u1796\u17c1\u179b\u1781\u17d2\u179b\u17b8) \u179a\u1794\u179f\u17cb\u1798\u17c9\u17bc\u178a\u17c2\u179b CTC \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u179f\u17c6\u17a1\u17c1\u1784 (Speech Recognition)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/ctc-generalized-full-sum-hmm-training-2017.html",
+      "author": [{"@type": "Person", "name": "Albert Zeyer"},{"@type": "Person", "name": "Eugen Beck"},{"@type": "Person", "name": "Ralf Schl\u00fcter"},{"@type": "Person", "name": "Hermann Ney"}],
+      "datePublished": "2017 INTERSPEECH",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "CTC in the Context of Generalized Full-Sum HMM Training",
+        "url": "http://dx.doi.org/10.21437/Interspeech.2017-1073"
+      },
+      "keywords": ["Connectionist Temporal Classification", "Hidden Markov Model", "Full-Sum Training", "Baum-Welch", "Speech Recognition", "LSTM", "Acoustic Modeling"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "CTC \u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u1794\u1791\u1793\u17c3\u1780\u17b6\u179a\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b Generalized Full-Sum HMM",
+          "item": "https://khmerresearch.com/papers/technology/ctc-generalized-full-sum-hmm-training-2017.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>CTC ក្នុងបរិបទនៃការបណ្តុះបណ្តាលម៉ូដែល Generalized Full-Sum HMM</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> CTC in the Context of Generalized Full-Sum HMM Training<br>
+        
+        <strong>Source:</strong> <a href="http://dx.doi.org/10.21437/Interspeech.2017-1073" target="_blank" rel="noopener">dx.doi.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>CTC ក្នុងបរិបទនៃការបណ្តុះបណ្តាលម៉ូដែល Generalized Full-Sum HMM</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> CTC in the Context of Generalized Full-Sum HMM Training</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Albert Zeyer, Eugen Beck, Ralf Schlüter, Hermann Ney</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2017 INTERSPEECH</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការយល់ដឹងពីសកម្មភាពមិនប្រក្រតីឬ "peaky" (ការប្រមូលផ្តុំលទ្ធផលខ្លាំងក្នុងរយៈពេលខ្លី) របស់ម៉ូដែល CTC នៅក្នុងប្រព័ន្ធសម្គាល់សំឡេង (Speech Recognition)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតទម្រង់ទូទៅនៃការបណ្តុះបណ្តាលកូនកាត់ HMM-NN ដោយប្រើវិធីសាស្ត្រ full-sum លើលំដាប់ស្ថានភាពលាក់កំបាំង (hidden state-sequence) ដើម្បីវិភាគប្រៀបធៀបជាមួយ CTC។
+        
+        <ul>
+            
+            <li>ការបង្កើតទម្រង់បណ្តុះបណ្តាល Generalized Full-Sum HMM (Generalized Full-Sum HMM Training Formulation)</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយ Baum-Welch លើ GPU ដើម្បីតម្រឹមទិន្នន័យ (Baum-Welch Algorithm on GPU)</li>
+            
+            <li>ការបណ្តុះបណ្តាលរួមគ្នានូវបណ្តាញសរសៃប្រសាទ FFNN និង BLSTM (Joint Training of FFNN and BLSTM)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការសិក្សាបានបង្ហាញថា CTC គឺជាករណីពិសេសនៃការបណ្តុះបណ្តាលម៉ូដែល generalized full-sum HMM ដែលមិនមានប្រើប្រាស់ state prior។</li>
+            
+            <li>ការប្រើប្រាស់ state prior នៅក្នុងការបណ្តុះបណ្តាល full-sum ជួយកាត់បន្ថយសកម្មភាព peaky និងធានាបាននូវការតម្រឹម (alignment) ទិន្នន័យកាន់តែត្រឹមត្រូវទៅនឹងសំឡេងជាក់ស្តែង។</li>
+            
+            <li>ការធ្វើតេស្តលើទិន្នន័យ Switchboard បង្ហាញថាម៉ូដែល full-sum ដែលហ្វឹកហាត់ពីដើម (from scratch) និងមានបន្ថែម FFNN ទទួលបានអត្រាកំហុសពាក្យ (WER) សរុប 17.5% ដែលបង្ហាញពីប្រសិទ្ធភាពនៃការគ្រប់គ្រងសកម្មភាពរបស់ម៉ូដែល។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Framewise CE Training (with Viterbi alignment)</span></strong><br>ការបណ្តុះបណ្តាល Framewise CE (ដោយប្រើប្រាស់ Viterbi alignment ជាមុន)</td>
+                <td>ទទួលបានអត្រាកំហុសពាក្យ (WER) ទាបបំផុត និងមានស្ថេរភាពក្នុងការបណ្តុះបណ្តាល ព្រោះវាមានការកំណត់គោលដៅច្បាស់លាស់។</td>
+                <td>ទាមទារឱ្យមានការតម្រឹមទិន្នន័យ (alignment) ពីមុនដោយប្រព័ន្ធផ្សេង (ដូចជា GMM-HMM) ដែលពិបាកសម្រាប់ភាសាដែលខ្វះទិន្នន័យ។</td>
+                <td>ទទួលបាន WER សរុប 15.4% លើទិន្នន័យ Switchboard (ល្អជាងគេ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Full-sum training without FFNN (CTC-like)</span></strong><br>ការបណ្តុះបណ្តាល Full-sum ដោយគ្មាន FFNN (ស្រដៀងនឹង CTC ធម្មតា)</td>
+                <td>អាចបណ្តុះបណ្តាលពីចំណុចចាប់ផ្តើម (from scratch) ដោយមិនត្រូវការការតម្រឹមទុកជាមុនពីប្រព័ន្ធផ្សេង។</td>
+                <td>មានបញ្ហា 'peaky' (ប្រមូលផ្តុំលទ្ធផលខ្លាំងក្នុងរយៈពេលខ្លី) និងបរាជ័យក្នុងការរៀនតម្រឹមឱ្យបានត្រឹមត្រូវទៅនឹងសំឡេងជាក់ស្តែង ដែលនាំឱ្យ WER ខ្ពស់។</td>
+                <td>ទទួលបាន WER សរុប 19.5% និងអត្រាកំហុស Frame (FER) ខ្ពស់រហូតដល់ 84.5%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Full-sum training with FFNN and State Prior</span></strong><br>ការបណ្តុះបណ្តាល Full-sum ដោយរួមបញ្ចូល FFNN និង State Prior</td>
+                <td>អាចបណ្តុះបណ្តាលពីដើម (from scratch) ខណៈពេលដែលកាត់បន្ថយបញ្ហា peaky និងរក្សាបាននូវការតម្រឹមជិតស្និទ្ធនឹងសំឡេងជាក់ស្តែង។</td>
+                <td>នៅតែមានគម្លាតអត្រាកំហុសតិចតួចបើប្រៀបធៀបទៅនឹងការបណ្តុះបណ្តាល framewise ស្តង់ដារ ហើយទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រ (hyperparameter tuning) ស្មុគស្មាញ។</td>
+                <td>ទទួលបាន WER សរុប 17.5% និង FER ធ្លាក់ចុះមកត្រឹម 48.8%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តវិធីសាស្ត្រនេះទាមទារធនធានកុំព្យូទ័រខ្លាំង ជាពិសេសការប្រើប្រាស់ GPU សម្រាប់ការគណនា Baum-Welch alignment ឱ្យបានរហ័ស និងទិន្នន័យសំឡេងខ្នាតធំ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារ GPU ដែលគាំទ្រប្រតិបត្តិការ CUDA ជាមួយនឹងសមត្ថភាព atomic Compare-and-Swap សម្រាប់ពន្លឿនការហ្វឹកហាត់ Baum-Welch។</li>
+        
+        <li><strong>Software:</strong> ត្រូវការប្រើប្រាស់ RETURNN framework (របស់សាកលវិទ្យាល័យ RWTH Aachen), Theano, កូដ CUDA សម្រាប់ Baum-Welch ព្រមទាំង RASR សម្រាប់សាងសង់ WFSA។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យសំឡេងទំហំធំដូចជា Switchboard (300 ម៉ោង) ព្រមទាំងអត្ថបទសម្រាប់ Language Model (រហូតដល់ 22 លានពាក្យ) និងវចនានុក្រមបញ្ចេញសំឡេង (Lexicon)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងស៊ីជម្រៅផ្នែក Acoustic Modeling, Hidden Markov Models (HMM), Neural Networks (BLSTM/FFNN), និងការកែតម្រូវប៉ារ៉ាម៉ែត្រ (Hyperparameter tuning)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យភាសាអង់គ្លេស (Switchboard និង WSJCam0) ជាមួយនឹងវចនានុក្រមបញ្ចេញសំឡេង CMU សម្រាប់ការសាកល្បង។ នេះជារឿងសំខាន់សម្រាប់កម្ពុជា ព្រោះភាសាខ្មែរមានរចនាសម្ព័ន្ធសូរសព្ទខុសគ្នាស្រឡះ (មានស្រៈ ព្យញ្ជនៈ ជើង និងគ្មានការដកឃ្លារវាងពាក្យ) ដែលទាមទារការបង្កើតកញ្ចប់សូរសព្ទ (phoneme set) និងច្បាប់តម្រឹម (alignment rules) ថ្មីទាំងស្រុងសម្រាប់ការហ្វឹកហាត់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្របណ្តុះបណ្តាល Generalized Full-Sum HMM នេះមានសក្តានុពលខ្ពស់សម្រាប់ជួយជំរុញការអភិវឌ្ឍប្រព័ន្ធសម្គាល់សំឡេង (ASR) សម្រាប់ភាសាខ្មែរ។</p>
+        
+        <ul>
+            
+            <li><strong>ការស្រាវជ្រាវ និងអភិវឌ្ឍន៍ ASR ភាសាខ្មែរ (Khmer Speech-to-Text):</strong> មានប្រយោជន៍ខ្លាំងសម្រាប់ការបង្កើតប្រព័ន្ធបំប្លែងសំឡេងទៅជាអត្ថបទសម្រាប់ភាសាខ្មែរ ពីព្រោះវាអនុញ្ញាតឱ្យហ្វឹកហាត់ពីដើម (from scratch) ដោយមិនតម្រូវឱ្យមានទិន្នន័យតម្រឹម (alignment data) ពីប្រព័ន្ធស៊េរីចាស់ៗ ដែលកម្ពុជានៅខ្វះខាតជាខ្លាំង។</li>
+            
+            <li><strong>មន្ទីរពិសោធន៍បច្ចេកវិទ្យាភាសា (Language Tech Labs at CADT/RUPP):</strong> អ្នកស្រាវជ្រាវនៅបណ្ឌិត្យសភាបច្ចេកវិទ្យាឌីជីថលកម្ពុជា (CADT) ឬសាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ អាចប្រើប្រាស់ទ្រឹស្តីនេះដើម្បីដោះស្រាយបញ្ហា peaky ពេលហ្វឹកហាត់ម៉ូដែល CTC ជាមួយទិន្នន័យភាសាខ្មែរ ដើម្បីទទួលបានការតម្រឹមតាមពេលវេលា (timestamps) កាន់តែច្បាស់។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ឯកសារនេះផ្តល់នូវដំណោះស្រាយបច្ចេកទេសដ៏រឹងមាំក្នុងការកសាងប្រព័ន្ធ ASR សម្រាប់ភាសាដែលមានធនធានតិច (low-resource languages) ដោយកាត់បន្ថយការពឹងផ្អែកលើម៉ូដែលកាត់តម្រឹមពីមុន (prior alignment models)។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាទ្រឹស្តី Acoustic Modeling និង HMM-NN:</strong> និស្សិតត្រូវស្វែងយល់ពីមូលដ្ឋានគ្រឹះនៃ <span class='en'>Hidden Markov Model (HMM)</span>, <span class='en'>Connectionist Temporal Classification (CTC)</span>, និង <span class='en'>Baum-Welch algorithm</span> ដើម្បីយល់ពីរបៀបដែលម៉ូដែលធ្វើការតម្រឹមរវាងសំឡេង និងអត្ថបទដោយមិនបាច់មានការកំណត់ទុកជាមុន។</li>
+            
+            <li><strong>រៀបចំទិន្នន័យសំឡេង និងវចនានុក្រមសូរសព្ទភាសាខ្មែរ:</strong> ប្រមូលទិន្នន័យសំឡេងភាសាខ្មែរ និងបង្កើតវចនានុក្រមបញ្ចេញសំឡេង (Pronunciation Lexicon) ដោយកំណត់រចនាសម្ព័ន្ធ <span class='en'>phonemes</span> របស់ខ្មែរឱ្យបានច្បាស់លាស់សម្រាប់ប្រើក្នុងក្របខ័ណ្ឌ <span class='en'>WFSA (Weighted Finite-State Transducer)</span>។</li>
+            
+            <li><strong>ដំឡើងឧបករណ៍ និង Framework សម្រាប់ការហ្វឹកហាត់:</strong> រៀបចំម៉ាស៊ីនសេវើដែលមាន <span class='en'>GPU</span> និងដំឡើង <span class='en'>RETURNN framework</span> រួមជាមួយបរិស្ថាន <span class='en'>CUDA</span> ដើម្បីអាចដំណើរការកូដសរសេរផ្ទាល់ (Custom CUDA code) សម្រាប់ Baum-Welch alignment ឱ្យបានលឿន។</li>
+            
+            <li><strong>អនុវត្តការហ្វឹកហាត់ Full-Sum និង FFNN រួមគ្នា:</strong> ចាប់ផ្តើមហ្វឹកហាត់ម៉ូដែល <span class='en'>BLSTM</span> ពីដើម (from scratch) ដោយដាក់បញ្ចូលការហ្វឹកហាត់រួមគ្នាជាមួយ <span class='en'>FFNN (Feed-Forward Neural Network)</span> ដោយប្រើយុទ្ធសាស្ត្រ <span class='en'>Full-sum training</span> និងការកំណត់ <span class='en'>state prior</span> ដើម្បីទប់ស្កាត់បញ្ហា peaky។</li>
+            
+            <li><strong>វាយតម្លៃ និងកែតម្រូវប៉ារ៉ាម៉ែត្រ (Hyperparameter Tuning):</strong> ធ្វើការវាស់ស្ទង់ <span class='en'>Word Error Rate (WER)</span> និងវិភាគ <span class='en'>Alignment error</span> របស់ម៉ូដែល រួចកែតម្រូវកម្រិតថយចុះ (decay factor) នៃទម្ងន់ <span class='en'>Acoustic-model scale (β)</span> ចាប់ពី 0.05 ដល់ 0.3 ដូចដែលអ្នកស្រាវជ្រាវបានធ្វើដើម្បីបង្កើនភាពត្រឹមត្រូវ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Connectionist Temporal Classification (CTC)</span></td>
+                <td>ជាមុខងារវាយតម្លៃ (Loss function) សម្រាប់បណ្តុះបណ្តាលបណ្តាញសរសៃប្រសាទកុំព្យូទ័រក្នុងការសម្គាល់សំឡេង ដោយមិនចាំបាច់មានការកំណត់ចំណុចពេលវេលា (alignment) ជាក់លាក់រវាងសំឡេង និងអក្សរពីមុន។ វាប្រើសញ្ញា "blank" (ទទេ) ដើម្បីដោះស្រាយបញ្ហាសំឡេងអូសបន្លាយ។</td>
+                <td>ដូចជាគ្រូបង្រៀនក្មេងឱ្យស្តាប់ និងសរសេរពាក្យទាំងមូល ដោយមិនខ្វល់ថាអក្សរនីមួយៗត្រូវនឹងវិនាទីទីប៉ុន្មាននៃសំឡេងនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model (HMM)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិដែលប្រើសម្រាប់តំណាងឱ្យប្រព័ន្ធដែលមានស្ថានភាពលាក់កំបាំង (hidden states) ដែលផ្លាស់ប្តូរតាមពេលវេលា។ វាត្រូវបានប្រើប្រាស់យ៉ាងទូលំទូលាយក្នុងការសម្គាល់សំឡេង ដើម្បីទស្សន៍ទាយលំដាប់នៃសូរសព្ទដោយផ្អែកលើទិន្នន័យសំឡេងដែលទទួលបាន។</td>
+                <td>ដូចជាការទាយអាកាសធាតុថ្ងៃស្អែក ដោយមើលថាតើថ្ងៃនេះមេឃស្រឡះឬមានពពក ទោះបីជាយើងមិនដឹងច្បាស់ពីចលនាខ្យល់ពិតប្រាកដ (hidden state) ក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Baum-Welch algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ស្វែងរកប៉ារ៉ាម៉ែត្រដែលល្អបំផុតរបស់ម៉ូដែល HMM ដោយបូកសរុបប្រូបាប៊ីលីតេនៃគ្រប់លទ្ធភាពនៃការតម្រឹម (alignments) ទាំងអស់រវាងសំឡេងនិងអត្ថបទ។ នៅក្នុងឯកសារនេះ គេហៅវាថាការបណ្តុះបណ្តាល full-sum។</td>
+                <td>ដូចជាការគិតគូរពីគ្រប់ផ្លូវទាំងអស់ដែលអាចដើរទៅដល់គោលដៅ ដើម្បីស្វែងរកមើលថាផ្លូវណាដែលមានឱកាសទៅដល់ញឹកញាប់ និងមានសុវត្ថិភាពជាងគេបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi alignment</span></td>
+                <td>ជានីតិវិធីស្វែងរកលំដាប់នៃស្ថានភាពលាក់កំបាំង (hidden states) តែមួយគត់ដែលមានប្រូបាប៊ីលីតេខ្ពស់បំផុត (ទំនងបំផុត) សម្រាប់ស៊េរីទិន្នន័យដែលបានសង្កេតឃើញ ផ្ទុយពី Baum-Welch ដែលគិតពីគ្រប់លទ្ធភាពទាំងអស់។</td>
+                <td>ដូចជាការកម្ម៉ង់ Google Maps ឱ្យបង្ហាញតែផ្លូវមួយខ្សែគត់ដែលលឿនបំផុត ដើម្បីទៅដល់គោលដៅ ជំនួសឱ្យការពិចារណាផ្លូវវាងផ្សេងៗទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">State prior probability</span></td>
+                <td>ជាប្រូបាប៊ីលីតេជាមុនដែលបញ្ជាក់ថាតើស្ថានភាព (state) ឬសូរសព្ទនីមួយៗមានឱកាសកើតឡើងញឹកញាប់ប៉ុណ្ណានៅក្នុងទិន្នន័យទូទៅ មុនពេលយើងគិតពីទិន្នន័យសំឡេងជាក់ស្តែង។ ការប្រើប្រាស់វាជួយកាត់បន្ថយបាតុភូតទិន្នន័យប្រមូលផ្តុំខ្លាំង (peaky behavior)។</td>
+                <td>ដូចជាការដឹងជាមុនថានៅកម្ពុជារដូវវស្សាមានភ្លៀងធ្លាក់ញឹកញាប់ជាងរដូវប្រាំង មុនពេលយើងមើលមេឃនៅថ្ងៃនេះដើម្បីទាយថានឹងមានភ្លៀងឬអត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Peaky behavior</span></td>
+                <td>ជាបាតុភូតក្នុង CTC ដែលម៉ូដែលបញ្ចេញលទ្ធផលទទេ (blank symbol) ស្ទើរតែគ្រប់ពេលវេលា ហើយបញ្ចេញអក្សរពិតប្រាកដតែក្នុងរយៈពេលខ្លីមែនទែន (ចេញជាកំពូលស្រួចៗ) ដែលធ្វើឱ្យម៉ូដែលមិនសូវចាប់អារម្មណ៍នឹងការតម្រឹមពេលវេលាជាក់ស្តែងរបស់សំឡេង។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលអង្គុយស្ងៀមរហូត រួចស្រាប់តែនិយាយប្រាប់ចម្លើយមួយយ៉ាងលឿនក្នុងមួយពព្រិចភ្នែក ហើយក៏ស្ងាត់ទៅវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">BLSTM (Bidirectional Long Short-Term Memory)</span></td>
+                <td>ជាប្រភេទបណ្តាញសរសៃប្រសាទកុំព្យូទ័រ (RNN) ដែលមានសមត្ថភាពចងចាំទិន្នន័យទាំងពីអតីតកាលនិងអនាគតកាលក្នុងបរិបទ (រត់ទៅមុខនិងថយក្រោយ) ដើម្បីធ្វើការសម្រេចចិត្តបានកាន់តែត្រឹមត្រូវ ពិសេសសម្រាប់ការសម្គាល់សំឡេង។</td>
+                <td>ដូចជាការអានសៀវភៅដែលយើងអានទាំងប្រយោគខាងមុខ និងប្រយោគខាងក្រោយ ដើម្បីអាចទាយយល់ន័យនៃពាក្យពិបាកមួយដែលនៅកណ្តាល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feed-Forward Neural Network (FFNN)</span></td>
+                <td>ជាបណ្តាញសរសៃប្រសាទសាមញ្ញដែលបញ្ជូនព័ត៌មានទៅមុខជានិច្ច គ្មានការតភ្ជាប់ត្រឡប់ក្រោយ (no loops)។ ក្នុងឯកសារនេះ វាត្រូវបានប្រើរួមគ្នាជាមួយ BLSTM ដើម្បីបង្ខំឲ្យម៉ូដែលតម្រឹមទិន្នន័យសំឡេងឲ្យត្រូវនឹងពេលវេលាជាក់ស្តែង (regularization)។</td>
+                <td>ដូចជាខ្សែសង្វាក់ផលិតកម្មក្នុងរោងចក្រ ដែលវត្ថុធាតុដើមត្រូវបញ្ជូនទៅមុខជារហូតពីដំណាក់កាលមួយទៅដំណាក់កាលមួយទៀត ដោយមិនអាចបញ្ជូនត្រឡប់ថយក្រោយបានឡើយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+                    <span class="km">ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង</span><br>
+                    <span class="en article-original-title">DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/thai-word-recognition-hybrid-mlp-hmm-2010.html">
+                    <span class="km">ការសម្គាល់ពាក្យភាសាថៃដោយប្រើប្រព័ន្ធកូនកាត់ MLP-HMM</span><br>
+                    <span class="en article-original-title">Thai Word Recognition Using Hybrid MLP-HMM</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/automatic-speech-recognition-hmm-htk-2003.html">
+                    <span class="km">ការទទួលស្គាល់សំឡេងនិយាយដោយស្វ័យប្រវត្តិ ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Automatic Speech Recognition USING Hidden Markov Models</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/voice-identification-python-hmm-2020.html">
+                    <span class="km">ការកំណត់អត្តសញ្ញាណសំឡេងនៅក្នុង Python ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Voice Identification in Python Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/spoken-dialogue-management-probabilistic-reasoning-2000.html">
+                    <span class="km">ការគ្រប់គ្រងការសន្ទនាតាមការនិយាយដោយប្រើប្រាស់ការវែកញែកតាមប្រូបាប៊ីលីតេ</span><br>
+                    <span class="en article-original-title">Spoken Dialogue Management Using Probabilistic Reasoning</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Connectionist+Temporal+Classification+vs+Cross+Entropy+training+acoustic+modeling" target="_blank" rel="noopener"><span class="en">Connectionist Temporal Classification vs Cross Entropy training acoustic modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Baum-Welch+algorithm+GPU+implementation+CUDA+for+speech+recognition" target="_blank" rel="noopener"><span class="en">Baum-Welch algorithm GPU implementation CUDA for speech recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=State+prior+estimation+and+handling+in+sequence-to-sequence+ASR" target="_blank" rel="noopener"><span class="en">State prior estimation and handling in sequence-to-sequence ASR</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Overcoming+peaky+behavior+spiky+output+in+CTC+BLSTM+models" target="_blank" rel="noopener"><span class="en">Overcoming peaky behavior spiky output in CTC BLSTM models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hybrid+HMM-NN+vs+end-to-end+ASR+performance+low+resource" target="_blank" rel="noopener"><span class="en">Hybrid HMM-NN vs end-to-end ASR performance low resource</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Lattice-free+MMI+vs+full-sum+HMM+training+speech+recognition" target="_blank" rel="noopener"><span class="en">Lattice-free MMI vs full-sum HMM training speech recognition</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

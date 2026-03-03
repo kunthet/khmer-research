@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>GD-CAF៖ ការបញ្ចូលគ្នានូវការយកចិត្តទុកដាក់ និងបណ្ដាញកុងវ៉ុលលូស្យុងចរន្តទ្វេជាទម្រង់ក្រាហ្វិក សម្រាប់ការព្យាករណ៍ទឹកភ្លៀងរយៈពេលខ្លី - GD-CAF: Graph Dual-stream Convolutional Attention Fusion for Precipitation Nowcasting | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី GD-CAF៖ ការបញ្ចូលគ្នានូវការយកចិត្តទុកដាក់ និងបណ្ដាញកុងវ៉ុលលូ។ ការព្យាករណ៍កម្រិតទឹកភ្លៀងរយៈពេលខ្លី (Precipitation Nowcasting) មានសារៈសំខាន់សម្រាប់ការគ្រប់គ្រងគ្...">
+    
+    <meta name="keywords" content="Precipitation nowcasting, Graph Attention Networks, Deep Learning, Spatiotemporal modeling, Meteorology, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/gd-caf-precipitation-nowcasting-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/gd-caf-precipitation-nowcasting-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/gd-caf-precipitation-nowcasting-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/gd-caf-precipitation-nowcasting-2024.html">
+    <meta property="og:title" content="GD-CAF៖ ការបញ្ចូលគ្នានូវការយកចិត្តទុកដាក់ និងបណ្ដាញកុងវ៉ុលលូស្យុងចរន្តទ្វេជាទម្រង់ក្រាហ្វិក សម្រាប់ការព្យាករណ៍ទឹកភ្លៀងរយៈពេលខ្លី | KhmerResearch.com">
+    <meta property="og:description" content="ការព្យាករណ៍កម្រិតទឹកភ្លៀងរយៈពេលខ្លី (Precipitation Nowcasting) មានសារៈសំខាន់សម្រាប់ការគ្រប់គ្រងគ្រោះមហន្តរាយ ប៉ុន្តែម៉ូដែលបច្ចុប្បន្នភាគច្រើនមិនបានសិក្សាពីទំនាក់ទំនងរវាងតំបន់ភូមិសាស្ត្រផ្សេងៗគ្នាដែ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2024 arXiv-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Precipitation nowcasting">
+    
+    <meta property="article:tag" content="Graph Attention Networks">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Spatiotemporal modeling">
+    
+    <meta property="article:tag" content="Meteorology">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="GD-CAF៖ ការបញ្ចូលគ្នានូវការយកចិត្តទុកដាក់ និងបណ្ដាញកុងវ៉ុលលូស្យុងចរន្តទ្វេជាទម្រង់ក្រាហ្វិក សម្រាប់ការព្យាករណ៍ទឹកភ្លៀងរយៈពេលខ្លី">
+    <meta name="twitter:description" content="ការព្យាករណ៍កម្រិតទឹកភ្លៀងរយៈពេលខ្លី (Precipitation Nowcasting) មានសារៈសំខាន់សម្រាប់ការគ្រប់គ្រងគ្រោះមហន្តរាយ ប៉ុន្តែម៉ូដែលបច្ចុប្បន្នភាគច្រើនមិនបានសិក្សាពីទំនាក់ទំនងរវាងតំបន់ភូមិសាស្ត្រផ្សេងៗគ្នាដែ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "GD-CAF\u17d6 \u1780\u17b6\u179a\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6\u1793\u17bc\u179c\u1780\u17b6\u179a\u1799\u1780\u1785\u17b7\u178f\u17d2\u178f\u1791\u17bb\u1780\u178a\u17b6\u1780\u17cb \u1793\u17b7\u1784\u1794\u178e\u17d2\u178a\u17b6\u1789\u1780\u17bb\u1784\u179c\u17c9\u17bb\u179b\u179b\u17bc\u179f\u17d2\u1799\u17bb\u1784\u1785\u179a\u1793\u17d2\u178f\u1791\u17d2\u179c\u17c1\u1787\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb\u1780\u17d2\u179a\u17b6\u17a0\u17d2\u179c\u17b7\u1780 \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u179a\u1799\u17c8\u1796\u17c1\u179b\u1781\u17d2\u179b\u17b8",
+      "name": "GD-CAF: Graph Dual-stream Convolutional Attention Fusion for Precipitation Nowcasting",
+      "description": "\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1780\u1798\u17d2\u179a\u17b7\u178f\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u179a\u1799\u17c8\u1796\u17c1\u179b\u1781\u17d2\u179b\u17b8 (Precipitation Nowcasting) \u1798\u17b6\u1793\u179f\u17b6\u179a\u17c8\u179f\u17c6\u1781\u17b6\u1793\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1782\u17d2\u179a\u17c4\u17c7\u1798\u17a0\u1793\u17d2\u178f\u179a\u17b6\u1799 \u1794\u17c9\u17bb\u1793\u17d2\u178f\u17c2\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793\u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793\u1798\u17b7\u1793\u1794\u17b6\u1793\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1796\u17b8\u1791\u17c6\u1793\u17b6\u1780\u17cb\u1791\u17c6\u1793\u1784\u179a\u179c\u17b6\u1784\u178f\u17c6\u1794\u1793\u17cb\u1797\u17bc\u1798\u17b7\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6\u178a\u17c2\u179b\u1793\u17c5\u178a\u17b6\u1785\u17cb\u1796\u17b8\u1782\u17d2\u1793\u17b6\u17a1\u17be\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/gd-caf-precipitation-nowcasting-2024.html",
+      "author": [{"@type": "Person", "name": "Lor\u00e1nd Vatam\u00e1ny (Utrecht University)"},{"@type": "Person", "name": "Siamak Mehrkanoon (Utrecht University)"}],
+      "datePublished": "2024 arXiv",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "GD-CAF: Graph Dual-stream Convolutional Attention Fusion for Precipitation Nowcasting",
+        "url": "https://arxiv.org/abs/2401.07958"
+      },
+      "keywords": ["Precipitation nowcasting", "Graph Attention Networks", "Deep Learning", "Spatiotemporal modeling", "Meteorology"],
+      "about": "Machine Learning / Meteorology"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "GD-CAF\u17d6 \u1780\u17b6\u179a\u1794\u1789\u17d2\u1785\u17bc\u179b\u1782\u17d2\u1793\u17b6\u1793\u17bc\u179c\u1780\u17b6\u179a\u1799\u1780\u1785\u17b7\u178f\u17d2\u178f\u1791\u17bb\u1780\u178a\u17b6\u1780\u17cb \u1793\u17b7\u1784\u1794\u178e\u17d2\u178a\u17b6\u1789\u1780\u17bb\u1784\u179c\u17c9\u17bb\u179b\u179b\u17bc\u179f\u17d2\u1799\u17bb\u1784\u1785\u179a\u1793\u17d2\u178f\u1791\u17d2\u179c\u17c1\u1787\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb\u1780\u17d2\u179a\u17b6\u17a0\u17d2\u179c\u17b7\u1780 \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1791\u17b9\u1780\u1797\u17d2\u179b\u17c0\u1784\u179a\u1799\u17c8\u1796\u17c1\u179b\u1781\u17d2\u179b\u17b8",
+          "item": "https://khmerresearch.com/papers/technology/gd-caf-precipitation-nowcasting-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>GD-CAF៖ ការបញ្ចូលគ្នានូវការយកចិត្តទុកដាក់ និងបណ្ដាញកុងវ៉ុ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> GD-CAF: Graph Dual-stream Convolutional Attention Fusion for Precipitation Nowcasting<br>
+        
+        <strong>Source:</strong> <a href="https://arxiv.org/abs/2401.07958" target="_blank" rel="noopener">arxiv.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>GD-CAF៖ ការបញ្ចូលគ្នានូវការយកចិត្តទុកដាក់ និងបណ្ដាញកុងវ៉ុលលូស្យុងចរន្តទ្វេជាទម្រង់ក្រាហ្វិក សម្រាប់ការព្យាករណ៍ទឹកភ្លៀងរយៈពេលខ្លី</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> GD-CAF: Graph Dual-stream Convolutional Attention Fusion for Precipitation Nowcasting</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Loránd Vatamány (Utrecht University), Siamak Mehrkanoon (Utrecht University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 arXiv</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Meteorology</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការព្យាករណ៍កម្រិតទឹកភ្លៀងរយៈពេលខ្លី (Precipitation Nowcasting) មានសារៈសំខាន់សម្រាប់ការគ្រប់គ្រងគ្រោះមហន្តរាយ ប៉ុន្តែម៉ូដែលបច្ចុប្បន្នភាគច្រើនមិនបានសិក្សាពីទំនាក់ទំនងរវាងតំបន់ភូមិសាស្ត្រផ្សេងៗគ្នាដែលនៅដាច់ពីគ្នាឡើយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើងនូវម៉ូដែលថ្មី GD-CAF ដែលប្រើប្រាស់បណ្ដាញសរសៃប្រសាទក្រាហ្វិកដើម្បីវិភាគទិន្នន័យទឹកភ្លៀងក្នុងទម្រង់ជាលំហ និងពេលវេលា។
+        
+        <ul>
+            
+            <li>ការបង្កើតបណ្ដាញក្រាហ្វិកលំហ និងពេលវេលា (Spatiotemporal Graph Sequence)</li>
+            
+            <li>ម៉ូឌុលយកចិត្តទុកដាក់កុងវ៉ុលលូស្យុងចរន្តទ្វេ (Dual-stream Convolutional Attention)</li>
+            
+            <li>បច្ចេកទេសធ្វើកុងវ៉ុលលូស្យុង (Depthwise-separable Convolution)</li>
+            
+            <li>ការបណ្តុះបណ្តាលដោយប្រើទិន្នន័យទឹកភ្លៀង ៧ឆ្នាំ ពីកញ្ចប់ទិន្នន័យ ERA5 (Copernicus CEMS)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល GD-CAF ទទួលបានលទ្ធផលប្រសើរជាង SmaAt-UNet ដោយទម្លាក់កម្រិតលម្អៀង (MSE) មកត្រឹម ០.០០០១០៨៧៤ សម្រាប់ការធ្វើតេស្តលើ ១៦ តំបន់គំរូ។</li>
+            
+            <li>ការបញ្ចូលបច្ចេកទេស Pooling ទៅក្នុងម៉ូដែល GD-CAF ជួយបង្កើនល្បឿននៃការគណនាបានរហូតដល់ទៅ ៣.៣៣ ដង បើប្រៀបធៀបទៅនឹងការមិនប្រើប្រាស់។</li>
+            
+            <li>ម៉ូដែលនេះអាចចាប់យកទំនាក់ទំនងអន្តរតំបន់បានយ៉ាងល្អ ដែលធ្វើឱ្យការព្យាករណ៍កាន់តែមានភាពសុក្រឹតទោះបីជាចំនួនតំបន់គោលដៅមានការកើនឡើងក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Graph Dual-stream Convolutional Attention Fusion (GD-CAF)</span></strong><br>បណ្ដាញកុងវ៉ុលលូស្យុងនិងការយកចិត្តទុកដាក់ចរន្តទ្វេជាក្រាហ្វិក (GD-CAF)</td>
+                <td>អាចចាប់យកទំនាក់ទំនងអន្តរតំបន់ (spatial) និងពេលវេលា (temporal) បានយ៉ាងល្អ ទោះបីជាតំបន់ទាំងនោះនៅដាច់ពីគ្នាក៏ដោយ។ មានល្បឿនលឿន និងប្រសិទ្ធភាពខ្ពស់នៅពេលចំនួនតំបន់កើនឡើង ដោយសារការប្រើប្រាស់បច្ចេកទេស Pooling។</td>
+                <td>ទាមទារការពង្រីកទំហំទិន្នន័យនៅដំណាក់កាលប្រើប្រាស់ Attention Heads ដែលអាចធ្វើឱ្យមានភាពស្មុគស្មាញក្នុងការគណនាបើសិនគ្មានការកាត់បន្ថយតាមរយៈប្រព័ន្ធ Pooling។</td>
+                <td>ទទួលបានកម្រិតលម្អៀង (MSE) ទាបបំផុត ០.០០۰១០៨៧៤ លើការធ្វើតេស្តក្រាហ្វិកចំនួន ១៦ តំបន់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SmaAt-UNet</span></strong><br>បណ្ដាញ SmaAt-UNet (ម៉ូដែលផ្អែកលើ UNet រួមជាមួយ Attention)</td>
+                <td>ជាម៉ូដែលដែលត្រូវបានប្រើប្រាស់យ៉ាងទូលំទូលាយសម្រាប់ការទស្សន៍ទាយអាកាសធាតុ ដែលមានប្រសិទ្ធភាពក្នុងការកាត់បន្ថយចំនួនប៉ារ៉ាម៉ែត្របានច្រើនបើធៀបនឹងម៉ូដែល UNet ដើម។</td>
+                <td>ប្រសិទ្ធភាពនៃភាពសុក្រឹតចាប់ផ្តើមថយចុះ (MSE កើនឡើង) នៅពេលដែលចំនួនតំបន់គោលដៅនៅក្នុងក្រាហ្វិកកើនឡើងលើសពី ៤ តំបន់។</td>
+                <td>ទទួលបានកម្រិតលម្អៀង (MSE) ប្រមាណ ០.០០០១៣០៣១ លើការធ្វើតេស្តក្រាហ្វិកចំនួន ១៦ តំបន់ ដែលទាបជាងម៉ូដែល GD-CAF។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Persistence Model</span></strong><br>ម៉ូដែល Persistence (ការព្យាករណ៍ដោយផ្អែកលើទិន្នន័យចុងក្រោយបំផុតជានិច្ច)</td>
+                <td>ងាយស្រួលបំផុតក្នុងការអនុវត្តដោយមិនចាំបាច់មានការបណ្តុះបណ្តាល (training) នោះទេ។ មានភាពត្រឹមត្រូវគួរសមសម្រាប់ការទស្សន៍ទាយក្នុងរយៈពេលខ្លីមែនទែន (១ម៉ោង)។</td>
+                <td>មិនមានសមត្ថភាពចាប់យកបម្រែបម្រួលអាកាសធាតុស្មុគស្មាញ ឬទំនាក់ទំនងឆ្លងតំបន់នោះទេ ហើយប្រសិទ្ធភាពធ្លាក់ចុះយ៉ាងខ្លាំងនៅពេលព្យាករណ៍លើសពី១ម៉ោង។</td>
+                <td>ទទួលបានកម្រិតលម្អៀង (MSE) ខ្ពស់បំផុត ០.០០០២២៤៤០ និងមិនមានការកែលម្អសោះទោះបីទំហំនៃក្រាហ្វិកកើនឡើងក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រ និងទិន្នន័យកម្រិតមធ្យម ដែលនិស្សិត ឬអ្នកស្រាវជ្រាវអាចចូលដំណើរការបានយ៉ាងងាយស្រួលតាមរយៈប្រព័ន្ធ Cloud ដោយមិនចាំបាច់វិនិយោគលើកុំព្យូទ័រថ្លៃៗឡើយ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ប្រើប្រាស់ GPU ប្រភេទ Nvidia Tesla T4 ដែលមានអង្គចងចាំទំហំ 16 GB (អាចដំណើរការបានដោយឥតគិតថ្លៃតាមរយៈ Google Colab)។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសាសរសេរកូដ Python ដោយពឹងផ្អែកលើបណ្ណាល័យ PyTorch Lightning សម្រាប់ការបណ្តុះបណ្តាល និង Adam optimizer។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់ទិន្នន័យទឹកភ្លៀងរយៈពេល ៧ ឆ្នាំ (២០១៦-២០២២) ពីប្រព័ន្ធ ERA5 ដែលផ្តល់ដោយស្ថាប័ន CEMS (ប្រមាណ ៤៧,៣៤៨ គំរូសម្រាប់ការបណ្តុះបណ្តាល)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្តោតលើទិន្នន័យទឹកភ្លៀងនៅតំបន់អឺរ៉ុប និងអាស៊ី-អឺរ៉ុប (Euro-Asian Region) ដែលមានលក្ខណៈអាកាសធាតុខុសពីតំបន់ត្រូពិច។ សម្រាប់ប្រទេសកម្ពុជា ការយកម៉ូដែលនេះមកអនុវត្តទាមទារឱ្យមានការបង្វឹកឡើងវិញ (retrain) ដោយប្រើប្រាស់ទិន្នន័យទឹកភ្លៀងក្នុងស្រុក ព្រោះរបបទឹកភ្លៀងនៅកម្ពុជាទទួលឥទ្ធិពលពីខ្យល់មូសុង ដែលមានលក្ខណៈបម្រែបម្រួលលឿននិងខ្លាំងជាងតំបន់អឺរ៉ុប។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យសាកល្បងដើមស្ថិតនៅតំបន់ផ្សេង ប៉ុន្តែវិធីសាស្ត្រ GD-CAF នេះមានសក្តានុពលខ្ពស់ខ្លាំងណាស់សម្រាប់កម្ពុជា ក្នុងការដោះស្រាយបញ្ហាគ្រោះទឹកជំនន់ និងការគាំទ្រដល់វិស័យកសិកម្ម។</p>
+        
+        <ul>
+            
+            <li><strong>ក្រសួងធនធានទឹក និងឧតុនិយម (MOWRAM):</strong> អាចប្រើប្រាស់បណ្ដាញក្រាហ្វិកនេះ ដើម្បីទស្សន៍ទាយភ្លៀងធ្លាក់រយៈពេលខ្លីពីស្ថានីយវាស់ទឹកភ្លៀងផ្សេងៗគ្នា ដែលនៅដាច់ពីគ្នា (ឧទាហរណ៍៖ ឥទ្ធិពលភ្លៀងពីស្ថានីយនៅជួរភ្នំក្រវាញ មកលើស្ថានីយនៅវាលទំនាបកណ្តាល) ជួយឱ្យការផ្តល់ការព្រមានទឹកជំនន់រហ័សមានភាពសុក្រឹតជាងមុន។</li>
+            
+            <li><strong>ការគ្រប់គ្រងគ្រោះមហន្តរាយនៅរាជធានីភ្នំពេញ:</strong> អាចជួយរដ្ឋបាលរាជធានីក្នុងការត្រៀមបើកទ្វារទឹក និងបើកម៉ាស៊ីនបូមទឹកបញ្ចៀសការលិចលង់ ដោយពឹងផ្អែកលើប្រព័ន្ធ Nowcasting ដែលដឹងមុនពីបរិមាណទឹកភ្លៀង (១-៦ ម៉ោងខាងមុខ) ដែលនឹងធ្លាក់ចូលតំបន់ប្រមូលផ្តុំទឹក។</li>
+            
+            <li><strong>វិស័យកសិកម្មនៅខេត្តបាត់ដំបង និងបន្ទាយមានជ័យ:</strong> ការប្រើប្រាស់ម៉ូដែលនេះដើម្បីព្យាករណ៍ទឹកភ្លៀងរយៈពេលខ្លី អាចជួយកសិករក្នុងការរៀបចំផែនការប្រមូលផល ឬការប្រើប្រាស់ជីបានទាន់ពេលវេលា ចៀសវាងការខូចខាតដោយសារភ្លៀងធ្លាក់ដោយមិនមានការដឹងមុន។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តវិធីសាស្ត្រនេះដោយពឹងផ្អែកលើទិន្នន័យស្ថានីយឧតុនិយមក្នុងស្រុក នឹងជួយលើកកម្ពស់ប្រព័ន្ធប្រកាសអាសន្នទឹកជំនន់ និងការសម្រេចចិត្តក្នុងវិស័យផ្សេងៗនៅកម្ពុជាបានយ៉ាងមានប្រសិទ្ធភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីបច្ចេកវិទ្យា Graph Neural Networks:</strong> ចាប់ផ្តើមរៀនអំពីមូលដ្ឋានគ្រឹះនៃម៉ូដែលក្រាហ្វិក និងការប្រើប្រាស់ <span class='en'>Attention Mechanisms</span> តាមរយៈវគ្គសិក្សាស៊ីជម្រៅលើវេទិកាអនឡាញដូចជា <span class='en'>Coursera</span> ឬការស្រាវជ្រាវឯកសារទាក់ទងនឹង <span class='en'>Spatiotemporal Modeling</span>។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យឧតុនិយមប្រចាំតំបន់:</strong> ទាញយកទិន្នន័យកម្រិតទឹកភ្លៀងប្រវត្តិសាស្ត្រក្នុងតំបន់អាស៊ីអាគ្នេយ៍ តាមរយៈប្រព័ន្ធ <span class='en'>Copernicus CEMS (ERA5)</span> ឬទាក់ទងស្នើសុំទិន្នន័យពីក្រសួងធនធានទឹកកម្ពុជា រួចធ្វើការសម្អាតទិន្នន័យឱ្យទៅជាទម្រង់ <span class='en'>Tensors</span> ច្រើនវិមាត្រ។</li>
+            
+            <li><strong>សាកល្បងដំណើរការកូដ និងបង្វឹកម៉ូដែលនៅលើ Cloud:</strong> ទាញយកកូដគំរូនៃគម្រោងនេះពី <span class='en'>GitHub</span> (ដូចដែលបានរៀបរាប់ក្នុងឯកសារ) រួចដំណើរការវាដោយប្រើប្រាស់ <span class='en'>Google Colab</span> ដោយកំណត់យក <span class='en'>Nvidia T4 GPU</span> និងប្រើ <span class='en'>PyTorch Lightning</span> ដើម្បីបង្វឹកម៉ូដែលជាមួយទិន្នន័យដែលបានរៀបចំ។</li>
+            
+            <li><strong>វាស់ស្ទង់សមត្ថភាព និងធ្វើការប្រៀបធៀប:</strong> អនុវត្តការវាស់ស្ទង់លទ្ធផល (Evaluation metrics) ដោយប្រើប្រាស់រង្វាស់ដូចជា <span class='en'>MSE, CSI, និង FAR</span> ដើម្បីប្រៀបធៀបសមត្ថភាពនៃម៉ូដែល <span class='en'>GD-CAF</span> ធៀបនឹងការព្យាករណ៍បែបសាមញ្ញ (<span class='en'>Persistence</span>) នៅក្នុងបរិបទអាកាសធាតុកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Precipitation nowcasting</span></td>
+                <td>ដំណើរការនៃការទស្សន៍ទាយកម្រិតទឹកភ្លៀងក្នុងរយៈពេលខ្លីមែនទែន (ពីប៉ុន្មាននាទី ទៅពីរបីម៉ោងខាងមុខ) ដោយផ្អែកលើទិន្នន័យអាកាសធាតុបច្ចុប្បន្ន និងអតីតកាលថ្មីៗ។</td>
+                <td>ដូចជាការមើលពពកខ្មៅលើមេឃ ហើយអាចប្រាប់បានថានឹងមានភ្លៀងធ្លាក់នៅកន្លែងណាក្នុងរយៈពេល១ម៉ោងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spatiotemporal graph</span></td>
+                <td>ទម្រង់ទិន្នន័យដែលភ្ជាប់ទំនាក់ទំនងរវាងទីតាំងភូមិសាស្ត្រផ្សេងៗគ្នា (លំហ/Spatial) និងការប្រែប្រួលរបស់វាតាមពេលវេលា (Temporal) ក្នុងទម្រង់ជាបណ្ដាញក្រាហ្វិក (Graph)។</td>
+                <td>ដូចជាផែនទីចរាចរណ៍ដែលបង្ហាញពីការកកស្ទះផ្លូវឆ្លងកាត់ខេត្តក្រុងនានា ដែលអាចប្រែប្រួលពីមួយម៉ោងទៅមួយម៉ោង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Graph Attention Networks</span></td>
+                <td>ប្រភេទនៃបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដែលអាចគណនា និងផ្តល់ទម្ងន់ភាពសំខាន់ (Attention) ទៅលើទំនាក់ទំនងរវាងចំណុច (Nodes) នីមួយៗនៅក្នុងក្រាហ្វិក។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលដឹងថាត្រូវប្រមូលអារម្មណ៍ស្តាប់មេរៀនពីគ្រូម្នាក់ណាជាងគេ ដើម្បីឱ្យប្រលងជាប់ ពេលដែលមានគ្រូច្រើននាក់កំពុងនិយាយព្រមគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Depthwise-separable convolution</span></td>
+                <td>បច្ចេកទេសក្នុង Deep Learning ដែលបំបែកការធ្វើប្រមាណវិធី Convolution ជាពីរដំណាក់កាល ដើម្បីកាត់បន្ថយទំហំនៃការគណនា និងធ្វើឱ្យម៉ូដែលដំណើរការបានលឿនជាងមុន ដោយប្រើប្រាស់ប៉ារ៉ាម៉ែត្រតិច។</td>
+                <td>ជំនួសឱ្យការចម្អិនម្ហូបគ្រប់មុខព្រមគ្នាក្នុងឆ្នាំងតែមួយ យើងបែងចែកវាជាការចម្អិនសាច់ដាច់ដោយឡែក រួចទើបយកមកលាយជាមួយបន្លែតាមក្រោយដើម្បីចំណេញកម្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean Squared Error (MSE)</span></td>
+                <td>រង្វាស់សម្រាប់វាយតម្លៃភាពសុក្រឹតរបស់ម៉ូដែល ដោយវាស់មធ្យមភាគនៃផលបូកការ៉េនៃគម្លាតរវាងតម្លៃដែលកុំព្យូទ័របានទស្សន៍ទាយ និងតម្លៃពិតប្រាកដ។</td>
+                <td>ដូចជាការវាស់ចម្ងាយមើលថាជាមធ្យម គ្រាប់ធ្នូនីមួយៗដែលអ្នកបាញ់នោះ ឃ្លាតពីចំណុចកណ្ដាលនៃផ្ទាំងគោលដៅប៉ុន្មានសង់ទីម៉ែត្រ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gated Fusion</span></td>
+                <td>យន្តការសម្រាប់សម្រេចចិត្តថាតើព័ត៌មានពីប្រភពផ្សេងៗគ្នា (ដូចជាព័ត៌មានពីលំហ និងពេលវេលា) គួរត្រូវបានច្របាច់បញ្ចូលគ្នាក្នុងកម្រិតណាខ្លះ ដើម្បីបង្កើតជាលទ្ធផលចុងក្រោយ។</td>
+                <td>ដូចជាប៉ូលីសចរាចរណ៍ដែលសម្រេចចិត្តថាត្រូវបើកឬបិទច្រកផ្លូវណាមួយ ដើម្បីបញ្ចេញចរាចរណ៍ឱ្យហូរទៅមុខបានលឿនបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pooling</span></td>
+                <td>វិធីសាស្ត្រកាត់បន្ថយទំហំនៃទិន្នន័យបញ្ជូនចូល ដោយរក្សាទុកតែព័ត៌មានសំខាន់ៗ ដើម្បីសន្សំទំហំអង្គចងចាំ និងបង្កើនល្បឿននៃការគណនារបស់ម៉ូដែល។</td>
+                <td>ដូចជាការសង្ខេបសៀវភៅ១០០ទំព័រ ឱ្យមកសល់ត្រឹម១ទំព័រ ដោយដកស្រង់យកតែចំណុចស្នូលសំខាន់ៗប៉ុណ្ណោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-network-methods-nlp-review-2017.html">
+                    <span class="km">វិធីសាស្ត្របណ្ដាញសរសៃប្រសាទសម្រាប់ការដំណើរការភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Network Methods for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/encoding-time-series-images-cnn-2015.html">
+                    <span class="km">ការបំប្លែងស៊េរីទិន្នន័យពេលវេលាជាទម្រង់រូបភាពសម្រាប់ការត្រួតពិនិត្យ និងចំណាត់ថ្នាក់ដោយប្រើបណ្ដាញសរសៃប្រសាទ Tiled Convolutional Neural Networks</span><br>
+                    <span class="en article-original-title">Encoding Time Series as Images for Visual Inspection and Classification Using Tiled Convolutional Neural Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-transfer-learning-nlp-ruder-2019.html">
+                    <span class="km">ការរៀនផ្ទេរចំណេះដឹងតាមបណ្ដាញសរសៃប្រសាទសម្រាប់ការកែច្នៃភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Transfer Learning for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/deep-learning-in-diagnostics-2025.html">
+                    <span class="km">ការរៀនស៊ីជម្រៅក្នុងការធ្វើរោគវិនិច្ឆ័យ</span><br>
+                    <span class="en article-original-title">Deep Learning in Diagnostics</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ai-predictive-analytics-edge-cloud-2021.html">
+                    <span class="km">ការវិភាគព្យាករណ៍ដែលជំរុញដោយ AI សម្រាប់បង្កើនប្រសិទ្ធភាពការប្រើប្រាស់ធនធាននៅក្នុងមជ្ឈមណ្ឌលទិន្នន័យ Edge-Cloud</span><br>
+                    <span class="en article-original-title">AI-Driven Predictive Analytics for Optimizing Resource Utilization in Edge-Cloud Data Centers</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=spatiotemporal+graph+neural+networks+for+weather+forecasting" target="_blank" rel="noopener"><span class="en">spatiotemporal graph neural networks for weather forecasting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=precipitation+nowcasting+using+convolutional+attention+mechanisms" target="_blank" rel="noopener"><span class="en">precipitation nowcasting using convolutional attention mechanisms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=depthwise-separable+convolutions+in+deep+learning+models" target="_blank" rel="noopener"><span class="en">depthwise-separable convolutions in deep learning models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Graph+Attention+Networks+%28GAT%29+multi-site+meteorological+prediction" target="_blank" rel="noopener"><span class="en">Graph Attention Networks (GAT) multi-site meteorological prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ERA5+precipitation+dataset+machine+learning+benchmark+models" target="_blank" rel="noopener"><span class="en">ERA5 precipitation dataset machine learning benchmark models</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

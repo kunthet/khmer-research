@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ឆ្ពោះទៅរកការបិទស្លាកផ្នែកនៃពាក្យ (POS Tagging) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់ភាសាកានូរី (Kanuri)៖ ដំណោះស្រាយផ្អែកលើម៉ូដែល Hidden Markov - TOWARDS EFFICIENT PART-OF-SPEECH TAGGING FOR THE KANURI LANGUAGE: A HIDDEN MA... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ឆ្ពោះទៅរកការបិទស្លាកផ្នែកនៃពាក្យ (POS Tagging) ប្រកបដោយប្រសិ។ ការសិក្សានេះដោះស្រាយបញ្ហាកង្វះខាតធនធានភាសា និងសំណុំទិន្នន័យសម្រាប់ភាសាកានូរី (Kanuri) ដែលជាឧបសគ្គ...">
+    
+    <meta name="keywords" content="Part-of-Speech Tagging, Hidden Markov Model, Kanuri Language, Natural Language Processing, Low-Resource Languages, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/kanuri-pos-tagging-hmm-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/kanuri-pos-tagging-hmm-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/kanuri-pos-tagging-hmm-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/kanuri-pos-tagging-hmm-2024.html">
+    <meta property="og:title" content="ឆ្ពោះទៅរកការបិទស្លាកផ្នែកនៃពាក្យ (POS Tagging) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់ភាសាកានូរី (Kanuri)៖ ដំណោះស្រាយផ្អែកលើម៉ូដែល Hidden Markov | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាកង្វះខាតធនធានភាសា និងសំណុំទិន្នន័យសម្រាប់ភាសាកានូរី (Kanuri) ដែលជាឧបសគ្គដល់ការអភិវឌ្ឍប្រព័ន្ធដំណើរការភាសាធម្មជាតិ (NLP) ដូចជាកម្មវិធីបិទស្លាកផ្នែកនៃពាក្យ (POS tagger) ជាដើម។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2024, Nigerian Journal of Engineering Science and Technology Research-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Part-of-Speech Tagging">
+    
+    <meta property="article:tag" content="Hidden Markov Model">
+    
+    <meta property="article:tag" content="Kanuri Language">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+    <meta property="article:tag" content="Low-Resource Languages">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ឆ្ពោះទៅរកការបិទស្លាកផ្នែកនៃពាក្យ (POS Tagging) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់ភាសាកានូរី (Kanuri)៖ ដំណោះស្រាយផ្អែកលើម៉ូដែល Hidden Markov">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហាកង្វះខាតធនធានភាសា និងសំណុំទិន្នន័យសម្រាប់ភាសាកានូរី (Kanuri) ដែលជាឧបសគ្គដល់ការអភិវឌ្ឍប្រព័ន្ធដំណើរការភាសាធម្មជាតិ (NLP) ដូចជាកម្មវិធីបិទស្លាកផ្នែកនៃពាក្យ (POS tagger) ជាដើម។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1786\u17d2\u1796\u17c4\u17c7\u1791\u17c5\u179a\u1780\u1780\u17b6\u179a\u1794\u17b7\u1791\u179f\u17d2\u179b\u17b6\u1780\u1795\u17d2\u1793\u17c2\u1780\u1793\u17c3\u1796\u17b6\u1780\u17d2\u1799 (POS Tagging) \u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6\u1780\u17b6\u1793\u17bc\u179a\u17b8 (Kanuri)\u17d6 \u178a\u17c6\u178e\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+      "name": "TOWARDS EFFICIENT PART-OF-SPEECH TAGGING FOR THE KANURI LANGUAGE: A HIDDEN MARKOV MODEL-BASED SOLUTION",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1780\u1784\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1792\u1793\u1792\u17b6\u1793\u1797\u17b6\u179f\u17b6 \u1793\u17b7\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6\u1780\u17b6\u1793\u17bc\u179a\u17b8 (Kanuri) \u178a\u17c2\u179b\u1787\u17b6\u17a7\u1794\u179f\u1782\u17d2\u1782\u178a\u179b\u17cb\u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1797\u17b6\u179f\u17b6\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7 (NLP) \u178a\u17bc\u1785\u1787\u17b6\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u1794\u17b7\u1791\u179f\u17d2\u179b\u17b6\u1780\u1795\u17d2\u1793\u17c2\u1780\u1793\u17c3\u1796\u17b6\u1780\u17d2\u1799 (POS tagger) \u1787\u17b6\u178a\u17be\u1798\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/kanuri-pos-tagging-hmm-2024.html",
+      "author": [{"@type": "Person", "name": "Tukur, A. (Borno State University)"},{"@type": "Person", "name": "Jibrin, A. (Borno State University)"},{"@type": "Person", "name": "Inuwa, U. (Borno State University)"}],
+      "datePublished": "2024, Nigerian Journal of Engineering Science and Technology Research",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "TOWARDS EFFICIENT PART-OF-SPEECH TAGGING FOR THE KANURI LANGUAGE: A HIDDEN MARKOV MODEL-BASED SOLUTION",
+        "url": "https://www.researchgate.net/profile/Aminu-Tukur-6/publication/384189854_TOWARDS_EFFICIENT_PART-OF-SPEECH_TAGGING_FOR_THE_KANURI_LANGUAGE_A_HIDDEN_MARKOV_MODEL-_BASED_SOLUTION/links/66ed7c8597a75a4b4838ec55/TOWARDS-EFFICIENT-PART-OF-SPEECH-TAGGING-FOR-THE-KANURI-LANGUAGE-A-HIDDEN-MARKOV-MODEL-BASED-SOLUTION.pdf"
+      },
+      "keywords": ["Part-of-Speech Tagging", "Hidden Markov Model", "Kanuri Language", "Natural Language Processing", "Low-Resource Languages"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1786\u17d2\u1796\u17c4\u17c7\u1791\u17c5\u179a\u1780\u1780\u17b6\u179a\u1794\u17b7\u1791\u179f\u17d2\u179b\u17b6\u1780\u1795\u17d2\u1793\u17c2\u1780\u1793\u17c3\u1796\u17b6\u1780\u17d2\u1799 (POS Tagging) \u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6\u1780\u17b6\u1793\u17bc\u179a\u17b8 (Kanuri)\u17d6 \u178a\u17c6\u178e\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b Hidden Markov",
+          "item": "https://khmerresearch.com/papers/technology/kanuri-pos-tagging-hmm-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ឆ្ពោះទៅរកការបិទស្លាកផ្នែកនៃពាក្យ (POS Tagging) ប្រកបដោយប្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> TOWARDS EFFICIENT PART-OF-SPEECH TAGGING FOR THE KANURI LANGUAGE: A HIDDEN MARKOV MODEL-BASED SOLUTION<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Aminu-Tukur-6/publication/384189854_TOWARDS_EFFICIENT_PART-OF-SPEECH_TAGGING_FOR_THE_KANURI_LANGUAGE_A_HIDDEN_MARKOV_MODEL-_BASED_SOLUTION/links/66ed7c8597a75a4b4838ec55/TOWARDS-EFFICIENT-PART-OF-SPEECH-TAGGING-FOR-THE-KANURI-LANGUAGE-A-HIDDEN-MARKOV-MODEL-BASED-SOLUTION.pdf" target="_blank" rel="noopener">www.researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ឆ្ពោះទៅរកការបិទស្លាកផ្នែកនៃពាក្យ (POS Tagging) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់ភាសាកានូរី (Kanuri)៖ ដំណោះស្រាយផ្អែកលើម៉ូដែល Hidden Markov</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> TOWARDS EFFICIENT PART-OF-SPEECH TAGGING FOR THE KANURI LANGUAGE: A HIDDEN MARKOV MODEL-BASED SOLUTION</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Tukur, A. (Borno State University), Jibrin, A. (Borno State University), Inuwa, U. (Borno State University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Nigerian Journal of Engineering Science and Technology Research</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហាកង្វះខាតធនធានភាសា និងសំណុំទិន្នន័យសម្រាប់ភាសាកានូរី (Kanuri) ដែលជាឧបសគ្គដល់ការអភិវឌ្ឍប្រព័ន្ធដំណើរការភាសាធម្មជាតិ (NLP) ដូចជាកម្មវិធីបិទស្លាកផ្នែកនៃពាក្យ (POS tagger) ជាដើម។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រមូលចងក្រងសំណុំទិន្នន័យអត្ថបទ និងប្រើប្រាស់វិធីសាស្ត្រស្ថិតិម៉ូដែល Hidden Markov សម្រាប់ការបង្ហាត់ និងធ្វើតេស្ត។
+        
+        <ul>
+            
+            <li>ការបង្កើតសំណុំទិន្នន័យអត្ថបទភាសាកានូរីចំនួន ១០.០០០ ពាក្យ (Corpus Development)</li>
+            
+            <li>ការបែងចែកទិន្នន័យ ៩០% សម្រាប់ការបង្ហាត់ និង ១០% សម្រាប់ការធ្វើតេស្ត (Train/Test Split validation)</li>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែលម៉ាកូវលាក់ (Hidden Markov Model - HMM) ដើម្បីរៀន និងបែងចែកចំណាត់ថ្នាក់ពាក្យ</li>
+            
+            <li>ការវាយតម្លៃដំណើរការតាមរយៈរង្វាស់ Precision, Recall, F1-score និង Accuracy (Performance Metrics)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>កម្មវិធីបិទស្លាក HMM-based POS នេះសម្រេចបាននូវភាពត្រឹមត្រូវរួមចំនួន ៨២,៧៤% លើទិន្នន័យធ្វើតេស្តភាសាកានូរី។</li>
+            
+            <li>ម៉ូដែលនេះមានដំណើរការល្អលើប្រភេទពាក្យទូទៅ ដូចជា សព្វនាម (F1-score: ០,៩៣) និង នាម (F1-score: ០,៨៤) ប៉ុន្តែនៅមានកម្រិតចំពោះពាក្យកម្រ ដូចជា លេខ និង និមិត្តសញ្ញា ដែលទទួលលទ្ធផល ០។</li>
+            
+            <li>លទ្ធផលនេះបង្ហាញថា ម៉ូដែល HMM អាចផ្ដល់ជាមូលដ្ឋានគ្រឹះដ៏ល្អសម្រាប់ការអភិវឌ្ឍប្រព័ន្ធដំណើរការភាសាធម្មជាតិបន្តបន្ទាប់សម្រាប់ភាសាដែលខ្វះខាតធនធាន (Low-resource languages) នេះ ទោះបីជាត្រូវការទិន្នន័យបន្ថែមសម្រាប់ពាក្យកម្រក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Hidden Markov Model (Kanuri Dataset - Proposed)</span></strong><br>ម៉ូដែលម៉ាកូវលាក់ (HMM) សម្រាប់ទិន្នន័យភាសាកានូរី (សំណើស្រាវជ្រាវ)</td>
+                <td>ដំណើរការបានល្អសម្រាប់ប្រភេទពាក្យទូទៅ (នាម សព្វនាម កិរិយាសព្ទ) និងត្រូវការទិន្នន័យតិចក្នុងការបង្ហាត់។</td>
+                <td>បរាជ័យក្នុងការទស្សន៍ទាយពាក្យកម្រ (លេខ និមិត្តសញ្ញា ឧទានសព្ទ) ដោយទទួលបានពិន្ទុសូន្យ ដោយសារទិន្នន័យបង្ហាត់មិនគ្រប់គ្រាន់។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវរួម (Overall Accuracy) ៨២,៧៤% លើសំណុំទិន្នន័យធ្វើតេស្ត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hidden Markov Model (Yoruba Dataset - Reference)</span></strong><br>ម៉ូដែលម៉ាកូវលាក់ (HMM) សម្រាប់ទិន្នន័យភាសាយ៉ូរូបា (ការប្រៀបធៀបឯកសារយោង)</td>
+                <td>បង្ហាញពីស្ថិរភាពនៃវិធីសាស្ត្រ HMM លើភាសាដែលខ្វះខាតធនធានផ្សេងទៀត។</td>
+                <td>ទំហំទិន្នន័យនៅមានកម្រិតតូច (៨.០៧៥ ពាក្យ) ដែលអាចប្រឈមនឹងបញ្ហាក្នុងការប្រើប្រាស់ជាមួយប្រព័ន្ធធំៗ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវរួម ៨៣,៦២% លើសំណុំទិន្នន័យ ៨.០៧៥ ពាក្យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hidden Markov Model (Hausa Dataset - Reference)</span></strong><br>ម៉ូដែលម៉ាកូវលាក់ (HMM) សម្រាប់ទិន្នន័យភាសាហូសា (ការប្រៀបធៀបឯកសារយោង)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការកំណត់ប្រភេទពាក្យជាក់លាក់ណាមួយ ដូចជាគុណនាមដែលអាចសម្រេចបានភាពត្រឹមត្រូវរហូតដល់ ១០០%។</td>
+                <td>មានភាពទន់ខ្សោយលើការបែងចែកឈ្នាប់ (Conjunction) ដែលមានភាពត្រឹមត្រូវត្រឹមតែ ៥០% ប៉ុណ្ណោះ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវរួមជាមធ្យម ៧៦,៧៩%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនតម្រូវឱ្យមានធនធានកុំព្យូទ័រលំដាប់ខ្ពស់នោះទេ ប៉ុន្តែទាមទារការប្រឹងប្រែងពេលវេលាជាច្រើនលើការប្រមូល និងបិទស្លាកទិន្នន័យដោយដៃពីសំណាក់អ្នកជំនាញភាសា។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យអត្ថបទតូចមួយចំនួន ១០.០០០ ពាក្យ ដែលត្រូវប្រមូលដោយដៃពីអក្សរសិល្ប៍ និងវចនានុក្រមកានូរី។</li>
+        
+        <li><strong>Expertise:</strong> តម្រូវឱ្យមានអ្នកជំនាញភាសាវិទ្យាដើម្បីធ្វើការបិទស្លាកចំណាត់ថ្នាក់ពាក្យ (POS tags) ឱ្យបានត្រឹមត្រូវជាមុនសិន សម្រាប់ប្រើជាទិន្នន័យបង្ហាត់។</li>
+        
+        <li><strong>Hardware:</strong> ម៉ូដែលស្ថិតិដូចជា HMM មិនតម្រូវឱ្យប្រើប្រាស់ GPU នោះទេ អាចដំណើរការបានយ៉ាងរលូននៅលើកុំព្យូទ័រ CPU ធម្មតា។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យត្រឹមតែ ១០.០០០ ពាក្យ មកពីវចនានុក្រមគ្រាមភាសា Manga និងអក្សរសិល្ប៍នៃភាសាកានូរីភាគឦសានប្រទេសនីហ្សេរីយ៉ា ដែលមិនអាចតំណាងឱ្យគ្រាមភាសាទាំងអស់នៃភាសានេះបានទេ។ សម្រាប់ប្រទេសកម្ពុជា នេះគឺជាមេរៀនដ៏សំខាន់មួយ ព្រោះនៅពេលអភិវឌ្ឍ NLP សម្រាប់ភាសាជនជាតិដើមភាគតិច ការខ្វះខាតទិន្នន័យចម្រុះអាចធ្វើឱ្យប្រព័ន្ធមិនស្គាល់ពាក្យកម្រ ឬគ្រាមភាសាតំបន់ផ្សេងទៀត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ និងស័ក្តិសមបំផុតក្នុងការយកមកអនុវត្តនៅក្នុងប្រទេសកម្ពុជា ពិសេសសម្រាប់ការផ្តួចផ្តើមអភិវឌ្ឍបច្ចេកវិទ្យាសម្រាប់ភាសាដែលខ្វះខាតធនធាន (Low-resource languages)។</p>
+        
+        <ul>
+            
+            <li><strong>ការអភិរក្សភាសាជនជាតិដើមភាគតិច (ខេត្តរតនគិរី និងមណ្ឌលគិរី):</strong> អាចប្រើប្រាស់ម៉ូដែល HMM ដើម្បីបង្កើតប្រព័ន្ធបិទស្លាកពាក្យ (POS Tagger) សម្រាប់ភាសាទំពួន ព្នង ឬគួយ ដោយចាប់ផ្តើមពីទិន្នន័យតូចៗ ដើម្បីជួយដល់ការចងក្រងវចនានុក្រមឌីជីថល និងប្រព័ន្ធបកប្រែជាមូលដ្ឋាន។</li>
+            
+            <li><strong>ការស្រាវជ្រាវភាសាវិទ្យាកុំព្យូទ័រនៅសាកលវិទ្យាល័យ (ឧទាហរណ៍៖ សាកលវិទ្យាល័យភូមិន្ទភ្នំពេញ):</strong> និស្សិតជំនាញវិទ្យាសាស្ត្រកុំព្យូទ័រ និងភាសាវិទ្យា អាចប្រើប្រាស់វិធីសាស្ត្រស្ថិតិនេះ ជាគម្រោងស្រាវជ្រាវបឋមដើម្បីបង្រៀនកុំព្យូទ័រឱ្យយល់ពីវេយ្យាករណ៍នៃគ្រាមភាសាខ្មែរតាមតំបន់ផ្សេងៗ មុននឹងឈានទៅប្រើប្រាស់បច្ចេកវិទ្យា Deep Learning ដ៏ស្មុគស្មាញ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការប្រើប្រាស់ HMM គឺជាចំណុចចាប់ផ្តើមដ៏មានប្រសិទ្ធភាពចំណាយ និងធនធានខ្ពស់ សម្រាប់ការស្រាវជ្រាវ NLP លើភាសាដែលពុំទាន់មានទិន្នន័យឌីជីថលទូលំទូលាយនៅក្នុងបរិបទប្រទេសកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>កំណត់សំណុំទិន្នន័យគោលដៅ និងប្រមូលអត្ថបទ:</strong> ជ្រើសរើសភាសាគោលដៅមួយនៅកម្ពុជា (ឧទាហរណ៍៖ ភាសាព្នង) ហើយប្រមូលអត្ថបទឱ្យបានប្រហែល ១០.០០០ ពាក្យពីសៀវភៅរឿងព្រេង ឬឯកសារចងក្រងនានា ដោយរក្សាទុកជាទម្រង់ Text ធម្មតា។</li>
+            
+            <li><strong>កំណត់ស្តង់ដារស្លាកពាក្យ និងធ្វើការបិទស្លាកដោយដៃ:</strong> សហការជាមួយអ្នកជំនាញភាសា ដើម្បីកំណត់ប្រភេទពាក្យ (នាម, កិរិយា, គុណនាម...) រួចប្រើប្រាស់ឧបករណ៍បិទស្លាកដូចជា <span class='en'>Doccano</span> ឬ <span class='en'>INCEpTION</span> ដើម្បីបិទស្លាកពាក្យលើអត្ថបទ។</li>
+            
+            <li><strong>រៀបចំទិន្នន័យ និងអភិវឌ្ឍម៉ូដែលម៉ាកូវលាក់ (HMM):</strong> បែងចែកទិន្នន័យជាពីរផ្នែក (៩០% សម្រាប់ Train និង ១០% សម្រាប់ Test) រួចសរសេរកូដ Python ដោយប្រើប្រាស់បណ្ណាល័យ <span class='en'>NLTK</span> សម្រាប់ដំណើរការភាសា ដើម្បីបង្កើត និងបង្ហាត់ម៉ូដែល HMM។</li>
+            
+            <li><strong>វាយតម្លៃប្រសិទ្ធភាពម៉ូដែល:</strong> ប្រើប្រាស់បណ្ណាល័យ <span class='en'>Scikit-Learn</span> មកគណនារង្វាស់វាយតម្លៃ (Precision, Recall, F1-Score និង Accuracy) ដោយត្រូវពិនិត្យវិភាគយ៉ាងលម្អិតទៅលើចំណុចខ្សោយរបស់ម៉ូដែលចំពោះប្រភេទពាក្យកម្រ។</li>
+            
+            <li><strong>កែលម្អម៉ូដែល និងពង្រីកសំណុំទិន្នន័យ:</strong> វិភាគលើកំហុស (Error Analysis) របស់ម៉ូដែល ហើយធ្វើការប្រមូល និងបិទស្លាកទិន្នន័យបន្ថែមលើប្រភេទពាក្យដែលម៉ូដែលទាយខុសច្រើន ដើម្បីបង្កើនភាពត្រឹមត្រូវ និងទំហំទិន្នន័យឱ្យកាន់តែធំ និងចម្រុះ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Natural Language Processing (NLP)</span></td>
+                <td>ជាសាខាមួយនៃបញ្ញាសិប្បនិម្មិត (AI) ដែលផ្តោតលើការបង្រៀនកុំព្យូទ័រឱ្យអាចអាន យល់ សរសេរ និងបកប្រែភាសារបស់មនុស្សតាមបែបធម្មជាតិ។</td>
+                <td>ដូចជាការបង្រៀនកុមារតូចម្នាក់ឱ្យចេះស្តាប់ និងនិយាយភាសាខ្មែរអញ្ចឹងដែរ តែនេះគឺយើងបង្រៀនកុំព្យូទ័រ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Part-of-Speech (POS) Tagging</span></td>
+                <td>ដំណើរការក្នុងការកំណត់ប្រភេទនិងចាត់ថ្នាក់ពាក្យនីមួយៗក្នុងប្រយោគទៅតាមតួនាទីវេយ្យាករណ៍របស់វា (ដូចជានាម កិរិយាសព្ទ គុណនាម) ដើម្បីឱ្យកុំព្យូទ័រអាចយល់ពីបរិបទនៃប្រយោគ។</td>
+                <td>ដូចជាការបិទស្លាកឈ្មោះលើគ្រឿងទេសក្នុងផ្ទះបាយ ដើម្បីឱ្យចុងភៅ (កុំព្យូទ័រ) ដឹងថាណាមួយជាអំបិល ណាមួយជាស្ករសមុននឹងយកទៅធ្វើម្ហូប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model (HMM)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិដែលអាចទស្សន៍ទាយព្រឹត្តិការណ៍បន្ទាប់ (ឧទាហរណ៍៖ ទាយប្រភេទពាក្យបន្ទាប់) ដោយគណនាប្រូបាប៊ីលីតេផ្អែកតែលើស្ថានភាពបច្ចុប្បន្ន ដោយមិនពឹងផ្អែកលើប្រវត្តិអតីតកាលឆ្ងាយនោះទេ។</td>
+                <td>ដូចជាការទស្សន៍ទាយអាកាសធាតុថ្ងៃស្អែក ដោយមើលតែស្ថានភាពមេឃថ្ងៃនេះ មិនបាច់ខ្វល់ពីអាកាសធាតុខែមុននោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Corpus</span></td>
+                <td>បណ្តុំអត្ថបទ ឬទិន្នន័យភាសាដ៏ធំដែលត្រូវបានប្រមូលចងក្រងយ៉ាងមានប្រព័ន្ធ សម្រាប់ប្រើប្រាស់ជាធនធានក្នុងការស្រាវជ្រាវភាសាវិទ្យា និងសម្រាប់បង្ហាត់ម៉ូដែលកុំព្យូទ័រ។</td>
+                <td>ដូចជាបណ្ណាល័យដ៏ធំមួយដែលផ្ទុកសៀវភៅរាប់ពាន់ក្បាល ដើម្បីឱ្យកុំព្យូទ័រចូលទៅអាន និងរៀនពីរបៀបដែលមនុស្សប្រើប្រាស់ពាក្យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Generative sequence model</span></td>
+                <td>ប្រភេទម៉ូដែលសិក្សារបស់ម៉ាស៊ីន (Machine Learning) ដែលអាចបង្កើត ឬទស្សន៍ទាយទិន្នន័យបន្តបន្ទាប់គ្នា (ដូចជាលំដាប់ពាក្យ) ដោយរៀនពីទម្រង់ច្បាប់ទម្លាប់នៃទិន្នន័យដែលវាធ្លាប់បានឃើញកន្លងមក។</td>
+                <td>ដូចជាមុខងារទាយពាក្យបន្ទាប់ (Auto-predict) នៅលើក្តារចុចទូរសព្ទដៃរបស់យើងនៅពេលកំពុងវាយអក្សរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">F1-score</span></td>
+                <td>រង្វាស់វាយតម្លៃសមត្ថភាពរបស់ម៉ូដែល ដែលយកតម្លៃមធ្យមរវាង Precision (ភាពសុក្រឹតនៃការទាយត្រូវ) និង Recall (សមត្ថភាពរកឃើញទិន្នន័យដែលត្រូវរក) ដើម្បីផ្តល់នូវពិន្ទុរួមមួយដែលឆ្លុះបញ្ចាំងពីគុណភាពពិតប្រាកដ។</td>
+                <td>ដូចជាការវាស់ស្ទង់សមត្ថភាពសិស្ស ដែលមិនត្រឹមតែគិតលើការឆ្លើយសំណួរបានត្រឹមត្រូវប៉ុណ្ណោះទេ តែត្រូវធានាថាសិស្សមិនរំលងសំណួរចោលច្រើនផងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">under-resourced languages</span></td>
+                <td>ភាសាដែលមានទិន្នន័យឌីជីថល (ដូចជា អត្ថបទតាមអ៊ីនធឺណិត សំឡេង វចនានុក្រមអេឡិចត្រូនិក) តិចតួចបំផុត ដែលធ្វើឱ្យមានការលំបាកយ៉ាងខ្លាំងក្នុងការអភិវឌ្ឍបច្ចេកវិទ្យា និងប្រព័ន្ធ AI សម្រាប់ភាសាទាំងនោះ។</td>
+                <td>ដូចជាសិស្សដែលចង់ស្រាវជ្រាវធ្វើលំហាត់អំពីប្រធានបទមួយ តែរកសៀវភៅយោងក្នុងបណ្ណាល័យសឹងតែមិនបាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/pos-tagging-hausa-texts-hmm-2020.html">
+                    <span class="km">ការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS) សម្រាប់អត្ថបទភាសាហូសា (Hausa) ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Parts-of-Speech Tagging of Hausa-Based Texts Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+                    <span class="km">ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង</span><br>
+                    <span class="en article-original-title">DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/voice-identification-python-hmm-2020.html">
+                    <span class="km">ការកំណត់អត្តសញ្ញាណសំឡេងនៅក្នុង Python ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Voice Identification in Python Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/speech-recognition-hidden-markov-model-2018.html">
+                    <span class="km">ការសម្គាល់សំឡេង និងម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Speech Recognition and Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-network-methods-nlp-review-2017.html">
+                    <span class="km">វិធីសាស្ត្របណ្ដាញសរសៃប្រសាទសម្រាប់ការដំណើរការភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Network Methods for Natural Language Processing</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=part-of-speech+tagging%22+OR+%22POS+tagging%22+%22low-resource+languages%22+OR+%22African+languages" target="_blank" rel="noopener"><span class="en">part-of-speech tagging" OR "POS tagging" "low-resource languages" OR "African languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model%22+AND+%22part-of-speech+tagging%22+AND+%22natural+language+processing" target="_blank" rel="noopener"><span class="en">Hidden Markov Model" AND "part-of-speech tagging" AND "natural language processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning%22+OR+%22LSTM%22+OR+%22CRF%22+%22part-of-speech+tagging%22+%22low+resource+language%22+comparison" target="_blank" rel="noopener"><span class="en">deep learning" OR "LSTM" OR "CRF" "part-of-speech tagging" "low resource language" comparison</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Kanuri+language%22+AND+%28%22natural+language+processing%22+OR+%22computational+linguistics%22+OR+%22corpus%22%29" target="_blank" rel="noopener"><span class="en">Kanuri language" AND ("natural language processing" OR "computational linguistics" OR "corpus")</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

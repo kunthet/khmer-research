@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ក្របខ័ណ្ឌផ្អែកលើការធ្វើត្រីកោណមាត្រទិន្នន័យ និងបច្ចេកទេស Machine Learning ដើម្បីបំពេញទិន្នន័យដែលបាត់បង់ក្នុងស៊េរីពេលវេលាអាកាសធាតុ - A Framework Based on Data Triangulation and Machine Learning Techniques to Fi... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ក្របខ័ណ្ឌផ្អែកលើការធ្វើត្រីកោណមាត្រទិន្នន័យ និងបច្ចេកទេស Mac។ ស៊េរីពេលវេលានៃទិន្នន័យអាកាសធាតុជាញឹកញាប់ជួបប្រទះបញ្ហាបាត់បង់ទិន្នន័យ ដែលកាត់បន្ថយគុណភាពនៃការវិភាគ...">
+    
+    <meta name="keywords" content="machine learning, data imputation, triangulation, weather time series, neural networks, Brazil, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/data-triangulation-ml-weather-missing-data.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/data-triangulation-ml-weather-missing-data.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/data-triangulation-ml-weather-missing-data.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/data-triangulation-ml-weather-missing-data.html">
+    <meta property="og:title" content="ក្របខ័ណ្ឌផ្អែកលើការធ្វើត្រីកោណមាត្រទិន្នន័យ និងបច្ចេកទេស Machine Learning ដើម្បីបំពេញទិន្នន័យដែលបាត់បង់ក្នុងស៊េរីពេលវេលាអាកាសធាតុ | KhmerResearch.com">
+    <meta property="og:description" content="ស៊េរីពេលវេលានៃទិន្នន័យអាកាសធាតុជាញឹកញាប់ជួបប្រទះបញ្ហាបាត់បង់ទិន្នន័យ ដែលកាត់បន្ថយគុណភាពនៃការវិភាគ និងការព្យាករណ៍អាកាសធាតុ។ ឯកសារនេះដោះស្រាយបញ្ហានេះដោយស្នើឡើងនូវគំរូកូនកាត់ដើម្បីប៉ាន់ស្មាននិងបំពេញទិ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="Preprint submitted to Elsevier-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="machine learning">
+    
+    <meta property="article:tag" content="data imputation">
+    
+    <meta property="article:tag" content="triangulation">
+    
+    <meta property="article:tag" content="weather time series">
+    
+    <meta property="article:tag" content="neural networks">
+    
+    <meta property="article:tag" content="Brazil">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ក្របខ័ណ្ឌផ្អែកលើការធ្វើត្រីកោណមាត្រទិន្នន័យ និងបច្ចេកទេស Machine Learning ដើម្បីបំពេញទិន្នន័យដែលបាត់បង់ក្នុងស៊េរីពេលវេលាអាកាសធាតុ">
+    <meta name="twitter:description" content="ស៊េរីពេលវេលានៃទិន្នន័យអាកាសធាតុជាញឹកញាប់ជួបប្រទះបញ្ហាបាត់បង់ទិន្នន័យ ដែលកាត់បន្ថយគុណភាពនៃការវិភាគ និងការព្យាករណ៍អាកាសធាតុ។ ឯកសារនេះដោះស្រាយបញ្ហានេះដោយស្នើឡើងនូវគំរូកូនកាត់ដើម្បីប៉ាន់ស្មាននិងបំពេញទិ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17d2\u179a\u1794\u1781\u17d0\u178e\u17d2\u178c\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u178f\u17d2\u179a\u17b8\u1780\u17c4\u178e\u1798\u17b6\u178f\u17d2\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u1793\u17b7\u1784\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f Machine Learning \u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1780\u17d2\u1793\u17bb\u1784\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb",
+      "name": "A Framework Based on Data Triangulation and Machine Learning Techniques to Fill Missing Data in Weather Time Series",
+      "description": "\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1793\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb\u1787\u17b6\u1789\u17b9\u1780\u1789\u17b6\u1794\u17cb\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u178a\u17c2\u179b\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1782\u17bb\u178e\u1797\u17b6\u1796\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb\u17d4 \u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u1799\u179f\u17d2\u1793\u17be\u17a1\u17be\u1784\u1793\u17bc\u179c\u1782\u17c6\u179a\u17bc\u1780\u17bc\u1793\u1780\u17b6\u178f\u17cb\u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u1793\u17b7\u1784\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17b8\u178f\u17bb\u178e\u17d2\u17a0\u1797\u17b6\u1796\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u178a\u17c4\u1799\u1798\u17b6\u1793\u17a2\u178f\u17d2\u179a\u17b6\u1780\u17c6\u17a0\u17bb\u179f\u1791\u17b6\u1794\u1794\u17c6\u1795\u17bb\u178f\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/data-triangulation-ml-weather-missing-data.html",
+      "author": [{"@type": "Person", "name": "Vin\u00edcius H. C. Lima (Universidade Federal de S\u00e3o Jo\u00e3o del-Rei)"},{"@type": "Person", "name": "Marconi A. Pereira (Universidade Federal de S\u00e3o Jo\u00e3o del-Rei)"}],
+      "datePublished": "Preprint submitted to Elsevier",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A Framework Based on Data Triangulation and Machine Learning Techniques to Fill Missing Data in Weather Time Series",
+        "url": "https://www.ufsj.edu.br/portal2-repositorio/File/cemec/TCC/tcc--VINICIUS%20HAENDER%20CALDAS%20LIMA.pdf"
+      },
+      "keywords": ["machine learning", "data imputation", "triangulation", "weather time series", "neural networks", "Brazil"],
+      "about": "Climatology and Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17d2\u179a\u1794\u1781\u17d0\u178e\u17d2\u178c\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u178f\u17d2\u179a\u17b8\u1780\u17c4\u178e\u1798\u17b6\u178f\u17d2\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u1793\u17b7\u1784\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f Machine Learning \u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u17c6\u1796\u17c1\u1789\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1780\u17d2\u1793\u17bb\u1784\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb",
+          "item": "https://khmerresearch.com/papers/technology/data-triangulation-ml-weather-missing-data.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ក្របខ័ណ្ឌផ្អែកលើការធ្វើត្រីកោណមាត្រទិន្នន័យ និងបច្ចេកទេស ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>English Title:</strong> A Framework Based on Data Triangulation and Machine Learning Techniques to Fill Missing Data in Weather Time Series<br>
+        
+        <strong>Source:</strong> <a href="https://www.ufsj.edu.br/portal2-repositorio/File/cemec/TCC/tcc--VINICIUS%20HAENDER%20CALDAS%20LIMA.pdf" target="_blank" rel="noopener">www.ufsj.edu.br</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ក្របខ័ណ្ឌផ្អែកលើការធ្វើត្រីកោណមាត្រទិន្នន័យ និងបច្ចេកទេស Machine Learning ដើម្បីបំពេញទិន្នន័យដែលបាត់បង់ក្នុងស៊េរីពេលវេលាអាកាសធាតុ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A Framework Based on Data Triangulation and Machine Learning Techniques to Fill Missing Data in Weather Time Series</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Vinícius H. C. Lima (Universidade Federal de São João del-Rei), Marconi A. Pereira (Universidade Federal de São João del-Rei)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> Preprint submitted to Elsevier</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Climatology and Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ស៊េរីពេលវេលានៃទិន្នន័យអាកាសធាតុជាញឹកញាប់ជួបប្រទះបញ្ហាបាត់បង់ទិន្នន័យ ដែលកាត់បន្ថយគុណភាពនៃការវិភាគ និងការព្យាករណ៍អាកាសធាតុ។ ឯកសារនេះដោះស្រាយបញ្ហានេះដោយស្នើឡើងនូវគំរូកូនកាត់ដើម្បីប៉ាន់ស្មាននិងបំពេញទិន្នន័យសីតុណ្ហភាពដែលបាត់ដោយមានអត្រាកំហុសទាបបំផុត។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតក្របខ័ណ្ឌពីរដំណាក់កាលដោយរួមបញ្ចូលវិធីសាស្ត្រធ្វើត្រីកោណមាត្រតាមគណិតវិទ្យា (Triangulation methods) ជាមួយនឹងបច្ចេកទេសរៀនដោយម៉ាស៊ីន (Machine learning) សម្រាប់វាយតម្លៃស្ថានីយអាកាសធាតុប្រេស៊ីលចំនួន៤០។
+        
+        <ul>
+            
+            <li>ការរៀបចំទិន្នន័យទុកជាមុន (Data Preprocessing) ដោយទាញយកទិន្នន័យសីតុណ្ហភាពពីតំបន់ចំនួន១០នៃប្រទេសប្រេស៊ីលចន្លោះឆ្នាំ២០០៨-២០១៧។</li>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្រធ្វើត្រីកោណមាត្រដំណាក់កាលទី១ (Phase 1: Triangulation) ដូចជា Arithmetic Average, Inverse Distance Weighted, Normal Ratio និង Regional Weight។</li>
+            
+            <li>ការអនុវត្តបច្ចេកទេសរៀនដោយម៉ាស៊ីនដំណាក់កាលទី២ (Phase 2: Machine Learning) រួមមាន Neural Network, Support Vector Machine, Regression Trees និង Bagged Trees។</li>
+            
+            <li>ការប្រៀបធៀបស្តង់ដារស្ថិតិ (Statistical Comparison) ដោយប្រើប្រាស់កំហុសអប្បបរមា NRMSE ព្រមទាំងការធ្វើតេស្ត ANOVA និង Tukey (p-value < 0.05)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការរួមបញ្ចូលគ្នារវាងបណ្តាញសរសៃប្រសាទ (Neural Networks) និងវិធីសាស្ត្រត្រីកោណមាត្រ Modified Inverse Distance Weighted (ម៉ូដែលទី៨) ឬ Regional Weight (ម៉ូដែលទី១០) ទទួលបានលទ្ធផលល្អបំផុតនិងត្រឹមត្រូវបំផុតក្នុងការបំពេញទិន្នន័យដែលបាត់។</li>
+            
+            <li>វិធីសាស្ត្រកូនកាត់ទាំងនេះផ្តល់អត្រាកំហុសគិតជា NRMSE ទាបជាងយ៉ាងច្បាស់ បើប្រៀបធៀបទៅនឹងការប្រើប្រាស់ត្រឹមតែវិធីសាស្ត្រធ្វើត្រីកោណមាត្រដាច់ដោយឡែកដោយគ្មាន Machine learning។</li>
+            
+            <li>នៅក្នុងគ្រប់តំបន់សិក្សាទាំង១០ ដែលមានអាកាសធាតុខុសៗគ្នា ម៉ូដែលដែលពឹងផ្អែកលើ Neural Networks មានភាពលេចធ្លោជាងម៉ូដែល Support Vector Machine ឬ Decision Trees ដោយបង្ហាញពីប្រសិទ្ធភាពខ្ពស់នៃក្របខ័ណ្ឌនេះសម្រាប់ការកសាងមូលដ្ឋានទិន្នន័យអាកាសធាតុដ៏រឹងមាំ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងការចំណាយ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Neural Network with Modified IDW / Regional Weight (Models 8 & 10)</span></strong><br>បណ្តាញសរសៃប្រសាទរួមបញ្ចូលជាមួយវិធីសាស្ត្រ MIDW ឬ Regional Weight</td>
+                <td>ផ្តល់នូវភាពត្រឹមត្រូវខ្ពស់បំផុត និងអត្រាកំហុស (NRMSE) ទាបបំផុតនៅគ្រប់តំបន់អាកាសធាតុ។ វាអាចរៀនពីទំនាក់ទំនងស្មុគស្មាញរវាងទិន្នន័យស្ថានីយជិតខាង។</td>
+                <td>ទាមទារពេលវេលាក្នុងការបង្ហាត់ម៉ូដែល និងការកំណត់រចនាសម្ព័ន្ធបណ្តាញ (ឧ. កំណត់ 10 hidden layers) បើប្រៀបធៀបទៅនឹងវិធីសាស្ត្រធម្មតា។</td>
+                <td>ទទួលបានចំណាត់ថ្នាក់លេខ១ ជាម៉ូដែលដែលល្អដាច់គេ ឬស្ថិតក្នុងចំណោមម៉ូដែលល្អបំផុតនៅគ្រប់តំបន់សិក្សាទាំង១០ ផ្អែកលើការធ្វើតេស្ត ANOVA និ​ង Tukey។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Regional Weight (Model 5 - Triangulation Only)</span></strong><br>ការថ្លឹងទម្ងន់តាមតំបន់ (វិធីសាស្ត្រត្រីកោណមាត្រតែមួយមុខ)</td>
+                <td>ងាយស្រួលអនុវត្ត មិនត្រូវការថាមពលកុំព្យូទ័រខ្ពស់ក្នុងការបង្ហាត់ និងមិនត្រូវការទិន្នន័យបណ្តុះបណ្តាល (Training data)។</td>
+                <td>មានភាពសុក្រឹតទាបជាងម៉ូដែលកូនកាត់ដែលប្រើ Machine Learning នៅពេលដែលទិន្នន័យមានបម្រែបម្រួលខ្លាំង។</td>
+                <td>ទទួលបានលទ្ធផលល្អគួរឱ្យកត់សម្គាល់ និងជាជម្រើសដ៏ល្អបំផុតក្នុងករណីដែលមិនអាចប្រើប្រាស់បច្ចេកទេស Machine Learning បាន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM) Hybrids</span></strong><br>ម៉ូដែលកូនកាត់ Support Vector Machine</td>
+                <td>ដំណើរការបានល្អជាងវិធីសាស្ត្រត្រីកោណមាត្រធម្មតា និងមានសមត្ថភាពល្អក្នុងការដោះស្រាយទិន្នន័យដែលមិនមានទំនាក់ទំនងជាបន្ទាត់ត្រង់ (Non-linear) ដោយប្រើ Gaussian Kernel។</td>
+                <td>លទ្ធផលនៅមានកម្រិត និងចាញ់ប្រៀបម៉ូដែល Neural Network ខណៈពេលដែលនៅតែទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រស្មុគស្មាញ។</td>
+                <td>ជាប់ចំណាត់ថ្នាក់កម្រិតមធ្យម ពោលគឺល្អជាង Regression Trees តែមិនអាចយកឈ្នះ Neural Network នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Regression Trees & Bagged Trees Hybrids</span></strong><br>ម៉ូដែលកូនកាត់ Regression Trees និង Bagged Trees</td>
+                <td>បច្ចេកទេស Bagging ជួយកាត់បន្ថយបញ្ហា Overfitting និងភាពប្រែប្រួលនៃលទ្ធផល (Variance) បើធៀបនឹងការប្រើ Regression Tree តែមួយ។</td>
+                <td>ទិន្នន័យព្យាករណ៍អាចមានភាពមិនច្បាស់លាស់ខ្ពស់ ដោយសារបំរែបំរួលនៅតាម Nodes ហើយផ្តល់អត្រាកំហុសខ្ពស់ជាងគេក្នុងចំណោមវិធីសាស្ត្រ Machine Learning។</td>
+                <td>ផ្តល់អត្រាកំហុស NRMSE ខ្ពស់ជាងគេ និងស្ថិតនៅចំណាត់ថ្នាក់ចុងក្រោយក្នុងចំណោមម៉ូដែល Machine Learning ទាំងអស់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ទោះបីជាឯកសារមិនបានបញ្ជាក់យ៉ាងច្បាស់ពីការចំណាយលើផ្នែករឹង (Hardware) ក៏ដោយ ក៏ការអនុវត្តក្របខ័ណ្ឌនេះតម្រូវឱ្យមានធនធានកុំព្យូទ័រជាមូលដ្ឋានសម្រាប់ការគណនា និងការបង្ហាត់ម៉ូដែលកូនកាត់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមាន CPU ធម្មតា ឬ GPU កម្រិតមធ្យម គឺគ្រប់គ្រាន់សម្រាប់ការបង្ហាត់ម៉ូដែល Neural Network (10 hidden layers) លើទិន្នន័យអាកាសធាតុទំហំតូចទៅមធ្យម។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យអាកាសធាតុប្រវត្តិសាស្ត្ររយៈពេលយ៉ាងតិច ៥ ទៅ ១០ ឆ្នាំ (ឧ. សីតុណ្ហភាពអតិបរមាប្រចាំថ្ងៃ រយៈកម្ពស់ ទីតាំងភូមិសាស្ត្រ) ពីស្ថានីយគោលដៅ និងស្ថានីយជិតខាងយ៉ាងហោចណាស់ចំនួន ៣។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី ឬភាសាកូដសម្រាប់ Data Science និង Machine Learning (ឧទាហរណ៍ Python, R, ឬ MATLAB) និងបណ្ណាល័យសម្រាប់ធ្វើតេស្តស្ថិតិវិភាគ (ANOVA)។</li>
+        
+        <li><strong>Expertise:</strong> អ្នកជំនាញផ្នែកវិទ្យាសាស្ត្រទិន្នន័យ (Data Science) វិភាគស្ថិតិ និងមានការយល់ដឹងពីបាតុភូតឧតុនិយមនិងអាកាសធាតុ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីស្ថានីយអាកាសធាតុនៅតំបន់ចំនួន១០ នៃប្រទេសប្រេស៊ីល (ពីឆ្នាំ២០០៨ ដល់ ២០១៧) ដែលតំណាងឱ្យអាកាសធាតុចម្រុះជាច្រើនរួមមាន តំបន់អេក្វាទ័រ និងពាក់កណ្តាលស្ងួត។ សម្រាប់ប្រទេសកម្ពុជាដែលមានអាកាសធាតុត្រូពិចមូសុង ការអនុវត្តម៉ូដែលនេះចាំបាច់ត្រូវមានការធ្វើតេស្តឡើងវិញ ព្រោះរបាយនៃស្ថានីយអាកាសធាតុ និងលក្ខណៈភូមិសាស្ត្ររបស់យើងមានភាពខុសគ្នា ដែលអាចជះឥទ្ធិពលដល់វិធីសាស្ត្រវាស់ចម្ងាយ (IDW)។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រកូនកាត់នេះមានសក្តានុពលខ្ពស់ខ្លាំងណាស់សម្រាប់កម្ពុជា ក្នុងការដោះស្រាយបញ្ហាខ្វះខាតទិន្នន័យអាកាសធាតុ ដែលតែងតែកើតមានដោយសារការខូចខាតឧបករណ៍ ឬកង្វះការថែទាំ។</p>
+        
+        <ul>
+            
+            <li><strong>ក្រសួងធនធានទឹក និងឧតុនិយម (MOWRAM):</strong> អាចប្រើប្រាស់ក្របខ័ណ្ឌនេះដើម្បីបំពេញទិន្នន័យសីតុណ្ហភាព ឬបរិមាណទឹកភ្លៀងដែលបាត់បង់នៅតាមស្ថានីយស្វ័យប្រវត្តិក្នុងខេត្តនានា ដើម្បីធ្វើឱ្យការព្យាករណ៍អាកាសធាតុជាតិមានភាពសុក្រឹតជាងមុន។</li>
+            
+            <li><strong>វិស័យកសិកម្ម (កសិកម្មឆ្លាតវៃនៅខេត្តបាត់ដំបង និងពោធិ៍សាត់):</strong> ការបំពេញចន្លោះទិន្នន័យសីតុណ្ហភាព និងទឹកភ្លៀងជួយឱ្យអ្នកស្រាវជ្រាវ និងកសិករអាចព្យាករណ៍ទិន្នផលស្រូវ និងរៀបចំផែនការដាំដុះបានត្រឹមត្រូវ ទោះបីជាស្ថានីយវាស់វែងក្នុងស្រុកជួបបញ្ហាបច្ចេកទេសក៏ដោយ។</li>
+            
+            <li><strong>ការត្រៀមបង្ការគ្រោះមហន្តរាយតាមដងទន្លេមេគង្គ:</strong> គណៈកម្មាធិការជាតិគ្រប់គ្រងគ្រោះមហន្តរាយ អាចទាញយកទិន្នន័យពេញលេញដើម្បីវិភាគនិន្នាការនៃរលកកម្តៅ ឬទឹកជំនន់ ដែលជួយសង្គ្រោះអាយុជីវិត និងទ្រព្យសម្បត្តិប្រជាជន។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការច្របាច់បញ្ចូលគ្នានូវរង្វាស់ភូមិសាស្ត្រ និងបញ្ញាសិប្បនិម្មិត នឹងជួយកម្ពុជាកសាងបាននូវឃ្លាំងទិន្នន័យអាកាសធាតុដ៏រឹងមាំមួយ ដែលជាឆ្អឹងខ្នងសម្រាប់ការអភិវឌ្ឍប្រកបដោយចីរភាព និងការទប់ទល់នឹងការប្រែប្រួលអាកាសធាតុ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យជាមុន (Data Collection & Preprocessing):</strong> ប្រមូលទិន្នន័យអាកាសធាតុពីស្ថានីយក្នុងស្រុកយ៉ាងហោចណាស់៤ (ស្ថានីយគោលដៅ១ និងស្ថានីយជិតខាង៣) ក្នុងរយៈពេល៥-១០ឆ្នាំចុងក្រោយ។ ប្រើប្រាស់ <span class="en">Pandas</span> ក្នុង <span class="en">Python</span> ដើម្បីច្រោះយកតែទិន្នន័យដែលមានថ្ងៃខែត្រួតគ្នានៅតាមស្ថានីយជិតខាង និងកំណត់អត្តសញ្ញាណទិន្នន័យដែលបាត់បង់។</li>
+            
+            <li><strong>អនុវត្តវិធីសាស្ត្រធ្វើត្រីកោណមាត្រ (Apply Triangulation Methods - Phase 1):</strong> ប្រើប្រាស់កូដ <span class="en">NumPy</span> ឬ <span class="en">SciPy</span> ដើម្បីគណនាចម្ងាយ (Haversine distance) និងប៉ាន់ស្មានតម្លៃទិន្នន័យដែលបាត់ដោយប្រើវិធីសាស្ត្រ Modified Inverse Distance Weighted (MIDW) និង Regional Weight (RW) ជាទិន្នន័យមូលដ្ឋាន។</li>
+            
+            <li><strong>បង្ហាត់ម៉ូដែលបញ្ញាសិប្បនិម្មិត (Train Machine Learning Models - Phase 2):</strong> បែងចែកទិន្នន័យជា ៧០% សម្រាប់ Training និង ៣០% សម្រាប់ Testing។ ប្រើប្រាស់ <span class="en">Scikit-Learn</span> ឬ <span class="en">TensorFlow/Keras</span> ដើម្បីបង្កើតម៉ូដែល Neural Network ដែលមាន 10 hidden layers ដោយបញ្ចូលលទ្ធផលពីដំណាក់កាលទី១ ធ្វើជា Input features។</li>
+            
+            <li><strong>វាយតម្លៃ និងវិភាគផ្នែកស្ថិតិ (Evaluate & Statistical Comparison):</strong> គណនាតម្លៃ NRMSE ដើម្បីវាស់ស្ទង់កម្រិតកំហុស។ បន្ទាប់មកប្រើប្រាស់ <span class="en">Statsmodels</span> ដើម្បីធ្វើតេស្ត ANOVA និង Tukey's test ដោយផ្អែកលើ p-value < 0.05 ដើម្បីបញ្ជាក់តាមបែបវិទ្យាសាស្ត្រថា តើម៉ូដែលណាមួយមានដំណើរការល្អដាច់គេ។</li>
+            
+            <li><strong>ដាក់ពង្រាយជាប្រព័ន្ធស្វ័យប្រវត្តិ (Deploy and Dashboarding):</strong> អភិវឌ្ឍន៍ផ្ទាំងគ្រប់គ្រង (Dashboard) តាមរយៈ <span class="en">Streamlit</span> ឬ <span class="en">Dash</span> ដើម្បីអនុញ្ញាតឱ្យអ្នកពាក់ព័ន្ធអាចបញ្ចូលទិន្នន័យស្ថានីយដែលមានចន្លោះខ្វះខាត និងទទួលបានទិន្នន័យដែលត្រូវបានបំពេញរួចរាល់ដោយស្វ័យប្រវត្តិដើម្បីយកទៅប្រើប្រាស់បន្ត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">data imputation</span></td>
+                <td>ដំណើរការនៃការប៉ាន់ស្មាន ឬបំពេញទិន្នន័យដែលបាត់បង់នៅក្នុងសំណុំទិន្នន័យ ដោយផ្អែកលើទិន្នន័យដែលមានស្រាប់ ដើម្បីឱ្យការវិភាគឬការចងក្រងម៉ូដែលអាចដំណើរការបានដោយរលូន។</td>
+                <td>ដូចជាការសរសេរបំពេញចន្លោះអក្សរដែលបាត់ក្នុងប្រយោគមួយ ដោយទាយតាមអត្ថន័យនៃពាក្យជុំវិញវា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">triangulation</span></td>
+                <td>វិធីសាស្ត្រគណិតវិទ្យាក្នុងការកំណត់តម្លៃ ឬទីតាំងមួយដែលមិនស្គាល់ ដោយផ្អែកលើទិន្នន័យពីចំណុចយោង (ស្ថានីយ) ដែលនៅជុំវិញវា ដើម្បីទាញរកតម្លៃកណ្តាល។</td>
+                <td>ដូចជាការស្វែងរកទីតាំងរបស់ទូរសព្ទដែលបាត់ ដោយវាស់ចម្ងាយពីអង់តែនទូរសព្ទចំនួន៣ដែលនៅជិតបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Inverse Distance Weighted</span></td>
+                <td>បច្ចេកទេសប៉ាន់ស្មានទិន្នន័យ ដែលផ្តល់តម្លៃ (ទម្ងន់) ខ្ពស់ទៅឱ្យស្ថានីយដែលនៅជិតទីតាំងគោលដៅជាងស្ថានីយដែលនៅឆ្ងាយ ដោយសន្មត់ថាទីតាំងជិតគ្នាមានលក្ខណៈអាកាសធាតុស្រដៀងគ្នា។</td>
+                <td>ដូចជាការស្តាប់មតិអ្នកជិតខាងផ្ទះទល់មុខគ្នា ដោយឱ្យតម្លៃខ្ពស់ជាងមតិអ្នកដែលរស់នៅម្ខាងទៀតនៃភូមិ ពេលចង់ដឹងពីសភាពការណ៍ក្នុងភូមិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Neural Network</span></td>
+                <td>ប្រព័ន្ធក្បួនដោះស្រាយ (Machine Learning) ដែលត្រូវបានរចនាឡើងដោយត្រាប់តាមបណ្តាញសរសៃប្រសាទខួរក្បាលមនុស្ស ដើម្បីរៀននិងស្វែងយល់ពីទំនាក់ទំនងដ៏ស្មុគស្មាញនៃទិន្នន័យបញ្ចូលគ្នាច្រើន។</td>
+                <td>ដូចជាក្មេងម្នាក់ដែលរៀនចំណាំមុខសត្វឆ្កែនិងឆ្មា តាមរយៈការមើលរូបភាពច្រើនដងរហូតដល់អាចបែងចែកដាច់ដោយខ្លួនឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machine</span></td>
+                <td>ក្បួនដោះស្រាយ Machine Learning ដែលបែងចែកទិន្នន័យជាក្រុមៗ ដោយស្វែងរកបន្ទាត់ ឬព្រំដែន (Hyperplane) ដ៏ល្អបំផុតដើម្បីកាត់ផ្តាច់រវាងចំណាត់ថ្នាក់នៃទិន្នន័យទាំងនោះ។</td>
+                <td>ដូចជាការគូសបន្ទាត់មួយនៅលើតុដើម្បីបែងចែកផ្លែប៉ោមពណ៌ក្រហម និងផ្លែប៉ោមពណ៌ខៀវឱ្យនៅដាច់ពីគ្នាដោយសុវត្ថិភាពបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bagged Trees</span></td>
+                <td>ការប្រមូលផ្តុំម៉ូដែលដើមឈើសម្រេចចិត្ត (Decision Trees) តូចៗជាច្រើនបញ្ចូលគ្នា ដើម្បីធ្វើការទស្សន៍ទាយរួមមួយ ដែលជួយកាត់បន្ថយកំហុសប្រភេទ Overfitting និងកាត់បន្ថយភាពប្រែប្រួលនៃទិន្នន័យ។</td>
+                <td>ដូចជាការសួរយោបល់ពីគ្រូពេទ្យ១០នាក់ផ្សេងគ្នា ហើយយកចម្លើយរួមមួយដែលភាគច្រើនយល់ស្រប ជំនួសឱ្យការជឿគ្រូពេទ្យតែម្នាក់ឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">normalized root mean-squared error (NRMSE)</span></td>
+                <td>រង្វាស់ស្ថិតិដែលប្រើសម្រាប់វាស់ស្ទង់កម្រិតកំហុសនៃម៉ូដែលទស្សន៍ទាយ ដោយប្រៀបធៀបភាពខុសគ្នារវាងទិន្នន័យជាក់ស្តែង និងទិន្នន័យដែលម៉ូដែលបានទាយ រួចធ្វើការធ្វើឱ្យមានស្តង់ដាររួម (Normalize)។</td>
+                <td>ដូចជាការដាក់ពិន្ទុឱ្យអ្នកបាញ់ធ្នូ ដោយវាស់ចម្ងាយសរុបដែលព្រួញឃ្លាតឆ្ងាយពីចំណុចកណ្តាលនៃគោលដៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">analysis of variance (ANOVA)</span></td>
+                <td>វិធីសាស្ត្រស្ថិតិដែលប្រើដើម្បីប្រៀបធៀបមធ្យមភាគនៃក្រុមទិន្នន័យច្រើនជាងពីរ ដើម្បីរកមើលថាតើម៉ូដែលមួយណាល្អជាងគេដាច់ ឬគ្រាន់តែមានភាពខុសគ្នាតាមលក្ខណៈចៃដន្យ។</td>
+                <td>ដូចជាការប្រកួតរត់ប្រណាំងច្រើនដង ដើម្បីបញ្ជាក់ថាអ្នកឈ្នះពិតជាលឿនជាងគេមែន ឬគ្រាន់តែសំណាងល្អក្នុងវគ្គទីមួយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/time-series-forecasting-finance-data-mining-2023.html">
+                    <span class="km">ការវិភាគស៊េរីពេលវេលា និងការព្យាករណ៍ក្នុងវិស័យហិរញ្ញវត្ថុ៖ អភិក្រមនៃការទាញយកទិន្នន័យ</span><br>
+                    <span class="en article-original-title">Time series analysis and forecasting in finance: A data mining approach</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-network-methods-nlp-review-2017.html">
+                    <span class="km">វិធីសាស្ត្របណ្ដាញសរសៃប្រសាទសម្រាប់ការដំណើរការភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Network Methods for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/overview-supervised-machine-learning-methods-2017-2.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃវិធីសាស្ត្ររៀនម៉ាស៊ីនមានការត្រួតពិនិត្យ</span><br>
+                    <span class="en article-original-title">An overview of the supervised machine learning methods</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/classification-class-imbalance-review-2013.html">
+                    <span class="km">ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ</span><br>
+                    <span class="en article-original-title">Classification with class imbalance problem: a review</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/education/integrating-affect-sensors-autotutor-2005.html">
+                    <span class="km">ការបញ្ចូលឧបករណ៍ចាប់សញ្ញាអារម្មណ៍ទៅក្នុងប្រព័ន្ធបង្រៀនឆ្លាតវៃ</span><br>
+                    <span class="en article-original-title">Integrating Affect Sensors in an Intelligent Tutoring System</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+machine+learning+and+spatial+interpolation+missing+weather+data" target="_blank" rel="noopener"><span class="en">hybrid machine learning and spatial interpolation missing weather data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=artificial+neural+networks+vs+support+vector+machines+for+climate+time+series+imputation" target="_blank" rel="noopener"><span class="en">artificial neural networks vs support vector machines for climate time series imputation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=inverse+distance+weighting+modifications+for+complex+topography" target="_blank" rel="noopener"><span class="en">inverse distance weighting modifications for complex topography</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=handling+missing+data+in+meteorological+time+series+using+ensemble+tree+methods" target="_blank" rel="noopener"><span class="en">handling missing data in meteorological time series using ensemble tree methods</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+LSTM+techniques+for+gap+filling+in+hydrological+time+series" target="_blank" rel="noopener"><span class="en">deep learning LSTM techniques for gap filling in hydrological time series</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>
