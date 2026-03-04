@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>តម្លៃ SHAPLEY ជាវិធីសាស្ត្រទូទៅសម្រាប់ការជ្រើសរើសលក្ខណៈពិសេសដែលអាចបកស្រាយបាន - SHAPLEY VALUES AS A GENERIC APPROACH TO INTERPRETABLE FEATURE SELECTION | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី តម្លៃ SHAPLEY ជាវិធីសាស្ត្រទូទៅសម្រាប់ការជ្រើសរើសលក្ខណៈពិសេស។ តើការប្រើប្រាស់តម្លៃ Shapley (Shapley values) សម្រាប់ការជ្រើសរើសលក្ខណៈពិសេស (Feature selection) ន...">
+    
+    <meta name="keywords" content="Feature Selection, Shapley Values, Machine Learning, Classification, Explainable AI, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/shapley-values-feature-selection-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/shapley-values-feature-selection-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/shapley-values-feature-selection-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/shapley-values-feature-selection-2023.html">
+    <meta property="og:title" content="តម្លៃ SHAPLEY ជាវិធីសាស្ត្រទូទៅសម្រាប់ការជ្រើសរើសលក្ខណៈពិសេសដែលអាចបកស្រាយបាន | KhmerResearch.com">
+    <meta property="og:description" content="តើការប្រើប្រាស់តម្លៃ Shapley (Shapley values) សម្រាប់ការជ្រើសរើសលក្ខណៈពិសេស (Feature selection) នៅក្នុងម៉ូដែល Machine Learning ពិតជាមានប្រសិទ្ធភាព និងអាចជំនួសវិធីសាស្ត្រប្រពៃណីផ្សេងទៀតបានដែរឬទេ?">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="October 2023, Tampere University-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Feature Selection">
+    
+    <meta property="article:tag" content="Shapley Values">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Classification">
+    
+    <meta property="article:tag" content="Explainable AI">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="តម្លៃ SHAPLEY ជាវិធីសាស្ត្រទូទៅសម្រាប់ការជ្រើសរើសលក្ខណៈពិសេសដែលអាចបកស្រាយបាន">
+    <meta name="twitter:description" content="តើការប្រើប្រាស់តម្លៃ Shapley (Shapley values) សម្រាប់ការជ្រើសរើសលក្ខណៈពិសេស (Feature selection) នៅក្នុងម៉ូដែល Machine Learning ពិតជាមានប្រសិទ្ធភាព និងអាចជំនួសវិធីសាស្ត្រប្រពៃណីផ្សេងទៀតបានដែរឬទេ?">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u178f\u1798\u17d2\u179b\u17c3 SHAPLEY \u1787\u17b6\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1791\u17bc\u1791\u17c5\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1794\u17b6\u1793",
+      "name": "SHAPLEY VALUES AS A GENERIC APPROACH TO INTERPRETABLE FEATURE SELECTION",
+      "description": "\u178f\u17be\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u178f\u1798\u17d2\u179b\u17c3 Shapley (Shapley values) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f (Feature selection) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b Machine Learning \u1796\u17b7\u178f\u1787\u17b6\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796 \u1793\u17b7\u1784\u17a2\u17b6\u1785\u1787\u17c6\u1793\u17bd\u179f\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8\u1795\u17d2\u179f\u17c1\u1784\u1791\u17c0\u178f\u1794\u17b6\u1793\u178a\u17c2\u179a\u17ac\u1791\u17c1?",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/shapley-values-feature-selection-2023.html",
+      "author": [{"@type": "Person", "name": "Igor Trotskii (Tampere University)"}],
+      "datePublished": "October 2023, Tampere University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "SHAPLEY VALUES AS A GENERIC APPROACH TO INTERPRETABLE FEATURE SELECTION",
+        "url": "https://trepo.tuni.fi/bitstream/handle/10024/151997/TrotskiiIgor.pdf?sequence=2"
+      },
+      "keywords": ["Feature Selection", "Shapley Values", "Machine Learning", "Classification", "Explainable AI"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u178f\u1798\u17d2\u179b\u17c3 SHAPLEY \u1787\u17b6\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1791\u17bc\u1791\u17c5\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u1794\u17b6\u1793",
+          "item": "https://khmerresearch.com/papers/technology/shapley-values-feature-selection-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>តម្លៃ SHAPLEY ជាវិធីសាស្ត្រទូទៅសម្រាប់ការជ្រើសរើសលក្ខណៈពិ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> SHAPLEY VALUES AS A GENERIC APPROACH TO INTERPRETABLE FEATURE SELECTION<br>
+        
+        <strong>Source:</strong> <a href="https://trepo.tuni.fi/bitstream/handle/10024/151997/TrotskiiIgor.pdf?sequence=2" target="_blank" rel="noopener">trepo.tuni.fi</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>តម្លៃ SHAPLEY ជាវិធីសាស្ត្រទូទៅសម្រាប់ការជ្រើសរើសលក្ខណៈពិសេសដែលអាចបកស្រាយបាន</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> SHAPLEY VALUES AS A GENERIC APPROACH TO INTERPRETABLE FEATURE SELECTION</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Igor Trotskii (Tampere University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> October 2023, Tampere University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> តើការប្រើប្រាស់តម្លៃ Shapley (Shapley values) សម្រាប់ការជ្រើសរើសលក្ខណៈពិសេស (Feature selection) នៅក្នុងម៉ូដែល Machine Learning ពិតជាមានប្រសិទ្ធភាព និងអាចជំនួសវិធីសាស្ត្រប្រពៃណីផ្សេងទៀតបានដែរឬទេ?</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រៀបធៀបវិធីសាស្ត្រជ្រើសរើសលក្ខណៈពិសេសដោយផ្អែកលើតម្លៃ Shapley ជាមួយនឹងវិធីសាស្ត្រ Filter និង Wrapper ប្រពៃណីផ្សេងៗទៀត ទៅលើទិន្នន័យអត្ថបទ និងទិន្នន័យលេខ។
+        
+        <ul>
+            
+            <li>ការធ្វើចំណាត់ថ្នាក់អត្ថបទខ្នាតធំ (High-dimensional text classification) ដូចជាទិន្នន័យ Enron Spam និង Brown corpus</li>
+            
+            <li>ការធ្វើចំណាត់ថ្នាក់ទិន្នន័យលេខ (Numerical data classification) ដូចជា MIT-BIH, Arcene, និង Ionosphere</li>
+            
+            <li>ការវាយតម្លៃដំណើរការម៉ូដែល (Model performance evaluation) ដោយប្រើ F1-score, Precision, Recall និង Runtime</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រតម្លៃ Shapley ធម្មតា (Naive Shapley-based method) អាចផ្តល់លទ្ធផលល្អ ប៉ុន្តែវាមិនមានសមត្ថភាពកាត់បន្ថយលក្ខណៈពិសេសដែលជាន់គ្នា (Redundancy) នោះទេ។</li>
+            
+            <li>វិធីសាស្ត្រ Interaction Shapley Values (ISV) អាចដោះស្រាយភាពជាន់គ្នាបាន ប៉ុន្តែវាទាមទារថាមពលកុំព្យូទ័រខ្ពស់ និងអង្គចងចាំច្រើន ដែលធ្វើឱ្យវាមិនអាចប្រើប្រាស់បានសម្រាប់ទិន្នន័យខ្នាតធំ។</li>
+            
+            <li>ក្បួនដោះស្រាយ mRMR (Minimum Redundancy Maximum Relevance) ត្រូវបានរកឃើញថាជាជម្រើសដ៏ល្អបំផុត ដែលផ្តល់នូវលទ្ធផលខ្ពស់ជាប់លាប់ជាមួយនឹងពេលវេលាដំណើរការ (Runtime) សមស្របជាងគេឆ្លងកាត់សំណុំទិន្នន័យជាច្រើន។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Naive Shapley Values (SHAP)</span></strong><br>វិធីសាស្ត្រតម្លៃ Shapley ធម្មតា</td>
+                <td>អាចចាប់យកឥទ្ធិពលរួមបញ្ចូលគ្នានៃលក្ខណៈពិសេសតាមរយៈម៉ូដែល Tree-based និងផ្តល់ការបកស្រាយបានយ៉ាងល្អ។ វាមានល្បឿនលឿនគួរសមបើធៀបនឹងវិធីសាស្ត្រ Wrapper ដទៃទៀត។</td>
+                <td>មិនមានសមត្ថភាពក្នុងការដោះស្រាយភាពជាន់គ្នា (Redundancy) ដោយស្វ័យប្រវត្តិទេ ដែលអាចធ្វើឱ្យជ្រើសរើសលក្ខណៈពិសេសស្រដៀងគ្នាច្រើនពេក។ ទាមទារការប្រើប្រាស់ម៉ូដែល Tree-based ប៉ុណ្ណោះ។</td>
+                <td>ទទួលបានលទ្ធផល F1-Score ខ្ពស់បំផុតលើទិន្នន័យ Enron Spam ប៉ុន្តែមានប្រសិទ្ធភាពទាបជាងវិធីសាស្ត្រប្រពៃណីផ្សេងទៀតលើទិន្នន័យ Brown Corpus។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Interaction Shapley Values (ISV)</span></strong><br>វិធីសាស្ត្រអន្តរកម្មតម្លៃ Shapley</td>
+                <td>ដោះស្រាយបញ្ហាភាពជាន់គ្នាបានយ៉ាងល្អ ដោយលុបបំបាត់ឥទ្ធិពលមិនល្អពីលក្ខណៈពិសេសដែលមិនបានជ្រើសរើស។ វាពិចារណាលើអន្តរកម្ម (Interactions) រវាងលក្ខណៈពិសេសនីមួយៗ។</td>
+                <td>ទាមទារអង្គចងចាំ Memory ខ្ពស់បំផុតរហូតដល់ O(M^2) និងស៊ីពេលគណនាខ្លាំង ដែលធ្វើឱ្យវាមិនអាចប្រើប្រាស់បានទាល់តែសោះសម្រាប់ទិន្នន័យខ្នាតធំ (High-dimensional data)។</td>
+                <td>ផ្តល់លទ្ធផលល្អប្រសើរខ្លាំងលើសំណុំទិន្នន័យតូចៗដូចជា MIT-BIH និង Arcene ប៉ុន្តែមិនអាចអនុវត្តលើទិន្នន័យអត្ថបទបានទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Minimum Redundancy Maximum Relevance (mRMR)</span></strong><br>វិធីសាស្ត្រកាត់បន្ថយភាពជាន់គ្នានិងបង្កើនភាពពាក់ព័ន្ធ (mRMR)</td>
+                <td>មានដំណើរការលឿន អាចកាត់បន្ថយលក្ខណៈពិសេសដែលជាន់គ្នាបានល្អ និងមានប្រសិទ្ធភាពខ្ពស់ជាប់លាប់នៅគ្រប់សំណុំទិន្នន័យ។ វាមានតុល្យភាពល្អរវាងពេលវេលាដំណើរការនិងភាពសុក្រឹត។</td>
+                <td>មិនអាចចាប់យកឥទ្ធិពលអន្តរកម្ម (Interactions) ស្មុគស្មាញរវាងលក្ខណៈពិសេសដូចវិធីសាស្ត្រ ISV ឬ Wrapper ដទៃទៀតនោះទេ។</td>
+                <td>ជាវិធីសាស្ត្រដ៏រឹងមាំមួយដែលផ្តល់លទ្ធផលល្អខ្លាំង និងលឿន ជាពិសេសលើទិន្នន័យ Ionosphere និង Brown Corpus។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Chi-Square (χ2)</span></strong><br>វិធីសាស្ត្រ Chi-Square</td>
+                <td>មានល្បឿនលឿនខ្លាំងសម្រាប់ការគណនា និងមានប្រសិទ្ធភាពខ្ពស់ក្នុងការស្វែងរកទំនាក់ទំនងរវាងលក្ខណៈពិសេសនិងប្រភេទចំណាត់ថ្នាក់ (Categorical data)។</td>
+                <td>អាចប្រើបានតែជាមួយទិន្នន័យដែលមានលក្ខណៈជាប្រភេទ (Categorical/Discrete) ប៉ុណ្ណោះ និងមិនអាចដោះស្រាយភាពជាន់គ្នាបានទេ។</td>
+                <td>ជាវិធីសាស្ត្រដែលដំណើរការបានល្អបំផុត និងមានល្បឿនលឿនលើសំណុំទិន្នន័យ Brown Corpus ក្នុងចំណោមវិធីសាស្ត្រ Filter ដទៃទៀត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការប្រើប្រាស់វិធីសាស្ត្រផ្អែកលើ Shapley Values ទាមទារថាមពលកុំព្យូទ័រ និងអង្គចងចាំ (Memory) ខ្ពស់ខុសៗគ្នា អាស្រ័យលើទំហំទិន្នន័យ និងប្រភេទក្បួនដោះស្រាយដែលត្រូវបានជ្រើសរើស។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារកុំព្យូទ័រដែលមាន RAM ធំ និង CPU/GPU សមត្ថភាពខ្ពស់ សម្រាប់ការប្រើប្រាស់វិធីសាស្ត្រ ISV ព្រោះវាត្រូវការអង្គចងចាំកើនឡើងតាមរូបមន្ត O(M^2) សម្រាប់គណនា Pairwise interactions នៃទិន្នន័យ។</li>
+        
+        <li><strong>Software:</strong> ទាមទារការប្រើប្រាស់ភាសា Python និងបណ្ណាល័យសំខាន់ៗដូចជា SHAP, scikit-learn, numpy រួមទាំងម៉ូដែលប្រភេទ Tree-based ដូចជា XGBoost, LightGBM ឬ Random Forest ដើម្បីអនុញ្ញាតឱ្យគណនាតម្លៃ Shapley បានលឿន (Polynomial time)។</li>
+        
+        <li><strong>Dataset:</strong> តម្រូវឱ្យទិន្នន័យត្រូវបានសម្អាតរួចរាល់ (Preprocessed) ដូចជាការធ្វើ Tokenization, Lemmatization និងការបំបាត់ Punctuation សម្រាប់ទិន្នន័យអត្ថបទ និងការធ្វើស្តង់ដារ (Standardization) សម្រាប់ទិន្នន័យលេខ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើសំណុំទិន្នន័យលោកខាងលិច ដូចជា Enron Spam (អ៊ីមែលភាសាអង់គ្លេស), Brown corpus និងទិន្នន័យវេជ្ជសាស្ត្រ MIT-BIH ជាដើម។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តវិធីសាស្ត្រទាំងនេះទៅលើទិន្នន័យអត្ថបទភាសាខ្មែរ (Khmer NLP) នឹងជួបប្រទះបញ្ហាប្រឈមធំៗទាក់ទងនឹងរចនាសម្ព័ន្ធវេយ្យាករណ៍ និងការកាត់ពាក្យ (Word segmentation) ដែលតម្រូវឱ្យមានការកែច្នៃទិន្នន័យឱ្យស្របតាមបរិបទភាសាក្នុងស្រុកជាមុនសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រជ្រើសរើសលក្ខណៈពិសេស (Feature Selection) ដែលបង្ហាញក្នុងឯកសារនេះ គឺមានសារៈសំខាន់ និងអាចយកមកអនុវត្តប្រកបដោយប្រសិទ្ធភាពដើម្បីអភិវឌ្ឍប្រព័ន្ធ Machine Learning នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>Khmer NLP & Spam Detection:</strong> ក្រុមហ៊ុនទូរគមនាគមន៍ (ឧ. Cellcard, Smart) ឬធនាគារ អាចប្រើយន្តការនេះដើម្បីវិភាគរកសារឆបោក (Spam/Phishing SMS) ជាភាសាខ្មែរ ដោយជ្រើសរើសតែពាក្យគន្លឹះសំខាន់ៗដែលជួយឱ្យម៉ូដែលដំណើរការលឿន និងច្បាស់លាស់។</li>
+            
+            <li><strong>Healthcare Data Analysis (ការវិភាគទិន្នន័យសុខាភិបាល):</strong> មន្ទីរពេទ្យកម្រិតខ្ពស់នៅកម្ពុជាអាចប្រើប្រាស់ក្បួនដោះស្រាយនេះលើទិន្នន័យជំងឺបេះដូង (ដូចការធ្វើតេស្តលើទិន្នន័យ MIT-BIH) ដើម្បីកាត់បន្ថយចំនួនរោគសញ្ញា ឬការធ្វើតេស្តដែលមិនចាំបាច់ ដែលជួយសន្សំសំចៃពេលវេលានិងថវិកាអ្នកជំងឺក្នុងការធ្វើរោគវិនិច្ឆ័យ។</li>
+            
+            <li><strong>Financial Credit Scoring (ការវាយតម្លៃឥណទាន):</strong> គ្រឹះស្ថានមីក្រូហិរញ្ញវត្ថុ និងធនាគារ (ឧ. ធនាគារអេស៊ីលីដា, ABA) អាចប្រើវិធីសាស្ត្រ mRMR ផ្គួបជាមួយ SHAP ដើម្បីជ្រើសរើសកត្តាដែលមានឥទ្ធិពលបំផុតសម្រាប់វាយតម្លៃហានិភ័យកម្ចី ដោយធានាបាននូវតម្លាភាពដែលអាចបកស្រាយមូលហេតុប្រាប់អតិថិជនបាន (Explainable AI)។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការច្របាច់បញ្ចូលគ្នារវាងវិធីសាស្ត្រកាត់បន្ថយទំហំទិន្នន័យរហ័ស (ដូចជា mRMR) និងការពន្យល់ម៉ូដែលលម្អិត (Shapley Values) គឺជាយុទ្ធសាស្ត្រដ៏មានសក្តានុពលសម្រាប់ស្ថាប័ននានានៅកម្ពុជា ក្នុងការបង្កើត AI ដែលមានតម្លៃទាបតែអាចទុកចិត្តបាន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃការជ្រើសរើសលក្ខណៈពិសេស:</strong> ស្វែងយល់ពីភាពខុសគ្នារវាង Filter, Wrapper, និង Embedded methods ដោយអនុវត្តការសរសេរកូដជាក់ស្តែងតាមរយៈបណ្ណាល័យ <span class="en">scikit-learn</span> នៅក្នុង <span class="en">Python</span> ដើម្បីធ្វើការច្រោះទិន្នន័យបឋម។</li>
+            
+            <li><strong>អនុវត្តការបកស្រាយម៉ូដែលជាមួយ Shapley Values:</strong> សិក្សាពីទ្រឹស្តី Game Theory និងប្រើប្រាស់បណ្ណាល័យ <span class="en">SHAP</span> ដើម្បីបកស្រាយលទ្ធផលម៉ូដែល 예측។ គប្បីចាប់ផ្តើមប្រើវាជាមួយម៉ូដែល <span class="en">XGBoost</span> ឬ <span class="en">Random Forest</span> ដែលចំណាយពេលគណនាតិច (Polynomial time)។</li>
+            
+            <li><strong>ទប់ស្កាត់ភាពជាន់គ្នាដោយប្រើ mRMR:</strong> សម្រាប់គម្រោងមានទិន្នន័យធំៗ (High-dimensional data) ដូចជាអត្ថបទ សូមកុំប្រើ SHAP តែឯង។ ត្រូវប្រើក្បួនដោះស្រាយ <span class="en">mRMR</span> ជាមុនសិន ដើម្បីកាត់បន្ថយលក្ខណៈពិសេសដែលជាន់គ្នា និងរក្សាទុកតែទិន្នន័យដែលពាក់ព័ន្ធបំផុត។</li>
+            
+            <li><strong>បង្កើតប្រព័ន្ធជ្រើសរើសទិន្នន័យបែបកូនកាត់ (Hybrid Approach):</strong> អនុវត្តតាមអនុសាសន៍នៃការសិក្សា ដោយបង្កើតប្រព័ន្ធ២ដំណាក់កាល៖ ប្រើ <span class="en">mRMR</span> ដើម្បីកាត់បន្ថយទំហំទិន្នន័យពីច្រើនម៉ឺនមកត្រឹមរាប់រយ រួចប្រើប្រាស់ <span class="en">Interaction Shapley Values (ISV)</span> ទៅលើទិន្នន័យដែលសល់នោះ ដើម្បីរក្សាទុកតែលក្ខណៈពិសេសមានអន្តរកម្មខ្លាំងបំផុត។</li>
+            
+            <li><strong>វាស់វែងប្រសិទ្ធភាពលើទិន្នន័យបរិបទកម្ពុជា:</strong> ប្រមូលទិន្នន័យជាក់ស្តែង (ឧទាហរណ៍៖ សំណុំទិន្នន័យពាក្យកម្ចី ឬ អត្ថបទព័ត៌មានភាសាខ្មែរ) រួចដំណើរការការប្រៀបធៀប (Benchmarking) ភាពត្រឹមត្រូវនៃម៉ូដែលតាមរយៈ <span class="en">F1-score</span> និងវាស់វែងពេលវេលាដំណើរការ (Runtime) ដើម្បីកំណត់ថាតើវិធីសាស្ត្រមួយណាស័ក្តិសមបំផុតក្នុងប្រតិបត្តិការជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Shapley values</span></td>
+                <td>ជាគោលគំនិតមានប្រភពពីទ្រឹស្តីល្បែង (Game Theory) ដែលត្រូវបានប្រើប្រាស់ក្នុង Machine Learning ដើម្បីគណនា និងបែងចែកចំណែកនៃឥទ្ធិពលរបស់លក្ខណៈពិសេស (Feature) នីមួយៗទៅលើលទ្ធផលរបស់ម៉ូដែល ដោយធានាបាននូវភាពយុត្តិធម៌ក្នុងការវាយតម្លៃ។</td>
+                <td>ដូចជាការបែងចែកប្រាក់រង្វាន់ដល់សមាជិកក្រុមនីមួយៗ ដោយផ្អែកលើទំហំការងារនិងការចូលរួមចំណែកជាក់ស្តែងរបស់ពួកគេក្នុងការសម្រេចលទ្ធផលការងារនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Selection</span></td>
+                <td>ជាដំណើរការនៃការជ្រើសរើសយកតែទិន្នន័យ ឬអថេរណាដែលពាក់ព័ន្ធ និងមានប្រយោជន៍បំផុត ដើម្បីយកមកបង្វឹកម៉ូដែល Machine Learning និងកាត់ចោលនូវទិន្នន័យដែលមិនចាំបាច់ ឬជាន់គ្នា។</td>
+                <td>ដូចជាការរៀបចំវ៉ាលីមុនពេលធ្វើដំណើរ ដោយជ្រើសរើសយកតែរបស់ចាំបាច់បំផុតទៅតាម និងទុកចោលរបស់ដែលមិនចាំបាច់ដើម្បីកុំឲ្យធ្ងន់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov Blanket</span></td>
+                <td>គឺជាសំណុំតូចបំផុតនៃអថេរជុំវិញអថេរគោលដៅ ដែលផ្ទុកនូវព័ត៌មានទាំងអស់ចាំបាច់សម្រាប់ធ្វើការទស្សន៍ទាយអថេរគោលដៅនោះ ដោយមិនត្រូវការទិន្នន័យពីអថេរផ្សេងទៀតឡើយ។</td>
+                <td>ដូចជាក្រុមអ្នកជិតខាងនិងគ្រួសារផ្ទាល់របស់អ្នក ដែលដឹងរឿងរ៉ាវពិតប្រាកដរបស់អ្នកច្បាស់ជាងគេ រហូតដល់អ្នកដទៃមិនចាំបាច់ទៅសួរអ្នកភូមិផ្សេងទៀតឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Wrapper methods</span></td>
+                <td>ជាក្បួនជ្រើសរើសលក្ខណៈពិសេស ដែលវាយតម្លៃសំណុំរងនៃលក្ខណៈពិសេស ដោយយកវាទៅបង្វឹកម៉ូដែល Machine Learning ពិតប្រាកដ រួចវាស់ស្ទង់មើលប្រសិទ្ធភាពរបស់ម៉ូដែលនោះ។ វាមានភាពសុក្រឹតខ្ពស់តែស៊ីពេលគណនាខ្លាំង។</td>
+                <td>ដូចជាការសាកល្បងពាក់ខោអាវផ្ទាល់ម្តងមួយឈុតៗ ដើម្បីចង់ដឹងថាមួយណាស័ក្តិសមនឹងអ្នកបំផុត ជាជាងការគ្រាន់តែស្មានដោយមើលនឹងភ្នែក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Filter methods</span></td>
+                <td>ជាវិធីសាស្ត្រជ្រើសរើសលក្ខណៈពិសេសដោយផ្អែកលើការគណនាស្ថិតិ (ដូចជា Mutual Information ឬ Chi-Square) ដោយមិនពឹងផ្អែកលើម៉ូដែល Machine Learning ឡើយ ដែលធ្វើឲ្យវាមានដំណើរការលឿន តែមិនបានគិតពីអន្តរកម្មរវាងអថេរទេ។</td>
+                <td>ដូចជាការរែងយកគ្រាប់ខ្សាច់ម៉ត់ៗដោយប្រើកញ្ច្រែង ដែលអាចធ្វើបានលឿនដោយមិនចាំបាច់យកខ្សាច់នោះទៅសាកល្បងលាយស៊ីម៉ងត៍ជាមុនឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mutual Information</span></td>
+                <td>ជារង្វាស់នៃការវាយតម្លៃថាតើព័ត៌មានពីអថេរមួយ អាចជួយកាត់បន្ថយភាពមិនប្រាកដប្រជា (Uncertainty) របស់អថេរមួយទៀតបានកម្រិតណា។ វាជួយប្រាប់យើងថាអថេរទាំងពីរមានទំនាក់ទំនងគ្នាកម្រិតណា។</td>
+                <td>ដូចជាការទស្សន៍ទាយអាកាសធាតុ បើអ្នកឃើញមេឃងងឹត (អថេរមួយ) វាផ្តល់ព័ត៌មានយ៉ាងច្បាស់ថាភ្លៀងនឹងធ្លាក់ (អថេរគោលដៅ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TF-IDF</span></td>
+                <td>ជារូបមន្តគណនាទម្ងន់នៃពាក្យក្នុងអត្ថបទ ដើម្បីកំណត់ថាតើពាក្យនោះមានសារៈសំខាន់កម្រិតណាសម្រាប់អត្ថបទនោះធៀបនឹងឯកសារទាំងអស់ក្នុងសំណុំទិន្នន័យ។ វាផ្តល់តម្លៃខ្ពស់ដល់ពាក្យដែលមានញឹកញាប់ក្នុងឯកសារមួយ តែមានតិចតួចក្នុងឯកសារផ្សេងទៀត។</td>
+                <td>ដូចជាការសម្គាល់មនុស្សដោយចំណុចពិសេសរបស់គាត់ (ឧ. មានសម្លាកលើមុខ) ជាជាងការសម្គាល់ដោយចំណុចធម្មតាដែលមានលើមនុស្សគ្រប់គ្នា (ឧ. មានច្រមុះមួយ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">mRMR</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់ជ្រើសរើសលក្ខណៈពិសេស ដែលមានគោលដៅស្វែងរកអថេរដែលមានទំនាក់ទំនងខ្លាំងបំផុតជាមួយអថេរគោលដៅ (Relevance) ព្រមទាំងព្យាយាមកាត់បន្ថយអថេរណាដែលមានព័ត៌មានជាន់គ្នា (Redundancy)។</td>
+                <td>ដូចជាការជ្រើសរើសក្រុមបាល់ទាត់ ដោយជ្រើសរើសកីឡាករពូកែៗ និងត្រូវប្រាកដថាអ្នកទាំងនោះមានជំនាញលេងនៅទីតាំងខុសៗគ្នា មិនជាន់តួនាទីគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tree-based models</span></td>
+                <td>ជាប្រភេទម៉ូដែល Machine Learning (ដូចជា Random Forest ឬ XGBoost) ដែលធ្វើការសម្រេចចិត្តដោយបំបែកទិន្នន័យជាមែកធាងជាបន្តបន្ទាប់។ វាមានលក្ខណៈពិសេសអាចឲ្យការគណនាតម្លៃ Shapley បានលឿន (Polynomial time)។</td>
+                <td>ដូចជាតារាងសំណួរយេសនូ (Yes/No) ជាបន្តបន្ទាប់ ដែលជួយណែនាំអ្នកឆ្ពោះទៅរកចម្លើយចុងក្រោយមួយជាក់លាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Curse of dimensionality</span></td>
+                <td>ជាបញ្ហាក្នុងវិទ្យាសាស្ត្រទិន្នន័យ ដែលនៅពេលចំនួនអថេរ (Features) កើនឡើងកាន់តែច្រើន ទំហំលំហទិន្នន័យកាន់តែធំ ដែលតម្រូវឲ្យមានសំណាកទិន្នន័យច្រើនជាអិចស្ប៉ូណង់ស្យែល (Exponential) ដើម្បីបង្វឹកម៉ូដែលឲ្យបានល្អ និងចៀសវាងការ Overfitting។</td>
+                <td>ដូចជាការព្យាយាមរកម្ជុលក្នុងបាតសមុទ្រ បើផ្ទៃសមុទ្រកាន់តែធំ និងជ្រៅ អ្នកកាន់តែពិបាករកម្ជុលនោះទាន់ពេលវេលា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Shapley+values+game+theory+machine+learning+feature+attribution" target="_blank" rel="noopener"><span class="en">Shapley values game theory machine learning feature attribution</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Interaction+Shapley+values+ISV+feature+selection+high-dimensional+data" target="_blank" rel="noopener"><span class="en">Interaction Shapley values ISV feature selection high-dimensional data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=mRMR+minimum+redundancy+maximum+relevance+feature+selection+comparative+study" target="_blank" rel="noopener"><span class="en">mRMR minimum redundancy maximum relevance feature selection comparative study</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Predictive+Permutation+Feature+Selection+PPFS+Markov+Blanket+estimation" target="_blank" rel="noopener"><span class="en">Predictive Permutation Feature Selection PPFS Markov Blanket estimation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Scalable+Shapley+value+approximation+tree-based+models+explainable+AI" target="_blank" rel="noopener"><span class="en">Scalable Shapley value approximation tree-based models explainable AI</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

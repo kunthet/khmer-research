@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទទួលស្គាល់រូបភាពស្លឹករុក្ខជាតិដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទកុងវ៉ុល (Convolutional Neural Network) - Plant Leaf Image Recognition Based on Convolutional Neural Network | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការទទួលស្គាល់រូបភាពស្លឹករុក្ខជាតិដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទក។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការលំបាកក្នុងការកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិថៃដ៏ច្រើនសន្ធឹកសន្ធាប់...">
+    
+    <meta name="keywords" content="Convolutional Neural Network, ResNet50, Plant Leaf Recognition, Image Classification, Deep Learning, MATLAB, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/plant-leaf-image-recognition-cnn-2021.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/plant-leaf-image-recognition-cnn-2021.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/plant-leaf-image-recognition-cnn-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/plant-leaf-image-recognition-cnn-2021.html">
+    <meta property="og:title" content="ការទទួលស្គាល់រូបភាពស្លឹករុក្ខជាតិដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទកុងវ៉ុល (Convolutional Neural Network) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការលំបាកក្នុងការកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិថៃដ៏ច្រើនសន្ធឹកសន្ធាប់ ដោយបង្កើតប្រព័ន្ធកុំព្យូទ័រដែលអាចស្គាល់ឈ្មោះរុក្ខជាតិពឹងផ្អែកលើរូបភាពស្លឹកតែមួយសន្លឹក។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2021, SWU Sci. J. Vol. 37 No. 2-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Convolutional Neural Network">
+    
+    <meta property="article:tag" content="ResNet50">
+    
+    <meta property="article:tag" content="Plant Leaf Recognition">
+    
+    <meta property="article:tag" content="Image Classification">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="MATLAB">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទទួលស្គាល់រូបភាពស្លឹករុក្ខជាតិដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទកុងវ៉ុល (Convolutional Neural Network)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការលំបាកក្នុងការកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិថៃដ៏ច្រើនសន្ធឹកសន្ធាប់ ដោយបង្កើតប្រព័ន្ធកុំព្យូទ័រដែលអាចស្គាល់ឈ្មោះរុក្ខជាតិពឹងផ្អែកលើរូបភាពស្លឹកតែមួយសន្លឹក។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u179f\u17d2\u179b\u17b9\u1780\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u1780\u17bb\u1784\u179c\u17c9\u17bb\u179b (Convolutional Neural Network)",
+      "name": "Plant Leaf Image Recognition Based on Convolutional Neural Network",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1780\u17c6\u178e\u178f\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u1794\u17d2\u179a\u1797\u17c1\u1791\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u1790\u17c3\u178a\u17cf\u1785\u17d2\u179a\u17be\u1793\u179f\u1793\u17d2\u1792\u17b9\u1780\u179f\u1793\u17d2\u1792\u17b6\u1794\u17cb \u178a\u17c4\u1799\u1794\u1784\u17d2\u1780\u17be\u178f\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u178a\u17c2\u179b\u17a2\u17b6\u1785\u179f\u17d2\u1782\u17b6\u179b\u17cb\u1788\u17d2\u1798\u17c4\u17c7\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u1796\u17b9\u1784\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179a\u17bc\u1794\u1797\u17b6\u1796\u179f\u17d2\u179b\u17b9\u1780\u178f\u17c2\u1798\u17bd\u1799\u179f\u1793\u17d2\u179b\u17b9\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/plant-leaf-image-recognition-cnn-2021.html",
+      "author": [{"@type": "Person", "name": "Chomtip Pornpanomchai, Faculty of Information and Communication Technology, Mahidol University"},{"@type": "Person", "name": "Varin Pornpanomchai, Faculty of Science, Mahidol University"}],
+      "datePublished": "2021, SWU Sci. J. Vol. 37 No. 2",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Plant Leaf Image Recognition Based on Convolutional Neural Network",
+        "url": "https://www.thaiscience.info/Journals/Article/SSCJ/10994249.pdf"
+      },
+      "keywords": ["Convolutional Neural Network", "ResNet50", "Plant Leaf Recognition", "Image Classification", "Deep Learning", "MATLAB"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u179f\u17d2\u179b\u17b9\u1780\u179a\u17bb\u1780\u17d2\u1781\u1787\u17b6\u178f\u17b7\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u1780\u17bb\u1784\u179c\u17c9\u17bb\u179b (Convolutional Neural Network)",
+          "item": "https://khmerresearch.com/papers/technology/plant-leaf-image-recognition-cnn-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការទទួលស្គាល់រូបភាពស្លឹករុក្ខជាតិដោយផ្អែកលើបណ្ដាញសរសៃប្រស...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Plant Leaf Image Recognition Based on Convolutional Neural Network<br>
+        
+        <strong>Source:</strong> <a href="https://www.thaiscience.info/Journals/Article/SSCJ/10994249.pdf" target="_blank" rel="noopener">www.thaiscience.info</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទទួលស្គាល់រូបភាពស្លឹករុក្ខជាតិដោយផ្អែកលើបណ្ដាញសរសៃប្រសាទកុងវ៉ុល (Convolutional Neural Network)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Plant Leaf Image Recognition Based on Convolutional Neural Network</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Chomtip Pornpanomchai, Faculty of Information and Communication Technology, Mahidol University, Varin Pornpanomchai, Faculty of Science, Mahidol University</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021, SWU Sci. J. Vol. 37 No. 2</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាការលំបាកក្នុងការកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិថៃដ៏ច្រើនសន្ធឹកសន្ធាប់ ដោយបង្កើតប្រព័ន្ធកុំព្យូទ័រដែលអាចស្គាល់ឈ្មោះរុក្ខជាតិពឹងផ្អែកលើរូបភាពស្លឹកតែមួយសន្លឹក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រមូលទិន្នន័យរូបភាពស្លឹករុក្ខជាតិផ្ទាល់ និងប្រើប្រាស់វិធីសាស្ត្រ Deep Learning ដើម្បីបង្ហាត់ប្រព័ន្ធក្នុងការសម្គាល់ចំណាត់ថ្នាក់រុក្ខជាតិ។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យរូបភាព (Image Acquisition): ថតរូបភាពស្លឹករុក្ខជាតិចំនួន ១០.៨០០ សន្លឹក នៃរុក្ខជាតិចំនួន ៥៤ ប្រភេទ ដោយប្រើកាមេរ៉ាទូរសព្ទដៃឆ្លាតវៃ។</li>
+            
+            <li>ការបង្ហាត់បណ្ដាញសរសៃប្រសាទកុងវ៉ុល (CNN Training): ប្រើប្រាស់ម៉ូដែល ResNet50 នៅក្នុងកម្មវិធី MATLAB R2020b ដើម្បីទាញយកលក្ខណៈពិសេសរបស់ស្លឹកនិងបង្ហាត់ប្រព័ន្ធចាត់ថ្នាក់ (៨០% សម្រាប់ការបង្ហាត់ និង ២០% សម្រាប់ការធ្វើតេស្ត)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធទទួលស្គាល់រូបភាពស្លឹករុក្ខជាតិ (PLIRS) សម្រេចបានអត្រាសុក្រឹតភាព (Precision rate) រហូតដល់ ៩៦,៩៩% និងអត្រាភាពត្រឹមត្រូវ (Accuracy) ៩៦,៥៩% ក្នុងការចាត់ថ្នាក់រុក្ខជាតិទាំង ៥៤ ប្រភេទ។</li>
+            
+            <li>ពេលវេលាជាមធ្យមសម្រាប់ការបង្ហាត់ទិន្នន័យ (Training Dataset) គឺប្រមាណ ១,៤៣៥៧x១០^៤ វិនាទី។</li>
+            
+            <li>ប្រព័ន្ធនេះដំណើរការដោយមានប្រសិទ្ធភាពខ្ពស់ ជាមួយនឹងពេលវេលាចូលប្រើជាមធ្យម (Average access time) ត្រឹមតែ ១,៣៦៤៩ វិនាទីប៉ុណ្ណោះ សម្រាប់ការសម្គាល់រូបភាពនីមួយៗ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Convolutional Neural Network (CNN - Proposed: ResNet50)</span></strong><br>បណ្ដាញសរសៃប្រសាទកុងវ៉ុល (CNN - ResNet50)</td>
+                <td>មានភាពងាយស្រួលក្នុងការបង្ហាត់ និងអាចទាញយកលក្ខណៈពិសេសរបស់រូបភាព (Feature extraction) ដោយស្វ័យប្រវត្តិ។ ផ្តល់អត្រាសុក្រឹតភាពខ្ពស់បំផុត។</td>
+                <td>ទាមទារសំណុំទិន្នន័យធំដើម្បីបង្ហាត់ និងអាចមានការភាន់ច្រឡំប្រសិនបើស្លឹករុក្ខជាតិមានរូបរាងស្រដៀងគ្នាខ្លាំង។</td>
+                <td>ទទួលបានអត្រាសុក្រឹតភាព (Precision) ៩៦,៩៩% និងភាពត្រឹមត្រូវ (Accuracy) ៩៦,៥៩% ក្នុងរយៈពេលដំណើរការ ១,៣៦ វិនាទី/រូបភាព។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM)</span></strong><br>ម៉ាស៊ីនវ៉ិចទ័រគាំទ្រ (SVM)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការដោះស្រាយជាមួយសំណាកទិន្នន័យតូចៗ និងការសម្គាល់លំនាំដែលមានវិមាត្រខ្ពស់និងមិនមែនលីនេអ៊ែរ។</td>
+                <td>ទាមទារការទាញយកលក្ខណៈពិសេស (ពណ៌ រូបរាង វាយនភាព) ដោយដៃ ដែលចំណាយពេលនិងស្មុគស្មាញ។</td>
+                <td>យោងតាមឯកសារស្រាវជ្រាវមុនៗ អត្រាសុក្រឹតភាពចន្លោះពី ៩២,៩៨% ទៅ ៩៨,១៣% អាស្រ័យលើចំនួនទិន្នន័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">K-Nearest Neighbor (KNN)</span></strong><br>ក្បួនដោះស្រាយអ្នកជិតខាងជិតបំផុត (KNN)</td>
+                <td>ជាម៉ូដែលចាត់ថ្នាក់សាមញ្ញ ដែលគណនាចម្ងាយរវាងលក្ខណៈពិសេសដូចគ្នា និងចំនួនអ្នកជិតខាងជិតបំផុត។</td>
+                <td>ប្រសិទ្ធភាពអាចធ្លាក់ចុះនៅពេលទិន្នន័យមានទំហំធំខ្លាំង ហើយក៏ទាមទារការទាញយកលក្ខណៈពិសេសដោយដៃផងដែរ។</td>
+                <td>អត្រាសុក្រឹតភាពចន្លោះពី ៨០,១២% ទៅ ៩៧,១៨% (ផ្អែកលើការស្រាវជ្រាវចាស់ៗក្នុងឯកសារ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Artificial Neural Network (ANN)</span></strong><br>បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (ANN)</td>
+                <td>អាចរៀននិងស្គាល់លំនាំស្មុគស្មាញដែលមិនធ្លាប់ឃើញពីមុនមក បន្ទាប់ពីទទួលបានការបង្ហាត់ត្រឹមត្រូវ។</td>
+                <td>ត្រូវការការទាញយកលក្ខណៈពិសេសជាមុន (Manual feature extraction) មុនពេលបញ្ចូលទៅក្នុង Input nodes។</td>
+                <td>អត្រាសុក្រឹតភាពប្រែប្រួលខ្លាំងចាប់ពី ៦៧,៧០% ដល់ ៩៦,៦៧% អាស្រ័យលើប្រភេទលក្ខណៈពិសេសដែលបានប្រើ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះពឹងផ្អែកលើធនធានកុំព្យូទ័រកម្រិតមធ្យម និងកម្មវិធីមានអាជ្ញាប័ណ្ណ ដែលត្រូវបានបញ្ជាក់យ៉ាងច្បាស់នៅក្នុងឯកសារ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ដំណើរការលើកុំព្យូទ័រដែលមាន CPU Intel® Core i5-11400 @ 2.6 GHz និង RAM ទំហំ 8 GB។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ប្រព័ន្ធប្រតិបត្តិការ Windows 10 និងកម្មវិធី MATLAB R2020b សម្រាប់ការអភិវឌ្ឍនិងបង្ហាត់ម៉ូដែល។</li>
+        
+        <li><strong>Hardware (Camera):</strong> ប្រើប្រាស់កាមេរ៉ាទូរសព្ទដៃម៉ាក Huawei Y9 ដើម្បីថតរូបភាពស្លឹករុក្ខជាតិ។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារពេលវេលាប្រមូលទិន្នន័យរូបភាពស្លឹកចំនួន ១០.៨០០ សន្លឹក (៥៤ ប្រភេទ, ក្នុងមួយប្រភេទ ២០០ សន្លឹក) ថតនៅលើក្រដាសស A4។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងទីក្រុងបាងកក ប្រទេសថៃ ដោយប្រើប្រាស់សំណុំទិន្នន័យរុក្ខជាតិក្នុងស្រុកចំនួន ៥៤ ប្រភេទ។ ទោះបីជាប្រទេសកម្ពុជាមានអាកាសធាតុនិងប្រភេទរុក្ខជាតិស្រដៀងគ្នាក៏ដោយ ក៏ម៉ូដែលដែលបង្ហាត់ដោយទិន្នន័យនេះមិនអាចស្គាល់រុក្ខជាតិកម្រ ឬរុក្ខជាតិប្រចាំតំបន់របស់កម្ពុជាបានឡើយ។ ការណ៍នេះតម្រូវឱ្យមានការប្រមូលទិន្នន័យរុក្ខជាតិក្នុងស្រុកដោយឡែក ដើម្បីបង្កើតប្រព័ន្ធមួយដែលអាចប្រើប្រាស់ជាផ្លូវការនៅកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់ណាស់ក្នុងការយកមកកែច្នៃ និងអនុវត្តសម្រាប់ការសិក្សាស្រាវជ្រាវផ្នែករុក្ខសាស្ត្រ និងការអភិរក្សនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យអប់រំ និងការស្រាវជ្រាវ (សាកលវិទ្យាល័យភូមិន្ទកសិកម្ម - RUA):</strong> និស្សិតកសិកម្ម និងរុក្ខសាស្ត្រអាចប្រើប្រាស់ប្រព័ន្ធបែបនេះដើម្បីកំណត់អត្តសញ្ញាណប្រភេទរុក្ខជាតិ និងចងក្រងជាសៀវភៅជីវចម្រុះឌីជីថល (Digital Herbarium) ប្រចាំប្រទេស។</li>
+            
+            <li><strong>ក្រសួងបរិស្ថាន និងការអភិរក្ស (ឧទ្យានជាតិជួរភ្នំក្រវាញ):</strong> មន្ត្រីឧទ្យានុរក្សអាចថតរូបស្លឹករុក្ខជាតិដើម្បីកំណត់អត្តសញ្ញាណរុក្ខជាតិកម្រ ឬរុក្ខជាតិជិតផុតពូជ ដើម្បីងាយស្រួលក្នុងការកត់ត្រា និងអភិរក្ស។</li>
+            
+            <li><strong>វិស័យឱសថបុរាណ និងសុខាភិបាល:</strong> អាចត្រូវបានប្រើប្រាស់ដើម្បីជួយអ្នកជំនាញឱសថបុរាណក្នុងការផ្ទៀងផ្ទាត់ និងកំណត់អត្តសញ្ញាណរុក្ខជាតិឱសថខ្មែរឱ្យបានត្រឹមត្រូវ ចៀសវាងការប្រើប្រាស់ខុសប្រភេទ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអភិវឌ្ឍប្រព័ន្ធស្រដៀងគ្នានេះ ដោយបញ្ចូលទិន្នន័យរុក្ខជាតិរបស់ប្រទេសកម្ពុជា នឹងជួយសម្រួលដល់ការសិក្សា ក៏ដូចជាលើកកម្ពស់ការគ្រប់គ្រងធនធានធម្មជាតិប្រកបដោយភាពច្នៃប្រឌិត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Deep Learning ជំនួសឱ្យការប្រើ MATLAB:</strong> ដោយសារ MATLAB មានតម្លៃថ្លៃ និស្សិតគួរចាប់ផ្តើមរៀនភាសា <span class="en">Python</span> រួមជាមួយនឹងបណ្ណាល័យ <span class="en">TensorFlow</span> ឬ <span class="en">PyTorch</span> ដើម្បីស្វែងយល់ពីស្ថាបត្យកម្ម <span class="en">ResNet50</span> និងការកសាងម៉ូដែល <span class="en">Image Classification</span>។</li>
+            
+            <li><strong>រៀបចំយុទ្ធនាការប្រមូលទិន្នន័យ (Data Collection):</strong> សហការជាមួយសាកលវិទ្យាល័យដើម្បីចុះថតរូបស្លឹករុក្ខជាតិក្នុងស្រុក (ឧទាហរណ៍៖ ស្លឹកត្នោត ស្លឹកក្រវាញ) ដោយថតទូរសព្ទដៃនៅលើផ្ទៃខាងក្រោយពណ៌ស (ក្រដាស A4) ឱ្យបានយ៉ាងហោចណាស់ ២០០ ទៅ ៥០០ រូបភាពក្នុងមួយប្រភេទ។</li>
+            
+            <li><strong>រៀបចំនិងពង្រីកទិន្នន័យ (Data Preprocessing & Augmentation):</strong> ប្រើប្រាស់ <span class="en">OpenCV</span> ឬ <span class="en">Albumentations</span> ក្នុងការកាត់ ទាញទំហំរូបភាព (Resize ទៅ 224x224 pixels) និងប្រើបច្ចេកទេស <span class="en">Data Augmentation</span> (បង្វិល, ត្រឡប់) ដើម្បីពង្រីកចំនួនទិន្នន័យនិងកាត់បន្ថយបញ្ហា <span class="en">Overfitting</span>។</li>
+            
+            <li><strong>បង្ហាត់ និងវាយតម្លៃម៉ូដែល (Model Training & Evaluation):</strong> ប្រើប្រាស់ <span class="en">Transfer Learning</span> ជាមួយម៉ូដែល <span class="en">ResNet50</span> ដែលមានស្រាប់ ដើម្បីបង្ហាត់លើសំណុំទិន្នន័យស្លឹករុក្ខជាតិកម្ពុជា។ វាយតម្លៃប្រព័ន្ធដោយប្រើប្រាស់រង្វាស់ដូចជា <span class="en">Accuracy, Precision, និង Confusion Matrix</span> ដើម្បីកំណត់កំហុសនៃការរៀនសូត្រ។</li>
+            
+            <li><strong>អភិវឌ្ឍកម្មវិធីទូរសព្ទ (Mobile App Deployment):</strong> បំប្លែងម៉ូដែលដែលបានបង្ហាត់រួចទៅជាទម្រង់ <span class="en">TensorFlow Lite</span> រួចប្រើប្រាស់ <span class="en">Flutter</span> ឬ <span class="en">React Native</span> ដើម្បីបង្កើតកម្មវិធីទូរសព្ទដៃ ដែលអនុញ្ញាតឱ្យអ្នកប្រើប្រាស់ថតរូប និងស្គាល់ឈ្មោះរុក្ខជាតិភ្លាមៗ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Network (CNN)</span></td>
+                <td>បណ្ដាញសរសៃប្រសាទកុងវ៉ុល គឺជាប្រភេទម៉ូដែល Deep Learning ដែលត្រូវបានរចនាឡើងយ៉ាងពិសេសសម្រាប់ដំណើរការទិន្នន័យរូបភាព ដោយវាប្រើប្រាស់ស្រទាប់ច្រោះ (filters) ដើម្បីទាញយកលក្ខណៈពិសេសៗដូចជា ពណ៌ រូបរាង និងវាយនភាពនៃរូបភាពដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាភ្នែក និងខួរក្បាលរបស់មនុស្សដែលសម្លឹងមើលរូបភាពមួយ ហើយអាចដឹងថាវត្ថុនោះជាអ្វីដោយផ្អែកលើទម្រង់ និងពណ៌របស់វា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">ResNet50</span></td>
+                <td>ជាស្ថាបត្យកម្ម CNN ដ៏ល្បីល្បាញមួយដែលមានជម្រៅ ៥០ ស្រទាប់ (Layers) ដែលអនុញ្ញាតឱ្យប្រព័ន្ធអាចរៀនពីទិន្នន័យរូបភាពរាប់លានសន្លឹកដោយមិនជួបប្រទះបញ្ហាបាត់បង់ព័ត៌មាន (Vanishing gradient) ពេលកំពុងបង្ហាត់ម៉ូដែលស្មុគស្មាញ។</td>
+                <td>ដូចជារោងចក្រដែលមានខ្សែសង្វាក់ផលិតកម្ម ៥០ ដំណាក់កាល ដើម្បីត្រួតពិនិត្យ និងវាយតម្លៃផលិតផលមួយយ៉ាងល្អិតល្អន់បំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pooling layer</span></td>
+                <td>ជាស្រទាប់មួយនៅក្នុង CNN ដែលមានតួនាទីបង្រួមទំហំវិមាត្រនៃរូបភាពដោយរក្សាទុកតែព័ត៌មានសំខាន់ៗបំផុត ជួយកាត់បន្ថយទំហំផ្ទុក និងបង្កើនល្បឿនក្នុងការគណនាដោយកាត់បន្ថយទិន្នន័យដែលមិនចាំបាច់។</td>
+                <td>ដូចជាការបង្រួមរូបភាព (Compress) ឱ្យតូចជាងមុន ប៉ុន្តែយើងនៅតែអាចមើលដឹងថារូបនោះជារូបអ្វីដដែល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Rectified linear unit (ReLU) layer</span></td>
+                <td>ជាអនុគមន៍សកម្មភាព (Activation function) នៅក្នុងបណ្ដាញសរសៃប្រសាទ ដែលមានតួនាទីផ្លាស់ប្តូររាល់តម្លៃអវិជ្ជមានទាំងអស់ឱ្យទៅជាសូន្យ (០) ដើម្បីជួយឱ្យបណ្ដាញសរសៃប្រសាទរៀនព័ត៌មានបានលឿន និងមានប្រសិទ្ធភាពជាងមុន។</td>
+                <td>ដូចជាប្រព័ន្ធចម្រោះទឹកដែលរក្សាទុកតែទឹកស្អាត (តម្លៃវិជ្ជមាន) និងកម្ចាត់ចោលរាល់កាកសំណល់ឬទឹកកខ្វក់ (តម្លៃអវិជ្ជមាន) ឱ្យក្លាយជាទទេ (សូន្យ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">confusion matrix</span></td>
+                <td>ជាតារាងម៉ាទ្រីសដែលប្រើសម្រាប់វាយតម្លៃដំណើរការរបស់ម៉ូដែល Machine Learning ដោយវាបង្ហាញពីចំនួនដងដែលម៉ូដែលទស្សន៍ទាយត្រូវ និងចំនួនដងដែលវាទស្សន៍ទាយខុស (ភាន់ច្រឡំ) សម្រាប់ចំណាត់ថ្នាក់នីមួយៗ។</td>
+                <td>ដូចជាតារាងពិន្ទុប្រឡងដែលបង្ហាញថាសិស្សម្នាក់ឆ្លើយត្រូវប៉ុន្មានសំណួរ និងឆ្លើយខុស (ច្រឡំចម្លើយ ខ ជាចម្លើយ ក) ប៉ុន្មានសំណួរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machine (SVM)</span></td>
+                <td>ជាក្បួនដោះស្រាយ (Algorithm) មួយប្រភេទដែលជួយក្នុងការចាត់ថ្នាក់ទិន្នន័យ ដោយវាព្យាយាមគូសបន្ទាត់ ឬប្លង់ (Hyperplane) ដ៏ល្អបំផុតដើម្បីបំបែកក្រុមទិន្នន័យផ្សេងៗគ្នាឱ្យនៅដាច់ពីគ្នាបានឆ្ងាយបំផុតតាមដែលអាចធ្វើទៅបាន។</td>
+                <td>ដូចជាការគូសបន្ទាត់ព្រំដែនដ៏ច្បាស់លាស់មួយនៅលើដី ដើម្បីបែងចែករវាងចម្ការស្វាយ និងចម្ការចេកកុំឱ្យច្រឡំគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Precision</span></td>
+                <td>អត្រាសុក្រឹតភាព គឺជារង្វាស់ដែលបង្ហាញពីសមាមាត្រនៃការទស្សន៍ទាយវិជ្ជមានត្រឹមត្រូវ (True Positive) ធៀបនឹងការទស្សន៍ទាយវិជ្ជមានសរុប (True Positive + False Positive) ពោលគឺវាវាស់ថាតើម៉ូដែលទាយត្រូវកម្រិតណាពេលវាអះអាងថាត្រូវ។</td>
+                <td>ដូចជាអ្នកបាញ់ធ្នូម្នាក់ ដែលរាល់ពេលគាត់បាញ់ ព្រួញតែងតែចំគោលដៅជានិច្ច មិនងាយខុសនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">features extraction</span></td>
+                <td>ដំណើរការនៃការបំប្លែងទិន្នន័យរូបភាពឆៅទៅជាទម្រង់វ៉ិចទ័រ ឬលេខកូដ ដែលតំណាងឱ្យលក្ខណៈសំខាន់ៗរបស់រូបភាពនោះ (ឧទាហរណ៍៖ ទ្រង់ទ្រាយស្លឹក សរសៃស្លឹក) ដើម្បីងាយស្រួលឱ្យម៉ាស៊ីនកុំព្យូទ័រធ្វើការប្រៀបធៀប និងសម្គាល់។</td>
+                <td>ដូចជាការកត់ត្រាតែចំណុចសំខាន់ៗរបស់ជនសង្ស័យ (កម្ពស់ ទម្រង់មុខ ស្លាកស្នាម) ដើម្បីងាយស្រួលចំណាំ ជាជាងការចងចាំគ្រប់យ៉ាងនៅលើមុខ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=plant+leaf+image+classification+using+convolutional+neural+networks+architecture+comparison" target="_blank" rel="noopener"><span class="en">plant leaf image classification using convolutional neural networks architecture comparison</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ResNet50+deep+learning+model+fine-tuning+for+agricultural+image+recognition" target="_blank" rel="noopener"><span class="en">ResNet50 deep learning model fine-tuning for agricultural image recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=mobile+application+plant+species+identification+deep+learning+deployment" target="_blank" rel="noopener"><span class="en">mobile application plant species identification deep learning deployment</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=support+vector+machine+vs+CNN+performance+in+plant+leaf+feature+extraction" target="_blank" rel="noopener"><span class="en">support vector machine vs CNN performance in plant leaf feature extraction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=large-scale+global+plant+leaf+image+datasets+for+deep+learning+research" target="_blank" rel="noopener"><span class="en">large-scale global plant leaf image datasets for deep learning research</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>
