@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព - Aspect Based Sentiment Analysis | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព។ ប្រព័ន្ធវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព (ABSA) ភាគច្រើនមិនមានការបែងចែកកិច្ចការច្បាស់លាស់ និងខ្វះរ...">
+    
+    <meta name="keywords" content="Aspect Based Sentiment Analysis, Information Extraction, Opinion Mining, Word Embeddings, Text Clustering, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/aspect-based-sentiment-analysis-2014.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/aspect-based-sentiment-analysis-2014.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/aspect-based-sentiment-analysis-2014.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/aspect-based-sentiment-analysis-2014.html">
+    <meta property="og:title" content="ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព | KhmerResearch.com">
+    <meta property="og:description" content="ប្រព័ន្ធវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព (ABSA) ភាគច្រើនមិនមានការបែងចែកកិច្ចការច្បាស់លាស់ និងខ្វះរង្វាស់វាយតម្លៃស្តង់ដារសម្រាប់អនុគម្រោងដូចជាការទាញយកពាក្យ ការប្រមូលផ្តុំ និងការប៉ាន់ស្មានប៉ូលមនោសញ្ចេតនា។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2014 (Ph.D. Thesis, Athens University of Economics and Business)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Aspect Based Sentiment Analysis">
+    
+    <meta property="article:tag" content="Information Extraction">
+    
+    <meta property="article:tag" content="Opinion Mining">
+    
+    <meta property="article:tag" content="Word Embeddings">
+    
+    <meta property="article:tag" content="Text Clustering">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព">
+    <meta name="twitter:description" content="ប្រព័ន្ធវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព (ABSA) ភាគច្រើនមិនមានការបែងចែកកិច្ចការច្បាស់លាស់ និងខ្វះរង្វាស់វាយតម្លៃស្តង់ដារសម្រាប់អនុគម្រោងដូចជាការទាញយកពាក្យ ការប្រមូលផ្តុំ និងការប៉ាន់ស្មានប៉ូលមនោសញ្ចេតនា។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796",
+      "name": "Aspect Based Sentiment Analysis",
+      "description": "\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796 (ABSA) \u1797\u17b6\u1782\u1785\u17d2\u179a\u17be\u1793\u1798\u17b7\u1793\u1798\u17b6\u1793\u1780\u17b6\u179a\u1794\u17c2\u1784\u1785\u17c2\u1780\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb \u1793\u17b7\u1784\u1781\u17d2\u179c\u17c7\u179a\u1784\u17d2\u179c\u17b6\u179f\u17cb\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179f\u17d2\u178f\u1784\u17cb\u178a\u17b6\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u1793\u17bb\u1782\u1798\u17d2\u179a\u17c4\u1784\u178a\u17bc\u1785\u1787\u17b6\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u1796\u17b6\u1780\u17d2\u1799 \u1780\u17b6\u179a\u1794\u17d2\u179a\u1798\u17bc\u179b\u1795\u17d2\u178f\u17bb\u17c6 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u179f\u17d2\u1798\u17b6\u1793\u1794\u17c9\u17bc\u179b\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/aspect-based-sentiment-analysis-2014.html",
+      "author": [{"@type": "Person", "name": "Ioannis (John) Pavlopoulos (Athens University of Economics and Business)"}],
+      "datePublished": "2014 (Ph.D. Thesis, Athens University of Economics and Business)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Aspect Based Sentiment Analysis",
+        "url": "https://www2.aueb.gr/users/ion/docs/pavlopoulos_phd_thesis.pdf"
+      },
+      "keywords": ["Aspect Based Sentiment Analysis", "Information Extraction", "Opinion Mining", "Word Embeddings", "Text Clustering"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796",
+          "item": "https://khmerresearch.com/papers/technology/aspect-based-sentiment-analysis-2014.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Aspect Based Sentiment Analysis<br>
+        
+        <strong>Source:</strong> <a href="https://www2.aueb.gr/users/ion/docs/pavlopoulos_phd_thesis.pdf" target="_blank" rel="noopener">www2.aueb.gr</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Aspect Based Sentiment Analysis</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ioannis (John) Pavlopoulos (Athens University of Economics and Business)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2014 (Ph.D. Thesis, Athens University of Economics and Business)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ប្រព័ន្ធវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាព (ABSA) ភាគច្រើនមិនមានការបែងចែកកិច្ចការច្បាស់លាស់ និងខ្វះរង្វាស់វាយតម្លៃស្តង់ដារសម្រាប់អនុគម្រោងដូចជាការទាញយកពាក្យ ការប្រមូលផ្តុំ និងការប៉ាន់ស្មានប៉ូលមនោសញ្ចេតនា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានស្នើឡើងនូវការបែងចែកកិច្ចការថ្មីមួយដែលមាន៣ដំណាក់កាលរួមជាមួយនឹងការបង្កើតសំណុំទិន្នន័យគោល (Benchmark datasets) និងរង្វាស់វាយតម្លៃថ្មីៗដើម្បីដោះស្រាយបញ្ហាខាងលើ។
+        
+        <ul>
+            
+            <li>ការទាញយកពាក្យទិដ្ឋភាព (Aspect term extraction) ដោយប្រើវិធីសាស្ត្រ H&L+W2V ផ្អែកលើវ៉ិចទ័រពាក្យ (Word vectors)</li>
+            
+            <li>ការប្រមូលផ្តុំពាក្យទិដ្ឋភាពពហុកម្រិត (Multi-granular aspect aggregation) តាមរយៈការតម្រៀបតាមឋានានុក្រម (Hierarchical clustering)</li>
+            
+            <li>ការប៉ាន់ស្មានប៉ូលមនោសញ្ចេតនាកម្រិតសារ (Message-level sentiment polarity estimation) ដោយប្រើចំណាត់ថ្នាក់ SVM</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រកាត់ចេញដោយប្រើវ៉ិចទ័រលំហបន្ត (Continuous space vector pruning) បានធ្វើឱ្យការទាញយកពាក្យទិដ្ឋភាពមានភាពប្រសើរឡើងខ្លាំងជាងវិធីសាស្ត្រមូលដ្ឋាន Hu & Liu និង frequency-based baselines។</li>
+            
+            <li>ការកាត់ចេញអត្ថន័យ (Sense pruning) បានធ្វើឱ្យប្រសើរឡើងយ៉ាងខ្លាំងនូវរង្វាស់ភាពស្រដៀងគ្នាផ្អែកលើ WordNet សម្រាប់ការប្រមូលផ្តុំពាក្យទិដ្ឋភាពក្នុងតារាងម៉ាទ្រីសភាពស្រដៀងគ្នា។</li>
+            
+            <li>ប្រព័ន្ធចំណាត់ថ្នាក់មនោសញ្ចេតនាពីរដំណាក់កាល (Two-stage sentiment classifier) ទទួលបានចំណាត់ថ្នាក់ទី៦ ក្នុងការប្រកួតប្រជែង SemEval 2014 ដោយបង្ហាញពីសមត្ថភាពទូទៅដ៏ល្អប្រសើរក្នុងការវាយតម្លៃប៉ូលមនោសញ្ចេតនាទោះបីជាមិនបានហ្វឹកហាត់កែសម្រួលសម្រាប់ដែនជាក់លាក់ (domain-independent) ក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Hu & Liu (H&L) Baseline</span></strong><br>វិធីសាស្ត្រមូលដ្ឋានទាញយកទិដ្ឋភាពតាមរយៈការកំណត់នាម (Nouns)</td>
+                <td>ជាវិធីសាស្ត្រដែលមិនត្រូវការទិន្នន័យបង្ហាត់ (Unsupervised) និងងាយស្រួលក្នុងការទាញយកពាក្យនាមធ្វើជាទិដ្ឋភាពគោល។</td>
+                <td>ទាញយកពាក្យច្រើនលើសលប់ដែលមិនមែនជាទិដ្ឋភាពពិតប្រាកដ (False positives) និងមានភាពសុក្រឹតទាបសម្រាប់ពាក្យផ្សំ (Multi-word terms)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវជាមធ្យម (AWP) ត្រឹមតែ 52.23% សម្រាប់ទិន្នន័យភោជនីយដ្ឋាន និង 49.73% សម្រាប់សណ្ឋាគារ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">H&L+W2V (Proposed ATE)</span></strong><br>វិធីសាស្ត្រ H&L បូករួមជាមួយការកាត់ចេញដោយវ៉ិចទ័រពាក្យ (Word2Vec)</td>
+                <td>បង្កើនភាពសុក្រឹតយ៉ាងខ្លាំងដោយប្រើប្រាស់ Word Vectors ដើម្បីវាស់ស្ទង់និងកាត់ចោលពាក្យទូទៅដែលមិនពាក់ព័ន្ធនឹងដែនកំណត់ជាក់លាក់ (Domain-specific)។</td>
+                <td>តម្រូវឱ្យមានទិន្នន័យអត្ថបទធំៗ (Corpora) ដើម្បីហ្វឹកហាត់បង្កើតម៉ូដែល Continuous Word Vectors ជាមុន។</td>
+                <td>ធ្វើឲ្យកម្រិត AWP កើនឡើងដល់ 66.80% (ភោជនីយដ្ឋាន) និង 53.37% (សណ្ឋាគារ) ដែលលើសដាច់វិធីសាស្ត្រមូលដ្ឋាន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">WNDS with Sense Pruning (SP)</span></strong><br>ការវាស់ភាពស្រដៀងគ្នាដោយប្រើ WordNet និង Distributional Similarity ជាមួយការកាត់ចេញអត្ថន័យ</td>
+                <td>លុបបំបាត់អត្ថន័យស្រដៀងគ្នាដែលមិនពាក់ព័ន្ធ និងរួមបញ្ចូលគ្នានូវស្ថិតិពីអត្ថបទពិតប្រាកដជាមួយនឹងរចនាសម្ព័ន្ធវចនានុក្រម ដែលធ្វើឲ្យការប្រមូលផ្តុំទិដ្ឋភាពកាន់តែសុក្រឹត។</td>
+                <td>ពឹងផ្អែកទាំងស្រុងលើធនធាន WordNet ដែលមានភាពសំបូរបែបសម្រាប់តែភាសាអង់គ្លេស ធ្វើឲ្យពិបាកអនុវត្តលើភាសាផ្សេង។</td>
+                <td>ទទួលបានពិន្ទុ Pearson correlation ខ្ពស់បំផុត (0.545 សម្រាប់ភោជនីយដ្ឋាន និង 0.546 សម្រាប់កុំព្យូទ័រយួរដៃ) បើធៀបនឹងវិធីសាស្ត្រដទៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Two-stage SVM Classifier</span></strong><br>ចំណាត់ថ្នាក់មនោសញ្ចេតនា SVM ចំនួនពីរដំណាក់កាល</td>
+                <td>ដោះស្រាយបញ្ហាវិសមភាពទិន្នន័យ (Class imbalance) បានល្អដោយបំបែកការកំណត់ថាមានឬគ្មានមនោសញ្ចេតនា (Subjectivity) ជាមុន សឹមបែងចែកជាវិជ្ជមានឬអវិជ្ជមានតាមក្រោយ។</td>
+                <td>ត្រូវការរៀបចំលក្ខណៈពិសេស (Feature engineering) ច្រើន ដោយពឹងផ្អែកលើវចនានុក្រមមនោសញ្ចេតនា (Sentiment Lexicons) ចំនួនច្រើន។</td>
+                <td>ជាប់ចំណាត់ថ្នាក់ទី៦ ក្នុងការប្រកួតប្រជែងថ្នាក់អន្តរជាតិ SemEval 2014 ដោយមានកំហុសទាបក្នុងការវាយតម្លៃប៉ូលមនោសញ្ចេតនា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រល្មមសម្រាប់ការហ្វឹកហាត់ម៉ូដែលម៉ាស៊ីនរៀន (Machine Learning) ប៉ុន្តែពឹងផ្អែកយ៉ាងខ្លាំងលើធនធានភាសា (Linguistic Resources) ស្តង់ដារដើម្បីដំណើរការសន្មត់អត្ថន័យ។
+    
+    <ul>
+        
+        <li><strong>Linguistic Resources:</strong> ត្រូវការវចនានុក្រមមនោសញ្ចេតនា (SentiWordNet, MPQA, NRC Emotion) និងកម្រងវេវចនសព្ទ WordNet ដែលមានភាពពេញលេញ។</li>
+        
+        <li><strong>Pre-trained Models & Data:</strong> ត្រូវការទិន្នន័យធំៗដូចជា English Wikipedia សម្រាប់ការហ្វឹកហាត់ Word2Vec និងទិន្នន័យគោលសម្រាប់ការវាយតម្លៃ (Annotated Gold Standard Datasets)។</li>
+        
+        <li><strong>Software & Libraries:</strong> តម្រូវឱ្យប្រើប្រាស់កម្មវិធីកែច្នៃភាសាធម្មជាតិ (NLTK), បណ្ណាល័យគណិតវិទ្យា (SciPy) និងម៉ាស៊ីនចំណាត់ថ្នាក់ (LibLinear សម្រាប់ SVM)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យអត្ថបទភាសាអង់គ្លេសពីការវាយតម្លៃអតិថិជនលើភោជនីយដ្ឋាន សណ្ឋាគារ និងកុំព្យូទ័រ និងពឹងផ្អែកខ្លាំងលើវចនានុក្រមភាសាអង់គ្លេស (WordNet, Lexicons)។ សម្រាប់កម្ពុជា ភាពលម្អៀងនេះជាឧបសគ្គធំ ដោយសារធនធានភាសាខ្មែរ (Khmer Lexicons/WordNet) មិនទាន់មានភាពពេញលេញ ដែលធ្វើឱ្យពិបាកក្នុងការទាញយកលទ្ធផលដូចគ្នាដោយផ្ទាល់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាខ្វះខាតធនធានភាសាក៏ដោយ គំនិតនៃការបែងចែកកិច្ចការ (Task decomposition) និងការប្រើប្រាស់ Word Vectors អាចផ្តល់ជាអត្ថប្រយោជន៍ដល់ការស្រាវជ្រាវ និងអាជីវកម្មនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទេសចរណ៍ និងបដិសណ្ឋារកិច្ច (Tourism & Hospitality):</strong> ប្រព័ន្ធ ABSA អាចជួយវិភាគមតិយោបល់ភ្ញៀវទេសចរលើសេវាកម្ម (សណ្ឋាគារ ភោជនីយដ្ឋាននៅសៀមរាប ឬភ្នំពេញ) ដើម្បីដឹងថាតើពួកគេពេញចិត្តទិដ្ឋភាពណាខ្លះ (ឧទាហរណ៍៖ បន្ទប់, អាហារ, បុគ្គលិក)។</li>
+            
+            <li><strong>ការតាមដានមតិលើបណ្តាញសង្គម (Social Media Listening):</strong> អាចប្រើប្រាស់វិធីសាស្ត្រ SVM ពីរដំណាក់កាល ដើម្បីវាយតម្លៃមតិគាំទ្រ ឬរិះគន់លើផលិតផល និងសេវាកម្មសាធារណៈ ដោយប្រើប្រាស់មតិយោបល់ពី Facebook និង TikTok នៅកម្ពុជា។</li>
+            
+            <li><strong>ការអភិវឌ្ឍប្រព័ន្ធភាសាខ្មែរ (Khmer NLP Development):</strong> វិធីសាស្ត្រក្នុងការបង្កើត Word Vectors និងការទាញយកទិដ្ឋភាពដោយការកាត់ចេញនាម (Noun Pruning) អាចជាគំរូដ៏ល្អសម្រាប់អ្នកស្រាវជ្រាវកម្ពុជាក្នុងការចាប់ផ្តើមអភិវឌ្ឍន៍ប្រព័ន្ធវិភាគអត្ថបទភាសាខ្មែរដោយមិនបាច់ពឹងលើ WordNet។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក និក្ខេបបទនេះផ្តល់នូវក្របខណ្ឌដ៏រឹងមាំមួយ ដែលអាចអនុវត្តបានសម្រាប់ទីផ្សារកម្ពុជា ប្រសិនបើមានការវិនិយោគក្នុងការបង្កើតទិន្នន័យហ្វឹកហាត់ និងវចនានុក្រមមនោសញ្ចេតនាជាភាសាខ្មែរ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូលទិន្នន័យ និងសាងសង់ Word Vectors:</strong> ប្រមូលមតិយោបល់របស់អតិថិជនជាភាសាខ្មែរពី Facebook ឬវេទិកាអនឡាញ បន្ទាប់មកធ្វើការកាត់ពាក្យ (Word Segmentation) និងប្រើប្រាស់ <span class="en">Word2Vec</span> ឬ <span class="en">FastText</span> ដើម្បីបង្កើត Continuous Word Vectors សម្រាប់ភាសាខ្មែរ។</li>
+            
+            <li><strong>អនុវត្តការទាញយកទិដ្ឋភាព (Aspect Extraction):</strong> សាកល្បងទាញយកពាក្យនាម (Nouns) ដែលមានប្រេកង់ខ្ពស់តាមរយៈការប្រើប្រាស់ POS Tagger របស់ខ្មែរ បន្ទាប់មកប្រើ Word Vectors ដែលបានហ្វឹកហាត់ដើម្បីកាត់ចេញ (Prune) ពាក្យដែលមិនពាក់ព័ន្ធ ដូចដែលបានស្នើក្នុងវិធីសាស្ត្រ <span class="en">H&L+W2V</span>។</li>
+            
+            <li><strong>បង្កើតវចនានុក្រមមនោសញ្ចេតនាមូលដ្ឋាន (Sentiment Lexicon):</strong> ចាប់ផ្តើមចងក្រងបញ្ជីពាក្យវិជ្ជមាន និងអវិជ្ជមានជាភាសាខ្មែរដោយដៃ (Manual Annotation) ឬបកប្រែពាក្យសំខាន់ៗពី <span class="en">SentiWordNet</span> ដើម្បីធ្វើជាប្រភពទិន្នន័យមូលដ្ឋានសម្រាប់ការវាយតម្លៃប៉ូលមនោសញ្ចេតនា។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែលវិភាគមនោសញ្ចេតនាពីរដំណាក់កាល:</strong> ប្រើប្រាស់បណ្ណាល័យ <span class="en">Scikit-learn</span> ដើម្បីបង្វឹកម៉ូដែល <span class="en">SVM</span> សម្រាប់បែងចែកមតិយោបល់ជា (១) មាន/គ្មានមនោសញ្ចេតនា និង (២) វិជ្ជមាន/អវិជ្ជមាន ដោយទាញយកលក្ខណៈពិសេស (Features) ពីវចនានុក្រមដែលបានបង្កើតឡើង។</li>
+            
+            <li><strong>សាកល្បងការប្រមូលផ្តុំទិដ្ឋភាព (Aspect Aggregation):</strong> ប្រើប្រាស់កញ្ចប់កូដ <span class="en">SciPy</span> ដើម្បីអនុវត្ត <span class="en">Agglomerative Hierarchical Clustering</span> លើពាក្យទិដ្ឋភាពខ្មែរ ដោយគណនាចម្ងាយ (Cosine Distance) ផ្អែកលើ Word Vectors ជំនួសឲ្យការប្រើ WordNet ដែលយើងមិនទាន់មាន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Aspect Based Sentiment Analysis (ABSA)</span></td>
+                <td>ជាប្រព័ន្ធវិភាគមនោសញ្ចេតនាដែលមិនត្រឹមតែប្រាប់ថាអត្ថបទមួយជាវិជ្ជមានឬអវិជ្ជមាននោះទេ ប៉ុន្តែវាស្វែងរកទិដ្ឋភាពជាក់លាក់ (ឧទាហរណ៍៖ សេវាកម្ម, អាហារ) ហើយវាយតម្លៃមតិលើទិដ្ឋភាពនីមួយៗនោះ។</td>
+                <td>ដូចជាការអានសៀវភៅកំណត់ហេតុរបស់អតិថិជន ហើយគូសចំណាំថាតើគេសរសើរពីអ្វី និងរិះគន់ពីអ្វីឱ្យច្បាស់ៗ មិនមែនគ្រាន់តែវាយតម្លៃជារួមនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Aspect Term Extraction (ATE)</span></td>
+                <td>ជាដំណើរការទាញយកពាក្យឬឃ្លាពីក្នុងអត្ថបទ ដែលតំណាងឱ្យលក្ខណៈ ឬផ្នែកណាមួយនៃផលិតផល/សេវាកម្ម ដែលអតិថិជនកំពុងនិយាយដល់ (ឧ. ពាក្យ "ថ្ម" ឬ "អេក្រង់" សម្រាប់ទូរស័ព្ទ)។</td>
+                <td>ដូចជាការប្រើហាយឡាយ (Highlighter) គូសពីលើពាក្យគន្លឹះសំខាន់ៗដែលបញ្ជាក់ពីផ្នែកផ្សេងៗនៃផលិតផលដែលអតិថិជនកំពុងនិយាយដល់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Continuous Space Word Vectors</span></td>
+                <td>ជាបច្ចេកទេសបំប្លែងពាក្យទៅជាវ៉ិចទ័រលេខគណិតវិទ្យា ដែលអនុញ្ញាតឱ្យកុំព្យូទ័រអាចវាស់ស្ទង់ភាពស្រដៀងគ្នានៃអត្ថន័យរវាងពាក្យមួយទៅពាក្យមួយទៀតបានដោយគណនាចម្ងាយរវាងវ៉ិចទ័រទាំងនោះ។</td>
+                <td>ដូចជាការដាក់ទីតាំងពាក្យនីមួយៗលើផែនទី បើពាក្យមានន័យស្រដៀងគ្នា ពួកវានឹងស្ថិតនៅជិតគ្នាលើផែនទីនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hierarchical Agglomerative Clustering</span></td>
+                <td>ជាក្បួនដោះស្រាយការប្រមូលផ្តុំទិន្នន័យពីក្រោមឡើងលើ ដោយចាប់ផ្តើមពីធាតុនីមួយៗជាក្រុមដាច់ដោយឡែក រួចបន្តបញ្ចូលក្រុមដែលស្រដៀងគ្នាចូលគ្នាបន្តបន្ទាប់រហូតបង្កើតបានជារចនាសម្ព័ន្ធមែកធាង។</td>
+                <td>ដូចជាការចងក្រងសៀវភៅ ដោយផ្តុំទំព័រទៅជាជំពូក រួចផ្តុំជំពូកទៅជាផ្នែកធំៗ រហូតបានសៀវភៅមួយក្បាលពេញលេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machine (SVM)</span></td>
+                <td>ជាម៉ូដែលម៉ាស៊ីនរៀន (Machine Learning) សម្រាប់ធ្វើចំណាត់ថ្នាក់ទិន្នន័យ ដោយវាព្យាយាមគូសបន្ទាត់ ឬប្លង់ដែលបែងចែកក្រុមទិន្នន័យផ្សេងៗគ្នាឱ្យមានគម្លាតឆ្ងាយពីគ្នាបំផុត។</td>
+                <td>ដូចជាការគូសបន្ទាត់ព្រំដែនដ៏ធំទូលាយមួយ ដើម្បីបំបែកផ្លែប៉ោមព៌ណក្រហម និងព៌ណបៃតងឱ្យដាច់ពីគ្នាបានល្អបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pointwise Mutual Information (PMI)</span></td>
+                <td>ជារង្វាស់ស្ថិតិដែលប្រើដើម្បីវាយតម្លៃថាតើពាក្យពីរតែងតែលេចឡើងជាមួយគ្នាញឹកញាប់កម្រិតណា បើធៀបនឹងការលេចឡើងដោយចៃដន្យដាច់ដោយឡែកពីគ្នា។</td>
+                <td>ដូចជារង្វាស់ដែលប្រាប់ថាតើអ្នក និងមិត្តភ័ក្តិម្នាក់ទៀតតែងតែទៅញ៉ាំអីជុំគ្នាញឹកញាប់ប៉ុណ្ណា បើធៀបនឹងការដើរម្នាក់ឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">WordNet</span></td>
+                <td>ជាមូលដ្ឋានទិន្នន័យវចនានុក្រមដែលចងក្រងពាក្យភាសាអង់គ្លេសជាក្រុមនៃវេវចនសព្ទ (Synsets) និងភ្ជាប់ទំនាក់ទំនងគ្នាទៅតាមអត្ថន័យធំឬតូច (ឧ. ពាក្យទូទៅ និងពាក្យជាក់លាក់)។</td>
+                <td>ដូចជាបណ្តាញផែនទីគ្រួសារនៃពាក្យ ដែលបង្ហាញពីពូជពង្ស និងទំនាក់ទំនងសាច់ញាតិរវាងពាក្យនីមួយៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Silhouette Index</span></td>
+                <td>ជារង្វាស់សម្រាប់វាយតម្លៃគុណភាពនៃការប្រមូលផ្តុំទិន្នន័យ (Clustering) ដោយវាស់ថាតើទិន្នន័យមួយស័ក្តិសមជាមួយក្រុមរបស់វាប៉ុណ្ណា បើធៀបនឹងក្រុមដែលនៅក្បែរវាបំផុត។</td>
+                <td>ដូចជាការវាស់ស្ទង់ថាតើសិស្សម្នាក់មានភាពចុះសម្រុងនឹងសមាជិកក្រុមខ្លួនឯងកម្រិតណា បើធៀបនឹងសិស្សក្នុងក្រុមផ្សេង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/modeling-language-vagueness-privacy-policies-dnn-2016.html">
+                    <span class="km">ការធ្វើម៉ូដែលភាពស្រពេចស្រពិលនៃភាសានៅក្នុងគោលការណ៍ឯកជនភាពដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ</span><br>
+                    <span class="en article-original-title">Modeling Language Vagueness in Privacy Policies Using Deep Neural Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/siel-aspect-based-sentiment-analysis-2015.html">
+                    <span class="km">SIEL: ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាពនៅក្នុងការវាយតម្លៃ</span><br>
+                    <span class="en article-original-title">SIEL: Aspect Based Sentiment Analysis in Reviews</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/doc-representations-math-retrieval-novotny-2019.html">
+                    <span class="km">តំណាងឯកសារសម្រាប់ការទាញយកព័ត៌មានគណិតវិទ្យាប្រកបដោយភាពរហ័ស និងត្រឹមត្រូវ</span><br>
+                    <span class="en article-original-title">Document Representations for Fast and Accurate Retrieval of Mathematical Information</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-learning-knowledge-graph-construction-reasoning-2025.html">
+                    <span class="km">ការអនុវត្តការរៀនស៊ីជម្រៅក្នុងការបង្កើតនិងការវែកញែកក្រាហ្វចំណេះដឹង</span><br>
+                    <span class="en article-original-title">深度学习在知识图谱构建及推理中的应用</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/opinion-mining-hybrid-deep-neural-networks-2025.html">
+                    <span class="km">ការទាញយកមតិ និងការវិភាគដោយប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតចម្រុះជម្រៅ</span><br>
+                    <span class="en article-original-title">Opinion Mining and Analysis Using Hybrid Deep Neural Networks</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=aspect-based+sentiment+analysis%22+AND+%22word+embeddings%22+AND+%22aspect+term+extraction" target="_blank" rel="noopener"><span class="en">aspect-based sentiment analysis" AND "word embeddings" AND "aspect term extraction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-granular+aspect+aggregation%22+OR+%22hierarchical+aspect+clustering%22+review" target="_blank" rel="noopener"><span class="en">multi-granular aspect aggregation" OR "hierarchical aspect clustering" review</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=continuous+space+word+vectors%22+AND+%22pruning%22+AND+%22information+extraction" target="_blank" rel="noopener"><span class="en">continuous space word vectors" AND "pruning" AND "information extraction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=sentiment+polarity+estimation%22+AND+%22support+vector+machine%22+AND+%22imbalanced+dataset" target="_blank" rel="noopener"><span class="en">sentiment polarity estimation" AND "support vector machine" AND "imbalanced dataset</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hierarchical+agglomerative+clustering%22+AND+%22semantic+similarity%22+AND+WordNet" target="_blank" rel="noopener"><span class="en">hierarchical agglomerative clustering" AND "semantic similarity" AND WordNet</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

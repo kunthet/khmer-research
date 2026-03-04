@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>Mashup៖ ការធ្វើឱ្យការគណនាបែប Serverless មានប្រយោជន៍សម្រាប់លំហូរការងារ HPC តាមរយៈការអនុវត្តបែបកូនកាត់ - Mashup: Making Serverless Computing Useful for HPC Workflows via Hybrid Execution | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី Mashup៖ ការធ្វើឱ្យការគណនាបែប Serverless មានប្រយោជន៍សម្រាប់លំ។ អ្នកប្រើប្រាស់ HPC (High-Performance Computing) តែងជួបប្រទះការខាតបង់ធនធាន និងការចំណាយខ្ពស់នៅពេលប្...">
+    
+    <meta name="keywords" content="Serverless Computing, Cloud Computing, HPC Workflows, Hybrid Execution, AWS Lambda, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/mashup-serverless-computing-hpc-hybrid-execution-2022.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/mashup-serverless-computing-hpc-hybrid-execution-2022.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/mashup-serverless-computing-hpc-hybrid-execution-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/mashup-serverless-computing-hpc-hybrid-execution-2022.html">
+    <meta property="og:title" content="Mashup៖ ការធ្វើឱ្យការគណនាបែប Serverless មានប្រយោជន៍សម្រាប់លំហូរការងារ HPC តាមរយៈការអនុវត្តបែបកូនកាត់ | KhmerResearch.com">
+    <meta property="og:description" content="អ្នកប្រើប្រាស់ HPC (High-Performance Computing) តែងជួបប្រទះការខាតបង់ធនធាន និងការចំណាយខ្ពស់នៅពេលប្រើប្រាស់ប្រព័ន្ធកុំព្យូទ័រពពកជាប្រពៃណី (VM clusters) ខណៈប្រព័ន្ធ Serverless នៅមានកម្រិតទាក់ទងនឹងការផ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2022 27th ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming (PPoPP '22)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Serverless Computing">
+    
+    <meta property="article:tag" content="Cloud Computing">
+    
+    <meta property="article:tag" content="HPC Workflows">
+    
+    <meta property="article:tag" content="Hybrid Execution">
+    
+    <meta property="article:tag" content="AWS Lambda">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="Mashup៖ ការធ្វើឱ្យការគណនាបែប Serverless មានប្រយោជន៍សម្រាប់លំហូរការងារ HPC តាមរយៈការអនុវត្តបែបកូនកាត់">
+    <meta name="twitter:description" content="អ្នកប្រើប្រាស់ HPC (High-Performance Computing) តែងជួបប្រទះការខាតបង់ធនធាន និងការចំណាយខ្ពស់នៅពេលប្រើប្រាស់ប្រព័ន្ធកុំព្យូទ័រពពកជាប្រពៃណី (VM clusters) ខណៈប្រព័ន្ធ Serverless នៅមានកម្រិតទាក់ទងនឹងការផ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "Mashup\u17d6 \u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1780\u17b6\u179a\u1782\u178e\u1793\u17b6\u1794\u17c2\u1794 Serverless \u1798\u17b6\u1793\u1794\u17d2\u179a\u1799\u17c4\u1787\u1793\u17cd\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179b\u17c6\u17a0\u17bc\u179a\u1780\u17b6\u179a\u1784\u17b6\u179a HPC \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1794\u17c2\u1794\u1780\u17bc\u1793\u1780\u17b6\u178f\u17cb",
+      "name": "Mashup: Making Serverless Computing Useful for HPC Workflows via Hybrid Execution",
+      "description": "\u17a2\u17d2\u1793\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb HPC (High-Performance Computing) \u178f\u17c2\u1784\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1780\u17b6\u179a\u1781\u17b6\u178f\u1794\u1784\u17cb\u1792\u1793\u1792\u17b6\u1793 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1785\u17c6\u178e\u17b6\u1799\u1781\u17d2\u1796\u179f\u17cb\u1793\u17c5\u1796\u17c1\u179b\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1796\u1796\u1780\u1787\u17b6\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8 (VM clusters) \u1781\u178e\u17c8\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 Serverless \u1793\u17c5\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f\u1791\u17b6\u1780\u17cb\u1791\u1784\u1793\u17b9\u1784\u1780\u17b6\u179a\u1795\u17d2\u1791\u17bb\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Statelessness) \u1793\u17b7\u1784\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1794\u17d2\u179a\u178f\u17b7\u1794\u178f\u17d2\u178f\u17b7\u1780\u17b6\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/mashup-serverless-computing-hpc-hybrid-execution-2022.html",
+      "author": [{"@type": "Person", "name": "Rohan Basu Roy (Northeastern University)"},{"@type": "Person", "name": "Tirthak Patel (Northeastern University)"},{"@type": "Person", "name": "Vijay Gadepally (MIT Lincoln Laboratory)"},{"@type": "Person", "name": "Devesh Tiwari (Northeastern University)"}],
+      "datePublished": "2022 27th ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming (PPoPP \u002722)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Mashup: Making Serverless Computing Useful for HPC Workflows via Hybrid Execution",
+        "url": "https://doi.org/10.1145/3503221.3508407"
+      },
+      "keywords": ["Serverless Computing", "Cloud Computing", "HPC Workflows", "Hybrid Execution", "AWS Lambda"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Mashup\u17d6 \u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1780\u17b6\u179a\u1782\u178e\u1793\u17b6\u1794\u17c2\u1794 Serverless \u1798\u17b6\u1793\u1794\u17d2\u179a\u1799\u17c4\u1787\u1793\u17cd\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179b\u17c6\u17a0\u17bc\u179a\u1780\u17b6\u179a\u1784\u17b6\u179a HPC \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1794\u17c2\u1794\u1780\u17bc\u1793\u1780\u17b6\u178f\u17cb",
+          "item": "https://khmerresearch.com/papers/technology/mashup-serverless-computing-hpc-hybrid-execution-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>Mashup៖ ការធ្វើឱ្យការគណនាបែប Serverless មានប្រយោជន៍សម្រាប...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Mashup: Making Serverless Computing Useful for HPC Workflows via Hybrid Execution<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.1145/3503221.3508407" target="_blank" rel="noopener">doi.org/10.1145/3503221.3508407</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>Mashup៖ ការធ្វើឱ្យការគណនាបែប Serverless មានប្រយោជន៍សម្រាប់លំហូរការងារ HPC តាមរយៈការអនុវត្តបែបកូនកាត់</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Mashup: Making Serverless Computing Useful for HPC Workflows via Hybrid Execution</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Rohan Basu Roy (Northeastern University), Tirthak Patel (Northeastern University), Vijay Gadepally (MIT Lincoln Laboratory), Devesh Tiwari (Northeastern University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022 27th ACM SIGPLAN Symposium on Principles and Practice of Parallel Programming (PPoPP '22)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> អ្នកប្រើប្រាស់ HPC (High-Performance Computing) តែងជួបប្រទះការខាតបង់ធនធាន និងការចំណាយខ្ពស់នៅពេលប្រើប្រាស់ប្រព័ន្ធកុំព្យូទ័រពពកជាប្រពៃណី (VM clusters) ខណៈប្រព័ន្ធ Serverless នៅមានកម្រិតទាក់ទងនឹងការផ្ទុកទិន្នន័យ (Statelessness) និងពេលវេលាប្រតិបត្តិការ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវប្រព័ន្ធកូនកាត់ឈ្មោះ Mashup ដែលប្រើប្រាស់ឧបករណ៍បញ្ជាការសម្រេចចិត្តទីតាំង (Placement Decision Controller) ដើម្បីវិភាគ និងជ្រើសរើសបរិយាកាសគណនាដ៏ល្អបំផុតសម្រាប់កិច្ចការនីមួយៗ។
+        
+        <ul>
+            
+            <li>ការវាយតម្លៃទម្រង់ប្រតិបត្តិការកូនកាត់ (Hybrid Execution Profiling)</li>
+            
+            <li>យន្តការកាត់បន្ថយបញ្ហាចាប់ផ្តើមយឺត និងទិន្នន័យលើស (Cold-start and I/O Overhead Mitigation)</li>
+            
+            <li>ការសាកល្បងធៀបនឹងប្រព័ន្ធគ្រប់គ្រងលំហូរការងារទំនើបរួមមាន Pegasus និង Kepler</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ប្រព័ន្ធ Mashup បានកាត់បន្ថយពេលវេលាដំណើរការលំហូរការងារជាមធ្យម 34% បើធៀបនឹងប្រព័ន្ធគ្រប់គ្រង Pegasus និង Kepler ។</li>
+            
+            <li>ការចំណាយលើការអនុវត្តលំហូរការងារទាំងមូលត្រូវបានកាត់បន្ថយជាមធ្យម 43% នៅលើប្រព័ន្ធពពក Amazon (AWS EC2 និង Lambda) ។</li>
+            
+            <li>ឧបករណ៍បញ្ជាការសម្រេចចិត្តទីតាំង (PDC) របស់ Mashup អាចប៉ាន់ស្មានបរិស្ថានដំណើរការល្អបំផុតបានត្រឹមត្រូវជាង 95% ដែលជួយបង្កើនប្រសិទ្ធភាពទូទៅនៃប្រព័ន្ធ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Mashup (Hybrid Execution with PDC)</span></strong><br>Mashup (ការអនុវត្តបែបកូនកាត់ជាមួយប្រព័ន្ធ PDC)</td>
+                <td>ជ្រើសរើសបរិស្ថានប្រតិបត្តិការល្អបំផុតដោយស្វ័យប្រវត្តិ (Serverless ឬ VM) សម្រាប់កិច្ចការនីមួយៗ ដែលជួយសន្សំទាំងពេល និងថវិកា។ វាជួយកាត់បន្ថយបញ្ហាភាពយឺតយ៉ាវនៃការចាប់ផ្តើម (Cold-start) និងការផ្ទេរទិន្នន័យ។</td>
+                <td>ទាមទារឱ្យមានការដំណើរការសាកល្បងការងារ (Profiling) ម្តងជាមុនសិន ដើម្បីឱ្យប្រព័ន្ធអាចវាយតម្លៃនិងសម្រេចចិត្តទីតាំងបានត្រឹមត្រូវ។</td>
+                <td>កាត់បន្ថយពេលវេលាប្រតិបត្តិការជាមធ្យម 34% និងចំណាយ 43% បើធៀបនឹងប្រព័ន្ធ Pegasus និង Kepler ព្រមទាំងលឿនជាងប្រព័ន្ធ VM cluster សុទ្ធរហូតដល់ចន្លោះពី 37% ទៅ 68%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Traditional VM-based Cluster</span></strong><br>ការប្រើប្រាស់ប្រព័ន្ធកុំព្យូទ័រពពកជាប្រពៃណី (VM Cluster)</td>
+                <td>គ្មានបញ្ហាភាពយឺតយ៉ាវពេលចាប់ផ្តើម (Cold-start) ហើយសក្តិសមបំផុតសម្រាប់កិច្ចការដែលត្រូវការរយៈពេលដំណើរការយូរនិងមានការផ្លាស់ប្តូរទិន្នន័យច្រើន។</td>
+                <td>ចំណាយខ្ពស់និងងាយប្រឈមនឹងបញ្ហាការរៀបចំធនធានលើសតម្រូវការ (Over-provisioning) ដែលធ្វើឱ្យខាតបង់ធនធានចោលពេលកិច្ចការមួយចំនួនរង់ចាំគ្នា។</td>
+                <td>ប្រើពេលយូរជាងនិងមានតម្លៃថ្លៃជាងប្រព័ន្ធ Mashup (Mashup ចំណាយអស់តិចជាងប្រមាណពី 58% ទៅ 62% បើធៀបនឹងប្រព័ន្ធនេះ)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Serverless-only Execution</span></strong><br>ការអនុវត្តតាមបែប Serverless សុទ្ធ (AWS Lambda)</td>
+                <td>គិតលុយតែពេលដំណើរការជាក់ស្តែង (Pay-as-you-go) គ្មានធនធានទំនេរចោល និងងាយស្រួលពង្រីកទំហំដោយស្វ័យប្រវត្តិសម្រាប់កិច្ចការដែលធ្វើស្របគ្នាច្រើន។</td>
+                <td>មានដែនកំណត់រយៈពេលដំណើរការយ៉ាងតឹងរ៉ឹង (ឧ.ត្រឹម 15 នាទី) ប្រឈមបញ្ហា Cold-start និងទាមទារការសរសេរអានទិន្នន័យតាមរយៈ Storage ខាងក្រៅដែលធ្វើឱ្យយឺតយ៉ាវ។</td>
+                <td>មានដំណើរការយឺតជាងប្រព័ន្ធ VM-based Cluster ធម្មតាជាង 10% ដោយសារបន្ទុកបន្ថែម (Overheads) នៃការសរសេរ/អានទិន្នន័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">State-of-the-art Workflow Managers (Pegasus, Kepler)</span></strong><br>ប្រព័ន្ធគ្រប់គ្រងលំហូរការងារទំនើបៗ (Pegasus និង Kepler)</td>
+                <td>មានមុខងារដ៏រឹងមាំក្នុងការគ្រប់គ្រង កំណត់កាលវិភាគការងារស្មុគស្មាញ និងការកាត់បន្ថយការគណនាស្ទួននៅលើប្រព័ន្ធ VM Cluster។</td>
+                <td>មិនមានសមត្ថភាពក្នុងការទាញយកអត្ថប្រយោជន៍ពីស្ថាបត្យកម្មប្រព័ន្ធ Serverless ដើម្បីបង្កើនល្បឿន ឬកាត់បន្ថយតម្លៃចំណាយនៅឡើយទេ។</td>
+                <td>ដំណើរការយឺតជាងប្រព័ន្ធ Mashup កូនកាត់ជាមធ្យម 34% លើបរិស្ថានកុំព្យូទ័រពពកដូចគ្នា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធនេះទាមទារនូវគណនី Cloud Computing ធំៗ ព្រមទាំងការយល់ដឹងពីការកំណត់រចនាសម្ព័ន្ធកូដកម្រិតខ្ពស់ និងថវិកាសម្រាប់ជួលការផ្ទុកទិន្នន័យខ្នាតធំ។
+    
+    <ul>
+        
+        <li><strong>Hardware / Cloud Resources:</strong> ត្រូវការគណនី Cloud Provider (ដូចជា AWS ដោយប្រើប្រាស់សេវាកម្ម EC2 instances (m5.large, r5.large), AWS Lambda, និង AWS S3) ឬ Google Cloud ។</li>
+        
+        <li><strong>Software:</strong> ទាមទារបរិស្ថានដំណើរការកម្មវិធី Python 3.6, បណ្ណាល័យ boto3, កម្មវិធីបញ្ជា awscli និងការទាញយកកូដ Mashup (Open-source)។</li>
+        
+        <li><strong>Dataset:</strong> ឈុតទិន្នន័យវិទ្យាសាស្ត្រ ឬលំហូរការងារ HPC ខ្នាតធំ (ឧទាហរណ៍ 1000Genome ឬ Epigenomics ដែលមានទំហំពីរាប់រយ Gigabytes រហូតដល់ជាង 8 Terabytes)។</li>
+        
+        <li><strong>Expertise:</strong> ជំនាញផ្នែក Cloud Architecture ការយល់ដឹងពីការគ្រប់គ្រងលំហូរការងារវិទ្យាសាស្ត្រតាមទម្រង់ DAG និងការដោះស្រាយបញ្ហាប្រព័ន្ធកូនកាត់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើប្រព័ន្ធពពកពាណិជ្ជកម្មខ្នាតធំ (AWS និង GCP) និងឈុតទិន្នន័យហ្សែន/ជីវព័ត៌មានវិទ្យា (Bioinformatics) មកពីបរទេស។ សម្រាប់ប្រទេសកម្ពុជា ការទាញយក ឬបញ្ជូនទិន្នន័យរាប់ Terabytes ទៅកាន់ Cloud Datacenter ដែលស្ថិតនៅក្រៅប្រទេស អាចជួបបញ្ហាល្បឿនអ៊ីនធឺណិត (Latency) និងការចំណាយលើកម្រិតបញ្ជូនអ៊ីនធឺណិតខ្ពស់ (Bandwidth Cost)។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានបញ្ហាប្រឈមផ្នែកហេដ្ឋារចនាសម្ព័ន្ធអ៊ីនធឺណិតក្តី យុទ្ធសាស្ត្រ Mashup នេះមានសក្តានុពលខ្ពស់សម្រាប់ជួយអ្នកស្រាវជ្រាវកម្ពុជាក្នុងការប្រើប្រាស់កុំព្យូទ័រកម្រិតខ្ពស់ដោយមិនបាច់ចំណាយទុនធំ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសុខាភិបាល (ឧទាហរណ៍៖ វិទ្យាស្ថានប៉ាស្ទ័រកម្ពុជា):</strong> អាចប្រើប្រាស់គម្រូនេះដើម្បីវិភាគទិន្នន័យហ្សែនវីរុស និងជំងឺឆ្លងផ្សេងៗ ដោយចំណាយថវិកាតិចលើការគណនា (Pay-as-you-go) ជាជាងការសាងសង់មជ្ឈមណ្ឌល Supercomputer ខ្លួនឯង។</li>
+            
+            <li><strong>វិស័យកសិកម្ម និងបរិស្ថាន:</strong> វិទ្យាស្ថានស្រាវជ្រាវកសិកម្មអាចប្រើប្រាស់វាសម្រាប់វិភាគទិន្នន័យហ្សែនដំណាំ (Agricultural Genomics) ការយកគំរូអាកាសធាតុ (Weather Modeling) ឬទិន្នន័យ GIS ខ្នាតធំ។</li>
+            
+            <li><strong>គ្រឹះស្ថានឧត្តមសិក្សា (ITC និង CADT):</strong> អាចបញ្ចូលការអនុវត្តប្រព័ន្ធកូនកាត់នេះទៅក្នុងកម្មវិធីសិក្សាផ្នែក វិទ្យាសាស្ត្រទិន្នន័យ និង Cloud Computing ដើម្បីឱ្យនិស្សិតរៀនដោះស្រាយបញ្ហាជាក់ស្តែងជាមួយនឹងការចំណាយថវិកាសាលាតិចតួចបំផុតក្នុងការអនុវត្ត។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម Mashup ផ្តល់នូវដំណោះស្រាយដ៏ឆ្លាតវៃសម្រាប់ស្ថាប័ននៅកម្ពុជាដែលខ្វះខាតធនធានម៉ាស៊ីនមេផ្ទាល់ខ្លួន ដើម្បីអាចចូលរួមក្នុងការស្រាវជ្រាវវិទ្យាសាស្ត្រកម្រិតខ្ពស់បានក្នុងតម្លៃសមរម្យ និងប្រកបដោយប្រសិទ្ធភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីស្ថាបត្យកម្មប្រព័ន្ធពពក (Cloud Architecture):</strong> ចាប់ផ្តើមដោយការសិក្សាស្វែងយល់ពីភាពខុសគ្នារវាងការប្រើប្រាស់ម៉ាស៊ីននិម្មិតបែបប្រពៃណី (<span class="en">AWS EC2</span>) និងដំណើរការគណនាបែប <span class="en">Serverless</span> ដូចជាសេវាកម្ម <span class="en">AWS Lambda</span>។</li>
+            
+            <li><strong>ស្វែងយល់ពីរចនាសម្ព័ន្ធខ្សែសង្វាក់ការងារ (HPC Workflows):</strong> រៀនពីរបៀបបំបែកកិច្ចការធំៗជាផ្នែកតូចៗតាមលំដាប់លំដោយ (Directed Acyclic Graph) ដោយសាកល្បងប្រើប្រាស់ឧបករណ៍ <span class="en">Pegasus</span> ឬ <span class="en">Kepler Workflow Manager</span> ជាមូលដ្ឋាន។</li>
+            
+            <li><strong>តំឡើង និងសាកល្បងប្រព័ន្ធ Mashup ផ្ទាល់:</strong> ទាញយកកូដ Mashup ដែលបានបើកទូលាយ (Open-source) ពី <span class="en">Zenodo</span> បន្ទាប់មកតំឡើងបរិស្ថានសាកល្បងដោយប្រើប្រាស់ <span class="en">Python 3.6</span> រួមជាមួយ <span class="en">boto3</span> និង <span class="en">AWS CLI</span>។</li>
+            
+            <li><strong>អនុវត្តទិន្នន័យលើគម្រោងស្រាវជ្រាវជាក់ស្តែង:</strong> អនុវត្តការរៀបចំកាលវិភាគ (Profiling) និងសាកល្បងប្រព័ន្ធនេះដោយប្រើសំណុំទិន្នន័យតូចៗជាមុនសិន មុននឹងយកវាទៅអនុវត្តជាមួយគម្រោងវិភាគទិន្នន័យកសិកម្ម ឬប្រព័ន្ធ GIS ជាក់ស្តែងនៅក្នុងស្រុក។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Serverless Computing</span></td>
+                <td>ជាទម្រង់នៃការគណនាលើពពកដែលអ្នកប្រើប្រាស់មិនចាំបាច់គ្រប់គ្រងម៉ាស៊ីនមេ (server) ទេ ដោយប្រព័ន្ធនឹងបែងចែកធនធានដោយស្វ័យប្រវត្តិសម្រាប់ដំណើរការកូដតែម្តង ហើយគិតប្រាក់ទៅតាមទំហំធនធាននិងពេលវេលាដែលបានប្រើប្រាស់ជាក់ស្តែងប៉ុណ្ណោះ។</td>
+                <td>ដូចជាការជួលតាក់ស៊ីជិះដែលអ្នកបង់លុយតាមចម្ងាយផ្លូវដែលបានធ្វើដំណើរជាក់ស្តែង ដោយមិនចាំបាច់ខ្វល់ពីការទិញឡាន ការថែទាំ ឬចាក់សាំងដោយខ្លួនឯងឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">HPC Workflows</span></td>
+                <td>ជាបណ្តុំនៃកិច្ចការគណនាបែបវិទ្យាសាស្ត្រស្មុគស្មាញនិងធំៗ ដែលត្រូវបានតភ្ជាប់គ្នាតាមលំដាប់លំដោយ ដើម្បីដោះស្រាយបញ្ហា ឬវិភាគទិន្នន័យក្នុងកម្រិតខ្ពស់ (High-Performance Computing)។</td>
+                <td>ដូចជាសង្វាក់ផលិតកម្មនៅក្នុងរោងចក្រ ដែលកិច្ចការនីមួយៗបញ្ជូនលទ្ធផលបន្តបន្ទាប់គ្នាជាដំណាក់កាលរហូតចេញជាផលិតផលសម្រេច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Directed Acyclic Graph (DAG)</span></td>
+                <td>ជារចនាសម្ព័ន្ធទិន្នន័យដែលបង្ហាញពីទំនាក់ទំនងនិងលំដាប់លំដោយរវាងកិច្ចការនីមួយៗក្នុងលំហូរការងារ ដោយមានទិសដៅដើរទៅមុខច្បាស់លាស់ពីកិច្ចការមួយទៅមួយទៀត ហើយមិនអាចវិលត្រឡប់ថយក្រោយជារង្វង់បានឡើយ។</td>
+                <td>ដូចជាការធ្វើម្ហូបតាមសៀវភៅមគ្គុទ្ទេសក៍ ដែលអ្នកត្រូវធ្វើជំហានទី១ឱ្យចប់សិន ទើបអាចបន្តទៅជំហានទី២និងទី៣ ដោយមិនអាចរំលង ឬធ្វើច្រាសទិសបានឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cold-start overhead</span></td>
+                <td>ជាពេលវេលាយឺតយ៉ាវនៅពេលទើបនឹងចាប់ផ្តើមដំណើរការកូដដំបូងនៅក្នុងប្រព័ន្ធ Serverless ដោយសារប្រព័ន្ធកុំព្យូទ័រពពកត្រូវចំណាយពេលរៀបចំបរិស្ថានការងារ និងទាញយកទិន្នន័យផ្សេងៗមុនពេលវាអាចដំណើរការកូដបាន។</td>
+                <td>ដូចជាការបញ្ឆេះម៉ាស៊ីនឡានដែលទុកចោលយូរនៅពេលព្រឹកត្រជាក់ ដែលត្រូវការពេលបញ្ឆេះកម្តៅម៉ាស៊ីនមួយសន្ទុះមុនពេលអ្នកអាចបើកបរវាបានលឿន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stateless execution</span></td>
+                <td>ជាលក្ខណៈនៃដំណើរការប្រព័ន្ធកុំព្យូទ័រដែលមិនរក្សាទុកទិន្នន័យ ឬចងចាំស្ថានភាពណាមួយពីការដំណើរការលើកមុនឡើយ។ រាល់ការដំណើរការថ្មីគឺចាប់ផ្តើមពីទទេ ហើយវាត្រូវពឹងផ្អែកលើការទាញយកនិងរក្សាទុកលទ្ធផលនៅកន្លែងផ្ទុកខាងក្រៅជានិច្ច។</td>
+                <td>ដូចជាមនុស្សដែលរលាយការចងចាំរាល់ពេលងើបពីគេង ដែលគាត់ត្រូវសរសេររឿងរ៉ាវគ្រប់យ៉ាងទុកក្នុងសៀវភៅរាល់យប់ ដើម្បីអាចអាននិងចងចាំនៅថ្ងៃបន្ទាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Placement Decision Controller (PDC)</span></td>
+                <td>ជាយន្តការស្នូលរបស់ប្រព័ន្ធ Mashup ដែលធ្វើការសាកល្បង វិភាគ និងសម្រេចចិត្តដោយស្វ័យប្រវត្តិថា តើកិច្ចការណាមួយគួរតែដំណើរការលើ Serverless ឬគួរដំណើរការលើម៉ាស៊ីននិម្មិត (VM cluster) ដើម្បីសម្រេចបានល្បឿនលឿននិងចំណាយអស់តិចបំផុត។</td>
+                <td>ដូចជាមេការសំណង់ដ៏ឆ្លាតវៃម្នាក់ ដែលប៉ាន់ស្មាននិងចាត់តាំងជាងជំនាញឱ្យសាកសមទៅនឹងប្រភេទការងារនីមួយៗ ដើម្បីឱ្យការងារឆាប់ចប់និងមិនខ្ជះខ្ជាយថវិកា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Virtual Machine (VM) cluster</span></td>
+                <td>ជាបណ្តុំនៃម៉ាស៊ីនកុំព្យូទ័រនិម្មិតនៅលើប្រព័ន្ធពពកដែលត្រូវបានតភ្ជាប់គ្នាជាបណ្តាញ ដើម្បីធ្វើការរួមគ្នាលើកិច្ចការធំមួយ ដែលទាមទារការកំណត់ទំហំនិងបង់ប្រាក់ជួលធនធានទុកជាមុន មិនថាយើងប្រើប្រាស់វាពេញលេញឬអត់នោះទេ។</td>
+                <td>ដូចជាការជួលក្រុមការងារពេញម៉ោងប្រចាំខែដើម្បីធ្វើការរួមគ្នាក្នុងគម្រោងមួយ ដែលអ្នកត្រូវបង់ប្រាក់ខែឱ្យពួកគេរាល់ខែ ទោះបីជាថ្ងៃខ្លះគ្មានការងារធ្វើក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/sustainable-it-services-green-computing-2009.html">
+                    <span class="km">សេវាកម្មបច្ចេកវិទ្យាព័ត៌មានប្រកបដោយនិរន្តរភាព៖ ការវាយតម្លៃផលប៉ះពាល់នៃការអនុវត្តកុំព្យូទ័រដែលមិនប៉ះពាល់ដល់បរិស្ថាន</span><br>
+                    <span class="en article-original-title">Sustainable IT Services: Assessing the Impact of Green Computing Practices</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/energy-efficient-vm-management-cloud-data-centers-2013.html">
+                    <span class="km">ការគ្រប់គ្រងម៉ាស៊ីននិម្មិតប្រកបដោយប្រសិទ្ធភាពថាមពលនៅក្នុងមជ្ឈមណ្ឌលទិន្នន័យសម្រាប់សេវាកម្មកុំព្យូទ័រលើពពក (Cloud Computing)</span><br>
+                    <span class="en article-original-title">Energy-Efficient Management of Virtual Machines in Data Centers for Cloud Computing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/quantum-computing-ai-cloud-2024.html">
+                    <span class="km">កុំព្យូទ័រកង់ទិច និងបញ្ញាសិប្បនិម្មិតនៅក្នុងបច្ចេកវិទ្យាក្លោដ</span><br>
+                    <span class="en article-original-title">Quantum Computing and AI in the Cloud</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/fog-edge-computing-survey-2018.html">
+                    <span class="km">អ្វីគ្រប់យ៉ាងដែលអ្នកត្រូវដឹងអំពីការគណនាបែប Fog Computing និងគំរូ Edge Computing ដែលពាក់ព័ន្ធ៖ ការស្ទង់មតិពេញលេញ</span><br>
+                    <span class="en article-original-title">All One Needs to Know about Fog Computing and Related Edge Computing Paradigms: A Complete Survey</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/green-computing-sustainable-it-services-2018.html">
+                    <span class="km">ការវាយតម្លៃឥទ្ធិពលនៃការអនុវត្តកុំព្យូទ័របៃតងលើសេវាកម្មព័ត៌មានវិទ្យាដែលមាននិរន្តរភាព</span><br>
+                    <span class="en article-original-title">Assessing the Influence of Green Computing Practices on Sustainable IT Services</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=serverless+computing%22+OR+%22FaaS%22+%22scientific+workflows%22+performance+evaluation" target="_blank" rel="noopener"><span class="en">serverless computing" OR "FaaS" "scientific workflows" performance evaluation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=hybrid+execution%22+%22cloud+computing%22+%22HPC%22+scheduling+algorithms" target="_blank" rel="noopener"><span class="en">hybrid execution" "cloud computing" "HPC" scheduling algorithms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=mitigating+%22cold+start%22+overhead+in+%22serverless+functions%22+AWS+Lambda" target="_blank" rel="noopener"><span class="en">mitigating "cold start" overhead in "serverless functions" AWS Lambda</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Directed+Acyclic+Graph%22+workflow+managers+%22Pegasus%22+OR+%22Kepler%22+cloud+comparison" target="_blank" rel="noopener"><span class="en">Directed Acyclic Graph" workflow managers "Pegasus" OR "Kepler" cloud comparison</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=cost+optimization+%22high+performance+computing%22+%22virtual+machine%22+vs+%22serverless" target="_blank" rel="noopener"><span class="en">cost optimization "high performance computing" "virtual machine" vs "serverless</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

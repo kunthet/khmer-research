@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការចាត់ថ្នាក់ទិន្នន័យជីវវេជ្ជសាស្ត្រដែលមានវិសមាមាត្រចំណាត់ថ្នាក់ (Class Imbalance) - Classification of Biomedical Data with Class Imbalance | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការចាត់ថ្នាក់ទិន្នន័យជីវវេជ្ជសាស្ត្រដែលមានវិសមាមាត្រចំណាត់ថ្។ ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាវិសមាមាត្រនៃចំណាត់ថ្នាក់ទិន្នន័យ (Class Imbalance) នៅក្នុងសំណុំទិន្ន...">
+    
+    <meta name="keywords" content="Class Imbalance, SMOTE, Binary Features, Dimensionality Reduction, Biomedical Data, COPD Prediction, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/classification-biomedical-data-class-imbalance-2021.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/classification-biomedical-data-class-imbalance-2021.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/classification-biomedical-data-class-imbalance-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/classification-biomedical-data-class-imbalance-2021.html">
+    <meta property="og:title" content="ការចាត់ថ្នាក់ទិន្នន័យជីវវេជ្ជសាស្ត្រដែលមានវិសមាមាត្រចំណាត់ថ្នាក់ (Class Imbalance) | KhmerResearch.com">
+    <meta property="og:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាវិសមាមាត្រនៃចំណាត់ថ្នាក់ទិន្នន័យ (Class Imbalance) នៅក្នុងសំណុំទិន្នន័យជីវវេជ្ជសាស្ត្រ ដែលធ្វើឱ្យម៉ូដែល Machine Learning ងាយនឹងទស្សន៍ទាយខុសទៅលើទិន្នន័យក្រុមភាគតិច (ឧទាហ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2021-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Class Imbalance">
+    
+    <meta property="article:tag" content="SMOTE">
+    
+    <meta property="article:tag" content="Binary Features">
+    
+    <meta property="article:tag" content="Dimensionality Reduction">
+    
+    <meta property="article:tag" content="Biomedical Data">
+    
+    <meta property="article:tag" content="COPD Prediction">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការចាត់ថ្នាក់ទិន្នន័យជីវវេជ្ជសាស្ត្រដែលមានវិសមាមាត្រចំណាត់ថ្នាក់ (Class Imbalance)">
+    <meta name="twitter:description" content="ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាវិសមាមាត្រនៃចំណាត់ថ្នាក់ទិន្នន័យ (Class Imbalance) នៅក្នុងសំណុំទិន្នន័យជីវវេជ្ជសាស្ត្រ ដែលធ្វើឱ្យម៉ូដែល Machine Learning ងាយនឹងទស្សន៍ទាយខុសទៅលើទិន្នន័យក្រុមភាគតិច (ឧទាហ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b8\u179c\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u179f\u1798\u17b6\u1798\u17b6\u178f\u17d2\u179a\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb (Class Imbalance)",
+      "name": "Classification of Biomedical Data with Class Imbalance",
+      "description": "\u1780\u17b6\u179a\u179f\u17d2\u179a\u17b6\u179c\u1787\u17d2\u179a\u17b6\u179c\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u179c\u17b7\u179f\u1798\u17b6\u1798\u17b6\u178f\u17d2\u179a\u1793\u17c3\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Class Imbalance) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b8\u179c\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17c9\u17bc\u178a\u17c2\u179b Machine Learning \u1784\u17b6\u1799\u1793\u17b9\u1784\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u1781\u17bb\u179f\u1791\u17c5\u179b\u17be\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1780\u17d2\u179a\u17bb\u1798\u1797\u17b6\u1782\u178f\u17b7\u1785 (\u17a7\u1791\u17b6\u17a0\u179a\u178e\u17cd \u1780\u17b6\u179a\u1791\u179f\u17d2\u179f\u1793\u17cd\u1791\u17b6\u1799\u17a2\u17d2\u1793\u1780\u1798\u17b6\u1793\u1787\u17c6\u1784\u17ba\u1796\u17b7\u178f\u1794\u17d2\u179a\u17b6\u1780\u178a)\u17d4 \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f \u179c\u17b6\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u1794\u1784\u17d2\u1780\u17be\u1793\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179b\u17be\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17d2\u179a\u1797\u17c1\u1791\u1782\u17c4\u179b\u1796\u17b8\u179a (Binary Features) \u178a\u17c2\u179b\u1780\u1798\u17d2\u179a\u17b7\u178f\u178a\u17c2\u1793\u178f\u1798\u17d2\u179b\u17c3\u1798\u17b6\u1793\u1797\u17b6\u1796\u1785\u1784\u17d2\u17a2\u17c0\u178f\u1796\u17c1\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/classification-biomedical-data-class-imbalance-2021.html",
+      "author": [{"@type": "Person", "name": "Kunti Robiatul Mahmudah (Kanazawa University)"},{"@type": "Person", "name": "Kenji Satou (Kanazawa University)"}],
+      "datePublished": "2021",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Classification of Biomedical Data with Class Imbalance",
+        "url": "https://kanazawa-u.repo.nii.ac.jp/record/58994/files/Full-N-1824042010-kunti-robiatul-mahmudah.pdf"
+      },
+      "keywords": ["Class Imbalance", "SMOTE", "Binary Features", "Dimensionality Reduction", "Biomedical Data", "COPD Prediction"],
+      "about": "Machine Learning and Bioinformatics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1787\u17b8\u179c\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u178a\u17c2\u179b\u1798\u17b6\u1793\u179c\u17b7\u179f\u1798\u17b6\u1798\u17b6\u178f\u17d2\u179a\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb (Class Imbalance)",
+          "item": "https://khmerresearch.com/papers/technology/classification-biomedical-data-class-imbalance-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការចាត់ថ្នាក់ទិន្នន័យជីវវេជ្ជសាស្ត្រដែលមានវិសមាមាត្រចំណាត...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Classification of Biomedical Data with Class Imbalance<br>
+        
+        <strong>Source:</strong> <a href="https://kanazawa-u.repo.nii.ac.jp/record/58994/files/Full-N-1824042010-kunti-robiatul-mahmudah.pdf" target="_blank" rel="noopener">kanazawa-u.repo.nii.ac.jp</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការចាត់ថ្នាក់ទិន្នន័យជីវវេជ្ជសាស្ត្រដែលមានវិសមាមាត្រចំណាត់ថ្នាក់ (Class Imbalance)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Classification of Biomedical Data with Class Imbalance</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Kunti Robiatul Mahmudah (Kanazawa University), Kenji Satou (Kanazawa University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning and Bioinformatics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការស្រាវជ្រាវនេះដោះស្រាយបញ្ហាវិសមាមាត្រនៃចំណាត់ថ្នាក់ទិន្នន័យ (Class Imbalance) នៅក្នុងសំណុំទិន្នន័យជីវវេជ្ជសាស្ត្រ ដែលធ្វើឱ្យម៉ូដែល Machine Learning ងាយនឹងទស្សន៍ទាយខុសទៅលើទិន្នន័យក្រុមភាគតិច (ឧទាហរណ៍ ការទស្សន៍ទាយអ្នកមានជំងឺពិតប្រាកដ)។ ជាពិសេស វាផ្តោតលើការលំបាកក្នុងការអនុវត្តបច្ចេកទេសបង្កើនទិន្នន័យលើទិន្នន័យប្រភេទគោលពីរ (Binary Features) ដែលកម្រិតដែនតម្លៃមានភាពចង្អៀតពេក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើងនូវវិធីសាស្ត្ររៀបចំទិន្នន័យជាមុន ដោយរួមបញ្ចូលការទាញយកលក្ខណៈពិសេសរួមជាមួយនឹងបច្ចេកទេសបង្កើតទិន្នន័យកាឡៃបន្ថែម (Oversampling) លើសំណុំទិន្នន័យហ្សែន និងសំណុំទិន្នន័យគោលពីរ។
+        
+        <ul>
+            
+            <li>ការទាញយកលក្ខណៈពិសេស (Feature Extraction) ដោយប្រើប្រាស់ PCA, ICA, t-SNE និង UMAP</li>
+            
+            <li>បច្ចេកទេសបង្កើតទិន្នន័យបន្ថែមសម្រាប់ក្រុមភាគតិច (Oversampling Methods) ដូចជា SMOTE, ADASYN និង RSLS</li>
+            
+            <li>ក្បួនដោះស្រាយការចាត់ថ្នាក់ម៉ាស៊ីន (Machine Learning Classifiers) រួមមាន Random Forest, SVM និង Multiclass Logistic Regression</li>
+            
+            <li>ការវិភាគលើសំណុំទិន្នន័យហ្សែនជំងឺសួតរ៉ាំរ៉ៃ (COPD Microarray Gene Expression Data) ចំនួន ១៣៥ សំណាក</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការរួមបញ្ចូលគ្នារវាងការបំប្លែងទិន្នន័យ (Feature Extraction) និងបច្ចេកទេស Oversampling ផ្តល់លទ្ធផលល្អប្រសើរជាងការប្រើប្រាស់បច្ចេកទេសតែមួយ ជាពិសេសលើសំណុំទិន្នន័យប្រភេទគោលពីរ (Binary Data)។</li>
+            
+            <li>ម៉ូដែល Multiclass Logistic Regression គួបផ្សំជាមួយបច្ចេកទេស SMOTE អាចទស្សន៍ទាយអត្ថិភាពនៃជំងឺ COPD ដោយសម្រេចបានភាពត្រឹមត្រូវសរុប (Overall Accuracy) ៨០% និងពិន្ទុ AUC រហូតដល់ ៩០%។</li>
+            
+            <li>ការបំប្លែងលក្ខណៈពិសេសគោលពីរទៅជាលេខមុនពេលធ្វើ Oversampling (ឧ. ការប្រើប្រាស់ t-SNE ជាមួយ RSLS លើ Random Forest) បានបង្កើនពិន្ទុ F1-score យ៉ាងកត់សម្គាល់ ឧទាហរណ៍ពី ០.៨៨៦ ទៅ ០.៩៨៩ សម្រាប់សំណុំទិន្នន័យ SPECT។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Standard Machine Learning (Base Model)</span></strong><br>ម៉ូដែល Machine Learning ស្តង់ដារ (មិនប្រើបច្ចេកទេសតម្លើងទិន្នន័យ)</td>
+                <td>ចំណាយពេលដំណើរការលឿន ងាយស្រួលក្នុងការសរសេរកូដអនុវត្ត និងមិនត្រូវការកម្លាំងម៉ាស៊ីនកុំព្យូទ័រខ្ពស់។</td>
+                <td>ងាយនឹងធ្វើការទស្សន៍ទាយខុសទៅលើទិន្នន័យក្រុមភាគតិច (Minority Class) ដោយសារវាទាញលទ្ធផលលំអៀងទៅរកក្រុមភាគច្រើន ជាពិសេសលើទិន្នន័យប្រភេទគោលពីរ (Binary Features)។</td>
+                <td>ផ្តល់ពិន្ទុ F1-score ទាប (ឧទាហរណ៍៖ ទទួលបានត្រឹមតែ ០.៨៨៦ ប៉ុណ្ណោះសម្រាប់សំណុំទិន្នន័យ SPECT ដែលប្រើយន្តការ Random Forest)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Direct Oversampling (SMOTE/ADASYN)</span></strong><br>ការតម្លើងទិន្នន័យកាឡៃដោយផ្ទាល់លើទិន្នន័យគោលពីរ</td>
+                <td>ជួយកាត់បន្ថយភាពលំអៀងនៃក្បួនដោះស្រាយ និងបង្កើនភាពត្រឹមត្រូវក្នុងការកំណត់អត្តសញ្ញាណទិន្នន័យក្រុមភាគតិចបានមួយកម្រិត។</td>
+                <td>មិនសូវមានប្រសិទ្ធភាពខ្ពស់ ដោយសារតម្លៃនៃលក្ខណៈពិសេសគោលពីរមានដែនកំណត់តូចចង្អៀត (មានត្រឹម ០ និង ១) ដែលធ្វើឱ្យការបង្កើតទិន្នន័យថ្មីខ្វះភាពចម្រុះនិងមិនឆ្លុះបញ្ចាំងពីសភាពពិត។</td>
+                <td>ទទួលបានអត្រា AUC ៩០% ជាមួយម៉ូដែល Multiclass LR លើទិន្នន័យជំងឺ COPD ប៉ុន្តែលទ្ធផលនៅមានកម្រិតនៅឡើយសម្រាប់សំណុំទិន្នន័យគោលពីរផ្សេងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Feature Extraction + Oversampling (Proposed Method)</span></strong><br>ការទាញយកលក្ខណៈពិសេសរួចបញ្ជូលជាមួយការតម្លើងទិន្នន័យ (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>ជួយបំប្លែងទិន្នន័យគោលពីរដែលចង្អៀតទៅជាទម្រង់លេខដែលមានលក្ខណៈទូលំទូលាយ ដែលជួយឱ្យការធ្វើ Oversampling ដំណើរការបានល្អឥតខ្ចោះ និងបង្កើនប្រសិទ្ធភាពម៉ូដែលយ៉ាងខ្លាំង។</td>
+                <td>ទាមទារការគណនាស៊ីជម្រៅដែលចំណាយពេលយូរក្នុងការរៀបចំទិន្នន័យជាមុន (Pre-processing) ព្រមទាំងធ្វើឱ្យអ្នកវិភាគពិបាកបកស្រាយអត្ថន័យនៃលក្ខណៈពិសេសដែលបានបំប្លែងរួច។</td>
+                <td>អត្រា F1-score កើនឡើងខ្ពស់កប់ក្ដោង (ឧទាហរណ៍៖ កើនពី ០.៨៨៦ ទៅ ០.៩៨៩ សម្រាប់សំណុំទិន្នន័យ SPECT ដោយប្រើបន្សំ RF + tSNE + RSLS)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះពឹងផ្អែកជាចម្បងលើការប្រើប្រាស់កម្មវិធី R និងធនធានកុំព្យូទ័រសម្រាប់ការដំណើរការម៉ូដែល Machine Learning ព្រមទាំងតម្រូវឱ្យមានទិន្នន័យជីវវេជ្ជសាស្ត្រដែលប្រមូលពីមូលដ្ឋានទិន្នន័យសាធារណៈឬមន្ទីរពេទ្យ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> តម្រូវឱ្យមានកម្មវិធី R រួមជាមួយកញ្ចប់វិភាគ (Packages) ដូចជា caret, DMwR, smotefamily, Limma, affy, និង pROC សម្រាប់ការដំណើរការនិងវាស់ស្ទង់ម៉ូដែល។</li>
+        
+        <li><strong>Hardware:</strong> ត្រូវការកុំព្យូទ័រដែលមាន CPU និង RAM កម្រិតមធ្យមទៅខ្ពស់ ដើម្បីដំណើរការក្បួនគណនាស្មុគស្មាញដូចជា ការទាញយកលក្ខណៈពិសេស (t-SNE/UMAP) និងការធ្វើ 10-fold Cross-validation ច្រើនជុំជាប់ៗគ្នា។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការសំណុំទិន្នន័យជាក់លាក់ដូចជា ទិន្នន័យហ្សែន (GEO dataset GSE20257) ទិន្នន័យបាក់តេរី MRSA ឬទិន្នន័យដែលមានការបែងចែកចំណាត់ថ្នាក់មិនស្មើគ្នាខ្លាំង (Class Imbalance)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ទិន្នន័យដែលប្រើប្រាស់ក្នុងការសិក្សានេះ ភាគច្រើនជាទិន្នន័យហ្សែនអ្នកជំងឺសួតរ៉ាំរ៉ៃ (COPD) ពីសហរដ្ឋអាមេរិក (GEO dataset) និងទិន្នន័យមេរោគពីមន្ទីរពេទ្យសាកលវិទ្យាល័យ Kanazawa នៃប្រទេសជប៉ុន។ សម្រាប់ប្រទេសកម្ពុជា ទិន្នន័យហ្សែន រចនាសម្ព័ន្ធមេរោគ ឬអត្រាអត្រាប្រេវ៉ាឡង់នៃជំងឺអាចមានភាពខុសគ្នាស្រឡះអាស្រ័យលើភូមិសាស្ត្រ និងកត្តារស់នៅ ដូច្នេះម៉ូដែលចាំបាច់ត្រូវមានការបង្ហាត់សារជាថ្មីដោយប្រើទិន្នន័យក្នុងស្រុកទើបមានសុក្រឹតភាពខ្ពស់សម្រាប់ការប្រើប្រាស់ជាក់ស្តែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យមានប្រភពពីប្រទេសអភិវឌ្ឍន៍ក៏ដោយ ប៉ុន្តែវិធីសាស្ត្រនិងបច្ចេកទេសស្នើឡើងនេះមានអត្ថប្រយោជន៍ និងអាចយកមកអនុវត្តបានយ៉ាងទូលំទូលាយសម្រាប់វិស័យស្រាវជ្រាវ និងបច្ចេកវិទ្យានៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិទ្យាស្ថានប៉ាស្ទ័រកម្ពុជា (Institut Pasteur du Cambodge):</strong> អ្នកស្រាវជ្រាវអាចប្រើប្រាស់វិធីសាស្ត្រនេះដើម្បីវិភាគទិន្នន័យតេស្តហ្សែន ឬទិន្នន័យនៃការស៊ាំនឹងថ្នាំរបស់មេរោគ (ឧទាហរណ៍ ជំងឺរបេង ឬមេរោគកូវីដ១៩) ដែលជាទូទៅមានចំនួនសំណាកករណីវិជ្ជមានតិចតួចជាងករណីអវិជ្ជមានខ្លាំង។</li>
+            
+            <li><strong>ក្រសួងសុខាភិបាល (ប្រព័ន្ធទស្សន៍ទាយជំងឺរ៉ាំរ៉ៃ):</strong> អាចយកទៅអភិវឌ្ឍប្រព័ន្ធ AI សម្រាប់ជួយគ្រូពេទ្យក្នុងការទស្សន៍ទាយហានិភ័យនៃជំងឺផ្លូវដង្ហើម ដោយផ្អែកលើការកត់ត្រារោគសញ្ញាគោលពីរ (មាន/គ្មាន) របស់អ្នកជំងឺតាមមន្ទីរពេទ្យបង្អែកនានា។</li>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុនៅកម្ពុជា:</strong> ដោយសារការសិក្សានេះបានសាកល្បងដោយជោគជ័យលើទិន្នន័យបន្លំ (analcatdata_fraud) ធនាគារក្នុងស្រុកអាចយកក្បួននេះទៅទស្សន៍ទាយប្រតិបត្តិការឆបោក (Fraud Detection) ដែលជាទូទៅករណីឆបោកមានភាគរយតិចតួចបំផុតបើធៀបនឹងប្រតិបត្តិការធម្មតារបស់អតិថិជន។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការរួមបញ្ចូលគ្នារវាងការបំប្លែងលក្ខណៈពិសេស និងការបង្កើនទិន្នន័យ (Oversampling) គឺជាក្បួនដ៏រឹងមាំមួយដែលអាចជួយឱ្យស្ថាប័នកម្ពុជាដោះស្រាយបញ្ហាខ្វះខាតទិន្នន័យ ឬការវិភាគលើទិន្នន័យក្រុមភាគតិចប្រកបដោយប្រសិទ្ធភាពខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីមូលដ្ឋានគ្រឹះនៃទិន្នន័យវិទ្យា និងកម្មវិធី R:</strong> និស្សិតគួរបង្កើនសមត្ថភាពក្នុងការសរសេរកូដភាសា R និងស្វែងយល់ពីរបៀបប្រើប្រាស់កញ្ចប់វិភាគទិន្នន័យដូចជា <span class="en">caret</span> និង <span class="en">e1017</span> សម្រាប់ការកសាងម៉ូដែលចាត់ថ្នាក់ទិន្នន័យ (Classification Models)។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសបំប្លែងទិន្នន័យកាត់បន្ថយវិមាត្រ (Dimensionality Reduction):</strong> សាកល្បងសរសេរកូដដើម្បីទាញយកលក្ខណៈពិសេសពីសំណុំទិន្នន័យទម្រង់គោលពីរ (Binary Data) ដោយប្រើប្រាស់ក្បួន <span class="en">PCA, ICA, t-SNE, ឬ UMAP</span> ដើម្បីយល់ច្បាស់ពីរបៀបដែលកុំព្យូទ័របំប្លែងទិន្នន័យទៅជាទម្រង់លេខបន្តបន្ទាប់។</li>
+            
+            <li><strong>សិក្សាពីបច្ចេកទេសតម្លើងទិន្នន័យ (Oversampling Techniques):</strong> ប្រើប្រាស់កញ្ចប់ <span class="en">DMwR</span> ឬ <span class="en">smotefamily</span> ដើម្បីអនុវត្តក្បួន <span class="en">SMOTE, ADASYN, និង RSLS</span> ក្នុងការដោះស្រាយបញ្ហាវិសមាមាត្រចំណាត់ថ្នាក់ (Class Imbalance) ដោយសង្កេតមើលការផ្លាស់ប្តូរនៃចំនួនសំណាក។</li>
+            
+            <li><strong>ការរួមបញ្ចូលបច្ចេកទេស និងការវាយតម្លៃម៉ូដែល:</strong> សរសេរកូដផ្គុំបច្ចេកទេស (Feature Extraction បូកជាមួយ Oversampling) រួចដំណើរការម៉ូដែល <span class="en">Random Forest</span> ឬ <span class="en">SVM</span> ហើយធ្វើការវាយតម្លៃលទ្ធផលដោយផ្តោតលើរង្វាស់ <span class="en">F1-score និង AUC</span> ជាជាងការមើលត្រឹមតែ <span class="en">Accuracy</span>។</li>
+            
+            <li><strong>អនុវត្តលើគម្រោងស្រាវជ្រាវជាក់ស្តែង:</strong> ប្រមូលទិន្នន័យអ្នកជំងឺ ឬទិន្នន័យហិរញ្ញវត្ថុក្នុងស្រុកពីស្ថាប័ននានា (ដែលមានលក្ខណៈជា Imbalanced Data និង Binary Features) រួចអនុវត្តក្បួនដែលបានរៀនខាងលើដើម្បីបង្កើតជាប្រព័ន្ធទស្សន៍ទាយមួយដែលជួយដោះស្រាយបញ្ហាជាក់ស្តែងនៅកម្ពុជា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Class Imbalance</span></td>
+                <td>វាគឺជាស្ថានភាពនៃសំណុំទិន្នន័យដែលចំនួនសំណាកក្នុងក្រុមមួយមានបរិមាណតិចតួចបំផុតធៀបនឹងក្រុមមួយទៀត (ឧទាហរណ៍ អ្នកឈឺមានតិចតួចធៀបនឹងអ្នកជា) ដែលធ្វើឱ្យកុំព្យូទ័ររៀនទន្ទេញតែពីលក្ខណៈរបស់ក្រុមភាគច្រើន និងងាយទស្សន៍ទាយខុសលើក្រុមភាគតិច។</td>
+                <td>ដូចជាសាលារៀនមួយដែលមានសិស្សប្រុស១ពាន់នាក់ តែមានសិស្សស្រីតែ២នាក់ ដែលធ្វើឱ្យគ្រូពិបាកកត់សម្គាល់ពីអត្តចរិតរបស់សិស្សស្រី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTE</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់បង្កើតទិន្នន័យថ្មីៗបន្ថែមដោយស្វ័យប្រវត្តិ (ចម្លងនិងបង្កាត់តាមទិន្នន័យចាស់ដែលមានស្រាប់) សម្រាប់ក្រុមភាគតិច ដើម្បីឱ្យវាមានចំនួនប្រហាក់ប្រហែលនឹងក្រុមភាគច្រើន ងាយស្រួលដល់ការបង្ហាត់ម៉ូដែល Machine Learning។</td>
+                <td>ដូចជាការថតចម្លងនិងកែច្នៃរូបថតសត្វកម្រដែលជិតផុតពូជបន្តិចបន្តួច ឱ្យទៅជារូបថតរាប់ពាន់សន្លឹកក្នុងប្លង់ខុសៗគ្នា ដើម្បីឱ្យកុំព្យូទ័រឆាប់ចំណាំវាបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Extraction</span></td>
+                <td>គឺជាដំណើរការបង្រួមនិងទាញយកតែលក្ខណៈសម្បត្តិស្នូលពីទិន្នន័យធំៗនិងស្មុគស្មាញ (ដូចជាទិន្នន័យហ្សែនរាប់ម៉ឺន) បំប្លែងទៅជាទម្រង់ថ្មីដែលតូចជាងមុន ជួយឱ្យកុំព្យូទ័រអាចដំណើរការគណនាបានលឿននិងមិនមានភាពរអាក់រអួលដោយសារទិន្នន័យរំខាន (Noise)។</td>
+                <td>ដូចជាការសង្ខេបសាច់រឿងសៀវភៅ១០០ទំព័រ មកត្រឹម១ទំព័រ ដោយរក្សាទុកតែអត្ថន័យសំខាន់បំផុតដើម្បីងាយយល់និងចំណេញពេលអាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Binary Features</span></td>
+                <td>គឺជាប្រភេទលក្ខណៈនៃទិន្នន័យដែលមានតែជម្រើសតម្លៃពីរគត់ (ឧទាហរណ៍៖ មានឬគ្មាន, ពិតឬមិនពិត, លេខ០ឬលេខ១) ដែលវាធ្វើឱ្យបច្ចេកទេសបង្កើតទិន្នន័យបន្ថែមមានការលំបាក ដោយសារដែនកំណត់វាតូចចង្អៀតពេក។</td>
+                <td>ដូចជាកុងតាក់ភ្លើងដែលមានតែស្ថានភាពបើក និង បិទប៉ុណ្ណោះ គឺគ្មានកម្រិតពន្លឺភ្លឺព្រិលៗនៅចន្លោះកណ្តាលនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">AUC</span></td>
+                <td>ជារង្វាស់ជាលេខ (ពី ០ ដល់ ១) សម្រាប់វាយតម្លៃសមត្ថភាពរបស់ម៉ូដែលថាតើវាអាចញែកដាច់រវាងក្រុមទិន្នន័យវិជ្ជមាន (អ្នកឈឺ) និងអវិជ្ជមាន (អ្នកមិនឈឺ) បានល្អកម្រិតណា (ពិន្ទុកាន់តែជិត ១ កាន់តែល្អ)។</td>
+                <td>ដូចជាពិន្ទុប្រឡងចុងឆ្នាំដែលវាស់ស្ទង់សមត្ថភាពសិស្ស ថាតើគេអាចញែកដាច់រវាងចម្លើយត្រូវនិងចម្លើយខុសបានច្បាស់លាស់កម្រិតណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">F1-score</span></td>
+                <td>ជារង្វាស់មធ្យមភាគដែលថ្លឹងថ្លែងភាពស៊ីចង្វាក់គ្នារវាង 'ភាពត្រឹមត្រូវនៃអ្វីដែលម៉ូដែលបានទាយ (Precision)' និង 'ការរកឃើញទិន្នន័យពិតប្រាកដដែលមិនបាត់បង់ (Recall)' ដែលវាមានប្រសិទ្ធភាពខ្លាំងក្នុងការវាស់ស្ទង់ទិន្នន័យដែលមានវិសមាមាត្រ។</td>
+                <td>ដូចជារង្វាស់ទម្ងន់នៃភាពជោគជ័យរបស់អ្នកនេសាទ ដែលគិតទាំងបរិមាណត្រីដែលចាប់បាន និងត្រូវប្រាកដថាអួនមិនជាប់ដោយកាកសំណល់ប្លាស្ទិកមកជាមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">t-SNE</span></td>
+                <td>ជាក្បួនគណនាមួយសម្រាប់កាត់បន្ថយវិមាត្រទិន្នន័យដ៏ស្មុគស្មាញ ដោយយកទិន្នន័យដែលមានលក្ខណៈស្រដៀងគ្នាទៅដាក់ផ្តុំគ្នានៅជិតៗគ្នាក្នុងទម្រង់ប្លង់ 2D ឬ 3D ដើម្បីងាយស្រួលក្នុងការមើលឃើញក្រុមនិងវិភាគចំណាត់ថ្នាក់។</td>
+                <td>ដូចជាការចាត់ថ្នាក់មនុស្សរាប់ពាន់នាក់ឱ្យឈរជាក្រុមៗនៅលើតារាងបាល់ទាត់តាមចំណង់ចំណូលចិត្តស្រដៀងគ្នា ដើម្បីងាយស្រួលមើលការប្រមូលផ្តុំពីលើអាកាស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Microarray Gene Expression Data</span></td>
+                <td>គឺជាទិន្នន័យជីវសាស្ត្រដែលវាស់ស្ទង់និងបង្ហាញពីកម្រិតនៃសកម្មភាព ឬការបញ្ចេញហ្សែនរាប់ពាន់ទៅរាប់ម៉ឺននៅក្នុងកោសិកាក្នុងពេលតែមួយ ដែលជួយអ្នកស្រាវជ្រាវវែកញែករកហ្សែនខុសប្រក្រតីដែលបង្កជំងឺ។</td>
+                <td>ដូចជាផ្ទាំងបញ្ជា (Dashboard) ដ៏ធំមួយដែលមានភ្លើងលោតរាប់ម៉ឺនគ្រាប់ ដើម្បីប្រាប់យើងឱ្យដឹងច្បាស់ថាគ្រឿងម៉ាស៊ីនមួយណាដំណើរការល្អ និងមួយណាកំពុងខូចខាតនៅក្នុងរោងចក្រ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-preprocessing-healthcare-ai-2024.html">
+                    <span class="km">បច្ចេកទេសរៀបចំទិន្នន័យជាមុនសម្រាប់ការលើកកម្ពស់គុណភាពទិន្នន័យថែទាំសុខភាពដោយប្រើប្រាស់បញ្ញាសិប្បនិម្មិត</span><br>
+                    <span class="en article-original-title">Data Pre-Processing Technique for Enhancing Healthcare Data Quality Using Artificial Intelligence</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/class-imbalance-depression-prediction-2023.html">
+                    <span class="km">បច្ចេកទេសដោះស្រាយអតុល្យភាពចំណាត់ថ្នាក់ដែលត្រូវបានប្រើប្រាស់ក្នុងការទស្សន៍ទាយ និងការរកឃើញជំងឺបាក់ទឹកចិត្ត</span><br>
+                    <span class="en article-original-title">CLASS IMBALANCE HANDLING TECHNIQUES USED IN DEPRESSION PREDICTION AND DETECTION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/balancing-class-classification-clinical-dataset-2014.html">
+                    <span class="km">ការធ្វើឱ្យមានតុល្យភាពចំណាត់ថ្នាក់សម្រាប់ប្រសិទ្ធភាពនៃការធ្វើចំណាត់ថ្នាក់ជាមួយនឹងសំណុំទិន្នន័យគ្លីនិក</span><br>
+                    <span class="en article-original-title">Balancing Class for Performance of Classification with a Clinical Dataset</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/cvd-prediction-big-data-smote-2020.html">
+                    <span class="km">ផលវិបាកតាមបែបគ្លីនិកនៃទិន្នន័យធំ (Big Data) ក្នុងការទស្សន៍ទាយជំងឺសរសៃឈាមបេះដូង ដោយប្រើប្រាស់បច្ចេកទេស SMOTE សម្រាប់ការដោះស្រាយទិន្នន័យមិនមានតុល្យភាព</span><br>
+                    <span class="en article-original-title">CLINICAL IMPLICATIONS OF BIG DATA IN PREDICTING CARDIOVASCULAR DISEASE USING SMOTE FOR HANDLING IMBALANCED DATA</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/data/preprocessing-imbalanced-medical-data-2016.html">
+                    <span class="km">ការសិក្សាពីអត្ថប្រយោជន៍នៃវិធីសាស្ត្ររៀបចំបឋមក្នុងការវិភាគទិន្នន័យវេជ្ជសាស្ត្រដែលមានវិមាត្រច្រើន និងអតុល្យភាពខ្លាំង</span><br>
+                    <span class="en article-original-title">The study of preprocessing methods' utility in analysis of multidimensional and highly imbalanced medical data</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=imbalanced+data+classification+techniques+in+biomedical+research" target="_blank" rel="noopener"><span class="en">imbalanced data classification techniques in biomedical research</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SMOTE+variations+for+binary+feature+datasets" target="_blank" rel="noopener"><span class="en">SMOTE variations for binary feature datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=combining+feature+extraction+and+oversampling+for+high-dimensional+data" target="_blank" rel="noopener"><span class="en">combining feature extraction and oversampling for high-dimensional data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+prediction+models+for+COPD+using+microarray+gene+expression" target="_blank" rel="noopener"><span class="en">machine learning prediction models for COPD using microarray gene expression</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=t-SNE+and+UMAP+for+dimensionality+reduction+in+bioinformatics" target="_blank" rel="noopener"><span class="en">t-SNE and UMAP for dimensionality reduction in bioinformatics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=evaluating+classification+metrics+AUC+and+F1-score+for+imbalanced+medical+data" target="_blank" rel="noopener"><span class="en">evaluating classification metrics AUC and F1-score for imbalanced medical data</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

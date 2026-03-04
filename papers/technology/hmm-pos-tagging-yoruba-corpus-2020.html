@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការអនុវត្តម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Model) លើកម្រងអត្ថបទសំឡេងភាសា Yoruba របស់សហភាពស្ត្រីនីហ្សេរីយ៉ាទីក្រុងឡាហ្គោស (NWU) - Implementation of Hidden Markov Model on Lagos Nigeria Women Union (NWU) Yoru... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការអនុវត្តម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Model) លើកម្។ ឯកសារនេះដោះស្រាយបញ្ហានៃកង្វះខាតឧបករណ៍ដំណើរការភាសាធម្មជាតិ (NLP) ជាពិសេសក្បួនដោះស្រាយសម្រាប់ការបិទ...">
+    
+    <meta name="keywords" content="Hidden Markov Model, Part of Speech Tagging, Yoruba Language, Natural Language Processing, Viterbi Algorithm, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/hmm-pos-tagging-yoruba-corpus-2020.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/hmm-pos-tagging-yoruba-corpus-2020.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/hmm-pos-tagging-yoruba-corpus-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/hmm-pos-tagging-yoruba-corpus-2020.html">
+    <meta property="og:title" content="ការអនុវត្តម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Model) លើកម្រងអត្ថបទសំឡេងភាសា Yoruba របស់សហភាពស្ត្រីនីហ្សេរីយ៉ាទីក្រុងឡាហ្គោស (NWU) | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃកង្វះខាតឧបករណ៍ដំណើរការភាសាធម្មជាតិ (NLP) ជាពិសេសក្បួនដោះស្រាយសម្រាប់ការបិទស្លាកថ្នាក់ពាក្យ (POS Tagging) សម្រាប់ភាសា Yoruba ដែលជាភាសានិយាយច្រើនជាងគេមួយនៅអាហ្វ្រិកខាងលិច។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2020 The Pacific Journal of Science and Technology-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Hidden Markov Model">
+    
+    <meta property="article:tag" content="Part of Speech Tagging">
+    
+    <meta property="article:tag" content="Yoruba Language">
+    
+    <meta property="article:tag" content="Natural Language Processing">
+    
+    <meta property="article:tag" content="Viterbi Algorithm">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការអនុវត្តម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Model) លើកម្រងអត្ថបទសំឡេងភាសា Yoruba របស់សហភាពស្ត្រីនីហ្សេរីយ៉ាទីក្រុងឡាហ្គោស (NWU)">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃកង្វះខាតឧបករណ៍ដំណើរការភាសាធម្មជាតិ (NLP) ជាពិសេសក្បួនដោះស្រាយសម្រាប់ការបិទស្លាកថ្នាក់ពាក្យ (POS Tagging) សម្រាប់ភាសា Yoruba ដែលជាភាសានិយាយច្រើនជាងគេមួយនៅអាហ្វ្រិកខាងលិច។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17c9\u17b6\u1780\u17bc\u179c\u179b\u17b6\u1780\u17cb\u1780\u17c6\u1794\u17b6\u17c6\u1784 (Hidden Markov Model) \u179b\u17be\u1780\u1798\u17d2\u179a\u1784\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u17c6\u17a1\u17c1\u1784\u1797\u17b6\u179f\u17b6 Yoruba \u179a\u1794\u179f\u17cb\u179f\u17a0\u1797\u17b6\u1796\u179f\u17d2\u178f\u17d2\u179a\u17b8\u1793\u17b8\u17a0\u17d2\u179f\u17c1\u179a\u17b8\u1799\u17c9\u17b6\u1791\u17b8\u1780\u17d2\u179a\u17bb\u1784\u17a1\u17b6\u17a0\u17d2\u1782\u17c4\u179f (NWU)",
+      "name": "Implementation of Hidden Markov Model on Lagos Nigeria Women Union (NWU) Yoruba Speech Corpus",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u1784\u17d2\u179c\u17c7\u1781\u17b6\u178f\u17a7\u1794\u1780\u179a\u178e\u17cd\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1797\u17b6\u179f\u17b6\u1792\u1798\u17d2\u1798\u1787\u17b6\u178f\u17b7 (NLP) \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17b7\u1791\u179f\u17d2\u179b\u17b6\u1780\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1796\u17b6\u1780\u17d2\u1799 (POS Tagging) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1797\u17b6\u179f\u17b6 Yoruba \u178a\u17c2\u179b\u1787\u17b6\u1797\u17b6\u179f\u17b6\u1793\u17b7\u1799\u17b6\u1799\u1785\u17d2\u179a\u17be\u1793\u1787\u17b6\u1784\u1782\u17c1\u1798\u17bd\u1799\u1793\u17c5\u17a2\u17b6\u17a0\u17d2\u179c\u17d2\u179a\u17b7\u1780\u1781\u17b6\u1784\u179b\u17b7\u1785\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/hmm-pos-tagging-yoruba-corpus-2020.html",
+      "author": [{"@type": "Person", "name": "A.O. Enikuomehin (Department of Computer Science, Lagos State University, Lagos Nigeria)"},{"@type": "Person", "name": "A.A. Tijani (Department of Computer Science, Lagos State University, Lagos Nigeria)"}],
+      "datePublished": "2020 The Pacific Journal of Science and Technology",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Implementation of Hidden Markov Model on Lagos Nigeria Women Union (NWU) Yoruba Speech Corpus",
+        "url": "http://www.akamaiuniversity.us/PJST.htm"
+      },
+      "keywords": ["Hidden Markov Model", "Part of Speech Tagging", "Yoruba Language", "Natural Language Processing", "Viterbi Algorithm"],
+      "about": "Computer Science (Natural Language Processing)"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17c9\u17b6\u1780\u17bc\u179c\u179b\u17b6\u1780\u17cb\u1780\u17c6\u1794\u17b6\u17c6\u1784 (Hidden Markov Model) \u179b\u17be\u1780\u1798\u17d2\u179a\u1784\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u17c6\u17a1\u17c1\u1784\u1797\u17b6\u179f\u17b6 Yoruba \u179a\u1794\u179f\u17cb\u179f\u17a0\u1797\u17b6\u1796\u179f\u17d2\u178f\u17d2\u179a\u17b8\u1793\u17b8\u17a0\u17d2\u179f\u17c1\u179a\u17b8\u1799\u17c9\u17b6\u1791\u17b8\u1780\u17d2\u179a\u17bb\u1784\u17a1\u17b6\u17a0\u17d2\u1782\u17c4\u179f (NWU)",
+          "item": "https://khmerresearch.com/papers/technology/hmm-pos-tagging-yoruba-corpus-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការអនុវត្តម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Model) លើ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Implementation of Hidden Markov Model on Lagos Nigeria Women Union (NWU) Yoruba Speech Corpus<br>
+        
+        <strong>Source:</strong> <a href="http://www.akamaiuniversity.us/PJST.htm" target="_blank" rel="noopener">www.akamaiuniversity.us</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការអនុវត្តម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Model) លើកម្រងអត្ថបទសំឡេងភាសា Yoruba របស់សហភាពស្ត្រីនីហ្សេរីយ៉ាទីក្រុងឡាហ្គោស (NWU)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Implementation of Hidden Markov Model on Lagos Nigeria Women Union (NWU) Yoruba Speech Corpus</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> A.O. Enikuomehin (Department of Computer Science, Lagos State University, Lagos Nigeria), A.A. Tijani (Department of Computer Science, Lagos State University, Lagos Nigeria)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 The Pacific Journal of Science and Technology</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science (Natural Language Processing)</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃកង្វះខាតឧបករណ៍ដំណើរការភាសាធម្មជាតិ (NLP) ជាពិសេសក្បួនដោះស្រាយសម្រាប់ការបិទស្លាកថ្នាក់ពាក្យ (POS Tagging) សម្រាប់ភាសា Yoruba ដែលជាភាសានិយាយច្រើនជាងគេមួយនៅអាហ្វ្រិកខាងលិច។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្ត្រសិក្សាតាមបែបស្ថិតិ (Statistical learning approach) ដោយអនុវត្តម៉ូដែលម៉ាកូវលាក់កំបាំង (Hidden Markov Model) លើកម្រងអត្ថបទដែលបានបិទស្លាកដោយដៃ។
+        
+        <ul>
+            
+            <li>ការបង្កើតសំណុំស្លាកពាក្យ (Tagset Preparation) ចំនួន ១៤ ប្រភេទផ្សេងៗគ្នាដោយផ្អែកលើ Penn tree tagset។</li>
+            
+            <li>ការរៀបចំកម្រងអត្ថបទ (Corpus Preparation) ដោយប្រើប្រាស់ ៥០០ ប្រយោគដែលបានបិទស្លាកដោយដៃសម្រាប់ការបណ្តុះបណ្តាល។</li>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយ វីធើប៊ី (Viterbi Algorithm) ដើម្បីទស្សន៍ទាយ និងស្វែងរកលំដាប់ស្លាក (Tag Sequence) ដែលត្រឹមត្រូវបំផុត។</li>
+            
+            <li>ការប្រើប្រាស់ភាសា Python និងកញ្ចប់ឧបករណ៍ (Natural Language Toolkit - NLTK) សម្រាប់ការកសាងប្រព័ន្ធ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការធ្វើតេស្តលើទិន្នន័យ ៥០ ប្រយោគ ទទួលបានភាពសុក្រឹត (Precision) 0.68 អត្រារំលឹក (Recall) 0.72 និង F-measure 0.70។</li>
+            
+            <li>ការធ្វើតេស្តលើទិន្នន័យ ១០០ ប្រយោគ ទទួលបានភាពសុក្រឹត (Precision) 0.71 អត្រារំលឹក (Recall) 0.76 និង F-measure 0.73។</li>
+            
+            <li>ការស្រាវជ្រាវនេះបង្ហាញពីប្រសិទ្ធភាពនៃម៉ូដែល HMM សម្រាប់ការបិទស្លាក POS ភាសា Yoruba ដែលអាចប្រើប្រាស់បានយ៉ាងល្អ ទោះបីជាមានទិន្នន័យបណ្តុះបណ្តាលក្នុងបរិមាណតិចតួចក្តី។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Hidden Markov Model (HMM) with Viterbi Algorithm</span></strong><br>ម៉ូដែលម៉ាកូវលាក់កំបាំងជាមួយក្បួនដោះស្រាយ Viterbi (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>ដំណើរការលឿន ទាមទារទិន្នន័យបណ្តុះបណ្តាលតិចតួចត្រឹមតែ ៥០០ ប្រយោគ ងាយស្រួលអនុវត្តសម្រាប់ភាសាដែលខ្វះខាតធនធាន។</td>
+                <td>ភាពសុក្រឹតនៅមានកម្រិតត្រឹម ៧៤% ព្រោះវាពឹងផ្អែកខ្លាំងទៅលើទំហំនិងភាពត្រឹមត្រូវនៃទិន្នន័យដែលបានបិទស្លាកដោយដៃ។</td>
+                <td>ទទួលបានភាពសុក្រឹត (Precision) 0.71 អត្រារំលឹក (Recall) 0.76 និង F-measure 0.73 លើទិន្នន័យសាកល្បងចំនួន ១០០ ប្រយោគ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Rule-Based Approach</span></strong><br>វិធីសាស្ត្រផ្អែកលើវិធាន (បានលើកឡើងក្នុងការសិក្សាស្រាវជ្រាវ)</td>
+                <td>អាចផ្តល់ភាពសុក្រឹតខ្ពស់ប្រសិនបើមានការចងក្រងវិធានវេយ្យាករណ៍ និងវាក្យសម្ព័ន្ធបានច្បាស់លាស់ពីអ្នកជំនាញ។</td>
+                <td>ចំណាយពេលយូរ ទាមទារអ្នកជំនាញភាសាវិទ្យាដើម្បីបង្កើតវិធានដោយដៃ មានភាពស្មុគស្មាញ និងពិបាកក្នុងការកែប្រែនៅពេលមានពាក្យថ្មីៗ។</td>
+                <td>មិនមានលទ្ធផលជាក់ស្តែងលើកម្រងអត្ថបទពាក្យ Yoruba នេះទេ ប៉ុន្តែឯកសារបញ្ជាក់ថាវាមានភាពលំបាកក្នុងការអនុវត្តជាក់ស្តែងសម្រាប់ភាសាថ្មី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Neural Networks</span></strong><br>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (បានលើកឡើងក្នុងការសិក្សាស្រាវជ្រាវ)</td>
+                <td>មានសមត្ថភាពអាចរៀនពីទិន្នន័យដោយស្វ័យប្រវត្តិ (Adaptive learning) និងស្វែងរកលក្ខណៈសម្បត្តិស្មុគស្មាញរបស់ភាសាដោយមិនបាច់កំណត់វិធានដោយដៃ។</td>
+                <td>ទាមទារទិន្នន័យបណ្តុះបណ្តាលក្នុងបរិមាណដ៏ច្រើនសន្ធឹកសន្ធាប់ និងកម្លាំងម៉ាស៊ីនកុំព្យូទ័រខ្លាំង ដែលមិនស័ក្តិសមទាល់តែសោះសម្រាប់ភាសាខ្វះខាតធនធាន (Low-resource language)។</td>
+                <td>មិនត្រូវបានជ្រើសរើសយកមកអនុវត្តក្នុងការស្រាវជ្រាវនេះទេ ដោយសារកង្វះខាតកម្រងអត្ថបទ (Corpus) ទំហំធំ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តការស្រាវជ្រាវនេះមិនទាមទារធនធានកុំព្យូទ័រ (Hardware) ធំដុំនោះទេ ប៉ុន្តែទាមទារការចំណាយពេលវេលាច្រើនលើកម្លាំងពលកម្មមនុស្សសម្រាប់ការរៀបចំទិន្នន័យដោយដៃ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> កម្រងអត្ថបទសំឡេង Lagos-NWU Yoruba Speech ចំនួន ២១,៧២៨ ពាក្យ (ប្រើប្រាស់ ៥០០ ប្រយោគដើម្បីបិទស្លាក POS ដោយដៃសម្រាប់ការបណ្តុះបណ្តាល)។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា Python ជាមួយបណ្ណាល័យ NLTK, Scikit-learn, និង NumPy ព្រមទាំងកម្មវិធីសរសេរកូដ PyCharm IDE។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងផ្នែកភាសាវិទ្យាដើម្បីបិទស្លាកថ្នាក់ពាក្យ (POS tagging) ដោយដៃ និងការប្រើប្រាស់វចនានុក្រមអង់គ្លេស-Yoruba ជាជំនួយ។</li>
+        
+        <li><strong>Hardware:</strong> មិនមានបញ្ជាក់ជាក់លាក់ក្នុងឯកសារ ប៉ុន្តែដោយសារទំហំទិន្នន័យតូច និងអត្រាគណនា O(n|K|3) នៃក្បួន Viterbi វាអាចដំណើរការបានយ៉ាងរលូនលើកុំព្យូទ័រយួរដៃទូទៅ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងផ្តាច់មុខលើកម្រងអត្ថបទភាសា Yoruba របស់សហភាពស្ត្រីនីហ្សេរីយ៉ាទីក្រុងឡាហ្គោស ដោយប្រើប្រាស់ទិន្នន័យបណ្តុះបណ្តាលត្រឹមតែ ៥០០ ប្រយោគប៉ុណ្ណោះ។ នេះគឺជាគំរូដ៏ល្អមួយសម្រាប់ប្រទេសកម្ពុជា ព្រោះភាសាខ្មែរក៏ជាភាសាដែលមានធនធានទិន្នន័យឌីជីថល (Corpus) នៅមានកម្រិតដូចគ្នា ដែលទាមទារការចាប់ផ្តើមពីទិន្នន័យតូចៗសិន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្លាំង និងស័ក្តិសមបំផុតក្នុងការយកមកអនុវត្តជាមូលដ្ឋានគ្រឹះសម្រាប់ការពង្រឹងប្រព័ន្ធដំណើរការភាសាធម្មជាតិ (NLP) ជាភាសាខ្មែរ។</p>
+        
+        <ul>
+            
+            <li><strong>គម្រោងស្រាវជ្រាវនៅសាកលវិទ្យាល័យ (ឧ. RUPP ឫ CADT):</strong> និស្សិតអាចប្រើប្រាស់វិធីសាស្ត្រ HMM នេះដើម្បីបង្កើតប្រព័ន្ធចំណាត់ថ្នាក់ពាក្យ (POS Tagger) សម្រាប់ភាសាខ្មែរ ដោយចាប់ផ្តើមប្រមូលទិន្នន័យតូចៗពីអត្ថបទព័ត៌មាន (Khmer News) ឬរឿងខ្លីៗ។</li>
+            
+            <li><strong>វិស័យបច្ចេកវិទ្យាអប់រំ (EdTech in Cambodia):</strong> អាចយកទៅអភិវឌ្ឍជាឧបករណ៍ពិនិត្យវេយ្យាករណ៍ (Grammar Checker) ឬវចនានុក្រមឆ្លាតវៃ ដើម្បីជួយសិស្សានុសិស្សក្នុងការសរសេរភាសាខ្មែរឲ្យបានត្រឹមត្រូវ។</li>
+            
+            <li><strong>មូលដ្ឋានសម្រាប់ការបកប្រែភាសា (Machine Translation):</strong> បម្រើជាជំហានដំបូង (Preprocessing) ដ៏សំខាន់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធបកប្រែភាសាពីខ្មែរទៅអង់គ្លេស ដោយការកំណត់ថ្នាក់ពាក្យ (នាម, កិរិយាសព្ទ, គុណនាម) បានត្រឹមត្រូវជាមុនសិន។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តម៉ូដែលស្ថិតិដូចជា HMM គឺជាជំហានដំបូងដ៏រឹងមាំ ចំណាយតិច និងងាយស្រួលអនុវត្តបំផុតក្នុងការកសាងឧបករណ៍ NLP សម្រាប់ភាសាខ្មែរ មុននឹងឈានទៅប្រើប្រាស់ AI ឬ Deep Learning ដែលទាមទារធនធានខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ POS Tagging និង HMM:</strong> ស្វែងយល់ពីទ្រឹស្តីនៃការបិទស្លាកថ្នាក់ពាក្យ និងរបៀបដែលម៉ូដែល <span class="en">Hidden Markov Model</span> រួមជាមួយ <span class="en">Viterbi algorithm</span> ដំណើរការក្នុងការទស្សន៍ទាយលំដាប់ពាក្យដោយផ្អែកលើស្ថិតិនិងប្រូបាប៊ីលីតេ។</li>
+            
+            <li><strong>កំណត់សំណុំស្លាកពាក្យ (Tagset) សម្រាប់ភាសាខ្មែរ:</strong> សិក្សាពីវេយ្យាករណ៍ខ្មែរ រួចបង្កើតកម្រងស្លាកពាក្យ (ឧទាហរណ៍ នាម, កិរិយាសព្ទ, គុណនាម, សម្បទាន) ដោយអ្នកអាចយកគំរូតាម <span class="en">Penn Treebank Tagset</span> រួចកែច្នៃឲ្យស្របតាមទម្រង់ភាសាខ្មែរ។</li>
+            
+            <li><strong>រៀបចំ និងបិទស្លាកទិន្នន័យដោយដៃ (Manual Annotation):</strong> ប្រមូលអត្ថបទខ្មែរប្រមាណ ៥០០ ទៅ ១០០០ ប្រយោគ ធ្វើការបំបែកពាក្យ (<span class="en">Word Segmentation</span>) ដោយប្រើឧបករណ៍ដូចជា <span class="en">Khmer Word Segmenter</span> រួចបិទស្លាក POS ឲ្យពាក្យនីមួយៗដោយដៃដើម្បីធ្វើជាទិន្នន័យបណ្តុះបណ្តាល។</li>
+            
+            <li><strong>សរសេរកូដអនុវត្តម៉ូដែល:</strong> អនុវត្តការសរសេរកូដដោយប្រើប្រាស់ភាសា <span class="en">Python</span> រួមជាមួយបណ្ណាល័យ <span class="en">NLTK</span> សម្រាប់ដំណើរការអត្ថបទ និងបណ្ណាល័យ <span class="en">Scikit-learn</span> ក្នុងការកសាងម៉ូដែល <span class="en">HMM Tagger</span> របស់អ្នក។</li>
+            
+            <li><strong>វាយតម្លៃ និងកែលម្អម៉ូដែល:</strong> ធ្វើតេស្តម៉ូដែលរបស់អ្នកលើទិន្នន័យថ្មី (១០០ ប្រយោគផ្សេងទៀត) រួចគណនា <span class="en">Precision, Recall</span> និង <span class="en">F-measure</span> ដូចក្នុងឯកសារស្រាវជ្រាវ ដើម្បីរកចំណុចខ្វះខាត រួចបន្តបន្ថែមទិន្នន័យបណ្តុះបណ្តាលដើម្បីបង្កើនភាពសុក្រឹត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Model (HMM)</span></td>
+                <td>ជាម៉ូដែលស្ថិតិមួយដែលប្រើប្រាស់ប្រូបាប៊ីលីតេដើម្បីទាយរកអ្វីមួយដែលយើងមើលមិនឃើញ (Hidden State) ដោយផ្អែកលើទិន្នន័យដែលយើងអាចសង្កេតឃើញផ្ទាល់ (Observed State)។ ក្នុងការសិក្សានេះ គេប្រើវាដើម្បីទស្សន៍ទាយថ្នាក់ពាក្យ (នាម, កិរិយាសព្ទ...) របស់ពាក្យនីមួយៗក្នុងប្រយោគដោយមិនបាច់ដឹងច្បាប់វេយ្យាករណ៍។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាអាកាសធាតុថ្ងៃនេះមានភ្លៀងឬអត់ ដោយគ្រាន់តែសង្កេតមើលថាតើមនុស្សនៅតាមផ្លូវកាន់ឆ័ត្រឬក៏អត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Part of Speech (POS) tagging</span></td>
+                <td>គឺជាដំណើរការបង្រៀនកុំព្យូទ័រឱ្យចេះចាត់ថ្នាក់ និងបិទស្លាកប្រភេទពាក្យនីមួយៗនៅក្នុងប្រយោគមួយ (ដូចជានាម សព្វនាម កិរិយាសព្ទ ឬគុណនាម) ទៅតាមអត្ថន័យ និងបរិបទដែលវាត្រូវបានប្រើប្រាស់ មុននឹងកុំព្យូទ័រអាចបន្តទៅយល់ន័យប្រយោគទាំងមូលបាន។</td>
+                <td>ដូចជាការបិទស្លាកឈ្មោះនិងតួនាទី (ឧទាហរណ៍៖ អ្នកចាត់ការ, បេឡាករ, អ្នកយាម) ទៅឱ្យបុគ្គលិកម្នាក់ៗនៅក្នុងក្រុមហ៊ុនមួយអញ្ចឹងដែរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយគណិតវិទ្យាក្នុងការសរសេរកម្មវិធី (Dynamic Programming) ដែលជួយគណនា និងស្វែងរកផ្លូវ ឬលំដាប់លំដោយនៃថ្នាក់ពាក្យដែលមានភាពត្រឹមត្រូវ និងមានប្រូបាប៊ីលីតេខ្ពស់ជាងគេបំផុត ក្នុងចំណោមជម្រើសរាប់ពាន់ម៉ឺន ដើម្បីចំណេញពេលវេលាគណនារបស់កុំព្យូទ័រ។</td>
+                <td>ដូចជាការប្រើប្រាស់កម្មវិធី Google Maps ដើម្បីគណនាស្វែងរកផ្លូវដែលលឿនបំផុត និងត្រឹមត្រូវបំផុតក្នុងការធ្វើដំណើរពីចំណុច A ទៅចំណុច B។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Corpus</span></td>
+                <td>ជាបណ្តុំនៃអត្ថបទ ឬទិន្នន័យភាសា (អាចជាអត្ថបទសរសេរ ឬការបញ្ចេញសំឡេង) យ៉ាងច្រើនសន្ធឹកសន្ធាប់ ដែលត្រូវបានប្រមូល និងរៀបចំជាប្រព័ន្ធសម្រាប់យកទៅប្រើប្រាស់ក្នុងការស្រាវជ្រាវភាសាវិទ្យា ឬបង្វឹកម៉ូដែលបញ្ញាសិប្បនិម្មិត (AI)។</td>
+                <td>ដូចជាបណ្ណាល័យដ៏ធំមួយដែលផ្ទុកសៀវភៅ និងឯកសាររាប់លានសន្លឹក ដែលរៀបចំយ៉ាងមានសណ្តាប់ធ្នាប់ ដើម្បីទុកឱ្យកុំព្យូទ័រចូលទៅអាននិងរៀនសូត្រ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Tagset</span></td>
+                <td>ជាបញ្ជីនៃស្លាកចំណាត់ថ្នាក់ពាក្យស្តង់ដារដែលត្រូវបានកំណត់ទុកជាមុនដោយអ្នកជំនាញ សម្រាប់យកទៅប្រើប្រាស់ក្នុងការបិទស្លាកសម្គាល់ពាក្យនីមួយៗក្នុងកម្រងអត្ថបទ (Corpus) ដើម្បីឱ្យមានឯកភាពគ្នា។</td>
+                <td>ដូចជាប្រអប់ស្ទីគ័រដែលមានពាក្យថា "ល្អ", "មធ្យម", "ខ្សោយ" ដែលគ្រូបង្រៀនរៀបចំទុកសម្រាប់បិទលើសៀវភៅរបស់សិស្សគ្រប់គ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stochastic Approach</span></td>
+                <td>ជាវិធីសាស្ត្រគណនាដែលផ្អែកលើស្ថិតិនិងប្រូបាប៊ីលីតេនៃការកើតឡើងញឹកញាប់ ដើម្បីធ្វើការសម្រេចចិត្ត ឬទស្សន៍ទាយលទ្ធផលដែលទំនងជាអាចកើតមានបំផុត ជាជាងការប្រើប្រាស់វិធានឬច្បាប់វេយ្យាករណ៍ស្ងួតៗ។</td>
+                <td>ដូចជាការទាយថាកាក់ដែលបោះទៅលើនឹងធ្លាក់មកចេញរូប "ក្បាល" ឬ "កន្ទុយ" ដោយផ្អែកលើការកត់ត្រាស្ថិតិនៃការបោះ១០០ដងមុន ជាជាងការព្យាយាមគណនាកម្លាំងខ្យល់ និងទម្ងន់កាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">N-gram</span></td>
+                <td>ជាវិធីសាស្ត្រនៃការកាត់បំបែកអត្ថបទជាបំណែកៗដែលមានប្រវែងស្មើៗគ្នា (ឧទាហរណ៍ Unigram=មួយពាក្យ, Bigram=ពីរពាក្យជាប់គ្នា) ដើម្បីឱ្យកុំព្យូទ័រវិភាគរកទំនាក់ទំនង និងទម្លាប់នៃការប្រើប្រាស់ពាក្យទាំងនោះនៅក្នុងភាសាណាមួយ។</td>
+                <td>ដូចជាការកាត់ខ្សែនំបញ្ចុកជាកង់ៗដែលមានប្រវែងប៉ុនៗគ្នា ដើម្បីងាយស្រួលក្នុងការពិនិត្យមើលគុណភាពនៃសរសៃនំឱ្យបានលម្អិត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/voice-identification-python-hmm-2020.html">
+                    <span class="km">ការកំណត់អត្តសញ្ញាណសំឡេងនៅក្នុង Python ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Voice Identification in Python Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+                    <span class="km">ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង</span><br>
+                    <span class="en article-original-title">DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/pos-tagging-hausa-texts-hmm-2020.html">
+                    <span class="km">ការបិទស្លាកផ្នែកនៃសន្ទរកថា (POS) សម្រាប់អត្ថបទភាសាហូសា (Hausa) ដោយប្រើប្រាស់ម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Parts-of-Speech Tagging of Hausa-Based Texts Using Hidden Markov Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/kanuri-pos-tagging-hmm-2024.html">
+                    <span class="km">ឆ្ពោះទៅរកការបិទស្លាកផ្នែកនៃពាក្យ (POS Tagging) ប្រកបដោយប្រសិទ្ធភាពសម្រាប់ភាសាកានូរី (Kanuri)៖ ដំណោះស្រាយផ្អែកលើម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">TOWARDS EFFICIENT PART-OF-SPEECH TAGGING FOR THE KANURI LANGUAGE: A HIDDEN MARKOV MODEL-BASED SOLUTION</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/speech-recognition-hidden-markov-model-2018.html">
+                    <span class="km">ការសម្គាល់សំឡេង និងម៉ូដែល Hidden Markov</span><br>
+                    <span class="en article-original-title">Speech Recognition and Hidden Markov Model</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Model+for+Part-of-Speech+tagging+implementation" target="_blank" rel="noopener"><span class="en">Hidden Markov Model for Part-of-Speech tagging implementation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Viterbi+algorithm+step-by-step+Natural+Language+Processing" target="_blank" rel="noopener"><span class="en">Viterbi algorithm step-by-step Natural Language Processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Techniques+for+building+a+text+corpus+for+low-resource+languages" target="_blank" rel="noopener"><span class="en">Techniques for building a text corpus for low-resource languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Adapting+the+Penn+Treebank+tagset+for+indigenous+languages" target="_blank" rel="noopener"><span class="en">Adapting the Penn Treebank tagset for indigenous languages</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+of+Rule-based+and+Stochastic+POS+taggers" target="_blank" rel="noopener"><span class="en">Comparison of Rule-based and Stochastic POS taggers</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Khmer+language+Natural+Language+Processing+POS+tagging+research" target="_blank" rel="noopener"><span class="en">Khmer language Natural Language Processing POS tagging research</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

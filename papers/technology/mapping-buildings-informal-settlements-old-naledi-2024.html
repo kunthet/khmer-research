@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការគូសផែនទីអគារពីលំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលដោយប្រើប្រាស់ឧបករណ៍ចំណាត់ថ្នាក់មិនមែនប៉ារ៉ាម៉ែត្រ៖ ករណីសិក្សានៅ Old Naledi - Mapping Buildings from Semi-Informal Settlements Using Non-Parametric Classif... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការគូសផែនទីអគារពីលំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលដោយប្រើប្រាស់ឧ។ ការគូសផែនទីប្លង់អគារនៅក្នុងតំបន់លំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលមានការលំបាកយ៉ាងខ្លាំងដោយសារភាពខុសគ្ន...">
+    
+    <meta name="keywords" content="Building detection, WorldView-2, Machine learning, GLCM, Informal settlements, Gaussian Mixture Model, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/mapping-buildings-informal-settlements-old-naledi-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/mapping-buildings-informal-settlements-old-naledi-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/mapping-buildings-informal-settlements-old-naledi-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/mapping-buildings-informal-settlements-old-naledi-2024.html">
+    <meta property="og:title" content="ការគូសផែនទីអគារពីលំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលដោយប្រើប្រាស់ឧបករណ៍ចំណាត់ថ្នាក់មិនមែនប៉ារ៉ាម៉ែត្រ៖ ករណីសិក្សានៅ Old Naledi | KhmerResearch.com">
+    <meta property="og:description" content="ការគូសផែនទីប្លង់អគារនៅក្នុងតំបន់លំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលមានការលំបាកយ៉ាងខ្លាំងដោយសារភាពខុសគ្នានៃលំហរៀបចំ ដែលធ្វើឱ្យប៉ះពាល់ដល់ការរៀបចំផែនការហេដ្ឋារចនាសម្ព័ន្ធ និងការផ្តល់សេវាសាធារណៈមូលដ្ឋាន។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2024, Journal of Civil Engineering and Urbanism-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Building detection">
+    
+    <meta property="article:tag" content="WorldView-2">
+    
+    <meta property="article:tag" content="Machine learning">
+    
+    <meta property="article:tag" content="GLCM">
+    
+    <meta property="article:tag" content="Informal settlements">
+    
+    <meta property="article:tag" content="Gaussian Mixture Model">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការគូសផែនទីអគារពីលំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលដោយប្រើប្រាស់ឧបករណ៍ចំណាត់ថ្នាក់មិនមែនប៉ារ៉ាម៉ែត្រ៖ ករណីសិក្សានៅ Old Naledi">
+    <meta name="twitter:description" content="ការគូសផែនទីប្លង់អគារនៅក្នុងតំបន់លំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលមានការលំបាកយ៉ាងខ្លាំងដោយសារភាពខុសគ្នានៃលំហរៀបចំ ដែលធ្វើឱ្យប៉ះពាល់ដល់ការរៀបចំផែនការហេដ្ឋារចនាសម្ព័ន្ធ និងការផ្តល់សេវាសាធារណៈមូលដ្ឋាន។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1782\u17bc\u179f\u1795\u17c2\u1793\u1791\u17b8\u17a2\u1782\u17b6\u179a\u1796\u17b8\u179b\u17c6\u1793\u17c5\u178b\u17b6\u1793\u1780\u17d2\u179a\u17c5\u1795\u17d2\u179b\u17bc\u179c\u1780\u17b6\u179a\u1796\u17b6\u1780\u17cb\u1780\u178e\u17d2\u178f\u17b6\u179b\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17a7\u1794\u1780\u179a\u178e\u17cd\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1798\u17b7\u1793\u1798\u17c2\u1793\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u17d6 \u1780\u179a\u178e\u17b8\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c5 Old Naledi",
+      "name": "Mapping Buildings from Semi-Informal Settlements Using Non-Parametric Classifiers: A Case of Old Naledi",
+      "description": "\u1780\u17b6\u179a\u1782\u17bc\u179f\u1795\u17c2\u1793\u1791\u17b8\u1794\u17d2\u179b\u1784\u17cb\u17a2\u1782\u17b6\u179a\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u178f\u17c6\u1794\u1793\u17cb\u179b\u17c6\u1793\u17c5\u178b\u17b6\u1793\u1780\u17d2\u179a\u17c5\u1795\u17d2\u179b\u17bc\u179c\u1780\u17b6\u179a\u1796\u17b6\u1780\u17cb\u1780\u178e\u17d2\u178f\u17b6\u179b\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1799\u17c9\u17b6\u1784\u1781\u17d2\u179b\u17b6\u17c6\u1784\u178a\u17c4\u1799\u179f\u17b6\u179a\u1797\u17b6\u1796\u1781\u17bb\u179f\u1782\u17d2\u1793\u17b6\u1793\u17c3\u179b\u17c6\u17a0\u179a\u17c0\u1794\u1785\u17c6 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u178a\u179b\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1794\u1785\u17c6\u1795\u17c2\u1793\u1780\u17b6\u179a\u17a0\u17c1\u178a\u17d2\u178b\u17b6\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1795\u17d2\u178f\u179b\u17cb\u179f\u17c1\u179c\u17b6\u179f\u17b6\u1792\u17b6\u179a\u178e\u17c8\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/mapping-buildings-informal-settlements-old-naledi-2024.html",
+      "author": [{"@type": "Person", "name": "Wame Mpoeleng (University of Botswana)"},{"@type": "Person", "name": "Mooketsi Segobye (University of Botswana)"},{"@type": "Person", "name": "Yashon Ouma (University of Botswana)"},{"@type": "Person", "name": "Kealeboga Moreri (University of Botswana)"},{"@type": "Person", "name": "Bagadzi M. Manisa (University of Botswana)"},{"@type": "Person", "name": "Boipuso Nkwae (University of Botswana)"},{"@type": "Person", "name": "Lopang Maphale (University of Botswana)"},{"@type": "Person", "name": "Nyaladzani Nkhwanana (University of Botswana)"}],
+      "datePublished": "2024, Journal of Civil Engineering and Urbanism",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Mapping Buildings from Semi-Informal Settlements Using Non-Parametric Classifiers: A Case of Old Naledi",
+        "url": "https://doi.org/10.54203/jceu.2024.14"
+      },
+      "keywords": ["Building detection", "WorldView-2", "Machine learning", "GLCM", "Informal settlements", "Gaussian Mixture Model"],
+      "about": "Remote Sensing and Urban Planning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1782\u17bc\u179f\u1795\u17c2\u1793\u1791\u17b8\u17a2\u1782\u17b6\u179a\u1796\u17b8\u179b\u17c6\u1793\u17c5\u178b\u17b6\u1793\u1780\u17d2\u179a\u17c5\u1795\u17d2\u179b\u17bc\u179c\u1780\u17b6\u179a\u1796\u17b6\u1780\u17cb\u1780\u178e\u17d2\u178f\u17b6\u179b\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17a7\u1794\u1780\u179a\u178e\u17cd\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1798\u17b7\u1793\u1798\u17c2\u1793\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u17d6 \u1780\u179a\u178e\u17b8\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c5 Old Naledi",
+          "item": "https://khmerresearch.com/papers/technology/mapping-buildings-informal-settlements-old-naledi-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការគូសផែនទីអគារពីលំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលដោយប្រើប្រា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Mapping Buildings from Semi-Informal Settlements Using Non-Parametric Classifiers: A Case of Old Naledi<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.54203/jceu.2024.14" target="_blank" rel="noopener">doi.org/10.54203/jceu.2024.14</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការគូសផែនទីអគារពីលំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលដោយប្រើប្រាស់ឧបករណ៍ចំណាត់ថ្នាក់មិនមែនប៉ារ៉ាម៉ែត្រ៖ ករណីសិក្សានៅ Old Naledi</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Mapping Buildings from Semi-Informal Settlements Using Non-Parametric Classifiers: A Case of Old Naledi</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Wame Mpoeleng (University of Botswana), Mooketsi Segobye (University of Botswana), Yashon Ouma (University of Botswana), Kealeboga Moreri (University of Botswana), Bagadzi M. Manisa (University of Botswana), Boipuso Nkwae (University of Botswana), Lopang Maphale (University of Botswana), Nyaladzani Nkhwanana (University of Botswana)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Journal of Civil Engineering and Urbanism</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Remote Sensing and Urban Planning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការគូសផែនទីប្លង់អគារនៅក្នុងតំបន់លំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលមានការលំបាកយ៉ាងខ្លាំងដោយសារភាពខុសគ្នានៃលំហរៀបចំ ដែលធ្វើឱ្យប៉ះពាល់ដល់ការរៀបចំផែនការហេដ្ឋារចនាសម្ព័ន្ធ និងការផ្តល់សេវាសាធារណៈមូលដ្ឋាន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានវាយតម្លៃក្បួនដោះស្រាយម៉ាស៊ីនរៀន (Machine Learning) ចំនួនបីប្រភេទ ដោយប្រើប្រាស់រូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់រួមបញ្ចូលជាមួយទិន្នន័យវាយនភាព ដើម្បីទាញយកទិន្នន័យអគារ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់រូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់ (WorldView-2 Satellite Imagery)</li>
+            
+            <li>ការគណនាម៉ាទ្រីសសហការកើតឡើងកម្រិតពណ៌ប្រផេះ (Gray-Level Co-Occurrence Matrix - GLCM)</li>
+            
+            <li>ការចាត់ថ្នាក់តាមរយៈម៉ាស៊ីនរៀនមិនមែនប៉ារ៉ាម៉ែត្រ (Non-Parametric ML Classifiers: GMM, RF, និង SVM)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ GMM សម្រេចបានភាពត្រឹមត្រូវជាមធ្យមខ្ពស់បំផុតរហូតដល់ ៩២,៤% ក្នុងការកំណត់ទីតាំងអគារទោល។</li>
+            
+            <li>ការប្រើប្រាស់សន្ទស្សន៍ GLCM មិនបានជួយកែលម្អការរកឃើញអគារសម្រាប់ GMM ទេ ប៉ុន្តែវាបានបង្កើនប្រសិទ្ធភាពសម្រាប់ម៉ូដែល Random Forest (RF) និង Support Vector Machine (SVM)។</li>
+            
+            <li>ម៉ូដែល SVM និង RF ទទួលបានភាពត្រឹមត្រូវរួមក្នុងការទាញយកប្លង់អគារត្រឹមតែ ៧៩% និង ៧០,៥% រៀងគ្នា ដែលបង្ហាញថាម៉ូដែល GMM គឺស័ក្តិសមបំផុតសម្រាប់ការគូសផែនទីនៅក្នុងបរិបទនេះ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Gaussian Mixture Model (GMM)</span></strong><br>ម៉ូដែល Gaussian Mixture (GMM)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់បំផុតក្នុងការទាញយកប្លង់អគារ និងគែមអគារបានច្បាស់លាស់ ដោយមិនចាំបាច់ប្រើទិន្នន័យវាយនភាព (GLCM textures)។</td>
+                <td>សមត្ថភាពថយចុះនៅពេលប្រើរួមបញ្ចូលជាមួយទិន្នន័យវាយនភាព ដែលអាចបណ្តាលឱ្យម៉ូដែលដំណើរការលើសកម្រិត (Overfit) ឬខ្វះកម្រិត (Underfit)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវមធ្យម ៩២,៣៨% សម្រាប់ការរកឃើញអគារ ដែលជាលទ្ធផលខ្ពស់ជាងគេបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest (RF)</span></strong><br>ម៉ូដែល Random Forest (RF)</td>
+                <td>មានស្ថិរភាពល្អក្នុងការចាត់ថ្នាក់វត្ថុផ្សេងៗគ្នាទូទៅនៅលើរូបភាព និងទទួលបានអត្ថប្រយោជន៍ខ្ពស់នៅពេលប្រើជាមួយទិន្នន័យវាយនភាព។</td>
+                <td>មិនសូវមានប្រសិទ្ធភាពក្នុងការកំណត់ព្រំប្រទល់ ឬគែមរបស់អគារនីមួយៗនោះទេ ជាពិសេសនៅតំបន់ដែលមានអគារកកកុញ។</td>
+                <td>មានភាពត្រឹមត្រូវរួម (Overall Accuracy) ខ្ពស់ដល់ ៩៩,៩០% តែភាពត្រឹមត្រូវសម្រាប់ការទាញយកប្លង់អគារមានត្រឹមតែ ៧០,៥៣% ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM)</span></strong><br>ម៉ូដែល Support Vector Machine (SVM)</td>
+                <td>ស័ក្តិសមសម្រាប់សំណុំទិន្នន័យស្មុគស្មាញ និងមានប្រសិទ្ធភាពក្នុងការកំណត់គែមអគារបានល្អប្រសើរនៅពេលប្រើជាមួយទិន្នន័យវាយនភាព GLCM។</td>
+                <td>មានភាពត្រឹមត្រូវទាបជាងម៉ូដែល GMM ក្នុងការទាញយកអគារ ហើយចាំបាច់ត្រូវទាមទារការប្រើប្រាស់សន្ទស្សន៍វាយនភាពដើម្បីទទួលបានលទ្ធផលល្អ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវមធ្យម ៧៩,២៦% សម្រាប់ការរកឃើញប្លង់អគារ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះពឹងផ្អែកជាចម្បងលើទិន្នន័យរូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់ដែលមានតម្លៃថ្លៃ និងទាមទារសមត្ថភាពកុំព្យូទ័រមធ្យមក្នុងការដំណើរការម៉ូដែល Machine Learning។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទាមទាររូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់ WorldView-2 (Multispectral និង Panchromatic) ដែលជារូបភាពពាណិជ្ជកម្មមានតម្លៃថ្លៃ។</li>
+        
+        <li><strong>Hardware:</strong> ត្រូវការកុំព្យូទ័រដែលមានកម្លាំងម៉ាស៊ីន (RAM/CPU) មធ្យមទៅខ្ពស់ សម្រាប់ដំណើរការការបូកបញ្ចូលរូបភាព (Pan-sharpening) និងគណនាម៉ាទ្រីសសហការកើតឡើងកម្រិតពណ៌ប្រផេះ (GLCM)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធីប្រព័ន្ធព័ត៌មានភូមិសាស្ត្រ (GIS) និងកូដសម្រាប់ដំណើរការម៉ូដែល Machine Learning។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានអនុវត្តនៅក្នុងតំបន់ Old Naledi រដ្ឋធានី Gaborone ប្រទេស Botswana ដែលជាលំនៅឋានក្រៅផ្លូវការពាក់កណ្តាលមានផ្ទះតូចៗកកកុញ និងគ្មានសណ្តាប់ធ្នាប់រៀបរយ។ លក្ខណៈភូមិសាស្ត្រ និងសណ្ឋានអគារទាំងនេះមានភាពប្រហាក់ប្រហែលគ្នានឹងសហគមន៍ក្រីក្រ ឬការតាំងទីលំនៅក្រៅផ្លូវការមួយចំនួននៅក្នុងប្រទេសកម្ពុជា ដែលសបញ្ជាក់ថាម៉ូដែល GMM ពិតជាមានសក្តានុពលក្នុងការយកមកអនុវត្តក្នុងបរិបទប្រទេសយើង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការប្រើប្រាស់រូបភាពផ្កាយរណប និង Machine Learning នេះ មានសារៈសំខាន់ និងអាចយកមកអនុវត្តបានយ៉ាងល្អសម្រាប់ប្រទេសកម្ពុជា ក្នុងការអភិវឌ្ឍន៍ទីក្រុង និងការគ្រប់គ្រងហេដ្ឋារចនាសម្ព័ន្ធ។</p>
+        
+        <ul>
+            
+            <li><strong>ការរៀបចំផែនការទីក្រុង (រាជធានីភ្នំពេញ និងក្រុងព្រះសីហនុ):</strong> អាចប្រើដើម្បីគូសផែនទីលំនៅឋានក្រៅផ្លូវការ ឬសហគមន៍ក្រីក្រនៅតំបន់ជាយក្រុង ដើម្បីផ្តល់ភាពងាយស្រួលដល់អាជ្ញាធរក្នុងការរៀបចំប្រព័ន្ធទឹកស្អាត លូ និងបណ្តាញអគ្គិសនី។</li>
+            
+            <li><strong>ការគ្រប់គ្រងគ្រោះមហន្តរាយ (ខេត្តបាត់ដំបង និងបន្ទាយមានជ័យ):</strong> ជួយគូសផែនទីកំណត់ទីតាំងអគារយ៉ាងរហ័សនៅតំបន់ដែលងាយរងគ្រោះដោយសារទឹកជំនន់ ដែលអនុញ្ញាតឱ្យមានការជួយសង្គ្រោះ និងការគ្រប់គ្រងហានិភ័យបានទាន់ពេលវេលា។</li>
+            
+            <li><strong>ការធ្វើជំរឿន និងការស្រាវជ្រាវប្រជាសាស្ត្រ:</strong> ជួយប៉ាន់ប្រមាណចំនួនប្រជាជន និងដង់ស៊ីតេអគារនៅតំបន់ដាច់ស្រយាល ឬតំបន់ដែលពិបាកចូលទៅដល់ដោយផ្ទាល់ ជួយកាត់បន្ថយពេលវេលា និងការចំណាយលើការចុះវាស់វែង។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់រូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់រួមជាមួយក្បួនដោះស្រាយ GMM គឺជាដំណោះស្រាយទំនើបដែលចំណាយពេលវេលា និងថវិកាតិចជាងការចុះវាស់វែងផ្ទាល់ សម្រាប់ការធ្វើបច្ចុប្បន្នភាពទិន្នន័យនគរូបនីយកម្មនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីប្រភពទិន្នន័យរូបភាពផ្កាយរណប:</strong> និស្សិតគួរចាប់ផ្តើមរៀនទាញយករូបភាពផ្កាយរណបដោយប្រើប្រាស់ <span class="en">Google Earth Engine (GEE)</span> ឬស្វែងរកទិន្នន័យឥតគិតថ្លៃកម្រិតច្បាស់មធ្យមពី <span class="en">Sentinel-2</span> និងការស្នើសុំទិន្នន័យសិក្សាពី <span class="en">PlanetScope</span> ជាជាងការទិញទិន្នន័យថ្លៃៗភ្លាមៗ។</li>
+            
+            <li><strong>សិក្សាអំពីការរៀបចំទិន្នន័យរូបភាពជាមុន (Pre-processing):</strong> អនុវត្តការបូកបញ្ចូលរូបភាពឱ្យច្បាស់ (Pan-sharpening) និងការគណនាសន្ទស្សន៍វាយនភាព GLCM ដោយប្រើប្រាស់កម្មវិធី <span class="en">QGIS</span> ឬ <span class="en">ArcGIS Pro</span> ដើម្បីត្រៀមទិន្នន័យសម្រាប់ម៉ូដែល។</li>
+            
+            <li><strong>ការសរសេរកូដសម្រាប់ម៉ូដែល Machine Learning:</strong> ប្រើប្រាស់ភាសា <span class="en">Python</span> ជាមួយបណ្ណាល័យ (Libraries) ស្តង់ដារដូចជា <span class="en">Scikit-learn</span> និង <span class="en">Rasterio</span> សម្រាប់សរសេរកូដបង្កើតម៉ូដែល <span class="en">GMM</span>, <span class="en">Random Forest</span>, និង <span class="en">SVM</span> ដើម្បីធ្វើចំណាត់ថ្នាក់រូបភាពដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ការអនុវត្តផ្ទាល់ និងការវាយតម្លៃលទ្ធផល:</strong> ជ្រើសរើសតំបន់លំនៅឋានណាមួយនៅជាយរាជធានីភ្នំពេញ (ឧទាហរណ៍៖ តំបន់ស្ទឹងមានជ័យ) សាកល្បងដំណើរការម៉ូដែលទាំងនេះ រួចធ្វើការវាយតម្លៃភាពត្រឹមត្រូវ (Accuracy Assessment) ដោយប្រើប្រាស់ <span class="en">Confusion Matrix</span> ធៀបនឹងរូបភាពពី Google Earth។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian Mixture Model (GMM)</span></td>
+                <td>ជាក្បួនដោះស្រាយម៉ាស៊ីនរៀនដោយគ្មានការត្រួតពិនិត្យ (Unsupervised Machine Learning) ដែលធ្វើការបែងចែកទិន្នន័យជាក្រុមៗ (Clusters) ដោយស្វ័យប្រវត្តិ ដោយផ្អែកលើការចែកចាយស្ថិតិបែប Gaussian នៃកម្រិតពណ៌ឬវាយនភាពក្នុងរូបភាព។</td>
+                <td>ដូចជាការបែងចែកសិស្សក្នុងថ្នាក់ជាក្រុមៗដោយស្វ័យប្រវត្តិ ដោយផ្អែកលើកម្ពស់ និងទម្ងន់របស់ពួកគេ ដោយមិនចាំបាច់មានគ្រូប្រាប់មុនថានរណានៅក្រុមណានោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gray-Level Co-Occurrence Matrix (GLCM)</span></td>
+                <td>ជាវិធីសាស្ត្រគណិតវិទ្យាសម្រាប់វិភាគ "វាយនភាព" (Texture) នៃរូបភាពផ្កាយរណប ដោយវាស់ស្ទង់ថាតើភីកសែល (Pixels) ដែលមានកម្រិតពណ៌ប្រផេះដូចគ្នាច្រើនតែកើតមាននៅក្បែរគ្នាក្នុងទម្រង់បែបណា ដើម្បីសម្គាល់វត្ថុផ្សេងៗគ្នា។</td>
+                <td>ដូចជាការស្ទាបក្រណាត់ពីរប្រភេទដោយបិទភ្នែក ដើម្បីដឹងថាវារលោង ឬគ្រើម ដោយមិនបាច់ពឹងផ្អែកលើការមើលពណ៌របស់វានោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pan-sharpening</span></td>
+                <td>ជាបច្ចេកទេសបូកបញ្ចូលគ្នារវាងរូបភាពសខ្មៅដែលមានកម្រិតច្បាស់ខ្ពស់ (Panchromatic) និងរូបភាពពណ៌ដែលមានកម្រិតច្បាស់ទាប (Multispectral) ដើម្បីបង្កើតជារូបភាពពណ៌ថ្មីមួយដែលមានភាពច្បាស់លាស់ខ្លាំងក្នុងការទាញយកប្លង់អគារ។</td>
+                <td>ដូចជាការយកគំនូរព្រាងខ្មៅដៃដែលគូសបានលម្អិតច្បាស់ មកផាត់ពណ៌ពីលើរូបភាពដែលព្រិលៗ ដើម្បីទទួលបានគំនូរពណ៌ថ្មីមួយដែលច្បាស់និងលម្អិត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest (RF)</span></td>
+                <td>ជាក្បួនដោះស្រាយម៉ាស៊ីនរៀនដែលបង្កើត "ដើមឈើសម្រេចចិត្ត" (Decision Trees) តូចៗជាច្រើន ហើយយកលទ្ធផលទស្សន៍ទាយពីដើមឈើទាំងអស់នោះមកបោះឆ្នោតជ្រើសរើសចម្លើយរួមមួយដែលត្រឹមត្រូវបំផុត ដើម្បីចាត់ថ្នាក់វត្ថុក្នុងរូបភាព។</td>
+                <td>ដូចជាការសួរមតិពីអ្នកជំនាញចំនួន ១០០ នាក់ អំពីបញ្ហាមួយ រួចយកចម្លើយដែលអ្នកជំនាញភាគច្រើនយល់ស្របគ្នាធ្វើជាសេចក្តីសន្និដ្ឋានចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machine (SVM)</span></td>
+                <td>ជាម៉ូដែលម៉ាស៊ីនរៀនដែលព្យាយាមស្វែងរកបន្ទាត់ ឬប្លង់ (Hyperplane) ដ៏ល្អបំផុតមួយ ដើម្បីខណ្ឌចែកចំណាត់ថ្នាក់ទិន្នន័យ (ឧទាហរណ៍៖ អគារ និង មិនមែនអគារ) ជាពីរក្រុមដាច់ពីគ្នាបានច្បាស់លាស់បំផុត។</td>
+                <td>ដូចជាការគូសបន្ទាត់មួយនៅលើតុដើម្បីបំបែកក្រុមផ្លែប៉ោម និងក្រុមផ្លែក្រូច ឱ្យនៅឆ្ងាយពីគ្នាឲ្យបានច្រើនបំផុតតាមដែលអាចធ្វើទៅបាន ដើម្បីកុំឱ្យច្រឡំគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multispectral Image (MSI)</span></td>
+                <td>ជារូបភាពផ្កាយរណបដែលថតយកទិន្នន័យចំណាំងផ្លាតពន្លឺតាមប្រេកង់រលកផ្សេងៗគ្នា (ដូចជាពណ៌ក្រហម បៃតង ខៀវ និងពន្លឺអ៊ីនហ្វ្រារ៉េដ) ដែលជួយឲ្យម៉ាស៊ីនកុំព្យូទ័រអាចបែងចែកប្រភេទវត្ថុនៅលើដីបានកាន់តែច្បាស់។</td>
+                <td>ដូចជាការប្រើវ៉ែនតាវេទមន្តដែលអាចឲ្យយើងមើលឃើញរលកកម្ដៅ ឬប្រភេទរុក្ខជាតិ ដែលភ្នែកធម្មតាមនុស្សយើងមិនអាចមើលឃើញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Semi-Informal Settlements</span></td>
+                <td>ជាតំបន់លំនៅឋានដែលសាងសង់ដោយមិនមានការរៀបចំផែនការទីក្រុងត្រឹមត្រូវ សំណង់កកកុញ និងខ្វះខាតហេដ្ឋារចនាសម្ព័ន្ធសាធារណៈមូលដ្ឋាន ប៉ុន្តែមិនមែនជាការតាំងទីលំនៅអនាធិបតេយ្យទាំងស្រុងនោះទេ។</td>
+                <td>ដូចជាភូមិ ឬសហគមន៍ដែលប្រជាជនសង់ផ្ទះតាមចិត្តដោយគ្មានប្លង់និងផ្លូវខ្វាត់ខ្វែង ប៉ុន្តែពួកគេរស់នៅទីនោះយូរមកហើយនិងមានផ្ទះសំបែងរឹងមាំគួរសម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">WorldView-2 (WV2)</span></td>
+                <td>ជាផ្កាយរណបពាណិជ្ជកម្មសម្រាប់សង្កេតមើលផែនដីដែលផ្តល់រូបភាពក្នុងកម្រិតច្បាស់ខ្ពស់បំផុត (Resolution 0.46m សម្រាប់រូបភាពសខ្មៅ) ដែលអាចឱ្យគេកំណត់ទីតាំង និងគែមអគារតូចៗបានយ៉ាងច្បាស់។</td>
+                <td>ដូចជាកែវយឺតដ៏មានអានុភាពខ្លាំងបំពាក់លើលំហអាកាស ដែលអាចចាប់យករូបភាពដំបូលផ្ទះរបស់អ្នកពីលើមេឃបានយ៉ាងច្បាស់កម្រិត HD។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/optimizing-industrial-systems-ml-anomaly-2023.html">
+                    <span class="km">ការធ្វើឱ្យប្រសើរឡើងនូវប្រព័ន្ធឧស្សាហកម្មជាមួយនឹងការរកឃើញភាពមិនប្រក្រតីដោយម៉ាស៊ីនរៀន (Machine Learning)</span><br>
+                    <span class="en article-original-title">Optimizing Industrial Systems with Machine Learning Anomaly Detection</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/overview-supervised-machine-learning-methods-2017-2.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃវិធីសាស្ត្ររៀនម៉ាស៊ីនមានការត្រួតពិនិត្យ</span><br>
+                    <span class="en article-original-title">An overview of the supervised machine learning methods</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/classification-class-imbalance-review-2013.html">
+                    <span class="km">ចំណាត់ថ្នាក់ជាមួយនឹងបញ្ហាអតុល្យភាពថ្នាក់៖ ការត្រួតពិនិត្យឡើងវិញ</span><br>
+                    <span class="en article-original-title">Classification with class imbalance problem: a review</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/imputation-missing-data-ml-techniques-1996.html">
+                    <span class="km">ការបំពេញទិន្នន័យដែលបាត់ដោយប្រើបច្ចេកទេសរៀនរបស់ម៉ាស៊ីន (Machine Learning)</span><br>
+                    <span class="en article-original-title">Imputation of missing data using machine learning techniques</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/survey-unsupervised-machine-learning-algorithms-2015.html">
+                    <span class="km">ការស្ទង់មតិស្តីពីក្បួនដោះស្រាយការរៀនម៉ាស៊ីនដោយគ្មានការត្រួតពិនិត្យសម្រាប់ការធ្វើស្វ័យប្រវត្តិកម្ម ការចាត់ថ្នាក់ និងការថែទាំ</span><br>
+                    <span class="en article-original-title">A Survey on Unsupervised Machine Learning Algorithms for Automation, Classification and Maintenance</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gaussian+Mixture+Model%22+AND+%22building+extraction%22+OR+%22footprint+detection%22+satellite+imagery" target="_blank" rel="noopener"><span class="en">Gaussian Mixture Model" AND "building extraction" OR "footprint detection" satellite imagery</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gray-Level+Co-Occurrence+Matrix%22+GLCM+texture+features+urban+mapping+classification" target="_blank" rel="noopener"><span class="en">Gray-Level Co-Occurrence Matrix" GLCM texture features urban mapping classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Informal+settlements%22+AND+%22remote+sensing%22+AND+%22machine+learning%22+OR+%22deep+learning" target="_blank" rel="noopener"><span class="en">Informal settlements" AND "remote sensing" AND "machine learning" OR "deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Pan-sharpening+techniques+%22WorldView-2%22+multispectral+resolution+enhancement" target="_blank" rel="noopener"><span class="en">Pan-sharpening techniques "WorldView-2" multispectral resolution enhancement</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparing+%22Random+Forest%22+AND+%22Support+Vector+Machine%22+land+cover+classification+urban+areas" target="_blank" rel="noopener"><span class="en">Comparing "Random Forest" AND "Support Vector Machine" land cover classification urban areas</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

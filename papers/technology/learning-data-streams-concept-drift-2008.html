@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរៀនពីលំហូរទិន្នន័យដែលមានបម្រែបម្រួលកុងសិប (Concept Drift) - Learning from Data Streams with Concept Drift | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការរៀនពីលំហូរទិន្នន័យដែលមានបម្រែបម្រួលកុងសិប (Concept Drift)។ នៅក្នុងបរិបទនៃការជីកកកាយទិន្នន័យ ទំហំទិន្នន័យធំៗ និងលំហូរទិន្នន័យលឿនៗជារឿយៗតែងតែផ្លាស់ប្តូរទម្រង់...">
+    
+    <meta name="keywords" content="Concept Drift, Data Streams, Online Learning, Dynamic Logistic Regressor, Ensemble Learning, Receiver Operating Characteristic, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/learning-data-streams-concept-drift-2008.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/learning-data-streams-concept-drift-2008.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/learning-data-streams-concept-drift-2008.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/learning-data-streams-concept-drift-2008.html">
+    <meta property="og:title" content="ការរៀនពីលំហូរទិន្នន័យដែលមានបម្រែបម្រួលកុងសិប (Concept Drift) | KhmerResearch.com">
+    <meta property="og:description" content="នៅក្នុងបរិបទនៃការជីកកកាយទិន្នន័យ ទំហំទិន្នន័យធំៗ និងលំហូរទិន្នន័យលឿនៗជារឿយៗតែងតែផ្លាស់ប្តូរទម្រង់ហៅថា Concept drift ដែលធ្វើឱ្យបច្ចេកទេសរៀនម៉ាស៊ីន (Machine learning) បែបប្រពៃណីលែងមានប្រសិទ្ធភាព។ ឯកស...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2008 Technical Report PARG-08-01, University of Oxford-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Concept Drift">
+    
+    <meta property="article:tag" content="Data Streams">
+    
+    <meta property="article:tag" content="Online Learning">
+    
+    <meta property="article:tag" content="Dynamic Logistic Regressor">
+    
+    <meta property="article:tag" content="Ensemble Learning">
+    
+    <meta property="article:tag" content="Receiver Operating Characteristic">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរៀនពីលំហូរទិន្នន័យដែលមានបម្រែបម្រួលកុងសិប (Concept Drift)">
+    <meta name="twitter:description" content="នៅក្នុងបរិបទនៃការជីកកកាយទិន្នន័យ ទំហំទិន្នន័យធំៗ និងលំហូរទិន្នន័យលឿនៗជារឿយៗតែងតែផ្លាស់ប្តូរទម្រង់ហៅថា Concept drift ដែលធ្វើឱ្យបច្ចេកទេសរៀនម៉ាស៊ីន (Machine learning) បែបប្រពៃណីលែងមានប្រសិទ្ធភាព។ ឯកស...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1798\u17b6\u1793\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u1780\u17bb\u1784\u179f\u17b7\u1794 (Concept Drift)",
+      "name": "Learning from Data Streams with Concept Drift",
+      "description": "\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u1794\u1791\u1793\u17c3\u1780\u17b6\u179a\u1787\u17b8\u1780\u1780\u1780\u17b6\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u1791\u17c6\u17a0\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1792\u17c6\u17d7 \u1793\u17b7\u1784\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179b\u17bf\u1793\u17d7\u1787\u17b6\u179a\u17bf\u1799\u17d7\u178f\u17c2\u1784\u178f\u17c2\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u1791\u1798\u17d2\u179a\u1784\u17cb\u17a0\u17c5\u1790\u17b6 Concept drift \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179a\u17c0\u1793\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine learning) \u1794\u17c2\u1794\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8\u179b\u17c2\u1784\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u17d4 \u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 \u1793\u17b7\u1784\u178f\u1798\u17d2\u179a\u17c2\u178f\u1798\u17d2\u179a\u1784\u17cb (Regression) \u1780\u17d2\u1793\u17bb\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u178a\u17c2\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u179f\u17d2\u1790\u17b7\u179a\u1797\u17b6\u1796\u1796\u17d2\u179a\u1798\u1791\u17b6\u17c6\u1784\u1798\u17b6\u1793\u1794\u17b6\u178f\u17cb\u178f\u1798\u17d2\u179b\u17c3\u179f\u17d2\u179b\u17b6\u1780 (Labels)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/learning-data-streams-concept-drift-2008.html",
+      "author": [{"@type": "Person", "name": "Roman Garnett (University of Oxford)"},{"@type": "Person", "name": "Stephen J. Roberts (University of Oxford)"}],
+      "datePublished": "2008 Technical Report PARG-08-01, University of Oxford",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Learning from Data Streams with Concept Drift",
+        "url": "https://www.robots.ox.ac.uk/~parg/pubs/TR-PARG-08-01.pdf"
+      },
+      "keywords": ["Concept Drift", "Data Streams", "Online Learning", "Dynamic Logistic Regressor", "Ensemble Learning", "Receiver Operating Characteristic"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17b8\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u1798\u17b6\u1793\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u1780\u17bb\u1784\u179f\u17b7\u1794 (Concept Drift)",
+          "item": "https://khmerresearch.com/papers/technology/learning-data-streams-concept-drift-2008.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរៀនពីលំហូរទិន្នន័យដែលមានបម្រែបម្រួលកុងសិប (Concept Drift)</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Learning from Data Streams with Concept Drift<br>
+        
+        <strong>Source:</strong> <a href="https://www.robots.ox.ac.uk/~parg/pubs/TR-PARG-08-01.pdf" target="_blank" rel="noopener">www.robots.ox.ac.uk</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរៀនពីលំហូរទិន្នន័យដែលមានបម្រែបម្រួលកុងសិប (Concept Drift)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Learning from Data Streams with Concept Drift</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Roman Garnett (University of Oxford), Stephen J. Roberts (University of Oxford)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2008 Technical Report PARG-08-01, University of Oxford</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> នៅក្នុងបរិបទនៃការជីកកកាយទិន្នន័យ ទំហំទិន្នន័យធំៗ និងលំហូរទិន្នន័យលឿនៗជារឿយៗតែងតែផ្លាស់ប្តូរទម្រង់ហៅថា Concept drift ដែលធ្វើឱ្យបច្ចេកទេសរៀនម៉ាស៊ីន (Machine learning) បែបប្រពៃណីលែងមានប្រសិទ្ធភាព។ ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហានៃការធ្វើចំណាត់ថ្នាក់ទិន្នន័យ និងតម្រែតម្រង់ (Regression) ក្នុងបរិស្ថានដែលទិន្នន័យមិនមានស្ថិរភាពព្រមទាំងមានបាត់តម្លៃស្លាក (Labels)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានណែនាំក្បួនដោះស្រាយតាមវិធីសាស្ត្រ Bayesian ចំនួនពីរគឺ Dynamic Logistic Regressor (DLR) និងក្បួនដោះស្រាយ Dynamic Characteristic Curve Convex Hull (DCCCH) សម្រាប់វាយតម្លៃនិងធ្វើសមាហរណកម្មលទ្ធផល។
+        
+        <ul>
+            
+            <li>Dynamic Logistic Regressor (DLR): ជាវិធីសាស្ត្រ Bayesian បែបបន្តបន្ទាប់សម្រាប់ការធ្វើចំណាត់ថ្នាក់ទិន្នន័យដែលមានបម្រែបម្រួល (Non-stationary) និងអាចទាញយកទិន្នន័យខូចឬបាត់។</li>
+            
+            <li>Dynamic Characteristic Curve Convex Hull (DCCCH): ជាក្បួនដោះស្រាយមេ (Meta-algorithm) សម្រាប់បូកបញ្ចូលលទ្ធផលរបស់អ្នករៀន (Ensemble learners) ដោយប្រើខ្សែទំហំកោងថាមវន្ត។</li>
+            
+            <li>អត្រាវាស់ស្ទង់ Receiver Operating Characteristic (ROC) និង Regression Error Characteristic (REC) curves ដែលត្រូវបានកែច្នៃដើម្បីផ្តល់ទម្ងន់ដល់ភាពជាក់លាក់តាមពេលវេលាថ្មីៗ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ DLR អាចរក្សាបាននូវភាពសុក្រឹតរហូតដល់ ៩១% សូម្បីតែពេលដែលស្លាកចំណាត់ថ្នាក់ (Class labels) ៨០% ត្រូវបានបាត់បង់ក៏ដោយ។</li>
+            
+            <li>ក្បួនដោះស្រាយ DCCCH មានប្រសិទ្ធភាពខ្ពស់ជាងវិធីសាស្ត្រ Ensemble មុនៗ (ដូចជា SEA, AddExp, និង CVFDT) ទាំងលើការធ្វើតេស្តទិន្នន័យនិម្មិត និងទិន្នន័យពិតនៃទីផ្សារហិរញ្ញវត្ថុ ដោយទទួលបានតម្លៃលំអៀង (RMSE) ទាបជាងគេ។</li>
+            
+            <li>DCCCH អនុញ្ញាតឱ្យមានការវាយតម្លៃលក្ខណៈទិន្នន័យ (Feature evaluation) តាមពេលវេលាជាក់ស្តែង ដែលជួយឱ្យប្រព័ន្ធដឹងពីសារៈសំខាន់នៃអថេរនីមួយៗនៅពេលដែលវាប្រែប្រួលរហូតដល់ ៧០%-៩០% នៃម៉ាស់ទិន្នន័យសរុប។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">DCCCH (Dynamic Characteristic Curve Convex Hull)</span></strong><br>ការជ្រើសរើសដោយប្រើខ្សែទំហំកោងថាមវន្ត (Meta-algorithm សម្រាប់ Ensemble)</td>
+                <td>សម្របខ្លួនលឿនទៅនឹងបម្រែបម្រួលទិន្នន័យ (Concept drift) ដោយផ្តល់ទម្ងន់លើដំណើរការថ្មីៗរបស់អ្នករៀន និងមិនទាមទារអង្គចងចាំធំសម្រាប់ការរក្សាទុកទិន្នន័យចាស់ៗ។</td>
+                <td>ទាមទារការគណនា Convex Hull ជាប្រចាំដើម្បីអាប់ដេតអ្នករៀន ដែលអាចប្រើប្រាស់កម្លាំងកុំព្យូទ័រច្រើនបន្តិចប្រសិនបើ Ensemble មានទំហំធំខ្លាំង។</td>
+                <td>ទទួលបានអត្រាកំហុសទាបបំផុត (០.១៤២) លើទិន្នន័យនិម្មិតចាត់ថ្នាក់ និងតម្លៃលំអៀង RMSE ទាបបំផុត (ឧ. ២.៨៧ លើទិន្នន័យ EUR-CHF) លើការតម្រែតម្រង់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">DLR (Dynamic Logistic Regressor)</span></strong><br>តម្រែតម្រង់ឡូជីស្ទីកថាមវន្ត (ចាត់ថ្នាក់ដោយប្រើ EKF)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការប៉ាន់ស្មានទិន្នន័យដែលបាត់ (Missing observations) និងអាចទប់ទល់នឹងកំហុសស្លាកចំណាត់ថ្នាក់ (Corrupted labels) យ៉ាងមានប្រសិទ្ធភាពតាមរយៈ Bayesian inference។</td>
+                <td>នៅតែជាទម្រង់ម៉ូដែលលីនេអ៊ែរ (Linear model) ដែលអាចមានដែនកំណត់ក្នុងការចាប់យកទំនាក់ទំនងទិន្នន័យដែលមានរចនាសម្ព័ន្ធមិនលីនេអ៊ែរស្មុគស្មាញ។</td>
+                <td>អាចរក្សាបាននូវភាពសុក្រឹតនៃការចាត់ថ្នាក់រហូតដល់ ៩១% សូម្បីតែនៅពេលដែល ៨០% នៃស្លាកចំណាត់ថ្នាក់ (Class labels) ត្រូវបានលុបបាត់ក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CVFDT (Concept-adapting Very Fast Decision Tree)</span></strong><br>មែកធាងសម្រេចចិត្តលឿនដែលអាចសម្របតាមបម្រែបម្រួលកុងសិប</td>
+                <td>ងាយស្រួលយល់ និងបកស្រាយលទ្ធផល ជាពិសេសល្អសម្រាប់ទិន្នន័យដែលមានលក្ខណៈ (Features) ច្រើន។</td>
+                <td>មានអត្រាកំហុសខ្ពស់ជាងបើធៀបនឹងវិធីសាស្ត្រ Ensemble ផ្សេងទៀត និងជួបប្រទះបញ្ហាដាច់ដំណើរការ (Segmentation fault) ក្នុងកូដដើមលើទិន្នន័យស្មុគស្មាញមួយចំនួន។</td>
+                <td>មានអត្រាកំហុសរហូតដល់ ០.៤៤៣ លើទិន្នន័យដែលមាន ៥០ លក្ខណៈ ធៀបនឹង ០.១៤២ របស់ DCCCH ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">AddExp (Additive Expert Ensembles)</span></strong><br>ការបូកបញ្ចូលលទ្ធផលអ្នកជំនាញ AddExp</td>
+                <td>មានទ្រឹស្តីគណិតវិទ្យារឹងមាំគាំទ្រ និងមានយន្តការកាត់បន្ថយអ្នករៀនចោលនៅពេល Ensemble ធំធាត់លើសកំណត់។</td>
+                <td>ដំណើរការជាក់ស្តែងនៅលើទិន្នន័យធំៗនិងស្មុគស្មាញមិនសូវល្អដូចការរំពឹងទុកតាមទ្រឹស្តីនោះទេ។</td>
+                <td>ទទួលបានតម្លៃ RMSE ខ្ពស់ខ្លាំង (៣០.៧) ធៀបនឹងវិធីសាស្ត្រដទៃលើទិន្នន័យហិរញ្ញវត្ថុពិតប្រាកដ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ក្បួនដោះស្រាយទាំងនេះត្រូវបានរចនាឡើងសម្រាប់លំហូរទិន្នន័យ (Data streams) ដែលទាមទារអង្គចងចាំថេរ (Constant memory footprint) ប៉ុន្តែទាមទារសមត្ថភាពគណនាលឿនដើម្បីអាប់ដេតតាមពេលវេលាជាក់ស្តែង។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> មិនទាមទារម៉ាស៊ីន Supercomputer ឬ GPU ធំដុំនោះទេ ព្រោះវាដំណើរការលើប្រព័ន្ធទិន្នន័យជាបន្តបន្ទាប់ដោយមិនរក្សាទុកទិន្នន័យចាស់ៗ ប៉ុន្តែត្រូវការ CPU ដែលអាចដំណើរការប្រតិបត្តិការម៉ាទ្រីសបានលឿន។</li>
+        
+        <li><strong>Software:</strong> អាចអភិវឌ្ឍន៍បានដោយប្រើភាសា Programming ដែលគាំទ្រគណិតវិទ្យាកម្រិតខ្ពស់ ដូចជា Python (ភ្ជាប់ជាមួយ NumPy/SciPy សម្រាប់ Convex Hull) ឬ C/C++ សម្រាប់ល្បឿនអតិបរមា។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅលើផ្នែកប្រូបាប៊ីលីតេ (Bayesian Inference), ស្ថិតិម៉ាទ្រីស, និង Extended Kalman Filter (EKF)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យនិម្មិត (Synthetic data) និងទិន្នន័យទីផ្សារប្តូរប្រាក់បរទេស (Forex) ប៉ុណ្ណោះ ដែលវាមិនតំណាងឱ្យភាពចម្រុះនៃប្រភេទបញ្ហាក្នុងពិភពពិតឡើយ។ សម្រាប់កម្ពុជា ការមិនបានសាកល្បងលើទិន្នន័យអត្ថបទ (Text) រូបភាព ឬទិន្នន័យរូបវន្ត (IoT sensors) ដែលជួបប្រទះញឹកញាប់ក្នុងបរិបទប្រទេសកំពុងអភិវឌ្ឍ ទាមទារឱ្យមានការសាកល្បងផ្ទៀងផ្ទាត់បន្ថែមមុននឹងដាក់ឱ្យប្រើប្រាស់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាយ៉ាងណាក៏ដោយ ក្បួនដោះស្រាយ DLR និង DCCCH នេះមានសក្តានុពលខ្ពស់ខ្លាំងសម្រាប់អភិវឌ្ឍប្រព័ន្ធនៅកម្ពុជា ដែលទិន្នន័យតែងមានការប្រែប្រួលជានិច្ច។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យបច្ចេកវិទ្យាហិរញ្ញវត្ថុ (FinTech & Digital Banking):</strong> អាចអនុវត្តក្នុងប្រព័ន្ធទូទាត់ប្រាក់ដូចជា Bakong ដើម្បីស្វែងរកប្រតិបត្តិការគួរឱ្យសង្ស័យ (Fraud detection) ព្រោះទម្លាប់នៃការចាយវាយរបស់ពលរដ្ឋអាចផ្លាស់ប្តូរលឿន (Concept drift) ហើយទិន្នន័យតែងតែហូរចូលជាបន្តបន្ទាប់។</li>
+            
+            <li><strong>ការត្រួតពិនិត្យអាកាសធាតុ និងកសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> ប្រើប្រាស់ជាមួយឧបករណ៍សេនស័រ (IoT sensors) នៅតាមដងទន្លេមេគង្គ ឬកសិដ្ឋាន ដើម្បីទស្សន៍ទាយកម្រិតទឹកនិងសំណើម ដ្បិតម៉ូដែល DLR មានសមត្ថភាពអាចទាយទុកនិងដំណើរការបាន ទោះបីជាសេនស័រខ្លះខូច ឬដាច់អ៊ីនធឺណិតធ្វើឱ្យបាត់ទិន្នន័យក៏ដោយ។</li>
+            
+            <li><strong>ការគ្រប់គ្រងចរាចរណ៍រាជធានីភ្នំពេញ (Urban Traffic Management):</strong> យកទៅប្រើប្រាស់ជាមួយកាមេរ៉ាចរាចរណ៍ដើម្បីវិភាគនិងព្យាករណ៍ការកកស្ទះ ដោយប្រព័ន្ធនេះអាចសម្របខ្លួនទៅនឹងការផ្លាស់ប្តូរលំហូរចរាចរណ៍តាមរដូវកាល ឬពេលមានបុណ្យទានធំៗ (Concept drift)។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ភាពបត់បែនរបស់ DCCCH ក្នុងការសម្របខ្លួនទៅនឹងការផ្លាស់ប្តូរ គឺជាដំណោះស្រាយដ៏សក្តិសមបំផុតសម្រាប់ប្រព័ន្ធរដ្ឋ និងឯកជននៅកម្ពុជា ដែលកំពុងបោះជំហានទៅរកការប្រើប្រាស់ទិន្នន័យធំ (Big Data) ក្នុងពេលវេលាជាក់ស្តែង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះទ្រឹស្តីប្រូបាប៊ីលីតេ:</strong> និស្សិតត្រូវយល់ដឹងស៊ីជម្រៅអំពីទ្រឹស្តី <span class="en">Bayesian Inference</span>, <span class="en">Conditional Probability</span> និង <span class="en">Expected Value</span> ដែលជាគ្រឹះនៃម៉ូដែល DLR។</li>
+            
+            <li><strong>ស្វែងយល់អំពីការរៀនម៉ាស៊ីនលើលំហូរទិន្នន័យ:</strong> ផ្តោតលើការស្រាវជ្រាវភាពខុសគ្នារវាងការរៀនបែបប្រពៃណី (Batch learning) និង <span class="en">Online Learning</span> ពិសេសបាតុភូត <span class="en">Concept Drift</span> នៅក្នុងសៀវភៅ ឬអត្ថបទស្រាវជ្រាវពាក់ព័ន្ធនឹង <span class="en">Data Stream Mining</span>។</li>
+            
+            <li><strong>សរសេរកូដសម្រាប់ Dynamic Logistic Regressor (DLR):</strong> អនុវត្តការសរសេរកូដជាភាសា Python ដោយប្រើបណ្ណាល័យ <span class="en">NumPy</span> ដើម្បីបង្កើតម៉ូដែលចំណាត់ថ្នាក់ដែលអាប់ដេតខ្លួនឯង ដោយប្រើប្រាស់ <span class="en">Extended Kalman Filter (EKF)</span> សម្រាប់កែសម្រួលទម្ងន់ម៉ូដែល។</li>
+            
+            <li><strong>បង្កើតប្រព័ន្ធ DCCCH Meta-algorithm:</strong> រៀបចំកូដដើម្បីគូរ <span class="en">Dynamic ROC/REC curves</span> បន្ទាប់មកប្រើប្រាស់មុខងារ <span class="en">ConvexHull</span> ពីបណ្ណាល័យ <span class="en">SciPy</span> ដើម្បីជ្រើសរើសម៉ូដែលកំពូលៗពីក្រុមអ្នករៀន (Ensemble) ប្រកបដោយប្រសិទ្ធភាព។</li>
+            
+            <li><strong>តេស្តផ្ទាល់ជាមួយទិន្នន័យជាក់ស្តែងនៅកម្ពុជា:</strong> ទាញយកទិន្នន័យប្រែប្រួលជាក់ស្តែង ឧទាហរណ៍ទិន្នន័យជួញដូរភាគហ៊ុនប្រចាំថ្ងៃពីផ្សារមូលបត្រកម្ពុជា (<span class="en">CSX</span>) ឬទិន្នន័យអាកាសធាតុពី Data.gov.kh ដើម្បីធ្វើតេស្តមើលសមត្ថភាពចាប់យកបម្រែបម្រួលរបស់ម៉ូដែល DCCCH។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept Drift</span></td>
+                <td>បាតុភូតដែលលក្ខណៈរចនាសម្ព័ន្ធ ឬទំនាក់ទំនងនៃប្រូបាប៊ីលីតេរបស់ទិន្នន័យមានការផ្លាស់ប្តូរទៅតាមពេលវេលា ដែលធ្វើឱ្យម៉ូដែលម៉ាស៊ីន (Machine Learning) ដែលធ្លាប់តែទាយត្រូវ ក្លាយជាលែងមានប្រសិទ្ធភាព។</td>
+                <td>ដូចជាច្បាប់នៃល្បែងមួយដែលផ្លាស់ប្តូររហូតពេលអ្នកកំពុងលេង ដែលតម្រូវឱ្យអ្នកលេងត្រូវរៀនក្បួនថ្មីជានិច្ចដើម្បីឈ្នះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Streams</span></td>
+                <td>លំហូរនៃទិន្នន័យដែលបញ្ជូនចូលមកជាបន្តបន្ទាប់ឥតឈប់ឈរ និងមានទំហំធំធេង ដែលប្រព័ន្ធត្រូវតែដំណើរការទិន្នន័យទាំងនោះភ្លាមៗ ដោយមិនមានអង្គចងចាំគ្រប់គ្រាន់សម្រាប់រក្សាទុកវាទាំងអស់នោះទេ។</td>
+                <td>ដូចជាទឹកទន្លេដែលហូរមិនដាច់ ដែលយើងមិនអាចត្រងទឹកទាំងអស់ទុកក្នុងអាងបានទេ គឺបានត្រឹមតែដួសយកមកប្រើប្រាស់ភ្លាមៗប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ensemble Learning</span></td>
+                <td>វិធីសាស្ត្រប្រើប្រាស់ម៉ូដែលរៀនម៉ាស៊ីន (Learners/Classifiers) ច្រើនបញ្ចូលគ្នា ដើម្បីធ្វើការសម្រេចចិត្តរួមមួយដែលត្រឹមត្រូវនិងមានស្ថិរភាពជាងការប្រើប្រាស់ម៉ូដែលតែមួយ។</td>
+                <td>ដូចជាការសួរយោបល់ពីគ្រូពេទ្យ៥នាក់ផ្សេងគ្នា រួចយកមតិភាគច្រើនដើម្បីធ្វើរោគវិនិច្ឆ័យជំងឺ ជាជាងជឿងងឹតងងល់លើគ្រូពេទ្យតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Receiver Operating Characteristic (ROC) curve</span></td>
+                <td>ខ្សែក្រាហ្វិកសម្រាប់វាស់ស្ទង់សមត្ថភាពរបស់ម៉ូដែលចំណាត់ថ្នាក់ ដោយប្រៀបធៀបអត្រានៃការទស្សន៍ទាយត្រូវ (True Positive) និងអត្រានៃការទស្សន៍ទាយខុស (False Positive) នៅកម្រិតនៃការសម្រេចចិត្តផ្សេងៗគ្នា។</td>
+                <td>ដូចជារបារវាស់ស្ទង់ថាតើឆ្មាំយាមច្រកទ្វារម្នាក់ពូកែប៉ុណ្ណាក្នុងការចាប់ចោរបានត្រឹមត្រូវ (True) ធៀបនឹងការចាប់ច្រឡំមនុស្សល្អ (False)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Convex Hull</span></td>
+                <td>នៅក្នុងបរិបទនៃក្រាហ្វិក ROC ឬ REC នេះ វាសំដៅលើខ្សែបន្ទាត់កោងនៅផ្នែកខាងក្រៅបង្អស់ដែលតភ្ជាប់ចំណុចដំណើរការល្អៗបំផុតរបស់ម៉ូដែលនានា ដើម្បីស្វែងរកបណ្តុំម៉ូដែលដែលផ្តល់លទ្ធផលល្អដាច់គេ។</td>
+                <td>ដូចជាការយកកៅស៊ូកងទៅចងរុំជុំវិញក្រុមបង្គោលឈើ កៅស៊ូដែលលាតសន្ធឹងប៉ះបង្គោលក្រៅគេបំផុតនោះហើយគឺជា Convex Hull។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Extended Kalman Filter (EKF)</span></td>
+                <td>ក្បួនគណិតវិទ្យាដែលប្រើសម្រាប់ប៉ាន់ស្មានស្ថានភាពបច្ចុប្បន្ននៃប្រព័ន្ធមួយដែលមានការប្រែប្រួល និងភាពមិនច្បាស់លាស់ ដោយធ្វើបច្ចុប្បន្នភាពទម្ងន់ម៉ូដែលផ្អែកលើការរួមបញ្ចូលគ្នារវាងការទស្សន៍ទាយមុន និងការអង្កេតទិន្នន័យថ្មី។</td>
+                <td>ដូចជាការបើកបរឡានក្នុងអ័ព្ទក្រាស់ដោយពឹងផ្អែកលើការស្មានទីតាំងចាស់ បូកផ្សំនឹងពន្លឺភ្លើងព្រាលៗខាងមុខ ដើម្បីប៉ាន់ស្មានថាឡានកំពុងនៅត្រង់ណាឱ្យប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bayesian Inference</span></td>
+                <td>វិធីសាស្ត្រស្ថិតិដែលប្រើប្រាស់ទ្រឹស្តី Bayes ដើម្បីធ្វើការអាប់ដេត (Update) ប្រូបាប៊ីលីតេ ឬកម្រិតនៃជំនឿទៅលើសម្មតិកម្មមួយ នៅពេលដែលប្រព័ន្ធទទួលបានភស្តុតាង ឬទិន្នន័យថ្មីៗបន្ថែមទៀត។</td>
+                <td>ដូចជាការសង្ស័យថាមេឃនឹងភ្លៀងនៅពេលព្រឹក ហើយជំនឿនេះកាន់តែត្រូវបានអាប់ដេតឲ្យខ្លាំងឡើងៗនៅពេលអ្នកសង្កេតឃើញពពកខ្មៅ និងមានខ្យល់បក់ខ្លាំងនៅពេលបន្តិចក្រោយមក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Semi-Supervised Learning</span></td>
+                <td>ការហ្វឹកហាត់ម៉ូដែលម៉ាស៊ីនដោយប្រើប្រាស់ទិន្នន័យចម្រុះគ្នា គឺទិន្នន័យដែលមានភ្ជាប់ស្លាកចម្លើយ (Labeled data) ចំនួនតិចតួច និងទិន្នន័យដែលគ្មានចម្លើយ (Unlabeled data / Missing labels) យ៉ាងច្រើនសន្ធឹកសន្ធាប់។</td>
+                <td>ដូចជាសិស្សរៀនមេរៀនដោយមានគ្រូប្រាប់ចម្លើយលំហាត់គំរូតែ២ទៅ៣ រួចសិស្សត្រូវយកគំរូនោះទៅសាកល្បងវិភាគដោះស្រាយលំហាត់រាប់រយផ្សេងទៀតដោយខ្លួនឯងដោយគ្មានចម្លើយផ្ទៀងផ្ទាត់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/aml4s-automl-pipeline-data-streams-2025.html">
+                    <span class="km">AML4S៖ បណ្តាញ AutoML សម្រាប់លំហូរទិន្នន័យ (Data Streams)</span><br>
+                    <span class="en article-original-title">AML4S: An AutoML Pipeline for Data Streams</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/anomaly-intrusion-detection-concept-drift-2020.html">
+                    <span class="km">ការរកឃើញការជ្រៀតចូលមិនប្រក្រតីដោយផ្អែកលើបម្រែបម្រួលគំនិត (Concept Drift)</span><br>
+                    <span class="en article-original-title">Anomaly Intrusion Detection Based on Concept Drift</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/recent-advances-concept-drift-deep-learning-2022.html">
+                    <span class="km">វឌ្ឍនភាពថ្មីៗនៃវិធីសាស្ត្រសម្របខ្លួនតាមការប្រែប្រួលគំនិត (Concept Drift) សម្រាប់ការរៀនស៊ីជម្រៅ (Deep Learning)</span><br>
+                    <span class="en article-original-title">Recent Advances in Concept Drift Adaptation Methods for Deep Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/siel-aspect-based-sentiment-analysis-2015.html">
+                    <span class="km">SIEL: ការវិភាគមនោសញ្ចេតនាផ្អែកលើទិដ្ឋភាពនៅក្នុងការវាយតម្លៃ</span><br>
+                    <span class="en article-original-title">SIEL: Aspect Based Sentiment Analysis in Reviews</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/intrusion-detection-iot-concept-drift-2023-2.html">
+                    <span class="km">ការរកឃើញការគំរាមកំហែងនៅក្នុងលំហូរទិន្នន័យ IoT ដោយប្រើប្រាស់ការកំណត់ទីតាំងបម្រែបម្រួលទម្រង់ទិន្នន័យ (Concept Drift Localization)</span><br>
+                    <span class="en article-original-title">Intrusion detection in the IoT data streams using concept drift localization</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+concept+drift+in+non-stationary+data+streams" target="_blank" rel="noopener"><span class="en">Handling concept drift in non-stationary data streams</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Bayesian+inference+and+Extended+Kalman+Filter+for+online+learning" target="_blank" rel="noopener"><span class="en">Bayesian inference and Extended Kalman Filter for online learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Dynamic+ROC+and+REC+convex+hull+for+ensemble+learning" target="_blank" rel="noopener"><span class="en">Dynamic ROC and REC convex hull for ensemble learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Semi-supervised+learning+techniques+in+continuous+data+streams" target="_blank" rel="noopener"><span class="en">Semi-supervised learning techniques in continuous data streams</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+label+noise+and+corrupted+labels+in+stream+mining" target="_blank" rel="noopener"><span class="en">Handling label noise and corrupted labels in stream mining</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Gaussian+processes+for+Bayesian+optimization+in+non-stationary+environments" target="_blank" rel="noopener"><span class="en">Gaussian processes for Bayesian optimization in non-stationary environments</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

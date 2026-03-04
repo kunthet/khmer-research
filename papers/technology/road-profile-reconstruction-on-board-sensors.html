@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការកសាងឡើងវិញ និងការគូសផែនទីទម្រង់ផ្លូវពីសេនស័រភ្ជាប់លើយានយន្ត - Reconstruction and mapping of the road profile from on-board sensors | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការកសាងឡើងវិញ និងការគូសផែនទីទម្រង់ផ្លូវពីសេនស័រភ្ជាប់លើយានយន្ត។ ឯកសារនេះដោះស្រាយបញ្ហានៃការតាមដានស្ថានភាពផ្លូវ និងការថែទាំហេដ្ឋារចនាសម្ព័ន្ធផ្លូវថ្នល់ដោយប្រើប្រាស...">
+    
+    <meta name="keywords" content="Road Monitoring, Model based, Frequency domain, Global positioning, Inertial navigation system, Sensor fusion, ADAS, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/road-profile-reconstruction-on-board-sensors.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/road-profile-reconstruction-on-board-sensors.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/road-profile-reconstruction-on-board-sensors.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/road-profile-reconstruction-on-board-sensors.html">
+    <meta property="og:title" content="ការកសាងឡើងវិញ និងការគូសផែនទីទម្រង់ផ្លូវពីសេនស័រភ្ជាប់លើយានយន្ត | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការតាមដានស្ថានភាពផ្លូវ និងការថែទាំហេដ្ឋារចនាសម្ព័ន្ធផ្លូវថ្នល់ដោយប្រើប្រាស់សេនស័រដែលមានស្រាប់លើយានយន្តជំនាន់ថ្មី (ADAS) ដើម្បីកាត់បន្ថយការចំណាយលើឧបករណ៍បន្ថែម។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="Stellantis / IMS Univ. Bordeaux-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Road Monitoring">
+    
+    <meta property="article:tag" content="Model based">
+    
+    <meta property="article:tag" content="Frequency domain">
+    
+    <meta property="article:tag" content="Global positioning">
+    
+    <meta property="article:tag" content="Inertial navigation system">
+    
+    <meta property="article:tag" content="Sensor fusion">
+    
+    <meta property="article:tag" content="ADAS">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការកសាងឡើងវិញ និងការគូសផែនទីទម្រង់ផ្លូវពីសេនស័រភ្ជាប់លើយានយន្ត">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការតាមដានស្ថានភាពផ្លូវ និងការថែទាំហេដ្ឋារចនាសម្ព័ន្ធផ្លូវថ្នល់ដោយប្រើប្រាស់សេនស័រដែលមានស្រាប់លើយានយន្តជំនាន់ថ្មី (ADAS) ដើម្បីកាត់បន្ថយការចំណាយលើឧបករណ៍បន្ថែម។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1780\u179f\u17b6\u1784\u17a1\u17be\u1784\u179c\u17b7\u1789 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1782\u17bc\u179f\u1795\u17c2\u1793\u1791\u17b8\u1791\u1798\u17d2\u179a\u1784\u17cb\u1795\u17d2\u179b\u17bc\u179c\u1796\u17b8\u179f\u17c1\u1793\u179f\u17d0\u179a\u1797\u17d2\u1787\u17b6\u1794\u17cb\u179b\u17be\u1799\u17b6\u1793\u1799\u1793\u17d2\u178f",
+      "name": "Reconstruction and mapping of the road profile from on-board sensors",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u178f\u17b6\u1798\u178a\u17b6\u1793\u179f\u17d2\u1790\u17b6\u1793\u1797\u17b6\u1796\u1795\u17d2\u179b\u17bc\u179c \u1793\u17b7\u1784\u1780\u17b6\u179a\u1790\u17c2\u1791\u17b6\u17c6\u17a0\u17c1\u178a\u17d2\u178b\u17b6\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1795\u17d2\u179b\u17bc\u179c\u1790\u17d2\u1793\u179b\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179f\u17c1\u1793\u179f\u17d0\u179a\u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u17d2\u179a\u17b6\u1794\u17cb\u179b\u17be\u1799\u17b6\u1793\u1799\u1793\u17d2\u178f\u1787\u17c6\u1793\u17b6\u1793\u17cb\u1790\u17d2\u1798\u17b8 (ADAS) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1780\u17b6\u179a\u1785\u17c6\u178e\u17b6\u1799\u179b\u17be\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u1793\u17d2\u1790\u17c2\u1798\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/road-profile-reconstruction-on-board-sensors.html",
+      "author": [{"@type": "Person", "name": "R. GURIDIS (Stellantis, IMS Univ. Bordeaux, OpenLab Stellantis)"},{"@type": "Person", "name": "G. POINT (Stellantis)"},{"@type": "Person", "name": "V. HERNETTE (Stellantis)"},{"@type": "Person", "name": "G. BEL HAJ FREJ (Stellantis, OpenLab Stellantis)"},{"@type": "Person", "name": "X. MOREAU (IMS Univ. Bordeaux, OpenLab Stellantis)"},{"@type": "Person", "name": "A. BENINE-NETO (IMS Univ. Bordeaux, OpenLab Stellantis)"}],
+      "datePublished": "Stellantis / IMS Univ. Bordeaux",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Reconstruction and mapping of the road profile from on-board sensors",
+        "url": "https://www.researchgate.net/profile/Guillaume-Point/publication/364722103_Reconstruction_and_mapping_of_the_road_profile_from_on-board_sensors/links/635849726e0d367d91c6914e/Reconstruction-and-mapping-of-the-road-profile-from-on-board-sensors.pdf"
+      },
+      "keywords": ["Road Monitoring", "Model based", "Frequency domain", "Global positioning", "Inertial navigation system", "Sensor fusion", "ADAS"],
+      "about": "Automotive Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1780\u179f\u17b6\u1784\u17a1\u17be\u1784\u179c\u17b7\u1789 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1782\u17bc\u179f\u1795\u17c2\u1793\u1791\u17b8\u1791\u1798\u17d2\u179a\u1784\u17cb\u1795\u17d2\u179b\u17bc\u179c\u1796\u17b8\u179f\u17c1\u1793\u179f\u17d0\u179a\u1797\u17d2\u1787\u17b6\u1794\u17cb\u179b\u17be\u1799\u17b6\u1793\u1799\u1793\u17d2\u178f",
+          "item": "https://khmerresearch.com/papers/technology/road-profile-reconstruction-on-board-sensors.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការកសាងឡើងវិញ និងការគូសផែនទីទម្រង់ផ្លូវពីសេនស័រភ្ជាប់លើយានយន្ត</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Reconstruction and mapping of the road profile from on-board sensors<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Guillaume-Point/publication/364722103_Reconstruction_and_mapping_of_the_road_profile_from_on-board_sensors/links/635849726e0d367d91c6914e/Reconstruction-and-mapping-of-the-road-profile-from-on-board-sensors.pdf" target="_blank" rel="noopener">www.researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការកសាងឡើងវិញ និងការគូសផែនទីទម្រង់ផ្លូវពីសេនស័រភ្ជាប់លើយានយន្ត</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Reconstruction and mapping of the road profile from on-board sensors</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> R. GURIDIS (Stellantis, IMS Univ. Bordeaux, OpenLab Stellantis), G. POINT (Stellantis), V. HERNETTE (Stellantis), G. BEL HAJ FREJ (Stellantis, OpenLab Stellantis), X. MOREAU (IMS Univ. Bordeaux, OpenLab Stellantis), A. BENINE-NETO (IMS Univ. Bordeaux, OpenLab Stellantis)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> Stellantis / IMS Univ. Bordeaux</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Automotive Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការតាមដានស្ថានភាពផ្លូវ និងការថែទាំហេដ្ឋារចនាសម្ព័ន្ធផ្លូវថ្នល់ដោយប្រើប្រាស់សេនស័រដែលមានស្រាប់លើយានយន្តជំនាន់ថ្មី (ADAS) ដើម្បីកាត់បន្ថយការចំណាយលើឧបករណ៍បន្ថែម។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះធ្វើការប្រៀបធៀបវិធីសាស្ត្រពីរផ្សេងគ្នាក្នុងការប៉ាន់ប្រមាណ និងកសាងទម្រង់ផ្លូវ ដោយប្រើប្រាស់ទិន្នន័យពីសេនស័រយានយន្ត និងប្រព័ន្ធកំណត់ទីតាំងសកល។
+        
+        <ul>
+            
+            <li>ការកសាងទិន្នន័យផ្លូវផ្អែកលើម៉ូដែលយានយន្ត (Road Input Reconstructor - RIR) ក្នុងដែនប្រេកង់</li>
+            
+            <li>ការតាមដានផ្លូវតាមប្រព័ន្ធភូមិសាស្ត្រ (Georeferenced Road Monitoring - GRM) ដោយប្រើការបញ្ចូលគ្នានៃសេនស័រ GNSS និងសេនស័ររង្វាស់បូមរថយន្ត</li>
+            
+            <li>ការធ្វើតេស្តជាក់ស្តែងលើយានយន្តគំរូ (DS7 និង Peugeot 3008 II) និងការវាយតម្លៃកម្រិតលម្អៀងដោយប្រៀបធៀបជាមួយទម្រង់ផ្លូវជាក់ស្តែង</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រ GRM អាចកសាងទម្រង់ផ្លូវជាមួយនឹងភាពសុក្រឹតកម្រិតសង់ទីម៉ែត្រ ដែលមានរង្វាស់លម្អៀងស្តង់ដារ ១៩,៦ ម.ម នៅល្បឿន ២០ គ.ម/ម៉ សម្រាប់ការវាយតម្លៃឧបសគ្គលើដងផ្លូវ។</li>
+            
+            <li>វិធីសាស្ត្រ RIR អាចចម្លងទម្រង់ផ្លូវបានល្អនៅប្រេកង់ទាប ប៉ុន្តែងាយរងឥទ្ធិពលពីរំខាន (Noise) របស់សេនស័រ និងទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រម៉ូដែលយានយន្តយ៉ាងច្បាស់លាស់។</li>
+            
+            <li>ការរួមបញ្ចូលគ្នានៃប្រព័ន្ធទាំងពីរនេះ ផ្តល់សក្តានុពលខ្ពស់ក្នុងការបង្កើតផែនទីភូមិសាស្ត្រនៃស្ថានភាពផ្លូវក្នុងពេលជាក់ស្តែង ដែលមានប្រយោជន៍សម្រាប់ប្រព័ន្ធសន្ដិសុខយានយន្តទំនើប និងការថែទាំផ្លូវថ្នល់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Road Input Reconstructor (RIR)</span></strong><br>ការកសាងទិន្នន័យផ្លូវផ្អែកលើម៉ូដែលយានយន្តក្នុងដែនប្រេកង់</td>
+                <td>ដំណើរការបានលឿន និងអាចចម្លងទម្រង់ផ្លូវបានល្អនៅប្រេកង់ទាប ដោយមិនត្រូវការការគណនាស្មុគស្មាញពីចំណុចកណ្តាលនៃយានយន្តឡើយ។</td>
+                <td>ងាយរងឥទ្ធិពលយ៉ាងខ្លាំងពីរំខាន (Noise) របស់សេនស័រនៅប្រេកង់ទាប ហើយទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រម៉ូដែលយានយន្តយ៉ាងច្បាស់លាស់។</td>
+                <td>ទទួលបានលទ្ធផលល្អក្នុងការកសាងទម្រង់ផ្លូវក្នុងបរិស្ថានក្លែងធ្វើ ប៉ុន្តែមានភាពយឺតយ៉ាវ (Delay) បន្តិចដោយសារដំណើរការស្រដៀងទៅនឹងតម្រង Low-pass filter រួមទាំងមានបាតុភូត Integration drift ពេលមាន Noise។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Georeferenced Road Monitoring (GRM)</span></strong><br>ការតាមដានផ្លូវតាមប្រព័ន្ធភូមិសាស្ត្រដោយប្រើប្រាស់ទិន្នន័យរួមបញ្ចូលគ្នា (Data Fusion)</td>
+                <td>អាចកសាងទម្រង់ផ្លូវក្នុងកម្រិតភាពសុក្រឹតខ្ពស់ដោយមិនពឹងផ្អែកលើប៉ារ៉ាម៉ែត្រម៉ូដែលយានយន្ត និងផ្តល់ទីតាំងភូមិសាស្ត្រច្បាស់លាស់។</td>
+                <td>ទាមទារសេនស័រដែលបានក្រិតតាមខ្នាត (Calibration) យ៉ាងត្រឹមត្រូវ និងពឹងផ្អែកខ្លាំងលើប្រព័ន្ធកំណត់ទីតាំងតម្លៃខ្ពស់ (High-end INS & RTK GNSS)។</td>
+                <td>ទទួលបានភាពសុក្រឹតកម្រិតសង់ទីម៉ែត្រ ជាមួយនឹងរង្វាស់លម្អៀងស្តង់ដារ ១៩,៦ ម.ម (នៅល្បឿន ២០ គ.ម/ម៉) និង ៣៦,៤ ម.ម (នៅល្បឿន ៣០ គ.ម/ម៉)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តវិធីសាស្ត្រទាំងពីរនេះ ទាមទារការបំពាក់សេនស័រជាក់លាក់លើយានយន្ត និងប្រព័ន្ធកំណត់ទីតាំងដែលមានភាពសុក្រឹតខ្ពស់ ដែលអាចមានតម្លៃថ្លៃ និងតម្រូវការបច្ចេកទេសខ្ពស់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ប្រព័ន្ធ OxTS RT3000v3 ឬប្រព័ន្ធ INS ដែលមានបច្ចេកវិទ្យា RTK (Real Time Kinematic) ដើម្បីទទួលបានភាពសុក្រឹតកម្រិតសង់ទីម៉ែត្រ ព្រមទាំងសេនស័រវាស់កម្រិតបូម (Suspension deflection sensors) ចំនួន៤។</li>
+        
+        <li><strong>Software/Model:</strong> ចំណេះដឹងផ្នែកម៉ូដែលយានយន្ត (Quarter-car model), ច្បាប់គ្រប់គ្រង CRONE និងបច្ចេកទេសតម្រងទិន្នន័យ (Data filtering)។</li>
+        
+        <li><strong>Test Vehicle:</strong> រថយន្តសាកល្បង (ដូចជា Peugeot 3008 II ឬ DS7) ដែលមានបំពាក់ប្រព័ន្ធព្យួរពាក់កណ្តាលសកម្ម (Semi-active suspension) និងប្រព័ន្ធ ADAS។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងប្រទេសបារាំង ដោយប្រើប្រាស់រថយន្តទំនើប និងហេដ្ឋារចនាសម្ព័ន្ធផ្លូវដែលមានស្តង់ដារ។ សម្រាប់ប្រទេសកម្ពុជា ទម្រង់ផ្លូវមានភាពចម្រុះច្រើន (ផ្លូវដី ផ្លូវក្រាលកៅស៊ូមានសភាពខូចខាតខ្លាំង) ដែលទាមទារការសាកល្បងបន្ថែមដើម្បីធានាថាប្រព័ន្ធនេះមិនរងផលប៉ះពាល់ដោយកម្រិតរំញ័រខ្លាំង និងការបាត់បង់សេវា GNSS នៅតំបន់ជនបទ ឬទីក្រុងចង្អៀត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់សម្រាប់ស្ថាប័នពាក់ព័ន្ធនៅកម្ពុជាក្នុងការតាមដាន និងវាយតម្លៃស្ថានភាពផ្លូវថ្នល់ដោយស្វ័យប្រវត្តិ ជំនួសឱ្យការចុះពិនិត្យដោយផ្ទាល់។</p>
+        
+        <ul>
+            
+            <li><strong>ក្រសួងសាធារណការ និងដឹកជញ្ជូន (MPWT):</strong> អាចប្រើប្រាស់វិធីសាស្ត្រ GRM បំពាក់លើរថយន្តល្បាត ដើម្បីប្រមូលទិន្នន័យជង្ហុក ឬការខូចខាតផ្លូវជាតិ (ដូចជាផ្លូវជាតិលេខ៣ ឬលេខ៤) ដោយស្វ័យប្រវត្តិ និងបង្កើតផែនទីថែទាំផ្លូវចំគោលដៅ។</li>
+            
+            <li><strong>ក្រុមហ៊ុនវិនិយោគផ្លូវល្បឿនលឿន (Expressway Operators):</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យានេះក្នុងការត្រួតពិនិត្យភាពរលោងនៃផ្ទៃផ្លូវ (Road Roughness) ជាប្រចាំ ដើម្បីធានាសុវត្ថិភាពសម្រាប់ការបើកបរល្បឿនលឿននៅលើផ្លូវល្បឿនលឿនភ្នំពេញ-ក្រុងព្រះសីហនុ។</li>
+            
+            <li><strong>ក្រុមហ៊ុនដឹកជញ្ជូន និងភស្តុភារ (Logistics Companies):</strong> អាចប្រើប្រាស់ទិន្នន័យផែនទីផ្លូវនេះដើម្បីស្វែងរកផ្លូវដែលមានសុវត្ថិភាព កាត់បន្ថយការខូចខាតទំនិញ និងកាត់បន្ថយការសឹករិចរិលនៃរថយន្តដឹកទំនិញធុនធ្ងន់។</li>
+            
+        </ul>
+        
+        
+        <p>ការទាញយកប្រយោជន៍ពីប្រព័ន្ធសេនស័រដែលមានស្រាប់លើយានយន្តទំនើប អាចជួយកម្ពុជាកាត់បន្ថយការចំណាយលើឧបករណ៍វាស់ស្ទង់ផ្លូវដាច់ដោយឡែក និងពន្លឿនការឆ្លើយតបក្នុងការជួសជុលហេដ្ឋារចនាសម្ព័ន្ធបានទាន់ពេលវេលា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃកាយវិទ្យាយានយន្ត និងប្រព័ន្ធសេនស័រ:</strong> ចាប់ផ្តើមដោយការសិក្សាពីម៉ូដែល <span class='en'>Quarter-car model</span> និងមុខងាររបស់សេនស័រ <span class='en'>Suspension deflection sensors</span> និង <span class='en'>Inertial Navigation Systems (INS)</span> ដែលប្រើប្រាស់ក្នុងយានយន្តទំនើប។</li>
+            
+            <li><strong>អនុវត្តការក្លែងធ្វើទិន្នន័យក្នុងបរិស្ថាននិម្មិត:</strong> ប្រើប្រាស់កម្មវិធីដូចជា <span class='en'>MATLAB/Simulink</span> ឬ <span class='en'>CarMaker</span> ដើម្បីបង្កើតម៉ូដែល <span class='en'>Road Input Reconstructor (RIR)</span> និងសាកល្បងអនុវត្តតម្រង <span class='en'>Low-pass filter</span> ដើម្បីកាត់បន្ថយរំខាន (Noise) របស់សេនស័រប្រកបដោយប្រសិទ្ធភាព។</li>
+            
+            <li><strong>សាកល្បងការរួមបញ្ចូលទិន្នន័យសេនស័រ (Sensor Fusion):</strong> រៀនប្រើប្រាស់ក្បួនដោះស្រាយដូចជា <span class='en'>Kalman Filter</span> នៅក្នុង <span class='en'>Python</span> ដើម្បីបញ្ចូលទិន្នន័យពី <span class='en'>GNSS</span> និង <span class='en'>INS</span> ក្នុងគោលបំណងទាញយកទីតាំងភូមិសាស្ត្រដែលមានភាពសុក្រឹតខ្ពស់ (RTK corrections)។</li>
+            
+            <li><strong>អភិវឌ្ឍប្រព័ន្ធសាកល្បងខ្នាតតូច (Prototype) លើរថយន្តជាក់ស្តែង:</strong> សហការជាមួយមន្ទីរពិសោធន៍នៅសាកលវិទ្យាល័យ (ឧ. សាលា ITC) ដើម្បីបំពាក់សេនស័រ <span class='en'>GNSS/INS</span> លើរថយន្ត ហើយបើកបរសាកល្បងលើផ្លូវដែលមានជង្ហុក ឬផ្លូវរដិបរដុបក្នុងរាជធានីភ្នំពេញដើម្បីប្រមូលទិន្នន័យ។</li>
+            
+            <li><strong>បង្កើតផែនទីស្ថានភាពផ្លូវ (Road Condition Map):</strong> ប្រើប្រាស់ទិន្នន័យកូអរដោណេដែលប្រមូលបាន រួមជាមួយកម្មវិធី <span class='en'>QGIS</span> ឬ <span class='en'>ArcGIS</span> ដើម្បីគូសផែនទីចំណុចខូចខាតផ្លូវថ្នល់ និងចែករំលែកជាទម្រង់ Dashboard សាមញ្ញសម្រាប់អ្នកពាក់ព័ន្ធ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Quarter-car model</span></td>
+                <td>ជាម៉ូដែលគណិតវិទ្យាដែលតំណាងឱ្យកាយវិទ្យារបស់យានយន្តដោយគិតត្រឹមមួយភាគបួននៃរថយន្ត (មានកង់មួយ និងបូមមួយ) ដើម្បីងាយស្រួលក្នុងការវិភាគរំញ័រ និងប្រតិកម្មរបស់វាទៅនឹងផ្ទៃផ្លូវដោយកាត់បន្ថយភាពស្មុគស្មាញក្នុងការគណនា។</td>
+                <td>ដូចជាការសិក្សាពីជើងមួយរបស់តុ ដើម្បីយល់ពីរបៀបដែលតុទាំងមូលរង្គើនៅពេលមានការរុញទង្គិច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sensor fusion</span></td>
+                <td>ជាដំណើរការក្បួនដោះស្រាយក្នុងការរួមបញ្ចូលទិន្នន័យពីសេនស័រច្រើនប្រភេទ (ដូចជា GNSS និង INS) ដើម្បីទាញយកទិន្នន័យរួមមួយដែលមានភាពច្បាស់លាស់ សុក្រឹតភាព និងអាចទុកចិត្តបានខ្ពស់ជាងការប្រើសេនស័រតែមួយមុខ។</td>
+                <td>ដូចជាការប្រើទាំងភ្នែកដើម្បីមើល និងត្រចៀកដើម្បីស្តាប់ ក្នុងការកំណត់ទីតាំងនៃរថយន្តសង្គ្រោះបន្ទាន់ដែលកំពុងបើកមកក្បែរបានយ៉ាងច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Inertial Navigation System (INS)</span></td>
+                <td>ជាប្រព័ន្ធរុករកដែលប្រើប្រាស់សេនស័រវាស់សន្ទុះ និងរង្វិល (Accelerometers និង Gyroscopes) ដើម្បីគណនាទីតាំង ទិសដៅ និងល្បឿនរបស់យានយន្តជាបន្តបន្ទាប់ ដោយមិនពឹងផ្អែកលើសេវាប្រព័ន្ធពីខាងក្រៅ។</td>
+                <td>ដូចជាអ្នកដំណើរដែលបិទភ្នែកអង្គុយក្នុងឡាន ប៉ុន្តែនៅតែអាចដឹងថាឡានកំពុងបត់ឆ្វេង បត់ស្តាំ ឬបង្កើនល្បឿន ដោយផ្អែកលើអារម្មណ៍នៃការផ្អៀង ឬការក្រឡកខ្លួនរបស់គាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Real Time Kinematic (RTK)</span></td>
+                <td>ជាបច្ចេកទេសកែតម្រូវទិន្នន័យ GNSS/GPS ក្នុងពេលជាក់ស្តែង ដើម្បីផ្តល់នូវភាពសុក្រឹតនៃការកំណត់ទីតាំងក្នុងកម្រិតសង់ទីម៉ែត្រ ដោយប្រើប្រាស់ស្ថានីយ៍យោង (Base station) បន្ថែម។</td>
+                <td>ដូចជាការពាក់វ៉ែនតាដែលវាស់ត្រូវកែវភ្នែក១០០ភាគរយ ដែលជួយឱ្យអ្នកមើលឃើញចំណុចតូចៗបានច្បាស់ជាងការពាក់វ៉ែនតាការពារកម្តៅថ្ងៃធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Frequency domain</span></td>
+                <td>ជាវិធីសាស្ត្រក្នុងការវិភាគសញ្ញា ឬទិន្នន័យដោយផ្តោតលើប្រេកង់ (កម្រិតរំញ័រ) ជំនួសឱ្យពេលវេលា (Time domain) ដែលជួយងាយស្រួលក្នុងការច្រោះបំបែកសញ្ញារំខាន (Noise) ពីទិន្នន័យពិតនៃទម្រង់ផ្លូវ។</td>
+                <td>ដូចជាការបំបែកសំឡេងតន្ត្រីទៅជាសម្លេងឧបករណ៍នីមួយៗ (សម្លេងស្គរ សម្លេងហ្គីតា) ជំនួសឱ្យការស្តាប់សំឡេងច្របល់ចូលគ្នាតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Integration drift</span></td>
+                <td>ជាបាតុភូតនៃកំហុសគណិតវិទ្យាដែលកើនឡើងបន្តិចម្តងៗតាមពេលវេលា នៅពេលដែលធ្វើប្រមាណវិធីអាំងតេក្រាលលើទិន្នន័យសេនស័រដែលមានរំខាន (Noise) ដែលបណ្តាលឱ្យលទ្ធផលប៉ាន់ស្មានងាកចេញពីការពិតកាន់តែឆ្ងាយ។</td>
+                <td>ដូចជានាឡិកាដែលដើរលឿនជាងម៉ោងធម្មតា១វិនាទីជារៀងរាល់ថ្ងៃ ដែលយូរៗទៅវានឹងបង្ហាញម៉ោងខុសស្រឡះពីម៉ោងពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Low-pass filter</span></td>
+                <td>ជាតម្រងដំណើរការទិន្នន័យដែលអនុញ្ញាតឱ្យតែសញ្ញាដែលមានប្រេកង់ទាប (បម្រែបម្រួលទម្រង់ផ្លូវយឺតៗ) ឆ្លងកាត់បាន ខណៈពេលដែលរារាំងសញ្ញាប្រេកង់ខ្ពស់ (ដូចជារំញ័រញឹកញាប់ ឬសញ្ញារំខានពីសេនស័រ)។</td>
+                <td>ដូចជាការតម្រងយកតែកាហ្វេទឹក ខណៈពេលដែលរារាំងកាកកាហ្វេមិនឱ្យហូរធ្លាក់ចូលក្នុងកែវផឹក។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/autonomous-navigation-forest-machines-2002.html">
+                    <span class="km">ការរុករកដោយស្វ័យប្រវត្តិសម្រាប់គ្រឿងចក្រព្រៃឈើ - ការសិក្សាបឋម</span><br>
+                    <span class="en article-original-title">Autonomous Navigation for Forest Machines - a Pre-Study</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/robotic-weeding-sensing-perception-2024.html">
+                    <span class="km">ការចាប់សញ្ញា និងការយល់ដឹងនៅក្នុងការដកស្មៅដោយមនុស្សយន្ត៖ ការច្នៃប្រឌិត និងដែនកំណត់សម្រាប់កសិកម្មឌីជីថល</span><br>
+                    <span class="en article-original-title">Sensing and Perception in Robotic Weeding: Innovations and Limitations for Digital Agriculture</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/astrail-state-of-the-art-automated-driving-2018.html">
+                    <span class="km">D3.1 - ស្ថានភាពបច្ចុប្បន្ននៃបច្ចេកវិទ្យាបើកបរដោយស្វ័យប្រវត្តិ</span><br>
+                    <span class="en article-original-title">D3.1 - State of the Art of Automated Driving technologies</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=sensor+fusion%22+GNSS+INS+%22road+profile%22+estimation" target="_blank" rel="noopener"><span class="en">sensor fusion" GNSS INS "road profile" estimation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=inverse+quarter-car+model%22+road+roughness+monitoring" target="_blank" rel="noopener"><span class="en">inverse quarter-car model" road roughness monitoring</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=CRONE+control+suspension+%22frequency+domain%22+vehicle+dynamics" target="_blank" rel="noopener"><span class="en">CRONE control suspension "frequency domain" vehicle dynamics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ADAS+crowdsourcing+%22road+condition%22+monitoring+system" target="_blank" rel="noopener"><span class="en">ADAS crowdsourcing "road condition" monitoring system</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=RTK+GPS+%22suspension+deflection+sensor%22+road+pothole+detection" target="_blank" rel="noopener"><span class="en">RTK GPS "suspension deflection sensor" road pothole detection</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>
