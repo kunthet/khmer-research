@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែល Vision Transformer ដែលបានកែសម្រួលយ៉ាងល្អិតល្អន់ជាមួយបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) សម្រាប់ការរកឃើញ និងចំណាត់ថ្នាក់ជំងឺភ្នែកពីរូបភាពវេជ្ជសាស្ត្រ - A hyper-tuned Vision Transformer model with Explainable AI for Eye disease de... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ម៉ូដែល Vision Transformer ដែលបានកែសម្រួលយ៉ាងល្អិតល្អន់ជាមួយប។ ជំងឺភ្នែកគឺជាបញ្ហាសុខភាពដ៏ចម្បងដែលប៉ះពាល់ដល់មនុស្សរាប់លាននាក់ ខណៈដែលការរកឃើញទាន់ពេលវេលាមានសារៈសំខ...">
+    
+    <meta name="keywords" content="Vision Transformer, Explainable AI, Eye Disease Detection, Medical Image Classification, LIME, SHAP, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/health/hyper-tuned-vit-xai-eye-disease-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/health/hyper-tuned-vit-xai-eye-disease-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/health/hyper-tuned-vit-xai-eye-disease-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/health/hyper-tuned-vit-xai-eye-disease-2023.html">
+    <meta property="og:title" content="ម៉ូដែល Vision Transformer ដែលបានកែសម្រួលយ៉ាងល្អិតល្អន់ជាមួយបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) សម្រាប់ការរកឃើញ និងចំណាត់ថ្នាក់ជំងឺភ្នែកពីរូបភាពវេជ្ជសាស្ត្រ | KhmerResearch.com">
+    <meta property="og:description" content="ជំងឺភ្នែកគឺជាបញ្ហាសុខភាពដ៏ចម្បងដែលប៉ះពាល់ដល់មនុស្សរាប់លាននាក់ ខណៈដែលការរកឃើញទាន់ពេលវេលាមានសារៈសំខាន់សម្រាប់ការការព្យាបាល ប៉ុន្តែម៉ូដែល Deep Learning បច្ចុប្បន្ននៅខ្វះតម្លាភាពក្នុងការបកស្រាយលទ្ធផលនៃ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2023 Islamic University, Bangladesh-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Vision Transformer">
+    
+    <meta property="article:tag" content="Explainable AI">
+    
+    <meta property="article:tag" content="Eye Disease Detection">
+    
+    <meta property="article:tag" content="Medical Image Classification">
+    
+    <meta property="article:tag" content="LIME">
+    
+    <meta property="article:tag" content="SHAP">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែល Vision Transformer ដែលបានកែសម្រួលយ៉ាងល្អិតល្អន់ជាមួយបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) សម្រាប់ការរកឃើញ និងចំណាត់ថ្នាក់ជំងឺភ្នែកពីរូបភាពវេជ្ជសាស្ត្រ">
+    <meta name="twitter:description" content="ជំងឺភ្នែកគឺជាបញ្ហាសុខភាពដ៏ចម្បងដែលប៉ះពាល់ដល់មនុស្សរាប់លាននាក់ ខណៈដែលការរកឃើញទាន់ពេលវេលាមានសារៈសំខាន់សម្រាប់ការការព្យាបាល ប៉ុន្តែម៉ូដែល Deep Learning បច្ចុប្បន្ននៅខ្វះតម្លាភាពក្នុងការបកស្រាយលទ្ធផលនៃ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Vision Transformer \u178a\u17c2\u179b\u1794\u17b6\u1793\u1780\u17c2\u179f\u1798\u17d2\u179a\u17bd\u179b\u1799\u17c9\u17b6\u1784\u179b\u17d2\u17a2\u17b7\u178f\u179b\u17d2\u17a2\u1793\u17cb\u1787\u17b6\u1798\u17bd\u1799\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1796\u1793\u17d2\u1799\u179b\u17cb\u1794\u17b6\u1793 (Explainable AI) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789 \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17c6\u1784\u17ba\u1797\u17d2\u1793\u17c2\u1780\u1796\u17b8\u179a\u17bc\u1794\u1797\u17b6\u1796\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a",
+      "name": "A hyper-tuned Vision Transformer model with Explainable AI for Eye disease detection and classification from medical images",
+      "description": "\u1787\u17c6\u1784\u17ba\u1797\u17d2\u1793\u17c2\u1780\u1782\u17ba\u1787\u17b6\u1794\u1789\u17d2\u17a0\u17b6\u179f\u17bb\u1781\u1797\u17b6\u1796\u178a\u17cf\u1785\u1798\u17d2\u1794\u1784\u178a\u17c2\u179b\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u178a\u179b\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f\u179a\u17b6\u1794\u17cb\u179b\u17b6\u1793\u1793\u17b6\u1780\u17cb \u1781\u178e\u17c8\u178a\u17c2\u179b\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789\u1791\u17b6\u1793\u17cb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1798\u17b6\u1793\u179f\u17b6\u179a\u17c8\u179f\u17c6\u1781\u17b6\u1793\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1794\u17b6\u179b \u1794\u17c9\u17bb\u1793\u17d2\u178f\u17c2\u1798\u17c9\u17bc\u178a\u17c2\u179b Deep Learning \u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793\u1793\u17c5\u1781\u17d2\u179c\u17c7\u178f\u1798\u17d2\u179b\u17b6\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1780\u179f\u17d2\u179a\u17b6\u1799\u179b\u1791\u17d2\u1792\u1795\u179b\u1793\u17c3\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u179a\u17c4\u1782\u179c\u17b7\u1793\u17b7\u1785\u17d2\u1786\u17d0\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/health/hyper-tuned-vit-xai-eye-disease-2023.html",
+      "author": [{"@type": "Person", "name": "Md Shahin Ali"},{"@type": "Person", "name": "Md Khairul Islam (Islamic University, Bangladesh)"}],
+      "datePublished": "2023 Islamic University, Bangladesh",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "A hyper-tuned Vision Transformer model with Explainable AI for Eye disease detection and classification from medical images",
+        "url": "https://www.researchgate.net/profile/Md-Ali-177/publication/369362312_A_hyper-tuned_Vision_Transformer_model_with_Explainable_AI_for_Eye_disease_detection_and_classification_from_medical_images/links/650d605ac05e6d1b1c26f7ef/A-hyper-tuned-Vision-Transformer-model-with-Explainable-AI-for-Eye-disease-detection-and-classification-from-medical-images.pdf"
+      },
+      "keywords": ["Vision Transformer", "Explainable AI", "Eye Disease Detection", "Medical Image Classification", "LIME", "SHAP"],
+      "about": "Biomedical Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Health",
+          "item": "https://khmerresearch.com/papers/health/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b Vision Transformer \u178a\u17c2\u179b\u1794\u17b6\u1793\u1780\u17c2\u179f\u1798\u17d2\u179a\u17bd\u179b\u1799\u17c9\u17b6\u1784\u179b\u17d2\u17a2\u17b7\u178f\u179b\u17d2\u17a2\u1793\u17cb\u1787\u17b6\u1798\u17bd\u1799\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1796\u1793\u17d2\u1799\u179b\u17cb\u1794\u17b6\u1793 (Explainable AI) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u1780\u1783\u17be\u1789 \u1793\u17b7\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1787\u17c6\u1784\u17ba\u1797\u17d2\u1793\u17c2\u1780\u1796\u17b8\u179a\u17bc\u1794\u1797\u17b6\u1796\u179c\u17c1\u1787\u17d2\u1787\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a",
+          "item": "https://khmerresearch.com/papers/health/hyper-tuned-vit-xai-eye-disease-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/health/">Health</a> &rsaquo;
+        <span>ម៉ូដែល Vision Transformer ដែលបានកែសម្រួលយ៉ាងល្អិតល្អន់ជាម...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> A hyper-tuned Vision Transformer model with Explainable AI for Eye disease detection and classification from medical images<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Md-Ali-177/publication/369362312_A_hyper-tuned_Vision_Transformer_model_with_Explainable_AI_for_Eye_disease_detection_and_classification_from_medical_images/links/650d605ac05e6d1b1c26f7ef/A-hyper-tuned-Vision-Transformer-model-with-Explainable-AI-for-Eye-disease-detection-and-classification-from-medical-images.pdf" target="_blank" rel="noopener">www.researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែល Vision Transformer ដែលបានកែសម្រួលយ៉ាងល្អិតល្អន់ជាមួយបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) សម្រាប់ការរកឃើញ និងចំណាត់ថ្នាក់ជំងឺភ្នែកពីរូបភាពវេជ្ជសាស្ត្រ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> A hyper-tuned Vision Transformer model with Explainable AI for Eye disease detection and classification from medical images</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Md Shahin Ali, Md Khairul Islam (Islamic University, Bangladesh)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 Islamic University, Bangladesh</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Biomedical Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ជំងឺភ្នែកគឺជាបញ្ហាសុខភាពដ៏ចម្បងដែលប៉ះពាល់ដល់មនុស្សរាប់លាននាក់ ខណៈដែលការរកឃើញទាន់ពេលវេលាមានសារៈសំខាន់សម្រាប់ការការព្យាបាល ប៉ុន្តែម៉ូដែល Deep Learning បច្ចុប្បន្ននៅខ្វះតម្លាភាពក្នុងការបកស្រាយលទ្ធផលនៃការធ្វើរោគវិនិច្ឆ័យ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះស្នើឡើងនូវវិធីសាស្ត្រថ្មីមួយដោយប្រើប្រាស់ម៉ូដែល Vision Transformer (ViT) ដែលត្រូវបានកំណត់ប៉ារ៉ាម៉ែត្រយ៉ាងល្អិតល្អន់ រួមជាមួយនឹងបច្ចេកទេសបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI)។
+        
+        <ul>
+            
+            <li>ការរៀបចំ និងការបង្កើនទិន្នន័យ (Data Preprocessing and Augmentation) ពីរូបភាពដើមចំនួន ៦០១ ទៅ ១២០០ រូបភាព</li>
+            
+            <li>ការប្រើប្រាស់ម៉ូដែល Data-Efficient Image Transformer (DeiT) សម្រាប់ការទាញយកលក្ខណៈពិសេស (Feature Extraction) និងចំណាត់ថ្នាក់</li>
+            
+            <li>ការអនុវត្តបច្ចេកទេសពន្យល់ (Explainable AI Techniques) ដូចជា LIME និង SHAP ដើម្បីបកស្រាយពីដំណើរការសម្រេចចិត្តរបស់ម៉ូដែល</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលដែលបានស្នើឡើងសម្រេចបានអត្រាភាពត្រឹមត្រូវខ្ពស់រហូតដល់ ៩១,៤០% ក្នុងការចាត់ថ្នាក់ជំងឺភ្នែកចំនួន ៤ ប្រភេទ (ធម្មតា, ជំងឺភ្នែកឡើងបាយ, ជំងឺទឹកដក់ក្នុងភ្នែក និងជំងឺរ៉េទីន)។</li>
+            
+            <li>ម៉ូដែល Vision Transformer នេះដំណើរការល្អជាងម៉ូដែលផ្ទេរការរៀន (Transfer Learning) ល្បីៗផ្សេងទៀតដូចជា VGG16, ResNet50, និង InceptionV3 ដោយសម្រេចបាន Precision ៩៤,០៧% និង F1 Score ៩១,២៨%។</li>
+            
+            <li>ការដាក់បញ្ចូល LIME និង SHAP បានផ្តល់នូវតម្លាភាពក្នុងការវិភាគ ដែលជួយឱ្យគ្រូពេទ្យយល់ពីមូលហេតុនៅពីក្រោយការទស្សន៍ទាយរបស់ម៉ូដែល និងធ្វើឱ្យប្រសើរឡើងនូវទំនុកចិត្តក្នុងការសម្រេចចិត្តព្យាបាល។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Proposed ViT (Hyper-tuned Vision Transformer)</span></strong><br>ម៉ូដែល Vision Transformer (ViT) ដែលបានកែសម្រួលយ៉ាងល្អិតល្អន់</td>
+                <td>ទទួលបានលទ្ធផលល្អបំផុតក្នុងការចាត់ថ្នាក់ជំងឺភ្នែក ព្រមទាំងមានសមត្ថភាពពន្យល់ពីដំណើរការនៃការសម្រេចចិត្ត (Explainable AI) ដែលជួយដល់ការយល់ដឹងរបស់គ្រូពេទ្យ។</td>
+                <td>ទាមទារទិន្នន័យសម្រាប់បង្ហាត់ច្រើន និងត្រូវការកម្លាំងម៉ាស៊ីនមានក្រាហ្វិកកាត (GPU) ខ្ពស់ដើម្បីដំណើរការការគណនាស្មុគស្មាញ។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវខ្ពស់បំផុតរហូតដល់ ៩១,៤០%, Precision ៩៤,០៧% និង F1 Score ៩១,២៨%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">MobileNetV2</span></strong><br>ម៉ូដែល MobileNetV2</td>
+                <td>ប្រើប្រាស់ធនធានកុំព្យូទ័រតិច និងដំណើរការបានលឿន ដែលស័ក្តិសមបំផុតសម្រាប់ការដាក់ឱ្យដំណើរការលើឧបករណ៍ចល័ត ឬទូរស័ព្ទដៃ។</td>
+                <td>ទោះបីជាលទ្ធផលល្អគួរសម ប៉ុន្តែវាមិនមានសមត្ថភាពផ្តល់នូវតម្លាភាពក្នុងការបកស្រាយលទ្ធផល (Lack of Explainability) ដូចម៉ូដែលដែលប្រើ XAI នោះទេ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៩១,០៣% និង F1 Score ៨៩,២៧% ដែលស្ថិតនៅលំដាប់ទីពីរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Baseline Deep Learning (VGG16 & ResNet50)</span></strong><br>ម៉ូដែល Deep Learning មូលដ្ឋាន (VGG16 និង ResNet50)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្តតាមរយៈវិធីសាស្ត្រ Transfer Learning និងមានកូដគំរូជាច្រើនដែលអាចស្វែងរកបាននៅលើអ៊ីនធឺណិតទូទៅ។</td>
+                <td>មានភាពត្រឹមត្រូវទាបជាងគេ និងជួបការលំបាកក្នុងការចាប់យកលក្ខណៈពិសេសតូចៗរវាងកោសិការូបភាពភ្នែក ដែលងាយធ្វើឱ្យមានការវិភាគខុស។</td>
+                <td>ភាពត្រឹមត្រូវនៃការធ្វើតេស្តមានកម្រិតត្រឹម ៨១,៦៩% សម្រាប់ VGG16 និង ៨៨,៨៩% សម្រាប់ ResNet50។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះបានបញ្ជាក់យ៉ាងច្បាស់ពីធនធានផ្នែករឹង និងផ្នែកទន់ដែលត្រូវបានប្រើប្រាស់សម្រាប់ការបង្ហាត់ម៉ូដែល ដែលទាមទារកម្លាំងម៉ាស៊ីនកម្រិតមធ្យមទៅខ្ពស់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមាន CPU Intel Core i5-8250U, RAM 8GB និងក្រាហ្វិកកាត NVIDIA GeForce MX130 សម្រាប់ការសាកល្បងបឋម។</li>
+        
+        <li><strong>Cloud Computing:</strong> ចាំបាច់ត្រូវប្រើប្រាស់ <span class="en">Google Colab (12 GB RAM)</span> ឬបរិស្ថាន Cloud ដែលមាន GPU សម្រាប់ការបង្ហាត់ម៉ូដែល ViT ដែលស៊ីកម្លាំងខ្លាំង។</li>
+        
+        <li><strong>Software:</strong> បរិស្ថានសម្រាប់សរសេរកូដ និងបង្ហាត់ម៉ូដែលគឺ <span class="en">Jupyter Notebook</span> និង <span class="en">Google Colab</span>។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យរូបភាពរ៉េទីនភ្នែក (Cataract Dataset) ចំនួន ៦០១ រូបភាពដើម ដែលតម្រូវឱ្យមានការប្រើបច្ចេកទេសពង្រីកទិន្នន័យ (Data Augmentation) ដើម្បីបង្កើនដល់ ១២០០ រូបភាព។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានស្រាវជ្រាវ និងប្រើប្រាស់សំណុំទិន្នន័យរូបភាពរ៉េទីនភ្នែកតូចមួយ (៦០១ រូបភាព) ដែលប្រមូលបានពីប្រភពដែលមិនមានការចង្អុលបង្ហាញច្បាស់លាស់ពីទីតាំងភូមិសាស្ត្រ ឬជាតិសាសន៍របស់អ្នកជំងឺឡើយ។ សម្រាប់ប្រទេសកម្ពុជា ភាពលម្អៀងនេះគឺមានសារៈសំខាន់ណាស់ ព្រោះលក្ខណៈជីវសាស្ត្រ និងទម្រង់រ៉េទីនភ្នែករបស់ប្រជាជនអាស៊ីអាគ្នេយ៍អាចមានការប្រែប្រួល ដែលទាមទារឱ្យមានការសាកល្បងជាមួយទិន្នន័យក្នុងស្រុកបន្ថែមទៀតមុនពេលយកមកប្រើប្រាស់ជាក់ស្តែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាមានបញ្ហាប្រឈមលើទំហំទិន្នន័យក៏ដោយ វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ណាស់ក្នុងការកែលម្អវិស័យចក្ខុវិទ្យានៅប្រទេសកម្ពុជា ជាពិសេសនៅតាមតំបន់ដែលខ្វះខាតធនធាន។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យបង្អែកខេត្ត (Provincial Referral Hospitals):</strong> អាចប្រើប្រាស់ប្រព័ន្ធនេះដើម្បីជួយគ្រូពេទ្យទូទៅក្នុងធ្វើការពិនិត្យស្វែងរកជំងឺភ្នែកបឋម មុននឹងសម្រេចចិត្តបញ្ជូនអ្នកជំងឺដែលមានស្ថានភាពធ្ងន់ធ្ងរមកកាន់មន្ទីរពេទ្យឯកទេសភ្នែកនៅរាជធានីភ្នំពេញ។</li>
+            
+            <li><strong>យុទ្ធនាការពិនិត្យសុខភាពចល័ត (Mobile Health Clinics):</strong> អង្គការក្រៅរដ្ឋាភិបាល ឬគ្លីនិកចល័តអាចរួមបញ្ចូលម៉ូដែលនេះជាមួយឧបករណ៍ថតរ៉េទីនភ្នែកខ្នាតតូច (Fundus Camera) សម្រាប់យុទ្ធនាការចុះពិនិត្យភ្នែកដោយឥតគិតថ្លៃតាមសហគមន៍ជនបទ និងភូមិដាច់ស្រយាល។</li>
+            
+            <li><strong>ការអប់រំផ្នែកវេជ្ជសាស្ត្រ (Medical Education Institutions):</strong> និស្សិតជំនាញចក្ខុវិទ្យានៅសាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល (UHS) អាចប្រើប្រាស់បច្ចេកទេសពន្យល់ពី AI (LIME & SHAP) ដើម្បីសិក្សាស្វែងយល់ពីរបៀបកំណត់សម្គាល់រោគសញ្ញា ឬកោសិកាខូចខាតនៅលើរូបភាពស្កែនភ្នែកឱ្យកាន់តែច្បាស់។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការដាក់បញ្ចូលបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) នឹងជួយបង្កើនតម្លាភាព និងទំនុកចិត្តដល់គ្រូពេទ្យកម្ពុជាក្នុងការប្រើប្រាស់បច្ចេកវិទ្យាដើម្បីវិភាគជំងឺភ្នែកឱ្យបានលឿន និងច្បាស់លាស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Vision Transformer:</strong> ចាប់ផ្តើមរៀនពីទ្រឹស្តី និងស្ថាបត្យកម្មរបស់ <span class="en">Vision Transformer (ViT)</span> ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> តាមរយៈមេរៀនបង្រៀនឥតគិតថ្លៃនៅលើ <span class="en">YouTube</span> របស់កាណាល់ជំនាញ AI ឬវគ្គសិក្សានៅលើ <span class="en">Coursera</span>។</li>
+            
+            <li><strong>រៀបចំ និងបង្កើនទិន្នន័យរូបភាពវេជ្ជសាស្ត្រ:</strong> ស្វែងរកសំណុំទិន្នន័យជំងឺភ្នែកពីគេហទំព័រ <span class="en">Kaggle</span> (ឧទាហរណ៍ដូចជា <span class="en">Ocular Disease Intelligent Recognition - ODIR</span>) រួចអនុវត្តបច្ចេកទេស <span class="en">Data Augmentation</span> ដូចជាបង្វិលរូប (Rotation) ត្រឡប់ (Flipping) និងប្តូរទំហំឱ្យត្រូវនឹងស្តង់ដារដែលម៉ូដែលត្រូវការ។</li>
+            
+            <li><strong>អភិវឌ្ឍ និងកែសម្រួលម៉ូដែល (Hyper-parameter Tuning):</strong> សរសេរកូដដើម្បីបង្ហាត់ម៉ូដែលនៅលើបរិស្ថាន <span class="en">Google Colab</span> ដោយកំណត់ប៉ារ៉ាម៉ែត្រ (Hyperparameters) សំខាន់ៗឱ្យបានត្រឹមត្រូវ ដូចជាកំណត់កញ្ចប់ទិន្នន័យ <span class="en">Batch size: 64</span>, <span class="en">Epochs: 100</span> និង <span class="en">Learning Rate: 0.001</span> ដើម្បីទទួលបានលទ្ធផលប្រសើរបំផុត។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេស Explainable AI (XAI):</strong> បញ្ជូលបណ្ណាល័យកូដ <span class="en">LIME</span> និង <span class="en">SHAP</span> ទៅក្នុងគម្រោងរបស់អ្នក ដើម្បីបង្កើតចេញជាផែនទីកម្ដៅ (Heatmaps) ដែលអាចចង្អុលបង្ហាញពីតំបន់ខូចខាតលើរ៉េទីនភ្នែក ដែលជាមូលហេតុធ្វើឱ្យម៉ូដែលសម្រេចចិត្តចាត់ថ្នាក់ជំងឺនេះ។</li>
+            
+            <li><strong>បង្កើតចំណុចប្រទាក់សម្រាប់អ្នកប្រើប្រាស់ (User Interface):</strong> សាកល្បងវេចខ្ចប់ម៉ូដែល (Model Deployment) និងបង្កើតជាកម្មវិធី Web App ងាយស្រួលប្រើប្រាស់ដោយពឹងផ្អែកលើ <span class="en">Streamlit</span> ឬ <span class="en">Gradio</span> ដើម្បីអនុញ្ញាតឱ្យសាស្រ្តាចារ្យ ឬគ្រូពេទ្យសាកល្បងបញ្ចូលរូបភាពស្កែនភ្នែក និងទទួលបានការវិភាគភ្លាមៗ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Vision Transformer</span></td>
+                <td>ជាស្ថាបត្យកម្មបញ្ញាសិប្បនិម្មិតដែលកាត់រូបភាពមួយជាបំណែកតូចៗ (Patches) ហើយវិភាគទំនាក់ទំនងរវាងបំណែកទាំងនោះព្រមៗគ្នាដើម្បីយល់ពីរូបភាពទាំងមូល ដោយមិនពឹងផ្អែកលើការស្កែនជាលំដាប់លំដោយដូចម៉ូដែលចាស់ៗ (CNN) ឡើយ។</td>
+                <td>ដូចជាការយកផ្ទាំងរូបភាពធំមួយមកកាត់ជាបំណែកផ្គុំ (Jigsaw puzzle) ហើយអ្នកអាចមើលឃើញបំណែកទាំងអស់ក្នុងពេលតែមួយ ដើម្បីដឹងថានេះជារូបអ្វី ដោយមិនបាច់មើលតាំងពីឆ្វេងទៅស្តាំម្តងមួយៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Explainable AI</span></td>
+                <td>ជាបណ្តុំបច្ចេកទេសដែលជួយបកស្រាយ និងបង្ហាញពីហេតុផលនៅពីក្រោយការសម្រេចចិត្តរបស់ប្រព័ន្ធកុំព្យូទ័រ ដែលធ្វើឱ្យមនុស្សអាចយល់ដឹងថាហេតុអ្វីបានជាម៉ូដែលទស្សន៍ទាយលទ្ធផលបែបនេះ ជាជាងគ្រាន់តែបញ្ចេញចម្លើយយ៉ាងគិតិបិទជិត (Black box)។</td>
+                <td>ដូចជាសិស្សដែលមិនត្រឹមតែផ្តល់ចម្លើយត្រឹមត្រូវក្នុងការប្រឡងគណិតវិទ្យាប៉ុណ្ណោះទេ តែថែមទាំងសរសេរយ៉ាងលម្អិតពីរបៀបគណនាពីមួយជំហានទៅមួយជំហានឱ្យគ្រូបានឃើញច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Self-attention</span></td>
+                <td>ជាយន្តការគណនានៅក្នុងម៉ូដែល Transformer ដែលជួយឱ្យប្រព័ន្ធនេះដឹងថាត្រូវផ្តោតការយកចិត្តទុកដាក់លើផ្នែកណាមួយនៃទិន្នន័យ (ឬរូបភាព) ដែលមានសារៈសំខាន់ជាងគេក្នុងការជួយដល់ការសម្រេចចិត្តរួម។</td>
+                <td>ដូចជាពេលអ្នកកំពុងស្តាប់នរណាម្នាក់និយាយក្នុងបន្ទប់ដែលមានសំឡេងរំខានច្រើន ខួរក្បាលអ្នកនឹងផ្តោតតែទៅលើសំឡេងរបស់អ្នកនិយាយនោះ ហើយច្រានចោលសំឡេងរំខានផ្សេងៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">LIME</span></td>
+                <td>ជាបច្ចេកទេសពន្យល់ AI មួយដែលបង្កើតផែនទីកម្ដៅ (Heatmap) ដោយផ្តោតលើតំបន់តូចៗនៃទិន្នន័យ (ឧទាហរណ៍ ផ្នែកណាមួយនៃរូបភាពភ្នែក) ដើម្បីបង្ហាញថាតំបន់ណាដែលជះឥទ្ធិពលខ្លាំងជាងគេឱ្យ AI សម្រេចចិត្តចាត់ថ្នាក់ជំងឺនោះ។</td>
+                <td>ដូចជាគ្រូពេទ្យដែលយកម្រាមដៃចង្អុលចំកន្លែងខូចខាតនៅលើរូបភាពស្កែនភ្នែក រួចប្រាប់អ្នកជំងឺថា "ដោយសារតែចំណុចតូចនេះហើយ ទើបខ្ញុំសន្និដ្ឋានថាអ្នកមានជំងឺទឹកដក់ក្នុងភ្នែក"។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SHAP</span></td>
+                <td>ជាវិធីសាស្ត្រគណនាបែបទ្រឹស្តីហ្គេម (Game Theory) ដែលវាស់វែង និងបែងចែកពិន្ទុឥទ្ធិពលដល់លក្ខណៈពិសេសនីមួយៗ (Features) របស់ទិន្នន័យ ដើម្បីបង្ហាញថាចំណុចនីមួយៗបានចូលរួមចំណែកប៉ុន្មានភាគរយក្នុងការទស្សន៍ទាយចុងក្រោយរបស់ AI។</td>
+                <td>ដូចជាការបែងចែកប្រាក់រង្វាន់ដល់កីឡាករក្នុងក្រុមបាល់ទាត់ម្នាក់ៗ ដោយផ្អែកលើទំហំនៃការខិតខំប្រឹងប្រែង និងការស៊ុតបញ្ចូលទីរបស់ពួកគេម្នាក់ៗដែលធ្វើឱ្យក្រុមទទួលបានជ័យជម្នះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Augmentation</span></td>
+                <td>ជាដំណើរការនៃការបង្កើតទិន្នន័យថ្មីៗបន្ថែមពីលើទិន្នន័យដើមដែលមានស្រាប់ តាមរយៈការបំប្លែងរូបភាពបន្តិចបន្តួចដូចជា ការបង្វិល ការត្រឡប់ ឬការប្តូរទំហំ ដើម្បីបង្រៀនម៉ូដែលឱ្យកាន់តែឆ្លាត និងជៀសវាងបញ្ហាទន្ទេញចាំមាត់ (Overfitting)។</td>
+                <td>ដូចជាការយកសៀវភៅលំហាត់តែមួយក្បាល មកប្តូរលេខ និងប្រធានបន្តិចបន្តួចដើម្បីបង្កើតជាលំហាត់ថ្មីៗរាប់រយទៀត ឱ្យសិស្សអនុវត្តទាល់តែស្ទាត់ជំនាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyper-parameter Tuning</span></td>
+                <td>ជាការកែសម្រួលតម្លៃកំណត់ជាមុន (Configurations) របស់ម៉ូដែល AI មុនពេលចាប់ផ្តើមដំណើរការបង្ហាត់ ដូចជាអត្រានៃការរៀនសូត្រ (Learning Rate) ដើម្បីស្វែងរកចំណុចដែលម៉ូដែលនោះអាចរៀនបានលឿន និងមានភាពត្រឹមត្រូវខ្ពស់បំផុត។</td>
+                <td>ដូចជាការសារ៉េខ្សែហ្គីតាឱ្យត្រូវសម្លេង (Tuning) មុនពេលឡើងប្រគុំតន្ត្រី ដើម្បីធានាថាបទចម្រៀងដែលលេងចេញមកមានសម្លេងពិរោះរណ្តំល្អបំផុតតាមដែលអាចធ្វើទៅបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gradient descent</span></td>
+                <td>ជាក្បួនដោះស្រាយគណិតវិទ្យាសម្រាប់ស្វែងរកចំណុចដែលទាបបំផុតនៃកំហុស (Loss function) របស់ម៉ូដែល ដោយធ្វើការកែតម្រូវប៉ារ៉ាម៉ែត្របន្តិចម្តងៗទៅតាមទិសដៅដែលកាត់បន្ថយកំហុសនោះរហូតដល់កម្រិតអប្បបរមា។</td>
+                <td>ដូចជាមនុស្សបិទភ្នែកម្នាក់កំពុងព្យាយាមដើរចុះពីលើភ្នំ គាត់ប្រើជើងដើម្បីស្ទាបរកផ្លូវណាដែលជម្រាលចុះក្រោម ហើយដើរតាមផ្លូវនោះរហូតដល់គាត់ដល់បាតជ្រលងភ្នំ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/xai-heart-disease-classification-2025.html">
+                    <span class="km">វិធីសាស្ត្របញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (XAI) សម្រាប់ការធ្វើចំណាត់ថ្នាក់ជំងឺបេះដូង</span><br>
+                    <span class="en article-original-title">An Explainable Artificial Intelligence (XAI) Methodology for Heart Disease Classification</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/black-box-glass-box-review-xai-2025.html">
+                    <span class="km">ពីប្រអប់ខ្មៅទៅប្រអប់កញ្ចក់៖ ការពិនិត្យឡើងវិញជាក់ស្តែងលើបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (XAI)</span><br>
+                    <span class="en article-original-title">From Black Box to Glass Box: A Practical Review of Explainable Artificial Intelligence (XAI)</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/explainable-ai-models-medical-diagnosis-2024.html">
+                    <span class="km">ម៉ូដែលបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (Explainable AI) ក្នុងការធ្វើរោគវិនិច្ឆ័យវេជ្ជសាស្ត្រ</span><br>
+                    <span class="en article-original-title">Explainable AI Models in Medical Diagnosis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/xai-real-time-vanet-intrusion-detection-2025.html">
+                    <span class="km">បច្ចេកទេស AI ដែលអាចពន្យល់បានសម្រាប់ការរកឃើញការឈ្លានពានលើបណ្តាញ VANET ក្នុងពេលវេលាជាក់ស្តែង</span><br>
+                    <span class="en article-original-title">Explainable AI Techniques for Real-Time VANET Intrusion Detection</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/explainable-ai-model-medical-data-analysis-2024.html">
+                    <span class="km">គំរូបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បានថ្មីមួយសម្រាប់ការវិភាគទិន្នន័យវេជ្ជសាស្ត្រ</span><br>
+                    <span class="en article-original-title">A NOVEL EXPLAINABLE AI MODEL FOR MEDICAL DATA ANALYSIS</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Vision+Transformer%22+AND+%22medical+image+classification%22+AND+%22self-attention+mechanism" target="_blank" rel="noopener"><span class="en">Vision Transformer" AND "medical image classification" AND "self-attention mechanism</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Explainable+AI%22+OR+%22XAI%22+AND+%22LIME%22+AND+%22SHAP%22+AND+%22ophthalmology" target="_blank" rel="noopener"><span class="en">Explainable AI" OR "XAI" AND "LIME" AND "SHAP" AND "ophthalmology</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Data-Efficient+Image+Transformer%22+OR+%22DeiT%22+AND+%22hyper-parameter+tuning%22+AND+%22deep+learning" target="_blank" rel="noopener"><span class="en">Data-Efficient Image Transformer" OR "DeiT" AND "hyper-parameter tuning" AND "deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hybrid+CNN-Transformer+models%22+AND+%22medical+image+segmentation%22+AND+%22retinal+diseases" target="_blank" rel="noopener"><span class="en">Hybrid CNN-Transformer models" AND "medical image segmentation" AND "retinal diseases</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=deploying+%22explainable+AI%22+deep+learning+models+in+real-world+clinical+workflows" target="_blank" rel="noopener"><span class="en">deploying "explainable AI" deep learning models in real-world clinical workflows</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

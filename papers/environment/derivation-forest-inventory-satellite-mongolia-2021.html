@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទាញយកប៉ារ៉ាម៉ែត្រនៃសារពើភ័ណ្ឌព្រៃឈើពីរូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់សម្រាប់តំបន់ Thunkel ភាគខាងជើងប្រទេសម៉ុងហ្គោលី៖ ការសិក្សាប្រៀបធៀបលើឧបករណ៍ចាប់សញ្ញាផ្កាយរណបផ្សេងៗ និងបច្ចេកទេសវិភាគទិន្នន័យ - Derivation of forest inventory parameters from high-resolution satellite imag... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការទាញយកប៉ារ៉ាម៉ែត្រនៃសារពើភ័ណ្ឌព្រៃឈើពីរូបភាពផ្កាយរណបកម្រិត។ ព្រៃឈើនៅប្រទេសម៉ុងហ្គោលីកំពុងរងការរិចរិលយ៉ាងធ្ងន់ធ្ងរដោយសារសកម្មភាពមនុស្ស និងភ្លើងព្រៃ ខណៈដែលទិន្...">
+    
+    <meta name="keywords" content="UAV, Satellite Imagery, Forest Inventory, Mongolia, Machine Learning, Random Forest, Taiga Forests, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/environment/derivation-forest-inventory-satellite-mongolia-2021.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/environment/derivation-forest-inventory-satellite-mongolia-2021.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/environment/derivation-forest-inventory-satellite-mongolia-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/environment/derivation-forest-inventory-satellite-mongolia-2021.html">
+    <meta property="og:title" content="ការទាញយកប៉ារ៉ាម៉ែត្រនៃសារពើភ័ណ្ឌព្រៃឈើពីរូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់សម្រាប់តំបន់ Thunkel ភាគខាងជើងប្រទេសម៉ុងហ្គោលី៖ ការសិក្សាប្រៀបធៀបលើឧបករណ៍ចាប់សញ្ញាផ្កាយរណបផ្សេងៗ និងបច្ចេកទេសវិភាគទិន្នន័យ | KhmerResearch.com">
+    <meta property="og:description" content="ព្រៃឈើនៅប្រទេសម៉ុងហ្គោលីកំពុងរងការរិចរិលយ៉ាងធ្ងន់ធ្ងរដោយសារសកម្មភាពមនុស្ស និងភ្លើងព្រៃ ខណៈដែលទិន្នន័យសារពើភ័ណ្ឌព្រៃឈើកម្រិតតំបន់នៅមានកម្រិត និងមិនសូវមានភាពត្រឹមត្រូវដែលអាចជឿទុកចិត្តបានសម្រាប់ការគ្រ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2021-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="UAV">
+    
+    <meta property="article:tag" content="Satellite Imagery">
+    
+    <meta property="article:tag" content="Forest Inventory">
+    
+    <meta property="article:tag" content="Mongolia">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Random Forest">
+    
+    <meta property="article:tag" content="Taiga Forests">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទាញយកប៉ារ៉ាម៉ែត្រនៃសារពើភ័ណ្ឌព្រៃឈើពីរូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់សម្រាប់តំបន់ Thunkel ភាគខាងជើងប្រទេសម៉ុងហ្គោលី៖ ការសិក្សាប្រៀបធៀបលើឧបករណ៍ចាប់សញ្ញាផ្កាយរណបផ្សេងៗ និងបច្ចេកទេសវិភាគទិន្នន័យ">
+    <meta name="twitter:description" content="ព្រៃឈើនៅប្រទេសម៉ុងហ្គោលីកំពុងរងការរិចរិលយ៉ាងធ្ងន់ធ្ងរដោយសារសកម្មភាពមនុស្ស និងភ្លើងព្រៃ ខណៈដែលទិន្នន័យសារពើភ័ណ្ឌព្រៃឈើកម្រិតតំបន់នៅមានកម្រិត និងមិនសូវមានភាពត្រឹមត្រូវដែលអាចជឿទុកចិត្តបានសម្រាប់ការគ្រ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u1793\u17c3\u179f\u17b6\u179a\u1796\u17be\u1797\u17d0\u178e\u17d2\u178c\u1796\u17d2\u179a\u17c3\u1788\u17be\u1796\u17b8\u179a\u17bc\u1794\u1797\u17b6\u1796\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794\u1780\u1798\u17d2\u179a\u17b7\u178f\u1785\u17d2\u1794\u17b6\u179f\u17cb\u1781\u17d2\u1796\u179f\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17c6\u1794\u1793\u17cb Thunkel \u1797\u17b6\u1782\u1781\u17b6\u1784\u1787\u17be\u1784\u1794\u17d2\u179a\u1791\u17c1\u179f\u1798\u17c9\u17bb\u1784\u17a0\u17d2\u1782\u17c4\u179b\u17b8\u17d6 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179b\u17be\u17a7\u1794\u1780\u179a\u178e\u17cd\u1785\u17b6\u1794\u17cb\u179f\u1789\u17d2\u1789\u17b6\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794\u1795\u17d2\u179f\u17c1\u1784\u17d7 \u1793\u17b7\u1784\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799",
+      "name": "Derivation of forest inventory parameters from high-resolution satellite imagery for the Thunkel area, Northern Mongolia. A comparative study on various satellite sensors and data analysis techniques.",
+      "description": "\u1796\u17d2\u179a\u17c3\u1788\u17be\u1793\u17c5\u1794\u17d2\u179a\u1791\u17c1\u179f\u1798\u17c9\u17bb\u1784\u17a0\u17d2\u1782\u17c4\u179b\u17b8\u1780\u17c6\u1796\u17bb\u1784\u179a\u1784\u1780\u17b6\u179a\u179a\u17b7\u1785\u179a\u17b7\u179b\u1799\u17c9\u17b6\u1784\u1792\u17d2\u1784\u1793\u17cb\u1792\u17d2\u1784\u179a\u178a\u17c4\u1799\u179f\u17b6\u179a\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1798\u1793\u17bb\u179f\u17d2\u179f \u1793\u17b7\u1784\u1797\u17d2\u179b\u17be\u1784\u1796\u17d2\u179a\u17c3 \u1781\u178e\u17c8\u178a\u17c2\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17b6\u179a\u1796\u17be\u1797\u17d0\u178e\u17d2\u178c\u1796\u17d2\u179a\u17c3\u1788\u17be\u1780\u1798\u17d2\u179a\u17b7\u178f\u178f\u17c6\u1794\u1793\u17cb\u1793\u17c5\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f \u1793\u17b7\u1784\u1798\u17b7\u1793\u179f\u17bc\u179c\u1798\u17b6\u1793\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u178a\u17c2\u179b\u17a2\u17b6\u1785\u1787\u17bf\u1791\u17bb\u1780\u1785\u17b7\u178f\u17d2\u178f\u1794\u17b6\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1785\u17b8\u179a\u1797\u17b6\u1796\u17d4 \u1780\u1784\u17d2\u179c\u17c7\u1781\u17b6\u178f\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u179b\u1798\u17d2\u17a2\u17b7\u178f\u1793\u17c1\u17c7\u1791\u17b6\u1798\u1791\u17b6\u179a\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1796\u17b8\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1793\u17c3\u1794\u1785\u17d2\u1785\u17c1\u1780\u179c\u17b7\u1791\u17d2\u1799\u17b6\u1790\u17d2\u1798\u17b8\u17d7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/environment/derivation-forest-inventory-satellite-mongolia-2021.html",
+      "author": [{"@type": "Person", "name": "Holger Vogt (Georg-August-Universit\u00e4t G\u00f6ttingen)"}],
+      "datePublished": "2021",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Derivation of forest inventory parameters from high-resolution satellite imagery for the Thunkel area, Northern Mongolia. A comparative study on various satellite sensors and data analysis techniques.",
+        "url": "https://ediss.uni-goettingen.de/bitstream/handle/21.11130/00-1735-0000-0008-5846-7/Vogt_Thesis_final_26052021_SUB_noCV.pdf?sequence=1\u0026isAllowed=y"
+      },
+      "keywords": ["UAV", "Satellite Imagery", "Forest Inventory", "Mongolia", "Machine Learning", "Random Forest", "Taiga Forests"],
+      "about": "Remote Sensing and Forestry"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Environment",
+          "item": "https://khmerresearch.com/papers/environment/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u1793\u17c3\u179f\u17b6\u179a\u1796\u17be\u1797\u17d0\u178e\u17d2\u178c\u1796\u17d2\u179a\u17c3\u1788\u17be\u1796\u17b8\u179a\u17bc\u1794\u1797\u17b6\u1796\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794\u1780\u1798\u17d2\u179a\u17b7\u178f\u1785\u17d2\u1794\u17b6\u179f\u17cb\u1781\u17d2\u1796\u179f\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17c6\u1794\u1793\u17cb Thunkel \u1797\u17b6\u1782\u1781\u17b6\u1784\u1787\u17be\u1784\u1794\u17d2\u179a\u1791\u17c1\u179f\u1798\u17c9\u17bb\u1784\u17a0\u17d2\u1782\u17c4\u179b\u17b8\u17d6 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179b\u17be\u17a7\u1794\u1780\u179a\u178e\u17cd\u1785\u17b6\u1794\u17cb\u179f\u1789\u17d2\u1789\u17b6\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794\u1795\u17d2\u179f\u17c1\u1784\u17d7 \u1793\u17b7\u1784\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799",
+          "item": "https://khmerresearch.com/papers/environment/derivation-forest-inventory-satellite-mongolia-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/environment/">Environment</a> &rsaquo;
+        <span>ការទាញយកប៉ារ៉ាម៉ែត្រនៃសារពើភ័ណ្ឌព្រៃឈើពីរូបភាពផ្កាយរណបកម្...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Derivation of forest inventory parameters from high-resolution satellite imagery for the Thunkel area, Northern Mongolia. A comparative study on various satellite sensors and data analysis techniques.<br>
+        
+        <strong>Source:</strong> <a href="https://ediss.uni-goettingen.de/bitstream/handle/21.11130/00-1735-0000-0008-5846-7/Vogt_Thesis_final_26052021_SUB_noCV.pdf?sequence=1&isAllowed=y" target="_blank" rel="noopener">ediss.uni-goettingen.de</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទាញយកប៉ារ៉ាម៉ែត្រនៃសារពើភ័ណ្ឌព្រៃឈើពីរូបភាពផ្កាយរណបកម្រិតច្បាស់ខ្ពស់សម្រាប់តំបន់ Thunkel ភាគខាងជើងប្រទេសម៉ុងហ្គោលី៖ ការសិក្សាប្រៀបធៀបលើឧបករណ៍ចាប់សញ្ញាផ្កាយរណបផ្សេងៗ និងបច្ចេកទេសវិភាគទិន្នន័យ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Derivation of forest inventory parameters from high-resolution satellite imagery for the Thunkel area, Northern Mongolia. A comparative study on various satellite sensors and data analysis techniques.</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Holger Vogt (Georg-August-Universität Göttingen)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Remote Sensing and Forestry</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ព្រៃឈើនៅប្រទេសម៉ុងហ្គោលីកំពុងរងការរិចរិលយ៉ាងធ្ងន់ធ្ងរដោយសារសកម្មភាពមនុស្ស និងភ្លើងព្រៃ ខណៈដែលទិន្នន័យសារពើភ័ណ្ឌព្រៃឈើកម្រិតតំបន់នៅមានកម្រិត និងមិនសូវមានភាពត្រឹមត្រូវដែលអាចជឿទុកចិត្តបានសម្រាប់ការគ្រប់គ្រងប្រកបដោយចីរភាព។ កង្វះខាតព័ត៌មានលម្អិតនេះទាមទារឱ្យមានការសិក្សាវាយតម្លៃពីប្រសិទ្ធភាពនៃបច្ចេកវិទ្យាថ្មីៗ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រើប្រាស់ការចុះវាស់វែងផ្ទាល់នៅទីតាំង រួមផ្សំជាមួយនឹងការវិភាគរូបភាពពីយន្តហោះគ្មានមនុស្សបើក (UAV) និងផ្កាយរណបកម្រិតច្បាស់ខ្ពស់ដោយប្រើប្រាស់បច្ចេកទេសបែងចែកចំណាត់ថ្នាក់តាមរយៈការរៀនដោយម៉ាស៊ីន (Machine Learning)។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យពីយន្តហោះគ្មានមនុស្សបើក និងផ្កាយរណប (UAV and Satellite Imagery Acquisition)</li>
+            
+            <li>ការស្រង់ទិន្នន័យកម្ពស់ដើមឈើ និងអង្កត់ផ្ចិតមកុដដើមឈើ (Tree Height and Crown Diameter Extraction)</li>
+            
+            <li>ការធ្វើចំណាត់ថ្នាក់រូបភាពផ្អែកលើវត្ថុ និងភីកសែល (Object-based and Pixel-based Image Classification)</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយម៉ាស៊ីន (Random Forest and Support Vector Machine Algorithms)</li>
+            
+            <li>ការចុះវាស់វែងទិន្នន័យជាក់ស្តែងនៅទីតាំងផ្ទាល់ដើម្បីផ្ទៀងផ្ទាត់ (Ground Truthing and Mensuration)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>រូបភាពពីយន្តហោះគ្មានមនុស្សបើក (UAV) មានសក្តានុពលខ្ពស់សម្រាប់ការទាញយកកម្ពស់ដើមឈើដោយមានកម្រិត R² ធំជាង 0.9 និងមានភាពជាក់លាក់ខ្ពស់សម្រាប់ការកំណត់ប្រភេទនិងអង្កត់ផ្ចិតមកុដដើមឈើ។</li>
+            
+            <li>ក្បួនដោះស្រាយតាមរយៈការរៀនដោយម៉ាស៊ីនដូចជា Support Vector Machines និង Random Forest បង្ហាញពីភាពស័ក្តិសមបំផុតសម្រាប់ការបែងចែកប្រភេទដើមឈើ ដោយទទួលបានភាពត្រឹមត្រូវរហូតដល់ 89%។</li>
+            
+            <li>រូបភាពពីផ្កាយរណប (Sentinel-2, RapidEye, WorldView-2) គឺស័ក្តិសមបំផុតសម្រាប់ការគូសវាសទីតាំងដែលឆេះដោយសារភ្លើងព្រៃ និងការវាយតម្លៃភាពរឹងមាំរបស់ដើមឈើ ថ្វីត្បិតតែការបកស្រាយដោយផ្ទាល់ភ្នែកលើរូបភាព UAV ពេលខ្លះផ្តល់លទ្ធផលល្អជាងការទាញយកដោយស្វ័យប្រវត្តិក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Object-Based Image Analysis (OBIA) + Random Forest</span></strong><br>ការវិភាគរូបភាពផ្អែកលើវត្ថុ (OBIA) រួមផ្សំជាមួយ Random Forest</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ចំពោះរូបភាពដែលមានកម្រិតច្បាស់ខ្លាំង (High-resolution) ដោយវាប្រមូលផ្ដុំភីកសែលទៅជាវត្ថុមានអត្ថន័យ ដូចជាមកុដដើមឈើ។ វាជួយកាត់បន្ថយបញ្ហាគ្រាប់អុចៗ (Salt and pepper effect) នៅក្នុងរូបភាព។</td>
+                <td>ងាយនឹងមានបញ្ហាបែងចែកវត្ថុខុស (Over/Under-segmentation) ប្រសិនបើការកំណត់មាត្រដ្ឋាន (Scale parameter) មិនបានល្អ។ វាទាមទារការកែសម្រួលដោយដៃច្រើនសម្រាប់ព្រៃដែលក្រាស់។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវទូទៅពី 66% ទៅ 98% អាស្រ័យលើប្រភេទផ្កាយរណប (WorldView-2 ទទួលបានលទ្ធផលល្អបំផុត) និងចំណាត់ថ្នាក់ប្រភេទដើមឈើ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Pixel-based Classification + Support Vector Machine (SVM) / Random Forest</span></strong><br>ការធ្វើចំណាត់ថ្នាក់រូបភាពផ្អែកលើភីកសែល ជាមួយ SVM ឬ Random Forest</td>
+                <td>ដំណើរការលឿនជាង OBIA និងស័ក្តិសមបំផុតសម្រាប់ទិន្នន័យផ្កាយរណបកម្រិតមធ្យមដូចជា Sentinel-2 និង Landsat 8។ វាមានភាពបត់បែននិងអាចទាញយកលក្ខណៈពិសេសពី Spectral bands ច្រើន។</td>
+                <td>មិនសូវមានប្រសិទ្ធភាពលើរូបភាពដែលមានកម្រិតច្បាស់ខ្លាំងពេក (ដូចជារូបភាពពី UAV) ព្រោះវាបង្កើតជា Noise ច្រើននៅពេលភីកសែលនីមួយៗចាប់យករូបភាពមែកឬស្លឹកឈើ។</td>
+                <td>ជាមួយទិន្នន័យ Sentinel-2 ក្បួនដោះស្រាយនេះសម្រេចបានភាពត្រឹមត្រូវរហូតដល់ប្រហែល 88% ក្នុងការកំណត់តំបន់ព្រៃនិងប្រភេទដើមឈើលេចធ្លោ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">UAV Photogrammetry (Structure from Motion - SfM)</span></strong><br>ការវាស់វែងតាមរូបថតពីយន្តហោះគ្មានមនុស្សបើក (SfM-MVS)</td>
+                <td>អាចទាញយកកម្ពស់ដើមឈើ និងអង្កត់ផ្ចិតមកុដដើមឈើបានយ៉ាងច្បាស់លាស់ ដោយចំណាយថវិកាតិចជាងការប្រើប្រាស់បច្ចេកវិទ្យា LiDAR។</td>
+                <td>ជួបការលំបាកខ្លាំងនៅតំបន់ព្រៃក្រាស់ដែលកាមេរ៉ាមិនអាចមើលធ្លុះដល់ដី និងទាមទារការហោះហើរដែលមានភាពត្រួតស៊ីគ្នានៃរូបភាពខ្ពស់បំផុត (>90%)។</td>
+                <td>សម្រេចបានភាពត្រឹមត្រូវខ្ពស់ក្នុងការវាស់កម្ពស់ដើមឈើទោល ដោយមានតម្លៃ R² ធំជាង 0.9 និងកម្រិតលម្អៀង (RMSE) ត្រឹមតែប្រហែល 1.15 ម៉ែត្រប៉ុណ្ណោះ បៀបធៀបនឹងការវាស់ផ្ទាល់។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">k-Nearest Neighbor (k-NN) Regression</span></strong><br>តំរែតំរង់ k-Nearest Neighbor សម្រាប់ប៉ាន់ស្មានទិន្នន័យព្រៃឈើ</td>
+                <td>ងាយស្រួលក្នុងការធ្វើសមាហរណកម្មទិន្នន័យពីផ្កាយរណប និងទិន្នន័យចុះវាស់វែងផ្ទាល់ (Field data) ដើម្បីប៉ាន់ស្មានទិន្នន័យលើផ្ទៃដីធំទូលាយ។</td>
+                <td>ទាមទារឱ្យមានទិន្នន័យចុះវាស់វែងផ្ទាល់ (Sample plots) ច្រើនទីតាំងទើបអាចទទួលបានលទ្ធផលត្រឹមត្រូវ (យ៉ាងហោចណាស់ 50 ទីតាំង)។</td>
+                <td>ទទួលបានលទ្ធផលល្អបង្គួរសម្រាប់ការប៉ាន់ស្មានផ្ទៃមុខកាត់ដើមឈើ (Basal Area) តែបរាជ័យក្នុងការប៉ាន់ស្មានបរិមាណឈើ (Timber Volume) ដោយសារទិន្នន័យសាកល្បងមានតិចតួចពេក។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារការវិនិយោគខ្ពស់លើឧបករណ៍ប្រមូលទិន្នន័យ កម្លាំងម៉ាស៊ីនកុំព្យូទ័រ និងកម្មវិធីកែច្នៃរូបភាព ទោះបីជាទិន្នន័យផ្កាយរណបមួយចំនួនអាចទាញយកបានដោយឥតគិតថ្លៃក៏ដោយ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> យន្តហោះគ្មានមនុស្សបើក (UAV) ដូចជា Yuneec Typhoon ឬ DJI Phantom, ឧបករណ៍ GPS កម្រិតខ្ពស់ (RTK), និងកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់សម្រាប់ការតម្លើងរូបភាព 3D (Photogrammetry)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធីសម្រាប់កែច្នៃទិន្នន័យដូចជា Agisoft Metashape, eCognition (សម្រាប់ OBIA), SNAP (សម្រាប់ Sentinel-2), QGIS/ArcGIS, និង TerrSet។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យឥតគិតថ្លៃមាន Sentinel-2 និង Landsat 8 ចំណែកឯទិន្នន័យកម្រិតច្បាស់ខ្ពស់ដូចជា Pléiades, WorldView-2, និង RapidEye ត្រូវការទិញ។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការអ្នកជំនាញផ្នែកវាស់វែងព្រៃឈើ (Forest Mensuration) ការប្រើប្រាស់ GIS/Remote Sensing និងអ្នកមានបទពិសោធន៍បញ្ជាដ្រូននិងការធ្វើចំណាត់ថ្នាក់រូបភាព (Machine Learning)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅតំបន់ព្រៃ Taiga ក្បែរតំបន់ Thunkel ភាគខាងជើងប្រទេសម៉ុងហ្គោលី ដែលមានអាកាសធាតុត្រជាក់ស្ងួត និងមានប្រភេទដើមឈើតិចតួច (ស្រល់ និងឡារីក)។ លក្ខណៈរចនាសម្ព័ន្ធព្រៃឈើនៅទីនោះមានភាពស្រឡះ និងខុសគ្នាស្រឡះពីព្រៃល្បោះឬព្រៃស្រោងនៅកម្ពុជា។ នេះមានន័យថា ក្បួនដោះស្រាយមួយចំនួនដូចជាការបែងចែកមកុដដើមឈើ (Crown segmentation) ដែលដំណើរការបានល្អនៅម៉ុងហ្គោលី អាចនឹងជួបការលំបាកខ្លាំងនៅពេលយកមកអនុវត្តលើព្រៃឈើចម្រុះនិងក្រាស់ឃ្មឹកនៅកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាស្ថានភាពព្រៃឈើមានភាពខុសគ្នាក៏ដោយ បច្ចេកទេសនិងវិធីសាស្ត្រដែលបានបង្ហាញនៅក្នុងការសិក្សានេះពិតជាមានប្រយោជន៍ និងអាចយកមកអនុវត្តបានយ៉ាងមានប្រសិទ្ធភាពសម្រាប់ការវាយតម្លៃធនធានព្រៃឈើនៅប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>គម្រោងកាបូនរេដបូក (REDD+) នៅតំបន់ជួរភ្នំក្រវាញ និងព្រៃឡង់:</strong> អាចប្រើប្រាស់បច្ចេកទេសវិភាគរូបភាពពី Sentinel-2 ជាមួយ Machine Learning (Random Forest) ដើម្បីតាមដានបំរែបំរួលគម្របព្រៃឈើ ការកាប់ឈើខុសច្បាប់ និងប៉ាន់ស្មានស្តុកកាបូន។</li>
+            
+            <li><strong>ចម្ការកសិ-ឧស្សាហកម្មនៅខេត្តក្រចេះ មណ្ឌលគិរី ឬរតនគិរី:</strong> អាចប្រើប្រាស់យន្តហោះគ្មានមនុស្សបើក (UAV) និងបច្ចេកវិទ្យា SfM ក្នុងការរាប់ចំនួនដើមឈើ (កៅស៊ូ, ស្វាយចន្ទី) វាស់កម្ពស់ និងវាយតម្លៃសុខភាពដំណាំដោយប្រើសន្ទស្សន៍ NDVI។</li>
+            
+            <li><strong>ព្រៃលិចទឹកនៅតំបន់បឹងទន្លេសាប:</strong> អាចប្រើប្រាស់សន្ទស្សន៍ NBR (Normalized Burn Ratio) និង Sentinel-2 ដើម្បីវាយតម្លៃពីផលប៉ះពាល់ និងទំហំផ្ទៃដីដែលរងការខូចខាតដោយសារភ្លើងឆេះព្រៃនៅរដូវប្រាំង។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យាទាំងនេះផ្តល់នូវដំណោះស្រាយដ៏មានសក្តានុពល និងចំណាយតិច សម្រាប់ការគ្រប់គ្រងធនធានធម្មជាតិនៅកម្ពុជា ប្រសិនបើមានការកែសម្រួលម៉ូដែល (Models) ឱ្យស្របតាមបរិបទនៃព្រៃឈើត្រូពិច។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាពីការទាញយកនិងកែច្នៃទិន្នន័យផ្កាយរណបឥតគិតថ្លៃ:</strong> និស្សិតគួរចាប់ផ្តើមរៀនប្រើប្រាស់កម្មវិធី <span class="en">SNAP</span> ឬ <span class="en">Google Earth Engine</span> ដើម្បីទាញយកនិងអនុវត្តការកែតម្រូវបរិយាកាស (Atmospheric correction) លើទិន្នន័យ <span class="en">Sentinel-2</span> និង <span class="en">Landsat 8</span>។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តការចងក្រងរូបភាព 3D ពីយន្តហោះគ្មានមនុស្សបើក (UAV):</strong> អនុវត្តការរៀបចំផែនការហោះហើរដោយប្រើប្រាស់កម្មវិធី <span class="en">Pix4DCapture</span> រួចយកទិន្នន័យរូបភាពមកបង្កើតជា Canopy Height Model (CHM) តាមរយៈកម្មវិធី <span class="en">Agisoft Metashape</span> ឬ <span class="en">WebODM</span>។</li>
+            
+            <li><strong>ជំហានទី៣៖ សិក្សាពីការធ្វើចំណាត់ថ្នាក់រូបភាពដោយប្រើ Machine Learning:</strong> ប្រើប្រាស់កម្មវិធី <span class="en">QGIS</span> ដោយដំឡើង Plugin បន្ថែម (ឧទាហរណ៍ Semi-Automatic Classification Plugin) ដើម្បីអនុវត្តក្បួនដោះស្រាយ <span class="en">Random Forest</span> ឬ <span class="en">Support Vector Machine</span> សម្រាប់ការបែងចែកប្រភេទគម្របដី។</li>
+            
+            <li><strong>ជំហានទី៤៖ ចុះអនុវត្តការវាស់វែងទិន្នន័យព្រៃឈើផ្ទាល់នៅទីតាំង:</strong> រៀបចំក្រុមចុះប្រមូលទិន្នន័យ Ground Truthing (ដូចជាការវាស់អង្កត់ផ្ចិត DBH, កម្ពស់ដើមឈើ, ទីតាំង GPS) ដើម្បីយកមកផ្ទៀងផ្ទាត់និងវាយតម្លៃភាពត្រឹមត្រូវនៃទិន្នន័យផ្កាយរណបដែលបានវិភាគរួច។</li>
+            
+            <li><strong>ជំហានទី៥៖ ពិសោធន៍ជាមួយការវិភាគផ្អែកលើវត្ថុ (OBIA):</strong> ស្វែងយល់ពីគោលការណ៍ Image Segmentation ដោយប្រើប្រាស់កម្មវិធី <span class="en">eCognition</span> ឬ <span class="en">Orfeo ToolBox (OTB)</span> នៅក្នុង QGIS ដើម្បីស្រង់យកទិន្នន័យមកុដដើមឈើនីមួយៗពីទិន្នន័យ UAV។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Object-Based Image Analysis (OBIA)</span></td>
+                <td>ជាបច្ចេកទេសវិភាគរូបភាពដែលមិនត្រឹមតែពឹងផ្អែកលើពណ៌នៃភីកសែល (pixels) នីមួយៗនោះទេ តែវាផ្តុំភីកសែលទាំងនោះទៅជាវត្ថុ (objects) ដោយផ្អែកលើរូបរាង ទំហំ និងវាយនភាព (texture) មុននឹងធ្វើចំណាត់ថ្នាក់ ឧទាហរណ៍ដូចជាការបែងចែកមកុដដើមឈើជាដើម។</td>
+                <td>វាប្រៀបដូចជាការផ្គុំរូបភាពជីកសរ (Jigsaw puzzle) ដែលយើងមិនមើលត្រឹមតែពណ៌នៃបំណែកនីមួយៗទេ តែយើងផ្គុំវាជារូបរាងសិនទើបដឹងថាវាជារូបអ្វីពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Structure from Motion (SfM)</span></td>
+                <td>ជាក្បួនដោះស្រាយក្នុងបច្ចេកវិទ្យា Photogrammetry ដែលប្រើប្រាស់រូបថត 2D ច្រើនសន្លឹកថតពីជ្រុងផ្សេងៗគ្នា ដើម្បីបង្កើតជាទម្រង់ 3D នៃវត្ថុ ឬទីតាំងណាមួយ ដោយស្វែងរកចំណុចត្រួតស៊ីគ្នានៃរូបថតទាំងនោះ។</td>
+                <td>វាដូចជាពេលដែលយើងបិទភ្នែកម្ខាងពុំសូវដឹងពីជម្រៅ តែពេលបើកភ្នែកទាំងសងខាងយើងដឹងថាវត្ថុណានៅជិតឬឆ្ងាយអញ្ចឹងដែរ ដោយប្រើរូបភាពច្រើនជ្រុងដើម្បីបង្កើតទិដ្ឋភាព 3D។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Canopy Height Model (CHM)</span></td>
+                <td>ជាគំរូទិន្នន័យ 3D ដែលបង្ហាញពីកម្ពស់ពិតប្រាកដនៃរុក្ខជាតិឬដើមឈើ ដោយយកទិន្នន័យកម្ពស់ផ្ទៃខាងលើបំផុតនៃព្រៃ (DSM) ដកជាមួយទិន្នន័យកម្ពស់ដីទទេ (DTM)។</td>
+                <td>វាដូចជាការយកកម្ពស់សរុបនៃផ្ទះគិតទាំងដំបូល ដកនឹងកម្ពស់ទីតាំងដីដែលផ្ទះនោះសង់ពីលើ ដើម្បីទទួលបានកម្ពស់ពិតប្រាកដនៃតួផ្ទះតែម្តង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest (RF)</span></td>
+                <td>ជាក្បួនដោះស្រាយប្រភេទ Machine Learning ដែលបង្កើតជម្រើសបញ្ញាសិប្បនិម្មិត (Decision Trees) ជាច្រើនបញ្ចូលគ្នា ដើម្បីធ្វើចំណាត់ថ្នាក់ទិន្នន័យ ឬទស្សន៍ទាយលទ្ធផល ដែលធ្វើឱ្យមានភាពសុក្រឹតខ្ពស់និងកាត់បន្ថយកំហុស។</td>
+                <td>វាដូចជាការសួរយោបល់ពីមនុស្ស ១០០ នាក់ផ្សេងគ្នា ហើយយកចម្លើយដែលភាគច្រើនឆ្លើយដូចគ្នាជាការសម្រេចចិត្តចុងក្រោយ ជៀសវាងការជឿលើមនុស្សតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Normalized Difference Vegetation Index (NDVI)</span></td>
+                <td>ជាសូចនាករដែលប្រើដើម្បីវាស់ស្ទង់សុខភាព និងដង់ស៊ីតេនៃរុក្ខជាតិ ដោយគណនាភាពខុសគ្នារវាងពន្លឺក្រហមដែលរុក្ខជាតិស្រូបយក (Red) និងពន្លឺអ៊ីនហ្វ្រារ៉េដជិត (Near-Infrared) ដែលវាចាំងត្រឡប់មកវិញ។</td>
+                <td>វាដូចជាការប្រើទែម៉ូម៉ែត្រវាស់កម្តៅដើម្បីដឹងថាមនុស្សមានជំងឺឬអត់ ដោយវាប្រើពន្លឺដើម្បីស្ទង់មើលថាតើព្រៃឈើកំពុងលូតលាស់ល្អឬមានភាពរិចរិល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Support Vector Machine (SVM)</span></td>
+                <td>ជាក្បួនដោះស្រាយការរៀនដោយម៉ាស៊ីន (Machine Learning) ដែលព្យាយាមគូសបន្ទាត់ ឬបង្កើតប្លង់ព្រំដែនដ៏ល្អបំផុត ដើម្បីបែងចែកក្រុមទិន្នន័យផ្សេងៗពីគ្នាឱ្យបានដាច់ស្រឡះល្អ ជាពិសេសប្រើក្នុងការបែងចែកប្រភេទដើមឈើក្នុងរូបភាពផ្កាយរណប។</td>
+                <td>វាប្រៀបដូចជាការសង់របងខណ្ឌចែករវាងហ្វូងចៀម និងហ្វូងពពែ ឱ្យនៅឆ្ងាយពីគ្នាតាមដែលអាចធ្វើទៅបាន ដើម្បីកុំឱ្យច្រឡំគ្នាចូលហ្វូងតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Leaf Area Index (LAI)</span></td>
+                <td>ជារង្វាស់ដែលគណនាទំហំផ្ទៃស្លឹកសរុបរបស់រុក្ខជាតិធៀបនឹងទំហំផ្ទៃដីដែលនៅពីក្រោមវា ដែលជួយឱ្យគេដឹងពីបរិមាណនៃការធ្វើរស្មីសំយោគ និងការហួតទឹករបស់ព្រៃឈើ។</td>
+                <td>វាដូចជាការគណនាថាតើឆ័ត្រមួយមានក្រណាត់ប៉ុន្មានស្រទាប់បាំងពីលើដី បើមានច្រើនស្រទាប់ មានន័យថាវាកាន់តែក្រាស់និងបាំងពន្លឺបានច្រើន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/iot-ml-predictive-maintenance-motors-2023.html">
+                    <span class="km">ប្រព័ន្ធថែទាំព្យាករណ៍ផ្អែកលើ IoT និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) សម្រាប់ម៉ូទ័រអគ្គិសនី</span><br>
+                    <span class="en article-original-title">An IoT and Machine Learning-Based Predictive Maintenance System for Electrical Motors</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/modeling-prt-deceleration-machine-learning-2017.html">
+                    <span class="km">ការធ្វើគំរូពេលវេលាប្រតិកម្មនៃការយល់ឃើញ និងកម្រិតនៃការបន្ថយល្បឿនសម្រាប់លក្ខខណ្ឌផ្ទៃផ្លូវផ្សេងៗគ្នា ដោយប្រើប្រាស់បច្ចេកទេសរៀនដោយម៉ាស៊ីន (Machine Learning)</span><br>
+                    <span class="en article-original-title">Modeling the Perception Reaction Time and Deceleration Level for Different Surface Conditions Using Machine Learning Techniques</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/fast-effective-classification-medical-datasets-2023.html">
+                    <span class="km">វិធីសាស្ត្រលឿននិងមានប្រសិទ្ធភាពសម្រាប់ការចាត់ថ្នាក់សំណុំទិន្នន័យវេជ្ជសាស្ត្រ</span><br>
+                    <span class="en article-original-title">A fast and effective approach for classification medical data sets</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/hybrid-learning-systems-ml-dl-integration.html">
+                    <span class="km">ប្រព័ន្ធសិក្សាកូនកាត់៖ ការរួមបញ្ចូលយន្តការរៀនម៉ាស៊ីនបែបប្រពៃណីជាមួយនឹងបច្ចេកទេសរៀនស៊ីជម្រៅ</span><br>
+                    <span class="en article-original-title">HYBRID LEARNING SYSTEMS: INTEGRATING TRADITIONAL MACHINE LEARNING WITH DEEP LEARNING TECHNIQUES</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/remote-sensing-forest-biophysical-machine-learning.html">
+                    <span class="km">ការប៉ាន់ប្រមាណអថេរជីវរូបវិទ្យាព្រៃឈើផ្អែកលើការចាប់សញ្ញាពីចម្ងាយដោយប្រើក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីន</span><br>
+                    <span class="en article-original-title">Remote Sensing based Estimation of Forest Biophysical Variables using Machine Learning Algorithm</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Structure+from+Motion%22+AND+%22UAV+photogrammetry%22+AND+%22forest+inventory%22+AND+LiDAR" target="_blank" rel="noopener"><span class="en">Structure from Motion" AND "UAV photogrammetry" AND "forest inventory" AND LiDAR</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Random+Forest%22+OR+%22Support+Vector+Machine%22+AND+%22tree+species+classification%22+AND+%22satellite+imagery" target="_blank" rel="noopener"><span class="en">Random Forest" OR "Support Vector Machine" AND "tree species classification" AND "satellite imagery</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Normalized+Burn+Ratio%22+OR+%22NBR%22+AND+%22wildfire+severity%22+AND+%22boreal+forest%22+AND+%22Sentinel-2" target="_blank" rel="noopener"><span class="en">Normalized Burn Ratio" OR "NBR" AND "wildfire severity" AND "boreal forest" AND "Sentinel-2</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Object-Based+Image+Analysis%22+AND+%22OBIA%22+AND+%22k-nearest+neighbor%22+AND+%22forest+biomass+estimation" target="_blank" rel="noopener"><span class="en">Object-Based Image Analysis" AND "OBIA" AND "k-nearest neighbor" AND "forest biomass estimation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

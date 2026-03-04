@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើគំរូពេលវេលាប្រតិកម្មនៃការយល់ឃើញ និងកម្រិតនៃការបន្ថយល្បឿនសម្រាប់លក្ខខណ្ឌផ្ទៃផ្លូវផ្សេងៗគ្នា ដោយប្រើប្រាស់បច្ចេកទេសរៀនដោយម៉ាស៊ីន (Machine Learning) - Modeling the Perception Reaction Time and Deceleration Level for Different Su... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការធ្វើគំរូពេលវេលាប្រតិកម្មនៃការយល់ឃើញ និងកម្រិតនៃការបន្ថយល្។ ការរចនាពេលវេលាភ្លើងសញ្ញាចរាចរណ៍បច្ចុប្បន្នប្រើប្រាស់តម្លៃថេរសម្រាប់ពេលវេលាប្រតិកម្មនៃការយល់ឃើញ (P...">
+    
+    <meta name="keywords" content="Perception reaction time, Deceleration level, Machine learning, Random forest, Deep learning, Traffic signal design, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/modeling-prt-deceleration-machine-learning-2017.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/modeling-prt-deceleration-machine-learning-2017.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/modeling-prt-deceleration-machine-learning-2017.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/modeling-prt-deceleration-machine-learning-2017.html">
+    <meta property="og:title" content="ការធ្វើគំរូពេលវេលាប្រតិកម្មនៃការយល់ឃើញ និងកម្រិតនៃការបន្ថយល្បឿនសម្រាប់លក្ខខណ្ឌផ្ទៃផ្លូវផ្សេងៗគ្នា ដោយប្រើប្រាស់បច្ចេកទេសរៀនដោយម៉ាស៊ីន (Machine Learning) | KhmerResearch.com">
+    <meta property="og:description" content="ការរចនាពេលវេលាភ្លើងសញ្ញាចរាចរណ៍បច្ចុប្បន្នប្រើប្រាស់តម្លៃថេរសម្រាប់ពេលវេលាប្រតិកម្មនៃការយល់ឃើញ (PRT) និងកម្រិតបន្ថយល្បឿន ដោយព្រងើយកន្តើយចំពោះភាពខុសគ្នានៃអ្នកបើកបរម្នាក់ៗនិងលក្ខខណ្ឌអាកាសធាតុ ដែលអាចប...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2017 (Advances in Intelligent Systems and Computing)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Perception reaction time">
+    
+    <meta property="article:tag" content="Deceleration level">
+    
+    <meta property="article:tag" content="Machine learning">
+    
+    <meta property="article:tag" content="Random forest">
+    
+    <meta property="article:tag" content="Deep learning">
+    
+    <meta property="article:tag" content="Traffic signal design">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើគំរូពេលវេលាប្រតិកម្មនៃការយល់ឃើញ និងកម្រិតនៃការបន្ថយល្បឿនសម្រាប់លក្ខខណ្ឌផ្ទៃផ្លូវផ្សេងៗគ្នា ដោយប្រើប្រាស់បច្ចេកទេសរៀនដោយម៉ាស៊ីន (Machine Learning)">
+    <meta name="twitter:description" content="ការរចនាពេលវេលាភ្លើងសញ្ញាចរាចរណ៍បច្ចុប្បន្នប្រើប្រាស់តម្លៃថេរសម្រាប់ពេលវេលាប្រតិកម្មនៃការយល់ឃើញ (PRT) និងកម្រិតបន្ថយល្បឿន ដោយព្រងើយកន្តើយចំពោះភាពខុសគ្នានៃអ្នកបើកបរម្នាក់ៗនិងលក្ខខណ្ឌអាកាសធាតុ ដែលអាចប...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1794\u17d2\u179a\u178f\u17b7\u1780\u1798\u17d2\u1798\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u1783\u17be\u1789 \u1793\u17b7\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1793\u17c3\u1780\u17b6\u179a\u1794\u1793\u17d2\u1790\u1799\u179b\u17d2\u1794\u17bf\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179b\u1780\u17d2\u1781\u1781\u178e\u17d2\u178c\u1795\u17d2\u1791\u17c3\u1795\u17d2\u179b\u17bc\u179c\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning)",
+      "name": "Modeling the Perception Reaction Time and Deceleration Level for Different Surface Conditions Using Machine Learning Techniques",
+      "description": "\u1780\u17b6\u179a\u179a\u1785\u1793\u17b6\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1797\u17d2\u179b\u17be\u1784\u179f\u1789\u17d2\u1789\u17b6\u1785\u179a\u17b6\u1785\u179a\u178e\u17cd\u1794\u1785\u17d2\u1785\u17bb\u1794\u17d2\u1794\u1793\u17d2\u1793\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u178f\u1798\u17d2\u179b\u17c3\u1790\u17c1\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1794\u17d2\u179a\u178f\u17b7\u1780\u1798\u17d2\u1798\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u1783\u17be\u1789 (PRT) \u1793\u17b7\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1794\u1793\u17d2\u1790\u1799\u179b\u17d2\u1794\u17bf\u1793 \u178a\u17c4\u1799\u1796\u17d2\u179a\u1784\u17be\u1799\u1780\u1793\u17d2\u178f\u17be\u1799\u1785\u17c6\u1796\u17c4\u17c7\u1797\u17b6\u1796\u1781\u17bb\u179f\u1782\u17d2\u1793\u17b6\u1793\u17c3\u17a2\u17d2\u1793\u1780\u1794\u17be\u1780\u1794\u179a\u1798\u17d2\u1793\u17b6\u1780\u17cb\u17d7\u1793\u17b7\u1784\u179b\u1780\u17d2\u1781\u1781\u178e\u17d2\u178c\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb \u178a\u17c2\u179b\u17a2\u17b6\u1785\u1794\u178e\u17d2\u178f\u17b6\u179b\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1782\u17d2\u179a\u17c4\u17c7\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1793\u17c5\u178f\u17c6\u1794\u1793\u17cb\u1795\u17d2\u179b\u17bc\u179c\u1794\u17c6\u1794\u17c2\u1780\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/modeling-prt-deceleration-machine-learning-2017.html",
+      "author": [{"@type": "Person", "name": "Mohammed Elhenawy"},{"@type": "Person", "name": "Ihab El-Shawarby"},{"@type": "Person", "name": "Hesham Rakha"}],
+      "datePublished": "2017 (Advances in Intelligent Systems and Computing)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Modeling the Perception Reaction Time and Deceleration Level for Different Surface Conditions Using Machine Learning Techniques",
+        "url": "https://doi.org/10.1007/978-3-319-41627-4_13"
+      },
+      "keywords": ["Perception reaction time", "Deceleration level", "Machine learning", "Random forest", "Deep learning", "Traffic signal design"],
+      "about": "Transportation Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1782\u17c6\u179a\u17bc\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1794\u17d2\u179a\u178f\u17b7\u1780\u1798\u17d2\u1798\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u1783\u17be\u1789 \u1793\u17b7\u1784\u1780\u1798\u17d2\u179a\u17b7\u178f\u1793\u17c3\u1780\u17b6\u179a\u1794\u1793\u17d2\u1790\u1799\u179b\u17d2\u1794\u17bf\u1793\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179b\u1780\u17d2\u1781\u1781\u178e\u17d2\u178c\u1795\u17d2\u1791\u17c3\u1795\u17d2\u179b\u17bc\u179c\u1795\u17d2\u179f\u17c1\u1784\u17d7\u1782\u17d2\u1793\u17b6 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f\u179a\u17c0\u1793\u178a\u17c4\u1799\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning)",
+          "item": "https://khmerresearch.com/papers/technology/modeling-prt-deceleration-machine-learning-2017.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើគំរូពេលវេលាប្រតិកម្មនៃការយល់ឃើញ និងកម្រិតនៃការបន្ថ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Modeling the Perception Reaction Time and Deceleration Level for Different Surface Conditions Using Machine Learning Techniques<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.1007/978-3-319-41627-4_13" target="_blank" rel="noopener">doi.org/10.1007/978-3-319-41627-4_13</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើគំរូពេលវេលាប្រតិកម្មនៃការយល់ឃើញ និងកម្រិតនៃការបន្ថយល្បឿនសម្រាប់លក្ខខណ្ឌផ្ទៃផ្លូវផ្សេងៗគ្នា ដោយប្រើប្រាស់បច្ចេកទេសរៀនដោយម៉ាស៊ីន (Machine Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Modeling the Perception Reaction Time and Deceleration Level for Different Surface Conditions Using Machine Learning Techniques</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Mohammed Elhenawy, Ihab El-Shawarby, Hesham Rakha</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2017 (Advances in Intelligent Systems and Computing)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Transportation Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការរចនាពេលវេលាភ្លើងសញ្ញាចរាចរណ៍បច្ចុប្បន្នប្រើប្រាស់តម្លៃថេរសម្រាប់ពេលវេលាប្រតិកម្មនៃការយល់ឃើញ (PRT) និងកម្រិតបន្ថយល្បឿន ដោយព្រងើយកន្តើយចំពោះភាពខុសគ្នានៃអ្នកបើកបរម្នាក់ៗនិងលក្ខខណ្ឌអាកាសធាតុ ដែលអាចបណ្តាលឱ្យមានគ្រោះថ្នាក់នៅតំបន់ផ្លូវបំបែក។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រមូលទិន្នន័យពីការពិសោធន៍ផ្ទាល់នៅទីតាំង Smart Road ក្រោមលក្ខខណ្ឌផ្លូវស្ងួតនិងសើម រួចប្រើប្រាស់ក្បួនដោះស្រាយរៀនដោយម៉ាស៊ីន (Machine Learning) ជាច្រើនដើម្បីធ្វើការព្យាករណ៍ប្រៀបធៀប។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យពីការបើកបរជាក់ស្តែងក្រោមលក្ខខណ្ឌអាកាសធាតុផ្សេងៗ (Controlled field experiments)</li>
+            
+            <li>ដើមឈើចំណាត់ថ្នាក់និងតំរែតំរង់ (Classification and Regression Tree - CART)</li>
+            
+            <li>ព្រៃចៃដន្យ (Random Forest - RF)</li>
+            
+            <li>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ (Ensemble of Deep Networks)</li>
+            
+            <li>តំរែតំរង់លីនេអ៊ែរច្រើន (Multiple Linear Regression - MLR)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយរៀនដោយម៉ាស៊ីន (Machine Learning) ភាគច្រើនបានផ្តល់លទ្ធផលព្យាករណ៍ល្អប្រសើរជាងវិធីសាស្ត្រតំរែតំរង់លីនេអ៊ែរ (MLR) ទាំងទៅលើ PRT និងកម្រិតនៃការបន្ថយល្បឿន។</li>
+            
+            <li>សម្រាប់ពេលវេលាប្រតិកម្មនៃការយល់ឃើញ (PRT) ម៉ូដែល Random Forest ផ្តល់នូវការទស្សន៍ទាយល្អបំផុតដោយមានកំហុសមធ្យម (MAE) ត្រឹមតែ 0.1070 វិនាទី។</li>
+            
+            <li>សម្រាប់កម្រិតនៃការបន្ថយល្បឿន ម៉ូដែល Ensemble of Deep Networks ផ្តល់នូវការទស្សន៍ទាយល្អបំផុតជាមួយនឹងកំហុសមធ្យម (MAE) ត្រឹមតែ 0.3314 m/s²។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Multiple Linear Regression (MLR)</span></strong><br>តំរែតំរង់លីនេអ៊ែរច្រើន (វិធីសាស្ត្រគោល)</td>
+                <td>ងាយស្រួលក្នុងការយល់ និងជាវិធីសាស្ត្រស្តង់ដារដែលគេប្រើប្រាស់ទូទៅ។</td>
+                <td>ត្រូវការសន្មត់លើទិន្នន័យ (ដូចជាភាពធម្មតានិងវ៉ារ្យង់ស្មើគ្នា) ដែលមិនសូវជាក់ស្តែង។</td>
+                <td>មានកំហុសខ្ពស់ (PRT MAE = 0.1180s, Deceleration MAE = 0.3802 m/s²) ធៀបនឹងម៉ូដែលទំនើបៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Classification and Regression Tree (CART)</span></strong><br>ដើមឈើចំណាត់ថ្នាក់និងតំរែតំរង់</td>
+                <td>មិនត្រូវការសន្មត់លើទិន្នន័យ (Non-parametric) និងអាចបកស្រាយបានងាយស្រួលតាមរចនាសម្ព័ន្ធដើមឈើ។</td>
+                <td>ផ្តល់លទ្ធផលអន់ជាងគេបំផុតសម្រាប់ការទស្សន៍ទាយពេលវេលាប្រតិកម្ម (PRT)។</td>
+                <td>PRT MAE = 0.1212s និង Deceleration MAE = 0.3586 m/s²។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Random Forest (RF)</span></strong><br>ព្រៃចៃដន្យ (ប្រមូលផ្តុំដើមឈើជាច្រើន)</td>
+                <td>ជៀសវាងបញ្ហា Overfitting និងមានភាពសុក្រឹតខ្ពស់ក្នុងការចាប់យកទំនាក់ទំនងស្មុគស្មាញ។</td>
+                <td>ពិបាកក្នុងការបកស្រាយដំណើរការខាងក្នុង (Black-box) ជាង CART ។</td>
+                <td>ផ្តល់លទ្ធផលល្អបំផុតសម្រាប់ PRT (MAE = 0.1070s) និងល្អទី២សម្រាប់កម្រិតបន្ថយល្បឿន (MAE = 0.3406 m/s²)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Ensemble of Deep Networks</span></strong><br>បណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅចម្រុះ</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការស្វែងរកទម្រង់លាក់កំបាំងនិងមិនលីនេអ៊ែរនៅក្នុងទិន្នន័យ។</td>
+                <td>ទាមទារទិន្នន័យធំ និងកម្លាំងកុំព្យូទ័រខ្លាំងក្នុងការហ្វឹកហាត់ម៉ូដែល។</td>
+                <td>ផ្តល់លទ្ធផលល្អដាច់គេសម្រាប់ទស្សន៍ទាយកម្រិតនៃការបន្ថយល្បឿន (Deceleration MAE = 0.3314 m/s²)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Adaptive Boosting (AdaBoost)</span></strong><br>ក្បួនដោះស្រាយជំរុញការបន្សាំ</td>
+                <td>ជួយកែលម្អក្បួនដោះស្រាយដែលខ្សោយឱ្យក្លាយជាម៉ូដែលដែលមានភាពសុក្រឹតខ្ពស់។</td>
+                <td>អាចមានភាពរសើបខ្លាំងចំពោះទិន្នន័យរំខាន (Noisy data) ឬ Outliers។</td>
+                <td>ផ្តល់លទ្ធផលល្អប្រហាក់ប្រហែលនឹង RF ដែរ (PRT MAE = 0.1074s, Deceleration MAE = 0.3397 m/s²)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារឧបករណ៍ចាប់សញ្ញាដែលមានភាពជាក់លាក់ខ្ពស់បំពាក់លើរថយន្ត និងកម្មវិធីកុំព្យូទ័រសម្រាប់ដំណើរការក្បួនដោះស្រាយ Machine Learning។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> យានយន្តដែលបំពាក់ដោយប្រព័ន្ធប្រមូលទិន្នន័យ (DAS) ឧបករណ៍ <span class="en">Differential GPS</span> និងឧបករណ៍វាស់ស្ទង់សន្ទុះ (Longitudinal accelerometer)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី <span class="en">MATLAB</span> ត្រូវបានប្រើប្រាស់ដើម្បីសរសេរកូដ និងដំណើរការក្បួនដោះស្រាយ Machine Learning ទាំងអស់។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យដែលប្រមូលបានពីការបើកបរជាក់ស្តែងនៅលើទីតាំងសាកល្បងសុវត្ថិភាព (Smart Road) ក្រោមលក្ខខណ្ឌអាកាសធាតុស្ងួត និងភ្លៀង។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅសហរដ្ឋអាមេរិក ក្នុងទីតាំងផ្លូវសាកល្បងបិទជិត (Smart Road) ដោយមានអ្នកចូលរួមត្រឹមតែ ៥០ នាក់ប៉ុណ្ណោះ។ សម្រាប់ប្រទេសកម្ពុជា ទិន្នន័យនេះមិនអាចឆ្លុះបញ្ចាំងពេញលេញទេ ដោយសារចរាចរណ៍នៅកម្ពុជាមានលក្ខណៈចម្រុះ (មានម៉ូតូ និងកង់បីច្រើន) និងអ្នកបើកបរមានទម្លាប់ខុសគ្នា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យដើមមិនត្រូវគ្នាបេះបិទ តែវិធីសាស្ត្រប្រើប្រាស់ Machine Learning នេះគឺមានប្រយោជន៍ខ្លាំងណាស់សម្រាប់ការរៀបចំប្រព័ន្ធចរាចរណ៍នៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>រាជធានីភ្នំពេញ (Phnom Penh Intersections):</strong> ការប្រើប្រាស់ម៉ូដែលនេះដើម្បីគណនា និងកំណត់រយៈពេលភ្លើងពណ៌លឿងឱ្យបានត្រឹមត្រូវនៅតាមផ្លូវបំបែកធំៗ ដើម្បីកាត់បន្ថយគ្រោះថ្នាក់បុកពីក្រោយ ឬបុកចំហៀង ពិសេសក្នុងរដូវភ្លៀងធ្លាក់។</li>
+            
+            <li><strong>សុវត្ថិភាពផ្លូវជាតិ (National Roads Safety):</strong> អនុវត្តលើផ្លូវជាតិសំខាន់ៗ (ដូចជាផ្លូវជាតិលេខ៤ ឬលេខ៦) ដើម្បីសិក្សាពីចម្ងាយនៃការចាប់ហ្វ្រាំង និងកំណត់ល្បឿនអតិបរមាប្រកបដោយសុវត្ថិភាពក្នុងស្ថានភាពផ្លូវសើម។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការយកវិធីសាស្ត្រនេះមកប្រមូលទិន្នន័យក្នុងស្រុក នឹងជួយស្ថាប័នពាក់ព័ន្ធរចនាប្រព័ន្ធសុវត្ថិភាពចរាចរណ៍នៅកម្ពុជាបានកាន់តែមានប្រសិទ្ធភាពខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីមូលដ្ឋានគ្រឹះវិស្វកម្មចរាចរណ៍:</strong> និស្សិតត្រូវសិក្សាពីគោលការណ៍នៃពេលវេលាប្រតិកម្មនៃការយល់ឃើញ (PRT) កម្រិតនៃការបន្ថយល្បឿន (Deceleration) និងបញ្ហាតំបន់ស្រពិចស្រពិល (Dilemma Zone) នៅផ្លូវបំបែក។</li>
+            
+            <li><strong>សិក្សាពីជំនាញវិភាគទិន្នន័យ និង <span class="en">Machine Learning</span>:</strong> រៀនប្រើប្រាស់ភាសាកម្មវិធី <span class="en">Python</span> (តាមរយៈ <span class="en">Scikit-Learn</span> ឬ <span class="en">TensorFlow</span>) ឬ <span class="en">MATLAB</span> ដើម្បីអនុវត្តក្បួនដោះស្រាយដូចជា <span class="en">Random Forest</span> និង <span class="en">Deep Learning</span>។</li>
+            
+            <li><strong>ការប្រមូលទិន្នន័យជាក់ស្តែងនៅកម្ពុជា:</strong> បំពាក់ឧបករណ៍ <span class="en">Dashcam</span> និង <span class="en">GPS Tracker</span> លើរថយន្តស្ម័គ្រចិត្តដើម្បីប្រមូលទិន្នន័យពីល្បឿន និងការជាន់ហ្វ្រាំងរបស់អ្នកបើកបរខ្មែរនៅពេលភ្លើងលឿងលោត។</li>
+            
+            <li><strong>ការបង្វឹក និងវាយតម្លៃម៉ូដែល:</strong> ប្រើប្រាស់ទិន្នន័យដែលប្រមូលបានដើម្បីបង្វឹកម៉ូដែល ហើយវាយតម្លៃភាពត្រឹមត្រូវដោយប្រើបច្ចេកទេស <span class="en">10-fold cross-validation</span> ដើម្បីរកមើលតម្លៃលម្អៀង <span class="en">MAE</span> និង <span class="en">MAPE</span>។</li>
+            
+            <li><strong>ការផ្តល់អនុសាសន៍គោលនយោបាយ:</strong> យកលទ្ធផលដែលរកឃើញទៅស្នើជាពេលវេលាភ្លើងពណ៌លឿងថ្មី ជូនដល់មន្ទីរសាធារណការ និងដឹកជញ្ជូនរាជធានីភ្នំពេញ ដើម្បីយកទៅកែសម្រួលប្រព័ន្ធភ្លើងស្តុបជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Perception Reaction Time (PRT)</span></td>
+                <td>ពេលវេលាដែលអ្នកបើកបរត្រូវការដើម្បីមើលឃើញសញ្ញាចរាចរណ៍ (ដូចជាភ្លើងលឿង) សម្រេចចិត្តថាត្រូវធ្វើអ្វី និងចាប់ផ្តើមអនុវត្តសកម្មភាព (ដូចជាជាន់ហ្វ្រាំង)។</td>
+                <td>ដូចជាពេលដែលយើងឃើញបាល់ហោះមករកមុខ ហើយខួរក្បាលបញ្ជាឱ្យដៃងើបឡើងបាំង ដែលត្រូវចាយពេលមួយប្រិចភ្នែក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dilemma zone</span></td>
+                <td>តំបន់មួយនៅជិតផ្លូវបំបែកដែលនៅពេលភ្លើងលោតពណ៌លឿង អ្នកបើកបរពិបាកសម្រេចចិត្តថា តើត្រូវជាន់ហ្វ្រាំងបញ្ឈប់រថយន្ត ឬត្រូវបន្ថែមល្បឿនបើកឆ្លងកាត់ ដែលងាយបង្កឱ្យមានគ្រោះថ្នាក់។</td>
+                <td>ដូចជាពេលយើងកំពុងរត់ទៅមាត់ទ្វារយន្តហោះដែលកំពុងបិទ ហើយយើងស្ទាក់ស្ទើរថាតើត្រូវឈប់ ឬត្រូវប្រឹងរត់តត្រដាបត្រដួសចូលទៅ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Random Forest</span></td>
+                <td>ក្បួនដោះស្រាយរៀនដោយម៉ាស៊ីន (Machine Learning) ដែលបង្កើត "ដើមឈើការសម្រេចចិត្ត" ជាច្រើនរួមបញ្ចូលគ្នា ដើម្បីធ្វើការព្យាករណ៍ទិន្នន័យបានកាន់តែសុក្រឹត និងជៀសវាងការវង្វេងទិន្នន័យ (Overfitting)។</td>
+                <td>ដូចជាការសួរមតិពីមនុស្ស១០០នាក់ផ្សេងៗគ្នា ដើម្បីសម្រេចចិត្តជ្រើសរើសចម្លើយមួយដែលត្រឹមត្រូវបំផុត ជាជាងការជឿលើមតិមនុស្សតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ensemble of Deep Networks</span></td>
+                <td>ការប្រមូលផ្តុំបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតជ្រៅ (Deep Learning) ជាច្រើនបញ្ចូលគ្នា ដើម្បីស្វែងរកទំនាក់ទំនងស្មុគស្មាញនៅក្នុងទិន្នន័យ និងធ្វើការព្យាករណ៍ឱ្យបានច្បាស់លាស់បំផុត។</td>
+                <td>ដូចជាការប្រមូលអ្នកជំនាញកំពូលៗជាច្រើនរូប មកអង្គុយប្រជុំគ្នាដោះស្រាយលំហាត់គណិតវិទ្យាដ៏លំបាកមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Classification and Regression Tree (CART)</span></td>
+                <td>ក្បួនដោះស្រាយដែលបំបែកទិន្នន័យជាមែកធាងជាបន្តបន្ទាប់ ដោយផ្អែកលើលក្ខខណ្ឌនីមួយៗ ដើម្បីធ្វើការបែងចែកចំណាត់ថ្នាក់ ឬទស្សន៍ទាយតម្លៃអ្វីមួយនៅចុងបញ្ចប់នៃមែកធាង។</td>
+                <td>ដូចជាការលេងល្បែងទាយឈ្មោះសត្វ ដែលយើងសួរជាសំនួរ "បាទ/ទេ" បន្តបន្ទាប់គ្នារហូតដល់រកឃើញចម្លើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">10-fold-cross-validation</span></td>
+                <td>វិធីសាស្ត្រវាយតម្លៃម៉ូដែល Machine Learning ដោយបែងចែកទិន្នន័យជា ១០ ចំណែក រួចយក ៩ ចំណែកទៅបង្រៀនម៉ូដែល និង ១ ចំណែកទៀតទៅធ្វើតេស្តសាកល្បង ដោយឆ្លាស់គ្នារហូតដល់គ្រប់ទាំង ១០ ដង។</td>
+                <td>ដូចជាការរៀនមេរៀន១០ជំពូក ដោយរៀន៩ជំពូក រួចប្រឡងសាកល្បង១ជំពូក ផ្លាស់ប្តូរគ្នារហូតដល់ប្រឡងចេះចាំអស់ទាំង១០ជំពូកដោយស្មើភាព។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean Absolute Error (MAE)</span></td>
+                <td>រង្វាស់គណិតវិទ្យាសម្រាប់គណនាកំហុសជាមធ្យម ដែលបង្ហាញពីគម្លាតដាច់ខាតរវាងតម្លៃដែលម៉ូដែលបានព្យាករណ៍ និងតម្លៃដែលកើតឡើងជាក់ស្តែង។</td>
+                <td>ដូចជាការទាយអាយុមិត្តភក្តិ ហើយយើងទាយខុសជាមធ្យម ២ឆ្នាំ មិនថាទាយលើស ឬទាយខ្វះនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Adaptive Boosting (AdaBoost)</span></td>
+                <td>បច្ចេកទេស Machine Learning ដែលយកម៉ូដែលខ្សោយៗមកបង្ហាត់បន្តបន្ទាប់គ្នា ដោយម៉ូដែលក្រោយផ្តោតលើការកែតម្រូវកំហុសរបស់ម៉ូដែលមុន ដើម្បីបង្កើតបានជាម៉ូដែលរួមមួយដ៏ខ្លាំង។</td>
+                <td>ដូចជាសិស្សខ្សោយមួយក្រុមជួយបង្រៀនគ្នា ដោយម្នាក់ៗជួយបំពេញចំណុចខ្វះខាតរបស់ម្នាក់ទៀតរហូតក្លាយជាក្រុមដ៏ពូកែមួយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/hybrid-learning-systems-ml-dl-integration.html">
+                    <span class="km">ប្រព័ន្ធសិក្សាកូនកាត់៖ ការរួមបញ្ចូលយន្តការរៀនម៉ាស៊ីនបែបប្រពៃណីជាមួយនឹងបច្ចេកទេសរៀនស៊ីជម្រៅ</span><br>
+                    <span class="en article-original-title">HYBRID LEARNING SYSTEMS: INTEGRATING TRADITIONAL MACHINE LEARNING WITH DEEP LEARNING TECHNIQUES</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ai-predictive-analytics-edge-cloud-2021.html">
+                    <span class="km">ការវិភាគព្យាករណ៍ដែលជំរុញដោយ AI សម្រាប់បង្កើនប្រសិទ្ធភាពការប្រើប្រាស់ធនធាននៅក្នុងមជ្ឈមណ្ឌលទិន្នន័យ Edge-Cloud</span><br>
+                    <span class="en article-original-title">AI-Driven Predictive Analytics for Optimizing Resource Utilization in Edge-Cloud Data Centers</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/missing-data-imputation-comprehensive-review-2024.html">
+                    <span class="km">ការបំពេញទិន្នន័យដែលបាត់៖ ការពិនិត្យឡើងវិញដ៏ទូលំទូលាយ</span><br>
+                    <span class="en article-original-title">Missing Data Imputation: A Comprehensive Review</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ai-enhanced-predictive-maintenance-2024.html">
+                    <span class="km">ការថែទាំបែបព្យាករណ៍ដោយប្រើប្រាស់បញ្ញាសិប្បនិម្មិតសម្រាប់ប្រព័ន្ធផលិតកម្ម</span><br>
+                    <span class="en article-original-title">AI Enhanced Predictive Maintenance for Manufacturing System</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/iot-ml-predictive-maintenance-motors-2023.html">
+                    <span class="km">ប្រព័ន្ធថែទាំព្យាករណ៍ផ្អែកលើ IoT និងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) សម្រាប់ម៉ូទ័រអគ្គិសនី</span><br>
+                    <span class="en article-original-title">An IoT and Machine Learning-Based Predictive Maintenance System for Electrical Motors</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=%22driver+perception+reaction+time%22+AND+%22traffic+signal+design%22+AND+%22yellow+interval%22" target="_blank" rel="noopener"><span class="en">"driver perception reaction time" AND "traffic signal design" AND "yellow interval"</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%22machine+learning%22+AND+%22driver+behavior+prediction%22+AND+%22dilemma+zone%22" target="_blank" rel="noopener"><span class="en">"machine learning" AND "driver behavior prediction" AND "dilemma zone"</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%22random+forest%22+OR+%22deep+learning%22+AND+%22deceleration+modeling%22+%22signalized+intersection%22" target="_blank" rel="noopener"><span class="en">"random forest" OR "deep learning" AND "deceleration modeling" "signalized intersection"</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=%22vehicle+to+infrastructure+communication%22+AND+%22dynamic+traffic+signal+timing%22+%22predictive+modeling%22" target="_blank" rel="noopener"><span class="en">"vehicle to infrastructure communication" AND "dynamic traffic signal timing" "predictive modeling"</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

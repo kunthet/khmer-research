@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើមូលដ្ឋានីយកម្ម និងការបង្កើតផែនទី 2D ដោយប្រើប្រាស់ឡាស៊ែរ Lidar តម្លៃថោក - Localization and 2D Mapping Using Low-Cost Lidar | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការធ្វើមូលដ្ឋានីយកម្ម និងការបង្កើតផែនទី 2D ដោយប្រើប្រាស់ឡាស៊។ និក្ខេបបទនេះមានគោលបំណងបង្កើតគំរូរថយន្តស្វ័យប្រវត្តិតម្លៃថោក ដែលមានសមត្ថភាពអាចធ្វើមូលដ្ឋានីយកម្ម ន...">
+    
+    <meta name="keywords" content="autonomous vehicles, 2D lidar, localization, 2D mapping, SLAM, ROS, obstacle detection, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/localization-2d-mapping-low-cost-lidar-2018.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/localization-2d-mapping-low-cost-lidar-2018.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/localization-2d-mapping-low-cost-lidar-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/localization-2d-mapping-low-cost-lidar-2018.html">
+    <meta property="og:title" content="ការធ្វើមូលដ្ឋានីយកម្ម និងការបង្កើតផែនទី 2D ដោយប្រើប្រាស់ឡាស៊ែរ Lidar តម្លៃថោក | KhmerResearch.com">
+    <meta property="og:description" content="និក្ខេបបទនេះមានគោលបំណងបង្កើតគំរូរថយន្តស្វ័យប្រវត្តិតម្លៃថោក ដែលមានសមត្ថភាពអាចធ្វើមូលដ្ឋានីយកម្ម និងបង្កើតផែនទី 2D ក្នុងពេលដំណាលគ្នា ព្រមទាំងអាចស្វែងរកឧបសគ្គ និងបញ្ចៀសការប៉ះទង្គិច។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2018 University of Turku-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="autonomous vehicles">
+    
+    <meta property="article:tag" content="2D lidar">
+    
+    <meta property="article:tag" content="localization">
+    
+    <meta property="article:tag" content="2D mapping">
+    
+    <meta property="article:tag" content="SLAM">
+    
+    <meta property="article:tag" content="ROS">
+    
+    <meta property="article:tag" content="obstacle detection">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើមូលដ្ឋានីយកម្ម និងការបង្កើតផែនទី 2D ដោយប្រើប្រាស់ឡាស៊ែរ Lidar តម្លៃថោក">
+    <meta name="twitter:description" content="និក្ខេបបទនេះមានគោលបំណងបង្កើតគំរូរថយន្តស្វ័យប្រវត្តិតម្លៃថោក ដែលមានសមត្ថភាពអាចធ្វើមូលដ្ឋានីយកម្ម និងបង្កើតផែនទី 2D ក្នុងពេលដំណាលគ្នា ព្រមទាំងអាចស្វែងរកឧបសគ្គ និងបញ្ចៀសការប៉ះទង្គិច។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u17b8\u1799\u1780\u1798\u17d2\u1798 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1795\u17c2\u1793\u1791\u17b8 2D \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17a1\u17b6\u179f\u17ca\u17c2\u179a Lidar \u178f\u1798\u17d2\u179b\u17c3\u1790\u17c4\u1780",
+      "name": "Localization and 2D Mapping Using Low-Cost Lidar",
+      "description": "\u1793\u17b7\u1780\u17d2\u1781\u17c1\u1794\u1794\u1791\u1793\u17c1\u17c7\u1798\u17b6\u1793\u1782\u17c4\u179b\u1794\u17c6\u178e\u1784\u1794\u1784\u17d2\u1780\u17be\u178f\u1782\u17c6\u179a\u17bc\u179a\u1790\u1799\u1793\u17d2\u178f\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u178f\u1798\u17d2\u179b\u17c3\u1790\u17c4\u1780 \u178a\u17c2\u179b\u1798\u17b6\u1793\u179f\u1798\u178f\u17d2\u1790\u1797\u17b6\u1796\u17a2\u17b6\u1785\u1792\u17d2\u179c\u17be\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u17b8\u1799\u1780\u1798\u17d2\u1798 \u1793\u17b7\u1784\u1794\u1784\u17d2\u1780\u17be\u178f\u1795\u17c2\u1793\u1791\u17b8 2D \u1780\u17d2\u1793\u17bb\u1784\u1796\u17c1\u179b\u178a\u17c6\u178e\u17b6\u179b\u1782\u17d2\u1793\u17b6 \u1796\u17d2\u179a\u1798\u1791\u17b6\u17c6\u1784\u17a2\u17b6\u1785\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u17a7\u1794\u179f\u1782\u17d2\u1782 \u1793\u17b7\u1784\u1794\u1789\u17d2\u1785\u17c0\u179f\u1780\u17b6\u179a\u1794\u17c9\u17c7\u1791\u1784\u17d2\u1782\u17b7\u1785\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/localization-2d-mapping-low-cost-lidar-2018.html",
+      "author": [{"@type": "Person", "name": "Yuan Zhang (University of Turku)"}],
+      "datePublished": "2018 University of Turku",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Localization and 2D Mapping Using Low-Cost Lidar",
+        "url": "https://www.utupub.fi/bitstream/handle/10024/146511/Zhang_Yuan_Thesis.pdf?sequence=1"
+      },
+      "keywords": ["autonomous vehicles", "2D lidar", "localization", "2D mapping", "SLAM", "ROS", "obstacle detection"],
+      "about": "Embedded Computing / Robotics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u17b8\u1799\u1780\u1798\u17d2\u1798 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1795\u17c2\u1793\u1791\u17b8 2D \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17a1\u17b6\u179f\u17ca\u17c2\u179a Lidar \u178f\u1798\u17d2\u179b\u17c3\u1790\u17c4\u1780",
+          "item": "https://khmerresearch.com/papers/technology/localization-2d-mapping-low-cost-lidar-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើមូលដ្ឋានីយកម្ម និងការបង្កើតផែនទី 2D ដោយប្រើប្រាស់ឡ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Localization and 2D Mapping Using Low-Cost Lidar<br>
+        
+        <strong>Source:</strong> <a href="https://www.utupub.fi/bitstream/handle/10024/146511/Zhang_Yuan_Thesis.pdf?sequence=1" target="_blank" rel="noopener">www.utupub.fi</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើមូលដ្ឋានីយកម្ម និងការបង្កើតផែនទី 2D ដោយប្រើប្រាស់ឡាស៊ែរ Lidar តម្លៃថោក</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Localization and 2D Mapping Using Low-Cost Lidar</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Yuan Zhang (University of Turku)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018 University of Turku</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Embedded Computing / Robotics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> និក្ខេបបទនេះមានគោលបំណងបង្កើតគំរូរថយន្តស្វ័យប្រវត្តិតម្លៃថោក ដែលមានសមត្ថភាពអាចធ្វើមូលដ្ឋានីយកម្ម និងបង្កើតផែនទី 2D ក្នុងពេលដំណាលគ្នា ព្រមទាំងអាចស្វែងរកឧបសគ្គ និងបញ្ចៀសការប៉ះទង្គិច។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះប្រើប្រាស់រថយន្តយន្តតូច (Redbot) បំពាក់ឧបករណ៍ចាប់សញ្ញា Lidar និងប្រព័ន្ធបញ្ជូនទិន្នន័យឥតខ្សែដើម្បីប្រមូលទិន្នន័យសម្រាប់ដំណើរការបង្កើតផែនទីក្នុងកុំព្យូទ័រ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ឧបករណ៍ Lidar (Lidar Lite V3) និងម៉ូទ័រ Servo ដើម្បីស្កេនបរិស្ថានជុំវិញជាលក្ខណៈ 2D</li>
+            
+            <li>ការបញ្ជូនទិន្នន័យឥតខ្សែតាមរយៈបណ្តាញ Zigbee (XBee modules) ទៅកាន់កុំព្យូទ័រ</li>
+            
+            <li>ការប្រើប្រាស់ប្រព័ន្ធប្រតិបត្តិការមនុស្សយន្ត (ROS) និងក្បួនដោះស្រាយ Hector SLAM សម្រាប់បង្កើតផែនទី និងកំណត់ទីតាំង</li>
+            
+            <li>ការប្រើប្រាស់កាងមេកានិក (Mechanical bumpers) សម្រាប់កំណត់ទីតាំងឧបសគ្គ និងបញ្ចៀសការប៉ះទង្គិច</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>គំរូរថយន្តនេះអាចបង្កើតផែនទី 2D នៃបរិស្ថានដែលមិនស្គាល់បានយ៉ាងជោគជ័យ និងអាចធ្វើមូលដ្ឋានីយកម្មក្នុងពេលដំណាលគ្នាបានយ៉ាងត្រឹមត្រូវ។</li>
+            
+            <li>យន្តការកាងមេកានិកអាចរុករកឧបសគ្គនៅពេលរថយន្តរត់ក្នុងល្បឿនក្រោម ១ គីឡូម៉ែត្រក្នុងមួយម៉ោង ក្នុងចម្ងាយ ៧.៥ សង់ទីម៉ែត្រពីរថយន្ត និងធ្វើការបញ្ចៀសបានទាន់ពេលវេលា។</li>
+            
+            <li>ទោះជាយ៉ាងណា ប្រព័ន្ធនេះមានដែនកំណត់ដោយសារជួរស្កេនខ្លីរបស់ Lidar និងល្បឿនយឺតដោយសារទំហំផ្ទុកទិន្នន័យរបស់ Zigbee (បញ្ជូនបានត្រឹមតែ ២០ ចំណុចប៉ុណ្ណោះក្នុងមួយការស្កេន)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Hector SLAM</span></strong><br>ក្បួនដោះស្រាយ Hector SLAM (មិនតម្រូវឱ្យមានអូដូមេទ្រី/Odometry)</td>
+                <td>អាចដំណើរការបានដោយមិនត្រូវការទិន្នន័យពីកង់ (Odometry) និងស័ក្តិសមសម្រាប់ប្រព័ន្ធ Lidar ដែលមានល្បឿនស្កេនលឿន។</td>
+                <td>មិនមានសមត្ថភាពកំណត់ទីតាំងចាស់ត្រឡប់មកវិញ (Explicit loop closing) ដោយស្វ័យប្រវត្តិទេ ដែលអាចបណ្តាលឱ្យមានកំហុសបន្តិចបន្តួចនៅពេលទីតាំងធំ។</td>
+                <td>បានប្រើប្រាស់យ៉ាងជោគជ័យនៅក្នុងគំរូនេះ ក្នុងការបង្កើតផែនទី 2D ទោះបីជាមានការបញ្ជូនទិន្នន័យយឺតត្រឹមតែ ២០ ចំណុចពី Lidar ក្នុងមួយការស្កេនក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Gmapping</span></strong><br>ក្បួនដោះស្រាយ Gmapping (ផ្អែកលើ Particle Filter)</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការបង្កើតផែនទី 2D ប្រភេទ Occupancy Grid Map ដែលផ្តល់ភាពច្បាស់លាស់។</td>
+                <td>តម្រូវឱ្យមានទិន្នន័យទីតាំងពីកង់ត្រឹមត្រូវ (Odometry) ដែលធ្វើឱ្យមានភាពស្មុគស្មាញដល់ការរៀបចំផ្នែករឹង (Hardware) លើរថយន្តតូចៗ។</td>
+                <td>មិនត្រូវបានជ្រើសរើសយកមកប្រើប្រាស់ក្នុងគម្រោងនេះទេ ដោយសាររថយន្ត Redbot មិនមានប្រព័ន្ធ Odometry ដែលមានភាពសុក្រឹត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Cartographer</span></strong><br>ក្បួនដោះស្រាយ Cartographer (អភិវឌ្ឍដោយ Google)</td>
+                <td>អាចធ្វើការភ្ជាប់ទីតាំងឡើងវិញ (Loop closure) ក្នុងពេលជាក់ស្តែង (Real-time) និងដំណើរការបានល្អលើឧបករណ៍ដែលមានកម្លាំងម៉ាស៊ីនខ្សោយ។</td>
+                <td>តម្រូវឱ្យមានការកំណត់រចនាសម្ព័ន្ធ (Configuration) និងការសរសេរកូដស្មុគស្មាញជាង Hector SLAM ក៏ដូចជាត្រូវការថាមពលកុំព្យូទ័រច្រើនជាងបន្តិច។</td>
+                <td>ត្រូវបានលើកឡើងជាជម្រើសដ៏ល្អ ប៉ុន្តែមិនត្រូវបានអនុវត្តជាក់ស្តែងក្នុងគំរូនៃនិក្ខេបបទនេះទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះត្រូវបានរចនាឡើងដោយផ្តោតលើការប្រើប្រាស់ធនធានកម្រិតទាបបំផុត និងតម្លៃថោក (Low-Cost) ដើម្បីបង្កើតជាគំរូរថយន្តស្វ័យប្រវត្តិសម្រាប់គោលបំណងសិក្សា។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការឧបករណ៍តម្លៃថោកដូចជា <span class="en">SparkFun Redbot Kit</span>, មីក្រូកុងត្រូល័រ <span class="en">Arduino Mega 2560</span>, ឧបករណ៍ចាប់សញ្ញា <span class="en">Lidar Lite V3</span> (~$150), ម៉ូទ័រ <span class="en">Servo MG995</span> និងម៉ូឌុលបញ្ជូនទិន្នន័យ <span class="en">XBee Pro S1</span> ចំនួន៣។</li>
+        
+        <li><strong>Software:</strong> ទាមទារប្រព័ន្ធប្រតិបត្តិការ <span class="en">Ubuntu Linux</span> និងប្រព័ន្ធ <span class="en">ROS (Robot Operating System)</span> រួមជាមួយនឹងកម្មវិធី <span class="en">Arduino IDE</span> សម្រាប់សរសេរកូដបញ្ចូលទៅក្នុង Hardware។</li>
+        
+        <li><strong>Network/Connectivity:</strong> ប្រើប្រាស់បណ្តាញ <span class="en">Zigbee</span> (XBee) ដែលមានល្បឿនបញ្ជូនទិន្នន័យ (Baud rate) ត្រឹមតែ 57600 ដែលជាដែនកំណត់ធ្វើឱ្យការបញ្ជូនទិន្នន័យ Lidar មានភាពយឺតយ៉ាវ។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងផ្នែកប្រព័ន្ធបង្កប់ (Embedded Systems) ការសរសេរកូដ <span class="en">C++/Arduino</span> និងការប្រើប្រាស់កញ្ចប់បញ្ជាក្នុង <span class="en">ROS</span> ជាមូលដ្ឋាន។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការធ្វើតេស្តនិងប្រមូលទិន្នន័យត្រូវបានអនុវត្តនៅក្នុងមន្ទីរពិសោធន៍បិទជិត ដោយប្រើប្រាស់ប្រអប់ក្រដាសតូចៗធ្វើជាឧបសគ្គ និងជញ្ជាំង ដែលមិនឆ្លុះបញ្ចាំងពីបរិស្ថានជាក់ស្តែងដ៏ស្មុគស្មាញនោះទេ។ សម្រាប់ប្រទេសកម្ពុជា ការខ្វះទិន្នន័យតេស្តក្នុងស្ថានភាពផ្លូវពិតប្រាកដ (ឧទាហរណ៍៖ ផ្លូវមានធូលី មានភ្លៀង ឬពន្លឺថ្ងៃខ្លាំង) មានន័យថាប្រព័ន្ធនេះនៅមិនទាន់អាចយកទៅប្រើប្រាស់ផ្ទាល់នៅខាងក្រៅ ឬលើដងផ្លូវសាធារណៈបាននៅឡើយទេ លុះត្រាតែមានការកែលម្អឧបករណ៍សេនស័រ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាគំរូនេះមានលក្ខណៈសាមញ្ញ និងប្រើប្រាស់ Hardware កម្រិតទាប ប៉ុន្តែវាជាមូលដ្ឋានគ្រឹះដ៏មានសក្តានុពលខ្ពស់សម្រាប់ការអប់រំ និងការស្រាវជ្រាវបឋមនៅប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យអប់រំ STEM (ឧ. វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា ITC ឬ RUPP):</strong> សាកលវិទ្យាល័យនៅកម្ពុជាអាចយកគំរូ (Architecture) នេះទៅបង្រៀននិស្សិតពីគោលការណ៍គ្រឹះនៃ <span class="en">ROS</span> និង <span class="en">SLAM</span> ដោយចំណាយថវិកាតិចតួចបំផុត ជំនួសឱ្យការទិញមនុស្សយន្តតម្លៃរាប់ពាន់ដុល្លារ។</li>
+            
+            <li><strong>វិស័យឃ្លាំងទំនិញ និងឡូជីស្ទីក (ឧ. តំបន់សេដ្ឋកិច្ចពិសេសភ្នំពេញ PPSEZ):</strong> បច្ចេកវិទ្យាបង្កើតផែនទី 2D និងប្រព័ន្ធជៀសវាងឧបសគ្គនេះ អាចត្រូវបានអភិវឌ្ឍបន្តទៅជាមនុស្សយន្តដឹកជញ្ជូនទំនិញខ្នាតតូច (AGV) សម្រាប់រត់ក្នុងឃ្លាំងបិទជិត ដែលជួយកាត់បន្ថយកម្លាំងពលកម្ម។</li>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Agri-tech នៅបាត់ដំបង):</strong> យន្តការកំណត់ទីតាំងតម្លៃថោកនេះ អាចយកទៅបំពាក់លើរទេះរុករកដោយស្វ័យប្រវត្តិ (Rover) ដើម្បីតាមដានដំណាំក្នុងផ្ទះកញ្ចក់ (Greenhouse) ទីដែលប្រព័ន្ធ GPS មិនអាចចាប់សេវាបានល្អ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក បច្ចេកវិទ្យាតម្លៃថោកនេះ គឺជាច្រកចូលដ៏ស័ក្តិសមបំផុតសម្រាប់និស្សិត អ្នកស្រាវជ្រាវ និងក្រុមហ៊ុន Startup ក្នុងស្រុក ក្នុងការចាប់ផ្តើមអភិវឌ្ឍប្រព័ន្ធមនុស្សយន្តស្វ័យប្រវត្តិដោយខ្លួនឯង មុននឹងឈានទៅប្រើប្រាស់ឧបករណ៍ពាណិជ្ជកម្មខ្នាតធំ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>រៀបចំឧបករណ៍ផ្នែករឹង (Hardware Setup):</strong> ស្វែងរកទិញគ្រឿងបន្លាស់តម្លៃថោកមានដូចជា <span class="en">Arduino Mega</span>, <span class="en">SparkFun Redbot Kit</span>, និងម៉ូឌុល <span class="en">XBee</span> ពីហាងលក់គ្រឿងអេឡិចត្រូនិចក្នុងស្រុក រួចរៀបចំតភ្ជាប់សៀគ្វីតាមគំរូ (Architecture) ។ គួរពិចារណាប្រើ <span class="en">RPLIDAR A1</span> (តម្លៃប្រហែល $100) ជាជាងការប្រើ Lidar បង្វិលលើ Servo ដើម្បីទទួលបានលទ្ធផលល្អជាង។</li>
+            
+            <li><strong>ដំឡើងប្រព័ន្ធកុំព្យូទ័រ និងកម្មវិធី (Software Environment):</strong> ដំឡើងប្រព័ន្ធប្រតិបត្តិការ <span class="en">Ubuntu Linux</span> (Version 20.04 ឬថ្មីជាង) នៅលើកុំព្យូទ័រយួរដៃ រួចដំឡើង <span class="en">ROS Noetic</span> ។ បន្ទាប់មក ដំឡើងកញ្ចប់ <span class="en">rosserial_arduino</span> ដើម្បីឱ្យកុំព្យូទ័រអាចទាក់ទងជាមួយ Arduino បានដោយផ្ទាល់។</li>
+            
+            <li><strong>សរសេរកូដ និងរៀបចំបណ្តាញឥតខ្សែ (Networking):</strong> កំណត់រចនាសម្ព័ន្ធម៉ូឌុល <span class="en">XBee</span> តាមរយៈកម្មវិធី <span class="en">XCTU</span> ដោយកំណត់ Baud Rate ឱ្យបានខ្ពស់បំផុត (យ៉ាងហោចណាស់ 115200 ជំនួសឱ្យ 57600) ដើម្បីកាត់បន្ថយការបាត់បង់ទិន្នន័យ (Data packet loss) រវាងរថយន្តនិងកុំព្យូទ័រ។</li>
+            
+            <li><strong>អនុវត្តក្បួនដោះស្រាយ SLAM:</strong> ទាញយកនិងកំណត់រចនាសម្ព័ន្ធកញ្ចប់ <span class="en">hector_slam</span> នៅក្នុង ROS Workspace។ បង្កើតឯកសារ <span class="en">launch file</span> ដើម្បីកំណត់ការបំប្លែងកូអរដោនេ (tf transformation) ពីរថយន្តទៅកាន់ Lidar ឱ្យបានត្រឹមត្រូវ រួចបើកកម្មវិធី <span class="en">Rviz</span> ដើម្បីមើលផែនទីដែលកំពុងបង្កើត។</li>
+            
+            <li><strong>សាកល្បងនិងកែលម្អ (Testing & Optimization):</strong> ដំណើរការរថយន្តក្នុងល្បឿនយឺតៗ (ក្រោម 1 គីឡូម៉ែត្រ/ម៉ោង) នៅក្នុងបន្ទប់ដែលមានជញ្ជាំងនិងឧបសគ្គច្បាស់លាស់។ ធ្វើការសារ៉េមុំកាងមេកានិក (Bumper Angle) ឱ្យចាប់ឧបសគ្គបានមុនប៉ះទង្គិច ៧ សង់ទីម៉ែត្រ និងកត់ត្រាទិន្នន័យផែនទីជាទម្រង់ <span class="en">Geotiff</span> ដើម្បីវិភាគកំហុស។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Simultaneous Localization and Mapping</span></td>
+                <td>គឺជាក្បួនដោះស្រាយដែលអនុញ្ញាតឱ្យមនុស្សយន្តឬរថយន្តស្វ័យប្រវត្តិអាចបង្កើតផែនទីនៃបរិស្ថានដែលវាមិនធ្លាប់ស្គាល់ ព្រមទាំងអាចកំណត់ទីតាំងរបស់វានៅក្នុងផែនទីនោះក្នុងពេលតែមួយ។</td>
+                <td>វាដូចជាការដែលអ្នកដើរចូលទៅក្នុងបន្ទប់ងងឹតមួយដែលមិនធ្លាប់ស្គាល់ ហើយអ្នកប្រើដៃស្ទាបជញ្ជាំងដើម្បីគូសប្លង់បន្ទប់ក្នុងខួរក្បាល ព្រមទាំងដឹងថាខ្លួនឯងកំពុងឈរនៅត្រង់ណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Robot Operating System</span></td>
+                <td>វាមិនមែនជាប្រព័ន្ធប្រតិបត្តិការ (OS) ដូច Windows ទេ ប៉ុន្តែវាជាបណ្តុំកម្មវិធី (Middleware) ដែលជួយសម្រួលដល់ការសរសេរកូដបញ្ជាមនុស្សយន្ត ដោយផ្តល់នូវឧបករណ៍ទំនាក់ទំនង និងកញ្ចប់មុខងារស្រាប់ៗសម្រាប់ឱ្យផ្នែកផ្សេងៗរបស់មនុស្សយន្តធ្វើការជាមួយគ្នា។</td>
+                <td>វាប្រៀបដូចជាអ្នកបកប្រែភាសានិងជាអ្នកសម្របសម្រួលប្រជុំ ដែលជួយឱ្យផ្នែកផ្សេងៗនៃមនុស្សយន្ត (ដូចជាកាមេរ៉ា កង់ និងសេនស័រ) អាចជជែកគ្នាបានយ៉ាងរលូន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Lidar</span></td>
+                <td>ជាបច្ចេកវិទ្យាប្រើប្រាស់ពន្លឺឡាស៊ែរដើម្បីវាស់ចម្ងាយពីឧបករណ៍ទៅវត្ថុផ្សេងៗ ដោយគណនារយៈពេលដែលពន្លឺបាញ់ចេញទៅប៉ះវត្ថុហើយចំណាំងផ្លាតត្រឡប់មកវិញ ដែលជួយបង្កើតជារូបភាព 2D ឬ 3D នៃបរិស្ថានជុំវិញ។</td>
+                <td>វាដំណើរការដូចជាសត្វប្រចៀវដែលបញ្ចេញសំឡេងដើម្បីស្វែងរកទីតាំងវត្ថុអញ្ចឹងដែរ ប៉ុន្តែ Lidar ប្រើប្រាស់ពន្លឺឡាស៊ែរជំនួសឱ្យសំឡេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Zigbee</span></td>
+                <td>ជាពិធីការទំនាក់ទំនងឥតខ្សែ (Wireless Protocol) ដែលប្រើថាមពលទាប និងត្រូវបានរចនាឡើងសម្រាប់ការបញ្ជូនទិន្នន័យក្នុងបរិមាណតិចរវាងឧបករណ៍អេឡិចត្រូនិចផ្សេងៗក្នុងចម្ងាយជិតទៅមធ្យម។</td>
+                <td>វាស្រដៀងនឹង Bluetooth ដែរ ប៉ុន្តែវាផ្តោតលើការសន្សំសំចៃថ្មខ្លាំង និងអាចតភ្ជាប់ឧបករណ៍បានច្រើនក្នុងទម្រង់ជាបណ្តាញសំណាញ់ (Mesh Network) ដូចជាមនុស្សតម្រង់ជួរខ្សឹបប្រាប់តៗគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Odometry</span></td>
+                <td>គឺជាការប្រើប្រាស់ទិន្នន័យពីឧបករណ៍វាស់ចលនា (ដូចជាការវិលរបស់កង់) ដើម្បីប៉ាន់ស្មានការផ្លាស់ប្តូរទីតាំង និងចម្ងាយដែលមនុស្សយន្តបានធ្វើដំណើរធៀបនឹងទីតាំងដើមរបស់វា។</td>
+                <td>វាដូចជាការរាប់ចំនួនជំហានរបស់អ្នកពេលដើរដើម្បីស្មានថាអ្នកបានដើរឆ្ងាយប៉ុណ្ណាពីផ្ទះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sensor Fusion</span></td>
+                <td>គឺជាដំណើរការនៃការប្រមូលផ្តុំ និងគួបបញ្ចូលទិន្នន័យដែលទទួលបានពីសេនស័រច្រើនប្រភេទផ្សេងៗគ្នា ដើម្បីបង្កើតបានជាលទ្ធផលមួយដែលមានភាពជាក់លាក់ និងអាចទុកចិត្តបានជាងការប្រើសេនស័រតែមួយមុខ។</td>
+                <td>វាដូចជាការពឹងផ្អែកលើទាំងភ្នែក (មើល) និងត្រចៀក (ស្តាប់) របស់អ្នក ដើម្បីដឹងប្រាកដថាមានឡានកំពុងបើកមកក្បែរអ្នក ព្រោះបើប្រើតែភ្នែកអ្នកអាចនឹងមើលមិនឃើញបើឡានមកពីក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Node</span></td>
+                <td>នៅក្នុងប្រព័ន្ធ ROS, Node នីមួយៗគឺជាដំណើរការកូដ (Process) តូចមួយដែលទទួលខុសត្រូវលើកិច្ចការតែមួយជាក់លាក់ (ឧទាហរណ៍៖ Node មួយសម្រាប់បញ្ជាកង់, Node មួយទៀតសម្រាប់អានទិន្នន័យ Lidar) ហើយពួកវាអាចទាក់ទងគ្នាទៅវិញទៅមកបានតាមរយៈ Topics។</td>
+                <td>Node ប្រៀបដូចជាបុគ្គលិកម្នាក់ៗនៅក្នុងក្រុមហ៊ុនមួយ ដែលម្នាក់ៗមានជំនាញនិងតួនាទីរៀងៗខ្លួន ប៉ុន្តែត្រូវធ្វើការងារប្រាស្រ័យទាក់ទងគ្នាដើម្បីសម្រេចការងារធំមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Occupancy grid map</span></td>
+                <td>ជាប្រភេទផែនទីដែលប្រើប្រាស់ក្នុងប្រព័ន្ធមនុស្សយន្ត ដែលបែងចែកលំហបរិស្ថានជាក្រឡាតូចៗ (Grid) ហើយក្រឡានីមួយៗផ្ទុកតម្លៃប្រូបាប៊ីលីតេដែលបញ្ជាក់ថាមាន ឬគ្មានវត្ថុរារាំងនៅលើទីតាំងនោះ។</td>
+                <td>វាដូចជាការយកក្រដាសក្រឡាអុកមកគូសប្លង់បន្ទប់ ដោយផាត់ពណ៌ខ្មៅត្រង់ក្រឡាណាដែលមានតុទូ (មិនអាចដើរទម្លុះបាន) និងទុកពណ៌សត្រង់ក្រឡាណាដែលទទេ (អាចដើរបាន)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/astrail-state-of-the-art-automated-driving-2018.html">
+                    <span class="km">D3.1 - ស្ថានភាពបច្ចុប្បន្ននៃបច្ចេកវិទ្យាបើកបរដោយស្វ័យប្រវត្តិ</span><br>
+                    <span class="en article-original-title">D3.1 - State of the Art of Automated Driving technologies</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/status-scope-robotics-agriculture-2016.html">
+                    <span class="km">ស្ថានភាព និងវិសាលភាពនៃមនុស្សយន្តក្នុងវិស័យកសិកម្ម</span><br>
+                    <span class="en article-original-title">Status and Scope of Robotics in Agriculture</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/autonomous-navigation-forest-machines-2002.html">
+                    <span class="km">ការរុករកដោយស្វ័យប្រវត្តិសម្រាប់គ្រឿងចក្រព្រៃឈើ - ការសិក្សាបឋម</span><br>
+                    <span class="en article-original-title">Autonomous Navigation for Forest Machines - a Pre-Study</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/network-aware-marl-adaptive-navigation-2021.html">
+                    <span class="km">ការរៀនពង្រឹងពហុភ្នាក់ងារដែលដឹងពីបណ្តាញសម្រាប់ការរុករកដោយប្រែប្រួលនៃយានយន្តនៅក្នុងបណ្តាញផ្លូវសកម្ម</span><br>
+                    <span class="en article-original-title">NETWORK-AWARE MULTI-AGENT REINFORCEMENT LEARNING FOR ADAPTIVE NAVIGATION OF VEHICLES IN A DYNAMIC ROAD NETWORK</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/iot-gis-data-platforms-agriculture-2022.html">
+                    <span class="km">ដំណោះស្រាយវេទិកាទិន្នន័យ IoT និង GIS ក្នុងវិស័យកសិកម្ម</span><br>
+                    <span class="en article-original-title">IoT and GIS Data Platform Solutions in Agricultural</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hector+SLAM+vs+Gmapping+performance+evaluation+in+ROS" target="_blank" rel="noopener"><span class="en">Hector SLAM vs Gmapping performance evaluation in ROS</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Low-cost+2D+Lidar+mapping+and+localization+for+mobile+robots" target="_blank" rel="noopener"><span class="en">Low-cost 2D Lidar mapping and localization for mobile robots</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Integrating+Zigbee+wireless+networks+with+Robot+Operating+System+%28ROS%29" target="_blank" rel="noopener"><span class="en">Integrating Zigbee wireless networks with Robot Operating System (ROS)</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Obstacle+avoidance+algorithms+for+autonomous+vehicles+using+single-layer+Lidar" target="_blank" rel="noopener"><span class="en">Obstacle avoidance algorithms for autonomous vehicles using single-layer Lidar</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Sensor+fusion+techniques+for+mapping+in+GPS-denied+indoor+environments" target="_blank" rel="noopener"><span class="en">Sensor fusion techniques for mapping in GPS-denied indoor environments</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Future+trends+in+low-compute+SLAM+algorithms+for+embedded+systems" target="_blank" rel="noopener"><span class="en">Future trends in low-compute SLAM algorithms for embedded systems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

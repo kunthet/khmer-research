@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>TinyML-RV: ការបណ្តុះបណ្តាលម៉ូដែលម៉ាស៊ីនរៀនតាមបែប Quantized លើប្រព័ន្ធ RISC-V - TinyML-RV: Quantized Training of Machine Learning Models on RISC-V Platforms | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី TinyML-RV: ការបណ្តុះបណ្តាលម៉ូដែលម៉ាស៊ីនរៀនតាមបែប Quantized ល។ ការរួមបញ្ចូលប្រព័ន្ធម៉ាស៊ីនរៀន (Machine Learning) ទៅក្នុងឧបករណ៍ Edge/IoT ទាមទារថាមពលកុំព្យូទ័រ និ...">
+    
+    <meta name="keywords" content="TinyML, RISC-V, Quantized Training, Edge Computing, Machine Learning, Microcontrollers, L-SGD, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/tinyml-rv-quantized-training-risc-v-2025.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/tinyml-rv-quantized-training-risc-v-2025.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/tinyml-rv-quantized-training-risc-v-2025.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/tinyml-rv-quantized-training-risc-v-2025.html">
+    <meta property="og:title" content="TinyML-RV: ការបណ្តុះបណ្តាលម៉ូដែលម៉ាស៊ីនរៀនតាមបែប Quantized លើប្រព័ន្ធ RISC-V | KhmerResearch.com">
+    <meta property="og:description" content="ការរួមបញ្ចូលប្រព័ន្ធម៉ាស៊ីនរៀន (Machine Learning) ទៅក្នុងឧបករណ៍ Edge/IoT ទាមទារថាមពលកុំព្យូទ័រ និងអង្គចងចាំច្រើន ដែលធ្វើឲ្យមានការលំបាកក្នុងការបណ្តុះបណ្តាលម៉ូដែលដោយផ្ទាល់នៅលើឧបករណ៍ (on-device traini...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2025 University of Minho-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="TinyML">
+    
+    <meta property="article:tag" content="RISC-V">
+    
+    <meta property="article:tag" content="Quantized Training">
+    
+    <meta property="article:tag" content="Edge Computing">
+    
+    <meta property="article:tag" content="Machine Learning">
+    
+    <meta property="article:tag" content="Microcontrollers">
+    
+    <meta property="article:tag" content="L-SGD">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="TinyML-RV: ការបណ្តុះបណ្តាលម៉ូដែលម៉ាស៊ីនរៀនតាមបែប Quantized លើប្រព័ន្ធ RISC-V">
+    <meta name="twitter:description" content="ការរួមបញ្ចូលប្រព័ន្ធម៉ាស៊ីនរៀន (Machine Learning) ទៅក្នុងឧបករណ៍ Edge/IoT ទាមទារថាមពលកុំព្យូទ័រ និងអង្គចងចាំច្រើន ដែលធ្វើឲ្យមានការលំបាកក្នុងការបណ្តុះបណ្តាលម៉ូដែលដោយផ្ទាល់នៅលើឧបករណ៍ (on-device traini...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "TinyML-RV: \u1780\u17b6\u179a\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179a\u17c0\u1793\u178f\u17b6\u1798\u1794\u17c2\u1794 Quantized \u179b\u17be\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 RISC-V",
+      "name": "TinyML-RV: Quantized Training of Machine Learning Models on RISC-V Platforms",
+      "description": "\u1780\u17b6\u179a\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179a\u17c0\u1793 (Machine Learning) \u1791\u17c5\u1780\u17d2\u1793\u17bb\u1784\u17a7\u1794\u1780\u179a\u178e\u17cd Edge/IoT \u1791\u17b6\u1798\u1791\u17b6\u179a\u1790\u17b6\u1798\u1796\u179b\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a \u1793\u17b7\u1784\u17a2\u1784\u17d2\u1782\u1785\u1784\u1785\u17b6\u17c6\u1785\u17d2\u179a\u17be\u1793 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b2\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u178a\u17c4\u1799\u1795\u17d2\u1791\u17b6\u179b\u17cb\u1793\u17c5\u179b\u17be\u17a7\u1794\u1780\u179a\u178e\u17cd (on-device training) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1792\u1793\u1792\u17b6\u1793\u1798\u17b6\u1793\u1780\u1798\u17d2\u179a\u17b7\u178f\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/tinyml-rv-quantized-training-risc-v-2025.html",
+      "author": [{"@type": "Person", "name": "Marcelo Jos\u00e9 Soares Ribeiro (University of Minho)"}],
+      "datePublished": "2025 University of Minho",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "TinyML-RV: Quantized Training of Machine Learning Models on RISC-V Platforms",
+        "url": "https://www.researchgate.net/profile/Marcelo-Ribeiro-49/publication/398285265_TinyML-RV_Quantized_Training_of_Machine_Learning_Models_on_RISC-V_Platforms/links/693058b618a6405a30fabc06/TinyML-RV-Quantized-Training-of-Machine-Learning-Models-on-RISC-V-Platforms.pdf"
+      },
+      "keywords": ["TinyML", "RISC-V", "Quantized Training", "Edge Computing", "Machine Learning", "Microcontrollers", "L-SGD"],
+      "about": "Computer Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TinyML-RV: \u1780\u17b6\u179a\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u179a\u17c0\u1793\u178f\u17b6\u1798\u1794\u17c2\u1794 Quantized \u179b\u17be\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792 RISC-V",
+          "item": "https://khmerresearch.com/papers/technology/tinyml-rv-quantized-training-risc-v-2025.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>TinyML-RV: ការបណ្តុះបណ្តាលម៉ូដែលម៉ាស៊ីនរៀនតាមបែប Quantize...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> TinyML-RV: Quantized Training of Machine Learning Models on RISC-V Platforms<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Marcelo-Ribeiro-49/publication/398285265_TinyML-RV_Quantized_Training_of_Machine_Learning_Models_on_RISC-V_Platforms/links/693058b618a6405a30fabc06/TinyML-RV-Quantized-Training-of-Machine-Learning-Models-on-RISC-V-Platforms.pdf" target="_blank" rel="noopener">www.researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>TinyML-RV: ការបណ្តុះបណ្តាលម៉ូដែលម៉ាស៊ីនរៀនតាមបែប Quantized លើប្រព័ន្ធ RISC-V</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> TinyML-RV: Quantized Training of Machine Learning Models on RISC-V Platforms</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Marcelo José Soares Ribeiro (University of Minho)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2025 University of Minho</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការរួមបញ្ចូលប្រព័ន្ធម៉ាស៊ីនរៀន (Machine Learning) ទៅក្នុងឧបករណ៍ Edge/IoT ទាមទារថាមពលកុំព្យូទ័រ និងអង្គចងចាំច្រើន ដែលធ្វើឲ្យមានការលំបាកក្នុងការបណ្តុះបណ្តាលម៉ូដែលដោយផ្ទាល់នៅលើឧបករណ៍ (on-device training) ដែលមានធនធានមានកម្រិត។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> និក្ខេបបទនេះស្នើឡើងនូវក្របខ័ណ្ឌបណ្តុះបណ្តាលដែលប្រើប្រាស់ធនធានតិចតួច ដោយបញ្ចូលក្បួនដោះស្រាយ Lightweight Stochastic Gradient Descent (L-SGD) ជាមួយនឹងបណ្ណាល័យ PULP-NN ។
+        
+        <ul>
+            
+            <li>ការអនុវត្តក្បួនដោះស្រាយការបណ្តុះបណ្តាលកម្រិតស្រាល (Lightweight Stochastic Gradient Descent - L-SGD)</li>
+            
+            <li>ការបណ្តុះបណ្តាលតាមបែបបរិមាណកម្មទិន្នន័យ 8-bit (int8 Quantized Training)</li>
+            
+            <li>ការវាយតម្លៃប្រៀបធៀបផ្នែកស្ថាបត្យកម្មប្រព័ន្ធ (Architectural evaluation on ARM and RISC-V)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការបណ្តុះបណ្តាលតាមបែប Quantized បានកាត់បន្ថយការប្រើប្រាស់អង្គចងចាំរហូតដល់ ១.៦ ដង (1.6x memory reduction)។</li>
+            
+            <li>ការអនុវត្តនេះជួយធ្វើឲ្យប្រសើរឡើងនូវល្បឿនប្រតិបត្តិការ ដោយកាត់បន្ថយភាពយឺតយ៉ាវរហូតដល់ ២.២ ដង (2.2x latency improvement)។</li>
+            
+            <li>ទោះបីជាដំណើរការលើប្រព័ន្ធ RISC-V ដែលគ្មាន Floating-Point Unit (FPU) ក៏ដោយ ក៏ម៉ូដែលនៅតែរក្សាបាននូវភាពត្រឹមត្រូវខ្ពស់ប្រហាក់ប្រហែលនឹងការប្រើប្រាស់ប្រព័ន្ធ 32-bit (float32) ដដែល។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">ARM Float32 L-SGD (Baseline)</span></strong><br>វិធីសាស្ត្រ ARM Float32 L-SGD (គោល)</td>
+                <td>មានដំណើរការលឿនក្នុងវគ្គ Forward Pass ដោយសារមានអង្គគណនា Floating-Point Unit (FPU) គាំទ្រផ្ទាល់ពីផ្នែករឹង (Hardware)។</td>
+                <td>ប្រើប្រាស់អង្គចងចាំច្រើន និងស៊ីថាមពលអគ្គិសនីខ្ពស់ ដែលមិនសូវស័ក្តិសមសម្រាប់ឧបករណ៍ខ្នាតតូចប្រភេទ Ultra-low power នោះទេ។</td>
+                <td>ប្រើប្រាស់រយៈពេល ៤.៧៩ms និងទទួលបានភាពត្រឹមត្រូវ ៩០.៦០% លើសំណុំទិន្នន័យ CogDist។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">RISC-V Float32 L-SGD (Optimized)</span></strong><br>វិធីសាស្ត្រ RISC-V Float32 L-SGD (ដែលបានធ្វើឲ្យប្រសើរ)</td>
+                <td>អាចដំណើរការបាននៅលើប្រព័ន្ធដែលគ្មាន FPU តាមរយៈការប្រើប្រាស់បណ្ណាល័យគណិតវិទ្យាជំនួស (fast_math.h) ប្រកបដោយប្រសិទ្ធភាព។</td>
+                <td>មានដំណើរការយឺតជាងប្រព័ន្ធ ARM (ដែលមាន FPU) ដោយសារប្រតិបត្តិការគណនា Float ត្រូវក្លែងធ្វើ (Emulate) តាមរយៈកម្មវិធីកូដ។</td>
+                <td>ប្រើប្រាស់រយៈពេល ១៧ms ជាមួយនឹងភាពត្រឹមត្រូវ ៩២.៩៦% លើសំណុំទិន្នន័យ CogDist។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">RISC-V Int8 Quantized L-SGD</span></strong><br>វិធីសាស្ត្រ RISC-V Int8 Quantized L-SGD</td>
+                <td>កាត់បន្ថយការប្រើប្រាស់អង្គចងចាំបានរហូតដល់ ១.៦ ដង និងមានល្បឿនប្រតិបត្តិការលឿនជាង Float32 ដល់ទៅ ២.២ ដង។</td>
+                <td>អាចប្រឈមនឹងបញ្ហា Saturation ធ្វើឲ្យប៉ះពាល់ដល់ភាពត្រឹមត្រូវ ប្រសិនបើបណ្តុះបណ្តាលម៉ូដែលពីចំណុចសូន្យ (ទាមទារការប្រើម៉ូដែល Pre-trained)។</td>
+                <td>ប្រើប្រាស់រយៈពេលត្រឹមតែ ៩ms ខណៈភាពត្រឹមត្រូវកើនដល់ ៩៦.០០% លើសំណុំទិន្នន័យ CogDist។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តគម្រោងនេះទាមទារនូវឧបករណ៍ Hardware ជាក់លាក់ និងកម្មវិធីកូដកម្រិតទាប ព្រមទាំងសំណុំទិន្នន័យសម្រាប់ការសាកល្បង និងចំណេះដឹងផ្នែក C/C++។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> បន្ទះឈីប RISC-V GAP-8 V1 (Gapuino Model 1.0) និង ARM Cortex-M7 (STM32F767-ZI)។</li>
+        
+        <li><strong>Software:</strong> បណ្ណាល័យ PULP-NN, CMSIS-NN, TensorFlow ព្រមទាំងកម្មវិធីបម្លែងកូដ (Compilers) ដូចជា riscv32-unknown-elf-gcc និង arm-none-eabi-gcc។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យ CogDist សម្រាប់ការចាប់សញ្ញាវត្តមាន និង CarEvaluation សម្រាប់ការចាត់ថ្នាក់យានយន្ត។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងស៊ីជម្រៅផ្នែកសរសេរកូដ C/C++ ចំណេះដឹងផ្នែកស្ថាបត្យកម្មកុំព្យូទ័រ (Computer Architecture) និង Machine Learning នៅលើ Edge Devices។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យទូទៅដូចជា CogDist និង CarEvaluation ដើម្បីវាស់ស្ទង់ដំណើរការនៃស្ថាបត្យកម្មកុំព្យូទ័រ ដោយមិនបានផ្តោតលើភាពលម្អៀងនៃទិន្នន័យ (Data Bias) នោះទេ។ សម្រាប់ការយកមកអនុវត្តនៅប្រទេសកម្ពុជា ការប្រមូលសំណុំទិន្នន័យជាក់ស្តែងក្នុងស្រុក (Local Data) ជារឿងចាំបាច់ ព្រោះអាកប្បកិរិយា ឬទិន្នន័យបរិស្ថាននៅកម្ពុជាអាចមានលក្ខណៈខុសប្លែកពីទិន្នន័យគោល ដែលតម្រូវឲ្យមានការបណ្តុះបណ្តាលម៉ូដែលសាជាថ្មី (Fine-tuning)។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យា TinyML និងស្ថាបត្យកម្ម RISC-V នេះមានសក្តានុពលខ្ពស់ខ្លាំងសម្រាប់ការអភិវឌ្ឍប្រព័ន្ធឆ្លាតវៃនៅកម្ពុជា ជាពិសេសនៅក្នុងតំបន់ដែលមានធនធាន និងការតភ្ជាប់អ៊ីនធឺណិតមានកម្រិត។</p>
+        
+        <ul>
+            
+            <li><strong>កសិកម្មឆ្លាតវៃនៅតាមបណ្តាខេត្ត (Smart Agriculture):</strong> ការប្រើប្រាស់ឧបករណ៍ IoT ជាមួយបច្ចេកវិទ្យា TinyML ដើម្បីតាមដានសំណើមដី និងអាកាសធាតុនៅខេត្តកសិកម្មដូចជាបាត់ដំបង ដោយអាចធ្វើការវិភាគទិន្នន័យនិងបញ្ជាម៉ាស៊ីនបូមទឹកដោយស្វ័យប្រវត្តិមិនបាច់ពឹងផ្អែកលើអ៊ីនធឺណិត។</li>
+            
+            <li><strong>វិស័យសុខាភិបាលតំបន់ដាច់ស្រយាល (Remote Healthcare):</strong> ការប្រើប្រាស់ឧបករណ៍តាមដានសុខភាពដែលអាចពាក់បាន (Wearables) សំរាប់វិភាគទិន្នន័យចង្វាក់បេះដូងអ្នកជំងឺភ្លាមៗនៅលើឧបករណ៍ផ្ទាល់ នៅតាមតំបន់ដែលគ្មានបណ្តាញទូរស័ព្ទដូចជាខេត្តរតនគិរី ឬមណ្ឌលគិរី។</li>
+            
+            <li><strong>ប្រព័ន្ធត្រួតពិនិត្យចរាចរណ៍ (Smart Traffic Monitoring):</strong> ការបំពាក់កាមេរ៉ា AI ខ្នាតតូចតម្លៃថោកនៅតាមស្តុបចរាចរណ៍ក្នុងរាជធានីភ្នំពេញ ដើម្បីរាប់ចំនួនយានយន្ត និងគ្រប់គ្រងភ្លើងស្តុបដោយស្វ័យប្រវត្តិក្នុងពេលជាក់ស្តែង។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការបណ្តុះបណ្តាលម៉ូដែល AI ដោយផ្ទាល់លើឧបករណ៍ខ្នាតតូច ផ្តល់លទ្ធភាពឲ្យស្ថាប័នកម្ពុជាអាចបង្កើតដំណោះស្រាយបច្ចេកវិទ្យាដែលមានតម្លៃថោក សន្សំសំចៃថាមពលអគ្គិសនី និងរក្សាបាននូវឯកជនភាពទិន្នន័យកម្រិតខ្ពស់។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ TinyML និង Edge Computing:</strong> និស្សិតគួរចាប់ផ្តើមសិក្សាពី <span class="en">TensorFlow Lite for Microcontrollers</span> តាមរយៈវគ្គសិក្សាអនឡាញ (ឧទាហរណ៍៖ <span class="en">Coursera TinyML Specialization</span> របស់សាកលវិទ្យាល័យហាវឺដ) ដើម្បីយល់ពីរបៀបដាក់ដំណើរការម៉ូដែល AI លើឧបករណ៍ Microcontrollers។</li>
+            
+            <li><strong>ស្វែងយល់ពីស្ថាបត្យកម្ម RISC-V និងការសរសេរកូដ C/C++:</strong> សិក្សាស៊ីជម្រៅពីប្រព័ន្ធ <span class="en">Instruction Set Architecture (ISA)</span> របស់ <span class="en">RISC-V</span> និងការសរសេរកូដកម្រិតទាប (Low-level C/C++) សម្រាប់ការគ្រប់គ្រងអង្គចងចាំ និងការបង្កើនល្បឿនប្រតិបត្តិការដោយមិនប្រើ Floating-Point Unit។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេស Model Quantization:</strong> រៀនបម្លែងទំហំទិន្នន័យម៉ូដែលពី <span class="en">Float32</span> ទៅជា <span class="en">Int8</span> តាមរយៈវិធីសាស្ត្រ <span class="en">Post-Training Quantization (PTQ)</span> និង <span class="en">Quantization-Aware Training (QAT)</span> ដើម្បីសន្សំសំចៃទំហំអង្គចងចាំ (RAM/ROM)។</li>
+            
+            <li><strong>សាកល្បងដំណើរការលើ Hardware ពិតប្រាកដ ឬ Emulators:</strong> ទិញឧបករណ៍ដូចជា <span class="en">STM32 Nucleo</span> ឬ <span class="en">GAP-8 Board</span> មកសាកល្បងផ្ទាល់។ ប្រសិនបើគ្មានថវិកា អាចប្រើប្រាស់កម្មវិធីក្លែងធ្វើដូចជា <span class="en">Renode</span> ឬ <span class="en">QEMU</span> ដើម្បីសាកល្បងកូដ <span class="en">RISC-V</span> នៅលើកុំព្យូទ័ររបស់អ្នក។</li>
+            
+            <li><strong>អភិវឌ្ឍក្បួនដោះស្រាយ On-device Training:</strong> សាកល្បងសរសេរកូដ <span class="en">Lightweight Stochastic Gradient Descent (L-SGD)</span> ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">PULP-NN</span> និង <span class="en">CMSIS-NN</span> ដើម្បីធ្វើឲ្យឧបករណ៍របស់អ្នកអាចរៀនសូត្រពីទិន្នន័យថ្មីៗដោយខ្លួនឯង ដោយមិនបាច់ពឹងផ្អែកលើ Cloud ឡើយ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Quantization</span></td>
+                <td>គឺជាដំណើរការនៃការបម្លែងទិន្នន័យម៉ូដែលម៉ាស៊ីនរៀនពីទម្រង់ដែលមានទំហំធំ (ដូចជា 32-bit floating-point) ទៅជាទម្រង់តូចជាង (ដូចជា 8-bit integer) ដើម្បីសន្សំសំចៃអង្គចងចាំ និងជួយឲ្យដំណើរការគណនាលឿនជាងមុននៅលើឧបករណ៍ដែលមានធនធានមានកម្រិត។</td>
+                <td>ដូចជាការបង្រួមរូបភាពទំហំធំ (HD) ទៅជារូបភាពតូចជាងមុន (SD) ដើម្បីងាយស្រួលផ្ញើ ឬរក្សាទុក តែអ្នកនៅតែអាចមើលដឹងថារូបនោះជារូបអ្វី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">TinyML</span></td>
+                <td>ជាបច្ចេកវិទ្យាដែលអនុញ្ញាតឲ្យដំណើរការប្រព័ន្ធបញ្ញាសិប្បនិម្មិត (AI) និងម៉ាស៊ីនរៀន (ML) ដោយផ្ទាល់នៅលើឧបករណ៍អេឡិចត្រូនិកខ្នាតតូចបំផុត (Microcontrollers) ដែលស៊ីថាមពលថ្មតិច និងមិនទាមទារការតភ្ជាប់អ៊ីនធឺណិត។</td>
+                <td>ដូចជាការដាក់ខួរក្បាលឆ្លាតវៃខ្នាតតូចមួយទៅក្នុងនាឡិកាដៃ ឬសេនស័រ ដើម្បីឲ្យវាអាចគិតនិងសម្រេចចិត្តដោយខ្លួនឯងបានភ្លាមៗដោយមិនបាច់សួរទៅម៉ាស៊ីនមេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">RISC-V</span></td>
+                <td>គឺជាស្ថាបត្យកម្មកុំព្យូទ័រប្រភេទកូដបើកចំហ (Open-source Instruction Set Architecture) ដែលអនុញ្ញាតឲ្យអ្នកអភិវឌ្ឍន៍អាចយកទៅរចនាបន្ទះឈីបដោយសេរី ងាយស្រួលកែច្នៃ និងសន្សំសំចៃថាមពល ជាពិសេសសម្រាប់ឧបករណ៍ IoT។</td>
+                <td>ដូចជាប្លង់សាងសង់ផ្ទះដែលអាចទាញយកមកប្រើដោយឥតគិតថ្លៃ ហើយអ្នកអាចកែច្នៃបន្ថែមបន្ទប់ ឬបន្ថយទំហំតាមតម្រូវការជាក់ស្តែងរបស់អ្នក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stochastic Gradient Descent (SGD)</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់បណ្តុះបណ្តាលម៉ូដែលដោយវាធ្វើការកែសម្រួលទម្ងន់ (Weights) របស់ម៉ូដែលបន្តិចម្តងៗ ដោយផ្អែកលើការគណនាកំហុស ដើម្បីឲ្យម៉ូដែលទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុត។ L-SGD គឺជាទម្រង់កាត់បន្ថយទំហំរបស់វាសម្រាប់ប្រើលើឧបករណ៍តូចៗ។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលបិទភ្នែកដើរចុះភ្នំ ដោយប្រើជើងស្ទាបរកផ្លូវដែលទេរចុះក្រោមបន្តិចម្តងៗ រហូតដល់អាចដើរទៅដល់ចំណុចទាបបំផុតនៃជ្រលងភ្នំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Floating-Point Unit (FPU)</span></td>
+                <td>ជាផ្នែកមួយនៃខួរក្បាលកុំព្យូទ័រ (Hardware) ដែលមានតួនាទីពិសេសសម្រាប់ធ្វើការគណនាលេខទសភាគ (លេខមានក្បៀស) យ៉ាងលឿន។ ប្រព័ន្ធកុំព្យូទ័រដែលគ្មាន FPU ត្រូវប្រើកម្មវិធីកូដដើម្បីក្លែងធ្វើការគណនា ដែលធ្វើឲ្យស៊ីពេលយូរជាងមុន។</td>
+                <td>ដូចជាការប្រើម៉ាស៊ីនគិតលេខដើម្បីបូកដកលេខក្បៀសវែងៗ ប្រៀបធៀបនឹងការអង្គុយគិតលេខនោះដោយប្រើក្រដាសនិងប៊ិច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gradient Saturation</span></td>
+                <td>ជាបញ្ហាដែលកើតឡើងនៅពេលបណ្តុះបណ្តាលម៉ូដែលដោយប្រើទិន្នន័យខ្នាតតូច (int8) ដែលធ្វើឲ្យតម្លៃនៃការផ្លាស់ប្តូរធំពេក រហូតដល់ហួសដែនកំណត់អតិបរមានៃ 8-bit ទើបតម្លៃនោះត្រូវកាត់ត្រឹមស្មើគ្នា ដែលធ្វើឲ្យម៉ូដែលបាត់បង់ព័ត៌មាននិងឈប់រៀនសូត្របន្ត។</td>
+                <td>ដូចជាការចាក់ទឹកចូលក្នុងកែវតូចមួយ បើចាក់ទឹកច្រើនពេកវានឹងហៀរចេញ ហើយយើងមិនដឹងថាបរិមាណទឹកដែលហៀរចេញនោះមានប៉ុន្មានពិតប្រាកដនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Federated Learning</span></td>
+                <td>គឺជាវិធីសាស្ត្របណ្តុះបណ្តាលម៉ាស៊ីនរៀន ដោយឲ្យឧបករណ៍នីមួយៗរៀនពីទិន្នន័យរបស់ខ្លួនផ្ទាល់ រួចបញ្ជូនតែលទ្ធផលនៃការរៀន (Model Updates) ទៅកាន់ម៉ាស៊ីនកណ្តាល ដោយមិនបញ្ជូនទិន្នន័យឯកជន (Raw Data) ឡើយ ដើម្បីរក្សាឯកជនភាព។</td>
+                <td>ដូចជាសិស្សម្នាក់ៗធ្វើលំហាត់នៅផ្ទះរៀងខ្លួន រួចផ្ញើតែចម្លើយចុងក្រោយទៅគ្រូដើម្បីបូកសរុប ដោយមិនចាំបាច់យកសៀវភៅព្រាងទៅឲ្យគ្រូមើលនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Backpropagation</span></td>
+                <td>គឺជាដំណើរការបញ្ជូនកំហុសត្រឡប់ថយក្រោយនៅក្នុងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Neural Network) ដើម្បីប្រាប់ស្រទាប់នីមួយៗឲ្យដឹងពីទំហំកំហុសរបស់ខ្លួន និងធ្វើការកែតម្រូវទម្ងន់ទិន្នន័យសម្រាប់ការទស្សន៍ទាយលើកក្រោយឲ្យកាន់តែសុក្រឹត។</td>
+                <td>ដូចជាថៅកែប្រាប់កំហុសទៅអ្នកចាត់ការ ហើយអ្នកចាត់ការប្រាប់បន្តទៅបុគ្គលិក ដើម្បីឲ្យអ្នកគ្រប់គ្នាជួយកែតម្រូវចំណុចខ្សោយរៀងៗខ្លួនសម្រាប់គម្រោងក្រោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/advancing-microcontroller-technology-saarc-2024.html">
+                    <span class="km">របាយការណ៍ស្រាវជ្រាវស្តីពី៖ ការលើកកម្ពស់បច្ចេកវិទ្យាមីក្រូកុងត្រូល័រ៖ បញ្ហាប្រឈម នវានុវត្តន៍ និងការអនុវត្ត</span><br>
+                    <span class="en article-original-title">RESEARCH REPORT ON: ADVANCING MICROCONTROLLER TECHNOLOGY: CHALLENGES, INNOVATIONS, AND APPLICATIONS</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/exploring-efficient-hardware-ai-acceleration-tinyml-2025.html">
+                    <span class="km">ការស្វែងយល់ពីផ្នែករឹងដែលមានប្រសិទ្ធភាពសម្រាប់ការបង្កើនល្បឿន AI នៅក្នុង TinyML</span><br>
+                    <span class="en article-original-title">Exploring Efficient Hardware for AI Acceleration in TinyML</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/digital-twins-iot-predictive-maintenance-2024.html">
+                    <span class="km">កូនភ្លោះឌីជីថល (Digital Twins) និង IoT៖ សករាជថ្មីសម្រាប់ការថែទាំបែបព្យាករណ៍ក្នុងវិស័យផលិតកម្ម</span><br>
+                    <span class="en article-original-title">Digital Twins & IoT: A New Era for Predictive Maintenance in Manufacturing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/impact-ai-iot-edge-energy-efficiency-2025.html">
+                    <span class="km">ឥទ្ធិពលនៃការវិភាគទិន្នន័យផ្អែកលើអ៊ីនធឺណិតនៃវត្ថុ (IoT) កុំព្យូទ័រជាយ (Edge Computing) និងបញ្ញាសិប្បនិម្មិត (AI) ទៅលើប្រសិទ្ធភាពថាមពលក្នុងបរិស្ថានឆ្លាតវៃ</span><br>
+                    <span class="en article-original-title">The Impact of Data Analytics Based on Internet of Things, Edge Computing, and Artificial Intelligence on Energy Efficiency in Smart Environment</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/smart-agriculture-iot-edge-ai-framework-2025.html">
+                    <span class="km">ក្របខ័ណ្ឌទូលំទូលាយសម្រាប់កសិកម្មឆ្លាតវៃ៖ ការរួមបញ្ចូល IoT, Edge Computing, និង AI សម្រាប់ការគ្រប់គ្រងដំណាំដែលអាចពង្រីកបាន តម្លាភាព និងប្រែប្រួលតាមកាលៈទេសៈ</span><br>
+                    <span class="en article-original-title">A Comprehensive Framework for Smart Agriculture: Integrating IoT, Edge Computing, and AI for Scalable, Transparent, and Adaptive Crop Management</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=on-device+machine+learning+training+algorithms+for+microcontrollers" target="_blank" rel="noopener"><span class="en">on-device machine learning training algorithms for microcontrollers</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=8-bit+quantized+backpropagation+and+mitigation+of+gradient+saturation" target="_blank" rel="noopener"><span class="en">8-bit quantized backpropagation and mitigation of gradient saturation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=RISC-V+vector+extensions+%28RVV%29+for+TinyML+hardware+acceleration" target="_blank" rel="noopener"><span class="en">RISC-V vector extensions (RVV) for TinyML hardware acceleration</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=PULP-NN+vs+CMSIS-NN+performance+comparison+for+edge+AI" target="_blank" rel="noopener"><span class="en">PULP-NN vs CMSIS-NN performance comparison for edge AI</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Federated+learning+frameworks+for+memory-constrained+IoT+devices" target="_blank" rel="noopener"><span class="en">Federated learning frameworks for memory-constrained IoT devices</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Lightweight+Stochastic+Gradient+Descent+%28L-SGD%29+optimization+techniques" target="_blank" rel="noopener"><span class="en">Lightweight Stochastic Gradient Descent (L-SGD) optimization techniques</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

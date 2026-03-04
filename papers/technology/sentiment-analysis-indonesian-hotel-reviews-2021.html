@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការវិភាគមនោសញ្ចេតនាលើការវាយតម្លៃសណ្ឋាគារនៅឥណ្ឌូនេស៊ី៖ ពីការរៀនម៉ាស៊ីនបែបបុរាណរហូតដល់ការរៀនស៊ីជម្រៅ - Sentiment analysis of Indonesian hotel reviews: from classical machine learni... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការវិភាគមនោសញ្ចេតនាលើការវាយតម្លៃសណ្ឋាគារនៅឥណ្ឌូនេស៊ី៖ ពីការរ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគទិន្នន័យវាយតម្លៃសណ្ឋាគារដ៏ច្រើនសន្ធឹកសន្ធាប់នៅលើប្រព័ន្ធអ៊ីនធឺណិត ...">
+    
+    <meta name="keywords" content="Sentiment Analysis, Word2Vec, Convolutional Neural Network, Classical Machine Learning, Indonesian Text, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/sentiment-analysis-indonesian-hotel-reviews-2021.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/sentiment-analysis-indonesian-hotel-reviews-2021.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/sentiment-analysis-indonesian-hotel-reviews-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/sentiment-analysis-indonesian-hotel-reviews-2021.html">
+    <meta property="og:title" content="ការវិភាគមនោសញ្ចេតនាលើការវាយតម្លៃសណ្ឋាគារនៅឥណ្ឌូនេស៊ី៖ ពីការរៀនម៉ាស៊ីនបែបបុរាណរហូតដល់ការរៀនស៊ីជម្រៅ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគទិន្នន័យវាយតម្លៃសណ្ឋាគារដ៏ច្រើនសន្ធឹកសន្ធាប់នៅលើប្រព័ន្ធអ៊ីនធឺណិត (Traveloka) ដើម្បីបែងចែកជាមតិវិជ្ជមាន ឬអវិជ្ជមានដោយស្វ័យប្រវត្តិ ដោយផ្តោតលើភាសាឥណ្ឌូនេស៊ីដែលមានរចនាស...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2021 International Journal of Advances in Intelligent Informatics-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Sentiment Analysis">
+    
+    <meta property="article:tag" content="Word2Vec">
+    
+    <meta property="article:tag" content="Convolutional Neural Network">
+    
+    <meta property="article:tag" content="Classical Machine Learning">
+    
+    <meta property="article:tag" content="Indonesian Text">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការវិភាគមនោសញ្ចេតនាលើការវាយតម្លៃសណ្ឋាគារនៅឥណ្ឌូនេស៊ី៖ ពីការរៀនម៉ាស៊ីនបែបបុរាណរហូតដល់ការរៀនស៊ីជម្រៅ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគទិន្នន័យវាយតម្លៃសណ្ឋាគារដ៏ច្រើនសន្ធឹកសន្ធាប់នៅលើប្រព័ន្ធអ៊ីនធឺណិត (Traveloka) ដើម្បីបែងចែកជាមតិវិជ្ជមាន ឬអវិជ្ជមានដោយស្វ័យប្រវត្តិ ដោយផ្តោតលើភាសាឥណ្ឌូនេស៊ីដែលមានរចនាស...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u179b\u17be\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179f\u178e\u17d2\u178b\u17b6\u1782\u17b6\u179a\u1793\u17c5\u17a5\u178e\u17d2\u178c\u17bc\u1793\u17c1\u179f\u17ca\u17b8\u17d6 \u1796\u17b8\u1780\u17b6\u179a\u179a\u17c0\u1793\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1794\u17c2\u1794\u1794\u17bb\u179a\u17b6\u178e\u179a\u17a0\u17bc\u178f\u178a\u179b\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5",
+      "name": "Sentiment analysis of Indonesian hotel reviews: from classical machine learning to deep learning",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179f\u178e\u17d2\u178b\u17b6\u1782\u17b6\u179a\u178a\u17cf\u1785\u17d2\u179a\u17be\u1793\u179f\u1793\u17d2\u1792\u17b9\u1780\u179f\u1793\u17d2\u1792\u17b6\u1794\u17cb\u1793\u17c5\u179b\u17be\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u17a2\u17ca\u17b8\u1793\u1792\u17ba\u178e\u17b7\u178f (Traveloka) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u17c2\u1784\u1785\u17c2\u1780\u1787\u17b6\u1798\u178f\u17b7\u179c\u17b7\u1787\u17d2\u1787\u1798\u17b6\u1793 \u17ac\u17a2\u179c\u17b7\u1787\u17d2\u1787\u1798\u17b6\u1793\u178a\u17c4\u1799\u179f\u17d2\u179c\u17d0\u1799\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7 \u178a\u17c4\u1799\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1797\u17b6\u179f\u17b6\u17a5\u178e\u17d2\u178c\u17bc\u1793\u17c1\u179f\u17ca\u17b8\u178a\u17c2\u179b\u1798\u17b6\u1793\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u1781\u17bb\u179f\u1796\u17b8\u1797\u17b6\u179f\u17b6\u17a2\u1784\u17cb\u1782\u17d2\u179b\u17c1\u179f\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/sentiment-analysis-indonesian-hotel-reviews-2021.html",
+      "author": [{"@type": "Person", "name": "Retno Kusumaningrum (Universitas Diponegoro)"},{"@type": "Person", "name": "Iffa Zainan Nisa (Universitas Diponegoro)"},{"@type": "Person", "name": "Rizka Putri Nawangsari (Universitas Diponegoro)"},{"@type": "Person", "name": "Adi Wibowo (Universitas Diponegoro)"}],
+      "datePublished": "2021 International Journal of Advances in Intelligent Informatics",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Sentiment analysis of Indonesian hotel reviews: from classical machine learning to deep learning",
+        "url": "https://doi.org/10.26555/ijain.v7i3.737"
+      },
+      "keywords": ["Sentiment Analysis", "Word2Vec", "Convolutional Neural Network", "Classical Machine Learning", "Indonesian Text"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179c\u17b7\u1797\u17b6\u1782\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u179b\u17be\u1780\u17b6\u179a\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u179f\u178e\u17d2\u178b\u17b6\u1782\u17b6\u179a\u1793\u17c5\u17a5\u178e\u17d2\u178c\u17bc\u1793\u17c1\u179f\u17ca\u17b8\u17d6 \u1796\u17b8\u1780\u17b6\u179a\u179a\u17c0\u1793\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1794\u17c2\u1794\u1794\u17bb\u179a\u17b6\u178e\u179a\u17a0\u17bc\u178f\u178a\u179b\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5",
+          "item": "https://khmerresearch.com/papers/technology/sentiment-analysis-indonesian-hotel-reviews-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការវិភាគមនោសញ្ចេតនាលើការវាយតម្លៃសណ្ឋាគារនៅឥណ្ឌូនេស៊ី៖ ពីក...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Sentiment analysis of Indonesian hotel reviews: from classical machine learning to deep learning<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.26555/ijain.v7i3.737" target="_blank" rel="noopener">doi.org/10.26555/ijain.v7i3.737</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការវិភាគមនោសញ្ចេតនាលើការវាយតម្លៃសណ្ឋាគារនៅឥណ្ឌូនេស៊ី៖ ពីការរៀនម៉ាស៊ីនបែបបុរាណរហូតដល់ការរៀនស៊ីជម្រៅ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Sentiment analysis of Indonesian hotel reviews: from classical machine learning to deep learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Retno Kusumaningrum (Universitas Diponegoro), Iffa Zainan Nisa (Universitas Diponegoro), Rizka Putri Nawangsari (Universitas Diponegoro), Adi Wibowo (Universitas Diponegoro)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021 International Journal of Advances in Intelligent Informatics</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការវិភាគទិន្នន័យវាយតម្លៃសណ្ឋាគារដ៏ច្រើនសន្ធឹកសន្ធាប់នៅលើប្រព័ន្ធអ៊ីនធឺណិត (Traveloka) ដើម្បីបែងចែកជាមតិវិជ្ជមាន ឬអវិជ្ជមានដោយស្វ័យប្រវត្តិ ដោយផ្តោតលើភាសាឥណ្ឌូនេស៊ីដែលមានរចនាសម្ព័ន្ធខុសពីភាសាអង់គ្លេស។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រៀបធៀបដំណើរការរវាងក្បួនដោះស្រាយម៉ាស៊ីនរៀនបែបបុរាណ និងវិធីសាស្ត្ររៀនស៊ីជម្រៅ ដោយប្រើប្រាស់សំណុំទិន្នន័យវាយតម្លៃចំនួន ២៥០០។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យ និងការធ្វើចំណាត់ថ្នាក់អត្ថបទ (Data Collection & Labeling)</li>
+            
+            <li>ដំណើរការរៀបចំទិន្នន័យអត្ថបទជាមុន (Preprocessing, Tokenization & Stemming)</li>
+            
+            <li>ការបំប្លែងពាក្យទៅជាវ៉ិចទ័រដោយប្រើម៉ូដែល (Word2Vec Model)</li>
+            
+            <li>ការវាយតម្លៃម៉ូដែលរៀនម៉ាស៊ីនបុរាណ (LR, NB, SVM)</li>
+            
+            <li>ការអភិវឌ្ឍនិងសាកល្បងបណ្ដាញសរសៃប្រសាទ (Convolutional Neural Network - CNN)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រ CNN ដែលមានទម្រង់ស្ថាបត្យកម្មទី៣ រួមផ្សំជាមួយ dropout 0.2 និង Adam optimizer ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុតរហូតដល់ 98.08%។</li>
+            
+            <li>ម៉ូដែលរៀនម៉ាស៊ីនបែបបុរាណដែលល្អជាងគេគឺ Logistic Regression (LR) ដែលទទួលបានភាពត្រឹមត្រូវត្រឹមតែ 54.4% ប៉ុណ្ណោះ។</li>
+            
+            <li>ការប្រើប្រាស់បច្ចេកវិទ្យារៀនស៊ីជម្រៅផ្តល់លទ្ធផលល្អប្រសើរជាងការរៀនម៉ាស៊ីនបែបបុរាណ ព្រោះវាមានសមត្ថភាពខ្ពស់ក្នុងការចាប់យកអត្ថន័យទូលំទូលាយនៃពាក្យក្នុងអត្ថបទភាសាឥណ្ឌូនេស៊ីតាមរយៈស្រទាប់ក្បួនដោះស្រាយរបស់វា។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Logistic Regression (LR) + Word2Vec</span></strong><br>ការរៀនម៉ាស៊ីនបែបបុរាណ Logistic Regression</td>
+                <td>មានភាពងាយស្រួលក្នុងការប្រើប្រាស់ និងមានដំណើរការល្អសម្រាប់ការចាត់ថ្នាក់ទិន្នន័យជាពីរក្រុម (Binary classification)។</td>
+                <td>បង្កើតលទ្ធផលមិនល្អឥតខ្ចោះនៅពេលខ្វះខាតលក្ខណៈពិសេស (Features) ឬនៅពេលមានលក្ខណៈពិសេសច្រើនពេកនៅក្នុងអត្ថបទ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវជាមធ្យមទាបត្រឹមតែ 54.4% ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Naïve Bayes (NB) + Word2Vec</span></strong><br>ចំណាត់ថ្នាក់ Naïve Bayes</td>
+                <td>ជាវិធីសាស្ត្រសាមញ្ញដែលមានប្រសិទ្ធភាពក្នុងការទស្សន៍ទាយផ្អែកលើប្រូបាប៊ីលីតេនៃបទពិសោធន៍កន្លងមក។</td>
+                <td>ងាយរងឥទ្ធិពល និងមានភាពរសើបខ្លាំងទៅនឹងការជ្រើសរើសលក្ខណៈពិសេស (Feature selection)។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវទាបបំផុតគឺ 53.8%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Support Vector Machine (SVM) + Word2Vec</span></strong><br>ម៉ូដែល Support Vector Machine</td>
+                <td>មានសមត្ថភាពក្នុងការស្វែងរកបន្ទាត់ព្រំដែន (Hyperplane) ដែលផ្តល់គម្លាតអតិបរមាសម្រាប់ការបែងចែកចំណាត់ថ្នាក់។</td>
+                <td>ជួបការលំបាកក្នុងការជ្រើសរើសលក្ខណៈពិសេសជាក់លាក់សម្រាប់បញ្ចូលក្នុងម៉ូដែលដោយប្រើវិធីសាស្ត្ររៀនម៉ាស៊ីនបុរាណ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវត្រឹមតែ 54.2%។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Convolutional Neural Network (CNN Architecture 3) + Word2Vec</span></strong><br>បណ្ដាញសរសៃប្រសាទខួរក្បាល (CNN) ទម្រង់ស្ថាបត្យកម្មទី៣</td>
+                <td>អាចរៀន និងចាប់យកអត្ថន័យស៊ីជម្រៅនៃពាក្យបានយ៉ាងល្អិតល្អន់ តាមរយៈទម្រង់ក្បួនដោះស្រាយច្រើនស្រទាប់ និងដំណើរការលឿនជាងម៉ូដែលអត្ថបទផ្សេងទៀត (ដូចជា LSTM)។</td>
+                <td>ត្រូវការទិន្នន័យច្រើនដើម្បីដំណើរការបានល្អ (មិនសូវមានប្រសិទ្ធភាពលើទិន្នន័យតូច) និងទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រឲ្យបានត្រឹមត្រូវ ដូចជាការកំណត់ Dropout ជាដើម ដើម្បីជៀសវាងការបាត់បង់អត្ថន័យ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុតរហូតដល់ 98.08% (ប្រើប្រាស់ Dropout 0.2, Tanh, Softmax និង Adam Optimizer)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារនេះមិនបានបញ្ជាក់លម្អិតអំពីតម្លៃ ឬការចំណាយផ្នែករឹង (Hardware) នោះទេ ប៉ុន្តែបានបញ្ជាក់ពីការប្រើប្រាស់ឧបករណ៍ និងបណ្ណាល័យកូដមួយចំនួនសម្រាប់ការស្រាវជ្រាវនេះ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា Python 3 និងបណ្ណាល័យដូចជា Scrapy ព្រមទាំង Selenium សម្រាប់ការប្រមូលទិន្នន័យពីគេហទំព័រ។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការសំណុំទិន្នន័យវាយតម្លៃសណ្ឋាគារចំនួន ២៥០០ ពីគេហទំព័រ Traveloka (១២៥០ វិជ្ជមាន និង ១២៥០ អវិជ្ជមាន) ដែលតម្រូវឱ្យមានការបែងចែកដោយដៃជាមុន។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងផ្នែករៀបចំទិន្នន័យ (Preprocessing) ការប្រើប្រាស់ម៉ូដែល Word2Vec និងការកំណត់កែតម្រូវ Hyperparameter តាមរយៈ GridSearchCV។</li>
+        
+        <li><strong>Hardware:</strong> ទោះបីជាមិនបានបញ្ជាក់ ប៉ុន្តែការហ្វឹកហាត់ម៉ូដែលរៀនស៊ីជម្រៅ (Deep Learning) ដូចជា CNN ជារឿយៗតម្រូវឱ្យមានអង្គគណនាវីដេអូ (GPU) ដើម្បីជួយឱ្យដំណើរការមានល្បឿនលឿន។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យវាយតម្លៃសណ្ឋាគារចំនួន ២៥០០ ពីគេហទំព័រ Traveloka ជាភាសាឥណ្ឌូនេស៊ីទាំងស្រុង។ នេះមានសារៈសំខាន់សម្រាប់ប្រទេសកម្ពុជា ព្រោះទោះបីជាវាមិនមែនជាភាសាខ្មែរក៏ដោយ វាបង្ហាញពីរបៀបដែលបច្ចេកទេស Word2Vec និង CNN អាចដោះស្រាយបញ្ហាការយល់អត្ថន័យនៃភាសាអាស៊ី ដែលមានរចនាសម្ព័ន្ធខុសពីភាសាអង់គ្លេស។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រក្នុងការស្រាវជ្រាវនេះមានសក្ដានុពលខ្ពស់ណាស់សម្រាប់យកមកអនុវត្តនៅក្នុងប្រទេសកម្ពុជា ជាពិសេសដើម្បីពង្រឹងគុណភាពសេវាកម្ម។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យទេសចរណ៍ និងបដិសណ្ឋារកិច្ច (ខេត្តសៀមរាប និងភ្នំពេញ):</strong> សណ្ឋាគារក្នុងស្រុកអាចប្រើប្រាស់ម៉ូដែលនេះដើម្បីវិភាគមតិយោបល់រាប់ពាន់របស់ភ្ញៀវទេសចរលើគេហទំព័រដូចជា Agoda, Booking.com ឬ TripAdvisor ដើម្បីស្វែងយល់ពីចំណុចខ្វះខាតដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ការវាយតម្លៃសេវាកម្មឌីជីថល (E-commerce & Delivery Apps):</strong> ក្រុមហ៊ុនដឹកជញ្ជូន និងពាណិជ្ជកម្មអេឡិចត្រូនិក ដូចជា Nham24, Foodpanda ឬកម្មវិធីធនាគារ អាចប្រើប្រាស់វាដើម្បីបែងចែកមតិរិះគន់ ឬការសរសើររបស់អតិថិជននៅលើ App Store ឬ Facebook។</li>
+            
+            <li><strong>ការអភិវឌ្ឍន៍បច្ចេកវិទ្យាភាសាខ្មែរ (Khmer NLP Development):</strong> សាកលវិទ្យាល័យ និងអ្នកស្រាវជ្រាវកម្ពុជា អាចយកគំរូស្ថាបត្យកម្ម Word2Vec រួមផ្សំជាមួយ CNN នេះ ទៅអនុវត្តជាមួយទិន្នន័យជាអត្ថបទភាសាខ្មែរ ដើម្បីជម្រុញការយល់ដឹងរបស់ AI លើភាសាជាតិ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការផ្លាស់ប្តូរពីការប្រើប្រាស់ម៉ូដែលរៀនម៉ាស៊ីនបែបបុរាណ មកប្រើប្រាស់បណ្ដាញសរសៃប្រសាទខួរក្បាល (CNN) អាចជួយឱ្យស្ថាប័នពាណិជ្ជកម្មនៅកម្ពុជាវិភាគអារម្មណ៍អតិថិជនបានយ៉ាងជាក់លាក់ និងទាន់ពេលវេលា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ការប្រមូល និងសម្អាតទិន្នន័យ (Data Collection & Preprocessing):</strong> ប្រើប្រាស់ឧបករណ៍ <span class="en">Scrapy</span> ឬ <span class="en">Selenium</span> ដើម្បីទាញយកទិន្នន័យវាយតម្លៃពីគេហទំព័រនានា រួចធ្វើការសម្អាតអត្ថបទ (Case folding, Tokenization, Stop-word removal)។ សម្រាប់ភាសាខ្មែរ គួរប្រើប្រាស់ឧបករណ៍កាត់ពាក្យដូចជា <span class="en">Khmer Word Segmentation</span>។</li>
+            
+            <li><strong>ការបំប្លែងពាក្យទៅជាវ៉ិចទ័រ (Word Embedding Training):</strong> សិក្សា និងអនុវត្តការប្រើប្រាស់ម៉ូដែល <span class="en">Word2Vec</span> ដោយកំណត់ប៉ារ៉ាម៉ែត្រ <span class="en">Skip-gram architecture</span>, <span class="en">Hierarchical softmax</span> និងមានទំហំវ៉ិចទ័រ ១០០ ដើម្បីបំប្លែងពាក្យទៅជាលេខដែលម៉ាស៊ីនអាចយល់បាន តាមរយៈបណ្ណាល័យ <span class="en">Gensim</span>។</li>
+            
+            <li><strong>ការអភិវឌ្ឍម៉ូដែលវាយតម្លៃ (Model Generation):</strong> ចាប់ផ្តើមបង្កើតម៉ូដែលចំណាត់ថ្នាក់ដោយសាកល្បងប្រើ <span class="en">scikit-learn</span> សម្រាប់ <span class="en">Logistic Regression</span> និង <span class="en">SVM</span> រួចឈានទៅការបង្កើតស្ថាបត្យកម្ម <span class="en">CNN</span> ច្រើនស្រទាប់ដោយប្រើប្រាស់ <span class="en">TensorFlow</span> ឬ <span class="en">Keras</span>។</li>
+            
+            <li><strong>ការកែតម្រូវប៉ារ៉ាម៉ែត្រ (Hyperparameter Tuning):</strong> ប្រើប្រាស់ <span class="en">GridSearchCV</span> សម្រាប់ម៉ូដែលបុរាណ និងធ្វើការផ្លាស់ប្តូរតម្លៃនៅក្នុង <span class="en">CNN</span> (ឧ. កំណត់ <span class="en">Dropout</span>=0.2, ប្រើ <span class="en">Tanh</span> ជា Convolution Activation, <span class="en">Softmax</span> សម្រាប់ Output និង <span class="en">Adam Optimizer</span>) ដើម្បីបង្កើនភាពត្រឹមត្រូវ។</li>
+            
+            <li><strong>ការវាយតម្លៃ និងការសាកល្បង (Evaluation & Validation):</strong> ប្រើប្រាស់វិធីសាស្ត្រ <span class="en">10-Fold Cross-validation</span> ដើម្បីវាយតម្លៃប្រសិទ្ធភាពនៃម៉ូដែល ដោយប្រៀបធៀបលើកម្រិតភាពត្រឹមត្រូវ (Accuracy), Precision, Recall, និង F-measure រួចជ្រើសរើសម៉ូដែលដែលល្អបំផុតសម្រាប់ដាក់ឱ្យប្រើប្រាស់ជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Network (CNN)</span></td>
+                <td>វិធីសាស្ត្ររៀនស៊ីជម្រៅ (Deep Learning) ដែលប្រើប្រាស់ស្រទាប់ក្បួនដោះស្រាយច្រើនតម្រួតគ្នា ដើម្បីទាញយកលក្ខណៈពិសេស (Features) ពីទិន្នន័យ ដូចជាអត្ថបទ ឬរូបភាព ដោយស្វ័យប្រវត្តិ។ ក្នុងការសិក្សានេះ វាជួយចាប់យកអត្ថន័យនៃពាក្យក្នុងបរិបទនៃប្រយោគ។</td>
+                <td>ដូចជាមនុស្សអានសៀវភៅដោយមើលពាក្យម្តងមួយក្រុមៗ ដើម្បីយល់ន័យរួមនៃឃ្លាទាំងមូល មិនមែនគ្រាន់តែមើលពាក្យមួយៗដាច់ពីគ្នានោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word2Vec</span></td>
+                <td>ម៉ូដែលបំប្លែងពាក្យទៅជាវ៉ិចទ័រ (លេខដែលកុំព្យូទ័រយល់បាន) ដែលអាចរក្សាទំនាក់ទំនងអត្ថន័យរវាងពាក្យផ្សេងៗ។ វាជួយដោះស្រាយបញ្ហាពាក្យមានន័យដូចគ្នា (Synonyms) និងទាក់ទងគ្នាដោយបង្ហាញវាជាចំណុចក្បែរគ្នាក្នុងលំហវ៉ិចទ័រ។</td>
+                <td>ដូចជាការគូសផែនទី ដែលពាក្យមានអត្ថន័យស្រដៀងគ្នា (ឧទាហរណ៍៖ "ល្អ" និង "អស្ចារ្យ") ត្រូវបានដាក់ឱ្យនៅទីតាំងជិតគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Logistic Regression (LR)</span></td>
+                <td>ក្បួនដោះស្រាយម៉ាស៊ីនរៀនបែបបុរាណដែលប្រើប្រាស់សមីការគណិតវិទ្យាដើម្បីទស្សន៍ទាយប្រូបាប៊ីលីតេនៃទិន្នន័យ (ថាតើវាជាចំណាត់ថ្នាក់ A ឬ B)។ ក្នុងការស្រាវជ្រាវនេះ វាកំពុងត្រូវបានប្រើដើម្បីបែងចែកមតិយោបល់ជាវិជ្ជមាន ឬអវិជ្ជមាន។</td>
+                <td>ដូចជាការថ្លឹងទម្ងន់នៃពាក្យនីមួយៗក្នុងប្រយោគលើជញ្ជីងមួយ ប្រសិនបើទម្ងន់ពាក្យល្អច្រើនជាង ជញ្ជីងនឹងលម្អៀងទៅរក "វិជ្ជមាន"។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hyperparameter Tuning</span></td>
+                <td>ដំណើរការកែតម្រូវការកំណត់តម្លៃផ្សេងៗ (Parameters) នៃម៉ូដែលរៀនម៉ាស៊ីនមុនពេលចាប់ផ្តើមបង្វឹក (Training) ដើម្បីស្វែងរកការកំណត់ណាដែលផ្តល់លទ្ធផល និងភាពត្រឹមត្រូវខ្ពស់បំផុត។</td>
+                <td>ដូចជាការសាកល្បងចុចប៊ូតុងកែតម្រូវកម្រិតសំឡេង និងបាសនៅលើម៉ាស៊ីនចាក់ភ្លេង ដើម្បីរកមើលកម្រិតណាដែលស្តាប់ទៅពិរោះបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">10-Fold Cross-validation</span></td>
+                <td>បច្ចេកទេសវាយតម្លៃម៉ូដែល ដោយបែងចែកទិន្នន័យទាំងមូលជា ១០ ចំណែកស្មើៗគ្នា ហើយធ្វើការបង្វឹក (Train) លើ ៩ ចំណែក និងសាកល្បង (Test) លើ ១ ចំណែកចុងក្រោយ ដោយឆ្លាស់គ្នាគ្រប់ទាំង ១០ ដង ដើម្បីធានាថាលទ្ធផលមិនលម្អៀង។</td>
+                <td>ដូចជាការឱ្យសិស្ស ១០ ក្រុមធ្វើតេស្តសាកល្បង ដោយរាល់ពេលប្រឡងមាន ៩ ក្រុមរៀន និង ១ ក្រុមប្រឡង ផ្លាស់ប្តូរគ្នារហូតដល់គ្រប់ក្រុមទាំងអស់បានប្រឡង ដើម្បីវាយតម្លៃសមត្ថភាពពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dropout</span></td>
+                <td>បច្ចេកទេសនៅក្នុងបណ្ដាញសរសៃប្រសាទ (Neural Networks) ដែលធ្វើការបិទ (Ignore) កោសិកា (Neurons) មួយចំនួនដោយចៃដន្យក្នុងអំឡុងពេលបង្វឹក ដើម្បីការពារកុំឱ្យម៉ូដែលចងចាំទិន្នន័យទន្ទេញចាំមាត់ពេក (Overfitting)។</td>
+                <td>ដូចជាការបិទភ្នែកម្ខាងនៅពេលហ្វឹកហាត់លេងកីឡា ដើម្បីបង្ខំឱ្យរាងកាយចេះសម្របខ្លួន និងមិនពឹងផ្អែកតែលើភ្នែកម្ខាងទាំងស្រុង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Preprocessing</span></td>
+                <td>ជំហាននៃការរៀបចំ និងសម្អាតទិន្នន័យឆៅជាមុន (ដូចជាការបំបាត់សញ្ញាខណ្ឌ, លុបពាក្យមិនសូវមានន័យ, និងបំប្លែងតួអក្សរធំទៅតូច) មុនពេលបញ្ចូលវាទៅក្នុងម៉ូដែលវិភាគ។</td>
+                <td>ដូចជាការលាងសម្អាត និងហាន់បន្លែសាច់ជាមុនឱ្យបានស្អាតបាត មុននឹងចាប់ផ្តើមចម្អិនម្ហូប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Softmax</span></td>
+                <td>អនុគមន៍គណិតវិទ្យា (Activation Function) ដែលប្រើនៅស្រទាប់ចុងក្រោយនៃបណ្ដាញសរសៃប្រសាទ ដើម្បីបំប្លែងលទ្ធផលលេខឱ្យទៅជាប្រភាគនៃប្រូបាប៊ីលីតេ (បូកចូលគ្នាស្មើ ១ ជានិច្ច) ដើម្បីងាយស្រួលក្នុងការធ្វើចំណាត់ថ្នាក់ច្រើនក្រុម។</td>
+                <td>ដូចជាការគណនាភាគរយនៃការបោះឆ្នោត ដែលបេក្ខជនទាំងអស់ទទួលបានភាគរយខុសៗគ្នា ប៉ុន្តែសរុបទាំងអស់ត្រូវតែស្មើ ១០០%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cnn-and-its-architectures-2021.html">
+                    <span class="km">បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតបែបខុនវ៉ូលូសិន និងស្ថាបត្យកម្មរបស់វា</span><br>
+                    <span class="en article-original-title">Convolutional Neural Network and its Architectures</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/comprehensive-review-deep-learning-computer-vision-2021.html">
+                    <span class="km">ការត្រួតពិនិត្យយ៉ាងទូលំទូលាយអំពីស្ថាបត្យកម្ម Deep Learning សម្រាប់កម្មវិធីកុំព្យូទ័រវីហ្សិន (Computer Vision)</span><br>
+                    <span class="en article-original-title">A Comprehensive Review of Deep Learning Architectures for Computer Vision Applications</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/emotion-recognition-education-sentiment-analysis-2019.html">
+                    <span class="km">ការទទួលស្គាល់អារម្មណ៍សម្រាប់ការអប់រំដោយប្រើការវិភាគមនោសញ្ចេតនា</span><br>
+                    <span class="en article-original-title">Emotion Recognition for Education using Sentiment Analysis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/smart-grid-cybersecurity-ml-nlp-2023.html">
+                    <span class="km">ការពង្រឹងសន្តិសុខតាមប្រព័ន្ធអ៊ីនធឺណិតសម្រាប់បណ្តាញអគ្គិសនីឆ្លាតវៃ៖ ការស៊ើបអង្កេតស៊ីជម្រៅស្តីពីការរួមបញ្ចូលគ្នារវាងការរៀនរបស់ម៉ាស៊ីន និងការកែច្នៃភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Strengthening Smart Grid Cybersecurity: An In-Depth Investigation into the Fusion of Machine Learning and Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/evaluating-one-stage-cnn-xray-baggage-threat-2020.html">
+                    <span class="km">ការវាយតម្លៃស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (CNN) ដំណាក់កាលតែមួយសម្រាប់ការរកឃើញវត្ថុគំរាមកំហែងដោយប្រើប្រាស់រូបភាពស្កេនកាំរស្មីអ៊ិចសម្រាប់សុវត្ថិភាពអីវ៉ាន់</span><br>
+                    <span class="en article-original-title">Evaluating One Stage Detector Architecture of Convolutional Neural Network for Threat Object Detection Using X-Ray Baggage Security Imaging</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Sentiment+analysis+of+Indonesian+hotel+reviews+using+CNN+and+Word2Vec" target="_blank" rel="noopener"><span class="en">Sentiment analysis of Indonesian hotel reviews using CNN and Word2Vec</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparative+study+of+deep+learning+and+classical+machine+learning+in+natural+language+processing" target="_blank" rel="noopener"><span class="en">Comparative study of deep learning and classical machine learning in natural language processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Word2Vec+skip-gram+model+implementation+for+non-English+languages+sentiment+classification" target="_blank" rel="noopener"><span class="en">Word2Vec skip-gram model implementation for non-English languages sentiment classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hyperparameter+tuning+in+Convolutional+Neural+Networks+for+text+classification" target="_blank" rel="noopener"><span class="en">Hyperparameter tuning in Convolutional Neural Networks for text classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Aspect-based+sentiment+analysis+of+hotel+reviews+using+transformer+models" target="_blank" rel="noopener"><span class="en">Aspect-based sentiment analysis of hotel reviews using transformer models</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

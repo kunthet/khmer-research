@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការសម្របតាមបម្រែបម្រួលទិន្នន័យ (Concept Drift) ក្នុងដំណើរការស្ទ្រីមទិន្នន័យបែងចែកទ្រង់ទ្រាយធំ - Concept Drift Adaptation in Large-scale Distributed Data Stream Processing | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការសម្របតាមបម្រែបម្រួលទិន្នន័យ (Concept Drift) ក្នុងដំណើរការ។ ម៉ូដែលរៀនម៉ាស៊ីនប្រពៃណី (Traditional Machine Learning) ជួបការលំបាកនៅពេលដែលទិន្នន័យមានការផ្លាស់ប្ត...">
+    
+    <meta name="keywords" content="Concept Drift, Apache Flink, Online Learning, Ensemble Methods, Bagging Algorithm, Distributed Stream Processing, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/concept-drift-adaptation-flink-2016.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/concept-drift-adaptation-flink-2016.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/concept-drift-adaptation-flink-2016.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/concept-drift-adaptation-flink-2016.html">
+    <meta property="og:title" content="ការសម្របតាមបម្រែបម្រួលទិន្នន័យ (Concept Drift) ក្នុងដំណើរការស្ទ្រីមទិន្នន័យបែងចែកទ្រង់ទ្រាយធំ | KhmerResearch.com">
+    <meta property="og:description" content="ម៉ូដែលរៀនម៉ាស៊ីនប្រពៃណី (Traditional Machine Learning) ជួបការលំបាកនៅពេលដែលទិន្នន័យមានការផ្លាស់ប្តូរតាមពេលវេលា (Concept drift) នៅក្នុងស្ទ្រីមទិន្នន័យធំៗ ដែលទាមទារឱ្យមានប្រព័ន្ធរៀនអនឡាញ (Online Learn...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2016-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Concept Drift">
+    
+    <meta property="article:tag" content="Apache Flink">
+    
+    <meta property="article:tag" content="Online Learning">
+    
+    <meta property="article:tag" content="Ensemble Methods">
+    
+    <meta property="article:tag" content="Bagging Algorithm">
+    
+    <meta property="article:tag" content="Distributed Stream Processing">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការសម្របតាមបម្រែបម្រួលទិន្នន័យ (Concept Drift) ក្នុងដំណើរការស្ទ្រីមទិន្នន័យបែងចែកទ្រង់ទ្រាយធំ">
+    <meta name="twitter:description" content="ម៉ូដែលរៀនម៉ាស៊ីនប្រពៃណី (Traditional Machine Learning) ជួបការលំបាកនៅពេលដែលទិន្នន័យមានការផ្លាស់ប្តូរតាមពេលវេលា (Concept drift) នៅក្នុងស្ទ្រីមទិន្នន័យធំៗ ដែលទាមទារឱ្យមានប្រព័ន្ធរៀនអនឡាញ (Online Learn...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u1794\u178f\u17b6\u1798\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Concept Drift) \u1780\u17d2\u1793\u17bb\u1784\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u179f\u17d2\u1791\u17d2\u179a\u17b8\u1798\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17c2\u1784\u1785\u17c2\u1780\u1791\u17d2\u179a\u1784\u17cb\u1791\u17d2\u179a\u17b6\u1799\u1792\u17c6",
+      "name": "Concept Drift Adaptation in Large-scale Distributed Data Stream Processing",
+      "description": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179a\u17c0\u1793\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793\u1794\u17d2\u179a\u1796\u17c3\u178e\u17b8 (Traditional Machine Learning) \u1787\u17bd\u1794\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1793\u17c5\u1796\u17c1\u179b\u178a\u17c2\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1795\u17d2\u179b\u17b6\u179f\u17cb\u1794\u17d2\u178f\u17bc\u179a\u178f\u17b6\u1798\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 (Concept drift) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179f\u17d2\u1791\u17d2\u179a\u17b8\u1798\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1792\u17c6\u17d7 \u178a\u17c2\u179b\u1791\u17b6\u1798\u1791\u17b6\u179a\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u179a\u17c0\u1793\u17a2\u1793\u17a1\u17b6\u1789 (Online Learning) \u178a\u17c2\u179b\u17a2\u17b6\u1785\u1796\u1784\u17d2\u179a\u17b8\u1780\u1791\u17c6\u17a0\u17c6\u1794\u17b6\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/concept-drift-adaptation-flink-2016.html",
+      "author": [{"@type": "Person", "name": "Anastasiia Basha (Technische Universit\u00e4t Berlin)"}],
+      "datePublished": "2016",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Concept Drift Adaptation in Large-scale Distributed Data Stream Processing",
+        "url": "https://it4bi.ulb.ac.be/it4bi/medias/pdfs/2016_Master_Thesis/www_it4bi_media_thesis_anastasiiabasha-TUB.pdf"
+      },
+      "keywords": ["Concept Drift", "Apache Flink", "Online Learning", "Ensemble Methods", "Bagging Algorithm", "Distributed Stream Processing"],
+      "about": "Computer Science / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u1794\u178f\u17b6\u1798\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Concept Drift) \u1780\u17d2\u1793\u17bb\u1784\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u179f\u17d2\u1791\u17d2\u179a\u17b8\u1798\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1794\u17c2\u1784\u1785\u17c2\u1780\u1791\u17d2\u179a\u1784\u17cb\u1791\u17d2\u179a\u17b6\u1799\u1792\u17c6",
+          "item": "https://khmerresearch.com/papers/technology/concept-drift-adaptation-flink-2016.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការសម្របតាមបម្រែបម្រួលទិន្នន័យ (Concept Drift) ក្នុងដំណើរ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Concept Drift Adaptation in Large-scale Distributed Data Stream Processing<br>
+        
+        <strong>Source:</strong> <a href="https://it4bi.ulb.ac.be/it4bi/medias/pdfs/2016_Master_Thesis/www_it4bi_media_thesis_anastasiiabasha-TUB.pdf" target="_blank" rel="noopener">it4bi.ulb.ac.be</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការសម្របតាមបម្រែបម្រួលទិន្នន័យ (Concept Drift) ក្នុងដំណើរការស្ទ្រីមទិន្នន័យបែងចែកទ្រង់ទ្រាយធំ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Concept Drift Adaptation in Large-scale Distributed Data Stream Processing</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Anastasiia Basha (Technische Universität Berlin)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2016</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ម៉ូដែលរៀនម៉ាស៊ីនប្រពៃណី (Traditional Machine Learning) ជួបការលំបាកនៅពេលដែលទិន្នន័យមានការផ្លាស់ប្តូរតាមពេលវេលា (Concept drift) នៅក្នុងស្ទ្រីមទិន្នន័យធំៗ ដែលទាមទារឱ្យមានប្រព័ន្ធរៀនអនឡាញ (Online Learning) ដែលអាចពង្រីកទំហំបាន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានរចនា និងអនុវត្តក្បួនដោះស្រាយបណ្តុំ (Bagging ensemble algorithm) ដែលអាចសម្របខ្លួនទៅនឹងបំរែបំរួលទិន្នន័យនៅក្នុង Apache Flink ដោយធ្វើការវាយតម្លៃលើសំណុំទិន្នន័យសិប្បនិម្មិត និងទិន្នន័យជាក់ស្តែង។
+        
+        <ul>
+            
+            <li>ការអនុវត្តកូដដើមក្នុង Apache Flink (Native Apache Flink Streaming Implementation)</li>
+            
+            <li>ក្បួនដោះស្រាយបណ្តុំសម្របខ្លួន (Adaptive Bagging Ensemble Algorithm)</li>
+            
+            <li>ការរកឃើញបំរែបំរួលទិន្នន័យជាមួយក្បួនដោះស្រាយ ADWIN (Concept Drift Detection with ADWIN)</li>
+            
+            <li>ការវាយតម្លៃដោយវិធីសាស្ត្រ Prequential និង K-fold (Prequential Evaluation & K-fold bagging validation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ Reactive base learner ដែលបានស្នើឡើងបង្ហាញពីភាពធន់ទៅនឹងការរកឃើញបម្រែបម្រួលខុស (False drift detections) ល្អជាងវិធីសាស្ត្រកំណត់ម៉ូដែលឡើងវិញ (Model reset) ធម្មតា។</li>
+            
+            <li>ការអនុវត្ត Bagging ក្នុង Flink ទទួលបានភាពត្រឹមត្រូវនៃការចាត់ថ្នាក់ (Classification accuracy) ខ្ពស់ជាងបើប្រៀបធៀបទៅនឹងក្បួនដោះស្រាយ VHT និង Adaptive Bagging របស់ SAMOA លើសំណុំទិន្នន័យនានាដូចជា SEA និង Hyperplane។</li>
+            
+            <li>ការអនុវត្តកូដដើមនេះបានកាត់បន្ថយពេលវេលាដំណើរការយ៉ាងច្រើន ដោយអាចដំណើរការទិន្នន័យ ៥០០,០០០ គំរូក្នុងរយៈពេលត្រឹមតែ ៣៣.៥ វិនាទី បើធៀបនឹង ២៦៧០.៧៥ វិនាទីរបស់ SAMOA។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Native Flink Adaptive Bagging (Proposed)</span></strong><br>ការអនុវត្ត Adaptive Bagging ដើមនៅក្នុង Apache Flink (ក្បួនដោះស្រាយដែលបានស្នើ)</td>
+                <td>មានល្បឿនលឿនខ្លាំងក្នុងការប្រមូលផ្តុំទិន្នន័យ និងមានភាពត្រឹមត្រូវខ្ពស់ជាងមុន ដោយមិនងាយរងឥទ្ធិពលពីការរកឃើញបម្រែបម្រួលខុស (False alarms) ដោយសារការប្រើ Reactive base learner។</td>
+                <td>ទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រច្រើន (ដូចជា λ, θ, w) និងកង្វះការចែករំលែកព័ត៌មានអន្តរម៉ូដែល (Local drift detector) ដោយសារដែនកំណត់របស់ Flink។</td>
+                <td>ប្រើពេលត្រឹមតែ ៣៣.៥ វិនាទី សម្រាប់ដំណើរការសំណាកទិន្នន័យចំនួន ៥០០,០០០ និងមានអត្រាកំហុសទាបបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SAMOA Adaptive Bagging</span></strong><br>ក្បួនដោះស្រាយ Adaptive Bagging របស់ប្រព័ន្ធ SAMOA</td>
+                <td>ងាយស្រួលក្នុងការប្រើប្រាស់និងដាក់ឱ្យដំណើរការ ដោយសារវាជា Framework ស្រាប់ និងប្រើប្រាស់ VHT ស្តង់ដារជា base learner។</td>
+                <td>ប្រើប្រាស់ពេលវេលាដំណើរការយូរខ្លាំងមែនទែននៅលើ Flink ដោយសារមិនបានប្រើប្រាស់ Native Optimization របស់ប្រព័ន្ធបានពេញលេញ។</td>
+                <td>ប្រើពេលរហូតដល់ ២៦៧០.៧៥ វិនាទី សម្រាប់ដំណើរការទិន្នន័យទំហំដូចគ្នា (យឺតជាងប្រហែល ៨០ ដង) និងមានភាពត្រឹមត្រូវទាបជាងបន្តិច។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Simple Reset Baseline</span></strong><br>វិធីសាស្ត្រ Baseline ដែលកំណត់ម៉ូដែលឡើងវិញ (Reset) ពេលមានបម្រែបម្រួល</td>
+                <td>មានភាពសាមញ្ញក្នុងការសរសេរកូដ និងអាចចាប់យកទម្រង់ទិន្នន័យថ្មីបានលឿនប្រសិនបើបម្រែបម្រួលនោះកើតឡើងលឿននិងច្បាស់លាស់។</td>
+                <td>កម្រិតភាពត្រឹមត្រូវធ្លាក់ចុះខ្លាំងកំឡុងពេលស្ទុះងើបឡើងវិញ ហើយងាយរងគ្រោះដោយសារទិន្នន័យរំខាន (Noise) ដែលបណ្តាលឱ្យ Reset ម៉ូដែលខុស។</td>
+                <td>ក្រាហ្វបង្ហាញពីការធ្លាក់ចុះភាពត្រឹមត្រូវយ៉ាងគំហុក (Spikes in error rate) នៅពេលជួបប្រទះការរកឃើញបម្រែបម្រួលមិនពិត (False drift)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">SAMOA Vertical Hoeffding Tree (VHT)</span></strong><br>ក្បួនដោះស្រាយដើមឈើសម្រេចចិត្ត VHT របស់ SAMOA</td>
+                <td>លឿនជាងវិធីសាស្ត្របណ្តុំ (Bagging) ដោយសារវាប្រើតែម៉ូដែលមួយ និងអាចសម្របខ្លួនបានល្មមចំពោះបម្រែបម្រួលបន្តិចម្តងៗ។</td>
+                <td>មិនមានយន្តការត្រៀមទុកសម្រាប់សម្របខ្លួននឹងបម្រែបម្រួលទិន្នន័យធំៗ (Concept Drift) នោះទេ ដែលធ្វើឱ្យវាខ្សោយជាង Adaptive Bagging។</td>
+                <td>ដំណើរការអស់រយៈពេល ១១៣.២៥ វិនាទី តែមានអត្រាកំហុសខ្ពស់ជាងក្បួនដោះស្រាយបណ្តុំ (Ensemble methods)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រធុនធំ (Cluster) ជាច្រើនគ្រឿងដើម្បីវាយតម្លៃល្បឿន និងប្រសិទ្ធភាពក្នុងការដំណើរការទិន្នន័យស្ទ្រីមក្នុងទ្រង់ទ្រាយធំដោយប្រើប្រាស់ Apache Flink។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ប្រើប្រាស់កុំព្យូទ័រ Cluster ចំនួន ៨ គ្រឿង (1 Job Manager និង 7 Task Managers)។ ម៉ាស៊ីននីមួយៗប្រើ CPU 3.72 GHz IBM POWER7 (12 physical cores) និងមាន RAM ទំហំ 48 GB (កំណត់ឱ្យ Flink ប្រើ 20.4 GB)។</li>
+        
+        <li><strong>Software:</strong> ប្រព័ន្ធ Apache Flink (Streaming API), ប្រព័ន្ធ Apache SAMOA សម្រាប់ប្រៀបធៀប និងភាសា Java សម្រាប់ការអភិវឌ្ឍ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យសិប្បនិម្មិត (SEA, Hyperplane, Agrawal, STAGGER) និងទិន្នន័យពិតមានដូចជា ទិន្នន័យអគ្គិសនី New South Wales និងទិន្នន័យជើងហោះហើរ (Airlines) សហរដ្ឋអាមេរិក។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះផ្អែកលើសំណុំទិន្នន័យសិប្បនិម្មិត និងទិន្នន័យជាក់ស្តែងពីទីផ្សារអគ្គិសនីនៅប្រទេសអូស្ត្រាលី និងជើងហោះហើរនៅសហរដ្ឋអាមេរិក។ ទោះបីជាក្បួនដោះស្រាយនេះមានលក្ខណៈទូទៅ ប៉ុន្តែការយកមកប្រើនៅកម្ពុជាទាមទារឱ្យមានការសាកល្បងជាមួយទិន្នន័យក្នុងស្រុក ព្រោះបម្រែបម្រួលទិន្នន័យ (Concept drift) អាស្រ័យយ៉ាងខ្លាំងលើបរិបទសង្គមនិងសេដ្ឋកិច្ចជាក់ស្តែងរបស់ប្រទេសនីមួយៗ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការចាត់ចែង និងវិភាគទិន្នន័យកំពុងហូរ (Data stream processing) នេះមានសារៈសំខាន់ខ្លាំងសម្រាប់ស្ថាប័នកម្ពុជាដែលមានទិន្នន័យធំនិងមានការប្រែប្រួលរហ័ស។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យហិរញ្ញវត្ថុ និងធនាគារ (Financial Sector):</strong> អាចប្រើប្រាស់នៅតាមធនាគារពាណិជ្ជក្នុងស្រុក (ដូចជា ABA ឫ ACLEDA) ដើម្បីចាប់យកការក្លែងបន្លំប្រតិបត្តិការហិរញ្ញវត្ថុ (Fraud detection) ក្នុងពេលជាក់ស្តែង ពេលដែលទម្រង់នៃការក្លែងបន្លំមានការផ្លាស់ប្តូរ (Concept drift)។</li>
+            
+            <li><strong>វិស័យទូរគមនាគមន៍ (Telecommunications):</strong> ក្រុមហ៊ុនប្រតិបត្តិករទូរស័ព្ទ (ដូចជា Smart ឬ Cellcard) អាចប្រើប្រាស់ម៉ូដែលនេះដើម្បីវិភាគទៅលើអាកប្បកិរិយាប្រើប្រាស់អ៊ីនធឺណិត និងបណ្តាញ Network ដើម្បីចាប់យកបញ្ហា និងកែសម្រួលសេវាកម្មបានទាន់ពេលវេលា។</li>
+            
+            <li><strong>ប្រព័ន្ធគ្រប់គ្រងអគ្គិសនីកម្ពុជា (EDC):</strong> អាចប្រើវិធីសាស្ត្រនេះដើម្បីវិភាគនិងទស្សន៍ទាយតម្រូវការប្រើប្រាស់អគ្គិសនី ដែលមានការប្រែប្រួលទៅតាមរដូវកាល និងអត្រាកំណើនប្រជាជននៅតាមតំបន់នីមួយៗ (ស្រដៀងនឹងការធ្វើតេស្តលើទិន្នន័យ New South Wales)។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការប្រើប្រាស់ Apache Flink រួមជាមួយក្បួនដោះស្រាយ Adaptive Bagging អាចជួយឱ្យស្ថាប័នកម្ពុជាធ្វើសេចក្តីសម្រេចចិត្តបានលឿន និងច្បាស់លាស់ ទោះបីជាប្រភពទិន្នន័យមានការប្រែប្រួលជាប្រចាំក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Stream Processing:</strong> និស្សិតគួរចាប់ផ្តើមរៀនពីគោលការណ៍កាត់ក្តីទិន្នន័យហូរចូលឥតឈប់ឈរ (Stream Processing) ដោយផ្តោតលើការអនុវត្តប្រព័ន្ធ <span class='en'>Apache Flink</span> និង <span class='en'>Apache Kafka</span> ជាមូលដ្ឋាន។</li>
+            
+            <li><strong>ស្វែងយល់ពី Online Machine Learning និង Concept Drift:</strong> ត្រូវស្រាវជ្រាវពីទ្រឹស្តីក្បួនដោះស្រាយម៉ាស៊ីនរៀនអនឡាញ (ឧទាហរណ៍ <span class='en'>Hoeffding Trees</span>, <span class='en'>Adaptive Bagging</span>) និងវិធីសាស្ត្រចាប់យកបម្រែបម្រួលទិន្នន័យដូចជា <span class='en'>ADWIN</span>។</li>
+            
+            <li><strong>អនុវត្តការសរសេរកូដនៅលើ Apache Flink:</strong> សាកល្បងប្រើប្រាស់ <span class='en'>Flink Streaming API</span> ដោយសរសេរជាភាសា <span class='en'>Java</span> ឬ <span class='en'>Scala</span> ដើម្បីបង្កើតប្រព័ន្ធរៀនម៉ាស៊ីនសាមញ្ញ (Data Pipeline)។</li>
+            
+            <li><strong>ប្រើប្រាស់ប្រព័ន្ធ Apache SAMOA សម្រាប់សាកល្បងម៉ូដែល:</strong> រៀនប្រៀបធៀបម៉ូដែលដោយប្រើ <span class='en'>Apache SAMOA</span> ដើម្បីងាយស្រួលប្រៀបធៀបប្រសិទ្ធភាពនៃក្បួនដោះស្រាយនានាមុននឹងប្តូរទៅសរសេរកូដដើម (Native Code) នៅក្នុង Flink ផ្ទាល់។</li>
+            
+            <li><strong>អនុវត្តលើទិន្នន័យជាក់ស្តែងនៅកម្ពុជា:</strong> ប្រមូលទិន្នន័យបើកទូលាយ (Open Data) ក្នុងស្រុក ដូចជាទិន្នន័យអាកាសធាតុ ទីផ្សារភាគហ៊ុន ឬចរាចរណ៍រាជធានីភ្នំពេញ ដើម្បីយកមកសាកល្បងប្រសិទ្ធភាពនៃក្បួនដោះស្រាយសម្របតាមបម្រែបម្រួល (Drift Adaptation) នេះ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Concept Drift</span></td>
+                <td>បាតុភូតដែលទិន្នន័យផ្លាស់ប្តូរលក្ខណៈសម្បត្តិ ឬអត្ថន័យរបស់វាតាមពេលវេលា ដែលធ្វើឱ្យម៉ូដែលបញ្ញាសិប្បនិម្មិត (AI) ឬម៉ាស៊ីនរៀនចាស់លែងមានភាពត្រឹមត្រូវ និងទាមទារការអាប់ដេតដើម្បីសម្របខ្លួនទៅនឹងទិន្នន័យថ្មី។</td>
+                <td>ដូចជាការដែលចំណូលចិត្តអតិថិជនប្តូរពីការទិញខោអាវរដូវប្រាំង ទៅជាខោអាវរដូវរងា ធ្វើឱ្យក្បួនទស្សន៍ទាយពីមុនលែងត្រូវនឹងស្ថានការណ៍បច្ចុប្បន្ន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Online Learning</span></td>
+                <td>ដំណើរការបណ្តុះបណ្តាលម៉ូដែលរៀនម៉ាស៊ីន (Machine Learning) ដែលរៀនជាបន្តបន្ទាប់រាល់ពេលមានទិន្នន័យថ្មីហូរចូលមកភ្លាមៗ ដោយមិនបាច់រង់ចាំប្រមូលទិន្នន័យទាំងអស់ជាដុំធំសិនទើបចាប់ផ្តើមដំណើរការរៀននោះទេ។</td>
+                <td>ដូចជាសិស្សដែលរៀនមេរៀនថ្មីជារៀងរាល់ថ្ងៃ ហើយចងចាំភ្លាមៗ ជាជាងរង់ចាំដល់ចុងឆ្នាំទើបរៀនសៀវភៅទាំងមូលតែម្តង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Stream Processing</span></td>
+                <td>បច្ចេកវិទ្យាក្នុងការទទួល វិភាគ និងចាត់ចែងទិន្នន័យដែលហូរចូលមកឥតឈប់ឈរ (ឧទាហរណ៍ពីសេនស័រ ឧបករណ៍ IoT ឬបណ្តាញសង្គម) ក្នុងពេលវេលាជាក់ស្តែង (Real-time) ដោយមិនរក្សាទុកវាយូរ។</td>
+                <td>ដូចជាប៉ូលីសចរាចរណ៍កំពុងត្រួតពិនិត្យ និងបញ្ជាឡាននៅលើផ្លូវធំដែលកំពុងបើកបរខ្វាត់ខ្វែងគ្រប់វិនាទី មិនមែនរង់ចាំឡានចតស្ងៀមទើបចាត់ចែងនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ensemble Methods</span></td>
+                <td>វិធីសាស្ត្រក្នុងការរួមបញ្ចូលម៉ូដែលរៀនម៉ាស៊ីនតូចៗជាច្រើនបញ្ជូលគ្នា ដើម្បីធ្វើការទស្សន៍ទាយរួមមួយ ដែលផ្តល់លទ្ធផលច្បាស់លាស់និងមានស្ថេរភាពជាងការប្រើប្រាស់ម៉ូដែលតែមួយឯកឯង។</td>
+                <td>ដូចជាការសួរសុំយោបល់ពីវេជ្ជបណ្ឌិត១០នាក់ រួចយកចម្លើយដែលមានអ្នកគាំទ្រច្រើនជាងគេ ជាជាងជឿលើរោគវិនិច្ឆ័យរបស់គ្រូពេទ្យតែម្នាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bagging Algorithm</span></td>
+                <td>ជាទម្រង់មួយនៃ Ensemble Method ដែលបង្កើតម៉ូដែលរងជាច្រើនដោយបង្រៀនពួកវាជាមួយនឹងបំណែកទិន្នន័យដែលត្រូវបានចាប់យកដោយចៃដន្យ បន្ទាប់មកបូកសរុបលទ្ធផលតាមរយៈការបោះឆ្នោតភាគច្រើន (Majority voting)។</td>
+                <td>ដូចជាការបែងចែកសិស្សជាក្រុមតូចៗឱ្យធ្វើលំហាត់តែមួយ តែផ្តល់ទិន្នន័យខុសៗគ្នាបន្តិចបន្តួច រួចយកចម្លើយដែលក្រុមភាគច្រើនឆ្លើយដូចគ្នាជាចម្លើយចុងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Adaptive Windowing (ADWIN)</span></td>
+                <td>ក្បួនដោះស្រាយសម្រាប់ចាប់យកបម្រែបម្រួលទិន្នន័យ (Concept drift) ដោយវាពង្រីក ឬបង្រួញទំហំផ្ទាំងផ្ទុកទិន្នន័យ (Window) ដោយស្វ័យប្រវត្តិ នៅពេលវាសង្កេតឃើញថាអត្រាកំហុសក្នុងការចាត់ថ្នាក់មានការប្រែប្រួលខុសប្រក្រតី។</td>
+                <td>ដូចជាការពង្រីកភ្នែកមើលទិដ្ឋភាពទូទៅពេលគ្មានអ្វីប្រែប្រួល តែបើមានសកម្មភាពគួរឱ្យសង្ស័យកើតឡើង យើងត្រូវផ្តោត(បង្រួញ)ការយកចិត្តទុកដាក់តែលើសកម្មភាពថ្មីៗនោះដើម្បីចាប់កំហុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Prequential Evaluation</span></td>
+                <td>វិធីសាស្ត្រវាយតម្លៃម៉ូដែលរៀនអនឡាញ (Online Learning) ដោយតម្រូវឱ្យម៉ូដែលធ្វើការទស្សន៍ទាយលើទិន្នន័យថ្មីសិន រួចទើបយកទិន្នន័យនោះទៅបង្រៀនម៉ូដែលបន្ត ធ្វើបែបនេះវិលជុំរហូតដល់អស់ទិន្នន័យក្នុងស្ទ្រីម។</td>
+                <td>ដូចជាការធ្វើតេស្តសិស្សមុនពេលបង្រៀនមេរៀនថ្មី ដើម្បីវាស់ស្ទង់ចំណេះដឹងពិតប្រាកដរបស់ពួកគេនៅពេលនោះ រួចទើបបង្រៀនមេរៀននោះដល់ពួកគេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/learning-data-streams-concept-drift-2008.html">
+                    <span class="km">ការរៀនពីលំហូរទិន្នន័យដែលមានបម្រែបម្រួលកុងសិប (Concept Drift)</span><br>
+                    <span class="en article-original-title">Learning from Data Streams with Concept Drift</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/aml4s-automl-pipeline-data-streams-2025.html">
+                    <span class="km">AML4S៖ បណ្តាញ AutoML សម្រាប់លំហូរទិន្នន័យ (Data Streams)</span><br>
+                    <span class="en article-original-title">AML4S: An AutoML Pipeline for Data Streams</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/recent-advances-concept-drift-deep-learning-2022.html">
+                    <span class="km">វឌ្ឍនភាពថ្មីៗនៃវិធីសាស្ត្រសម្របខ្លួនតាមការប្រែប្រួលគំនិត (Concept Drift) សម្រាប់ការរៀនស៊ីជម្រៅ (Deep Learning)</span><br>
+                    <span class="en article-original-title">Recent Advances in Concept Drift Adaptation Methods for Deep Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-mining-prediction-financial-series-2003.html">
+                    <span class="km">ការទាញយកទិន្នន័យសម្រាប់ការទស្សន៍ទាយ៖ ករណីស៊េរីហិរញ្ញវត្ថុ</span><br>
+                    <span class="en article-original-title">Data Mining for Prediction. Financial Series Case</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/review-data-mining-big-data-machine-learning-2023.html">
+                    <span class="km">ការពិនិត្យឡើងវិញលើការទាញយកទិន្នន័យ ការវិភាគទិន្នន័យធំ និងវិធីសាស្ត្រយន្តការសិក្សា</span><br>
+                    <span class="en article-original-title">A Review of Data Mining, Big Data Analytics, and Machine Learning Approaches</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=concept+drift+adaptation+algorithms+data+stream+processing" target="_blank" rel="noopener"><span class="en">concept drift adaptation algorithms data stream processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=online+machine+learning+distributed+systems+Apache+Flink" target="_blank" rel="noopener"><span class="en">online machine learning distributed systems Apache Flink</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=ensemble+methods+online+bagging+handling+concept+drift" target="_blank" rel="noopener"><span class="en">ensemble methods online bagging handling concept drift</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=prequential+evaluation+techniques+for+data+stream+classifiers" target="_blank" rel="noopener"><span class="en">prequential evaluation techniques for data stream classifiers</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=class+imbalance+in+concept+drift+detection+streams" target="_blank" rel="noopener"><span class="en">class imbalance in concept drift detection streams</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>

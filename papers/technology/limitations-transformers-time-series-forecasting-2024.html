@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការពិនិត្យមើលដែនកំណត់ និងបញ្ហាប្រឈមនៃការប្រើប្រាស់ Transformers សម្រាប់ការព្យាករណ៍ស៊េរីពេលវេលា - Examining the limitations and challenges of using Transformers for time serie... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការពិនិត្យមើលដែនកំណត់ និងបញ្ហាប្រឈមនៃការប្រើប្រាស់ Transform។ ឯកសារនេះពិនិត្យមើលទៅលើប្រសិទ្ធភាព និងបញ្ហាប្រឈមនៃម៉ូដែល Transformers (ដែលពេញនិយមដោយសារ ChatGPT) ក...">
+    
+    <meta name="keywords" content="Deep Learning, Transformers, Time Series, Forecasting, Self-Attention, Computational Complexity, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/limitations-transformers-time-series-forecasting-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/limitations-transformers-time-series-forecasting-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/limitations-transformers-time-series-forecasting-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/limitations-transformers-time-series-forecasting-2024.html">
+    <meta property="og:title" content="ការពិនិត្យមើលដែនកំណត់ និងបញ្ហាប្រឈមនៃការប្រើប្រាស់ Transformers សម្រាប់ការព្យាករណ៍ស៊េរីពេលវេលា | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះពិនិត្យមើលទៅលើប្រសិទ្ធភាព និងបញ្ហាប្រឈមនៃម៉ូដែល Transformers (ដែលពេញនិយមដោយសារ ChatGPT) ក្នុងការយកមកប្រើប្រាស់សម្រាប់ការការព្យាករណ៍ទិន្នន័យស៊េរីពេលវេលា (Time Series Forecasting) ធៀបនឹងម៉ូដែ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2024-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Transformers">
+    
+    <meta property="article:tag" content="Time Series">
+    
+    <meta property="article:tag" content="Forecasting">
+    
+    <meta property="article:tag" content="Self-Attention">
+    
+    <meta property="article:tag" content="Computational Complexity">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការពិនិត្យមើលដែនកំណត់ និងបញ្ហាប្រឈមនៃការប្រើប្រាស់ Transformers សម្រាប់ការព្យាករណ៍ស៊េរីពេលវេលា">
+    <meta name="twitter:description" content="ឯកសារនេះពិនិត្យមើលទៅលើប្រសិទ្ធភាព និងបញ្ហាប្រឈមនៃម៉ូដែល Transformers (ដែលពេញនិយមដោយសារ ChatGPT) ក្នុងការយកមកប្រើប្រាស់សម្រាប់ការការព្យាករណ៍ទិន្នន័យស៊េរីពេលវេលា (Time Series Forecasting) ធៀបនឹងម៉ូដែ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u1798\u17be\u179b\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb \u1793\u17b7\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1793\u17c3\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Transformers \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6",
+      "name": "Examining the limitations and challenges of using Transformers for time series forecasting",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u1798\u17be\u179b\u1791\u17c5\u179b\u17be\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796 \u1793\u17b7\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b Transformers (\u178a\u17c2\u179b\u1796\u17c1\u1789\u1793\u17b7\u1799\u1798\u178a\u17c4\u1799\u179f\u17b6\u179a ChatGPT) \u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1799\u1780\u1798\u1780\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 (Time Series Forecasting) \u1792\u17c0\u1794\u1793\u17b9\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179f\u17d2\u1790\u17b7\u178f\u17b7\u1794\u17bb\u179a\u17b6\u178e\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/limitations-transformers-time-series-forecasting-2024.html",
+      "author": [{"@type": "Person", "name": "Stefano Grassi (Goldsmiths, University of London)"}],
+      "datePublished": "2024",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Examining the limitations and challenges of using Transformers for time series forecasting",
+        "url": "https://forecastingdata.org/"
+      },
+      "keywords": ["Deep Learning", "Transformers", "Time Series", "Forecasting", "Self-Attention", "Computational Complexity"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u1798\u17be\u179b\u178a\u17c2\u1793\u1780\u17c6\u178e\u178f\u17cb \u1793\u17b7\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1793\u17c3\u1780\u17b6\u179a\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb Transformers \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/limitations-transformers-time-series-forecasting-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការពិនិត្យមើលដែនកំណត់ និងបញ្ហាប្រឈមនៃការប្រើប្រាស់ Transf...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Examining the limitations and challenges of using Transformers for time series forecasting<br>
+        
+        <strong>Source:</strong> <a href="https://forecastingdata.org/" target="_blank" rel="noopener">forecastingdata.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការពិនិត្យមើលដែនកំណត់ និងបញ្ហាប្រឈមនៃការប្រើប្រាស់ Transformers សម្រាប់ការព្យាករណ៍ស៊េរីពេលវេលា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Examining the limitations and challenges of using Transformers for time series forecasting</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Stefano Grassi (Goldsmiths, University of London)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះពិនិត្យមើលទៅលើប្រសិទ្ធភាព និងបញ្ហាប្រឈមនៃម៉ូដែល Transformers (ដែលពេញនិយមដោយសារ ChatGPT) ក្នុងការយកមកប្រើប្រាស់សម្រាប់ការការព្យាករណ៍ទិន្នន័យស៊េរីពេលវេលា (Time Series Forecasting) ធៀបនឹងម៉ូដែលស្ថិតិបុរាណ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានធ្វើការត្រួតពិនិត្យអក្សរសិល្ប៍យ៉ាងល្អិតល្អន់ (Literature Review) ទៅលើស្ថាបត្យកម្មរបស់ Transformer ដោយផ្តោតលើការវាយតម្លៃយន្តការយកចិត្តទុកដាក់ (Attention Mechanism) ក្នុងទិន្នន័យពេលវេលា។
+        
+        <ul>
+            
+            <li>ការវិភាគយន្តការនៃការយកចិត្តទុកដាក់ (Self-Attention Mechanism) និងភាពមិនចាប់អារម្មណ៍លើទីតាំង (Locality-agnostics)។</li>
+            
+            <li>ការវាយតម្លៃលើលក្ខណៈរក្សាទុកលំដាប់ថ្នាក់ (Permutation-invariant) នៅក្នុងបរិបទនៃទិន្នន័យពេលវេលា។</li>
+            
+            <li>ការប្រៀបធៀបភាពស្មុគស្មាញនៃការគណនា និងការប្រើប្រាស់អង្គចងចាំ (Computational Complexity) រវាងម៉ូដែលផ្សេងៗ (ឧ. LogTrans, Informer)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល Transformers មានការលំបាកក្នុងការចាប់យកលំនាំពេលវេលាក្នុងតំបន់ និងអាចបាត់បង់ព័ត៌មានតាមលំដាប់លំដោយដោយសារលក្ខណៈ Permutation-invariance នៃ Self-attention។</li>
+            
+            <li>ភាពស្មុគស្មាញនៃការគណនារបស់ Transformers កើនឡើងជាការ៉េ O(N^2) ទៅតាមប្រវែងនៃទិន្នន័យ ដែលបណ្តាលឱ្យមានបញ្ហាកកស្ទះអង្គចងចាំ (Memory bottleneck) និងមានតម្លៃថ្លៃក្នុងការដំណើរការទិន្នន័យរយៈពេលវែង។</li>
+            
+            <li>បើទោះបីជាមានម៉ូដែលកែលម្អជាច្រើន អ្នកស្រាវជ្រាវភាគច្រើនមិនបានធ្វើការវាយតម្លៃត្រឹមត្រូវតាមបែបបទស្តង់ដារ ដោយជារឿយៗបានមើលរំលងម៉ូដែលស្ថិតិដូចជា ARIMA ជាគោលវាស់វែង (Benchmark) ដែលធ្វើឱ្យប្រសិទ្ធភាពជាក់ស្តែងរបស់ Transformers នៅមានមន្ទិលសង្ស័យនៅឡើយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Statistical Methods (ARIMA, ETS)</span></strong><br>វិធីសាស្ត្រស្ថិតិបុរាណ (ARIMA និង ETS)</td>
+                <td>ងាយស្រួលប្រើប្រាស់ ងាយយល់ (Interpretability) និងមានភាពត្រឹមត្រូវខ្ពស់សម្រាប់ទិន្នន័យទូទៅ។ ពួកវាមានប្រសិទ្ធភាពខ្ពស់ និងមិនទាមទារធនធានកុំព្យូទ័រធំដុំនោះទេ។</td>
+                <td>អាចជួបការលំបាកក្នុងការចាប់យកលំនាំទិន្នន័យស្មុគស្មាញ និងទិន្នន័យដែលមានទំហំធំខ្លាំង (Big Data) ក្នុងរយៈពេលវែង។</td>
+                <td>ត្រូវបានអ្នកស្រាវជ្រាវ និងអ្នកអនុវត្តចាត់ទុកជាម៉ូដែលគោល (Benchmark) ដ៏រឹងមាំ និងបានឈ្នះកម្មវិធីប្រកួតប្រជែងជាច្រើន (ដូចជា M3, NN3, NN5)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Vanilla Transformers</span></strong><br>ម៉ូដែល Transformer ដើម (Vanilla Transformer)</td>
+                <td>មានសមត្ថភាពអាចចាប់យកទំនាក់ទំនងទិន្នន័យក្នុងរយៈពេលខ្លី និងវែងបានតាមរយៈយន្តការ Self-Attention។ អាចដំណើរការទិន្នន័យដែលមានទំហំធំ និងមានប្រេកង់ខ្ពស់។</td>
+                <td>ទាមទារអង្គចងចាំទំហំធំខ្លាំងកម្រិត O(N^2) មិនសូវខ្វល់ពីទីតាំងទិន្នន័យ (Locality-agnostic) និងបាត់បង់លំដាប់លំដោយ (Permutation-invariant)។</td>
+                <td>ប្រឈមនឹងបញ្ហាកកស្ទះអង្គចងចាំ (Memory bottleneck) ដែលធ្វើឱ្យការប្រើប្រាស់ក្នុងពិភពពិតមានតម្លៃថ្លៃខ្លាំង និងពិបាកពង្រីកទំហំ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Efficient Transformers (LogTrans, Informer, Pyraformer)</span></strong><br>ម៉ូដែល Transformer កែលម្អ (Efficient Transformers)</td>
+                <td>កាត់បន្ថយភាពស្មុគស្មាញនៃការគណនាមកត្រឹម O(N log N) ឬ O(N) តាមរយៈការប្រើប្រាស់ Sparsity bias ឬ Convolution។ ដោះស្រាយបញ្ហាកកស្ទះអង្គចងចាំបានមួយកម្រិតធំ។</td>
+                <td>នៅតែមានភាពស្មុគស្មាញខ្ពស់ជាងម៉ូដែលស្ថិតិ និងទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រច្រើន ហើយលទ្ធផលជារឿយៗមិនទាន់ត្រូវបានវាយតម្លៃតាមស្តង់ដារតឹងរ៉ឹងនៅឡើយទេ។</td>
+                <td>Convolutional self-attention អាចបង្កើនភាពត្រឹមត្រូវរហូតដល់ 9% ធៀបនឹង Transformer ដើម នៅពេលសាកល្បងលើទិន្នន័យស្មុគស្មាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Linear Models (LTSF-Linear)</span></strong><br>ម៉ូដែលលីនេអ៊ែរសាមញ្ញ (LTSF-Linear)</td>
+                <td>មានភាពសាមញ្ញបំផុត ដំណើរការលឿន និងស៊ីធនធានកុំព្យូទ័រតិចតួចបំផុត បើធៀបនឹង Transformers។</td>
+                <td>អាចមានដែនកំណត់ប្រសិនបើទិន្នន័យមានទំនាក់ទំនងមិនមែនលីនេអ៊ែរ (Non-linear) ដែលស្មុគស្មាញខ្លាំងពេក។</td>
+                <td>បានបង្ហាញឱ្យឃើញថាម៉ូដែលលីនេអ៊ែរសាមញ្ញ ជារឿយៗអាចយកឈ្នះម៉ូដែល Transformers ស្មុគស្មាញៗក្នុងការការព្យាករណ៍ស៊េរីពេលវេលា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ម៉ូដែល Transformers ត្រូវការធនធានកុំព្យូទ័រ និងអង្គចងចាំទំហំធំខ្លាំង ដោយសារភាពស្មុគស្មាញកម្រិត O(N^2) ដែលធ្វើឱ្យពួកវាមានតម្លៃថ្លៃក្នុងការដំណើរការជាក់ស្តែងធៀបនឹងវិធីសាស្ត្រស្ថិតិ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារម៉ាស៊ីនកុំព្យូទ័រដែលមានសមត្ថភាពគណនាខ្ពស់ (ជាពិសេស GPU) ដើម្បីដោះស្រាយជាមួយបញ្ហាកកស្ទះអង្គចងចាំ (Memory bottleneck) ពេលដំណើរការទិន្នន័យវែង។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការទិន្នន័យប្រវត្តិសាស្ត្រទំហំធំ (Big Data) និងមានប្រេកង់ខ្ពស់ ដើម្បីបង្ហាត់ម៉ូដែលឱ្យចាប់យកលំនាំរយៈពេលវែងបានល្អ។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញដែលមានចំណេះដឹងជ្រៅជ្រះផ្នែក Deep Learning ដើម្បីកែសម្រួលស្ថាបត្យកម្ម (ដូចជាការប្រើប្រាស់ Positional Encoding) ឱ្យសមស្របនឹងទិន្នន័យពេលវេលា។</li>
+        
+        <li><strong>Software & Repositories:</strong> ត្រូវការការប្រើប្រាស់កូដចំហ (Open-source codes) និងប្រភពទិន្នន័យស្តង់ដារដូចជា Monash Time Series Forecasting Archive ដើម្បីផ្ទៀងផ្ទាត់ភាពត្រឹមត្រូវ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សាស្រាវជ្រាវភាគច្រើនបានប្រើប្រាស់សំណុំទិន្នន័យពីវិស័យថាមពល ការដឹកជញ្ជូន និងការលក់ ជាជាងវិស័យធនាគារ សុខាភិបាល ឬបរិស្ថាន ហើយជារឿយៗប្រើប្រាស់ទិន្នន័យតែមួយជ្រុងតូចដើម្បីទាញសេចក្តីសន្និដ្ឋាន។ សម្រាប់ប្រទេសកម្ពុជា ការខ្វះខាតការវាយតម្លៃលើទិន្នន័យចម្រុះនេះមានន័យថា ម៉ូដែល Transformers អាចនឹងមិនធានាបាននូវប្រសិទ្ធភាពខ្ពស់នៅពេលយកមកអនុវត្តជាក់ស្តែងក្នុងបរិបទក្នុងស្រុកឡើយ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បើទោះបីជា Transformers មានតម្លៃថ្លៃក្នុងការដំណើរការ និងមានភាពស្មុគស្មាញក៏ដោយ ក៏ម៉ូដែលកែលម្អថ្មីៗ (Efficient Transformers) អាចផ្តល់អត្ថប្រយោជន៍ដល់វិស័យមួយចំនួននៅកម្ពុជា ប្រសិនបើមានទិន្នន័យគ្រាប់គ្រាន់។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យថាមពលកកើតឡើងវិញ (ឧ. អគ្គិសនីកម្ពុជា និងស្ថានីយថាមពលព្រះអាទិត្យ):</strong> អាចប្រើប្រាស់ម៉ូដែលដូចជា SpringNet ដែលពូកែខាងចាប់យកការប្រែប្រួលតាមតំបន់ ដើម្បីទស្សន៍ទាយទិន្នផលថាមពលព្រះអាទិត្យ (Solar PV power forecasting) ឱ្យបានកាន់តែសុក្រឹត។</li>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (ឧ. ធនាគារជាតិ ឫគ្រឹះស្ថានមីក្រូហិរញ្ញវត្ថុ):</strong> ការប្រើប្រាស់ម៉ូដែលលីនេអ៊ែរសាមញ្ញ (LTSF-Linear) ឬ ARIMA ដើម្បីទស្សន៍ទាយអតិផរណា ឬហានិភ័យឥណទាន ដែលប្រើប្រាស់ធនធានតិច និងផ្តល់ភាពងាយស្រួលក្នុងការបកស្រាយលទ្ធផលជូនអ្នកធ្វើសេចក្តីសម្រេច។</li>
+            
+            <li><strong>ការតាមដានបរិស្ថាន និងកសិកម្ម (ឧ. ក្រសួងធនធានទឹក និងឧតុនិយម):</strong> ការអនុវត្តម៉ូដែលព្យាករណ៍ស៊េរីពេលវេលាលើទិន្នន័យអាកាសធាតុ និងកម្រិតទឹកទន្លេមេគង្គ ទោះបីជាវិស័យនេះត្រូវបានគេមើលរំលងក្នុងការសិក្សាជាសកលក៏ដោយ វាមានសារៈសំខាន់ណាស់សម្រាប់សេដ្ឋកិច្ចកម្ពុជា។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក អ្នកស្រាវជ្រាវ និងវិស្វករទិន្នន័យនៅកម្ពុជាគួរតែចាប់ផ្តើមជាមួយវិធីសាស្ត្រស្ថិតិ ឬម៉ូដែលសាមញ្ញជាមុនសិន មុននឹងសម្រេចចិត្តវិនិយោគធនធានដ៏ច្រើនសន្ធឹកសន្ធាប់លើម៉ូដែល Transformers សម្រាប់ការការព្យាករណ៍ទិន្នន័យពេលវេលា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃម៉ូដែលស្ថិតិបុរាណជាមុន:</strong> ចាប់ផ្តើមអនុវត្ត និងស្វែងយល់ពីម៉ូដែលស្ថិតិដូចជា ARIMA និង ETS ឱ្យបានច្បាស់លាស់ ដើម្បីប្រើប្រាស់ពួកវាជាម៉ូដែលគោល (Benchmark standard) សម្រាប់ការវាយតម្លៃ។</li>
+            
+            <li><strong>ប្រើប្រាស់សំណុំទិន្នន័យស្តង់ដារសម្រាប់ការស្រាវជ្រាវ:</strong> ចូលទៅកាន់វេបសាយ Monash Time Series Forecasting Archive (forecastingdata.org) ដើម្បីទាញយកសំណុំទិន្នន័យស្តង់ដារចំនួន ២៥ យកមកធ្វើការសាកល្បងនិងវាយតម្លៃម៉ូដែលរបស់អ្នក។</li>
+            
+            <li><strong>ទាញយកលក្ខណៈពិសេសនៃទិន្នន័យ (Feature Extraction):</strong> ប្រើប្រាស់កញ្ចប់កូដដូចជា tsfeatures និង catch22 នៅក្នុង Python ឬ R ដើម្បីវិភាគ និងស្វែងយល់ពីលក្ខណៈស៊ីជម្រៅនៃទិន្នន័យស៊េរីពេលវេលា មុននឹងបញ្ជូនទៅកាន់ម៉ូដែល។</li>
+            
+            <li><strong>សាកល្បងម៉ូដែល Linear មុននឹងឈានទៅ Deep Learning:</strong> អនុវត្តម៉ូដែលសាមញ្ញដូចជា LTSF-Linear ទៅលើទិន្នន័យរបស់អ្នក ដើម្បីផ្ទៀងផ្ទាត់ថាតើអ្នកពិតជាត្រូវការម៉ូដែលកម្រិតស្មុគស្មាញ (Transformers) ឬក៏អត់ ដោយចំណាយធនធានតិចតួចបំផុត។</li>
+            
+            <li><strong>វាយតម្លៃប្រសិទ្ធភាពម៉ូដែលឱ្យបានគ្រប់ជ្រុងជ្រោយ:</strong> ជ្រើសរើសរង្វាស់កំហុស (Error metrics) ដែលសមស្របទៅនឹងប្រភេទអាជីវកម្ម ដោយមិនត្រូវពឹងផ្អែកតែលើរង្វាស់ ad-hoc ណាមួយឡើយ ហើយត្រូវធានាថាការស្រាវជ្រាវរបស់អ្នកមានកូដដែលអាចដំណើរការឡើងវិញបាន (Reproducibility) ដោយបង្ហោះលើ GitHub។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Self-attention mechanism</span></td>
+                <td>យន្តការនៅក្នុងម៉ូដែល AI ដែលអនុញ្ញាតឱ្យវាវាយតម្លៃ និងផ្តល់ទម្ងន់ទៅលើផ្នែកផ្សេងៗនៃទិន្នន័យ (ឧទាហរណ៍ ពាក្យ ឬចំណុចពេលវេលា) ក្នុងពេលតែមួយ ដើម្បីយល់ពីទំនាក់ទំនងនៃបរិបទទាំងមូល។</td>
+                <td>ដូចជាពេលយើងអានសៀវភៅ ហើយខួរក្បាលយើងភ្ជាប់ទំនាក់ទំនងរវាងតួអង្គដែលទើបលេចមុខនៅទំព័រនេះ ទៅនឹងសាច់រឿងដែលបានកើតឡើងនៅទំព័រមុនៗដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Time series forecasting</span></td>
+                <td>ការប្រើប្រាស់វិធីសាស្ត្រគណិតវិទ្យា ឬបញ្ញាសិប្បនិម្មិតដើម្បីវិភាគទិន្នន័យអតីតកាលដែលបានកត់ត្រាតាមលំដាប់ពេលវេលាជាបន្តបន្ទាប់ ក្នុងគោលបំណងទស្សន៍ទាយនិន្នាការ ឬតម្លៃនាពេលអនាគត។</td>
+                <td>ដូចជាការមើលកំណត់ត្រាសីតុណ្ហភាពរៀងរាល់ថ្ងៃក្នុងខែមុន ដើម្បីទាយថាតើថ្ងៃស្អែកមេឃនឹងក្តៅ ឬត្រជាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Locality-agnostics</span></td>
+                <td>លក្ខណៈរបស់ម៉ូដែលដែលមិនសូវចាប់អារម្មណ៍ ឬពិបាកក្នុងការចាប់យកលំនាំនៃទិន្នន័យដែលនៅក្បែរៗគ្នា ដែលធ្វើឱ្យវាខកខានក្នុងការយល់ពីបម្រែបម្រួលភ្លាមៗ ឬភាពមិនប្រក្រតីក្នុងរយៈពេលខ្លី (Local patterns/anomalies)។</td>
+                <td>ដូចជាមនុស្សដែលមើលឃើញតែរូបភាពធំពីចម្ងាយ ប៉ុន្តែមិនបានកត់សម្គាល់ពីព័ត៌មានលម្អិតតូចៗដែលនៅជាប់នឹងភ្នែករបស់គាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Permutation-invariant</span></td>
+                <td>លក្ខណៈគណិតវិទ្យាដែលម៉ូដែលផ្តល់លទ្ធផលដូចគ្នាទោះបីជាលំដាប់លំដោយនៃទិន្នន័យបញ្ជូល (Input) ត្រូវបានផ្លាស់ប្តូរទីតាំងក៏ដោយ។ នេះជាបញ្ហាធំសម្រាប់ទិន្នន័យពេលវេលាដែលទាមទារការតម្រៀបតាមលំដាប់មុនក្រោយយ៉ាងតឹងរ៉ឹង។</td>
+                <td>ដូចជាម៉ាស៊ីនក្រឡុកទឹកក្រឡុក ដែលមិនខ្វល់ថាអ្នកដាក់ផ្លែប៉ោមមុន ឬចេកមុននោះទេ លទ្ធផលចេញមកគឺទឹកក្រឡុកដូចគ្នា (បាត់បង់អត្ថន័យនៃលំដាប់មុនក្រោយ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Positional Encoding</span></td>
+                <td>បច្ចេកទេសក្នុងការបន្ថែមវ៉ិចទ័រដែលបញ្ជាក់ពីទីតាំង ឬលំដាប់លំដោយទៅក្នុងទិន្នន័យនីមួយៗ មុននឹងបញ្ជូនទៅកាន់ម៉ូដែល Transformer ដើម្បីជួយឱ្យវាដឹងថាទិន្នន័យមួយណាមុន ទិន្នន័យមួយណាក្រោយ។</td>
+                <td>ដូចជាការបិទលេខរៀងលើសន្លឹកបៀនីមួយៗ មុននឹងបោះវាចូលទៅក្នុងប្រអប់ ដើម្បីឱ្យគេអាចរៀបចំវាត្រឡប់មកតាមលំដាប់ដើមវិញបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Computational complexity</span></td>
+                <td>រង្វាស់នៃចំនួនធនធាន (ដូចជាពេលវេលាដំណើរការ និងទំហំអង្គចងចាំ) ដែលកុំព្យូទ័រត្រូវការដើម្បីដោះស្រាយបញ្ហាណាមួយ។ សម្រាប់ Transformer ដើម វាមានកម្រិត O(N²) ដែលកើនឡើងយ៉ាងលឿនជាការ៉េនៅពេលទិន្នន័យកាន់តែវែង។</td>
+                <td>ដូចជាការរៀបចំពិធីជប់លៀង ពេលមានភ្ញៀវ១០នាក់ ការចាប់ដៃគ្នាស្វាគមន៍មានចំនួនតិច តែបើភ្ញៀវកើនដល់១០០នាក់ ការចាប់ដៃគ្នាម្នាក់ម្តងៗនឹងកើនឡើងយ៉ាងច្រើនសន្ធឹកសន្ធាប់ដែលចំណាយពេលនិងកម្លាំងខ្លាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Dynamic Time Warping (DTW)</span></td>
+                <td>ក្បួនអាល់ហ្គោរីតឹមសម្រាប់វាស់ស្ទង់ភាពស្រដៀងគ្នារវាងស៊េរីទិន្នន័យពេលវេលាពីរ ទោះបីជាពួកវាមានល្បឿន ឬប្រវែងខុសគ្នាក៏ដោយ (ទប់ទល់នឹងភាពរអិល ឬការខុសចង្វាក់នៃពេលវេលា)។</td>
+                <td>ដូចជាការប្រៀបធៀបបទចម្រៀងតែមួយដែលច្រៀងដោយមនុស្សពីរនាក់ ម្នាក់ច្រៀងញាប់ ម្នាក់ច្រៀងយឺត តែយើងនៅតែអាចស្តាប់ដឹងថាវាជាបទតែមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Autoregressive Integrated Moving Average (ARIMA)</span></td>
+                <td>ម៉ូដែលស្ថិតិបុរាណដ៏ពេញនិយមមួយដែលប្រើប្រាស់ទិន្នន័យអតីតកាល (Autoregressive) ការដកយកភាពខុសគ្នាដើម្បីរក្សាលំនឹងទិន្នន័យ (Integrated) និងកម្រិតមធ្យមនៃកំហុសប្រែប្រួល (Moving Average) ដើម្បីធ្វើការព្យាករណ៍ស៊េរីពេលវេលា។</td>
+                <td>ដូចជាការទស្សន៍ទាយពិន្ទុប្រឡងខែនេះ ដោយផ្អែកលើពិន្ទុខែមុនរបស់សិស្ស និងការវាយតម្លៃមើលថាតើគាត់មានការវិវត្តប្រែប្រួលកម្រិតណាបើធៀបនឹងមធ្យមភាគរបស់គាត់កន្លងមក។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Limitations+of+Transformer+architecture+in+time+series+forecasting" target="_blank" rel="noopener"><span class="en">Limitations of Transformer architecture in time series forecasting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Self-attention+mechanism+vs+computational+complexity+in+deep+learning" target="_blank" rel="noopener"><span class="en">Self-attention mechanism vs computational complexity in deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Permutation+invariance+problem+in+temporal+sequence+modeling" target="_blank" rel="noopener"><span class="en">Permutation invariance problem in temporal sequence modeling</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Linear+models+vs+Transformers+for+long-term+time+series+forecasting" target="_blank" rel="noopener"><span class="en">Linear models vs Transformers for long-term time series forecasting</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Efficient+Transformers+for+reducing+O%28N%5E2%29+complexity+in+temporal+data" target="_blank" rel="noopener"><span class="en">Efficient Transformers for reducing O(N^2) complexity in temporal data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Monash+Time+Series+Forecasting+Archive+benchmark+evaluation+methodologies" target="_blank" rel="noopener"><span class="en">Monash Time Series Forecasting Archive benchmark evaluation methodologies</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>
