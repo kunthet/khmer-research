@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់សម្រាប់ការរៀនផ្ទេរទិន្នន័យស៊េរីពេលវេលា - Reconstruction and Regression Loss for Time-Series Transfer Learning | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការបាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់សម្រាប់ការរៀនផ្ទេរទិន។ ការព្យាករណ៍ទិន្នន័យស៊េរីពេលវេលា (Time-series forecasting) ដែលមានប្រវត្តិទិន្នន័យហ្វឹកហាត់តិចតួច ជ...">
+    
+    <meta name="keywords" content="Time-Series Forecasting, Transfer Learning, LSTM, Deep Learning, Reconstruction Loss, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/reconstruction-regression-loss-time-series-transfer-2018.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/reconstruction-regression-loss-time-series-transfer-2018.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/reconstruction-regression-loss-time-series-transfer-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/reconstruction-regression-loss-time-series-transfer-2018.html">
+    <meta property="og:title" content="ការបាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់សម្រាប់ការរៀនផ្ទេរទិន្នន័យស៊េរីពេលវេលា | KhmerResearch.com">
+    <meta property="og:description" content="ការព្យាករណ៍ទិន្នន័យស៊េរីពេលវេលា (Time-series forecasting) ដែលមានប្រវត្តិទិន្នន័យហ្វឹកហាត់តិចតួច ជារឿយៗតែងតែផ្តល់លទ្ធផលមិនច្បាស់លាស់ និងទាមទារធនធានកុំព្យូទ័រខ្ពស់ក្នុងការបង្កើតម៉ូដែលសម្រាប់ទិន្នន័យន...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2018 SIGKDD MiLeTS-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Time-Series Forecasting">
+    
+    <meta property="article:tag" content="Transfer Learning">
+    
+    <meta property="article:tag" content="LSTM">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Reconstruction Loss">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់សម្រាប់ការរៀនផ្ទេរទិន្នន័យស៊េរីពេលវេលា">
+    <meta name="twitter:description" content="ការព្យាករណ៍ទិន្នន័យស៊េរីពេលវេលា (Time-series forecasting) ដែលមានប្រវត្តិទិន្នន័យហ្វឹកហាត់តិចតួច ជារឿយៗតែងតែផ្តល់លទ្ធផលមិនច្បាស់លាស់ និងទាមទារធនធានកុំព្យូទ័រខ្ពស់ក្នុងការបង្កើតម៉ូដែលសម្រាប់ទិន្នន័យន...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1780\u17b6\u179a\u179f\u17d2\u1790\u17b6\u1794\u1793\u17b6\u17a1\u17be\u1784\u179c\u17b7\u1789 \u1793\u17b7\u1784\u178f\u17c6\u179a\u17c2\u178f\u17c6\u179a\u1784\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6",
+      "name": "Reconstruction and Regression Loss for Time-Series Transfer Learning",
+      "description": "\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 (Time-series forecasting) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u178f\u17b7\u1785\u178f\u17bd\u1785 \u1787\u17b6\u179a\u17bf\u1799\u17d7\u178f\u17c2\u1784\u178f\u17c2\u1795\u17d2\u178f\u179b\u17cb\u179b\u1791\u17d2\u1792\u1795\u179b\u1798\u17b7\u1793\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb \u1793\u17b7\u1784\u1791\u17b6\u1798\u1791\u17b6\u179a\u1792\u1793\u1792\u17b6\u1793\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u1781\u17d2\u1796\u179f\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1793\u17b8\u1798\u17bd\u1799\u17d7\u178a\u17b6\u1785\u17cb\u178a\u17c4\u1799\u17a1\u17c2\u1780\u1796\u17b8\u1782\u17d2\u1793\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/reconstruction-regression-loss-time-series-transfer-2018.html",
+      "author": [{"@type": "Person", "name": "Nikolay Laptev (Stanford University)"},{"@type": "Person", "name": "Jiafan Yu (Stanford University)"},{"@type": "Person", "name": "Ram Rajagopal (Stanford University)"}],
+      "datePublished": "2018 SIGKDD MiLeTS",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Reconstruction and Regression Loss for Time-Series Transfer Learning",
+        "url": "https://doi.org/10.1145/nnnnnnn.nnnnnnn"
+      },
+      "keywords": ["Time-Series Forecasting", "Transfer Learning", "LSTM", "Deep Learning", "Reconstruction Loss"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17b6\u178f\u17cb\u1794\u1784\u17cb\u1780\u17b6\u179a\u179f\u17d2\u1790\u17b6\u1794\u1793\u17b6\u17a1\u17be\u1784\u179c\u17b7\u1789 \u1793\u17b7\u1784\u178f\u17c6\u179a\u17c2\u178f\u17c6\u179a\u1784\u17cb\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/reconstruction-regression-loss-time-series-transfer-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់សម្រាប់ការរៀនផ្ទេរ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Reconstruction and Regression Loss for Time-Series Transfer Learning<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.1145/nnnnnnn.nnnnnnn" target="_blank" rel="noopener">doi.org/10.1145/nnnnnnn.nnnnnnn</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់សម្រាប់ការរៀនផ្ទេរទិន្នន័យស៊េរីពេលវេលា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Reconstruction and Regression Loss for Time-Series Transfer Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Nikolay Laptev (Stanford University), Jiafan Yu (Stanford University), Ram Rajagopal (Stanford University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018 SIGKDD MiLeTS</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការព្យាករណ៍ទិន្នន័យស៊េរីពេលវេលា (Time-series forecasting) ដែលមានប្រវត្តិទិន្នន័យហ្វឹកហាត់តិចតួច ជារឿយៗតែងតែផ្តល់លទ្ធផលមិនច្បាស់លាស់ និងទាមទារធនធានកុំព្យូទ័រខ្ពស់ក្នុងការបង្កើតម៉ូដែលសម្រាប់ទិន្នន័យនីមួយៗដាច់ដោយឡែកពីគ្នា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើងនូវស្ថាបត្យកម្មបណ្តាញសរសៃប្រសាទ (Deep LSTM) និងអនុគមន៍បាត់បង់ថ្មី (Novel loss function) ដើម្បីអនុវត្តបច្ចេកទេសរៀនផ្ទេរ (Transfer Learning) លើទិន្នន័យស៊េរីពេលវេលា។
+        
+        <ul>
+            
+            <li>ការរៀនផ្ទេរដោយប្រើបណ្តាញសរសៃប្រសាទ (Transfer Learning with Deep LSTM network)</li>
+            
+            <li>អនុគមន៍បាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់ (Reconstruction and Regression Loss Function)</li>
+            
+            <li>ការសាកល្បងម៉ូដែលលើទិន្នន័យអគ្គិសនី PG&E និងទិន្នន័យ M3 (Experiments on PG&E and M3 datasets)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលរៀនផ្ទេរថ្មីនេះបានកាត់បន្ថយកំហុសការព្យាករណ៍ជាមធ្យម (SMAPE) ពីប្រមាណ ២០០% មកនៅក្រោម ៧៥% សម្រាប់សំណុំទិន្នន័យហ្វឹកហាត់ដែលមានទំហំតូច។</li>
+            
+            <li>ការប្រើប្រាស់ការរៀនផ្ទេរ (Transfer Learning) ជួយសន្សំសំចៃពេលវេលា និងធនធានកុំព្យូទ័រយ៉ាងច្រើន ដោយអនុញ្ញាតឱ្យប្រើប្រាស់ម៉ូដែលតែមួយសម្រាប់ការធ្វើអនុមាន (Inference) លើទិន្នន័យស៊េរីពេលវេលារាប់ពាន់។</li>
+            
+            <li>លក្ខណៈពិសេសដែលទាញយកបានពីម៉ូដែលនេះ (Learned features) អាចត្រូវបានផ្ទេរទៅអនុវត្តយ៉ាងមានប្រសិទ្ធភាពក្នុងការចាត់ថ្នាក់ (Classification) ការបំបែកទិន្នន័យ (Disaggregation) និងការព្យាករណ៍ (Forecasting) សម្រាប់ទិន្នន័យថ្មីៗ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Deep LSTM with Transfer Learning (AnB)</span></strong><br>ម៉ូដែល Deep LSTM ប្រើប្រាស់ការរៀនផ្ទេរ (Transfer Learning) ដោយបង្កកស្រទាប់ n</td>
+                <td>ដំណើរការល្អខ្លាំងលើទិន្នន័យហ្វឹកហាត់តិចតួច សន្សំសំចៃធនធានកុំព្យូទ័របានច្រើន និងមានប្រសិទ្ធភាពខ្ពស់លើទិន្នន័យរំខាន (noisy) ព្រមទាំងទិន្នន័យរង្វើល (sparse)។</td>
+                <td>អត្ថប្រយោជន៍នៃការព្យាករណ៍ធៀបនឹងម៉ូដែលធម្មតានឹងថយចុះនៅពេលទំហំទិន្នន័យហ្វឹកហាត់គោលដៅមានទំហំធំខ្លាំង។</td>
+                <td>បន្ថយកំហុស SMAPE ពីប្រមាណ ២០០% មកនៅក្រោម ៧៥% សម្រាប់កម្រិតទិន្នន័យហ្វឹកហាត់តូចបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Standard Deep LSTM (Single)</span></strong><br>ម៉ូដែល Deep LSTM ធម្មតា (ហ្វឹកហាត់ដាច់ដោយឡែក)</td>
+                <td>ងាយស្រួលយល់ និងមិនស្មុគស្មាញក្នុងការរៀបចំសម្រាប់ទិន្នន័យនីមួយៗដាច់ដោយឡែក ប្រសិនបើមានទិន្នន័យហ្វឹកហាត់គ្រប់គ្រាន់។</td>
+                <td>ទាមទារទិន្នន័យហ្វឹកហាត់ច្រើន និងត្រូវការពេលវេលា ព្រមទាំងធនធានកុំព្យូទ័រខ្ពស់ដើម្បីហ្វឹកហាត់ម៉ូដែលរាប់ពាន់ដាច់ដោយឡែកពីគ្នា។</td>
+                <td>មានកំហុស SMAPE ខ្ពស់ (ប្រមាណ ២០០%) នៅពេលហ្វឹកហាត់ជាមួយនឹងទិន្នន័យដែលមានប្រវត្តិខ្លី (limited history)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">HoltWinters</span></strong><br>វិធីសាស្ត្រស្ថិតិ HoltWinters (Classical baseline)</td>
+                <td>ជាវិធីសាស្ត្រព្យាករណ៍បែបប្រពៃណីដែលងាយស្រួលប្រើ និងមិនទាមទារធនធានកុំព្យូទ័រខ្ពស់សម្រាប់ដំណើរការ។</td>
+                <td>មិនមានសមត្ថភាពចាប់យកទំនាក់ទំនងស្មុគស្មាញនៃទិន្នន័យ (non-linearities) និងមានកម្រិតកំហុសខ្ពស់ធៀបនឹងម៉ូដែល Deep Learning ជាពិសេសលើទិន្នន័យមិនប្រក្រតី។</td>
+                <td>មានកំហុសព្យាករណ៍ខ្ពស់ជាងម៉ូដែល Transfer Learning ជាពិសេសនៅពេលអនុវត្តលើទិន្នន័យដែលមានលក្ខណៈ Noisy ឬ Sparse។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការប្រើប្រាស់បច្ចេកទេសរៀនផ្ទេរ (Transfer Learning) ជួយកាត់បន្ថយតម្រូវការធនធានយ៉ាងច្រើនសន្ធឹកសន្ធាប់ ទាំងការហ្វឹកហាត់ និងការធ្វើអនុមាន (inference) ដោយអនុញ្ញាតឱ្យប្រើម៉ូដែលតែមួយសម្រាប់ទិន្នន័យរាប់ពាន់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារម៉ាស៊ីនមាន GPU សម្រាប់ការហ្វឹកហាត់ម៉ូដែលគោល (Base Model) ដែលមានទំហំធំ ប៉ុន្តែការធ្វើអនុមាន (Inference) លើទិន្នន័យថ្មីចំណាយធនធានកុំព្យូទ័រតិចតួចបំផុត។</li>
+        
+        <li><strong>Dataset:</strong> ត្រូវការសំណុំទិន្នន័យខ្នាតធំ និងទូទៅ (ឧទាហរណ៍ PG&E 116,000 time-series) សម្រាប់ហ្វឹកហាត់ម៉ូដែលគោល មុននឹងអាចផ្ទេរចំណេះដឹងទៅទិន្នន័យតូចៗគោលដៅ។</li>
+        
+        <li><strong>Computational Time:</strong> សន្សំសំចៃពេលវេលាហ្វឹកហាត់រាប់ពាន់ដង ព្រោះមិនចាំបាច់ហ្វឹកហាត់ម៉ូដែលថ្មីពីចំណុចសូន្យសម្រាប់រាល់ទិន្នន័យស៊េរីពេលវេលានីមួយៗនៅក្នុងប្រព័ន្ធ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យអគ្គិសនីពីសហរដ្ឋអាមេរិក (PG&E នៅរដ្ឋកាលីហ្វ័រញ៉ា និង Pecan Street នៅរដ្ឋតិចសាស់) ព្រមទាំងទិន្នន័យស្តង់ដារ M3 ដែលមានបរិបទខុសពីកម្ពុជា។ ទោះបីជាលំនាំនៃការប្រើប្រាស់អាចខុសគ្នា ប៉ុន្តែបញ្ហា 'កង្វះខាតទិន្នន័យប្រវត្តិយូរអង្វែង' គឺជាបញ្ហាទូទៅនៅកម្ពុជា ដូច្នេះវិធីសាស្ត្រនេះមានសារៈសំខាន់ខ្លាំងណាស់ក្នុងការដោះស្រាយបញ្ហានេះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ Transfer Learning សម្រាប់ទិន្នន័យស៊េរីពេលវេលានេះ មានសក្តានុពលខ្ពស់ខ្លាំងសម្រាប់ការអនុវត្តនៅប្រទេសកម្ពុជា ជាពិសេសក្នុងវិស័យដែលទើបចាប់ផ្តើមប្រមូលទិន្នន័យតាមប្រព័ន្ធឌីជីថល។</p>
+        
+        <ul>
+            
+            <li><strong>អគ្គិសនីកម្ពុជា (EDC) និងវិស័យថាមពល:</strong> អាចប្រើដើម្បីព្យាករណ៍តម្រូវការប្រើប្រាស់អគ្គិសនីនៅតាមតំបន់ជនបទ ឬតំបន់អភិវឌ្ឍន៍ថ្មីៗដែលមិនទាន់មានទិន្នន័យប្រវត្តិយូរ ដោយផ្ទេរចំណេះដឹងពីម៉ូដែលដែលបានហ្វឹកហាត់លើទិន្នន័យទីក្រុងភ្នំពេញ។</li>
+            
+            <li><strong>គ្រឹះស្ថានមីក្រូហិរញ្ញវត្ថុ និងធនាគារ:</strong> អាចជួយព្យាករណ៍ពីនិន្នាការនៃលំហូរសាច់ប្រាក់ អត្រាឥណទាន ឬការសងប្រាក់ត្រឡប់មកវិញសម្រាប់សាខាថ្មីៗនៅតាមខេត្ត ដោយមិនចាំបាច់រង់ចាំប្រមូលទិន្នន័យរាប់ឆ្នាំនោះទេ។</li>
+            
+            <li><strong>វិស័យកសិកម្ម និងធនធានទឹក (ឧ. ក្រសួងធនធានទឹក និងឧតុនិយម):</strong> អាចផ្ទេរចំណេះដឹងនៃទិន្នន័យអាកាសធាតុ កម្រិតទឹកភ្លៀង ឬទឹកជំនន់ ពីស្ថានីយវាស់វែងធំៗ ទៅកាន់តំបន់ដែលទើបនឹងតំឡើងឧបករណ៍វាស់វែងថ្មី ដើម្បីផ្តល់ការព្យាករណ៍បានទាន់ពេលវេលា។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការប្រើប្រាស់ Transfer Learning គឺជាដំណោះស្រាយដ៏ឆ្លាតវៃសម្រាប់បរិបទប្រទេសកម្ពុជា ព្រោះវាអនុញ្ញាតឱ្យយើងបង្កើតប្រព័ន្ធព្យាករណ៍ដែលមានភាពត្រឹមត្រូវខ្ពស់ ទោះបីជាយើងស្ថិតក្នុងដំណាក់កាលខ្វះខាតទិន្នន័យ (Data-scarce environment) ក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សា និងសរសេរកូដមូលដ្ឋានគ្រឹះនៃ LSTM:</strong> ចាប់ផ្តើមរៀនសរសេរកូដម៉ូដែល LSTM សម្រាប់ការព្យាករណ៍ទិន្នន័យស៊េរីពេលវេលា ដោយប្រើប្រាស់បណ្ណាល័យ PyTorch ឬ TensorFlow/Keras ដើម្បីយល់ពីរបៀបដែលទិន្នន័យបន្តបន្ទាប់ (Sequential data) ត្រូវបានដំណើរការ។</li>
+            
+            <li><strong>បង្កើត និងហ្វឹកហាត់ម៉ូដែលគោល (Base Model) លើទិន្នន័យខ្នាតធំ:</strong> ប្រមូលសំណុំទិន្នន័យខ្នាតធំមួយ (ឧទាហរណ៍ ទិន្នន័យអាកាសធាតុប្រវត្តិសាស្ត្រ ឬទិន្នន័យអគ្គិសនីដែលមានស្រាប់) ដើម្បីហ្វឹកហាត់ម៉ូដែលដោយប្រើប្រាស់អនុគមន៍បាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់ (Reconstruction and Regression Loss) ដូចមានបង្ហាញក្នុងឯកសារ។</li>
+            
+            <li><strong>អនុវត្តការរៀនផ្ទេរចំណេះដឹង (Transfer Learning):</strong> យកម៉ូដែលគោលដែលបានហ្វឹកហាត់រួច ធ្វើការបង្កក (Freeze) ស្រទាប់ដំបូងៗ (Feature layers) ហើយធ្វើការហ្វឹកហាត់បន្ត (Fine-tune) តែស្រទាប់ចុងក្រោយដោយប្រើប្រាស់ទិន្នន័យគោលដៅរបស់កម្ពុជាដែលមានទំហំតូច។</li>
+            
+            <li><strong>វាយតម្លៃ និងប្រៀបធៀបលទ្ធផល:</strong> វាស់ស្ទង់កម្រិតកំហុសដោយប្រើរង្វាស់ SMAPE ហើយប្រៀបធៀបលទ្ធផលជាមួយវិធីសាស្ត្រប្រពៃណីដូចជា ARIMA ឬ HoltWinters ដោយប្រើប្រាស់កញ្ចប់ statsmodels នៅក្នុង Python ដើម្បីបញ្ជាក់ពីប្រសិទ្ធភាពនៃម៉ូដែលរៀនផ្ទេរ។</li>
+            
+            <li><strong>ដាក់ពង្រាយជាទម្រង់ API (Deployment):</strong> វេចខ្ចប់ម៉ូដែលនេះទៅជាសេវាកម្មគេហទំព័រដោយប្រើប្រាស់ FastAPI ឬ Flask ព្រមទាំងតំហែទាំជាមួយ Docker ដើម្បីអនុញ្ញាតឱ្យអ្នកប្រើប្រាស់ផ្សេងៗអាចបញ្ចូលទិន្នន័យស៊េរីពេលវេលាខ្លីៗរបស់ពួកគេ និងទទួលបានលទ្ធផលព្យាករណ៍បានភ្លាមៗ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>ដំណើរការនៃការយកចំណេះដឹង (ទម្ងន់នៃបណ្តាញសរសៃប្រសាទ) ដែលម៉ូដែលមួយបានរៀនពីសំណុំទិន្នន័យដ៏ធំមួយ ទៅប្រើប្រាស់ដើម្បីដោះស្រាយបញ្ហាថ្មីមួយទៀតដែលមានទិន្នន័យតិចតួច។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលចេះជិះកង់រួចហើយ យកជំនាញរក្សាតុល្យភាពនោះទៅរៀនជិះម៉ូតូដោយប្រើពេលតិចជាងអ្នកដែលមិនធ្លាប់ជិះកង់សោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">LSTM (Long Short-Term Memory)</span></td>
+                <td>ប្រភេទនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (RNN) ដែលមានសមត្ថភាពចងចាំព័ត៌មានពីអតីតកាលក្នុងរយៈពេលយូរ ដើម្បីទាញយកទំនាក់ទំនង និងទស្សន៍ទាយទិន្នន័យដែលមានលក្ខណៈជាស៊េរីបន្តបន្ទាប់គ្នាដូចជាពេលវេលាជាដើម។</td>
+                <td>ដូចជាសៀវភៅកំណត់ហេតុដែលជួយចងចាំព្រឹត្តិការណ៍សំខាន់ៗកាលពីមុន ដើម្បីសម្រេចចិត្តថានឹងមានអ្វីកើតឡើងនៅថ្ងៃស្អែក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Reconstruction Loss</span></td>
+                <td>ទំហំនៃកំហុសនៅពេលដែលម៉ូដែលព្យាយាមបង្កើតទិន្នន័យដើមឡើងវិញចេញពីលក្ខណៈពិសេសដែលវាបានបង្រួម (Compressed features) ដែលជួយធានាថាម៉ូដែលយល់ច្បាស់ពីទម្រង់ទូទៅនៃទិន្នន័យមុននឹងធ្វើការព្យាករណ៍។</td>
+                <td>ដូចជាការគូររូបភាពសង្ខេបពីការចងចាំរបស់អ្នក ហើយប្រៀបធៀបវាទៅនឹងរូបភាពដើមថាតើវាមានភាពខុសគ្នា ឬបាត់បង់ព័ត៌មានប៉ុណ្ណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Regression Loss</span></td>
+                <td>ទំហំនៃកំហុសរវាងតម្លៃដែលម៉ូដែលបានទស្សន៍ទាយសម្រាប់អនាគត និងតម្លៃជាក់ស្តែងដែលកើតឡើងពិតប្រាកដ (ប្រើសម្រាប់វាយតម្លៃ និងកែតម្រូវសមត្ថភាពការព្យាករណ៍របស់ម៉ូដែល)។</td>
+                <td>ដូចជាការទស្សន៍ទាយថាថ្ងៃស្អែកនឹងមានភ្លៀងធ្លាក់ ៨០ មីលីម៉ែត្រ តែជាក់ស្តែងធ្លាក់ត្រឹម ៥០ មីលីម៉ែត្រ នោះកំហុសចំនួន ៣០ គឺជា Regression Loss។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMAPE (Symmetric Mean Absolute Percentage Error)</span></td>
+                <td>រង្វាស់ស្ថិតិមួយប្រភេទដែលប្រើសម្រាប់គណនាកម្រិតកំហុសជាភាគរយនៃម៉ូដែលការព្យាករណ៍ ដោយបែងចែកភាពខុសគ្នារវាងតម្លៃទស្សន៍ទាយ និងតម្លៃពិត ជាមួយនឹងមធ្យមភាគនៃតម្លៃទាំងពីរ។</td>
+                <td>ជាពិន្ទុដែលប្រាប់យើងថាការទស្សន៍ទាយរបស់យើងខុសពីការពិតប៉ុន្មានភាគរយ ដើម្បីបញ្ជាក់ថាម៉ូដែលនោះពូកែកម្រិតណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bottleneck layer</span></td>
+                <td>ស្រទាប់កណ្តាលនៃបណ្តាញសរសៃប្រសាទដែលមានចំនួនណឺរ៉ូន (Neurons) តិចជាងស្រទាប់ផ្សេងៗ ដែលបង្ខំឱ្យម៉ូដែលត្រូវបង្រួមទិន្នន័យ និងទាញយកតែលក្ខណៈពិសេសដែលសំខាន់បំផុត ដើម្បីយកទៅផ្ទេរចំណេះដឹង។</td>
+                <td>ដូចជាកញ្ច្រែងរែងយកតែកំទេចមាសសុទ្ធចេញពីខ្សាច់និងថ្មរាប់តោន ដោយរក្សាទុកតែរបស់ដែលមានតម្លៃនិងតំណាងឱ្យទិន្នន័យទាំងមូលបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fine-tuning</span></td>
+                <td>ដំណើរការនៃការយកម៉ូដែលដែលបានហ្វឹកហាត់រួចជាស្រេច (Pre-trained model) មកហ្វឹកហាត់បន្ថែមតែបន្តិចបន្តួច (ជាពិសេសស្រទាប់ចុងក្រោយ) នៅលើសំណុំទិន្នន័យថ្មី ដើម្បីឱ្យវាមានភាពសុក្រឹតនិងស័ក្តិសមបំផុតសម្រាប់បរិបទថ្មីនោះ។</td>
+                <td>ដូចជាការទិញអាវធំដែលគេកាត់ស្រេចមកកែតម្រូវទំហំបន្តិចបន្តួចនៅត្រង់ចង្កេះនិងដៃ ដើម្បីឱ្យស្លៀកត្រូវពិតប្រាកដជាមួយរាងកាយរបស់អ្នក។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=deep+learning+time-series+forecasting+transfer+learning+architectures" target="_blank" rel="noopener"><span class="en">deep learning time-series forecasting transfer learning architectures</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=LSTM+reconstruction+loss+vs+regression+loss+time+series" target="_blank" rel="noopener"><span class="en">LSTM reconstruction loss vs regression loss time series</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=time+series+feature+extraction+autoencoders+bottleneck+layer" target="_blank" rel="noopener"><span class="en">time series feature extraction autoencoders bottleneck layer</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=cross-domain+transfer+learning+for+limited+history+time-series" target="_blank" rel="noopener"><span class="en">cross-domain transfer learning for limited history time-series</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=energy+load+forecasting+transfer+learning+deep+neural+networks" target="_blank" rel="noopener"><span class="en">energy load forecasting transfer learning deep neural networks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SMAPE+optimization+in+deep+learning+forecasting+models" target="_blank" rel="noopener"><span class="en">SMAPE optimization in deep learning forecasting models</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+</body>
+</html>
