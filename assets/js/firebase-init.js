@@ -113,6 +113,7 @@
   // Load Firebase SDK scripts dynamically
   // var RECAPTCHA_SITE_KEY = "6Le-L3wsAAAAAF1AAbkCEQBVGOnZFwUfigT40cIi";
   var RECAPTCHA_SITE_KEY = "6LfgQXwsAAAAADQOlj-L1UkVcWjJkF4juHqQsV0A";
+  var ENABLE_APP_CHECK = false; // Temporary toggle
 
   var sdkBase = "https://www.gstatic.com/firebasejs/10.14.1/";
   var scripts = [
@@ -130,26 +131,28 @@
     // All scripts loaded — initialize
     firebase.initializeApp(FIREBASE_CONFIG);
 
-    // Activate App Check (optional — site works without it)
-    // If token exchange fails, Firebase requests still proceed when RTDB enforcement is off.
-    try {
-      var host = (window.location && window.location.hostname) || "";
-      var isLocalhost = host === "localhost" || host === "127.0.0.1" || host === "[::1]";
+    // App Check is temporarily disabled.
+    // Re-enable later by setting ENABLE_APP_CHECK = true.
+    if (ENABLE_APP_CHECK) {
+      try {
+        var host = (window.location && window.location.hostname) || "";
+        var isLocalhost = host === "localhost" || host === "127.0.0.1" || host === "[::1]";
 
-      // Local development with RTDB App Check enforcement:
-      // use Firebase App Check debug token flow (register token in Firebase Console once).
-      if (isLocalhost && typeof self.FIREBASE_APPCHECK_DEBUG_TOKEN === "undefined") {
-        self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+        // Local development with RTDB App Check enforcement:
+        // use Firebase App Check debug token flow (register token in Firebase Console once).
+        if (isLocalhost && typeof self.FIREBASE_APPCHECK_DEBUG_TOKEN === "undefined") {
+          self.FIREBASE_APPCHECK_DEBUG_TOKEN = true;
+        }
+
+        var appCheck = firebase.appCheck();
+        appCheck.activate(
+          new firebase.appCheck.ReCaptchaV3Provider(RECAPTCHA_SITE_KEY),
+          /* isTokenAutoRefreshEnabled= */ true
+        );
+      } catch (e) {
+        // Non-fatal: site continues to function without App Check
+        console.warn("[KR] App Check activation skipped:", e.message || e);
       }
-
-      var appCheck = firebase.appCheck();
-      appCheck.activate(
-        new firebase.appCheck.ReCaptchaV3Provider(RECAPTCHA_SITE_KEY),
-        /* isTokenAutoRefreshEnabled= */ true
-      );
-    } catch (e) {
-      // Non-fatal: site continues to function without App Check
-      console.warn("[KR] App Check activation skipped:", e.message || e);
     }
 
     // Listen for auth state

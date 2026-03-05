@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរៀបចំផែនការចលនាដ៏ប្រសើរបំផុតនៅក្នុងចន្លោះការងារ 3D៖ ការរួមបញ្ចូលកម្មវិធីរៀបចំផែនការចលនាផ្អែកលើវិធីសាស្ត្រ Panel ជាមួយនឹងការរៀនពង្រឹងស៊ីជម្រៅជាបន្តបន្ទាប់ - Optimal Motion Planning in 3D Workspaces: Integrating a Panel-Method-Based Mo... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការរៀបចំផែនការចលនាដ៏ប្រសើរបំផុតនៅក្នុងចន្លោះការងារ 3D៖ ការរួ។ និក្ខេបបទនេះដោះស្រាយបញ្ហានៃការរៀបចំផែនការចលនារបស់មនុស្សយន្តក្នុងលំហ 3D (3D Workspaces) ប្រកបដោយសុ...">
+    
+    <meta name="keywords" content="3D Motion Planning, Deep Reinforcement Learning, Panel Method, Artificial Harmonic Potential Fields, Hamilton-Jacobi-Bellman, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/optimal-motion-planning-3d-rl-ntua-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/optimal-motion-planning-3d-rl-ntua-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/optimal-motion-planning-3d-rl-ntua-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/optimal-motion-planning-3d-rl-ntua-2023.html">
+    <meta property="og:title" content="ការរៀបចំផែនការចលនាដ៏ប្រសើរបំផុតនៅក្នុងចន្លោះការងារ 3D៖ ការរួមបញ្ចូលកម្មវិធីរៀបចំផែនការចលនាផ្អែកលើវិធីសាស្ត្រ Panel ជាមួយនឹងការរៀនពង្រឹងស៊ីជម្រៅជាបន្តបន្ទាប់ | KhmerResearch.com">
+    <meta property="og:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហានៃការរៀបចំផែនការចលនារបស់មនុស្សយន្តក្នុងលំហ 3D (3D Workspaces) ប្រកបដោយសុវត្ថិភាព និងប្រសិទ្ធភាពបំផុត ដែលវិធីសាស្ត្រមុនៗ (ដូចជាក្បួនដោះស្រាយ RRT*) តែងតែជួបប្រទះបញ្ហានៃការគណន...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2023 National Technical University of Athens-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="3D Motion Planning">
+    
+    <meta property="article:tag" content="Deep Reinforcement Learning">
+    
+    <meta property="article:tag" content="Panel Method">
+    
+    <meta property="article:tag" content="Artificial Harmonic Potential Fields">
+    
+    <meta property="article:tag" content="Hamilton-Jacobi-Bellman">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរៀបចំផែនការចលនាដ៏ប្រសើរបំផុតនៅក្នុងចន្លោះការងារ 3D៖ ការរួមបញ្ចូលកម្មវិធីរៀបចំផែនការចលនាផ្អែកលើវិធីសាស្ត្រ Panel ជាមួយនឹងការរៀនពង្រឹងស៊ីជម្រៅជាបន្តបន្ទាប់">
+    <meta name="twitter:description" content="និក្ខេបបទនេះដោះស្រាយបញ្ហានៃការរៀបចំផែនការចលនារបស់មនុស្សយន្តក្នុងលំហ 3D (3D Workspaces) ប្រកបដោយសុវត្ថិភាព និងប្រសិទ្ធភាពបំផុត ដែលវិធីសាស្ត្រមុនៗ (ដូចជាក្បួនដោះស្រាយ RRT*) តែងតែជួបប្រទះបញ្ហានៃការគណន...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u17c0\u1794\u1785\u17c6\u1795\u17c2\u1793\u1780\u17b6\u179a\u1785\u179b\u1793\u17b6\u178a\u17cf\u1794\u17d2\u179a\u179f\u17be\u179a\u1794\u17c6\u1795\u17bb\u178f\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1780\u17b6\u179a\u1784\u17b6\u179a 3D\u17d6 \u1780\u17b6\u179a\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179a\u17c0\u1794\u1785\u17c6\u1795\u17c2\u1793\u1780\u17b6\u179a\u1785\u179b\u1793\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Panel \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u1787\u17b6\u1794\u1793\u17d2\u178f\u1794\u1793\u17d2\u1791\u17b6\u1794\u17cb",
+      "name": "Optimal Motion Planning in 3D Workspaces: Integrating a Panel-Method-Based Motion Planner with Continuous Deep Reinforcement Learning",
+      "description": "\u1793\u17b7\u1780\u17d2\u1781\u17c1\u1794\u1794\u1791\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1794\u1785\u17c6\u1795\u17c2\u1793\u1780\u17b6\u179a\u1785\u179b\u1793\u17b6\u179a\u1794\u179f\u17cb\u1798\u1793\u17bb\u179f\u17d2\u179f\u1799\u1793\u17d2\u178f\u1780\u17d2\u1793\u17bb\u1784\u179b\u17c6\u17a0 3D (3D Workspaces) \u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u179f\u17bb\u179c\u178f\u17d2\u1790\u17b7\u1797\u17b6\u1796 \u1793\u17b7\u1784\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1794\u17c6\u1795\u17bb\u178f \u178a\u17c2\u179b\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1798\u17bb\u1793\u17d7 (\u178a\u17bc\u1785\u1787\u17b6\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 RRT*) \u178f\u17c2\u1784\u178f\u17c2\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1782\u178e\u1793\u17b6\u1799\u17bc\u179a \u1793\u17b7\u1784\u1795\u17d2\u178f\u179b\u17cb\u179b\u1791\u17d2\u1792\u1795\u179b\u1798\u17b7\u1793\u1791\u17b6\u1793\u17cb\u179b\u17d2\u17a2\u17a5\u178f\u1781\u17d2\u1785\u17c4\u17c7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/optimal-motion-planning-3d-rl-ntua-2023.html",
+      "author": [{"@type": "Person", "name": "Marios Malliaropoulos Katsimis (National Technical University of Athens)"},{"@type": "Person", "name": "K. J. Kyriakopoulos"},{"@type": "Person", "name": "Ch. Bechlioulis"}],
+      "datePublished": "2023 National Technical University of Athens",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Optimal Motion Planning in 3D Workspaces: Integrating a Panel-Method-Based Motion Planner with Continuous Deep Reinforcement Learning",
+        "url": "https://dspace.lib.ntua.gr/xmlui/bitstream/handle/123456789/57923/Thesis_Malliaropoulos.pdf?sequence=1"
+      },
+      "keywords": ["3D Motion Planning", "Deep Reinforcement Learning", "Panel Method", "Artificial Harmonic Potential Fields", "Hamilton-Jacobi-Bellman"],
+      "about": "Robotics and Control Systems"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u17c0\u1794\u1785\u17c6\u1795\u17c2\u1793\u1780\u17b6\u179a\u1785\u179b\u1793\u17b6\u178a\u17cf\u1794\u17d2\u179a\u179f\u17be\u179a\u1794\u17c6\u1795\u17bb\u178f\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1780\u17b6\u179a\u1784\u17b6\u179a 3D\u17d6 \u1780\u17b6\u179a\u179a\u17bd\u1798\u1794\u1789\u17d2\u1785\u17bc\u179b\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u179a\u17c0\u1794\u1785\u17c6\u1795\u17c2\u1793\u1780\u17b6\u179a\u1785\u179b\u1793\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Panel \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u1787\u17b6\u1794\u1793\u17d2\u178f\u1794\u1793\u17d2\u1791\u17b6\u1794\u17cb",
+          "item": "https://khmerresearch.com/papers/technology/optimal-motion-planning-3d-rl-ntua-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរៀបចំផែនការចលនាដ៏ប្រសើរបំផុតនៅក្នុងចន្លោះការងារ 3D៖ កា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Optimal Motion Planning in 3D Workspaces: Integrating a Panel-Method-Based Motion Planner with Continuous Deep Reinforcement Learning<br>
+        
+        <strong>Source:</strong> <a href="https://dspace.lib.ntua.gr/xmlui/bitstream/handle/123456789/57923/Thesis_Malliaropoulos.pdf?sequence=1" target="_blank" rel="noopener">dspace.lib.ntua.gr</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរៀបចំផែនការចលនាដ៏ប្រសើរបំផុតនៅក្នុងចន្លោះការងារ 3D៖ ការរួមបញ្ចូលកម្មវិធីរៀបចំផែនការចលនាផ្អែកលើវិធីសាស្ត្រ Panel ជាមួយនឹងការរៀនពង្រឹងស៊ីជម្រៅជាបន្តបន្ទាប់</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Optimal Motion Planning in 3D Workspaces: Integrating a Panel-Method-Based Motion Planner with Continuous Deep Reinforcement Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Marios Malliaropoulos Katsimis (National Technical University of Athens), K. J. Kyriakopoulos, Ch. Bechlioulis</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 National Technical University of Athens</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Robotics and Control Systems</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> និក្ខេបបទនេះដោះស្រាយបញ្ហានៃការរៀបចំផែនការចលនារបស់មនុស្សយន្តក្នុងលំហ 3D (3D Workspaces) ប្រកបដោយសុវត្ថិភាព និងប្រសិទ្ធភាពបំផុត ដែលវិធីសាស្ត្រមុនៗ (ដូចជាក្បួនដោះស្រាយ RRT*) តែងតែជួបប្រទះបញ្ហានៃការគណនាយូរ និងផ្តល់លទ្ធផលមិនទាន់ល្អឥតខ្ចោះ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្ត្រចម្រុះប្រកបដោយភាពច្នៃប្រឌិត ដោយផ្តោតលើគោលការណ៍មេកានិចនៃលំហូរទឹក ទ្រឹស្តីនៃការគ្រប់គ្រងដ៏ប្រសើរបំផុត និងបញ្ញាសិប្បនិម្មិតដើម្បីបង្កើតគន្លងសុវត្ថិភាព។
+        
+        <ul>
+            
+            <li>ការធ្វើគំរូលំហូរនៃអង្គធាតុរាវដោយប្រើប្រាស់វិធីសាស្ត្រ Panel និងលក្ខខណ្ឌ von-Neumann (Fluid Flow Modeling using Panel Method)</li>
+            
+            <li>ការអនុវត្តដែនសក្តានុពលអាម៉ូនិកសិប្បនិម្មិតសម្រាប់ការចៀសវាងឧបសគ្គ (Artificial Harmonic Potential Fields - AHPFs)</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយការរៀនពង្រឹងស៊ីជម្រៅ (Continuous Deep Reinforcement Learning) ផ្អែកលើម៉ូដែល Actor-Critic ដើម្បីដោះស្រាយសមីការ Hamilton-Jacobi-Bellman (HJB)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រដែលបានស្នើឡើងអាចបង្កើតគន្លងផ្លូវរលូន និងមានសុវត្ថិភាពខ្ពស់ពីការប៉ះទង្គិចនៅក្នុងបរិស្ថាន 3D ដែលមានឧបសគ្គស្មុគស្មាញដោយប្រើប្រាស់ការបញ្ជាល្បឿនជាបន្តបន្ទាប់ (Continuous Velocity Commands)។</li>
+            
+            <li>បើប្រៀបធៀបជាមួយវិធីសាស្ត្រ RRT* ទាំងក្នុងបរិស្ថានទីក្រុង និងព្រៃឈើ ក្បួនដោះស្រាយថ្មីនេះផ្តល់នូវប្រវែងគន្លងខ្លីជាង និងតម្លៃចំណាយ (Cost) ទាបជាងយ៉ាងកត់សម្គាល់ ជាមួយនឹងការកាត់បន្ថយបញ្ហាតម្លៃដល់ទៅជាងពាក់កណ្តាលក្នុងករណីខ្លះ។</li>
+            
+            <li>ម៉ូដែលនេះធានាបាននូវការធ្វើដំណើរដល់គោលដៅចុងក្រោយដោយមិនមានបញ្ហាជាប់គាំងនៅចំណុចអប្បបរមាក្នុងតំបន់ (Free of Local Minima) តាមរយៈការរក្សានូវលក្ខណៈសម្បត្តិអាម៉ូនិកនៃលំហូរសក្តានុពល។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">AHPF with Continuous Deep RL (Actor-Critic)</span></strong><br>វិធីសាស្ត្ររៀបចំផែនការចលនាបែប AHPF រួមបញ្ចូលជាមួយការរៀនពង្រឹងស៊ីជម្រៅ</td>
+                <td>បង្កើតគន្លងផ្លូវរលូន មានសុវត្ថិភាពខ្ពស់ គ្មានបញ្ហាជាប់គាំងនៅចំណុចអប្បបរមាក្នុងតំបន់ (Local Minima) និងផ្តល់លទ្ធផលប្រកបដោយភាពប្រាកដប្រជា (Deterministic)។</td>
+                <td>ការគណនាមានភាពស្មុគស្មាញនៅពេលបង្វឹកម៉ូដែល ហើយស័ក្តិសមបំផុតសម្រាប់តែបរិស្ថានដែលគ្មានវត្ថុមានចលនា (Static Environments)។</td>
+                <td>ទទួលបានតម្លៃចំណាយ (Cost) ទាបជាង និងប្រវែងគន្លងខ្លីជាងឆ្ងាយ (ឧទាហរណ៍៖ ៤.៩ ទល់នឹង ៩.៣ ក្នុងបរិស្ថានទីក្រុង)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Baseline and Enhanced RRT*</span></strong><br>ក្បួនដោះស្រាយ RRT* ជាមូលដ្ឋាន និងបែបកែលម្អ</td>
+                <td>ងាយស្រួលអនុវត្ត និងត្រូវបានគេប្រើប្រាស់យ៉ាងទូលំទូលាយសម្រាប់ដោះស្រាយបញ្ហារៀបចំផែនការចលនាក្នុងលំហធំៗ និងអាចរកដំណោះស្រាយអប្បបរមាបាន (Probabilistically complete)។</td>
+                <td>ត្រូវការពេលគណនាយូរដោយសារលក្ខណៈចៃដន្យ (Stochastic) ផ្តល់គន្លងមិនសូវរលូន និងត្រូវដំណើរការក្លែងធ្វើច្រើនដងទើបទទួលបានលទ្ធផល។</td>
+                <td>មានតម្លៃចំណាយខ្ពស់ជាង និងប្រវែងគន្លងវែងជាង (ឧទាហរណ៍៖ តម្លៃមធ្យម ១៧៨ និង ១៥០ ធៀបនឹងតម្លៃ ៩០ របស់វិធីសាស្ត្រថ្មី)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រដែលមានកម្លាំងមធ្យមទៅខ្ពស់សម្រាប់ការក្លែងធ្វើ និងការបង្វឹកម៉ូដែលបញ្ញាសិប្បនិម្មិត។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រមានប្រតិបត្តិការ Windows 10 ដែលមានស៊ីភីយូ (CPU) Ryzen 7 (8-Core) និងរ៉េម (RAM) ទំហំ 32GB។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់កម្មវិធី MATLAB សម្រាប់ការក្លែងធ្វើ ដោយភ្ជាប់ជាមួយឯកសារ C++ Mex សម្រាប់ដោះស្រាយសមីការលំហូរនៃអង្គធាតុរាវ។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារចំណេះដឹងស៊ីជម្រៅផ្នែកការរៀនពង្រឹង (Deep Reinforcement Learning) មេកានិចនៃលំហូរអង្គធាតុរាវ (Fluid Mechanics) និងទ្រឹស្តីត្រួតពិនិត្យដ៏ប្រសើរបំផុត (Optimal Control Theory)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើទិន្នន័យក្លែងធ្វើ (Simulations) ក្នុងបរិស្ថានទីក្រុង និងព្រៃឈើនិម្មិត 3D ដោយមិនទាន់មានការសាកល្បងលើមនុស្សយន្តពិតប្រាកដនៅឡើយទេ។ សម្រាប់ប្រទេសកម្ពុជា ការខ្វះខាតទិន្នន័យជាក់ស្តែងមានន័យថា គេត្រូវការសាកល្បងប្រព័ន្ធនេះផ្ទាល់នៅតាមទីតាំងពិតប្រាកដដើម្បីធានាថាវាអាចទប់ទល់នឹងកត្តាអាកាសធាតុ និងឧបសគ្គដែលមានចលនា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍវិស័យមនុស្សយន្ត និងយន្តហោះគ្មានមនុស្សបើក (Drones) ប្រកបដោយសុវត្ថិភាពនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>ការដឹកជញ្ជូនតាម Drone ក្នុងរាជធានីភ្នំពេញ:</strong> អាចប្រើប្រាស់សម្រាប់បង្កើតប្រព័ន្ធដ្រូនដឹកជញ្ជូនទំនិញដែលអាចហោះហើរគេចវាងអគារខ្ពស់ៗក្នុងទីក្រុងបានយ៉ាងរលូន និងសន្សំសំចៃថ្ម។</li>
+            
+            <li><strong>ការតាមដានតំបន់ព្រៃឈើ (ឧទាហរណ៍៖ ជួរភ្នំក្រវាញ ឬមណ្ឌលគិរី):</strong> អាចជួយដល់ដ្រូនល្បាតព្រៃឈើ ឬដ្រូនកសិកម្ម ក្នុងការហោះហើរដោយស្វ័យប្រវត្តិក្នុងបរិស្ថានដែលមានដើមឈើក្រាស់ៗ និងមានឧបសគ្គស្មុគស្មាញច្រើនដោយសុវត្ថិភាព។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ក្បួនដោះស្រាយនេះផ្តល់នូវមូលដ្ឋានគ្រឹះដ៏រឹងមាំមួយសម្រាប់ការស្រាវជ្រាវមនុស្សយន្តស្វ័យប្រវត្តិនៅកម្ពុជា ថ្វីត្បិតតែត្រូវការការអភិវឌ្ឍបន្ថែមសម្រាប់ប្រព័ន្ធចាប់សញ្ញាជាក់ស្តែង (Real-time Sensors) ក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះគណិតវិទ្យា និងរូបវិទ្យា:</strong> ស្វែងយល់អំពីសមីការលំហូរនៃអង្គធាតុរាវ (Potential Fluid Flow) វិធីសាស្ត្របន្ទះ (Panel Method) និងសមីការ <span class='en'>Hamilton-Jacobi-Bellman (HJB)</span> ដែលជាស្នូលនៃការគ្រប់គ្រងដ៏ប្រសើរបំផុត។</li>
+            
+            <li><strong>អនុវត្តការសរសេរកូដក្នុងបរិស្ថានក្លែងធ្វើ:</strong> រៀនប្រើប្រាស់កម្មវិធី <span class='en'>MATLAB</span> សម្រាប់ការសាងសង់បរិស្ថាននិម្មិត 3D និងប្រើប្រាស់កូដ <span class='en'>C++ Mex</span> ដើម្បីជួយពន្លឿនការគណនាសមីការស្មុគស្មាញឲ្យបានលឿនជាងមុន។</li>
+            
+            <li><strong>អភិវឌ្ឍម៉ូដែល Deep Reinforcement Learning:</strong> ចាប់ផ្តើមរចនា និងបង្វឹកក្បួនដោះស្រាយទម្រង់ <span class='en'>Actor-Critic Network</span> ដោយប្រើទិន្នន័យដែលប្រមូលបានពីគន្លងផ្លូវក្នុងទីធ្លាក្លែងធ្វើ ដើម្បីទាញយកប៉ារ៉ាម៉ែត្របញ្ជាដែលប្រសើរបំផុត។</li>
+            
+            <li><strong>ការធ្វើតេស្តប្រៀបធៀប (Benchmarking):</strong> ដំណើរការម៉ូដែលរបស់អ្នកប្រៀបធៀបជាមួយក្បួនដោះស្រាយទូទៅដូចជា <span class='en'>RRT*</span> ដើម្បីវាយតម្លៃលើប្រវែងផ្លូវ ពេលវេលាគណនា និងកម្រិតសុវត្ថិភាពពីការប៉ះទង្គិច។</li>
+            
+            <li><strong>ការសាកល្បងលើឧបករណ៍ជាក់ស្តែង (Hardware Deployment):</strong> ផ្ទេរក្បួនដោះស្រាយដែលបានបង្វឹករួចទៅកាន់ឧបករណ៍បញ្ជា (Flight Controller) របស់ដ្រូនពិតប្រាកដ ដោយបន្ថែមមុខងារ <span class='en'>Low-level planner</span> ដើម្បីឆ្លើយតបនឹងឧបសគ្គដែលមានចលនា (Dynamic Obstacles)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hamilton-Jacobi-Bellman (HJB) equation</span></td>
+                <td>ជាសមីការគណិតវិទ្យាដ៏សំខាន់ផ្នែកទ្រឹស្តីគ្រប់គ្រងដ៏ប្រសើរបំផុត (Optimal Control Theory) ដែលប្រើសម្រាប់ស្វែងរកគោលការណ៍គ្រប់គ្រងល្អបំផុតដើម្បីកាត់បន្ថយការចំណាយ (Cost) ក្នុងប្រព័ន្ធដំណើរការបន្តបន្ទាប់។ នៅក្នុងការស្រាវជ្រាវនេះ វាជួយទាញយកគន្លងផ្លូវខ្លី និងមានប្រសិទ្ធភាពថាមពលបំផុតសម្រាប់មនុស្សយន្ត។</td>
+                <td>ដូចជាការរកផ្លូវកាត់តាម Google Maps ដែលមិនត្រឹមតែជិតជាងគេ តែថែមទាំងប្រាប់ពីរបៀបជិះដែលមិនស្ទះចរាចរណ៍ និងចំណាយសាំងតិចបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Artificial Harmonic Potential Fields (AHPFs)</span></td>
+                <td>ជាវិធីសាស្ត្របង្កើតដែនទំនាញសិប្បនិម្មិតដោយផ្អែកលើអនុគមន៍អាម៉ូនិក ដើម្បីដឹកនាំមនុស្សយន្តទៅរកគោលដៅ (កម្លាំងទាញ) និងរុញវាចេញពីឧបសគ្គ (កម្លាំងច្រាន)។ លក្ខណៈ Harmonic ជួយធានាថាមនុស្សយន្តនឹងមិនជាប់គាំងនៅចំណុចណាមួយក្រៅពីគោលដៅពិតប្រាកដឡើយ។</td>
+                <td>ដូចជាការដាក់មេដែកស្រូបនៅគោលដៅ និងមេដែកច្រាននៅតាមជញ្ជាំង ដើម្បីរុញរថយន្តក្មេងលេងឱ្យរត់ទៅដល់រន្ធគោលដៅដោយមិនបុកជញ្ជាំង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Panel Method</span></td>
+                <td>ជាបច្ចេកទេសក្នុងមេកានិចនៃអង្គធាតុរាវ (Fluid Mechanics) ដែលបំបែកផ្ទៃនៃឧបសគ្គទៅជាផ្ទាំងតូចៗ (Panels) ជាច្រើន ដើម្បីងាយស្រួលគណនាលំហូរនៅជុំវិញវា។ ក្នុងបរិបទនេះ វាត្រូវបានប្រើដើម្បីគណនាកម្លាំងច្រានរបស់ឧបសគ្គក្នុងលំហ 3D ឱ្យបានច្បាស់លាស់។</td>
+                <td>ដូចជាការយកក្រដាសស្ទីកគ័រតូចៗទៅបិទជុំវិញបាល់ ដើម្បីងាយស្រួលវាស់ស្ទង់ទំហំនិងកោងនៃផ្ទៃបាល់ ជាជាងការវាស់បាល់ទាំងមូលតែម្តង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Actor-Critic Architecture</span></td>
+                <td>ជាទម្រង់នៃបញ្ញាសិប្បនិម្មិតក្នុងរចនាសម្ព័ន្ធការរៀនពង្រឹង (Reinforcement Learning) ដែលបែងចែកជាពីរផ្នែក៖ 'Actor' មានតួនាទីសម្រេចចិត្តជ្រើសរើសចលនា និង 'Critic' មានតួនាទីវាយតម្លៃថាសកម្មភាពនោះល្អឬអាក្រក់ ដើម្បីឱ្យម៉ូដែលអភិវឌ្ឍការសម្រេចចិត្តរបស់ខ្លួនបន្តិចម្តងៗ។</td>
+                <td>ដូចជាសិស្ស (Actor) ដែលកំពុងហាត់ធ្វើលំហាត់ ហើយមានគ្រូបង្រៀន (Critic) នៅក្បែរចាំផ្តល់ពិន្ទុនិងកែតម្រូវរាល់ពេលសិស្សធ្វើខុស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Rapidly-Exploring Random Trees (RRT*)</span></td>
+                <td>ជាក្បួនដោះស្រាយដ៏ពេញនិយមមួយសម្រាប់ការរៀបចំផែនការចលនា ដែលបង្កើតមែកធាងស្រាវជ្រាវដោយចៃដន្យក្នុងលំហ ដើម្បីរកផ្លូវពីចំណុចចាប់ផ្តើមទៅគោលដៅ។ ទម្រង់ RRT* ត្រូវបានកែលម្អបន្ថែមដើម្បីតភ្ជាប់ខ្សែផ្លូវឡើងវិញរហូតទទួលបានផ្លូវដែលខ្លីបំផុត។</td>
+                <td>ដូចជាការចាក់ឫសរបស់ដើមឈើទៅគ្រប់ទិសទីដោយចៃដន្យដើម្បីស្វែងរកប្រភពទឹក ហើយនៅពេលរកឃើញ វាជ្រើសរើសយកតែឫសណាដែលខ្លីនិងបញ្ជូនទឹកបានលឿនជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Local Minima</span></td>
+                <td>ក្នុងបរិបទនៃការរៀបចំផែនការចលនាដោយកម្លាំងសក្តានុពល វាគឺជាចំណុចខ្វាក់មួយនៅក្នុងលំហដែលកម្លាំងទាក់ទាញនិងកម្លាំងច្រានមានទំហំប៉ុនគ្នា និងផ្ទុយគ្នា ធ្វើឱ្យមនុស្សយន្តជាប់គាំងមិនអាចទៅមុខទៀតបាន ទាំងដែលវាមិនទាន់ដល់គោលដៅពិតប្រាកដ។</td>
+                <td>ដូចជាអ្នកកំពុងឡើងភ្នំខ្ពស់បំផុត រួចបានដើរទៅដល់កំពូលទួលមួយហើយគិតថាដល់កំពូលភ្នំ រួចក៏ឈប់ដើរ តែការពិតកំពូលភ្នំធំនៅឆ្ងាយទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Laplace Equation</span></td>
+                <td>ជាសមីការឌីផេរ៉ង់ស្យែលលំដាប់ទីពីរដែលប្រើសម្រាប់ពិពណ៌នាអំពីលំហូរសក្តានុពល (Potential Flow) ក្នុងរូបវិទ្យា។ នៅក្នុងការសិក្សានេះ ការប្រើប្រាស់វាធានាថាខ្សែគន្លងរបស់មនុស្សយន្តមានភាពរលូន និងមិនមានលំហូរគួច (Irrotational) ដែលអាចធ្វើឱ្យមនុស្សយន្តបាត់បង់លំនឹង។</td>
+                <td>ដូចជាច្បាប់ធម្មជាតិដែលតម្រូវឱ្យទឹកទន្លេហូរតាមកន្លែងទំនាបដោយរលូនជានិច្ច និងមិនបង្កើតជាខ្យល់កួចទោះបីជាវាហូរកាត់ផ្ទាំងថ្មក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/end-to-end-dialog-state-reinforcement-learning-2016.html">
+                    <span class="km">ឆ្ពោះទៅរកការរៀនពីដើមដល់ចប់សម្រាប់ការតាមដាន និងការគ្រប់គ្រងស្ថានភាពសន្ទនា ដោយប្រើប្រាស់ការរៀនពង្រឹងបែបស៊ីជម្រៅ</span><br>
+                    <span class="en article-original-title">Towards End-to-End Learning for Dialog State Tracking and Management using Deep Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cooling-optimization-data-center-drl-2018.html">
+                    <span class="km">ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់មជ្ឈមណ្ឌលទិន្នន័យបៃតង តាមរយៈការរៀនសូត្របែបពង្រឹងកម្លាំងយ៉ាងស៊ីជម្រៅ (Deep Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Transforming Cooling Optimization for Green Data Center via Deep Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html">
+                    <span class="km">វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero</span><br>
+                    <span class="en article-original-title">深度强化学习进展: 从AlphaGo到AlphaGo Zero</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/wireless-power-mec-offloading-drl-2024.html">
+                    <span class="km">ការបញ្ជូនការគណនាដោយមានជំនួយពីថាមពលឥតខ្សែនៅក្នុងការគណនាចល័តនៅគែមបណ្តាញ៖ វិធីសាស្ត្រសិក្សាបំប៉នស៊ីជម្រៅ (Deep Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Wireless Power Assisted Computation Offloading in Mobile Edge Computing: A Deep Reinforcement Learning Approach</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-rl-hmm-speech-recognition-2023.html">
+                    <span class="km">ការរៀនពង្រឹងស៊ីជម្រៅជាមួយម៉ូដែល Hidden Markov សម្រាប់ការសម្គាល់សំឡេង</span><br>
+                    <span class="en article-original-title">DEEP REINFORCEMENT LEARNING WITH HIDDEN MARKOV MODEL FOR SPEECH RECOGNITION</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hamilton-Jacobi-Bellman+equation+continuous+deep+reinforcement+learning+robotics" target="_blank" rel="noopener"><span class="en">Hamilton-Jacobi-Bellman equation continuous deep reinforcement learning robotics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Artificial+Harmonic+Potential+Fields+3D+motion+planning+UAVs+obstacle+avoidance" target="_blank" rel="noopener"><span class="en">Artificial Harmonic Potential Fields 3D motion planning UAVs obstacle avoidance</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Panel+method+boundary+element+method+for+robotic+path+planning+trajectory+generation" target="_blank" rel="noopener"><span class="en">Panel method boundary element method for robotic path planning trajectory generation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Actor-critic+architecture+trajectory+optimization+dynamic+environments" target="_blank" rel="noopener"><span class="en">Actor-critic architecture trajectory optimization dynamic environments</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+RRT%2A+and+potential+field+methods+in+dense+3D+continuous+spaces" target="_blank" rel="noopener"><span class="en">Comparison RRT* and potential field methods in dense 3D continuous spaces</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
