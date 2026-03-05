@@ -39,7 +39,7 @@
     panel.className = "kr-widget-panel";
     panel.innerHTML =
       '<div class="kr-widget-panel-header">' +
-        '<h3>Community</h3>' +
+        '<h3>Feedback for this article</h3>' +
         '<button class="kr-widget-close" onclick="this.closest(\'.kr-widget-panel\').classList.remove(\'open\')">&times;</button>' +
       '</div>' +
       '<div class="kr-widget-like-section">' +
