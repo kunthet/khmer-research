@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការអនុវត្តវិធានសហការ (Association Rule) សម្រាប់ការណែនាំយុទ្ធសាស្ត្រលក់បន្ថែម (Up-Selling) និងលក់ឆ្លង (Cross-Selling) ដោយប្រើប្រាស់ FP-Growth - Implementasi Association Rule Untuk Rekomendasi Strategi Up-Selling dan Cross... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការអនុវត្តវិធានសហការ (Association Rule) សម្រាប់ការណែនាំយុទ្ធ។ មជ្ឈមណ្ឌលពាណិជ្ជកម្ម ABC មានចំនួនប្រតិបត្តិការខ្ពស់ ប៉ុន្តែផលិតផលមួយចំនួនមិនសូវលក់ដាច់ដោយសារការផ្...">
+    
+    <meta name="keywords" content="Association Rules, Cross-Selling, FP-Growth, Recommendation, Up-Selling, Data Mining, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/fp-growth-association-rule-upselling-crossselling-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/fp-growth-association-rule-upselling-crossselling-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/fp-growth-association-rule-upselling-crossselling-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/fp-growth-association-rule-upselling-crossselling-2024.html">
+    <meta property="og:title" content="ការអនុវត្តវិធានសហការ (Association Rule) សម្រាប់ការណែនាំយុទ្ធសាស្ត្រលក់បន្ថែម (Up-Selling) និងលក់ឆ្លង (Cross-Selling) ដោយប្រើប្រាស់ FP-Growth | KhmerResearch.com">
+    <meta property="og:description" content="មជ្ឈមណ្ឌលពាណិជ្ជកម្ម ABC មានចំនួនប្រតិបត្តិការខ្ពស់ ប៉ុន្តែផលិតផលមួយចំនួនមិនសូវលក់ដាច់ដោយសារការផ្សព្វផ្សាយមិនមានប្រសិទ្ធភាព ដែលតម្រូវឱ្យមានយុទ្ធសាស្ត្រលក់ថ្មីដោយផ្អែកលើទិន្នន័យ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2024, Indonesian Journal of Computer Science-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Association Rules">
+    
+    <meta property="article:tag" content="Cross-Selling">
+    
+    <meta property="article:tag" content="FP-Growth">
+    
+    <meta property="article:tag" content="Recommendation">
+    
+    <meta property="article:tag" content="Up-Selling">
+    
+    <meta property="article:tag" content="Data Mining">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការអនុវត្តវិធានសហការ (Association Rule) សម្រាប់ការណែនាំយុទ្ធសាស្ត្រលក់បន្ថែម (Up-Selling) និងលក់ឆ្លង (Cross-Selling) ដោយប្រើប្រាស់ FP-Growth">
+    <meta name="twitter:description" content="មជ្ឈមណ្ឌលពាណិជ្ជកម្ម ABC មានចំនួនប្រតិបត្តិការខ្ពស់ ប៉ុន្តែផលិតផលមួយចំនួនមិនសូវលក់ដាច់ដោយសារការផ្សព្វផ្សាយមិនមានប្រសិទ្ធភាព ដែលតម្រូវឱ្យមានយុទ្ធសាស្ត្រលក់ថ្មីដោយផ្អែកលើទិន្នន័យ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179c\u17b7\u1792\u17b6\u1793\u179f\u17a0\u1780\u17b6\u179a (Association Rule) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178e\u17c2\u1793\u17b6\u17c6\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179b\u1780\u17cb\u1794\u1793\u17d2\u1790\u17c2\u1798 (Up-Selling) \u1793\u17b7\u1784\u179b\u1780\u17cb\u1786\u17d2\u179b\u1784 (Cross-Selling) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb FP-Growth",
+      "name": "Implementasi Association Rule Untuk Rekomendasi Strategi Up-Selling dan Cross-Selling Produk Menggunakan FP-Growth",
+      "description": "\u1798\u1787\u17d2\u1788\u1798\u178e\u17d2\u178c\u179b\u1796\u17b6\u178e\u17b7\u1787\u17d2\u1787\u1780\u1798\u17d2\u1798 ABC \u1798\u17b6\u1793\u1785\u17c6\u1793\u17bd\u1793\u1794\u17d2\u179a\u178f\u17b7\u1794\u178f\u17d2\u178f\u17b7\u1780\u17b6\u179a\u1781\u17d2\u1796\u179f\u17cb \u1794\u17c9\u17bb\u1793\u17d2\u178f\u17c2\u1795\u179b\u17b7\u178f\u1795\u179b\u1798\u17bd\u1799\u1785\u17c6\u1793\u17bd\u1793\u1798\u17b7\u1793\u179f\u17bc\u179c\u179b\u1780\u17cb\u178a\u17b6\u1785\u17cb\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u1795\u17d2\u179f\u1796\u17d2\u179c\u1795\u17d2\u179f\u17b6\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796 \u178a\u17c2\u179b\u178f\u1798\u17d2\u179a\u17bc\u179c\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179b\u1780\u17cb\u1790\u17d2\u1798\u17b8\u178a\u17c4\u1799\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/fp-growth-association-rule-upselling-crossselling-2024.html",
+      "author": [{"@type": "Person", "name": "Nabiilah (Universitas Islam Negeri Sultan Syarif Kasim Riau)"},{"@type": "Person", "name": "M. Afdal"},{"@type": "Person", "name": "Rice Novita"},{"@type": "Person", "name": "Mustakim"}],
+      "datePublished": "2024, Indonesian Journal of Computer Science",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Implementasi Association Rule Untuk Rekomendasi Strategi Up-Selling dan Cross-Selling Produk Menggunakan FP-Growth",
+        "url": "https://www.researchgate.net/profile/Nabiilah-Nabiilah/publication/381964796_Implementasi_Association_Rule_Untuk_Rekomendasi_Strategi_Up-Selling_dan_Cross-Selling_Produk_Menggunakan_FP-Growth/links/6696324f02e9686cd10560a2/Implementasi-Association-Rule-Untuk-Rekomendasi-Strategi-Up-Selling-dan-Cross-Selling-Produk-Menggunakan-FP-Growth.pdf"
+      },
+      "keywords": ["Association Rules", "Cross-Selling", "FP-Growth", "Recommendation", "Up-Selling", "Data Mining"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179c\u17b7\u1792\u17b6\u1793\u179f\u17a0\u1780\u17b6\u179a (Association Rule) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u178e\u17c2\u1793\u17b6\u17c6\u1799\u17bb\u1791\u17d2\u1792\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179b\u1780\u17cb\u1794\u1793\u17d2\u1790\u17c2\u1798 (Up-Selling) \u1793\u17b7\u1784\u179b\u1780\u17cb\u1786\u17d2\u179b\u1784 (Cross-Selling) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb FP-Growth",
+          "item": "https://khmerresearch.com/papers/technology/fp-growth-association-rule-upselling-crossselling-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការអនុវត្តវិធានសហការ (Association Rule) សម្រាប់ការណែនាំយុ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Implementasi Association Rule Untuk Rekomendasi Strategi Up-Selling dan Cross-Selling Produk Menggunakan FP-Growth<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Nabiilah-Nabiilah/publication/381964796_Implementasi_Association_Rule_Untuk_Rekomendasi_Strategi_Up-Selling_dan_Cross-Selling_Produk_Menggunakan_FP-Growth/links/6696324f02e9686cd10560a2/Implementasi-Association-Rule-Untuk-Rekomendasi-Strategi-Up-Selling-dan-Cross-Selling-Produk-Menggunakan-FP-Growth.pdf" target="_blank" rel="noopener">www.researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការអនុវត្តវិធានសហការ (Association Rule) សម្រាប់ការណែនាំយុទ្ធសាស្ត្រលក់បន្ថែម (Up-Selling) និងលក់ឆ្លង (Cross-Selling) ដោយប្រើប្រាស់ FP-Growth</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Implementasi Association Rule Untuk Rekomendasi Strategi Up-Selling dan Cross-Selling Produk Menggunakan FP-Growth</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Nabiilah (Universitas Islam Negeri Sultan Syarif Kasim Riau), M. Afdal, Rice Novita, Mustakim</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Indonesian Journal of Computer Science</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> មជ្ឈមណ្ឌលពាណិជ្ជកម្ម ABC មានចំនួនប្រតិបត្តិការខ្ពស់ ប៉ុន្តែផលិតផលមួយចំនួនមិនសូវលក់ដាច់ដោយសារការផ្សព្វផ្សាយមិនមានប្រសិទ្ធភាព ដែលតម្រូវឱ្យមានយុទ្ធសាស្ត្រលក់ថ្មីដោយផ្អែកលើទិន្នន័យ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់បច្ចេកទេសទាញយកទិន្នន័យ (Data Mining) ជាមួយក្បួនដោះស្រាយ FP-Growth ដើម្បីវិភាគលំនាំនៃការទិញរបស់អតិថិជន និងបង្កើតជាវិធានសម្រាប់ធ្វើទីផ្សារ។
+        
+        <ul>
+            
+            <li>ការសម្អាត និងបំប្លែងទិន្នន័យប្រតិបត្តិការចំនួន ៣០៥២ កំណត់ត្រា (Data Pre-processing)</li>
+            
+            <li>ការប្រើប្រាស់ក្បួនដោះស្រាយដើម្បីស្វែងរកលំនាំទិញ (FP-Growth Algorithm)</li>
+            
+            <li>ការកំណត់តម្លៃគាំទ្រអប្បបរមា និងទំនុកចិត្ត (Minimum Support and Confidence Rules)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ FP-Growth បានរកឃើញវិធានទាក់ទងគ្នា (Rules) ច្រើនបំផុតចំនួន ១៩០ នៅពេលកំណត់ការគាំទ្រត្រឹម ៥% និងទំនុកចិត្ត ១០%។</li>
+            
+            <li>សម្រាប់ការលក់ឆ្លង (Cross-Selling) ប្រព័ន្ធបានណែនាំកញ្ចប់ផលិតផលចំនួន ៤ ដោយផ្អែកលើវិធានដែលមានការគាំទ្រអប្បបរមា ៥% និងទំនុកចិត្ត ៧០%។</li>
+            
+            <li>សម្រាប់ការលក់បន្ថែម (Up-Selling) ការសិក្សាបានផ្តល់ជម្រើសណែនាំផលិតផលជាក់លាក់ចំនួន ៣ សម្រាប់ជំរុញអតិថិជនឱ្យទិញផលិតផលដែលមានតម្លៃខ្ពស់ជាង និងបង្កើនប្រាក់ចំណេញ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">FP-Growth Algorithm (Proposed)</span></strong><br>ក្បួនដោះស្រាយ FP-Growth (វិធីសាស្ត្រដែលបានស្នើ)</td>
+                <td>មានល្បឿនលឿន និងមានប្រសិទ្ធភាពខ្ពស់ក្នុងការវិភាគទិន្នន័យធំៗ ដោយមិនចាំបាច់បង្កើតបណ្តុំទិន្នន័យបេក្ខជន (Candidate generation) ច្រើនដង។ វាជួយស្វែងរកទំនាក់ទំនងរវាងផលិតផលបានយ៉ាងច្បាស់លាស់។</td>
+                <td>ត្រូវការអង្គចងចាំ (Memory) កុំព្យូទ័រច្រើននៅពេលដែលដើមឈើទិន្នន័យ (FP-Tree) មានទំហំធំ និងមានទំនិញច្រើនប្រភេទពេក។</td>
+                <td>បង្កើតបានវិធាន (Rules) ចំនួន ១៩០ ដែលមានការគាំទ្រ (Support) ៥% និងទំនុកចិត្ត (Confidence) ១០% សម្រាប់ទាញយកយុទ្ធសាស្ត្រលក់ឆ្លង និងលក់បន្ថែមប្រកបដោយជោគជ័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Manual Promotion (Baseline)</span></strong><br>ការរៀបចំយុទ្ធសាស្ត្រផ្សព្វផ្សាយបែបប្រពៃណី (វិធីសាស្ត្រដើម)</td>
+                <td>មិនត្រូវការចំណេះដឹងផ្នែកវិទ្យាសាស្ត្រទិន្នន័យ ឬប្រព័ន្ធកុំព្យូទ័រស្មុគស្មាញដើម្បីអនុវត្តនោះទេ។</td>
+                <td>មិនមានប្រសិទ្ធភាពក្នុងការកំណត់គោលដៅអតិថិជន ធ្វើឱ្យការលក់មិនកើនឡើង និងផលិតផលមួយចំនួននៅសល់ក្នុងស្តុកច្រើនដោយសារអតិថិជនមិនស្គាល់។</td>
+                <td>ឯកសារបង្ហាញថាការប្រើប្រាស់ការលើកកម្ពស់ទីផ្សារធម្មតាមិនសូវមានប្រសិទ្ធភាព ដែលនាំឱ្យមានការផ្លាស់ប្តូរមកប្រើ CRM ផ្អែកលើ FP-Growth វិញ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារមិនបានបញ្ជាក់លម្អិតអំពីធនធានផ្នែករឹង (Hardware) ឬផ្នែកទន់ (Software) ជាក់លាក់នោះទេ ប៉ុន្តែផ្អែកលើទំហំទិន្នន័យ ការអនុវត្តវិធីសាស្ត្រនេះទាមទារឧបករណ៍វិភាគកម្រិតស្តង់ដារ។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> ទាមទារទិន្នន័យប្រតិបត្តិការលក់យ៉ាងហោចណាស់ ៦ខែ (ក្នុងករណីនេះមាន ៥៣៦៤ កំណត់ត្រា ដែលក្រោយការសម្អាតនៅសល់ ៣០៥២ កំណត់ត្រា និងទំនិញ ១១៤ ប្រភេទ)។</li>
+        
+        <li><strong>Software:</strong> ត្រូវការកម្មវិធីភាសាកូដ ឬកម្មវិធីវិភាគទិន្នន័យ (ឧទាហរណ៍ Python រួមជាមួយបណ្ណាល័យ mlxtend ឬ កម្មវិធី RapidMiner) ដើម្បីដំណើរការក្បួន FP-Growth។</li>
+        
+        <li><strong>Expertise:</strong> ត្រូវការអ្នកមានជំនាញ Data Mining ដើម្បីធ្វើការសម្អាតទិន្នន័យ (Pre-processing), ការកំណត់តម្លៃ Support/Confidence និងអ្នកជំនាញទីផ្សារដើម្បីបកប្រែវិធានទាំងនោះទៅជាយុទ្ធសាស្ត្រលក់។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យប្រតិបត្តិការលក់ជាក់ស្តែងពីមជ្ឈមណ្ឌលពាណិជ្ជកម្ម ABC ដែលជាសាខារបស់ PT. XYZ នៅប្រទេសឥណ្ឌូនេស៊ី ដោយផ្តោតលើផលិតផលឱសថបុរាណ គ្រឿងសម្អាង និងទំនិញប្រើប្រាស់ក្នុងផ្ទះ។ ទោះបីជាអាកប្បកិរិយា និងចំណង់ចំណូលចិត្តរបស់អ្នកប្រើប្រាស់ឥណ្ឌូនេស៊ីអាចមានភាពខុសគ្នាខ្លះពីកម្ពុជាក៏ដោយ ក៏ទ្រឹស្តីនៃលំនាំទិញទំនិញដែលពាក់ព័ន្ធគ្នា (Market Basket Analysis) គឺជាគោលការណ៍សកល ដែលអាចអនុវត្តបានយ៉ាងមានប្រសិទ្ធភាពនៅក្នុងទីផ្សារលក់រាយរបស់ប្រទេសកម្ពុជា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ និងងាយស្រួលក្នុងការយកមកអនុវត្តសម្រាប់ប្រតិបត្តិការអាជីវកម្មលក់រាយ និងសេវាកម្មនានានៅកម្ពុជា ដើម្បីបង្កើនប្រាក់ចំណេញពីអតិថិជនចាស់។</p>
+        
+        <ul>
+            
+            <li><strong>ផ្សារទំនើប និងផ្សារម៉ាត (Supermarkets and Marts like Makro, Aeon, Super Duper):</strong> អាចប្រើប្រាស់ក្បួន FP-Growth លើប្រព័ន្ធម៉ាស៊ីនគិតលុយ (POS) ដើម្បីរៀបចំកញ្ចប់ទំនិញបញ្ចុះតម្លៃ (Bundling) ឬរៀបចំទីតាំងទំនិញដែលអតិថិជនឧស្សាហ៍ទិញជាមួយគ្នាឱ្យនៅក្បែរគ្នា។</li>
+            
+            <li><strong>វេទិកាពាណិជ្ជកម្មអេឡិចត្រូនិក (E-commerce Platforms like Nham24, Smile Shop, Foodpanda):</strong> អាចបញ្ចូលប្រព័ន្ធនេះទៅក្នុងមុខងារណែនាំស្វ័យប្រវត្តិ (Recommendation Systems) ដើម្បីបង្ហាញសារ 'អ្នកទិញទំនិញនេះ ក៏បានទិញ...' ដែលជាការជំរុញការលក់ឆ្លង (Cross-Selling) ដោយផ្ទាល់។</li>
+            
+            <li><strong>ហាងកាហ្វេ និងភោជនីយដ្ឋាន (Cafes & Restaurants like Brown Coffee, Tube Coffee):</strong> អាចវិភាគទិន្នន័យអតិថិជនដើម្បីរៀបចំយុទ្ធសាស្ត្រលក់បន្ថែម (Up-Selling) ឧទាហរណ៍៖ ការបណ្តុះបណ្តាលបុគ្គលិកឱ្យណែនាំនំ (Pastry) ឬការដំឡើងទំហំកែវភេសជ្ជៈ នៅពេលអតិថិជនកុម្ម៉ង់ភេសជ្ជៈជាក់លាក់ណាមួយ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តក្បួនដោះស្រាយនេះអាចជួយអាជីវកម្មនៅកម្ពុជាបំប្លែងទិន្នន័យប្រតិបត្តិការប្រចាំថ្ងៃទៅជាយុទ្ធសាស្ត្រទីផ្សារជាក់ស្តែង ដែលមិនត្រឹមតែបង្កើនការលក់នោះទេ ថែមទាំងផ្តល់បទពិសោធន៍ទិញទំនិញកាន់តែប្រសើរដល់អតិថិជន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងសម្អាតទិន្នន័យ (Data Collection & Pre-processing):</strong> ទាញយកទិន្នន័យប្រតិបត្តិការលក់ពីប្រព័ន្ធ POS យ៉ាងហោចណាស់ ៣ ទៅ ៦ខែ រួចសម្អាតទិន្នន័យដោយប្រើប្រាស់ <span class="en">Pandas</span> ក្នុង <span class="en">Python</span> ដើម្បីដកចេញនូវកំហុស ឬវិក្កយបត្រដែលមានទំនិញតែមួយមុខ។</li>
+            
+            <li><strong>បំប្លែងទិន្នន័យ (Data Transformation):</strong> បំប្លែងទិន្នន័យដែលបានសម្អាតទៅជាទម្រង់ One-Hot Encoding ឬ Transaction Matrix ដែលស័ក្តិសមសម្រាប់ក្បួនដោះស្រាយសហការ ដោយប្រើប្រាស់មុខងារ <span class="en">TransactionEncoder</span> ពីបណ្ណាល័យ <span class="en">mlxtend</span>។</li>
+            
+            <li><strong>ដំណើរការក្បួនដោះស្រាយ (Execute FP-Growth Algorithm):</strong> ប្រើប្រាស់មុខងារ <span class="en">fpgrowth</span> ពី <span class="en">mlxtend.frequent_patterns</span> ដើម្បីទាញយកបណ្តុំទំនិញដែលលេចឡើងញឹកញាប់ ដោយធ្វើការសាកល្បងជាមួយនឹងតម្លៃ Minimum Support ផ្សេងៗគ្នា (ឧ. ៥%, ១០%, ១៥%) ដើម្បីរកមើលលទ្ធផលល្អបំផុត។</li>
+            
+            <li><strong>ទាញយកវិធានសហការ (Generate Association Rules):</strong> ប្រើប្រាស់មុខងារ <span class="en">association_rules</span> ដោយកំណត់អត្រាទំនុកចិត្ត (Minimum Confidence) ចាប់ពី ៧០% សម្រាប់យុទ្ធសាស្ត្រកញ្ចប់ទំនិញ (Cross-selling) និង ១០% សម្រាប់យុទ្ធសាស្ត្រណែនាំទំនិញថ្លៃជាង (Up-selling) ដូចដែលបានណែនាំក្នុងឯកសារ។</li>
+            
+            <li><strong>អនុវត្តយុទ្ធសាស្ត្រទីផ្សារ (Implement Marketing Strategy):</strong> យកវិធានដែលទទួលបានទៅពិភាក្សាជាមួយក្រុមទីផ្សារ ដើម្បីបង្កើតជាកញ្ចប់ប្រូម៉ូសិន (Bundling) ការរៀបចំទំនិញលើធ្នើរឡើងវិញ ឬបញ្ចូលទៅក្នុងប្រព័ន្ធ CRM សម្រាប់ណែនាំបុគ្គលិកលក់ក្នុងការផ្តល់ជម្រើសបន្ថែមដល់អតិថិជន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Association Rule</span></td>
+                <td>ជាបច្ចេកទេសនៅក្នុងការទាញយកទិន្នន័យ (Data Mining) ដែលប្រើសម្រាប់ស្វែងរកទំនាក់ទំនង ឬលំនាំនៃការទិញទំនិញរួមគ្នារបស់អតិថិជន។ វាជួយរកឱ្យឃើញនូវក្បួនដែលបញ្ជាក់ថា បើអតិថិជនទិញទំនិញ A នោះមានឱកាសប៉ុន្មានភាគរយដែលគេនឹងទិញទំនិញ B បន្តទៀត។</td>
+                <td>ដូចជាការសង្កេតឃើញថា រាល់ពេលដែលអតិថិជនទិញកាហ្វេ ពួកគេតែងតែទិញនំប៉័ងជាមួយគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">FP-Growth</span></td>
+                <td>ជាក្បួនដោះស្រាយ (Algorithm) មួយដែលប្រើដើម្បីស្វែងរកលំនាំទំនិញដែលលេចឡើងញឹកញាប់ក្នុងទិន្នន័យប្រតិបត្តិការ ដោយវាបង្កើតជារចនាសម្ព័ន្ធដើមឈើទិន្នន័យ (FP-Tree) ដែលធ្វើឱ្យវាមានល្បឿនលឿន និងមិនសូវស៊ីទំហំអង្គចងចាំបើធៀបនឹងក្បួនដោះស្រាយចាស់ៗ។</td>
+                <td>ដូចជាការធ្វើបញ្ជីសង្ខេបអំពីទំនិញដែលលក់ដាច់បំផុត ដើម្បីងាយស្រួលស្វែងរកទំនាក់ទំនងដោយមិនចាំបាច់រាប់ទំនិញម្តងមួយៗឡើងវិញរាល់ពេល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Cross-Selling</span></td>
+                <td>ជាយុទ្ធសាស្ត្រលក់ដែលអ្នកលក់ព្យាយាមបញ្ចុះបញ្ចូលអតិថិជនឱ្យទិញផលិតផលផ្សេងទៀតបន្ថែម ដែលមានទំនាក់ទំនង ឬអាចបំពេញតម្រូវការបន្ថែមឱ្យផលិតផលដែលអតិថិជនកំពុងទិញស្រាប់ (ឧ. ការលក់ជាកញ្ចប់ Bundling)។</td>
+                <td>ដូចជាពេលអ្នកទិញទូរស័ព្ទថ្មី ហើយអ្នកលក់សួរថាចង់ទិញស្រោមទូរស័ព្ទ ឬកាសពាក់ត្រចៀកបន្ថែមដែរឬទេ?</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Up-Selling</span></td>
+                <td>ជាយុទ្ធសាស្ត្រលក់ដែលជំរុញឱ្យអតិថិជនសម្រេចចិត្តទិញផលិតផលប្រភេទដូចគ្នា ប៉ុន្តែមានតម្លៃថ្លៃជាង មានគុណភាពល្អជាង ឬមានទំហំធំជាងអ្វីដែលគេមានបំណងទិញតាំងពីដំបូង ដើម្បីបង្កើនប្រាក់ចំណេញ។</td>
+                <td>ដូចជាពេលអ្នកកុម្ម៉ង់កាហ្វេកែវតូច ហើយអ្នកលក់សួរថាចង់បន្ថែមលុយបន្តិចដើម្បីយកកែវធំដែលចំណេញជាងឬទេ?</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">minimum support</span></td>
+                <td>នៅក្នុងវិធានសហការ វាជារង្វាស់ដែលបង្ហាញពីភាគរយនៃប្រតិបត្តិការសរុបទាំងអស់ដែលមានផ្ទុកបណ្តុំទំនិញជាក់លាក់ណាមួយ។ តម្លៃនេះត្រូវបានកំណត់ជាកម្រិតអប្បបរមា ដើម្បីចម្រាញ់យកតែទំនិញណាដែលគេទិញញឹកញាប់មកវិភាគប៉ុណ្ណោះ។</td>
+                <td>ដូចជាការវាស់ស្ទង់ថា តើក្នុងចំណោមអតិថិជន ១០០នាក់ មានយ៉ាងហោចណាស់ប៉ុន្មាននាក់ដែលទិញសាប៊ូកក់សក់ និងក្រអូបបន្ទន់សក់ជាមួយគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">minimum confidence</span></td>
+                <td>ជារង្វាស់ភាគរយដែលបង្ហាញពីប្រូបាប៊ីលីតេ (ឱកាស) ដែលអតិថិជននឹងទិញទំនិញ B នៅពេលដែលគេបានទិញទំនិញ A រួចហើយ។ ការកំណត់តម្លៃអប្បបរមានេះគឺដើម្បីបញ្ជាក់ពីភាពរឹងមាំ ឬភាពជឿជាក់នៃទំនាក់ទំនងរវាងទំនិញទាំងពីរមុននឹងយកមកធ្វើជាយុទ្ធសាស្ត្រលក់។</td>
+                <td>ដូចជាការទស្សន៍ទាយយ៉ាងជឿជាក់ថា បើគេទិញសាច់គោអាំង នោះមានឱកាស ៧០% ដែលគេនឹងកុម្ម៉ង់ស្រាបៀរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Pre-processing</span></td>
+                <td>ជាដំណាក់កាលរៀបចំ និងសម្អាតទិន្នន័យឆៅមុននឹងយកទៅវិភាគក្នុងប្រព័ន្ធ ដូចជាការលុបទិន្នន័យដែលគ្មានប្រយោជន៍ (noise) ការបំពេញទិន្នន័យដែលបាត់បង់ និងការបំប្លែងទិន្នន័យទៅជាទម្រង់លេខ ឬម៉ាទ្រីសដែលអាចប្រើប្រាស់បានជាមួយក្បួនដោះស្រាយ។</td>
+                <td>ដូចជាការលាងសម្អាត និងហាន់បន្លែសាច់ឱ្យរួចរាល់ មុននឹងចាប់ផ្តើមចម្អិនម្ហូប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Customer Relationship Management (CRM)</span></td>
+                <td>ជាវិធីសាស្ត្រ និងប្រព័ន្ធដែលក្រុមហ៊ុនប្រើប្រាស់ដើម្បីប្រមូល គ្រប់គ្រង និងវិភាគទិន្នន័យអន្តរកម្មជាមួយអតិថិជន ក្នុងគោលបំណងកែលម្អទំនាក់ទំនង ផ្តល់សេវាកម្មបានចំគោលដៅ រក្សាអតិថិជនចាស់ និងជំរុញកំណើននៃការលក់។</td>
+                <td>ដូចជាសៀវភៅកត់ត្រាប្រវត្តិអតិថិជនម៉ូយ ដែលជួយឱ្យម្ចាស់ហាងចងចាំពីចំណង់ចំណូលចិត្តរបស់ពួកគេ ដើម្បីងាយស្រួលរៀបចំសេវាកម្មយកចិត្តបានត្រឹមត្រូវ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=FP-Growth+algorithm+vs+Apriori+market+basket+analysis+performance+comparison" target="_blank" rel="noopener"><span class="en">FP-Growth algorithm vs Apriori market basket analysis performance comparison</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Customer+Relationship+Management+CRM+up-selling+cross-selling+data+mining+techniques" target="_blank" rel="noopener"><span class="en">Customer Relationship Management CRM up-selling cross-selling data mining techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Retail+product+bundling+strategies+based+on+association+rule+mining" target="_blank" rel="noopener"><span class="en">Retail product bundling strategies based on association rule mining</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Predictive+analytics+in+retail+e-commerce+recommendation+systems" target="_blank" rel="noopener"><span class="en">Predictive analytics in retail e-commerce recommendation systems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

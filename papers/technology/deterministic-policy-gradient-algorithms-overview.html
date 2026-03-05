@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ទិដ្ឋភាពទូទៅនៃក្បួនដោះស្រាយ Deterministic Policy Gradient - Deterministic Policy Gradient Algorithms Overview | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ទិដ្ឋភាពទូទៅនៃក្បួនដោះស្រាយ Deterministic Policy Gradient។ ឯកសារនេះដោះស្រាយអំពីបញ្ហានៃដំណើរការយឺតយ៉ាវរបស់ stochastic policy gradients នៅក្នុងលំហសកម្មភាពបន្ត...">
+    
+    <meta name="keywords" content="Reinforcement Learning, Deterministic Policy Gradient, DDPG, TD3, D4PG, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/deterministic-policy-gradient-algorithms-overview.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/deterministic-policy-gradient-algorithms-overview.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/deterministic-policy-gradient-algorithms-overview.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/deterministic-policy-gradient-algorithms-overview.html">
+    <meta property="og:title" content="ទិដ្ឋភាពទូទៅនៃក្បួនដោះស្រាយ Deterministic Policy Gradient | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយអំពីបញ្ហានៃដំណើរការយឺតយ៉ាវរបស់ stochastic policy gradients នៅក្នុងលំហសកម្មភាពបន្ត (continuous action spaces) ដែលមានទំហំធំ និងពិនិត្យមើលការវិវត្តនៃជម្រើសក្បួនដោះស្រាយ deterministic វិញ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="N/A-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Reinforcement Learning">
+    
+    <meta property="article:tag" content="Deterministic Policy Gradient">
+    
+    <meta property="article:tag" content="DDPG">
+    
+    <meta property="article:tag" content="TD3">
+    
+    <meta property="article:tag" content="D4PG">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ទិដ្ឋភាពទូទៅនៃក្បួនដោះស្រាយ Deterministic Policy Gradient">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយអំពីបញ្ហានៃដំណើរការយឺតយ៉ាវរបស់ stochastic policy gradients នៅក្នុងលំហសកម្មភាពបន្ត (continuous action spaces) ដែលមានទំហំធំ និងពិនិត្យមើលការវិវត្តនៃជម្រើសក្បួនដោះស្រាយ deterministic វិញ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796\u1791\u17bc\u1791\u17c5\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Deterministic Policy Gradient",
+      "name": "Deterministic Policy Gradient Algorithms Overview",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u17a2\u17c6\u1796\u17b8\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1799\u17ba\u178f\u1799\u17c9\u17b6\u179c\u179a\u1794\u179f\u17cb stochastic policy gradients \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179b\u17c6\u17a0\u179f\u1780\u1798\u17d2\u1798\u1797\u17b6\u1796\u1794\u1793\u17d2\u178f (continuous action spaces) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1791\u17c6\u17a0\u17c6\u1792\u17c6 \u1793\u17b7\u1784\u1796\u17b7\u1793\u17b7\u178f\u17d2\u1799\u1798\u17be\u179b\u1780\u17b6\u179a\u179c\u17b7\u179c\u178f\u17d2\u178f\u1793\u17c3\u1787\u1798\u17d2\u179a\u17be\u179f\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 deterministic \u179c\u17b7\u1789\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/deterministic-policy-gradient-algorithms-overview.html",
+      "author": [{"@type": "Person", "name": "Dmitry Demidov (Mohamed bin Zayed University of Artificial Intelligence)"},{"@type": "Person", "name": "Rouqaiah Al-Refai (Mohamed bin Zayed University of Artificial Intelligence)"}],
+      "datePublished": "N/A",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Deterministic Policy Gradient Algorithms Overview",
+        "url": "https://www.researchgate.net/profile/Dmitry-Demidov-5/publication/361142388_Deterministic_Policy_Gradient_Algorithms_Overview/links/629f52936886635d5cc700bd/Deterministic-Policy-Gradient-Algorithms-Overview.pdf"
+      },
+      "keywords": ["Reinforcement Learning", "Deterministic Policy Gradient", "DDPG", "TD3", "D4PG"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1791\u17b7\u178a\u17d2\u178b\u1797\u17b6\u1796\u1791\u17bc\u1791\u17c5\u1793\u17c3\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Deterministic Policy Gradient",
+          "item": "https://khmerresearch.com/papers/technology/deterministic-policy-gradient-algorithms-overview.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ទិដ្ឋភាពទូទៅនៃក្បួនដោះស្រាយ Deterministic Policy Gradient</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Deterministic Policy Gradient Algorithms Overview<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Dmitry-Demidov-5/publication/361142388_Deterministic_Policy_Gradient_Algorithms_Overview/links/629f52936886635d5cc700bd/Deterministic-Policy-Gradient-Algorithms-Overview.pdf" target="_blank" rel="noopener">www.researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ទិដ្ឋភាពទូទៅនៃក្បួនដោះស្រាយ Deterministic Policy Gradient</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Deterministic Policy Gradient Algorithms Overview</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Dmitry Demidov (Mohamed bin Zayed University of Artificial Intelligence), Rouqaiah Al-Refai (Mohamed bin Zayed University of Artificial Intelligence)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> N/A</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយអំពីបញ្ហានៃដំណើរការយឺតយ៉ាវរបស់ stochastic policy gradients នៅក្នុងលំហសកម្មភាពបន្ត (continuous action spaces) ដែលមានទំហំធំ និងពិនិត្យមើលការវិវត្តនៃជម្រើសក្បួនដោះស្រាយ deterministic វិញ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកនិពន្ធបានធ្វើការត្រួតពិនិត្យ និងប្រៀបធៀបឯកសារស្រាវជ្រាវទាក់ទងនឹងក្បួនដោះស្រាយ off-policy actor-critic ដែលផ្អែកលើទ្រឹស្តី deterministic policy gradient ។
+        
+        <ul>
+            
+            <li>ទ្រឹស្តីក្បួនដោះស្រាយ (Deterministic Policy Gradient - DPG)</li>
+            
+            <li>បណ្តាញសរសៃប្រសាទក្បួនដោះស្រាយស៊ីជម្រៅ (Deep Deterministic Policy Gradient - DDPG)</li>
+            
+            <li>ក្បួនដោះស្រាយកាត់បន្ថយការប៉ាន់ស្មានលើស (Twin Delayed Deep Deterministic - TD3)</li>
+            
+            <li>ក្បួនដោះស្រាយរបាយបែងចែក (Distributed Distributional DDPG - D4PG)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>DPG អាចធ្វើការប៉ាន់ស្មានជម្រាល (gradient) បានលឿន និងមានប្រសិទ្ធភាពជាងវិធីសាស្ត្រ stochastic ជាពិសេសសម្រាប់បរិស្ថានដែលមានទំហំសកម្មភាពធំ (high-dimensional action spaces)។</li>
+            
+            <li>ក្បួនដោះស្រាយ TD3 ដោះស្រាយបញ្ហានៃការប៉ាន់ស្មានតម្លៃ Q លើសនៅក្នុងក្បួន DDPG តាមរយៈការប្រើប្រាស់បច្ចេកទេស clipped Double-Q Learning និងការពន្យារពេលធ្វើបច្ចុប្បន្នភាពគោលនយោបាយ (delayed policy updates)។</li>
+            
+            <li>ក្បួនដោះស្រាយ D4PG បង្កើនប្រសិទ្ធភាពគំរូ (sample efficiency) និងផ្តល់ការប៉ាន់ស្មានជម្រាលកាន់តែសុក្រឹតតាមរយៈការប្រើប្រាស់ទស្សនវិស័យរបាយបែងចែក (distributional perspective) និងបច្ចេកទេស Prioritized Experience Replay។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Deterministic Policy Gradient (DPG)</span></strong><br>ក្បួនដោះស្រាយ Deterministic Policy Gradient មូលដ្ឋាន</td>
+                <td>មានប្រសិទ្ធភាពខ្ពស់ក្នុងការប៉ាន់ស្មាន gradient សម្រាប់លំហសកម្មភាពបន្ត (continuous action spaces) បើធៀបនឹងវិធីសាស្ត្រ stochastic។ វាត្រូវការទិន្នន័យគំរូតិចជាង។</td>
+                <td>ជួបប្រទះការលំបាកក្នុងការរុករក (exploration) ព្រោះវាជ្រើសរើសសកម្មភាពជាក់លាក់មួយជានិច្ច ហើយអាចមិនមានស្ថិរភាពបើគ្មានការកែច្នៃបន្ថែម។</td>
+                <td>បានបង្ហាញទ្រឹស្តីជាមូលដ្ឋានគ្រឹះដែលបញ្ជាក់ថា deterministic gradient អាចដំណើរការបាន និងមានប្រសិទ្ធភាពជាង stochastic នៅក្នុង high-dimensional spaces។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Deep Deterministic Policy Gradient (DDPG)</span></strong><br>ក្បួនដោះស្រាយ DPG ដោយប្រើបណ្តាញសរសៃប្រសាទស៊ីជម្រៅ</td>
+                <td>ប្រើប្រាស់ Replay Buffer និង Target Networks ដូចក្នុងសៀវភៅ DQN ដែលជួយបង្កើនស្ថិរភាព និងប្រសិទ្ធភាពរៀនសូត្រនៅក្នុងបរិស្ថានស្មុគស្មាញ។</td>
+                <td>ងាយនឹងជួបបញ្ហាប៉ាន់ស្មានតម្លៃ Q លើស (Q-value overestimation) ដែលធ្វើឲ្យម៉ូដែលទាញយកកំហុសមកប្រើប្រាស់ និងធ្វើឲ្យគោលនយោបាយខ្សោយទៅវិញ។</td>
+                <td>រួមបញ្ចូលទ្រឹស្តី DPG ជាមួយ Actor-Critic និង Deep Learning ដើម្បីដោះស្រាយបញ្ហាធំៗដោយជោគជ័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Twin Delayed Deep Deterministic (TD3)</span></strong><br>ក្បួនដោះស្រាយ TD3 ដែលដោះស្រាយបញ្ហាប៉ាន់ស្មានតម្លៃលើស</td>
+                <td>ដោះស្រាយបញ្ហា Q-value overestimation យ៉ាងមានប្រសិទ្ធភាពតាមរយៈការប្រើប្រាស់ Clipped Double-Q Learning និងការពន្យារពេលធ្វើបច្ចុប្បន្នភាព Actor។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការរចនា និងតម្រូវឲ្យមានការកំណត់ hyperparameters និងការកែសម្រួល Noise ច្រើនជាង DDPG ធម្មតា។</td>
+                <td>កាត់បន្ថយការប្រែប្រួល (variance) និងបង្កើនស្ថិរភាពនៃការរៀនសូត្របានយ៉ាងល្អប្រសើរជាង DDPG ដើម។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Distributed Distributional DDPG (D4PG)</span></strong><br>ក្បួនដោះស្រាយ DDPG បែបរបាយបែងចែក និងចែកចាយ</td>
+                <td>បង្កើន sample efficiency យ៉ាងខ្លាំងតាមរយៈការដំណើរការ Actors ច្រើនព្រមគ្នា (Parallelization) និងការប្រើប្រាស់ Prioritized Experience Replay។</td>
+                <td>ទាមទារធនធានកុំព្យូទ័រ និងប្រព័ន្ធចែកចាយទិន្នន័យទំហំធំ (High computing power) ដើម្បីដំណើរការ Actors ជាច្រើនក្នុងពេលតែមួយ។</td>
+                <td>ផ្តល់នូវការប៉ាន់ស្មាន policy gradient កាន់តែសុក្រឹត និងដំណើរការលឿនជាងមុនតាមរយៈទស្សនវិស័យ distributional perspective។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ទោះបីជាឯកសារមិនបានបញ្ជាក់តួលេខច្បាស់លាស់ពីការចំណាយ ប៉ុន្តែក្បួនដោះស្រាយ Deep Reinforcement Learning ទាំងនេះ ជាទូទៅទាមទារថាមពលកុំព្យូទ័រខ្ពស់ខ្លាំង។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការ GPUs ដែលមានសមត្ថភាពខ្ពស់សម្រាប់ការហ្វឹកហាត់ Deep Neural Networks និង CPUs ដែលមាន Cores ច្រើនដើម្បីគាំទ្រ Parallel actors (ពិសេសសម្រាប់ក្បួន D4PG)។</li>
+        
+        <li><strong>Memory/Storage:</strong> ត្រូវការអង្គចងចាំ (RAM) ធំដើម្បីរក្សាទុក Experience Replay Buffer ដែលប្រមូលទិន្នន័យ (states, actions, rewards) ពីបរិស្ថានរាប់លានជំហាន។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារវិស្វករដែលមានចំណេះដឹងស៊ីជម្រៅផ្នែក Reinforcement Learning, ការកំណត់ Hyperparameters និងការសរសេរកូដសម្រាប់ប្រព័ន្ធ Distributed Systems។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ឯកសារនេះគឺជាការត្រួតពិនិត្យទ្រឹស្តី (Literature Review) នៃក្បួនដោះស្រាយ ដោយមិនបានប្រើប្រាស់ទិន្នន័យប្រជាសាស្ត្រណាមួយឡើយ។ ទោះជាយ៉ាងណា នៅក្នុងការអនុវត្តជាក់ស្តែងនៅកម្ពុជា ម៉ូដែល RL នឹងរៀនពីកំហុស (Bias) នៃបរិស្ថានក្លែងធ្វើ (Simulated environment) ដូច្នេះការរចនាបរិស្ថានដែលឆ្លុះបញ្ចាំងពីស្ថានភាពជាក់ស្តែងរបស់កម្ពុជា (ដូចជាស្ថានភាពផ្លូវ ចរាចរណ៍ ឬអាកាសធាតុ) គឺជារឿងសំខាន់បំផុត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ក្បួនដោះស្រាយ Deterministic Policy Gradient ទាំងនេះមានសក្តានុពលខ្ពស់ក្នុងការជំរុញប្រព័ន្ធស្វ័យប្រវត្តិកម្មកម្រិតខ្ពស់ និងការគ្រប់គ្រងមនុស្សយន្តនៅក្នុងប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> ក្បួនដោះស្រាយដូចជា TD3 អាចត្រូវបានប្រើប្រាស់ដើម្បីបញ្ជាយន្តហោះដ្រូន (Drones) បាញ់ថ្នាំ ឬរុករកលើដីកសិកម្មនៅតាមខេត្ត ព្រោះវាទាមទារការបញ្ជាទីតាំង និងល្បឿនបន្តបន្ទាប់គ្នា (continuous control) ប្រកបដោយភាពច្បាស់លាស់។</li>
+            
+            <li><strong>ស្វ័យប្រវត្តិកម្មចរាចរណ៍រាជធានីភ្នំពេញ:</strong> អាយ៉ង (RL Agents) ដែលហ្វឹកហាត់តាមបច្ចេកទេស D4PG អាចត្រូវបានដាក់ឲ្យដំណើរការដើម្បីគ្រប់គ្រងប្រព័ន្ធភ្លើងស្តុបឆ្លាតវៃ ដោយកែសម្រួលពេលវេលាភ្លើងពណ៌ទៅតាមលំហូរចរាចរណ៍ជាក់ស្តែងតាមដងផ្លូវក្នុងពេលជាក់ស្តែង។</li>
+            
+            <li><strong>ការគ្រប់គ្រងប្រព័ន្ធថាមពល (Energy Grid Management):</strong> អាចអនុវត្តសម្រាប់ប្រព័ន្ធចែកចាយអគ្គិសនីជាតិ (EDC) ដើម្បីធ្វើឲ្យមានតុល្យភាពដោយស្វ័យប្រវត្តិរវាងការផលិត និងការប្រើប្រាស់ថាមពល កាត់បន្ថយការខាតបង់ថាមពល។</li>
+            
+        </ul>
+        
+        
+        <p>ការបណ្តុះបណ្តាលធនធានមនុស្សលើបច្ចេកទេស Reinforcement Learning នេះ គឺជាគន្លឹះឆ្ពោះទៅរកការអភិវឌ្ឍឧស្សាហកម្មជំនាន់ទី៤ (Industry 4.0) ដែលអាចផ្លាស់ប្តូរមុខមាត់ស្វ័យប្រវត្តិកម្មនៅកម្ពុជាប្រកបដោយនិរន្តរភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាមូលដ្ឋានគ្រឹះគណិតវិទ្យា និង RL:</strong> និស្សិតគួរចាប់ផ្តើមរៀនអំពី Markov Decision Processes (MDP), Bellman Equations, និង Q-Learning តាមរយៈសៀវភៅ 'Reinforcement Learning: An Introduction' របស់ Sutton & Barto ដើម្បីយល់ពីទ្រឹស្តីគោល។</li>
+            
+            <li><strong>ជំហានទី២៖ ស្ទាត់ជំនាញឧបករណ៍ Deep Learning និង Environments:</strong> អនុវត្តការសរសេរកូដដោយប្រើប្រាស់បណ្ណាល័យ PyTorch ឬ TensorFlow សម្រាប់ការបង្កើត Neural Networks និងប្រើប្រាស់ OpenAI Gym ឬ MuJoCo សម្រាប់ការក្លែងធ្វើបរិស្ថានសកម្មភាពបន្ត (Continuous Action Spaces)។</li>
+            
+            <li><strong>ជំហានទី៣៖ អនុវត្តកូដ DDPG មូលដ្ឋានពីទទេ:</strong> សរសេរកូដក្បួនដោះស្រាយ DDPG (Actor-Critic Networks និង Replay Buffer) ពីទទេ ដើម្បីឲ្យយល់ច្បាស់ពីរបៀបដែលម៉ូដែលធ្វើបច្ចុប្បន្នភាពគោលនយោបាយ (Policy Update) និងបញ្ហា Q-value overestimation ដែលអាចកើតមាន។</li>
+            
+            <li><strong>ជំហានទី៤៖ សិក្សា និងដោះស្រាយបញ្ហាជាមួយ TD3 & D4PG:</strong> ពង្រីកគម្រោងដោយអនុវត្តបច្ចេកទេស Clipped Double-Q Learning ដូចដែលមានក្នុងក្បួនដោះស្រាយ TD3 និងសាកល្បងប្រើប្រាស់បណ្ណាល័យ Ray RLlib ដើម្បីរៀនពីរបៀបចែកចាយការហ្វឹកហាត់ (Distributed Training) ដូចក្បួន D4PG។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Deterministic Policy</span></td>
+                <td>ជាគោលនយោបាយក្នុងប្រព័ន្ធ Reinforcement Learning ដែលតែងតែផ្តល់នូវសកម្មភាព (action) ជាក់លាក់តែមួយគត់ សម្រាប់ស្ថានភាព (state) នីមួយៗជានិច្ច ដោយគ្មានជម្រើសព្រាវ ឬប្រូបាប៊ីលីតេឡើយ។ វាត្រូវបានទាញយកតាមរយៈការគណនា gradient នៃសកម្មភាព។</td>
+                <td>ដូចជាម៉ាស៊ីនលក់ភេសជ្ជៈ ដែលចុចប៊ូតុងកូកាកូឡា វានឹងទម្លាក់កូកាកូឡាមកជានិច្ច គ្មានការភាន់ច្រឡំ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Stochastic Policy</span></td>
+                <td>ជាគោលនយោបាយដែលមិនបញ្ជាក់សកម្មភាពដាច់ខាត តែវាផ្តល់នូវទម្រង់របាយប្រូបាប៊ីលីតេ (probability distribution) នៃសកម្មភាពផ្សេងៗដែលអាចធ្វើបានក្នុងស្ថានភាពណាមួយ។ វាអនុញ្ញាតឱ្យភ្នាក់ងារ (agent) អាចធ្វើការរុករក (explore) ជម្រើសថ្មីៗបានល្អជាងមុន។</td>
+                <td>ដូចជាការសម្រេចចិត្តទិញម្ហូប ដោយមានឱកាស ៧០% ទិញបាយ និង ៣០% ទិញគុយទាវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Actor-Critic</span></td>
+                <td>ជាទម្រង់ស្ថាបត្យកម្មក្នុង Reinforcement Learning ដែលប្រើប្រាស់បណ្តាញ (networks) ពីរផ្សេងគ្នា៖ 'Actor' មានតួនាទីសម្រេចចិត្តថាតើត្រូវធ្វើសកម្មភាពអ្វី (កំណត់ policy) រីឯ 'Critic' មានតួនាទីវាយតម្លៃថាតើសកម្មភាពដែល Actor ជ្រើសរើសនោះល្អកម្រិតណា (គណនា value function)។</td>
+                <td>ដូចជាអ្នករាំ (Actor) ដែលកំពុងសម្តែងនៅលើឆាក និងគណៈកម្មការ (Critic) ដែលអង្គុយវាយតម្លៃនិងផ្តល់ពិន្ទុ ដើម្បីឱ្យអ្នករាំកែលម្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Off-policy</span></td>
+                <td>ជាវិធីសាស្ត្ររៀនសូត្រដែលម៉ូដែលអាចទាញយកទិន្នន័យពីគោលនយោបាយចាស់ៗ ឬពីប្រភពខាងក្រៅ (តាមរយៈ Replay Buffer) មកហ្វឹកហាត់ ដោយមិនចាំបាច់រៀនតែពីទិន្នន័យដែលវាទើបនឹងធ្វើសកម្មភាពភ្លាមៗនោះទេ។ វាជួយសន្សំសំចៃទិន្នន័យគំរូបានច្រើន។</td>
+                <td>ដូចជាកីឡាករបាល់ទាត់ដែលរៀនពីក្បាច់ទាត់តាមរយៈការមើលវីដេអូប្រកួតចាស់ៗរបស់ខ្លួនឯង ឬអ្នកដទៃ ដើម្បីយកមកកែលម្អបច្ចេកទេស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Experience replay buffer</span></td>
+                <td>ជាកន្លែងផ្ទុកទិន្នន័យ (memory) ដែលរក្សាទុកនូវរាល់បទពិសោធន៍ (transitions) របស់ភ្នាក់ងារ រួមមាន ស្ថានភាពបច្ចុប្បន្ន សកម្មភាព រង្វាន់ និងស្ថានភាពបន្ទាប់។ ក្បួនដោះស្រាយនឹងចាប់យកទិន្នន័យពីទីនេះដោយចៃដន្យមកហ្វឹកហាត់ ដើម្បីបំបាត់ភាពអាស្រ័យគ្នានៃទិន្នន័យបន្តបន្ទាប់។</td>
+                <td>ដូចជាការសរសេរកំណត់ហេតុប្រចាំថ្ងៃទុក ហើយយូរៗម្តងបើកអានទំព័រណាមួយដោយចៃដន្យឡើងវិញ ដើម្បីរៀនសូត្រពីកំហុស ឬជោគជ័យកាលពីអតីតកាល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Bellman equation</span></td>
+                <td>ជាសមីការគណិតវិទ្យាដែលប្រើសម្រាប់គណនាតម្លៃរំពឹងទុកនៃស្ថានភាពណាមួយ ដោយបូកបញ្ចូលរង្វាន់បច្ចុប្បន្ន (immediate reward) ជាមួយនឹងតម្លៃអតិបរមាដែលអាចទទួលបានពីស្ថានភាពបន្ទាប់ (discounted future reward) ដែលវាជាមូលដ្ឋានគ្រឹះនៃ Q-learning។</td>
+                <td>ដូចជាការគិតគូរពីប្រាក់ចំណេញនៃការវិនិយោគ ដោយបូកបញ្ចូលប្រាក់ចំណេញថ្ងៃនេះ ជាមួយនឹងការព្យាករណ៍ប្រាក់ចំណេញធំបំផុតនៅថ្ងៃស្អែកបន្តបន្ទាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Action-value function</span></td>
+                <td>ឬហៅថា Q-function គឺជាអនុគមន៍ដែលវាស់ស្ទង់ថាតើសកម្មភាពជាក់លាក់ណាមួយ នៅក្នុងស្ថានភាពជាក់លាក់មួយ នឹងផ្តល់លទ្ធផល (return) សរុបនាពេលអនាគតល្អកម្រិតណា ប្រសិនបើភ្នាក់ងារបន្តធ្វើសកម្មភាពតាមគោលនយោបាយបច្ចុប្បន្នរហូតដល់ចប់។</td>
+                <td>ដូចជាការមានត្រីវិស័យនិងផែនទីដែលប្រាប់អ្នកថា បើអ្នកបត់ស្តាំនៅផ្លូវបំបែកនេះ តើអ្នកនឹងមានឱកាសទៅដល់គោលដៅលឿនប៉ុណ្ណាធៀបនឹងការបត់ឆ្វេង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Clipped Double-Q Learning</span></td>
+                <td>ជាបច្ចេកទេសប្រើក្នុងក្បួន TD3 ដែលបង្កើត Q-networks ពីរស្របគ្នា ហើយជ្រើសរើសយកតម្លៃដែលតូចជាងរវាងបណ្តាញទាំងពីរ មកធ្វើជាគោលដៅ (target) ដើម្បីទប់ស្កាត់បញ្ហានៃការប៉ាន់ស្មានតម្លៃ Q លើស (Overestimation bias) ដែលតែងតែកើតមានក្នុង DDPG។</td>
+                <td>ដូចជាការសួរតម្លៃទំនិញពីហាងពីរផ្សេងគ្នា ហើយសម្រេចចិត្តយកតម្លៃដែលទាបជាងគេមកធ្វើជាការប៉ាន់ស្មាន ដើម្បីកុំឱ្យចាញ់បោកគេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/research-on-reinforcement-learning-review-2004.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃការស្រាវជ្រាវលើការរៀនតាមបែបពង្រឹង (Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">强化学习研究综述</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/automatic-learning-dialogue-strategy-rl-2002.html">
+                    <span class="km">ការរៀនយុទ្ធសាស្ត្រសន្ទនាដោយស្វ័យប្រវត្តិដោយប្រើប្រាស់ការក្លែងធ្វើការសន្ទនានិងការរៀនពង្រឹង (Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Automatic learning of dialogue strategy using dialogue simulation and reinforcement learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/gaussian-processes-pomdp-dialogue-managers-2010.html">
+                    <span class="km">ដំណើរការ Gaussian សម្រាប់ការធ្វើឲ្យប្រសើរលឿននៃគោលការណ៍សម្រាប់កម្មវិធីគ្រប់គ្រងការសន្ទនាផ្អែកលើ POMDP</span><br>
+                    <span class="en article-original-title">Gaussian Processes for Fast Policy Optimisation of POMDP-based Dialogue Managers</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/rl-spoken-dialogue-systems-deployment-2006.html">
+                    <span class="km">ការរៀនពង្រឹង (Reinforcement Learning) សម្រាប់ប្រព័ន្ធសន្ទនាជាសំឡេង៖ ការប្រៀបធៀបចំណុចខ្លាំង និងចំណុចខ្សោយសម្រាប់ការដាក់ពង្រាយក្នុងការអនុវត្តជាក់ស្តែង</span><br>
+                    <span class="en article-original-title">Reinforcement Learning for Spoken Dialogue Systems: Comparing Strengths and Weaknesses for Practical Deployment</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/interactive-rl-task-oriented-dialogue-2016.html">
+                    <span class="km">ការរៀនពង្រឹងបែបអន្តរកម្មសម្រាប់ការគ្រប់គ្រងការសន្ទនាដែលផ្តោតលើកិច្ចការ</span><br>
+                    <span class="en article-original-title">Interactive reinforcement learning for task-oriented dialogue management</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deterministic+Policy+Gradient+vs+Stochastic+Policy+Gradient+continuous+action+space" target="_blank" rel="noopener"><span class="en">Deterministic Policy Gradient vs Stochastic Policy Gradient continuous action space</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Deep+Deterministic+Policy+Gradient+DDPG+hyperparameter+tuning+and+stability" target="_blank" rel="noopener"><span class="en">Deep Deterministic Policy Gradient DDPG hyperparameter tuning and stability</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Twin+Delayed+DDPG+%28TD3%29+clipped+double-Q+learning+implementation" target="_blank" rel="noopener"><span class="en">Twin Delayed DDPG (TD3) clipped double-Q learning implementation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Distributional+reinforcement+learning+perspective+Bellemare+D4PG" target="_blank" rel="noopener"><span class="en">Distributional reinforcement learning perspective Bellemare D4PG</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Prioritized+experience+replay+buffer+off-policy+actor-critic" target="_blank" rel="noopener"><span class="en">Prioritized experience replay buffer off-policy actor-critic</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Model-free+off-policy+reinforcement+learning+robotics+continuous+control" target="_blank" rel="noopener"><span class="en">Model-free off-policy reinforcement learning robotics continuous control</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

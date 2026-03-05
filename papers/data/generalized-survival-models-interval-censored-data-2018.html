@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែលរស់រានទូទៅដែលអនុវត្តចំពោះទិន្នន័យដែលត្រូវបានកាត់ផ្តាច់តាមចន្លោះពេល - Generalized survival models applied to interval censored data | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ម៉ូដែលរស់រានទូទៅដែលអនុវត្តចំពោះទិន្នន័យដែលត្រូវបានកាត់ផ្តាច់។ ការសិក្សានេះវាយតម្លៃពីដំណើរការនៃម៉ូដែលរស់រានទូទៅ (Generalized Survival Model - GSM) នៅពេលអនុវត្តល...">
+    
+    <meta name="keywords" content="Generalized Survival Model, Interval Censoring, Proportional Hazards, Accelerated Failure Time, R package rstpm2, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/data/generalized-survival-models-interval-censored-data-2018.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/data/generalized-survival-models-interval-censored-data-2018.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/data/generalized-survival-models-interval-censored-data-2018.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/data/generalized-survival-models-interval-censored-data-2018.html">
+    <meta property="og:title" content="ម៉ូដែលរស់រានទូទៅដែលអនុវត្តចំពោះទិន្នន័យដែលត្រូវបានកាត់ផ្តាច់តាមចន្លោះពេល | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះវាយតម្លៃពីដំណើរការនៃម៉ូដែលរស់រានទូទៅ (Generalized Survival Model - GSM) នៅពេលអនុវត្តលើទិន្នន័យដែលត្រូវបានកាត់ផ្តាច់តាមចន្លោះពេល (Interval-Censored Data) ដោយប្រៀបធៀបវាទៅនឹងម៉ូដែលស្តង់ដារ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2018 Stockholm University-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Generalized Survival Model">
+    
+    <meta property="article:tag" content="Interval Censoring">
+    
+    <meta property="article:tag" content="Proportional Hazards">
+    
+    <meta property="article:tag" content="Accelerated Failure Time">
+    
+    <meta property="article:tag" content="R package rstpm2">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែលរស់រានទូទៅដែលអនុវត្តចំពោះទិន្នន័យដែលត្រូវបានកាត់ផ្តាច់តាមចន្លោះពេល">
+    <meta name="twitter:description" content="ការសិក្សានេះវាយតម្លៃពីដំណើរការនៃម៉ូដែលរស់រានទូទៅ (Generalized Survival Model - GSM) នៅពេលអនុវត្តលើទិន្នន័យដែលត្រូវបានកាត់ផ្តាច់តាមចន្លោះពេល (Interval-Censored Data) ដោយប្រៀបធៀបវាទៅនឹងម៉ូដែលស្តង់ដារ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179a\u179f\u17cb\u179a\u17b6\u1793\u1791\u17bc\u1791\u17c5\u178a\u17c2\u179b\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1785\u17c6\u1796\u17c4\u17c7\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u178f\u17d2\u179a\u17bc\u179c\u1794\u17b6\u1793\u1780\u17b6\u178f\u17cb\u1795\u17d2\u178f\u17b6\u1785\u17cb\u178f\u17b6\u1798\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1796\u17c1\u179b",
+      "name": "Generalized survival models applied to interval censored data",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u179c\u17b6\u1799\u178f\u1798\u17d2\u179b\u17c3\u1796\u17b8\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179a\u179f\u17cb\u179a\u17b6\u1793\u1791\u17bc\u1791\u17c5 (Generalized Survival Model - GSM) \u1793\u17c5\u1796\u17c1\u179b\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179b\u17be\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u178f\u17d2\u179a\u17bc\u179c\u1794\u17b6\u1793\u1780\u17b6\u178f\u17cb\u1795\u17d2\u178f\u17b6\u1785\u17cb\u178f\u17b6\u1798\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1796\u17c1\u179b (Interval-Censored Data) \u178a\u17c4\u1799\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u179c\u17b6\u1791\u17c5\u1793\u17b9\u1784\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179f\u17d2\u178f\u1784\u17cb\u178a\u17b6\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/data/generalized-survival-models-interval-censored-data-2018.html",
+      "author": [{"@type": "Person", "name": "Albin Niva Printz (Stockholm University)"}],
+      "datePublished": "2018 Stockholm University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Generalized survival models applied to interval censored data",
+        "url": "http://www.math.su.se"
+      },
+      "keywords": ["Generalized Survival Model", "Interval Censoring", "Proportional Hazards", "Accelerated Failure Time", "R package rstpm2"],
+      "about": "Mathematical Statistics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Data",
+          "item": "https://khmerresearch.com/papers/data/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179a\u179f\u17cb\u179a\u17b6\u1793\u1791\u17bc\u1791\u17c5\u178a\u17c2\u179b\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1785\u17c6\u1796\u17c4\u17c7\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178a\u17c2\u179b\u178f\u17d2\u179a\u17bc\u179c\u1794\u17b6\u1793\u1780\u17b6\u178f\u17cb\u1795\u17d2\u178f\u17b6\u1785\u17cb\u178f\u17b6\u1798\u1785\u1793\u17d2\u179b\u17c4\u17c7\u1796\u17c1\u179b",
+          "item": "https://khmerresearch.com/papers/data/generalized-survival-models-interval-censored-data-2018.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/data/">Data</a> &rsaquo;
+        <span>ម៉ូដែលរស់រានទូទៅដែលអនុវត្តចំពោះទិន្នន័យដែលត្រូវបានកាត់ផ្ត...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Generalized survival models applied to interval censored data<br>
+        
+        <strong>Source:</strong> <a href="http://www.math.su.se" target="_blank" rel="noopener">www.math.su.se</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែលរស់រានទូទៅដែលអនុវត្តចំពោះទិន្នន័យដែលត្រូវបានកាត់ផ្តាច់តាមចន្លោះពេល</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Generalized survival models applied to interval censored data</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Albin Niva Printz (Stockholm University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2018 Stockholm University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Mathematical Statistics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះវាយតម្លៃពីដំណើរការនៃម៉ូដែលរស់រានទូទៅ (Generalized Survival Model - GSM) នៅពេលអនុវត្តលើទិន្នន័យដែលត្រូវបានកាត់ផ្តាច់តាមចន្លោះពេល (Interval-Censored Data) ដោយប្រៀបធៀបវាទៅនឹងម៉ូដែលស្តង់ដារ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់ទិន្នន័យក្លែងធ្វើ (Simulated Data) និងទិន្នន័យជាក់ស្តែង ដើម្បីសាកល្បងនិងប្រៀបធៀបដំណើរការរបស់ម៉ូដែលទាំងពីរ។
+        
+        <ul>
+            
+            <li>ការក្លែងធ្វើទិន្នន័យតាមរបាយ Weibull និង Mixture Weibull (Weibull and Mixture Weibull Data Simulation)</li>
+            
+            <li>ការប្រើប្រាស់កញ្ចប់កម្មវិធី R ឈ្មោះ rstpm2 សម្រាប់ម៉ូដែល GSM និង survreg សម្រាប់ម៉ូដែលស្តង់ដារ (R Packages Application)</li>
+            
+            <li>ការអនុវត្តនិងវិភាគលើទិន្នន័យផ្នែកទន្តសាស្ត្រជាក់ស្តែង (Signal Tandmobiel Dataset Analysis)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>សម្រាប់ទិន្នន័យ Weibull ស្តង់ដារ ម៉ូដែល GSM ផ្តល់នូវលទ្ធផលនិងប៉ារ៉ាម៉ែត្រប៉ាន់ស្មានដូចគ្នាបេះបិទទៅនឹងម៉ូដែល Proportional Hazards (PH) ធម្មតា។</li>
+            
+            <li>ក្នុងករណីរបាយទិន្នន័យមានភាពស្មុគស្មាញ (Mixture Weibull និងទិន្នន័យជាក់ស្តែង) ម៉ូដែល GSM ដំណើរការបានល្អជាងម៉ូដែល PH ក្នុងការចាប់យកលក្ខណៈលម្អិតនៃទិន្នន័យ។</li>
+            
+            <li>ទោះជាយ៉ាងណាក៏ដោយ ម៉ូដែល GSM នឹងមិនអាចដំណើរការបានល្អ និងមិនអាចវិភាគទិន្នន័យបានត្រឹមត្រូវទេ ប្រសិនបើការកាត់ផ្តាច់ទិន្នន័យ (Censoring Resolution) មានគម្លាតឆ្ងាយ ឬរដុបពេក។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Generalized Survival Model (GSM) via rstpm2</span></strong><br>ម៉ូដែលរស់រានទូទៅ (GSM) ដោយប្រើកញ្ចប់កម្មវិធី rstpm2</td>
+                <td>អាចចាប់យកលក្ខណៈស្មុគស្មាញនៃរបាយទិន្នន័យបានល្អ និងមានភាពបត់បែនខ្ពស់ដោយប្រើមុខងារ Spline (Natural splines of log time)។</td>
+                <td>មិនដំណើរការល្អទេនៅពេលការកាត់ផ្តាច់ទិន្នន័យ (Censoring) មានទំហំធំ ឬរដុបពេក ហើយការជ្រើសរើសចំនួនចំណុច (Knots) តាមរយៈ AIC ទាមទារពេលវេលាគណនាច្រើន។</td>
+                <td>ទទួលបានតម្លៃ AIC ទាបជាង និងមានគម្លាតតូចជាងរវាងខ្សែកោងកម្រិតហានិភ័យ (Hazard Curve) ពិតប្រាកដនិងតម្លៃប៉ាន់ស្មាន នៅក្នុងទិន្នន័យស្មុគស្មាញ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Accelerated Failure Time (AFT) / Proportional Hazards via survreg</span></strong><br>ម៉ូដែល Accelerated Failure Time (AFT) / Proportional Hazards ដោយប្រើកញ្ចប់កម្មវិធី survreg</td>
+                <td>ងាយស្រួលប្រើប្រាស់ លឿនក្នុងការគណនា និងផ្តល់លទ្ធផលល្អឥតខ្ចោះសម្រាប់ទិន្នន័យដែលមានរបាយស្តង់ដារដូចជាធម្មតា (ឧទាហរណ៍ Weibull)។</td>
+                <td>មិនអាចចាប់យកលក្ខណៈលម្អិតនៃរបាយទិន្នន័យស្មុគស្មាញ (Complex distributions) បានទេ ដោយសារវាជាម៉ូដែលប៉ារ៉ាម៉ែត្រតឹងរ៉ឹងមិនអាចបត់បែនបាន។</td>
+                <td>ផ្តល់លទ្ធផលដូចគ្នាបេះបិទទៅនឹង GSM សម្រាប់ទិន្នន័យ Weibull ធម្មតា ប៉ុន្តែមិនអាចចាប់យកកំពូលនៃខ្សែកោងហានិភ័យ ក្នុងទិន្នន័យចម្រុះ (Mixed Weibull) បានទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះផ្ដោតលើការវិភាគទិន្នន័យស្ថិតិ ដែលទាមទារចំណេះដឹងផ្នែកសរសេរកូដស្ថិតិ ប៉ុន្តែមិនត្រូវការកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់ខ្លាំង (ដូចជា GPU) នោះទេ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ទាមទារកម្មវិធី R និងកញ្ចប់កម្មវិធីជាក់លាក់ដូចជា rstpm2 (សម្រាប់ GSM) ព្រមទាំង survival (សម្រាប់ AFT និង Kaplan-Meier)។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រធម្មតា (Standard CPU) គឺគ្រប់គ្រាន់សម្រាប់ការដំណើរការទិន្នន័យកម្រិតមធ្យម និងការធ្វើ Simulation ដែលមានទំហំគំរូ ៥០០ និងធ្វើឡើងវិញ ១០០០០ ដង។</li>
+        
+        <li><strong>Dataset Requirements:</strong> ទិន្នន័យត្រូវមានលក្ខណៈ Interval-Censored ជាមួយនឹងកម្រិតនៃការកាត់ផ្តាច់ (Resolution) តូចល្មមគ្រប់គ្រាន់ ដើម្បីឱ្យម៉ូដែល GSM អាចចាប់យកលក្ខណៈស្មុគស្មាញបាន។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យក្លែងធ្វើតាមកុំព្យូទ័រ (Simulated Data) និងទិន្នន័យជាក់ស្តែងផ្នែកទន្តសាស្ត្រ (Signal-Tandmobiel) របស់កុមារនៅតំបន់ Flanders ប្រទេសប៊ែលហ្សិក។ ទិន្នន័យនេះមិនឆ្លុះបញ្ចាំងពីបរិបទប្រជាសាស្ត្រ ឬបញ្ហាសុខភាពនៅក្នុងប្រទេសកម្ពុជានោះទេ។ ទោះជាយ៉ាងណាក៏ដោយ ដោយសារវាជាការស្រាវជ្រាវផ្នែកវិធីសាស្ត្រស្ថិតិ (Methodological Statistics) ម៉ូដែលទាំងនេះនៅតែអាចយកមកអនុវត្តលើទិន្នន័យស្រាវជ្រាវក្នុងស្រុកបានដោយគ្មានបញ្ហា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ Generalized Survival Models (GSM) នេះមានអត្ថប្រយោជន៍ខ្លាំងសម្រាប់ការស្រាវជ្រាវនៅកម្ពុជា ជាពិសេសលើទិន្នន័យតាមដានរយៈពេលវែង (Longitudinal Studies)។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យសុខភាពសាធារណៈ (NIPH & Epidemiology):</strong> អាចប្រើប្រាស់ដោយវិទ្យាស្ថានជាតិសុខភាពសាធារណៈ (NIPH) ដើម្បីសិក្សាពីពេលវេលានៃការកើតជំងឺរ៉ាំរ៉ៃ ឬការឆ្លងជំងឺផ្សេងៗ ដែលអ្នកជំងឺមកពិនិត្យតែតាមចន្លោះពេលជាក់លាក់ណាមួយប៉ុណ្ណោះ (Interval-Censored)។</li>
+            
+            <li><strong>ការស្រាវជ្រាវវេជ្ជសាស្ត្រ និងទន្តសាស្ត្រ (UHS):</strong> សាកលវិទ្យាល័យវិទ្យាសាស្ត្រសុខាភិបាល (UHS) អាចអនុវត្តម៉ូដែលនេះលើការសិក្សាពីសុខភាពមាត់ធ្មេញកុមារកម្ពុជា ឬការព្យាបាលជំងឺផ្សេងៗដែលតម្រូវឱ្យមានការតាមដានរៀងរាល់ខែ ឬឆ្នាំ។</li>
+            
+            <li><strong>វិស័យកសិកម្ម និងបរិស្ថាន:</strong> ក្រសួងកសិកម្មអាចប្រើដើម្បីវិភាគពីអត្រារស់រាននៃពូជដំណាំ ឬសត្វ ដោយផ្អែកលើទិន្នន័យត្រួតពិនិត្យតាមរដូវកាល ជំនួសឱ្យការតាមដានរៀងរាល់ថ្ងៃ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ម៉ូដែល GSM ផ្តល់នូវភាពបត់បែនខ្ពស់ក្នុងការវិភាគទិន្នន័យនៅកម្ពុជា ប៉ុន្តែទាមទារឱ្យអ្នកស្រាវជ្រាវរៀបចំកាលវិភាគប្រមូលទិន្នន័យឱ្យបានញឹកញាប់ល្មម (High Resolution) ទើបម៉ូដែលនេះផ្តល់លទ្ធផលត្រឹមត្រូវ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Survival Analysis:</strong> និស្សិតគួរចាប់ផ្តើមស្វែងយល់ពីទ្រឹស្តីនៃ Survival Analysis ជាពិសេសទិន្នន័យប្រភេទ Interval-Censored Data និងការប្រើប្រាស់ម៉ូដែល <span class="en">Proportional Hazards (PH)</span> និង <span class="en">Accelerated Failure Time (AFT)</span>។</li>
+            
+            <li><strong>អនុវត្តការប្រើប្រាស់កម្មវិធី R:</strong> តម្លើង និងអនុវត្តការសរសេរកូដក្នុងកម្មវិធី <span class="en">RStudio</span> ដោយផ្តោតលើការប្រើប្រាស់កញ្ចប់កម្មវិធី <span class="en">survival (survreg)</span> ដើម្បីវិភាគទិន្នន័យដែលមា​នរបាយស្តង់ដារ។</li>
+            
+            <li><strong>ប្រើប្រាស់កញ្ចប់កម្មវិធី rstpm2:</strong> ទាញយកនិងសាកល្បងប្រើប្រាស់កញ្ចប់កម្មវិធី <span class="en">rstpm2</span> សម្រាប់ទិន្នន័យ Interval-Censored ដោយរៀនពីរបៀបប្រើប្រាស់មុខងារ <span class="en">stpm2()</span> និងការកំណត់ចំនួនចំណុច Knots ដោយប្រើលក្ខណៈវិនិច្ឆ័យ AIC។</li>
+            
+            <li><strong>ការក្លែងធ្វើទិន្នន័យ (Data Simulation):</strong> រៀនបង្កើតទិន្នន័យក្លែងធ្វើ (Simulation) ដូចជាទិន្នន័យ Weibull តាមការណែនាំក្នុងឯកសារ ដោយប្រើមុខងារ <span class="en">uniroot</span> ក្នុង R ដើម្បីធ្វើការប្រៀបធៀបប្រសិទ្ធភាពរវាងម៉ូដែលផ្សេងៗ។</li>
+            
+            <li><strong>អនុវត្តលើទិន្នន័យជាក់ស្តែង:</strong> ស្វែងរកទិន្នន័យសុខភាពសាធារណៈរបស់កម្ពុជា (ឧទាហរណ៍ ទិន្នន័យពី CDHS) ដែលមានលក្ខណៈ Interval-Censored រួចសាកល្បងប្រើម៉ូដែល GSM ដើម្បីទាញយកលទ្ធផលស្រាវជ្រាវជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Interval censored data</span></td>
+                <td>ទិន្នន័យដែលយើងមិនដឹងពីពេលវេលាពិតប្រាកដដែលព្រឹត្តិការណ៍មួយបានកើតឡើង ប៉ុន្តែយើងដឹងថាវាបានកើតឡើងនៅចន្លោះពេលនៃការត្រួតពិនិត្យពីរដង (ឧទាហរណ៍ វាកើតឡើងចន្លោះពេលពិនិត្យលើកទី១ និងទី២)។</td>
+                <td>ដូចជាការដែលអ្នកឃើញដើមឈើមួយដើមចេញផ្លែនៅពេលអ្នកត្រលប់មកពីវិស្សមកាល ដែលអ្នកដឹងថាវាបានផ្លែនៅចន្លោះពេលអ្នកមិននៅ តែមិនដឹងច្បាស់ថាជាថ្ងៃណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Generalized survival model</span></td>
+                <td>ម៉ូដែលស្ថិតិទូលំទូលាយដែលអនុញ្ញាតឱ្យមានភាពបត់បែនខ្ពស់ក្នុងការវិភាគទិន្នន័យរស់រាន (Survival data) ដោយប្រើមុខងារតភ្ជាប់ (Link functions) និងខ្សែកោង (Splines) ដើម្បីចាប់យកទម្រង់របាយទិន្នន័យដែលស្មុគស្មាញ។</td>
+                <td>ដូចជាសម្លៀកបំពាក់ដែលអាចយឺតតាមរាងកាយអ្នកពាក់ជាក់ស្តែង ជាជាងអាវដែលមានទំហំស្តង់ដារតឹងរ៉ឹងមិនអាចបត់បែនបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Proportional hazards model</span></td>
+                <td>ម៉ូដែលស្ថិតិដែលសន្មតថាកត្តាអថេរ (Covariates) នីមួយៗមានឥទ្ធិពលថេរទៅលើកម្រិតហានិភ័យ (Hazard rate) នៅគ្រប់ពេលវេលាទាំងអស់ មានន័យថាអនុបាតហានិភ័យរវាងក្រុមពីរគឺថេរជានិច្ច។</td>
+                <td>ដូចជាការសន្មតថា អ្នកជក់បារីតែងតែមានហានិភ័យកើតជំងឺសួតខ្ពស់ជាងអ្នកមិនជក់បារី ២ដង ជារៀងរហូត មិនថានៅអាយុប៉ុន្មានក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Accelerated failure time model</span></td>
+                <td>ម៉ូដែលដែលសន្មតថាកត្តាអថេរធ្វើឱ្យពេលវេលានៃការកើតមានព្រឹត្តិការណ៍ដើរលឿនជាងមុន ឬយឺតជាងមុន (ពន្លឿន ឬបន្ថយពេលវេលា) ជំនួសឱ្យការជះឥទ្ធិពលលើកម្រិតហានិភ័យផ្ទាល់។</td>
+                <td>ដូចជាការបើកវីដេអូក្នុងល្បឿន 2x ឬ 0.5x ដែលធ្វើឱ្យសាច់រឿងចប់លឿន ឬយឺតជាងធម្មតា ដោយផ្អែកលើកត្តាណាមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hazard function</span></td>
+                <td>អនុគមន៍ដែលវាស់ស្ទង់ពីអត្រានៃហានិភ័យភ្លាមៗ (Instantaneous rate) នៃការកើតមានព្រឹត្តិការណ៍ណាមួយនៅពេលវេលាជាក់លាក់មួយ ដោយផ្អែកលើលក្ខខណ្ឌដែលវាមិនទាន់កើតឡើងរហូតមកដល់ពេលនោះ។</td>
+                <td>ដូចជាការវាស់ស្ទង់ពីឱកាសដែលអំពូលភ្លើងនឹងខូចនៅវិនាទីបន្ទាប់ ដោយដឹងថាវាបានភ្លឺរហូតមកដល់ពេលនេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Natural splines</span></td>
+                <td>វិធីសាស្ត្រគណិតវិទ្យាក្នុងការគូសខ្សែកោងដោយផ្គុំបំណែកសមីការតូចៗ (Polynomials) បញ្ចូលគ្នាត្រង់ចំណុចប្រសព្វ (Knots) ដើម្បីឱ្យវាបត់បែនតាមទិន្នន័យ និងមានលក្ខណៈរលោងល្អ។</td>
+                <td>ដូចជាការយកខ្សែយឺតមកចងភ្ជាប់នឹងដែកគោលជាច្រើនចំណុច ដើម្បីបង្កើតបានជាខ្សែកោងមួយដែលរលោងនិងកាត់តាមចំណុចទាំងអស់នោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Kaplan-Meier estimator</span></td>
+                <td>វិធីសាស្ត្រមិនប្រើប៉ារ៉ាម៉ែត្រ (Non-parametric) សម្រាប់ប៉ាន់ស្មាននិងគូសខ្សែកោងអត្រារស់រាន (Survival curve) ផ្អែកលើទិន្នន័យពិតប្រាកដដែលសង្កេតឃើញ រួមទាំងទិន្នន័យដែលកាត់ផ្តាច់ (Censored) ផងដែរ។</td>
+                <td>ដូចជាការចុះបញ្ជីចំនួនអ្នកដំណើរដែលនៅសេសសល់លើរថយន្តក្រុង រាល់ពេលដែលរថយន្តឈប់នៅចំណតនីមួយៗ ទោះបីជាមានអ្នកខ្លះចុះបាត់ក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Akaike information criterion</span></td>
+                <td>រង្វាស់មួយសម្រាប់វាយតម្លៃគុណភាពនៃម៉ូដែលស្ថិតិ ដោយថ្លឹងថ្លែងរវាងភាពស័ក្តិសមរបស់ម៉ូដែលទៅនឹងទិន្នន័យ (Goodness of fit) និងភាពស្មុគស្មាញនៃម៉ូដែល ដើម្បីចៀសវាងការដាក់ប៉ារ៉ាម៉ែត្រច្រើនពេក (Overfitting)។ តម្លៃកាន់តែទាបគឺកាន់តែល្អ។</td>
+                <td>ដូចជាការជ្រើសរើសទិញឡានដែលស៊ីសាំងតិចបំផុត តែនៅតែអាចដឹកឥវ៉ាន់របស់អ្នកបានគ្រប់គ្រាន់ (រក្សាតុល្យភាពរវាងការសន្សំសំចៃនិងអត្ថប្រយោជន៍)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=generalized+survival+models+interval+censored+data+flexible+parametric+models" target="_blank" rel="noopener"><span class="en">generalized survival models interval censored data flexible parametric models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=rstpm2+package+R+implementation+survival+analysis+tutorial" target="_blank" rel="noopener"><span class="en">rstpm2 package R implementation survival analysis tutorial</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparison+of+proportional+hazards+and+accelerated+failure+time+models+in+biostatistics" target="_blank" rel="noopener"><span class="en">comparison of proportional hazards and accelerated failure time models in biostatistics</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Turnbull+estimator+vs+Kaplan-Meier+for+interval+censored+longitudinal+data" target="_blank" rel="noopener"><span class="en">Turnbull estimator vs Kaplan-Meier for interval censored longitudinal data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=knot+placement+strategies+for+natural+splines+in+survival+modeling" target="_blank" rel="noopener"><span class="en">knot placement strategies for natural splines in survival modeling</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ចំណាត់ថ្នាក់តាមពេលវេលាគិតបែបតភ្ជាប់ (Connectionist Temporal Classification) សម្រាប់ការស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្តាញ - Connectionist Temporal Classification for Offline Handwritten Text Recognition | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ចំណាត់ថ្នាក់តាមពេលវេលាគិតបែបតភ្ជាប់ (Connectionist Temporal ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្គាល់អត្ថបទសរសេរដោយដៃ (HTR) ពីឯកសារប្រវត្តិសាស្ត្រ ដែលជារឿយៗមានភាពយឺត...">
+    
+    <meta name="keywords" content="Connectionist Temporal Classification, Handwritten Text Recognition, Long Short-Term Memory, Neural Networks, Transcriptorium dataset, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/ctc-offline-handwritten-text-recognition-nina.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/ctc-offline-handwritten-text-recognition-nina.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/ctc-offline-handwritten-text-recognition-nina.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/ctc-offline-handwritten-text-recognition-nina.html">
+    <meta property="og:title" content="ចំណាត់ថ្នាក់តាមពេលវេលាគិតបែបតភ្ជាប់ (Connectionist Temporal Classification) សម្រាប់ការស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្តាញ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្គាល់អត្ថបទសរសេរដោយដៃ (HTR) ពីឯកសារប្រវត្តិសាស្ត្រ ដែលជារឿយៗមានភាពយឺតយ៉ាវខ្លាំងក្នុងការបណ្តុះបណ្តាលម៉ូដែលដោយប្រើប្រាស់តែអង្គគណនាកណ្តាល (CPU) ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="N/A-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Connectionist Temporal Classification">
+    
+    <meta property="article:tag" content="Handwritten Text Recognition">
+    
+    <meta property="article:tag" content="Long Short-Term Memory">
+    
+    <meta property="article:tag" content="Neural Networks">
+    
+    <meta property="article:tag" content="Transcriptorium dataset">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ចំណាត់ថ្នាក់តាមពេលវេលាគិតបែបតភ្ជាប់ (Connectionist Temporal Classification) សម្រាប់ការស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្តាញ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្គាល់អត្ថបទសរសេរដោយដៃ (HTR) ពីឯកសារប្រវត្តិសាស្ត្រ ដែលជារឿយៗមានភាពយឺតយ៉ាវខ្លាំងក្នុងការបណ្តុះបណ្តាលម៉ូដែលដោយប្រើប្រាស់តែអង្គគណនាកណ្តាល (CPU) ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178f\u17b6\u1798\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1782\u17b7\u178f\u1794\u17c2\u1794\u178f\u1797\u17d2\u1787\u17b6\u1794\u17cb (Connectionist Temporal Classification) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u179a\u179f\u17c1\u179a\u178a\u17c4\u1799\u178a\u17c3\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789",
+      "name": "Connectionist Temporal Classification for Offline Handwritten Text Recognition",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179f\u1798\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u179a\u179f\u17c1\u179a\u178a\u17c4\u1799\u178a\u17c3 (HTR) \u1796\u17b8\u17af\u1780\u179f\u17b6\u179a\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a \u178a\u17c2\u179b\u1787\u17b6\u179a\u17bf\u1799\u17d7\u1798\u17b6\u1793\u1797\u17b6\u1796\u1799\u17ba\u178f\u1799\u17c9\u17b6\u179c\u1781\u17d2\u179b\u17b6\u17c6\u1784\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1794\u178e\u17d2\u178f\u17bb\u17c7\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u17c9\u17bc\u178a\u17c2\u179b\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u178f\u17c2\u17a2\u1784\u17d2\u1782\u1782\u178e\u1793\u17b6\u1780\u178e\u17d2\u178f\u17b6\u179b (CPU) \u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/ctc-offline-handwritten-text-recognition-nina.html",
+      "author": [{"@type": "Person", "name": "Oliver Nina (University of Central Florida)"}],
+      "datePublished": "N/A",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Connectionist Temporal Classification for Offline Handwritten Text Recognition",
+        "url": "https://github.com/olivernina/htr-ctc"
+      },
+      "keywords": ["Connectionist Temporal Classification", "Handwritten Text Recognition", "Long Short-Term Memory", "Neural Networks", "Transcriptorium dataset"],
+      "about": "Computer Vision / Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u178f\u17b6\u1798\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6\u1782\u17b7\u178f\u1794\u17c2\u1794\u178f\u1797\u17d2\u1787\u17b6\u1794\u17cb (Connectionist Temporal Classification) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u179f\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u179a\u179f\u17c1\u179a\u178a\u17c4\u1799\u178a\u17c3\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178f\u17b6\u1789",
+          "item": "https://khmerresearch.com/papers/technology/ctc-offline-handwritten-text-recognition-nina.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ចំណាត់ថ្នាក់តាមពេលវេលាគិតបែបតភ្ជាប់ (Connectionist Tempor...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Connectionist Temporal Classification for Offline Handwritten Text Recognition<br>
+        
+        <strong>Source:</strong> <a href="https://github.com/olivernina/htr-ctc" target="_blank" rel="noopener">github.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ចំណាត់ថ្នាក់តាមពេលវេលាគិតបែបតភ្ជាប់ (Connectionist Temporal Classification) សម្រាប់ការស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្តាញ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Connectionist Temporal Classification for Offline Handwritten Text Recognition</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Oliver Nina (University of Central Florida)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> N/A</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Vision / Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការសម្គាល់អត្ថបទសរសេរដោយដៃ (HTR) ពីឯកសារប្រវត្តិសាស្ត្រ ដែលជារឿយៗមានភាពយឺតយ៉ាវខ្លាំងក្នុងការបណ្តុះបណ្តាលម៉ូដែលដោយប្រើប្រាស់តែអង្គគណនាកណ្តាល (CPU) ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះប្រើប្រាស់វិធីសាស្ត្ររួមបញ្ចូលគ្នានៃការកែសម្រួលរូបភាព និងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតខ្ពស់ ដើម្បីដំណើរការរូបភាពអត្ថបទដោយផ្ទាល់។
+        
+        <ul>
+            
+            <li>ការធ្វើឱ្យរូបភាពមានលក្ខណៈស្តង់ដារ ដែលរួមមានការកែតម្រូវភាពទ្រេត (De-slant) និងកម្រិតពណ៌ (Contrast Normalization)</li>
+            
+            <li>ការប្រើប្រាស់បណ្តាញសរសៃប្រសាទនៃការចងចាំរយៈពេលខ្លីនិងវែង (Long Short-Term Memory - LSTM) សម្រាប់ទាញយកលក្ខណៈសម្បត្តិពីទិន្នន័យ</li>
+            
+            <li>ការគណនាក្បួនដោះស្រាយចំណាត់ថ្នាក់តាមពេលវេលាគិតបែបតភ្ជាប់ (Connectionist Temporal Classification - CTC) សម្រាប់ការសម្គាល់ដោយមិនបាច់កាត់បំបែកតួអក្សរ</li>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេសផ្ទេរចំណេះដឹង (Transfer Learning) ដើម្បីពន្លឿនការបណ្តុះបណ្តាលម៉ូដែល</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែលនេះទាមទារប្រហែល 14 អេប៉ុក (157K ជុំ) ឬចំណាយពេលរហូតដល់ ២ ថ្ងៃលើ CPU ដើម្បីចាប់ផ្តើមតម្រឹមការព្យាករណ៍របស់វាទៅនឹងអត្ថបទដើមបានត្រឹមត្រូវ។</li>
+            
+            <li>បន្ទាប់ពីការបណ្តុះបណ្តាលកើនដល់ 40 អេប៉ុក (468K ជុំ) ម៉ូដែលនេះអាចរៀនសម្គាល់ពាក្យដែលលេចឡើងញឹកញាប់នៅក្នុងសំណុំទិន្នន័យបានយ៉ាងច្បាស់លាស់។</li>
+            
+            <li>ដើម្បីកាត់បន្ថយពេលវេលាបណ្តុះបណ្តាលដ៏យូរនេះ អ្នកស្រាវជ្រាវបានស្នើឱ្យប្រើប្រាស់ Theano សម្រាប់អនុវត្តការគណនាលើអង្គគណនាក្រាហ្វិក (GPU) វិញ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">CPU-based LSTM + CTC (via Ocrpy)</span></strong><br>ម៉ូដែល LSTM + CTC ដំណើរការលើ CPU ដោយប្រើកម្មវិធី Ocrpy</td>
+                <td>មានកូដប្រភពបើកចំហ (Open Source) ស្រាប់ និងអាចរៀនសម្គាល់ពាក្យបានយ៉ាងច្បាស់លាស់បន្ទាប់ពីការបណ្តុះបណ្តាលច្រើនជុំ។ ការប្រើ Transfer Learning ជួយពន្លឿនការបណ្តុះបណ្តាល។</td>
+                <td>ចំណាយពេលយូរខ្លាំង (ប្រហែល ២ ថ្ងៃសម្រាប់តែ ១៤ អេប៉ុកលើ CPU) និងពិបាកក្នុងការសាកល្បងជាមួយឯកតាបណ្តាញសរសៃប្រសាទថ្មីៗ ដោយសារត្រូវគណនាដេរីវេនៃអនុគមន៍ដោយផ្ទាល់ដៃ។</td>
+                <td>បន្ទាប់ពី ៤០ អេប៉ុក (468K ជុំ) ម៉ូដែលអាចសម្គាល់អត្ថបទនិងពាក្យដែលលេចឡើងញឹកញាប់បានយ៉ាងល្អប្រសើរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">GPU-accelerated LSTM + CTC (via Theano)</span></strong><br>ម៉ូដែល LSTM + CTC ប្រើប្រាស់ GPU តាមរយៈ Theano</td>
+                <td>អាចគណនា Gradient descent ដោយប្រើ GPU ដែលជួយកាត់បន្ថយពេលវេលាបណ្តុះបណ្តាលយ៉ាងច្រើន និងងាយស្រួលផ្លាស់ប្តូរឯកតាបណ្តាញ (Recurrent units) ដើម្បីធ្វើការពិសោធន៍ថ្មីៗ។</td>
+                <td>ស្ថិតក្នុងដំណាក់កាលអភិវឌ្ឍន៍នៅឡើយ (កំឡុងពេលនិពន្ធឯកសារ) និងតម្រូវឱ្យមានចំណេះដឹងក្នុងការប្រើប្រាស់បណ្ណាល័យ Theano។</td>
+                <td>ដោះស្រាយបញ្ហាភាពយឺតយ៉ាវនៃការបណ្តុះបណ្តាលម៉ូដែល និងជួយសម្រួលដល់ការស្រាវជ្រាវ (មិនមានតួលេខលទ្ធផលជាក់លាក់ក្នុងឯកសារ)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រខ្លាំង ជាពិសេសផ្នែករឹង (Hardware) និងទាមទារពេលវេលាយូរសម្រាប់ការបណ្តុះបណ្តាលម៉ូដែលបើមិនមាន GPU ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការ CPU ដែលមានល្បឿនលឿន (ចំណាយ ២ ថ្ងៃសម្រាប់ ១៤ អេប៉ុក) ឬចាំបាច់ត្រូវមាន GPU ទំនើបដើម្បីកាត់បន្ថយពេលវេលាបណ្តុះបណ្តាល។</li>
+        
+        <li><strong>Software:</strong> បណ្ណាល័យ Ocrpy សម្រាប់ការប្រើប្រាស់លើ CPU និង Theano សម្រាប់ការអភិវឌ្ឍលើ GPU រួមទាំងប្រព័ន្ធកូដនៅលើ GitHub ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យ Transcriptorium ដែលមានរូបភាពបន្ទាត់អត្ថបទប្រវត្តិសាស្ត្រជាង ១១,០០០ រូបភាពសម្រាប់ការបណ្តុះបណ្តាល។</li>
+        
+        <li><strong>Expertise:</strong> ការយល់ដឹងស៊ីជម្រៅពីមុខងារផ្ទេរចំណេះដឹង (Transfer Learning) បណ្តាញសរសៃប្រសាទ (RNN, LSTM) និងក្បួនដោះស្រាយ CTC ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ Transcriptorium ដែលជាឯកសារប្រវត្តិសាស្ត្រអឺរ៉ុប (សរសេរជាភាសាអង់គ្លេស/អឺរ៉ុប)។ ម៉ូដែលនេះប្រហែលជាមិនអាចប្រើប្រាស់ដោយផ្ទាល់សម្រាប់អក្សរខ្មែរបានទេ ដោយសារអក្សរខ្មែរមានទម្រង់ស្មុគស្មាញ មានព្យញ្ជនៈ ស្រៈលើ/ក្រោម និងជើងអក្សរជាប់គ្នា។ ដូច្នេះ ការអនុវត្តនៅកម្ពុជាទាមទារការប្រមូលទិន្នន័យអត្ថបទសរសេរដោយដៃភាសាខ្មែរក្នុងទំហំធំដើម្បីបណ្តុះបណ្តាលវាសាជាថ្មី។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាទិន្នន័យដើមជាភាសាបរទេស ប៉ុន្តែវិធីសាស្ត្រ LSTM រួមផ្សំជាមួយ CTC នេះមានសក្តានុពលខ្លាំងក្នុងការអភិវឌ្ឍប្រព័ន្ធអានអក្សរខ្មែរសរសេរដោយដៃនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>បណ្ណាល័យជាតិ និងបណ្ណាសារដ្ឋានកម្ពុជា (National Archives of Cambodia):</strong> អាចប្រើប្រាស់បច្ចេកវិទ្យានេះដើម្បីធ្វើនីយកម្ម (Digitize) ឯកសារប្រវត្តិសាស្ត្រ សាស្ត្រាស្លឹករឹត ឬកំណត់ត្រាចាស់ៗសរសេរដោយដៃឱ្យទៅជាទម្រង់អត្ថបទកុំព្យូទ័រ ដែលងាយស្រួលក្នុងការរក្សាទុក និងស្វែងរក។</li>
+            
+            <li><strong>វិស័យធនាគារ និងរដ្ឋបាលសាធារណៈ (Banking & Public Administration):</strong> ជួយសម្រួលដល់ការទាញយកទិន្នន័យដោយស្វ័យប្រវត្តិពីទម្រង់បែបបទក្រដាសដែលអតិថិជន ឬប្រជាពលរដ្ឋបំពេញដោយដៃ ចូលទៅក្នុងប្រព័ន្ធទិន្នន័យ កាត់បន្ថយការវាយបញ្ចូលដោយមនុស្ស និងកំហុសឆ្គង។</li>
+            
+            <li><strong>វិស័យអប់រំនៅកម្ពុជា (Education Sector):</strong> អាចអភិវឌ្ឍទៅជាកម្មវិធីកុំព្យូទ័រសម្រាប់វាយតម្លៃ ឬកែសន្លឹកកិច្ចការ និងប្រឡងរបស់សិស្សដែលសរសេរដោយដៃដោយស្វ័យប្រវត្តិ ដែលជួយសម្រាលបន្ទុករបស់លោកគ្រូអ្នកគ្រូ។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តប្រព័ន្ធនេះនៅកម្ពុជាឱ្យទទួលបានជោគជ័យ ទាមទារការវិនិយោគពេលវេលាលើការបង្កើតសំណុំទិន្នន័យអក្សរខ្មែរសរសេរដោយដៃស្តង់ដារ និងការបំពាក់ហេដ្ឋារចនាសម្ព័ន្ធ GPU កម្រិតខ្ពស់សម្រាប់ការស្រាវជ្រាវ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃបណ្តាញសរសៃប្រសាទ:</strong> អ្នកស្រាវជ្រាវគួរតែចាប់ផ្តើមសិក្សាពីទ្រឹស្តីនៃ <span class='en'>Recurrent Neural Networks (RNN)</span>, <span class='en'>Long Short-Term Memory (LSTM)</span> និងជាពិសេសយន្តការរបស់ <span class='en'>Connectionist Temporal Classification (CTC) loss</span> ។</li>
+            
+            <li><strong>ប្រមូលនិងកែច្នៃទិន្នន័យអក្សរខ្មែរ:</strong> ចាប់ផ្តើមប្រមូលទិន្នន័យអក្សរសរសេរដោយដៃភាសាខ្មែរ ហើយអនុវត្តបច្ចេកទេសកែសម្រួលរូបភាពជាមុន ដូចជាការបំបាត់ភាពទ្រេតដោយប្រើ <span class='en'>Affine Transformation</span> និងការកែតម្រូវកម្រិតពណ៌ដោយប្រើ <span class='en'>Contrast Normalization</span> ដូចដែលឯកសារបានណែនាំ។</li>
+            
+            <li><strong>ប្រើប្រាស់ Frameworks ទំនើបៗដែលមានការគាំទ្រ GPU:</strong> ជំនួសឱ្យការប្រើប្រាស់ <span class='en'>Theano</span> ឬ <span class='en'>Ocrpy</span> ដែលចាស់ហួសសម័យ សូមងាកមកប្រើប្រាស់ <span class='en'>PyTorch</span> ឬ <span class='en'>TensorFlow</span> វិញដើម្បីកសាងម៉ូដែល <span class='en'>CRNN (CNN + Bi-LSTM + CTC)</span> ដែលងាយស្រួលអភិវឌ្ឍ និងដំណើរការលើ <span class='en'>GPU</span> បានលឿន។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសផ្ទេរចំណេះដឹង (Transfer Learning):</strong> បណ្តុះបណ្តាលម៉ូដែលជាមួយអត្ថបទខ្មែរវាយដោយកុំព្យូទ័រដោយប្រើ <span class='en'>Synthetic Data Generation</span> ជាមុនសិន បន្ទាប់មកសឹមយកម៉ូដែលនោះទៅបន្តបណ្តុះបណ្តាល (<span class='en'>Fine-tune</span>) ជាមួយសំណុំទិន្នន័យអក្សរខ្មែរសរសេរដោយដៃពិតប្រាកដដើម្បីសន្សំពេលវេលា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Connectionist Temporal Classification</span></td>
+                <td>ជាក្បួនដោះស្រាយសម្រាប់បណ្តាញសរសៃប្រសាទសិប្បនិម្មិត ដែលអនុញ្ញាតឱ្យម៉ូដែលរៀនពីទិន្នន័យតាមលំដាប់លំដោយ (ដូចជាអត្ថបទ ឬសំឡេង) ដោយមិនចាំបាច់មានការកាត់បំបែករូបភាពអត្ថបទទៅជាតួអក្សរនីមួយៗ ហើយតម្រឹមវាទៅនឹងស្លាកពាក្យទុកជាមុននោះទេ។ វាគណនាប្រូបាប៊ីលីតេនៃតួអក្សរដែលអាចកើតមាននៅរាល់ជំហាននៃពេលវេលា។</td>
+                <td>ដូចជាគ្រូបង្រៀនដែលស្តាប់សិស្សអានប្រយោគទាំងមូល ហើយដឹងថាសិស្សអានត្រូវឬខុស ដោយមិនចាំបាច់ចាប់កំហុសតាមកាត់ព្យាង្គម្តងមួយៗឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Long Short-Term Memory</span></td>
+                <td>ជាប្រភេទនៃបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (RNN) ដែលមានសមត្ថភាពចងចាំព័ត៌មានពីអតីតកាលក្នុងរយៈពេលយូរ ដែលស័ក្តិសមបំផុតសម្រាប់ការទស្សន៍ទាយលំដាប់លំដោយនៃតួអក្សរ។ វាមានយន្តការត្រួតពិនិត្យ (Gates) ដូចជា input gate និង forget gate ដើម្បីសម្រេចថាគួរចងចាំ ឬបំភ្លេចព័ត៌មានណាខ្លះ។</td>
+                <td>ដូចជាសៀវភៅកំណត់ហេតុឆ្លាតវៃមួយ ដែលចេះរើសទុកតែរឿងសំខាន់ៗសម្រាប់ប្រើនៅថ្ងៃមុខ និងលុបចោលរឿងឥតប្រយោជន៍ដោយស្វ័យប្រវត្តិ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer Learning</span></td>
+                <td>ជាវិធីសាស្ត្រក្នុងរៀនម៉ាស៊ីន (Machine Learning) ដែលគេយកម៉ូដែលដែលបានបណ្តុះបណ្តាលរួចលើកិច្ចការមួយ (ឧទាហរណ៍៖ អានអក្សរវាយដោយកុំព្យូទ័រ) មកប្រើប្រាស់ជាមូលដ្ឋានដើម្បីបន្តបណ្តុះបណ្តាលលើកិច្ចការថ្មីមួយទៀតដែលស្រដៀងគ្នា (ឧទាហរណ៍៖ អានអក្សរសរសេរដោយដៃ) ដើម្បីចំណេញពេលវេលា និងកាត់បន្ថយតម្រូវការទិន្នន័យ។</td>
+                <td>ដូចជាអ្នកដែលចេះជិះកង់ស្ទាត់ជំនាញស្រាប់ ពេលប្តូរទៅរៀនជិះម៉ូតូ គឺគាត់ឆាប់ចេះជាងអ្នកដែលមិនធ្លាប់ចេះជិះកង់សោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">De-slant</span></td>
+                <td>ជាបច្ចេកទេសកែសម្រួលរូបភាពជាមុន (Preprocessing) នៅក្នុងការសម្គាល់អត្ថបទ ដែលគណនាមុំនៃភាពទ្រេតរបស់អក្សរ ហើយកែតម្រូវតួអក្សរដែលសរសេរទ្រេតទាំងនោះ ឱ្យត្រឡប់មកឈរត្រង់វិញតាមរយៈប្រតិបត្តិការបំលែង (Affine transformation) ដើម្បីងាយស្រួលដល់កុំព្យូទ័រក្នុងការអាន។</td>
+                <td>ដូចជាការចាប់ទាញស៊ុមរូបថតដែលព្យួរវៀចនៅលើជញ្ជាំង ឱ្យត្រឡប់មកឈរត្រង់ស្មើល្អវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vanishing gradient problem</span></td>
+                <td>ជាបញ្ហាមួយក្នុងការបណ្តុះបណ្តាលបណ្តាញសរសៃប្រសាទដែលជ្រៅៗ ដែលតម្លៃនៃការកែតម្រូវកំហុស (Gradient) ក្លាយទៅជាតូចពេកក្នុងអំឡុងពេល Backpropagation រហូតធ្វើឱ្យស្រទាប់ខាងដើមនៃបណ្តាញមិនអាចរៀន ឬកែប្រែទម្ងន់របស់វាបាន។ ម៉ូដែល LSTM ត្រូវបានបង្កើតឡើងដើម្បីដោះស្រាយបញ្ហានេះ។</td>
+                <td>ដូចជាការផ្ញើសារខ្សឹបតៗគ្នាក្នុងជួរមនុស្សវែងឆ្ងាយ ដែលសារនោះកាន់តែខ្សោយទៅៗរហូតដល់អ្នកខាងចុងស្តាប់លែងបានន័យអ្វីទាំងអស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Contrast Normalization</span></td>
+                <td>ជាដំណើរការកែតម្រូវកម្រិតពន្លឺនិងភាពងងឹតនៃរូបភាព (Pixel values) ឱ្យមានភាពច្បាស់លាស់និងស៊ីសង្វាក់គ្នា ដោយដកតម្លៃភីកសែលខ្ពស់បំផុតចេញ ដើម្បីទាញពង្រីកគម្លាតនៃពណ៌ប្រផេះ ដែលជួយឱ្យម៉ូដែលបែងចែករវាងតួអក្សរពណ៌ខ្មៅ និងផ្ទៃខាងក្រោយពណ៌សបានកាន់តែច្បាស់។</td>
+                <td>ដូចជាការកែពន្លឺអេក្រង់ទូរស័ព្ទរបស់អ្នកនៅពេលដើរក្រោមពន្លឺថ្ងៃ ដើម្បីអាចមើលឃើញអក្សរនៅលើអេក្រង់បានច្បាស់លេចធ្លោពីផ្ទៃខាងក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hidden Markov Models</span></td>
+                <td>ជាម៉ូដែលស្ថិតិដែលធ្លាប់ត្រូវបានគេនិយមប្រើដើម្បីទស្សន៍ទាយប្រូបាប៊ីលីតេនៃលំដាប់លំដោយនៃព្រឹត្តិការណ៍ ដែលមិនអាចមើលឃើញផ្ទាល់ (Hidden states) ដោយផ្អែកលើព្រឹត្តិការណ៍ដែលអាចសង្កេតបាន។ សព្វថ្ងៃបច្ចេកវិទ្យានេះត្រូវបានជំនួសដោយបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតខ្ពស់សម្រាប់កិច្ចការសម្គាល់អក្សរ។</td>
+                <td>ដូចជាអ្នកព្យាករណ៍អាកាសធាតុដែលទាយថាថ្ងៃស្អែកអាចនឹងភ្លៀង ដោយផ្អែកទៅលើស្ថានភាពមេឃស្រទុំនៅថ្ងៃនេះ បើទោះជាគាត់មើលមិនឃើញដំណក់ទឹកភ្លៀងផ្ទាល់ក៏ដោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-network-methods-nlp-review-2017.html">
+                    <span class="km">វិធីសាស្ត្របណ្ដាញសរសៃប្រសាទសម្រាប់ការដំណើរការភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Network Methods for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/education/integrating-affect-sensors-autotutor-2005.html">
+                    <span class="km">ការបញ្ចូលឧបករណ៍ចាប់សញ្ញាអារម្មណ៍ទៅក្នុងប្រព័ន្ធបង្រៀនឆ្លាតវៃ</span><br>
+                    <span class="en article-original-title">Integrating Affect Sensors in an Intelligent Tutoring System</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ctc-generalized-full-sum-hmm-training-2017.html">
+                    <span class="km">CTC ក្នុងបរិបទនៃការបណ្តុះបណ្តាលម៉ូដែល Generalized Full-Sum HMM</span><br>
+                    <span class="en article-original-title">CTC in the Context of Generalized Full-Sum HMM Training</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/flower-recognition-image-processing-neural-networks-2018.html">
+                    <span class="km">ប្រព័ន្ធកំណត់អត្តសញ្ញាណផ្កាផ្អែកលើដំណើរការរូបភាពនិងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត</span><br>
+                    <span class="en article-original-title">A Flower Recognition System Based On Image Processing And Neural Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html">
+                    <span class="km">វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero</span><br>
+                    <span class="en article-original-title">深度强化学习进展: 从AlphaGo到AlphaGo Zero</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Connectionist+Temporal+Classification+forward-backward+algorithm+tutorial" target="_blank" rel="noopener"><span class="en">Connectionist Temporal Classification forward-backward algorithm tutorial</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Long+Short-Term+Memory+architecture+for+offline+handwritten+text+recognition" target="_blank" rel="noopener"><span class="en">Long Short-Term Memory architecture for offline handwritten text recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Transfer+learning+techniques+for+historical+document+transcription" target="_blank" rel="noopener"><span class="en">Transfer learning techniques for historical document transcription</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=GPU+acceleration+for+recurrent+neural+networks+Theano+vs+PyTorch" target="_blank" rel="noopener"><span class="en">GPU acceleration for recurrent neural networks Theano vs PyTorch</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hidden+Markov+Models+vs+CTC+for+handwritten+text+recognition" target="_blank" rel="noopener"><span class="en">Hidden Markov Models vs CTC for handwritten text recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Image+preprocessing+and+contrast+normalization+for+OCR+and+HTR" target="_blank" rel="noopener"><span class="en">Image preprocessing and contrast normalization for OCR and HTR</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
