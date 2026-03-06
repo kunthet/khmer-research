@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការបន្ថែមទិន្នន័យអត្ថបទដើម្បីគ្រប់គ្រងចំណាត់ថ្នាក់មិនមានតុល្យភាព៖ ការអនុវត្តចំពោះចំណាត់ថ្នាក់ពហុថ្នាក់ធំផ្អែកលើ BERT សម្រាប់សន្លឹកផលិតផល - Text Data Augmentation to Manage Imbalanced Classification: Apply to BERT-bas... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការបន្ថែមទិន្នន័យអត្ថបទដើម្បីគ្រប់គ្រងចំណាត់ថ្នាក់មិនមានតុល្។ ការធ្វើចំណាត់ថ្នាក់អត្ថបទពហុថ្នាក់នៅក្នុងពិភពពិត ជារឿយៗប្រឈមមុខនឹងបញ្ហាមិនមានតុល្យភាពនៃទិន្នន័យ (...">
+    
+    <meta name="keywords" content="Text Classification, Imbalanced Classification, BERT, CamemBERT, Data Augmentation, Deep Learning, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/text-data-augmentation-bert-imbalanced-classification-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/text-data-augmentation-bert-imbalanced-classification-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/text-data-augmentation-bert-imbalanced-classification-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/text-data-augmentation-bert-imbalanced-classification-2023.html">
+    <meta property="og:title" content="ការបន្ថែមទិន្នន័យអត្ថបទដើម្បីគ្រប់គ្រងចំណាត់ថ្នាក់មិនមានតុល្យភាព៖ ការអនុវត្តចំពោះចំណាត់ថ្នាក់ពហុថ្នាក់ធំផ្អែកលើ BERT សម្រាប់សន្លឹកផលិតផល | KhmerResearch.com">
+    <meta property="og:description" content="ការធ្វើចំណាត់ថ្នាក់អត្ថបទពហុថ្នាក់នៅក្នុងពិភពពិត ជារឿយៗប្រឈមមុខនឹងបញ្ហាមិនមានតុល្យភាពនៃទិន្នន័យ (Class Imbalance) ព្រមទាំងមានចំនួនថ្នាក់ (Classes) រាប់រយ ដែលធ្វើឱ្យម៉ូដែលបណ្ដុះបណ្ដាលមានការលម្អៀង និ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2023 International Journal of Computational Linguistics (IJCL)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Text Classification">
+    
+    <meta property="article:tag" content="Imbalanced Classification">
+    
+    <meta property="article:tag" content="BERT">
+    
+    <meta property="article:tag" content="CamemBERT">
+    
+    <meta property="article:tag" content="Data Augmentation">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការបន្ថែមទិន្នន័យអត្ថបទដើម្បីគ្រប់គ្រងចំណាត់ថ្នាក់មិនមានតុល្យភាព៖ ការអនុវត្តចំពោះចំណាត់ថ្នាក់ពហុថ្នាក់ធំផ្អែកលើ BERT សម្រាប់សន្លឹកផលិតផល">
+    <meta name="twitter:description" content="ការធ្វើចំណាត់ថ្នាក់អត្ថបទពហុថ្នាក់នៅក្នុងពិភពពិត ជារឿយៗប្រឈមមុខនឹងបញ្ហាមិនមានតុល្យភាពនៃទិន្នន័យ (Class Imbalance) ព្រមទាំងមានចំនួនថ្នាក់ (Classes) រាប់រយ ដែលធ្វើឱ្យម៉ូដែលបណ្ដុះបណ្ដាលមានការលម្អៀង និ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u1793\u17d2\u1790\u17c2\u1798\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a2\u178f\u17d2\u1790\u1794\u1791\u178a\u17be\u1798\u17d2\u1794\u17b8\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u17d6 \u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1785\u17c6\u1796\u17c4\u17c7\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1796\u17a0\u17bb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1792\u17c6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be BERT \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179f\u1793\u17d2\u179b\u17b9\u1780\u1795\u179b\u17b7\u178f\u1795\u179b",
+      "name": "Text Data Augmentation to Manage Imbalanced Classification: Apply to BERT-based Large Multiclass Classification for Product Sheets",
+      "description": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u1796\u17a0\u17bb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1796\u17b7\u1797\u1796\u1796\u17b7\u178f \u1787\u17b6\u179a\u17bf\u1799\u17d7\u1794\u17d2\u179a\u1788\u1798\u1798\u17bb\u1781\u1793\u17b9\u1784\u1794\u1789\u17d2\u17a0\u17b6\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1793\u17c3\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 (Class Imbalance) \u1796\u17d2\u179a\u1798\u1791\u17b6\u17c6\u1784\u1798\u17b6\u1793\u1785\u17c6\u1793\u17bd\u1793\u1790\u17d2\u1793\u17b6\u1780\u17cb (Classes) \u179a\u17b6\u1794\u17cb\u179a\u1799 \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1794\u178e\u17d2\u178a\u17bb\u17c7\u1794\u178e\u17d2\u178a\u17b6\u179b\u1798\u17b6\u1793\u1780\u17b6\u179a\u179b\u1798\u17d2\u17a2\u17c0\u1784 \u1793\u17b7\u1784\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1798\u17b7\u1793\u1794\u17b6\u1793\u179b\u17d2\u17a2\u17d4 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u17a2\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u1793\u17c1\u17c7 \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1785\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1794\u17d2\u179a\u1797\u17c1\u1791\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8 SaaS \u1787\u17b6\u1797\u17b6\u179f\u17b6\u1794\u17b6\u179a\u17b6\u17c6\u1784 \u178a\u17c2\u179b\u1798\u17b6\u1793\u1785\u17c6\u1793\u17bd\u1793\u179a\u17a0\u17bc\u178f\u178a\u179b\u17cb \u17e2\u17e3\u17e3 \u1790\u17d2\u1793\u17b6\u1780\u17cb\u178a\u17b6\u1785\u17cb\u178a\u17c4\u1799\u17a1\u17c2\u1780\u1796\u17b8\u1782\u17d2\u1793\u17b6\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/text-data-augmentation-bert-imbalanced-classification-2023.html",
+      "author": [{"@type": "Person", "name": "Yu DU (Cloud-is-Mine R\u0026D)"},{"@type": "Person", "name": "Erwann LAVAREC (Cloud-is-Mine R\u0026D)"},{"@type": "Person", "name": "Colin LALOUETTE (Cloud-is-Mine R\u0026D)"}],
+      "datePublished": "2023 International Journal of Computational Linguistics (IJCL)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Text Data Augmentation to Manage Imbalanced Classification: Apply to BERT-based Large Multiclass Classification for Product Sheets",
+        "url": "https://www.cscjournals.org/journals/IJCL/description.php"
+      },
+      "keywords": ["Text Classification", "Imbalanced Classification", "BERT", "CamemBERT", "Data Augmentation", "Deep Learning"],
+      "about": "Natural Language Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u1793\u17d2\u1790\u17c2\u1798\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u17a2\u178f\u17d2\u1790\u1794\u1791\u178a\u17be\u1798\u17d2\u1794\u17b8\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796\u17d6 \u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1785\u17c6\u1796\u17c4\u17c7\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1796\u17a0\u17bb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u1792\u17c6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be BERT \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u179f\u1793\u17d2\u179b\u17b9\u1780\u1795\u179b\u17b7\u178f\u1795\u179b",
+          "item": "https://khmerresearch.com/papers/technology/text-data-augmentation-bert-imbalanced-classification-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការបន្ថែមទិន្នន័យអត្ថបទដើម្បីគ្រប់គ្រងចំណាត់ថ្នាក់មិនមានត...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Text Data Augmentation to Manage Imbalanced Classification: Apply to BERT-based Large Multiclass Classification for Product Sheets<br>
+        
+        <strong>Source:</strong> <a href="https://www.cscjournals.org/journals/IJCL/description.php" target="_blank" rel="noopener">www.cscjournals.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការបន្ថែមទិន្នន័យអត្ថបទដើម្បីគ្រប់គ្រងចំណាត់ថ្នាក់មិនមានតុល្យភាព៖ ការអនុវត្តចំពោះចំណាត់ថ្នាក់ពហុថ្នាក់ធំផ្អែកលើ BERT សម្រាប់សន្លឹកផលិតផល</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Text Data Augmentation to Manage Imbalanced Classification: Apply to BERT-based Large Multiclass Classification for Product Sheets</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Yu DU (Cloud-is-Mine R&D), Erwann LAVAREC (Cloud-is-Mine R&D), Colin LALOUETTE (Cloud-is-Mine R&D)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023 International Journal of Computational Linguistics (IJCL)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Natural Language Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការធ្វើចំណាត់ថ្នាក់អត្ថបទពហុថ្នាក់នៅក្នុងពិភពពិត ជារឿយៗប្រឈមមុខនឹងបញ្ហាមិនមានតុល្យភាពនៃទិន្នន័យ (Class Imbalance) ព្រមទាំងមានចំនួនថ្នាក់ (Classes) រាប់រយ ដែលធ្វើឱ្យម៉ូដែលបណ្ដុះបណ្ដាលមានការលម្អៀង និងដំណើរការមិនបានល្អ។ ការសិក្សានេះផ្តោតលើការដោះស្រាយបញ្ហាអតុល្យភាពនេះ សម្រាប់ការចាត់ថ្នាក់ប្រភេទកម្មវិធី SaaS ជាភាសាបារាំង ដែលមានចំនួនរហូតដល់ ២៣៣ ថ្នាក់ដាច់ដោយឡែកពីគ្នា។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានប្រើប្រាស់បច្ចេកទេសបន្ថែមទិន្នន័យអត្ថបទ រួមផ្សំជាមួយនឹងម៉ូដែលភាសាធំដើម្បីដោះស្រាយបញ្ហាអតុល្យភាពថ្នាក់ទិន្នន័យ។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់បច្ចេកទេសបន្ថែមទិន្នន័យ (Easy Data Augmentation - EDA) ដើម្បីបង្កើតទិន្នន័យអត្ថបទថ្មីសម្រាប់ថ្នាក់ទិន្នន័យភាគតិច (Minority classes)</li>
+            
+            <li>ការបំពាក់និងបង្វឹកម៉ូដែលភាសាបារាំង (Fine-tuning CamemBERT) ជាមួយទិន្នន័យដែលបានបន្ថែមរួច</li>
+            
+            <li>ការវាយតម្លៃម៉ូដែលដោយប្រើរង្វាស់ ភាពត្រឹមត្រូវ (Accuracy), ភាពត្រឹមត្រូវកំពូល-k (Top-k accuracy) និង ពិន្ទុ F1-score</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>បច្ចេកទេស EDA បានបង្កើនទិន្នន័យហ្វឹកហាត់ពី ១៦ ០៧៦ ដល់ ៨០ ២៤៧ សំណាក ដែលជួយកាត់បន្ថយភាពលម្អៀងនៃទិន្នន័យ។</li>
+            
+            <li>ម៉ូដែល CamemBERT ដែលបានប្រើទិន្នន័យបន្ថែម (CamemBERT-TDA) ទទួលបានភាពត្រឹមត្រូវ (Accuracy) ០.៧៣០ ដែលជាកំណើន ៣៤.៧% បើធៀបនឹងម៉ូដែលធម្មតា។</li>
+            
+            <li>ម៉ូដែលនេះក៏ទទួលបានពិន្ទុ F1-score កើនឡើង ៣៧.១% (ឈានដល់ ០.៧៣១) ដែលបង្ហាញយ៉ាងច្បាស់ពីប្រសិទ្ធភាពនៃវិធីសាស្ត្របន្ថែមទិន្នន័យក្នុងការដោះស្រាយបញ្ហាចំណាត់ថ្នាក់ពហុថ្នាក់ដ៏ធំ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">CamemBERT-No-TDA (Baseline)</span></strong><br>ម៉ូដែល CamemBERT ដែលមិនប្រើប្រាស់បច្ចេកទេសបន្ថែមទិន្នន័យ (Baseline)</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងមិនទាមទារពេលវេលា ឬធនធានបន្ថែមក្នុងការបង្កើតទិន្នន័យសិប្បនិម្មិត។</td>
+                <td>ដំណើរការមិនបានល្អលើទិន្នន័យដែលមិនមានតុល្យភាព (Imbalanced data) ដែលធ្វើឱ្យមានភាពលម្អៀងទៅរកថ្នាក់ដែលមានទិន្នន័យច្រើន។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy): ០.៥៤២ និង ពិន្ទុ F1-score: ០.៥៣៣</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CamemBERT-TDA (with Easy Data Augmentation)</span></strong><br>ម៉ូដែល CamemBERT ដែលប្រើប្រាស់បច្ចេកទេសបន្ថែមទិន្នន័យ (EDA)</td>
+                <td>ដោះស្រាយបញ្ហាអតុល្យភាពទិន្នន័យបានយ៉ាងល្អ និងបង្កើនភាពត្រឹមត្រូវនៃការធ្វើចំណាត់ថ្នាក់សម្រាប់ថ្នាក់ដែលមានទិន្នន័យតិចតួច (Minority classes)។</td>
+                <td>ត្រូវការពេលវេលា និងធនធានកុំព្យូទ័រច្រើនជាងមុន ដើម្បីបង្កើតទិន្នន័យបន្ថែម និងអាចបាត់បង់អត្ថន័យដើមប្រសិនបើការជំនួសពាក្យមិនបានត្រឹមត្រូវ។</td>
+                <td>ភាពត្រឹមត្រូវ (Accuracy): ០.៧៣០ និង ពិន្ទុ F1-score: ០.៧៣១ (មានន័យថាកើនឡើង ៣៤.៧% និង ៣៧.១% រៀងគ្នា)</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារធនធានកុំព្យូទ័រធុនមធ្យមទៅខ្ពស់ ជាពិសេសសម្រាប់ការបង្វឹកម៉ូដែលភាសាខ្នាតធំ (Large Language Models)។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ទាមទារអង្គគណនា (GPU) ដូចជា Tesla T4 GPU សម្រាប់ការបង្វឹកម៉ូដែល (Fine-tuning)។</li>
+        
+        <li><strong>Software & Libraries:</strong> ប្រើប្រាស់បណ្ណាល័យ Python ដូចជា Hugging Face Transformers, fastbert, និង Textattack (សម្រាប់ធ្វើ EDA)។</li>
+        
+        <li><strong>Dataset:</strong> ប្រើប្រាស់សំណុំទិន្នន័យអត្ថបទភាសាបារាំងចំនួន ១៣ ០១៤ សន្លឹក ដែលត្រូវបានកាត់ជាផ្នែកតូចៗរហូតដល់មាន ២០ ០៩៥ អត្ថបទ និងត្រូវបង្កើនចំនួនទិន្នន័យហ្វឹកហាត់ដល់ ៨០ ២៤៧ តាមរយៈ EDA។</li>
+        
+        <li><strong>Pre-trained Model:</strong> ត្រូវការម៉ូដែលភាសាដែលបានបង្វឹកជាមុន ដូចជា CamemBERT ដែលត្រូវបានបង្វឹកលើទិន្នន័យអត្ថបទភាសាបារាំងទំហំ 135GB រួចជាស្រេច។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យសន្លឹកផលិតផលផ្នែកទន់ (SaaS product sheets) ជាភាសាបារាំងពីប្រព័ន្ធ Appvizer ។ ដោយសារវាផ្តោតតែលើភាសាបារាំង និងបរិបទកម្មវិធី SaaS ដែលមានលក្ខណៈជាក់លាក់ខ្លាំង លទ្ធផលអាចនឹងមិនឆ្លើយតបទាំងស្រុងទៅនឹងភាសា ឬបរិបទផ្សេងទៀតឡើយ។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តបច្ចេកទេសនេះទាមទារឱ្យមានម៉ូដែលភាសាខ្មែរ (ដូចជា XLM-R) និងទិន្នន័យក្នុងស្រុកដែលមានគុណភាពដើម្បីធានាបាននូវប្រសិទ្ធភាព។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសបន្ថែមទិន្នន័យ (EDA) សម្រាប់ការធ្វើចំណាត់ថ្នាក់អត្ថបទនេះ មានសារៈសំខាន់ណាស់សម្រាប់ប្រទេសកម្ពុជា ដែលជារឿយៗជួបប្រទះបញ្ហាខ្វះខាតទិន្នន័យហ្វឹកហាត់។</p>
+        
+        <ul>
+            
+            <li><strong>E-Commerce Platforms (ឧ. Nham24, Khmer24):</strong> អាចប្រើប្រាស់ដើម្បីចាត់ថ្នាក់ផលិតផលរាប់ពាន់ប្រភេទដោយស្វ័យប្រវត្តិ ជាពិសេសសម្រាប់ប្រភេទផលិតផលកម្រដែលមានទិន្នន័យតិចតួច។</li>
+            
+            <li><strong>News and Media Categorization:</strong> ជួយស្ថាប័នព័ត៌មានក្នុងការចាត់ថ្នាក់អត្ថបទព័ត៌មានទៅតាមប្រធានបទដោយស្វ័យប្រវត្តិ ទោះបីជាប្រធានបទខ្លះមានចំនួនអត្ថបទតិចក៏ដោយ ដោយការបង្កើតទិន្នន័យសិប្បនិម្មិតបន្ថែម។</li>
+            
+            <li><strong>E-Government & Citizen Feedback:</strong> ជួយរដ្ឋាភិបាល ឬក្រសួងស្ថាប័នក្នុងការបែងចែកពាក្យបណ្តឹង ឬសំណូមពររបស់ប្រជាពលរដ្ឋទៅតាមផ្នែកពាក់ព័ន្ធបានយ៉ាងរហ័សនិងសុក្រឹត ទោះបីជាសំណូមពរខ្លះមានទម្រង់កម្រជួបក៏ដោយ។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់វិធីសាស្ត្រនេះអាចជួយស្ថាប័នឯកជន និងរដ្ឋនៅកម្ពុជាចំណេញពេលវេលា កាត់បន្ថយកំហុសពីមនុស្ស និងបង្កើនប្រសិទ្ធភាពក្នុងការចាត់ចែងទិន្នន័យអត្ថបទខ្នាតធំ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាពីមូលដ្ឋានគ្រឹះនៃការធ្វើចំណាត់ថ្នាក់អត្ថបទ:</strong> ចាប់ផ្តើមស្វែងយល់ពីរបៀបដំណើរការរបស់ម៉ូដែល <span class='en'>BERT</span> និង <span class='en'>Transformers</span> តាមរយៈឯកសារ ឬវគ្គសិក្សាឥតគិតថ្លៃពី <span class='en'>Hugging Face</span>។</li>
+            
+            <li><strong>ប្រមូលនិងរៀបចំទិន្នន័យភាសាខ្មែរ:</strong> ប្រមូលទិន្នន័យអត្ថបទពិតប្រាកដ (ឧ. ព័ត៌មាន ឬការពិពណ៌នាផលិតផល) ហើយសម្អាតវាដោយប្រើបណ្ណាល័យ <span class='en'>Pandas</span> ព្រមទាំងកំណត់អត្តសញ្ញាណថ្នាក់ទិន្នន័យដែលមានតុល្យភាពនិងគ្មានតុល្យភាព។</li>
+            
+            <li><strong>អនុវត្តបច្ចេកទេសបន្ថែមទិន្នន័យ (EDA):</strong> សាកល្បងសរសេរកូដ <span class='en'>Python</span> ដើម្បីបង្កើតទិន្នន័យបន្ថែមសម្រាប់ថ្នាក់ដែលមានទិន្នន័យតិចតួច ដោយប្រើបច្ចេកទេសជំនួសពាក្យ (Synonym Replacement) ឬការបកប្រែត្រលប់ (Back-translation) ដោយប្រើ <span class='en'>Textattack library</span>។</li>
+            
+            <li><strong>បង្វឹកនិងវាយតម្លៃម៉ូដែល (Fine-tuning):</strong> ប្រើប្រាស់ <span class='en'>Google Colab (T4 GPU)</span> រួមជាមួយ <span class='en'>Transformers library</span> ឬ <span class='en'>fastbert</span> ដើម្បីបង្វឹកម៉ូដែលពហុភាសាដូចជា <span class='en'>XLM-RoBERTa</span> លើទិន្នន័យភាសាខ្មែររបស់អ្នក រួចប្រៀបធៀបលទ្ធផល F1-score រវាងទិន្នន័យដើម និងទិន្នន័យដែលបានបន្ថែម។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">BERT</span></td>
+                <td>ជាម៉ូដែលបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតកម្រិតខ្ពស់សម្រាប់ការយល់ដឹងពីភាសាធម្មជាតិ (NLP) ដែលអាចអានអត្ថបទទាំងទៅមុខនិងថយក្រោយ ដើម្បីចាប់យកអត្ថន័យបរិបទនៃពាក្យនីមួយៗបានយ៉ាងច្បាស់លាស់។</td>
+                <td>ដូចជាអ្នកអានសៀវភៅម្នាក់ដែលមិនត្រឹមតែអានពីឆ្វេងទៅស្តាំប៉ុណ្ណោះទេ តែអាចអានត្រលប់ចុះឡើងដើម្បីយល់ន័យពិតប្រាកដនៃប្រយោគដោយផ្អែកលើពាក្យជុំវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Imbalanced Classification</span></td>
+                <td>ជាបញ្ហាក្នុងការរៀនម៉ាស៊ីន (Machine Learning) ដែលចំនួនទិន្នន័យក្នុងក្រុម (Class) នីមួយៗមានភាពខុសគ្នាខ្លាំង ធ្វើឱ្យម៉ូដែលងាយនឹងទាយត្រូវតែលើក្រុមដែលមានទិន្នន័យច្រើន និងទាយខុសលើក្រុមមានទិន្នន័យតិច។</td>
+                <td>ដូចជាសិស្សដែលរៀនតែមុខវិជ្ជាគណិតវិទ្យារាល់ថ្ងៃ ហើយមិនសូវរៀនគីមី ដល់ពេលប្រឡងក៏ធ្វើបានល្អតែមុខវិជ្ជាគណិតវិទ្យា ចំណែកឯគីមីធ្លាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Text Data Augmentation</span></td>
+                <td>ជាបច្ចេកទេសបង្កើតទិន្នន័យអត្ថបទថ្មីៗបន្ថែមពីលើទិន្នន័យចាស់ដែលមានស្រាប់ ដោយរក្សាអត្ថន័យដើម ដើម្បីជួយឱ្យម៉ូដែលរៀនម៉ាស៊ីនមានទិន្នន័យគ្រប់គ្រាន់សម្រាប់ការហ្វឹកហាត់។</td>
+                <td>ដូចជាការយកប្រយោគមួយមកសរសេរជាឃ្លាថ្មីៗជាច្រើនជម្រើសដោយប្រើពាក្យមានន័យដូចគ្នា ដើម្បីបង្រៀនឱ្យកុំព្យូទ័រស្គាល់ប្រយោគនោះក្នុងទម្រង់ច្រើនបែប។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Easy Data Augmentation</span></td>
+                <td>ជាវិធីសាស្ត្រជាក់លាក់មួយនៃការបន្ថែមទិន្នន័យអត្ថបទ ដែលបង្កើតទិន្នន័យថ្មីដោយប្រើបច្ចេកទេសងាយៗចំនួន៤ ដូចជា៖ ជំនួសពាក្យមានន័យដូច, បញ្ចូលពាក្យថ្មី, លុបពាក្យចោល, និងប្តូរទីតាំងពាក្យក្នុងប្រយោគ។</td>
+                <td>ដូចជាការលេងល្បែងផ្គុំពាក្យ ដែលយើងអាចដក ដូរ ឬថែមពាក្យក្នុងប្រយោគមួយ ដើម្បីបង្កើតប្រយោគថ្មីៗបានយ៉ាងងាយស្រួលនិងរហ័ស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fine-tuning</span></td>
+                <td>ជាដំណើរការយកម៉ូដែលបញ្ញាសិប្បនិម្មិតដែលត្រូវបានបង្វឹកជាមុនលើទិន្នន័យទូទៅដ៏ធំ (Pre-trained model) មកបង្វឹកបន្តបន្តិចបន្តួចបន្ថែមទៀតលើទិន្នន័យជាក់លាក់ណាមួយ ដើម្បីឱ្យវាអាចធ្វើការងារនោះបានល្អប្រសើរ។</td>
+                <td>ដូចជាការយកនិស្សិតដែលទើបបញ្ចប់បរិញ្ញាបត្រចំណេះដឹងទូទៅ មកបណ្តុះបណ្តាលជំនាញការងារជាក់លាក់នៅក្នុងក្រុមហ៊ុនមួយបន្ថែមទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Word embedding</span></td>
+                <td>ជាបច្ចេកទេសបំប្លែងពាក្យពេចន៍ពីទម្រង់អក្សរ ទៅជាទម្រង់វ៉ិចទ័រ ឬតួលេខគណិតវិទ្យា ដើម្បីឱ្យកុំព្យូទ័រអាចយល់ពីទំនាក់ទំនង និងអត្ថន័យរវាងពាក្យនីមួយៗបាន។</td>
+                <td>ដូចជាការផ្តល់កូដលេខសម្ងាត់ទៅឱ្យពាក្យនីមួយៗ ដែលកូដលេខក្បែរៗគ្នាមានន័យថាពាក្យទាំងនោះមានអត្ថន័យស្រដៀងគ្នា ឬទាក់ទងគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Masked Language Modeling</span></td>
+                <td>ជាវិធីសាស្ត្របង្វឹកម៉ូដែលភាសា ដោយលាក់ពាក្យមួយចំនួននៅក្នុងប្រយោគ (ឧ. ធ្វើឱ្យទៅជាចន្លោះទទេរ) ហើយតម្រូវឱ្យម៉ូដែលនោះទស្សន៍ទាយរកពាក្យដែលបាត់នោះ ដោយផ្អែកលើបរិបទពាក្យជុំវិញ។</td>
+                <td>ដូចជាលំហាត់បំពេញចន្លោះនៅក្នុងសាលារៀន ដែលសិស្សត្រូវអានប្រយោគទាំងមូលដើម្បីរកនឹកពាក្យមកបំពេញកន្លែងដែលទទេរឱ្យបានត្រឹមត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Top-k accuracy</span></td>
+                <td>ជារង្វាស់សម្រាប់វាយតម្លៃម៉ូដែល ដែលចាត់ទុកថាការទាយរបស់ម៉ូដែលគឺ 'ត្រឹមត្រូវ' ប្រសិនបើចម្លើយពិតប្រាកដស្ថិតនៅក្នុងចំណោមជម្រើសកំពូលទាំង k (ឧ. ជម្រើសកំពូលទាំង ៣ ឬ ៥) ដែលម៉ូដែលបានផ្តល់ឱ្យ។</td>
+                <td>ដូចជាការលេងហ្គេមទាយឈ្មោះសត្វ បើយើងទាយ ៣ ឈ្មោះ ហើយក្នុងចំណោមនោះមានឈ្មោះសត្វនោះមែន នោះចាត់ទុកថាយើងទាយត្រូវហើយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/sentiment-analysis-online-courses-bert-2021.html">
+                    <span class="km">ការវិភាគមនោសញ្ចេតនានៃការវាយតម្លៃរបស់សិស្សលើវគ្គសិក្សាតាមអ៊ីនធឺណិត៖ វិធីសាស្ត្រផ្ទេរការរៀន (Transfer Learning)</span><br>
+                    <span class="en article-original-title">Sentiment Analysis of Students’ Reviews on Online Courses: A Transfer Learning Method</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/sentiment-analysis-machine-learning-review-2024.html">
+                    <span class="km">ការវិភាគមនោសញ្ចេតនាដោយប្រើប្រាស់ការរៀនដោយម៉ាស៊ីន៖ ការត្រួតពិនិត្យយ៉ាងទូលំទូលាយ</span><br>
+                    <span class="en article-original-title">SENTIMENT ANALYSIS USING MACHINE LEARNING: A COMPREHENSIVE REVIEW</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-augmentation-explainable-ai-medical-image-2024.html">
+                    <span class="km">ការវាយតម្លៃលើឥទ្ធិពលនៃការបង្កើនទិន្នន័យទៅលើបញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បានក្នុងការវិភាគរូបភាពវេជ្ជសាស្ត្រ</span><br>
+                    <span class="en article-original-title">Evaluating the Impact of Data Augmentation on Explainable AI in Medical Image Analysis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/evalbert-automated-descriptive-answer-evaluation-2025.html">
+                    <span class="km">EvalBERT៖ ក្របខ័ណ្ឌថ្មីសម្រាប់ការវាយតម្លៃចម្លើយពណ៌នា និងការសរសេរកូដ C ដោយមានជំនួយ</span><br>
+                    <span class="en article-original-title">EvalBERT: a novel framework for assisted descriptive answers and C programming evaluation</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/rgb-vegetation-indices-cnn-jalapeno-virus-2021.html">
+                    <span class="km">ការវិភាគសន្ទស្សន៍រុក្ខជាតិ RGB ថ្មីសម្រាប់ការកំណត់អត្តសញ្ញាណវីរុស PHYVV និង TMV លើស្លឹកម្ទេស (Capsicum annuum) ដោយប្រើប្រាស់ម៉ូដែលផ្អែកលើបណ្ដាញសរសៃប្រសាទកាឡៃ (CNNs)</span><br>
+                    <span class="en article-original-title">Analysis of New RGB Vegetation Indices for PHYVV and TMV Identification in Jalapeño Pepper (Capsicum annuum) Leaves Using CNNs-Based Model</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Text+data+augmentation+techniques+for+imbalanced+multiclass+classification" target="_blank" rel="noopener"><span class="en">Text data augmentation techniques for imbalanced multiclass classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Handling+class+imbalance+in+large+scale+text+classification+using+deep+learning" target="_blank" rel="noopener"><span class="en">Handling class imbalance in large scale text classification using deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=BERT+fine-tuning+strategies+for+domain-specific+multiclass+text+classification" target="_blank" rel="noopener"><span class="en">BERT fine-tuning strategies for domain-specific multiclass text classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Easy+Data+Augmentation+EDA+performance+on+contextualized+transformer+models" target="_blank" rel="noopener"><span class="en">Easy Data Augmentation EDA performance on contextualized transformer models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Multilingual+text+data+augmentation+using+XLM-RoBERTa+for+imbalanced+datasets" target="_blank" rel="noopener"><span class="en">Multilingual text data augmentation using XLM-RoBERTa for imbalanced datasets</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Comparison+of+text+data+augmentation+methods+in+NLP+classification+tasks" target="_blank" rel="noopener"><span class="en">Comparison of text data augmentation methods in NLP classification tasks</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

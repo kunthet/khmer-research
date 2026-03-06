@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ឥទ្ធិពលនៃរង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ (Feature Scaling) លើក្បួនដោះស្រាយ KNN ក្នុងចំណាត់ថ្នាក់រូបភាពកាំរស្មីអ៊ិច - Effect of Distance Metric and Feature Scaling on KNN Algorithm while Classify... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ឥទ្ធិពលនៃរង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការស្វែងរកវិធីសាស្ត្ររង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ (F...">
+    
+    <meta name="keywords" content="k-Nearest Neighbors, Distance Metrics, Feature Scaling, Medical Imaging, Canberra Distance, X-ray Classification, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/effect-distance-metric-feature-scaling-knn-xrays-2021.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/effect-distance-metric-feature-scaling-knn-xrays-2021.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/effect-distance-metric-feature-scaling-knn-xrays-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/effect-distance-metric-feature-scaling-knn-xrays-2021.html">
+    <meta property="og:title" content="ឥទ្ធិពលនៃរង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ (Feature Scaling) លើក្បួនដោះស្រាយ KNN ក្នុងចំណាត់ថ្នាក់រូបភាពកាំរស្មីអ៊ិច | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការស្វែងរកវិធីសាស្ត្ររង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ (Feature Scaling) ដ៏ល្អបំផុតដើម្បីកាត់បន្ថយចំណាយពេលវេលា និងបង្កើនភាពត្រឹមត្រូវរបស់ក្បួនដោះស្រាយ k-Near...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2021 RIF'21: The 10th Seminary of Computer Science Research-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="k-Nearest Neighbors">
+    
+    <meta property="article:tag" content="Distance Metrics">
+    
+    <meta property="article:tag" content="Feature Scaling">
+    
+    <meta property="article:tag" content="Medical Imaging">
+    
+    <meta property="article:tag" content="Canberra Distance">
+    
+    <meta property="article:tag" content="X-ray Classification">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ឥទ្ធិពលនៃរង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ (Feature Scaling) លើក្បួនដោះស្រាយ KNN ក្នុងចំណាត់ថ្នាក់រូបភាពកាំរស្មីអ៊ិច">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការស្វែងរកវិធីសាស្ត្ររង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ (Feature Scaling) ដ៏ល្អបំផុតដើម្បីកាត់បន្ថយចំណាយពេលវេលា និងបង្កើនភាពត្រឹមត្រូវរបស់ក្បួនដោះស្រាយ k-Near...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u1793\u17c3\u179a\u1784\u17d2\u179c\u17b6\u179f\u17cb\u1785\u1798\u17d2\u1784\u17b6\u1799 (Distance Metric) \u1793\u17b7\u1784\u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8 (Feature Scaling) \u179b\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 KNN \u1780\u17d2\u1793\u17bb\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u1780\u17b6\u17c6\u179a\u179f\u17d2\u1798\u17b8\u17a2\u17ca\u17b7\u1785",
+      "name": "Effect of Distance Metric and Feature Scaling on KNN Algorithm while Classifying X-rays",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u179a\u1784\u17d2\u179c\u17b6\u179f\u17cb\u1785\u1798\u17d2\u1784\u17b6\u1799 (Distance Metric) \u1793\u17b7\u1784\u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8 (Feature Scaling) \u178a\u17cf\u179b\u17d2\u17a2\u1794\u17c6\u1795\u17bb\u178f\u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1785\u17c6\u178e\u17b6\u1799\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u1793\u17b7\u1784\u1794\u1784\u17d2\u1780\u17be\u1793\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u179a\u1794\u179f\u17cb\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 k-Nearest Neighbors (k-NN) \u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u1780\u17b6\u17c6\u179a\u179f\u17d2\u1798\u17b8\u17a2\u17ca\u17b7\u1785 (X-ray)\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/effect-distance-metric-feature-scaling-knn-xrays-2021.html",
+      "author": [{"@type": "Person", "name": "Ishan Arora (Gurukul Kangri University)"},{"@type": "Person", "name": "Namit Khanduja (Gurukul Kangri University)"},{"@type": "Person", "name": "Mayank Bansal (Gurukul Kangri University)"}],
+      "datePublished": "2021 RIF\u002721: The 10th Seminary of Computer Science Research",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Effect of Distance Metric and Feature Scaling on KNN Algorithm while Classifying X-rays",
+        "url": "https://ceur-ws.org/Vol-3176/paper5.pdf"
+      },
+      "keywords": ["k-Nearest Neighbors", "Distance Metrics", "Feature Scaling", "Medical Imaging", "Canberra Distance", "X-ray Classification"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u1793\u17c3\u179a\u1784\u17d2\u179c\u17b6\u179f\u17cb\u1785\u1798\u17d2\u1784\u17b6\u1799 (Distance Metric) \u1793\u17b7\u1784\u1780\u17b6\u179a\u1796\u1784\u17d2\u179a\u17b8\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8 (Feature Scaling) \u179b\u17be\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 KNN \u1780\u17d2\u1793\u17bb\u1784\u1785\u17c6\u178e\u17b6\u178f\u17cb\u1790\u17d2\u1793\u17b6\u1780\u17cb\u179a\u17bc\u1794\u1797\u17b6\u1796\u1780\u17b6\u17c6\u179a\u179f\u17d2\u1798\u17b8\u17a2\u17ca\u17b7\u1785",
+          "item": "https://khmerresearch.com/papers/technology/effect-distance-metric-feature-scaling-knn-xrays-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ឥទ្ធិពលនៃរង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Effect of Distance Metric and Feature Scaling on KNN Algorithm while Classifying X-rays<br>
+        
+        <strong>Source:</strong> <a href="https://ceur-ws.org/Vol-3176/paper5.pdf" target="_blank" rel="noopener">ceur-ws.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ឥទ្ធិពលនៃរង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ (Feature Scaling) លើក្បួនដោះស្រាយ KNN ក្នុងចំណាត់ថ្នាក់រូបភាពកាំរស្មីអ៊ិច</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Effect of Distance Metric and Feature Scaling on KNN Algorithm while Classifying X-rays</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ishan Arora (Gurukul Kangri University), Namit Khanduja (Gurukul Kangri University), Mayank Bansal (Gurukul Kangri University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021 RIF'21: The 10th Seminary of Computer Science Research</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការស្វែងរកវិធីសាស្ត្ររង្វាស់ចម្ងាយ (Distance Metric) និងការពង្រីកលក្ខណៈ (Feature Scaling) ដ៏ល្អបំផុតដើម្បីកាត់បន្ថយចំណាយពេលវេលា និងបង្កើនភាពត្រឹមត្រូវរបស់ក្បួនដោះស្រាយ k-Nearest Neighbors (k-NN) ក្នុងការធ្វើចំណាត់ថ្នាក់រូបភាពកាំរស្មីអ៊ិច (X-ray)។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានធ្វើការពិសោធន៍លើសំណុំទិន្នន័យរូបភាពកាំរស្មីអ៊ិចពី Kaggle ចំនួន ៣ ដោយប្រៀបធៀបដំណើរការរបស់ម៉ូដែលតាមរយៈការផ្លាស់ប្តូរតម្លៃ K រង្វាស់ចម្ងាយ និងវិធីសាស្ត្រពង្រីកលក្ខណៈ។
+        
+        <ul>
+            
+            <li>ការធ្វើតេស្តប្រៀបធៀបរង្វាស់ចម្ងាយ (Distance Metrics) ចំនួន ៨ ដូចជា Euclidean, Manhattan, Canberra, Cosine ជាដើម។</li>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្រពង្រីកលក្ខណៈ (Feature Scaling) ចំនួន ៣៖ Min-Max Scaler, Standard Scaler, និង Robust Scaler។</li>
+            
+            <li>ការវាយតម្លៃប្រសិទ្ធភាពម៉ូដែលដោយប្រើប្រាស់រង្វាស់ភាពត្រឹមត្រូវ (Accuracy) និងខ្សែកោង (ROC-AUC Curve)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>រង្វាស់ចម្ងាយ Canberra (Canberra Distance Metric) ផ្តល់លទ្ធផលល្អដាច់គេក្នុងការធ្វើចំណាត់ថ្នាក់ ដោយទទួលបានភាពត្រឹមត្រូវរហូតដល់ ៨៥,៥៦% សម្រាប់សំណុំទិន្នន័យទី១ និង ៨៤,៦១% សម្រាប់សំណុំទិន្នន័យទី៣។</li>
+            
+            <li>ការប្រើប្រាស់វិធីសាស្ត្រ Robust Feature Scaling ទទួលបានប្រសិទ្ធភាពថេរ និងល្អជាងវិធីសាស្ត្រ Min-Max ឬ Standard Scaler នៅលើគ្រប់សំណុំទិន្នន័យ។</li>
+            
+            <li>ម៉ូដែលដែលប្រើប្រាស់រង្វាស់ចម្ងាយ Canberra និង Robust Scaling បង្ហាញពីប្រសិទ្ធភាពខ្ពស់ក្នុងការយកឈ្នះលើរង្វាស់ចម្ងាយ Euclidean ដែលតែងតែត្រូវបានគេប្រើប្រាស់ជាទូទៅ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">k-NN with Canberra Distance + Robust Scaling</span></strong><br>ក្បួនដោះស្រាយ k-NN ប្រើរង្វាស់ចម្ងាយ Canberra និងវិធីពង្រីកលក្ខណៈ Robust</td>
+                <td>មានភាពត្រឹមត្រូវខ្ពស់ជាងគេបំបាត់ក្នុងចំណោមវិធីសាស្ត្រដែលបានធ្វើតេស្ត និងមានភាពធន់នឹងទិន្នន័យខុសប្រក្រតី (Outliers)។</td>
+                <td>ទាមទារការគណនារូបមន្តស្មុគស្មាញជាងរង្វាស់ចម្ងាយធម្មតាបន្តិច ដែលអាចប្រើពេលគណនាយូរបន្តិចលើសំណុំទិន្នន័យធំៗ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវខ្ពស់បំផុត ៨៥,៥៦% សម្រាប់សំណុំទិន្នន័យទី១ និងមានពិន្ទុ AUC រហូតដល់ ០,៩១៧៨។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">k-NN with Euclidean Distance + Standard/Min-Max Scaling</span></strong><br>ក្បួនដោះស្រាយ k-NN ប្រើរង្វាស់ចម្ងាយ Euclidean (វិធីសាស្រ្តទូទៅ)</td>
+                <td>ជារង្វាស់ចម្ងាយដែលគេនិយមប្រើប្រាស់ទូទៅបំផុត ងាយស្រួលយល់ និងមានរូបមន្តគណនាសាមញ្ញ។</td>
+                <td>ផ្តល់លទ្ធផលមិនសូវបានល្អប្រសើរក្នុងការធ្វើចំណាត់ថ្នាក់រូបភាពកាំរស្មីអ៊ិច បើធៀបនឹងរង្វាស់ចម្ងាយផ្សេងទៀត។</td>
+                <td>អត្រាភាពត្រឹមត្រូវទាបជាងការប្រើរង្វាស់ចម្ងាយ Canberra ដាច់ឆ្ងាយ និងមានប្រសិទ្ធភាពប្រហាក់ប្រហែលនឹងរង្វាស់ចម្ងាយ Minkowski។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">k-NN with Bray Curtis Distance</span></strong><br>ក្បួនដោះស្រាយ k-NN ប្រើរង្វាស់ចម្ងាយ Bray Curtis</td>
+                <td>ជាដៃគូប្រកួតប្រជែងដ៏ខ្លាំងមួយដែលផ្តល់លទ្ធផលល្អប្រហាក់ប្រហែលនឹង Canberra Metric សម្រាប់សំណុំទិន្នន័យមួយចំនួន។</td>
+                <td>រូបមន្តមិនអាចកំណត់បាន (Undefined) ប្រសិនបើប្រវែងវ៉ិចទ័រមានតម្លៃស្មើនឹងសូន្យ។</td>
+                <td>ទទួលបានភាពត្រឹមត្រូវ ៨៣,៩៥% សម្រាប់សំណុំទិន្នន័យទី១ ដែលជាលទ្ធផលល្អលំដាប់ទីពីរ បន្ទាប់ពី Canberra។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ក្បួនដោះស្រាយ k-NN មិនទាមទារធនធានកុំព្យូទ័រធំដុំដូចបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត (Deep Learning) នោះទេ ប៉ុន្តែវាត្រូវការកម្លាំងគណនាខ្ពស់នៅពេលទាញយកទិន្នន័យមកប្រៀបធៀប (Time complexity O(n²))។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ភាសាប្រូក្រាម Python និងបណ្ណាល័យជំនួយសរសេរកូដដូចជា scikit-learn សម្រាប់ Machine Learning។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រខ្នាតធម្មតា (Standard CPU) គឺអាចដំណើរការបាន ដោយមិនចាំបាច់តម្រូវឱ្យមានក្រាហ្វិកកាត (GPU) កម្រិតខ្ពស់នោះទេ។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យរូបភាពកាំរស្មីអ៊ិច (X-ray images) ដូចជាទិន្នន័យពាក់ព័ន្ធនឹងជំងឺកូវីដ១៩ ដែលអាចទាញយកបានពី Kaggle។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងមូលដ្ឋានលើ Machine Learning ការប្រើប្រាស់ក្បួន k-NN ការធ្វើ Data Preprocessing និងការវាស់វែងប្រសិទ្ធភាពម៉ូដែលតាមរយៈខ្សែកោង ROC-AUC។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យរូបភាពកាំរស្មីអ៊ិចពី Kaggle ដែលប្រមូលពីប្រភពអន្តរជាតិ (medRxiv, JAMA ល) ដែលអាចមានគុណភាពបង្ហាញ និងកម្រិតស្តង់ដារខុសពីរូបភាពកាំរស្មីអ៊ិចនៅតាមគ្លីនិកជនបទក្នុងប្រទេសកម្ពុជា។ ភាពខុសគ្នានៃការកំណត់ម៉ាស៊ីនថត និងគុណភាពរូបភាពក្នុងស្រុក អាចជះឥទ្ធិពលដល់ភាពត្រឹមត្រូវរបស់ម៉ូដែលនៅពេលយកមកអនុវត្តជាក់ស្តែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសក្តានុពលខ្ពស់ និងស័ក្តិសមក្នុងការអនុវត្តនៅប្រទេសកម្ពុជា ដោយសារវាទាមទារធនធានកុំព្យូទ័រទាប និងផ្តល់លទ្ធផលវិភាគរូបភាពវេជ្ជសាស្ត្របានល្អ។</p>
+        
+        <ul>
+            
+            <li><strong>មន្ទីរពេទ្យបង្អែកខេត្ត និងគ្លីនិកជនបទ (Provincial Hospitals and Rural Clinics):</strong> ម៉ូដែល k-NN នេះអាចប្រើជាជំនួយការរោគវិនិច្ឆ័យជំងឺសួត (ដូចជាកូវីដ១៩ ឬរបេង) តាមរយៈការវិភាគកាំរស្មីអ៊ិច ដោយមិនតម្រូវឱ្យទិញម៉ាស៊ីន Server ឬ GPU ថ្លៃៗឡើយ។</li>
+            
+            <li><strong>វិស័យអប់រំ និងស្ថាប័នស្រាវជ្រាវវេជ្ជសាស្ត្រ (Medical Research & Academic Institutions):</strong> និស្សិតកុំព្យូទ័រ ឬវិទ្យាស្ថានប៉ាស្ទ័រកម្ពុជា អាចប្រើប្រាស់របកគំហើញពីការជ្រើសរើស Canberra Metric នេះដើម្បីអភិវឌ្ឍប្រព័ន្ធ AI ដែលមានស្រាប់ឱ្យកាន់តែមានភាពសុក្រឹតជាងមុន។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់ក្បួន k-NN ជាមួយរង្វាស់ចម្ងាយ Canberra និង Robust scaling គឺជាដំណោះស្រាយ AI ដ៏មានប្រសិទ្ធភាព សន្សំសំចៃ និងងាយស្រួលដាក់ពង្រាយសម្រាប់ប្រព័ន្ធសុខាភិបាលឌីជីថលនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃក្បួនដោះស្រាយ និងរង្វាស់ចម្ងាយ:</strong> ស្វែងយល់ទ្រឹស្តី និងរូបមន្តគណនាចម្ងាយ (Distance Metrics) ដូចជា Canberra ធៀបនឹង Euclidean និងស្វែងយល់ពីរបៀបដំណើរការរបស់ចំណាត់ថ្នាក់ k-NN។</li>
+            
+            <li><strong>ប្រមូល និងរៀបចំទិន្នន័យ (Data Preprocessing):</strong> ទាញយកសំណុំទិន្នន័យកាំរស្មីអ៊ិចពី <span class="en">Kaggle</span> ធ្វើការបំប្លែងរូបភាពទៅជាទម្រង់វ៉ិចទ័រ (Flatten Image) និងប្រើប្រាស់ <span class="en">Robust Scaler</span> ពីបណ្ណាល័យ <span class="en">scikit-learn</span> ដើម្បីកាត់បន្ថយឥទ្ធិពលពី Outliers។</li>
+            
+            <li><strong>សរសេរកូដបង្កើតម៉ូដែល និងធ្វើការពិសោធន៍:</strong> ប្រើប្រាស់ <span class="en">Python</span> ដើម្បីសរសេរកូដម៉ូដែល ដោយកំណត់តម្លៃ K ពី ១ ដល់ ១៥ និងសាកល្បងបញ្ចូលរង្វាស់ចម្ងាយទាំង ៨ មុខ ដើម្បីស្វែងរកការកំណត់ដែលល្អបំផុត។</li>
+            
+            <li><strong>វាយតម្លៃប្រសិទ្ធភាពនៃម៉ូដែល (Evaluation):</strong> ប្រើប្រាស់រង្វាស់ភាពត្រឹមត្រូវ (Accuracy metrics) និងគូរខ្សែកោង <span class="en">ROC-AUC Curve</span> ដើម្បីធ្វើការប្រៀបធៀប និងកំណត់អត្តសញ្ញាណវិធីសាស្ត្រដែលឈ្នះដាច់គេ។</li>
+            
+            <li><strong>ការសាកល្បងក្នុងបរិបទជាក់ស្តែងនៅកម្ពុជា:</strong> ប្រមូលរូបភាពកាំរស្មីអ៊ិចដែលបានថតចេញពីមន្ទីរពេទ្យក្នុងស្រុក (Local Datasets) មកបញ្ចូលក្នុងម៉ូដែល ដើម្បីវាយតម្លៃថាតើម៉ូដែលនៅតែរក្សាបានភាពត្រឹមត្រូវកម្រិតខ្ពស់ឬយ៉ាងណា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">k-Nearest Neighbors (k-NN)</span></td>
+                <td>ក្បួនដោះស្រាយចំណាត់ថ្នាក់នៅក្នុងម៉ាស៊ីនរៀន (Machine Learning) ដែលកំណត់អត្តសញ្ញាណនៃទិន្នន័យថ្មីមួយ ដោយផ្អែកលើចំណុចទិន្នន័យដែលនៅជិតវាបំផុតចំនួន k នៅក្នុងលំហទិន្នន័យ។ វាជាវិធីសាស្ត្រដែលរៀនពីទិន្នន័យដោយផ្ទាល់នៅពេលត្រូវធ្វើការទស្សន៍ទាយ ដោយមិនចាំបាច់ហ្វឹកហាត់ទុកជាមុន។</td>
+                <td>ដូចជាការទាយអត្តចរិតរបស់មនុស្សម្នាក់ ដោយមើលទៅលើអត្តចរិតមិត្តភក្តិជិតស្និទ្ធបំផុតទាំង ៥ នាក់របស់គាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Distance Metric</span></td>
+                <td>រូបមន្តគណិតវិទ្យាដែលប្រើសម្រាប់វាស់ចម្ងាយ ឬកម្រិតភាពខុសគ្នារវាងចំណុចទិន្នន័យពីរនៅក្នុងលំហ។ ការជ្រើសរើសរង្វាស់ចម្ងាយបានត្រឹមត្រូវ (ដូចជាបន្ទាត់ត្រង់ ឬរង្វាស់តាមប្លុក) គឺជាកត្តាសំខាន់ដែលជះឥទ្ធិពលដល់ភាពត្រឹមត្រូវរបស់ម៉ូដែល។</td>
+                <td>ដូចជាការវាស់ចម្ងាយពីផ្ទះមួយទៅផ្ទះមួយទៀត ថាតើគួវាស់កាត់តាមអាកាស (បន្ទាត់ត្រង់) ឬវាស់តាមផ្លូវខ្វែងខ្វាត់ក្នុងទីក្រុង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Canberra Distance</span></td>
+                <td>ប្រភេទនៃរង្វាស់ចម្ងាយមួយដែលគណនាផលធៀបនៃគម្លាតដាច់ខាត (Absolute difference) ធៀបនឹងផលបូកដាច់ខាតនៃតម្លៃទិន្នន័យនីមួយៗ។ រង្វាស់នេះមានប្រសិទ្ធភាពខ្ពស់ក្នុងការកាត់បន្ថយឥទ្ធិពលអវិជ្ជមានពីទិន្នន័យដែលនៅឆ្ងាយៗខុសគេ ហើយវាស័ក្តិសមខ្លាំងសម្រាប់សំណុំទិន្នន័យមានតម្លៃមិនស្មើគ្នា។</td>
+                <td>ដូចជាការគិតភាពខុសគ្នានៃប្រាក់ខែអ្នកពីរនាក់ ដោយយកប្រាក់ខែដែលខុសគ្នាទៅចែកនឹងផលបូកប្រាក់ខែអ្នកទាំងពីរ ដើម្បីទទួលបានភាគរយខុសគ្នាដែលយុត្តិធម៌។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Robust Scaler</span></td>
+                <td>បច្ចេកទេសកែសម្រួលទំហំទិន្នន័យ (Feature Scaling) ឱ្យស្ថិតក្នុងកម្រិតស្តង់ដារ ដោយប្រើប្រាស់មេដ្យាន (Median) និងចន្លោះកាតាល់ (Interquartile Range)។ បច្ចេកទេសនេះមានប្រយោជន៍បំផុតក្នុងការគ្រប់គ្រងទិន្នន័យដែលមានតម្លៃខុសប្រក្រតី (Outliers) ដោយមិនធ្វើឱ្យខូចទម្រង់ដើមនៃទិន្នន័យ។</td>
+                <td>ដូចជាការគិតមធ្យមភាគពិន្ទុសិស្សក្នុងថ្នាក់ ដោយលុបចោលពិន្ទុអ្នកខ្សោយបំផុត និងពូកែបំផុតចេញ ដើម្បីមើលកម្រិតទូទៅពិតប្រាកដរបស់សិស្សភាគច្រើន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">ROC-AUC Curve</span></td>
+                <td>រង្វាស់សម្រាប់វាយតម្លៃប្រសិទ្ធភាពរបស់ម៉ូដែលចំណាត់ថ្នាក់។ ROC គឺជាខ្សែកោងដែលបង្ហាញពីអត្រានៃការទាយត្រូវ និងការទាយខុស ចំណែក AUC គឺជាទំហំផ្ទៃក្រោមកោង ដែលពិន្ទុ AUC កាន់តែខិតជិត ១ មានន័យថាម៉ូដែលកាន់តែមានភាពត្រឹមត្រូវក្នុងការបែងចែកក្រុមទិន្នន័យ។</td>
+                <td>ដូចជាសញ្ញាបត្របញ្ជាក់សមត្ថភាពរបស់គ្រូពេទ្យក្នុងការបែងចែករវាងអ្នកមានជំងឺ និងអ្នកគ្មានជំងឺ ពិន្ទុកាន់តែជិត ១០០% គឺគាត់កាន់តែពូកែ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Non-parametric classification</span></td>
+                <td>វិធីសាស្ត្រចាត់ថ្នាក់ដែលមិនធ្វើការសន្មត់ជាមុនអំពីទម្រង់ ឬរបាយនៃទិន្នន័យ (Data distribution) នោះទេ។ ម៉ូដែលប្រភេទនេះកសាងក្បួននៃការសម្រេចចិត្តដោយពឹងផ្អែកទាំងស្រុងទៅលើទិន្នន័យដែលមានស្រាប់។</td>
+                <td>ដូចជាអ្នកធ្វើម្ហូបដែលមិនប្រើសៀវភៅរូបមន្តគោល តែគាត់ភ្លក់ និងកែច្នៃរសជាតិភ្លាមៗនៅពេលកំពុងចម្អិនជាក់ស្តែង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Feature Scaling</span></td>
+                <td>ដំណើរការបំប្លែងទិន្នន័យដែលមានខ្នាតរង្វាស់ធំតូចខុសៗគ្នា ឱ្យមកនៅក្នុងជួរតម្លៃ (Range) ប្រហាក់ប្រហែលគ្នា (ឧទាហរណ៍ ពី ០ ទៅ ១) ដើម្បីកុំឱ្យលក្ខណៈទិន្នន័យដែលមានតម្លៃធំ មានឥទ្ធិពលគ្របដណ្ដប់លើលក្ខណៈដែលមានតម្លៃតូច កំឡុងពេលម៉ាស៊ីនធ្វើការគណនា។</td>
+                <td>ដូចជាការប្តូររូបិយប័ណ្ណលុយរៀល និងលុយដុល្លារ ឱ្យទៅជាលុយអឺរ៉ូទាំងអស់ ដើម្បីងាយស្រួលប្រៀបធៀបតម្លៃឱ្យស្មើភាពគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Outliers</span></td>
+                <td>ចំណុចទិន្នន័យដែលមានតម្លៃខុសប្លែកដាច់ឆ្ងាយពីទិន្នន័យភាគច្រើន (ធំពេក ឬតូចពេក)។ វត្តមានរបស់ Outliers អាចធ្វើឱ្យម៉ូដែលវិភាគមានភាពលំអៀង ឬទាញលទ្ធផលឱ្យខុសឆ្គងពីការពិត ប្រសិនបើមិនមានប្រើវិធីសាស្ត្រទប់ស្កាត់ត្រឹមត្រូវ។</td>
+                <td>ដូចជាសិស្សម្នាក់ដែលប្រលងបានពិន្ទុ ១០០ ពេញ ខណៈដែលសិស្ស ៩៩ នាក់ទៀតទទួលបានពិន្ទុត្រឹមតែ ៤០ ទៅ ៥០ ធ្វើឱ្យមធ្យមភាគពិន្ទុក្នុងថ្នាក់កើនឡើងខ្ពស់ខុសពីការពិត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/performance-analysis-ml-missing-value-imputation-2018.html">
+                    <span class="km">ការវិភាគលើសមត្ថភាពនៃក្បួនដោះស្រាយការរៀនរបស់ម៉ាស៊ីនសម្រាប់ការបំពេញតម្លៃដែលបាត់បង់</span><br>
+                    <span class="en article-original-title">Performance Analysis of Machine Learning Algorithms for Missing Value Imputation</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/environment/national-forest-inventory-finland-1999.html">
+                    <span class="km">សារពើភណ្ឌព្រៃឈើជាតិប្រទេសហ្វាំងឡង់ — អតីតកាល បច្ចុប្បន្ន និងអនាគត</span><br>
+                    <span class="en article-original-title">National Forest Inventory of Finland — Past, Present and Future</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/role-of-xai-medical-imaging-2025.html">
+                    <span class="km">តួនាទីរបស់បញ្ញាសិប្បនិម្មិតដែលអាចពន្យល់បាន (XAI) ក្នុងការថតរូបភាពវេជ្ជសាស្ត្រ៖ ការកសាងទំនុកចិត្ត និងតម្លាភាព</span><br>
+                    <span class="en article-original-title">The Role of Explainable AI (XAI) in Medical Imaging: Building Trust and Transparency</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/classification-keratitis-deep-learning-2024.html">
+                    <span class="km">ការចាត់ថ្នាក់ជំងឺរលាកកញ្ចក់ភ្នែកពីរូបថតកញ្ចក់ភ្នែកដោយប្រើការរៀនស៊ីជម្រៅ៖ ការសិក្សាប្រៀបធៀបលើអាមីប បាក់តេរី និងផ្សិត</span><br>
+                    <span class="en article-original-title">Classification of Keratitis from Eye Corneal Photographs using Deep Learning: A Comparative Study on Amoeba, Bacteria, and Fungi</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/advanced-feature-selection-medical-imaging-2025.html">
+                    <span class="km">បច្ចេកទេសជ្រើសរើសលក្ខណៈពិសេសកម្រិតខ្ពស់នៅក្នុងរូបភាពវេជ្ជសាស្ត្រ—ការពិនិត្យឡើងវិញនូវអក្សរសិល្ប៍ជាប្រព័ន្ធ</span><br>
+                    <span class="en article-original-title">Advanced Feature Selection Techniques in Medical Imaging—A Systematic Literature Review</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=impact+of+distance+metrics+on+k-nearest+neighbors+classification+accuracy" target="_blank" rel="noopener"><span class="en">impact of distance metrics on k-nearest neighbors classification accuracy</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=machine+learning+approaches+for+covid-19+x-ray+image+classification" target="_blank" rel="noopener"><span class="en">machine learning approaches for covid-19 x-ray image classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=comparison+of+feature+scaling+techniques+robust+standard+min-max" target="_blank" rel="noopener"><span class="en">comparison of feature scaling techniques robust standard min-max</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=canberra+distance+metric+applications+in+medical+image+processing" target="_blank" rel="noopener"><span class="en">canberra distance metric applications in medical image processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=optimizing+k-NN+algorithm+performance+on+large+high-dimensional+datasets" target="_blank" rel="noopener"><span class="en">optimizing k-NN algorithm performance on large high-dimensional datasets</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ស្ថាបត្យកម្មផ្ទុកទិន្នន័យស្របគ្នា និងអាចទុកចិត្តបាន៖ RAID និងលើសពីនេះ - Reliable, Parallel Storage Architecture: RAID & Beyond | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ស្ថាបត្យកម្មផ្ទុកទិន្នន័យស្របគ្នា និងអាចទុកចិត្តបាន៖ RAID និ។ ឯកសារនេះដោះស្រាយពីបញ្ហាប្រឈមក្នុងដំណើរការនៃប្រព័ន្ធផ្ទុកទិន្នន័យ RAID ជាពិសេសការធ្លាក់ចុះល្បឿនពេល...">
+    
+    <meta name="keywords" content="RAID, Data Striping, Parity Logging, Disk Array, Storage Architecture, Fault Tolerance, Small-Write Problem, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/reliable-parallel-storage-architecture-raid-beyond-1995.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/reliable-parallel-storage-architecture-raid-beyond-1995.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/reliable-parallel-storage-architecture-raid-beyond-1995.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/reliable-parallel-storage-architecture-raid-beyond-1995.html">
+    <meta property="og:title" content="ស្ថាបត្យកម្មផ្ទុកទិន្នន័យស្របគ្នា និងអាចទុកចិត្តបាន៖ RAID និងលើសពីនេះ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយពីបញ្ហាប្រឈមក្នុងដំណើរការនៃប្រព័ន្ធផ្ទុកទិន្នន័យ RAID ជាពិសេសការធ្លាក់ចុះល្បឿនពេលសរសេរទិន្នន័យតូចៗ (Small-write penalty) ក្នុង RAID 5 និងការថយចុះដំណើរការយ៉ាងខ្លាំងនៅពេលមានថាសរឹងខូច។...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="1995 ISCA Reliable, Parallel Storage Tutorial-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="RAID">
+    
+    <meta property="article:tag" content="Data Striping">
+    
+    <meta property="article:tag" content="Parity Logging">
+    
+    <meta property="article:tag" content="Disk Array">
+    
+    <meta property="article:tag" content="Storage Architecture">
+    
+    <meta property="article:tag" content="Fault Tolerance">
+    
+    <meta property="article:tag" content="Small-Write Problem">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ស្ថាបត្យកម្មផ្ទុកទិន្នន័យស្របគ្នា និងអាចទុកចិត្តបាន៖ RAID និងលើសពីនេះ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយពីបញ្ហាប្រឈមក្នុងដំណើរការនៃប្រព័ន្ធផ្ទុកទិន្នន័យ RAID ជាពិសេសការធ្លាក់ចុះល្បឿនពេលសរសេរទិន្នន័យតូចៗ (Small-write penalty) ក្នុង RAID 5 និងការថយចុះដំណើរការយ៉ាងខ្លាំងនៅពេលមានថាសរឹងខូច។...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: Book Chapter (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Chapter",
+      "headline": "\u179f\u17d2\u1790\u17b6\u1794\u178f\u17d2\u1799\u1780\u1798\u17d2\u1798\u1795\u17d2\u1791\u17bb\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17d2\u179a\u1794\u1782\u17d2\u1793\u17b6 \u1793\u17b7\u1784\u17a2\u17b6\u1785\u1791\u17bb\u1780\u1785\u17b7\u178f\u17d2\u178f\u1794\u17b6\u1793\u17d6 RAID \u1793\u17b7\u1784\u179b\u17be\u179f\u1796\u17b8\u1793\u17c1\u17c7",
+      "name": "Reliable, Parallel Storage Architecture: RAID \u0026 Beyond",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1796\u17b8\u1794\u1789\u17d2\u17a0\u17b6\u1794\u17d2\u179a\u1788\u1798\u1780\u17d2\u1793\u17bb\u1784\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1793\u17c3\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1795\u17d2\u1791\u17bb\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799 RAID \u1787\u17b6\u1796\u17b7\u179f\u17c1\u179f\u1780\u17b6\u179a\u1792\u17d2\u179b\u17b6\u1780\u17cb\u1785\u17bb\u17c7\u179b\u17d2\u1794\u17bf\u1793\u1796\u17c1\u179b\u179f\u179a\u179f\u17c1\u179a\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178f\u17bc\u1785\u17d7 (Small-write penalty) \u1780\u17d2\u1793\u17bb\u1784 RAID 5 \u1793\u17b7\u1784\u1780\u17b6\u179a\u1790\u1799\u1785\u17bb\u17c7\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a\u1799\u17c9\u17b6\u1784\u1781\u17d2\u179b\u17b6\u17c6\u1784\u1793\u17c5\u1796\u17c1\u179b\u1798\u17b6\u1793\u1790\u17b6\u179f\u179a\u17b9\u1784\u1781\u17bc\u1785\u17d4 \u179c\u17b6\u1780\u17cf\u1786\u17d2\u179b\u17be\u1799\u178f\u1794\u1791\u17c5\u1793\u17b9\u1784\u1782\u1798\u17d2\u179b\u17b6\u178f\u178a\u17c2\u179b\u1785\u17c1\u17c7\u178f\u17c2\u1780\u17be\u1793\u17a1\u17be\u1784\u179a\u179c\u17b6\u1784\u1791\u17c6\u17a0\u17c6\u1795\u17d2\u1791\u17bb\u1780 \u1793\u17b7\u1784\u179b\u17d2\u1794\u17bf\u1793\u1793\u17c3\u1780\u17b6\u179a\u1785\u17bc\u179b\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1793\u17c3\u1790\u17b6\u179f\u179a\u17b9\u1784\u1795\u1784\u178a\u17c2\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/reliable-parallel-storage-architecture-raid-beyond-1995.html",
+      "author": [{"@type": "Person", "name": "Garth Gibson (Carnegie Mellon University)"}],
+      "datePublished": "1995 ISCA Reliable, Parallel Storage Tutorial",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "Book",
+        "name": "Reliable, Parallel Storage Architecture: RAID \u0026 Beyond",
+        "url": "http://www.cs.cmu.edu/Web/Groups/PDL/"
+      },
+      "keywords": ["RAID", "Data Striping", "Parity Logging", "Disk Array", "Storage Architecture", "Fault Tolerance", "Small-Write Problem"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179f\u17d2\u1790\u17b6\u1794\u178f\u17d2\u1799\u1780\u1798\u17d2\u1798\u1795\u17d2\u1791\u17bb\u1780\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17d2\u179a\u1794\u1782\u17d2\u1793\u17b6 \u1793\u17b7\u1784\u17a2\u17b6\u1785\u1791\u17bb\u1780\u1785\u17b7\u178f\u17d2\u178f\u1794\u17b6\u1793\u17d6 RAID \u1793\u17b7\u1784\u179b\u17be\u179f\u1796\u17b8\u1793\u17c1\u17c7",
+          "item": "https://khmerresearch.com/papers/technology/reliable-parallel-storage-architecture-raid-beyond-1995.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ស្ថាបត្យកម្មផ្ទុកទិន្នន័យស្របគ្នា និងអាចទុកចិត្តបាន៖ RAID...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Reliable, Parallel Storage Architecture: RAID & Beyond<br>
+        
+        <strong>Source:</strong> <a href="http://www.cs.cmu.edu/Web/Groups/PDL/" target="_blank" rel="noopener">www.cs.cmu.edu</a><br>
+        
+        <strong>Document Type:</strong> Textbook / Educational Material<br>
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original material for complete content.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ស្ថាបត្យកម្មផ្ទុកទិន្នន័យស្របគ្នា និងអាចទុកចិត្តបាន៖ RAID និងលើសពីនេះ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Reliable, Parallel Storage Architecture: RAID & Beyond</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Garth Gibson (Carnegie Mellon University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 1995 ISCA Reliable, Parallel Storage Tutorial</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេប (Overview)</h2>
+
+    <div class="executive-summary">
+        <p><strong>ប្រធានបទ (Topic)៖</strong> ឯកសារនេះដោះស្រាយពីបញ្ហាប្រឈមក្នុងដំណើរការនៃប្រព័ន្ធផ្ទុកទិន្នន័យ RAID ជាពិសេសការធ្លាក់ចុះល្បឿនពេលសរសេរទិន្នន័យតូចៗ (Small-write penalty) ក្នុង RAID 5 និងការថយចុះដំណើរការយ៉ាងខ្លាំងនៅពេលមានថាសរឹងខូច។ វាក៏ឆ្លើយតបទៅនឹងគម្លាតដែលចេះតែកើនឡើងរវាងទំហំផ្ទុក និងល្បឿននៃការចូលប្រើប្រាស់ទិន្នន័យនៃថាសរឹងផងដែរ។</p>
+
+        <p><strong>រចនាសម្ព័ន្ធ (Structure)៖</strong> បទបង្ហាញនេះធ្វើការវាយតម្លៃលើបច្ចេកវិទ្យាថាសរឹង កម្រិត RAID ផ្សេងៗ និងស្នើឡើងនូវស្ថាបត្យកម្មថ្មីៗដើម្បីបង្កើនប្រសិទ្ធភាពនៃប្រព័ន្ធផ្ទុកទិន្នន័យ។
+        
+        <ul>
+            
+            <li>ការវាយតម្លៃលើបច្ចេកទេសបំបែកទិន្នន័យ និងកម្រិត RAID (Data Striping and RAID Levels)</li>
+            
+            <li>ការដោះស្រាយបញ្ហាសរសេរទិន្នន័យតូចៗដោយប្រើ Caching និងការកត់ត្រា Parity (Parity Logging)</li>
+            
+            <li>ការប្រើប្រាស់ការបំបែក Parity (Parity Declustering) ដើម្បីកាត់បន្ថយបន្ទុកនៅពេលប្រព័ន្ធមានបញ្ហា (Degraded Mode)</li>
+            
+            <li>ការទាញយកទិន្នន័យទុកជាមុន (Informed Prefetching) ដើម្បីកាត់បន្ថយពេលវេលារង់ចាំ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>ចំណុចសំខាន់ៗ (Key Takeaways)៖</strong></p>
+        <ul>
+            
+            <li>ដង់ស៊ីតេនៃថាសរឹងមានការកើនឡើង ៦០% ក្នុងមួយឆ្នាំ ប៉ុន្តែល្បឿននៃការចូលប្រើមិនអាចតាមទាន់ ដែលទាមទារឱ្យមានការគ្រប់គ្រងប្រព័ន្ធផ្ទុកទិន្នន័យប្រកបដោយភាពឆ្លាតវៃ។</li>
+            
+            <li>បច្ចេកទេស Parity Logging អាចជួយបង្កើនប្រសិទ្ធភាពសរសេរទិន្នន័យតូចៗបានលឿនជាងមុនលើសពី ៨ដង បើធៀបនឹងការប្រើប្រាស់ Disk Access ចំនួន ៤ដងរបស់ដើមរបស់ RAID 5។</li>
+            
+            <li>ការបំបែក Parity (Parity Declustering) ផ្តល់លទ្ធភាពឱ្យប្រព័ន្ធទប់ទល់នឹងបញ្ហាបានកាន់តែល្អ ហើយការប្រើប្រាស់បណ្តាញ RAID (Network RAID) ជួយពន្លឿនការប្រើប្រាស់ទិន្នន័យរួមគ្នាក្នុងកម្រិតខ្ពស់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Chapter Overview & Learning Objectives -->
+    <h2>២. គោលបំណងសិក្សា (Learning Objectives)</h2>
+
+    
+    <div class="roadmap">
+        <p>បន្ទាប់ពីអានឯកសារនេះ អ្នកគួរអាច៖</p>
+        <ol>
+            
+            <li>ស្វែងយល់ពីមូលដ្ឋានគ្រឹះនៃបច្ចេកវិទ្យា RAID និងកម្រិតផ្សេងៗរបស់វា (RAID Levels 1, 3, 5) ព្រមទាំងអត្ថប្រយោជន៍ និងចំណុចខ្សោយរបស់កម្រិតនីមួយៗ។</li>
+            
+            <li>វិភាគពីនិន្នាការនៃបច្ចេកវិទ្យាថាសរឹង (Magnetic disk trends) និងគម្លាតរវាងទំហំផ្ទុក និងល្បឿនដំណើរការក្នុងការបញ្ជូនទិន្នន័យ។</li>
+            
+            <li>សិក្សាពីដំណោះស្រាយចំពោះបញ្ហានៃការសរសេរទិន្នន័យតូចៗ (Small-write problem) តាមរយៈការប្រើប្រាស់បច្ចេកទេសដូចជា Parity Logging និង Writeback Caching។</li>
+            
+            <li>វាយតម្លៃពីប្រព័ន្ធការពារភាពរអាក់រអួល និងការសង្គ្រោះទិន្នន័យនៅពេលមានបញ្ហា (Fault tolerance and online recovery) នៅក្នុងបណ្ដាញថាសរឹង (Disk arrays)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <p>ឯកសារនេះបង្ហាញពីការវិវឌ្ឍនៃស្ថាបត្យកម្មប្រព័ន្ធផ្ទុកទិន្នន័យ ជាពិសេសផ្តោតលើបច្ចេកវិទ្យា RAID (Redundant Array of Independent Disks) និងដំណោះស្រាយចំពោះបញ្ហាគម្លាតនៃការអនុវត្តរវាងស៊ីភីយូ (CPU) និងថាសរឹង។ វាគ្របដណ្តប់លើមូលដ្ឋានគ្រឹះនៃ RAID ការវាយតម្លៃលើភាពគួរឱ្យទុកចិត្ត (Reliability) និងយុទ្ធសាស្រ្តក្នុងការដោះស្រាយបញ្ហាយឺតយ៉ាវពេលសរសេរទិន្នន័យតូចៗ ដើម្បីធានាបាននូវការផ្ទុកទិន្នន័យប្រកបដោយសុវត្ថិភាពនិងល្បឿនលឿន។</p>
+    
+    
+
+    
+    <!-- 5. Key Concepts -->
+    <h2>៣. គោលគំនិតសំខាន់ៗ (Key Concepts)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>គោលគំនិត (Concept)</th>
+                <th>ការពន្យល់ (Explanation)</th>
+                <th>ឧទាហរណ៍ (Example)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Data Striping</span></strong><br>ការបំបែកទិន្នន័យ (Data Striping)</td>
+                <td>ជាបច្ចេកទេសបែងចែកទិន្នន័យជាចំណែកតូចៗ ហើយរក្សាទុកវានៅលើថាសរឹង (Disks) ជាច្រើនក្នុងពេលតែមួយ ដើម្បីបង្កើនល្បឿនក្នុងការអាននិងសរសេរ ព្រមទាំងជួយសម្រួលបន្ទុកការងារឱ្យមានតុល្យភាព។ ប្រតិបត្តិការអានឬសរសេរឯកសារតែមួយ អាចប្រព្រឹត្តទៅស្របគ្នានៅលើថាសរឹងច្រើនក្នុងពេលតែមួយ។</td>
+                <td>ការផ្ទុកឯកសារវីដេអូធំមួយ ដោយបំបែកវាទៅដាក់លើថាសរឹងចំនួន៤ផ្សេងគ្នា ធ្វើឱ្យការទាញយកវីដេអូនោះមកបង្ហាញវិញមានល្បឿនលឿនជាងមុន៤ដង ដោយសារថាសរឹងទាំង៤ធ្វើការអានទិន្នន័យព្រមៗគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Parity and RAID 5</span></strong><br>បច្ចេកទេស Parity ក្នុង RAID 5</td>
+                <td>Parity គឺជាកូដបន្ថែមដែលគណនាចេញពីទិន្នន័យដើម ដែលជួយការពារការបាត់បង់ទិន្នន័យនៅពេលមានថាសរឹងណាមួយខូច។ ក្នុង RAID 5, ទិន្នន័យ Parity ត្រូវបានចែកចាយពាសពេញគ្រប់ថាសរឹងទាំងអស់ ដែលជួយសន្សំសំចៃទំហំផ្ទុកជាងការចម្លងទុកទាំងស្រុង (Mirroring ឬ RAID 1) តែនៅតែផ្តល់នូវសុវត្ថិភាពទិន្នន័យ។</td>
+                <td>ប្រសិនបើថាសរឹងទី១ខូច ប្រព័ន្ធអាចប្រើប្រាស់ទិន្នន័យដែលនៅសល់លើថាសរឹងផ្សេងទៀត និងទិន្នន័យ Parity (គណនាតាមរយៈប្រតិបត្តិការកុំព្យូទ័រ XOR) ដើម្បីទាញយកទិន្នន័យដែលបាត់បង់មកវិញបានដោយស្វ័យប្រវត្តិ ដោយមិនធ្វើឱ្យបាត់បង់ឯកសារឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">The Small-Write Problem</span></strong><br>បញ្ហានៃការសរសេរទិន្នន័យតូចៗ (Small-Write Problem)</td>
+                <td>នៅក្នុងប្រព័ន្ធ RAID 5 ការសរសេរទិន្នន័យតូចៗថ្មីមួយចូលទៅក្នុងប្រព័ន្ធ ទាមទារឱ្យមានដំណើរការច្រើនដំណាក់កាល គឺត្រូវអានទិន្នន័យចាស់ អាន Parity ចាស់ សរសេរទិន្នន័យថ្មី និងសរសេរ Parity ថ្មី ដែលការងារទាំងអស់នេះប្រើប្រាស់ Disk Access ដល់ទៅ៤ដង ធ្វើឱ្យប្រព័ន្ធដើរយឺតយ៉ាងខ្លាំង។</td>
+                <td>នៅក្នុងប្រព័ន្ធគ្រប់គ្រងទិន្នន័យ (Database) របស់ធនាគារ រាល់ការកត់ត្រាប្រតិបត្តិការផ្ទេរប្រាក់តូចៗតែមួយដង ធ្វើឱ្យប្រព័ន្ធ RAID 5 ត្រូវធ្វើការអាននិងសរសេរកែប្រែ Parity ជាន់គ្នាច្រើនដង នាំឱ្យមានភាពយឺតយ៉ាវ (Bottleneck)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Parity Logging</span></strong><br>ការកត់ត្រា Parity (Parity Logging)</td>
+                <td>ជាបច្ចេកទេសមួយដើម្បីដោះស្រាយបញ្ហា Small-Write ខាងលើ ដោយវាធ្វើការប្រមូលផ្តុំរាល់បម្រែបម្រួលនៃ Parity ទុកសិន មុននឹងធ្វើការកត់ត្រាបញ្ចូលគ្នា (Reintegration) ទៅក្នុងទម្រង់ Parity ពេញលេញម្តងតែម្ដង ដើម្បីកាត់បន្ថយការអាននិងសរសេរឡើងវិញជាន់គ្នាច្រើនដងលើថាសរឹង។</td>
+                <td>ជំនួសឱ្យការកែប្រែ Parity រាល់ពេលមានការផ្លាស់ប្តូរទិន្នន័យបន្តិចបន្តួចប្រព័ន្ធរង់ចាំរហូតដល់មានប្រតិបត្តិការផ្លាស់ប្តូរច្រើន ទើបបញ្ជូនទិន្នន័យដែលបានផ្លាស់ប្តូរទាំងនោះចូលទៅកែប្រែក្នុងថាសរឹងក្នុងពេលតែមួយ ដែលជួយឱ្យល្បឿនកើនឡើងជាង ៨ដង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Writeback Caching</span></strong><br>ការចងចាំបណ្តោះអាសន្នពេលសរសេរ (Writeback Caching)</td>
+                <td>ការប្រើប្រាស់បច្ចេកទេសនេះ គឺប្រព័ន្ធរក្សាទុកទិន្នន័យបណ្តោះអាសន្ននៅក្នុងអង្គចងចាំដែលមានល្បឿនលឿន (NVRAM) ជាមុនសិន រួចឆ្លើយតបទៅកម្មវិធីភ្លាមៗថាការសរសេរបានជោគជ័យ (Zero Latency Writes) មុននឹងប្រព័ន្ធចាត់ចែងបញ្ជូនទិន្នន័យនោះទៅរក្សាទុកក្នុងថាសរឹងជាក់ស្តែងនៅពេលវាទំនេរ។</td>
+                <td>ពេលអ្នកប្រើប្រាស់ចុច Save ឯកសារទៅក្នុងប្រព័ន្ធផ្ទុកទិន្នន័យ ប្រព័ន្ធនឹងប្រាប់ថា Save រួចរាល់ភ្លាមៗក្នុងរយៈពេលប៉ុន្មានមិល្លីវិនាទី ទោះបីជាទិន្នន័យពិតប្រាកដមិនទាន់ត្រូវបានសរសេរចូលទៅក្នុងថាសរឹងពេញលេញក៏ដោយ ធ្វើឱ្យអ្នកប្រើប្រាស់មានអារម្មណ៍ថាប្រព័ន្ធដើរលឿនបំផុត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 6. Cambodia Relevance -->
+    <h2>៤. ភាពពាក់ព័ន្ធសម្រាប់កម្ពុជា (Cambodia Relevance)</h2>
+
+    <div class="critical-review">
+        
+        <p>ការយល់ដឹងពីស្ថាបត្យកម្មនៃការផ្ទុកទិន្នន័យកម្រិតខ្ពស់ (RAID Storage Architecture) មានសារៈសំខាន់ណាស់សម្រាប់ប្រទេសកម្ពុជា ស្របពេលដែលស្ថាប័នរដ្ឋនិងឯកជនកំពុងផ្លាស់ប្តូរយ៉ាងលឿនទៅកាន់ប្រព័ន្ធឌីជីថល (Digitalization) ដែលទាមទារការរក្សាទុកទិន្នន័យធំៗប្រកបដោយល្បឿន និងសុវត្ថិភាពខ្ពស់។</p>
+        
+
+        
+        <h3>ការអនុវត្ត (Applications)៖</h3>
+        <ul>
+            
+            <li><strong>វិស័យធនាគារ និងហិរញ្ញវត្ថុ (Banking and Financial Sector):</strong> ធនាគារនៅកម្ពុជាអាចប្រើប្រាស់បច្ចេកវិទ្យា RAID សម្រាប់ការគ្រប់គ្រងទិន្នន័យប្រតិបត្តិការអតិថិជន (Core Banking Systems) ដើម្បីធានាថាមិនមានការបាត់បង់ប្រាក់កាស ឬទិន្នន័យឡើយ សូម្បីតែក្នុងករណីដែលមានបញ្ហាខូចថាសរឹងម៉ាស៊ីនមេ (Hardware Failure) ក៏ដោយ ដោយហេតុថាប្រព័ន្ធអាចដំណើរការបន្តតាមរយៈមុខងារ Redundancy នៃ RAID។</li>
+            
+            <li><strong>រដ្ឋាភិបាលឌីជីថល (Digital Government & National Data Centers):</strong> មជ្ឈមណ្ឌលផ្ទុកទិន្នន័យជាតិ អាចអនុវត្តស្ថាបត្យកម្មប្រព័ន្ធផ្ទុកទិន្នន័យស្របគ្នា (Parallel Storage) ដូចជា RAID 5 ឬ RAID 6 ដើម្បីធានាបាននូវការអាននិងទាញយកឯកសារផ្លូវការ អត្តសញ្ញាណបណ្ណ ឬឯកសារពន្ធដារ បានលឿននិងមានស្ថិរភាព នៅពេលដែលមានប្រជាពលរដ្ឋចូលប្រើប្រាស់រាប់ម៉ឺននាក់ក្នុងពេលតែមួយ។</li>
+            
+            <li><strong>ក្រុមហ៊ុនទូរគមនាគមន៍ (Telecommunication Companies):</strong> ក្រុមហ៊ុនបណ្តាញទូរស័ព្ទក្នុងស្រុក អាចប្រើប្រាស់បច្ចេកទេស Writeback Caching និង Parity Logging ដែលរៀបរាប់ក្នុងឯកសារនេះ ក្នុងការកត់ត្រាទិន្នន័យនៃការហៅទូរស័ព្ទ (Call Logs) និងទិន្នន័យអ៊ីនធឺណិតរាប់លានប្រតិបត្តិការក្នុងមួយវិនាទីតូចៗដោយមិនធ្វើឱ្យប្រព័ន្ធគាំង ឬមានបញ្ហា Bottleneck ឡើយ។</li>
+            
+        </ul>
+        
+
+        
+        <p>ចំណេះដឹងពីស្ថាបត្យកម្ម RAID ផ្ដល់ជាមូលដ្ឋានគ្រឹះដ៏រឹងមាំសម្រាប់និស្សិតកម្ពុជាជំនាញព័ត៌មានវិទ្យា ក្នុងការក្លាយខ្លួនជាអ្នកគ្រប់គ្រងប្រព័ន្ធ (System Administrators) និងវិស្វករទិន្នន័យមជ្ឈមណ្ឌល (Data Center Engineers) ដែលមានសមត្ថភាពអាចរៀបចំប្រព័ន្ធម៉ាស៊ីនមេកម្រិតស្តង់ដារអន្តរជាតិបាន។</p>
+        
+    </div>
+    
+
+    
+    <!-- 7. Study Guide -->
+    <h2>៥. មគ្គុទ្ទេសក៍សិក្សា (Study Guide)</h2>
+    <div class="roadmap">
+        <p>លំហាត់ និងសកម្មភាពសិក្សាដើម្បីពង្រឹងការយល់ដឹង៖</p>
+        <ol>
+            
+            <li><strong>ការក្លែងធ្វើប្រព័ន្ធ RAID (RAID Array Simulation in Linux):</strong> និស្សិតត្រូវប្រើប្រាស់កម្មវិធីសាកល្បងដូចជាបញ្ជា 'mdadm' លើប្រព័ន្ធប្រតិបត្តិការ Linux ដើម្បីបង្កើត Virtual RAID 0, RAID 1, និង RAID 5 ដោយប្រើប្រាស់ USB Drives ធាតុតូចៗ។ បន្ទាប់មកសាកល្បងដក Virtual Disk ណាមួយចេញ ដើម្បីសង្កេតមើលដំណើរការនៃការសង្គ្រោះទិន្នន័យ (Data Recovery Process) ថាតើប្រព័ន្ធនៅអាចដំណើរការបានឬអត់។</li>
+            
+            <li><strong>ការគណនាការបែងចែក Parity (Parity Logic Calculation Exercise):</strong> ផ្តល់លំហាត់ដែលមានទិន្នន័យជាប្រព័ន្ធគោលពីរ (Binary Data) ដល់និស្សិត រួចឱ្យពួកគេគណនារកកូដ Parity ដោយធ្វើដោយដៃ (ប្រើប្រាស់ប្រតិបត្តិការ Logic XOR)។ សកម្មភាពនេះជួយឱ្យនិស្សិតយល់ច្បាស់ពីយន្តការគណិតវិទ្យាដែល RAID 5 និង RAID 6 ប្រើប្រាស់ដើម្បីការពារទិន្នន័យនៅពេលមានថាសរឹងណាមួយបរាជ័យ។</li>
+            
+            <li><strong>ការវិភាគលើការអនុវត្តរបស់ថាសរឹង (Disk Performance Benchmarking):</strong> ប្រើប្រាស់កម្មវិធីវាស់ស្ទង់ល្បឿន (Benchmarking tools) ដូចជា 'fio' លើ Linux ឬ 'CrystalDiskMark' លើ Windows ដើម្បីវាស់ស្ទង់ និងប្រៀបធៀបល្បឿននៃការសរសេរទិន្នន័យតូចៗ (Random Small-Writes) រវាងការកត់ត្រាផ្ទាល់ទៅកាន់ថាសរឹងធម្មតា ធៀបនឹងប្រព័ន្ធដែលប្រើប្រាស់បច្ចេកវិទ្យា Caching ដើម្បីបង្ហាញពីទ្រឹស្តី Small-Write Problem។</li>
+            
+            <li><strong>ទស្សនកិច្ចសិក្សានៅមជ្ឈមណ្ឌលផ្ទុកទិន្នន័យ (Data Center Field Trip):</strong> សាកលវិទ្យាល័យគួររៀបចំដំណើរទស្សនកិច្ចទៅកាន់ Data Center របស់ក្រុមហ៊ុនផ្តល់សេវាអ៊ីនធឺណិត (ISP) ឬក្រុមហ៊ុនទូរគមនាគមន៍ ដើម្បីឱ្យនិស្សិតពិនិត្យមើលផ្ទាល់នូវការរៀបចំប្រព័ន្ធម៉ាស៊ីនមេ ការប្រើប្រាស់ Hardware RAID Controllers ប្រព័ន្ធខ្សែ Fiber និងស្ថាបត្យកម្ម Storage Area Network (SAN) នៅក្នុងពិភពការងារជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 8. Technical Glossary -->
+    <h2>៦. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស (English)</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Data Striping</span></td>
+                <td>ជាបច្ចេកទេសក្នុងការបែងចែកទិន្នន័យជាចំណែកតូចៗ (Stripe Units) ហើយរក្សាទុកវានៅលើថាសរឹង (Disks) ជាច្រើនក្នុងពេលតែមួយ ដើម្បីអនុញ្ញាតឱ្យមានការអាននិងសរសេរទិន្នន័យព្រមៗគ្នា ដែលជួយបង្កើនល្បឿនរួមរបស់ប្រព័ន្ធផ្ទុកទិន្នន័យ។</td>
+                <td>ដូចជាការបែងចែកកិច្ចការផ្ទះដែលមានច្រើនទំព័រឱ្យមិត្តភក្តិ៣នាក់ជួយសរសេរក្នុងពេលតែមួយ ដើម្បីឱ្យការងារនោះឆាប់រួចរាល់ជាជាងការសរសេរតែម្នាក់ឯង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Parity</span></td>
+                <td>គឺជាកូដបន្ថែមដែលបង្កើតឡើងតាមរយៈប្រតិបត្តិការគណិតវិទ្យា Logic XOR លើទិន្នន័យដើម។ វាត្រូវបានប្រើប្រាស់នៅក្នុងប្រព័ន្ធ RAID (ដូចជា RAID 5 និង RAID 6) សម្រាប់សង្គ្រោះទិន្នន័យដែលបាត់បង់មកវិញដោយស្វ័យប្រវត្តិ នៅពេលដែលមានថាសរឹងណាមួយរងការខូចខាត។</td>
+                <td>ដូចជាការរក្សាទុកសមីការ A + B = C ប្រសិនបើអ្នកបាត់ឯកសារ A អ្នកនៅតែអាចរកវាឃើញវិញដោយយក C ដក B។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mirroring (RAID 1)</span></td>
+                <td>ជាយន្តការថតចម្លងទិន្នន័យដូចគ្នាបេះបិទទៅកាន់ថាសរឹងមួយផ្សេងទៀតក្នុងពេលដំណាលគ្នា។ វាផ្តល់នូវសុវត្ថិភាពទិន្នន័យខ្ពស់បំផុត ប៉ុន្តែវាត្រូវចំណាយទំហំផ្ទុកទិន្នន័យទ្វេដង ពោលគឺ ៥០% នៃទំហំសរុបត្រូវបានបាត់បង់សម្រាប់ការចម្លង។</td>
+                <td>ដូចជាការថតចម្លងឯកសារអត្តសញ្ញាណប័ណ្ណទុកមួយច្បាប់ទៀតនៅកន្លែងផ្សេង ដើម្បីការពារក្រែងលោច្បាប់ដើមបាត់បង់ឬរហែក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Small-Write Problem</span></td>
+                <td>ជាបញ្ហាប្រឈមធំមួយនៅក្នុងប្រព័ន្ធ RAID 5 នៅពេលមានការសរសេរទិន្នន័យទំហំតូច។ ដំណើរការនេះតម្រូវឱ្យប្រព័ន្ធធ្វើការអានទិន្នន័យចាស់ អាន Parity ចាស់ សរសេរទិន្នន័យថ្មី និងសរសេរ Parity ថ្មី ដែលការងារនេះប្រើប្រាស់ប្រតិបត្តិការថាសរឹងដល់ទៅ៤ដង ធ្វើឱ្យប្រព័ន្ធដើរយឺតយ៉ាងខ្លាំង។</td>
+                <td>ដូចជាការកែអក្ខរាវិរុទ្ធតែមួយពាក្យក្នុងសៀវភៅ តែតម្រូវឱ្យអ្នកអានមួយទំព័រពេញ លុបចោលទាំងស្រុង ហើយសរសេរទំព័រនោះឡើងវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Writeback Caching</span></td>
+                <td>ជាបច្ចេកទេសផ្ទុកទិន្នន័យបណ្តោះអាសន្នទៅក្នុងអង្គចងចាំ (ដូចជា RAM ឬ NVRAM) ដែលមានល្បឿនលឿន ដើម្បីឆ្លើយតបទៅកម្មវិធីវិញថាការសរសេរបានជោគជ័យភ្លាមៗ (Zero Latency Writes) មុនពេលប្រព័ន្ធរៀបចំបញ្ជូនទិន្នន័យទាំងនោះទៅរក្សាទុកក្នុងថាសរឹងពិតប្រាកដនៅពេលក្រោយ។</td>
+                <td>ដូចជាអ្នករត់តុការកត់ត្រាការកម្ម៉ង់ម្ហូបរបស់អតិថិជនចូលក្នុងសៀវភៅព្រាងសិន ដើម្បីកុំឱ្យអតិថិជនចាំយូរ រួចទើបយកទៅវាយបញ្ចូលក្នុងប្រព័ន្ធកុំព្យូទ័រពេលរៀងទំនេរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Parity Logging</span></td>
+                <td>ជាវិធីសាស្ត្រមួយសម្រាប់ដោះស្រាយបញ្ហា Small-Write ដោយវាធ្វើការប្រមូលផ្តុំរាល់ការផ្លាស់ប្តូរនៃទិន្នន័យ Parity ទុកសិន រួចទើបធ្វើការសរសេរ (Update) ចូលទៅក្នុងថាសរឹងក្នុងពេលតែមួយជាទម្រង់ដុំធំ (Cylinder rates) ដែលជួយកាត់បន្ថយបន្ទុកនៃការអាននិងសរសេរចុះឡើងៗ។</td>
+                <td>ដូចជាការសន្សំសំរាមទុកក្នុងធុងតូចក្នុងផ្ទះសិន រហូតដល់ពេញទើបយកទៅចោលក្នុងធុងធំនៅក្រៅផ្ទះម្តង ដើម្បីកុំឱ្យខាតពេលដើរចេញទៅក្រៅញឹកញាប់ពេក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Parity Declustering</span></td>
+                <td>គឺជាការរៀបចំរចនាសម្ព័ន្ធបំបែក Parity និងទិន្នន័យទៅលើថាសរឹងចំនួនច្រើនជាងចំនួនដែលត្រូវការក្នុងមួយក្រុមធម្មតា។ វិធីនេះជួយកាត់បន្ថយបន្ទុកការងារ និងបង្កើនល្បឿនយ៉ាងខ្លាំងនៅពេលប្រព័ន្ធកំពុងស្ថិតក្នុងទម្រង់សង្គ្រោះទិន្នន័យ (Degraded mode) ពីថាសរឹងដែលខូច។</td>
+                <td>ដូចជាការបែងចែកការងាររបស់បុគ្គលិកម្នាក់ដែលឈប់សម្រាក ទៅឱ្យបុគ្គលិក១០នាក់ផ្សេងទៀតជួយធ្វើម្នាក់បន្តិច ជាជាងទម្លាក់ការងារនោះទៅឱ្យមនុស្សតែ៣នាក់ដែលធ្វើឱ្យពួកគេរវល់ខ្លាំងពេក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Prefetching</span></td>
+                <td>ជាយន្តការទាញយកទិន្នន័យពីថាសរឹងមករក្សាទុកក្នុងអង្គចងចាំ (Cache) ជាមុន មុនពេលដែលកម្មវិធី (Application) ទាមទារប្រើប្រាស់វាជាក់ស្តែង។ វាជួយកាត់បន្ថយពេលវេលារង់ចាំ (I/O Stall Time) និងធ្វើឱ្យដំណើរការកម្មវិធីលឿនជាងមុន។</td>
+                <td>ដូចជាចុងភៅដែលរៀបចំគ្រឿងផ្សំនិងហាន់បន្លែទុកជាមុន មុនពេលអតិថិជនកម្ម៉ង់ម្ហូប ដើម្បីឱ្យការចម្អិនមានភាពរហ័សនិងទាន់ចិត្ត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 9. Further Reading -->
+    <h2>៧. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/design-wsn-smart-irrigation-citrus-2018.html">
+                    <span class="km">ការរចនាបណ្តាញសេនស័រឥតខ្សែ (WSN) សម្រាប់ការស្រោចស្រពឆ្លាតវៃក្នុងចម្ការក្រូច ដោយមានក្បួនដោះស្រាយការសន្សំសំចៃថាមពល និងភាពធន់នឹងកំហុស</span><br>
+                    <span class="en article-original-title">Design of a WSN for Smart Irrigation in Citrus Plots with Fault-Tolerance and Energy-Saving Algorithms</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/embryonics-bio-inspired-fault-tolerant-system-2000.html">
+                    <span class="km">អំប្រ៊ីយ៉ូនិច៖ ប្រព័ន្ធពហុកោសិកាធន់នឹងកំហុសដែលយកលំនាំតាមជីវសាស្ត្រ</span><br>
+                    <span class="en article-original-title">Embryonics: A Bio-Inspired Fault-Tolerant Multicellular System</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/fault-tolerant-data-placement-storage-networks-2008.html">
+                    <span class="km">ស្តីពីការដាក់ទិន្នន័យដែលធន់នឹងកំហុសនៅក្នុងបណ្តាញផ្ទុកទិន្នន័យ</span><br>
+                    <span class="en article-original-title">On Fault-Tolerant Data Placement in Storage Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neuromorphic-computing-snn-edge-deployment-2021.html">
+                    <span class="km">ការគណនាបែបសរសៃប្រសាទ (Neuromorphic Computing) - ពីបណ្តាញសរសៃប្រសាទ Spiking ដល់ការដាក់ពង្រាយនៅគែម (Edge Deployment)</span><br>
+                    <span class="en article-original-title">神经形态计算——从脉冲神经网络到边缘部署</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/adaptive-fault-tolerant-scheduling-healthcare-cloud-2019.html">
+                    <span class="km">ការកំណត់កាលវិភាគដែលអាចសម្របតាម និងធន់នឹងកំហុសសម្រាប់ការរក្សាទុកទិន្នន័យប្រកបដោយប្រសិទ្ធភាពនៅក្នុងសហគមន៍ថែទាំសុខភាពដោយប្រើប្រាស់ក្លោដកុំព្យូទ័រ</span><br>
+                    <span class="en article-original-title">ADAPTIVE AND FAULT-TOLERANT SCHEDULING FOR EFFECTIVE DATA STORING IN HEALTHCARE COMMUNITY USING CLOUD COMPUTING</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=redundant+array+of+independent+disks+RAID+architectures+and+performance" target="_blank" rel="noopener"><span class="en">redundant array of independent disks RAID architectures and performance</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=the+small-write+problem+in+RAID+5+and+parity+logging+solutions" target="_blank" rel="noopener"><span class="en">the small-write problem in RAID 5 and parity logging solutions</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=parity+declustering+for+continuous+operation+in+degraded+mode" target="_blank" rel="noopener"><span class="en">parity declustering for continuous operation in degraded mode</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=log-structured+file+systems+LFS+performance+evaluation" target="_blank" rel="noopener"><span class="en">log-structured file systems LFS performance evaluation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=writeback+caching+architectures+in+non-volatile+RAM+NVRAM+for+storage+arrays" target="_blank" rel="noopener"><span class="en">writeback caching architectures in non-volatile RAM NVRAM for storage arrays</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=informed+prefetching+and+caching+in+parallel+file+systems" target="_blank" rel="noopener"><span class="en">informed prefetching and caching in parallel file systems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

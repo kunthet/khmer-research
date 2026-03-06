@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>TrajViViT៖ បណ្តាញ Vision Transformer វីដេអូសម្រាប់ការព្យាករណ៍គន្លងផ្លូវ - TrajViViT: A Trajectory Video Vision Transformer Network for Trajectory Forecasting | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី TrajViViT៖ បណ្តាញ Vision Transformer វីដេអូសម្រាប់ការព្យាករណ។ ការព្យាករណ៍គន្លងផ្លូវរបស់ភ្នាក់ងារ (ដូចជាអ្នកថ្មើរជើង ឬយានយន្ត) គឺជាកិច្ចការដ៏ស្មុគស្មាញ ដែលជារឿយ...">
+    
+    <meta name="keywords" content="Vision Transformers, Trajectory Forecasting, Multi-Modality, Noise Robustness, Sequence Modelling, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/trajvivit-trajectory-video-vision-transformer-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/trajvivit-trajectory-video-vision-transformer-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/trajvivit-trajectory-video-vision-transformer-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/trajvivit-trajectory-video-vision-transformer-2024.html">
+    <meta property="og:title" content="TrajViViT៖ បណ្តាញ Vision Transformer វីដេអូសម្រាប់ការព្យាករណ៍គន្លងផ្លូវ | KhmerResearch.com">
+    <meta property="og:description" content="ការព្យាករណ៍គន្លងផ្លូវរបស់ភ្នាក់ងារ (ដូចជាអ្នកថ្មើរជើង ឬយានយន្ត) គឺជាកិច្ចការដ៏ស្មុគស្មាញ ដែលជារឿយៗប្រឈមនឹងបញ្ហាដោយសារការចាប់យកទីតាំងកន្លងមកមានការរំខាន (Noise) និងភាពស្មុគស្មាញនៃការយល់ដឹងពីបរិបទសង្គមជុំវិញ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2024 ICPRAM-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Vision Transformers">
+    
+    <meta property="article:tag" content="Trajectory Forecasting">
+    
+    <meta property="article:tag" content="Multi-Modality">
+    
+    <meta property="article:tag" content="Noise Robustness">
+    
+    <meta property="article:tag" content="Sequence Modelling">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="TrajViViT៖ បណ្តាញ Vision Transformer វីដេអូសម្រាប់ការព្យាករណ៍គន្លងផ្លូវ">
+    <meta name="twitter:description" content="ការព្យាករណ៍គន្លងផ្លូវរបស់ភ្នាក់ងារ (ដូចជាអ្នកថ្មើរជើង ឬយានយន្ត) គឺជាកិច្ចការដ៏ស្មុគស្មាញ ដែលជារឿយៗប្រឈមនឹងបញ្ហាដោយសារការចាប់យកទីតាំងកន្លងមកមានការរំខាន (Noise) និងភាពស្មុគស្មាញនៃការយល់ដឹងពីបរិបទសង្គមជុំវិញ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "TrajViViT\u17d6 \u1794\u178e\u17d2\u178f\u17b6\u1789 Vision Transformer \u179c\u17b8\u178a\u17c1\u17a2\u17bc\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1782\u1793\u17d2\u179b\u1784\u1795\u17d2\u179b\u17bc\u179c",
+      "name": "TrajViViT: A Trajectory Video Vision Transformer Network for Trajectory Forecasting",
+      "description": "\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1782\u1793\u17d2\u179b\u1784\u1795\u17d2\u179b\u17bc\u179c\u179a\u1794\u179f\u17cb\u1797\u17d2\u1793\u17b6\u1780\u17cb\u1784\u17b6\u179a (\u178a\u17bc\u1785\u1787\u17b6\u17a2\u17d2\u1793\u1780\u1790\u17d2\u1798\u17be\u179a\u1787\u17be\u1784 \u17ac\u1799\u17b6\u1793\u1799\u1793\u17d2\u178f) \u1782\u17ba\u1787\u17b6\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u178a\u17cf\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789 \u178a\u17c2\u179b\u1787\u17b6\u179a\u17bf\u1799\u17d7\u1794\u17d2\u179a\u1788\u1798\u1793\u17b9\u1784\u1794\u1789\u17d2\u17a0\u17b6\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u1785\u17b6\u1794\u17cb\u1799\u1780\u1791\u17b8\u178f\u17b6\u17c6\u1784\u1780\u1793\u17d2\u179b\u1784\u1798\u1780\u1798\u17b6\u1793\u1780\u17b6\u179a\u179a\u17c6\u1781\u17b6\u1793 (Noise) \u1793\u17b7\u1784\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1793\u17c3\u1780\u17b6\u179a\u1799\u179b\u17cb\u178a\u17b9\u1784\u1796\u17b8\u1794\u179a\u17b7\u1794\u1791\u179f\u1784\u17d2\u1782\u1798\u1787\u17bb\u17c6\u179c\u17b7\u1789\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/trajvivit-trajectory-video-vision-transformer-2024.html",
+      "author": [{"@type": "Person", "name": "Gauthier Rotsart de Hertaing (UCLouvain)"},{"@type": "Person", "name": "Dani Manjah (UCLouvain)"},{"@type": "Person", "name": "Benoit Macq (UCLouvain)"}],
+      "datePublished": "2024 ICPRAM",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "TrajViViT: A Trajectory Video Vision Transformer Network for Trajectory Forecasting",
+        "url": "https://doi.org/10.5220/0012372000003654"
+      },
+      "keywords": ["Vision Transformers", "Trajectory Forecasting", "Multi-Modality", "Noise Robustness", "Sequence Modelling"],
+      "about": "Computer Vision"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "TrajViViT\u17d6 \u1794\u178e\u17d2\u178f\u17b6\u1789 Vision Transformer \u179c\u17b8\u178a\u17c1\u17a2\u17bc\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1796\u17d2\u1799\u17b6\u1780\u179a\u178e\u17cd\u1782\u1793\u17d2\u179b\u1784\u1795\u17d2\u179b\u17bc\u179c",
+          "item": "https://khmerresearch.com/papers/technology/trajvivit-trajectory-video-vision-transformer-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>TrajViViT៖ បណ្តាញ Vision Transformer វីដេអូសម្រាប់ការព្យា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> TrajViViT: A Trajectory Video Vision Transformer Network for Trajectory Forecasting<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.5220/0012372000003654" target="_blank" rel="noopener">doi.org/10.5220/0012372000003654</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>TrajViViT៖ បណ្តាញ Vision Transformer វីដេអូសម្រាប់ការព្យាករណ៍គន្លងផ្លូវ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> TrajViViT: A Trajectory Video Vision Transformer Network for Trajectory Forecasting</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Gauthier Rotsart de Hertaing (UCLouvain), Dani Manjah (UCLouvain), Benoit Macq (UCLouvain)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024 ICPRAM</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Vision</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការព្យាករណ៍គន្លងផ្លូវរបស់ភ្នាក់ងារ (ដូចជាអ្នកថ្មើរជើង ឬយានយន្ត) គឺជាកិច្ចការដ៏ស្មុគស្មាញ ដែលជារឿយៗប្រឈមនឹងបញ្ហាដោយសារការចាប់យកទីតាំងកន្លងមកមានការរំខាន (Noise) និងភាពស្មុគស្មាញនៃការយល់ដឹងពីបរិបទសង្គមជុំវិញ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានស្នើឡើងនូវម៉ូដែល TrajViViT ដែលជាបណ្តាញ Transformer ពហុទម្រង់ (Multimodal Transformer Network) សម្រាប់ធ្វើការព្យាករណ៍គន្លងផ្លូវ ដោយធ្វើការរួមបញ្ចូលទិន្នន័យរូបភាពនិងព័ត៌មានទីតាំងកន្លងមក។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់បណ្តាញវិភាគរូបភាព (Video Vision Transformer) រួមជាមួយយន្តការយកចិត្តទុកដាក់ (Attention Mechanism)</li>
+            
+            <li>ការបំប្លែងទិន្នន័យពហុទម្រង់ (Spatio-temporal positional encoding)</li>
+            
+            <li>ការវាយតម្លៃនិងធ្វើតេស្តលើសំណុំទិន្នន័យ Stanford Drone Dataset (SDD) ដោយបន្ថែមការរំខាន (Additive White Gaussian Noise)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការរួមបញ្ចូលទិន្នន័យរូបភាពនិងទីតាំងផ្តល់នូវលទ្ធផលល្អបំផុត ដោយកាត់បន្ថយកំហុសផ្លាស់ទីជាមធ្យម (ADE) មកត្រឹម 9.29 និងកំហុសចុងក្រោយ (FDE) មកត្រឹម 14.53 សម្រាប់ការធ្វើតេស្តឆ្លងដែន (Cross-domain)។</li>
+            
+            <li>វិធីសាស្ត្រពហុទម្រង់នេះជួយកាត់បន្ថយកំហុសមធ្យមការ៉េ (MSE) ដែលធ្វើឲ្យការព្យាករណ៍ក្នុងរយៈចម្ងាយឆ្ងាយកាន់តែមានភាពសុក្រឹត។</li>
+            
+            <li>ម៉ូដែល TrajViViT បង្ហាញពីភាពរឹងមាំនិងធន់ខ្ពស់ចំពោះការរំខាន (Noise Robustness) ប្រសើរជាងម៉ូដែលធម្មតា ទោះបីជាមានបំរែបំរួលកម្រិតរំខានទិន្នន័យខ្ពស់ដល់កម្រិត ២០ ក៏ដោយ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Image Modality Only (Img)</span></strong><br>ការប្រើប្រាស់ត្រឹមទិន្នន័យរូបភាពពីកាមេរ៉ា</td>
+                <td>អាចទាញយកព័ត៌មានពីបរិយាកាសជុំវិញបាន (Semantic Context) សម្រាប់ការស្វែងយល់ពីចលនារបស់ភ្នាក់ងារ។</td>
+                <td>ងាយនឹងជួបបញ្ហា Underfitting មានកំហុសខ្ពស់ (MSE) លើការព្យាករណ៍ចម្ងាយឆ្ងាយ និងមិនសូវល្អសម្រាប់ការធ្វើតេស្តឆ្លងដែន (Cross-domain)។</td>
+                <td>ពិន្ទុ AVG ADE: 59.75 និង FDE: 71.03 (សម្រាប់ការធ្វើតេស្ត Cross-domain) ដែលបង្ហាញពីដំណើរការខ្សោយបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Position Modality Only (Pos)</span></strong><br>ការប្រើប្រាស់ត្រឹមទិន្នន័យទីតាំងកន្លងមក</td>
+                <td>មានដំណើរការល្អប្រសើរជាងការប្រើរូបភាពតែមួយមុខ ត្រូវការទិន្នន័យហ្វឹកហាត់តិច និងមានលក្ខណៈសាមញ្ញក្នុងការអនុវត្ត។</td>
+                <td>ងាយរងឥទ្ធិពលពីការរំខាន (Noise) នៃទិន្នន័យទីតាំង ធ្វើឱ្យធ្លាក់ចុះភាពសុក្រឹតនៅពេលចាប់យកទីតាំងមិនច្បាស់លាស់។</td>
+                <td>ពិន្ទុ AVG ADE: 10.13 និង FDE: 15.29 ដែលជាលទ្ធផលល្អមធ្យម ប៉ុន្តែធ្លាក់ចុះគុណភាពនៅពេលកម្រិត Noise កើនឡើង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Multimodal TrajViViT (Img + Pos)</span></strong><br>ការរួមបញ្ចូលទិន្នន័យរូបភាពនិងទីតាំង (TrajViViT)</td>
+                <td>មានភាពធន់ខ្ពស់បំផុតចំពោះការរំខាននៃទិន្នន័យ (Noise Robustness) និងផ្តល់លទ្ធផលល្អដាច់គេសម្រាប់ការទស្សន៍ទាយលើទីតាំងថ្មីដែលមិនធ្លាប់ហ្វឹកហាត់ពីមុនមក។</td>
+                <td>ទាមទារថាមពលកុំព្យូទ័រខ្ពស់ និងចំណាយពេលច្រើនសម្រាប់ការបង្ហាត់ម៉ូដែល ដោយសារទំហំនិងភាពស្មុគស្មាញនៃបណ្តាញ។</td>
+                <td>ពិន្ទុ AVG ADE: 9.29 និង FDE: 14.53 ដែលជាលទ្ធផលល្អដាច់គេ និងបង្ហាញពីភាពត្រឹមត្រូវខ្ពស់បំផុត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការបង្ហាត់ម៉ូដែល TrajViViT ទាមទារធនធានកុំព្យូទ័រនិងថាមពលដំណើរការខ្ពស់ (Computational Resources) ដែលត្រូវបានគាំទ្រជាពិសេសដោយស្ថាប័នស្រាវជ្រាវ (OpenHub)។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនដែលមាន GPU កម្លាំងខ្លាំង ដើម្បីដំណើរការបណ្តាញ Deep Learning, 3D Convolutional layers និង Transformer ដែលមាន 6 layers និង 4 attention heads។</li>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ Stochastic Gradient Descent (SGD) ជាមួយ Adam Optimizer (Learning rate: 5e-5, Batch size: 4) ដែលអាចអនុវត្តបានតាមរយៈ PyTorch ឬ TensorFlow។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យធំមហិមាដូចជា Stanford Drone Dataset (SDD) ដែលមានរាប់លាន Data points និងរាប់ពាន់គន្លងផ្លូវ (Trajectories) សម្រាប់ការបង្ហាត់រយៈពេល 100 Epochs។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកមានជំនាញឯកទេសលើផ្នែក Computer Vision, Sequence Modelling, និងការរៀបចំទិន្នន័យបណ្តុំពហុទម្រង់ (Multimodal Data)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់សំណុំទិន្នន័យ Stanford Drone Dataset (SDD) ដែលថតចេញពីបរិវេណសាកលវិទ្យាល័យនៅសហរដ្ឋអាមេរិក ដែលមានរបៀបរៀបរយល្អ។ នេះជាកត្តាប្រឈមមួយសម្រាប់កម្ពុជា ព្រោះស្ថានភាពចរាចរណ៍នៅកម្ពុជាមានភាពស្មុគស្មាញជាង (មានម៉ូតូច្រើនកកកុញ និងខ្វះគំនូសសញ្ញាច្បាស់លាស់) ដែលអាចធ្វើឱ្យម៉ូដែលដំណើរការមិនបានល្អប្រសិនបើមិនមានការហ្វឹកហាត់ជាមួយទិន្នន័យក្នុងស្រុកបន្ថែម។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់សម្រាប់ប្រើប្រាស់នៅកម្ពុជា ជាពិសេសក្នុងការអភិវឌ្ឍទីក្រុងឆ្លាតវៃ និងបច្ចេកវិទ្យាសុខាភិបាលទំនើប។</p>
+        
+        <ul>
+            
+            <li><strong>រាជធានីភ្នំពេញ (Smart City Traffic Management):</strong> ប្រើប្រាស់ជាមួយប្រព័ន្ធកាមេរ៉ាសុវត្ថិភាពតាមស្តុប ដើម្បីតាមដាននិងព្យាករណ៍ចលនារបស់យានយន្ត និងអ្នកថ្មើរជើង ដែលជួយកាត់បន្ថយគ្រោះថ្នាក់និងការកកស្ទះ។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល (មន្ទីរពេទ្យកាល់ម៉ែត):</strong> បច្ចេកវិទ្យានេះអាចយកមកបន្ស៊ាំសម្រាប់ការតាមដានចលនារបស់ដុំសាច់មហារីក (Tumor motion prediction) ក្នុងអំឡុងពេលព្យាបាលដោយកាំរស្មី (Proton-therapy) ដូចដែលឯកសារបានលើកឡើង។</li>
+            
+            <li><strong>យានយន្តស្វ័យប្រវត្តិ និងប្រព័ន្ធ ADAS:</strong> ក្រុមហ៊ុនបច្ចេកវិទ្យាយានយន្តក្នុងស្រុកអាចប្រើជាមូលដ្ឋានអភិវឌ្ឍប្រព័ន្ធព្រមានពីការប៉ះទង្គិច (Collision Avoidance) ដោយប្រើកាមេរ៉ារបស់រថយន្តដោយផ្ទាល់។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអនុវត្តវិធីសាស្រ្តនេះនឹងជួយបង្កើនប្រសិទ្ធភាពការគ្រប់គ្រងនិងសុវត្ថិភាពទូទៅ ប៉ុន្តែទាមទារការវិនិយោគលើការប្រមូលទិន្នន័យចរាចរណ៍ពិតប្រាកដក្នុងស្រុកជាមុនសិនទើបទទួលបានលទ្ធផលត្រឹមត្រូវ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Vision Transformers:</strong> និស្សិតគួរសិក្សាពីយន្តការ Attention Mechanism និងរបៀបដែល <span class="en">Vision Transformers</span> ដំណើរការលើការវិភាគរូបភាព (Video processing) ដោយអនុវត្តតាមរយៈវគ្គសិក្សាលើ <span class="en">Coursera</span> ឬប្រើប្រាស់ <span class="en">PyTorch</span> សម្រាប់ការអនុវត្តកូដមូលដ្ឋាន។</li>
+            
+            <li><strong>ដំណើរការកូដនិងសាកល្បងម៉ូដែលដើម:</strong> ទាញយកកូដពី <span class="en">GitHub Repository</span> របស់អ្នកនិពន្ធ (https://github.com/GauthierRotsart/TrajViViT) រួចដំណើរការ (Reproduce) ម៉ូដែលលើម៉ាស៊ីន <span class="en">Google Colab</span> ឬ Server របស់សាកលវិទ្យាល័យ ដោយប្រើទិន្នន័យគំរូតូចមួយសិន។</li>
+            
+            <li><strong>ប្រមូលនិងរៀបចំទិន្នន័យក្នុងស្រុក:</strong> ប្រើប្រាស់ <span class="en">Drone</span> ថតវីដេអូសកម្មភាពចរាចរណ៍តាមរង្វង់មូលសំខាន់ៗក្នុងក្រុងភ្នំពេញ បន្ទាប់មកប្រើប្រាស់ប្រព័ន្ធ <span class="en">YOLO (You Only Look Once)</span> ដើម្បីចាប់យកទីតាំង (Bounding Boxes) របស់យានយន្តនីមួយៗដើម្បីបង្កើតជាសំណុំទិន្នន័យហ្វឹកហាត់។</li>
+            
+            <li><strong>បន្ស៊ាំម៉ូដែលនិងកាត់បន្ថយទំហំ:</strong> អនុវត្តបច្ចេកទេស <span class="en">Knowledge Distillation</span> ដើម្បីបង្រួមទំហំម៉ូដែល TrajViViT ឱ្យស្រាលល្មមអាចដំណើរការលើកាមេរ៉ាសុវត្ថិភាពតាមដងផ្លូវ (Edge computing) និងអាចព្យាករណ៍បានក្នុងពេលវេលាជាក់ស្តែង (Real-time)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Vision Transformers</span></td>
+                <td>បណ្តាញបញ្ញាសិប្បនិម្មិតដែលប្រើប្រាស់យន្តការ Attention ដើម្បីវិភាគនិងយល់ពីទំនាក់ទំនងនៃចំណែកតូចៗរបស់រូបភាព (Patches) ជំនួសឱ្យការប្រើប្រាស់ Convolutional Neural Networks (CNNs) ធម្មតា។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលកំពុងមើលផ្ទាំងគំនូរធំមួយ ដោយផ្តោតការយកចិត្តទុកដាក់លើចំណុចសំខាន់ៗម្តងមួយៗដើម្បីយល់ពីអត្ថន័យរួមនៃគំនូរនោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Trajectory Forecasting</span></td>
+                <td>ដំណើរការនៃការប្រើប្រាស់ទិន្នន័យទីតាំងនិងចលនានៅក្នុងអតីតកាលរបស់វត្ថុមួយ (ដូចជាមនុស្ស ឬយានយន្ត) ដើម្បីទស្សន៍ទាយឬគណនារកទីតាំងដែលវានឹងធ្វើដំណើរទៅក្នុងពេលអនាគត។</td>
+                <td>ដូចជាការមើលឃើញបាល់ដែលគេទាត់កំពុងហោះលើអាកាស ហើយយើងអាចស្មានដឹងថាវានឹងធ្លាក់ទៅទីតាំងណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Attention mechanism</span></td>
+                <td>យន្តការគណនានៅក្នុងម៉ូដែល Deep Learning ដែលជួយឱ្យប្រព័ន្ធចេះផ្តល់ទម្ងន់ឬផ្តោតសំខាន់ទៅលើផ្នែកជាក់លាក់ណាមួយនៃទិន្នន័យបញ្ចូល (Input) ដែលមានប្រយោជន៍បំផុតសម្រាប់ការធ្វើការព្យាករណ៍ ខណៈពេលដែលមើលរំលងព័ត៌មានដែលមិនសូវសំខាន់។</td>
+                <td>ដូចជាសិស្សដែលកំពុងស្តាប់គ្រូពន្យល់ ដោយផ្តោតអារម្មណ៍តែលើពាក្យគន្លឹះសំខាន់ៗ ដើម្បីងាយស្រួលយល់មេរៀនជាជាងស្តាប់គ្រប់ពាក្យទាំងអស់ដោយស្មើភាពគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-Modality</span></td>
+                <td>ការរួមបញ្ចូលគ្នានូវប្រភេទប្រភពទិន្នន័យផ្សេងៗគ្នា (ឧទាហរណ៍៖ ទិន្នន័យរូបភាពពីកាមេរ៉ា (Semantic) និងទិន្នន័យកូអរដោនេទីតាំង (Positional)) ទៅក្នុងម៉ូដែលតែមួយដើម្បីបង្កើនភាពសុក្រឹតនៃការវិភាគប្រព័ន្ធកុំព្យូទ័រ។</td>
+                <td>ដូចជាការប្រើប្រាស់ទាំងភ្នែក (មើលសកម្មភាព) និងត្រចៀក (ស្តាប់សំឡេង) ព្រមគ្នាដើម្បីស្វែងយល់ពីអ្វីមួយឱ្យបានច្បាស់លាស់បំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Noise Robustness</span></td>
+                <td>សមត្ថភាពរបស់ប្រព័ន្ធឬម៉ូដែលក្នុងការរក្សាបាននូវភាពត្រឹមត្រូវនិងដំណើរការល្អ ទោះបីជាទិន្នន័យបញ្ចូលមានភាពមិនច្បាស់លាស់ មានកំហុស ឬមានការរំខានបន្តិចបន្តួច (Noise) ក៏ដោយ។</td>
+                <td>ដូចជាអ្នកបើកបរដែលមានបទពិសោធន៍នៅតែអាចបើកបរបានល្អ ទោះបីជាអាកាសធាតុមានភ្លៀងធ្លាក់ខ្លាំងធ្វើឱ្យមើលផ្លូវមិនសូវច្បាស់ក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spatio-temporal positional encoding</span></td>
+                <td>ការបំប្លែងព័ត៌មានដែលទាក់ទងនឹងទីតាំង (លំហ) និងពេលវេលា ទៅជាទម្រង់វ៉ិចទ័រគណិតវិទ្យា ដើម្បីឱ្យបណ្តាញ Transformer ដែលមិនយល់ពីលំដាប់ដោយខ្លួនឯង អាចដឹងពីលំដាប់លំដោយនៃព្រឹត្តិការណ៍និងទីតាំងរបស់វត្ថុនៅក្នុងខ្សែវីដេអូ។</td>
+                <td>ដូចជាការបិទស្លាកលេខរៀងនិងម៉ោងនៅលើរូបថតនីមួយៗ ដើម្បីប្រាប់កុំព្យូទ័រថារូបណាថតនៅកន្លែងណា និងនៅម៉ោងប៉ុន្មាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Teacher forcing</span></td>
+                <td>វិធីសាស្ត្រក្នុងការបង្ហាត់ម៉ូដែល Machine Learning ដោយប្រើប្រាស់ចម្លើយពិត (Ground truth) ពីជំហានមុនជាធាតុបញ្ចូល (Input) សម្រាប់ការព្យាករណ៍នៅជំហានបន្ទាប់ ជាជាងប្រើប្រាស់ការព្យាករណ៍ដែលម៉ូដែលទាយបានកន្លងមក ដើម្បីពន្លឿនការហ្វឹកហាត់។</td>
+                <td>ដូចជាគ្រូដែលប្រាប់ចម្លើយត្រឹមត្រូវនៃលំហាត់ទី១ ដល់សិស្ស ដើម្បីឱ្យសិស្សយកចម្លើយនោះទៅបន្តគណនារកចម្លើយទី២ដោយមិនឱ្យខុសតាំងពីដើមទី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Average Displacement Error (ADE)</span></td>
+                <td>រង្វាស់នៃការវាយតម្លៃកំហុសនៅក្នុងការព្យាករណ៍គន្លងផ្លូវ ដែលវាស់ពីគម្លាតចម្ងាយជាមធ្យមរវាងទីតាំងដែលម៉ូដែលបានទាយ និងទីតាំងពិតប្រាកដសម្រាប់គ្រប់ចំណុចពេលវេលាទាំងអស់នៃគន្លងផ្លូវនោះ។</td>
+                <td>ដូចជាការវាស់ចម្ងាយខុសគ្នាជាមធ្យមនៅរាល់ជំហានដែលមនុស្សម្នាក់បានដើរធៀបនឹងផ្លូវដែលយើងបានស្មានទុកថាគាត់នឹងដើរ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/ai-multimodal-neuroimaging-alzheimers-parkinsons-2023.html">
+                    <span class="km">ការវិភាគរូបភាពសរសៃប្រសាទពហុទម្រង់ដោយប្រើ AI សម្រាប់ការធ្វើរោគវិនិច្ឆ័យ និងការព្យាករណ៍ជំងឺខួរក្បាល៖ ការផ្តោតលើជំងឺអាល់ហ្សៃមឺ និងជំងឺផាកឃីនសាន់</span><br>
+                    <span class="en article-original-title">AI-Powered Multimodal Neuroimaging Analysis for Accurate Diagnosis and Prognosis of Brain Disorders: A Focus on Alzheimer's and Parkinson’s Diseases</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/swin-transformer-ensemble-breast-cancer-2025.html">
+                    <span class="km">បណ្តុំម៉ូដែល Swin Transformer តាមឋានានុក្រមជាមួយបញ្ញាសិប្បនិម្មិតដែលអាចបកស្រាយបាន សម្រាប់ការធ្វើរោគវិនិច្ឆ័យជំងឺមហារីកសុដន់ប្រកបដោយភាពរឹងមាំ និងវិមជ្ឈការ</span><br>
+                    <span class="en article-original-title">Hierarchical Swin Transformer Ensemble with Explainable AI for Robust and Decentralized Breast Cancer Diagnosis</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Vision+Transformer%22+AND+%22sequence+modelling%22+AND+%22trajectory+prediction" target="_blank" rel="noopener"><span class="en">Vision Transformer" AND "sequence modelling" AND "trajectory prediction</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Trajectory+forecasting%22+AND+%22multi-modal%22+AND+%28%22semantic+map%22+OR+%22social+context%22%29" target="_blank" rel="noopener"><span class="en">Trajectory forecasting" AND "multi-modal" AND ("semantic map" OR "social context")</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Noise+robustness%22+AND+%22Transformer+networks%22+AND+%22additive+white+Gaussian+noise" target="_blank" rel="noopener"><span class="en">Noise robustness" AND "Transformer networks" AND "additive white Gaussian noise</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Teacher+forcing%22+AND+%22autoregressive+decoding%22+AND+%22transformer" target="_blank" rel="noopener"><span class="en">Teacher forcing" AND "autoregressive decoding" AND "transformer</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Stanford+Drone+Dataset%22+AND+%22pedestrian+trajectory+prediction%22+AND+%22deep+learning" target="_blank" rel="noopener"><span class="en">Stanford Drone Dataset" AND "pedestrian trajectory prediction" AND "deep learning</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

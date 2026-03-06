@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការទទួលស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្ដាញនៃឯកសារសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge’ez ដោយប្រើបច្ចេកទេស Deep Learning - Offline Handwritten Text Recognition of Historical Ge’ez Manuscripts Using De... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការទទួលស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្ដាញនៃឯកសារសាត្រាស្លឹករឹត។ ឯកសារនេះដោះស្រាយបញ្ហានៃការបំប្លែងឯកសារសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge'ez (ហ្គីស) ទៅជាទម្រង់ឌីជីថ...">
+    
+    <meta name="keywords" content="Optical Character Recognition, Deep Learning, Historical Manuscripts, Ge’ez Script, Document Image Analysis, Tesseract, LSTM, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/offline-handwritten-text-recognition-geez-2021.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/offline-handwritten-text-recognition-geez-2021.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/offline-handwritten-text-recognition-geez-2021.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/offline-handwritten-text-recognition-geez-2021.html">
+    <meta property="og:title" content="ការទទួលស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្ដាញនៃឯកសារសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge’ez ដោយប្រើបច្ចេកទេស Deep Learning | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបំប្លែងឯកសារសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge'ez (ហ្គីស) ទៅជាទម្រង់ឌីជីថល ដែលជួបប្រទះការលំបាកយ៉ាងខ្លាំងដោយសារភាពស្មុគស្មាញនៃទម្រង់ទំព័រ និងការខូចខាតគុណភាពនៃសាត្រាស្លឹករឹតចាស់ៗ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2021, Jimma University-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Optical Character Recognition">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Historical Manuscripts">
+    
+    <meta property="article:tag" content="Ge’ez Script">
+    
+    <meta property="article:tag" content="Document Image Analysis">
+    
+    <meta property="article:tag" content="Tesseract">
+    
+    <meta property="article:tag" content="LSTM">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការទទួលស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្ដាញនៃឯកសារសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge’ez ដោយប្រើបច្ចេកទេស Deep Learning">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការបំប្លែងឯកសារសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge'ez (ហ្គីស) ទៅជាទម្រង់ឌីជីថល ដែលជួបប្រទះការលំបាកយ៉ាងខ្លាំងដោយសារភាពស្មុគស្មាញនៃទម្រង់ទំព័រ និងការខូចខាតគុណភាពនៃសាត្រាស្លឹករឹតចាស់ៗ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u179a\u179f\u17c1\u179a\u178a\u17c4\u1799\u178a\u17c3\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178a\u17b6\u1789\u1793\u17c3\u17af\u1780\u179f\u17b6\u179a\u179f\u17b6\u178f\u17d2\u179a\u17b6\u179f\u17d2\u179b\u17b9\u1780\u179a\u17b9\u178f\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Ge\u2019ez \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f Deep Learning",
+      "name": "Offline Handwritten Text Recognition of Historical Ge\u2019ez Manuscripts Using Deep Learning Techniques",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1794\u17c6\u1794\u17d2\u179b\u17c2\u1784\u17af\u1780\u179f\u17b6\u179a\u179f\u17b6\u178f\u17d2\u179a\u17b6\u179f\u17d2\u179b\u17b9\u1780\u179a\u17b9\u178f\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Ge\u0027ez (\u17a0\u17d2\u1782\u17b8\u179f) \u1791\u17c5\u1787\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb\u178c\u17b8\u1787\u17b8\u1790\u179b \u178a\u17c2\u179b\u1787\u17bd\u1794\u1794\u17d2\u179a\u1791\u17c7\u1780\u17b6\u179a\u179b\u17c6\u1794\u17b6\u1780\u1799\u17c9\u17b6\u1784\u1781\u17d2\u179b\u17b6\u17c6\u1784\u178a\u17c4\u1799\u179f\u17b6\u179a\u1797\u17b6\u1796\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u1793\u17c3\u1791\u1798\u17d2\u179a\u1784\u17cb\u1791\u17c6\u1796\u17d0\u179a \u1793\u17b7\u1784\u1780\u17b6\u179a\u1781\u17bc\u1785\u1781\u17b6\u178f\u1782\u17bb\u178e\u1797\u17b6\u1796\u1793\u17c3\u179f\u17b6\u178f\u17d2\u179a\u17b6\u179f\u17d2\u179b\u17b9\u1780\u179a\u17b9\u178f\u1785\u17b6\u179f\u17cb\u17d7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/offline-handwritten-text-recognition-geez-2021.html",
+      "author": [{"@type": "Person", "name": "Mesfin Geresu Gurmu (Jimma University)"}],
+      "datePublished": "2021, Jimma University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Offline Handwritten Text Recognition of Historical Ge\u2019ez Manuscripts Using Deep Learning Techniques",
+        "url": "https://www.researchgate.net/profile/Mesfin-Geresu/publication/351110116_Offline_Handwritten_Text_Recognition_of_Historical_Ge\u0027ez_Manuscripts_Using_Deep_Learning_Techniques/links/60880259881fa114b42e119b/Offline-Handwritten-Text-Recognition-of-Historical-Geez-Manuscripts-Using-Deep-Learning-Techniques.pdf"
+      },
+      "keywords": ["Optical Character Recognition", "Deep Learning", "Historical Manuscripts", "Ge\u2019ez Script", "Document Image Analysis", "Tesseract", "LSTM"],
+      "about": "Information Science, Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1791\u1791\u17bd\u179b\u179f\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u178f\u17d2\u1790\u1794\u1791\u179f\u179a\u179f\u17c1\u179a\u178a\u17c4\u1799\u178a\u17c3\u1780\u17d2\u179a\u17c5\u1794\u178e\u17d2\u178a\u17b6\u1789\u1793\u17c3\u17af\u1780\u179f\u17b6\u179a\u179f\u17b6\u178f\u17d2\u179a\u17b6\u179f\u17d2\u179b\u17b9\u1780\u179a\u17b9\u178f\u1794\u17d2\u179a\u179c\u178f\u17d2\u178f\u17b7\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Ge\u2019ez \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f Deep Learning",
+          "item": "https://khmerresearch.com/papers/technology/offline-handwritten-text-recognition-geez-2021.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការទទួលស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្ដាញនៃឯកសារសាត្រាស្លឹក...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Offline Handwritten Text Recognition of Historical Ge’ez Manuscripts Using Deep Learning Techniques<br>
+        
+        <strong>Source:</strong> <a href="https://www.researchgate.net/profile/Mesfin-Geresu/publication/351110116_Offline_Handwritten_Text_Recognition_of_Historical_Ge'ez_Manuscripts_Using_Deep_Learning_Techniques/links/60880259881fa114b42e119b/Offline-Handwritten-Text-Recognition-of-Historical-Geez-Manuscripts-Using-Deep-Learning-Techniques.pdf" target="_blank" rel="noopener">www.researchgate.net</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការទទួលស្គាល់អត្ថបទសរសេរដោយដៃក្រៅបណ្ដាញនៃឯកសារសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge’ez ដោយប្រើបច្ចេកទេស Deep Learning</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Offline Handwritten Text Recognition of Historical Ge’ez Manuscripts Using Deep Learning Techniques</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Mesfin Geresu Gurmu (Jimma University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2021, Jimma University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Information Science, Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការបំប្លែងឯកសារសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge'ez (ហ្គីស) ទៅជាទម្រង់ឌីជីថល ដែលជួបប្រទះការលំបាកយ៉ាងខ្លាំងដោយសារភាពស្មុគស្មាញនៃទម្រង់ទំព័រ និងការខូចខាតគុណភាពនៃសាត្រាស្លឹករឹតចាស់ៗ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះអនុវត្តវិធីសាស្ត្រជាបន្តបន្ទាប់ដោយរួមបញ្ចូលការវិភាគរូបភាពឯកសារ និងបច្ចេកទេស Deep Learning សម្រាប់ដំណើរការស្គាល់អក្សរ។
+        
+        <ul>
+            
+            <li>ការកំណត់តម្លៃគោលពីរនៃរូបភាព (Image Binarization) ដោយប្រៀបធៀបវិធីសាស្ត្រចំនួន ៤ ដែលវិធីសាស្ត្រ Sauvola's method ត្រូវបានរកឃើញថាល្អបំផុត។</li>
+            
+            <li>ការប៉ាន់ស្មានភាពទ្រេត (Skew Estimation) ដោយប្រើប្រាស់ប្លែងកម្ម Hough (Hough transform) ដើម្បីកែតម្រូវទិសដៅអត្ថបទ។</li>
+            
+            <li>ការវិភាគទម្រង់ទំព័រ (Page Layout Analysis) ដោយប្រើប្រាស់បណ្ណាល័យកូដ Leptonica សម្រាប់ការបែងចែកតំបន់អត្ថបទ និងក្រាហ្វិក។</li>
+            
+            <li>ការបង្វឹកម៉ូដែលទទួលស្គាល់អត្ថបទ (OCR Engine Training) ដោយប្រើយន្តការ Tesseract OCR ដែលដំណើរការលើបណ្ដាញសរសៃប្រសាទ (LSTM) ជាមួយនឹងសំណុំទិន្នន័យនៃបន្ទាត់អត្ថបទចំនួន ២៥៧។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>នៅក្នុងដំណាក់កាលរៀបចំឯកសារ វិធីសាស្ត្រ Sauvola ទទួលបានពិន្ទុសរុបខ្ពស់ជាងគេក្នុងការលុបបំបាត់ស្នាមប្រឡាក់ ខណៈវិធីសាស្ត្រ Hough Transform អាចកែតម្រូវភាពទ្រេតបានយ៉ាងត្រឹមត្រូវរហូតដល់ ៧៦%។</li>
+            
+            <li>ការធ្វើតេស្តការវិភាគទម្រង់ទំព័រដោយប្រើ Leptonica បង្ហាញពីអត្រាជោគជ័យខ្ពស់ក្នុងការកំណត់តំបន់អត្ថបទ ទោះបីជាមានវត្តមានគំនូរលម្អក៏ដោយ។</li>
+            
+            <li>ម៉ូដែលទទួលស្គាល់អក្សរ Tesseract OCR ដែលបានកែសម្រួលដោយប្រើទិន្នន័យថ្មី ទទួលបានលទ្ធផលដ៏គួរឱ្យកត់សម្គាល់ ដោយបង្ហាញអត្រាកំហុសតួអក្សរ (Character Error Rate) ទាបត្រឹមតែ ២.៦៣២% ប៉ុណ្ណោះ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Sauvola's Binarization Method</span></strong><br>វិធីសាស្ត្រកំណត់តម្លៃគោលពីរ Sauvola's Binarization Method</td>
+                <td>ដំណើរការបានល្អបំផុតលើរូបភាពឯកសារចាស់ៗដែលមានគុណភាពអន់ និងមានពន្លឺផ្ទៃខាងក្រោយមិនស្មើគ្នា (Adaptive Thresholding)។ ការពារការបាត់បង់ទម្រង់ដើមនៃតួអក្សរបានល្អ។</td>
+                <td>ទាមទារការកំណត់ប៉ារ៉ាម៉ែត្រឱ្យបានត្រឹមត្រូវមុន (ដូចជាទំហំ window និងទម្ងន់ k) ដើម្បីទទួលបានលទ្ធផលល្អបំផុត។</td>
+                <td>ទទួលបានចំណាត់ថ្នាក់លេខ១ ជាមួយនឹងពិន្ទុសរុបល្អបំផុត (៦១) តាមរយៈការវាយតម្លៃលើ FM, ps-FM, PSNR និង DRD។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Otsu's Global Binarization Method</span></strong><br>វិធីសាស្ត្រកំណត់តម្លៃគោលពីរទូទៅ Otsu's Global Binarization</td>
+                <td>ជាវិធីសាស្ត្រសាមញ្ញ ងាយស្រួលអនុវត្ត និងមិនទាមទារការកែតម្រូវប៉ារ៉ាម៉ែត្រច្រើនដោយដៃនោះទេ។</td>
+                <td>មិនស័ក្តិសម និងគ្មានប្រសិទ្ធភាពសោះសម្រាប់ឯកសារចាស់ៗដែលមានស្នាមប្រឡាក់ ឬភាពងងឹតនៃផ្ទៃខាងក្រោយច្រើន។</td>
+                <td>ទទួលបានចំណាត់ថ្នាក់ទាបជាងគេបំផុត (ចំណាត់ថ្នាក់លេខ៤) ជាមួយនឹងពិន្ទុសរុប ១៤៤ ក្នុងការធ្វើតេស្តជាមួយឯកសារប្រវត្តិសាស្ត្រ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Fine-tuned Tesseract OCR (LSTM-based)</span></strong><br>ការកែសម្រួលម៉ូដែល Fine-tuned Tesseract OCR (LSTM)</td>
+                <td>អាចកាត់បន្ថយអត្រាកំហុសតួអក្សរបានយ៉ាងមានប្រសិទ្ធភាពដោយគ្រាន់តែយកម៉ូដែលដើម (Base Model) មកបង្ហាត់បន្តជាមួយទិន្នន័យថ្មីក្នុងបរិមាណតិចតួច។</td>
+                <td>ចាំបាច់ត្រូវមានការបង្កើត Ground truth យ៉ាងប្រុងប្រយ័ត្ន និងទាមទារទិន្នន័យហ្វឹកហាត់បន្ថែមទៀតដើម្បីបង្កើនភាពសុក្រឹតកម្រិតខ្ពស់។</td>
+                <td>ម៉ូដែលដែលទទួលបានការហ្វឹកហាត់ថ្មីនេះ អាចសម្រេចបានអត្រាកំហុសតួអក្សរ (CER) ទាបត្រឹមតែ ២.៦៣២% ប៉ុណ្ណោះ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះប្រើប្រាស់ធនធានកុំព្យូទ័រធម្មតា ប៉ុន្តែពឹងផ្អែកខ្លាំងលើកម្មវិធីកូដបើកចំហ (Open-source) សម្រាប់ការវិភាគ និងបង្វឹកម៉ូដែលកម្រិតជ្រៅ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ប្រើប្រាស់កុំព្យូទ័រធម្មតា HP PRO 3500 Series MT (Intel Core i3-3240 CPU @ 3.40 GHz, 4GB RAM) ដំណើរការដោយ Windows 10 Pro (ទោះបីជាការហ្វឹកហាត់ Deep Learning ជាទូទៅត្រូវការ GPU ក៏ដោយ)។</li>
+        
+        <li><strong>Software:</strong> MATLAB (R2020b) សម្រាប់កែច្នៃរូបភាព, Aletheia (v1.2.4) សម្រាប់បង្កើត Ground Truth, Tesseract OCR-D ដំណើរការលើ Ubuntu 20.04 ជាមួយនឹងកូដ Python 3។</li>
+        
+        <li><strong>Dataset:</strong> សំណុំទិន្នន័យវាយតម្លៃពី DIBCO 2019 និង DISEC'13 និងសំណុំទិន្នន័យហ្វឹកហាត់សរសេរដោយដៃចំនួន ២៥៧ បន្ទាត់ (ទាញចេញពី ១៥ ទំព័រនៃសាត្រាស្លឹករឹត)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យសាត្រាស្លឹករឹតប្រវត្តិសាស្ត្រ Ge'ez (ភាសាអំបូរអាហ្វ្រិក) ដែលប្រមូលបានពីវត្តអារាមនានានៅតំបន់ North Gondar ប្រទេសអេត្យូពី។ ទោះបីជាទិន្នន័យមានលក្ខណៈតំបន់និយម ប៉ុន្តែវាមានសារៈសំខាន់ខ្លាំងសម្រាប់ប្រទេសកម្ពុជា ពីព្រោះឯកសារប្រវត្តិសាស្ត្រខ្មែរ (ដូចជាសាត្រាស្លឹករឹត) ក៏ជួបប្រទះបញ្ហាស្នាមប្រឡាក់ សរសៃអំបោះ ពណ៌មិនស្មើគ្នា និងភាពស្មុគស្មាញនៃរចនាសម្ព័ន្ធទំព័រដូចគ្នា។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេស និងលំហូរការងារ (Pipeline) នៅក្នុងឯកសារនេះ អាចយកមកអនុវត្តដោយផ្ទាល់សម្រាប់ការអភិរក្ស និងធ្វើឌីជីថលនីយកម្មឯកសារប្រវត្តិសាស្ត្រនៅប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិទ្យាស្ថានពុទ្ធសាសនបណ្ឌិត្យ និង សារមន្ទីរជាតិកម្ពុជា:</strong> ស្ថាប័នទាំងនេះអាចប្រើប្រាស់បច្ចេកទេស Adaptive Binarization និង Tesseract OCR នេះដើម្បីធ្វើឌីជីថលនីយកម្មសាត្រាស្លឹករឹត (Sastra Slek Rith) កម្ពុជា ដែលកំពុងរងការខូចខាតដោយសារអាយុកាល។</li>
+            
+            <li><strong>បណ្ណសារដ្ឋានជាតិកម្ពុជា (National Archives of Cambodia):</strong> អាចអនុវត្តវិធីសាស្ត្រនេះដើម្បីសម្អាត (Noise removal) កែតម្រូវភាពទ្រេត (Skew correction) និងទាញយកអត្ថបទពីឯកសាររដ្ឋបាលចាស់ៗសម័យអាណានិគមបារាំង ដែលសរសេរដោយដៃ។</li>
+            
+            <li><strong>ការស្រាវជ្រាវនៅសាកលវិទ្យាល័យ (ឧ. RUPP, ITC):</strong> និស្សិតផ្នែកវិទ្យាសាស្ត្រកុំព្យូទ័រអាចយកគំរូស្ថាបត្យកម្មប្រព័ន្ធ (System Architecture) នេះទៅអនុវត្តបន្ត ដើម្បីអភិវឌ្ឍន៍ប្រព័ន្ធ OCR សម្រាប់ទទួលស្គាល់អក្សរខ្មែរសរសេរដោយដៃ ដែលនៅមានកម្រិតនៅឡើយ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់បច្ចេកវិទ្យា Deep Learning ដូចជា Tesseract LSTM រួមផ្សំជាមួយដំណើរការសម្អាតរូបភាពយ៉ាងប្រុងប្រយ័ត្ន នឹងជួយសង្គ្រោះ និងធ្វើទំនើបកម្មបេតិកភណ្ឌអក្សរសាស្ត្រកម្ពុជាបានយ៉ាងមានប្រសិទ្ធភាព។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះកែច្នៃរូបភាពឯកសារ (Document Image Pre-processing):</strong> ចាប់ផ្តើមរៀនពីបច្ចេកទេស Binarization និង Skew Correction ដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">OpenCV</span> ក្នុង <span class="en">Python</span> ឬ <span class="en">MATLAB</span>។ សាកល្បងអនុវត្តវិធីសាស្ត្រ <span class="en">Sauvola</span> និង <span class="en">Hough Transform</span> លើរូបភាពសាត្រាស្លឹករឹតខ្មែរ ដើម្បីមើលភាពខុសគ្នា។</li>
+            
+            <li><strong>ប្រមូល និងបង្កើតទិន្នន័យគោល (Ground Truth Creation):</strong> ប្រមូលរូបភាពឯកសារប្រវត្តិសាស្ត្រខ្មែរ ហើយប្រើប្រាស់កម្មវិធី <span class="en">Aletheia</span> ដើម្បីកំណត់ទីតាំងអត្ថបទ (Bounding boxes) និងវាយអត្ថបទបញ្ចូលជា Ground truth សម្រាប់ត្រៀមបង្វឹកម៉ូដែល។</li>
+            
+            <li><strong>អនុវត្តការវិភាគទម្រង់ទំព័រ (Page Layout Analysis):</strong> ប្រើប្រាស់បណ្ណាល័យកូដបើកចំហ <span class="en">Leptonica</span> ឆ្លងកាត់ការសរសេរកូដ ដើម្បីសាកល្បងបំបែកទំព័រឯកសារជាផ្នែកៗ (ឧទាហរណ៍៖ រូបភាព, កថាខណ្ឌអត្ថបទ) មុននឹងបញ្ជូនទៅកាន់ម៉ាស៊ីន OCR។</li>
+            
+            <li><strong>កែសម្រួល និងបង្វឹកម៉ូដែល OCR (Tesseract Fine-tuning):</strong> ដំឡើង <span class="en">Tesseract OCR-D</span> លើប្រព័ន្ធប្រតិបត្តិការ <span class="en">Ubuntu Linux</span> ហើយធ្វើការ Fine-tune ម៉ូដែលអក្សរខ្មែរដែលមានស្រាប់ ដោយបញ្ចុកទិន្នន័យថ្មីដែលបានរៀបចំនៅជំហានទី២ ដើម្បីឱ្យវាស្គាល់ទម្រង់អក្សរសរសេរដោយដៃ។</li>
+            
+            <li><strong>វាស់ស្ទង់លទ្ធផល និងកែលម្អ (Evaluation & Post-processing):</strong> គណនាអត្រាកំហុសតួអក្សរ (CER) ដោយប្រៀបធៀបលទ្ធផល OCR ជាមួយ Ground truth។ បន្ទាប់មក សាកល្បងបញ្ចូលវចនានុក្រមខ្មែរ ឬបច្ចេកទេស <span class="en">NLP</span> ជា Post-processing ដើម្បីកែតម្រូវពាក្យដែលម៉ាស៊ីនទាយខុស។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Image Binarization</span></td>
+                <td>វាគឺជាដំណើរការបំប្លែងរូបភាពដែលមានពណ៌ ឬស្រមោលប្រផេះច្រើនកម្រិត ទៅជារូបភាពដែលមានតែពីរពណ៌ប៉ុណ្ណោះ គឺស និងខ្មៅ។ ដំណើរការនេះជួយកាត់បន្ថយភាពរញ៉េរញ៉ៃ (ដូចជាស្នាមប្រឡាក់លើក្រដាស) ដើម្បីឱ្យកុំព្យូទ័រងាយស្រួលផ្ដោតតែទៅលើតួអក្សរសម្រាប់ការវិភាគបន្ត។</td>
+                <td>ដូចជាការយកប៉ិចហ្វឺតពណ៌ខ្មៅទៅគូសពីលើអក្សរស្រាលៗ រួចលុបពណ៌ផ្ទៃខាងក្រោយចោលឱ្យសក្បុស ដើម្បីឱ្យមើលឃើញអក្សរដាច់ច្បាស់ល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Skew Estimation</span></td>
+                <td>គឺជាដំណើរការគណនា និងស្វែងរកមុំទ្រេតនៃអត្ថបទនៅក្នុងរូបភាពឯកសារដែលបានស្កេន ដើម្បីធ្វើការកែតម្រូវឱ្យបន្ទាត់អត្ថបទត្រឡប់មកត្រង់ផ្ដេកវិញ មុននឹងបញ្ជូនទិន្នន័យនោះទៅកាន់ម៉ាស៊ីនស្គាល់អក្សរ (OCR)។</td>
+                <td>ដូចជាការសារេកែតម្រូវស៊ុមរូបថតដែលព្យួរវៀចនៅលើជញ្ជាំង ឱ្យត្រឡប់មកត្រង់ស្មើល្អវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Long Short-Term Memory (LSTM)</span></td>
+                <td>ជាប្រភេទមួយនៃបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (RNN) ដែលមានសមត្ថភាពចងចាំព័ត៌មានពីមុនៗក្នុងរយៈពេលវែង និងដឹងថាព័ត៌មានណាគួររក្សាទុក ឬគួរលុបចោល ដែលស័ក្តិសមបំផុតសម្រាប់ការទាញយកលក្ខណៈពិសេសពីតួអក្សរដែលសរសេរតជាប់គ្នាជាបន្ទាត់។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលកំពុងអានសៀវភៅ ដោយអាចចងចាំពាក្យនៅដើមប្រយោគ ដើម្បីយល់ន័យនៃពាក្យបន្ទាប់ និងបំភ្លេចចោលរឿងដែលមិនសំខាន់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Page Layout Analysis</span></td>
+                <td>គឺជាការវិភាគរចនាសម្ព័ន្ធនៃទំព័រឯកសារដើម្បីបំបែក និងចំណាត់ថ្នាក់តំបន់ផ្សេងៗគ្នានៅលើក្រដាស ដូចជា កថាខណ្ឌអត្ថបទ រូបភាព ឬគំនូរ និងរឹមទំព័រ ដើម្បីឱ្យកុំព្យូទ័រដឹងថាផ្នែកណាខ្លះដែលវាត្រូវទាញយកអត្ថបទ។</td>
+                <td>ដូចជាការយកបន្ទាត់ទៅគូសស៊ុមព័ទ្ធជុំវិញរូបភាព និងអត្ថបទដោយឡែកពីគ្នា នៅក្នុងទំព័រកាសែត ដើម្បីកុំឱ្យអានរំលងចូលគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Connectionist Temporal Classification (CTC)</span></td>
+                <td>គឺជាក្បួនដោះស្រាយដែលអនុញ្ញាតឱ្យបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតអាចទស្សន៍ទាយលំដាប់នៃតួអក្សរពីទិន្នន័យ (ដូចជាលំដាប់នៃរូបភាពបន្ទាត់អត្ថបទ) ដោយមិនចាំបាច់ត្រូវមានអ្នកកាត់បំបែករូបភាពតួអក្សរនីមួយៗជាមុនឡើយ។</td>
+                <td>ដូចជាអ្នកបកប្រែដែលអាចស្ដាប់យល់ និងសរសេរចេញជាប្រយោគបានភ្លាមៗ ទោះបីជាអ្នកនិយាយនិយាយលឿនរអិលមាត់មិនដកដង្ហើមក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ground truth</span></td>
+                <td>ជាសំណុំទិន្នន័យដើមដែលត្រូវបានផ្ទៀងផ្ទាត់ និងចាត់ទុកថាត្រឹមត្រូវ១០០% (ជាទូទៅវាយបញ្ចូលដោយមនុស្ស) ដែលប្រើសម្រាប់បង្វឹកម៉ូដែលបញ្ញាសិប្បនិម្មិត និងសម្រាប់ប្រៀបធៀបវាស់ស្ទង់ភាពត្រឹមត្រូវនៃលទ្ធផលដែលម៉ូដែលទាយបាន។</td>
+                <td>ដូចជាសៀវភៅចម្លើយ (Answer Key) នៅខាងចុងសៀវភៅលំហាត់ ដែលគ្រូប្រើសម្រាប់កែពិន្ទុសិស្ស។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Character Error Rate (CER)</span></td>
+                <td>ជារង្វាស់សម្រាប់វាយតម្លៃគុណភាពនៃប្រព័ន្ធទទួលស្គាល់អក្សរ (OCR) ដោយគណនាអត្រានៃការទាយខុស (ការបញ្ចូលអក្សរលើស ការបាត់អក្សរ ឬការជំនួសអក្សរខុស) ធៀបនឹងចំនួនតួអក្សរសរុប។</td>
+                <td>ដូចជាការរាប់ចំនួនអក្ខរាវិរុទ្ធដែលសិស្សសរសេរខុសនៅក្នុងការប្រឡងសរសេរតាមអាន ដើម្បីយកមកកាត់ពិន្ទុអញ្ចឹងដែរ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/reconstruction-regression-loss-time-series-transfer-2018.html">
+                    <span class="km">ការបាត់បង់ការស្ថាបនាឡើងវិញ និងតំរែតំរង់សម្រាប់ការរៀនផ្ទេរទិន្នន័យស៊េរីពេលវេលា</span><br>
+                    <span class="en article-original-title">Reconstruction and Regression Loss for Time-Series Transfer Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-learning-predictive-maintenance-grid-stability-2024.html">
+                    <span class="km">ការប្រើប្រាស់ការរៀនស៊ីជម្រៅសម្រាប់ការថែទាំតាមបែបព្យាករណ៍ និងស្ថិរភាពបណ្តាញអគ្គិសនីនៅក្នុងប្រព័ន្ធថាមពលដែលរួមបញ្ចូលថាមពលកកើតឡើងវិញ</span><br>
+                    <span class="en article-original-title">Leveraging Deep Learning for Predictive Maintenance and Grid Stability in Renewable Energy-Integrated Power Systems</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/hybrid-learning-systems-ml-dl-integration.html">
+                    <span class="km">ប្រព័ន្ធសិក្សាកូនកាត់៖ ការរួមបញ្ចូលយន្តការរៀនម៉ាស៊ីនបែបប្រពៃណីជាមួយនឹងបច្ចេកទេសរៀនស៊ីជម្រៅ</span><br>
+                    <span class="en article-original-title">HYBRID LEARNING SYSTEMS: INTEGRATING TRADITIONAL MACHINE LEARNING WITH DEEP LEARNING TECHNIQUES</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-recurrent-convolutional-neural-networks-behavior-2015.html">
+                    <span class="km">បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត Recurrent និង Convolutional សម្រាប់ចំណាត់ថ្នាក់អាកប្បកិរិយាដោយស្វ័យប្រវត្តិ</span><br>
+                    <span class="en article-original-title">Deep Recurrent and Convolutional Neural Networks for Automated Behavior Classification</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/hybrid-dl-iot-wind-turbine-pdm-2025.html">
+                    <span class="km">ក្របខ័ណ្ឌ Deep Learning កូនកាត់ និង IoT សម្រាប់ការថែទាំបែបព្យាករណ៍នៃទួរប៊ីនខ្យល់៖ ការបង្កើនភាពជឿជាក់ និងកាត់បន្ថយពេលវេលាផ្អាកដំណើរការ</span><br>
+                    <span class="en article-original-title">A Hybrid Deep Learning and IoT Framework for Predictive Maintenance of Wind Turbines: Enhancing Reliability and Reducing Downtime</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=LSTM+CTC+architecture+for+offline+handwritten+text+recognition" target="_blank" rel="noopener"><span class="en">LSTM CTC architecture for offline handwritten text recognition</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Adaptive+document+image+binarization+methods+Sauvola+vs+Niblack" target="_blank" rel="noopener"><span class="en">Adaptive document image binarization methods Sauvola vs Niblack</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Historical+manuscript+digitization+and+page+layout+analysis+techniques" target="_blank" rel="noopener"><span class="en">Historical manuscript digitization and page layout analysis techniques</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Ethiopic+and+Amharic+script+optical+character+recognition+deep+learning" target="_blank" rel="noopener"><span class="en">Ethiopic and Amharic script optical character recognition deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Natural+language+processing+statistical+language+models+for+OCR+post-processing" target="_blank" rel="noopener"><span class="en">Natural language processing statistical language models for OCR post-processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hough+transform+document+image+skew+detection+and+correction" target="_blank" rel="noopener"><span class="en">Hough transform document image skew detection and correction</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

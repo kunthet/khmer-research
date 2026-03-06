@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>សំណើផ្តល់ព័ត៌មានមូលដ្ឋាននៅក្នុងក្បួនដោះស្រាយ Metropolis-Hastings ជាមួយនឹងការអនុវត្ត - Locally-informed proposals in Metropolis-Hastings algorithm with applications | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី សំណើផ្តល់ព័ត៌មានមូលដ្ឋាននៅក្នុងក្បួនដោះស្រាយ Metropolis-Hast។ និក្ខេបបទនេះដោះស្រាយពីភាពមិនមានប្រសិទ្ធភាពក្នុងការគណនានៃវិធីសាស្ត្រ Markov Chain Monte Carlo (MCM...">
+    
+    <meta name="keywords" content="Metropolis-Hastings, Markov Chain Monte Carlo, Traveling Salesman Problem, Locally-informed proposals, Simulated annealing, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/locally-informed-proposals-metropolis-hastings-2022.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/science/locally-informed-proposals-metropolis-hastings-2022.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/science/locally-informed-proposals-metropolis-hastings-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/locally-informed-proposals-metropolis-hastings-2022.html">
+    <meta property="og:title" content="សំណើផ្តល់ព័ត៌មានមូលដ្ឋាននៅក្នុងក្បួនដោះស្រាយ Metropolis-Hastings ជាមួយនឹងការអនុវត្ត | KhmerResearch.com">
+    <meta property="og:description" content="និក្ខេបបទនេះដោះស្រាយពីភាពមិនមានប្រសិទ្ធភាពក្នុងការគណនានៃវិធីសាស្ត្រ Markov Chain Monte Carlo (MCMC) ស្តង់ដារ នៅពេលត្រូវដោះស្រាយបញ្ហាកំណត់ដ៏ធំ និងស្មុគស្មាញដូចជាបញ្ហា Traveling Salesman Problem (TSP...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2022-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Metropolis-Hastings">
+    
+    <meta property="article:tag" content="Markov Chain Monte Carlo">
+    
+    <meta property="article:tag" content="Traveling Salesman Problem">
+    
+    <meta property="article:tag" content="Locally-informed proposals">
+    
+    <meta property="article:tag" content="Simulated annealing">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="សំណើផ្តល់ព័ត៌មានមូលដ្ឋាននៅក្នុងក្បួនដោះស្រាយ Metropolis-Hastings ជាមួយនឹងការអនុវត្ត">
+    <meta name="twitter:description" content="និក្ខេបបទនេះដោះស្រាយពីភាពមិនមានប្រសិទ្ធភាពក្នុងការគណនានៃវិធីសាស្ត្រ Markov Chain Monte Carlo (MCMC) ស្តង់ដារ នៅពេលត្រូវដោះស្រាយបញ្ហាកំណត់ដ៏ធំ និងស្មុគស្មាញដូចជាបញ្ហា Traveling Salesman Problem (TSP...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u179f\u17c6\u178e\u17be\u1795\u17d2\u178f\u179b\u17cb\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Metropolis-Hastings \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f",
+      "name": "Locally-informed proposals in Metropolis-Hastings algorithm with applications",
+      "description": "\u1793\u17b7\u1780\u17d2\u1781\u17c1\u1794\u1794\u1791\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1796\u17b8\u1797\u17b6\u1796\u1798\u17b7\u1793\u1798\u17b6\u1793\u1794\u17d2\u179a\u179f\u17b7\u1791\u17d2\u1792\u1797\u17b6\u1796\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1782\u178e\u1793\u17b6\u1793\u17c3\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a Markov Chain Monte Carlo (MCMC) \u179f\u17d2\u178f\u1784\u17cb\u178a\u17b6\u179a \u1793\u17c5\u1796\u17c1\u179b\u178f\u17d2\u179a\u17bc\u179c\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1780\u17c6\u178e\u178f\u17cb\u178a\u17cf\u1792\u17c6 \u1793\u17b7\u1784\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u178a\u17bc\u1785\u1787\u17b6\u1794\u1789\u17d2\u17a0\u17b6 Traveling Salesman Problem (TSP)\u17d4 \u1780\u17b6\u179a\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u178a\u17c6\u178e\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1787\u1798\u17d2\u179a\u17be\u179f\u1785\u17c3\u178a\u1793\u17d2\u1799\u178f\u17c2\u1784\u178f\u17c2\u1791\u17b6\u1798\u1791\u17b6\u179a\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u1793\u17b7\u1784\u1785\u17c6\u1793\u17bd\u1793\u1787\u17bb\u17c6 (iterations) \u1785\u17d2\u179a\u17be\u1793\u1787\u17d2\u179a\u17bb\u179b\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/locally-informed-proposals-metropolis-hastings-2022.html",
+      "author": [{"@type": "Person", "name": "Bartosz Chmiela (Uniwersytet Wroc\u0142awski)"}],
+      "datePublished": "2022",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Locally-informed proposals in Metropolis-Hastings algorithm with applications",
+        "url": "https://github.com/Homeomorphistic/Locally-informed-proposals-MCMC"
+      },
+      "keywords": ["Metropolis-Hastings", "Markov Chain Monte Carlo", "Traveling Salesman Problem", "Locally-informed proposals", "Simulated annealing"],
+      "about": "Computer Science"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u179f\u17c6\u178e\u17be\u1795\u17d2\u178f\u179b\u17cb\u1796\u17d0\u178f\u17cc\u1798\u17b6\u1793\u1798\u17bc\u179b\u178a\u17d2\u178b\u17b6\u1793\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799 Metropolis-Hastings \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f",
+          "item": "https://khmerresearch.com/papers/science/locally-informed-proposals-metropolis-hastings-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>សំណើផ្តល់ព័ត៌មានមូលដ្ឋាននៅក្នុងក្បួនដោះស្រាយ Metropolis-H...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Locally-informed proposals in Metropolis-Hastings algorithm with applications<br>
+        
+        <strong>Source:</strong> <a href="https://github.com/Homeomorphistic/Locally-informed-proposals-MCMC" target="_blank" rel="noopener">github.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>សំណើផ្តល់ព័ត៌មានមូលដ្ឋាននៅក្នុងក្បួនដោះស្រាយ Metropolis-Hastings ជាមួយនឹងការអនុវត្ត</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Locally-informed proposals in Metropolis-Hastings algorithm with applications</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Bartosz Chmiela (Uniwersytet Wrocławski)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computer Science</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> និក្ខេបបទនេះដោះស្រាយពីភាពមិនមានប្រសិទ្ធភាពក្នុងការគណនានៃវិធីសាស្ត្រ Markov Chain Monte Carlo (MCMC) ស្តង់ដារ នៅពេលត្រូវដោះស្រាយបញ្ហាកំណត់ដ៏ធំ និងស្មុគស្មាញដូចជាបញ្ហា Traveling Salesman Problem (TSP)។ ការស្វែងរកដំណោះស្រាយដោយប្រើជម្រើសចៃដន្យតែងតែទាមទារពេលវេលា និងចំនួនជុំ (iterations) ច្រើនជ្រុល។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានបង្កើត និងសាកល្បងក្បួនដោះស្រាយ Metropolis-Hastings ដែលបានកែប្រែដោយប្រើប្រាស់ការចែកចាយសំណើផ្តល់ព័ត៌មានមូលដ្ឋាន (Locally-informed proposals) ដើម្បីធ្វើឱ្យប្រសើរឡើងនូវការជ្រើសរើសបេក្ខជនក្នុងដំណើរការស្វែងរកដំណោះស្រាយល្អបំផុត។
+        
+        <ul>
+            
+            <li>ការកែប្រែក្បួនដោះស្រាយ (Metropolis-Hastings Algorithm Modification)</li>
+            
+            <li>ការចែកចាយសំណើផ្តល់ព័ត៌មានមូលដ្ឋាន (Locally-Informed Proposals Distribution)</li>
+            
+            <li>ការវាស់ស្ទង់ជាមួយទិន្នន័យ (Traveling Salesman Problem Benchmark - TSPLIB95)</li>
+            
+            <li>ការរួមបញ្ចូលបច្ចេកទេសបន្ធូរបន្ថយ (Simulated Annealing)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ LIP ត្រូវការចំនួនជុំតិចជាងឆ្ងាយបើធៀបនឹងការជ្រើសរើសអ្នកជិតខាងចៃដន្យ (Random Neighbours) ដោយរត់រកដំណោះស្រាយរួមក្នុងចន្លោះត្រឹម ២៧ ទៅ ២៥៦ ជំហាន ធៀបនឹង ២០០០០ ជំហានធម្មតា។</li>
+            
+            <li>ទោះបីជាមានចំនួនជុំតិចជាងក៏ដោយ ក្បួនដោះស្រាយ LIP មានភាពស្មុគស្មាញក្នុងការគណនាខ្ពស់ជាងក្នុងមួយជំហាន ដែលបណ្តាលឱ្យប្រើពេលដំណើរការជាក់ស្តែងយូរជាងពិតមែន (រហូតដល់ ១,៥ ម៉ោង ធៀបនឹង ១,៥ វិនាទីសម្រាប់ទិន្នន័យធំ)។</li>
+            
+            <li>វិធីសាស្ត្រនេះបង្ហាញពីសក្តានុពលខ្ពស់សម្រាប់ការធ្វើឱ្យប្រសើរឡើង ប្រសិនបើគេអាចយកវាទៅប្រើរួមគ្នាជាមួយការគណនាស្របគ្នា (Concurrent computing) ឬបច្ចេកទេសចងក្រងទិន្នន័យឱ្យកាន់តែប្រសើរដើម្បីកាត់បន្ថយភាពស្មុគស្មាញក្នុងការគណនា។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Neighbours (RN) in Metropolis-Hastings</span></strong><br>ការជ្រើសរើសអ្នកជិតខាងដោយចៃដន្យ (RN)</td>
+                <td>មានភាពសាមញ្ញក្នុងការអនុវត្ត និងមានល្បឿនលឿនខ្លាំងក្នុងការគណនាក្នុងមួយជំហាន ព្រោះមិនទាមទារការគណនាស្មុគស្មាញច្រើន។</td>
+                <td>ទាមទារចំនួនជុំ (iterations) ច្រើនខ្លាំងណាស់ ដើម្បីឈានទៅរកដំណោះស្រាយល្អបំផុត ដែលធ្វើឱ្យខាតពេលវេលាក្នុងការស្វែងរកជម្រើសល្អ។</td>
+                <td>ត្រូវការរហូតដល់ ២០០០០ ជំហានទើបអាចទទួលបានចម្ងាយសរុបប្រហាក់ប្រហែលនឹងការប្រើវិធី LIP ប៉ុន្តែចំណាយពេលគណនាសរុបតិចបំផុត (ឧ. ១.៥ វិនាទីសម្រាប់ទិន្នន័យ dsj1000)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Locally-Informed Proposals (LIP)</span></strong><br>ការផ្តល់សំណើដោយផ្អែកលើព័ត៌មានមូលដ្ឋាន (LIP)</td>
+                <td>កាត់បន្ថយចំនួនជុំយ៉ាងច្រើនសន្ធឹកសន្ធាប់ក្នុងការស្វែងរកចម្លើយ ដោយជ្រើសរើសអ្នកជិតខាងដែលមានសក្តានុពលខ្ពស់មុនគេ។</td>
+                <td>មានភាពស្មុគស្មាញក្នុងការគណនាខ្ពស់ក្នុងមួយជំហានៗ ដែលធ្វើឱ្យការអនុវត្តជាក់ស្តែងប្រើពេលវេលាយូរខ្លាំង ប្រសិនបើមិនមានការបំបែកការគណនា។</td>
+                <td>អាចឈានដល់ដំណោះស្រាយល្អបំផុតដោយប្រើត្រឹមតែ ២៧ ទៅ ២៥៦ ជំហានប៉ុណ្ណោះ អាស្រ័យលើទំហំទិន្នន័យ តែចំណាយពេលរហូតដល់ជាង ៨០ វិនាទី ឬដល់រាប់ម៉ោងសម្រាប់ទិន្នន័យធំៗ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តក្បួនដោះស្រាយនេះទាមទារធនធានកុំព្យូទ័រជាមូលដ្ឋានសម្រាប់ការសាកល្បងខ្នាតតូច ប៉ុន្តែត្រូវការថាមពលគណនាខ្ពស់ ឬការធ្វើទំនើបកម្មកូដកម្រិតខ្ពស់សម្រាប់ទិន្នន័យជាក់ស្តែងធំៗ។
+    
+    <ul>
+        
+        <li><strong>Software Framework:</strong> ភាសាអភិវឌ្ឍន៍ <span class='en'>Python 3</span> ជាមួយនឹងកញ្ចប់ទិន្នន័យ <span class='en'>tsplib95</span> និងបណ្ណាល័យគណនាមួយចំនួនទៀត។</li>
+        
+        <li><strong>Hardware Requirements:</strong> កុំព្យូទ័រធម្មតាអាចដំណើរការបាន តែដើម្បីពន្លឿនក្បួនដោះស្រាយ LIP ឱ្យមានប្រសិទ្ធភាពជាក់ស្តែង គួរប្រើប្រាស់ម៉ាស៊ីនដែលមានសមត្ថភាពធ្វើការគណនាស្របគ្នា (<span class='en'>Multi-core CPU</span>)។</li>
+        
+        <li><strong>Datasets:</strong> ទិន្នន័យស្តង់ដារពី <span class='en'>TSPLIB</span> ដូចជា berlin52, kroA150, att532, និង dsj1000។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យគំរូស្តង់ដារពី <span class='en'>TSPLIB</span> ដែលតំណាងឱ្យទីក្រុងនៅប្រទេសអាល្លឺម៉ង់ សហរដ្ឋអាមេរិក និងទិន្នន័យបង្កើតដោយចៃដន្យ។ ទោះបីជាវាមិនមែនជាទិន្នន័យនៃទីតាំងក្នុងប្រទេសកម្ពុជាផ្ទាល់ក៏ដោយ លក្ខណៈនៃបញ្ហា <span class='en'>Traveling Salesman Problem (TSP)</span> គឺមានលក្ខណៈសកល ហើយការសន្និដ្ឋានពីល្បឿននិងចំនួនជុំរបស់ក្បួនដោះស្រាយនេះ អាចយកមកអនុវត្តដោយផ្ទាល់លើបណ្តាញផ្លូវនៅក្នុងប្រទេសកម្ពុជាបាន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ក្បួនដោះស្រាយនេះមានសារៈសំខាន់ខ្លាំងណាស់ក្នុងការជួយដោះស្រាយបញ្ហាដឹកជញ្ជូន និងបណ្តាញចែកចាយ ដែលកំពុងមានតម្រូវការខ្ពស់ក្នុងប្រទេសកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យភស្តុភារ និងដឹកជញ្ជូន (Logistics & E-commerce):</strong> ក្រុមហ៊ុនដឹកជញ្ជូនទំនិញ ឬអាហារ អាចប្រើប្រាស់វាដើម្បីស្វែងរកផ្លូវខ្លីបំផុតក្នុងការចែកចាយកញ្ចប់បញ្ញើនៅរាជធានីភ្នំពេញ ដើម្បីសន្សំសំចៃការចំណាយលើប្រេងឥន្ធនៈ និងកាត់បន្ថយពេលវេលាដឹកជញ្ជូន។</li>
+            
+            <li><strong>ការរៀបចំបណ្តាញអគ្គិសនី និងទឹកស្អាត (Utility Routing):</strong> អាជ្ញាធរពាក់ព័ន្ធអាចប្រើប្រាស់វិធីសាស្ត្រនេះក្នុងការគូសប្លង់តភ្ជាប់បណ្តាញខ្សែកាប ឬបំពង់ទឹកស្អាតទៅកាន់ភូមិដាច់ស្រយាលនានានៅតាមបណ្តាខេត្ត ដើម្បីប្រើប្រាស់សម្ភារៈតិចបំផុត និងកាត់បន្ថយថ្លៃដើម។</li>
+            
+            <li><strong>ការធ្វើផែនការដំណើរកម្សាន្ត (Tourism Itinerary Planning):</strong> ទីភ្នាក់ងារទេសចរណ៍អាចយកទៅរៀបចំកញ្ចប់ធ្វើដំណើរដ៏ប្រសើរបំផុតក្នុងការទស្សនាប្រាសាទនានាក្នុងខេត្តសៀមរាប ដោយកំណត់ផ្លូវដែលចំណាយពេលធ្វើដំណើរកាត់ខ្វែងគ្នាតិចបំផុត។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកទេសនេះគឺជាមូលដ្ឋានគ្រឹះដ៏មានសក្តានុពលក្នុងការបង្កើនប្រសិទ្ធភាពប្រតិបត្តិការដែលមានការពាក់ព័ន្ធនឹងបណ្តាញផ្លូវ និងទីតាំងច្រើនក្នុងប្រទេសកម្ពុជា ប្រសិនបើត្រូវបានគួបផ្សំជាមួយបច្ចេកវិទ្យាគណនាស្របគ្នា (<span class='en'>Concurrent Computing</span>) ដើម្បីដោះស្រាយបញ្ហាយឺតយ៉ាវ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ជំហានទី១៖ សិក្សាពីទ្រឹស្តីមូលដ្ឋាននៃដំណើរការ Markov:</strong> និស្សិតគួរចាប់ផ្តើមស្វែងយល់ពីគោលការណ៍ <span class='en'>Markov Chain Monte Carlo (MCMC)</span> និងក្បួនដោះស្រាយ <span class='en'>Metropolis-Hastings</span> ជាមុនសិន ដើម្បីយល់ពីរបៀបដែលកុំព្យូទ័រអាចប៉ាន់ស្មានរកដំណោះស្រាយ។</li>
+            
+            <li><strong>ជំហានទី២៖ អនុវត្តកូដដោះស្រាយបញ្ហាទីតាំងតិចតួច:</strong> ទាញយកកញ្ចប់ <span class='en'>tsplib95</span> ក្នុងភាសា <span class='en'>Python</span> រួចសាកល្បងសរសេរកូដដោយប្រើវិធី <span class='en'>Random Neighbours</span> ដើម្បីរកចម្ងាយខ្លីបំផុតសម្រាប់បញ្ហាដែលមានចំណុចទីតាំងពី ១០ ទៅ ៥០ ទីតាំង។</li>
+            
+            <li><strong>ជំហានទី៣៖ អនុវត្តក្បួនដោះស្រាយ LIP និងប្រៀបធៀបលទ្ធផល:</strong> សរសេរកូដក្បួនដោះស្រាយ <span class='en'>Locally-Informed Proposals</span> ដោយផ្អែកតាមរូបមន្តគណនាក្នុងឯកសារស្រាវជ្រាវនេះ រួចធ្វើការប្រៀបធៀបចំនួនជុំ (iterations) ដែលបានប្រើជាមួយវិធីចៃដន្យដែលបានធ្វើក្នុងជំហានទី២។</li>
+            
+            <li><strong>ជំហានទី៤៖ ធ្វើឱ្យប្រសើរឡើងនូវល្បឿនគណនា (Optimization):</strong> សិក្សាប្រើប្រាស់បណ្ណាល័យ <span class='en'>multiprocessing</span> ឬ <span class='en'>concurrent.futures</span> នៅក្នុង <span class='en'>Python</span> ដើម្បីធ្វើការគណនាទម្ងន់នៃអ្នកជិតខាងនីមួយៗក្នុងពេលតែមួយ ដែលអាចដោះស្រាយបញ្ហាចំណាយពេលយូររបស់ក្បួនដោះស្រាយនេះ។</li>
+            
+            <li><strong>ជំហានទី៥៖ សាកល្បងលើទិន្នន័យជាក់ស្តែងនៅប្រទេសកម្ពុជា:</strong> ប្រមូលទិន្នន័យ <span class='en'>GPS</span> ពិតប្រាកដនៃទីតាំងបញ្ញើប្រមាណ ៥០ ទៅ ១០០ កន្លែងក្នុងរាជធានីភ្នំពេញ រួចប្រើប្រាស់ <span class='en'>Google Maps Distance Matrix API</span> ដើម្បីទាញយកចម្ងាយជាក់ស្តែង និងបញ្ចូលទៅក្នុងក្បួនដោះស្រាយនេះដើម្បីរកផ្លូវដឹកជញ្ជូនដែលចំណេញបំផុត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Markov Chain Monte Carlo (MCMC)</span></td>
+                <td>ជាក្រុមនៃក្បួនដោះស្រាយតាមបែបស្ថិតិដែលប្រើប្រាស់ដំណើរការម៉ាកូវ (Markov Chain) ដើម្បីបង្កើតគំរូចៃដន្យសម្រាប់ប៉ាន់ស្មានលទ្ធផលចេញពីបំណែងចែកប្រូបាប៊ីលីតេដ៏ស្មុគស្មាញ ដែលមិនអាចគណនាដោយផ្ទាល់បាន។</td>
+                <td>ដូចជាការដើររុករកក្នុងព្រៃដ៏ធំមួយដោយបោះកាក់រាល់ជំហាន ដើម្បីស្វែងរកកន្លែងដែលមានផ្លែឈើច្រើនជាងគេ ដោយមិនចាំបាច់ដើរសព្វគ្រប់កន្លែងទាំងអស់នោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Metropolis-Hastings algorithm</span></td>
+                <td>ជាក្បួនដោះស្រាយចម្បងមួយនៅក្នុងវិធីសាស្ត្រ MCMC ដែលសម្រេចថាតើត្រូវទទួលយក ឬបដិសេធ "អ្នកជិតខាង" (ជម្រើសថ្មី) ដោយផ្អែកលើការប្រៀបធៀបប្រូបាប៊ីលីតេរវាងជម្រើសចាស់ និងជម្រើសថ្មី ដើម្បីធានាថាដំណើរការនេះឈានទៅរកលទ្ធផលល្អបំផុត។</td>
+                <td>ដូចជាការសម្រេចចិត្តប្តូរទីតាំងតូបលក់អីវ៉ាន់នៅផ្សារ៖ បើតូបថ្មីមានភ្ញៀវច្រើនជាង យើងដូរទៅភ្លាម តែបើតូបថ្មីមានភ្ញៀវតិចជាង យើងអាចនៅកន្លែងចាស់ ឬប្តូរទៅល្បងមើលសិនក្នុងឱកាសណាមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Traveling Salesman Problem (TSP)</span></td>
+                <td>ជាបញ្ហាបែបគណិតវិទ្យា និងវិទ្យាសាស្ត្រកុំព្យូទ័រ (ប្រភេទ NP-hard) ដែលទាមទារការស្វែងរកផ្លូវធ្វើដំណើរដែលខ្លីបំផុត កាត់តាមទីតាំងទាំងអស់ដែលបានកំណត់តែម្តងគត់ រួចត្រលប់មកចំណុចដើមវិញ។</td>
+                <td>ដូចជាអ្នកដឹកជញ្ជូនរៀបចំផែនការជិះម៉ូតូផ្ញើអីវ៉ាន់ឱ្យអតិថិជន១០នាក់នៅតាមផ្ទះផ្សេងៗគ្នា ដោយធ្វើយ៉ាងណាឱ្យចំណាយសាំង និងពេលវេលាតិចបំផុតមុនពេលត្រលប់មកឃ្លាំងវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Locally-informed proposals (LIP)</span></td>
+                <td>ជាការកែច្នៃរបៀបជ្រើសរើសជម្រើសថ្មីនៅក្នុងក្បួន MCMC ដោយមិនជ្រើសរើសដោយចៃដន្យទាំងស្រុងនោះទេ តែប្រើប្រាស់ព័ត៌មាននៃទម្ងន់ឬចម្ងាយរបស់អ្នកជិតខាង ដើម្បីផ្តល់អាទិភាពដល់ជម្រើសណាដែលមានសក្តានុពលខ្ពស់ជាងគេមុន។</td>
+                <td>ជំនួសឱ្យការបិទភ្នែកដើររើសផ្លូវដោយចៃដន្យ វាប្រៀបដូចជាការប្រើពិលបញ្ចាំងមើលផ្លូវនៅក្បែរៗខ្លួនជាមុនសិន រួចទើបសម្រេចចិត្តដើរទៅរកផ្លូវណាដែលមើលទៅស្រឡះល្អជាងគេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Simulated annealing</span></td>
+                <td>ជាបច្ចេកទេសបន្ធូរបន្ថយ (Optimization) ដែលអនុញ្ញាតឱ្យក្បួនដោះស្រាយអាចទទួលយកជម្រើសអាក្រក់នៅដំណាក់កាលដំបូងៗ (សីតុណ្ហភាពខ្ពស់) ដើម្បីចៀសវាងការជាប់គាំងនៅត្រឹមដំណោះស្រាយល្អត្រឹមតំបន់តូចមួយ (Local Minima) រួចសឹមបង្រួមការស្វែងរកដើម្បីយកតែជម្រើសល្អនៅពេលក្រោយ (សីតុណ្ហភាពទាប)។</td>
+                <td>ដូចជាការសិតលោហៈធាតុក្តៅ៖ ដំបូងគេប្រើកម្តៅខ្លាំងដើម្បីឱ្យវារលាយអាចពត់ពេនបានស្រួលទៅគ្រប់ទម្រង់ បន្ទាប់មកទើបគេបន្ថយកម្តៅបន្តិចម្តងៗដើម្បីឱ្យវាកកិតរឹងមាំទៅជារូបរាងដ៏ល្អឥតខ្ចោះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">NP-hard problem</span></td>
+                <td>ជាចំណាត់ថ្នាក់នៃបញ្ហាក្នុងទ្រឹស្តីកុំព្យូទ័រ ដែលការរកដំណោះស្រាយល្អដាច់ខាត ទាមទារពេលវេលាគណនាកើនឡើងយ៉ាងគំហុក (Exponential time) នៅពេលទំហំទិន្នន័យកាន់តែធំ ដែលធ្វើឱ្យកុំព្យូទ័រធម្មតាមិនអាចដោះស្រាយវាបានក្នុងពេលជាក់ស្តែង។</td>
+                <td>ដូចជាការទាយលេខសម្ងាត់ (Password) របស់ទូដែក ដែលបើអ្នកថែមតែលេខមួយខ្ទង់ទៀត ចំនួនជម្រើសក្នុងការសាកល្បងនឹងកើនឡើងយ៉ាងច្រើនរហូតកុំព្យូទ័រប្រើពេលរាប់ពាន់ឆ្នាំទើបរកឃើញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Detailed balance</span></td>
+                <td>ជាលក្ខខណ្ឌមួយនៅក្នុងទ្រឹស្តីម៉ាកូវ ដែលធានាថាអត្រានៃការផ្លាស់ប្តូរពីស្ថានភាព A ទៅស្ថានភាព B គឺស្មើគ្នានឹងអត្រានៃការផ្លាស់ប្តូរត្រលប់ពីស្ថានភាព B មកស្ថានភាព A វិញ ដែលជួយឱ្យប្រព័ន្ធរក្សាបាននូវលំនឹងចែកចាយ (Stationary distribution)។</td>
+                <td>ដូចជាចំនួនមនុស្សដើរចេញពីបន្ទប់ A ចូលបន្ទប់ B ស្មើគ្នាបេះបិទនឹងចំនួនមនុស្សដើរចេញពីបន្ទប់ B ចូលបន្ទប់ A ក្នុងពេលតែមួយ ដែលធ្វើឱ្យចំនួនមនុស្សសរុបក្នុងបន្ទប់នីមួយៗនៅថេរដដែល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Ergodicity</span></td>
+                <td>ជាលក្ខណៈនៃដំណើរការម៉ាកូវ ដែលរាល់ស្ថានភាពទាំងអស់ (States) អាចត្រូវបានឈានទៅដល់បានដោយមិនខ្វល់ថាចាប់ផ្តើមពីទីតាំងណាមួយនោះទេ ហើយការអនុវត្តរយៈពេលយូរនឹងអាចគ្របដណ្តប់ប្រព័ន្ធទាំងមូលដោយមិនជាប់គាំង។</td>
+                <td>ដូចជាការលាយទឹកស៊ីរ៉ូក្នុងកែវទឹក៖ បើអ្នកកូរវាយូរគ្រប់គ្រាន់ ម៉ូលេគុលស៊ីរ៉ូនឹងសាយភាយទៅដល់គ្រប់កន្លែងនៃទឹកនោះ ដោយមិននៅដុំកកកុញតែមួយកន្លែងឡើយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Improvements+to+Metropolis-Hastings+algorithms+for+large+state+spaces" target="_blank" rel="noopener"><span class="en">Improvements to Metropolis-Hastings algorithms for large state spaces</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Locally-informed+proposals+Markov+Chain+Monte+Carlo+optimization" target="_blank" rel="noopener"><span class="en">Locally-informed proposals Markov Chain Monte Carlo optimization</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Simulated+annealing+cooling+schedules+for+the+Traveling+Salesman+Problem" target="_blank" rel="noopener"><span class="en">Simulated annealing cooling schedules for the Traveling Salesman Problem</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Concurrent+computing+techniques+for+MCMC+routing+algorithms" target="_blank" rel="noopener"><span class="en">Concurrent computing techniques for MCMC routing algorithms</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Markov+Chain+Monte+Carlo+approaches+to+solving+NP-hard+deterministic+routing+problems" target="_blank" rel="noopener"><span class="en">Markov Chain Monte Carlo approaches to solving NP-hard deterministic routing problems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

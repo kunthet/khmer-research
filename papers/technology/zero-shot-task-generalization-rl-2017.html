@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ឯកសារបន្ថែម៖ ការធ្វើទូទៅកម្មកិច្ចការដោយគ្មានការហ្វឹកហាត់ជាមុន (Zero-Shot) ជាមួយនឹងការរៀនពង្រឹងស៊ីជម្រៅពហុកិច្ចការ - Supplementary Material: Zero-Shot Task Generalization with Multi-Task Deep Re... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ឯកសារបន្ថែម៖ ការធ្វើទូទៅកម្មកិច្ចការដោយគ្មានការហ្វឹកហាត់ជាមុ។ ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើទូទៅកម្មកិច្ចការដោយមិនមានការហ្វឹកហាត់ជាមុន (Zero-Shot Task Gene...">
+    
+    <meta name="keywords" content="Deep Reinforcement Learning, Zero-Shot Task Generalization, Multi-Task Learning, Analogy-Making, Policy Distillation, Actor-Critic, Grid-World Environment, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/zero-shot-task-generalization-rl-2017.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/zero-shot-task-generalization-rl-2017.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/zero-shot-task-generalization-rl-2017.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/zero-shot-task-generalization-rl-2017.html">
+    <meta property="og:title" content="ឯកសារបន្ថែម៖ ការធ្វើទូទៅកម្មកិច្ចការដោយគ្មានការហ្វឹកហាត់ជាមុន (Zero-Shot) ជាមួយនឹងការរៀនពង្រឹងស៊ីជម្រៅពហុកិច្ចការ | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើទូទៅកម្មកិច្ចការដោយមិនមានការហ្វឹកហាត់ជាមុន (Zero-Shot Task Generalization) នៅក្នុងភ្នាក់ងារបញ្ញាសិប្បនិម្មិត ដើម្បីឱ្យពួកវាអាចអនុវត្តការណែនាំថ្មីៗនិងស្មុគស្មាញដោយជ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2017, Proceedings of the 34th International Conference on Machine Learning, PMLR 70-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Deep Reinforcement Learning">
+    
+    <meta property="article:tag" content="Zero-Shot Task Generalization">
+    
+    <meta property="article:tag" content="Multi-Task Learning">
+    
+    <meta property="article:tag" content="Analogy-Making">
+    
+    <meta property="article:tag" content="Policy Distillation">
+    
+    <meta property="article:tag" content="Actor-Critic">
+    
+    <meta property="article:tag" content="Grid-World Environment">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ឯកសារបន្ថែម៖ ការធ្វើទូទៅកម្មកិច្ចការដោយគ្មានការហ្វឹកហាត់ជាមុន (Zero-Shot) ជាមួយនឹងការរៀនពង្រឹងស៊ីជម្រៅពហុកិច្ចការ">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើទូទៅកម្មកិច្ចការដោយមិនមានការហ្វឹកហាត់ជាមុន (Zero-Shot Task Generalization) នៅក្នុងភ្នាក់ងារបញ្ញាសិប្បនិម្មិត ដើម្បីឱ្យពួកវាអាចអនុវត្តការណែនាំថ្មីៗនិងស្មុគស្មាញដោយជ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u17af\u1780\u179f\u17b6\u179a\u1794\u1793\u17d2\u1790\u17c2\u1798\u17d6 \u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1791\u17bc\u1791\u17c5\u1780\u1798\u17d2\u1798\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u178a\u17c4\u1799\u1782\u17d2\u1798\u17b6\u1793\u1780\u17b6\u179a\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u1787\u17b6\u1798\u17bb\u1793 (Zero-Shot) \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u1796\u17a0\u17bb\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a",
+      "name": "Supplementary Material: Zero-Shot Task Generalization with Multi-Task Deep Reinforcement Learning",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1791\u17bc\u1791\u17c5\u1780\u1798\u17d2\u1798\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u178a\u17c4\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u1780\u17b6\u179a\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u1787\u17b6\u1798\u17bb\u1793 (Zero-Shot Task Generalization) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1797\u17d2\u1793\u17b6\u1780\u17cb\u1784\u17b6\u179a\u1794\u1789\u17d2\u1789\u17b6\u179f\u17b7\u1794\u17d2\u1794\u1793\u17b7\u1798\u17d2\u1798\u17b7\u178f \u178a\u17be\u1798\u17d2\u1794\u17b8\u17b1\u17d2\u1799\u1796\u17bd\u1780\u179c\u17b6\u17a2\u17b6\u1785\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1780\u17b6\u179a\u178e\u17c2\u1793\u17b6\u17c6\u1790\u17d2\u1798\u17b8\u17d7\u1793\u17b7\u1784\u179f\u17d2\u1798\u17bb\u1782\u179f\u17d2\u1798\u17b6\u1789\u178a\u17c4\u1799\u1787\u17c4\u1782\u1787\u17d0\u1799\u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u17a0\u17bb\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/zero-shot-task-generalization-rl-2017.html",
+      "author": [{"@type": "Person", "name": "Junhyuk Oh (University of Michigan)"},{"@type": "Person", "name": "Satinder Singh (University of Michigan)"},{"@type": "Person", "name": "Honglak Lee (University of Michigan, Google Brain)"},{"@type": "Person", "name": "Pushmeet Kohli (Microsoft Research)"}],
+      "datePublished": "2017, Proceedings of the 34th International Conference on Machine Learning, PMLR 70",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Supplementary Material: Zero-Shot Task Generalization with Multi-Task Deep Reinforcement Learning",
+        "url": "http://proceedings.mlr.press/v70/oh17a/oh17a-supp.pdf"
+      },
+      "keywords": ["Deep Reinforcement Learning", "Zero-Shot Task Generalization", "Multi-Task Learning", "Analogy-Making", "Policy Distillation", "Actor-Critic", "Grid-World Environment"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u17af\u1780\u179f\u17b6\u179a\u1794\u1793\u17d2\u1790\u17c2\u1798\u17d6 \u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1791\u17bc\u1791\u17c5\u1780\u1798\u17d2\u1798\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a\u178a\u17c4\u1799\u1782\u17d2\u1798\u17b6\u1793\u1780\u17b6\u179a\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u1787\u17b6\u1798\u17bb\u1793 (Zero-Shot) \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u179f\u17ca\u17b8\u1787\u1798\u17d2\u179a\u17c5\u1796\u17a0\u17bb\u1780\u17b7\u1785\u17d2\u1785\u1780\u17b6\u179a",
+          "item": "https://khmerresearch.com/papers/technology/zero-shot-task-generalization-rl-2017.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ឯកសារបន្ថែម៖ ការធ្វើទូទៅកម្មកិច្ចការដោយគ្មានការហ្វឹកហាត់ជ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Supplementary Material: Zero-Shot Task Generalization with Multi-Task Deep Reinforcement Learning<br>
+        
+        <strong>Source:</strong> <a href="http://proceedings.mlr.press/v70/oh17a/oh17a-supp.pdf" target="_blank" rel="noopener">proceedings.mlr.press</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ឯកសារបន្ថែម៖ ការធ្វើទូទៅកម្មកិច្ចការដោយគ្មានការហ្វឹកហាត់ជាមុន (Zero-Shot) ជាមួយនឹងការរៀនពង្រឹងស៊ីជម្រៅពហុកិច្ចការ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Supplementary Material: Zero-Shot Task Generalization with Multi-Task Deep Reinforcement Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Junhyuk Oh (University of Michigan), Satinder Singh (University of Michigan), Honglak Lee (University of Michigan, Google Brain), Pushmeet Kohli (Microsoft Research)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2017, Proceedings of the 34th International Conference on Machine Learning, PMLR 70</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហានៃការធ្វើទូទៅកម្មកិច្ចការដោយមិនមានការហ្វឹកហាត់ជាមុន (Zero-Shot Task Generalization) នៅក្នុងភ្នាក់ងារបញ្ញាសិប្បនិម្មិត ដើម្បីឱ្យពួកវាអាចអនុវត្តការណែនាំថ្មីៗនិងស្មុគស្មាញដោយជោគជ័យតាមរយៈការរៀនពហុកិច្ចការ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានបង្កើតបរិស្ថានសាកល្បង 2D Grid-World ដោយប្រើប្រាស់បច្ចេកទេសរៀនពង្រឹងស៊ីជម្រៅរួមបញ្ចូលជាមួយនឹងស្ថាបត្យកម្មត្រួតពិនិត្យមេ (Meta Controller)។
+        
+        <ul>
+            
+            <li>ការធ្វើតេស្តក្នុងបរិស្ថាន 2D ដែលមានជម្រើសវត្ថុច្រើន (2D Grid-World Environment)</li>
+            
+            <li>ការបង្រួមគោលនយោបាយ និងការវាយតម្លៃអត្ថប្រយោជន៍ទូទៅ (Policy Distillation and Generalized Advantage Estimation)</li>
+            
+            <li>ការដាក់បញ្ចូលកម្មវិធីវត្ថុបំណងតាមបែបអាណាឡូក (Analogy-Making Objective)</li>
+            
+            <li>ការពិន័យតាមរយៈការធ្វើបច្ចុប្បន្នភាពម៉ាទ្រីសនៃប្រព័ន្ធត្រួតពិនិត្យមេ (Meta Controller Architecture)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ភ្នាក់ងារដែលហ្វឹកហាត់ដោយប្រើវត្ថុបំណងអាណាឡូកអាចធ្វើទូទៅកម្មកិច្ចការដែលមិនធ្លាប់ជួបបានយ៉ាងជោគជ័យ ដោយទទួលបានអត្រាជោគជ័យ 99.6% សម្រាប់កិច្ចការឯករាជ្យ និង 99.5% សម្រាប់កិច្ចការអាស្រ័យលើវត្ថុ។</li>
+            
+            <li>ស្ថាបត្យកម្ម Hierarchical-Dynamic ទទួលបានលទ្ធផលល្អជាងគេលើការអនុវត្តការណែនាំចំនួន ២០ ជំហាន ដោយមានអត្រាជោគជ័យ 95.5% (លើកិច្ចការធ្លាប់ជួប) និង 40.3% (លើកិច្ចការមិនធ្លាប់ជួប) ប្រៀបធៀបនឹងគំរូ Flat ដែលទទួលបានត្រឹមតែប្រមាណ 0%។</li>
+            
+            <li>លទ្ធផលបង្ហាញថាការរៀនសូត្រក្នុងមាត្រដ្ឋានពេលវេលាធំ (Large-time Scale) មានសារៈសំខាន់បំផុតសម្រាប់ការដោះស្រាយរង្វាន់ដែលពន្យារពេល (Delayed Reward)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Flat Controller</span></strong><br>ឧបករណ៍ត្រួតពិនិត្យរាបស្មើ (Flat Controller)</td>
+                <td>ងាយស្រួលក្នុងការរចនា និងអនុវត្តសម្រាប់កិច្ចការខ្លីៗ និងសាមញ្ញ។</td>
+                <td>ដំណើរការធ្លាក់ចុះយ៉ាងខ្លាំងនៅពេលចំនួននៃការណែនាំកើនឡើង ដោយសារតែវាលុបចោលវត្ថុគោលដៅដោយមិនចាំបាច់នៅពេលមិនមានពាក្យ 'ទាំងអស់'។</td>
+                <td>ទទួលបានអត្រាជោគជ័យត្រឹមតែ 0.0% លើការអនុវត្តការណែនាំចំនួន ២០ ជំហានដែលមិនធ្លាប់ជួប។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hierarchical-Short</span></strong><br>ស្ថាបត្យកម្មឋានានុក្រមខ្លី (Hierarchical-Short)</td>
+                <td>ដំណើរការបានល្អជាង Flat Controller តាមរយៈការបែងចែកការណែនាំជាកិច្ចការរង (subtasks) ធ្វើឱ្យមានភាពច្បាស់លាស់ជាងមុន។</td>
+                <td>ធ្វើបច្ចុប្បន្នភាពកិច្ចការរងនៅរាល់ជំហាននៃពេលវេលា (every time-step) ដែលធ្វើឱ្យវាពិបាកក្នុងការដោះស្រាយជាមួយរង្វាន់ដែលពន្យារពេល (delayed reward)។</td>
+                <td>ទទួលបានអត្រាជោគជ័យ 11.3% លើការអនុវត្តការណែនាំចំនួន ២០ ជំហានដែលមិនធ្លាប់ជួប។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Hierarchical-Dynamic (Proposed)</span></strong><br>ស្ថាបត្យកម្មឋានានុក្រមឌីណាមិក (Hierarchical-Dynamic)</td>
+                <td>រៀនដំណើរការក្នុងមាត្រដ្ឋានពេលវេលាធំ (Large-time scale) ដែលជួយឱ្យភ្នាក់ងាររៀនដោះស្រាយបញ្ហារង្វាន់ពន្យារពេលបានយ៉ាងមានប្រសិទ្ធភាព។</td>
+                <td>ទាមទារការគណនាស្មុគស្មាញ និងត្រូវការបច្ចេកទេសបង្វឹកកម្រិតខ្ពស់ (Policy Distillation & Multi-Task RL)។</td>
+                <td>ទទួលបានអត្រាជោគជ័យខ្ពស់បំផុតរហូតដល់ 40.3% លើការអនុវត្តការណែនាំចំនួន ២០ ជំហានដែលមិនធ្លាប់ជួប។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ទោះបីជាឯកសារមិនបានបញ្ជាក់អំពីតម្លៃធនធានជាសាច់ប្រាក់ក៏ដោយ ក៏ការបណ្តុះបណ្តាលម៉ូដែល Multi-Task Deep Reinforcement Learning ទាមទារធនធានកុំព្យូទ័រខ្ពស់សម្រាប់ការដំណើរការស្របគ្នា។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនដែលមាន CPU ច្រើន (ប្រើយ៉ាងហោចណាស់ 16 threads ជាមួយ batch size 8) និង GPU ខ្លាំងដើម្បីដំណើរការ 15,000 iterations។</li>
+        
+        <li><strong>Software Framework:</strong> បរិស្ថានសាកល្បង 2D ផ្អែកលើ MazeBase និងប្រព័ន្ធបណ្ដុះបណ្ដាល Deep Learning (ដូចជា TensorFlow ឬ PyTorch) សម្រាប់ Actor-Critic (GAE) និង RMSProp optimizer។</li>
+        
+        <li><strong>Expertise:</strong> ទាមទារអ្នកជំនាញកម្រិតខ្ពស់ផ្នែក Deep Reinforcement Learning, Multi-Task Learning, Policy Distillation និង NLP (សម្រាប់ការបង្កប់ពាក្យ)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការស្រាវជ្រាវនេះត្រូវបានធ្វើឡើង និងវាយតម្លៃទាំងស្រុងនៅក្នុងបរិស្ថានសិប្បនិម្មិត 2D Grid-World ដែលមិនមានទិន្នន័យពិភពពិត។ សម្រាប់ប្រទេសកម្ពុជា នេះមានន័យថាវាគ្រាន់តែជាការបង្ហាញពីទ្រឹស្តី (Proof of Concept) ហើយការអនុវត្តជាក់ស្តែងតម្រូវឱ្យមានទិន្នន័យជាក់ស្តែងពីបរិស្ថានដែលមានភាពស្មុគស្មាញ និងភាពមិនច្បាស់លាស់ (Noise) ច្រើនជាងនេះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនៃការបង្រៀន AI ឱ្យរៀនធ្វើកិច្ចការថ្មីដោយមិនបាច់ហ្វឹកហាត់សារជាថ្មី (Zero-Shot) នេះ មានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍប្រព័ន្ធស្វ័យប្រវត្តិកម្មឆ្លាតវៃនៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្មឆ្លាតវៃ (Smart Agriculture):</strong> អាចត្រូវបានយកទៅកែច្នៃប្រើប្រាស់សម្រាប់បញ្ជាដ្រូន ឬរ៉ូបូតកសិកម្មនៅតាមកសិដ្ឋានធំៗ (ឧទាហរណ៍នៅខេត្តបាត់ដំបង) ឱ្យយល់ពីការណែនាំថ្មីៗជារៀងរាល់ថ្ងៃ ដោយគ្រាន់តែផ្លាស់ប្តូរពាក្យបញ្ជាដោយមិនចាំបាច់សរសេរកម្មវិធីឡើងវិញ។</li>
+            
+            <li><strong>វិស័យភស្តុភារ និងឃ្លាំងទំនិញ (Logistics & Warehousing):</strong> ក្រុមហ៊ុនដឹកជញ្ជូន ឬឃ្លាំងទំនិញនៅតំបន់សេដ្ឋកិច្ចពិសេសក្រុងព្រះសីហនុ អាចប្រើប្រាស់ភ្នាក់ងារ AI ដើម្បីរៀបចំ ផ្លាស់ទី ឬស្វែងរកទំនិញដោយស្វ័យប្រវត្តិ ដោយប្រើការណែនាំជាភាសាធម្មជាតិ។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ទោះបីជាបច្ចុប្បន្នស្ថិតក្នុងដំណាក់កាលពិសោធន៍ក្តី ក៏ស្ថាបត្យកម្ម Meta Controller នេះជាគ្រឹះដ៏សំខាន់សម្រាប់បង្កើតរ៉ូបូត ឬប្រព័ន្ធ AI ដែលអាចបត់បែនបានទៅតាមស្ថានភាពជាក់ស្តែងនៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃ Deep Reinforcement Learning:</strong> និស្សិតគួរចាប់ផ្តើមរៀនអំពីក្បួនដោះស្រាយ (Algorithms) ដូចជា Actor-Critic និង Generalized Advantage Estimation (GAE) ដោយអនុវត្តកូដសាកល្បងតាមរយៈ <span class="en">OpenAI Gym</span> និង <span class="en">Stable Baselines3</span> នៅក្នុង <span class="en">Python</span>។</li>
+            
+            <li><strong>អនុវត្តការរៀនពហុកិច្ចការ (Multi-Task Learning):</strong> ចាប់ផ្តើមអនុវត្តការបណ្តុះបណ្តាលភ្នាក់ងារ AI ឱ្យធ្វើកិច្ចការច្រើនក្នុងពេលតែមួយ និងអនុវត្តបច្ចេកទេស Policy Distillation ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span> ដើម្បីបង្រួមទំហំម៉ូដែល។</li>
+            
+            <li><strong>កសាងបរិស្ថានសាកល្បង 2D:</strong> ប្រើប្រាស់បណ្ណាល័យដូចជា <span class="en">Minigrid</span> ឬកែច្នៃ <span class="en">MazeBase</span> ដើម្បីបង្កើតបរិស្ថានសាកល្បង 2D ផ្ទាល់ខ្លួន ដែលមានលក្ខណៈស្រដៀងនឹងបញ្ហាជាក់ស្តែង (ឧទាហរណ៍៖ បរិស្ថានឃ្លាំងទំនិញ)។</li>
+            
+            <li><strong>អភិវឌ្ឍស្ថាបត្យកម្ម Hierarchical Controller:</strong> ស្រាវជ្រាវ និងសរសេរកូដសម្រាប់ Meta Controller ដែលអាចធ្វើបច្ចុប្បន្នភាពកិច្ចការរងដោយផ្អែកលើពេលវេលាជាក់លាក់ (dynamic time-scale) និងប្រើប្រាស់ Analogy-making ដើម្បីសាកល្បងសមត្ថភាព Zero-Shot Learning របស់ភ្នាក់ងារ AI។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Zero-Shot Task Generalization</span></td>
+                <td>សមត្ថភាពរបស់ភ្នាក់ងារបញ្ញាសិប្បនិម្មិត (AI) ក្នុងការអនុវត្តកិច្ចការថ្មីៗដែលវាមិនធ្លាប់បានហ្វឹកហាត់ពីមុនមក ដោយប្រើប្រាស់ចំណេះដឹងឬការចាប់យកគំរូទូទៅ ដែលវាធ្លាប់រៀនពីកិច្ចការផ្សេងៗ។</td>
+                <td>ដូចជាសិស្សដែលចេះក្បួនបូកនិងដកលេខ រួចអាចដោះស្រាយលំហាត់ថ្មីដែលមិនធ្លាប់ជួបក្នុងថ្នាក់បានដោយខ្លួនឯង ដោយមិនបាច់មានអ្នកប្រាប់មុន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-Task Deep Reinforcement Learning</span></td>
+                <td>ការប្រើប្រាស់បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតស៊ីជម្រៅ (Deep Neural Networks) ដើម្បីបង្រៀនភ្នាក់ងារ AI តាមរយៈប្រព័ន្ធរង្វាន់និងពិន័យ ឱ្យចេះធ្វើកិច្ចការច្រើនខុសៗគ្នាក្នុងពេលតែមួយដោយជោគជ័យ។</td>
+                <td>ដូចជាការបង្វឹកសត្វឆ្កែមួយក្បាលឱ្យចេះទាំងអង្គុយ ក្រោក និងចាប់បាល់ ដោយការផ្តល់ចំណីជារង្វាន់នៅពេលវាធ្វើត្រូវ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Policy Distillation</span></td>
+                <td>បច្ចេកទេសផ្ទេរចំណេះដឹងពីម៉ូដែល AI គ្រូ (Teacher Policies) ជាច្រើនដែលជំនាញរៀងៗខ្លួន ទៅកាន់ម៉ូដែល AI សិស្ស (Student Policy) តែមួយ ដើម្បីឱ្យម៉ូដែលតែមួយនោះអាចធ្វើកិច្ចការទាំងអស់នោះបានយ៉ាងមានប្រសិទ្ធភាព។</td>
+                <td>ដូចជាការសង្ខេបមេរៀនពីសៀវភៅក្រាស់ៗជាច្រើនមុខវិជ្ជា បញ្ចូលទៅក្នុងសៀវភៅសង្ខេបតែមួយក្បាលដើម្បីងាយស្រួលយកតាមខ្លួន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Actor-Critic</span></td>
+                <td>ក្បួនដោះស្រាយនៅក្នុងការរៀនពង្រឹង (Reinforcement Learning) ដែលបែងចែកប្រព័ន្ធជាពីរផ្នែក៖ 'Actor' ជាអ្នកសម្រេចចិត្តធ្វើសកម្មភាព និង 'Critic' ជាអ្នកវាយតម្លៃថាតើសកម្មភាពនោះល្អកម្រិតណាដើម្បីកែតម្រូវនៅពេលក្រោយ។</td>
+                <td>ដូចជាអ្នកលេងកីឡា (Actor) ដែលកំពុងប្រកួតលើទីលាន និងមានគ្រូបង្វឹក (Critic) ដែលឈរចាំវាយតម្លៃនិងប្រាប់ថាលេងបានល្អឬអត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Generalized Advantage Estimation (GAE)</span></td>
+                <td>វិធីសាស្ត្រគណនាប៉ាន់ស្មានពី 'អត្ថប្រយោជន៍' នៃសកម្មភាពនីមួយៗរបស់ AI ដើម្បីកាត់បន្ថយភាពមិនច្បាស់លាស់ (Variance) ក្នុងការរៀនសូត្រ ដែលជួយធ្វើឱ្យការបង្វឹក AI កាន់តែមានស្ថិរភាពនិងលឿនជាងមុន។</td>
+                <td>ដូចជាការគិតពិចារណាយ៉ាងហ្មត់ចត់ក្នុងការថ្លឹងថ្លែងពីផលចំណេញនិងហានិភ័យ មុននឹងសម្រេចចិត្តវិនិយោគលើគម្រោងអ្វីមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Meta Controller</span></td>
+                <td>ប្រព័ន្ធបញ្ជាកម្រិតខ្ពស់នៅក្នុងស្ថាបត្យកម្មឋានានុក្រម ដែលមានតួនាទីសម្រេចចិត្តថាតើកិច្ចការរង (subtask) មួយណាដែល AI គួរអនុវត្តបន្ត ដើម្បីឈានទៅសម្រេចគោលដៅធំនៅចុងបញ្ចប់។</td>
+                <td>ដូចជាអ្នកគ្រប់គ្រងគម្រោង (Project Manager) ដែលមិនមែនជាអ្នកធ្វើការងារផ្ទាល់ ប៉ុន្តែជាអ្នកបែងចែកការងារតូចៗឱ្យកូនចៅធ្វើជាជំហានៗដើម្បីបញ្ចប់គម្រោងធំមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Multiplicative Interaction</span></td>
+                <td>វិធីសាស្ត្រផ្សំបញ្ចូលទិន្នន័យអថេរលក្ខខណ្ឌទៅក្នុងបណ្ដាញសរសៃប្រសាទតាមរយៈការគុណម៉ាទ្រីស (Matrix multiplication) ជំនួសឱ្យការគ្រាន់តែតម្រៀបបន្តគ្នា (concatenating) ដែលជួយឱ្យ AI យល់ពីទំនាក់ទំនងស្មុគស្មាញរវាងលក្ខខណ្ឌនិងកិច្ចការបានល្អប្រសើរ។</td>
+                <td>ដូចជាការលាយពណ៌ទឹក ដែលការលាយពណ៌ក្រហមនិងលឿងបញ្ចូលគ្នា បង្កើតបានជាពណ៌ថ្មីមួយទៀត (ពណ៌ទឹកក្រូច) ជាជាងគ្រាន់តែដាក់វាទន្ទឹមគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Curriculum Learning</span></td>
+                <td>យុទ្ធសាស្ត្របង្វឹកម៉ូដែល Machine Learning ដោយចាប់ផ្តើមពីការផ្តល់ទិន្នន័យឬកិច្ចការដែលងាយៗនិងសាមញ្ញ រួចទើបបង្កើនកម្រិតស្មុគស្មាញនិងទំហំលំបាកបន្តិចម្តងៗនៅពេលវាចាប់ផ្តើមរៀនចេះមូលដ្ឋានគ្រឹះ។</td>
+                <td>ដូចជាការបង្រៀនក្មេងឱ្យចេះវារ និងចេះដើរជាមុនសិន មុនពេលបង្រៀនឱ្យពួកគេចេះរត់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-transfer-learning-nlp-ruder-2019.html">
+                    <span class="km">ការរៀនផ្ទេរចំណេះដឹងតាមបណ្ដាញសរសៃប្រសាទសម្រាប់ការកែច្នៃភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Transfer Learning for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/end-to-end-dialog-state-reinforcement-learning-2016.html">
+                    <span class="km">ឆ្ពោះទៅរកការរៀនពីដើមដល់ចប់សម្រាប់ការតាមដាន និងការគ្រប់គ្រងស្ថានភាពសន្ទនា ដោយប្រើប្រាស់ការរៀនពង្រឹងបែបស៊ីជម្រៅ</span><br>
+                    <span class="en article-original-title">Towards End-to-End Learning for Dialog State Tracking and Management using Deep Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/cooling-optimization-data-center-drl-2018.html">
+                    <span class="km">ការផ្លាស់ប្តូរការបង្កើនប្រសិទ្ធភាពប្រព័ន្ធត្រជាក់សម្រាប់មជ្ឈមណ្ឌលទិន្នន័យបៃតង តាមរយៈការរៀនសូត្របែបពង្រឹងកម្លាំងយ៉ាងស៊ីជម្រៅ (Deep Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Transforming Cooling Optimization for Green Data Center via Deep Reinforcement Learning</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-reinforcement-learning-alphago-to-alphago-zero-2017.html">
+                    <span class="km">វឌ្ឍនភាពនៃការរៀនសូត្រពង្រឹងស៊ីជម្រៅ៖ ពី AlphaGo ដល់ AlphaGo Zero</span><br>
+                    <span class="en article-original-title">深度强化学习进展: 从AlphaGo到AlphaGo Zero</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/wireless-power-mec-offloading-drl-2024.html">
+                    <span class="km">ការបញ្ជូនការគណនាដោយមានជំនួយពីថាមពលឥតខ្សែនៅក្នុងការគណនាចល័តនៅគែមបណ្តាញ៖ វិធីសាស្ត្រសិក្សាបំប៉នស៊ីជម្រៅ (Deep Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">Wireless Power Assisted Computation Offloading in Mobile Edge Computing: A Deep Reinforcement Learning Approach</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Zero-shot+task+generalization%22+%22reinforcement+learning" target="_blank" rel="noopener"><span class="en">Zero-shot task generalization" "reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Policy+Distillation%22+multi-task+reinforcement+learning" target="_blank" rel="noopener"><span class="en">Policy Distillation" multi-task reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Actor-Critic+methods+%22Generalized+Advantage+Estimation" target="_blank" rel="noopener"><span class="en">Actor-Critic methods "Generalized Advantage Estimation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Hierarchical+Reinforcement+Learning+%22Meta+Controller%22+delayed+reward" target="_blank" rel="noopener"><span class="en">Hierarchical Reinforcement Learning "Meta Controller" delayed reward</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Multiplicative+Interaction+neural+networks+parameter+prediction+zero-shot" target="_blank" rel="noopener"><span class="en">Multiplicative Interaction neural networks parameter prediction zero-shot</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Curriculum+Learning+scheduling+in+deep+reinforcement+learning" target="_blank" rel="noopener"><span class="en">Curriculum Learning scheduling in deep reinforcement learning</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

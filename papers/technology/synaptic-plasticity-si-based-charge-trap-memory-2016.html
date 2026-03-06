@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការអនុវត្តភាពបត់បែននៃស៊ីណាប់និងមុខងាររៀនសូត្រដោយប្រើប្រាស់អង្គចងចាំប្រភេទផ្ទុកបន្ទុកអគ្គិសនីផ្អែកលើស៊ីលីកូន (Si) - Implementation of Synaptic Plasticity and Learning functions using Si-based C... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការអនុវត្តភាពបត់បែននៃស៊ីណាប់និងមុខងាររៀនសូត្រដោយប្រើប្រាស់អង។ ការអភិវឌ្ឍប្រព័ន្ធកុំព្យូទ័រដែលត្រាប់តាមខួរក្បាល (Neuromorphic computing) ទាមទារឱ្យមានការបង្កើតស៊...">
+    
+    <meta name="keywords" content="Charge trap memory, Synaptic plasticity, Short-term plasticity (STP), Long-term potentiation (LTP), Al2O3/HfO2/Si3N4 gate stack, Spike-timing-dependent plasticity (STDP), ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/synaptic-plasticity-si-based-charge-trap-memory-2016.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/synaptic-plasticity-si-based-charge-trap-memory-2016.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/synaptic-plasticity-si-based-charge-trap-memory-2016.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/synaptic-plasticity-si-based-charge-trap-memory-2016.html">
+    <meta property="og:title" content="ការអនុវត្តភាពបត់បែននៃស៊ីណាប់និងមុខងាររៀនសូត្រដោយប្រើប្រាស់អង្គចងចាំប្រភេទផ្ទុកបន្ទុកអគ្គិសនីផ្អែកលើស៊ីលីកូន (Si) | KhmerResearch.com">
+    <meta property="og:description" content="ការអភិវឌ្ឍប្រព័ន្ធកុំព្យូទ័រដែលត្រាប់តាមខួរក្បាល (Neuromorphic computing) ទាមទារឱ្យមានការបង្កើតស៊ីណាប់អេឡិចត្រូនិក (Electronic synapse) ដែលស៊ីភ្លើងតិច មានភាពជឿជាក់ខ្ពស់ និងមិនតម្រូវឱ្យមានឧបករណ៍ជ្រើ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2016 Seoul National University-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Charge trap memory">
+    
+    <meta property="article:tag" content="Synaptic plasticity">
+    
+    <meta property="article:tag" content="Short-term plasticity (STP)">
+    
+    <meta property="article:tag" content="Long-term potentiation (LTP)">
+    
+    <meta property="article:tag" content="Al2O3/HfO2/Si3N4 gate stack">
+    
+    <meta property="article:tag" content="Spike-timing-dependent plasticity (STDP)">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការអនុវត្តភាពបត់បែននៃស៊ីណាប់និងមុខងាររៀនសូត្រដោយប្រើប្រាស់អង្គចងចាំប្រភេទផ្ទុកបន្ទុកអគ្គិសនីផ្អែកលើស៊ីលីកូន (Si)">
+    <meta name="twitter:description" content="ការអភិវឌ្ឍប្រព័ន្ធកុំព្យូទ័រដែលត្រាប់តាមខួរក្បាល (Neuromorphic computing) ទាមទារឱ្យមានការបង្កើតស៊ីណាប់អេឡិចត្រូនិក (Electronic synapse) ដែលស៊ីភ្លើងតិច មានភាពជឿជាក់ខ្ពស់ និងមិនតម្រូវឱ្យមានឧបករណ៍ជ្រើ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1797\u17b6\u1796\u1794\u178f\u17cb\u1794\u17c2\u1793\u1793\u17c3\u179f\u17ca\u17b8\u178e\u17b6\u1794\u17cb\u1793\u17b7\u1784\u1798\u17bb\u1781\u1784\u17b6\u179a\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17a2\u1784\u17d2\u1782\u1785\u1784\u1785\u17b6\u17c6\u1794\u17d2\u179a\u1797\u17c1\u1791\u1795\u17d2\u1791\u17bb\u1780\u1794\u1793\u17d2\u1791\u17bb\u1780\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179f\u17ca\u17b8\u179b\u17b8\u1780\u17bc\u1793 (Si)",
+      "name": "Implementation of Synaptic Plasticity and Learning functions using Si-based Charge Trap Memory",
+      "description": "\u1780\u17b6\u179a\u17a2\u1797\u17b7\u179c\u178c\u17d2\u178d\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u178a\u17c2\u179b\u178f\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17b6\u1798\u1781\u17bd\u179a\u1780\u17d2\u1794\u17b6\u179b (Neuromorphic computing) \u1791\u17b6\u1798\u1791\u17b6\u179a\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17be\u178f\u179f\u17ca\u17b8\u178e\u17b6\u1794\u17cb\u17a2\u17c1\u17a1\u17b7\u1785\u178f\u17d2\u179a\u17bc\u1793\u17b7\u1780 (Electronic synapse) \u178a\u17c2\u179b\u179f\u17ca\u17b8\u1797\u17d2\u179b\u17be\u1784\u178f\u17b7\u1785 \u1798\u17b6\u1793\u1797\u17b6\u1796\u1787\u17bf\u1787\u17b6\u1780\u17cb\u1781\u17d2\u1796\u179f\u17cb \u1793\u17b7\u1784\u1798\u17b7\u1793\u178f\u1798\u17d2\u179a\u17bc\u179c\u17b1\u17d2\u1799\u1798\u17b6\u1793\u17a7\u1794\u1780\u179a\u178e\u17cd\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u178a\u17b6\u1785\u17cb\u178a\u17c4\u1799\u17a1\u17c2\u1780\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17c4\u179f\u17b7\u1780\u17b6\u1793\u17b8\u1798\u17bd\u1799\u17d7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/synaptic-plasticity-si-based-charge-trap-memory-2016.html",
+      "author": [{"@type": "Person", "name": "Myoung-Sun Lee (Seoul National University)"}],
+      "datePublished": "2016 Seoul National University",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Implementation of Synaptic Plasticity and Learning functions using Si-based Charge Trap Memory",
+        "url": "https://s-space.snu.ac.kr/bitstream/10371/119235/1/000000137447.pdf"
+      },
+      "keywords": ["Charge trap memory", "Synaptic plasticity", "Short-term plasticity (STP)", "Long-term potentiation (LTP)", "Al2O3/HfO2/Si3N4 gate stack", "Spike-timing-dependent plasticity (STDP)"],
+      "about": "Neuromorphic Engineering / Solid-State Devices"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u1797\u17b6\u1796\u1794\u178f\u17cb\u1794\u17c2\u1793\u1793\u17c3\u179f\u17ca\u17b8\u178e\u17b6\u1794\u17cb\u1793\u17b7\u1784\u1798\u17bb\u1781\u1784\u17b6\u179a\u179a\u17c0\u1793\u179f\u17bc\u178f\u17d2\u179a\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u17a2\u1784\u17d2\u1782\u1785\u1784\u1785\u17b6\u17c6\u1794\u17d2\u179a\u1797\u17c1\u1791\u1795\u17d2\u1791\u17bb\u1780\u1794\u1793\u17d2\u1791\u17bb\u1780\u17a2\u1782\u17d2\u1782\u17b7\u179f\u1793\u17b8\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u179f\u17ca\u17b8\u179b\u17b8\u1780\u17bc\u1793 (Si)",
+          "item": "https://khmerresearch.com/papers/technology/synaptic-plasticity-si-based-charge-trap-memory-2016.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការអនុវត្តភាពបត់បែននៃស៊ីណាប់និងមុខងាររៀនសូត្រដោយប្រើប្រាស...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Implementation of Synaptic Plasticity and Learning functions using Si-based Charge Trap Memory<br>
+        
+        <strong>Source:</strong> <a href="https://s-space.snu.ac.kr/bitstream/10371/119235/1/000000137447.pdf" target="_blank" rel="noopener">s-space.snu.ac.kr</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការអនុវត្តភាពបត់បែននៃស៊ីណាប់និងមុខងាររៀនសូត្រដោយប្រើប្រាស់អង្គចងចាំប្រភេទផ្ទុកបន្ទុកអគ្គិសនីផ្អែកលើស៊ីលីកូន (Si)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Implementation of Synaptic Plasticity and Learning functions using Si-based Charge Trap Memory</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Myoung-Sun Lee (Seoul National University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2016 Seoul National University</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Neuromorphic Engineering / Solid-State Devices</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការអភិវឌ្ឍប្រព័ន្ធកុំព្យូទ័រដែលត្រាប់តាមខួរក្បាល (Neuromorphic computing) ទាមទារឱ្យមានការបង្កើតស៊ីណាប់អេឡិចត្រូនិក (Electronic synapse) ដែលស៊ីភ្លើងតិច មានភាពជឿជាក់ខ្ពស់ និងមិនតម្រូវឱ្យមានឧបករណ៍ជ្រើសរើសដាច់ដោយឡែកសម្រាប់កោសិកានីមួយៗ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានរចនា និងផលិតឧបករណ៍អង្គចងចាំផ្ទុកបន្ទុកអគ្គិសនីដែលមានស្រទាប់ Al2O3/HfO2/Si3N4 (A/H/N) ហើយធ្វើការវាស់ស្ទង់លក្ខណៈអគ្គិសនីរបស់វាដើម្បីត្រាប់តាមមុខងារស៊ីណាប់។
+        
+        <ul>
+            
+            <li>ការផលិតឧបករណ៍ប្រកបដោយស្រទាប់ Gate Stack ប្រភេទ Al2O3/HfO2/Si3N4 (A/H/N)</li>
+            
+            <li>ការវាស់ស្ទង់សមត្ថភាពផ្ទុកនិងវ៉ុល (Capacitance-Voltage - C-V) និងសមត្ថភាពផ្ទុកនិងពេលវេលា (Capacitance-Time - C-t)</li>
+            
+            <li>ការវាស់ស្ទង់ចរន្តអគ្គិសនីបញ្ជូន (I-V Measurements) និងការប្រើប្រាស់បច្ចេកទេសបូមបន្ទុក (Charge Pumping Method)</li>
+            
+            <li>ការវិភាគលើភាពបត់បែនអាស្រ័យលើពេលវេលានៃស្ប៉ៃ (Spike-Timing-Dependent Plasticity - STDP)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ឧបករណ៍អង្គចងចាំ A/H/N អាចបង្ហាញពីមុខងារភាពបត់បែនរយៈពេលខ្លី (STP) តាមរយៈការបាត់បង់បន្ទុកលឿនក្នុងស្រទាប់ Si3N4 និងការពង្រឹងរយៈពេលយូរ (LTP) តាមរយៈកម្រិតអន្ទាក់ជ្រៅក្នុងស្រទាប់ HfO2។</li>
+            
+            <li>ការផ្លាស់ប្តូរពីមុខងារ STP ទៅ LTP ត្រូវបានបង្ហាញយ៉ាងច្បាស់តាមរយៈការបញ្ចូលជីពចរអគ្គិសនីញឹកញាប់ ដែលត្រាប់តាមអាកប្បកិរិយារបស់ស៊ីណាប់ជីវសាស្ត្រក្នុងការចងចាំ។</li>
+            
+            <li>ប្រព័ន្ធនេះបានបង្ហាញពីលក្ខណៈ STDP ដោយជោគជ័យ ដែលបញ្ជាក់ថាវាមានសក្ដានុពលខ្ពស់សម្រាប់ការប្រើប្រាស់ក្នុងប្រព័ន្ធបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតផ្អែកលើស៊ីលីកូន (Silicon-based neuromorphic applications)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">A/H/N Gate Stack Memory (Proposed)</span></strong><br>អង្គចងចាំ Gate Stack ប្រភេទ Al2O3/HfO2/Si3N4 (វិធីសាស្ត្រស្នើឡើង)</td>
+                <td>អាចបង្ហាញទាំងមុខងារភាពបត់បែនរយៈពេលខ្លី (STP) និងការពង្រឹងរយៈពេលយូរ (LTP) ព្រមទាំងមិនត្រូវការឧបករណ៍ជ្រើសរើស (Select device) សម្រាប់កោសិកានីមួយៗឡើយ។</td>
+                <td>ទាមទារដំណើរការផលិតស្មុគស្មាញដែលមានច្រើនស្រទាប់ និងបច្ចេកទេសបន្សុតកម្រិតខ្ពស់ក្នុងការដាក់បញ្ចូលស្រទាប់ High-k dielectrics។</td>
+                <td>សម្រេចបាននូវការត្រាប់តាមមុខងារ STDP (Spike-Timing-Dependent Plasticity) យ៉ាងជោគជ័យ និងមានស្ថិរភាពក្នុងការផ្លាស់ប្តូរពីការចងចាំរយៈពេលខ្លីទៅរយៈពេលយូរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">O/N and A/N Stacks (Baseline)</span></strong><br>អង្គចងចាំប្រភេទ O/N (SiO2/Si3N4) និង A/N (Al2O3/Si3N4)</td>
+                <td>មានរចនាសម្ព័ន្ធសាមញ្ញជាងមុន និងងាយស្រួលក្នុងការផលិតជាងរចនាសម្ព័ន្ធមានបីស្រទាប់។</td>
+                <td>មិនមានលទ្ធភាពរក្សាទិន្នន័យបានយូរ (LTP) នោះទេ ដោយបង្ហាញត្រឹមតែលក្ខណៈបាត់បង់បន្ទុកអគ្គិសនីលឿន (STP) ប៉ុណ្ណោះ។</td>
+                <td>បន្ទុកអគ្គិសនីបាត់បង់លឿន ដោយគ្មានការពឹងផ្អែកលើចន្លោះពេល (Interval dependence) ដើម្បីបម្លែងទៅជាការចងចាំរយៈពេលយូរឡើយ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Two-Terminal Memristors (e.g., PCM, ReRAM)</span></strong><br>ឧបករណ៍ Memristors ប្រភេទពីរតំណ (ឧ. ឧបករណ៍ប្តូរទម្រង់ Phase-change ឧបករណ៍រេស៊ីស្តង់)</td>
+                <td>មានទំហំតូច សាមញ្ញក្នុងការរចនាសៀគ្វី និងងាយស្រួលសម្រាប់ការតភ្ជាប់របៀប Crossbar array។</td>
+                <td>ត្រូវការឧបករណ៍ជ្រើសរើស (Select device) មួយសម្រាប់កោសិកានីមួយៗ និងមានបញ្ហាប្រឈមផ្នែកភាពជឿជាក់ (Reliability)។</td>
+                <td>មានបញ្ហាក្នុងដំណើរការផលិត និងសមាហរណកម្មសម្រាប់បណ្តាញសរសៃប្រសាទខ្នាតធំបើធៀបនឹងឧបករណ៍FET-based ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការស្រាវជ្រាវនេះទាមទារឱ្យមានបន្ទប់ពិសោធន៍ផលិតគ្រឿងអេឡិចត្រូនិកស្តង់ដារ (Semiconductor Cleanroom) និងឧបករណ៍វាស់ស្ទង់អគ្គិសនីកម្រិតខ្ពស់។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនផលិតស្រទាប់ស្តើងៗដូចជា ALD (Atomic Layer Deposition), LPCVD (Low Pressure CVD) និងប្រព័ន្ធ Photolithography។</li>
+        
+        <li><strong>Equipment:</strong> ឧបករណ៍វាស់ស្ទង់ទំនើបៗមានដូចជា Agilent B1500 parameter analyzer, HP 4280 CV meter និង Pulse pattern generator។</li>
+        
+        <li><strong>Materials:</strong> បន្ទះស៊ីលីកូន (Silicon wafers), សារធាតុ High-k dielectrics (Al2O3, HfO2) និង ស៊ីលីកូននីទ្រីត (Si3N4)។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងស៊ីជម្រៅផ្នែករូបវិទ្យាឧបករណ៍ពាក់កណ្តាលចម្លង (Semiconductor Device Physics) និងវិស្វកម្មណាណូ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានអនុវត្តនៅក្នុងមន្ទីរពិសោធន៍នៃសាកលវិទ្យាល័យជាតិសេអ៊ូល (Seoul National University) ប្រទេសកូរ៉េខាងត្បូង ដោយផ្តោតទាំងស្រុងលើការច្នៃប្រឌិត និងផលិត Hardware ក្នុងកម្រិតណាណូ (Nanoscale)។ សម្រាប់បរិបទប្រទេសកម្ពុជា ការស្រាវជ្រាវប្រភេទនេះគឺមិនទាន់អាចធ្វើទៅបាននៅឡើយទេ ដោយសារកង្វះខាតហេដ្ឋារចនាសម្ព័ន្ធផលិតបន្ទះឈីប (Semiconductor fab) និងមន្ទីរពិសោធន៍កម្រិតខ្ពស់។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាការផលិតផ្ទាល់នៅមានកម្រិត ក៏ការយល់ដឹងពីបច្ចេកវិទ្យានេះជាមូលដ្ឋានគ្រឹះដ៏សំខាន់សម្រាប់ការចូលរួមក្នុងខ្សែចង្វាក់ផ្គត់ផ្គង់ និងការស្រាវជ្រាវផ្នែក AI Hardware នាពេលអនាគត។</p>
+        
+        <ul>
+            
+            <li><strong>សាកលវិទ្យាល័យ និងវិទ្យាស្ថានស្រាវជ្រាវ (ឧ. ITC, RUPP):</strong> អាចបញ្ជ្រាបទ្រឹស្តីពាក់ព័ន្ធនឹងបច្ចេកវិទ្យា CMOS និង Neuromorphic Engineering ទៅក្នុងកម្មវិធីសិក្សាផ្នែកអេឡិចត្រូនិច និងទូរគមនាគមន៍ ដើម្បីបណ្តុះបណ្តាលធនធានមនុស្សជំនាន់ថ្មី។</li>
+            
+            <li><strong>វិស័យរចនាបន្ទះឈីប (IC Design):</strong> និស្សិត និងវិស្វករខ្មែរអាចផ្តោតលើការរចនាសៀគ្វី (Circuit Design) នៃប្រព័ន្ធ Neuromorphic ដោយប្រើប្រាស់កម្មវិធីកុំព្យូទ័រ ទោះបីមិនបានផលិតជាក់ស្តែងក៏ដោយ។</li>
+            
+            <li><strong>បច្ចេកវិទ្យា IoT & Smart Devices:</strong> ការស្វែងយល់ពីឧបករណ៍ដែលស៊ីភ្លើងតិច (Low-power neuromorphic hardware) អាចជួយក្នុងការអភិវឌ្ឍឧបករណ៍សម្រាប់ Smart Agriculture និង Smart City នៅកម្ពុជា ពេលដែលបច្ចេកវិទ្យានេះមានតម្លៃថោកនាពេលខាងមុខ។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម បច្ចេកវិទ្យានេះជាជំហានត្រួសត្រាយផ្លូវឆ្ពោះទៅរកប្រព័ន្ធបញ្ញាសិប្បនិម្មិតកម្រិតខ្ពស់ (AI Hardware) ដែលទាមទារឱ្យកម្ពុជាផ្តើមបណ្តុះបណ្តាលធនធានមនុស្សផ្នែក Microelectronics ចាប់ពីពេលនេះតទៅ ដើម្បីចាប់យកឱកាសនាពេលអនាគត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះ Semiconductor:</strong> ចាប់ផ្តើមរៀនអំពីវត្ថុធាតុពាក់កណ្តាលចម្លង (Semiconductor), CMOS, MOSFET និង Solid-State Physics តាមរយៈវគ្គសិក្សាអនឡាញលើ <span class="en">Coursera</span> ឬសៀវភៅជំនាញ។</li>
+            
+            <li><strong>ស្វែងយល់ពីបច្ចេកវិទ្យាអង្គចងចាំ (Memory Technologies):</strong> សិក្សាពីស្ថាបត្យកម្ម Flash Memory ទំនើបៗ ដូចជា Charge Trap Flash (CTF) និងលក្ខណៈសម្បត្តិនៃ High-k dielectrics សម្រាប់ការផ្ទុកទិន្នន័យ។</li>
+            
+            <li><strong>អនុវត្តការសាកល្បងម៉ូដែលដោយប្រើ Software:</strong> រៀនប្រើប្រាស់កម្មវិធីដូចជា <span class="en">TCAD (Technology Computer-Aided Design)</span> ដើម្បីធ្វើការ Simulation លើរចនាសម្ព័ន្ធឧបករណ៍កម្រិតណាណូ និងការបញ្ជូនចរន្តអគ្គិសនី។</li>
+            
+            <li><strong>ស្រាវជ្រាវលើ Neuromorphic Algorithms:</strong> ទោះបីគ្មាន Hardware ប្រើប្រាស់ក៏ដោយ អ្នកអាចសិក្សាពី Artificial Neural Networks (ANNs) និ​ងរបៀបត្រាប់តាម Synaptic plasticity (STP, LTP) ដោយប្រើប្រាស់ <span class="en">Python</span> ឬ <span class="en">MATLAB</span>។</li>
+            
+            <li><strong>ស្វែងរកឱកាសសិក្សាបន្តនៅក្រៅប្រទេស:</strong> ដោយសារកម្ពុជាខ្វះមន្ទីរពិសោធន៍ អ្នកគួរស្វែងរកអាហារូបករណ៍ទៅរៀនបន្តថ្នាក់អនុបណ្ឌិត ឬបណ្ឌិតនៅប្រទេសដែលមានឧស្សាហកម្មបន្ទះឈីបខ្លាំង ដូចជា កូរ៉េខាងត្បូង តៃវ៉ាន់ ឬជប៉ុន។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Synaptic plasticity</span></td>
+                <td>សមត្ថភាពនៃស៊ីណាប់ (ចំណុចតភ្ជាប់រវាងកោសិកាសរសៃប្រសាទ) ក្នុងការផ្លាស់ប្តូរកម្លាំង ឬប្រសិទ្ធភាពរបស់វា អាស្រ័យលើប្រវត្តិសកម្មភាពរបស់វា។ វាជាមូលដ្ឋានគ្រឹះជីវសាស្ត្រនៃការចងចាំ និងការរៀនសូត្រក្នុងខួរក្បាល។</td>
+                <td>ដូចជាផ្លូវដើរមួយដែលកាន់តែធំទូលាយ និងស្រួលដើរជាងមុន ប្រសិនបើមានមនុស្សដើរឆ្លងកាត់វាញឹកញាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Charge trap memory</span></td>
+                <td>ប្រភេទអង្គចងចាំមិនបាត់បង់ទិន្នន័យ (Non-volatile memory) ដែលរក្សាទុកទិន្នន័យដោយការចាប់យកអេឡិចត្រុងទុកនៅក្នុង "អន្ទាក់" (Trap sites) នៃស្រទាប់អ៊ីសូឡង់ (Dielectric layer) ជាជាងប្រើចំហាយអគ្គិសនីក្នុងលោហៈចម្លងធម្មតា។</td>
+                <td>ដូចជាការបន្តក់ទឹកចូលក្នុងរន្ធអេប៉ុង ដើម្បីរក្សាទឹកទុកមិនឱ្យហូរចេញមកវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Short-term plasticity (STP)</span></td>
+                <td>ការកើនឡើងនូវកម្លាំងតភ្ជាប់នៃស៊ីណាប់ក្នុងរយៈពេលខ្លី (ជាវិនាទី ឬនាទី) បន្ទាប់ពីមានសញ្ញាអគ្គិសនីឆ្លងកាត់ ហើយវានឹងបាត់បង់ទៅវិញយ៉ាងលឿន ប្រសិនបើគ្មានសញ្ញាអគ្គិសនីដាស់តឿនបន្ថែមទៀត។</td>
+                <td>ដូចជាស្នាមជើងដែលអ្នកដើរជាន់លើខ្សាច់មាត់សមុទ្រ ដែលនឹងត្រូវរលកទឹកលុបបាត់ទៅវិញក្នុងរយៈពេលដ៏ខ្លី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Long-term potentiation (LTP)</span></td>
+                <td>ការពង្រឹងកម្លាំងតភ្ជាប់នៃស៊ីណាប់ក្នុងរយៈពេលយូរ (រាប់ម៉ោង ឬរាប់ឆ្នាំ) ដែលកើតឡើងដោយសារការជំរុញសញ្ញាអគ្គិសនីញឹកញាប់បន្តបន្ទាប់គ្នា ដែលជាយន្តការនៃការចងចាំអចិន្ត្រៃយ៍។</td>
+                <td>ដូចជាការចាក់ស៊ីម៉ងត៍ធ្វើផ្លូវ ដែលធ្វើឱ្យផ្លូវនោះក្លាយជាផ្លូវអចិន្ត្រៃយ៍ និងមិនងាយបាត់បង់រូបរាង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Spike-timing-dependent plasticity (STDP)</span></td>
+                <td>គោលការណ៍នៃការរៀនសូត្ររបស់ខួរក្បាល ដែលកម្លាំងតភ្ជាប់រវាងកោសិកាប្រសាទប្រែប្រួល អាស្រ័យទៅលើ "លំដាប់ពេលវេលា" នៃការបញ្ជូនសញ្ញារវាងកោសិកាបញ្ជូន (Pre-synaptic) និងកោសិកាទទួល (Post-synaptic)។</td>
+                <td>ដូចជាក្បាច់រាំគូ ប្រសិនបើអ្នកនាំមុខបោះជំហានមុនអ្នកតាម នោះការរាំនឹងរលូនល្អ (ពង្រឹងការតភ្ជាប់) ប៉ុន្តែបើអ្នកតាមបោះជំហានមុនអ្នកនាំ នោះនឹងជាន់ជើងគ្នា (បញ្ចុះកម្លាំងតភ្ជាប់)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">High-k dielectrics</span></td>
+                <td>សារធាតុអ៊ីសូឡង់ (មិនចម្លងអគ្គិសនី) ដែលមានសមត្ថភាពផ្ទុកបន្ទុកអគ្គិសនីបានខ្ពស់ (Dielectric constant ខ្ពស់) ជាងស៊ីលីកូនឌីអុកស៊ីត (SiO2) ធម្មតា។ វាជួយកាត់បន្ថយការលេចធ្លាយចរន្តអគ្គិសនី ខណៈពេលរក្សាសមត្ថភាពដំណើរការបានល្អ សម្រាប់ឧបករណ៍កម្រិតណាណូ។</td>
+                <td>ដូចជាជញ្ជាំងការពារសំឡេងទំនើប ដែលទោះបីជាវាស្តើងក្តី តែក៏អាចទប់សំឡេងរំខានបានល្អជាងជញ្ជាំងឥដ្ឋដ៏ក្រាស់ធម្មតាទៅទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Neuromorphic computing</span></td>
+                <td>ការរចនាប្រព័ន្ធកុំព្យូទ័រ ឬបន្ទះឈីប (Hardware) ឱ្យមានរចនាសម្ព័ន្ធ និងដំណើរការស្រដៀងទៅនឹងបណ្តាញសរសៃប្រសាទខួរក្បាលរបស់មនុស្ស ដើម្បីដោះស្រាយបញ្ហា AI ដោយប្រើប្រាស់ថាមពលអគ្គិសនីតិចបំផុត។</td>
+                <td>ការបង្កើតខួរក្បាលអេឡិចត្រូនិច ដែលចម្លងរបៀបគិតនិងរៀនសូត្ររបស់មនុស្ស ជាជាងគ្រាន់តែគណនាលេខដូចម៉ាស៊ីនគិតលេខធម្មតា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Poole-Frenkel (PF) conduction</span></td>
+                <td>យន្តការរូបវិទ្យានៃការបញ្ជូនចរន្តអគ្គិសនីឆ្លងកាត់សារធាតុអ៊ីសូឡង់ ដែលអេឡិចត្រុងអាចរំដោះខ្លួនចេញពីអន្ទាក់ (Traps) ដោយសារកម្លាំងជំរុញពីកម្ដៅ (Thermal energy) និងកម្លាំងដែនអគ្គិសនី (Electric field) ដែលជួយបញ្ចុះកម្ពស់របាំងការពារ។</td>
+                <td>ដូចជានរណាម្នាក់កំពុងជាប់ក្នុងរណ្តៅ ហើយមានកម្លាំងខ្យល់ព្យុះខ្លាំងមកជួយរុញគេពីក្រោយ បូករួមនឹងកម្លាំងលោតរបស់គេផ្ទាល់ ទើបអាចធ្វើឱ្យគេចេញពីរណ្តៅនោះបាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/high-content-assay-ampa-receptor-trafficking-2019.html">
+                    <span class="km">ការវិភាគមាតិកាខ្ពស់សម្រាប់ការតាមដានការដឹកជញ្ជូនរ៉េសិបទ័រ AMPA</span><br>
+                    <span class="en article-original-title">A High-content Assay for Monitoring AMPA Receptor Trafficking</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/synaptic-plasticity-neuronal-sprouting-2009.html">
+                    <span class="km">ភាពបត់បែននៃស៊ីណាប់៖ ការដុះពន្លកនៃកោសិកាប្រសាទ</span><br>
+                    <span class="en article-original-title">Synaptic Plasticity: Neuronal Sprouting</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/molecular-basis-learning-hippocampus-amygdala-2015.html">
+                    <span class="km">មូលដ្ឋានម៉ូលេគុលនៃការរៀនសូត្រនៅក្នុងអ៊ីប៉ូកាំ (Hippocampus) និងអាមីហ្គដាឡា (Amygdala)</span><br>
+                    <span class="en article-original-title">MOLECULAR BASIS OF LEARNING IN THE HIPPOCAMPUS AND THE AMYGDALA</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/cognitive-reserve-synaptic-plasticity-alzheimers-2025.html">
+                    <span class="km">ទុនបម្រុងនៃការយល់ដឹង និងភាពបត់បែននៃស៊ីណាប់៖ ការបកស្រាយពីសមត្ថភាពសម្របខ្លួនរបស់ខួរក្បាលក្នុងជំងឺអាល់ហ្សៃមឺរ</span><br>
+                    <span class="en article-original-title">Cognitive Reserve and Synaptic Plasticity: Unraveling the Brain’s Adaptive Capacity in Alzheimer’s Disease</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/contemporary-analysis-neuroplasticity-wellbeing-2024.html">
+                    <span class="km">ការវិភាគសហសម័យអំពីឥទ្ធិពលនៃភាពបត់បែននៃប្រព័ន្ធប្រសាទ (Neuroplasticity) ទៅលើសុខុមាលភាព</span><br>
+                    <span class="en article-original-title">A contemporary analysis of the effects of neuroplasticity on well-being</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Charge+trap+memory%22+AND+%22synaptic+plasticity%22+AND+%22neuromorphic" target="_blank" rel="noopener"><span class="en">Charge trap memory" AND "synaptic plasticity" AND "neuromorphic</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Spike-timing-dependent+plasticity%22+AND+%22CMOS-compatible+synapse" target="_blank" rel="noopener"><span class="en">Spike-timing-dependent plasticity" AND "CMOS-compatible synapse</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Short-term+plasticity%22+AND+%22Long-term+potentiation%22+AND+%22Al2O3%2FHfO2" target="_blank" rel="noopener"><span class="en">Short-term plasticity" AND "Long-term potentiation" AND "Al2O3/HfO2</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Silicon-based+neuromorphic+hardware%22+AND+%22electronic+synapse" target="_blank" rel="noopener"><span class="en">Silicon-based neuromorphic hardware" AND "electronic synapse</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Poole-Frenkel+conduction%22+AND+%22charge+trapping+mechanism%22+AND+%22high-k+dielectrics" target="_blank" rel="noopener"><span class="en">Poole-Frenkel conduction" AND "charge trapping mechanism" AND "high-k dielectrics</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>បណ្ដាញ ConvLSTM សម្រាប់ការទាញយកលក្ខណៈពិសេសទំហំ និងពេលវេលា នៅក្នុងរូបភាពជាស៊េរីពេលវេលា - ConvLSTM for Spatio-Temporal Feature Extraction in Time-Series Images | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី បណ្ដាញ ConvLSTM សម្រាប់ការទាញយកលក្ខណៈពិសេសទំហំ និងពេលវេលា នៅ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការតាមដានតំបន់ឆ្នេរដែលងាយរងគ្រោះដោយសារការប្រែប្រួលអាកាសធាតុ តាមរយៈការកាត់ប...">
+    
+    <meta name="keywords" content="ConvLSTM, Time-Series Images, Land Cover Classification, Sentinel-2, Spatio-Temporal Feature, Deep Learning, Mangrove Monitoring, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/convlstm-spatiotemporal-feature-extraction-2020.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/convlstm-spatiotemporal-feature-extraction-2020.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/convlstm-spatiotemporal-feature-extraction-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/convlstm-spatiotemporal-feature-extraction-2020.html">
+    <meta property="og:title" content="បណ្ដាញ ConvLSTM សម្រាប់ការទាញយកលក្ខណៈពិសេសទំហំ និងពេលវេលា នៅក្នុងរូបភាពជាស៊េរីពេលវេលា | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការតាមដានតំបន់ឆ្នេរដែលងាយរងគ្រោះដោយសារការប្រែប្រួលអាកាសធាតុ តាមរយៈការកាត់បន្ថយភាពប្រែប្រួលនៃរូបភាពផ្កាយរណបដែលថតនៅថ្ងៃខុសៗគ្នា ដើម្បីបង្កើតផែនទីគ្របដណ្តប់ដីឱ្យបានច្បាស់លាស់។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2020 (NeurIPS Tackling Climate Change with Machine Learning)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="ConvLSTM">
+    
+    <meta property="article:tag" content="Time-Series Images">
+    
+    <meta property="article:tag" content="Land Cover Classification">
+    
+    <meta property="article:tag" content="Sentinel-2">
+    
+    <meta property="article:tag" content="Spatio-Temporal Feature">
+    
+    <meta property="article:tag" content="Deep Learning">
+    
+    <meta property="article:tag" content="Mangrove Monitoring">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="បណ្ដាញ ConvLSTM សម្រាប់ការទាញយកលក្ខណៈពិសេសទំហំ និងពេលវេលា នៅក្នុងរូបភាពជាស៊េរីពេលវេលា">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការតាមដានតំបន់ឆ្នេរដែលងាយរងគ្រោះដោយសារការប្រែប្រួលអាកាសធាតុ តាមរយៈការកាត់បន្ថយភាពប្រែប្រួលនៃរូបភាពផ្កាយរណបដែលថតនៅថ្ងៃខុសៗគ្នា ដើម្បីបង្កើតផែនទីគ្របដណ្តប់ដីឱ្យបានច្បាស់លាស់។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u178e\u17d2\u178a\u17b6\u1789 ConvLSTM \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u1791\u17c6\u17a0\u17c6 \u1793\u17b7\u1784\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179a\u17bc\u1794\u1797\u17b6\u1796\u1787\u17b6\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6",
+      "name": "ConvLSTM for Spatio-Temporal Feature Extraction in Time-Series Images",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u178f\u17b6\u1798\u178a\u17b6\u1793\u178f\u17c6\u1794\u1793\u17cb\u1786\u17d2\u1793\u17c1\u179a\u178a\u17c2\u179b\u1784\u17b6\u1799\u179a\u1784\u1782\u17d2\u179a\u17c4\u17c7\u178a\u17c4\u1799\u179f\u17b6\u179a\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u17a2\u17b6\u1780\u17b6\u179f\u1792\u17b6\u178f\u17bb \u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1780\u17b6\u178f\u17cb\u1794\u1793\u17d2\u1790\u1799\u1797\u17b6\u1796\u1794\u17d2\u179a\u17c2\u1794\u17d2\u179a\u17bd\u179b\u1793\u17c3\u179a\u17bc\u1794\u1797\u17b6\u1796\u1795\u17d2\u1780\u17b6\u1799\u179a\u178e\u1794\u178a\u17c2\u179b\u1790\u178f\u1793\u17c5\u1790\u17d2\u1784\u17c3\u1781\u17bb\u179f\u17d7\u1782\u17d2\u1793\u17b6 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u1784\u17d2\u1780\u17be\u178f\u1795\u17c2\u1793\u1791\u17b8\u1782\u17d2\u179a\u1794\u178a\u178e\u17d2\u178f\u1794\u17cb\u178a\u17b8\u17b1\u17d2\u1799\u1794\u17b6\u1793\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/convlstm-spatiotemporal-feature-extraction-2020.html",
+      "author": [{"@type": "Person", "name": "Gael Kamdem De Teyou"}],
+      "datePublished": "2020 (NeurIPS Tackling Climate Change with Machine Learning)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "ConvLSTM for Spatio-Temporal Feature Extraction in Time-Series Images",
+        "url": "https://s3.us-east-1.amazonaws.com/climate-change-ai/papers/neurips2020/12/paper.pdf"
+      },
+      "keywords": ["ConvLSTM", "Time-Series Images", "Land Cover Classification", "Sentinel-2", "Spatio-Temporal Feature", "Deep Learning", "Mangrove Monitoring"],
+      "about": "Machine Learning / Remote Sensing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u178e\u17d2\u178a\u17b6\u1789 ConvLSTM \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1791\u17b6\u1789\u1799\u1780\u179b\u1780\u17d2\u1781\u178e\u17c8\u1796\u17b7\u179f\u17c1\u179f\u1791\u17c6\u17a0\u17c6 \u1793\u17b7\u1784\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u179a\u17bc\u1794\u1797\u17b6\u1796\u1787\u17b6\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6",
+          "item": "https://khmerresearch.com/papers/technology/convlstm-spatiotemporal-feature-extraction-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>បណ្ដាញ ConvLSTM សម្រាប់ការទាញយកលក្ខណៈពិសេសទំហំ និងពេលវេលា...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> ConvLSTM for Spatio-Temporal Feature Extraction in Time-Series Images<br>
+        
+        <strong>Source:</strong> <a href="https://s3.us-east-1.amazonaws.com/climate-change-ai/papers/neurips2020/12/paper.pdf" target="_blank" rel="noopener">s3.us-east-1.amazonaws.com</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>បណ្ដាញ ConvLSTM សម្រាប់ការទាញយកលក្ខណៈពិសេសទំហំ និងពេលវេលា នៅក្នុងរូបភាពជាស៊េរីពេលវេលា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> ConvLSTM for Spatio-Temporal Feature Extraction in Time-Series Images</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Gael Kamdem De Teyou</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 (NeurIPS Tackling Climate Change with Machine Learning)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning / Remote Sensing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការតាមដានតំបន់ឆ្នេរដែលងាយរងគ្រោះដោយសារការប្រែប្រួលអាកាសធាតុ តាមរយៈការកាត់បន្ថយភាពប្រែប្រួលនៃរូបភាពផ្កាយរណបដែលថតនៅថ្ងៃខុសៗគ្នា ដើម្បីបង្កើតផែនទីគ្របដណ្តប់ដីឱ្យបានច្បាស់លាស់។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់គំរូបញ្ញាសិប្បនិម្មិតកម្រិតជ្រៅ (Deep Learning) ដែលរួមបញ្ចូលនូវការវិភាគទាំងលំហ (Spatial) និងពេលវេលា (Temporal) ទៅលើរូបភាពផ្កាយរណប។
+        
+        <ul>
+            
+            <li>ទិន្នន័យរូបភាពពីផ្កាយរណប Sentinel-2 ជាស៊េរីពេលវេលា (Sentinel-2 Time-Series Images)</li>
+            
+            <li>ការប្រើប្រាស់បណ្ដាញសរសៃប្រសាទរចនាសម្ព័ន្ធ U-Net ដើម្បីទាញយកលក្ខណៈពិសេសលំហ (Fully Convolutional Network / U-Net)</li>
+            
+            <li>ការប្រើប្រាស់បណ្ដាញ ConvLSTM ដើម្បីទាញយកទំនាក់ទំនងពេលវេលា និងកាត់បន្ថយភាពប្រែប្រួលតាមថ្ងៃថត (Convolutional LSTM)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការប្រើប្រាស់រូបភាពជាស៊េរីចំនួន 5 បានបង្កើនភាពត្រឹមត្រូវនៃការរកឃើញផ្លូវថ្នល់ដល់ 93.4% បើធៀបនឹង 91.1% សម្រាប់ការប្រើរូបភាពតែមួយសន្លឹក។</li>
+            
+            <li>ភាពត្រឹមត្រូវនៃការកំណត់សម្គាល់តំបន់ព្រៃកោងកាងបានកើនឡើងយ៉ាងកត់សម្គាល់ពី 80.1% ដល់ 86.3% នៅពេលប្រើប្រាស់រូបភាពជាស៊េរីពេលវេលា។</li>
+            
+            <li>ការបញ្ចូលព័ត៌មានពេលវេលាទៅក្នុងអង្គចងចាំនៃស្រទាប់ LSTM ពិតជាមានប្រសិទ្ធភាពខ្ពស់ក្នុងការធ្វើឱ្យប្រសើរឡើងនូវការបែងចែកចំណាត់ថ្នាក់គ្របដណ្តប់ដី (Land Cover Classification) ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Single Image FCN (Baseline)</span></strong><br>បណ្ដាញ FCN ប្រើរូបភាពតែមួយសន្លឹក (កម្រិតមូលដ្ឋាន)</td>
+                <td>ងាយស្រួលក្នុងការអភិវឌ្ឍ និងប្រើប្រាស់ថាមពលកុំព្យូទ័រ (GPU Memory) តិចជាងម៉ូដែលស៊េរីពេលវេលា។</td>
+                <td>មិនអាចស្វែងយល់ពីទំនាក់ទំនងតាមពេលវេលា និងរងការប៉ះពាល់ដោយការប្រែប្រួលពន្លឺ ឬស្រមោលប្រចាំថ្ងៃ។</td>
+                <td>ភាពត្រឹមត្រូវ 91.1% សម្រាប់ផ្លូវ និង 80.1% សម្រាប់ព្រៃកោងកាង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">FCN + ConvLSTM with 5-image sequence (Proposed)</span></strong><br>បណ្ដាញរួមបញ្ចូល FCN និង ConvLSTM ដោយប្រើស៊េរីរូបភាព ៥ សន្លឹក</td>
+                <td>អាចទាញយកលក្ខណៈពិសេសទាំងលំហ និងពេលវេលា ដែលជួយកាត់បន្ថយភាពប្រែប្រួលដោយសារពេលវេលាថតរូបភាព។</td>
+                <td>ទាមទារការពុះរូបភាពជាចំណែកៗ (Patches) ដើម្បីឱ្យទំហំតម្រូវការស៊ីសង្វាក់ជាមួយអង្គចងចាំ GPU ធ្វើឱ្យចំណាយពេលហ្វឹកហាត់យូរជាង។</td>
+                <td>ភាពត្រឹមត្រូវកើនឡើងដល់ 93.4% សម្រាប់ផ្លូវ និង 86.3% សម្រាប់ព្រៃកោងកាង។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រ និងទិន្នន័យច្រើនគួរសម ជាពិសេសអង្គចងចាំ GPU សម្រាប់ដំណើរការបណ្ដាញ Deep Learning លើរូបភាពដែលមានទំហំធំ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការកាតក្រាហ្វិក (GPU) ដែលមានទំហំអង្គចងចាំ VRAM ធំ ដើម្បីអាចដំណើរការបំណែករូបភាពទំហំ 512x512 ជាស៊េរី ៥ សន្លឹកក្នុងពេលតែមួយ។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យរូបភាពផ្កាយរណប Sentinel-2 ស៊េរីពេលវេលា (Time-series) ដែលមានកម្រិតភាពច្បាស់ 10m និងទិន្នន័យផែនទីគោល (Shapefile) សម្រាប់ផ្ទៀងផ្ទាត់លទ្ធផល។</li>
+        
+        <li><strong>Software:</strong> បណ្ណាល័យ Deep Learning Frameworks សម្រាប់អភិវឌ្ឍម៉ូដែល និងកម្មវិធីដំណើរការទិន្នន័យភូមិសាស្ត្រដើម្បីធ្វើ Morphological dilation លើទិន្នន័យ Shapefile។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះប្រើប្រាស់ទិន្នន័យពីតំបន់ឆ្នេរនៃទ្វីបអាហ្រ្វិកខាងលិច (ទីក្រុង Saint-Louis និង Douala)។ ទោះបីជាតំបន់ទាំងនេះមានលក្ខណៈភូមិសាស្រ្តឆ្នេរស្រដៀងគ្នាក៏ដោយ ក៏លក្ខណៈព្រៃកោងកាង និងរចនាសម្ព័ន្ធផ្លូវនៅកម្ពុជាអាចមានភាពខុសគ្នាខ្លះៗ។ ការយកមកអនុវត្តនៅកម្ពុជា ទាមទារឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែមដើម្បីកែតម្រូវម៉ូដែល (Fine-tuning) ឱ្យកាន់តែសុក្រឹត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្រ្តនេះមានសក្តានុពលខ្ពស់ខ្លាំងណាស់ក្នុងការយកមកអនុវត្តនៅប្រទេសកម្ពុជា ជាពិសេសសម្រាប់ការតាមដានការផ្លាស់ប្តូរគម្របដីដោយស្វ័យប្រវត្តិ។</p>
+        
+        <ul>
+            
+            <li><strong>ខេត្តកោះកុង និងកំពត (ការតាមដានព្រៃកោងកាង):</strong> អាចប្រើដើម្បីតាមដានការបាត់បង់ ឬការស្តារឡើងវិញនូវព្រៃកោងកាងនៅតំបន់ឆ្នេរកម្ពុជា ដែលជារឿយៗពិបាកក្នុងការកំណត់ចំណាត់ថ្នាក់ដោយភ្នែកទទេ ឬប្រើរូបភាពតែមួយសន្លឹក។</li>
+            
+            <li><strong>រាជធានីភ្នំពេញ និងតំបន់ជាយក្រុង (ការអភិវឌ្ឍហេដ្ឋារចនាសម្ព័ន្ធ):</strong> ជួយតាមដានការស្ថាបនាផ្លូវថ្មីៗ និងការពង្រីកទីក្រុងយ៉ាងឆាប់រហ័ស ដោយធ្វើបច្ចុប្បន្នភាពផែនទីគម្របដីបានលឿន និងមានតម្លៃថោកតាមរយៈរូបភាព Sentinel-2។</li>
+            
+            <li><strong>តំបន់ជុំវិញបឹងទន្លេសាប (ការប្រែប្រួលតាមរដូវកាល):</strong> បណ្ដាញ ConvLSTM អាចចាប់យកការប្រែប្រួលតាមរដូវកាល (Seasonal changes) នៃផ្ទៃទឹក និងព្រៃលិចទឹកទន្លេសាបបានយ៉ាងល្អប្រសើរតាមរយៈស៊េរីពេលវេលា។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការរួមបញ្ចូលទិន្នន័យផ្កាយរណបឥតគិតថ្លៃជាមួយម៉ូដែលបញ្ញាសិប្បនិម្មិតកម្រិតជ្រៅនេះ គឺជាដំណោះស្រាយដែលមានប្រសិទ្ធភាពចំណាយខ្ពស់ សម្រាប់ស្ថាប័នរដ្ឋ និងអង្គការនានាក្នុងការតាមដានបរិស្ថាននៅកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទិន្នន័យផ្កាយរណប:</strong> ស្វែងយល់ពីរបៀបទាញយករូបភាពពី <span class="en">ESA Copernicus Open Access Hub</span> ឬប្រើប្រាស់ <span class="en">Google Earth Engine (GEE)</span> ដើម្បីដំណើរការរូបភាពពហុពេលវេលា (Time-series) កម្រិត 10m របស់ Sentinel-2។</li>
+            
+            <li><strong>ការរៀបចំទិន្នន័យ និងកែច្នៃទិន្នន័យ:</strong> រៀបចំប្រភេទទិន្នន័យជារូបភាពស៊េរីទំហំ 512x512 និងធ្វើ Data Augmentation (បង្វិល, ត្រឡប់) រួចប្រើប្រាស់ <span class="en">OpenCV</span> ឬ <span class="en">GDAL</span> ដើម្បីធ្វើ Morphological Dilation លើខ្សែបន្ទាត់ផ្លូវ (Shapefile)។</li>
+            
+            <li><strong>ការអភិវឌ្ឍម៉ូដែល Deep Learning:</strong> អនុវត្តការសរសេរកូដដើម្បីបង្កើតបណ្ដាញ <span class="en">U-Net</span> ផ្សារភ្ជាប់ជាមួយស្រទាប់ <span class="en">ConvLSTM</span> ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ឬ <span class="en">TensorFlow</span>។</li>
+            
+            <li><strong>ការហ្វឹកហាត់ម៉ូដែល និងការវាយតម្លៃ:</strong> ហ្វឹកហាត់ម៉ូដែលដោយប្រើប្រាស់ <span class="en">Joint Loss Function</span> (រួមបញ្ចូល Cross Entropy និង IoU) តាមរយៈ <span class="en">Adam Optimizer</span> ដោយកំណត់អត្រារៀនពី 0.1 ទៅ 0.001 តាមជំហាននីមួយៗ។</li>
+            
+            <li><strong>ការអនុវត្តជាក់ស្តែង និងការផ្ទៀងផ្ទាត់ទីតាំង:</strong> សាកល្បងដាក់ពង្រាយម៉ូដែលនៅតំបន់គោលដៅជាក់លាក់ណាមួយ (ឧទាហរណ៍ ព្រៃកោងកាងខេត្តកោះកុង) រួចផ្ទៀងផ្ទាត់លទ្ធផលជាមួយទិន្នន័យជាក់ស្តែង <span class="en">Ground Truth</span> និងរូបភាពពី <span class="en">Google Earth</span>។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">ConvLSTM</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតដែលរួមបញ្ចូលសមត្ថភាពរបស់បណ្ដាញ Convolution ក្នុងការទាញយកលក្ខណៈពិសេសពីរូបភាព និងសមត្ថភាពរបស់បណ្ដាញ LSTM ក្នុងការចងចាំព័ត៌មានតាមពេលវេលា ដើម្បីវិភាគការផ្លាស់ប្តូរនៃទីតាំងណាមួយពីមួយថ្ងៃទៅមួយថ្ងៃ។</td>
+                <td>ដូចជាមនុស្សម្នាក់ដែលមិនត្រឹមតែអាចចំណាំមុខមិត្តភក្តិបានច្បាស់កាលពីជួបគ្នាម្សិលមិញ ប៉ុន្តែថែមទាំងចាំនិងតាមដានថាថ្ងៃនេះមិត្តភក្តិនោះផ្លាស់ប្តូរសម្លៀកបំពាក់អ្វីខ្លះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fully Convolutional Networks</span></td>
+                <td>ជាបណ្ដាញបញ្ញាសិប្បនិម្មិតកម្រិតជ្រៅ ដែលប្រើប្រាស់ស្រទាប់ Convolution សុទ្ធសាធ (គ្មានស្រទាប់ភ្ជាប់ពេញលេញ ឬ Fully Connected Layer) ដើម្បីបែងចែកចំណាត់ថ្នាក់របស់ភីកសែល (Pixel) នីមួយៗក្នុងរូបភាព ដែលជួយឱ្យយើងដឹងថាផ្នែកណាជារបស់អ្វី (ឧ. ផ្លូវ ឬ ព្រៃ)។</td>
+                <td>ដូចជាវិចិត្រករដែលលាបពណ៌រូបភាពធំមួយដោយផ្តោតលើចំណុចតូចៗម្ដងមួយៗ ហើយអាចប្រាប់បានថាចំណុចនីមួយៗជារូបអ្វី (ឧទាហរណ៍៖ ស្លឹកឈើ ឬដី) ដោយមិនបាត់បង់ទម្រង់ដើមនៃរូបភាពទាំងមូល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Time-Series Images</span></td>
+                <td>ជាបណ្ដុំរូបភាពនៃទីតាំងតែមួយ ដែលត្រូវបានថតជាបន្តបន្ទាប់គ្នាតាមកាលបរិច្ឆេទខុសៗគ្នា ដើម្បីតាមដាន និងវិភាគការប្រែប្រួលនៃទីតាំងនោះតាមពេលវេលាជាក់ស្តែង។</td>
+                <td>ដូចជាការថតរូបសែលហ្វី (Selfie) នៅកន្លែងដដែលជារៀងរាល់ថ្ងៃ ដើម្បីយកមកតម្រៀបគ្នាមើលថាតើសក់របស់អ្នកដុះវែងប៉ុណ្ណាក្នុងរយៈពេលមួយខែ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">morphological dilation</span></td>
+                <td>ជាបច្ចេកទេសកែច្នៃរូបភាពដែលពង្រីកទំហំ ឬកម្រាស់នៃព្រំដែនវត្ថុនៅក្នុងរូបភាព (ដូចជាការពង្រីកបន្ទាត់ផ្លូវថ្នល់) ឱ្យធំជាងមុន ដើម្បីងាយស្រួលដល់ប្រព័ន្ធកុំព្យូទ័រក្នុងការរៀន និងសម្គាល់វត្ថុនោះបានច្បាស់។</td>
+                <td>ដូចជាការយកប៊ិចហ្វឺតទៅគូសបញ្ជាក់ (Highlight) លើគំនូសបន្ទាត់ខ្មៅតូចមួយ ដើម្បីឱ្យគេអាចមើលឃើញបន្ទាត់នោះកាន់តែច្បាស់ និងងាយស្រួលចាប់អារម្មណ៍ពីចម្ងាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Probability Map</span></td>
+                <td>ជាលទ្ធផលរូបភាពដែលបញ្ចេញដោយប្រព័ន្ធបញ្ញាសិប្បនិម្មិត ដែលក្នុងនោះភីកសែល (Pixel) នីមួយៗផ្ទុកនូវតម្លៃភាគរយដែលបញ្ជាក់ពីលទ្ធភាពដែលទីតាំងនោះជាវត្ថុអ្វីមួយ (ឧទាហរណ៍៖ ភាគរយដែលទីតាំងនោះជាព្រៃកោងកាង)។</td>
+                <td>ដូចជាផែនទីព្យាករណ៍អាកាសធាតុ ដែលតំបន់មានពណ៌ក្រហមចាស់បង្ហាញពីកន្លែងដែលមានភាគរយ ឬឱកាសភ្លៀងធ្លាក់ខ្ពស់បំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Sentinel-2</span></td>
+                <td>ជាគម្រោងផ្កាយរណបសង្កេតការណ៍ផែនដីរបស់ទីភ្នាក់ងារអវកាសអឺរ៉ុប (ESA) ដែលថតរូបភាពផ្ទៃផែនដីក្នុងកម្រិតភាពច្បាស់ ១០ម៉ែត្រ និងផ្តល់ទិន្នន័យដោយឥតគិតថ្លៃសម្រាប់ការតាមដានបរិស្ថាន និងកសិកម្ម។</td>
+                <td>ដូចជាកាមេរ៉ាសុវត្ថិភាពដ៏ធំមួយនៅលើមេឃ ដែលថតរូបផ្ទះរបស់អ្នកជារៀងរាល់ ៥ ថ្ងៃម្តង ដើម្បីឱ្យអ្នកដឹងថាមានអ្វីប្រែប្រួលខ្លះនៅក្នុងសួនច្បាររបស់អ្នក។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">U-Net</span></td>
+                <td>ជារចនាសម្ព័ន្ធបណ្ដាញសរសៃប្រសាទកម្រិតជ្រៅមានរាងជាអក្សរ U ដែលមានសមត្ថភាពខ្ពស់ក្នុងការកាត់ផ្តាច់ និងបែងចែកវត្ថុក្នុងរូបភាព (Image Segmentation) ដោយចាប់យកទាំងរូបរាងទូទៅ និងទីតាំងលម្អិតរបស់វត្ថុក្នុងពេលតែមួយ។</td>
+                <td>ដូចជារោងចក្រកែច្នៃ ដែលដំបូងបង្រួមវត្ថុធំមួយឱ្យតូចដើម្បីយល់ពីរចនាសម្ព័ន្ធស្នូលរបស់វា រួចពង្រីកវាត្រឡប់មកទំហំដើមវិញដោយបំពាក់ព័ត៌មានលម្អិត ដើម្បីបង្កើតជាផែនទីរូបភាពដ៏ច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">intersection over union</span></td>
+                <td>ជារង្វាស់សម្រាប់វាយតម្លៃភាពត្រឹមត្រូវនៃម៉ូដែល (IoU) ក្នុងការចាប់យករូបភាព ដោយគណនាធៀបគ្នារវាងផ្នែកដែលកុំព្យូទ័រទាយត្រូវ (ផ្ទៃត្រួតស៊ីគ្នា) ចែកជាមួយទំហំផ្ទៃសរុបនៃវត្ថុជាក់ស្តែង និងការទស្សន៍ទាយបញ្ចូលគ្នា។</td>
+                <td>ដូចជាការយកកាក់ពីរមកដាក់ត្រួតលើគ្នា ហើយវាស់មើលថាតើផ្ទៃដែលត្រួតលើគ្នានោះមានទំហំប៉ុនណាធៀបនឹងផ្ទៃរួមនៃកាក់ទាំងពីរ ដើម្បីដឹងថាវាដាក់ចំគ្នាល្អកម្រិតណា។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-network-solar-irradiance-forecast-edge-2023.html">
+                    <span class="km">ការព្យាករណ៍កាំរស្មីព្រះអាទិត្យផ្អែកលើបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិតសម្រាប់ឧបករណ៍កុំព្យូទ័រជាយ (Edge Computing Devices)</span><br>
+                    <span class="en article-original-title">Neural Network-Based Solar Irradiance Forecast for Edge Computing Devices</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-network-methods-nlp-review-2017.html">
+                    <span class="km">វិធីសាស្ត្របណ្ដាញសរសៃប្រសាទសម្រាប់ការដំណើរការភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Network Methods for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/encoding-time-series-images-cnn-2015.html">
+                    <span class="km">ការបំប្លែងស៊េរីទិន្នន័យពេលវេលាជាទម្រង់រូបភាពសម្រាប់ការត្រួតពិនិត្យ និងចំណាត់ថ្នាក់ដោយប្រើបណ្ដាញសរសៃប្រសាទ Tiled Convolutional Neural Networks</span><br>
+                    <span class="en article-original-title">Encoding Time Series as Images for Visual Inspection and Classification Using Tiled Convolutional Neural Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/neural-transfer-learning-nlp-ruder-2019.html">
+                    <span class="km">ការរៀនផ្ទេរចំណេះដឹងតាមបណ្ដាញសរសៃប្រសាទសម្រាប់ការកែច្នៃភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Neural Transfer Learning for Natural Language Processing</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/health/deep-learning-in-diagnostics-2025.html">
+                    <span class="km">ការរៀនស៊ីជម្រៅក្នុងការធ្វើរោគវិនិច្ឆ័យ</span><br>
+                    <span class="en article-original-title">Deep Learning in Diagnostics</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=ConvLSTM+spatio-temporal+feature+extraction+satellite+imagery" target="_blank" rel="noopener"><span class="en">ConvLSTM spatio-temporal feature extraction satellite imagery</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Fully+Convolutional+Networks+U-Net+land+cover+classification" target="_blank" rel="noopener"><span class="en">Fully Convolutional Networks U-Net land cover classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Sentinel-2+time-series+images+mangrove+forest+monitoring+deep+learning" target="_blank" rel="noopener"><span class="en">Sentinel-2 time-series images mangrove forest monitoring deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Attention+mechanisms+vs+RNNs+for+multi-temporal+remote+sensing+classification" target="_blank" rel="noopener"><span class="en">Attention mechanisms vs RNNs for multi-temporal remote sensing classification</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Morphological+operations+rasterized+shapefile+data+augmentation+satellite" target="_blank" rel="noopener"><span class="en">Morphological operations rasterized shapefile data augmentation satellite</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

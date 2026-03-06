@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើទូទៅកម្មភារកិច្ចនៅក្នុងការរៀនពង្រឹងភ្នាក់ងារច្រើន - Task Generalisation in Multi-Agent Reinforcement Learning | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការធ្វើទូទៅកម្មភារកិច្ចនៅក្នុងការរៀនពង្រឹងភ្នាក់ងារច្រើន។ ឯកសារនេះដោះស្រាយបញ្ហានៃការរៀនពង្រឹងភ្នាក់ងារច្រើន (MARL) ដែលភ្នាក់ងារតែងតែពឹងផ្អែកខ្លាំងពេកទៅលើបរ...">
+    
+    <meta name="keywords" content="Multi-Agent Reinforcement Learning, Task Generalisation, Zero-shot Generalisation, Domain Randomisation, Neural Network Architectures, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/task-generalisation-marl-aamas-2022.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/task-generalisation-marl-aamas-2022.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/task-generalisation-marl-aamas-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/task-generalisation-marl-aamas-2022.html">
+    <meta property="og:title" content="ការធ្វើទូទៅកម្មភារកិច្ចនៅក្នុងការរៀនពង្រឹងភ្នាក់ងារច្រើន | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរៀនពង្រឹងភ្នាក់ងារច្រើន (MARL) ដែលភ្នាក់ងារតែងតែពឹងផ្អែកខ្លាំងពេកទៅលើបរិស្ថានហ្វឹកហាត់តែមួយ (overfit) ដែលធ្វើឱ្យពួកវាមិនអាចបត់បែន ឬធ្វើទូទៅកម្ម (generalise) ទៅនឹងបរិស្ថានថ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="AAMAS 2022-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Multi-Agent Reinforcement Learning">
+    
+    <meta property="article:tag" content="Task Generalisation">
+    
+    <meta property="article:tag" content="Zero-shot Generalisation">
+    
+    <meta property="article:tag" content="Domain Randomisation">
+    
+    <meta property="article:tag" content="Neural Network Architectures">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើទូទៅកម្មភារកិច្ចនៅក្នុងការរៀនពង្រឹងភ្នាក់ងារច្រើន">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការរៀនពង្រឹងភ្នាក់ងារច្រើន (MARL) ដែលភ្នាក់ងារតែងតែពឹងផ្អែកខ្លាំងពេកទៅលើបរិស្ថានហ្វឹកហាត់តែមួយ (overfit) ដែលធ្វើឱ្យពួកវាមិនអាចបត់បែន ឬធ្វើទូទៅកម្ម (generalise) ទៅនឹងបរិស្ថានថ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1791\u17bc\u1791\u17c5\u1780\u1798\u17d2\u1798\u1797\u17b6\u179a\u1780\u17b7\u1785\u17d2\u1785\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1797\u17d2\u1793\u17b6\u1780\u17cb\u1784\u17b6\u179a\u1785\u17d2\u179a\u17be\u1793",
+      "name": "Task Generalisation in Multi-Agent Reinforcement Learning",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1797\u17d2\u1793\u17b6\u1780\u17cb\u1784\u17b6\u179a\u1785\u17d2\u179a\u17be\u1793 (MARL) \u178a\u17c2\u179b\u1797\u17d2\u1793\u17b6\u1780\u17cb\u1784\u17b6\u179a\u178f\u17c2\u1784\u178f\u17c2\u1796\u17b9\u1784\u1795\u17d2\u17a2\u17c2\u1780\u1781\u17d2\u179b\u17b6\u17c6\u1784\u1796\u17c1\u1780\u1791\u17c5\u179b\u17be\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u17a0\u17d2\u179c\u17b9\u1780\u17a0\u17b6\u178f\u17cb\u178f\u17c2\u1798\u17bd\u1799 (overfit) \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1796\u17bd\u1780\u179c\u17b6\u1798\u17b7\u1793\u17a2\u17b6\u1785\u1794\u178f\u17cb\u1794\u17c2\u1793 \u17ac\u1792\u17d2\u179c\u17be\u1791\u17bc\u1791\u17c5\u1780\u1798\u17d2\u1798 (generalise) \u1791\u17c5\u1793\u17b9\u1784\u1794\u179a\u17b7\u179f\u17d2\u1790\u17b6\u1793\u1790\u17d2\u1798\u17b8\u178a\u17c2\u179b\u179f\u17d2\u179a\u178a\u17c0\u1784\u1782\u17d2\u1793\u17b6\u1794\u17b6\u1793\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/task-generalisation-marl-aamas-2022.html",
+      "author": [{"@type": "Person", "name": "Lukas Sch\u00e4fer (University of Edinburgh)"}],
+      "datePublished": "AAMAS 2022",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Task Generalisation in Multi-Agent Reinforcement Learning",
+        "url": "https://ifaamas.org/Proceedings/aamas2022/pdfs/p1863.pdf"
+      },
+      "keywords": ["Multi-Agent Reinforcement Learning", "Task Generalisation", "Zero-shot Generalisation", "Domain Randomisation", "Neural Network Architectures"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u1791\u17bc\u1791\u17c5\u1780\u1798\u17d2\u1798\u1797\u17b6\u179a\u1780\u17b7\u1785\u17d2\u1785\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1796\u1784\u17d2\u179a\u17b9\u1784\u1797\u17d2\u1793\u17b6\u1780\u17cb\u1784\u17b6\u179a\u1785\u17d2\u179a\u17be\u1793",
+          "item": "https://khmerresearch.com/papers/technology/task-generalisation-marl-aamas-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការធ្វើទូទៅកម្មភារកិច្ចនៅក្នុងការរៀនពង្រឹងភ្នាក់ងារច្រើន</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Task Generalisation in Multi-Agent Reinforcement Learning<br>
+        
+        <strong>Source:</strong> <a href="https://ifaamas.org/Proceedings/aamas2022/pdfs/p1863.pdf" target="_blank" rel="noopener">ifaamas.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើទូទៅកម្មភារកិច្ចនៅក្នុងការរៀនពង្រឹងភ្នាក់ងារច្រើន</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Task Generalisation in Multi-Agent Reinforcement Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Lukas Schäfer (University of Edinburgh)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> AAMAS 2022</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការរៀនពង្រឹងភ្នាក់ងារច្រើន (MARL) ដែលភ្នាក់ងារតែងតែពឹងផ្អែកខ្លាំងពេកទៅលើបរិស្ថានហ្វឹកហាត់តែមួយ (overfit) ដែលធ្វើឱ្យពួកវាមិនអាចបត់បែន ឬធ្វើទូទៅកម្ម (generalise) ទៅនឹងបរិស្ថានថ្មីដែលស្រដៀងគ្នាបាន។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានធ្វើការពិសោធន៍បឋមនៅក្នុងបរិស្ថានឃ្លាំងមនុស្សយន្តច្រើន (multi-robot warehouse) ដោយប្រើប្រាស់ក្បួនដោះស្រាយ IA2C ដើម្បីវាយតម្លៃកម្រិតនៃការធ្វើទូទៅកម្មរបស់ភ្នាក់ងារ។
+        
+        <ul>
+            
+            <li>ការវាយតម្លៃការធ្វើទូទៅកម្មដោយគ្មានការហ្វឹកហាត់បន្ថែម (Zero-shot generalisation)</li>
+            
+            <li>ការអនុវត្តវិធីសាស្ត្រធ្វើចៃដន្យដែន (Domain Randomisation - DR)</li>
+            
+            <li>ការសាកល្បងស្ថាបត្យកម្មបណ្ដាញសរសៃប្រសាទផ្សេងៗគ្នា (CNNs និង GRUs)</li>
+            
+            <li>ការកែសម្រួលម៉ូដែលឡើងវិញ (Finetuning) លើការតំណាងដែលបានរៀនរួចនៅក្នុងបរិស្ថានថ្មី</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ក្បួនដោះស្រាយ MARL បច្ចុប្បន្នមានភាពរហ័សរងគ្រោះនឹងការផ្លាស់ប្តូរទិន្នន័យសង្កេត និងបរាជ័យក្នុងការធ្វើទូទៅកម្ម (zero-shot) ទៅកាន់ឃ្លាំងដែលមានប្លង់ខុសគ្នាទាំងស្រុងពីរាងដើម។</li>
+            
+            <li>ការប្រើប្រាស់វិធីសាស្ត្រ Domain Randomisation (DR) និងការជ្រើសរើសទម្រង់ទិន្នន័យសង្កេតត្រឹមត្រូវអាចជួយកែលម្អការធ្វើទូទៅកម្មបានមួយកម្រិត ប៉ុន្តែវានៅតែមិនទាន់គ្រប់គ្រាន់សម្រាប់ដោះស្រាយបញ្ហានេះទាំងស្រុងនោះទេ។</li>
+            
+            <li>ការកែសម្រួលម៉ូដែល (Finetuning) នូវម៉ូដែលដែលបានហ្វឹកហាត់ពីឃ្លាំងតូចទៅក្នុងឃ្លាំងធំរយៈពេលត្រឹម 20 លានជំហាន (timesteps) ផ្តល់នូវលទ្ធផលប្រសើរជាងយ៉ាងខ្លាំងបើធៀបនឹងភ្នាក់ងារដែលត្រូវរៀនពីចំណុចសូន្យ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">IA2C Zero-shot with Absolute Coordinates</span></strong><br>ការប្រើប្រាស់ IA2C សម្រាប់ការធ្វើទូទៅកម្ម (Zero-shot) ដោយប្រើកូអរដោនេដាច់ខាត</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងមានទំហំទិន្នន័យសង្កេត (observation space) សាមញ្ញ។</td>
+                <td>បរាជ័យទាំងស្រុងក្នុងការធ្វើទូទៅកម្មទៅកាន់ឃ្លាំងដែលមានទម្រង់ខុសពីដើម ដោយសារភ្នាក់ងារជួបប្រទះទិន្នន័យក្រៅតំបន់ហ្វឹកហាត់ (out-of-distribution)។</td>
+                <td>ទទួលបានផលចំណេញ (returns) ស្មើនឹងសូន្យ នៅពេលអនុវត្តក្នុងឃ្លាំងថ្មី។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">IA2C Zero-shot with Local Image Encoding + DR + GRU</span></strong><br>ការប្រើប្រាស់ IA2C ជាមួយការបំប្លែងរូបភាពមូលដ្ឋាន រួមជាមួយ Domain Randomisation និងបណ្ដាញ GRU</td>
+                <td>មានសមត្ថភាពប្រសើរជាងមុនក្នុងការធ្វើទូទៅកម្មចំពោះឃ្លាំងដែលមានទំហំប្រហាក់ប្រហែលគ្នា ហើយបណ្តាញ GRU ជួយចងចាំព័ត៌មានដែលមើលមិនឃើញផ្ទាល់ (partial observability)។</td>
+                <td>នៅតែបរាជ័យដដែលនៅពេលផ្ទេរភ្នាក់ងារទៅកាន់ឃ្លាំងដែលមានទំហំធំជាង និងមានប្លង់ខុសគ្នាខ្លាំង។</td>
+                <td>ដំណើរការបានល្អលើបរិស្ថានស្រដៀងគ្នា ប៉ុន្តែភ្នាក់ងារគាំង (stuck) និងមិនអាចដំណើរការបានក្នុងឃ្លាំងធំ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Pretraining followed by Finetuning</span></strong><br>ការហ្វឹកហាត់ម៉ូដែលជាមុនសិន (Pretraining) រួចទើបយកមកកែសម្រួលបន្ថែម (Finetuning)</td>
+                <td>ភ្នាក់ងារអាចទាញយកចំណេះដឹងដែលបានរៀនពីមុនមកប្រើប្រាស់ ដែលជួយឱ្យការរៀនក្នុងបរិស្ថានថ្មីមានល្បឿនលឿន និងមានប្រសិទ្ធភាពខ្ពស់។</td>
+                <td>ទាមទារការរក្សាទុកម៉ូដែលចាស់ និងចំណាយពេលហ្វឹកហាត់បន្ថែម (ទោះបីជាតិចជាងការហ្វឹកហាត់ពីដំបូងក៏ដោយ)។</td>
+                <td>ទទួលបានផលចំណេញខ្ពស់ខ្លាំងបន្ទាប់ពីហ្វឹកហាត់បន្ថែម 20 លានជំហាន បើធៀបនឹងការហ្វឹកហាត់ពីដំបូងចំនួន 100 លានជំហាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ឯកសារមិនបានបញ្ជាក់លម្អិតអំពីតម្រូវការផ្នែករឹង (Hardware) នោះទេ ប៉ុន្តែការហ្វឹកហាត់ភ្នាក់ងារចំនួនរាប់សិបលានជំហាន (50M-100M timesteps) ទាមទារថាមពលកុំព្យូទ័រខ្ពស់យ៉ាងពិតប្រាកដ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> ត្រូវការម៉ាស៊ីនដែលមាន CPU ច្រើនគ្រាប់ (Multi-core CPUs) ឬ GPUs ដែលមានកម្លាំងខ្លាំង ដើម្បីដំណើរការការហ្វឹកហាត់ Deep Reinforcement Learning (ដូចជាបណ្តាញ CNN និង GRU) ក្នុងល្បឿនលឿន។</li>
+        
+        <li><strong>Software Environment:</strong> ការក្លែងធ្វើបរិស្ថានឃ្លាំងមនុស្សយន្ត (Multi-Robot Warehouse - RWARE) ដែលត្រូវបានរៀបចំជាទម្រង់ Gridworld សម្រាប់ដំណើរការពិសោធន៍។</li>
+        
+        <li><strong>Time / Compute:</strong> តម្រូវឱ្យមានការដំណើរការរហូតដល់ទៅ 50 លានទៅ 100 លានជំហាន (Timesteps) សម្រាប់ការហ្វឹកហាត់ ដែលអាចចំណាយពេលច្រើនថ្ងៃលើម៉ាស៊ីនធម្មតា។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងទាំងស្រុងនៅក្នុងបរិស្ថានក្លែងធ្វើនិម្មិត (Simulated 2D Gridworld) ឈ្មោះ RWARE ដែលមិនមានបញ្ចូលនូវរូបវិទ្យាពិតប្រាកដ កំហុសសេនស័រ ឬការរំខានពីមនុស្សឡើយ។ សម្រាប់ប្រទេសកម្ពុជា ការអនុវត្តនេះដោយផ្ទាល់ទៅលើមនុស្សយន្តពិតក្នុងរោងចក្រ នឹងជួបប្រទះបញ្ហាគម្លាតរវាងការក្លែងធ្វើនិងការពិត (Sim-to-Real gap) ដែលតម្រូវឱ្យមានការកែសម្រួលបន្ថែមយ៉ាងប្រុងប្រយ័ត្ន។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានៃការសម្របសម្រួលមនុស្សយន្តច្រើននេះ មានសក្តានុពលខ្ពស់សម្រាប់ការធ្វើស្វ័យប្រវត្តិកម្មឃ្លាំងទំនិញ និងភស្តុភារនៅក្នុងប្រទេសកម្ពុជានាពេលអនាគត។</p>
+        
+        <ul>
+            
+            <li><strong>តំបន់សេដ្ឋកិច្ចពិសេសភ្នំពេញ (PPSEZ) និងមជ្ឈមណ្ឌលភស្តុភារ:</strong> អាចប្រើប្រាស់ក្បួនដោះស្រាយនេះដើម្បីគ្រប់គ្រងក្រុមមនុស្សយន្តស្វ័យប្រវត្តិ (AGVs) ក្នុងការលើកដាក់ទំនិញ និងចាត់ចែងផលិតផលនៅក្នុងឃ្លាំងស្តុកធំៗ ដូចជាឃ្លាំងរបស់ Kerry Worldbridge ជាដើម ដើម្បីបង្កើនល្បឿន និងកាត់បន្ថយកំហុស។</li>
+            
+            <li><strong>កំពង់ផែស្វយ័តក្រុងព្រះសីហនុ (PAS):</strong> នៅពេលកំពង់ផែពង្រីកប្រព័ន្ធស្វ័យប្រវត្តិកម្ម ការប្រើប្រាស់ Multi-Agent RL អាចជួយសម្របសម្រួលចលនារបស់រថយន្តដឹកកុងតឺន័រគ្មានមនុស្សបើក ដើម្បីចៀសវាងការកកស្ទះ និងបង្កើនប្រសិទ្ធភាពប្រតិបត្តិការកំពង់ផែ។</li>
+            
+            <li><strong>វិស័យកសិ-ឧស្សាហកម្ម:</strong> ការប្រើប្រាស់រ៉ូបូតដើម្បីចាត់ចែងការស្តុកទុក និងការដឹកជញ្ជូនកសិផល (ដូចជាអង្ករ ឬកៅស៊ូ) នៅក្នុងរោងម៉ាស៊ីនធំៗ ដោយអនុវត្តប្រព័ន្ធដែលអាចរៀនសូត្រពីកំហុស និងបត់បែនតាមទំហំឃ្លាំងផ្សេងៗគ្នា។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់វិធីសាស្ត្រ Finetuning អាចជួយសហគ្រាសកម្ពុជាសន្សំសំចៃពេលវេលា និងធនធានកុំព្យូទ័របានយ៉ាងច្រើន នៅពេលពង្រីកប្រតិបត្តិការឃ្លាំងរបស់ពួកគេពីតូចទៅធំ ដោយមិនចាំបាច់ហ្វឹកហាត់ប្រព័ន្ធបញ្ញាសិប្បនិម្មិតពីដំបូងឡើងវិញ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីមូលដ្ឋានគ្រឹះនៃ RL និង MARL:</strong> និស្សិតគួរសិក្សាពីទ្រឹស្តីនៃការរៀនពង្រឹង (Reinforcement Learning) ដោយចាប់ផ្តើមពី Single-Agent រួចឈានទៅ Multi-Agent។ គួរប្រើប្រាស់បណ្ណាល័យកូដដូចជា <span class="en">OpenAI Gym</span> និង <span class="en">PettingZoo</span> ដើម្បីអនុវត្តកូដសាមញ្ញៗជាមុនសិន។</li>
+            
+            <li><strong>ដំឡើងនិងធ្វើតេស្តបរិស្ថាន RWARE:</strong> ទាញយកកូដប្រភពនៃបរិស្ថានក្លែងធ្វើឃ្លាំងមនុស្សយន្ត (Multi-Robot Warehouse) ពី <span class="en">GitHub (uoe-agents/robotic-warehouse)</span> មករត់លើកុំព្យូទ័ររបស់អ្នក ដើម្បីស្វែងយល់ពីរបៀបដែលទិន្នន័យសង្កេត និងរង្វាន់ត្រូវបានគណនា។</li>
+            
+            <li><strong>អនុវត្តក្បួនដោះស្រាយ Actor-Critic:</strong> សរសេរកូដក្បួនដោះស្រាយ A2C ឬ PPO ដោយប្រើប្រាស់ <span class="en">PyTorch</span> ឬបណ្ណាល័យដែលស្រាប់ដូចជា <span class="en">Ray RLlib</span> ដើម្បីហ្វឹកហាត់ភ្នាក់ងារ (Agents) ឱ្យចេះដើរប្រមូលទំនិញក្នុងឃ្លាំងតូច (ទំហំ 5x5)។</li>
+            
+            <li><strong>ពិសោធន៍ជាមួយការធ្វើ Transfer Learning និង Finetuning:</strong> រក្សាទុក (Save) ម៉ូដែលដែលបានហ្វឹកហាត់រួចក្នុងឃ្លាំងតូច រួចផ្ទុកវាឡើងវិញ (Load weights) ទៅក្នុងបរិស្ថានឃ្លាំងធំជាងមុន ហើយបន្តការហ្វឹកហាត់ (Finetune) ដើម្បីប្រៀបធៀបលទ្ធផលជាមួយនឹងការហ្វឹកហាត់ម៉ូដែលថ្មីពីចំណុចសូន្យ។</li>
+            
+            <li><strong>ផ្សារភ្ជាប់ការក្លែងធ្វើទៅនឹងរូបវិទ្យាពិត (Sim-to-Real):</strong> ដើម្បីត្រៀមខ្លួនក្នុងការអនុវត្តជាក់ស្តែងនៅកម្ពុជា គួរចាប់ផ្តើមសិក្សាពី <span class="en">ROS (Robot Operating System)</span> និងកម្មវិធីក្លែងធ្វើ 3D ដែលមានរូបវិទ្យាពិតប្រាកដដូចជា <span class="en">Gazebo</span> ដើម្បីសាកល្បងបញ្ជូនគោលការណ៍ដែលបានរៀនទៅកាន់រ៉ូបូតជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Multi-agent reinforcement learning (MARL)</span></td>
+                <td>ការរៀនពង្រឹងដែលភ្នាក់ងារ (បញ្ញាសិប្បនិម្មិត) ជាច្រើនធ្វើការរៀនសូត្រក្នុងពេលតែមួយតាមរយៈការសាកល្បងខុសត្រូវនៅក្នុងបរិស្ថានជុំវិញខ្លួន និងតាមរយៈការធ្វើអន្តរកម្មជាមួយភ្នាក់ងារដទៃទៀត។</td>
+                <td>ដូចជាក្រុមកីឡាករបាល់ទាត់រៀនលេងជាមួយគ្នា ដោយម្នាក់ៗរៀនពីកំហុសខ្លួនឯងផង និងរៀនសហការជាមួយមិត្តរួមក្រុមផង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">zero-shot generalisation</span></td>
+                <td>សមត្ថភាពរបស់ម៉ូដែល AI ក្នុងការដោះស្រាយបញ្ហាថ្មី ឬធ្វើការក្នុងបរិស្ថានថ្មីដែលវាមិនធ្លាប់ជួបប្រទះពីមុនមកទាល់តែសោះ ដោយមិនចាំបាច់មានការហ្វឹកហាត់បន្ថែមទៅលើទិន្នន័យថ្មីនោះឡើយ។</td>
+                <td>ដូចជាសិស្សដែលចេះបូកលេខដោយប្រើផ្លែប៉ោម ហើយអាចយកចំណេះដឹងនោះទៅបូកលេខដោយប្រើផ្លែក្រូចបានភ្លាមៗដោយមិនបាច់រៀនសារជាថ្មី។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">finetuning</span></td>
+                <td>ដំណើរការនៃការយកម៉ូដែល AI ដែលបានហ្វឹកហាត់រួចម្ដងមកហើយ (pre-trained) ទៅហ្វឹកហាត់បន្ថែមបន្តិចបន្តួចនៅលើទិន្នន័យ ឬបរិស្ថានថ្មី ដើម្បីឱ្យវាអាចសម្របខ្លួនបានលឿននិងមានប្រសិទ្ធភាពខ្ពស់។</td>
+                <td>ដូចជាជាងជួសជុលឡានដែលពូកែខាងឡានសាំង ទៅរៀនវគ្គខ្លីបន្ថែមដើម្បីចេះជួសជុលឡានអគ្គិសនី ដោយផ្អែកលើចំណេះដឹងមូលដ្ឋានដែលមានស្រាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">domain randomisation (DR)</span></td>
+                <td>បច្ចេកទេសហ្វឹកហាត់ AI ដោយផ្លាស់ប្តូរលក្ខខណ្ឌបរិស្ថានជានិច្ច (ដូចជាប្តូរពណ៌ ទំហំ ឬប្លង់) ដើម្បីឱ្យ AI នោះរៀនមិនប្រកាន់យកតែទម្រង់ណាមួយ និងមានភាពបត់បែនខ្ពស់ពេលជួបស្ថានភាពជាក់ស្តែងផ្សេងៗ។</td>
+                <td>ដូចជាការហ្វឹកហាត់ទាហានឱ្យចេះប្រយុទ្ធទាំងក្នុងព្រៃ លើភ្នំ ក្នុងទឹក និងទីក្រុង ដើម្បីឱ្យពួកគេមានភាពបត់បែន និងត្រៀមខ្លួនរួចរាល់សម្រាប់គ្រប់ស្ថានភាព។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">partially-observable stochastic games (POSG)</span></td>
+                <td>ទម្រង់គណិតវិទ្យាដែលពិពណ៌នាពីបរិស្ថានដែលភ្នាក់ងារនីមួយៗមើលឃើញតែផ្នែកខ្លះនៃពិភពលោក (មិនដឹងព័ត៌មានទាំងអស់គ្រប់ជ្រុងជ្រោយ) ហើយលទ្ធផលនៃសកម្មភាពណាមួយតែងមានលក្ខណៈចៃដន្យ។</td>
+                <td>ដូចជាការលេងបៀរដែលអ្នកមើលឃើញតែសន្លឹកបៀរក្នុងដៃខ្លួនឯង និងមិនដឹងថាអ្នកដទៃមានបៀរអ្វីខ្លះ ហើយរាល់ការចាប់បៀរថ្មីគឺពឹងផ្អែកលើភាពចៃដន្យ (សំណាង)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Advantage Actor-Critic (IA2C)</span></td>
+                <td>ក្បួនដោះស្រាយដែលបែងចែក AI ជាពីរផ្នែក៖ មួយជា "តួអង្គ (Actor)" សម្រាប់សម្រេចចិត្តធ្វើសកម្មភាព និងមួយទៀតជា "អ្នករិះគន់ (Critic)" សម្រាប់វាយតម្លៃថាសកម្មភាពនោះល្អកម្រិតណា ដើម្បីជួយឱ្យការរៀនមានភាពប្រសើរឡើង។</td>
+                <td>ដូចជាអ្នកកំពុងហាត់ច្រៀង (តួអង្គ) ដោយមានគ្រូបង្វឹកម្នាក់នៅក្បែរចាំស្តាប់និងប្រាប់ថាអ្នកច្រៀងត្រូវចង្វាក់ឬអត់ (អ្នករិះគន់)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Meta RL</span></td>
+                <td>ការរៀនពង្រឹងកម្រិតខ្ពស់ ដែល AI មិនត្រឹមតែរៀនពីរបៀបដោះស្រាយបញ្ហាមួយប៉ុណ្ណោះទេ តែវា "រៀនពីរបៀបរៀន" ដើម្បីឱ្យវាអាចចាប់យកចំណេះដឹងថ្មីៗបានលឿននៅពេលជួបភារកិច្ចថ្មី (Few-shot learning)។</td>
+                <td>ដូចជាសិស្សដែលមិនត្រឹមតែទន្ទេញមេរៀន តែយល់ពី "វិធីសាស្ត្រនៃការរៀនសូត្រ" ដែលធ្វើឱ្យគេអាចរៀនមុខវិជ្ជាថ្មីអ្វីក៏ឆាប់ចេះ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Gated Recurrent Networks (GRU)</span></td>
+                <td>ប្រភេទបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតដែលមានសមត្ថភាពចងចាំព័ត៌មានពីអតីតកាល និងប្រើប្រាស់វាសម្រាប់ការសម្រេចចិត្តនៅពេលអនាគត ដែលស័ក្តិសមបំផុតសម្រាប់ដំណើរការទិន្នន័យដែលមានលំដាប់លំដោយ។</td>
+                <td>ដូចជាអ្នកអានសៀវភៅរឿងប្រលោមលោកដែលត្រូវចងចាំសាច់រឿងពីជំពូកមុនៗ ទើបអាចយល់អត្ថន័យនៃសាច់រឿងនៅជំពូកបន្ទាប់បាន។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/research-on-reinforcement-learning-review-2004.html">
+                    <span class="km">ទិដ្ឋភាពទូទៅនៃការស្រាវជ្រាវលើការរៀនតាមបែបពង្រឹង (Reinforcement Learning)</span><br>
+                    <span class="en article-original-title">强化学习研究综述</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/marl-multimodal-pretrained-models-2023.html">
+                    <span class="km">ការរៀនពង្រឹងភ្នាក់ងារច្រើននៅក្នុងបរិស្ថានពហុម៉ូឌែល៖ ទស្សនវិស័យនៃម៉ូដែលធំដែលបានបង្វឹកជាមុន</span><br>
+                    <span class="en article-original-title">多模态环境中的多智能体强化学习：预训练大模型视角</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/iterative-method-crop-disease-analysis-stgcn-2024.html">
+                    <span class="km">ការរចនាវិធីសាស្ត្រវិភាគជំងឺដំណាំដោយរួមបញ្ចូលយន្តការ Graph Attention ជាមួយ Spatial-Temporal Learning និង Deep Q-Networks</span><br>
+                    <span class="en article-original-title">Design of an Iterative Method for Crop Disease Analysis Incorporating Graph Attention with Spatial-Temporal Learning and Deep Q-Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/network-aware-marl-adaptive-navigation-2021.html">
+                    <span class="km">ការរៀនពង្រឹងពហុភ្នាក់ងារដែលដឹងពីបណ្តាញសម្រាប់ការរុករកដោយប្រែប្រួលនៃយានយន្តនៅក្នុងបណ្តាញផ្លូវសកម្ម</span><br>
+                    <span class="en article-original-title">NETWORK-AWARE MULTI-AGENT REINFORCEMENT LEARNING FOR ADAPTIVE NAVIGATION OF VEHICLES IN A DYNAMIC ROAD NETWORK</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/safe-cast-secure-ai-federated-m2m-2025.html">
+                    <span class="km">SAFE-CAST: ការរាប់បញ្ចូលតាមប្រព័ន្ធសហព័ន្ធ AI ដែលមានសុវត្ថិភាពសម្រាប់ការឃ្លាំមើលស្វ័យប្រវត្តិផ្អែកលើចង្កោម និងទំនុកចិត្តក្នុងទំនាក់ទំនងពីម៉ាស៊ីនទៅម៉ាស៊ីន</span><br>
+                    <span class="en article-original-title">SAFE-CAST: secure AI-federated enumeration for clustering-based automated surveillance and trust in machine-to-machine communication</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=multi-agent+reinforcement+learning%22+AND+%22partially-observable+stochastic+games" target="_blank" rel="noopener"><span class="en">multi-agent reinforcement learning" AND "partially-observable stochastic games</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=zero-shot+generalisation%22+OR+%22zero-shot+transfer%22+AND+%22multi-agent+reinforcement+learning" target="_blank" rel="noopener"><span class="en">zero-shot generalisation" OR "zero-shot transfer" AND "multi-agent reinforcement learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=domain+randomisation%22+AND+%22reinforcement+learning%22+AND+%22generalisation" target="_blank" rel="noopener"><span class="en">domain randomisation" AND "reinforcement learning" AND "generalisation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=independent+advantage+actor-critic%22+OR+%22IA2C%22+AND+%22multi-robot+warehouse" target="_blank" rel="noopener"><span class="en">independent advantage actor-critic" OR "IA2C" AND "multi-robot warehouse</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Meta+reinforcement+learning%22+AND+%22multi-agent+systems%22+AND+%22few-shot+adaptation" target="_blank" rel="noopener"><span class="en">Meta reinforcement learning" AND "multi-agent systems" AND "few-shot adaptation</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>

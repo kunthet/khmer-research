@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ឆ្ពោះទៅរកការដោះស្រាយភាពលម្អៀង និងយុត្តិធម៌ក្នុងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) - Towards Addressing Bias and Fairness in Machine Learning | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ឆ្ពោះទៅរកការដោះស្រាយភាពលម្អៀង និងយុត្តិធម៌ក្នុងការរៀនរបស់ម៉ា។ ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហាភាពលម្អៀងនៅក្នុងក្បួនដោះស្រាយនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning...">
+    
+    <meta name="keywords" content="Machine Learning Fairness, Algorithmic Bias Mitigation, Upsampling, Downsampling, Ethical AI, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/addressing-bias-fairness-machine-learning-2023.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/addressing-bias-fairness-machine-learning-2023.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/addressing-bias-fairness-machine-learning-2023.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/addressing-bias-fairness-machine-learning-2023.html">
+    <meta property="og:title" content="ឆ្ពោះទៅរកការដោះស្រាយភាពលម្អៀង និងយុត្តិធម៌ក្នុងការរៀនរបស់ម៉ាស៊ីន (Machine Learning) | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហាភាពលម្អៀងនៅក្នុងក្បួនដោះស្រាយនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning algorithms) ដែលបណ្តាលមកពីទិន្នន័យមិនមានតុល្យភាព (Imbalanced datasets) ដែលអាចនាំឱ្យមានការសម្រេចចិត្ត...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2023, PICT’s International Journal of Engineering and Technology (PIJET)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Machine Learning Fairness">
+    
+    <meta property="article:tag" content="Algorithmic Bias Mitigation">
+    
+    <meta property="article:tag" content="Upsampling">
+    
+    <meta property="article:tag" content="Downsampling">
+    
+    <meta property="article:tag" content="Ethical AI">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ឆ្ពោះទៅរកការដោះស្រាយភាពលម្អៀង និងយុត្តិធម៌ក្នុងការរៀនរបស់ម៉ាស៊ីន (Machine Learning)">
+    <meta name="twitter:description" content="ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហាភាពលម្អៀងនៅក្នុងក្បួនដោះស្រាយនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning algorithms) ដែលបណ្តាលមកពីទិន្នន័យមិនមានតុល្យភាព (Imbalanced datasets) ដែលអាចនាំឱ្យមានការសម្រេចចិត្ត...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1786\u17d2\u1796\u17c4\u17c7\u1791\u17c5\u179a\u1780\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1797\u17b6\u1796\u179b\u1798\u17d2\u17a2\u17c0\u1784 \u1793\u17b7\u1784\u1799\u17bb\u178f\u17d2\u178f\u17b7\u1792\u1798\u17cc\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning)",
+      "name": "Towards Addressing Bias and Fairness in Machine Learning",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u1795\u17d2\u178f\u17c4\u178f\u179b\u17be\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1797\u17b6\u1796\u179b\u1798\u17d2\u17a2\u17c0\u1784\u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1780\u17d2\u1794\u17bd\u1793\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1793\u17c3\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning algorithms) \u178a\u17c2\u179b\u1794\u178e\u17d2\u178f\u17b6\u179b\u1798\u1780\u1796\u17b8\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1798\u17b7\u1793\u1798\u17b6\u1793\u178f\u17bb\u179b\u17d2\u1799\u1797\u17b6\u1796 (Imbalanced datasets) \u178a\u17c2\u179b\u17a2\u17b6\u1785\u1793\u17b6\u17c6\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u179f\u1798\u17d2\u179a\u17c1\u1785\u1785\u17b7\u178f\u17d2\u178f\u1798\u17b7\u1793\u179f\u17d2\u1798\u17be\u1797\u17b6\u1796\u1782\u17d2\u1793\u17b6\u179b\u17be\u1780\u17d2\u179a\u17bb\u1798\u1787\u1793\u1787\u17b6\u178f\u17b7 \u17ac\u1799\u17c1\u1793\u178c\u17d0\u179a\u178e\u17b6\u1798\u17bd\u1799\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/addressing-bias-fairness-machine-learning-2023.html",
+      "author": [{"@type": "Person", "name": "Rudraksh Khandelwal, Pune Institute of Computer Technology"},{"@type": "Person", "name": "Shyam Deshmukh, Pune Institute of Computer Technology"}],
+      "datePublished": "2023, PICT\u2019s International Journal of Engineering and Technology (PIJET)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Towards Addressing Bias and Fairness in Machine Learning",
+        "url": "https://www.pijet.org"
+      },
+      "keywords": ["Machine Learning Fairness", "Algorithmic Bias Mitigation", "Upsampling", "Downsampling", "Ethical AI"],
+      "about": "Machine Learning"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1786\u17d2\u1796\u17c4\u17c7\u1791\u17c5\u179a\u1780\u1780\u17b6\u179a\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1797\u17b6\u1796\u179b\u1798\u17d2\u17a2\u17c0\u1784 \u1793\u17b7\u1784\u1799\u17bb\u178f\u17d2\u178f\u17b7\u1792\u1798\u17cc\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u179a\u1794\u179f\u17cb\u1798\u17c9\u17b6\u179f\u17ca\u17b8\u1793 (Machine Learning)",
+          "item": "https://khmerresearch.com/papers/technology/addressing-bias-fairness-machine-learning-2023.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ឆ្ពោះទៅរកការដោះស្រាយភាពលម្អៀង និងយុត្តិធម៌ក្នុងការរៀនរបស់...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Towards Addressing Bias and Fairness in Machine Learning<br>
+        
+        <strong>Source:</strong> <a href="https://www.pijet.org" target="_blank" rel="noopener">www.pijet.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ឆ្ពោះទៅរកការដោះស្រាយភាពលម្អៀង និងយុត្តិធម៌ក្នុងការរៀនរបស់ម៉ាស៊ីន (Machine Learning)</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Towards Addressing Bias and Fairness in Machine Learning</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Rudraksh Khandelwal, Pune Institute of Computer Technology, Shyam Deshmukh, Pune Institute of Computer Technology</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2023, PICT’s International Journal of Engineering and Technology (PIJET)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Machine Learning</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះផ្តោតលើការដោះស្រាយបញ្ហាភាពលម្អៀងនៅក្នុងក្បួនដោះស្រាយនៃការរៀនរបស់ម៉ាស៊ីន (Machine Learning algorithms) ដែលបណ្តាលមកពីទិន្នន័យមិនមានតុល្យភាព (Imbalanced datasets) ដែលអាចនាំឱ្យមានការសម្រេចចិត្តមិនស្មើភាពគ្នាលើក្រុមជនជាតិ ឬយេនឌ័រណាមួយ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់វិធីសាស្ត្រកែតម្រូវទំហំនិងរបាយទិន្នន័យ ដើម្បីសាកល្បងលើម៉ូដែលវាយតម្លៃនិងជ្រើសរើសបេក្ខជនឱ្យមានតម្លាភាព។
+        
+        <ul>
+            
+            <li>បច្ចេកទេសបង្កើនទិន្នន័យ (Upsampling): ការបង្កើតទិន្នន័យចម្លងសម្រាប់ក្រុមភាគតិច (ស្ត្រី) នៅក្នុងសំណុំទិន្នន័យដើម្បីឱ្យចំនួនស្មើនឹងក្រុមភាគច្រើន។</li>
+            
+            <li>បច្ចេកទេសបន្ថយទិន្នន័យ (Downsampling): ការកាត់បន្ថយទិន្នន័យចៃដន្យពីក្រុមភាគច្រើន (បុរស) ដើម្បីឱ្យស្មើនឹងក្រុមភាគតិច។</li>
+            
+            <li>ម៉ូដែលតំរែតំរង់ឡូជីខល (Logistic Regression Model): ត្រូវបានអនុវត្តដើម្បីទស្សន៍ទាយស្ថានភាពជាប់ឈ្មោះដោយផ្អែកលើបទពិសោធន៍ ជំនាញ និងកម្រិតអប់រំ។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការធ្វើ Upsampling លើទិន្នន័យបេក្ខជនស្ត្រីពី ២៩១ នាក់ ទៅ ៧០៩ នាក់ ដើម្បីឲ្យស្មើនឹងបុរស បានលុបបំបាត់ភាពលម្អៀងយេនឌ័រក្នុងប្រព័ន្ធយ៉ាងមានប្រសិទ្ធភាព។</li>
+            
+            <li>បេក្ខនារីម្នាក់ (ID: 613) ដែលមានបទពិសោធន៍ ១៥ ឆ្នាំ និងកម្រិត PhD ដែលត្រូវបានប្រព័ន្ធបដិសេធពីដំបូង ត្រូវបានជ្រើសរើសដោយជោគជ័យបន្ទាប់ពីការកែតម្រូវតុល្យភាពទិន្នន័យរួច។</li>
+            
+            <li>វិធីសាស្ត្រកែតម្រូវទិន្នន័យដូចជា Upsampling និង Downsampling គឺជាយុទ្ធសាស្ត្រដ៏សំខាន់និងមានភាពងាយស្រួល ក្នុងការអភិវឌ្ឍបញ្ញាសិប្បនិម្មិតដែលប្រកបដោយក្រមសីលធម៌ (Ethical AI)។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Upsampling (Oversampling)</span></strong><br>ការបង្កើនទិន្នន័យ (Upsampling)</td>
+                <td>ជួយរក្សាតុល្យភាពទិន្នន័យដោយមិនបាត់បង់ព័ត៌មានដើម និងផ្តល់ឱ្យម៉ូដែលនូវទិន្នន័យគ្រប់គ្រាន់សម្រាប់រៀនពីក្រុមភាគតិច។</td>
+                <td>អាចបណ្តាលឱ្យមានបញ្ហា Overfitting និងបង្កើនទិន្នន័យរំខាន (Noise) នៅក្នុងប្រព័ន្ធដោយសារការចម្លងទិន្នន័យដដែលៗ។</td>
+                <td>ធ្វើឱ្យទិន្នន័យបេក្ខជនភេទប្រុស និងស្រីមានចំនួនស្មើគ្នា (៧០៩ នាក់) និងជួយឱ្យបេក្ខនារីម្នាក់ដែលត្រូវគេបដិសេធពីដំបូង អាចជាប់ឈ្មោះត្រឡប់មកវិញ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Downsampling (Undersampling)</span></strong><br>ការកាត់បន្ថយទិន្នន័យ (Downsampling)</td>
+                <td>ជួយឱ្យម៉ូដែលធ្វើការវាយតម្លៃបានទូលំទូលាយ (Generalization) កាត់បន្ថយភាពលម្អៀងទៅរកក្រុមភាគច្រើន និងសន្សំសំចៃថាមពលកុំព្យូទ័រ។</td>
+                <td>ប្រឈមនឹងការបាត់បង់ព័ត៌មាន ឬលំនាំទិន្នន័យសំខាន់ៗពីក្រុមភាគច្រើនដោយសារតែការលុបចោលកំណត់ត្រាដោយចៃដន្យ។</td>
+                <td>កាត់បន្ថយទិន្នន័យក្រុមភាគច្រើនឱ្យមានទំហំស្មើនឹងក្រុមភាគតិច (ឧទាហរណ៍៖ កាត់បន្ថយពី ១០០ មកត្រឹម ១០ ដើម្បឱ្យស្មើគ្នានឹងក្រុមមួយទៀត)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះមិនបានបញ្ជាក់ពីការចំណាយលើធនធានកុំព្យូទ័រធំដុំនោះទេ ដោយសារវាប្រើប្រាស់ទិន្នន័យតូច (១០០០ ជួរ) និងម៉ូដែលសាមញ្ញ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> ប្រើប្រាស់ភាសា Python ជាមួយបណ្ណាល័យ Scikit-Learn និង Pandas សម្រាប់ការរៀបចំទិន្នន័យ ការធ្វើ Sampling និងសាងសង់ម៉ូដែល។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រធម្មតា (Standard CPU) គឺគ្រប់គ្រាន់សម្រាប់ការដំណើរការម៉ូដែល Logistic Regression លើទិន្នន័យខ្នាតតូចនេះ។</li>
+        
+        <li><strong>Dataset:</strong> ទាមទារសំណុំទិន្នន័យជ្រើសរើសបុគ្គលិកដែលមានចំនួន ១០០០ កំណត់ត្រា (ផ្ទុកព័ត៌មានដូចជា៖ យេនឌ័រ បទពិសោធន៍ ជំនាញ និងកម្រិតអប់រំ)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយអ្នកស្រាវជ្រាវនៅស្ថាប័ន Pune Institute នៃប្រទេសឥណ្ឌា ដោយប្រើប្រាស់សំណុំទិន្នន័យជ្រើសរើសបុគ្គលិកដែលមានបេក្ខជន ១០០០ នាក់ (មានបុរសលើសលុប)។ ទោះបីជាទិន្នន័យនេះមិនមែនជារបស់កម្ពុជាដោយផ្ទាល់ក៏ដោយ ប៉ុន្តែវាឆ្លុះបញ្ចាំងយ៉ាងច្បាស់ពីបញ្ហាអតុល្យភាពយេនឌ័រនៅក្នុងទីផ្សារការងារ ដែលជារឿងគួរឱ្យកត់សម្គាល់បំផុតសម្រាប់ប្រទេសកម្ពុជាក្នុងការរៀបចំប្រព័ន្ធ AI នាពេលអនាគត។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកទេសកាត់បន្ថយភាពលម្អៀងទាំងនេះមានសារៈសំខាន់ និងអាចអនុវត្តបានយ៉ាងល្អនៅក្នុងបរិបទនៃការរីកចម្រើននៃប្រព័ន្ធបច្ចេកវិទ្យានៅកម្ពុជា។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យធនធានមនុស្ស (HR & Recruitment):</strong> ក្រុមហ៊ុនធំៗ និងទីភ្នាក់ងារជ្រើសរើសបុគ្គលិកនៅរាជធានីភ្នំពេញអាចប្រើប្រាស់បច្ចេកទេសនេះ ដើម្បីធានាថាប្រព័ន្ធជ្រើសរើស CV ដោយស្វ័យប្រវត្តិមិនមានភាពលម្អៀងប្រឆាំងនឹងបេក្ខជនស្ត្រី ឬបេក្ខជនមកពីតំបន់ជនបទ។</li>
+            
+            <li><strong>វិស័យហិរញ្ញវត្ថុ និងធនាគារ (Microfinance & Banking):</strong> ស្ថាប័នមីក្រូហិរញ្ញវត្ថុ (ឧទាហរណ៍៖ អម្រឹត អេស៊ីលីដា) អាចប្រើបច្ចេកទេស Resampling លើទិន្នន័យអតិថិជន ដើម្បីវាយតម្លៃការផ្តល់កម្ចីប្រកបដោយសមធម៌ និងការរកឃើញប្រតិបត្តិការក្លែងបន្លំ (Fraud Detection) កាន់តែច្បាស់លាស់។</li>
+            
+            <li><strong>វិស័យសុខាភិបាល (Healthcare):</strong> មន្ទីរពេទ្យ និងគ្លីនិកអាចប្រើប្រាស់វាដើម្បីធ្វើតុល្យភាពទិន្នន័យរោគវិនិច្ឆ័យជំងឺកម្រនានា ដើម្បីជួយឱ្យប្រព័ន្ធ AI វិភាគរោគសញ្ញាបានកាន់តែសុក្រឹត ដោយមិនមើលរំលងទិន្នន័យជំងឺដែលមានតិចតួច។</li>
+            
+        </ul>
+        
+        
+        <p>ការអនុវត្តបច្ចេកទេសកែតម្រូវទិន្នន័យទាំងនេះ នឹងជួយឱ្យស្ថាប័ននៅកម្ពុជាអាចកសាងប្រព័ន្ធ AI មួយដែលប្រកបដោយក្រមសីលធម៌ យុត្តិធម៌ និងមិនរើសអើង។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>១. សិក្សាពីមូលដ្ឋានគ្រឹះនៃទិន្នន័យមិនមានតុល្យភាព (Imbalanced Data):</strong> ស្វែងយល់ពីរបៀបកំណត់អត្តសញ្ញាណទិន្នន័យដែលមានភាពលម្អៀងដោយប្រើបណ្ណាល័យ <span class="en">Pandas</span> នៅក្នុង <span class="en">Python</span> ដើម្បីវិភាគរបាយទិន្នន័យ (Data Distribution)។</li>
+            
+            <li><strong>២. អនុវត្តបច្ចេកទេស Resampling ជាមូលដ្ឋាន:</strong> សាកល្បងសរសេរកូដដោយប្រើប្រាស់អនុគមន៍ <span class="en">resample</span> ពី <span class="en">Scikit-Learn</span> ដើម្បីធ្វើ <span class="en">Upsampling</span> លើក្រុមទិន្នន័យភាគតិច និង <span class="en">Downsampling</span> លើទិន្នន័យភាគច្រើន ឱ្យមានចំនួនស្មើគ្នា។</li>
+            
+            <li><strong>៣. ប្រើប្រាស់ក្បួនដោះស្រាយទំនើប (Advanced Bias Mitigation):</strong> សិក្សា និងអនុវត្តវិធីសាស្ត្របង្កើតទិន្នន័យសិប្បនិម្មិតដូចជា <span class="en">SMOTE</span> (Synthetic Minority Over-sampling Technique) ដើម្បីដោះស្រាយបញ្ហា Overfitting ដែលបណ្តាលមកពីការចម្លងទិន្នន័យដើមដដែលៗ។</li>
+            
+            <li><strong>៤. សាងសង់ និងវាយតម្លៃភាពយុត្តិធម៌នៃម៉ូដែល:</strong> ប្រើប្រាស់ <span class="en">Logistic Regression</span> ដើម្បីហ្វឹកហាត់ម៉ូដែល និងវាយតម្លៃលទ្ធផលដោយប្រៀបធៀបមុន និងក្រោយពេលកែតម្រូវទិន្នន័យ ដោយផ្តោតលើភាពត្រឹមត្រូវនៃការព្យាករណ៍សម្រាប់ក្រុមនីមួយៗ ដាច់ដោយឡែកពីគ្នា។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Upsampling</span></td>
+                <td>ដំណើរការនៃការបង្កើនចំនួនទិន្នន័យនៃក្រុមភាគតិច (Minority class) នៅក្នុងសំណុំទិន្នន័យ ដើម្បីឱ្យមានតុល្យភាពជាមួយក្រុមភាគច្រើន ដោយការចម្លងទិន្នន័យដើមដដែលៗ ឬប្រើក្បួនដើម្បីបង្កើតទិន្នន័យថ្មី។</td>
+                <td>ដូចជាការថតចម្លង (Copy) ឯកសារសំខាន់ៗដែលមានតិចតួចឱ្យបានច្រើនសន្លឹក ដើម្បីឱ្យមានចំនួនស្មើនឹងឯកសារទូទៅផ្សេងទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Downsampling</span></td>
+                <td>ការកាត់បន្ថយទំហំទិន្នន័យនៃក្រុមភាគច្រើន (Majority class) ឱ្យមកត្រឹមចំនួនមួយដែលស្មើនឹងក្រុមភាគតិច ដោយការលុបចោលកំណត់ត្រាមួយចំនួនដោយចៃដន្យ ដើម្បីជៀសវាងម៉ូដែលលម្អៀង។</td>
+                <td>ដូចជាការដកសិស្សប្រុសមួយចំនួនចេញពីក្រុមដែលមានប្រុសច្រើនពេក ដើម្បីឱ្យចំនួនសិស្សប្រុសនិងសិស្សស្រីនៅក្នុងក្រុមមានតុល្យភាពគ្នាស្មើៗគ្នា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">SMOTE (Synthetic Minority Over-sampling Technique)</span></td>
+                <td>បច្ចេកទេសមួយក្នុងការធ្វើ Upsampling ដែលមិនមែនគ្រាន់តែចម្លងទិន្នន័យចាស់ដដែលៗនោះទេ ប៉ុន្តែវាប្រើប្រាស់ក្បួនគណិតវិទ្យាដើម្បីបង្កើតទិន្នន័យថ្មីៗ (Synthetic data) ដែលមានលក្ខណៈស្រដៀងទៅនឹងទិន្នន័យភាគតិចដើម។</td>
+                <td>ដូចជាការយកពណ៌ក្រហមដែលមានតិចតួចមកលាយជាមួយពណ៌ទឹកក្រូច ដើម្បីបង្កើតជាពណ៌ថ្មីមួយទៀតដែលមានលក្ខណៈស្រដៀងពណ៌ក្រហម ជំនួសឱ្យការគ្រាន់តែចាក់ពណ៌ក្រហមដដែលៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Overfitting</span></td>
+                <td>បញ្ហាដែលកើតឡើងនៅពេលដែលម៉ូដែល Machine Learning រៀនទន្ទេញចាំទិន្នន័យហ្វឹកហាត់ (Training data) និងទិន្នន័យរំខាន (Noise) ខ្លាំងពេក រហូតដល់មិនអាចធ្វើការទស្សន៍ទាយបានត្រឹមត្រូវលើទិន្នន័យថ្មីដែលវាមិនធ្លាប់ជួបពីមុនមក។</td>
+                <td>ដូចជាសិស្សដែលទន្ទេញចាំតែវិញ្ញាសាចាស់ៗដើម្បីប្រឡង ប៉ុន្តែពេលគ្រូចេញវិញ្ញាសាថ្មីបែរជាធ្វើមិនបាន ព្រោះគាត់មិនយល់ពីមេរៀនពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Generative Adversarial Networks (GANs)</span></td>
+                <td>ប្រព័ន្ធ AI ដែលមានបណ្តាញសរសៃប្រសាទសិប្បនិម្មិតចំនួនពីរប្រកួតប្រជែងគ្នា (មួយបង្កើតទិន្នន័យ មួយទៀតពិនិត្យទិន្នន័យ) ដើម្បីបង្កើតទិន្នន័យថ្មីដែលមើលទៅដូចជារបស់ពិត។ ក្នុងករណីនេះ វាត្រូវបានប្រើដើម្បីបង្កើតទិន្នន័យបន្ថែមសម្រាប់ក្រុមភាគតិចដើម្បីដោះស្រាយភាពលម្អៀង។</td>
+                <td>ដូចជាជាងគំនូរក្លែងក្លាយខិតខំគូររូបឱ្យដូចពិតប្រាកដ ខណៈពេលដែលអ្នកត្រួតពិនិត្យសិល្បៈខិតខំចាប់កំហុស រហូតទាល់តែអ្នកត្រួតពិនិត្យមើលលែងដឹងថាមួយណាពិតមួយណាក្លែងក្លាយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Adversarial Debiasing</span></td>
+                <td>បច្ចេកទេសកាត់បន្ថយភាពលម្អៀងដោយប្រើប្រព័ន្ធពីរប្រកួតគ្នា៖ មួយព្យាករណ៍លទ្ធផល និងមួយទៀតព្យាយាមទាយថាតើលទ្ធផលនោះមានភាពលម្អៀងដែរឬទេ។ វាដំណើរការរហូតដល់ប្រព័ន្ធទីពីរលែងអាចរកឃើញភាពលម្អៀង។</td>
+                <td>ដូចជាចៅក្រមម្នាក់ខិតខំកាត់ក្តីឱ្យយុត្តិធម៌បំផុត ដើម្បីកុំឱ្យអ្នកសារព័ត៌មានដែលចាំតែចាប់កំហុស អាចរកឃើញចំណុចលម្អៀងណាមួយពីការកាត់ក្តីនោះបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Meta-learning</span></td>
+                <td>បច្ចេកទេសនៃការ "រៀនពីរបៀបរៀន" ដោយបង្វឹកម៉ូដែលឱ្យដោះស្រាយកិច្ចការផ្សេងៗគ្នាជាច្រើន ដើម្បីឱ្យវាអាចសម្របខ្លួននិងរៀនកិច្ចការថ្មីៗបានយ៉ាងរហ័ស ទោះបីជាមានទិន្នន័យតិចតួចក៏ដោយ។</td>
+                <td>ដូចជាការបង្រៀនក្មេងម្នាក់ឱ្យចេះពីរបៀបអានសៀវភៅនិងស្រាវជ្រាវដោយខ្លួនឯង ដូច្នេះនៅពេលគាត់ជួបមុខវិជ្ជាថ្មី គាត់អាចរៀនយល់បានលឿនជាងក្មេងដែលរង់ចាំតែគ្រូបង្រៀន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Distributionally Robust Optimization (DRO)</span></td>
+                <td>វិធីសាស្ត្របង្វឹកម៉ូដែលកុំព្យូទ័រឱ្យអាចដំណើរការបានល្អបំផុត សូម្បីតែនៅក្នុងស្ថានភាពអាក្រក់បំផុត (Worst-case scenarios) ឬនៅពេលដែលរបាយទិន្នន័យមានការប្រែប្រួលខ្លាំង ដែលជាទូទៅពាក់ព័ន្ធនឹងក្រុមទិន្នន័យដែលកម្រមាន។</td>
+                <td>ដូចជាការបង្ហាត់ទាហានឱ្យចេះប្រយុទ្ធក្នុងស្ថានភាពអាក្រក់បំផុតដូចជាភ្លៀងធ្លាក់ខ្លាំង ឬខ្វះអាវុធ ដើម្បីធានាថាពួកគេអាចតស៊ូបានគ្រប់កាលៈទេសៈទាំងអស់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/bias-in-ai-detection-mitigation-ethics-2025.html">
+                    <span class="km">ភាពលម្អៀងក្នុងបញ្ញាសិប្បនិម្មិត៖ ដំណោះស្រាយឆ្លាតវៃសម្រាប់ការរកឃើញ ការកាត់បន្ថយ និងយុទ្ធសាស្ត្រសីលធម៌ក្នុងកម្មវិធីពិភពពិត</span><br>
+                    <span class="en article-original-title">Bias in artificial intelligence: smart solutions for detection, mitigation, and ethical strategies in real-world applications</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/ethical-responsible-ai-governance-mas-2024.html">
+                    <span class="km">បញ្ញាសិប្បនិម្មិតប្រកបដោយក្រមសីលធម៌ និងការទទួលខុសត្រូវ៖ ក្របខណ្ឌអភិបាលកិច្ច និងផលវិបាកនៃគោលនយោបាយសម្រាប់ប្រព័ន្ធភ្នាក់ងារច្រើន (Multi-Agent Systems)</span><br>
+                    <span class="en article-original-title">Ethical and Responsible AI: Governance Frameworks and Policy Implications for Multi-Agent Systems</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/education/state-algorithmic-bias-policy-recommendations-2022.html">
+                    <span class="km">ស្ថានភាពបច្ចុប្បន្ន និងអនុសាសន៍គោលនយោបាយសម្រាប់ភាពលម្អៀងនៃក្បួនដោះស្រាយ</span><br>
+                    <span class="en article-original-title">The State of the Situation and Policy Recommendations for Algorithmic Bias</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=imbalanced+dataset+classification+techniques+machine+learning" target="_blank" rel="noopener"><span class="en">imbalanced dataset classification techniques machine learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SMOTE+synthetic+minority+over-sampling+technique+evaluation" target="_blank" rel="noopener"><span class="en">SMOTE synthetic minority over-sampling technique evaluation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=algorithmic+fairness+demographic+parity+equal+opportunity" target="_blank" rel="noopener"><span class="en">algorithmic fairness demographic parity equal opportunity</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Generative+Adversarial+Networks+GANs+for+data+augmentation+imbalanced+data" target="_blank" rel="noopener"><span class="en">Generative Adversarial Networks GANs for data augmentation imbalanced data</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=mitigating+gender+bias+in+automated+recruitment+systems" target="_blank" rel="noopener"><span class="en">mitigating gender bias in automated recruitment systems</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
