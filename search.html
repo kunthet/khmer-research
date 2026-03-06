@@ -422,6 +422,11 @@
             background: #003366;
             color: #fff;
         }
+        .result-tag.author {
+            background: #f8fafc;
+            color: #334155;
+            border: 1px solid #e2e8f0;
+        }
         .result-score {
             font-size: 11px;
             color: #059669;
@@ -933,12 +938,12 @@
 
             // Khmer title
             const khmerTitleHtml = result.khmer_title
-                ? `<a href="${escapeHtml(fullUrl)}" class="result-title">${escapeHtml(result.khmer_title)}</a>`
+                ? `<a href="${escapeHtml(fullUrl)}" class="result-title">${escapeHtmlAllowItalics(result.khmer_title)}</a>`
                 : "";
 
             // Original title
             const originalTitleHtml = result.title
-                ? `<div class="result-original-title">${escapeHtml(result.title)}</div>`
+                ? `<div class="result-original-title">${escapeHtmlAllowItalics(result.title)}</div>`
                 : "";
 
             // Meta tags
@@ -955,6 +960,10 @@
             if (result.language && result.language !== "English") {
                 metaParts.push(`<span class="result-tag">${escapeHtml(result.language)}</span>`);
             }
+            const firstAuthor = formatFirstAuthor(result.authors);
+            if (firstAuthor) {
+                metaParts.push(`<span class="result-tag author">${escapeHtml(firstAuthor)}</span>`);
+            }
             if (result.relevance_score) {
                 const pct = (parseFloat(result.relevance_score) * 100).toFixed(0);
                 metaParts.push(`<span class="result-score">${pct}% match</span>`);
@@ -970,15 +979,15 @@
             // Atomic claims
             let claimHtml = "";
             if (result.atomic_claim_english) {
-                claimHtml += `<div class="result-claim">${escapeHtml(result.atomic_claim_english)}</div>`;
+                claimHtml += `<div class="result-claim">${escapeHtmlAllowItalics(result.atomic_claim_english)}</div>`;
             }
             if (result.atomic_claim_khmer) {
-                claimHtml += `<div class="result-claim-km">${escapeHtml(result.atomic_claim_khmer)}</div>`;
+                claimHtml += `<div class="result-claim-km">${escapeHtmlAllowItalics(result.atomic_claim_khmer)}</div>`;
             }
 
             card.innerHTML = `
                 ${rankHtml}
-                ${khmerTitleHtml || `<a href="${escapeHtml(fullUrl)}" class="result-title">${escapeHtml(result.title || "Untitled")}</a>`}
+                ${khmerTitleHtml || `<a href="${escapeHtml(fullUrl)}" class="result-title">${escapeHtmlAllowItalics(result.title || "Untitled")}</a>`}
                 ${khmerTitleHtml ? originalTitleHtml : ""}
                 <div class="result-meta">${metaParts.join("")}</div>
                 ${claimHtml}
@@ -1002,6 +1011,42 @@
         const div = document.createElement("div");
         div.textContent = text;
         return div.innerHTML;
+    }
+
+    function escapeHtmlAllowItalics(text) {
+        const escaped = escapeHtml(text ?? "");
+        return escaped
+            .replace(/&lt;i&gt;/gi, "<i>")
+            .replace(/&lt;\/i&gt;/gi, "</i>");
+    }
+
+    function formatFirstAuthor(authors) {
+        let parsedAuthors = [];
+        if (Array.isArray(authors)) {
+            parsedAuthors = authors;
+        } else if (typeof authors === "string" && authors.trim()) {
+            try {
+                const decoded = JSON.parse(authors);
+                if (Array.isArray(decoded)) parsedAuthors = decoded;
+            } catch {
+                parsedAuthors = authors.split(/[,;]+/).map((a) => a.trim()).filter(Boolean);
+            }
+        }
+
+        if (!parsedAuthors.length) return "";
+
+        const firstRaw = parsedAuthors[0];
+        const first = typeof firstRaw === "string"
+            ? firstRaw.trim().replace(/\s*\(.*?\)\s*/g, "").trim()
+            : (firstRaw && typeof firstRaw.name === "string" ? firstRaw.name.trim().replace(/\s*\(.*?\)\s*/g, "").trim() : "");
+        if (!first) return "";
+
+        if (parsedAuthors.length === 1) {
+            return first.length > 30 ? `${first.slice(0, 30)}...` : first;
+        }
+
+        const truncatedFirst = first.length > 30 ? `${first.slice(0, 30)}...` : first;
+        return `${truncatedFirst} et al.`;
     }
 
     // =================================================================
