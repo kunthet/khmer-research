@@ -134,8 +134,26 @@
         .feature h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #0f172a; }
         .feature p { font-size: 14px; color: #64748b; }
 
+        /* Newsletter */
+        .newsletter-section { background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%); padding: 48px 20px; text-align: center; }
+        .newsletter-inner { max-width: 600px; margin: 0 auto; }
+        .newsletter-section h2 { color: #fff; font-size: 1.5rem; font-weight: 700; margin-bottom: 6px; }
+        .newsletter-section p { color: #94a3b8; font-size: 15px; margin-bottom: 20px; }
+        .newsletter-form { display: flex; gap: 8px; max-width: 480px; margin: 0 auto; }
+        .newsletter-form input { flex: 1; border: 2px solid #334155; border-radius: 8px; padding: 12px 16px; font-size: 14px; font-family: 'Inter', sans-serif; background: #1e293b; color: #fff; outline: none; transition: border-color 0.2s; min-width: 0; }
+        .newsletter-form input::placeholder { color: #64748b; }
+        .newsletter-form input:focus { border-color: #2563eb; }
+        .newsletter-form button { background: #2563eb; color: #fff; border: none; padding: 12px 24px; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; transition: background 0.2s; white-space: nowrap; font-family: 'Inter', sans-serif; }
+        .newsletter-form button:hover { background: #1d4ed8; }
+        .newsletter-form button:disabled { background: #475569; cursor: not-allowed; }
+        .newsletter-status { margin-top: 12px; font-size: 13px; min-height: 20px; }
+        .newsletter-status.success { color: #4ade80; }
+        .newsletter-status.error { color: #f87171; }
+        .newsletter-privacy { font-size: 12px; color: #64748b; margin-top: 10px; }
+        .newsletter-privacy a { color: #94a3b8; }
+
         /* Footer */
-        .site-footer { background: #0f172a; color: #94a3b8; padding: 40px 20px; margin-top: 40px; }
+        .site-footer { background: #0f172a; color: #94a3b8; padding: 40px 20px; margin-top: 0; }
         .footer-inner { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; }
         .footer-col h4 { color: #e2e8f0; font-size: 14px; font-weight: 700; margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
         .footer-col a { display: block; color: #94a3b8; text-decoration: none; font-size: 14px; margin-bottom: 8px; }
@@ -376,13 +394,36 @@
         </section>
     </main>
 
+    <!-- Newsletter Subscription -->
+    <section class="newsletter-section">
+        <div class="newsletter-inner">
+            <h2>Stay Updated</h2>
+            <p>Get notified when we add new research papers and features.</p>
+            <form class="newsletter-form" id="newsletter-form">
+                <input type="email" id="newsletter-email" placeholder="Enter your email address" required maxlength="200">
+                <button type="submit" id="newsletter-btn">Subscribe</button>
+            </form>
+            <div class="newsletter-status" id="newsletter-status"></div>
+            <p class="newsletter-privacy">No spam. Unsubscribe anytime. <a href="/privacy.html">Privacy Policy</a></p>
+        </div>
+    </section>
+
     <!-- Footer with internal links for SEO -->
     <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-col">
                 <h4>KhmerResearch.com</h4>
                 <p>The first AI-powered digital library for Cambodia. Translating and summarizing global academic research into Khmer.</p>
-                <p style="margin-top:10px;"><a href="mailto:ai.kunthet@gmail.com">ai.kunthet@gmail.com</a></p>
+                <!-- <p style="margin-top:10px;"><a href="mailto:ai.kunthet@gmail.com">ai.kunthet@gmail.com</a></p> -->
+            </div>
+            <div class="footer-col">
+                <h4>About &amp; Legal</h4>
+                <a href="/about.html">About Us</a>
+                <a href="/contact.html">Contact Us</a>
+                <a href="/privacy.html">Privacy Policy</a>
+                <a href="/terms.html">Terms of Service</a>
+                <a href="/forum.html">Forum</a>
+                <a href="/qa.html">Q&amp;A</a>
             </div>
             <div class="footer-col">
                 <h4>Popular Categories</h4>
@@ -403,17 +444,9 @@
                 <a href="/papers/society/">Society</a>
                 <a href="/papers/">View All &rarr;</a>
             </div>
-            <div class="footer-col">
-                <h4>Community</h4>
-                <a href="/forum.html">Forum</a>
-                <a href="/qa.html">Q&amp;A</a>
-                <a href="/search.html">AI Search</a>
-                <a href="/papers/">Browse All Papers</a>
-                <a href="mailto:ai.kunthet@gmail.com">Contact Us</a>
-            </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 KhmerResearch.com. All rights reserved.</p>
+            <p>&copy; 2026 KhmerResearch.com. All rights reserved. | <a href="/privacy.html" style="color:#94a3b8;">Privacy</a> | <a href="/terms.html" style="color:#94a3b8;">Terms</a></p>
         </div>
     </footer>
 
@@ -452,8 +485,58 @@
     })();
     </script>
 
-    <!-- Visitor Counter (Firebase RTDB) -->
+    <!-- Firebase + Visitor Counter -->
+    <script src="/assets/js/firebase-init.js"></script>
     <script src="/assets/js/visitor-counter.js"></script>
+
+    <!-- Newsletter subscription -->
+    <script>
+    (function() {
+        var form = document.getElementById('newsletter-form');
+        var statusEl = document.getElementById('newsletter-status');
+        var btn = document.getElementById('newsletter-btn');
+        if (!form) return;
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            statusEl.className = 'newsletter-status';
+            statusEl.textContent = '';
+            var email = document.getElementById('newsletter-email').value.trim();
+            if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                statusEl.textContent = 'Please enter a valid email address.';
+                statusEl.className = 'newsletter-status error';
+                return;
+            }
+            btn.disabled = true;
+            btn.textContent = '...';
+            window.KR.onReady(function() {
+                var key = email.replace(/\./g, '_dot_').replace(/@/g, '_at_');
+                var ref = window.KR.dbRef('newsletter_subscribers/' + key);
+                ref.once('value').then(function(snap) {
+                    if (snap.exists()) {
+                        statusEl.textContent = 'You are already subscribed!';
+                        statusEl.className = 'newsletter-status success';
+                        btn.disabled = false;
+                        btn.textContent = 'Subscribe';
+                        return;
+                    }
+                    return ref.set({ email: email, subscribedAt: firebase.database.ServerValue.TIMESTAMP }).then(function() {
+                        statusEl.textContent = 'Subscribed! Thank you.';
+                        statusEl.className = 'newsletter-status success';
+                        form.reset();
+                        btn.disabled = false;
+                        btn.textContent = 'Subscribe';
+                    });
+                }).catch(function(err) {
+                    console.error('Newsletter error:', err);
+                    statusEl.textContent = 'Something went wrong. Please try again.';
+                    statusEl.className = 'newsletter-status error';
+                    btn.disabled = false;
+                    btn.textContent = 'Subscribe';
+                });
+            });
+        });
+    })();
+    </script>
 
 </body>
 </html>
