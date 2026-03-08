@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការរចនាសំណុំទិន្នន័យសម្រាប់ការនិយាយប្រកបដោយមនោសញ្ចេតនា៖ ឥទ្ធិពលនៃប្រវែងកន្សោមពាក្យ - Corpus design for expressive speech: impact of the utterance length | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការរចនាសំណុំទិន្នន័យសម្រាប់ការនិយាយប្រកបដោយមនោសញ្ចេតនា៖ ឥទ្ធ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការចំណាយខ្ពស់ក្នុងការថតសំឡេងសម្រាប់ប្រព័ន្ធបំប្លែងអត្ថបទទៅជាសំឡេង (Text-to...">
+    
+    <meta name="keywords" content="Text to speech, voice corpus design, utterance length, expressive speech, CNN-KMeans, speech synthesis, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/corpus-design-expressive-speech-utterance-length-2020.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/corpus-design-expressive-speech-utterance-length-2020.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/corpus-design-expressive-speech-utterance-length-2020.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/corpus-design-expressive-speech-utterance-length-2020.html">
+    <meta property="og:title" content="ការរចនាសំណុំទិន្នន័យសម្រាប់ការនិយាយប្រកបដោយមនោសញ្ចេតនា៖ ឥទ្ធិពលនៃប្រវែងកន្សោមពាក្យ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការចំណាយខ្ពស់ក្នុងការថតសំឡេងសម្រាប់ប្រព័ន្ធបំប្លែងអត្ថបទទៅជាសំឡេង (Text-to-Speech) ដោយស្វែងរកវិធីសាស្ត្រជ្រើសរើសប្រយោគដ៏ល្អបំផុតដើម្បីបង្កើតសំណុំទិន្នន័យតូចតែមានគុណភាព។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2020 Speech Prosody-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Text to speech">
+    
+    <meta property="article:tag" content="voice corpus design">
+    
+    <meta property="article:tag" content="utterance length">
+    
+    <meta property="article:tag" content="expressive speech">
+    
+    <meta property="article:tag" content="CNN-KMeans">
+    
+    <meta property="article:tag" content="speech synthesis">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការរចនាសំណុំទិន្នន័យសម្រាប់ការនិយាយប្រកបដោយមនោសញ្ចេតនា៖ ឥទ្ធិពលនៃប្រវែងកន្សោមពាក្យ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការចំណាយខ្ពស់ក្នុងការថតសំឡេងសម្រាប់ប្រព័ន្ធបំប្លែងអត្ថបទទៅជាសំឡេង (Text-to-Speech) ដោយស្វែងរកវិធីសាស្ត្រជ្រើសរើសប្រយោគដ៏ល្អបំផុតដើម្បីបង្កើតសំណុំទិន្នន័យតូចតែមានគុណភាព។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u179a\u1785\u1793\u17b6\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1793\u17b7\u1799\u17b6\u1799\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u17d6 \u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u1793\u17c3\u1794\u17d2\u179a\u179c\u17c2\u1784\u1780\u1793\u17d2\u179f\u17c4\u1798\u1796\u17b6\u1780\u17d2\u1799",
+      "name": "Corpus design for expressive speech: impact of the utterance length",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1785\u17c6\u178e\u17b6\u1799\u1781\u17d2\u1796\u179f\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1780\u17b6\u179a\u1790\u178f\u179f\u17c6\u17a1\u17c1\u1784\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1794\u17c6\u1794\u17d2\u179b\u17c2\u1784\u17a2\u178f\u17d2\u1790\u1794\u1791\u1791\u17c5\u1787\u17b6\u179f\u17c6\u17a1\u17c1\u1784 (Text-to-Speech) \u178a\u17c4\u1799\u179f\u17d2\u179c\u17c2\u1784\u179a\u1780\u179c\u17b7\u1792\u17b8\u179f\u17b6\u179f\u17d2\u178f\u17d2\u179a\u1787\u17d2\u179a\u17be\u179f\u179a\u17be\u179f\u1794\u17d2\u179a\u1799\u17c4\u1782\u178a\u17cf\u179b\u17d2\u17a2\u1794\u17c6\u1795\u17bb\u178f\u178a\u17be\u1798\u17d2\u1794\u17b8\u1794\u1784\u17d2\u1780\u17be\u178f\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u178f\u17bc\u1785\u178f\u17c2\u1798\u17b6\u1793\u1782\u17bb\u178e\u1797\u17b6\u1796\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/corpus-design-expressive-speech-utterance-length-2020.html",
+      "author": [{"@type": "Person", "name": "Meysam Shamsi (Univ Rennes, CNRS, IRISA)"},{"@type": "Person", "name": "Jonathan Chevelu (Univ Rennes, CNRS, IRISA)"},{"@type": "Person", "name": "Nelly Barbot (Univ Rennes, CNRS, IRISA)"},{"@type": "Person", "name": "Damien Lolive (Univ Rennes, CNRS, IRISA)"}],
+      "datePublished": "2020 Speech Prosody",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Corpus design for expressive speech: impact of the utterance length",
+        "url": "https://doi.org/10.21437/SpeechProsody.2020-195"
+      },
+      "keywords": ["Text to speech", "voice corpus design", "utterance length", "expressive speech", "CNN-KMeans", "speech synthesis"],
+      "about": "Speech Processing"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u179a\u1785\u1793\u17b6\u179f\u17c6\u178e\u17bb\u17c6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1793\u17b7\u1799\u17b6\u1799\u1794\u17d2\u179a\u1780\u1794\u178a\u17c4\u1799\u1798\u1793\u17c4\u179f\u1789\u17d2\u1785\u17c1\u178f\u1793\u17b6\u17d6 \u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u1793\u17c3\u1794\u17d2\u179a\u179c\u17c2\u1784\u1780\u1793\u17d2\u179f\u17c4\u1798\u1796\u17b6\u1780\u17d2\u1799",
+          "item": "https://khmerresearch.com/papers/technology/corpus-design-expressive-speech-utterance-length-2020.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការរចនាសំណុំទិន្នន័យសម្រាប់ការនិយាយប្រកបដោយមនោសញ្ចេតនា៖ ឥទ្ធ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Corpus design for expressive speech: impact of the utterance length<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.21437/SpeechProsody.2020-195" target="_blank" rel="noopener">doi.org/10.21437/SpeechProsody.2020-195</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការរចនាសំណុំទិន្នន័យសម្រាប់ការនិយាយប្រកបដោយមនោសញ្ចេតនា៖ ឥទ្ធិពលនៃប្រវែងកន្សោមពាក្យ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Corpus design for expressive speech: impact of the utterance length</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Meysam Shamsi (Univ Rennes, CNRS, IRISA), Jonathan Chevelu (Univ Rennes, CNRS, IRISA), Nelly Barbot (Univ Rennes, CNRS, IRISA), Damien Lolive (Univ Rennes, CNRS, IRISA)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2020 Speech Prosody</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Speech Processing</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការចំណាយខ្ពស់ក្នុងការថតសំឡេងសម្រាប់ប្រព័ន្ធបំប្លែងអត្ថបទទៅជាសំឡេង (Text-to-Speech) ដោយស្វែងរកវិធីសាស្ត្រជ្រើសរើសប្រយោគដ៏ល្អបំផុតដើម្បីបង្កើតសំណុំទិន្នន័យតូចតែមានគុណភាព។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានធ្វើការប្រៀបធៀបវិធីសាស្ត្រជ្រើសរើសសំណុំទិន្នន័យចំនួន ៤ ដោយប្រើប្រាស់សៀវភៅសំឡេងភាសាបារាំងចំនួន ២ និងម៉ាស៊ីន TTS ចំនួន ២ ប្រភេទ ដើម្បីវាយតម្លៃគុណភាពនៃការសំយោគសំឡេង។
+        
+        <ul>
+            
+            <li>ការជ្រើសរើសកន្សោមពាក្យ (Utterance Selection Methods): ការប្រើប្រាស់វិធីសាស្ត្រ Random, Set covering, CNN-KMeans, និង Shortest</li>
+            
+            <li>ការវាយតម្លៃតាមរយៈរង្វាស់គោលដៅ (Objective Measures): ការគណនាលើការចំណាយលើការតភ្ជាប់ (Concatenation cost) និងចំណាយសរុប (Global cost) នៃប្រព័ន្ធ TTS</li>
+            
+            <li>ការវាយតម្លៃតាមរយៈការស្តាប់ (Perceptual Evaluation): ការធ្វើតេស្តចំណូលចិត្ត (AB preference test) ដោយអ្នកស្តាប់ចំនួន ១២ នាក់លើសំឡេងចំនួន ២០០ គូ</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>វិធីសាស្ត្រជ្រើសរើសកន្សោមពាក្យខ្លីបំផុត (Shortest method) បានផ្តល់នូវសំឡេងដែលមានគុណភាពល្អបំផុត ទាំងក្នុងការវាយតម្លៃដោយប្រព័ន្ធ និងការស្តាប់ផ្ទាល់។</li>
+            
+            <li>រង្វាស់ប្រពៃណីដូចជាអត្រាគ្របដណ្តប់នៃឯកតា (Unit coverage rate) និងគម្លាតនៃការចែកចាយ (KLD) មិនមែនជារង្វាស់ដ៏ល្អសម្រាប់ទស្សន៍ទាយគុណភាពនៃសំណុំទិន្នន័យសំឡេងទំហំធំនោះទេ។</li>
+            
+            <li>ការប្រើប្រាស់ប្រយោគខ្លីៗក្នុងសំណុំទិន្នន័យ មិនបានធ្វើឱ្យមានការធ្លាក់ចុះនូវសមត្ថភាពរបស់ប្រព័ន្ធ TTS ក្នុងការបង្កើតសំឡេងសម្រាប់ប្រយោគវែងៗនោះទេ ដោយមេគុណសហសម្ព័ន្ធ (Pearson correlation) មានកម្រិតទាបជាង ០.១២ ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Random Selection</span></strong><br>ការជ្រើសរើសដោយចៃដន្យ</td>
+                <td>ងាយស្រួលក្នុងការអនុវត្ត និងរក្សាបាននូវទម្រង់នៃការចែកចាយទិន្នន័យដើម (KLD ទាប)។</td>
+                <td>លទ្ធផលមិនសូវមានស្ថិរភាព ហើយគុណភាពនៃការសំយោគសំឡេងស្ថិតនៅកម្រិតមធ្យម។</td>
+                <td>មានអត្រាចំណាយ (Global Cost) ខ្ពស់ជាងវិធីសាស្ត្រ Shortest ក្នុងការវាយតម្លៃដោយប្រព័ន្ធ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Set Covering</span></strong><br>ការគ្របដណ្តប់សំណុំឯកតា (Greedy Algorithm)</td>
+                <td>ធានាបាននូវការគ្របដណ្តប់ឯកតាសំឡេង (Diphones/Triphones) ស្ទើរតែទាំងអស់ដែលមានក្នុងអត្ថបទដើម។</td>
+                <td>មានទំនោរជ្រើសរើសប្រយោគវែងៗ ដែលធ្វើឱ្យការថតសំឡេងមានភាពស្មុគស្មាញ និងទទួលបានសំឡេងរឹងៗ។</td>
+                <td>ផ្តល់លទ្ធផលអន់បំផុត ដោយមានអត្រាចំណាយ TTS ខ្ពស់ជាងការជ្រើសរើសដោយចៃដន្យទៅទៀត។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">CNN-KMeans</span></strong><br>ការដាក់ជាបណ្ដុំដោយប្រើ CNN និង KMeans</td>
+                <td>ជាវិធីសាស្ត្រទំនើប (State-of-the-art) ដែលប្រើប្រាស់បច្ចេកវិទ្យា Deep Learning ដើម្បីរៀបចំទិន្នន័យតាមលក្ខណៈភាសាវិទ្យា។</td>
+                <td>ទាមទារការរៀបចំកូដស្មុគស្មាញ និងចំណាយធនធានកុំព្យូទ័រក្នុងការហ្វឹកហាត់ម៉ូដែល Auto-encoder។</td>
+                <td>ចាញ់វិធីសាស្ត្រ Shortest ទាំងក្នុងការវាយតម្លៃដោយប្រព័ន្ធ និងការធ្វើតេស្តស្តាប់ដោយមនុស្ស។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Shortest</span></strong><br>ការជ្រើសរើសកន្សោមពាក្យខ្លីបំផុត</td>
+                <td>សាមញ្ញបំផុត ងាយស្រួលសម្រាប់អ្នកបញ្ចេញសំឡេងអាន និងបង្កើតបាននូវបំរែបំរួលសម្លេង (Prosody) ច្រើនប្រភេទ។</td>
+                <td>មិនធានាបានការគ្របដណ្តប់គ្រប់ឯកតាសំឡេងទាំងអស់ឡើយ (KLD ខ្ពស់)។</td>
+                <td>ទទួលបានចំណាត់ថ្នាក់លេខ១ ពីអ្នកស្តាប់ និងមានតម្លៃចំណាយ TTS (Global Cost) ទាបបំផុត។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះទាមទារធនធានកុំព្យូទ័រ និងទិន្នន័យជាសំឡេងដែលមានគុណភាពខ្ពស់ ព្រមទាំងពេលវេលាសម្រាប់ការវាយតម្លៃដោយមនុស្សដោយផ្ទាល់។
+    
+    <ul>
+        
+        <li><strong>Dataset:</strong> សៀវភៅសំឡេងភាសាបារាំងចំនួន ២ (មានរយៈពេលប្រហែល ១០ ម៉ោងក្នុងមួយសៀវភៅ)។</li>
+        
+        <li><strong>Software:</strong> ប្រព័ន្ធ Text-to-Speech ចំនួន២ប្រភេទគឺ Expert TTS (Unit Selection) និង Hybrid TTS។</li>
+        
+        <li><strong>Hardware:</strong> ម៉ាស៊ីនកុំព្យូទ័រដែលមានសមត្ថភាពខ្ពស់ (មាន GPU) សម្រាប់ដំណើរការម៉ូដែល DNN ក្នុងប្រព័ន្ធ Hybrid TTS និង CNN auto-encoder។</li>
+        
+        <li><strong>Human Resources:</strong> អ្នកស្ម័គ្រចិត្តចំនួន ១២ នាក់ សម្រាប់ការធ្វើតេស្តវាយតម្លៃគុណភាពសំឡេង (Perceptual AB preference test)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងដោយប្រើប្រាស់សៀវភៅសំឡេងភាសាបារាំងតែប៉ុណ្ណោះ (អ្នកអានប្រុសម្នាក់ និងស្រីម្នាក់) ដែលមិនមែនជាភាសាដែលមានសំនៀងឡើងចុះអត្ថន័យខុសគ្នា (Tonal language) នោះទេ។ សម្រាប់ប្រទេសកម្ពុជា ភាសាខ្មែរមានទម្រង់សូរសព្ទខុសគ្នាឆ្ងាយ មានស្រៈច្រើន និងការបញ្ចេញសំឡេងស្មុគស្មាញ ដូច្នេះការប្រើប្រាស់ត្រឹមតែប្រយោគខ្លីៗ អាចនឹងមិនគ្រប់គ្រាន់ក្នុងការគ្របដណ្តប់ស្រៈឬព្យញ្ជនៈកម្រៗឡើយ ទោះបីជាវិធីនេះជួយឱ្យសំឡេងមានលក្ខណៈធម្មជាតិក៏ដោយ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រ «ជ្រើសរើសប្រយោគខ្លីបំផុត» នេះមានសក្តានុពលខ្ពស់សម្រាប់ស្ថាប័នស្រាវជ្រាវនៅកម្ពុជា ព្រោះវាចំណាយពេលតិច និងងាយស្រួលរៀបចំទិន្នន័យ។</p>
+        
+        <ul>
+            
+            <li><strong>ការបង្កើតប្រព័ន្ធ TTS ភាសាខ្មែរ (NIPTICT/CADT):</strong> អ្នកស្រាវជ្រាវអាចសាកល្បងប្រើវិធីនេះដើម្បីជ្រើសរើសប្រយោគខ្លីៗពីអត្ថបទសារព័ត៌មាន ដើម្បីថតសំឡេង និងហ្វឹកហាត់ AI ឱ្យអានព័ត៌មានដោយស្វ័យប្រវត្តិ។</li>
+            
+            <li><strong>ប្រព័ន្ធឆ្លើយតបស្វ័យប្រវត្តិ IVR សម្រាប់ក្រុមហ៊ុនទូរគមនាគមន៍ (Smart, Cellcard):</strong> ក្រុមហ៊ុនអាចប្រើប្រាស់វិធីសាស្ត្រនេះដើម្បីរៀបចំសេណារីយ៉ូថតសំឡេងអ្នកប្រកាស ដែលមានការបញ្ចេញសំឡេងច្បាស់លាស់ មានមនោសញ្ចេតនា និងសន្សំសំចៃថវិកាថតសំឡេង។</li>
+            
+            <li><strong>សៀវភៅសំឡេងសម្រាប់អ្នកពិការភ្នែក (National Institute for Special Education):</strong> អាចយកគំនិតនេះទៅបង្កើតសំឡេងនិម្មិតដោយប្រមូលប្រយោគខ្លីៗពីសៀវភៅរឿង ដើម្បីឱ្យ AI មានសំឡេងអានរស់រវើក មិនរឹងត្អឹង។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម វិធីសាស្ត្រនេះផ្តល់នូវផ្លូវកាត់ដ៏ងាយស្រួល ក្នុងការរៀបចំសំណុំទិន្នន័យថតសំឡេង (Voice Corpus) ប្រកបដោយគុណភាព ដោយមិនតម្រូវឱ្យមានក្បួនគណិតវិទ្យាស្មុគស្មាញឡើយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ប្រមូល និងបំបែកទិន្នន័យអត្ថបទ:</strong> ប្រមូលទិន្នន័យពីវីគីភីឌា ឬគេហទំព័រព័ត៌មាន រួចបំបែកអត្ថបទទាំងនោះជាល្បះឬប្រយោគខ្លីៗ ដោយប្រើប្រាស់ <span class="en">Python (NLTK ឬ Regular Expressions)</span>។</li>
+            
+            <li><strong>អនុវត្តក្បួន Shortest Selection:</strong> សរសេរកូដ <span class="en">Python</span> ដើម្បីរាប់ចំនួនតួអក្សរ ឬពាង្គក្នុងមួយប្រយោគ រួចតម្រៀបបញ្ជីពីខ្លីទៅវែង។ ជ្រើសរើសយកប្រយោគខ្លីៗបំផុត រហូតដល់បានទំហំទិន្នន័យដែលចង់បាន (ឧទាហរណ៍៖ ចំនួនប្រយោគដែលអាចថតបាន ១ ម៉ោង)។</li>
+            
+            <li><strong>ការថតសំឡេងដោយអ្នកជំនាញ:</strong> យកបញ្ជីប្រយោគខ្លីៗទាំងនោះទៅឱ្យអ្នកប្រកាស (Voice Talent) ធ្វើការថតសំឡេង នៅក្នុងបន្ទប់ស្ទូឌីយោដែលមានសភាពស្ងាត់ល្អ ដោយប្រើប្រាស់កម្មវិធីដូចជា <span class="en">Audacity</span> ឬ <span class="en">Adobe Audition</span>។</li>
+            
+            <li><strong>ហ្វឹកហាត់ម៉ូដែលសំឡេង (Model Training):</strong> ប្រើប្រាស់ឧបករណ៍បច្ចេកវិទ្យាបើកចំហរដូចជា <span class="en">Coqui TTS</span> ឬ <span class="en">VITS</span> ដើម្បីហ្វឹកហាត់ម៉ូដែលបំប្លែងអត្ថបទទៅជាសំឡេង ដោយផ្គូផ្គងអត្ថបទជាមួយសំឡេងដែលបានថត។</li>
+            
+            <li><strong>ធ្វើតេស្ត និងវាយតម្លៃដោយអ្នកស្តាប់:</strong> យកអត្ថបទថ្មីដែលម៉ូដែលមិនធ្លាប់ស្គាល់ មកឱ្យប្រព័ន្ធអាន រួចរៀបចំការធ្វើតេស្តស្តាប់ <span class="en">(AB Preference Test)</span> ជាមួយអ្នកស្ម័គ្រចិត្តដើម្បីវាយតម្លៃភាពរលូន និងលក្ខណៈធម្មជាតិនៃសំឡេងដែលត្រូវបានសំយោគ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Text-to-Speech (TTS)</span></td>
+                <td>ប្រព័ន្ធកុំព្យូទ័រដែលត្រូវបានបង្កើតឡើងដើម្បីបំប្លែងអត្ថបទសរសេរ ទៅជាសំឡេងនិយាយរបស់មនុស្សដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាអ្នកអានសៀវភៅម្នាក់ដែលបញ្ចេញសំឡេងអានរាល់ពាក្យដែលយើងវាយបញ្ចូលទៅក្នុងកុំព្យូទ័រឱ្យយើងស្តាប់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Voice Corpus</span></td>
+                <td>សំណុំទិន្នន័យដែលផ្ទុកនូវឯកសារសំឡេងថត និងអត្ថបទដែលត្រូវគ្នា ដែលអ្នកស្រាវជ្រាវប្រើប្រាស់សម្រាប់បង្ហាត់ប្រព័ន្ធបញ្ចេញសំឡេង (AI) ឱ្យចេះនិយាយ។</td>
+                <td>ដូចជាវចនានុក្រមសំឡេង ដែលកុំព្យូទ័ររៀនសូត្រពីរបៀបបញ្ចេញសំឡេងតាមរយៈការស្តាប់គំរូទាំងនោះជាដដែលៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Utterance</span></td>
+                <td>កន្សោមពាក្យ ឬប្រយោគពេញលេញមួយដែលត្រូវបានបញ្ចេញសំឡេង តាំងពីចាប់ផ្តើមរហូតដល់បញ្ចប់ការនិយាយមុនពេលដកដង្ហើម ឬឈប់។</td>
+                <td>ដូចជារបៀបដែលយើងនិយាយមួយឃ្លាៗ ឬមួយប្រយោគ មុនពេលសម្រាកដកដង្ហើមម្តង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Set covering problem</span></td>
+                <td>បញ្ហានៃការស្វែងរក និងជ្រើសរើសសំណុំទិន្នន័យរង (Sub-corpus) ឱ្យបានតូចបំផុត តែត្រូវធានាថាវាមានផ្ទុកនូវគ្រប់ឯកតាសូរសព្ទទាំងអស់ដែលមានក្នុងអត្ថបទដើម។</td>
+                <td>ដូចជាការរើសសិស្សមួយក្រុមតូចបំផុត ប៉ុន្តែធានាថាមានអ្នកចេះលេងឧបករណ៍តន្ត្រីគ្រប់ប្រភេទដើម្បីបង្កើតជាក្រុមតន្ត្រីមួយដែលពេញលេញ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Kullback-Leibler Divergence (KLD)</span></td>
+                <td>រង្វាស់គណិតវិទ្យាដែលប្រើដើម្បីវាស់ពីគម្លាត ឬភាពខុសគ្នារវាងរបាយនៃការចែកចាយទិន្នន័យពីរ (ឧទាហរណ៍ ភាពខុសគ្នានៃការចែកចាយសូរសព្ទរវាងសំណុំទិន្នន័យតូច និងអត្ថបទដើមទាំងមូល)។</td>
+                <td>ដូចជាការប្រៀបធៀបរូបមន្តធ្វើម្ហូបពីរមុខ ដើម្បីមើលថាតើសមាមាត្រនៃការប្រើប្រាស់គ្រឿងផ្សំមានភាពខុសគ្នាកម្រិតណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Diphone / Triphone</span></td>
+                <td>ឯកតាសំឡេងតូចៗដែលផ្សំឡើងពីសូរសព្ទពីរ (Diphone) ឬបី (Triphone) ជាប់គ្នា ដែលប្រព័ន្ធ TTS កាត់យកមកប្រើដើម្បីផ្គុំជាពាក្យពេញលេញ។</td>
+                <td>ដូចជាបំណែកឡេហ្គោ (Lego) តូចៗ ដែលគេយកមកតភ្ជាប់គ្នាដើម្បីសាងសង់ជារូបរាងអ្វីមួយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">CNN-KMeans</span></td>
+                <td>វិធីសាស្ត្ររួមបញ្ចូលគ្នារវាងបណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត (CNN) ដើម្បីទាញយកលក្ខណៈសម្បត្តិនៃទិន្នន័យ និងក្បួន KMeans ដើម្បីចាត់ថ្នាក់ទិន្នន័យជាក្រុមៗ សម្រាប់ការជ្រើសរើសប្រយោគដោយស្វ័យប្រវត្តិ។</td>
+                <td>ដូចជាម៉ាស៊ីនដែលចេះស្គាល់និងបែងចែកប្រភេទផ្លែឈើតាមពណ៌និងទំហំ (CNN) រួចរៀបចំវាដាក់កន្ត្រកផ្សេងៗគ្នាដោយស្វ័យប្រវត្តិ (KMeans)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Prosody / Prosodic variation</span></td>
+                <td>បម្រែបម្រួលនៃសំនៀងឡើងចុះ ចង្វាក់ កម្រិតសំឡេង និងការសង្កត់ន័យក្នុងការនិយាយ ដែលធ្វើឱ្យការនិយាយមានមនោសញ្ចេតនា និងលក្ខណៈធម្មជាតិ។</td>
+                <td>ដូចជាការនិយាយដែលមានការឡើងចុះសម្លេងតាមកាលៈទេសៈ មិនមែនស្មើធេងគ្មានព្រលឹងដូចមនុស្សយន្តនោះទេ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/hmm-based-speech-synthesis-system-hts-v2-2007.html">
+                    <span class="km">ប្រព័ន្ធសំយោគសំឡេងផ្អែកលើម៉ូដែល HMM (HTS) កំណែ 2.0</span><br>
+                    <span class="en article-original-title">The HMM-based Speech Synthesis System (HTS) Version 2.0</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/auto-sentence-selection-hmm-tts-2011.html">
+                    <span class="km">ការជ្រើសរើសប្រយោគដោយស្វ័យប្រវត្តិពីកម្រងទិន្នន័យសំឡេងរួមមានសំឡេងចម្រុះសម្រាប់ការធ្វើឱ្យប្រសើរឡើងនូវគុណភាពនៃការសំយោគសំឡេង HMM-TTS</span><br>
+                    <span class="en article-original-title">Automatic sentence selection from speech corpora including diverse speech for improved HMM-TTS synthesis quality</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-selection-adaptation-hmm-speech-synthesis-2016.html">
+                    <span class="km">ការជ្រើសរើស និងបន្សាំទិន្នន័យដើម្បីភាពធម្មជាតិក្នុងការសំយោគសំឡេងផ្អែកលើ HMM</span><br>
+                    <span class="en article-original-title">Data Selection and Adaptation for Naturalness in HMM-based Speech Synthesis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/data-selection-naturalness-hmm-speech-synthesis-2016.html">
+                    <span class="km">ការជ្រើសរើសទិន្នន័យសម្រាប់ភាពធម្មជាតិនៃការសំយោគសំឡេងដោយផ្អែកលើ HMM</span><br>
+                    <span class="en article-original-title">Data Selection for Naturalness in HMM-based Speech Synthesis</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/chinese-speech-synthesis-prosody-model-2003.html">
+                    <span class="km">ការសិក្សាអំពីម៉ូដែលចង្វាក់សំឡេងក្នុងការសំយោគសំឡេងភាសាចិន ដោយផ្អែកលើការចាត់ថ្នាក់លក្ខណៈចង្វាក់នៃព្យាង្គ</span><br>
+                    <span class="en article-original-title">基于音节韵律特征分类的汉语语音合成中韵律模型的研究</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=voice+corpus+design+for+expressive+speech+synthesis" target="_blank" rel="noopener"><span class="en">voice corpus design for expressive speech synthesis</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=utterance+selection+algorithms+text-to-speech+CNN-KMeans" target="_blank" rel="noopener"><span class="en">utterance selection algorithms text-to-speech CNN-KMeans</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=set+covering+problem+in+speech+corpus+generation" target="_blank" rel="noopener"><span class="en">set covering problem in speech corpus generation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Kullback-Leibler+divergence+phonetic+distribution+TTS" target="_blank" rel="noopener"><span class="en">Kullback-Leibler divergence phonetic distribution TTS</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=impact+of+prosody+and+utterance+length+on+neural+TTS+quality" target="_blank" rel="noopener"><span class="en">impact of prosody and utterance length on neural TTS quality</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>More</strong>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com</p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
