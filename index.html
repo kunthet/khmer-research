@@ -495,11 +495,50 @@
         var form = document.getElementById('newsletter-form');
         var statusEl = document.getElementById('newsletter-status');
         var btn = document.getElementById('newsletter-btn');
+        function ensureKrReady(done) {
+            if (window.KR && typeof window.KR.onReady === 'function' && typeof window.KR.dbRef === 'function') {
+                done();
+                return;
+            }
+
+            var existing = document.getElementById('kr-firebase-init-fallback');
+            if (!existing) {
+                var s = document.createElement('script');
+                s.id = 'kr-firebase-init-fallback';
+                s.src = 'assets/js/firebase-init.js';
+                s.onerror = function() {
+                    var s2 = document.createElement('script');
+                    s2.id = 'kr-firebase-init-fallback-abs';
+                    s2.src = '/assets/js/firebase-init.js';
+                    document.head.appendChild(s2);
+                };
+                document.head.appendChild(s);
+            }
+
+            var tries = 0;
+            var timer = setInterval(function() {
+                if (window.KR && typeof window.KR.onReady === 'function' && typeof window.KR.dbRef === 'function') {
+                    clearInterval(timer);
+                    done();
+                    return;
+                }
+                tries += 1;
+                if (tries > 50) {
+                    clearInterval(timer);
+                    console.error('Newsletter error: Firebase client failed to initialize.');
+                    statusEl.textContent = 'Service is temporarily unavailable. Please try again.';
+                    statusEl.className = 'newsletter-status error';
+                    btn.disabled = false;
+                    btn.textContent = 'Subscribe';
+                }
+            }, 100);
+        }
         if (!form) return;
         form.addEventListener('submit', function(e) {
             e.preventDefault();
             statusEl.className = 'newsletter-status';
             statusEl.textContent = '';
+
             var email = document.getElementById('newsletter-email').value.trim();
             if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
                 statusEl.textContent = 'Please enter a valid email address.';
@@ -508,30 +547,29 @@
             }
             btn.disabled = true;
             btn.textContent = '...';
-            window.KR.onReady(function() {
+            ensureKrReady(function() {
+                window.KR.onReady(function() {
                 var key = email.replace(/\./g, '_dot_').replace(/@/g, '_at_');
                 var ref = window.KR.dbRef('newsletter_subscribers/' + key);
-                ref.once('value').then(function(snap) {
-                    if (snap.exists()) {
-                        statusEl.textContent = 'You are already subscribed!';
-                        statusEl.className = 'newsletter-status success';
-                        btn.disabled = false;
-                        btn.textContent = 'Subscribe';
-                        return;
-                    }
-                    return ref.set({ email: email, subscribedAt: firebase.database.ServerValue.TIMESTAMP }).then(function() {
-                        statusEl.textContent = 'Subscribed! Thank you.';
-                        statusEl.className = 'newsletter-status success';
-                        form.reset();
-                        btn.disabled = false;
-                        btn.textContent = 'Subscribe';
-                    });
-                }).catch(function(err) {
-                    console.error('Newsletter error:', err);
-                    statusEl.textContent = 'Something went wrong. Please try again.';
-                    statusEl.className = 'newsletter-status error';
+                ref.set({ email: email, subscribedAt: firebase.database.ServerValue.TIMESTAMP }).then(function() {
+                    statusEl.textContent = 'Subscribed! Thank you.';
+                    statusEl.className = 'newsletter-status success';
+
+                    form.reset();
                     btn.disabled = false;
                     btn.textContent = 'Subscribe';
+                }).catch(function(err) {
+                    console.error('Newsletter error:', err);
+                    if (err && err.code === 'PERMISSION_DENIED') {
+                        statusEl.textContent = 'You may already be subscribed.';
+                        statusEl.className = 'newsletter-status success';
+                    } else {
+                        statusEl.textContent = 'Something went wrong. Please try again.';
+                        statusEl.className = 'newsletter-status error';
+                    }
+                    btn.disabled = false;
+                    btn.textContent = 'Subscribe';
+                });
                 });
             });
         });
