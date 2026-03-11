@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការប្រៀបធៀបជាលេខរវាងឧបករណ៍បញ្ជា PI និងឧបករណ៍បញ្ជាផ្អែកលើបណ្ដាញសរសៃប្រសាទសម្រាប់អង្គភាពអ៊ីដ្រូស្តាទិកក្នុងប្រព័ន្ធបញ្ជូនចលនាអ៊ីដ្រូមេកានិកនៃយានជំនិះស្វ័យចលករ - Numerical Comparison of PI and Neural Network-Based Controllers for the Hydro... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការប្រៀបធៀបជាលេខរវាងឧបករណ៍បញ្ជា PI និងឧបករណ៍បញ្ជាផ្អែកលើបណ្ដ។ ឯកសារនេះដោះស្រាយបញ្ហានៃការគ្រប់គ្រងយ៉ាងច្បាស់លាស់លើអង្គភាពអ៊ីដ្រូស្តាទិក (Hydrostatic unit) នៅក្ន...">
+    
+    <meta name="keywords" content="Hydrostatic transmissions, Hydro-mechanical transmissions, Transmission ratio control, Neural network-based control, PI controller, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/pi-vs-nn-controller-hydrostatic-transmission-2024.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/pi-vs-nn-controller-hydrostatic-transmission-2024.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/pi-vs-nn-controller-hydrostatic-transmission-2024.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/pi-vs-nn-controller-hydrostatic-transmission-2024.html">
+    <meta property="og:title" content="ការប្រៀបធៀបជាលេខរវាងឧបករណ៍បញ្ជា PI និងឧបករណ៍បញ្ជាផ្អែកលើបណ្ដាញសរសៃប្រសាទសម្រាប់អង្គភាពអ៊ីដ្រូស្តាទិកក្នុងប្រព័ន្ធបញ្ជូនចលនាអ៊ីដ្រូមេកានិកនៃយានជំនិះស្វ័យចលករ | KhmerResearch.com">
+    <meta property="og:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការគ្រប់គ្រងយ៉ាងច្បាស់លាស់លើអង្គភាពអ៊ីដ្រូស្តាទិក (Hydrostatic unit) នៅក្នុងប្រព័ន្ធបញ្ជូនចលនាអ៊ីដ្រូមេកានិកនៃយានជំនិះកសិកម្ម ដែលតែងតែរងឥទ្ធិពលពីលក្ខណៈមិនលីនេអ៊ែរ និងការរំខាន...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2024, Vietnam Journal of Agricultural Sciences-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Hydrostatic transmissions">
+    
+    <meta property="article:tag" content="Hydro-mechanical transmissions">
+    
+    <meta property="article:tag" content="Transmission ratio control">
+    
+    <meta property="article:tag" content="Neural network-based control">
+    
+    <meta property="article:tag" content="PI controller">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការប្រៀបធៀបជាលេខរវាងឧបករណ៍បញ្ជា PI និងឧបករណ៍បញ្ជាផ្អែកលើបណ្ដាញសរសៃប្រសាទសម្រាប់អង្គភាពអ៊ីដ្រូស្តាទិកក្នុងប្រព័ន្ធបញ្ជូនចលនាអ៊ីដ្រូមេកានិកនៃយានជំនិះស្វ័យចលករ">
+    <meta name="twitter:description" content="ឯកសារនេះដោះស្រាយបញ្ហានៃការគ្រប់គ្រងយ៉ាងច្បាស់លាស់លើអង្គភាពអ៊ីដ្រូស្តាទិក (Hydrostatic unit) នៅក្នុងប្រព័ន្ធបញ្ជូនចលនាអ៊ីដ្រូមេកានិកនៃយានជំនិះកសិកម្ម ដែលតែងតែរងឥទ្ធិពលពីលក្ខណៈមិនលីនេអ៊ែរ និងការរំខាន...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1787\u17b6\u179b\u17c1\u1781\u179a\u179c\u17b6\u1784\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u1789\u17d2\u1787\u17b6 PI \u1793\u17b7\u1784\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u1789\u17d2\u1787\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u1784\u17d2\u1782\u1797\u17b6\u1796\u17a2\u17ca\u17b8\u178a\u17d2\u179a\u17bc\u179f\u17d2\u178f\u17b6\u1791\u17b7\u1780\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1794\u1789\u17d2\u1787\u17bc\u1793\u1785\u179b\u1793\u17b6\u17a2\u17ca\u17b8\u178a\u17d2\u179a\u17bc\u1798\u17c1\u1780\u17b6\u1793\u17b7\u1780\u1793\u17c3\u1799\u17b6\u1793\u1787\u17c6\u1793\u17b7\u17c7\u179f\u17d2\u179c\u17d0\u1799\u1785\u179b\u1780\u179a",
+      "name": "Numerical Comparison of PI and Neural Network-Based Controllers for the Hydrostatic Unit in Hydro-mechanical Transmissions of Self-propelled Vehicles",
+      "description": "\u17af\u1780\u179f\u17b6\u179a\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u1782\u17d2\u179a\u1794\u17cb\u1782\u17d2\u179a\u1784\u1799\u17c9\u17b6\u1784\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u179b\u17be\u17a2\u1784\u17d2\u1782\u1797\u17b6\u1796\u17a2\u17ca\u17b8\u178a\u17d2\u179a\u17bc\u179f\u17d2\u178f\u17b6\u1791\u17b7\u1780 (Hydrostatic unit) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1794\u1789\u17d2\u1787\u17bc\u1793\u1785\u179b\u1793\u17b6\u17a2\u17ca\u17b8\u178a\u17d2\u179a\u17bc\u1798\u17c1\u1780\u17b6\u1793\u17b7\u1780\u1793\u17c3\u1799\u17b6\u1793\u1787\u17c6\u1793\u17b7\u17c7\u1780\u179f\u17b7\u1780\u1798\u17d2\u1798 \u178a\u17c2\u179b\u178f\u17c2\u1784\u178f\u17c2\u179a\u1784\u17a5\u1791\u17d2\u1792\u17b7\u1796\u179b\u1796\u17b8\u179b\u1780\u17d2\u1781\u178e\u17c8\u1798\u17b7\u1793\u179b\u17b8\u1793\u17c1\u17a2\u17ca\u17c2\u179a \u1793\u17b7\u1784\u1780\u17b6\u179a\u179a\u17c6\u1781\u17b6\u1793\u1798\u17b7\u1793\u179f\u17d2\u1782\u17b6\u179b\u17cb\u17a2\u178f\u17d2\u178f\u179f\u1789\u17d2\u1789\u17b6\u178e\u1795\u17d2\u179f\u17c1\u1784\u17d7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/pi-vs-nn-controller-hydrostatic-transmission-2024.html",
+      "author": [{"@type": "Person", "name": "Dang Ngoc Danh (Faculty of Engineering, Vietnam National University of Agriculture)"},{"@type": "Person", "name": "Bui Viet Duc (Institute of Engineering Technology Development, Vietnam National University of Agriculture)"},{"@type": "Person", "name": "Nguyen Thi Hue (Institute of Engineering Technology Development, Vietnam National University of Agriculture)"},{"@type": "Person", "name": "Vu Cong Canh (Institute of Engineering Technology Development, Vietnam National University of Agriculture)"}],
+      "datePublished": "2024, Vietnam Journal of Agricultural Sciences",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Numerical Comparison of PI and Neural Network-Based Controllers for the Hydrostatic Unit in Hydro-mechanical Transmissions of Self-propelled Vehicles",
+        "url": "https://doi.org/10.31817/vjas.2024.7.4.04"
+      },
+      "keywords": ["Hydrostatic transmissions", "Hydro-mechanical transmissions", "Transmission ratio control", "Neural network-based control", "PI controller"],
+      "about": "Control Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1794\u17d2\u179a\u17c0\u1794\u1792\u17c0\u1794\u1787\u17b6\u179b\u17c1\u1781\u179a\u179c\u17b6\u1784\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u1789\u17d2\u1787\u17b6 PI \u1793\u17b7\u1784\u17a7\u1794\u1780\u179a\u178e\u17cd\u1794\u1789\u17d2\u1787\u17b6\u1795\u17d2\u17a2\u17c2\u1780\u179b\u17be\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u17a2\u1784\u17d2\u1782\u1797\u17b6\u1796\u17a2\u17ca\u17b8\u178a\u17d2\u179a\u17bc\u179f\u17d2\u178f\u17b6\u1791\u17b7\u1780\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1794\u1789\u17d2\u1787\u17bc\u1793\u1785\u179b\u1793\u17b6\u17a2\u17ca\u17b8\u178a\u17d2\u179a\u17bc\u1798\u17c1\u1780\u17b6\u1793\u17b7\u1780\u1793\u17c3\u1799\u17b6\u1793\u1787\u17c6\u1793\u17b7\u17c7\u179f\u17d2\u179c\u17d0\u1799\u1785\u179b\u1780\u179a",
+          "item": "https://khmerresearch.com/papers/technology/pi-vs-nn-controller-hydrostatic-transmission-2024.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>ការប្រៀបធៀបជាលេខរវាងឧបករណ៍បញ្ជា PI និងឧបករណ៍បញ្ជាផ្អែកលើបណ្ដ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Numerical Comparison of PI and Neural Network-Based Controllers for the Hydrostatic Unit in Hydro-mechanical Transmissions of Self-propelled Vehicles<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.31817/vjas.2024.7.4.04" target="_blank" rel="noopener">doi.org/10.31817/vjas.2024.7.4.04</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការប្រៀបធៀបជាលេខរវាងឧបករណ៍បញ្ជា PI និងឧបករណ៍បញ្ជាផ្អែកលើបណ្ដាញសរសៃប្រសាទសម្រាប់អង្គភាពអ៊ីដ្រូស្តាទិកក្នុងប្រព័ន្ធបញ្ជូនចលនាអ៊ីដ្រូមេកានិកនៃយានជំនិះស្វ័យចលករ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Numerical Comparison of PI and Neural Network-Based Controllers for the Hydrostatic Unit in Hydro-mechanical Transmissions of Self-propelled Vehicles</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Dang Ngoc Danh (Faculty of Engineering, Vietnam National University of Agriculture), Bui Viet Duc (Institute of Engineering Technology Development, Vietnam National University of Agriculture), Nguyen Thi Hue (Institute of Engineering Technology Development, Vietnam National University of Agriculture), Vu Cong Canh (Institute of Engineering Technology Development, Vietnam National University of Agriculture)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2024, Vietnam Journal of Agricultural Sciences</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Control Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ឯកសារនេះដោះស្រាយបញ្ហានៃការគ្រប់គ្រងយ៉ាងច្បាស់លាស់លើអង្គភាពអ៊ីដ្រូស្តាទិក (Hydrostatic unit) នៅក្នុងប្រព័ន្ធបញ្ជូនចលនាអ៊ីដ្រូមេកានិកនៃយានជំនិះកសិកម្ម ដែលតែងតែរងឥទ្ធិពលពីលក្ខណៈមិនលីនេអ៊ែរ និងការរំខានមិនស្គាល់អត្តសញ្ញាណផ្សេងៗ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះប្រើប្រាស់កម្មវិធី Matlab/SIMULINK ដើម្បីបង្កើតម៉ូដែលក្លែងធ្វើប្រព័ន្ធបញ្ជូនចលនា និងប្រៀបធៀបដំណើរការរវាងឧបករណ៍បញ្ជាពីរប្រភេទក្រោមលក្ខខណ្ឌបន្ទុកខុសៗគ្នា។
+        
+        <ul>
+            
+            <li>ម៉ូដែលក្លែងធ្វើប្រព័ន្ធបញ្ជូនចលនា (Hydro-mechanical Transmission Simulation Model)</li>
+            
+            <li>ឧបករណ៍បញ្ជាសមាមាត្រ-អាំងតេក្រាល (Proportional-Integral Controller ឬ PI)</li>
+            
+            <li>ឧបករណ៍បញ្ជាផ្អែកលើបណ្ដាញសរសៃប្រសាទកម្រិតពីរ (Two-layer Neural Network-Based Controller)</li>
+            
+            <li>ការធ្វើតេស្តបន្ទុកប្រែប្រួលយឺត និងបន្ទុកជីពចរ (Slow Varying and Pulse Load Testing)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ចំពោះការប្រែប្រួលបន្ទុកយឺត ឧបករណ៍បញ្ជា NN កាត់បន្ថយកំហុសអតិបរមា ១១,២% និងកំហុស RMS ១៤,៨% បើធៀបនឹងឧបករណ៍បញ្ជា PI។</li>
+            
+            <li>ចំពោះបន្ទុកជីពចរធំនិងលឿន ឧបករណ៍បញ្ជា NN ផ្តល់លទ្ធផលកាន់តែប្រសើរ ដោយកាត់បន្ថយកំហុសអតិបរមា ២១,៦% និងកំហុស RMS ២៧,៤%។</li>
+            
+            <li>ឧបករណ៍បញ្ជាផ្អែកលើបណ្ដាញសរសៃប្រសាទផ្តល់នូវដំណោះស្រាយត្រួតពិនិត្យដ៏រឹងមាំ និងឆ្លើយតបរហ័ស ដោយមិនទាមទារម៉ូដែលគណិតវិទ្យាពេញលេញនៃប្រព័ន្ធបញ្ជូនចលនានោះទេ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">PI Controller</span></strong><br>ឧបករណ៍បញ្ជា PI (សមាមាត្រ-អាំងតេក្រាល)</td>
+                <td>ងាយស្រួលប្រើប្រាស់ ជាទូទៅត្រូវបានគេយកទៅអនុវត្តយ៉ាងទូលំទូលាយក្នុងឧស្សាហកម្ម និងមិនតម្រូវឱ្យមានការគណនាស្មុគស្មាញច្រើននោះទេ។</td>
+                <td>ដំណើរការមិនសូវបានល្អនៅពេលប្រព័ន្ធមានការប្រែប្រួលបន្ទុកខ្លាំងនិងលឿន ហើយវាពិបាកក្នុងការគ្រប់គ្រងប្រព័ន្ធដែលមិនមានលីនេអ៊ែរ (Nonlinear systems)។</td>
+                <td>កំហុសអតិបរមា ១,៦០ rpm និង RMS ០,៥៤ rpm ចំពោះបន្ទុកប្រែប្រួលយឺត ហើយកំហុសកើនឡើងដល់ ៨,២០ rpm និង RMS ៣,៥០ rpm ពេលជួបបន្ទុកជីពចរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Neural Network-Based Controller</span></strong><br>ឧបករណ៍បញ្ជាផ្អែកលើបណ្ដាញសរសៃប្រសាទ (NN)</td>
+                <td>មិនទាមទារម៉ូដែលគណិតវិទ្យាពេញលេញនៃប្រព័ន្ធនោះទេ (Model-free) និងមានភាពរឹងមាំព្រមទាំងអាចឆ្លើយតបបានយ៉ាងល្អចំពោះការប្រែប្រួលបន្ទុកលឿននិងមិនរំពឹងទុក។</td>
+                <td>តម្រូវឱ្យមានដំណើរការបណ្តុះបណ្តាល (Training) វ៉ិចទ័រទម្ងន់នៃបណ្តាញ និងអាចមានភាពស្មុគស្មាញក្នុងការរៀបចំជាងឧបករណ៍បញ្ជា PI ធម្មតា។</td>
+                <td>កាត់បន្ថយកំហុសអតិបរមាបាន ២១,៦% (មកត្រឹម ៦,៤៣ rpm) និងកំហុស RMS បាន ២៧,៤% (មកត្រឹម ២,៥៤ rpm) ធៀបនឹង PI ក្នុងលក្ខខណ្ឌបន្ទុកជីពចរ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើការក្លែងធ្វើកុំព្យូទ័រ (Computer Simulation) ដូច្នេះការចំណាយចម្បងគឺទៅលើកម្មវិធីនិងកម្លាំងម៉ាស៊ីនកុំព្យូទ័រ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កម្មវិធី Matlab/SIMULINK រួមជាមួយនឹងបណ្ណាល័យ Simscape សម្រាប់បង្កើតម៉ូដែលក្លែងធ្វើប្រព័ន្ធបញ្ជូនចលនា និងបន្ទុក។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានសមត្ថភាពមធ្យម ឬខ្ពស់សម្រាប់ការរត់ Simulation និងដំណើរការ Back-propagation នៃបណ្តាញសរសៃប្រសាទបានរលូន។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងស៊ីជម្រៅផ្នែកវិស្វកម្មបញ្ជា (Control Engineering) ទ្រឹស្តីបណ្តាញសរសៃប្រសាទ និងយន្តការប្រព័ន្ធអ៊ីដ្រូស្តាទិក (Hydrostatic systems)។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះធ្វើឡើងដោយអ្នកស្រាវជ្រាវនៅសាកលវិទ្យាល័យកសិកម្មជាតិវៀតណាម ដោយផ្អែកទាំងស្រុងលើទិន្នន័យក្លែងធ្វើ (Simulation data) តាមរយៈកម្មវិធីកុំព្យូទ័រ មិនមានការធ្វើតេស្តលើត្រាក់ទ័រពិតប្រាកដនោះទេ។ ទោះបីជាលទ្ធផលគួរឱ្យកត់សម្គាល់ក្ដី ការខ្វះខាតការធ្វើតេស្តជាក់ស្តែងនៅក្នុងស្ថានភាពស្រែចម្ការ ឬអាកាសធាតុពិតប្រាកដ អាចជះឥទ្ធិពលដល់ដំណើរការពេលយកទៅអនុវត្តផ្ទាល់។ សម្រាប់ប្រទេសកម្ពុជា ការសាកល្បងជាក់ស្តែងលើតំបន់ដីស្រែដែលមានលក្ខណៈប្លែកៗគ្នាគឺមានសារៈសំខាន់ណាស់ដើម្បីធានាប្រសិទ្ធភាព។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ការស្រាវជ្រាវនេះមានសក្តានុពលខ្ពស់សម្រាប់ការអភិវឌ្ឍវិស័យកសិកម្មនៅកម្ពុជា ពិសេសក្នុងការធ្វើទំនើបកម្មគ្រឿងចក្រកសិកម្មឱ្យស៊ីប្រេងតិច និងមានប្រសិទ្ធភាពខ្ពស់។</p>
+        
+        <ul>
+            
+            <li><strong>ការធ្វើទំនើបកម្មត្រាក់ទ័រ និងម៉ាស៊ីនច្រូតកាត់ (Agricultural Machinery Modernization):</strong> អាចអនុវត្តបច្ចេកវិទ្យានេះលើគ្រឿងចក្រកសិកម្មដែលប្រើប្រាស់យ៉ាងច្រើននៅខេត្តបាត់ដំបង និងកំពង់ធំ ដើម្បីសន្សំសំចៃប្រេង និងបង្កើនប្រសិទ្ធភាពកម្លាំងម៉ាស៊ីនពេលជួបដីរឹង ឬភក់ជ្រៅ។</li>
+            
+            <li><strong>ស្ថាប័នស្រាវជ្រាវ (Research Institutions like ITC):</strong> និស្សិតនិងអ្នកស្រាវជ្រាវផ្នែកមេកានិក និងស្វ័យប្រវត្តិកម្មនៅវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា អាចយកគំរូនេះទៅសិក្សាបន្ត និងបង្កើតឧបករណ៍បញ្ជាឆ្លាតវៃសម្រាប់បំពាក់លើគ្រឿងចក្រកែច្នៃក្នុងស្រុក។</li>
+            
+            <li><strong>សហគ្រាសផលិតគ្រឿងចក្រក្នុងស្រុក (Local Machinery Assemblers):</strong> រោងជាង ឬសហគ្រាសផលិតគ្រឿងចក្រកសិកម្មក្នុងស្រុក អាចប្រើប្រាស់គោលគំនិតនៃការគ្រប់គ្រង (Model-free control) នេះ ដើម្បីបង្កើនភាពប្រកួតប្រជែងក្នុងការផលិតគ្រឿងចក្រដែលឆ្លាតវៃជាងមុន និងងាយស្រួលក្នុងការបញ្ជា។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក ការអភិវឌ្ឍបច្ចេកវិទ្យាបញ្ជាឆ្លាតវៃ (NN Controller) លើប្រព័ន្ធបញ្ជូនចលនា អាចជួយកសិករកម្ពុជាបង្កើនផលិតភាពការងារ ខណៈពេលកាត់បន្ថយការចំណាយលើឥន្ធនៈបានយ៉ាងច្រើន។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃប្រព័ន្ធបញ្ជូនចលនា និងការបញ្ជា:</strong> ស្វែងយល់ពីគោលការណ៍ដំណើរការនៃប្រព័ន្ធ Hydro-mechanical transmissions រួមទាំងយន្តការរបស់ស៊ើវ៉ូវ៉ាល់ (Servo valve) និងឧបករណ៍បញ្ជាប្រភេទ PI ដោយប្រើប្រាស់ឯកសារយោង និងវគ្គសិក្សាតាមអ៊ីនធឺណិត។</li>
+            
+            <li><strong>អនុវត្តការប្រើប្រាស់កម្មវិធីសាកល្បង:</strong> ចាប់ផ្តើមរៀនប្រើប្រាស់កម្មវិធី <span class="en">Matlab/SIMULINK</span> ដោយប្រើប្រាស់ <span class="en">Simscape library</span> ដើម្បីបង្កើតគំរូសៀគ្វីអ៊ីដ្រូលីក និងម៉ូដែលម៉ាស៊ីនចំហេះក្នុង (ICE) សាមញ្ញ។</li>
+            
+            <li><strong>សិក្សាពីការរចនាបណ្តាញសរសៃប្រសាទ (Neural Networks):</strong> ស្រាវជ្រាវពីទម្រង់ Artificial Neural Networks លក្ខណៈ Two-layer និងយន្តការអាប់ដេតទម្ងន់តាមរយៈ Back-propagation technique រួចសាកល្បងសរសេរកូដនៅក្នុង <span class="en">Matlab</span>។</li>
+            
+            <li><strong>បង្កើតម៉ូដែលក្លែងធ្វើរួម (Build Simulation Model):</strong> ប្រើប្រាស់គំនូសបំព្រួញ (Block diagrams) ដូចដែលបានបង្ហាញក្នុងឯកសារ (Figure 6, 7, 10) ដើម្បីបង្កើតការសាកល្បងប្រៀបធៀបរវាង PI និង NN Controllers ក្រោមលក្ខខណ្ឌបន្ទុកប្រែប្រួលផ្សេងៗ។</li>
+            
+            <li><strong>អភិវឌ្ឍទៅកាន់ការធ្វើតេស្តជាក់ស្តែង (Prototyping):</strong> បន្ទាប់ពីក្លែងធ្វើជោគជ័យ សហការជាមួយរោងជាងមេកានិកក្នុងស្រុក ដើម្បីដំឡើងក្បួនដោះស្រាយ (Algorithm) នេះទៅក្នុងកុំព្យូទ័រឧស្សាហកម្ម ឬ Microcontrollers ដូចជា <span class="en">Raspberry Pi</span> ឬ <span class="en">Arduino Portenta</span> រួចធ្វើតេស្តជាមួយម៉ាស៊ីនអ៊ីដ្រូស្តាទិកខ្នាតតូចជាក់ស្តែង។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Hydro-mechanical transmission (ប្រព័ន្ធបញ្ជូនចលនាអ៊ីដ្រូមេកានិក)</span></td>
+                <td>ប្រព័ន្ធបញ្ជូនថាមពលដែលច្របាច់បញ្ចូលគ្នានូវយន្តការបញ្ជូនកម្លាំងតាមរយៈកង់ធ្មេញ (Mechanical path) និងយន្តការបញ្ជូនតាមរយៈសម្ពាធសប់រាវ (Hydrostatic path) ដើម្បីឱ្យម៉ាស៊ីនអាចដំណើរការបានយ៉ាងមានប្រសិទ្ធភាពក្នុងល្បឿនប្រែប្រួលដោយរក្សាកម្លាំងបានល្អ។</td>
+                <td>ដូចជាការជិះកង់ដែលមានប្រអប់លេខធម្មតារួមផ្សំជាមួយម៉ូទ័រជំនួយ ដែលចេះប្តូរកម្លាំងអូសទាញដោយស្វ័យប្រវត្តិដើម្បីសន្សំកម្លាំងអ្នកធាក់នៅពេលផ្លូវទួលឬរលាក់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Hydrostatic unit (អង្គភាពអ៊ីដ្រូស្តាទិក)</span></td>
+                <td>សមាសធាតុសំខាន់មួយនៃប្រព័ន្ធបញ្ជូនចលនា ដែលប្រើប្រាស់សម្ពាធនៃវត្ថុរាវ (ប្រេងអ៊ីដ្រូលីក) ដើម្បីបញ្ជូនកម្លាំងបង្វិលពីម៉ាស៊ីនទៅកាន់កង់អូសទាញ។ នៅក្នុងនេះមានសមាសភាពរងដូចជា បូម និងម៉ូទ័រអ៊ីដ្រូលីក។</td>
+                <td>ដូចជាសឺរាំងពីរតភ្ជាប់គ្នាដោយបំពង់ទុយោទឹក ដែលនៅពេលអ្នកសង្កត់សឺរាំងម្ខាង សម្ពាធទឹកនឹងរុញសឺរាំងម្ខាងទៀតឱ្យធ្វើចលនា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Proportional-Integral (PI) controller (ឧបករណ៍បញ្ជាសមាមាត្រ-អាំងតេក្រាល)</span></td>
+                <td>ក្បួនដោះស្រាយគណិតវិទ្យាដែលត្រូវបានប្រើប្រាស់យ៉ាងទូលំទូលាយក្នុងឧស្សាហកម្ម ដើម្បីគណនានិងកែតម្រូវកំហុសរវាងលទ្ធផលដែលចង់បាន និងលទ្ធផលជាក់ស្តែង ដោយពឹងផ្អែកលើទំហំកំហុសបច្ចុប្បន្ន (Proportional) និងផលបូកកំហុសដែលកើនឡើងពីអតីតកាល (Integral)។</td>
+                <td>ដូចជាអ្នកបើកបរឡានដែលសម្លឹងមើលកុងទ័រល្បឿន (ជាន់ហ្គែរតាមល្បឿនដែលខ្វះ) និងចងចាំថាខ្លួនជាន់ហ្គែរតិចពេកយូរហើយទើបមិនដល់គោលដៅ (ជាន់ថែមបន្តិចទៀតដើម្បីបំបាត់ការយឺតយ៉ាវ)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Neural network-based control (ការគ្រប់គ្រងផ្អែកលើបណ្ដាញសរសៃប្រសាទ)</span></td>
+                <td>ប្រព័ន្ធបញ្ជាដែលប្រើប្រាស់ក្បួនរៀនសូត្រពីកំហុស (Machine Learning) តាមលំនាំនៃប្រព័ន្ធសរសៃប្រសាទខួរក្បាល ដើម្បីទស្សន៍ទាយ និងបញ្ចេញសញ្ញាគ្រប់គ្រងប្រព័ន្ធបានត្រឹមត្រូវ ដោយមិនចាំបាច់មានរូបមន្តគណិតវិទ្យាថេរប្រាប់វាពីមុននោះទេ។</td>
+                <td>ដូចជាក្មេងម្នាក់រៀនជិះកង់ ដែលដំបូងចេះតែដួល ប៉ុន្តែក្រោយមកខួរក្បាលចេះស្វ័យតម្រូវការរក្សាលំនឹងដោយខ្លួនឯងតាមបទពិសោធន៍រាល់ពេលដែលរៀបនឹងដួល។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Model-free control (ការគ្រប់គ្រងមិនពឹងផ្អែកលើម៉ូដែលគណិតវិទ្យា)</span></td>
+                <td>វិធីសាស្ត្រនៃការរចនាឧបករណ៍បញ្ជាដោយមិនចាំបាច់ស្គាល់ ឬបង្កើតរូបមន្តគណិតវិទ្យាស្មុគស្មាញដែលតំណាងឱ្យចលនារូបវន្តនៃប្រព័ន្ធទាំងមូលនោះទេ ប៉ុន្តែវាពឹងផ្អែកលើទិន្នន័យជាក់ស្តែងនិងការឆ្លើយតបចេញចូលរបស់ប្រព័ន្ធ។</td>
+                <td>ដូចជាចុងភៅដែលភ្លក់រសជាតិសម្លរួចថែមគ្រឿងបណ្តើរៗឱ្យត្រូវមាត់ ដោយមិនចាំបាច់ដឹងពីរូបមន្តគីមីនៃអំបិលឬស្ករ និងប្រតិកម្មរបស់វានៅក្នុងឆ្នាំងនោះទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Internal combustion engine (ICE) (ម៉ាស៊ីនចំហេះក្នុង)</span></td>
+                <td>ម៉ាស៊ីនដែលបង្កើតថាមពលមេកានិក (កម្លាំងបង្វិល) តាមរយៈការដុតបញ្ឆេះល្បាយឥន្ធនៈនិងខ្យល់នៅខាងក្នុងទីតាំងបិទជិតមួយហៅថាស៊ីឡាំង ដែលកម្លាំងផ្ទុះនោះរុញច្រានពីស្តុងឱ្យមានចលនាចុះឡើង។</td>
+                <td>ដូចជាការដុតផាវក្នុងបំពង់ដែកបិទជិតមួយ ដែលកម្លាំងផ្ទុះនឹងរុញច្រានគម្របបំពង់ឱ្យហោះឡើងលើ ដើម្បីបង្កើតជាកម្លាំងចលករ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Back-propagation (បច្ចេកទេសបង្វិលត្រឡប់រកកំហុស)</span></td>
+                <td>ក្បួនហ្វឹកហាត់នៅក្នុងបណ្តាញសរសៃប្រសាទសិប្បនិម្មិត ដែលគណនាទំហំកំហុសនៅចុងបញ្ចប់ រួចបញ្ជូនទិន្នន័យកំហុសនោះត្រឡប់មកថយក្រោយវិញតាមលំដាប់ស្រទាប់ ដើម្បីកែតម្រូវទម្ងន់ (Weights) នៃទំនាក់ទំនងរវាងណឺរ៉ូននីមួយៗឱ្យកាន់តែសុក្រឹតនៅជំហានបន្ទាប់។</td>
+                <td>ដូចជាគ្រូបាញ់ធ្នូដែលបាញ់ខុសគោលដៅ ហើយគាត់ធ្វើការគិតបញ្ច្រាសមកវិញថា កំហុសមកពីកម្លាំងខ្យល់ ឬការទាញខ្សែធ្នូ រួចកែតម្រូវកម្លាំងដៃខ្លួនឯងសម្រាប់ព្រួញក្រោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Continuously variable transmissions (CVTs) (ប្រព័ន្ធបញ្ជូនចលនាប្រែប្រួលជាបន្តបន្ទាប់)</span></td>
+                <td>ប្រអប់លេខនៃយានយន្តដែលអាចផ្លាស់ប្តូរសមាមាត្រលេខ (Transmission ratio) បានយ៉ាងរលូនគ្មានព្រំដែនកំណត់នៅគ្រប់ចន្លោះល្បឿន ខុសពីប្រអប់លេខធម្មតាដែលមានត្រឹម ៤ ឬ ៥ លេខថេរ។</td>
+                <td>ដូចជាការឡើងសំឡេងវិទ្យុដោយបង្វិលប៊ូតុងតូចដែលសំឡេងឡើងបន្តិចម្តងៗយ៉ាងរលូន ខុសពីការចុចប៉ូតុងដែលឡើងលោតកម្រិតៗ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=hydro-mechanical+transmission%22+control+optimization+%22agricultural+vehicles" target="_blank" rel="noopener"><span class="en">hydro-mechanical transmission" control optimization "agricultural vehicles</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=neural+network%22+OR+%22model-free+control%22+%22hydrostatic+transmission%22+performance" target="_blank" rel="noopener"><span class="en">neural network" OR "model-free control" "hydrostatic transmission" performance</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=PID+vs+neural+network%22+dynamic+systems+nonlinear+control+comparison" target="_blank" rel="noopener"><span class="en">PID vs neural network" dynamic systems nonlinear control comparison</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=back-propagation%22+training+adaptive+control+discrete-time+hydraulic+motor" target="_blank" rel="noopener"><span class="en">back-propagation" training adaptive control discrete-time hydraulic motor</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=power+split+gearbox%22+OR+CVT+efficiency+%22internal+combustion+engine%22+working+point" target="_blank" rel="noopener"><span class="en">power split gearbox" OR CVT efficiency "internal combustion engine" working point</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>About &amp; Legal</strong>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com | <a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a></p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
