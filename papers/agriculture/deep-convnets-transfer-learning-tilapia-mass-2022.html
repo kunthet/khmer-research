@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>បណ្ដាញសរសៃប្រសាទកុងវ៉ុលជ្រៅ (Deep Convolutional Neural Networks) ជាមួយនឹងការរៀនផ្ទេរចំណេះដឹង (Transfer Learning) សម្រាប់ការប៉ាន់ប្រមាណម៉ាសត្រីទីឡាព្យា - Deep convolutional neural networks with transfer learning for estimation of N... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី បណ្ដាញសរសៃប្រសាទកុងវ៉ុលជ្រៅ (Deep Convolutional Neural Netwo។ ការថ្លឹងម៉ាសត្រីរស់ដោយផ្ទាល់ដោយប្រើជញ្ជីងឌីជីថលត្រូវចំណាយពេលយូរ ប្រើកម្លាំងពលកម្មច្រើន និងអាចធ្វើ...">
+    
+    <meta name="keywords" content="Computer vision, Deep learning, Mass estimation, Nile Tilapia, Transfer learning, Convolutional Neural Networks, Aquaculture, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/agriculture/deep-convnets-transfer-learning-tilapia-mass-2022.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/agriculture/deep-convnets-transfer-learning-tilapia-mass-2022.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/agriculture/deep-convnets-transfer-learning-tilapia-mass-2022.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/agriculture/deep-convnets-transfer-learning-tilapia-mass-2022.html">
+    <meta property="og:title" content="បណ្ដាញសរសៃប្រសាទកុងវ៉ុលជ្រៅ (Deep Convolutional Neural Networks) ជាមួយនឹងការរៀនផ្ទេរចំណេះដឹង (Transfer Learning) សម្រាប់ការប៉ាន់ប្រមាណម៉ាសត្រីទីឡាព្យា | KhmerResearch.com">
+    <meta property="og:description" content="ការថ្លឹងម៉ាសត្រីរស់ដោយផ្ទាល់ដោយប្រើជញ្ជីងឌីជីថលត្រូវចំណាយពេលយូរ ប្រើកម្លាំងពលកម្មច្រើន និងអាចធ្វើឱ្យត្រីមានភាពតានតឹង (Stress) ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់សុខភាពត្រីសម្រាប់ការបង្កាត់ពូជ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2022, Agriculture and Natural Resources-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Computer vision">
+    
+    <meta property="article:tag" content="Deep learning">
+    
+    <meta property="article:tag" content="Mass estimation">
+    
+    <meta property="article:tag" content="Nile Tilapia">
+    
+    <meta property="article:tag" content="Transfer learning">
+    
+    <meta property="article:tag" content="Convolutional Neural Networks">
+    
+    <meta property="article:tag" content="Aquaculture">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="បណ្ដាញសរសៃប្រសាទកុងវ៉ុលជ្រៅ (Deep Convolutional Neural Networks) ជាមួយនឹងការរៀនផ្ទេរចំណេះដឹង (Transfer Learning) សម្រាប់ការប៉ាន់ប្រមាណម៉ាសត្រីទីឡាព្យា">
+    <meta name="twitter:description" content="ការថ្លឹងម៉ាសត្រីរស់ដោយផ្ទាល់ដោយប្រើជញ្ជីងឌីជីថលត្រូវចំណាយពេលយូរ ប្រើកម្លាំងពលកម្មច្រើន និងអាចធ្វើឱ្យត្រីមានភាពតានតឹង (Stress) ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់សុខភាពត្រីសម្រាប់ការបង្កាត់ពូជ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u1780\u17bb\u1784\u179c\u17c9\u17bb\u179b\u1787\u17d2\u179a\u17c5 (Deep Convolutional Neural Networks) \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a\u1785\u17c6\u178e\u17c1\u17c7\u178a\u17b9\u1784 (Transfer Learning) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u1794\u17d2\u179a\u1798\u17b6\u178e\u1798\u17c9\u17b6\u179f\u178f\u17d2\u179a\u17b8\u1791\u17b8\u17a1\u17b6\u1796\u17d2\u1799\u17b6",
+      "name": "Deep convolutional neural networks with transfer learning for estimation of Nile Tilapia mass",
+      "description": "\u1780\u17b6\u179a\u1790\u17d2\u179b\u17b9\u1784\u1798\u17c9\u17b6\u179f\u178f\u17d2\u179a\u17b8\u179a\u179f\u17cb\u178a\u17c4\u1799\u1795\u17d2\u1791\u17b6\u179b\u17cb\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1787\u1789\u17d2\u1787\u17b8\u1784\u178c\u17b8\u1787\u17b8\u1790\u179b\u178f\u17d2\u179a\u17bc\u179c\u1785\u17c6\u178e\u17b6\u1799\u1796\u17c1\u179b\u1799\u17bc\u179a \u1794\u17d2\u179a\u17be\u1780\u1798\u17d2\u179b\u17b6\u17c6\u1784\u1796\u179b\u1780\u1798\u17d2\u1798\u1785\u17d2\u179a\u17be\u1793 \u1793\u17b7\u1784\u17a2\u17b6\u1785\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u178f\u17d2\u179a\u17b8\u1798\u17b6\u1793\u1797\u17b6\u1796\u178f\u17b6\u1793\u178f\u17b9\u1784 (Stress) \u178a\u17c2\u179b\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u1799\u17c9\u17b6\u1784\u1781\u17d2\u179b\u17b6\u17c6\u1784\u178a\u179b\u17cb\u179f\u17bb\u1781\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b8\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u1784\u17d2\u1780\u17b6\u178f\u17cb\u1796\u17bc\u1787\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/agriculture/deep-convnets-transfer-learning-tilapia-mass-2022.html",
+      "author": [{"@type": "Person", "name": "Poonpat Poonnoy (Maejo University, Thailand)"},{"@type": "Person", "name": "Nissara Kitcharoen (Maejo University, Thailand)"}],
+      "datePublished": "2022, Agriculture and Natural Resources",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Deep convolutional neural networks with transfer learning for estimation of Nile Tilapia mass",
+        "url": "https://doi.org/10.34044/j.anres.2022.56.4.07"
+      },
+      "keywords": ["Computer vision", "Deep learning", "Mass estimation", "Nile Tilapia", "Transfer learning", "Convolutional Neural Networks", "Aquaculture"],
+      "about": "Aquaculture and Computer Vision"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Agriculture",
+          "item": "https://khmerresearch.com/papers/agriculture/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1794\u178e\u17d2\u178a\u17b6\u1789\u179f\u179a\u179f\u17c3\u1794\u17d2\u179a\u179f\u17b6\u1791\u1780\u17bb\u1784\u179c\u17c9\u17bb\u179b\u1787\u17d2\u179a\u17c5 (Deep Convolutional Neural Networks) \u1787\u17b6\u1798\u17bd\u1799\u1793\u17b9\u1784\u1780\u17b6\u179a\u179a\u17c0\u1793\u1795\u17d2\u1791\u17c1\u179a\u1785\u17c6\u178e\u17c1\u17c7\u178a\u17b9\u1784 (Transfer Learning) \u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u1794\u17d2\u179a\u1798\u17b6\u178e\u1798\u17c9\u17b6\u179f\u178f\u17d2\u179a\u17b8\u1791\u17b8\u17a1\u17b6\u1796\u17d2\u1799\u17b6",
+          "item": "https://khmerresearch.com/papers/agriculture/deep-convnets-transfer-learning-tilapia-mass-2022.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/agriculture/">Agriculture</a> &rsaquo;
+        <span>បណ្ដាញសរសៃប្រសាទកុងវ៉ុលជ្រៅ (Deep Convolutional Neural Netwo...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Deep convolutional neural networks with transfer learning for estimation of Nile Tilapia mass<br>
+        
+        <strong>Source:</strong> <a href="https://doi.org/10.34044/j.anres.2022.56.4.07" target="_blank" rel="noopener">doi.org/10.34044/j.anres.2022.56.4.07</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>បណ្ដាញសរសៃប្រសាទកុងវ៉ុលជ្រៅ (Deep Convolutional Neural Networks) ជាមួយនឹងការរៀនផ្ទេរចំណេះដឹង (Transfer Learning) សម្រាប់ការប៉ាន់ប្រមាណម៉ាសត្រីទីឡាព្យា</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Deep convolutional neural networks with transfer learning for estimation of Nile Tilapia mass</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Poonpat Poonnoy (Maejo University, Thailand), Nissara Kitcharoen (Maejo University, Thailand)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2022, Agriculture and Natural Resources</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Aquaculture and Computer Vision</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការថ្លឹងម៉ាសត្រីរស់ដោយផ្ទាល់ដោយប្រើជញ្ជីងឌីជីថលត្រូវចំណាយពេលយូរ ប្រើកម្លាំងពលកម្មច្រើន និងអាចធ្វើឱ្យត្រីមានភាពតានតឹង (Stress) ដែលប៉ះពាល់យ៉ាងខ្លាំងដល់សុខភាពត្រីសម្រាប់ការបង្កាត់ពូជ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានបង្កើតនិងកែច្នៃបណ្ដាញសរសៃប្រសាទកុងវ៉ុលជ្រៅ (Deep Convolutional Neural Networks) ចំនួន ៨ ប្រភេទ ដោយប្រើប្រាស់បច្ចេកទេសរៀនផ្ទេរចំណេះដឹង (Transfer Learning) ដើម្បីប៉ាន់ស្មានម៉ាសត្រីពីក្នុងរូបភាព។
+        
+        <ul>
+            
+            <li>ការប្រមូលទិន្នន័យរូបភាពត្រី (Image dataset collection): ថតរូបភាពត្រីទីឡាព្យាចំនួន ៣.៨៣២ ក្បាល ផ្គូផ្គងជាមួយទិន្នន័យម៉ាសជាក់ស្តែងដើម្បីបែងចែកជាក្រុមសម្រាប់បង្វឹកនិងធ្វើតេស្ត។</li>
+            
+            <li>ការកែច្នៃម៉ូដែល (Model modification): កែច្នៃម៉ូដែល AI ល្បីៗដូចជា VGG-19, AlexNet និង ResNet សម្រាប់ការវិភាគតំរែតំរង់ (Regression analysis) ដើម្បីទស្សន៍ទាយម៉ាសត្រី។</li>
+            
+            <li>ការវាយតម្លៃដំណើរការម៉ូដែល (Model performance evaluation): វាស់វែងភាពសុក្រឹតតាមរយៈកំហុសមធ្យមការ៉េឫស (RMSE) កំហុសមធ្យមដាច់ខាត (MAE) និងមេគុណកំនត់ (R²)។</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ម៉ូដែល VGG-19 ដែលបានកែច្នៃផ្តល់លទ្ធផលល្អដាច់គេ ដោយមានកំហុសមធ្យមការ៉េឫស (RMSE) ទាបបំផុតត្រឹម ៣.៥៩ ក្រាម និងមេគុណកំនត់ (R²) ល្អឥតខ្ចោះរហូតដល់ ០.៩៩។</li>
+            
+            <li>ពេលវេលាដំណើរការទស្សន៍ទាយសម្រាប់រូបភាពមួយសន្លឹកគឺលឿនបំផុត ត្រឹមតែ ០.០៥៣ វិនាទីនៅលើ GPU និង ០.១៧៧ វិនាទីនៅលើ CPU ដែលស័ក្តិសមសម្រាប់ការវាស់វែងក្នុងពេលជាក់ស្តែង (Real-time)។</li>
+            
+            <li>ការជះពន្លឺចាំងពីស្រទាប់ទឹកនៅលើផ្ទៃខាងក្រោយមានឥទ្ធិពលអវិជ្ជមានដល់ការប៉ាន់ស្មានម៉ាស ដែលទាមទារឱ្យមានការកែលម្អប្រព័ន្ធកាមេរ៉ាបន្ថែមនៅពេលអនាគត។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Modified VGG-19 (Deep Learning)</span></strong><br>ម៉ូដែល VGG-19 ដែលបានកែច្នៃ (បណ្ដាញសរសៃប្រសាទកុងវ៉ុលជ្រៅ)</td>
+                <td>ផ្តល់ភាពសុក្រឹតខ្ពស់បំផុត និងមានសមត្ថភាពចាប់យកលក្ខណៈលម្អិតនៃរូបរាងត្រីបានយ៉ាងល្អ ដោយចំណាយពេលទស្សន៍ទាយលឿនបំផុត។</td>
+                <td>ទាមទារការបង្វឹកដោយប្រើកុំព្យូទ័រដែលមានកម្លាំង GPU ខ្លាំង និងងាយរងឥទ្ធិពលអវិជ្ជមានពីពន្លឺចាំងលើទឹក។</td>
+                <td>កំហុសមធ្យមការ៉េឫស (RMSE) ទាបបំផុតត្រឹម ៣.៥៩ ក្រាម និងល្បឿនដំណើរការ ០.០៥៣ វិនាទី/រូបភាព (លើ GPU)។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Modified GoogLeNet (Deep Learning)</span></strong><br>ម៉ូដែល GoogLeNet ដែលបានកែច្នៃ</td>
+                <td>មានទំហំម៉ូដែលតូចខ្លាំង និងមានល្បឿនដំណើរការលឿនជាងគេនៅលើកុំព្យូទ័រធម្មតា (CPU)។</td>
+                <td>មានភាពសុក្រឹតទាបជាងម៉ូដែល VGG-19 បន្តិច ដោយសារការកែប្រែទម្រង់រូបភាពស្មុគស្មាញពេក។</td>
+                <td>RMSE ស្មើនឹង ៣.៩២ ក្រាម, ទំហំម៉ូដែលត្រឹមតែ ២២.២ MB។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Traditional Power Curve Model (using area)</span></strong><br>គំរូខ្សែកោងថាមពលប្រពៃណី (ប្រើប្រាស់ផ្ទៃក្រឡា)</td>
+                <td>សាមញ្ញ ងាយស្រួលគណនាដោយមិនចាំបាច់ប្រើប្រាស់បច្ចេកវិទ្យាបញ្ញាសិប្បនិម្មិតកម្រិតខ្ពស់។</td>
+                <td>មានកំហុសខ្ពស់ជាង និងទាមទារឱ្យមានការប្រើប្រាស់កម្មវិធីកាត់ផ្ទៃកន្ទុយនិងព្រុយចេញពីរូបរាងដងខ្លួនត្រីជាមុនសិន។</td>
+                <td>RMSE ខ្ពស់រហូតដល់ ១៨.៦០ ក្រាម សម្រាប់ការប្រើផ្ទៃរូបរាងទូទៅ ឬ ៧៧.៥២ ក្រាម បើប្រើតែផ្ទៃដងខ្លួនសុទ្ធ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Modified InceptionResNetV2</span></strong><br>ម៉ូដែល InceptionResNetV2 ដែលបានកែច្នៃ</td>
+                <td>មានសក្តានុពលសម្រាប់កិច្ចការវិភាគរូបភាពដែលមានភាពស្មុគស្មាញ និងមានស្រទាប់វិភាគច្រើន។</td>
+                <td>មិនស័ក្តិសមសម្រាប់ការងារតំរែតំរង់ (Regression) សាមញ្ញទេ ដោយវាបង្កើតឱ្យមានកំហុសខ្ពស់ (Overfitting)។</td>
+                <td>មានកំហុសធំបំផុត ដោយតម្លៃ RMSE ស្មើនឹង ១៤.៣៦ ក្រាម និងកំហុសជាភាគរយ (MAPE) រហូតដល់ ៣៩.០១%។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តការសិក្សានេះទាមទារនូវឧបករណ៍កុំព្យូទ័រដែលមានកម្លាំងម៉ាស៊ីនខ្លាំងសម្រាប់ការបង្វឹកម៉ូដែល និងប្រព័ន្ធថតរូបភាពដែលមានការគ្រប់គ្រងបរិស្ថានពន្លឺបានល្អ។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រ Workstation ដែលមាន CPU Intel XEON Silver 4108, RAM 32 GB និងកាតក្រាហ្វិក NVIDIA Quadro RTX5000 GPU ព្រមទាំងប្រព័ន្ធកាមេរ៉ា CMOS ជញ្ជីងឌីជីថល (Sartorius) និងម៉ាស៊ីនស្កេន RFID។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី LABVIEW សម្រាប់បញ្ជាប្រព័ន្ធថតរូប និងទាញយកទិន្នន័យ ព្រមទាំងបរិស្ថានកម្មវិធី MATLAB សម្រាប់កសាង និងបង្វឹកបណ្ដាញសរសៃប្រសាទកុងវ៉ុល។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យរូបភាពត្រីទីឡាព្យាចំនួន ៣.៨៣២ សន្លឹក ដែលត្រូវបានថត និងភ្ជាប់ជាមួយទិន្នន័យម៉ាសពិតប្រាកដ និងលេខសម្គាល់ត្រី។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងឯកទេសផ្នែកកុំព្យូទ័រចក្ខុ (Computer Vision), បច្ចេកទេសរៀនផ្ទេរចំណេះដឹង (Transfer Learning) និងជំនាញសរសេរកូដសម្រាប់បញ្ញាសិប្បនិម្មិត។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងនៅក្នុងប្រទេសថៃ ដោយប្រើប្រាស់រូបភាពត្រីទីឡាព្យា (<i>Oreochromis niloticus</i>) ចំនួន ៣.៨៣២ ក្បាល ក្នុងលក្ខខណ្ឌថតរូបដែលមានប្រអប់ទប់ពន្លឺយ៉ាងត្រឹមត្រូវ។ ការណ៍នេះជារឿងសំខាន់ដែលត្រូវពិចារណាសម្រាប់កម្ពុជា ព្រោះលក្ខខណ្ឌជាក់ស្តែងនៅតាមកសិដ្ឋានវារីវប្បកម្មនៅកម្ពុជាអាចមានភាពខុសគ្នាទាំងពន្លឺ ប្រភេទពូជត្រី និងបរិយាកាសទឹក ដែលទាមទារឱ្យមានការប្រមូលទិន្នន័យក្នុងស្រុកបន្ថែមដើម្បីបង្វឹកម៉ូដែលឱ្យស្របតាមស្ថានភាពជាក់ស្តែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>បច្ចេកវិទ្យានេះមានសក្តានុពលខ្ពស់ខ្លាំងសម្រាប់ការអភិវឌ្ឍវិស័យវារីវប្បកម្មទំនើបនៅកម្ពុជា ជាពិសេសសម្រាប់ការបង្កាត់ពូជ និងគ្រប់គ្រងកសិដ្ឋាន។</p>
+        
+        <ul>
+            
+            <li><strong>វិទ្យាស្ថានស្រាវជ្រាវ និងអភិវឌ្ឍន៍ជលផលទឹកសាបកម្ពុជា:</strong> អាចអនុវត្តបច្ចេកទេសនេះដើម្បីថ្លឹងម៉ាសត្រីមេពូជដោយមិនបាច់ចាប់កាន់ផ្ទាល់ ដែលជួយកាត់បន្ថយភាពតានតឹង (Stress) និងអត្រាស្លាប់របស់ត្រីក្នុងអំឡុងពេលជ្រើសរើសពូជ។</li>
+            
+            <li><strong>កសិដ្ឋានវារីវប្បកម្មពាណិជ្ជកម្ម (ខេត្តកណ្តាល, សៀមរាប, កំពង់ធំ):</strong> កសិដ្ឋានចិញ្ចឹមត្រីខ្នាតធំអាចប្រើប្រព័ន្ធកាមេរ៉ានេះដើម្បីត្រួតពិនិត្យការលូតលាស់ប្រចាំថ្ងៃ និងគណនាបរិមាណចំណីបានយ៉ាងរហ័សនិងសុក្រឹត ដោយកាត់បន្ថយការប្រើប្រាស់កម្លាំងពលកម្មច្រើន។</li>
+            
+            <li><strong>ការអប់រំនៅសាកលវិទ្យាល័យភូមិន្ទកសិកម្ម (RUA) ឬវិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា (ITC):</strong> និស្សិតជំនាញកសិកម្ម និងវិស្វកម្មកុំព្យូទ័រអាចយកវិធីសាស្ត្រនេះទៅកែច្នៃស្រាវជ្រាវបន្ថែម ប្រើជាមួយពូជត្រីសេដ្ឋកិច្ចក្នុងស្រុកផ្សេងទៀត ដូចជា ត្រីប្រា ត្រីពោ ឬត្រីឆ្តោជាដើម។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការប្រើប្រាស់បច្ចេកទេសរៀនផ្ទេរចំណេះដឹង (Transfer Learning) ជួយកាត់បន្ថយពេលវេលានិងធនធានក្នុងការបង្កើតម៉ូដែល AI ថ្មី ដែលធ្វើឱ្យបច្ចេកវិទ្យានេះងាយស្រួលនឹងត្រូវបានសម្របយកមកប្រើប្រាស់ជាក់ស្តែងក្នុងវិស័យកសិកម្មកម្ពុជា។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>១. សិក្សាមូលដ្ឋានគ្រឹះកុំព្យូទ័រចក្ខុ និងរៀនផ្ទេរចំណេះដឹង:</strong> ចាប់ផ្តើមរៀនភាសាកូដ <span class="en">Python</span> និងប្រើប្រាស់បណ្ណាល័យ Deep Learning ទូទៅដូចជា <span class="en">TensorFlow</span> ឬ <span class="en">PyTorch</span> ដើម្បីយល់ពីរបៀបដំណើរការបណ្ដាញសរសៃប្រសាទកុងវ៉ុល (CNNs)។</li>
+            
+            <li><strong>២. រៀបចំប្រព័ន្ធកាមេរ៉ា និងប្រមូលទិន្នន័យរៀបចំ:</strong> បង្កើតប្រអប់ថតរូប (Lightbox) ដែលមានកាមេរ៉ានិងភ្លើងបំភ្លឺថេរ រួចថតរូបត្រីផ្គូផ្គងជាមួយទម្ងន់ជាក់ស្តែងដែលថ្លឹងដោយជញ្ជីងឌីជីថល រួចរក្សាទុកទិន្នន័យក្នុងទម្រង់ជា <span class="en">CSV</span>។</li>
+            
+            <li><strong>៣. កែច្នៃម៉ូដែល AI សម្រាប់ការវិភាគតំរែតំរង់ (Regression):</strong> ទាញយកម៉ូដែលកុំព្យូទ័រដែលបានបង្វឹករួចដូចជា <span class="en">VGG-19</span> រួចផ្លាស់ប្តូរស្រទាប់ចុងក្រោយ (Fully Connected Layers) ពីមុខងារធ្វើចំណាត់ថ្នាក់រូបភាព (Classification) ទៅជាការទស្សន៍ទាយលេខ (Regression) សម្រាប់ទម្ងន់ត្រីវិញ។</li>
+            
+            <li><strong>៤. បង្វឹកម៉ូដែល និងវាយតម្លៃលទ្ធផលសុក្រឹតភាព:</strong> ប្រើប្រាស់ <span class="en">GPU</span> ឬ Google Colab ដើម្បីបង្វឹកម៉ូដែលជាមួយទិន្នន័យរូបភាពត្រីដែលបានប្រមូល រួចវាយតម្លៃភាពសុក្រឹតនៃម៉ូដែលដោយប្រើរង្វាស់ស្តង់ដារដូចជា <span class="en">RMSE</span> និង <span class="en">R²</span>។</li>
+            
+            <li><strong>៥. ដាក់ពង្រាយប្រព័ន្ធឱ្យដំណើរការជាក់ស្តែង (Model Deployment):</strong> សរសេរកម្មវិធីកុំព្យូទ័រដោយប្រើប្រាស់បណ្ណាល័យ <span class="en">OpenCV</span> ដើម្បីភ្ជាប់ជាមួយកាមេរ៉ាផ្ទាល់ និងអនុញ្ញាតឱ្យប្រព័ន្ធអាចទស្សន៍ទាយម៉ាសត្រីរស់ក្នុងពេលជាក់ស្តែង (Real-time) ដោយស្វ័យប្រវត្តិ។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Transfer learning (ការរៀនផ្ទេរចំណេះដឹង)</span></td>
+                <td>ជាបច្ចេកទេសក្នុងបញ្ញាសិប្បនិម្មិត (AI) ដែលគេយកម៉ូដែលដែលបានបង្វឹកនិងរៀនរួចរាល់ពីទិន្នន័យដ៏ធំមួយ (ឧទាហរណ៍ រូបភាពទូទៅ) មកកែច្នៃនិងបង្វឹកបន្តបន្តិចបន្តួច ដើម្បីដោះស្រាយបញ្ហាថ្មីមួយទៀត (ឧទាហរណ៍ ការប៉ាន់ស្មានទម្ងន់ត្រី) ដែលជួយសន្សំសំចៃពេលវេលានិងទិន្នន័យក្នុងការបង្វឹក។</td>
+                <td>ដូចជាមនុស្សដែលចេះជិះកង់រួចហើយ យកជំនាញទប់លំនឹងនោះទៅរៀនជិះម៉ូតូ ដោយមិនបាច់ចាប់ផ្តើមរៀនពីសូន្យ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Convolutional Neural Networks (បណ្ដាញសរសៃប្រសាទកុងវ៉ុល)</span></td>
+                <td>ជាប្រភេទម៉ូដែលបញ្ញាសិប្បនិម្មិតដ៏មានប្រសិទ្ធភាពបំផុតសម្រាប់ការវិភាគរូបភាព ដោយវាប្រើប្រាស់ស្រទាប់តម្រង (Filters) ជាច្រើនជាន់ដើម្បីទាញយកលក្ខណៈពិសេសៗពីរូបភាព ដូចជា គែម ទ្រង់ទ្រាយ និងលំនាំផ្សេងៗដោយស្វ័យប្រវត្តិ ដោយមិនចាំបាច់មានមនុស្សបញ្ជាប្រាប់។</td>
+                <td>ដូចជាភ្នែកនិងខួរក្បាលមនុស្សដែលសម្លឹងមើលវត្ថុមួយ ដោយផ្តើមពីការចាប់អារម្មណ៍លើវណ្ឌវង្កខាងក្រៅ រហូតដល់អាចចំណាំបានលម្អិតថាវាជារបស់អ្វីមួយច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">VGG-19 (ម៉ូដែល VGG-19)</span></td>
+                <td>ជាប្រភេទបណ្ដាញសរសៃប្រសាទកុងវ៉ុល (CNN) ដ៏ល្បីមួយនិងមានជម្រៅជ្រៅរហូតដល់ ១៩ ស្រទាប់ (Layers) ដែលមានសមត្ថភាពខ្ពស់ក្នុងការវិភាគលក្ខណៈលម្អិតៗនៃរូបភាព ប៉ុន្តែវាទាមទារកម្លាំងម៉ាស៊ីនកុំព្យូទ័រខ្លាំងដើម្បីដំណើរការ។</td>
+                <td>ដូចជាកែវពង្រីកដែលមានឡង់ទី ១៩ ជាន់ត្រួតស៊ីគ្នា ដែលជួយឱ្យយើងមើលឃើញភាពលម្អិតនៃវត្ថុមួយកាន់តែច្បាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Regression output layer (ស្រទាប់លទ្ធផលតំរែតំរង់)</span></td>
+                <td>ជាស្រទាប់ចុងក្រោយបង្អស់នៃបណ្ដាញសរសៃប្រសាទកុងវ៉ុល ដែលត្រូវបានកែច្នៃពីការប្រើសម្រាប់ធ្វើចំណាត់ថ្នាក់រូបភាព (ឧទាហរណ៍ ប្រាប់ថាជារូបត្រី ឬឆ្កែ) មកជាការទស្សន៍ទាយចេញជាតម្លៃលេខពិតប្រាកដ (ឧទាហរណ៍ ប្រាប់ថាត្រីមានទម្ងន់ ៣០០ ក្រាម)។</td>
+                <td>ដូចជាអ្នកជំនាញម្នាក់ដែលមិនត្រឹមតែអាចប្រាប់ថានេះជា "ផ្លែឪឡឹក" ទេ តែថែមទាំងអាចស្មានដឹងថាវាមានទម្ងន់ "៣ គីឡូក្រាម" ទៀតផង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Root Mean Square Error (កំហុសមធ្យមការ៉េឫស)</span></td>
+                <td>ជារង្វាស់គណិតវិទ្យាសម្រាប់វាយតម្លៃភាពសុក្រឹតនៃម៉ូដែលទស្សន៍ទាយ ដោយវាវាស់វែងពីគម្លាតរវាងតម្លៃដែលម៉ូដែលទស្សន៍ទាយបាន និងតម្លៃពិតប្រាកដជាក់ស្តែង តម្លៃ RMSE កាន់តែតូច បញ្ជាក់ថាម៉ូដែលកាន់តែមានភាពសុក្រឹតនិងត្រឹមត្រូវខ្ពស់។</td>
+                <td>ដូចជាការបាញ់ព្រួញទៅកាន់ផ្ទាំងស៊ីប បើគ្រាប់ព្រួញភាគច្រើនដោតចំក្បែរៗចំណុចកណ្តាល នោះកំហុស (RMSE) គឺមានទំហំតូច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Passive integrated transponder (បន្ទះឈីបបញ្ជូនសញ្ញាអកម្ម)</span></td>
+                <td>ហៅកាត់ថា PIT ជាបន្ទះឈីបអេឡិចត្រូនិចទំហំតូចដែលត្រូវបានចាក់បញ្ចូលទៅក្នុងខ្លួនត្រីនីមួយៗ ដើម្បីផ្ទុកលេខកូដសម្គាល់អត្តសញ្ញាណ (ID) ធ្វើឱ្យគេអាចតាមដានប្រវត្តិទម្ងន់ ការលូតលាស់ និងពូជអម្បូររបស់ត្រីមួយក្បាលៗបានយ៉ាងច្បាស់លាស់។</td>
+                <td>ដូចជាអត្តសញ្ញាណប័ណ្ណទំហំប៉ុនគ្រាប់អង្ករដែលផ្សាំក្នុងខ្លួនត្រី សម្រាប់ឱ្យម៉ាស៊ីនស្កេនដឹងថាត្រីនេះឈ្មោះអ្វីនិងមកពីពូជណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Fully connected layer (ស្រទាប់តភ្ជាប់ពេញលេញ)</span></td>
+                <td>ជាស្រទាប់នៅក្នុងបណ្ដាញសរសៃប្រសាទ ដែលតភ្ជាប់គ្រប់ណឺរ៉ូន (Neurons) ពីស្រទាប់មុនទៅកាន់ណឺរ៉ូននៃស្រទាប់បន្ទាប់ ដើម្បីប្រមូលផ្តុំរាល់ព័ត៌មានលក្ខណៈពិសេសៗដែលបានវិភាគរួចរាល់ យកមកធ្វើការសម្រេចចិត្តឬទស្សន៍ទាយលទ្ធផលចុងក្រោយ។</td>
+                <td>ដូចជាក្រុមប្រឹក្សាភិបាលដែលប្រមូលរបាយការណ៍សង្ខេបពីគ្រប់ផ្នែកទាំងអស់នៃក្រុមហ៊ុន ដើម្បីយកមកធ្វើការសម្រេចចិត្តរួមមួយចុងក្រោយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/deep-recurrent-convolutional-neural-networks-behavior-2015.html">
+                    <span class="km">បណ្ដាញសរសៃប្រសាទសិប្បនិម្មិត Recurrent និង Convolutional សម្រាប់ចំណាត់ថ្នាក់អាកប្បកិរិយាដោយស្វ័យប្រវត្តិ</span><br>
+                    <span class="en article-original-title">Deep Recurrent and Convolutional Neural Networks for Automated Behavior Classification</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/automated-microbial-classification-cnn-2025.html">
+                    <span class="km">ការចាត់ថ្នាក់មេរោគដោយស្វ័យប្រវត្តិពីរូបភាពមីក្រូទស្សន៍ ដោយប្រើបណ្តាញសរសៃប្រសាទខនវ៉ូលូសិន (Convolutional Neural Networks)</span><br>
+                    <span class="en article-original-title">Automated Microbial Classification from Microscopy Images Using Convolutional Neural Networks</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/agriculture/rgb-vegetation-indices-cnn-jalapeno-virus-2021.html">
+                    <span class="km">ការវិភាគសន្ទស្សន៍រុក្ខជាតិ RGB ថ្មីសម្រាប់ការកំណត់អត្តសញ្ញាណវីរុស PHYVV និង TMV លើស្លឹកម្ទេស (Capsicum annuum) ដោយប្រើប្រាស់ម៉ូដែលផ្អែកលើបណ្ដាញសរសៃប្រសាទកាឡៃ (CNNs)</span><br>
+                    <span class="en article-original-title">Analysis of New RGB Vegetation Indices for PHYVV and TMV Identification in Jalapeño Pepper (Capsicum annuum) Leaves Using CNNs-Based Model</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/landslide-prediction-transfer-learning-vaegan-2023.html">
+                    <span class="km">ការរៀនផ្ទេរ (Transfer Learning) ជាមួយនឹងលក្ខណៈសម្បត្តិដើម្បីកែលម្អប្រសិទ្ធភាពនៃការការព្យាករណ៍លំហនៃការបាក់ដីនៅតំបន់ខ្វះខាតគំរូ ដោយផ្អែកលើបណ្តាញ Variational Autoencoder Generative Adversarial</span><br>
+                    <span class="en article-original-title">Transfer learning with attributes for improving the landslide spatial prediction performance in sample-scarce area based on variational autoencoder generative adversarial network</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/transfer-learning-impact-deep-learning-2025.html">
+                    <span class="km">ការវាយតម្លៃលើឥទ្ធិពលនៃការរៀនផ្ទេរ (Transfer Learning) ទៅលើការរៀនស៊ីជម្រៅ (Deep Learning) សម្រាប់ការសម្គាល់រូបភាព និងដំណើរការភាសាធម្មជាតិ</span><br>
+                    <span class="en article-original-title">Assessing Transfer Learning's Impact on Deep Learning for Image Recognition and Natural Language Processing</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=computer+vision+fish+mass+estimation+aquaculture+deep+learning" target="_blank" rel="noopener"><span class="en">computer vision fish mass estimation aquaculture deep learning</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=transfer+learning+VGG-19+regression+analysis+image+processing" target="_blank" rel="noopener"><span class="en">transfer learning VGG-19 regression analysis image processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=non-destructive+morphological+trait+measurement+fish+deep+neural+networks" target="_blank" rel="noopener"><span class="en">non-destructive morphological trait measurement fish deep neural networks</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=3D+imaging+stereovision+fish+mass+estimation+volume+calculation" target="_blank" rel="noopener"><span class="en">3D imaging stereovision fish mass estimation volume calculation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=SegNet+body+area+segmentation+vs+direct+CNN+regression+fish+weight" target="_blank" rel="noopener"><span class="en">SegNet body area segmentation vs direct CNN regression fish weight</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>About &amp; Legal</strong>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com | <a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a></p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
