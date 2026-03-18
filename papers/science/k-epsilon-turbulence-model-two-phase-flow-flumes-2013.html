@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ម៉ូដែលលំហូរកួច k-ε ដើម្បីធ្វើត្រាប់តាមលំហូរទ្វេតំណាក់កាលនៃអង្គធាតុរាវក្នុងប្រឡាយ ដោយប្រើប្រាស់កូដចំហ C++ នៃកម្មវិធីឌីណាមិចលំហូរអង្គធាតុរាវដោយកុំព្យូទ័រ - The k-ε Turbulence Model to Simulate the Two-Phase Flows of Fluids in Flumes ... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ម៉ូដែលលំហូរកួច k-ε ដើម្បីធ្វើត្រាប់តាមលំហូរទ្វេតំណាក់កាលនៃអង។ ការសិក្សានេះដោះស្រាយលើបញ្ហានៃការសិក្សាទម្រង់ផ្ទៃទឹកហូរឆ្លងកាត់ទំនប់ក្នុងប្រឡាយ (Flumes) ដើម្បីកែល...">
+    
+    <meta name="keywords" content="CFD, turbulence modeling, VOF method, OpenFOAM, flumes, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/k-epsilon-turbulence-model-two-phase-flow-flumes-2013.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/science/k-epsilon-turbulence-model-two-phase-flow-flumes-2013.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/science/k-epsilon-turbulence-model-two-phase-flow-flumes-2013.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/k-epsilon-turbulence-model-two-phase-flow-flumes-2013.html">
+    <meta property="og:title" content="ម៉ូដែលលំហូរកួច k-ε ដើម្បីធ្វើត្រាប់តាមលំហូរទ្វេតំណាក់កាលនៃអង្គធាតុរាវក្នុងប្រឡាយ ដោយប្រើប្រាស់កូដចំហ C++ នៃកម្មវិធីឌីណាមិចលំហូរអង្គធាតុរាវដោយកុំព្យូទ័រ | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយលើបញ្ហានៃការសិក្សាទម្រង់ផ្ទៃទឹកហូរឆ្លងកាត់ទំនប់ក្នុងប្រឡាយ (Flumes) ដើម្បីកែលម្អការរចនាទម្រង់ទំនប់ និងវាស់ស្ទង់រចនាសម្ព័ន្ធលំហូរទឹកឱ្យបានត្រឹមត្រូវដោយប្រើម៉ូដែលកុំព្យូទ័រ។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2013 Kasetsart J. (Nat. Sci.)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="CFD">
+    
+    <meta property="article:tag" content="turbulence modeling">
+    
+    <meta property="article:tag" content="VOF method">
+    
+    <meta property="article:tag" content="OpenFOAM">
+    
+    <meta property="article:tag" content="flumes">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ម៉ូដែលលំហូរកួច k-ε ដើម្បីធ្វើត្រាប់តាមលំហូរទ្វេតំណាក់កាលនៃអង្គធាតុរាវក្នុងប្រឡាយ ដោយប្រើប្រាស់កូដចំហ C++ នៃកម្មវិធីឌីណាមិចលំហូរអង្គធាតុរាវដោយកុំព្យូទ័រ">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយលើបញ្ហានៃការសិក្សាទម្រង់ផ្ទៃទឹកហូរឆ្លងកាត់ទំនប់ក្នុងប្រឡាយ (Flumes) ដើម្បីកែលម្អការរចនាទម្រង់ទំនប់ និងវាស់ស្ទង់រចនាសម្ព័ន្ធលំហូរទឹកឱ្យបានត្រឹមត្រូវដោយប្រើម៉ូដែលកុំព្យូទ័រ។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179b\u17c6\u17a0\u17bc\u179a\u1780\u17bd\u1785 k-\u03b5 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1792\u17d2\u179c\u17be\u178f\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17b6\u1798\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17d2\u179c\u17c1\u178f\u17c6\u178e\u17b6\u1780\u17cb\u1780\u17b6\u179b\u1793\u17c3\u17a2\u1784\u17d2\u1782\u1792\u17b6\u178f\u17bb\u179a\u17b6\u179c\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u17a1\u17b6\u1799 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17bc\u178a\u1785\u17c6\u17a0 C++ \u1793\u17c3\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u178c\u17b8\u178e\u17b6\u1798\u17b7\u1785\u179b\u17c6\u17a0\u17bc\u179a\u17a2\u1784\u17d2\u1782\u1792\u17b6\u178f\u17bb\u179a\u17b6\u179c\u178a\u17c4\u1799\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a",
+      "name": "The k-\u03b5 Turbulence Model to Simulate the Two-Phase Flows of Fluids in Flumes using C++ Open Source Code Computational Fluid Dynamic Software",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u179b\u17be\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb\u1795\u17d2\u1791\u17c3\u1791\u17b9\u1780\u17a0\u17bc\u179a\u1786\u17d2\u179b\u1784\u1780\u17b6\u178f\u17cb\u1791\u17c6\u1793\u1794\u17cb\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u17a1\u17b6\u1799 (Flumes) \u178a\u17be\u1798\u17d2\u1794\u17b8\u1780\u17c2\u179b\u1798\u17d2\u17a2\u1780\u17b6\u179a\u179a\u1785\u1793\u17b6\u1791\u1798\u17d2\u179a\u1784\u17cb\u1791\u17c6\u1793\u1794\u17cb \u1793\u17b7\u1784\u179c\u17b6\u179f\u17cb\u179f\u17d2\u1791\u1784\u17cb\u179a\u1785\u1793\u17b6\u179f\u1798\u17d2\u1796\u17d0\u1793\u17d2\u1792\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17b9\u1780\u17b1\u17d2\u1799\u1794\u17b6\u1793\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1798\u17c9\u17bc\u178a\u17c2\u179b\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/k-epsilon-turbulence-model-two-phase-flow-flumes-2013.html",
+      "author": [{"@type": "Person", "name": "Ekachai Chaichanasiri (Department of Mechanical Engineering, Mahidol University)"},{"@type": "Person", "name": "Chakrit Suvanjumrat (Department of Mechanical Engineering, Mahidol University)"}],
+      "datePublished": "2013 Kasetsart J. (Nat. Sci.)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "The k-\u03b5 Turbulence Model to Simulate the Two-Phase Flows of Fluids in Flumes using C++ Open Source Code Computational Fluid Dynamic Software",
+        "url": "https://li01.tci-thaijo.org/index.php/anres/article/view/243087"
+      },
+      "keywords": ["CFD", "turbulence modeling", "VOF method", "OpenFOAM", "flumes"],
+      "about": "Computational Fluid Dynamics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179b\u17c6\u17a0\u17bc\u179a\u1780\u17bd\u1785 k-\u03b5 \u178a\u17be\u1798\u17d2\u1794\u17b8\u1792\u17d2\u179c\u17be\u178f\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17b6\u1798\u179b\u17c6\u17a0\u17bc\u179a\u1791\u17d2\u179c\u17c1\u178f\u17c6\u178e\u17b6\u1780\u17cb\u1780\u17b6\u179b\u1793\u17c3\u17a2\u1784\u17d2\u1782\u1792\u17b6\u178f\u17bb\u179a\u17b6\u179c\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u17a1\u17b6\u1799 \u178a\u17c4\u1799\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1780\u17bc\u178a\u1785\u17c6\u17a0 C++ \u1793\u17c3\u1780\u1798\u17d2\u1798\u179c\u17b7\u1792\u17b8\u178c\u17b8\u178e\u17b6\u1798\u17b7\u1785\u179b\u17c6\u17a0\u17bc\u179a\u17a2\u1784\u17d2\u1782\u1792\u17b6\u178f\u17bb\u179a\u17b6\u179c\u178a\u17c4\u1799\u1780\u17bb\u17c6\u1796\u17d2\u1799\u17bc\u1791\u17d0\u179a",
+          "item": "https://khmerresearch.com/papers/science/k-epsilon-turbulence-model-two-phase-flow-flumes-2013.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ម៉ូដែលលំហូរកួច k-ε ដើម្បីធ្វើត្រាប់តាមលំហូរទ្វេតំណាក់កាលនៃអង...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> The k-ε Turbulence Model to Simulate the Two-Phase Flows of Fluids in Flumes using C++ Open Source Code Computational Fluid Dynamic Software<br>
+        
+        <strong>Source:</strong> <a href="https://li01.tci-thaijo.org/index.php/anres/article/view/243087" target="_blank" rel="noopener">li01.tci-thaijo.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ម៉ូដែលលំហូរកួច k-ε ដើម្បីធ្វើត្រាប់តាមលំហូរទ្វេតំណាក់កាលនៃអង្គធាតុរាវក្នុងប្រឡាយ ដោយប្រើប្រាស់កូដចំហ C++ នៃកម្មវិធីឌីណាមិចលំហូរអង្គធាតុរាវដោយកុំព្យូទ័រ</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> The k-ε Turbulence Model to Simulate the Two-Phase Flows of Fluids in Flumes using C++ Open Source Code Computational Fluid Dynamic Software</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Ekachai Chaichanasiri (Department of Mechanical Engineering, Mahidol University), Chakrit Suvanjumrat (Department of Mechanical Engineering, Mahidol University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2013 Kasetsart J. (Nat. Sci.)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Computational Fluid Dynamics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយលើបញ្ហានៃការសិក្សាទម្រង់ផ្ទៃទឹកហូរឆ្លងកាត់ទំនប់ក្នុងប្រឡាយ (Flumes) ដើម្បីកែលម្អការរចនាទម្រង់ទំនប់ និងវាស់ស្ទង់រចនាសម្ព័ន្ធលំហូរទឹកឱ្យបានត្រឹមត្រូវដោយប្រើម៉ូដែលកុំព្យូទ័រ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការស្រាវជ្រាវនេះបានអភិវឌ្ឍសមីការសម្រាប់លំហូរពីរដំណាក់កាលដោយផ្អែកលើម៉ូដែលលំហូរកួច k-ε ដោយប្រើប្រាស់កម្មវិធីកូដចំហ OpenFOAM ព្រមទាំងផ្ទៀងផ្ទាត់លទ្ធផលជាមួយនឹងការពិសោធន៍ជាក់ស្តែងលើទំនប់រាងចតុកោណ និងត្រីកោណ។
+        
+        <ul>
+            
+            <li>ម៉ូដែលលំហូរកួច k-ε (k-ε Turbulence Model)</li>
+            
+            <li>វិធីសាស្ត្របរិមាណអង្គធាតុរាវ (Volume of Fluid - VOF Method)</li>
+            
+            <li>អាល់កូរីត PISO សម្រាប់ដោះស្រាយសម្ពាធនិងល្បឿន (PISO Algorithm)</li>
+            
+            <li>ការធ្វើត្រាប់តាមដោយប្រើកម្មវិធី C++ OpenFOAM (OpenFOAM Simulation)</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ការធ្វើត្រាប់តាមតាមរយៈ CFD អាចទស្សន៍ទាយយ៉ាងត្រឹមត្រូវនូវទម្រង់ផ្ទៃទឹកនៃលំហូរផ្នែកខាងលើ និងពន្យល់ពីអាកប្បកិរិយាស្មុគស្មាញនៃផ្ទៃទឹកឆ្លងកាត់ទំនប់រាងចតុកោណ និងត្រីកោណ។</li>
+            
+            <li>កំហុសមធ្យមនៃទម្រង់ផ្ទៃទឹកក្នុងការធ្វើត្រាប់តាមសម្រាប់រយៈពេលប្រែប្រួល (Transient period) គឺ 8.94% បើធៀបនឹងការពិសោធន៍ជាក់ស្តែង។</li>
+            
+            <li>សម្រាប់រយៈពេលថេរ (Steady period) កំហុសមធ្យមមានកម្រិតទាបជាងត្រឹមតែ 8.06% ដែលបញ្ជាក់ថាកូដដែលបានបង្កើតអាចប្រើប្រាស់សម្រាប់ការរចនាទំនប់ និងវាស់ស្ទង់លំហូរទឹកប្រកបដោយភាពត្រឹមត្រូវខ្ពស់។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">CFD Simulation (k-ε model via OpenFOAM)</span></strong><br>ការធ្វើត្រាប់តាម CFD (ម៉ូដែល k-ε តាមរយៈ OpenFOAM)</td>
+                <td>ចំណាយតិចដោយប្រើប្រាស់កម្មវិធីកូដចំហ (Open Source) និងអាចពន្យល់ពីរចនាសម្ព័ន្ធលំហូរកួច និងអាកប្បកិរិយាស្មុគស្មាញនៃលំហូរទឹកបានយ៉ាងលម្អិត។</td>
+                <td>ត្រូវការជំនាញសរសេរកូដ C++ ខ្ពស់ ការយល់ដឹងពីគណិតវិទ្យា CFD និងម៉ាស៊ីនកុំព្យូទ័រដែលមានសមត្ថភាពគណនាខ្លាំង។</td>
+                <td>ទទួលបានកំហុសមធ្យមនៃទម្រង់ផ្ទៃទឹកត្រឹមតែ 8.94% ក្នុងអំឡុងពេលប្រែប្រួល និង 8.06% ក្នុងអំឡុងពេលថេរ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Experimental Laboratory Flume</span></strong><br>ការពិសោធន៍ជាក់ស្តែងក្នុងប្រឡាយមន្ទីរពិសោធន៍</td>
+                <td>ផ្តល់ទិន្នន័យពិតប្រាកដ និងជាក់ស្តែងសម្រាប់ការផ្ទៀងផ្ទាត់ (Validation) ជាមួយនឹងលទ្ធផលពីកុំព្យូទ័រ។</td>
+                <td>ទាមទារការចំណាយច្រើនលើការរៀបចំឧបករណ៍រូបវន្ត (កាមេរ៉ា ក្បាលបូម ធុងវាស់) និងមានការលំបាកក្នុងការវាស់ស្ទង់បាតុភូតទឹកកួចផ្ទៃក្នុង។</td>
+                <td>ត្រូវបានប្រើជាទិន្នន័យគោល (Baseline) ដោយចាប់យករូបភាពទម្រង់ផ្ទៃទឹក និងការបែកធ្លាយនៃរលកទឹកបានយ៉ាងច្បាស់លាស់។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះពឹងផ្អែកលើកម្មវិធីកូដចំហដែលជួយកាត់បន្ថយការចំណាយលើអាជ្ញាប័ណ្ណកម្មវិធីពាណិជ្ជកម្មបានយ៉ាងច្រើន ប៉ុន្តែនៅតែទាមទារឧបករណ៍ពិសោធន៍ និងកុំព្យូទ័រដែលមានកម្លាំងគណនា។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កម្មវិធីកូដចំហ <span class="en">OpenFOAM</span> និងកម្មវិធី <span class="en">SloshDetector</span> សម្រាប់ការវិភាគរូបភាពផ្ទៃទឹកពីការពិសោធន៍។</li>
+        
+        <li><strong>Expertise:</strong> ជំនាញផ្នែក <span class="en">Computational Fluid Dynamics (CFD)</span> និងការសរសេរកូដភាសា <span class="en">C++</span> សម្រាប់បង្កើត Utility សម្រាប់ការដោះស្រាយសមីការ។</li>
+        
+        <li><strong>Hardware:</strong> កាមេរ៉ា <span class="en">CCD (60 fps)</span> សម្រាប់ថតរូបភាពលំហូរ និងកុំព្យូទ័រដែលមានសមត្ថភាពគណនា (<span class="en">Computational power</span>) សម្រាប់ដោះស្រាយក្រឡាចត្រង្គជាង 32,000 cells។</li>
+        
+        <li><strong>Physical Setup:</strong> ប្រឡាយពិសោធន៍ (Flume) ខ្នាតតូចទំហំ 2,500 x 55 x 175 mm និងទំនប់ (Weirs) រាងចតុកោណ និងត្រីកោណ។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះត្រូវបានធ្វើឡើងក្នុងមន្ទីរពិសោធន៍ខ្នាតតូច ជាមួយនឹងលំហូរទឹកថេរដែលត្រូវបានគ្រប់គ្រងដោយឧបករណ៍នៅសាកលវិទ្យាល័យ Mahidol ប្រទេសថៃ។ ទិន្នន័យនេះមិនបានឆ្លុះបញ្ចាំងពីលក្ខខណ្ឌស្មុគស្មាញនៃប្រព័ន្ធធារាសាស្ត្រធម្មជាតិ (ដូចជាកាកសំណល់ បាតទន្លេមិនរាបស្មើ ឬបម្រែបម្រួលអាកាសធាតុ) នោះទេ ប៉ុន្តែវាជាមូលដ្ឋានដ៏ល្អសម្រាប់និស្សិតកម្ពុជាក្នុងការសិក្សាពីគោលការណ៍គ្រឹះនៃការរចនាទំនប់ទឹក។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសារៈសំខាន់ខ្លាំងណាស់សម្រាប់កម្ពុជា ពិសេសក្នុងការអភិវឌ្ឍប្រព័ន្ធធារាសាស្ត្រដោយចំណាយតិចតាមរយៈការប្រើប្រាស់កម្មវិធីកូដចំហ។</p>
+        
+        <ul>
+            
+            <li><strong>វិស័យកសិកម្ម និងធារាសាស្ត្រ (ខេត្តបាត់ដំបង និងតាកែវ):</strong> អាចប្រើដើម្បីរចនាទំនប់បង្ហូរទឹក (Broad-crested weirs) ក្នុងប្រឡាយទឹកកសិកម្ម ដើម្បីវាស់ស្ទង់ និងគ្រប់គ្រងបរិមាណលំហូរទឹកឱ្យបានត្រឹមត្រូវសម្រាប់ការស្រោចស្រព។</li>
+            
+            <li><strong>ការគ្រប់គ្រងធនធានទឹក (អាជ្ញាធរទន្លេសាប និងក្រសួងធនធានទឹក):</strong> ជួយដល់វិស្វករកម្ពុជាក្នុងការធ្វើត្រាប់តាមលំហូរទឹក និងព្យាករណ៍ពីផលប៉ះពាល់នៃលំហូរកួចនៅតំបន់ទ្វារទឹកនានានៅរដូវវស្សា។</li>
+            
+            <li><strong>ការអប់រំនៅសាកលវិទ្យាល័យ (ឧ. វិទ្យាស្ថានបច្ចេកវិទ្យាកម្ពុជា - ITC):</strong> ផ្តល់លទ្ធភាពដល់និស្សិតវិស្វកម្មក្នុងការស្រាវជ្រាវលើជំនាញ <span class="en">CFD</span> ដោយមិនចាំបាច់ប្រើប្រាស់ថវិកាធំសម្រាប់ទិញកម្មវិធីពាណិជ្ជកម្មថ្លៃៗ។</li>
+            
+        </ul>
+        
+        
+        <p>ការប្រើប្រាស់ <span class="en">OpenFOAM</span> ផ្តល់ឱកាសឱ្យវិស្វករកម្ពុជាអាចរចនា កែលម្អ និងវាយតម្លៃរចនាសម្ព័ន្ធធារាសាស្ត្រប្រកបដោយប្រសិទ្ធភាពខ្ពស់ និងចំណាយថវិកាតិចតួចបំផុត។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>១. សិក្សាមូលដ្ឋានគ្រឹះនៃលំហូរអង្គធាតុរាវ និង CFD:</strong> ស្វែងយល់ពីសមីការ <span class="en">Navier-Stokes</span> ទ្រឹស្តី <span class="en">k-ε turbulence model</span> និងវិធីសាស្ត្រ <span class="en">Volume of Fluid (VOF)</span> ដែលប្រើប្រាស់សម្រាប់គណនាលំហូរពីរដំណាក់កាល (ទឹក និងខ្យល់) តាមរយៈឯកសារ ឬវគ្គសិក្សាអនឡាញ។</li>
+            
+            <li><strong>២. ដំឡើង និងស្វែងយល់ពីកម្មវិធី OpenFOAM:</strong> ដំឡើងប្រព័ន្ធប្រតិបត្តិការ <span class="en">Linux</span> ឬ <span class="en">Ubuntu on Windows (WSL)</span> បន្ទាប់មកដំឡើងកម្មវិធី <span class="en">OpenFOAM</span> ព្រមទាំងរៀនពីរបៀបសរសេរកូដ <span class="en">C++</span> ជាមូលដ្ឋានដើម្បីកែប្រែ Solvers តាមតម្រូវការរបស់អ្នក។</li>
+            
+            <li><strong>៣. បង្កើតសំណាញ់រចនាសម្ព័ន្ធ (Meshing):</strong> រៀនប្រើប្រាស់ឧបករណ៍នៅក្នុង <span class="en">OpenFOAM</span> ដូចជា <span class="en">blockMesh</span> ដើម្បីបង្កើតក្រឡាចត្រង្គ (Cells) សម្រាប់ធ្វើត្រាប់តាមទម្រង់ប្រឡាយ និងទំនប់ (Weirs)។ ត្រូវប្រាកដថាប្រើប្រាស់សំណាញ់ក្រាស់នៅតំបន់ជិតទំនប់។</li>
+            
+            <li><strong>៤. កំណត់លក្ខខណ្ឌព្រំដែន និងដំណើរការ Simulation:</strong> កំណត់លក្ខខណ្ឌព្រំដែន (Boundary conditions) ដូចជាល្បឿនទឹកចូល និងសម្ពាធ រួចប្រើប្រាស់ <span class="en">PISO algorithm</span> ដើម្បីដោះស្រាយការផ្សារភ្ជាប់សម្ពាធនិងល្បឿន បន្ទាប់មកដំណើរការការធ្វើត្រាប់តាមក្នុងមុខងារ Transient និង Steady state។</li>
+            
+            <li><strong>៥. ប្រៀបធៀប និងផ្ទៀងផ្ទាត់លទ្ធផល (Validation):</strong> ស្រង់យកលទ្ធផលក្រាហ្វិកនៃទម្រង់ផ្ទៃទឹកពីកម្មវិធី <span class="en">ParaView</span> រួចយកទៅប្រៀបធៀបជាមួយទិន្នន័យជាក់ស្តែងដែលប្រមូលបានពីប្រឡាយទឹកដោយប្រើកម្មវិធីដូចជា <span class="en">SloshDetector</span> ដើម្បីគណនាភាគរយកំហុស (Error percentage)។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">k-ε Turbulence Model (ម៉ូដែលលំហូរកួច k-ε)</span></td>
+                <td>ម៉ូដែលគណិតវិទ្យាដែលប្រើក្នុងវិទ្យាសាស្ត្រ CFD ដើម្បីទស្សន៍ទាយលក្ខណៈស្មុគស្មាញនៃលំហូរទឹកកួចដោយប្រើប្រាស់អថេរពីរគឺ ថាមពលស៊ីនេទិចកួច (k) និងអត្រានៃការរលាយថាមពលកួច (ε)។</td>
+                <td>វាដូចជាការប្រើរូបមន្តគណិតវិទ្យាដើម្បីទាយមើលថាតើទឹកនឹងខ្ទាតឬកួចវិលយ៉ាងដូចម្តេចនៅពេលវាបុកនឹងឧបសគ្គ (ដូចជាផ្ទាំងថ្ម ឬទំនប់)។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Computational Fluid Dynamics / CFD (ឌីណាមិចលំហូរអង្គធាតុរាវដោយកុំព្យូទ័រ)</span></td>
+                <td>ការប្រើប្រាស់កុំព្យូទ័រ និងសមីការគណិតវិទ្យាដើម្បីធ្វើត្រាប់តាម និងវិភាគពីរបៀបដែលអង្គធាតុរាវ (ទឹក ខ្យល់) ហូរឆ្លងកាត់ ឬជុំវិញវត្ថុផ្សេងៗ។</td>
+                <td>វាដូចជាការបង្កើតទន្លេ ឬប្រឡាយនិម្មិតនៅក្នុងកុំព្យូទ័រ ដើម្បីមើលការហូររបស់ទឹកដោយមិនបាច់ចំណាយលុយសាងសង់ប្រឡាយពិតប្រាកដ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Volume of Fluid method / VOF (វិធីសាស្ត្របរិមាណអង្គធាតុរាវ)</span></td>
+                <td>បច្ចេកទេសក្នុងម៉ូដែលកុំព្យូទ័រសម្រាប់តាមដាន និងកំណត់ទីតាំងព្រំប្រទល់រវាងអង្គធាតុរាវពីរប្រភេទផ្សេងគ្នា (ឧទាហរណ៍ ផ្ទៃទំនាក់ទំនងរវាងទឹកនិងខ្យល់) នៅក្នុងលំហូរទ្វេតំណាក់កាល។</td>
+                <td>វាដូចជាការគូសបន្ទាត់ព្រំដែនដាច់ដោយឡែករវាងស្រទាប់ប្រេង និងទឹកនៅក្នុងកែវមួយ ដើម្បីដឹងច្បាស់ថាទឹកនៅត្រង់ណា ហើយខ្យល់នៅត្រង់ណា។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">OpenFOAM (កម្មវិធីកូដចំហ OpenFOAM)</span></td>
+                <td>កម្មវិធីកុំព្យូទ័រកូដចំហ (Open Source) ឥតគិតថ្លៃដែលប្រើភាសា C++ សម្រាប់ដោះស្រាយចំណោទស្មុគស្មាញទាក់ទងនឹងលំហូរអង្គធាតុរាវ និងបាតុភូតរូបវិទ្យាផ្សេងៗ។</td>
+                <td>វាដូចជាប្រអប់ឧបករណ៍ជាង (Toolbox) ឥតគិតថ្លៃដ៏ធំមួយ ដែលអនុញ្ញាតឱ្យវិស្វករយកទៅសាងសង់ និងពិសោធន៍ម៉ូដែលទឹកហូរក្នុងកុំព្យូទ័រ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">PISO algorithm (អាល់កូរីត PISO)</span></td>
+                <td>នីតិវិធីនៃការគណនាមួយ (Pressure Implicit with Splitting of Operator) ដែលប្រើសម្រាប់ដោះស្រាយសមីការផ្សារភ្ជាប់គ្នារវាងសម្ពាធ និងល្បឿនរបស់លំហូរទឹកក្នុងរយៈពេលដែលកំពុងប្រែប្រួល (transient)។</td>
+                <td>វាជាវិធីសាស្ត្រគណនាដែលជួយកុំព្យូទ័រទាយកែតម្រូវល្បឿន និងកម្លាំងរុញរបស់ទឹកម្តងបន្តិចៗសាជាថ្មីរហូតដល់ទទួលបានលទ្ធផលត្រឹមត្រូវបំផុត។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Finite Volume Method / FVM (វិធីសាស្ត្រមាឌកំណត់)</span></td>
+                <td>វិធីសាស្ត្របំបែកលំហនៃការគណនា (ឧទាហរណ៍ ប្រឡាយទឹកទាំងមូល) ទៅជាប្រអប់តូចៗ (Cells) រាប់ពាន់ដើម្បីងាយស្រួលក្នុងការដោះស្រាយសមីការរូបវិទ្យានៅក្នុងប្រអប់នីមួយៗ រួចបូកបញ្ចូលគ្នា។</td>
+                <td>វាដូចជាការកាត់នំខេកមួយដុំធំទៅជាចំណិតតូចៗរាប់ពាន់ ដើម្បីងាយស្រួលគណនាថាតើមានជាតិស្ករកម្រិតណានៅក្នុងចំណិតនីមួយៗ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Transient time period (រយៈពេលប្រែប្រួល)</span></td>
+                <td>ដំណាក់កាលនៃពេលវេលាដែលលក្ខណៈរបស់លំហូរទឹក (ដូចជាល្បឿន កម្ពស់ផ្ទៃទឹក) កំពុងតែផ្លាស់ប្តូរ និងមិនទាន់ឈានដល់សភាពនឹងនរ (Steady state) នៅឡើយ។</td>
+                <td>វាដូចជាចន្លោះពេលដែលយើងទើបតែបើកក្បាលរ៉ូប៊ីណេទឹកភ្លាមៗ ដែលទឹកកំពុងតែបាញ់ចេញ និងប្រែប្រួលរូបរាង មុនពេលវាហូរស្មើល្អ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Flume (ប្រឡាយពិសោធន៍)</span></td>
+                <td>ប្រឡាយសិប្បនិម្មិត ឬរចនាសម្ព័ន្ធបើកចំហដែលត្រូវបានសាងសង់ឡើងជាពិសេសនៅក្នុងមន្ទីរពិសោធន៍ ដើម្បីបង្ខំឱ្យទឹកហូរតាមលក្ខខណ្ឌកំណត់ណាមួយ និងសិក្សាពីលក្ខណៈរូបវិទ្យារបស់វា។</td>
+                <td>វាដូចជាអាងទឹកឬប្រឡាយតូចមួយធ្វើពីកញ្ចក់ ដែលអ្នកវិទ្យាសាស្ត្រប្រើសម្រាប់បង្ហូរទឹកមើល និងថតវីដេអូដើម្បីសិក្សាពីចលនារបស់រលកទឹក។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/science/cfd-simulation-batch-baking-2008.html">
+                    <span class="km">ការក្លែងធ្វើសក្ដានុពលនៃអង្គធាតុរាវតាមប្រព័ន្ធកុំព្យូទ័រ (CFD) លើទម្រង់សីតុណ្ហភាពកំឡុងពេលដុតនំប៉័ងជាបាច់</span><br>
+                    <span class="en article-original-title">Computational Fluid Dynamics Simulation of Temperature Profiles during Batch Baking</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=k-epsilon+turbulence+model%22+%22two-phase+flow%22+OpenFOAM+weir+simulation" target="_blank" rel="noopener"><span class="en">k-epsilon turbulence model" "two-phase flow" OpenFOAM weir simulation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Volume+of+Fluid+method%22+free+surface+flow+open-channel+CFD" target="_blank" rel="noopener"><span class="en">Volume of Fluid method" free surface flow open-channel CFD</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=PISO+algorithm%22+pressure-velocity+coupling+transient+flow+computation" target="_blank" rel="noopener"><span class="en">PISO algorithm" pressure-velocity coupling transient flow computation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=3D+CFD+simulation+broad-crested+weir+OpenFOAM+surface+profile+validation" target="_blank" rel="noopener"><span class="en">3D CFD simulation broad-crested weir OpenFOAM surface profile validation</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=computational+fluid+dynamics+flume+flow+measurement+weir+design+optimization" target="_blank" rel="noopener"><span class="en">computational fluid dynamics flume flow measurement weir design optimization</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>About &amp; Legal</strong>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com | <a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a></p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
