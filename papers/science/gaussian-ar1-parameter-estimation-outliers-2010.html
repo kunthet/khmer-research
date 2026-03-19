@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>ការធ្វើឱ្យប្រសើរឡើងនូវការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរការ Gaussian AR(1) ដែលមានបម្រែបម្រួលមិនស្គាល់ និងទិន្នន័យខុសប្រក្រតីបូកបញ្ចូល៖ ការសិក្សាតាមរយៈការធ្វើត្រាប់តាម - Improvement in Parameter Estimation for a Gaussian AR(1) Process with an Unkn... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី ការធ្វើឱ្យប្រសើរឡើងនូវការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរ។ ទិន្នន័យស៊េរីពេលវេលា (Time series) តែងតែរងផលប៉ះពាល់ដោយទិន្នន័យខុសប្រក្រតី (Outliers) ដែលធ្វើឱ្យកា...">
+    
+    <meta name="keywords" content="parameter estimation, AR(1) process, recursive median, winsorized mean, additive outliers, mean square error, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/science/gaussian-ar1-parameter-estimation-outliers-2010.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/science/gaussian-ar1-parameter-estimation-outliers-2010.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/science/gaussian-ar1-parameter-estimation-outliers-2010.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/science/gaussian-ar1-parameter-estimation-outliers-2010.html">
+    <meta property="og:title" content="ការធ្វើឱ្យប្រសើរឡើងនូវការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរការ Gaussian AR(1) ដែលមានបម្រែបម្រួលមិនស្គាល់ និងទិន្នន័យខុសប្រក្រតីបូកបញ្ចូល៖ ការសិក្សាតាមរយៈការធ្វើត្រាប់តាម | KhmerResearch.com">
+    <meta property="og:description" content="ទិន្នន័យស៊េរីពេលវេលា (Time series) តែងតែរងផលប៉ះពាល់ដោយទិន្នន័យខុសប្រក្រតី (Outliers) ដែលធ្វើឱ្យការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរការ Gaussian AR(1) មានភាពលំអៀង និងមិនច្បាស់លាស់។ ការសិក្សានេះដោះ...">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2010 Kasetsart J. (Nat. Sci.)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="parameter estimation">
+    
+    <meta property="article:tag" content="AR(1) process">
+    
+    <meta property="article:tag" content="recursive median">
+    
+    <meta property="article:tag" content="winsorized mean">
+    
+    <meta property="article:tag" content="additive outliers">
+    
+    <meta property="article:tag" content="mean square error">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="ការធ្វើឱ្យប្រសើរឡើងនូវការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរការ Gaussian AR(1) ដែលមានបម្រែបម្រួលមិនស្គាល់ និងទិន្នន័យខុសប្រក្រតីបូកបញ្ចូល៖ ការសិក្សាតាមរយៈការធ្វើត្រាប់តាម">
+    <meta name="twitter:description" content="ទិន្នន័យស៊េរីពេលវេលា (Time series) តែងតែរងផលប៉ះពាល់ដោយទិន្នន័យខុសប្រក្រតី (Outliers) ដែលធ្វើឱ្យការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរការ Gaussian AR(1) មានភាពលំអៀង និងមិនច្បាស់លាស់។ ការសិក្សានេះដោះ...">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u17a1\u17be\u1784\u1793\u17bc\u179c\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u1794\u17d2\u179a\u1798\u17b6\u178e\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a Gaussian AR(1) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u1798\u17b7\u1793\u179f\u17d2\u1782\u17b6\u179b\u17cb \u1793\u17b7\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1781\u17bb\u179f\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u1794\u17bc\u1780\u1794\u1789\u17d2\u1785\u17bc\u179b\u17d6 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u178f\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17b6\u1798",
+      "name": "Improvement in Parameter Estimation for a Gaussian AR(1) Process with an Unknown Drift and Additive Outliers: A Simulation Study",
+      "description": "\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u179f\u17ca\u17c1\u179a\u17b8\u1796\u17c1\u179b\u179c\u17c1\u179b\u17b6 (Time series) \u178f\u17c2\u1784\u178f\u17c2\u179a\u1784\u1795\u179b\u1794\u17c9\u17c7\u1796\u17b6\u179b\u17cb\u178a\u17c4\u1799\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1781\u17bb\u179f\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8 (Outliers) \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u1794\u17d2\u179a\u1798\u17b6\u178e\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a Gaussian AR(1) \u1798\u17b6\u1793\u1797\u17b6\u1796\u179b\u17c6\u17a2\u17c0\u1784 \u1793\u17b7\u1784\u1798\u17b7\u1793\u1785\u17d2\u1794\u17b6\u179f\u17cb\u179b\u17b6\u179f\u17cb\u17d4 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1781\u17bb\u179f\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u1794\u17bc\u1780\u1794\u1789\u17d2\u1785\u17bc\u179b (Additive Outliers) \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1781\u17bc\u1785\u1781\u17b6\u178f\u178a\u179b\u17cb\u1797\u17b6\u1796\u178f\u17d2\u179a\u17b9\u1798\u178f\u17d2\u179a\u17bc\u179c\u1793\u17c3\u1798\u17c9\u17bc\u178a\u17c2\u179b\u179f\u17d2\u1790\u17b7\u178f\u17b7\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/science/gaussian-ar1-parameter-estimation-outliers-2010.html",
+      "author": [{"@type": "Person", "name": "Wararit Panichkitkosolkul (Department of Mathematics and Statistics, Thammasat University)"}],
+      "datePublished": "2010 Kasetsart J. (Nat. Sci.)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Improvement in Parameter Estimation for a Gaussian AR(1) Process with an Unknown Drift and Additive Outliers: A Simulation Study",
+        "url": "https://li01.tci-thaijo.org/index.php/anres/article/view/245010"
+      },
+      "keywords": ["parameter estimation", "AR(1) process", "recursive median", "winsorized mean", "additive outliers", "mean square error"],
+      "about": "Statistics"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Science",
+          "item": "https://khmerresearch.com/papers/science/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1794\u17d2\u179a\u179f\u17be\u179a\u17a1\u17be\u1784\u1793\u17bc\u179c\u1780\u17b6\u179a\u1794\u17c9\u17b6\u1793\u17cb\u1794\u17d2\u179a\u1798\u17b6\u178e\u1794\u17c9\u17b6\u179a\u17c9\u17b6\u1798\u17c9\u17c2\u178f\u17d2\u179a\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u178a\u17c6\u178e\u17be\u179a\u1780\u17b6\u179a Gaussian AR(1) \u178a\u17c2\u179b\u1798\u17b6\u1793\u1794\u1798\u17d2\u179a\u17c2\u1794\u1798\u17d2\u179a\u17bd\u179b\u1798\u17b7\u1793\u179f\u17d2\u1782\u17b6\u179b\u17cb \u1793\u17b7\u1784\u1791\u17b7\u1793\u17d2\u1793\u1793\u17d0\u1799\u1781\u17bb\u179f\u1794\u17d2\u179a\u1780\u17d2\u179a\u178f\u17b8\u1794\u17bc\u1780\u1794\u1789\u17d2\u1785\u17bc\u179b\u17d6 \u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u178f\u17b6\u1798\u179a\u1799\u17c8\u1780\u17b6\u179a\u1792\u17d2\u179c\u17be\u178f\u17d2\u179a\u17b6\u1794\u17cb\u178f\u17b6\u1798",
+          "item": "https://khmerresearch.com/papers/science/gaussian-ar1-parameter-estimation-outliers-2010.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/science/">Science</a> &rsaquo;
+        <span>ការធ្វើឱ្យប្រសើរឡើងនូវការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Improvement in Parameter Estimation for a Gaussian AR(1) Process with an Unknown Drift and Additive Outliers: A Simulation Study<br>
+        
+        <strong>Source:</strong> <a href="https://li01.tci-thaijo.org/index.php/anres/article/view/245010" target="_blank" rel="noopener">li01.tci-thaijo.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>ការធ្វើឱ្យប្រសើរឡើងនូវការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរការ Gaussian AR(1) ដែលមានបម្រែបម្រួលមិនស្គាល់ និងទិន្នន័យខុសប្រក្រតីបូកបញ្ចូល៖ ការសិក្សាតាមរយៈការធ្វើត្រាប់តាម</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Improvement in Parameter Estimation for a Gaussian AR(1) Process with an Unknown Drift and Additive Outliers: A Simulation Study</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Wararit Panichkitkosolkul (Department of Mathematics and Statistics, Thammasat University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2010 Kasetsart J. (Nat. Sci.)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Statistics</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ទិន្នន័យស៊េរីពេលវេលា (Time series) តែងតែរងផលប៉ះពាល់ដោយទិន្នន័យខុសប្រក្រតី (Outliers) ដែលធ្វើឱ្យការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រសម្រាប់ដំណើរការ Gaussian AR(1) មានភាពលំអៀង និងមិនច្បាស់លាស់។ ការសិក្សានេះដោះស្រាយបញ្ហាទិន្នន័យខុសប្រក្រតីបូកបញ្ចូល (Additive Outliers) ដែលធ្វើឱ្យខូចខាតដល់ភាពត្រឹមត្រូវនៃម៉ូដែលស្ថិតិ។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> ការសិក្សានេះបានប្រើប្រាស់ការធ្វើត្រាប់តាមម៉ុងតេការឡូ (Monte Carlo simulations) ដើម្បីប្រៀបធៀបឧបករណ៍ប៉ាន់ប្រមាណចំនួនបួនផ្សេងគ្នា ដោយស្នើឡើងនូវវិធីសាស្ត្ររឹងមាំថ្មីមួយ។
+        
+        <ul>
+            
+            <li>ការធ្វើត្រាប់តាមម៉ុងតេការឡូ (Monte Carlo Simulations) ចំនួន ១០,០០០ ដង ជាមួយទំហំសំណាក និងកម្រិតខុសប្រក្រតីផ្សេងៗគ្នា</li>
+            
+            <li>ការប្រើប្រាស់មធ្យម α-winsorized (α-winsorized mean) ដើម្បីកែតម្រូវមេដ្យានវិលជុំ</li>
+            
+            <li>ការប្រៀបធៀបឧបករណ៍ប៉ាន់ប្រមាណ (Estimators) ចំនួន ៤ ប្រភេទរួមមាន ρˆW, ρˆR–W, ρˆRmd–W, និង ρˆW–Rmd–W</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>ឧបករណ៍ប៉ាន់ប្រមាណដែលបានស្នើឡើង (ρˆW–Rmd–W) ផ្តល់នូវកំហុសការ៉េមធ្យម (MSE) ទាបជាងឧបករណ៍ប៉ាន់ប្រមាណផ្សេងទៀតនៅក្នុងស្ទើរតែគ្រប់ស្ថានភាពធ្វើត្រាប់តាមទាំងអស់។</li>
+            
+            <li>វិធីសាស្ត្រថ្មីនេះបង្ហាញប្រសិទ្ធភាពខ្ពស់បំផុត ជាពិសេសនៅពេលដែលប៉ារ៉ាម៉ែត្រ autoregressive (ρ) មានតម្លៃកៀកនឹង ១ និងសម្រាប់ទំហំសំណាកតូចៗ។</li>
+            
+            <li>ការប្រើប្រាស់មធ្យម α-winsorized អាចជួយលុបបំបាត់ផលប៉ះពាល់នៃទិន្នន័យខុសប្រក្រតីបានយ៉ាងល្អ ដោយសារតម្លៃរបស់វាមិនរងឥទ្ធិពលពីតម្លៃចុងសងខាងនៃទិន្នន័យ។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Weighted symmetric estimator (W)</span></strong><br>ឧបករណ៍ប៉ាន់ប្រមាណស៊ីមេទ្រីមានទម្ងន់មូលដ្ឋាន</td>
+                <td>ងាយស្រួលក្នុងការគណនា និងប្រើប្រាស់ជាមូលដ្ឋានសម្រាប់ទិន្នន័យធម្មតាដែលគ្មានកំហុស។</td>
+                <td>ងាយរងគ្រោះ និងប្រែប្រួលខ្លាំងនៅពេលមានវត្តមានទិន្នន័យខុសប្រក្រតី (Outliers) ធ្វើឱ្យមានភាពលំអៀងធ្ងន់ធ្ងរ។</td>
+                <td>មានកំហុសការ៉េមធ្យម (MSE) ធំជាងគេបំផុតនៅក្នុងការធ្វើត្រាប់តាមស្ទើរតែទាំងអស់ ពិសេសពេលមានការរំខានពីកំហុសទិន្នន័យ។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Recursive mean adjusted weighted symmetric estimator (R-W)</span></strong><br>ឧបករណ៍ប៉ាន់ប្រមាណកែតម្រូវដោយមធ្យមវិលជុំ</td>
+                <td>មានភាពប្រសើរជាងវិធីសាស្ត្រមូលដ្ឋានក្នុងការកាត់បន្ថយភាពលម្អៀងនៃកំហុស។</td>
+                <td>ការប្រើប្រាស់មធ្យម (Mean) នៅតែធ្វើឱ្យការគណនារងឥទ្ធិពលពីទិន្នន័យខុសប្រក្រតីធំៗដដែល។</td>
+                <td>ផ្តល់កំហុសការ៉េមធ្យម (MSE) ទាបជាងវិធីសាស្ត្រមូលដ្ឋាន ប៉ុន្តែនៅតែខ្ពស់ជាងវិធីប្រើមេដ្យាន។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Recursive median adjusted weighted symmetric estimator (Rmd-W)</span></strong><br>ឧបករណ៍ប៉ាន់ប្រមាណកែតម្រូវដោយមេដ្យានវិលជុំ</td>
+                <td>មានភាពរឹងមាំ (Robust) ជាងមុនចំពោះទិន្នន័យខុសប្រក្រតី ដោយសារមេដ្យានមិនសូវរងឥទ្ធិពលពីតម្លៃខ្លាំងតូចឬធំពេក។</td>
+                <td>ប្រសិទ្ធភាពនៅមានកម្រិតបើធៀបនឹងការកាត់តម្លៃចុងសងខាង (winsorized) នៃទិន្នន័យទាំងស្រុង។</td>
+                <td>ជាទូទៅទទួលបានចំណាត់ថ្នាក់ល្អលេខ ២ ក្នុងចំណោមវិធីសាស្ត្រទាំងអស់ដែលមាន MSE ទាប។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Adjusted recursive median based on α-winsorized mean (W-Rmd-W)</span></strong><br>ឧបករណ៍ប៉ាន់ប្រមាណស្នើឡើងថ្មីកែតម្រូវដោយមធ្យម α-winsorized នៃមេដ្យានវិលជុំ</td>
+                <td>មានភាពរឹងមាំបំផុតប្រឆាំងនឹងទិន្នន័យខុសប្រក្រតី ព្រោះលុបបំបាត់ឥទ្ធិពលតម្លៃចុងសងខាងទាំងស្រុងដោយជំនួសវាដោយតម្លៃដែលសង្កេតឃើញជិតបំផុត។</td>
+                <td>ត្រូវការការគណនាស្មុគស្មាញ និងមានច្រើនដំណាក់កាលជាងវិធីមុនៗ។</td>
+                <td>ផ្តល់កំហុសការ៉េមធ្យម (MSE) ទាបបំផុតក្នុងស្ទើរតែគ្រប់ស្ថានភាព ជាពិសេសពេលសំណាកតូចនិងពេលតម្លៃ ρ កៀកនឹង ១។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើការធ្វើត្រាប់តាមតាមប្រព័ន្ធកុំព្យូទ័រ (Computer Simulations) ដូច្នេះវាមិនតម្រូវឱ្យមានការចុះប្រមូលទិន្នន័យផ្ទាល់នោះទេ។
+    
+    <ul>
+        
+        <li><strong>Software:</strong> កម្មវិធីស្ថិតិ R (R statistical software package) សម្រាប់ដំណើរការ និងសរសេរកូដសាកល្បងម៉ូដែល។</li>
+        
+        <li><strong>Hardware:</strong> កុំព្យូទ័រដែលមានសមត្ថភាពមធ្យម ឬខ្ពស់សម្រាប់ការដំណើរការការធ្វើត្រាប់តាម Monte Carlo ចំនួន ១០,០០០ ដងក្នុងមួយស្ថានភាព។</li>
+        
+        <li><strong>Dataset:</strong> ទិន្នន័យស៊េរីពេលវេលាបង្កើតឡើងដោយការធ្វើត្រាប់តាមតាមបែបគណិតវិទ្យា (Simulated time series data) ដោយមានបញ្ចូលទិន្នន័យខុសប្រក្រតី ៥% ទៅ ១០%។</li>
+        
+        <li><strong>Expertise:</strong> ចំណេះដឹងផ្នែកស្ថិតិកម្រិតខ្ពស់ ជាពិសេសលើម៉ូដែល AR(1) ការវិភាគ Time Series និងដំណើរការ Monte Carlo។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកទាំងស្រុងលើការធ្វើត្រាប់តាមបែបគណិតវិទ្យាដោយកុំព្យូទ័រ ដូច្នេះវាមិនមានបញ្ហាលំអៀងទៅលើប្រជាសាស្ត្រ ឬតំបន់ភូមិសាស្ត្រជាក់លាក់ណាមួយឡើយ។ ទោះជាយ៉ាងណាក៏ដោយ ទិន្នន័យជាក់ស្តែងនៅក្នុងប្រទេសកម្ពុជា (ដូចជាសេដ្ឋកិច្ច ឬអាកាសធាតុ) អាចមានប្រភេទនៃទិន្នន័យខុសប្រក្រតីចម្រុះ និងស្មុគស្មាញជាងការសន្មត់ខាងទ្រឹស្តីនៅក្នុងការសិក្សានេះ។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>ទោះបីជាការសិក្សានេះជាការសាកល្បងបែបទ្រឹស្តីក៏ដោយ វិធីសាស្ត្ររឹងមាំ (Robust method) នេះមានប្រយោជន៍យ៉ាងខ្លាំងសម្រាប់ការវិភាគទិន្នន័យនៅកម្ពុជា ដែលតែងតែមានភាពខ្វះចន្លោះ ឬកំហុសក្នុងការកត់ត្រាដោយដៃ។</p>
+        
+        <ul>
+            
+            <li><strong>ធនាគារជាតិរៀលកម្ពុជា (National Bank of Cambodia - NBC):</strong> អាចប្រើប្រាស់សម្រាប់ការវិភាគទិន្នន័យអតិផរណា និងអត្រាប្តូរប្រាក់ ដែលជារឿយៗអាចមានកំហុសទិន្នន័យ (typing errors) ក្នុងបញ្ជីស៊េរីពេលវេលា។</li>
+            
+            <li><strong>វិស័យកសិកម្ម និងសន្តិសុខស្បៀង (Agriculture):</strong> ក្រសួងកសិកម្មអាចប្រើវិធីនេះដើម្បីព្យាករណ៍ទិន្នផលស្រូវ ឬនិន្នាការតម្លៃទីផ្សារ ដែលតែងតែរងការរំខានដោយការផ្លាស់ប្តូរអាកាសធាតុភ្លាមៗ បង្កើតជាទិន្នន័យខុសប្រក្រតីធំៗ។</li>
+            
+            <li><strong>ឧតុនិយម និងធនធានទឹក (Meteorology):</strong> សម្រាប់ការវិភាគកម្រិតទឹកទន្លេមេគង្គ ជៀសវាងការខូចខាតដល់ការព្យាករណ៍ដោយសារទិន្នន័យខុសពីសេនស័រវាស់ស្ទង់ (Gross errors)។</li>
+            
+        </ul>
+        
+        
+        <p>សរុបមក វិធីសាស្ត្រកែតម្រូវស្ថិតិនេះជួយឱ្យស្ថាប័នស្រាវជ្រាវ និងរដ្ឋាភិបាលកម្ពុជាអាចធ្វើការទស្សន៍ទាយ និងសន្និដ្ឋានបានត្រឹមត្រូវ ទោះបីជាប្រព័ន្ធប្រមូលទិន្នន័យនៅមានកំហុសមួយចំនួនក៏ដោយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>ស្វែងយល់ពីទ្រឹស្តីស្ថិតិ និងស៊េរីពេលវេលា:</strong> សិក្សាពីមូលដ្ឋានគ្រឹះនៃម៉ូដែល <span class="en">AR(1) process</span> និងស្វែងយល់ពីឥទ្ធិពលនៃ <span class="en">Additive Outliers</span> ទៅលើការវិភាគទិន្នន័យស៊េរីពេលវេលា។</li>
+            
+            <li><strong>ដំឡើងនិងអនុវត្តជាមួយកម្មវិធីស្ថិតិ:</strong> ដំឡើងកម្មវិធី <span class="en">R Software</span> ឬ <span class="en">Python (Statsmodels/SciPy)</span> រួចអនុវត្តការសរសេរកូដដើម្បីបង្កើតទិន្នន័យធ្វើត្រាប់តាមដែលមានទិន្នន័យខុសប្រក្រតី។</li>
+            
+            <li><strong>សរសេរកូដបង្កើតវិធីសាស្ត្រថ្មី:</strong> អភិវឌ្ឍកូដដោយផ្ទាល់ដើម្បីអនុវត្តរូបមន្ត <span class="en">α-winsorized mean</span> បញ្ចូលគ្នាជាមួយ <span class="en">recursive median adjustment</span> ដូចដែលបានរៀបរាប់ក្នុងឯកសារ។</li>
+            
+            <li><strong>ដំណើរការការធ្វើត្រាប់តាម Monte Carlo:</strong> ប្រើប្រាស់កុំព្យូទ័រដើម្បីដំណើរការការធ្វើត្រាប់តាម <span class="en">Monte Carlo</span> ចំនួន ១០,០០០ ដង ដើម្បីប្រៀបធៀប <span class="en">Mean Square Error (MSE)</span> រវាងម៉ូដែលផ្សេងៗគ្នាបញ្ជាក់ពីភាពត្រឹមត្រូវនៃកូដ។</li>
+            
+            <li><strong>សាកល្បងលើទិន្នន័យជាក់ស្តែងរបស់កម្ពុជា:</strong> ទាញយកទិន្នន័យសេដ្ឋកិច្ច ឬអាកាសធាតុពិតប្រាកដពី <span class="en">National Institute of Statistics (NIS)</span> កម្ពុជា ហើយអនុវត្តម៉ូដែលនេះដើម្បីចម្រោះកំហុស និងធ្វើការព្យាករណ៍ឱ្យកាន់តែសុក្រឹត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Gaussian AR(1) process (ដំណើរការ Gaussian AR(1))</span></td>
+                <td>ជាដំណើរការស្ថិតិនៃស៊េរីពេលវេលាលំដាប់ទី១ ដែលតម្លៃបច្ចុប្បន្នត្រូវបានគណនាដោយពឹងផ្អែកលើតម្លៃមុនវាភ្លាមៗ បូកបញ្ចូលជាមួយនឹងកំហុសចៃដន្យដែលមានរបាយបែប Gaussian (Normal distribution)។</td>
+                <td>ដូចជាការទស្សន៍ទាយសីតុណ្ហភាពថ្ងៃនេះ ដោយផ្អែកលើសីតុណ្ហភាពកាលពីម្សិលមិញ បូកនឹងកត្តាប្រែប្រួលអាកាសធាតុចៃដន្យបន្តិចបន្តួច។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Additive Outliers (ទិន្នន័យខុសប្រក្រតីបូកបញ្ចូល)</span></td>
+                <td>ជាទិន្នន័យដែលមានតម្លៃលោតខុសគេខ្លាំង ដែលកើតឡើងតែមួយគ្រា (ឧទាហរណ៍ ដោយសារកំហុសក្នុងការវាយបញ្ចូលទិន្នន័យ) ហើយវាមិនមានឥទ្ធិពលអូសបន្លាយដល់ទិន្នន័យនៅពេលបន្ទាប់ៗទៀតនោះទេ។</td>
+                <td>ដូចជាការកត់ត្រាពិន្ទុសិស្សខុសដោយអចេតនាសម្រាប់មុខវិជ្ជាមួយ (ឧទាហរណ៍ វាយលេខ ១០ ទៅជា ១០០) ប៉ុន្តែវាមិនប៉ះពាល់ដល់ពិន្ទុមុខវិជ្ជាផ្សេងទៀតរបស់គាត់ទេ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">α-winsorized mean (មធ្យម α-winsorized)</span></td>
+                <td>ជារង្វាស់ស្ថិតិរឹងមាំមួយ ដែលត្រូវបានគណនាដោយការជំនួសតម្លៃទិន្នន័យដែលខុសប្រក្រតីខ្លាំងនៅចុងសងខាង (ខ្ពស់ពេក ឬទាបពេក) ដោយតម្លៃដែលនៅក្បែរវាបំផុត ជាជាងការលុបវាចោលទាំងស្រុង។</td>
+                <td>ដូចជាការកាត់សក់សរសៃណាដែលវែងខុសគេឱ្យស្មើនឹងប្រវែងសក់ទូទៅ ដើម្បីឱ្យមើលទៅមានរបៀបរៀបរយ ជាជាងការដកសក់នោះចោលតែម្តង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Recursive median adjustment (ការកែតម្រូវមេដ្យានវិលជុំ)</span></td>
+                <td>ជាបច្ចេកទេសកែតម្រូវទិន្នន័យជាបន្តបន្ទាប់ ដោយការដកតម្លៃមេដ្យាននៃទិន្នន័យដែលបានអង្កេតកន្លងមក ដើម្បីកាត់បន្ថយឥទ្ធិពលនៃទិន្នន័យខុសប្រក្រតី ក្នុងពេលធ្វើការប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រ។</td>
+                <td>ដូចជាការកែតម្រូវចង្កូតរថយន្តជាបន្តបន្ទាប់ដោយពឹងផ្អែកលើចំណុចកណ្តាលនៃគន្លងផ្លូវ ដើម្បីកុំឱ្យរថយន្តរេចង្កូតធ្លាក់ផ្លូវដោយសារការប៉ះទង្គិចនឹងដុំថ្ម។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Monte Carlo simulations (ការធ្វើត្រាប់តាមម៉ុងតេការឡូ)</span></td>
+                <td>ជាវិធីសាស្ត្រគណនាតាមកុំព្យូទ័រ ដែលប្រើប្រាស់ការទាញយកសំណាកចៃដន្យរាប់ពាន់ឬម៉ឺនដង ដើម្បីសាកល្បងនិងវាយតម្លៃថាតើម៉ូដែល ឬឧបករណ៍ប៉ាន់ប្រមាណដំណើរការបានល្អកម្រិតណាក្នុងស្ថានភាពផ្សេងៗគ្នា។</td>
+                <td>ដូចជាការឱ្យកុំព្យូទ័របោះកាក់រាប់ម៉ឺនដងជំនួសមនុស្ស ដើម្បីគណនារកប្រូបាប៊ីលីតេនៃការចេញក្បាល ឬកន្ទុយឱ្យបានច្បាស់លាស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Mean Square Error / MSE (កំហុសការ៉េមធ្យម)</span></td>
+                <td>ជារង្វាស់សម្រាប់វាស់ស្ទង់គុណភាពនៃឧបករណ៍ប៉ាន់ប្រមាណ ដោយគណនាពីមធ្យមនៃការ៉េនៃគម្លាតរវាងតម្លៃដែលបានប៉ាន់ប្រមាណ និងតម្លៃពិតប្រាកដ។ តម្លៃ MSE កាន់តែតូច បង្ហាញថាការប៉ាន់ប្រមាណកាន់តែសុក្រឹត។</td>
+                <td>ដូចជារង្វាស់នៃការបាញ់ធ្នូ ប្រសិនបើព្រួញទាំងអស់បាញ់ចំជិតចំណុចកណ្តាលបំផុត នោះកំហុស (MSE) គឺតូចបំផុត បង្ហាញថាអ្នកបាញ់មានភាពសុក្រឹតខ្ពស់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Weighted symmetric estimator (ឧបករណ៍ប៉ាន់ប្រមាណស៊ីមេទ្រីមានទម្ងន់)</span></td>
+                <td>ជារូបមន្តស្ថិតិជាក់លាក់មួយសម្រាប់ប៉ាន់ប្រមាណប៉ារ៉ាម៉ែត្រក្នុងស៊េរីពេលវេលា ដោយផ្តល់ទម្ងន់ស្មើគ្នា (ស៊ីមេទ្រី) ដល់ទិន្នន័យសង្កេត ដើម្បីកាត់បន្ថយភាពលម្អៀង បើធៀបនឹងវិធីសាស្ត្រ OLS (Ordinary Least Squares) ធម្មតា។</td>
+                <td>ដូចជាការថ្លឹងជញ្ជីងដែលយើងដាក់កម្រិតទម្ងន់ឱ្យមានតុល្យភាពស្មើគ្នាសងខាង ដើម្បីទទួលបានការវាស់វែងមួយដែលត្រឹមត្រូវនិងមិនលម្អៀង។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Innovations outlier (ទិន្នន័យខុសប្រក្រតីអន្តរាគមន៍ / Innovations Outlier)</span></td>
+                <td>ជាប្រភេទនៃទិន្នន័យខុសប្រក្រតីនៅក្នុងស៊េរីពេលវេលា ដែលមិនត្រឹមតែធ្វើឱ្យទិន្នន័យនៅចំណុចនោះប្រែប្រួលប៉ុណ្ណោះទេ តែវាបានផ្លាស់ប្តូររចនាសម្ព័ន្ធទិន្នន័យ និងជះឥទ្ធិពលដល់តម្លៃទិន្នន័យនៅពេលបន្ទាប់ៗជាបន្តបន្ទាប់។</td>
+                <td>ដូចជាការបែកកង់ឡានពាក់កណ្តាលផ្លូវ ដែលមិនត្រឹមតែធ្វើឱ្យល្បឿនថយចុះភ្លាមៗនៅនាទីនោះទេ តែវានឹងបន្តធ្វើឱ្យឡានធ្វើដំណើរយឺតរហូតដល់ចុងបញ្ចប់នៃការធ្វើដំណើរ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/data/density-estimation-censored-economic-data-2008.html">
+                    <span class="km">ការប៉ាន់ស្មានដង់ស៊ីតេសម្រាប់ទិន្នន័យសេដ្ឋកិច្ចដែលត្រូវបានកម្រិត</span><br>
+                    <span class="en article-original-title">Density Estimation for Censored Economic Data</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/data/modified-product-estimators-population-mean-2015.html">
+                    <span class="km">ឧបករណ៍ប៉ាន់ស្មានផលគុណដែលបានកែសម្រួលសម្រាប់មធ្យមសាកលក្នុងការជ្រើសរើសគំរូចៃដន្យសាមញ្ញ ដោយប្រើមេគុណភាពកំពូល (Kurtosis) ភាពវៀច (Skewness) និងអនុគមន៍ក្វាទីលនៃអថេរជំនួយ</span><br>
+                    <span class="en article-original-title">Modified Product Estimators for Population Mean in Simple Random Sampling Using Coefficients of Kurtosis and Skewness and Function of Quartiles of Auxiliary Variable</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=robust+parameter+estimation+additive+outliers+time+series" target="_blank" rel="noopener"><span class="en">robust parameter estimation additive outliers time series</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=winsorized+mean+vs+trimmed+mean+in+autoregressive+models" target="_blank" rel="noopener"><span class="en">winsorized mean vs trimmed mean in autoregressive models</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=recursive+median+adjustment+techniques+in+signal+processing" target="_blank" rel="noopener"><span class="en">recursive median adjustment techniques in signal processing</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Monte+Carlo+simulation+of+AR%281%29+process+with+gross+errors" target="_blank" rel="noopener"><span class="en">Monte Carlo simulation of AR(1) process with gross errors</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=detecting+and+mitigating+innovations+outliers+vs+additive+outliers" target="_blank" rel="noopener"><span class="en">detecting and mitigating innovations outliers vs additive outliers</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=weighted+symmetric+estimator+properties+for+near+non-stationary+processes" target="_blank" rel="noopener"><span class="en">weighted symmetric estimator properties for near non-stationary processes</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>About &amp; Legal</strong>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com | <a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a></p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
