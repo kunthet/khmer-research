@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="km" prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- PRIMARY SEO -->
+    <title>កូដតភ្ជាប់ Reed-Solomon ខាងក្នុង និងកូដ Convolutional ខាងក្រៅសម្រាប់បណ្តាញចល័ត ដែលមានការអនុវត្តលើអង្គប្រតិបត្តិការ Soft Core - Concatenated Reed-Solomon Inner and Convolutional Outer Codes for Mobile Chan... | KhmerResearch.com</title>
+    <meta name="description" content="ស្រាវជ្រាវអំពី កូដតភ្ជាប់ Reed-Solomon ខាងក្នុង និងកូដ Convolutional ខាងក្រ។ ការសិក្សានេះដោះស្រាយបញ្ហានៃកំហុសសញ្ញាជាចង្កោម (Burst errors) នៅក្នុងប្រព័ន្ធទំនាក់ទំនងទូរស័ព្ទចល័...">
+    
+    <meta name="keywords" content="Vector Symbol Decoding, Reed-Solomon code, convolutional code, mobile channels, FPGA, BCH code, ស្រាវជ្រាវ, ខ្មែរ, Cambodia, KhmerResearch">
+    
+    <meta name="author" content="KhmerResearch.com">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://khmerresearch.com/papers/technology/concatenated-reed-solomon-convolutional-codes-2013.html">
+
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" hreflang="km" href="https://khmerresearch.com/papers/technology/concatenated-reed-solomon-convolutional-codes-2013.html">
+    <link rel="alternate" hreflang="x-default" href="https://khmerresearch.com/papers/technology/concatenated-reed-solomon-convolutional-codes-2013.html">
+
+    <!-- OPEN GRAPH (Facebook, Telegram, LinkedIn) -->
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="KhmerResearch.com">
+    <meta property="og:url" content="https://khmerresearch.com/papers/technology/concatenated-reed-solomon-convolutional-codes-2013.html">
+    <meta property="og:title" content="កូដតភ្ជាប់ Reed-Solomon ខាងក្នុង និងកូដ Convolutional ខាងក្រៅសម្រាប់បណ្តាញចល័ត ដែលមានការអនុវត្តលើអង្គប្រតិបត្តិការ Soft Core | KhmerResearch.com">
+    <meta property="og:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃកំហុសសញ្ញាជាចង្កោម (Burst errors) នៅក្នុងប្រព័ន្ធទំនាក់ទំនងទូរស័ព្ទចល័តល្បឿនលឿន ដោយមិនចាំបាច់ប្រើប្រាស់បច្ចេកទេស Interleaving ដែលធ្វើឱ្យមានការពន្យារពេល។">
+    <meta property="og:image" content="https://khmerresearch.com/assets/img/banner.png">
+    <meta property="article:published_time" content="2013 Agriculture and Natural Resources / Kasetsart J. (Nat. Sci.)-01-01T00:00:00Z">
+    
+    <meta property="article:tag" content="Vector Symbol Decoding">
+    
+    <meta property="article:tag" content="Reed-Solomon code">
+    
+    <meta property="article:tag" content="convolutional code">
+    
+    <meta property="article:tag" content="mobile channels">
+    
+    <meta property="article:tag" content="FPGA">
+    
+    <meta property="article:tag" content="BCH code">
+    
+
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@KhmerResearch">
+    <meta name="twitter:title" content="កូដតភ្ជាប់ Reed-Solomon ខាងក្នុង និងកូដ Convolutional ខាងក្រៅសម្រាប់បណ្តាញចល័ត ដែលមានការអនុវត្តលើអង្គប្រតិបត្តិការ Soft Core">
+    <meta name="twitter:description" content="ការសិក្សានេះដោះស្រាយបញ្ហានៃកំហុសសញ្ញាជាចង្កោម (Burst errors) នៅក្នុងប្រព័ន្ធទំនាក់ទំនងទូរស័ព្ទចល័តល្បឿនលឿន ដោយមិនចាំបាច់ប្រើប្រាស់បច្ចេកទេស Interleaving ដែលធ្វើឱ្យមានការពន្យារពេល។">
+    <meta name="twitter:image" content="https://khmerresearch.com/assets/img/banner.png">
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/logo-32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/img/logo-48.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="/assets/img/logo-128.png">
+
+    <!-- STYLESHEET -->
+    <link rel="stylesheet" href="../../assets/css/style.css">
+    <link rel="stylesheet" href="../../assets/css/community.css">
+
+    <!-- JSON-LD: ScholarlyArticle (Google Rich Results) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": "\u1780\u17bc\u178a\u178f\u1797\u17d2\u1787\u17b6\u1794\u17cb Reed-Solomon \u1781\u17b6\u1784\u1780\u17d2\u1793\u17bb\u1784 \u1793\u17b7\u1784\u1780\u17bc\u178a Convolutional \u1781\u17b6\u1784\u1780\u17d2\u179a\u17c5\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u178e\u17d2\u178f\u17b6\u1789\u1785\u179b\u17d0\u178f \u178a\u17c2\u179b\u1798\u17b6\u1793\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179b\u17be\u17a2\u1784\u17d2\u1782\u1794\u17d2\u179a\u178f\u17b7\u1794\u178f\u17d2\u178f\u17b7\u1780\u17b6\u179a Soft Core",
+      "name": "Concatenated Reed-Solomon Inner and Convolutional Outer Codes for Mobile Channels with Soft Core Processor Implementation",
+      "description": "\u1780\u17b6\u179a\u179f\u17b7\u1780\u17d2\u179f\u17b6\u1793\u17c1\u17c7\u178a\u17c4\u17c7\u179f\u17d2\u179a\u17b6\u1799\u1794\u1789\u17d2\u17a0\u17b6\u1793\u17c3\u1780\u17c6\u17a0\u17bb\u179f\u179f\u1789\u17d2\u1789\u17b6\u1787\u17b6\u1785\u1784\u17d2\u1780\u17c4\u1798 (Burst errors) \u1793\u17c5\u1780\u17d2\u1793\u17bb\u1784\u1794\u17d2\u179a\u1796\u17d0\u1793\u17d2\u1792\u1791\u17c6\u1793\u17b6\u1780\u17cb\u1791\u17c6\u1793\u1784\u1791\u17bc\u179a\u179f\u17d0\u1796\u17d2\u1791\u1785\u179b\u17d0\u178f\u179b\u17d2\u1794\u17bf\u1793\u179b\u17bf\u1793 \u178a\u17c4\u1799\u1798\u17b7\u1793\u1785\u17b6\u17c6\u1794\u17b6\u1785\u17cb\u1794\u17d2\u179a\u17be\u1794\u17d2\u179a\u17b6\u179f\u17cb\u1794\u1785\u17d2\u1785\u17c1\u1780\u1791\u17c1\u179f Interleaving \u178a\u17c2\u179b\u1792\u17d2\u179c\u17be\u17b1\u17d2\u1799\u1798\u17b6\u1793\u1780\u17b6\u179a\u1796\u1793\u17d2\u1799\u17b6\u179a\u1796\u17c1\u179b\u17d4",
+      "inLanguage": "km",
+      "url": "https://khmerresearch.com/papers/technology/concatenated-reed-solomon-convolutional-codes-2013.html",
+      "author": [{"@type": "Person", "name": "Usana Tuntoolavest (Department of Electrical Engineering, Kasetsart University)"},{"@type": "Person", "name": "Vasin Suktalordcheep (Department of Electrical Engineering, Kasetsart University)"},{"@type": "Person", "name": "Jatupon Thonchai (Department of Electrical Engineering, Kasetsart University)"}],
+      "datePublished": "2013 Agriculture and Natural Resources / Kasetsart J. (Nat. Sci.)",
+      "publisher": {
+        "@type": "Organization",
+        "name": "KhmerResearch.com",
+        "url": "https://khmerresearch.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://khmerresearch.com/assets/img/logo-512.png"
+        }
+      },
+      "isBasedOn": {
+        "@type": "ScholarlyArticle",
+        "name": "Concatenated Reed-Solomon Inner and Convolutional Outer Codes for Mobile Channels with Soft Core Processor Implementation",
+        "url": "https://li01.tci-thaijo.org/index.php/anres/article/view/243158"
+      },
+      "keywords": ["Vector Symbol Decoding", "Reed-Solomon code", "convolutional code", "mobile channels", "FPGA", "BCH code"],
+      "about": "Telecommunications Engineering"
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "ទំព័រដើម",
+          "item": "https://khmerresearch.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Technology",
+          "item": "https://khmerresearch.com/papers/technology/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "\u1780\u17bc\u178a\u178f\u1797\u17d2\u1787\u17b6\u1794\u17cb Reed-Solomon \u1781\u17b6\u1784\u1780\u17d2\u1793\u17bb\u1784 \u1793\u17b7\u1784\u1780\u17bc\u178a Convolutional \u1781\u17b6\u1784\u1780\u17d2\u179a\u17c5\u179f\u1798\u17d2\u179a\u17b6\u1794\u17cb\u1794\u178e\u17d2\u178f\u17b6\u1789\u1785\u179b\u17d0\u178f \u178a\u17c2\u179b\u1798\u17b6\u1793\u1780\u17b6\u179a\u17a2\u1793\u17bb\u179c\u178f\u17d2\u178f\u179b\u17be\u17a2\u1784\u17d2\u1782\u1794\u17d2\u179a\u178f\u17b7\u1794\u178f\u17d2\u178f\u17b7\u1780\u17b6\u179a Soft Core",
+          "item": "https://khmerresearch.com/papers/technology/concatenated-reed-solomon-convolutional-codes-2013.html"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-BQ81J3V9EN"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-BQ81J3V9EN');
+    </script>
+</head>
+<body>
+
+<!-- Site-wide Navigation -->
+<header class="site-nav">
+    <div class="site-nav-inner">
+        <a href="/" class="site-nav-logo"><img src="/assets/img/logo-48.png" alt="KhmerResearch" width="28" height="28" class="site-nav-logo-img"><span class="en">Khmer<span style="color:#2563eb">Research</span>.com</span></a>
+        <nav class="site-nav-links" aria-label="Main navigation">
+            <a href="/papers/">ឯកសារទាំងអស់</a>
+            <a href="/papers/technology/">បច្ចេកវិទ្យា</a>
+            <a href="/papers/health/">សុខភាព</a>
+            <a href="/papers/economics/">សេដ្ឋកិច្ច</a>
+            <a href="/papers/education/">អប់រំ</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html" class="site-nav-search"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:2px;"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>Search</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Breadcrumb Navigation -->
+<nav class="breadcrumb-nav" aria-label="breadcrumb">
+    <div class="container">
+        <a href="/">ទំព័រដើម</a> &rsaquo;
+        <a href="/papers/technology/">Technology</a> &rsaquo;
+        <span>កូដតភ្ជាប់ Reed-Solomon ខាងក្នុង និងកូដ Convolutional ខាងក្រ...</span>
+    </div>
+</nav>
+
+<div class="container">
+
+    <!-- 1. Citation & Disclaimer -->
+    <div class="disclaimer">
+        <strong>Original Title:</strong> Concatenated Reed-Solomon Inner and Convolutional Outer Codes for Mobile Channels with Soft Core Processor Implementation<br>
+        
+        <strong>Source:</strong> <a href="https://li01.tci-thaijo.org/index.php/anres/article/view/243158" target="_blank" rel="noopener">li01.tci-thaijo.org</a><br>
+        
+        <strong>Disclaimer:</strong> Summary generated by AI based on the provided document. Please refer to the original paper for full scientific accuracy.
+    </div>
+
+    <!-- 2. Translated Title & Metadata -->
+    <h1>កូដតភ្ជាប់ Reed-Solomon ខាងក្នុង និងកូដ Convolutional ខាងក្រៅសម្រាប់បណ្តាញចល័ត ដែលមានការអនុវត្តលើអង្គប្រតិបត្តិការ Soft Core</h1>
+
+    <div class="metadata">
+        <p><strong>ចំណងជើងដើម៖</strong> Concatenated Reed-Solomon Inner and Convolutional Outer Codes for Mobile Channels with Soft Core Processor Implementation</p>
+        <p><strong>អ្នកនិពន្ធ៖</strong> Usana Tuntoolavest (Department of Electrical Engineering, Kasetsart University), Vasin Suktalordcheep (Department of Electrical Engineering, Kasetsart University), Jatupon Thonchai (Department of Electrical Engineering, Kasetsart University)</p>
+        <p><strong>ឆ្នាំបោះពុម្ព៖</strong> 2013 Agriculture and Natural Resources / Kasetsart J. (Nat. Sci.)</p>
+        <p><strong>វិស័យសិក្សា៖</strong> Telecommunications Engineering</p>
+    </div>
+
+    <!-- 3. Executive Summary -->
+    <h2>១. សេចក្តីសង្ខេបប្រតិបត្តិ (Executive Summary)</h2>
+
+    <div class="executive-summary">
+        <p><strong>បញ្ហា (The Problem)៖</strong> ការសិក្សានេះដោះស្រាយបញ្ហានៃកំហុសសញ្ញាជាចង្កោម (Burst errors) នៅក្នុងប្រព័ន្ធទំនាក់ទំនងទូរស័ព្ទចល័តល្បឿនលឿន ដោយមិនចាំបាច់ប្រើប្រាស់បច្ចេកទេស Interleaving ដែលធ្វើឱ្យមានការពន្យារពេល។</p>
+
+        <p><strong>វិធីសាស្ត្រ (The Methodology)៖</strong> អ្នកស្រាវជ្រាវបានធ្វើការក្លែងធ្វើ (Simulations) និងអនុវត្តប្រព័ន្ធកូដតភ្ជាប់នេះទៅលើផ្នែករឹង (Hardware) ដោយប្រៀបធៀបដំណើរការរវាងកូដផ្សេងៗក្នុងស្ថានភាពបណ្តាញខុសៗគ្នា។
+        
+        <ul>
+            
+            <li>ការប្រើប្រាស់ការឌិកូដនិមិត្តសញ្ញាវ៉ិចទ័រទំហំធំ (Vector Symbol Decoding - VSD) សម្រាប់កូដខាងក្រៅ</li>
+            
+            <li>ការប្រើប្រាស់កូដ Reed-Solomon និងកូដ BCH សម្រាប់កូដខាងក្នុង (Inner codes)</li>
+            
+            <li>ការក្លែងធ្វើបណ្តាញចល័តដោយមានបាតុភូត Doppler Effect (Rayleigh, Rician និង 2-state fading channels)</li>
+            
+            <li>ការអនុវត្តប្រព័ន្ធលើបន្ទះសៀគ្វី FPGA ដោយប្រើអង្គប្រតិបត្តិការ TSK 3000A Soft Processor និងកម្មវិធីភាសា C++</li>
+            
+        </ul>
+        
+        </p>
+
+        <p><strong>លទ្ធផលសំខាន់ៗ (The Verdict)៖</strong></p>
+        <ul>
+            
+            <li>នៅក្នុងបណ្តាញ Rician ប្រើប្រេកង់ 2.1 GHz ក្នុងល្បឿន 80 គីឡូម៉ែត្រ/ម៉ោង និង SNR 11 dB ប្រព័ន្ធកូដ Reed-Solomon មានអត្រាបរាជ័យទាបជាងប្រព័ន្ធកូដ BCH ចំនួន ៣ រង្វាស់ (Three magnitudes)។</li>
+            
+            <li>ចំពោះប្រព័ន្ធឌិកូដ VSD តែឯង និមិត្តសញ្ញាដែលមានទំហំធំ (Larger sized symbols) ផ្តល់ដំណើរការល្អប្រសើរនៅក្នុងបណ្តាញកំហុសជាចង្កោម ចំណែកទំហំតូចល្អសម្រាប់បណ្តាញដែលមានកំហុសចៃដន្យ (Random error channel)។</li>
+            
+            <li>ការអនុវត្តប្រព័ន្ធទាំងមូលលើផ្នែករឹង FPGA បង្ហាញថាវាមានភាពជាក់ស្តែង និងមិនមានភាពស្មុគស្មាញខ្ពស់ពេកទេក្នុងការប្រើប្រាស់សម្រាប់ប្រព័ន្ធទំនាក់ទំនងជាក់ស្តែង។</li>
+            
+        </ul>
+    </div>
+
+    
+    <!-- 4. Performance & Constraints -->
+    <h2>២. ការវិភាគលើប្រសិទ្ធភាព និងដែនកំណត់ (Performance & Constraints)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>វិធីសាស្ត្រ (Method)</th>
+                <th>គុណសម្បត្តិ (Pros)</th>
+                <th>គុណវិបត្តិ (Cons)</th>
+                <th>លទ្ធផលគន្លឹះ (Key Result)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><strong><span class="en">Concatenated Reed-Solomon (RS) Inner Code + VSD Outer Code (Hard Decision)</span></strong><br>ប្រព័ន្ធកូដតភ្ជាប់ដោយប្រើកូដខាងក្នុង RS និងការឌិកូដនិមិត្តសញ្ញាវ៉ិចទ័រខាងក្រៅ (VSD)</td>
+                <td>មានសមត្ថភាពខ្ពស់ក្នុងការកែតម្រូវកំហុសសញ្ញាជាចង្កោម (Burst errors) វែងៗដោយមិនបាច់ពន្យារពេល និងដំណើរការល្អក្នុងបណ្តាញមានល្បឿនលឿន។</td>
+                <td>ការប្រើប្រាស់ការឌិកូដបែប Hard Decision អាចមានប្រសិទ្ធភាពតិចតួចជាង Soft Decision ក្នុងលក្ខខណ្ឌសញ្ញាខ្សោយខ្លះៗ ប៉ុន្តែនៅតែមានដំណើរការល្អរួម។</td>
+                <td>មានអត្រាបរាជ័យក្នុងការឌិកូដទាបជាងកូដ BCH ចំនួន ៣ រង្វាស់ (3 magnitudes) ក្នុងបណ្តាញ Rician ប្រើប្រេកង់ 2.1 GHz ល្បឿន 80 គ.ម/ម៉ោង។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">Concatenated Bose-Chaudhuri-Hocquenghem (BCH) Inner Code + VSD Outer Code (Soft VA)</span></strong><br>ប្រព័ន្ធកូដតភ្ជាប់ដោយប្រើកូដខាងក្នុង BCH និងការឌិកូដនិមិត្តសញ្ញាវ៉ិចទ័រខាងក្រៅ (VSD)</td>
+                <td>ដំណើរការបានល្អបំផុតសម្រាប់បណ្តាញដែលមានកំហុសចៃដន្យ (Random error channels) ដូចជា AWGN។ ការប្រើ List-of-2 Soft Viterbi ជួយបង្កើនប្រសិទ្ធភាព។</td>
+                <td>ប្រសិទ្ធភាពធ្លាក់ចុះខ្លាំងនៅក្នុងបណ្តាញដែលមានកំហុសជាចង្កោម (Burst errors) និងរងឥទ្ធិពលពីល្បឿន (Doppler effect) ធៀបនឹងកូដ RS។</td>
+                <td>អត្រាបរាជ័យមានកម្រិតខ្ពស់ជាងកូដ RS គួរឱ្យកត់សម្គាល់នៅក្នុងបណ្តាញដែលមាន Rician fading និង Rayleigh fading។</td>
+            </tr>
+            
+            <tr>
+                <td><strong><span class="en">VSD only (64-bit vs 128-bit symbols)</span></strong><br>ការឌិកូដនិមិត្តសញ្ញាវ៉ិចទ័រ (VSD) តែឯង ដោយមិនប្រើកូដខាងក្នុង</td>
+                <td>មានភាពបត់បែនខ្ពស់ដោយអនុញ្ញាតឱ្យផ្លាស់ប្តូរទំហំនិមិត្តសញ្ញា (Symbol size) ទៅតាមស្ថានភាពបណ្តាញ។</td>
+                <td>មិនមានប្រសិទ្ធភាពល្អគ្រប់ជ្រុងជ្រោយដូចការប្រើប្រព័ន្ធកូដតភ្ជាប់ (Concatenated codes) ឡើយ។</td>
+                <td>និមិត្តសញ្ញាធំ (128-bit) ដំណើរការល្អក្នុងបណ្តាញកំហុសជាចង្កោម រីឯនិមិត្តសញ្ញាតូច (64-bit) ល្អក្នុងបណ្តាញកំហុសចៃដន្យ (AWGN)។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+
+    
+    <p><strong>ការចំណាយលើធនធាន (Resource Cost)៖</strong> ការអនុវត្តប្រព័ន្ធនេះទាមទារឧបករណ៍ផ្នែករឹងកម្រិតខ្ពស់សម្រាប់ការសាកល្បងជាក់ស្តែង ក៏ដូចជាកម្មវិធីសូហ្វវែរសម្រាប់ការក្លែងធ្វើ និងសរសេរកូដបញ្ចូលក្នុងបន្ទះសៀគ្វី។
+    
+    <ul>
+        
+        <li><strong>Hardware:</strong> បន្ទះសៀគ្វី FPGA (Nanoboard 3000 model XC3S1400AN), អង្គប្រតិបត្តិការ Soft Core TSK 3000A, និងម៉ូឌុលបញ្ជូន/ទទួលសញ្ញាវិទ្យុ (RF Transceiver JZ863 433 MHz)។</li>
+        
+        <li><strong>Software:</strong> កម្មវិធី MATLAB (R2011b) សម្រាប់ការក្លែងធ្វើ, កម្មវិធី C++ (Visual Studio 2010) និង Altium Designer សម្រាប់គ្រប់គ្រងកូដលើ FPGA។</li>
+        
+        <li><strong>Expertise:</strong> ជំនាញស៊ីជម្រៅផ្នែកទូរគមនាគមន៍ (Telecommunications), ទ្រឹស្តីកូដ (Coding theory), ការសរសេរកម្មវិធី C/C++, និងការរៀបចំបន្ទះសៀគ្វី FPGA។</li>
+        
+    </ul>
+    
+    </p>
+    
+    
+
+    
+    <!-- 5. Critical Review for Cambodia/SE Asia Context -->
+    <h2>៣. ការពិនិត្យសម្រាប់បរិបទកម្ពុជា/អាស៊ីអាគ្នេយ៍</h2>
+
+    <div class="critical-review">
+        
+        <h3>ភាពលំអៀងនៃទិន្នន័យ (Data Bias)៖</h3>
+        <p>ការសិក្សានេះពឹងផ្អែកលើការក្លែងធ្វើបណ្តាញ (Simulations) ជាមួយគំរូ Rayleigh, Rician និង 2-state fading channels រួមផ្សំជាមួយបាតុភូត Doppler effect និងការធ្វើតេស្តលើផ្នែករឹងក្នុងមន្ទីរពិសោធន៍។ ថ្វីត្បិតតែវាមិនប្រើទិន្នន័យជាក់ស្តែងពីបណ្តាញទូរស័ព្ទនៅកម្ពុជា ប៉ុន្តែគំរូទាំងនេះតំណាងឱ្យស្តង់ដាររូបវិទ្យាទូទៅនៃប្រព័ន្ធទូរគមនាគមន៍ ដែលអាចយកមកអនុវត្តបាននៅគ្រប់ទីកន្លែង។</p>
+        
+
+        
+        <h3>លទ្ធភាពនៃការអនុវត្ត (Applicability)៖</h3>
+        <p>វិធីសាស្ត្រនេះមានសារៈសំខាន់សម្រាប់ការអភិវឌ្ឍ និងកែលម្អគុណភាពប្រព័ន្ធទូរគមនាគមន៍ចល័តកម្រិតខ្ពស់ (4G/5G) នៅប្រទេសកម្ពុជា ជាពិសេសដើម្បីដោះស្រាយបញ្ហាដាច់រលកសញ្ញា។</p>
+        
+        <ul>
+            
+            <li><strong>ប្រព័ន្ធទូរស័ព្ទចល័តនៅតាមផ្លូវល្បឿនលឿន (Expressway Networks):</strong> បច្ចេកវិទ្យានេះអាចជួយកាត់បន្ថយការដាច់សញ្ញានៅពេលអ្នកប្រើប្រាស់ធ្វើដំណើរក្នុងល្បឿនលឿន (Doppler effect) នៅលើផ្លូវល្បឿនលឿនភ្នំពេញ-ព្រះសីហនុ ជាដើម។</li>
+            
+            <li><strong>ក្រុមហ៊ុនផ្តល់សេវាទូរគមនាគមន៍ (Telecom Operators):</strong> អាចឱ្យក្រុមហ៊ុនដូចជា Cellcard, Smart ឬ Metfone ប្រើប្រាស់ក្នុងការកាត់បន្ថយកំហុសសញ្ញា (Burst errors) សម្រាប់ការភ្ជាប់រលកអាកាសកាត់តាមតំបន់ព្រៃភ្នំ ឬតំបន់ដាច់ស្រយាលដែលសញ្ញាងាយនឹងរំខាន។</li>
+            
+            <li><strong>ប្រព័ន្ធទំនាក់ទំនងតាមខ្សែភ្លើង (Power Line Communication - PLC):</strong> អាចយកទៅអភិវឌ្ឍប្រព័ន្ធបញ្ជូនទិន្នន័យរបស់អគ្គិសនីកម្ពុជា (EDC) ដើម្បីទប់ទល់នឹងរលកសំឡេងរំខានភ្លាមៗ (Impulsive noise) នៅក្នុងបណ្តាញបញ្ជូនថាមពលអគ្គិសនី។</li>
+            
+        </ul>
+        
+        
+        <p>ជារួម ការដាក់បញ្ចូលកូដ Reed-Solomon និងក្បួន VSD អាចជួយឱ្យប្រព័ន្ធទូរគមនាគមន៍នៅកម្ពុជាបង្កើនស្ថិរភាពបញ្ជូនទិន្នន័យ ដោយមិនតម្រូវឱ្យមានការពន្យារពេលសញ្ញា (Delay) ដោយសារបច្ចេកទេស Interleaving ឡើយ។</p>
+        
+        
+    </div>
+    
+
+    
+    <!-- 6. Actionable Roadmap for Students -->
+    <h2>៤. ផែនការសកម្មភាពសម្រាប់និស្សិត (Actionable Roadmap)</h2>
+    <div class="roadmap">
+        <p>ដើម្បីអនុវត្តតាមការសិក្សានេះ និស្សិតគួរអនុវត្តតាមជំហានខាងក្រោម៖</p>
+        <ol>
+            
+            <li><strong>សិក្សាមូលដ្ឋានគ្រឹះនៃទ្រឹស្តីកូដ (Coding Theory):</strong> ចាប់ផ្តើមរៀនស្វែងយល់ពីរបៀបដំណើរការរបស់ <span class="en">Reed-Solomon Codes</span>, <span class="en">Convolutional Codes</span> និងក្បួន <span class="en">Viterbi Algorithm</span> តាមរយៈសៀវភៅជំនាញ ឬវគ្គសិក្សាតាមអនឡាញ។</li>
+            
+            <li><strong>ក្លែងធ្វើប្រព័ន្ធបញ្ជូនសញ្ញា (Signal Simulation):</strong> ប្រើប្រាស់កម្មវិធី <span class="en">MATLAB</span> ឬ <span class="en">GNU Octave</span> ដើម្បីបង្កើតគំរូបណ្តាញក្លែងធ្វើ (Rayleigh/Rician fading channels) រួចសរសេរកូដសាកល្បងដំណើរការបញ្ជូននិងទទួលទិន្នន័យដើម្បីវិភាគកំហុស។</li>
+            
+            <li><strong>សិក្សា និងអនុវត្តលើផ្នែករឹង (Hardware Implementation):</strong> រៀនភាសាសរសេរកម្មវិធី <span class="en">C/C++</span> សម្រាប់កម្មវិធី <span class="en">Soft Core Processors</span> ឬរៀនភាសា <span class="en">VHDL</span> ហើយអនុវត្តផ្ទាល់លើបន្ទះ <span class="en">FPGA</span> ដូចជា <span class="en">Xilinx</span> ឬ <span class="en">Altera</span>។</li>
+            
+            <li><strong>អភិវឌ្ឍប្រព័ន្ធតភ្ជាប់ទិន្នន័យកម្រិតតូច (Data Communication Prototyping):</strong> សាកល្បងភ្ជាប់បន្ទះ <span class="en">FPGA</span> ជាមួយកុំព្យូទ័រតាមរយៈ <span class="en">Ethernet</span> និងម៉ូឌុលបញ្ជូនសញ្ញាវិទ្យុ <span class="en">RF Transceiver</span> (ឧ. 433MHz) ដើម្បីធ្វើតេស្តបញ្ជូនទិន្នន័យប្រកបដោយសុវត្ថិភាព។</li>
+            
+            <li><strong>វាយតម្លៃ និងប្រៀបធៀបលទ្ធផល (Performance Evaluation):</strong> វាស់ស្ទង់អត្រាកំហុសប៊ីត (<span class="en">Bit Error Rate - BER</span>) ដែលទទួលបាន ហើយវិភាគប្រៀបធៀបប្រសិទ្ធភាពរវាងការប្រើ និងមិនប្រើកូដតភ្ជាប់ ដើម្បីធ្វើការកែលម្អប្រព័ន្ធបន្ថែមទៀត។</li>
+            
+        </ol>
+    </div>
+    
+
+    
+    <!-- 7. Technical Glossary -->
+    <h2>៥. វាក្យសព្ទបច្ចេកទេស (Technical Glossary)</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>ពាក្យបច្ចេកទេស</th>
+                <th>ការពន្យល់ជាខេមរភាសា (Khmer Explanation)</th>
+                <th>និយមន័យសាមញ្ញ (Simple Definition)</th>
+            </tr>
+        </thead>
+        <tbody>
+            
+            <tr>
+                <td><span class="en glossary-term">Concatenated codes (កូដតភ្ជាប់)</span></td>
+                <td>ការប្រើប្រាស់កូដកែតម្រូវកំហុសពីរជាន់ (កូដខាងក្នុង Inner និង កូដខាងក្រៅ Outer) បញ្ចូលគ្នា ដើម្បីបង្កើនសមត្ថភាពចាប់ និងកែតម្រូវកំហុសទិន្នន័យក្នុងការបញ្ជូនសញ្ញាឱ្យកាន់តែមានប្រសិទ្ធភាពខ្ពស់ ធៀបនឹងការប្រើកូដតែមួយ។</td>
+                <td>ដូចជាការវេចខ្ចប់ទំនិញពីរជាន់ (ដាក់ប្រអប់តូចក្នុងប្រអប់ធំ) ដើម្បីការពារកុំឱ្យខូចខាតពេលដឹកជញ្ជូន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Reed-Solomon (RS) codes (កូដ Reed-Solomon)</span></td>
+                <td>ប្រភេទកូដកែតម្រូវកំហុស (Error-correcting code) ដែលពូកែខាងជួសជុលកំហុសទិន្នន័យដែលកើតឡើងជាប់ៗគ្នាជាបន្តបន្ទាប់ (Burst errors) ញឹកញាប់នៅក្នុងការបញ្ជូនសញ្ញា។</td>
+                <td>ដូចជាគ្រូពេទ្យវះកាត់ដែលពូកែព្យាបាលរបួសធំៗមួយកន្លែង ជាជាងរបួសតូចៗរាយប៉ាយពេញខ្លួន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Vector Symbol Decoding - VSD (ការឌិកូដនិមិត្តសញ្ញាវ៉ិចទ័រ)</span></td>
+                <td>បច្ចេកទេសឌិកូដសម្រាប់និមិត្តសញ្ញា (Symbols) ដែលមានទំហំប៊ីតធំ ដោយធ្វើការគណនាតាមទម្រង់វ៉ិចទ័រ ដែលជួយរក្សាស្ថិរភាពដំណើរការទោះបីទំហំន័យកាន់តែធំក៏ដោយ និងកាត់បន្ថយភាពស្មុគស្មាញក្នុងការគណនា។</td>
+                <td>ដូចជាការអានពាក្យមួយឃ្លាទាំងមូលតែម្តង ជាជាងការអានប្រកបម្តងមួយតួអក្សរ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Burst errors (កំហុសជាចង្កោម)</span></td>
+                <td>កំហុសទិន្នន័យដែលកើតឡើងជាប់ៗគ្នាច្រើននៅក្នុងរយៈពេលខ្លីមួយ (ផ្តុំគ្នា) ជាជាងកើតឡើងរាយប៉ាយដាច់ពីគ្នា ដែលតែងជួបប្រទះក្នុងបណ្តាញទូរស័ព្ទចល័តនៅពេលមានការរំខានសញ្ញាខ្លាំងភ្លាមៗ។</td>
+                <td>ដូចជាភ្លៀងធ្លាក់ខ្លាំងមួយមេធំក្នុងរយៈពេលខ្លី ជាជាងភ្លៀងរលឹមស្រិចៗពេញមួយថ្ងៃ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Doppler Effect (បាតុភូត Doppler)</span></td>
+                <td>បម្រែបម្រួលប្រេកង់នៃរលកសញ្ញាដែលកើតឡើងនៅពេលអ្នកទទួល (ឧទាហរណ៍ ទូរស័ព្ទដៃ) ធ្វើចលនាក្នុងល្បឿនលឿន (ដូចជាជិះឡាន ឬរថភ្លើង) ធៀបនឹងបង្គោលអង់តែន ដែលធ្វើឱ្យប្រព័ន្ធបញ្ជូនទិន្នន័យអាចមានកំហុស។</td>
+                <td>ដូចជាសំឡេងស៊ីរ៉ែនរថយន្តសង្គ្រោះបន្ទាន់ដែលឮខ្លាំងហើយស្រួចពេលវាបើកសំដៅមករកយើង ហើយប្រែជាឮធ្ងន់ពេលវាបើកហួសទៅបាត់។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Viterbi Algorithm - VA (ក្បួន Viterbi)</span></td>
+                <td>ក្បួនគណិតវិទ្យាសម្រាប់ស្វែងរកផ្លូវ ឬលំដាប់លំដោយនៃទិន្នន័យដែលត្រឹមត្រូវបំផុត (Maximum likelihood) ពីក្នុងចំណោមទិន្នន័យដែលទទួលបាននិងមានផ្ទុកសំឡេងរំខាន (Noise) នៅក្នុងប្រព័ន្ធទូរគមនាគមន៍។</td>
+                <td>ដូចជាកម្មវិធី GPS ដែលជួយស្វែងរកផ្លូវដែលល្អនិងត្រឹមត្រូវបំផុត ដើម្បីទៅដល់គោលដៅ ទោះបីជាមានផ្លូវវង្វេងវង្វាន់ខ្វាត់ខ្វែងច្រើនក៏ដោយ។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">FPGA - Field Programmable Gate Array (បន្ទះសៀគ្វី FPGA)</span></td>
+                <td>បន្ទះសៀគ្វីអេឡិចត្រូនិចដែលអាចឱ្យវិស្វករសរសេរកម្មវិធីដើម្បីកំណត់រចនាសម្ព័ន្ធមុខងារផ្នែករឹង (Hardware) របស់វាឡើងវិញបានតាមតម្រូវការបន្ទាប់ពីផលិតរួច ដែលស័ក្តិសមបំផុតសម្រាប់ការសាកល្បងបច្ចេកវិទ្យាថ្មីៗ។</td>
+                <td>ដូចជាដុំឡេហ្គោ (Lego) ដែលយើងអាចតម្លើងវាជារូបឡានក៏បាន រូបផ្ទះក៏បាន តាមគំនិតច្នៃប្រឌិតរបស់យើងផ្ទាល់ ជាជាងរបស់ក្មេងលេងដែលចាក់ពុម្ពចេញជារូបរាងស្រាប់មិនអាចដោះដូរបាន។</td>
+            </tr>
+            
+            <tr>
+                <td><span class="en glossary-term">Rician fading channel (បណ្តាញ Rician fading)</span></td>
+                <td>គំរូនៃបណ្តាញទំនាក់ទំនងឥតខ្សែដែលសញ្ញាទទួលបានមកពីផ្លូវផ្ទាល់មួយដែលខ្លាំង (Line-of-sight) បូករួមជាមួយសញ្ញាផ្សេងៗទៀតដែលផ្លាតចេញពីឧបសគ្គជុំវិញ ធ្វើឱ្យរលកសញ្ញាមានការប្រែប្រួលចុះឡើង។</td>
+                <td>ដូចជាការស្តាប់សំឡេងអ្នកចម្រៀងផ្ទាល់ផង និងសំឡេងអេកូដែលចំណាំងផ្លាតពីជញ្ជាំងបន្ទប់ផង ចូលត្រចៀកយើងក្នុងពេលតែមួយ។</td>
+            </tr>
+            
+        </tbody>
+    </table>
+    
+
+    
+    <!-- 8. Further Reading -->
+    <h2>៦. ប្រធានបទពាក់ព័ន្ធ (Further Reading)</h2>
+    <div class="further-reading">
+        
+        
+        
+        <p>អត្ថបទដែលបានបោះពុម្ពនៅលើ KhmerResearch ដែលទាក់ទងនឹងប្រធានបទនេះ៖</p>
+        <ul class="internal-articles">
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/compact-fast-ml-accelerator-iot-2018.html">
+                    <span class="km">ឧបករណ៍ពន្លឿនម៉ាស៊ីនរៀនដែលមានទំហំតូច និងល្បឿនលឿនសម្រាប់ឧបករណ៍ IoT</span><br>
+                    <span class="en article-original-title">COMPACT AND FAST MACHINE LEARNING ACCELERATOR FOR IOT DEVICES</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/modern-processing-devices-intro-2025.html">
+                    <span class="km">សេចក្តីណែនាំសង្ខេបអំពីឧបករណ៍ដំណើរការទិន្នន័យទំនើប</span><br>
+                    <span class="en article-original-title">Brief Introduction to Modern Processing Devices</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/adjusting-vector-symbol-decoding-nonbinary-convolutional-201.html">
+                    <span class="km">ការកែសម្រួលការបកប្រែកូដ Vector Symbol សម្រាប់កូដ Nonbinary Convolutional ផ្សេងៗគ្នាជាច្រើន</span><br>
+                    <span class="en article-original-title">On Adjusting Vector Symbol Decoding for Many Different Nonbinary Convolutional Codes</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/design-testing-asic-chip-pabx-1998.html">
+                    <span class="km">ការរចនា និងការសាកល្បងបន្ទះសៀគ្វី ASIC សម្រាប់តភ្ជាប់មីក្រូប្រូសេស័រនៅក្នុងប្រព័ន្ធទូរស័ព្ទ PABX ឌីជីថល</span><br>
+                    <span class="en article-original-title">Design and Testing of Asic Chip for Microprocessors Interfacing in a Digital PABX System</span>
+                </a>
+            </li>
+            
+            <li class="internal-article-link">
+                <a href="/papers/technology/adjusting-vsd-nonbinary-convolutional-codes-2012.html">
+                    <span class="km">ស្តីពីការកែសម្រួលការឌិកូដនិមិត្តសញ្ញាវ៉ិចទ័រសម្រាប់កូដ Convolutional មិនមែនគោលពីរផ្សេងៗគ្នាជាច្រើន</span><br>
+                    <span class="en article-original-title">On Adjusting Vector Symbol Decoding for Many Different Nonbinary Convolutional Codes</span>
+                </a>
+            </li>
+            
+        </ul>
+        
+        
+        <p>ប្រធានបទ និងសំណួរស្រាវជ្រាវដែលទាក់ទងនឹងឯកសារនេះ ដែលអ្នកអាចស្វែងរកបន្ថែម៖</p>
+        <ul class="external-suggestions">
+            
+            <li><a href="https://scholar.google.com/scholar?q=Vector+Symbol+Decoding+for+nonbinary+convolutional+codes" target="_blank" rel="noopener"><span class="en">Vector Symbol Decoding for nonbinary convolutional codes</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=FPGA+implementation+of+soft-core+processors+for+error+correction+coding" target="_blank" rel="noopener"><span class="en">FPGA implementation of soft-core processors for error correction coding</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Concatenated+coding+schemes+using+Reed-Solomon+and+Viterbi+decoders" target="_blank" rel="noopener"><span class="en">Concatenated coding schemes using Reed-Solomon and Viterbi decoders</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Impact+of+Doppler+effect+and+Rician+fading+on+high-speed+mobile+communications" target="_blank" rel="noopener"><span class="en">Impact of Doppler effect and Rician fading on high-speed mobile communications</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Burst+error+correction+techniques+in+wireless+channels+without+interleaving" target="_blank" rel="noopener"><span class="en">Burst error correction techniques in wireless channels without interleaving</span></a></li>
+            
+            <li><a href="https://scholar.google.com/scholar?q=Performance+comparison+of+BCH+and+Reed-Solomon+codes+in+multipath+fading+environments" target="_blank" rel="noopener"><span class="en">Performance comparison of BCH and Reed-Solomon codes in multipath fading environments</span></a></li>
+            
+        </ul>
+        
+    </div>
+    
+
+</div>
+
+<!-- Site Footer -->
+<footer class="site-footer">
+    <div class="site-footer-inner">
+        <div class="footer-section">
+            <strong>KhmerResearch.com</strong>
+            <p>AI-powered academic library for Cambodia.</p>
+        </div>
+        <div class="footer-section">
+            <strong>Categories</strong>
+            <a href="/papers/technology/">Technology</a>
+            <a href="/papers/health/">Health</a>
+            <a href="/papers/economics/">Economics</a>
+            <a href="/papers/education/">Education</a>
+            <a href="/papers/agriculture/">Agriculture</a>
+            <a href="/papers/science/">Science</a>
+        </div>
+        <div class="footer-section">
+            <strong>About &amp; Legal</strong>
+            <a href="/about.html">About Us</a>
+            <a href="/contact.html">Contact Us</a>
+            <a href="/privacy.html">Privacy Policy</a>
+            <a href="/terms.html">Terms of Service</a>
+            <a href="/papers/history/">History</a>
+            <a href="/papers/law/">Law &amp; Policy</a>
+            <a href="/papers/environment/">Environment</a>
+            <a href="/papers/architecture/">Architecture</a>
+            <a href="/papers/data/">Data</a>
+            <a href="/papers/society/">Society</a>
+            <a href="/papers/">All Categories &rarr;</a>
+            <a href="/forum.html">Forum</a>
+            <a href="/qa.html">Q&amp;A</a>
+            <a href="/search.html">AI Search</a>
+        </div>
+    </div>
+    <p class="footer-copy">&copy; 2026 KhmerResearch.com | <a href="/privacy.html">Privacy</a> | <a href="/terms.html">Terms</a></p>
+</footer>
+
+<!-- Scroll-aware header: hide on scroll-down, show on scroll-up (mobile only) -->
+<script>
+(function() {
+    var header = document.querySelector('.site-nav');
+    var lastY = 0, ticking = false, MOBILE_BP = 900, THRESHOLD = 8;
+    function onScroll() {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(function() {
+            var y = window.pageYOffset;
+            if (window.innerWidth <= MOBILE_BP) {
+                if (y > lastY && y > 60 && (y - lastY) > THRESHOLD) header.classList.add('header-hidden');
+                else if (lastY > y && (lastY - y) > THRESHOLD) header.classList.remove('header-hidden');
+            } else { header.classList.remove('header-hidden'); }
+            lastY = y < 0 ? 0 : y;
+            ticking = false;
+        });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', function() { if (window.innerWidth > MOBILE_BP) header.classList.remove('header-hidden'); });
+})();
+</script>
+
+<!-- Visitor Counter (Firebase RTDB) -->
+<script src="/assets/js/visitor-counter.js"></script>
+
+<!-- Community: Firebase + Comment/Like Widget -->
+<script src="/assets/js/firebase-init.js"></script>
+<script src="/assets/js/page-widget.js"></script>
+
+</body>
+</html>
